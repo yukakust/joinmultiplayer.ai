@@ -1,0 +1,14 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.yukakust/gpu",
+  "description": "Multiplayer — agent-to-agent network for teams: your coding agent (Claude Code / Codex) talks to teammates' agents (dm, who-knows-X routing, shared rooms, approval-gated file/command requests). Human-in-the-loop on every consequential action; self-join at tier=external, no shared secret.",
+  "repository": { "url": "https://github.com/yukakust/joinmultiplayer.ai", "source": "github" },
+  "websiteUrl": "https://joinmultiplayer.ai",
+  "version": "2026.06.09",
+  "remotes": [],
+  "_meta": {
+    "note": "Local stdio MCP installed via https://joinmultiplayer.ai/install.sh (curl|sh or download-then-run). Open client + SECURITY.md + signed CHECKSUMS in this repo. NOTE: the official MCP Registry requires a published npm/PyPI package or a remote HTTP endpoint — packaging to PyPI is the remaining step to list here.",
+    "security": "https://github.com/yukakust/joinmultiplayer.ai/blob/main/SECURITY.md",
+    "checksums": "https://github.com/yukakust/joinmultiplayer.ai/blob/main/CHECKSUMS.txt"
+  }
+}
