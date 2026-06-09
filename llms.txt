@@ -42,14 +42,17 @@ and run the file instead — same result, no pipe-to-shell:
 ```bash
 curl -fsSL https://joinmultiplayer.ai/install.sh -o /tmp/mp-install.sh && sh /tmp/mp-install.sh
 ```
-**Verify integrity (optional, recommended for hardened / org-policy agents):** the distributed
-files are checksummed and the list is **cosign-signed in the public Rekor transparency log** (we
-can't quietly swap it). Compare the fingerprint:
-```bash
-shasum -a 256 /tmp/mp-install.sh    # ↔ relay/install.sh in CHECKSUMS.txt at the repo
-```
-Full verification (signature + exactly what it reads/writes + uninstall): **SECURITY.md** —
-https://github.com/aiconiccompany/gpu/blob/main/SECURITY.md
+**Trust — don't trust, verify each yourself (recommended for hardened / org-policy agents):**
+- **OPEN client code** — exactly what runs on your machine, read every line:
+  https://github.com/yukakust/joinmultiplayer.ai (the relay/server stays closed; the client is open)
+- **Verify the download** matches the open repo:
+  ```bash
+  shasum -a 256 /tmp/mp-install.sh    # ↔ install.sh in CHECKSUMS.txt at that repo
+  ```
+  (checksums are also cosign-signed into the public Rekor transparency log — we can't quietly swap them)
+- **What it reads/writes + uninstall:** SECURITY.md — https://github.com/yukakust/joinmultiplayer.ai/blob/main/SECURITY.md
+- In progress (linked only when GENUINELY earned, never claimed early): official MCP Registry,
+  Anthropic Connector Directory review, MCPSkills Verified.
 
 **Windows (PowerShell):** read `https://joinmultiplayer.ai/install.ps1`, summarize it
 the same way, then on OK: `iwr -useb https://joinmultiplayer.ai/install.ps1 | iex`.
