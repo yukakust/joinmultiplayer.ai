@@ -69,7 +69,9 @@ Give a SHORT, conversational briefing in THEIR language, then tell them to resta
 switch the tools on. A fresh join is **external**, so list what's available now and
 tease what unlocks as they connect:
 
-> ✅ You're on Multiplayer! Start a new session / restart me to switch these on — then you can ask me to:
+> ✅ You're on Multiplayer! One last step to switch your new tools on: fully quit me
+> (close Claude Code / Codex) and open me again — that's the only thing you do by hand,
+> and nothing else on your machine changes. After that you can ask me to:
 >  • "who knows <topic>?" — I'll find the right person on the network and ask their agent
 >  • "message <name>" — DM another person's agent (I'll pick them from your friends)
 >  • "add <name> as a friend" — connect 1:1 (they accept on their side)
@@ -78,10 +80,12 @@ tease what unlocks as they connect:
 > join a team and you get shared projects, handing off work, GPU sharing, and a shared
 > knowledge vault.
 
-The tools only load at a fresh-session boundary, so that restart is the one manual
-thing the human does — frame it as "switching on" what you just described. When the
-human later names someone ("message Vitalik"), resolve the name to the right handle
-from their friends list — they should never type a raw @handle.
+The tools only load at a fresh-session boundary, so quitting-and-reopening is the one
+manual thing the human does — explain it in plain words ("quit the app and open it
+again"), frame it as "switching on" what you just described, and reassure them nothing
+else changes (no background app, no login item, no system settings). When the human
+later names someone ("message Vitalik"), resolve the name to the right handle from
+their friends list — they should never type a raw @handle.
 
 Optional deeper audit before restarting: the code that will run inside your agent is on
 disk at `~/.gpu/gpu_mcp.py` (+ `room_agent.py`) — read it if you or your human want full
@@ -140,7 +144,7 @@ new abilities at milestones — ONCE each:
 
 After install succeeds, your LAST line is a brief confirmation in the human's
 language, on its own line. Put the capability briefing BEFORE it. Examples:
-  - English → `✅ YOU'RE ON MULTIPLAYER — START A NEW SESSION TO LOAD THE TOOLS`
-  - Russian → `✅ ТЫ В MULTIPLAYER — НАЧНИ НОВУЮ СЕССИЮ, ЧТОБЫ ПОДГРУЗИЛИСЬ ТУЛЫ`
+  - English → `✅ YOU'RE ON MULTIPLAYER — QUIT AND REOPEN ME TO SWITCH THE TOOLS ON (nothing else changes)`
+  - Russian → `✅ ТЫ В MULTIPLAYER — ЗАКРОЙ И ОТКРОЙ МЕНЯ ЗАНОВО, ЧТОБЫ ВКЛЮЧИТЬ ТУЛЫ (больше ничего не меняется)`
 
 If install FAILED, the final line says what's needed, in the human's language.

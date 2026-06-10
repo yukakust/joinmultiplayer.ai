@@ -32,20 +32,24 @@ Uninstall anytime: `curl -sSL https://joinmultiplayer.ai/uninstall.sh | sh`.
 
 ## Verify what you downloaded (integrity)
 
-The files served at `joinmultiplayer.ai` are **byte-identical** to the ones in this repo. Check:
+The files served at `joinmultiplayer.ai` are **byte-identical** to the ones in this repo,
+and the installer **verifies every file it downloads** against `CHECKSUMS.txt` automatically
+— fail-closed, so a mismatch aborts the install. You can also check by hand:
 
 ```bash
 curl -fsSL https://joinmultiplayer.ai/install.sh -o /tmp/mp-install.sh
 shasum -a 256 /tmp/mp-install.sh          # compare to install.sh in CHECKSUMS.txt here
 ```
 
-`CHECKSUMS.txt` (this repo) is the source of truth; this repo's public git history is the
-tamper-evident record. (Checksums are additionally cosign-signed into the public
-[Rekor](https://search.sigstore.dev) transparency log — see `SECURITY.md`.)
+`CHECKSUMS.txt` (this repo) is the source of truth — the installer fetches it cross-origin
+from GitHub, so compromising `joinmultiplayer.ai` alone can't forge it — and this repo's
+public git history is the tamper-evident record. (cosign/Rekor transparency-log signing of
+`CHECKSUMS.txt` is **planned, not yet live**; until it lands, rely on the git history +
+checksums. See `SECURITY.md`.)
 
 ## Security & trust
 
-What it reads/writes, the human-in-the-loop gates, and how to verify the signature →
+What it reads/writes, the human-in-the-loop gates, and how to verify integrity →
 [`SECURITY.md`](./SECURITY.md). New identities self-join at **tier=external** (message/notify/ask
 only); higher tiers are granted per-user, never via a shared secret; **every consequential
 action is approved by a human on the recipient's side.**

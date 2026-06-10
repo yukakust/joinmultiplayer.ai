@@ -289,6 +289,53 @@ dl() {
   curl -sSL --fail -u "team:$BRAIN_PASSWORD" "$BRAIN_URL$1" -o "$2"
 }
 
+# --- Supply-chain verification ------------------------------------------------
+# Every file we download is sha256-checked against the published CHECKSUMS.txt.
+# The PRIMARY source is the OPEN client mirror on GitHub — a different origin from
+# joinmultiplayer.ai, so an attacker would have to compromise BOTH github.com AND
+# joinmultiplayer.ai to slip code past this. The origin is only a fallback.
+# Fail-closed: a checksum MISMATCH always aborts; if checksums can't be fetched at
+# all we also abort (set MP_SKIP_VERIFY=1 to bypass at your own risk).
+CHECKSUMS_RAW="https://raw.githubusercontent.com/yukakust/joinmultiplayer.ai/main/CHECKSUMS.txt"
+CHECKSUMS_FILE=""
+fetch_checksums() {
+  [ -n "$CHECKSUMS_FILE" ] && [ -s "$CHECKSUMS_FILE" ] && return 0
+  _out="$(mktemp 2>/dev/null || echo "/tmp/mp-checksums.$$")"
+  for _src in "$CHECKSUMS_RAW" "$BRAIN_URL/CHECKSUMS.txt"; do
+    if curl -fsSL "$_src" -o "$_out" 2>/dev/null && [ -s "$_out" ]; then
+      CHECKSUMS_FILE="$_out"; return 0
+    fi
+  done
+  return 1
+}
+sha256_of() {  # $1 = file → lowercase hex (empty if no tool)
+  if command -v shasum >/dev/null 2>&1; then shasum -a 256 "$1" 2>/dev/null | awk '{print $1}'
+  elif command -v sha256sum >/dev/null 2>&1; then sha256sum "$1" 2>/dev/null | awk '{print $1}'
+  else echo ""; fi
+}
+verify() {  # $1 = published name (download filename)   $2 = local file
+  [ "$MP_SKIP_VERIFY" = "1" ] && { echo "  (MP_SKIP_VERIFY=1 — checksum skipped for $1)"; return 0; }
+  if ! fetch_checksums; then
+    red "✗ could not fetch CHECKSUMS.txt — refusing to install unverified code for $1."
+    red "  retry, or re-run with MP_SKIP_VERIFY=1 to bypass at your own risk."; exit 1
+  fi
+  _want="$(awk -v n="$1" '$2==n{print $1}' "$CHECKSUMS_FILE")"
+  if [ -z "$_want" ]; then
+    red "✗ no published checksum for $1 — refusing (MP_SKIP_VERIFY=1 to bypass)."; exit 1
+  fi
+  _got="$(sha256_of "$2")"
+  if [ -z "$_got" ]; then
+    echo "  (no sha256 tool on this system; checksum for $1 skipped)"; return 0
+  fi
+  if [ "$_got" != "$_want" ]; then
+    red "✗ CHECKSUM MISMATCH for $1 — the download does NOT match the open repo. Aborting."
+    red "  expected $_want"
+    red "  got      $_got"
+    red "  Do NOT trust this. Report at github.com/yukakust/joinmultiplayer.ai/issues"; exit 1
+  fi
+  green "✓ verified $1 (sha256)"
+}
+
 # 5. Download MCP
 mkdir -p "$INSTALL_DIR"
 echo "Downloading MCP server → $MCP_FILE"
@@ -297,21 +344,29 @@ dl "/download/mcp.py" "$MCP_FILE"
 if [ ! -s "$MCP_FILE" ] || [ "$(wc -c < "$MCP_FILE")" -lt 1000 ]; then
   red "MCP file looks corrupted (too small) — check server, see $MCP_FILE"; exit 1
 fi
+verify "mcp.py" "$MCP_FILE"
 chmod +x "$MCP_FILE"
 green "✓ downloaded ($(wc -c < "$MCP_FILE") bytes)"
 
 # 5b. Download agent_workspace helper (Step A+ — used by MCP and tray)
 echo "Downloading agent-workspace helper → $INSTALL_DIR/agent_workspace.py"
-dl "/download/agent_workspace.py" "$INSTALL_DIR/agent_workspace.py" || \
+if dl "/download/agent_workspace.py" "$INSTALL_DIR/agent_workspace.py"; then
+  verify "agent_workspace.py" "$INSTALL_DIR/agent_workspace.py"
+  green "✓ agent_workspace.py ready"
+else
   red "(agent_workspace.py download failed — auto-react features will be skipped)"
-green "✓ agent_workspace.py ready"
+fi
 
 # 5c. Download the Shared-Room watcher (self-updating: it auto-refreshes itself
-# from /download/room_agent.py thereafter, so this is the only manual fetch ever).
+# from /download/room_agent.py thereafter — each refresh is sha256-verified against
+# CHECKSUMS.txt before it's applied, so this is the only manual fetch ever).
 echo "Downloading Shared-Room watcher → $INSTALL_DIR/room_agent.py"
-dl "/download/room_agent.py" "$INSTALL_DIR/room_agent.py" || \
+if dl "/download/room_agent.py" "$INSTALL_DIR/room_agent.py"; then
+  verify "room_agent.py" "$INSTALL_DIR/room_agent.py"
+  green "✓ room_agent.py ready"
+else
   red "(room_agent.py download failed — Shared Room watcher will be skipped)"
-green "✓ room_agent.py ready"
+fi
 
 # 6. Python deps — use absolute python -m pip (NOT --upgrade, preserves user pins)
 echo "Installing Python deps (mcp, requests)…"
@@ -530,14 +585,17 @@ EOF
 chmod 600 "$INSTALL_DIR/agent.json"
 green "✓ config saved → $INSTALL_DIR/agent.json"
 
-# 10. Menu bar app (macOS only — Windows uses tray, see install.ps1)
-if [ "$(uname)" = "Darwin" ]; then
+# 10. Menu bar app — macOS only, OPT-IN (default OFF). Multiplayer runs entirely
+# inside your coding agent; we do NOT add an always-on background app or a login
+# item unless you ask for one. Enable a menu-bar status icon with MP_MENUBAR=1.
+if [ "$(uname)" = "Darwin" ] && [ "$MP_MENUBAR" = "1" ]; then
   echo ""
-  echo "Installing menu bar app…"
-  curl -sSL --fail -u "team:$BRAIN_PASSWORD" "$BRAIN_URL/download/menu_bar.py" -o "$INSTALL_DIR/menu_bar.py"
+  echo "Installing menu bar app (MP_MENUBAR=1)…"
+  dl "/download/menu_bar.py" "$INSTALL_DIR/menu_bar.py" || true
   if [ ! -s "$INSTALL_DIR/menu_bar.py" ] || [ "$(wc -c < "$INSTALL_DIR/menu_bar.py")" -lt 500 ]; then
     red "menu_bar.py download failed (file too small); skipping menu bar"
   else
+    verify "menu_bar.py" "$INSTALL_DIR/menu_bar.py"
     install_python_deps rumps
     PY_SITE="$(python_site_packages)"
     GPU_APP="$INSTALL_DIR/gpu.app"
@@ -604,6 +662,10 @@ EOF
     launchctl kickstart -k "gui/$uid/com.gpu.menubar" 2>/dev/null || true
     green "✓ menu bar app started — look for the gpu app and ◉ in the menu bar"
   fi
+elif [ "$(uname)" = "Darwin" ]; then
+  echo ""
+  echo "(No menu-bar app or login item installed — Multiplayer lives inside your agent."
+  echo " Want a status icon that starts at login? re-run with MP_MENUBAR=1.)"
 fi
 
 # First-run marker: the MCP self-heals the one-time portrait step from this on next start
@@ -611,7 +673,10 @@ fi
 : > "$INSTALL_DIR/onboarding_pending" 2>/dev/null || true
 
 echo ""
-bold "✓ Done — start a NEW Claude Code / Codex session to load the Multiplayer tools."
+bold "✓ Done! One last step, and it's the only thing you do by hand:"
+echo "  fully quit your coding agent (Claude Code / Codex) and open it again."
+echo "  That's what switches the new Multiplayer tools on. Nothing else on your"
+echo "  machine changes — no background app, no login item, no system settings."
 echo ""
 echo "Then try in chat:"
 echo "  who's online on Multiplayer?"

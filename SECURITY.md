@@ -40,8 +40,12 @@ cosign verify-blob \
 ```
 
 **Self-update:** `room_agent.py` auto-refreshes itself from `/download/room_agent.py` when the
-server reports a newer version (sanity-checked, atomic). It's how fixes reach every machine; it
-is NOT covered by the static checksum above — pin it yourself if your policy forbids auto-update.
+server reports a newer version. Before it applies an update — or refreshes any helper below — it
+**sha256-verifies the new code against `CHECKSUMS.txt`** (fetched cross-origin from GitHub, with
+the origin as fallback) and **fail-closed refuses** anything that doesn't match, keeping the
+current code instead of running unverified new code. It's how fixes reach every machine without
+giving the server a silent path to run arbitrary code on yours. Disable auto-update entirely by
+not running the watcher (`/gpu` is a manual command; the watcher is optional).
 
 **Helpers fetched by install.sh** (also open, served at `/download/*`): `agent_workspace.py`,
 `await_reply.py`, `team_inbox.py`, `session_streamer.py`, `gpu_autostart.py`.

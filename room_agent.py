@@ -52,7 +52,7 @@ import requests
 
 # Self-update version (Variant-D pattern, like MCP_VERSION). Bump on every
 # meaningful room_agent.py change so running watchers pull + restart themselves.
-ROOM_AGENT_VERSION = "2026.06.08.4"
+ROOM_AGENT_VERSION = "2026.06.10.1"
 
 # Windows: a console-less parent (pythonw) spawning a console app (claude.exe / codex)
 # makes the OS pop a NEW visible console window per child. CREATE_NO_WINDOW suppresses it.
@@ -831,6 +831,55 @@ def _download_get(path: str, timeout: int = 15):
     return requests.get(url, headers={"Authorization": f"Basic {cred}"}, timeout=timeout)
 
 
+_GH_CHECKSUMS = "https://raw.githubusercontent.com/yukakust/joinmultiplayer.ai/main/CHECKSUMS.txt"
+_CHECKSUMS_CACHE = None
+_CHECKSUMS_TS = 0.0
+
+
+def _published_checksums() -> dict:
+    """Fetch + parse CHECKSUMS.txt → {filename: sha256hex}. PRIMARY source is the OPEN
+    GitHub mirror — a different origin from the relay, so forging an update means
+    compromising BOTH github.com AND the relay; the relay /CHECKSUMS.txt is only a
+    fallback. Cached 10 min. Returns {} if neither source is reachable (→ verify fails
+    closed)."""
+    global _CHECKSUMS_CACHE, _CHECKSUMS_TS
+    if _CHECKSUMS_CACHE is not None and (time.time() - _CHECKSUMS_TS) < 600:
+        return _CHECKSUMS_CACHE
+    text = ""
+    for url in (_GH_CHECKSUMS, f"{BASE}/CHECKSUMS.txt"):
+        try:
+            r = requests.get(url, timeout=15)
+            if r.status_code == 200 and r.text.strip():
+                text = r.text
+                break
+        except Exception:
+            continue
+    out = {}
+    for line in text.splitlines():
+        parts = line.split()
+        if len(parts) == 2 and len(parts[0]) == 64:
+            out[parts[1]] = parts[0].lower()
+    if out:
+        _CHECKSUMS_CACHE, _CHECKSUMS_TS = out, time.time()
+    return out
+
+
+def _verify_download(name: str, content: str) -> bool:
+    """True iff sha256(content) matches the published checksum for `name`. FAIL-CLOSED:
+    returns False when the checksum is unknown or unreachable, so a self-update / sidecar
+    refresh is REFUSED (current code kept) rather than running unverified new code."""
+    want = _published_checksums().get(name)
+    if not want:
+        print(f"[room-agent] verify {name}: no published checksum — refusing update", flush=True)
+        return False
+    got = hashlib.sha256(content.encode("utf-8")).hexdigest()
+    if got != want:
+        print(f"[room-agent] verify {name}: CHECKSUM MISMATCH "
+              f"(want {want[:12]}…, got {got[:12]}…) — refusing", flush=True)
+        return False
+    return True
+
+
 def _self_update_once() -> None:
     """If the server reports a newer ROOM_AGENT_VERSION, download
     /download/room_agent.py (Bearer per-user token, Basic team:PW transitional fallback),
@@ -849,6 +898,8 @@ def _self_update_once() -> None:
         m = re.search(r'^ROOM_AGENT_VERSION\s*=\s*["\']([^"\']+)["\']', remote, re.MULTILINE)
         if "def main(" not in remote or not m or m.group(1) != srv or len(remote) < 2000:
             return                          # error page / truncated / mismatch â†’ refuse
+        if not _verify_download("room_agent.py", remote):
+            return                          # unverified → keep current code, never run it
         me = Path(__file__).resolve()
         tmp = me.with_suffix(".py.new")
         tmp.write_text(remote, encoding="utf-8")
@@ -873,6 +924,8 @@ def _sync_sidecars() -> None:
             r = _download_get(f"/download/{name}")
             if r.status_code != 200 or "def " not in r.text or len(r.text) < 200:
                 continue                       # 404 / error page / truncated → skip
+            if not _verify_download(name, r.text):
+                continue                       # unverified → keep current sidecar, never run it
             dst = gpu / name
             cur = dst.read_text(encoding="utf-8") if dst.exists() else ""
             if cur != r.text:
