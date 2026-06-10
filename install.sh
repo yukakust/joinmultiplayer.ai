@@ -355,10 +355,12 @@ else
   echo "(Codex not found; skipping)"
 fi
 
-# 8.5 Cursor — ~/.cursor/mcp.json (merge, preserving any other servers). Same MCP, same env.
-CURSOR_CFG="$HOME/.cursor/mcp.json"
-if [ -d "$HOME/.cursor" ]; then
-  "$PYTHON_RUNTIME" - "$CURSOR_CFG" "$PYTHON_RUNTIME" "$MCP_FILE" "$BRAIN_URL" "$BRAIN_PASSWORD" "$BRAIN_USER" "$BRAIN_SHARE_ROOTS" <<'PYEOF' || true
+# 8.5 Any MCP client with a JSON config (Cursor, Windsurf, Claude Desktop, Antigravity, …) —
+# same MCP, same env. People use different agents, so register everywhere we can find a client.
+# Merge-preserves other servers; only touches a client whose marker dir exists.
+add_json_mcp() {  # $1 = config file path   $2 = client marker dir (skip unless it exists)
+  [ -d "$2" ] || return 0
+  "$PYTHON_RUNTIME" - "$1" "$PYTHON_RUNTIME" "$MCP_FILE" "$BRAIN_URL" "$BRAIN_PASSWORD" "$BRAIN_USER" "$BRAIN_SHARE_ROOTS" <<'PYEOF' || return 0
 import sys, json, os
 cfg, py, mcp, url, pw, user, roots = sys.argv[1:8]
 d = {}
@@ -369,12 +371,19 @@ d.setdefault("mcpServers", {})["gpu"] = {
     "command": py, "args": [mcp],
     "env": {"BRAIN_URL": url, "BRAIN_PASSWORD": pw, "BRAIN_USER": user, "BRAIN_SHARE_ROOTS": roots},
 }
+os.makedirs(os.path.dirname(cfg), exist_ok=True)
 json.dump(d, open(cfg, "w"), indent=2)
 PYEOF
-  green "✓ Cursor: added 'gpu' MCP ($CURSOR_CFG)"
-else
-  echo "(Cursor not found; skipping)"
-fi
+  green "✓ MCP registered → $1"
+}
+add_json_mcp "$HOME/.cursor/mcp.json"                                                "$HOME/.cursor"                                  # Cursor
+add_json_mcp "$HOME/.codeium/windsurf/mcp_config.json"                               "$HOME/.codeium"                                # Windsurf
+add_json_mcp "$HOME/.antigravity/mcp.json"                                           "$HOME/.antigravity"                            # Antigravity (Google)
+add_json_mcp "$HOME/Library/Application Support/Claude/claude_desktop_config.json"   "$HOME/Library/Application Support/Claude"       # Claude Desktop (macOS)
+add_json_mcp "$HOME/.config/Claude/claude_desktop_config.json"                       "$HOME/.config/Claude"                          # Claude Desktop (Linux)
+add_json_mcp "$HOME/.config/Cursor/mcp.json"                                         "$HOME/.config/Cursor"                          # Cursor (Linux)
+# Escape hatch — any other client: MP_EXTRA_MCP_CONFIGS="/path/a.json /path/b.json"
+[ -n "$MP_EXTRA_MCP_CONFIGS" ] && for _c in $MP_EXTRA_MCP_CONFIGS; do add_json_mcp "$_c" "$(dirname "$_c")"; done
 
 # 8.6 Room-agent slash command (/gpu) — makes this install a Shared-Room agent
 # out of the box. Runs in the user's live, logged-in Claude Code / Codex session
