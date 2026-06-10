@@ -52,7 +52,7 @@ import requests
 
 # Self-update version (Variant-D pattern, like MCP_VERSION). Bump on every
 # meaningful room_agent.py change so running watchers pull + restart themselves.
-ROOM_AGENT_VERSION = "2026.06.10.1"
+ROOM_AGENT_VERSION = "2026.06.10.2"
 
 # Windows: a console-less parent (pythonw) spawning a console app (claude.exe / codex)
 # makes the OS pop a NEW visible console window per child. CREATE_NO_WINDOW suppresses it.
@@ -864,15 +864,17 @@ def _published_checksums() -> dict:
     return out
 
 
-def _verify_download(name: str, content: str) -> bool:
-    """True iff sha256(content) matches the published checksum for `name`. FAIL-CLOSED:
-    returns False when the checksum is unknown or unreachable, so a self-update / sidecar
-    refresh is REFUSED (current code kept) rather than running unverified new code."""
+def _verify_download(name: str, raw: bytes) -> bool:
+    """True iff sha256 of the RAW downloaded bytes matches the published checksum for
+    `name`. FAIL-CLOSED: returns False when the checksum is unknown or unreachable, so a
+    self-update / sidecar refresh is REFUSED (current code kept) rather than running
+    unverified new code. Hashing raw bytes (not re-encoded text) matches how CHECKSUMS
+    was generated, immune to origin-controlled charset games."""
     want = _published_checksums().get(name)
     if not want:
         print(f"[room-agent] verify {name}: no published checksum — refusing update", flush=True)
         return False
-    got = hashlib.sha256(content.encode("utf-8")).hexdigest()
+    got = hashlib.sha256(raw).hexdigest()
     if got != want:
         print(f"[room-agent] verify {name}: CHECKSUM MISMATCH "
               f"(want {want[:12]}…, got {got[:12]}…) — refusing", flush=True)
@@ -894,15 +896,16 @@ def _self_update_once() -> None:
         r = _download_get("/download/room_agent.py")
         if r.status_code != 200:
             return
+        raw = r.content
         remote = r.text
         m = re.search(r'^ROOM_AGENT_VERSION\s*=\s*["\']([^"\']+)["\']', remote, re.MULTILINE)
         if "def main(" not in remote or not m or m.group(1) != srv or len(remote) < 2000:
             return                          # error page / truncated / mismatch â†’ refuse
-        if not _verify_download("room_agent.py", remote):
+        if not _verify_download("room_agent.py", raw):
             return                          # unverified → keep current code, never run it
         me = Path(__file__).resolve()
         tmp = me.with_suffix(".py.new")
-        tmp.write_text(remote, encoding="utf-8")
+        tmp.write_bytes(raw)
         os.replace(tmp, me)                 # atomic on same volume
         print(f"[room-agent] self-update {ROOM_AGENT_VERSION} -> {srv}; restarting", flush=True)
         os.execv(sys.executable, [sys.executable, str(me)])   # replaces process image
@@ -924,13 +927,14 @@ def _sync_sidecars() -> None:
             r = _download_get(f"/download/{name}")
             if r.status_code != 200 or "def " not in r.text or len(r.text) < 200:
                 continue                       # 404 / error page / truncated → skip
-            if not _verify_download(name, r.text):
+            raw = r.content
+            if not _verify_download(name, raw):
                 continue                       # unverified → keep current sidecar, never run it
             dst = gpu / name
-            cur = dst.read_text(encoding="utf-8") if dst.exists() else ""
-            if cur != r.text:
+            cur = dst.read_bytes() if dst.exists() else b""
+            if cur != raw:
                 tmp = dst.with_suffix(dst.suffix + ".new")
-                tmp.write_text(r.text, encoding="utf-8")
+                tmp.write_bytes(raw)
                 os.replace(tmp, dst)
                 print(f"[room-agent] synced sidecar {name}", flush=True)
         except Exception as e:

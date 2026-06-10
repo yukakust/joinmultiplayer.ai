@@ -22,6 +22,7 @@ Env vars (set by install.sh in Claude Code/Codex config):
 """
 from __future__ import annotations
 import base64
+import hashlib
 import json
 import os
 import re
@@ -106,7 +107,7 @@ if not any(VAULT_DIR.iterdir()):
 # of mcp_local.py and reports it via /healthz; a background thread here compares
 # and, if the server is newer, status_resource() nudges the user to restart
 # Claude (stdio MCP can't hot-reload — see docs/MCP-HOT-RELOAD.md).
-MCP_VERSION = "2026.06.08.4"
+MCP_VERSION = "2026.06.10.1"
 
 BRAIN_URL = os.environ.get("BRAIN_URL", "https://gpu.social").rstrip("/")
 BRAIN_PASSWORD = os.environ.get("BRAIN_PASSWORD", "")
@@ -778,6 +779,52 @@ def _download_get(path: str, timeout: int = 20):
     return requests.get(url, headers={"Authorization": f"Basic {_cred}"}, timeout=timeout)
 
 
+_GH_CHECKSUMS = "https://raw.githubusercontent.com/yukakust/joinmultiplayer.ai/main/CHECKSUMS.txt"
+_CHECKSUMS_CACHE = None
+_CHECKSUMS_TS = 0.0
+
+
+def _published_checksums() -> dict:
+    """Parse CHECKSUMS.txt → {filename: sha256hex}. PRIMARY source is the OPEN GitHub
+    mirror (cross-origin trust anchor — forging an update means compromising BOTH
+    github.com AND the relay); BRAIN_URL/CHECKSUMS.txt is only a fallback. Cached 10 min.
+    Returns {} if neither is reachable, so verification fails closed."""
+    global _CHECKSUMS_CACHE, _CHECKSUMS_TS
+    if _CHECKSUMS_CACHE is not None and (time.time() - _CHECKSUMS_TS) < 600:
+        return _CHECKSUMS_CACHE
+    text = ""
+    for url in (_GH_CHECKSUMS, f"{BRAIN_URL}/CHECKSUMS.txt"):
+        try:
+            r = requests.get(url, timeout=15)
+            if r.status_code == 200 and r.text.strip():
+                text = r.text
+                break
+        except Exception:
+            continue
+    out = {}
+    for line in text.splitlines():
+        parts = line.split()
+        if len(parts) == 2 and len(parts[0]) == 64:
+            out[parts[1]] = parts[0].lower()
+    if out:
+        _CHECKSUMS_CACHE, _CHECKSUMS_TS = out, time.time()
+    return out
+
+
+def _verify_download(name: str, raw: bytes) -> bool:
+    """True iff sha256 of the RAW downloaded bytes matches the published checksum for
+    `name`. FAIL-CLOSED: False when the checksum is unknown or unreachable, so the caller
+    keeps the current code instead of writing/running unverified new code."""
+    want = _published_checksums().get(name)
+    if not want:
+        sys.stderr.write(f"[update] verify {name}: no published checksum — refusing\n")
+        return False
+    if hashlib.sha256(raw).hexdigest() != want:
+        sys.stderr.write(f"[update] verify {name}: CHECKSUM MISMATCH — refusing\n")
+        return False
+    return True
+
+
 def _try_stage_update(expected_ver: str) -> None:
     """D+: fetch /download/mcp.py and write it over our own file on disk, so the
     next Claude restart picks it up. Atomic (tmp + os.replace), sanity-guarded,
@@ -790,6 +837,7 @@ def _try_stage_update(expected_ver: str) -> None:
         r = _download_get("/download/mcp.py")
         if not r.ok:
             return
+        raw = r.content
         remote = r.text
         # Sanity guard: never write garbage over a working MCP. It must look
         # like our file and carry the version we expected from /healthz.
@@ -799,9 +847,11 @@ def _try_stage_update(expected_ver: str) -> None:
         got = m.group(1) if m else None
         if got != expected_ver:
             return  # /healthz and /download disagree — skip, try next cycle
+        if not _verify_download("mcp.py", raw):
+            return  # unverified → keep current MCP, never stage unverified code
         self_path = Path(__file__).resolve()
         tmp = self_path.with_name(self_path.name + ".new")
-        tmp.write_text(remote, encoding="utf-8")
+        tmp.write_bytes(raw)
         os.replace(tmp, self_path)  # atomic swap; Python already holds bytecode
         _staged_update_version = got
         sys.stderr.write(
@@ -832,11 +882,14 @@ def _ensure_sidecar(name: str) -> None:
         r = _download_get(f"/download/{name}")
         if not r.ok or "def " not in r.text or len(r.text) < 200:
             return  # 404 / error page / truncated → skip
+        raw = r.content
+        if not _verify_download(name, raw):
+            return  # unverified → keep current sidecar, never run unverified code
         dst = Path.home() / ".gpu" / name
-        cur = dst.read_text(encoding="utf-8") if dst.exists() else ""
-        if cur != r.text:
+        cur = dst.read_bytes() if dst.exists() else b""
+        if cur != raw:
             tmp = dst.with_name(dst.name + ".new")
-            tmp.write_text(r.text, encoding="utf-8")
+            tmp.write_bytes(raw)
             os.replace(tmp, dst)
             sys.stderr.write(f"[sidecar] synced {name}\n")
     except Exception as e:

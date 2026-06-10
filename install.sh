@@ -292,10 +292,12 @@ dl() {
 # --- Supply-chain verification ------------------------------------------------
 # Every file we download is sha256-checked against the published CHECKSUMS.txt.
 # The PRIMARY source is the OPEN client mirror on GitHub — a different origin from
-# joinmultiplayer.ai, so an attacker would have to compromise BOTH github.com AND
-# joinmultiplayer.ai to slip code past this. The origin is only a fallback.
+# joinmultiplayer.ai, so an attacker who controls ONLY joinmultiplayer.ai can't slip
+# code past this; the origin is only a fallback. (Caveat: a network/MITM attacker who
+# can selectively fail the github.com fetch could force the origin fallback — pinning
+# the manifest hash is a planned future hardening.)
 # Fail-closed: a checksum MISMATCH always aborts; if checksums can't be fetched at
-# all we also abort (set MP_SKIP_VERIFY=1 to bypass at your own risk).
+# all, or no sha256 tool exists, we also abort (set MP_SKIP_VERIFY=1 to bypass).
 CHECKSUMS_RAW="https://raw.githubusercontent.com/yukakust/joinmultiplayer.ai/main/CHECKSUMS.txt"
 CHECKSUMS_FILE=""
 fetch_checksums() {
@@ -308,13 +310,15 @@ fetch_checksums() {
   done
   return 1
 }
-sha256_of() {  # $1 = file → lowercase hex (empty if no tool)
+sha256_of() {  # $1 = file → lowercase hex (empty ONLY if no sha256 tool at all)
   if command -v shasum >/dev/null 2>&1; then shasum -a 256 "$1" 2>/dev/null | awk '{print $1}'
   elif command -v sha256sum >/dev/null 2>&1; then sha256sum "$1" 2>/dev/null | awk '{print $1}'
+  elif command -v openssl >/dev/null 2>&1; then openssl dgst -sha256 "$1" 2>/dev/null | awk '{print $NF}'
+  elif command -v python3 >/dev/null 2>&1; then python3 -c "import hashlib,sys;print(hashlib.sha256(open(sys.argv[1],'rb').read()).hexdigest())" "$1" 2>/dev/null
   else echo ""; fi
 }
 verify() {  # $1 = published name (download filename)   $2 = local file
-  [ "$MP_SKIP_VERIFY" = "1" ] && { echo "  (MP_SKIP_VERIFY=1 — checksum skipped for $1)"; return 0; }
+  [ "$MP_SKIP_VERIFY" = "1" ] && { red "⚠ MP_SKIP_VERIFY=1 — NOT verifying $1 (running unverified code is unsafe)"; return 0; }
   if ! fetch_checksums; then
     red "✗ could not fetch CHECKSUMS.txt — refusing to install unverified code for $1."
     red "  retry, or re-run with MP_SKIP_VERIFY=1 to bypass at your own risk."; exit 1
@@ -325,7 +329,8 @@ verify() {  # $1 = published name (download filename)   $2 = local file
   fi
   _got="$(sha256_of "$2")"
   if [ -z "$_got" ]; then
-    echo "  (no sha256 tool on this system; checksum for $1 skipped)"; return 0
+    red "✗ no sha256 tool (shasum/sha256sum/openssl/python3) to verify $1 — refusing."
+    red "  install one, or re-run with MP_SKIP_VERIFY=1 to bypass at your own risk."; exit 1
   fi
   if [ "$_got" != "$_want" ]; then
     red "✗ CHECKSUM MISMATCH for $1 — the download does NOT match the open repo. Aborting."

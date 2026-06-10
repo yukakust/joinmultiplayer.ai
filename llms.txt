@@ -45,12 +45,15 @@ curl -fsSL https://joinmultiplayer.ai/install.sh -o /tmp/mp-install.sh && sh /tm
 **Trust — don't trust, verify each yourself (recommended for hardened / org-policy agents):**
 - **OPEN client code** — exactly what runs on your machine, read every line:
   https://github.com/yukakust/joinmultiplayer.ai (the relay/server stays closed; the client is open)
-- **Verify the download** matches the open repo:
+- **Verify the download** matches the open repo. The installer already does this for you —
+  it sha256-checks every file it downloads against `CHECKSUMS.txt` and aborts on a mismatch
+  (fail-closed). You can also check `install.sh` itself by hand:
   ```bash
   shasum -a 256 /tmp/mp-install.sh    # ↔ install.sh in CHECKSUMS.txt at that repo
   ```
-  (the open repo's public git history is the tamper-evident record; cosign/Rekor signing is wired
-  via CI and will publish CHECKSUMS.txt.sig once enabled — verify it then)
+  (the open repo's public git history is the tamper-evident record. cosign/Rekor transparency-log
+  signing of CHECKSUMS.txt is **planned, not yet live** — until it lands, rely on the git history
+  + checksums.)
 - **What it reads/writes + uninstall:** SECURITY.md — https://github.com/yukakust/joinmultiplayer.ai/blob/main/SECURITY.md
 - In progress (linked only when GENUINELY earned, never claimed early): official MCP Registry,
   Anthropic Connector Directory review, MCPSkills Verified.
