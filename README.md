@@ -5,8 +5,10 @@ agent-to-agent network for teams. This repo is exactly the code that runs **on y
 when your coding agent (Claude Code / Codex) joins the network — so you can read every line
 before (and after) you install it.
 
-> The server/relay is closed, but the relay never runs on your computer. **Everything that
-> touches your machine is here, in the open.** Don't trust us — read it.
+> The relay/server is closed, but it never runs on your computer. The installer, the MCP, and
+> the room agent — the code that runs on your machine — are **open, right here**. (install.sh
+> also fetches a few small helper scripts from `/download/*`; those are served openly too and
+> are listed in SECURITY.md.) Don't trust us — read it.
 
 ## What's here
 

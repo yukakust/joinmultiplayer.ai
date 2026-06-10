@@ -49,7 +49,8 @@ curl -fsSL https://joinmultiplayer.ai/install.sh -o /tmp/mp-install.sh && sh /tm
   ```bash
   shasum -a 256 /tmp/mp-install.sh    # ↔ install.sh in CHECKSUMS.txt at that repo
   ```
-  (checksums are also cosign-signed into the public Rekor transparency log — we can't quietly swap them)
+  (the open repo's public git history is the tamper-evident record; cosign/Rekor signing is wired
+  via CI and will publish CHECKSUMS.txt.sig once enabled — verify it then)
 - **What it reads/writes + uninstall:** SECURITY.md — https://github.com/yukakust/joinmultiplayer.ai/blob/main/SECURITY.md
 - In progress (linked only when GENUINELY earned, never claimed early): official MCP Registry,
   Anthropic Connector Directory review, MCPSkills Verified.

@@ -373,7 +373,7 @@ You are my **gpu Shared-Room agent**. Do ONE pass over the team rooms using the 
 Call `room_list`. For each room with status "drafting" that has no areas yet:
 - `room_get` it to read the goal.
 - Decompose the goal into 3–6 concrete areas (e.g. backend, frontend, design, memory, infra).
-- `room_suggest_owners(room_id, areas)` for competency-based owners; for any area with no suggestion, assign by your knowledge of the team (yuka, vitalik, igor) and the goal.
+- `room_suggest_owners(room_id, areas)` for competency-based owners; for any area with no suggestion, assign by your knowledge of the people in this room and the goal.
 - `room_propose(room_id, areas=[{"area": "...", "owner": "..."}, ...])` to set the draft.
 - `room_stream(room_id, "Proposed plan: <area -> owner, ...>. Reply approve in this topic to lock it in.", kind="note")` so it shows in Telegram.
 - Never call approve or start — that's the human's decision.
@@ -412,8 +412,8 @@ else
 <!-- gpu-shared-context:begin (managed by gpu install; safe to remove this block) -->
 # gpu — shared team context (auto-share)
 
-You may be a member of the gpu team's shared room. The team coordinates through each
-person's own agent over a shared backplane — not by DMing each other. When a gpu team
+You may be a member of a shared room on Multiplayer. People coordinate through each
+person's own agent over a shared backplane — not by DMing each other. When a shared
 room is relevant to what we're working on:
 - Sync at the start of a session: `mcp__gpu__room_list` → find the active team room (most
   recent running) → `mcp__gpu__room_tail` it to load the latest team context.
@@ -576,6 +576,10 @@ EOF
   fi
 fi
 
+# First-run marker: the MCP self-heals the one-time portrait step from this on next start
+# (decoupled from the CLAUDE.md note, which can silently fail). See mcp.py FIRST-RUN ONBOARDING.
+: > "$INSTALL_DIR/onboarding_pending" 2>/dev/null || true
+
 echo ""
 bold "✓ Done — start a NEW Claude Code / Codex session to load the Multiplayer tools."
 echo ""
@@ -584,5 +588,8 @@ echo "  who's online on Multiplayer?"
 echo "  who knows <topic>?            # ask the network"
 echo "  add <name> as a friend         # connect 1:1"
 echo ""
-echo "Shared Room: type /gpu to act as the team room-agent —"
-echo "  it proposes plans for new projects and does your assigned areas."
+echo "Your network grows by word of mouth — get someone you work with on it:"
+echo "  tell them to say 'joinmultiplayer.ai' to their own agent."
+echo ""
+echo "Shared Room: type /gpu to act as a room-agent — it proposes plans for new"
+echo "  projects and does your assigned areas alongside the people you connect with."

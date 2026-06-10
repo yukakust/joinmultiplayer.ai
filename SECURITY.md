@@ -28,8 +28,9 @@ shasum -a 256 /tmp/mp-install.sh          # compare to install.sh in CHECKSUMS.t
 # the same holds for mcp.py (/download/mcp.py) and room_agent.py (/download/room_agent.py)
 ```
 
-`CHECKSUMS.txt` is signed keyless (GitHub OIDC → Fulcio → **Rekor** public, append-only transparency
-log) so a tampered file can't match a genuine, logged checksum:
+`CHECKSUMS.txt` lives in this repo and the public git history is the tamper-evident record.
+cosign/Rekor keyless signing is wired via CI; once enabled it publishes `CHECKSUMS.txt.sig` +
+`.pem` and you verify (not yet published — don't run this until the files exist):
 
 ```bash
 cosign verify-blob \
@@ -37,6 +38,16 @@ cosign verify-blob \
   --certificate-identity-regexp '.*/sign-checksums.yml@.*' \
   --signature CHECKSUMS.txt.sig --certificate CHECKSUMS.txt.pem CHECKSUMS.txt
 ```
+
+**Self-update:** `room_agent.py` auto-refreshes itself from `/download/room_agent.py` when the
+server reports a newer version (sanity-checked, atomic). It's how fixes reach every machine; it
+is NOT covered by the static checksum above — pin it yourself if your policy forbids auto-update.
+
+**Helpers fetched by install.sh** (also open, served at `/download/*`): `agent_workspace.py`,
+`await_reply.py`, `team_inbox.py`, `session_streamer.py`, `gpu_autostart.py`.
+
+**Egress:** the client only talks to `joinmultiplayer.ai` / `gpu.social`. Pair with a PreToolUse
+egress allowlist (L0 containment) so a compromised turn can't phone home.
 
 > **Honest scope:** a checksum/signature proves *integrity + provenance* ("unchanged, really from
 > us") — **not** that the code is benign. That comes from this **open, readable code** and from
