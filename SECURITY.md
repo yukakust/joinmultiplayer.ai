@@ -29,8 +29,11 @@ shasum -a 256 /tmp/mp-install.sh          # compare to install.sh in CHECKSUMS.t
 ```
 
 `CHECKSUMS.txt` lives in this repo and the public git history is the tamper-evident record.
-cosign/Rekor keyless signing is wired via CI; once enabled it publishes `CHECKSUMS.txt.sig` +
-`.pem` and you verify (not yet published — don't run this until the files exist):
+On top of that, every change to `CHECKSUMS.txt` is **cosign-signed keyless in CI** (GitHub OIDC
+→ Fulcio certificate → Rekor public transparency log — the signing event is publicly logged and
+cannot be removed later). The signature lives next to it as `CHECKSUMS.txt.sig` + `CHECKSUMS.txt.pem`;
+the workflow is [`.github/workflows/sign-checksums.yml`](./.github/workflows/sign-checksums.yml).
+Verify:
 
 ```bash
 cosign verify-blob \

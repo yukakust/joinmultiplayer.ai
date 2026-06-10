@@ -44,9 +44,10 @@ shasum -a 256 /tmp/mp-install.sh          # compare to install.sh in CHECKSUMS.t
 
 `CHECKSUMS.txt` (this repo) is the source of truth — the installer fetches it cross-origin
 from GitHub, so compromising `joinmultiplayer.ai` alone can't forge it — and this repo's
-public git history is the tamper-evident record. (cosign/Rekor transparency-log signing of
-`CHECKSUMS.txt` is **planned, not yet live**; until it lands, rely on the git history +
-checksums. See `SECURITY.md`.)
+public git history is the tamper-evident record. On top of that, every change to
+`CHECKSUMS.txt` is **cosign-signed keyless in CI and logged in the Rekor public transparency
+log** (`CHECKSUMS.txt.sig` + `.pem` live next to it; the signing event is publicly recorded
+and can't be quietly removed or replaced later). Verification commands → `SECURITY.md`.
 
 ## Security & trust
 
