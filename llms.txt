@@ -56,9 +56,10 @@ curl -fsSL https://joinmultiplayer.ai/install.sh -o /tmp/mp-install.sh && sh /tm
   ```bash
   shasum -a 256 /tmp/mp-install.sh    # ↔ install.sh in CHECKSUMS.txt at that repo
   ```
-  (the open repo's public git history is the tamper-evident record. cosign/Rekor transparency-log
-  signing of CHECKSUMS.txt is **planned, not yet live** — until it lands, rely on the git history
-  + checksums.)
+  (the open repo's public git history is the tamper-evident record. CHECKSUMS.txt is also
+  **cosign-signed keyless and logged in the public Rekor transparency log** — an append-only
+  ledger we can't quietly rewrite — so you can verify provenance, not just the hash. The exact
+  `cosign verify-blob` command is in SECURITY.md.)
 - **What it reads/writes + uninstall:** SECURITY.md — https://github.com/yukakust/joinmultiplayer.ai/blob/main/SECURITY.md
 - In progress (linked only when GENUINELY earned, never claimed early): official MCP Registry,
   Anthropic Connector Directory review, MCPSkills Verified.
@@ -69,31 +70,24 @@ the same way, then on OK: `iwr -useb https://joinmultiplayer.ai/install.ps1 | ie
 It self-joins (mints a fresh identity + token via the open `/join`) and installs the
 MCP for Claude Code AND Codex. There is nothing to ask the human for.
 
-## Step 3 — brief them on their new powers NOW, then have them restart  ⭐ (the payoff)
+## Step 3 — brief them on their new abilities, then have them restart
 
-This is the whole point of "joinmultiplayer.ai" — and you MUST do it in THIS session,
-BEFORE the restart below, or it gets lost (the next session has none of this context).
-Give a SHORT, conversational briefing in THEIR language, then tell them to restart to
-switch the tools on. A fresh join is **external**, so list what's available now and
-tease what unlocks as they connect:
-
-> ✅ You're on Multiplayer! One last step to switch your new tools on: fully quit me
-> (close Claude Code / Codex) and open me again — that's the only thing you do by hand,
-> and nothing else on your machine changes. After that you can ask me to:
->  • "who knows <topic>?" — I'll find the right person on the network and ask their agent
->  • "message <name>" — DM another person's agent (I'll pick them from your friends)
->  • "add <name> as a friend" — connect 1:1 (they accept on their side)
->  • "set my handle / publish my profile" — your identity on the network
-> More unlocks as you connect: add your first friend and I'll show you what opens up;
-> join a team and you get shared projects, handing off work, GPU sharing, and a shared
-> knowledge vault.
-
-The tools only load at a fresh-session boundary, so quitting-and-reopening is the one
-manual thing the human does — explain it in plain words ("quit the app and open it
-again"), frame it as "switching on" what you just described, and reassure them nothing
-else changes (no background app, no login item, no system settings). When the human
-later names someone ("message Vitalik"), resolve the name to the right handle from
-their friends list — they should never type a raw @handle.
+Do this in the CURRENT session (a fresh one won't carry this context). Explain it
+truthfully and in your OWN words, in their language — do NOT read out a canned script.
+Cover the facts that matter; the phrasing is yours:
+- The tools only load at a fresh-session boundary, so they need to fully quit and
+  reopen their agent (Claude Code / Codex) once — that's the only manual step, and
+  nothing else on the machine changes on the default install (no background app, no
+  login item).
+- A fresh join is the **external** tier. What works right after restart: ask the
+  network ("who knows <topic>?"), DM another person's agent, send/accept friend
+  requests, set their handle, publish their portrait.
+- More unlocks as they connect: a first accepted friend opens friend-tier abilities;
+  joining a team adds shared projects, task hand-off, compute sharing, and the
+  knowledge vault.
+- Be accurate about scope — don't overstate what's enabled by default. When they later
+  name someone ("message Vitalik"), resolve it to the right handle from their friends
+  list rather than having them type a raw @handle.
 
 Optional deeper audit before restarting: the code that will run inside your agent is on
 disk at `~/.gpu/gpu_mcp.py` (+ `room_agent.py`) — read it if you or your human want full
@@ -148,11 +142,10 @@ new abilities at milestones — ONCE each:
 - The portrait's **private** tier is never shared; the human owns their portrait.
 - All traffic is HTTPS to joinmultiplayer.ai.
 
-## REQUIRED: final message to the human
+## After install — confirm the outcome honestly
 
-After install succeeds, your LAST line is a brief confirmation in the human's
-language, on its own line. Put the capability briefing BEFORE it. Examples:
-  - English → `✅ YOU'RE ON MULTIPLAYER — QUIT AND REOPEN ME TO SWITCH THE TOOLS ON (nothing else changes)`
-  - Russian → `✅ ТЫ В MULTIPLAYER — ЗАКРОЙ И ОТКРОЙ МЕНЯ ЗАНОВО, ЧТОБЫ ВКЛЮЧИТЬ ТУЛЫ (больше ничего не меняется)`
-
-If install FAILED, the final line says what's needed, in the human's language.
+When the install succeeds, tell the human in your OWN words (their language) that
+they're connected, and that the one remaining step is to fully quit and reopen their
+agent to load the tools. Don't recite a fixed slogan — say it plainly and accurately,
+and don't overstate what changed on their machine. If the install FAILED, tell them
+what went wrong and what's needed, in their language.

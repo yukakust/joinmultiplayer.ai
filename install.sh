@@ -64,12 +64,23 @@ else
   green "→ identity: $BRAIN_USER"
 fi
 
-# 3. Share roots
+# 3. Share roots — folders a teammate's APPROVED request can read files from.
+#    SAFE DEFAULT: a single dedicated, initially-empty folder (~/gpu-shared) —
+#    never your whole ~/code or ~/Desktop, and never granted silently under
+#    `curl | sh`. A fresh install therefore exposes nothing until you put files
+#    there on purpose. Widen scope later, deliberately, by editing
+#    BRAIN_SHARE_ROOTS in ~/.gpu/agent.json.
+SHARE_ROOTS_DEFAULT="$HOME/gpu-shared"
 if [ -z "$NON_INTERACTIVE" ] && [ -z "$BRAIN_SHARE_ROOTS" ]; then
-  printf "Share roots [default: %s/code,%s/Desktop]: " "$HOME" "$HOME"
+  printf "Share roots — folders teammates can request files from [default: %s]: " "$SHARE_ROOTS_DEFAULT"
   read -r BRAIN_SHARE_ROOTS
 fi
-BRAIN_SHARE_ROOTS="${BRAIN_SHARE_ROOTS:-$HOME/code,$HOME/Desktop}"
+BRAIN_SHARE_ROOTS="${BRAIN_SHARE_ROOTS:-$SHARE_ROOTS_DEFAULT}"
+# Ensure the dedicated default folder exists (but stays empty) so the safe
+# default is a real, usable path rather than a missing one.
+case ",$BRAIN_SHARE_ROOTS," in
+  *",$SHARE_ROOTS_DEFAULT,"*) mkdir -p "$SHARE_ROOTS_DEFAULT" 2>/dev/null || true ;;
+esac
 green "→ share roots: $BRAIN_SHARE_ROOTS"
 echo ""
 
@@ -238,6 +249,12 @@ PYEOF
   rm -rf "$iconset"
 }
 
+# NOTE: this builds a menu-bar .app bundle and, at its tail, ad-hoc code-signs it
+# (`codesign --sign -`) and strips the Gatekeeper quarantine xattr so the freshly
+# minted bundle can launch. Those two steps ONLY run on the OPT-IN menu-bar path:
+# this function is called solely from the `MP_MENUBAR=1` block below (default OFF).
+# On the default install path no .app is built, nothing is code-signed, and no
+# quarantine flag is touched.
 install_macos_gpu_app() {
   GPU_APP="$INSTALL_DIR/gpu.app"
   PYTHON_APP="$(find_python_app || true)"
@@ -489,11 +506,23 @@ if command -v codex >/dev/null 2>&1 || [ -d "$HOME/.codex" ]; then
   green "✓ /gpu room-agent prompt installed for Codex"
 fi
 
-# 8.7 Shared-context auto-share — a standing instruction so your interactive
-# agent syncs the team room at start and proactively posts decisions/progress
-# (the input side of the living shared context). Idempotent: only added once.
+# 8.7 Shared-context auto-share — OPT-IN (default: leave your global config alone).
+# This is a standing instruction that makes your interactive agent sync the team
+# room at start and proactively post decisions/progress. Because it edits your
+# GLOBAL ~/.claude/CLAUDE.md (which loads in every project), we do NOT add it by
+# default. Enable it explicitly with MP_SHARED_CONTEXT=1, or answer yes to the
+# prompt in an interactive install. Idempotent: only added once.
 GLOBAL_MD="$HOME/.claude/CLAUDE.md"
-if [ -f "$GLOBAL_MD" ] && grep -q "gpu-shared-context:begin" "$GLOBAL_MD" 2>/dev/null; then
+WANT_SHARED_CONTEXT="$MP_SHARED_CONTEXT"
+if [ -z "$WANT_SHARED_CONTEXT" ] && [ -z "$NON_INTERACTIVE" ]; then
+  printf "Add a shared-context auto-share note to your GLOBAL ~/.claude/CLAUDE.md? [y/N]: "
+  read -r _sc_ans
+  case "$_sc_ans" in [yY]|[yY][eE][sS]) WANT_SHARED_CONTEXT=1 ;; *) WANT_SHARED_CONTEXT=0 ;; esac
+fi
+if [ "$WANT_SHARED_CONTEXT" != "1" ]; then
+  echo "(Skipped the shared-context note — your ~/.claude/CLAUDE.md is untouched."
+  echo " Enable it anytime by re-running with MP_SHARED_CONTEXT=1.)"
+elif [ -f "$GLOBAL_MD" ] && grep -q "gpu-shared-context:begin" "$GLOBAL_MD" 2>/dev/null; then
   green "✓ gpu shared-context instruction already present"
 else
   mkdir -p "$HOME/.claude"
