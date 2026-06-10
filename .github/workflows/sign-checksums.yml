@@ -1,0 +1,43 @@
+# Signs CHECKSUMS.txt keyless (GitHub OIDC → Fulcio cert → Rekor public transparency log)
+# on every change, and commits CHECKSUMS.txt.sig + CHECKSUMS.txt.pem next to it.
+# Verify (documented in SECURITY.md):
+#   cosign verify-blob \
+#     --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+#     --certificate-identity-regexp '.*/sign-checksums.yml@.*' \
+#     --signature CHECKSUMS.txt.sig --certificate CHECKSUMS.txt.pem CHECKSUMS.txt
+name: sign-checksums
+
+on:
+  push:
+    branches: [main]
+    paths: [CHECKSUMS.txt]
+  workflow_dispatch: {}
+
+permissions:
+  id-token: write   # keyless cosign via GitHub OIDC
+  contents: write   # push the signature back to the repo
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: sigstore/cosign-installer@v3
+
+      - name: Cosign keyless sign → Rekor public log
+        env:
+          COSIGN_YES: "true"
+        run: |
+          cosign sign-blob --yes \
+            --output-signature CHECKSUMS.txt.sig \
+            --output-certificate CHECKSUMS.txt.pem \
+            CHECKSUMS.txt
+
+      - name: Commit signature
+        run: |
+          git config user.name  "sign-bot"
+          git config user.email "noreply@joinmultiplayer.ai"
+          git add CHECKSUMS.txt.sig CHECKSUMS.txt.pem
+          git commit -m "sign CHECKSUMS.txt (cosign keyless, Rekor logged) [skip ci]" || { echo "no change"; exit 0; }
+          git push
