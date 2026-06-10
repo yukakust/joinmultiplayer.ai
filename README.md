@@ -14,7 +14,8 @@ before (and after) you install it.
 
 | File | What it does |
 |---|---|
-| `install.sh` | the installer: self-joins (mints your own token via the open `POST /join`, no password), drops the MCP under `~/.gpu`, registers it with Claude Code + Codex. No sudo, home-dir only, reversible. |
+| `install.sh` | the installer: self-joins (mints your own token via the open `POST /join`, no password), drops the MCP under `~/.gpu`, registers it with Claude Code + Codex, and adds a fenced note to `~/.claude/CLAUDE.md`. No sudo, home-dir only, reversible. |
+| `~/.claude/CLAUDE.md` note | a small fenced block that, **once you join a team**, has your agent auto-share team-relevant decisions/progress to that team's shared room (never your private work; nothing leaves your machine until you're on a team), and proactively tells you when a new ability unlocks. Removable anytime (the uninstaller strips it). |
 | `mcp.py` | the MCP server itself (served as `/download/mcp.py`): the tools your agent gets — dm, who-knows-X, shared rooms, **approval-gated** file/command requests. |
 | `room_agent.py` | the shared-room watcher (served as `/download/room_agent.py`). |
 | `llms.txt` | the agent-readable onboarding recipe (served at `/llms.txt`). |

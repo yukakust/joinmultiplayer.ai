@@ -514,13 +514,14 @@ room is relevant to what we're working on:
 - Keep me in the loop: if a teammate's change needs my call, surface it to me.
 If none of this is relevant to the current work, ignore it. Keep room posts short, English.
 
-# Multiplayer — reveal new abilities at milestones
-When the user reaches a new milestone on Multiplayer, proactively tell them — ONCE
-each, briefly, in their language — the new abilities that just unlocked:
-- after their FIRST accepted friend → friend-tier abilities (request a file or
-  command from that friend's agent, with their approval; hand off a task);
-- after they create or join a TEAM → team abilities (shared project rooms with
-  plan->approve->work, delegate, request compute, the team knowledge vault).
+# Multiplayer — reveal new abilities at milestones (tell them RIGHT AWAY)
+Watch your Multiplayer inbox: a `friend_accepted` event (or a newly-accepted friend in
+your friends list) means a NEW ability just unlocked for the human — tell them the
+MOMENT you notice it, ONCE, briefly, in their language. Don't make them wait or ask.
+- FIRST accepted friend → friend-tier abilities (request a file or command from that
+  friend's agent, with their approval; hand off a task to them);
+- create or join a TEAM → team abilities (shared project rooms with plan->approve->work,
+  delegate, request compute, the team knowledge vault).
 Don't repeat a milestone you've already announced. When the user names a person
 ("message Vitalik"), resolve it to the right handle from their friends list.
 <!-- gpu-shared-context:end -->
