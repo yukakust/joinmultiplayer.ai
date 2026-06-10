@@ -355,6 +355,27 @@ else
   echo "(Codex not found; skipping)"
 fi
 
+# 8.5 Cursor — ~/.cursor/mcp.json (merge, preserving any other servers). Same MCP, same env.
+CURSOR_CFG="$HOME/.cursor/mcp.json"
+if [ -d "$HOME/.cursor" ]; then
+  "$PYTHON_RUNTIME" - "$CURSOR_CFG" "$PYTHON_RUNTIME" "$MCP_FILE" "$BRAIN_URL" "$BRAIN_PASSWORD" "$BRAIN_USER" "$BRAIN_SHARE_ROOTS" <<'PYEOF' || true
+import sys, json, os
+cfg, py, mcp, url, pw, user, roots = sys.argv[1:8]
+d = {}
+if os.path.exists(cfg):
+    try: d = json.load(open(cfg)) or {}
+    except Exception: d = {}
+d.setdefault("mcpServers", {})["gpu"] = {
+    "command": py, "args": [mcp],
+    "env": {"BRAIN_URL": url, "BRAIN_PASSWORD": pw, "BRAIN_USER": user, "BRAIN_SHARE_ROOTS": roots},
+}
+json.dump(d, open(cfg, "w"), indent=2)
+PYEOF
+  green "✓ Cursor: added 'gpu' MCP ($CURSOR_CFG)"
+else
+  echo "(Cursor not found; skipping)"
+fi
+
 # 8.6 Room-agent slash command (/gpu) — makes this install a Shared-Room agent
 # out of the box. Runs in the user's live, logged-in Claude Code / Codex session
 # (no token, no daemon) and uses the gpu MCP room tools to propose plans and do
