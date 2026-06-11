@@ -52,6 +52,19 @@ MESSAGES_DIR.mkdir(parents=True, exist_ok=True)
 READ_MARKERS_DIR = MESSAGES_DIR / ".read"
 READ_MARKERS_DIR.mkdir(parents=True, exist_ok=True)
 
+
+def _mark_read_local(message_id: str) -> None:
+    """Write the local read-marker so a message you've REPLIED to stops surfacing in
+    read_messages(). Called automatically when you answer something (dm reply / reply) —
+    if you've responded, you've handled it. Best-effort: never break the send."""
+    if not message_id:
+        return
+    try:
+        READ_MARKERS_DIR.mkdir(parents=True, exist_ok=True)
+        (READ_MARKERS_DIR / f"{message_id}.read").write_text("")
+    except Exception:
+        pass
+
 # Vault: user's personal knowledge store. Lives ONLY on the device — brain
 # never sees the contents. Used by the agent to answer questions like
 # "what's my Hetzner IP" or "GA property for miracle" without re-asking
@@ -107,7 +120,7 @@ if not any(VAULT_DIR.iterdir()):
 # of mcp_local.py and reports it via /healthz; a background thread here compares
 # and, if the server is newer, status_resource() nudges the user to restart
 # Claude (stdio MCP can't hot-reload — see docs/MCP-HOT-RELOAD.md).
-MCP_VERSION = "2026.06.10.1"
+MCP_VERSION = "2026.06.11.1"
 
 BRAIN_URL = os.environ.get("BRAIN_URL", "https://gpu.social").rstrip("/")
 BRAIN_PASSWORD = os.environ.get("BRAIN_PASSWORD", "")
@@ -1310,6 +1323,8 @@ def dm(to: str, msg: str, reply_to: str | None = None) -> dict[str, Any]:
         headers=_hdr(), timeout=15,
     )
     r.raise_for_status()
+    if reply_to:
+        _mark_read_local(reply_to)   # you answered it → it's handled, stop surfacing it
     return r.json()
 
 
@@ -1942,6 +1957,7 @@ def reply(in_reply_to: str, body: str, decision: str = "approved") -> dict[str, 
     )
     if r.status_code != 200:
         return {"ok": False, "error": r.text, "status": r.status_code}
+    _mark_read_local(in_reply_to)    # you responded → it's handled, stop surfacing it
     return r.json()
 
 
