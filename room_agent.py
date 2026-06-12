@@ -52,7 +52,7 @@ import requests
 
 # Self-update version (Variant-D pattern, like MCP_VERSION). Bump on every
 # meaningful room_agent.py change so running watchers pull + restart themselves.
-ROOM_AGENT_VERSION = "2026.06.12.1"
+ROOM_AGENT_VERSION = "2026.06.12.2"
 
 # Windows: a console-less parent (pythonw) spawning a console app (claude.exe / codex)
 # makes the OS pop a NEW visible console window per child. CREATE_NO_WINDOW suppresses it.
@@ -370,13 +370,22 @@ def _save(s: dict) -> None:
         print(f"[room-agent] state save: {e}", flush=True)
 
 
-def _get(path: str) -> dict:
-    try:
-        r = requests.get(BASE + path, headers=H, timeout=30)
-        return r.json() if r.status_code == 200 else {}
-    except Exception as e:
-        print(f"[room-agent] GET {path}: {e}", flush=True)
-        return {}
+def _get(path: str, timeout: float = 10, tries: int = 2) -> dict:
+    """Resilient GET. FAIL-FAST (10s, not 30s) + one retry on a transient network error:
+    when the relay restarts (or Cloudflare re-establishes origin links), a 30s hang ×
+    many polled rooms ballooned the poll cycle to minutes — felt like 'messages stopped'.
+    A short timeout + fresh-connection retry self-heals in seconds with NO manual watcher
+    restart (the 'works without humans' contract); on final failure return {} and the loop
+    keeps moving."""
+    for attempt in range(max(1, tries)):
+        try:
+            r = requests.get(BASE + path, headers=H, timeout=timeout)
+            return r.json() if r.status_code == 200 else {}
+        except Exception as e:
+            if attempt + 1 >= tries:
+                print(f"[room-agent] GET {path}: {e}", flush=True)
+                return {}
+    return {}
 
 
 def _rooms() -> list:
