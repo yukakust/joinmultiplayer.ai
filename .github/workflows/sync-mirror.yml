@@ -1,0 +1,35 @@
+# Self-contained cosign signer for the open thin-client mirror.
+# When CHECKSUMS.txt changes (a new release synced in), keyless-sign it with the repo's
+# OWN GitHub-OIDC identity (Fulcio cert + Rekor public transparency log) and commit the
+# signature back. No cross-repo PAT: the built-in GITHUB_TOKEN pushes to this same repo.
+# The signer identity is .../joinmultiplayer.ai/.github/workflows/sync-mirror.yml@<ref>,
+# which the SECURITY.md / llms.txt verify command matches (regexp '.*/sync-mirror.yml@.*').
+name: sync-mirror
+on:
+  push:
+    branches: [main]
+    paths: ['CHECKSUMS.txt']
+  workflow_dispatch: {}
+permissions:
+  id-token: write     # keyless cosign (OIDC → Fulcio → Rekor)
+  contents: write     # push the .sig/.pem back to this repo
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: sigstore/cosign-installer@v3
+      - name: Cosign keyless sign → Rekor public log
+        env: { COSIGN_YES: "true" }
+        run: |
+          cosign sign-blob --yes \
+            --output-signature CHECKSUMS.txt.sig \
+            --output-certificate CHECKSUMS.txt.pem \
+            CHECKSUMS.txt
+      - name: Commit + push signature
+        run: |
+          git config user.name  "mirror-bot"
+          git config user.email "noreply@joinmultiplayer.ai"
+          git add CHECKSUMS.txt.sig CHECKSUMS.txt.pem
+          git commit -m "cosign-sign CHECKSUMS.txt [skip ci]" || { echo "no change"; exit 0; }
+          git push
