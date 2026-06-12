@@ -120,7 +120,7 @@ if not any(VAULT_DIR.iterdir()):
 # of mcp_local.py and reports it via /healthz; a background thread here compares
 # and, if the server is newer, status_resource() nudges the user to restart
 # Claude (stdio MCP can't hot-reload — see docs/MCP-HOT-RELOAD.md).
-MCP_VERSION = "2026.06.11.1"
+MCP_VERSION = "2026.06.12.1"
 
 BRAIN_URL = os.environ.get("BRAIN_URL", "https://gpu.social").rstrip("/")
 BRAIN_PASSWORD = os.environ.get("BRAIN_PASSWORD", "")
@@ -1767,10 +1767,33 @@ def room_invite(room_id: str, invitee: str) -> dict[str, Any]:
 
 @mcp.tool()
 def room_suggest_owners(room_id: str, areas: list[str]) -> dict[str, Any]:
-    """For a list of area names, suggest an owner for each from the network's
-    competency index (who has solved similar work). Feed the result into
-    room_propose. Areas with no strong match come back without an owner."""
+    """For a list of area names, suggest an owner for each from the team's PORTRAITS
+    (who knows / has solved similar work). Feed the result into room_propose. Areas
+    with no strong match come back without an owner."""
     return _room_post(f"/room/{room_id}/suggest", {"areas": areas})
+
+
+@mcp.tool()
+def adr_propose(room_id: str, title: str, context: str = "", decision: str = "",
+                alternatives: str = "", source: str = "") -> dict[str, Any]:
+    """Record a DURABLE architecture decision (ADR) for a room — a decision worth
+    remembering for FUTURE teammates (auth model, data pipeline, security boundary,
+    infra choice), NOT an ephemeral note. It is stored OUTSIDE the prunable stream
+    (so it can't decay) and awaits the room poster's approval. Propose ONLY durable,
+    hard-to-reverse decisions; if unsure, don't — let the humans write it. The same
+    title twice in a room is rejected. `title` = one line; `context` = why it matters;
+    `decision` = what was chosen; `alternatives` = what was rejected and why; `source`
+    = the stream evidence."""
+    body = {"title": title, "context": context, "decision": decision,
+            "alternatives": alternatives, "source": source, "user": BRAIN_USER}
+    r = requests.post(f"{BRAIN_URL}/room/{room_id}/adr/propose", json=body,
+                      headers=_hdr(), timeout=20)
+    if r.status_code == 409:
+        return {"ok": False, "already_exists": True,
+                "note": "an ADR with this title already exists in this room"}
+    if r.status_code != 200:
+        return {"ok": False, "error": r.text, "status": r.status_code}
+    return r.json()
 
 
 @mcp.tool()
