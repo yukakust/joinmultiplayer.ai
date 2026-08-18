@@ -17,6 +17,16 @@ The public language is English, but the site currently supports English and Russ
 
 Do not assume that `main` contains the latest work. Begin from `agent/game-loop-v0.1`, inspect the draft PR, and merge only after review.
 
+## Primary development workspace
+
+The working copy is on `yukabox`:
+
+```text
+/home/yuka/projects/joinmultiplayer.ai
+```
+
+It is checked out on `agent/game-loop-v0.1` and matches the current GitHub commit. Treat this server workspace and GitHub as the development source of truth; the Mac is only a user interface for steering and review.
+
 ## Project map
 
 - `site/` — static public site: `index.html`, `style.css`, `app.js`. There is no framework or build step.
@@ -49,3 +59,5 @@ Run D04 with a real question as the first player. Record where the flow causes f
 ## Access and secrets
 
 No credentials, tokens, or production secrets belong in this repository or this document. Request access through the project owner. Use a personal GitHub account with the least privilege needed; never share the owner’s account or personal access token.
+
+The `yukabox` user can read the repository, but production-server SSH is not currently available from that user. Before assigning deployment work to a developer, provide their individual SSH public key and GitHub username, then grant only the repository role and server permissions they need.
