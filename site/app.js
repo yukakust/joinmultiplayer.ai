@@ -143,13 +143,17 @@ function revealedDoor(id) {
   const data = doors[id];
   return `
     <article class="lit-door">
-      <div class="lit-symbol" aria-hidden="true">i</div>
-      <div class="door-id">i · ${id.toUpperCase()}</div>
-      <div class="lit-hook">${escapeHTML(data.card)}</div>
-      <p>${escapeHTML(data.copy)}</p>
-      <div class="actions">
-        <a class="button" href="/${id}">${id === "d04" ? "Try it" : "Enter this door"}</a>
-        <button class="text-button" data-action="close-door">another i</button>
+      <div class="lit-primary">
+        <div class="lit-symbol" aria-hidden="true">i</div>
+        <div class="door-id">i · ${id.toUpperCase()}</div>
+        <div class="lit-hook">${escapeHTML(data.card)}</div>
+      </div>
+      <div class="lit-secondary">
+        <p>${escapeHTML(data.copy)}</p>
+        <div class="actions">
+          <a class="button" href="/${id}">${id === "d04" ? "Try it" : "Enter this door"}</a>
+          <button class="text-button" data-action="close-door">another i</button>
+        </div>
       </div>
     </article>`;
 }
