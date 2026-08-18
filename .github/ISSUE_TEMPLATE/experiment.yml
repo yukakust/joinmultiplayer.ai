@@ -1,0 +1,57 @@
+name: Experiment proposal
+description: Propose the smallest honest test of a hypothesis.
+title: "[EXPERIMENT] "
+labels:
+  - experiment
+body:
+  - type: input
+    id: hypotheses
+    attributes:
+      label: Hypothesis IDs
+      placeholder: H001, H026
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: State one falsifiable question.
+    validations:
+      required: true
+  - type: textarea
+    id: comparison
+    attributes:
+      label: Comparison and baseline
+      description: Define every i, the single-system baseline, and why the comparison is fair.
+    validations:
+      required: true
+  - type: textarea
+    id: budget
+    attributes:
+      label: Shared resource budget
+      description: Record cost, tokens, time, tools, and latency.
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Smallest honest method
+      description: Include the sample, controls, repetitions, exclusions, and ground truth.
+    validations:
+      required: true
+  - type: textarea
+    id: metric
+    attributes:
+      label: Metric and decision rule
+      description: Decide what counts as support, challenge, or inconclusive before the run.
+    validations:
+      required: true
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Readiness
+      options:
+        - label: I read METHOD.md and will publish the complete record, including failures.
+          required: true
+        - label: The proposal contains no private or restricted data.
+          required: true

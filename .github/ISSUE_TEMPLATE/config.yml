@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the contribution guide
+    url: https://github.com/yukakust/joinmultiplayer.ai/blob/main/CONTRIBUTING.md
+    about: Choose the smallest useful way to enter the laboratory.
