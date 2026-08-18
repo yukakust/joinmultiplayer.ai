@@ -4,6 +4,7 @@
   --ink: #15140f;
   --muted: #716e64;
   --line: rgba(21, 20, 15, 0.18);
+  --ember: #b64f20;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,6 +13,7 @@
     --ink: #eeece4;
     --muted: #99968d;
     --line: rgba(238, 236, 228, 0.2);
+    --ember: #ed7942;
   }
 }
 
@@ -109,7 +111,7 @@ h1 {
 }
 
 .home h1 {
-  font-size: clamp(1.1rem, 5.7vw, 3rem);
+  font-size: clamp(1rem, 5vw, 2.75rem);
   max-width: none;
 }
 
@@ -155,15 +157,29 @@ h1 {
 }
 
 .hand-section {
+  justify-content: flex-start;
+  padding-bottom: clamp(4rem, 10vw, 8rem);
+  padding-top: 0;
+}
+
+.equation-stage {
   align-items: center;
-  gap: 1.5rem;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.equation-wrap {
+  text-align: center;
+  width: 100%;
 }
 
 .equation {
   align-items: center;
   display: flex;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3.5rem, 12vw, 8rem);
+  font-size: clamp(4rem, 14vw, 9rem);
   gap: clamp(0.5rem, 3vw, 2rem);
   justify-content: center;
   line-height: 1;
@@ -176,6 +192,29 @@ h1 {
   font-weight: 400;
 }
 
+.equation-i {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1em;
+  line-height: 1;
+  padding: 0.02em 0.04em;
+  transition: color 180ms ease, text-shadow 180ms ease, transform 180ms ease;
+}
+
+.equation-i:hover,
+.equation-i:focus-visible {
+  color: var(--ember);
+  text-shadow: 0 0 0.35em color-mix(in srgb, var(--ember) 55%, transparent);
+  transform: translateY(-0.035em);
+}
+
+.equation-unknown {
+  color: var(--ink);
+}
+
 .touch-hint,
 .progress-copy,
 .prototype-note {
@@ -183,78 +222,77 @@ h1 {
   font-size: 0.8rem;
 }
 
-.hidden-hand {
-  align-items: stretch;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-}
-
-.mystery-card,
-.revealed-card {
-  min-height: 24rem;
-}
-
-.mystery-card {
-  align-items: center;
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 0;
-  color: var(--ink);
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.mystery-card span {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 8rem;
-  line-height: 1;
-}
-
-.mystery-card:hover {
-  border-color: var(--ink);
-}
-
-.revealed-card {
-  border: 1px solid var(--ink);
+.lit-door {
+  animation: reveal-door 420ms ease both;
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
 }
 
-.revealed-card .door-id {
-  margin-bottom: 1.25rem;
+.lit-symbol {
+  animation: ignite 650ms ease both;
+  color: var(--ember);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(5rem, 15vw, 9rem);
+  line-height: 0.8;
+  margin-bottom: clamp(2rem, 6vw, 4rem);
+  text-shadow: 0 0 0.45em color-mix(in srgb, var(--ember) 45%, transparent);
 }
 
-.mini-card {
-  flex: 1;
+.lit-hook {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(1rem, 2.2vw, 1.45rem);
+  font-size: clamp(2rem, 6vw, 4.8rem);
   font-weight: 700;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.05em;
   line-height: 1.02;
+  max-width: 13ch;
   white-space: pre-line;
 }
 
-.revealed-card p {
+.lit-door > p {
   color: var(--muted);
-  font-size: 0.78rem;
-  line-height: 1.5;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  line-height: 1.6;
+  margin: 2rem 0;
+  max-width: 38rem;
 }
 
-.revealed-card .button {
+.lit-door .actions {
+  gap: 1.25rem;
+}
+
+.catalog-peek {
   text-align: center;
-}
-
-.revealed-card .text-button {
-  margin-top: 1rem;
+  width: 100%;
 }
 
 .all-doors {
-  margin-top: 2rem;
+  margin-top: 3rem;
+  text-align: left;
   width: 100%;
+}
+
+@keyframes ignite {
+  from {
+    opacity: 0;
+    text-shadow: 0 0 0 transparent;
+    transform: translateY(0.2em) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes reveal-door {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .door-picker {
@@ -757,13 +795,12 @@ blockquote {
     grid-template-columns: 2.7rem 1fr auto;
   }
 
-  .hidden-hand {
-    grid-template-columns: 1fr;
+  .equation {
+    gap: 0.4rem;
   }
 
-  .mystery-card,
-  .revealed-card {
-    min-height: 20rem;
+  .lit-hook {
+    max-width: 100%;
   }
 
   .form-grid {
@@ -813,6 +850,13 @@ blockquote {
   .door-choice,
   .door-choice:hover,
   .door-choice:focus-visible {
+    transition: none;
+  }
+
+  .equation-i,
+  .lit-door,
+  .lit-symbol {
+    animation: none;
     transition: none;
   }
 }

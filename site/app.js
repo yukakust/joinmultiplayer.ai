@@ -60,9 +60,8 @@ const doors = {
 };
 
 const openDoors = ["d01", "d02", "d03", "d04", "d05", "d06", "d07", "d10"];
-let hand = ["d04", "d06", "d10"];
-const drawnDoors = new Set(hand);
-const revealed = new Set();
+const hand = ["d04", "d06", "d10"];
+let activeDoorIndex = null;
 
 function defaultPrototype() {
   return {
@@ -122,8 +121,8 @@ function home() {
     <section class="home">
       <div class="mark" aria-label="i">i</div>
       <h1>
-        <span>Can many small intelligences</span>
-        <span>become smarter than</span>
+        <span>Can people and their pocket AIs</span>
+        <span>become smarter together than</span>
         <span>one big AI?</span>
       </h1>
       <p>We don't know.<br>Let's find out together.</p>
@@ -133,39 +132,48 @@ function home() {
       </div>
     </section>
     <section class="hand-section" id="hand">
-      <div class="equation" aria-label="i plus i plus i leads to an unknown">
-        <span>i</span><b>+</b><span>i</span><b>+</b><span>i</span><b>→</b><span>?</span>
+      <div class="equation-stage" id="equation-stage" aria-live="polite"></div>
+      <div class="catalog-peek">
+        <button class="text-button" data-action="show-all">see all open questions</button>
+        <div class="all-doors" id="all-doors" hidden></div>
       </div>
-      <p class="touch-hint">touch an i</p>
-      <div class="hidden-hand" id="hidden-hand"></div>
-      <button class="text-button" data-action="show-all">see all open questions</button>
-      <div class="all-doors" id="all-doors" hidden></div>
     </section>`;
 }
 
-function handCard(id, index) {
+function revealedDoor(id) {
   const data = doors[id];
-  if (!revealed.has(index)) {
-    return `
-      <button class="mystery-card" data-reveal="${index}" aria-label="Reveal a question">
-        <span>i</span>
-      </button>`;
-  }
-
   return `
-    <article class="revealed-card">
-      <div class="door-id">${id.toUpperCase()}</div>
-      <div class="mini-card">${escapeHTML(data.card)}</div>
+    <article class="lit-door">
+      <div class="lit-symbol" aria-hidden="true">i</div>
+      <div class="door-id">i · ${id.toUpperCase()}</div>
+      <div class="lit-hook">${escapeHTML(data.card)}</div>
       <p>${escapeHTML(data.copy)}</p>
-      <a class="button" href="/${id}">${id === "d04" ? "Try it" : "Enter this door"}</a>
-      <button class="text-button" data-draw="${index}">draw another i</button>
+      <div class="actions">
+        <a class="button" href="/${id}">${id === "d04" ? "Try it" : "Enter this door"}</a>
+        <button class="text-button" data-action="close-door">another i</button>
+      </div>
     </article>`;
 }
 
 function renderHand() {
-  const target = document.querySelector("#hidden-hand");
+  const target = document.querySelector("#equation-stage");
   if (!target) return;
-  target.innerHTML = hand.map(handCard).join("");
+  if (activeDoorIndex !== null) {
+    target.innerHTML = revealedDoor(hand[activeDoorIndex]);
+    return;
+  }
+
+  target.innerHTML = `
+    <div class="equation-wrap">
+      <div class="equation" aria-label="Three intelligences lead to an unknown">
+        ${hand.map((id, index) => `
+          ${index ? "<b>+</b>" : ""}
+          <button class="equation-i" data-reveal="${index}" aria-label="Touch an i to reveal a question">i</button>
+        `).join("")}
+        <b>→</b><span class="equation-unknown">?</span>
+      </div>
+      <p class="touch-hint">touch an i</p>
+    </div>`;
 }
 
 function renderAllDoors() {
@@ -560,24 +568,9 @@ const app = document.querySelector("#app");
 app.addEventListener("click", (event) => {
   const revealButton = event.target.closest("[data-reveal]");
   if (revealButton) {
-    const index = Number(revealButton.dataset.reveal);
-    revealed.add(index);
+    activeDoorIndex = Number(revealButton.dataset.reveal);
     renderHand();
-    document.querySelector(`[data-draw="${index}"]`)?.focus();
-    return;
-  }
-
-  const drawButton = event.target.closest("[data-draw]");
-  if (drawButton) {
-    const index = Number(drawButton.dataset.draw);
-    const next = openDoors.find((id) => !drawnDoors.has(id)) || openDoors.find((id) => !hand.includes(id));
-    if (next) {
-      hand[index] = next;
-      drawnDoors.add(next);
-    }
-    revealed.delete(index);
-    renderHand();
-    document.querySelector(`[data-reveal="${index}"]`)?.focus();
+    document.querySelector(".lit-door .button")?.focus();
     return;
   }
 
@@ -586,6 +579,11 @@ app.addEventListener("click", (event) => {
     const list = document.querySelector("#all-doors");
     list.hidden = !list.hidden;
     event.target.textContent = list.hidden ? "see all open questions" : "hide open questions";
+  }
+  if (action === "close-door") {
+    activeDoorIndex = null;
+    renderHand();
+    document.querySelector(".equation-i")?.focus();
   }
   if (action === "start-question") {
     prototype.stage = "question";
