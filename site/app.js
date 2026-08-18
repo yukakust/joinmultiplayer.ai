@@ -121,9 +121,8 @@ function home() {
     <section class="home">
       <div class="mark" aria-label="i">i</div>
       <h1>
-        <span>Can people and their pocket AIs</span>
-        <span>become smarter together than</span>
-        <span>one big AI?</span>
+        <span>Can people and their pocket AIs together</span>
+        <span>become smarter than one big AI?</span>
       </h1>
       <p>We don't know.<br>Let's find out together.</p>
       <div class="links">
@@ -570,7 +569,6 @@ app.addEventListener("click", (event) => {
   if (revealButton) {
     activeDoorIndex = Number(revealButton.dataset.reveal);
     renderHand();
-    document.querySelector(".lit-door .button")?.focus();
     return;
   }
 
@@ -581,9 +579,10 @@ app.addEventListener("click", (event) => {
     event.target.textContent = list.hidden ? "see all open questions" : "hide open questions";
   }
   if (action === "close-door") {
+    const previousIndex = activeDoorIndex;
     activeDoorIndex = null;
     renderHand();
-    document.querySelector(".equation-i")?.focus();
+    document.querySelector(`[data-reveal="${previousIndex}"]`)?.focus({ preventScroll: true });
   }
   if (action === "start-question") {
     prototype.stage = "question";
