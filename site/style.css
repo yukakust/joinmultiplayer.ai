@@ -842,6 +842,7 @@ blockquote {
 
   .lit-door {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
     padding-top: 1.5rem;
