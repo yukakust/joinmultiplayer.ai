@@ -1,0 +1,39 @@
+name: Correction
+description: Correct a source, ground truth, result, or project claim.
+title: "[CORRECTION] "
+labels:
+  - correction
+body:
+  - type: input
+    id: target
+    attributes:
+      label: Record to correct
+      description: Link the issue, file, experiment, result, or claim.
+    validations:
+      required: true
+  - type: textarea
+    id: original
+    attributes:
+      label: What the current record says
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Include direct sources, dates, or a reproducible check.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety
+      options:
+        - label: This correction does not repeat exposed secrets or personal data.
+          required: true

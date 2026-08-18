@@ -1,0 +1,81 @@
+name: Door observation
+description: Bring one complete observation through a door.
+title: "[D__] "
+labels:
+  - observation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        An observation is not a conclusion. Preserve the original material and remove private data before submitting.
+  - type: dropdown
+    id: door
+    attributes:
+      label: Door
+      options:
+        - D01 — stale knowledge
+        - D02 — many small vs one big
+        - D03 — knowing vs guessing
+        - D04 — correlated errors
+        - D05 — claim provenance
+        - D06 — expert-caught mistakes
+        - D07 — human contribution
+        - D08 — blind judge
+        - D09 — source memory
+        - D10 — multiplayer intelligence
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Exact question or prompt
+      description: Include the complete wording and relevant instructions.
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: Complete observation
+      description: Paste the complete, unedited answer or describe exactly what happened.
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Model, version, and date
+      description: Leave blank only when no AI was involved.
+  - type: textarea
+    id: context
+    attributes:
+      label: Context and tools
+      description: Record language, system instructions when known, browsing, retrieval, memory, code, and other conditions.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or reproducible check
+      description: Add direct source links, dates, and the smallest check another person can repeat.
+  - type: dropdown
+    id: credit
+    attributes:
+      label: Public credit
+      options:
+        - GitHub identity
+        - A different handle supplied below
+        - No public credit
+    validations:
+      required: true
+  - type: input
+    id: handle
+    attributes:
+      label: Optional public handle
+  - type: checkboxes
+    id: permission
+    attributes:
+      label: Permission
+      options:
+        - label: I removed secrets, personal data, and restricted records.
+          required: true
+        - label: I have the right to publish this material under the project terms.
+          required: true
+        - label: I understand that this issue is public.
+          required: true
