@@ -3,6 +3,9 @@
 You do not need to build an entire experiment to move the main question
 forward.
 
+Read [`GAME.md`](GAME.md) to see how one contribution becomes a trace, how a
+different person places the dot, and what the result unlocks.
+
 ## Bring one observation
 
 Choose a [door](doors/) and open a
@@ -41,9 +44,11 @@ history of being wrong is part of the result.
 1. A maintainer checks the contribution for completeness, safety, and scope.
 2. The original material is preserved; interpretation is recorded separately.
 3. Accepted observations enter `journal/` with a stable ID.
-4. Repeated or decisive observations may create or challenge a hypothesis.
-5. Experiments publish complete records under the public result contract.
-6. The contributor receives a link to the record and may use a name, handle, or
+4. A different person may independently check the trace; no contributor places
+   the dot on their own work.
+5. Repeated or decisive observations may create or challenge a hypothesis.
+6. Experiments publish complete records under the public result contract.
+7. The contributor receives a link to the record and may use a name, handle, or
    no public credit.
 
 ## Before submitting

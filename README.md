@@ -4,7 +4,7 @@
 
 We don't know.
 
-Let's find out.
+Let's find out together.
 
 `i + i > AI ?`
 
@@ -53,6 +53,7 @@ journal/       observations people bring
 hypotheses/    ideas before evidence: ı
 experiments/   reproducible tests
 i/             results that earned their dot
+matches/       people and the traces between them
 site/          the public entrance
 ```
 
@@ -66,6 +67,10 @@ Enter through a [door](doors/), contribute an
 [observation](CONTRIBUTING.md), or start with the
 [hypothesis pool](hypotheses/POOL.md).
 
+The public entrance reveals only three questions at first. Read
+[`GAME.md`](GAME.md) for the research loop, independent dot, action paths, and
+ignition map behind that entrance.
+
 ## Rules
 
 - Ask one sharp question.
@@ -75,6 +80,7 @@ Enter through a [door](doors/), contribute an
 - Publish what failed.
 - Separate observation from interpretation.
 - Let evidence place the dot.
+- No one puts the dot on their own `i`.
 
 Inconclusive and failed experiments belong here too. Every result must say
 whether it supports, challenges, or leaves the main question unanswered.

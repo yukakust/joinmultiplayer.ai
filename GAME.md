@@ -1,0 +1,215 @@
+# Game Loop v0.1
+
+> A person comes to solve a question and discovers that they became part of
+> the answer.
+
+This is a research game. Mystery hides what comes next. The record of what
+already happened stays open.
+
+## The first hand
+
+After entering, a visitor sees only:
+
+```text
+i + i + i → ?
+```
+
+Each `i` hides one door. Clicking it reveals the public hook, the smallest
+useful contribution, and two choices:
+
+```text
+enter this door
+draw another i
+```
+
+The first hand is fixed while the loop is being tested:
+
+- `D04` — a question anyone with several AI systems can investigate;
+- `D06` — a question that needs experience in a real field;
+- `D10` — a question that can grow into a controlled network experiment.
+
+The labels `beginner`, `expert`, and `researcher` are not shown. People choose
+the question they recognize as theirs.
+
+`draw another i` reveals an unseen open door before repeating one. A quiet
+`see all open questions` always opens the complete catalog. A researcher may
+enter an advanced experiment immediately.
+
+`D08` and `D09` never enter the draw until real cases unlock them.
+
+## One move
+
+A click is not a move. A move leaves a trace another person can inspect.
+
+The smallest move contains:
+
+```text
+door:
+exact question or prompt:
+complete observation:
+conditions and context:
+source or reproducible check:
+permission to publish:
+```
+
+The trace enters the journal as `ı`: present, but not independently checked.
+Incomplete material may be useful conversation, but it does not enter the
+research record.
+
+## The dot
+
+```text
+ı → i
+```
+
+Another person places the dot by following the declared check and publishing
+what happened.
+
+> No one puts the dot on their own i.
+
+The dot means **independently checked under stated conditions**. It does not
+mean true, permanent, or generally proven.
+
+A check ends as one of:
+
+```text
+supports | challenges | inconclusive
+```
+
+All three can earn the dot when the record is complete. A correction never
+removes history; it adds a new trace and may reopen the question.
+
+Maintainers check completeness, safety, and scope. That review is not the
+independent check unless the maintainer also performs and publishes the
+declared verification.
+
+## Ways to move
+
+The game expands by action, not by points:
+
+```text
+FIND → VERIFY → TEST → CONNECT → BUILD
+```
+
+- **Find:** bring a complete observation, disagreement, source trail, or
+  expert-caught mistake.
+- **Verify:** repeat or independently check another person's trace.
+- **Test:** run a pre-specified comparison with a baseline and decision rule.
+- **Connect:** show how several results change a hypothesis or the main
+  question.
+- **Build:** contribute a reproducible protocol, instrument, or new door born
+  from evidence.
+
+These are capabilities, not ranks. Nothing prevents an experienced researcher
+from beginning with `TEST`. Completing one action helps the network offer that
+person relevant next actions and collaborators.
+
+There is no score for posts, invitations, agreement, or the size of a branch.
+
+## What changes after a move
+
+Every accepted move must visibly change at least one thing:
+
+- add a trace to the journal;
+- place a dot through independent verification;
+- support, challenge, or leave a hypothesis inconclusive;
+- open a real case such as `Blind Judge 001` or `Source Memory 001`;
+- create the next question;
+- add a person or connection to the ignition map.
+
+If a contribution disappears into an issue without a stable record, response,
+and next action, the loop is broken.
+
+## The ignition map
+
+The map records the spread of questions and checks, not popularity.
+
+Each participating person receives a stable match ID:
+
+```text
+M0001
+```
+
+A public match record may contain:
+
+```text
+match ID:
+name or pseudonym: optional
+image or symbol: optional
+approximate location: optional
+entered through:
+lit by: match ID | self-found | unknown
+dotted by: match ID | not yet dotted
+public traces:
+```
+
+Two relationships form the map:
+
+- **lit by** — who brought the person to the question;
+- **dotted by** — who independently checked their first checkable trace.
+
+The two people may be different. A participant appears as `ı` until one of
+their checkable contributions earns a dot. Self-reports that cannot be
+independently checked remain observations and do not claim more.
+
+The first origin record is:
+
+```text
+M0001
+Yuka Kust
+Match 0001
+Lit the first question.
+```
+
+Being first grants provenance, not authority. Branch size grants no status.
+Names, images, location, and public appearance on the map require consent.
+Exact location is never required.
+
+## How new doors open
+
+New doors are consequences, not content scheduled in advance.
+
+- A real disagreement collected through `D04` can open `D08` as
+  `Blind Judge 001`.
+- A familiar claim found through `D05` can open `D09` as
+  `Source Memory 001`.
+- A repeated pattern may create a falsifiable hypothesis.
+- A surprising result or correction may return as a new public question.
+
+The interface may conceal which door appears next. The source deck, selection
+rules, raw contributions, and research decisions remain inspectable in this
+repository.
+
+## First pilot
+
+`Game Pilot 001` tests the loop, not the main hypothesis.
+
+1. `M0001` enters through `D04`.
+2. One bounded, source-verifiable question is chosen before any model run.
+3. The exact question is asked independently to at least three AI systems.
+4. Every complete answer, model identifier, date, tool condition, and source is
+   preserved.
+5. `M0001` brings one independent participant into the pilot as `M0002`.
+6. `M0002` checks the ground truth and completeness of the record without
+   seeing `M0001`'s interpretation first.
+7. The result is recorded as supports, challenges, or inconclusive.
+8. The pilot records `M0002 lit by M0001` and `M0001 dotted by M0002`.
+9. If the systems genuinely disagree, the case may become `Blind Judge 001`.
+
+All-correct agreement, all-wrong agreement, disagreement, and an inconclusive
+check are valid outcomes. No result will be engineered to make the game look
+successful. The pilot succeeds only if a stranger can understand the record,
+repeat the check, and see what should happen next.
+
+## Rules
+
+1. A question is a door, not a promised answer.
+2. An observation is not a conclusion.
+3. No one checks their own trace.
+4. Raw material is preserved; interpretation is added separately.
+5. A correction is progress.
+6. Disagreement may open a door, but it is not evidence by itself.
+7. Identity may remain private; the research conditions may not.
+8. No leaderboard or referral contest.
+9. Case-dependent doors use real cases only.
+10. Every result returns to the main question or creates a sharper one.
