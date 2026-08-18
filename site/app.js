@@ -186,6 +186,7 @@ function withLanguage(content) {
 const openDoors = ["d01", "d02", "d03", "d04", "d05", "d06", "d07", "d10"];
 const hand = ["d04", "d06", "d10"];
 let activeDoorIndex = null;
+let allDoorsVisible = false;
 
 function defaultPrototype() {
   return {
@@ -286,6 +287,15 @@ function renderHand() {
     return;
   }
 
+  if (allDoorsVisible) {
+    target.innerHTML = `
+      <section class="open-question-catalog" aria-label="${t("seeAll")}">
+        <div class="all-doors" id="all-doors"></div>
+        <button class="text-button" data-action="show-all">${t("hideAll")}</button>
+      </section>`;
+    return;
+  }
+
   target.innerHTML = `
     <div class="equation-wrap">
       <div class="equation" aria-label="${t("equationAria")}">
@@ -299,7 +309,6 @@ function renderHand() {
     </div>
     <div class="catalog-peek">
       <button class="text-button" data-action="show-all">${t("seeAll")}</button>
-      <div class="all-doors" id="all-doors" hidden></div>
     </div>`;
 }
 
@@ -710,9 +719,9 @@ app.addEventListener("click", (event) => {
     return;
   }
   if (action === "show-all") {
-    const list = document.querySelector("#all-doors");
-    list.hidden = !list.hidden;
-    event.target.textContent = list.hidden ? t("seeAll") : t("hideAll");
+    allDoorsVisible = !allDoorsVisible;
+    renderHand();
+    renderAllDoors();
   }
   if (action === "close-door") {
     const previousIndex = activeDoorIndex;
