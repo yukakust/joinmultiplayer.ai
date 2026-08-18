@@ -1,6 +1,7 @@
 const repository = "https://github.com/yukakust/joinmultiplayer.ai";
 const contribution = `${repository}/issues/new?template=observation.yml`;
 const storageKey = "multiplayer-d04-prototype-v1";
+const languageStorageKey = "multiplayer-language-v1";
 
 const doors = {
   d01: {
@@ -59,6 +60,129 @@ const doors = {
   }
 };
 
+const russianDoors = {
+  d01: {
+    card: "МИР ИЗМЕНИЛСЯ.\nМОДЕЛЬ — НЕТ.\n\nМОЖЕТ ЛИ ОНА\nЭТО ПОНЯТЬ?",
+    short: "Может ли ИИ заметить, что его знание устарело?",
+    copy: "Принесите один факт, который изменился, и полный ответ ИИ, который не предупредил об этом."
+  },
+  d02: {
+    card: "ИИ БЫЛ\nОДИНОЧНОЙ ИГРОЙ.\n\nА ЕСЛИ\nИНТЕЛЛЕКТ —\nМНОГОПОЛЬЗОВАТЕЛЬСКИЙ?",
+    short: "Могут ли много малых интеллектов превзойти одну фронтирную модель?",
+    copy: "Сравните фронтирную модель с командой малых интеллектов в одинаковом заявленном бюджете ресурсов."
+  },
+  d03: {
+    card: "ГДЕ ИИ\nПЕРЕСТАЁТ ЗНАТЬ\n\nИ НАЧИНАЕТ\nГАДАТЬ?",
+    short: "Где ИИ перестаёт знать и начинает гадать?",
+    copy: "Соберите лестницу вопросов в знакомой области и найдите место, где ломается точность."
+  },
+  d04: {
+    card: "ЕСЛИ СОГЛАСНЫ\nВСЕ ИИ,\n\nМОГУТ ЛИ ОНИ\nВСЕ ОШИБАТЬСЯ?",
+    short: "Могут ли несколько ИИ разделять одну слепую зону?",
+    copy: "Принесите вопрос, на который вам действительно нужен ответ. Задайте его нескольким ИИ одинаково. Принесите каждый ответ."
+  },
+  d05: {
+    card: "МОЖЕТЕ ЛИ ВЫ\nПРОСЛЕДИТЬ «ФАКТ»,\nКОТОРЫЙ ПОВТОРЯЕТ ИИ,\n\nДО ЕГО\nПЕРВОГО ИСТОЧНИКА?",
+    short: "Можно ли проследить «факт» ИИ до первого источника?",
+    copy: "Идите по следу повторяемого утверждения назад до первичного доказательства — или честно зафиксируйте, где след обрывается."
+  },
+  d06: {
+    card: "ИИ ДУМАЕТ,\nЧТО ЗНАЕТ\nВАШУ РАБОТУ.\n\nКАКУЮ ОШИБКУ\nЗАМЕТИТ ТОЛЬКО\nЭКСПЕРТ?",
+    short: "Какую ошибку заметит только практик?",
+    copy: "Принесите одну проверяемую профессиональную ошибку и условия, при которых она возникает."
+  },
+  d07: {
+    card: "ИИ ДЕЛАЕТ\nЗАДАЧУ.\n\nА ЧТО\nДЕЛАЕТЕ ВЫ?",
+    short: "Когда ИИ делает задачу, что всё ещё делаете вы?",
+    copy: "Назовите одну вещь, которую вы всё ещё задаёте, замечаете, решаете или за которую отвечаете."
+  },
+  d08: {
+    card: "КОГДА ИИ\nНЕ СОГЛАСНЫ,\n\nКОМУ ВЫ\nДОВЕРЯЕТЕ?",
+    short: "Когда ИИ не согласны, какому ответу вы доверяете?",
+    copy: "Blind Judge 001 откроется, только когда D04 даст настоящее расхождение.",
+    waiting: true,
+    next: "/d04"
+  },
+  d09: {
+    card: "ВЫ ЭТО\nЗНАЕТЕ.\n\nНО ЗНАЕТЕ ЛИ ВЫ,\nГДЕ ЭТО УЗНАЛИ?",
+    short: "Знаете ли вы, откуда в памяти появился знакомый факт?",
+    copy: "Source Memory 001 откроется, только когда Claim Hunt найдёт знакомое утверждение.",
+    waiting: true,
+    next: "/d05"
+  },
+  d10: {
+    card: "ОДНА ГОЛОВА —\nХОРОШО,\nДВЕ — ЛУЧШЕ.\n\nУ СЕМИ НЯНЕК\nДИТЯ БЕЗ ГЛАЗУ.\n\nКАКОЕ ПРАВИЛО\nВЕРНО ДЛЯ ИИ?",
+    short: "Какое старое правило верно для ИИ?",
+    copy: "Проверьте, добавляет ли ещё один интеллект недостающее знание — или только стоимость координации."
+  }
+};
+
+const ui = {
+  en: {
+    homeA: "Can people and their pocket AIs together",
+    homeB: "become smarter than one big AI?",
+    homeSub: "We don't know.<br>Let's find out together.",
+    enter: "Enter", openLab: "open laboratory", equationAria: "Three intelligences lead to an unknown",
+    revealAria: "Touch an i to reveal a question", touch: "touch an i", seeAll: "see all open questions", hideAll: "hide open questions",
+    tryIt: "Try it", enterDoor: "Enter this door", anotherI: "another i", prototype: "UX PROTOTYPE",
+    prototypeNote: "saved only in this browser · nothing is published · no email is sent", reset: "reset",
+    principle: "The door gives you a method.<br>You bring the question.", bringQuestion: "Bring my question", return: "Return to i",
+    questionStep: "D04 · QUESTION", trace: "TRACE", verifier: "verifier", whatKnow: "What do you<br>want to know?", exactQuestion: "Your exact question",
+    questionPlaceholder: "Write it exactly as you will ask every AI.", whyMatter: "Why does it matter to you?", field: "Field or domain",
+    fieldPlaceholder: "e.g. architecture, tax law, beekeeping", knowAnswer: "Do you know the answer?", choose: "Choose",
+    know: "I know", partlyKnow: "I partly know", dontKnow: "I don't know", checkPath: "How could it be checked?",
+    source: "A source", reproduce: "Reproduce it", expertReview: "Expert review", unknown: "I don't know yet",
+    expected: "I have an expected answer", sealExpected: "Seal it before seeing the AI answers", expectedPlaceholder: "This stays hidden in the verifier view.", freeze: "Freeze this question",
+    answer: "ANSWER", frozenQuestion: "FROZEN QUESTION", copyQuestion: "copy question", answerAria: "{count} of 3 answers brought",
+    progressEmpty: "Bring every answer. Don't select the best one.", progressPart: "{count} brought · {remaining} before the D04 comparison is ready", progressReady: "{count} answers · comparison ready",
+    bringFirst: "Bring the first answer", bringAnother: "Bring another answer", model: "AI / model", modelPlaceholder: "e.g. Claude Opus 4.1",
+    version: "Version", versionPlaceholder: "exact, dated, or unknown", date: "Date", tools: "Tools available", none: "None", browsing: "Browsing", files: "Files", code: "Code", memory: "Memory",
+    fullAnswer: "Complete, unedited answer", addAnswer: "Add this answer", betweenAnswers: "What happened between the answers?", chooseAfter: "Choose only after bringing them all",
+    agree: "They agree", disagree: "They disagree", partlyDisagree: "They partly disagree", cannotTell: "I cannot tell", sealTrace: "Seal this trace", rawUnchanged: "Raw answers stay unchanged. Corrections may be added, never hidden.",
+    identity: "IDENTITY", traceExists: "Your trace exists.", whoLeft: "Who left it?", name: "Public name or pseudonym", anonymousPlaceholder: "Leave blank to appear as anonymous",
+    symbol: "Image or symbol", location: "Approximate location", locationPlaceholder: "optional · never exact", email: "Email for status updates", emailPlaceholder: "optional · prototype only", noEmail: "No email is sent in this prototype.", mapConsent: "Show this identity on the future public ignition map", enterAs: "Enter as ı",
+    anonymous: "anonymous", origin: "origin", awaiting: "AWAITING ANOTHER i", noDot: "It does not have a dot yet.", aiAnswers: "AI answers", privateLink: "PRIVATE STATUS LINK", copyLink: "copy link", invite: "Invite an i to check it", askNetwork: "Ask the network", verifierView: "switch to verifier view →", verifierNote: "The verifier switch exists only so you can walk through both sides of the prototype.",
+    independentCheck: "ANOTHER i · INDEPENDENT CHECK", checkTrace: "Can you check<br>this trace?", question: "QUESTION", rawAnswers: "RAW ANSWERS", hiddenInterpretation: "The creator's expected answer and interpretation are hidden.", whatChecked: "What did you check?", groundTruth: "Ground truth", howChecked: "How did you check it?", evidence: "Evidence or direct sources", outcome: "Outcome", supports: "Supports", challenges: "Challenges", inconclusive: "Inconclusive", limitations: "Limitations", independent: "I did not create this trace or see its sealed interpretation", publishCheck: "Publish this check",
+    dottedBy: "DOTTED BY M0003", checkedTrace: "Another i<br>checked your trace.", emailPreview: "EMAIL PREVIEW", dotNotification: "Another i put a dot on your trace.", checkedSentence: "{trace} was independently checked. Outcome: {outcome}.", newDoor: "YOU OPENED A NEW DOOR", modelsDisagreed: "The models disagreed. Can people recognize the correct answer?", labChanged: "THE LAB CHANGED", agreementSurvived: "Agreement survived one check.", oneCase: "One case is not the answer. The trace is now ready to be repeated.", startAnother: "Start another trace",
+    waiting: "Waiting for a real case. Nothing fictional will be placed here.", openSource: "Open the source door", bringObservation: "Bring an observation", noDoor: "No door here yet.", copied: "Copied", copyPrompt: "Copy this:", clearConfirm: "Clear this browser-only prototype trace?", queued: "Added to the prototype queue"
+  },
+  ru: {
+    homeA: "Могут ли люди и их карманные ИИ вместе", homeB: "стать умнее одного большого ИИ?", homeSub: "Мы не знаем.<br>Давайте узнаем вместе.",
+    enter: "Войти", openLab: "открытая лаборатория", equationAria: "Три интеллекта ведут к неизвестному", revealAria: "Нажмите i, чтобы открыть вопрос", touch: "нажмите i", seeAll: "все открытые вопросы", hideAll: "скрыть вопросы",
+    tryIt: "Попробовать", enterDoor: "Открыть дверь", anotherI: "другой i", prototype: "ПРОТОТИП UX", prototypeNote: "сохранено только в этом браузере · ничего не публикуется · письма не отправляются", reset: "сбросить",
+    principle: "Дверь даёт метод.<br>Вопрос приносите вы.", bringQuestion: "Принести мой вопрос", return: "Вернуться к i", questionStep: "D04 · ВОПРОС", trace: "СЛЕД", verifier: "проверяющий", whatKnow: "Что вы<br>хотите узнать?", exactQuestion: "Ваш точный вопрос", questionPlaceholder: "Напишите его ровно так, как зададите каждому ИИ.", whyMatter: "Почему это важно для вас?", field: "Область или тема", fieldPlaceholder: "например: архитектура, налоговое право, пчеловодство", knowAnswer: "Вы знаете ответ?", choose: "Выберите", know: "Знаю", partlyKnow: "Знаю частично", dontKnow: "Не знаю", checkPath: "Как это можно проверить?", source: "По источнику", reproduce: "Воспроизвести", expertReview: "Экспертная проверка", unknown: "Пока не знаю", expected: "У меня есть ожидаемый ответ", sealExpected: "Запечатайте его до ответов ИИ", expectedPlaceholder: "Он останется скрытым в режиме проверяющего.", freeze: "Зафиксировать вопрос",
+    answer: "ОТВЕТ", frozenQuestion: "ЗАФИКСИРОВАННЫЙ ВОПРОС", copyQuestion: "копировать вопрос", answerAria: "Принесено ответов: {count} из 3", progressEmpty: "Принесите каждый ответ. Не выбирайте лучший.", progressPart: "принесено: {count} · ещё {remaining} до сравнения D04", progressReady: "{count} ответа · сравнение готово", bringFirst: "Принести первый ответ", bringAnother: "Принести ещё один ответ", model: "ИИ / модель", modelPlaceholder: "например: Claude Opus 4.1", version: "Версия", versionPlaceholder: "точная, датированная или неизвестна", date: "Дата", tools: "Доступные инструменты", none: "Нет", browsing: "Поиск", files: "Файлы", code: "Код", memory: "Память", fullAnswer: "Полный ответ без изменений", addAnswer: "Добавить этот ответ", betweenAnswers: "Что произошло между ответами?", chooseAfter: "Выберите, только когда принесёте все", agree: "Они согласны", disagree: "Они не согласны", partlyDisagree: "Они частично не согласны", cannotTell: "Я не могу понять", sealTrace: "Запечатать след", rawUnchanged: "Сырые ответы останутся неизменными. Исправления можно добавить, но нельзя скрыть.",
+    identity: "ЛИЧНОСТЬ", traceExists: "Ваш след существует.", whoLeft: "Кто его оставил?", name: "Публичное имя или псевдоним", anonymousPlaceholder: "Оставьте пустым, чтобы быть анонимным", symbol: "Изображение или символ", location: "Примерное место", locationPlaceholder: "необязательно · никогда не точно", email: "Почта для обновлений статуса", emailPlaceholder: "необязательно · только прототип", noEmail: "В этом прототипе письма не отправляются.", mapConsent: "Показывать эту личность на будущей публичной карте зажжений", enterAs: "Войти как ı",
+    anonymous: "аноним", origin: "источник", awaiting: "ОЖИДАЕТ ДРУГОГО i", noDot: "Точки над ним ещё нет.", aiAnswers: "ответов ИИ", privateLink: "ЛИЧНАЯ ССЫЛКА СТАТУСА", copyLink: "копировать ссылку", invite: "Позвать i проверить", askNetwork: "Спросить сеть", verifierView: "перейти в режим проверки →", verifierNote: "Переключатель проверяющего существует только для того, чтобы пройти обе стороны прототипа.",
+    independentCheck: "ДРУГОЙ i · НЕЗАВИСИМАЯ ПРОВЕРКА", checkTrace: "Можете проверить<br>этот след?", question: "ВОПРОС", rawAnswers: "СЫРЫЕ ОТВЕТЫ", hiddenInterpretation: "Ожидаемый ответ и интерпретация автора скрыты.", whatChecked: "Что вы проверили?", groundTruth: "Факт / ground truth", howChecked: "Как вы это проверили?", evidence: "Доказательства или прямые источники", outcome: "Результат", supports: "Подтверждает", challenges: "Ставит под сомнение", inconclusive: "Неопределённо", limitations: "Ограничения", independent: "Я не создавал этот след и не видел его запечатанную интерпретацию", publishCheck: "Опубликовать проверку",
+    dottedBy: "ТОЧКУ ПОСТАВИЛ M0003", checkedTrace: "Другой i<br>проверил ваш след.", emailPreview: "ПРЕВЬЮ ПИСЬМА", dotNotification: "Другой i поставил точку над вашим следом.", checkedSentence: "{trace} независимо проверен. Результат: {outcome}.", newDoor: "ВЫ ОТКРЫЛИ НОВУЮ ДВЕРЬ", modelsDisagreed: "Модели не согласились. Могут ли люди распознать верный ответ?", labChanged: "ЛАБОРАТОРИЯ ИЗМЕНИЛАСЬ", agreementSurvived: "Согласие пережило одну проверку.", oneCase: "Один случай — ещё не ответ. Теперь этот след можно повторить.", startAnother: "Начать другой след",
+    waiting: "Ждём реальный случай. Здесь не будет ничего вымышленного.", openSource: "Открыть исходную дверь", bringObservation: "Принести наблюдение", noDoor: "Здесь пока нет двери.", copied: "Скопировано", copyPrompt: "Скопируйте это:", clearConfirm: "Очистить этот след, сохранённый только в браузере?", queued: "Добавлено в очередь прототипа"
+  }
+};
+
+let language = localStorage.getItem(languageStorageKey) || (navigator.language?.toLowerCase().startsWith("ru") ? "ru" : "en");
+
+function t(key, variables = {}) {
+  return ui[language][key].replace(/\{(\w+)\}/g, (_, name) => variables[name] ?? `{${name}}`);
+}
+
+function getDoor(id) {
+  return language === "ru" ? russianDoors[id] : doors[id];
+}
+
+function languageSwitch(inBanner = false) {
+  return `
+    <div class="language-switch ${inBanner ? "language-switch-banner" : ""}" aria-label="Language">
+      <button class="${language === "en" ? "active" : ""}" data-action="set-language" data-language="en" ${language === "en" ? "aria-pressed=\"true\"" : "aria-pressed=\"false\""}>EN</button>
+      <span aria-hidden="true">/</span>
+      <button class="${language === "ru" ? "active" : ""}" data-action="set-language" data-language="ru" ${language === "ru" ? "aria-pressed=\"true\"" : "aria-pressed=\"false\""}>RU</button>
+    </div>`;
+}
+
+function withLanguage(content) {
+  return `${languageSwitch()}${content}`;
+}
+
 const openDoors = ["d01", "d02", "d03", "d04", "d05", "d06", "d07", "d10"];
 const hand = ["d04", "d06", "d10"];
 let activeDoorIndex = null;
@@ -109,10 +233,10 @@ async function copyText(value, button) {
   try {
     await navigator.clipboard.writeText(value);
     const previous = button.textContent;
-    button.textContent = "Copied";
+    button.textContent = t("copied");
     setTimeout(() => { button.textContent = previous; }, 1200);
   } catch {
-    window.prompt("Copy this:", value);
+    window.prompt(t("copyPrompt"), value);
   }
 }
 
@@ -121,13 +245,13 @@ function home() {
     <section class="home">
       <div class="mark" aria-label="i">i</div>
       <h1>
-        <span>Can people and their pocket AIs together</span>
-        <span>become smarter than one big AI?</span>
+        <span>${t("homeA")}</span>
+        <span>${t("homeB")}</span>
       </h1>
-      <p>We don't know.<br>Let's find out together.</p>
+      <p>${t("homeSub")}</p>
       <div class="links">
-        <a class="button" href="#hand">Enter</a>
-        <a class="quiet-link" href="${repository}">open laboratory</a>
+        <a class="button" href="#hand">${t("enter")}</a>
+        <a class="quiet-link" href="${repository}">${t("openLab")}</a>
       </div>
     </section>
     <section class="hand-section" id="hand">
@@ -136,7 +260,7 @@ function home() {
 }
 
 function revealedDoor(id) {
-  const data = doors[id];
+  const data = getDoor(id);
   return `
     <article class="lit-door">
       <div class="lit-primary">
@@ -147,8 +271,8 @@ function revealedDoor(id) {
       <div class="lit-secondary">
         <p>${escapeHTML(data.copy)}</p>
         <div class="actions">
-          <a class="button" href="/${id}">${id === "d04" ? "Try it" : "Enter this door"}</a>
-          <button class="text-button" data-action="close-door">another i</button>
+          <a class="button" href="/${id}">${id === "d04" ? t("tryIt") : t("enterDoor")}</a>
+          <button class="text-button" data-action="close-door">${t("anotherI")}</button>
         </div>
       </div>
     </article>`;
@@ -164,17 +288,17 @@ function renderHand() {
 
   target.innerHTML = `
     <div class="equation-wrap">
-      <div class="equation" aria-label="Three intelligences lead to an unknown">
+      <div class="equation" aria-label="${t("equationAria")}">
         ${hand.map((id, index) => `
           ${index ? "<b>+</b>" : ""}
-          <button class="equation-i" data-reveal="${index}" aria-label="Touch an i to reveal a question">i</button>
+          <button class="equation-i" data-reveal="${index}" aria-label="${t("revealAria")}">i</button>
         `).join("")}
         <b>→</b><span class="equation-unknown">?</span>
       </div>
-      <p class="touch-hint">touch an i</p>
+      <p class="touch-hint">${t("touch")}</p>
     </div>
     <div class="catalog-peek">
-      <button class="text-button" data-action="show-all">see all open questions</button>
+      <button class="text-button" data-action="show-all">${t("seeAll")}</button>
       <div class="all-doors" id="all-doors" hidden></div>
     </div>`;
 }
@@ -187,7 +311,7 @@ function renderAllDoors() {
       ${openDoors.map((id) => `
         <a class="door-choice" href="/${id}">
           <span class="door-choice-id">${id.toUpperCase()}</span>
-          <span>${escapeHTML(doors[id].short)}</span>
+          <span>${escapeHTML(getDoor(id).short)}</span>
           <span aria-hidden="true">→</span>
         </a>`).join("")}
     </div>`;
@@ -196,9 +320,10 @@ function renderAllDoors() {
 function prototypeBanner() {
   return `
     <aside class="prototype-banner">
-      <span>UX PROTOTYPE</span>
-      <span>saved only in this browser · nothing is published · no email is sent</span>
-      <button data-action="reset-prototype">reset</button>
+      <span>${t("prototype")}</span>
+      <span>${t("prototypeNote")}</span>
+      ${languageSwitch(true)}
+      <button data-action="reset-prototype">${t("reset")}</button>
     </aside>`;
 }
 
@@ -206,12 +331,12 @@ function d04Intro() {
   return `
     <section class="door flow-shell">
       <div class="door-id">i · D04</div>
-      <div class="card">${doors.d04.card}</div>
-      <p class="door-copy">${doors.d04.copy}</p>
-      <p class="principle">The door gives you a method.<br>You bring the question.</p>
+      <div class="card">${getDoor("d04").card}</div>
+      <p class="door-copy">${getDoor("d04").copy}</p>
+      <p class="principle">${t("principle")}</p>
       <div class="actions">
-        <button class="button" data-action="start-question">Bring my question</button>
-        <a class="button secondary" href="/">Return to i</a>
+        <button class="button" data-action="start-question">${t("bringQuestion")}</button>
+        <a class="button secondary" href="/">${t("return")}</a>
       </div>
     </section>`;
 }
@@ -219,50 +344,50 @@ function d04Intro() {
 function questionForm() {
   return `
     <section class="flow-shell form-page">
-      <div class="flow-step">D04 · QUESTION</div>
-      <h1>What do you<br>want to know?</h1>
+      <div class="flow-step">${t("questionStep")}</div>
+      <h1>${t("whatKnow")}</h1>
       <form data-form="question" class="research-form">
         <label>
-          Your exact question
-          <textarea name="question" rows="4" required placeholder="Write it exactly as you will ask every AI."></textarea>
+          ${t("exactQuestion")}
+          <textarea name="question" rows="4" required placeholder="${t("questionPlaceholder")}"></textarea>
         </label>
         <label>
-          Why does it matter to you?
+          ${t("whyMatter")}
           <textarea name="why" rows="3" required></textarea>
         </label>
         <label>
-          Field or domain
-          <input name="domain" required placeholder="e.g. architecture, tax law, beekeeping">
+          ${t("field")}
+          <input name="domain" required placeholder="${t("fieldPlaceholder")}">
         </label>
         <div class="form-grid">
           <label>
-            Do you know the answer?
+            ${t("knowAnswer")}
             <select name="knowledge" required>
-              <option value="">Choose</option>
-              <option value="know">I know</option>
-              <option value="partly know">I partly know</option>
-              <option value="do not know">I don't know</option>
+              <option value="">${t("choose")}</option>
+              <option value="know">${t("know")}</option>
+              <option value="partly know">${t("partlyKnow")}</option>
+              <option value="do not know">${t("dontKnow")}</option>
             </select>
           </label>
           <label>
-            How could it be checked?
+            ${t("checkPath")}
             <select name="checkPath" required>
-              <option value="">Choose</option>
-              <option value="source">A source</option>
-              <option value="reproduction">Reproduce it</option>
-              <option value="expert review">Expert review</option>
-              <option value="unknown">I don't know yet</option>
+              <option value="">${t("choose")}</option>
+              <option value="source">${t("source")}</option>
+              <option value="reproduction">${t("reproduce")}</option>
+              <option value="expert review">${t("expertReview")}</option>
+              <option value="unknown">${t("unknown")}</option>
             </select>
           </label>
         </div>
         <details>
-          <summary>I have an expected answer</summary>
+          <summary>${t("expected")}</summary>
           <label>
-            Seal it before seeing the AI answers
-            <textarea name="expected" rows="3" placeholder="This stays hidden in the verifier view."></textarea>
+            ${t("sealExpected")}
+            <textarea name="expected" rows="3" placeholder="${t("expectedPlaceholder")}"></textarea>
           </label>
         </details>
-        <button class="button" type="submit">Freeze this question</button>
+        <button class="button" type="submit">${t("freeze")}</button>
       </form>
     </section>`;
 }
@@ -270,9 +395,9 @@ function questionForm() {
 function responseCard(response, index) {
   return `
     <details class="response-record">
-      <summary><span>ANSWER ${index + 1}</span><span>${escapeHTML(response.model)}</span></summary>
+      <summary><span>${t("answer")} ${index + 1}</span><span>${escapeHTML(response.model)}</span></summary>
       <p>${escapeHTML(response.raw)}</p>
-      <small>${escapeHTML(response.date)} · ${escapeHTML(response.tools)} · version ${escapeHTML(response.version || "unknown")}</small>
+      <small>${escapeHTML(response.date)} · ${escapeHTML(response.tools)} · ${t("version").toLowerCase()} ${escapeHTML(response.version || t("unknown"))}</small>
     </details>`;
 }
 
@@ -281,64 +406,64 @@ function responsesPage() {
   const ready = count >= 3;
   return `
     <section class="flow-shell form-page responses-page">
-      <div class="flow-step">${escapeHTML(prototype.question.id)} · TRACE</div>
+      <div class="flow-step">${escapeHTML(prototype.question.id)} · ${t("trace")}</div>
       <div class="frozen-question">
-        <span>FROZEN QUESTION</span>
+        <span>${t("frozenQuestion")}</span>
         <blockquote>${escapeHTML(prototype.question.text)}</blockquote>
-        <button class="text-button" data-copy="question">copy question</button>
+        <button class="text-button" data-copy="question">${t("copyQuestion")}</button>
       </div>
-      <div class="answer-progress" aria-label="${count} of 3 answers brought">
+      <div class="answer-progress" aria-label="${t("answerAria", { count })}">
         ${[0, 1, 2].map((index) => `<i class="${count > index ? "filled" : ""}">i</i>`).join("<b>+</b>")}
       </div>
-      <p class="progress-copy">${count === 0 ? "Bring every answer. Don't select the best one." : count < 3 ? `${count} brought · ${3 - count} before the D04 comparison is ready` : `${count} answers · comparison ready`}</p>
+      <p class="progress-copy">${count === 0 ? t("progressEmpty") : count < 3 ? t("progressPart", { count, remaining: 3 - count }) : t("progressReady", { count })}</p>
       <div class="response-list">${prototype.responses.map(responseCard).join("")}</div>
       <form data-form="response" class="research-form compact-form">
-        <h2>Bring ${count === 0 ? "the first" : "another"} answer</h2>
+        <h2>${count === 0 ? t("bringFirst") : t("bringAnother")}</h2>
         <div class="form-grid">
           <label>
-            AI / model
-            <input name="model" required placeholder="e.g. Claude Opus 4.1">
+            ${t("model")}
+            <input name="model" required placeholder="${t("modelPlaceholder")}">
           </label>
           <label>
-            Version
-            <input name="version" placeholder="exact, dated, or unknown">
+            ${t("version")}
+            <input name="version" placeholder="${t("versionPlaceholder")}">
           </label>
           <label>
-            Date
+            ${t("date")}
             <input type="date" name="date" value="${today()}" required>
           </label>
           <label>
-            Tools available
+            ${t("tools")}
             <select name="tools" required>
-              <option value="none">None</option>
-              <option value="browsing">Browsing</option>
-              <option value="files">Files</option>
-              <option value="code">Code</option>
-              <option value="memory">Memory</option>
-              <option value="unknown">Unknown</option>
+              <option value="none">${t("none")}</option>
+              <option value="browsing">${t("browsing")}</option>
+              <option value="files">${t("files")}</option>
+              <option value="code">${t("code")}</option>
+              <option value="memory">${t("memory")}</option>
+              <option value="unknown">${t("unknown")}</option>
             </select>
           </label>
         </div>
         <label>
-          Complete, unedited answer
+          ${t("fullAnswer")}
           <textarea name="raw" rows="7" required></textarea>
         </label>
-        <button class="button secondary" type="submit">Add this answer</button>
+        <button class="button secondary" type="submit">${t("addAnswer")}</button>
       </form>
       ${ready ? `
         <form data-form="seal" class="seal-form">
           <label>
-            What happened between the answers?
+            ${t("betweenAnswers")}
             <select name="pattern" required>
-              <option value="">Choose only after bringing them all</option>
-              <option value="agreement">They agree</option>
-              <option value="disagreement">They disagree</option>
-              <option value="partial disagreement">They partly disagree</option>
-              <option value="unclear">I cannot tell</option>
+              <option value="">${t("chooseAfter")}</option>
+              <option value="agreement">${t("agree")}</option>
+              <option value="disagreement">${t("disagree")}</option>
+              <option value="partial disagreement">${t("partlyDisagree")}</option>
+              <option value="unclear">${t("cannotTell")}</option>
             </select>
           </label>
-          <button class="button" type="submit">Seal this trace</button>
-          <p>Raw answers stay unchanged. Corrections may be added, never hidden.</p>
+          <button class="button" type="submit">${t("sealTrace")}</button>
+          <p>${t("rawUnchanged")}</p>
         </form>` : ""}
     </section>`;
 }
@@ -346,47 +471,47 @@ function responsesPage() {
 function identityPage() {
   return `
     <section class="flow-shell form-page identity-page">
-      <div class="flow-step">${escapeHTML(prototype.trace.id)} · IDENTITY</div>
-      <h1>Your trace exists.</h1>
-      <p>Who left it?</p>
+      <div class="flow-step">${escapeHTML(prototype.trace.id)} · ${t("identity")}</div>
+      <h1>${t("traceExists")}</h1>
+      <p>${t("whoLeft")}</p>
       <form data-form="identity" class="research-form">
         <label>
-          Public name or pseudonym
-          <input name="name" placeholder="Leave blank to appear as anonymous">
+          ${t("name")}
+          <input name="name" placeholder="${t("anonymousPlaceholder")}">
         </label>
         <div class="form-grid">
           <label>
-            Image or symbol
+            ${t("symbol")}
             <input name="symbol" maxlength="3" placeholder="i">
           </label>
           <label>
-            Approximate location
-            <input name="location" placeholder="optional · never exact">
+            ${t("location")}
+            <input name="location" placeholder="${t("locationPlaceholder")}">
           </label>
         </div>
         <label>
-          Email for status updates
-          <input type="email" name="email" placeholder="optional · prototype only">
-          <small>No email is sent in this prototype.</small>
+          ${t("email")}
+          <input type="email" name="email" placeholder="${t("emailPlaceholder")}">
+          <small>${t("noEmail")}</small>
         </label>
         <label class="check-label">
           <input type="checkbox" name="mapConsent">
-          Show this identity on the future public ignition map
+          ${t("mapConsent")}
         </label>
-        <button class="button" type="submit">Enter as ı</button>
+        <button class="button" type="submit">${t("enterAs")}</button>
       </form>
     </section>`;
 }
 
 function mapMarkup(final = false) {
-  const profile = prototype.profile || { name: "anonymous", symbol: "ı", matchId: "M0002" };
+  const profile = prototype.profile || { name: t("anonymous"), symbol: "ı", matchId: "M0002" };
   return `
-    <div class="map-canvas ${final ? "map-final" : ""}" aria-label="Ignition map prototype">
+    <div class="map-canvas ${final ? "map-final" : ""}" aria-label="${t("prototype")}">
       <div class="map-line origin-line"></div>
       ${final ? `<div class="map-line dotted-line"></div>` : ""}
-      <div class="map-node origin-node"><b>i</b><span>M0001<br>origin</span></div>
-      <div class="map-node player-node"><b>${final ? "i" : "ı"}</b><span>${escapeHTML(profile.matchId)}<br>${escapeHTML(profile.name || "anonymous")}</span></div>
-      ${final ? `<div class="map-node verifier-node"><b>ı</b><span>M0003<br>verifier</span></div>` : ""}
+      <div class="map-node origin-node"><b>i</b><span>M0001<br>${t("origin")}</span></div>
+      <div class="map-node player-node"><b>${final ? "i" : "ı"}</b><span>${escapeHTML(profile.matchId)}<br>${escapeHTML(profile.name || t("anonymous"))}</span></div>
+      ${final ? `<div class="map-node verifier-node"><b>ı</b><span>M0003<br>${t("verifier")}</span></div>` : ""}
     </div>`;
 }
 
@@ -394,78 +519,78 @@ function statusPage() {
   const statusUrl = `${location.origin}/d04/#status-${prototype.profile.statusToken}`;
   return `
     <section class="flow-shell status-page">
-      <div class="flow-step">${escapeHTML(prototype.profile.matchId)} · AWAITING ANOTHER i</div>
+      <div class="flow-step">${escapeHTML(prototype.profile.matchId)} · ${t("awaiting")}</div>
       <div class="large-state">ı</div>
-      <h1>Your trace exists.<br>It does not have a dot yet.</h1>
+      <h1>${t("traceExists")}<br>${t("noDot")}</h1>
       ${mapMarkup(false)}
       <div class="record-summary">
         <span>${escapeHTML(prototype.question.id)}</span>
         <span>${escapeHTML(prototype.trace.id)}</span>
-        <span>${prototype.responses.length} AI answers</span>
-        <span>${escapeHTML(prototype.trace.pattern)}</span>
+        <span>${prototype.responses.length} ${t("aiAnswers")}</span>
+        <span>${escapeHTML({ agreement: t("agree"), disagreement: t("disagree"), "partial disagreement": t("partlyDisagree"), unclear: t("cannotTell") }[prototype.trace.pattern] || prototype.trace.pattern)}</span>
       </div>
       <div class="status-link">
-        <span>PRIVATE STATUS LINK</span>
+        <span>${t("privateLink")}</span>
         <code>${escapeHTML(statusUrl)}</code>
-        <button class="text-button" data-copy="status">copy link</button>
+        <button class="text-button" data-copy="status">${t("copyLink")}</button>
       </div>
       <div class="next-actions">
-        <button class="button" data-action="invite">Invite an i to check it</button>
-        <button class="button secondary" data-action="ask-network">Ask the network</button>
-        <button class="text-button" data-action="open-verifier">switch to verifier view →</button>
+        <button class="button" data-action="invite">${t("invite")}</button>
+        <button class="button secondary" data-action="ask-network">${t("askNetwork")}</button>
+        <button class="text-button" data-action="open-verifier">${t("verifierView")}</button>
       </div>
-      <p class="prototype-note">The verifier switch exists only so you can walk through both sides of the prototype.</p>
+      <p class="prototype-note">${t("verifierNote")}</p>
     </section>`;
 }
 
 function verifierPage() {
   return `
     <section class="flow-shell form-page verifier-page">
-      <div class="flow-step">ANOTHER i · INDEPENDENT CHECK</div>
-      <h1>Can you check<br>this trace?</h1>
+      <div class="flow-step">${t("independentCheck")}</div>
+      <h1>${t("checkTrace")}</h1>
       <div class="blind-record">
-        <span>QUESTION</span>
+        <span>${t("question")}</span>
         <blockquote>${escapeHTML(prototype.question.text)}</blockquote>
-        <span>RAW ANSWERS</span>
+        <span>${t("rawAnswers")}</span>
         ${prototype.responses.map(responseCard).join("")}
-        <p>The creator's expected answer and interpretation are hidden.</p>
+        <p>${t("hiddenInterpretation")}</p>
       </div>
       <form data-form="verification" class="research-form">
         <label>
-          What did you check?
+          ${t("whatChecked")}
           <select name="scope" required>
-            <option value="">Choose</option>
-            <option value="ground truth">Ground truth</option>
-            <option value="reproduction">Reproduction</option>
-            <option value="expert review">Expert review</option>
+            <option value="">${t("choose")}</option>
+            <option value="ground truth">${t("groundTruth")}</option>
+            <option value="reproduction">${t("reproduce")}</option>
+            <option value="expert review">${t("expertReview")}</option>
           </select>
         </label>
         <label>
-          How did you check it?
+          ${t("howChecked")}
           <textarea name="method" rows="4" required></textarea>
         </label>
         <label>
-          Evidence or direct sources
+          ${t("evidence")}
           <textarea name="evidence" rows="4" required></textarea>
         </label>
         <label>
-          Outcome
+          ${t("outcome")}
           <select name="outcome" required>
-            <option value="">Choose</option>
-            <option value="supports">Supports</option>
-            <option value="challenges">Challenges</option>
-            <option value="inconclusive">Inconclusive</option>
+            <option value="">${t("choose")}</option>
+            <option value="supports">${t("supports")}</option>
+            <option value="challenges">${t("challenges")}</option>
+            <option value="inconclusive">${t("inconclusive")}</option>
           </select>
         </label>
         <label>
-          Limitations
+          ${t("limitations")}
           <textarea name="limitations" rows="3" required></textarea>
         </label>
         <label class="check-label">
           <input type="checkbox" name="independent" required>
-          I did not create this trace or see its sealed interpretation
+          ${t("independent")}
         </label>
-        <button class="button" type="submit">Publish this check</button>
+        <button class="button" type="submit">${t("publishCheck")}</button>
       </form>
     </section>`;
 }
@@ -474,30 +599,30 @@ function finalPage() {
   const openedDoor = prototype.trace.pattern.includes("disagreement");
   return `
     <section class="flow-shell final-page">
-      <div class="flow-step">${escapeHTML(prototype.profile.matchId)} · DOTTED BY M0003</div>
+      <div class="flow-step">${escapeHTML(prototype.profile.matchId)} · ${t("dottedBy")}</div>
       <div class="large-state">i</div>
-      <h1>Another i<br>checked your trace.</h1>
-      <p class="outcome">Outcome: <strong>${escapeHTML(prototype.verification.outcome)}</strong></p>
+      <h1>${t("checkedTrace")}</h1>
+      <p class="outcome">${t("outcome")}: <strong>${escapeHTML(t(prototype.verification.outcome))}</strong></p>
       ${mapMarkup(true)}
       <div class="notification-preview">
-        <span>EMAIL PREVIEW</span>
-        <h2>Another i put a dot on your trace.</h2>
-        <p>${escapeHTML(prototype.trace.id)} was independently checked. Outcome: ${escapeHTML(prototype.verification.outcome)}.</p>
+        <span>${t("emailPreview")}</span>
+        <h2>${t("dotNotification")}</h2>
+        <p>${t("checkedSentence", { trace: escapeHTML(prototype.trace.id), outcome: escapeHTML(t(prototype.verification.outcome)) })}</p>
       </div>
       ${openedDoor ? `
         <div class="door-unlocked">
-          <span>YOU OPENED A NEW DOOR</span>
+          <span>${t("newDoor")}</span>
           <h2>D08 · Blind Judge 001</h2>
-          <p>The models disagreed. Can people recognize the correct answer?</p>
+          <p>${t("modelsDisagreed")}</p>
         </div>` : `
         <div class="door-unlocked">
-          <span>THE LAB CHANGED</span>
-          <h2>Agreement survived one check.</h2>
-          <p>One case is not the answer. The trace is now ready to be repeated.</p>
+          <span>${t("labChanged")}</span>
+          <h2>${t("agreementSurvived")}</h2>
+          <p>${t("oneCase")}</p>
         </div>`}
       <div class="actions">
-        <button class="button" data-action="reset-prototype">Start another trace</button>
-        <a class="button secondary" href="/">Return to i</a>
+        <button class="button" data-action="reset-prototype">${t("startAnother")}</button>
+        <a class="button secondary" href="/">${t("return")}</a>
       </div>
     </section>`;
 }
@@ -518,9 +643,9 @@ function d04Flow() {
 
 function door(id, data) {
   const action = data.waiting
-    ? `<p class="status">Waiting for a real case. Nothing fictional will be placed here.</p>
-       <a class="button" href="${data.next}">Open the source door</a>`
-    : `<a class="button" href="${contribution}&title=%5B${id.toUpperCase()}%5D%20">Bring an observation</a>`;
+    ? `<p class="status">${t("waiting")}</p>
+       <a class="button" href="${data.next}">${t("openSource")}</a>`
+    : `<a class="button" href="${contribution}&title=%5B${id.toUpperCase()}%5D%20">${t("bringObservation")}</a>`;
 
   return `
     <section class="door">
@@ -529,26 +654,27 @@ function door(id, data) {
       <p class="door-copy">${data.copy}</p>
       <div class="actions">
         ${action}
-        <a class="button secondary" href="/">Return to i</a>
+        <a class="button secondary" href="/">${t("return")}</a>
       </div>
     </section>`;
 }
 
 function notFound() {
-  document.title = "Not found — i";
+  document.title = language === "ru" ? "Не найдено — i" : "Not found — i";
   return `
     <section class="not-found">
       <div class="door-id">404</div>
-      <h1>No door here yet.</h1>
-      <a class="button" href="/">Return to i</a>
+      <h1>${t("noDoor")}</h1>
+      <a class="button" href="/">${t("return")}</a>
     </section>`;
 }
 
 function render() {
   const path = window.location.pathname.replace(/^\/+|\/+$/g, "").toLowerCase();
+  document.documentElement.lang = language;
   if (!path) {
     document.title = "i — multiplayer intelligence";
-    app.innerHTML = home();
+    app.innerHTML = withLanguage(home());
     renderHand();
     renderAllDoors();
   } else if (path === "d04") {
@@ -556,9 +682,9 @@ function render() {
     app.innerHTML = d04Flow();
   } else if (doors[path]) {
     document.title = `${path.toUpperCase()} — i`;
-    app.innerHTML = door(path, doors[path]);
+    app.innerHTML = withLanguage(door(path, getDoor(path)));
   } else {
-    app.innerHTML = notFound();
+    app.innerHTML = withLanguage(notFound());
   }
 }
 
@@ -577,10 +703,16 @@ app.addEventListener("click", (event) => {
   }
 
   const action = event.target.closest("[data-action]")?.dataset.action;
+  if (action === "set-language") {
+    language = event.target.closest("[data-language]").dataset.language;
+    localStorage.setItem(languageStorageKey, language);
+    render();
+    return;
+  }
   if (action === "show-all") {
     const list = document.querySelector("#all-doors");
     list.hidden = !list.hidden;
-    event.target.textContent = list.hidden ? "see all open questions" : "hide open questions";
+    event.target.textContent = list.hidden ? t("seeAll") : t("hideAll");
   }
   if (action === "close-door") {
     const previousIndex = activeDoorIndex;
@@ -595,7 +727,7 @@ app.addEventListener("click", (event) => {
     scrollTo(0, 0);
   }
   if (action === "reset-prototype") {
-    if (confirm("Clear this browser-only prototype trace?")) {
+    if (confirm(t("clearConfirm"))) {
       prototype = defaultPrototype();
       savePrototype();
       render();
@@ -607,7 +739,7 @@ app.addEventListener("click", (event) => {
     copyText(value, event.target);
   }
   if (action === "ask-network") {
-    event.target.textContent = "Added to the prototype queue";
+    event.target.textContent = t("queued");
     event.target.disabled = true;
   }
   if (action === "open-verifier") {
@@ -664,7 +796,7 @@ app.addEventListener("submit", (event) => {
   if (form.dataset.form === "identity") {
     prototype.profile = {
       matchId: "M0002",
-      name: data.name.trim() || "anonymous",
+      name: data.name.trim() || t("anonymous"),
       symbol: data.symbol.trim() || "ı",
       location: data.location.trim(),
       email: data.email.trim(),
