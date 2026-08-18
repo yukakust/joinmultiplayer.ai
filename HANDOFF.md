@@ -58,6 +58,23 @@ Run D04 with a real question as the first player. Record where the flow causes f
 
 ## Access and secrets
 
-No credentials, tokens, or production secrets belong in this repository or this document. Request access through the project owner. Use a personal GitHub account with the least privilege needed; never share the owner’s account or personal access token.
+No credentials, tokens, or production secrets belong in this repository or this document.
 
-The `yukabox` user can read the repository, but production-server SSH is not currently available from that user. Before assigning deployment work to a developer, provide their individual SSH public key and GitHub username, then grant only the repository role and server permissions they need.
+The `yukabox` development user is already authenticated to GitHub as the project owner and has production root access through the local SSH alias `multiplayer-production`. This is a machine-specific key, not a copied password or personal token.
+
+### Deploy from yukabox
+
+The live Caddy virtual host serves this exact directory:
+
+```text
+/opt/aiconic-site/_multiplayer
+```
+
+From `/home/yuka/projects/joinmultiplayer.ai`, deploy the static site with:
+
+```sh
+rsync -a --delete -e ssh site/ multiplayer-production:/opt/aiconic-site/_multiplayer/
+curl -fsS -o /dev/null -w '%{http_code}\n' https://joinmultiplayer.ai/
+```
+
+The trailing `site/` and target `_multiplayer/` are intentional. Do not sync or delete any parent directory: it contains unrelated production sites.
