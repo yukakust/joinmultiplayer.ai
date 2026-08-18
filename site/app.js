@@ -49,15 +49,39 @@ const doors = {
 };
 
 function home() {
+  const openDoors = ["d01", "d02", "d03", "d04", "d05", "d06", "d07", "d10"];
+  const choices = openDoors.map((id) => {
+    const question = doors[id].card.replace(/\n+/g, " ");
+    return `
+      <a class="door-choice" href="/${id}">
+        <span class="door-choice-id">${id.toUpperCase()}</span>
+        <span>${question}</span>
+        <span class="door-choice-arrow" aria-hidden="true">→</span>
+      </a>`;
+  }).join("");
+
   return `
     <section class="home">
       <div class="mark" aria-label="i">i</div>
-      <h1>Can many small intelligences become smarter than one big AI?</h1>
-      <p>We don't know.<br>Let's find out.</p>
+      <h1>
+        <span>Can many small intelligences</span>
+        <span>become smarter than</span>
+        <span>one big AI?</span>
+      </h1>
+      <p>We don't know.<br>Let's find out together.</p>
       <div class="links">
-        <a class="button" href="/d04">Enter</a>
+        <a class="button" href="#doors">Enter</a>
         <a class="quiet-link" href="${repository}">open laboratory</a>
       </div>
+    </section>
+    <section class="door-picker" id="doors">
+      <div class="door-picker-heading">
+        <div class="door-id">i · OPEN DOORS</div>
+        <h2>Choose the question<br>you cannot leave alone.</h2>
+      </div>
+      <nav class="door-list" aria-label="Open experiments">
+        ${choices}
+      </nav>
     </section>`;
 }
 
