@@ -132,10 +132,6 @@ function home() {
     </section>
     <section class="hand-section" id="hand">
       <div class="equation-stage" id="equation-stage" aria-live="polite"></div>
-      <div class="catalog-peek">
-        <button class="text-button" data-action="show-all">see all open questions</button>
-        <div class="all-doors" id="all-doors" hidden></div>
-      </div>
     </section>`;
 }
 
@@ -176,6 +172,10 @@ function renderHand() {
         <b>→</b><span class="equation-unknown">?</span>
       </div>
       <p class="touch-hint">touch an i</p>
+    </div>
+    <div class="catalog-peek">
+      <button class="text-button" data-action="show-all">see all open questions</button>
+      <div class="all-doors" id="all-doors" hidden></div>
     </div>`;
 }
 
