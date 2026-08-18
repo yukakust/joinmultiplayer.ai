@@ -1,0 +1,82 @@
+name: Наблюдение через дверь
+description: Добавьте одно полное наблюдение, сделанное через одну из дверей.
+title: "[D__] "
+labels:
+  - observation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Наблюдение — ещё не вывод. Сохраните исходный материал без изменений и удалите личные данные перед публикацией.
+  - type: dropdown
+    id: door
+    attributes:
+      label: Дверь
+      options:
+        - D01 — устаревшие знания
+        - D02 — много небольших ИИ против одной большой модели
+        - D03 — знание или догадка
+        - D04 — общие ошибки разных ИИ
+        - D05 — происхождение утверждения
+        - D06 — ошибки, заметные специалисту
+        - D07 — вклад человека
+        - D08 — слепой выбор ответа
+        - D09 — источник воспоминания
+        - D10 — коллективный интеллект
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Точный вопрос или запрос
+      description: Приведите полную формулировку и важные инструкции.
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: Полное наблюдение
+      description: Вставьте полный ответ без изменений или точно опишите, что произошло.
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Модель, версия и дата
+      description: Оставьте пустым, только если ИИ не использовался.
+  - type: textarea
+    id: context
+    attributes:
+      label: Контекст и инструменты
+      description: Укажите язык, системные инструкции, если они известны, а также доступ к поиску, файлам, памяти, коду и другим инструментам.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Доказательства или воспроизводимая проверка
+      description: Добавьте прямые ссылки, даты и минимальную проверку, которую сможет повторить другой человек.
+  - type: dropdown
+    id: credit
+    attributes:
+      label: Публичное авторство
+      options:
+        - Профиль GitHub
+        - Другой псевдоним, указанный ниже
+        - Без публичного авторства
+    validations:
+      required: true
+  - type: input
+    id: handle
+    attributes:
+      label: Другой публичный псевдоним
+      description: Необязательно.
+  - type: checkboxes
+    id: permission
+    attributes:
+      label: Разрешение на публикацию
+      options:
+        - label: Я удалил(а) секреты, личные данные и материалы с ограниченным доступом.
+          required: true
+        - label: У меня есть право опубликовать этот материал на условиях проекта.
+          required: true
+        - label: Я понимаю, что эта запись будет общедоступной.
+          required: true

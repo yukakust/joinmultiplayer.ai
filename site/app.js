@@ -1,5 +1,4 @@
 const repository = "https://github.com/yukakust/joinmultiplayer.ai";
-const contribution = `${repository}/issues/new?template=observation.yml`;
 const storageKey = "multiplayer-d04-prototype-v1";
 const languageStorageKey = "multiplayer-language-v1";
 
@@ -144,6 +143,7 @@ const ui = {
     anonymous: "anonymous", origin: "origin", awaiting: "AWAITING ANOTHER i", noDot: "It does not have a dot yet.", aiAnswers: "AI answers", privateLink: "PRIVATE STATUS LINK", copyLink: "copy link", invite: "Invite an i to check it", askNetwork: "Ask the network", verifierView: "switch to verifier view →", verifierNote: "The verifier switch exists only so you can walk through both sides of the prototype.",
     independentCheck: "ANOTHER i · INDEPENDENT CHECK", checkTrace: "Can you check<br>this trace?", question: "QUESTION", rawAnswers: "RAW ANSWERS", hiddenInterpretation: "The creator's expected answer and interpretation are hidden.", whatChecked: "What did you check?", groundTruth: "Ground truth", howChecked: "How did you check it?", evidence: "Evidence or direct sources", outcome: "Outcome", supports: "Supports", challenges: "Challenges", inconclusive: "Inconclusive", limitations: "Limitations", independent: "I did not create this trace or see its sealed interpretation", publishCheck: "Publish this check",
     dottedBy: "DOTTED BY M0003", checkedTrace: "Another i<br>checked your trace.", emailPreview: "EMAIL PREVIEW", dotNotification: "Another i put a dot on your trace.", checkedSentence: "{trace} was independently checked. Outcome: {outcome}.", newDoor: "YOU OPENED A NEW DOOR", modelsDisagreed: "The models disagreed. Can people recognize the correct answer?", labChanged: "THE LAB CHANGED", agreementSurvived: "Agreement survived one check.", oneCase: "One case is not the answer. The trace is now ready to be repeated.", startAnother: "Start another trace",
+    whatToBring: "WHAT TO BRING", whatNext: "WHAT HAPPENS NEXT", contributionNext: "Your observation opens as a public GitHub form. A maintainer checks it for safety and completeness before it can enter the research record.", githubNotice: "GitHub opens in a new page. The submission is public and requires a GitHub account.", continueGithub: "Continue on GitHub",
     waiting: "Waiting for a real case. Nothing fictional will be placed here.", openSource: "Open the source door", bringObservation: "Bring an observation", noDoor: "No door here yet.", copied: "Copied", copyPrompt: "Copy this:", clearConfirm: "Clear this browser-only prototype trace?", queued: "Added to the prototype queue"
   },
   ru: {
@@ -156,6 +156,7 @@ const ui = {
     anonymous: "аноним", origin: "источник", awaiting: "ОЖИДАЕТ ДРУГОГО i", noDot: "Точки над ним ещё нет.", aiAnswers: "ответов ИИ", privateLink: "ЛИЧНАЯ ССЫЛКА СТАТУСА", copyLink: "копировать ссылку", invite: "Позвать i проверить", askNetwork: "Спросить сеть", verifierView: "перейти в режим проверки →", verifierNote: "Переключатель проверяющего существует только для того, чтобы пройти обе стороны прототипа.",
     independentCheck: "ДРУГОЙ i · НЕЗАВИСИМАЯ ПРОВЕРКА", checkTrace: "Можете проверить<br>этот след?", question: "ВОПРОС", rawAnswers: "СЫРЫЕ ОТВЕТЫ", hiddenInterpretation: "Ожидаемый ответ и интерпретация автора скрыты.", whatChecked: "Что вы проверили?", groundTruth: "Факт / ground truth", howChecked: "Как вы это проверили?", evidence: "Доказательства или прямые источники", outcome: "Результат", supports: "Подтверждает", challenges: "Ставит под сомнение", inconclusive: "Неопределённо", limitations: "Ограничения", independent: "Я не создавал этот след и не видел его запечатанную интерпретацию", publishCheck: "Опубликовать проверку",
     dottedBy: "ТОЧКУ ПОСТАВИЛ M0003", checkedTrace: "Другой i<br>проверил ваш след.", emailPreview: "ПРЕВЬЮ ПИСЬМА", dotNotification: "Другой i поставил точку над вашим следом.", checkedSentence: "{trace} независимо проверен. Результат: {outcome}.", newDoor: "ВЫ ОТКРЫЛИ НОВУЮ ДВЕРЬ", modelsDisagreed: "Модели не согласились. Могут ли люди распознать верный ответ?", labChanged: "ЛАБОРАТОРИЯ ИЗМЕНИЛАСЬ", agreementSurvived: "Согласие пережило одну проверку.", oneCase: "Один случай — ещё не ответ. Теперь этот след можно повторить.", startAnother: "Начать другой след",
+    whatToBring: "ЧТО НУЖНО ПРИНЕСТИ", whatNext: "ЧТО БУДЕТ ДАЛЬШЕ", contributionNext: "Наблюдение откроется как публичная форма GitHub. Перед добавлением в исследовательский журнал мы проверим безопасность и полноту записи.", githubNotice: "Откроется GitHub. Публикация будет общедоступной, потребуется аккаунт GitHub.", continueGithub: "Продолжить на GitHub",
     waiting: "Ждём реальный случай. Здесь не будет ничего вымышленного.", openSource: "Открыть исходную дверь", bringObservation: "Принести наблюдение", noDoor: "Здесь пока нет двери.", copied: "Скопировано", copyPrompt: "Скопируйте это:", clearConfirm: "Очистить этот след, сохранённый только в браузере?", queued: "Добавлено в очередь прототипа"
   }
 };
@@ -168,6 +169,12 @@ function t(key, variables = {}) {
 
 function getDoor(id) {
   return language === "ru" ? russianDoors[id] : doors[id];
+}
+
+function contributionUrl(id) {
+  const template = language === "ru" ? "observation-ru.yml" : "observation.yml";
+  const title = encodeURIComponent(`[${id.toUpperCase()}] `);
+  return `${repository}/issues/new?template=${template}&title=${title}`;
 }
 
 function languageSwitch(inBanner = false) {
@@ -654,13 +661,23 @@ function door(id, data) {
   const action = data.waiting
     ? `<p class="status">${t("waiting")}</p>
        <a class="button" href="${data.next}">${t("openSource")}</a>`
-    : `<a class="button" href="${contribution}&title=%5B${id.toUpperCase()}%5D%20">${t("bringObservation")}</a>`;
+    : `<p class="github-notice">${t("githubNotice")}</p>
+       <a class="button" href="${contributionUrl(id)}">${t("continueGithub")}</a>`;
 
   return `
-    <section class="door">
+    <section class="door door-detail">
       <div class="door-id">i · ${id.toUpperCase()}</div>
-      <div class="card">${data.card}</div>
-      <p class="door-copy">${data.copy}</p>
+      <h1>${escapeHTML(data.short)}</h1>
+      <div class="door-detail-blocks">
+        <section>
+          <span>${t("whatToBring")}</span>
+          <p>${escapeHTML(data.copy)}</p>
+        </section>
+        ${data.waiting ? "" : `<section>
+          <span>${t("whatNext")}</span>
+          <p>${t("contributionNext")}</p>
+        </section>`}
+      </div>
       <div class="actions">
         ${action}
         <a class="button secondary" href="/">${t("return")}</a>
