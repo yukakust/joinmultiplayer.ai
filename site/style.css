@@ -89,6 +89,7 @@ button:disabled {
   color: var(--muted);
   font-size: 0.72rem;
   min-height: 44px;
+  min-width: 44px;
   padding: 0.5rem 0.4rem;
 }
 

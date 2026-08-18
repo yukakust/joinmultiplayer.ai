@@ -722,6 +722,13 @@ app.addEventListener("click", (event) => {
     allDoorsVisible = !allDoorsVisible;
     renderHand();
     renderAllDoors();
+    if (allDoorsVisible) {
+      const root = document.documentElement;
+      const previousScrollBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = "auto";
+      window.scrollTo(0, document.querySelector("#hand").offsetTop);
+      requestAnimationFrame(() => { root.style.scrollBehavior = previousScrollBehavior; });
+    }
   }
   if (action === "close-door") {
     const previousIndex = activeDoorIndex;
