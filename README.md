@@ -71,6 +71,9 @@ The public entrance reveals only three questions at first. Read
 [`GAME.md`](GAME.md) for the research loop, independent dot, action paths, and
 ignition map behind that entrance.
 
+Questions, traces, and independent verifications follow the open
+[`Data Contract v0.1`](DATA.md).
+
 ## Rules
 
 - Ask one sharp question.

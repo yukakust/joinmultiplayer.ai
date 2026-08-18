@@ -5,6 +5,8 @@ forward.
 
 Read [`GAME.md`](GAME.md) to see how one contribution becomes a trace, how a
 different person places the dot, and what the result unlocks.
+Structured questions, traces, verifications, exports, and private notification
+data follow [`DATA.md`](DATA.md).
 
 ## Bring one observation
 

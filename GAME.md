@@ -14,8 +14,9 @@ After entering, a visitor sees only:
 i + i + i → ?
 ```
 
-Each `i` hides one door. Clicking it reveals the public hook, the smallest
-useful contribution, and two choices:
+Each `i` hides one door. A door supplies a protocol, never the participant's
+question. Clicking it reveals the public hook, the smallest useful
+contribution, and two choices:
 
 ```text
 enter this door
@@ -41,6 +42,15 @@ enter an advanced experiment immediately.
 
 A click is not a move. A move leaves a trace another person can inspect.
 
+The participant brings the question. The laboratory gives it a stable `Q` ID;
+model runs become `T` traces; independent checks become `V` verifications.
+
+```text
+Q — question
+T — trace
+V — verification
+```
+
 The smallest move contains:
 
 ```text
@@ -55,6 +65,28 @@ permission to publish:
 The trace enters the journal as `ı`: present, but not independently checked.
 Incomplete material may be useful conversation, but it does not enter the
 research record.
+
+Public Q, T, and V records belong to an open dataset. Anyone may add an answer,
+repeat a run, verify a trace, challenge a check, download the records, or build
+an analysis from them. The complete contract lives in [`DATA.md`](DATA.md).
+
+For `D04`, the participant:
+
+1. writes a question they genuinely wanted answered;
+2. records why it matters and how it might be checked;
+3. freezes the wording and receives a `Q` ID;
+4. copies the same question into any AI systems they choose;
+5. pastes each complete, unedited answer with model, date, and tool conditions;
+6. adds more answers without selecting only the best one.
+
+```text
+1 answer  — trace started
+2 answers — comparison started
+3+ answers — D04 comparison ready
+```
+
+Raw searchable text is required. A screenshot or public conversation link may
+support it but cannot replace it.
 
 ## The dot
 
@@ -185,7 +217,8 @@ repository.
 `Game Pilot 001` tests the loop, not the main hypothesis.
 
 1. `M0001` enters through `D04`.
-2. One bounded, source-verifiable question is chosen before any model run.
+2. `M0001` brings one genuine, bounded, source-verifiable question and records
+   why it matters before any model run. The project does not supply it.
 3. The exact question is asked independently to at least three AI systems.
 4. Every complete answer, model identifier, date, tool condition, and source is
    preserved.
@@ -200,6 +233,23 @@ All-correct agreement, all-wrong agreement, disagreement, and an inconclusive
 check are valid outcomes. No result will be engineered to make the game look
 successful. The pilot succeeds only if a stranger can understand the record,
 repeat the check, and see what should happen next.
+
+## Return path
+
+After submitting, a participant receives a private status URL and may add an
+email address for transactional notifications. Email is not required, is never
+public, and is not used for a newsletter without separate consent.
+
+The participant is notified when:
+
+- the record becomes public;
+- another `i` picks up the trace;
+- a verification places the dot;
+- a correction changes the record;
+- the trace opens a real case or next door.
+
+No submission should disappear into a queue without a stable status and next
+action.
 
 ## Rules
 
