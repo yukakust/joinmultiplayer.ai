@@ -234,29 +234,45 @@ function morrowText(key) {
 
 function morrowFace(expression = "calm") {
   return `
-    <svg class="morrow-face morrow-${expression}" viewBox="0 0 100 100" aria-hidden="true">
-      <g class="morrow-contour">
-        <circle cx="50" cy="9" r="3.2"/><circle cx="34" cy="13" r="3"/><circle cx="22" cy="23" r="2.8"/>
-        <circle cx="14" cy="38" r="3"/><circle cx="12" cy="54" r="2.7"/><circle cx="18" cy="70" r="3.1"/>
-        <circle cx="30" cy="82" r="2.8"/><circle cx="45" cy="89" r="3"/><circle cx="61" cy="87" r="2.7"/>
-        <circle cx="75" cy="78" r="3.1"/><circle cx="85" cy="64" r="2.8"/><circle cx="88" cy="48" r="3"/>
-        <circle cx="84" cy="32" r="2.7"/><circle cx="75" cy="19" r="3"/><circle cx="64" cy="12" r="2.8"/>
+    <svg class="morrow-face morrow-${expression}" viewBox="0 0 120 138" aria-hidden="true">
+      <defs>
+        <pattern id="morrow-particles" width="3.2" height="3.2" patternUnits="userSpaceOnUse" patternTransform="rotate(-4)">
+          <circle class="morrow-particle" cx="1" cy="1" r="0.58"/>
+        </pattern>
+        <filter id="morrow-soft" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="3.4"/>
+        </filter>
+        <filter id="morrow-glow" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="1.8" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <mask id="morrow-visage">
+          <rect width="120" height="138" fill="black"/>
+          <ellipse cx="60" cy="63" rx="43" ry="57" fill="white" opacity="0.6"/>
+          <ellipse cx="60" cy="22" rx="32" ry="18" fill="white" opacity="0.7" filter="url(#morrow-soft)"/>
+          <ellipse cx="39" cy="56" rx="17" ry="10" fill="black" opacity="0.92" filter="url(#morrow-soft)"/>
+          <ellipse cx="81" cy="56" rx="17" ry="10" fill="black" opacity="0.92" filter="url(#morrow-soft)"/>
+          <path d="M55 44 C57 62 49 82 55 91 C59 95 66 94 70 90 C64 82 64 62 65 44 Z" fill="white" opacity="0.9" filter="url(#morrow-soft)"/>
+          <ellipse cx="35" cy="76" rx="14" ry="13" fill="white" opacity="0.45" filter="url(#morrow-soft)"/>
+          <ellipse cx="85" cy="76" rx="14" ry="13" fill="white" opacity="0.45" filter="url(#morrow-soft)"/>
+          <ellipse cx="24" cy="60" rx="10" ry="28" fill="black" opacity="0.38" filter="url(#morrow-soft)"/>
+          <ellipse cx="96" cy="60" rx="10" ry="28" fill="black" opacity="0.38" filter="url(#morrow-soft)"/>
+          <path d="M43 101 Q60 107 77 101 Q60 116 43 101Z" fill="black" opacity="0.88" filter="url(#morrow-soft)"/>
+          <ellipse cx="60" cy="119" rx="22" ry="13" fill="white" opacity="0.76" filter="url(#morrow-soft)"/>
+          <ellipse cx="17" cy="72" rx="9" ry="32" fill="black" opacity="0.55" filter="url(#morrow-soft)"/>
+          <ellipse cx="103" cy="72" rx="9" ry="32" fill="black" opacity="0.55" filter="url(#morrow-soft)"/>
+        </mask>
+        <mask id="morrow-halo">
+          <rect width="120" height="138" fill="black"/>
+          <ellipse cx="60" cy="66" rx="55" ry="66" fill="white" opacity="0.32" filter="url(#morrow-soft)"/>
+          <ellipse cx="60" cy="66" rx="46" ry="59" fill="black"/>
+        </mask>
+      </defs>
+      <rect class="morrow-halo" width="120" height="138" fill="url(#morrow-particles)" mask="url(#morrow-halo)"/>
+      <rect class="morrow-visage" width="120" height="138" fill="url(#morrow-particles)" mask="url(#morrow-visage)"/>
+      <g class="morrow-embers" filter="url(#morrow-glow)">
+        <circle cx="91" cy="32" r="1.15"/><circle cx="28" cy="91" r="0.95"/><circle class="morrow-pilot" cx="73" cy="119" r="0.8"/>
       </g>
-      <g class="morrow-brow">
-        <circle cx="31" cy="37" r="2.2"/><circle cx="39" cy="35" r="2.1"/>
-        <circle cx="61" cy="35" r="2.1"/><circle cx="69" cy="37" r="2.2"/>
-      </g>
-      <g class="morrow-eyes">
-        <circle class="morrow-spark" cx="35" cy="47" r="4.1"/><circle class="morrow-spark" cx="65" cy="47" r="4.1"/>
-      </g>
-      <g class="morrow-nose">
-        <circle cx="50" cy="55" r="2"/>
-      </g>
-      <g class="morrow-mouth">
-        <circle cx="38" cy="67" r="2.3"/><circle cx="46" cy="70" r="2.2"/>
-        <circle cx="54" cy="70" r="2.2"/><circle cx="62" cy="67" r="2.3"/>
-      </g>
-      <circle class="morrow-spark morrow-pilot" cx="91" cy="18" r="1.8"/>
     </svg>`;
 }
 
