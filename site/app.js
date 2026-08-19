@@ -164,38 +164,38 @@ const ui = {
 
 const morrowCopy = {
   en: {
-    label: "MORROW · GUIDE",
-    scripted: "fixed lines for this pilot",
+    label: "MORROW",
     hide: "hide",
     show: "call Morrow",
-    home: "I'm Morrow, a fictional guide. I lit the first question. I don't know its answer.",
-    hand: "Choose an i. The door gives you a way to look; the question stays yours.",
-    door: "I'll show you the rule. You decide what is worth investigating.",
-    intro: "This door looks for a blind spot shared by several AIs. Start with a real question.",
-    question: "Begin with a question that genuinely matters to you. Don't write one for the experiment.",
-    responsesEmpty: "Keep the wording frozen. Ask every AI exactly the same question.",
-    responsesPart: "Keep the complete answer. Don't choose the best one.",
-    responsesReady: "Agreement proves nothing yet. Now the trace needs an independent check.",
-    identity: "This trace is yours. Give it a name—or leave it anonymous.",
-    status: "Another i must place the dot. I can't judge the trace I helped you make.",
-    final: "Now you know the path. Light the next question."
+    home: "I don't have answers for you. But I can help you ask a question that can be checked.",
+    hand: "Each i hides a different way to search. Touch one.",
+    revealed: "If this question caught you, open the door. If not, choose another i.",
+    door: "Read what the door asks you to bring. When your observation is ready, continue to GitHub.",
+    intro: "Think of a question whose answer could genuinely change what you decide or do.",
+    question: "Write it exactly as you will ask every AI. Once frozen, the wording cannot change.",
+    responsesEmpty: "Now ask the same question to the first AI and keep its complete answer.",
+    responsesPart: "The answer is saved. Ask the next AI the same question, word for word.",
+    responsesReady: "Three answers are here. Mark whether they agree, disagree, or you cannot tell yet.",
+    identity: "The trace is ready. Leave a name, a pseudonym, or remain anonymous.",
+    status: "Now another person is needed. Only an independent i can check the trace and place the dot.",
+    final: "One trace has been checked. That is not the end of the answer—it is the beginning of knowledge we can trust."
   },
   ru: {
-    label: "MORROW · ПРОВОДНИК",
-    scripted: "пока говорит по сценарию",
+    label: "MORROW",
     hide: "убрать",
     show: "позвать Morrow",
-    home: "Я Morrow, вымышленный проводник. Я зажёг первый вопрос, но не знаю ответа.",
-    hand: "Выберите i. Дверь подскажет, как искать. Вопрос останется вашим.",
-    door: "Я покажу правило. А что стоит исследовать — решаете вы.",
-    intro: "Эта дверь ищет слепое пятно, общее для нескольких ИИ. Начните с настоящего вопроса.",
-    question: "Начните с вопроса, который действительно важен вам. Не придумывайте его ради эксперимента.",
-    responsesEmpty: "Не меняйте формулировку. Задайте каждому ИИ один и тот же вопрос, слово в слово.",
-    responsesPart: "Сохраните ответ целиком. Не выбирайте лучший.",
-    responsesReady: "Совпадение ответов ещё ничего не доказывает. Теперь нужна независимая проверка.",
-    identity: "Этот след — ваш. Дайте ему имя или оставьте анонимным.",
-    status: "Точку должен поставить другой i. Я не могу судить след, который помогал создавать.",
-    final: "Теперь вы знаете путь. Зажгите следующий вопрос."
+    home: "У меня нет для вас ответов. Но я помогу задать вопрос так, чтобы его можно было проверить.",
+    hand: "За каждым i — свой способ искать. Коснитесь одного.",
+    revealed: "Если этот вопрос вас задел — откройте дверь. Если нет — выберите другой i.",
+    door: "Прочитайте, что просит дверь. Когда наблюдение будет готово, продолжите в GitHub.",
+    intro: "Вспомните вопрос, ответ на который действительно может изменить ваше решение или действие.",
+    question: "Запишите его так, как зададите каждому ИИ. После этого формулировку нельзя менять.",
+    responsesEmpty: "Теперь задайте этот вопрос первому ИИ и сохраните полный ответ.",
+    responsesPart: "Ответ сохранён. Задайте тот же вопрос следующему ИИ — слово в слово.",
+    responsesReady: "Три ответа собраны. Отметьте: они согласны, расходятся или вы пока не уверены.",
+    identity: "След готов. Оставьте имя, псевдоним или останьтесь анонимным.",
+    status: "Теперь нужен другой человек. Только независимый i может проверить след и поставить точку.",
+    final: "Один след проверен. Это не конец ответа — это начало знания, которому можно доверять."
   }
 };
 
@@ -287,7 +287,6 @@ function morrowGuide(message = "home", expression = "calm") {
             <button class="morrow-hide" data-action="hide-morrow" aria-label="${morrowText("hide")}">×</button>
           </div>
           <p>${morrowText(message)}</p>
-          <small>${morrowText("scripted")}</small>
         </div>
       </div>
       <button class="morrow-restore" data-action="show-morrow">${morrowText("show")}</button>
@@ -848,7 +847,7 @@ app.addEventListener("click", (event) => {
   if (revealButton) {
     activeDoorIndex = Number(revealButton.dataset.reveal);
     renderHand();
-    updateMorrow("door", "curious");
+    updateMorrow("revealed", "curious");
     return;
   }
 

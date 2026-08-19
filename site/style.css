@@ -657,13 +657,6 @@ h1 {
   margin: 0.55rem 0;
 }
 
-.morrow-copy small {
-  color: var(--muted);
-  font-family: inherit;
-  font-size: 0.68rem;
-  font-weight: 400;
-}
-
 .morrow-hide {
   background: transparent;
   border: 0;
