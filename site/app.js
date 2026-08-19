@@ -648,6 +648,7 @@ function contributionCompose(doorId) {
             <textarea name="verification" rows="5" required maxlength="20000">${draftValue(draft, "verification")}</textarea>
           </label>`}
         <input class="form-honeypot" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="form-error" role="alert"></p>
         <button class="button" type="submit">${c("continue")}</button>
       </form>
       <a class="quiet-link contribution-source" href="${repository}">${c("source")}</a>
@@ -1328,7 +1329,7 @@ app.addEventListener("submit", async (event) => {
       render();
       scrollTo(0, 0);
     } catch (error) {
-      alert(error.message);
+      form.querySelector(".form-error").textContent = error.message;
     }
     return;
   }
@@ -1354,7 +1355,7 @@ app.addEventListener("submit", async (event) => {
         })
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || c("submitError"));
+      if (!response.ok) throw new Error(c("submitError"));
       localStorage.removeItem(contributionDraftKey(contributionPreview.door));
       contributionPreview = null;
       contributionStage = "compose";
@@ -1380,7 +1381,7 @@ app.addEventListener("submit", async (event) => {
         })
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || c("submitError"));
+      if (!response.ok) throw new Error(c("submitError"));
       await loadPrivateContribution();
     } catch (error) {
       errorTarget.textContent = error.message || c("submitError");
