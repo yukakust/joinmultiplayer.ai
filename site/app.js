@@ -951,18 +951,67 @@ async function loadPublicMap() {
     const response = await fetch("/api/public/events.json");
     if (!response.ok) throw new Error("map failed");
     const data = await response.json();
-    target.innerHTML = data.events.length ? data.events.map(event => {
+    if (!data.events.length) {
+      target.innerHTML = `<p>${c("mapEmpty")}</p>`;
+      return;
+    }
+    const width = 1000;
+    const height = 640;
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+    const positions = new Map();
+    const childCounts = new Map();
+    data.events.forEach((event, index) => {
+      const parent = event.links.find(link => link.relation === "continues");
+      const parentPosition = parent ? positions.get(parent.target_id) : null;
+      if (parentPosition) {
+        const childIndex = childCounts.get(parent.target_id) || 0;
+        childCounts.set(parent.target_id, childIndex + 1);
+        const angle = childIndex * goldenAngle - Math.PI / 3;
+        const ring = Math.floor(childIndex / 6);
+        const radius = 145 + ring * 85;
+        positions.set(event.object_id, {
+          x: Math.max(65, Math.min(width - 65, parentPosition.x + Math.cos(angle) * radius)),
+          y: Math.max(65, Math.min(height - 65, parentPosition.y + Math.sin(angle) * radius))
+        });
+      } else if (index === 0) {
+        positions.set(event.object_id, { x: width / 2, y: height / 2 });
+      } else {
+        const radius = 95 + 44 * Math.sqrt(index);
+        positions.set(event.object_id, {
+          x: width / 2 + Math.cos(index * goldenAngle) * radius,
+          y: height / 2 + Math.sin(index * goldenAngle) * radius
+        });
+      }
+    });
+    const lines = data.events.flatMap(event => event.links
+      .filter(link => link.relation === "continues" && positions.has(link.target_id))
+      .map(link => {
+        const from = positions.get(link.target_id);
+        const to = positions.get(event.object_id);
+        return `<line x1="${from.x}" y1="${from.y}" x2="${to.x}" y2="${to.y}"></line>`;
+      })).join("");
+    const nodes = data.events.map(event => {
+      const position = positions.get(event.object_id);
       const parent = event.links.find(link => link.relation === "continues");
       return `
-        <article class="event-node ${event.verified ? "event-verified" : ""}">
-          <a class="event-mark" href="/record/?id=${encodeURIComponent(event.object_id)}" aria-label="${escapeHTML(event.event_id)}">${event.verified ? "i" : "ı"}</a>
-          <div>
-            <span>${escapeHTML(event.event_id)} · ${c(event.event_type === "trace_continued" ? "eventContinued" : "eventPublished")}</span>
+        <a class="map-event-node ${event.verified ? "event-verified" : ""} ${position.x > width * .7 ? "card-left" : ""}"
+           style="left:${position.x / width * 100}%;top:${position.y / height * 100}%"
+           href="/record/?id=${encodeURIComponent(event.object_id)}"
+           aria-label="${escapeHTML(event.event_id)} · ${escapeHTML(event.payload.question)}">
+          <b>${event.verified ? "i" : "ı"}</b>
+          <span>${escapeHTML(event.event_id)}</span>
+          <span class="map-event-card">
+            <small>${c(event.event_type === "trace_continued" ? "eventContinued" : "eventPublished")} · ${escapeHTML(event.object_id)}</small>
             <strong>${escapeHTML(event.payload.question)}</strong>
-            <small>${escapeHTML(event.object_id)} · ${escapeHTML(event.actor)}${parent ? ` · ${c("continuationOf")} ${escapeHTML(parent.target_id)}` : ""}</small>
-          </div>
-        </article>`;
-    }).join("") : `<p>${c("mapEmpty")}</p>`;
+            ${parent ? `<small>${c("continuationOf")} ${escapeHTML(parent.target_id)}</small>` : ""}
+          </span>
+        </a>`;
+    }).join("");
+    target.innerHTML = `
+      <div class="event-map-plane" role="img" aria-label="${c("mapTitle")}">
+        <svg viewBox="0 0 ${width} ${height}" aria-hidden="true">${lines}</svg>
+        ${nodes}
+      </div>`;
   } catch {
     target.innerHTML = `<p>${c("dataError")}</p>`;
   }

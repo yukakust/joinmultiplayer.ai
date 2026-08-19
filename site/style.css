@@ -794,75 +794,132 @@ h1 {
 }
 
 .event-map {
-  display: grid;
-  max-width: 64rem;
+  width: 100%;
   margin: 1rem 0 3rem;
 }
 
-.event-node {
+.event-map-plane {
   position: relative;
-  display: grid;
-  grid-template-columns: 5rem 1fr;
-  gap: 1.5rem;
-  padding: 1.5rem 0;
+  width: 100%;
+  min-height: min(68vh, 720px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at center, color-mix(in srgb, var(--ink) 4%, transparent) 0 1px, transparent 1.5px) 0 0 / 26px 26px,
+    color-mix(in srgb, var(--paper) 97%, var(--ink));
 }
 
-.event-node:not(:last-child)::after {
-  content: "";
+.event-map-plane svg {
   position: absolute;
-  left: 2.45rem;
-  top: 5.8rem;
-  bottom: -1.2rem;
-  width: 1px;
-  background: var(--line);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
-.event-mark {
+.event-map-plane line {
+  stroke: color-mix(in srgb, var(--ink) 35%, transparent);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.map-event-node {
+  position: absolute;
+  z-index: 2;
   display: grid;
   place-items: center;
-  width: 5rem;
-  height: 5rem;
-  border: 1px solid var(--line);
-  border-radius: 50%;
+  width: 3.8rem;
+  height: 3.8rem;
+  transform: translate(-50%, -50%);
   color: var(--ink);
-  font-size: 3rem;
-  line-height: 1;
   text-decoration: none;
 }
 
-.event-node > div {
-  display: grid;
-  gap: .6rem;
-  align-content: center;
+.map-event-node::before {
+  content: "";
+  position: absolute;
+  inset: .25rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--paper);
+  transition: transform 160ms ease, border-color 160ms ease;
 }
 
-.event-node span,
-.event-node small {
+.map-event-node:hover::before,
+.map-event-node:focus-visible::before {
+  transform: scale(1.14);
+  border-color: var(--ink);
+}
+
+.map-event-node > b {
+  position: relative;
+  z-index: 1;
+  font-size: 2.35rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.map-event-node > span:not(.map-event-card) {
+  position: absolute;
+  top: calc(100% + .2rem);
+  color: var(--muted);
+  font-size: .68rem;
+  white-space: nowrap;
+}
+
+.map-event-card {
+  position: absolute;
+  z-index: 4;
+  left: calc(100% + .8rem);
+  top: 50%;
+  display: grid;
+  width: min(23rem, 62vw);
+  gap: .55rem;
+  padding: 1rem;
+  transform: translate(.5rem, -50%);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.map-event-card strong {
+  font: inherit;
+  line-height: 1.35;
+}
+
+.map-event-card small {
   color: var(--muted);
 }
 
-.event-node strong {
-  max-width: 56rem;
-  font: inherit;
-  font-size: clamp(1.05rem, 2vw, 1.5rem);
-  line-height: 1.3;
+.map-event-node.card-left .map-event-card {
+  right: calc(100% + .8rem);
+  left: auto;
+}
+
+.map-event-node:hover .map-event-card,
+.map-event-node:focus-visible .map-event-card {
+  opacity: 1;
+  transform: translate(0, -50%);
 }
 
 @media (max-width: 620px) {
-  .event-node {
-    grid-template-columns: 3.5rem 1fr;
-    gap: 1rem;
+  .event-map-plane {
+    min-height: 62vh;
   }
 
-  .event-mark {
-    width: 3.5rem;
-    height: 3.5rem;
-    font-size: 2.2rem;
+  .map-event-card {
+    right: auto;
+    left: 50%;
+    top: calc(100% + 1rem);
+    transform: translate(-50%, .5rem);
   }
 
-  .event-node:not(:last-child)::after {
-    left: 1.7rem;
-    top: 4.4rem;
+  .map-event-node:hover .map-event-card,
+  .map-event-node:focus-visible .map-event-card {
+    transform: translate(-50%, 0);
   }
 }
 
