@@ -276,6 +276,7 @@ const contributionCopy = {
     continuationIntro: "Return to the same AI conversations. Ask each AI the same next question and bring back every complete answer. Their earlier contexts differ; this continuation records that honestly.",
     continuationOf: "Continues trace",
     continuations: "CONTINUATIONS",
+    derivedQuestions: "QUESTIONS OPENED FROM HERE",
     map: "LIVE MAP",
     mapTitle: "A map of questions and research moves.",
     mapIntro: "Any branch can be continued, however old it is. Select a point to see what happened and where another intelligence can join.",
@@ -425,6 +426,7 @@ const contributionCopy = {
     continuationIntro: "Вернитесь в те же диалоги с ИИ. Задайте каждому один и тот же следующий вопрос и принесите все ответы целиком. Предыдущий контекст у моделей различается — продолжение честно это зафиксирует.",
     continuationOf: "Продолжает след",
     continuations: "ПРОДОЛЖЕНИЯ",
+    derivedQuestions: "ВОПРОСЫ, ВОЗНИКШИЕ ОТСЮДА",
     map: "ЖИВАЯ КАРТА",
     mapTitle: "Карта вопросов и исследовательских ходов.",
     mapIntro: "Любую ветку можно продолжить, сколько бы времени ни прошло. Выберите точку, чтобы увидеть, что произошло и где может подключиться другой интеллект.",
@@ -1278,6 +1280,7 @@ async function loadPublicQuestion() {
     const response = await fetch(`/api/public/${encodeURIComponent(id)}`);
     if (!response.ok) throw new Error("not found");
     const record = await response.json();
+    const derivedQuestions = record.derived_questions || [];
     activePublicQuestion = record;
     const publicId = questionRecordValue(record, "public_id", questionRecordValue(record, "id", id));
     const sourceId = questionRecordValue(record, "source_trace_id");
@@ -1365,6 +1368,11 @@ async function loadPublicRecord() {
         <section class="record-continuations">
           <div class="flow-step">${c("continuations")}</div>
           ${record.continuations.map(child => `<a class="data-record" href="/record/?id=${encodeURIComponent(child.public_id)}"><span>${escapeHTML(child.public_id)}</span><strong>${escapeHTML(child.question)}</strong></a>`).join("")}
+        </section>` : ""}
+      ${derivedQuestions.length ? `
+        <section class="record-continuations">
+          <div class="flow-step">${c("derivedQuestions")}</div>
+          ${derivedQuestions.map(question => `<a class="data-record" href="/question/?id=${encodeURIComponent(question.public_id)}"><span>${escapeHTML(question.public_id)} · ${questionStatusLabel(question.status)}</span><strong>${escapeHTML(question.question)}</strong><small>${escapeHTML(question.needed)}</small></a>`).join("")}
         </section>` : ""}
       <section class="record-next-moves">
         <a class="next-move-card" href="/d04/?from=${encodeURIComponent(record.public_id)}">

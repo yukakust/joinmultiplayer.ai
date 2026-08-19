@@ -385,6 +385,22 @@ class SubmissionTests(unittest.TestCase):
             self.assertEqual(public["payload"]["question"], "What do repeated attempts add?")
             self.assertTrue(handler.sent[2]["public"])
 
+    def test_source_trace_lists_its_public_derived_questions(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            with sqlite3.connect(path) as db:
+                insert_trace(db)
+                insert_question(db)
+                insert_question(db, public_id="Q0002", status="pending", question="Private question")
+            handler = handler_for(path)
+            handler.get_public("T0001")
+            questions = handler.sent[1]["derived_questions"]
+            self.assertEqual(len(questions), 1)
+            self.assertEqual(questions[0]["public_id"], "Q0001")
+            self.assertEqual(questions[0]["status"], "open")
+            self.assertEqual(questions[0]["question"], "What do repeated attempts add?")
+
     def test_trace_can_answer_public_question_with_exact_wording(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "test.sqlite3"

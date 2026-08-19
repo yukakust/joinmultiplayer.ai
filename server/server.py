@@ -664,6 +664,11 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                 "ORDER BY row_id",
                 (public_id,),
             ).fetchall()
+            questions = db.execute(
+                "SELECT public_id, payload, author, research_status, created_at FROM questions "
+                "WHERE source_trace_id = ? AND status = 'public' ORDER BY row_id",
+                (public_id,),
+            ).fetchall()
         response["continuations"] = [
             {
                 "public_id": child["public_id"],
@@ -671,6 +676,17 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                 "author": child["author"],
             }
             for child in children
+        ]
+        response["derived_questions"] = [
+            {
+                "public_id": question["public_id"],
+                "question": json.loads(question["payload"]).get("question", ""),
+                "needed": json.loads(question["payload"]).get("needed", ""),
+                "author": question["author"],
+                "status": question["research_status"],
+                "created_at": question["created_at"],
+            }
+            for question in questions
         ]
         self.send_json(HTTPStatus.OK, response, public=True)
 
