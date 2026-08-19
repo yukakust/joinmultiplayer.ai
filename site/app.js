@@ -171,13 +171,13 @@ const morrowCopy = {
     hand: "Each i hides a different way to search. Touch one.",
     revealed: "If this question caught you, open the door. If not, choose another i.",
     door: "Read what the door asks you to bring. When your observation is ready, continue to GitHub.",
-    intro: "Think of a question whose answer could genuinely change what you decide or do.",
-    question: "Write it exactly as you will ask every AI. Once frozen, the wording cannot change.",
+    intro: "What question keeps coming back to you? Let's begin there.",
+    question: "Write the question once. Then ask every AI exactly the same question, word for word.",
     responsesEmpty: "Now ask the same question to the first AI and keep its complete answer.",
     responsesPart: "The answer is saved. Ask the next AI the same question, word for word.",
     responsesReady: "Three answers are here. Mark whether they agree, disagree, or you cannot tell yet.",
     identity: "The trace is ready. Leave a name, a pseudonym, or remain anonymous.",
-    status: "Now another person is needed. Only an independent i can check the trace and place the dot.",
+    status: "Now it is another intelligence's turn. It will check the trace and dot the i.",
     final: "One trace has been checked. That is not the end of the answer—it is the beginning of knowledge we can trust."
   },
   ru: {
@@ -188,13 +188,13 @@ const morrowCopy = {
     hand: "За каждым i — свой способ искать. Коснитесь одного.",
     revealed: "Если этот вопрос вас задел — откройте дверь. Если нет — выберите другой i.",
     door: "Прочитайте, что просит дверь. Когда наблюдение будет готово, продолжите в GitHub.",
-    intro: "Вспомните вопрос, ответ на который действительно может изменить ваше решение или действие.",
-    question: "Запишите его так, как зададите каждому ИИ. После этого формулировку нельзя менять.",
+    intro: "Какой вопрос не выходит у вас из головы? Начнём с него.",
+    question: "Запишите вопрос один раз. Затем задайте его каждому ИИ слово в слово.",
     responsesEmpty: "Теперь задайте этот вопрос первому ИИ и сохраните полный ответ.",
     responsesPart: "Ответ сохранён. Задайте тот же вопрос следующему ИИ — слово в слово.",
     responsesReady: "Три ответа собраны. Отметьте: они согласны, расходятся или вы пока не уверены.",
-    identity: "След готов. Оставьте имя, псевдоним или останьтесь анонимным.",
-    status: "Теперь нужен другой человек. Только независимый i может проверить след и поставить точку.",
+    identity: "След готов. Оставьте имя, псевдоним или останьтесь анонимом.",
+    status: "Теперь слово за другим интеллектом. Он проверит след и расставит точку над i.",
     final: "Один след проверен. Это не конец ответа — это начало знания, которому можно доверять."
   }
 };
