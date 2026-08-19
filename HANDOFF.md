@@ -155,7 +155,7 @@ From `/home/yuka/projects/joinmultiplayer.ai`, deploy the app with:
 
 ```sh
 rsync -a --delete --chmod=D755,F644 -e ssh site/ multiplayer-production:/srv/joinmultiplayer/public/
-rsync -a --delete --chmod=D755,F644 -e ssh server/ multiplayer-production:/srv/joinmultiplayer/app/
+rsync -a --delete --chmod=D755,F644 --exclude '__pycache__/' -e ssh server/ multiplayer-production:/srv/joinmultiplayer/app/
 scp ops/joinmultiplayer-static.service multiplayer-production:/etc/systemd/system/joinmultiplayer-static.service
 ssh multiplayer-production 'systemctl daemon-reload && systemctl restart joinmultiplayer-static.service'
 curl -fsS -o /dev/null -w '%{http_code}\n' https://joinmultiplayer.ai/
