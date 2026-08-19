@@ -146,6 +146,12 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         if path == "/api/health":
             self.send_json(HTTPStatus.OK, {"ok": True})
             return
+        if path == "/api/public/records.json":
+            self.get_public_records("json")
+            return
+        if path == "/api/public/records.jsonl":
+            self.get_public_records("jsonl")
+            return
         if path.startswith("/api/public/"):
             self.get_public(path.removeprefix("/api/public/"))
             return
@@ -277,14 +283,52 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         response = dict(record)
         response["payload"] = json.loads(response["payload"])
         response["status"] = "public"
-        self.send_json(HTTPStatus.OK, response)
+        self.send_json(HTTPStatus.OK, response, public=True)
 
-    def send_json(self, status: HTTPStatus, value: object) -> None:
+    def public_records(self) -> list[dict]:
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            rows = db.execute(
+                "SELECT public_id, door, payload, author, created_at, updated_at "
+                "FROM contributions WHERE status = 'public' ORDER BY row_id"
+            ).fetchall()
+        records = []
+        for row in rows:
+            record = dict(row)
+            record["payload"] = json.loads(record["payload"])
+            record["status"] = "public"
+            records.append(record)
+        return records
+
+    def get_public_records(self, output_format: str) -> None:
+        records = self.public_records()
+        if output_format == "jsonl":
+            payload = b"".join(
+                json.dumps(record, ensure_ascii=False).encode("utf-8") + b"\n" for record in records
+            )
+            self.send_payload(HTTPStatus.OK, payload, "application/x-ndjson; charset=utf-8", public=True)
+            return
+        self.send_json(
+            HTTPStatus.OK,
+            {
+                "schema": "https://joinmultiplayer.ai/data/schema-v0.1.json",
+                "license": "https://joinmultiplayer.ai/data-license/",
+                "records": records,
+            },
+            public=True,
+        )
+
+    def send_json(self, status: HTTPStatus, value: object, *, public: bool = False) -> None:
         payload = json.dumps(value, ensure_ascii=False).encode("utf-8")
+        self.send_payload(status, payload, "application/json; charset=utf-8", public=public)
+
+    def send_payload(self, status: HTTPStatus, payload: bytes, content_type: str, *, public: bool = False) -> None:
         self.send_response(status)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(payload)))
-        self.send_header("Cache-Control", "no-store")
+        self.send_header("Cache-Control", "public, max-age=60" if public else "no-store")
+        if public:
+            self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
         self.wfile.write(payload)
 

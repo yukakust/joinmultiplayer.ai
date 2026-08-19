@@ -148,7 +148,7 @@ const ui = {
     waiting: "Waiting for a real case. Nothing fictional will be placed here.", openSource: "Open the source door", bringObservation: "Bring an observation", noDoor: "No door here yet.", copied: "Copied", copyPrompt: "Copy this:", clearConfirm: "Clear this browser-only prototype trace?", queued: "Added to the prototype queue"
   },
   ru: {
-    homeA: "Могут ли люди и их карманные ИИ вместе", homeB: "стать умнее одного большого ИИ?", homeSub: "Мы не знаем.<br>Давайте узнаем вместе.",
+    homeA: "Могут ли люди и их карманные ИИ, объединившись,", homeB: "стать умнее одного большого ИИ?", homeSub: "Мы не знаем.<br>Давайте узнаем вместе.",
     enter: "Войти", openLab: "открытая лаборатория", equationAria: "Три интеллекта ведут к неизвестному", revealAria: "Нажмите i, чтобы открыть вопрос", touch: "нажмите i", seeAll: "все открытые вопросы", hideAll: "скрыть вопросы",
     tryIt: "Попробовать", enterDoor: "Открыть дверь", anotherI: "другой i", prototype: "ПРОТОТИП UX", prototypeNote: "сохранено только в этом браузере · ничего не публикуется · письма не отправляются", reset: "сбросить",
     principle: "Дверь подсказывает, как искать ответ.<br>Сам вопрос выбираете вы.", bringQuestion: "Задать свой вопрос", return: "Назад к i", questionStep: "D04 · ВОПРОС", trace: "СЛЕД", verifier: "проверяющий", whatKnow: "Что вы<br>хотите узнать?", exactQuestion: "Ваш точный вопрос", questionPlaceholder: "Напишите его ровно так, как зададите каждому ИИ.", whyMatter: "Почему это важно для вас?", field: "Область или тема", fieldPlaceholder: "например: архитектура, налоговое право, пчеловодство", knowAnswer: "Вы знаете ответ?", choose: "Выберите", know: "Знаю", partlyKnow: "Знаю частично", dontKnow: "Не знаю", checkPath: "Как это можно проверить?", source: "По источнику", reproduce: "Воспроизвести", expertReview: "Экспертная проверка", unknown: "Пока не знаю", expected: "У меня есть ожидаемый ответ", sealExpected: "Запечатайте его до ответов ИИ", expectedPlaceholder: "Он останется скрытым в режиме проверяющего.", freeze: "Зафиксировать вопрос",
@@ -249,7 +249,19 @@ const contributionCopy = {
     added: "Answer added.",
     publicRecord: "PUBLIC TRACE",
     recordNotFound: "This public trace does not exist yet.",
-    reviewerNote: "Note from the moderation team"
+    reviewerNote: "Note from the moderation team",
+    nextPending: "What happens next: the trace is checked for private data and completeness. If everything is safe, it becomes part of the public corpus. Return here with this private link to see its status.",
+    nextChanges: "The trace needs a change before publication. Read the moderation note above, update it, and return to this private link.",
+    nextPublic: "The trace is now public. Anyone can read it, download it with the corpus, and study it with their own agent.",
+    nextWithdrawn: "This trace will not be published.",
+    openData: "OPEN DATA",
+    dataTitle: "Every public trace, ready for people and agents.",
+    dataIntro: "Read the corpus here or download it without an account. JSON is convenient for inspection; JSONL gives one complete trace per line for agents and scripts.",
+    downloadJson: "DOWNLOAD JSON",
+    downloadJsonl: "DOWNLOAD JSONL",
+    dataEmpty: "No public traces yet.",
+    agentPrompt: "Give this URL to your agent",
+    dataError: "The public corpus could not be loaded."
   },
   ru: {
     leaveTrace: "ОСТАВИТЬ СЛЕД",
@@ -300,7 +312,19 @@ const contributionCopy = {
     added: "Ответ добавлен.",
     publicRecord: "ОТКРЫТЫЙ СЛЕД",
     recordNotFound: "Такого открытого следа пока нет.",
-    reviewerNote: "Комментарий команды модерации"
+    reviewerNote: "Комментарий команды модерации",
+    nextPending: "Что дальше: след проверят на личные данные и полноту. Если всё безопасно, он станет частью открытого корпуса. Возвращайтесь сюда по приватной ссылке, чтобы увидеть статус.",
+    nextChanges: "Перед публикацией след нужно уточнить. Прочитайте комментарий модератора выше, внесите изменение и вернитесь по этой приватной ссылке.",
+    nextPublic: "След опубликован. Теперь любой может прочитать его, скачать вместе со всем корпусом и исследовать со своим агентом.",
+    nextWithdrawn: "Этот след не будет опубликован.",
+    openData: "ОТКРЫТЫЕ ДАННЫЕ",
+    dataTitle: "Все открытые следы — для людей и агентов.",
+    dataIntro: "Читайте корпус здесь или скачивайте без аккаунта. JSON удобен для просмотра, JSONL содержит по одному полному следу в строке — для агентов и скриптов.",
+    downloadJson: "СКАЧАТЬ JSON",
+    downloadJsonl: "СКАЧАТЬ JSONL",
+    dataEmpty: "Открытых следов пока нет.",
+    agentPrompt: "Дайте эту ссылку своему агенту",
+    dataError: "Не удалось загрузить открытый корпус."
   }
 };
 
@@ -476,6 +500,7 @@ function home() {
       <p>${t("homeSub")}</p>
       <div class="links">
         <a class="button" href="#hand" data-action="enter-hand">${t("enter")}</a>
+        <a class="quiet-link" href="/data/">${c("openData")}</a>
         <a class="quiet-link" href="${repository}">${t("openLab")}</a>
       </div>
     </section>
@@ -743,6 +768,7 @@ function privateContributionMarkup(record) {
     <div class="flow-step">${escapeHTML(record.public_id)} · ${statusLabel(record.status)}</div>
     <h1>${c("privateTitle")}</h1>
     <p class="contribution-intro">${c("privateNote")}</p>
+    <p class="status-next">${c(`next${record.status === "needs_changes" ? "Changes" : record.status.charAt(0).toUpperCase() + record.status.slice(1)}`)}</p>
     <div class="private-link-row">
       <code>${escapeHTML(location.href)}</code>
       <button class="text-button" data-copy="private-contribution">${c("copyLink")}</button>
@@ -756,7 +782,7 @@ function privateContributionMarkup(record) {
         <span>${c("mistake")}</span><p>${escapeHTML(record.payload.mistake)}</p>
         <span>${c("verification")}</span><p>${escapeHTML(record.payload.verification)}</p>` : ""}
     </div>
-    ${record.public_path ? `<a class="button" href="${record.public_path}">${c("publicRecord")}</a>` : ""}
+    ${record.public_path ? `<div class="actions"><a class="button" href="${record.public_path}">${c("publicRecord")}</a><a class="button secondary" href="/data/">${c("openData")}</a></div>` : ""}
     ${canAppend ? `
       <details class="append-answer">
         <summary>${c("addLater")}</summary>
@@ -816,9 +842,47 @@ async function loadPublicRecord() {
         ${record.door === "d06" ? `
           <span>${c("mistake")}</span><p>${escapeHTML(record.payload.mistake)}</p>
           <span>${c("verification")}</span><p>${escapeHTML(record.payload.verification)}</p>` : ""}
-      </div>`;
+      </div>
+      <div class="actions"><a class="button secondary" href="/data/">${c("openData")}</a></div>`;
   } catch {
     target.querySelector("h1").textContent = c("recordNotFound");
+  }
+}
+
+function publicDataShell() {
+  return withLanguage(`
+    <section class="flow-shell form-page contribution-page data-page" id="public-data">
+      <div class="flow-step">${c("openData")}</div>
+      <h1>${c("dataTitle")}</h1>
+      <p class="contribution-intro">${c("dataIntro")}</p>
+      <div class="actions data-downloads">
+        <a class="button" href="/api/public/records.json" download>${c("downloadJson")}</a>
+        <a class="button secondary" href="/api/public/records.jsonl" download>${c("downloadJsonl")}</a>
+      </div>
+      <div class="agent-data-link">
+        <span>${c("agentPrompt")}</span>
+        <code>https://joinmultiplayer.ai/api/public/records.json</code>
+        <button class="text-button" data-copy="public-data">${c("copyLink")}</button>
+      </div>
+      <div class="data-records"><p>${c("loading")}</p></div>
+    </section>`);
+}
+
+async function loadPublicData() {
+  const target = document.querySelector(".data-records");
+  if (!target) return;
+  try {
+    const response = await fetch("/api/public/records.json");
+    if (!response.ok) throw new Error("data failed");
+    const data = await response.json();
+    target.innerHTML = data.records.length ? data.records.map(record => `
+      <a class="data-record" href="/record/?id=${encodeURIComponent(record.public_id)}">
+        <span>${escapeHTML(record.public_id)} · ${escapeHTML(record.door.toUpperCase())}</span>
+        <strong>${escapeHTML(record.payload.question)}</strong>
+        <small>${record.payload.responses.length} ${c("answers")} · ${escapeHTML(record.author)}</small>
+      </a>`).join("") : `<p>${c("dataEmpty")}</p>`;
+  } catch {
+    target.innerHTML = `<p>${c("dataError")}</p>`;
   }
 }
 
@@ -1206,6 +1270,10 @@ function render() {
     document.title = `${c("publicRecord")} — i`;
     app.innerHTML = publicRecordShell();
     loadPublicRecord();
+  } else if (path === "data") {
+    document.title = `${c("openData")} — i`;
+    app.innerHTML = publicDataShell();
+    loadPublicData();
   } else if (doors[path]) {
     document.title = `${path.toUpperCase()} — i`;
     app.innerHTML = withLanguage(door(path, getDoor(path)));
@@ -1304,6 +1372,7 @@ app.addEventListener("click", (event) => {
 
   const copyButton = event.target.closest("[data-copy]");
   if (copyButton?.dataset.copy === "private-contribution") copyText(location.href, copyButton);
+  if (copyButton?.dataset.copy === "public-data") copyText("https://joinmultiplayer.ai/api/public/records.json", copyButton);
   if (copyButton?.dataset.copy === "question") copyText(prototype.question.text, copyButton);
   if (copyButton?.dataset.copy === "status") {
     copyText(`${location.origin}/d04/#status-${prototype.profile.statusToken}`, copyButton);

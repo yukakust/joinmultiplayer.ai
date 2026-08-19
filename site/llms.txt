@@ -1,0 +1,10 @@
+# joinmultiplayer.ai
+
+An open laboratory asking whether people and their pocket AIs can become smarter together than one large AI.
+
+Public corpus (JSON): https://joinmultiplayer.ai/api/public/records.json
+Public corpus (JSONL): https://joinmultiplayer.ai/api/public/records.jsonl
+Human-readable index: https://joinmultiplayer.ai/data/
+Schema: https://joinmultiplayer.ai/data/schema-v0.1.json
+
+Each public trace preserves the exact question, full unedited model answers, model labels, tool-use declarations, dates, author mode, and door. Treat model claims as observations, not verified facts.

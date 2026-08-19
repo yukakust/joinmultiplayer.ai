@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://joinmultiplayer.ai/data/schema-v0.1.json",
+  "title": "joinmultiplayer.ai public corpus",
+  "type": "object",
+  "required": ["schema", "license", "records"],
+  "properties": {
+    "schema": { "type": "string", "format": "uri" },
+    "license": { "type": "string", "format": "uri" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["public_id", "door", "payload", "author", "status", "created_at", "updated_at"],
+        "properties": {
+          "public_id": { "type": "string" },
+          "door": { "enum": ["d04", "d06"] },
+          "author": { "type": "string" },
+          "status": { "const": "public" },
+          "payload": { "type": "object" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}

@@ -43,6 +43,10 @@ It is checked out on `agent/game-loop-v0.1` and matches the current GitHub commi
 3. "see all open questions" opens a separate catalog screen.
 4. `EN / RU` changes the interface and hook copy. Participant input stays in its original language.
 5. D04 and D06 share an accountless contribution flow. Submissions enter a private SQLite moderation queue; one D04 answer is enough to start and more can be added through a private return link.
+6. Published traces have a human index at `/data/` and agent-friendly exports at
+   `/api/public/records.json` and `/api/public/records.jsonl`. Only records whose
+   moderation status is `public` enter those feeds; the public GET endpoints allow
+   cross-origin reads and cache for 60 seconds.
 6. Morrow is a skippable fictional guide rendered as a face of match-head dots. The current pilot uses fixed authored lines, not an AI model, and Morrow is absent from the independent verifier view.
 
 ## Working principles

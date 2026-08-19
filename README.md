@@ -74,6 +74,12 @@ ignition map behind that entrance.
 Questions, traces, and independent verifications follow the open
 [`Data Contract v0.1`](DATA.md).
 
+Public traces can be read at [joinmultiplayer.ai/data](https://joinmultiplayer.ai/data/)
+or consumed without an account as
+[JSON](https://joinmultiplayer.ai/api/public/records.json) and
+[JSONL](https://joinmultiplayer.ai/api/public/records.jsonl). Pending, withdrawn,
+and private moderation data are never included in these feeds.
+
 ## Rules
 
 - Ask one sharp question.
