@@ -773,6 +773,99 @@ h1 {
   line-height: 1.25;
 }
 
+.continuation-parent {
+  display: inline-block;
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.record-continuations {
+  margin: 3rem 0;
+}
+
+.map-grammar {
+  display: grid;
+  gap: .75rem;
+  margin: 2rem 0 3rem;
+  padding: 1.25rem 0;
+  border-block: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.event-map {
+  display: grid;
+  max-width: 64rem;
+  margin: 1rem 0 3rem;
+}
+
+.event-node {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+}
+
+.event-node:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 2.45rem;
+  top: 5.8rem;
+  bottom: -1.2rem;
+  width: 1px;
+  background: var(--line);
+}
+
+.event-mark {
+  display: grid;
+  place-items: center;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  font-size: 3rem;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.event-node > div {
+  display: grid;
+  gap: .6rem;
+  align-content: center;
+}
+
+.event-node span,
+.event-node small {
+  color: var(--muted);
+}
+
+.event-node strong {
+  max-width: 56rem;
+  font: inherit;
+  font-size: clamp(1.05rem, 2vw, 1.5rem);
+  line-height: 1.3;
+}
+
+@media (max-width: 620px) {
+  .event-node {
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1rem;
+  }
+
+  .event-mark {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 2.2rem;
+  }
+
+  .event-node:not(:last-child)::after {
+    left: 1.7rem;
+    top: 4.4rem;
+  }
+}
+
 .contribution-answer {
   border: 1px solid var(--line);
   display: flex;

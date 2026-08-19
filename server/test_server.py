@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from server import ApplicationHandler, init_db, validate_submission
+from server import ApplicationHandler, init_db, record_publication_event, validate_submission
 
 
 class SubmissionTests(unittest.TestCase):
@@ -48,6 +48,10 @@ class SubmissionTests(unittest.TestCase):
             path = Path(directory) / "test.sqlite3"
             init_db(path)
             self.assertTrue(path.exists())
+            with sqlite3.connect(path) as db:
+                columns = {row[1] for row in db.execute("PRAGMA table_info(contributions)")}
+                self.assertIn("parent_public_id", columns)
+                self.assertIsNotNone(db.execute("SELECT name FROM sqlite_master WHERE name = 'events'").fetchone())
 
     def test_public_corpus_excludes_pending_records(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -73,6 +77,28 @@ class SubmissionTests(unittest.TestCase):
             records = handler.public_records()
             self.assertEqual([record["public_id"] for record in records], ["T0002"])
             self.assertEqual(records[0]["payload"]["question"], "What changed?")
+
+    def test_continuation_creates_a_linked_global_event(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            payload = json.dumps(
+                {"question": "Who notices the gap?", "responses": [{"model": "Example AI", "raw": "A person."}]}
+            )
+            with sqlite3.connect(path) as db:
+                db.execute(
+                    "INSERT INTO contributions "
+                    "(public_id, token_hash, door, payload, author, status, parent_public_id, relation, created_at, updated_at) "
+                    "VALUES ('T0002', 'child', 'd04', ?, 'Yuka', 'public', 'T0001', 'continues', ?, ?)",
+                    (payload, "2026-08-19T00:00:00+00:00", "2026-08-19T00:00:00+00:00"),
+                )
+                record_publication_event(db, "T0002")
+            handler = object.__new__(ApplicationHandler)
+            handler.db_path = path
+            events = handler.public_events()
+            self.assertEqual(events[0]["event_id"], "E000001")
+            self.assertEqual(events[0]["event_type"], "trace_continued")
+            self.assertEqual(events[0]["links"][0]["target_id"], "T0001")
 
 
 if __name__ == "__main__":

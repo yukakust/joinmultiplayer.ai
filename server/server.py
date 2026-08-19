@@ -112,6 +112,74 @@ def init_db(path: Path) -> None:
             )
             """
         )
+        columns = {row[1] for row in db.execute("PRAGMA table_info(contributions)")}
+        if "parent_public_id" not in columns:
+            db.execute("ALTER TABLE contributions ADD COLUMN parent_public_id TEXT NOT NULL DEFAULT ''")
+        if "relation" not in columns:
+            db.execute("ALTER TABLE contributions ADD COLUMN relation TEXT NOT NULL DEFAULT ''")
+        db.execute(
+            """
+            CREATE TABLE IF NOT EXISTS events (
+                row_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                event_id TEXT UNIQUE,
+                event_type TEXT NOT NULL,
+                object_type TEXT NOT NULL,
+                object_id TEXT NOT NULL,
+                actor TEXT NOT NULL,
+                links TEXT NOT NULL DEFAULT '[]',
+                payload TEXT NOT NULL DEFAULT '{}',
+                created_at TEXT NOT NULL,
+                UNIQUE(event_type, object_id)
+            )
+            """
+        )
+        public_ids = db.execute(
+            "SELECT public_id FROM contributions WHERE status = 'public' ORDER BY row_id"
+        ).fetchall()
+        for (public_id,) in public_ids:
+            record_publication_event(db, public_id)
+
+
+def record_publication_event(db: sqlite3.Connection, public_id: str) -> None:
+    db.row_factory = sqlite3.Row
+    record = db.execute(
+        "SELECT public_id, parent_public_id, relation, author, payload, updated_at "
+        "FROM contributions WHERE public_id = ? AND status = 'public'",
+        (public_id,),
+    ).fetchone()
+    if record is None:
+        return
+    payload = json.loads(record["payload"])
+    links = []
+    if record["parent_public_id"]:
+        links.append(
+            {
+                "relation": record["relation"] or "continues",
+                "target_type": "trace",
+                "target_id": record["parent_public_id"],
+            }
+        )
+    event_type = "trace_continued" if links else "trace_published"
+    existing = db.execute(
+        "SELECT 1 FROM events WHERE event_type = ? AND object_id = ?",
+        (event_type, record["public_id"]),
+    ).fetchone()
+    if existing is not None:
+        return
+    cursor = db.execute(
+        "INSERT INTO events "
+        "(event_type, object_type, object_id, actor, links, payload, created_at) "
+        "VALUES (?, 'trace', ?, ?, ?, ?, ?)",
+        (
+            event_type,
+            record["public_id"],
+            record["author"],
+            json.dumps(links, ensure_ascii=False),
+            json.dumps({"question": payload.get("question", "")}, ensure_ascii=False),
+            record["updated_at"],
+        ),
+    )
+    db.execute("UPDATE events SET event_id = ? WHERE row_id = ?", (f"E{cursor.lastrowid:06d}", cursor.lastrowid))
 
 
 class RateLimiter:
@@ -149,8 +217,14 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         if path == "/api/public/records.json":
             self.get_public_records("json")
             return
-        if path == "/api/public/records.jsonl":
+        if path in {"/api/public/records.jsonl", "/data/traces.jsonl"}:
             self.get_public_records("jsonl")
+            return
+        if path == "/api/public/events.json":
+            self.get_public_events("json")
+            return
+        if path in {"/api/public/events.jsonl", "/data/events.jsonl"}:
+            self.get_public_events("jsonl")
             return
         if path.startswith("/api/public/"):
             self.get_public(path.removeprefix("/api/public/"))
@@ -203,12 +277,36 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
             self.send_json(HTTPStatus.TOO_MANY_REQUESTS, {"error": "too many submissions; try later"})
             return
         door, payload, author = validate_submission(body)
+        parent_public_id = clean_text(body.get("parent_id", ""), "parent trace", required=False, limit=40)
+        relation = "continues" if parent_public_id else ""
+        if parent_public_id:
+            if door != "d04":
+                raise ValueError("only D04 traces can continue a conversation")
+            with sqlite3.connect(self.db_path) as db:
+                parent = db.execute(
+                    "SELECT 1 FROM contributions WHERE public_id = ? AND status = 'public'",
+                    (parent_public_id,),
+                ).fetchone()
+            if parent is None:
+                raise ValueError("parent trace is not public")
+            payload["context_mode"] = "continued_conversations"
         token = secrets.token_urlsafe(32)
         now = utc_now()
         with sqlite3.connect(self.db_path) as db:
             cursor = db.execute(
-                "INSERT INTO contributions (token_hash, door, payload, author, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
-                (token_hash(token), door, json.dumps(payload, ensure_ascii=False), author, now, now),
+                "INSERT INTO contributions "
+                "(token_hash, door, payload, author, parent_public_id, relation, created_at, updated_at) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    token_hash(token),
+                    door,
+                    json.dumps(payload, ensure_ascii=False),
+                    author,
+                    parent_public_id,
+                    relation,
+                    now,
+                    now,
+                ),
             )
             public_id = f"T{cursor.lastrowid:04d}"
             db.execute("UPDATE contributions SET public_id = ? WHERE row_id = ?", (public_id, cursor.lastrowid))
@@ -223,7 +321,8 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         with sqlite3.connect(self.db_path) as db:
             db.row_factory = sqlite3.Row
             return db.execute(
-                "SELECT public_id, door, payload, author, status, review_note, created_at, updated_at FROM contributions WHERE token_hash = ?",
+                "SELECT public_id, door, payload, author, parent_public_id, relation, status, review_note, created_at, updated_at "
+                "FROM contributions WHERE token_hash = ?",
                 (token_hash(token),),
             ).fetchone()
 
@@ -274,7 +373,8 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         with sqlite3.connect(self.db_path) as db:
             db.row_factory = sqlite3.Row
             record = db.execute(
-                "SELECT public_id, door, payload, author, created_at, updated_at FROM contributions WHERE public_id = ? AND status = 'public'",
+                "SELECT public_id, door, payload, author, parent_public_id, relation, created_at, updated_at "
+                "FROM contributions WHERE public_id = ? AND status = 'public'",
                 (public_id,),
             ).fetchone()
         if record is None:
@@ -283,13 +383,28 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         response = dict(record)
         response["payload"] = json.loads(response["payload"])
         response["status"] = "public"
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            children = db.execute(
+                "SELECT public_id, payload, author FROM contributions "
+                "WHERE parent_public_id = ? AND status = 'public' ORDER BY row_id",
+                (public_id,),
+            ).fetchall()
+        response["continuations"] = [
+            {
+                "public_id": child["public_id"],
+                "question": json.loads(child["payload"]).get("question", ""),
+                "author": child["author"],
+            }
+            for child in children
+        ]
         self.send_json(HTTPStatus.OK, response, public=True)
 
     def public_records(self) -> list[dict]:
         with sqlite3.connect(self.db_path) as db:
             db.row_factory = sqlite3.Row
             rows = db.execute(
-                "SELECT public_id, door, payload, author, created_at, updated_at "
+                "SELECT public_id, door, payload, author, parent_public_id, relation, created_at, updated_at "
                 "FROM contributions WHERE status = 'public' ORDER BY row_id"
             ).fetchall()
         records = []
@@ -299,6 +414,36 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
             record["status"] = "public"
             records.append(record)
         return records
+
+    def public_events(self) -> list[dict]:
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            rows = db.execute(
+                "SELECT event_id, event_type, object_type, object_id, actor, links, payload, created_at "
+                "FROM events ORDER BY row_id"
+            ).fetchall()
+        events = []
+        for row in rows:
+            event = dict(row)
+            event["links"] = json.loads(event["links"])
+            event["payload"] = json.loads(event["payload"])
+            event["verified"] = False
+            events.append(event)
+        return events
+
+    def get_public_events(self, output_format: str) -> None:
+        events = self.public_events()
+        if output_format == "jsonl":
+            payload = b"".join(
+                json.dumps(event, ensure_ascii=False).encode("utf-8") + b"\n" for event in events
+            )
+            self.send_payload(HTTPStatus.OK, payload, "application/x-ndjson; charset=utf-8", public=True)
+            return
+        self.send_json(
+            HTTPStatus.OK,
+            {"schema_version": "0.1", "events": events},
+            public=True,
+        )
 
     def get_public_records(self, output_format: str) -> None:
         records = self.public_records()

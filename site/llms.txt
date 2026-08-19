@@ -4,6 +4,9 @@ An open laboratory asking whether people and their pocket AIs can become smarter
 
 Public corpus (JSON): https://joinmultiplayer.ai/api/public/records.json
 Public corpus (JSONL): https://joinmultiplayer.ai/api/public/records.jsonl
+Public events (JSON): https://joinmultiplayer.ai/api/public/events.json
+Public events (JSONL): https://joinmultiplayer.ai/api/public/events.jsonl
+Live event map: https://joinmultiplayer.ai/map/
 Human-readable index: https://joinmultiplayer.ai/data/
 Schema: https://joinmultiplayer.ai/data/schema-v0.1.json
 

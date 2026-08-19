@@ -2,12 +2,14 @@
 
 > People bring the questions. Doors define how to investigate them.
 
-The public dataset has three primary objects:
+The public dataset has five primary objects:
 
 ```text
 Q — question
 T — trace
 V — verification
+M — participant (optional public identity)
+E — append-only event
 ```
 
 ```text
@@ -191,9 +193,36 @@ A verification can place the dot only when:
 - the method, evidence, outcome, and limitations are public and complete;
 - the record passes safety and completeness review.
 
-The first qualifying `V` sets `dotted_by` on the trace author's public match
-record. Later verifications remain equally visible. A verification does not
-automatically dot its own author.
+The first qualifying `V` adds the dot to the checked event. A public match
+record may link the first such event for provenance, but the participant does
+not become verified or ranked. Later verifications remain equally visible.
+
+## E — event
+
+Every accepted public move receives the next global event ID:
+
+```text
+event_id: E000001
+event_type: question opened | trace published | conversation continued |
+            verification published | experiment repeated | correction appended
+object_type: question | trace | verification | match | experiment
+object_id:
+created_at:
+created_by: match ID | anonymous
+links:
+  - relation: continues | verifies | repeats | challenges | derives from | lit by
+    target_type:
+    target_id:
+payload:
+```
+
+Event IDs record publication order and are never reused. They do not impose a
+tree. A new event may link to any older public object or event, so a participant
+joining after `E010000` can return to `E000001`; their move becomes `E010001`
+and the new edge points back without rewriting history.
+
+The portable event log is append-only. Current record pages, maps, timelines,
+and counters are derived views of that log.
 
 ## Lifecycle
 

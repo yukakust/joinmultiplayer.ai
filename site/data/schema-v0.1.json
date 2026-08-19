@@ -17,6 +17,8 @@
           "door": { "enum": ["d04", "d06"] },
           "author": { "type": "string" },
           "status": { "const": "public" },
+          "parent_public_id": { "type": "string" },
+          "relation": { "enum": ["", "continues"] },
           "payload": { "type": "object" },
           "created_at": { "type": "string", "format": "date-time" },
           "updated_at": { "type": "string", "format": "date-time" }

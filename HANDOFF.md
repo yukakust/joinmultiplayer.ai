@@ -47,6 +47,10 @@ It is checked out on `agent/game-loop-v0.1` and matches the current GitHub commi
    `/api/public/records.json` and `/api/public/records.jsonl`. Only records whose
    moderation status is `public` enter those feeds; the public GET endpoints allow
    cross-origin reads and cache for 60 seconds.
+7. A public D04 record can be continued from `/d04/?from=TNNNN`. The child trace
+   stores `parent_public_id` plus the `continues` relation. Publication appends a
+   gap-free global `ENNNNNN` event; `/map/`, `/api/public/events.json`, and the
+   JSONL equivalent are derived from that log.
 6. Morrow is a skippable fictional guide rendered as a face of match-head dots. The current pilot uses fixed authored lines, not an AI model, and Morrow is absent from the independent verifier view.
 
 ## Working principles

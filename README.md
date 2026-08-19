@@ -80,6 +80,11 @@ or consumed without an account as
 [JSONL](https://joinmultiplayer.ai/api/public/records.jsonl). Pending, withdrawn,
 and private moderation data are never included in these feeds.
 
+Every published move also enters the append-only
+[event map](https://joinmultiplayer.ai/map/). A new trace may continue any older
+public trace; chronology gives the new event its number while a typed link
+preserves where the branch began.
+
 ## Rules
 
 - Ask one sharp question.

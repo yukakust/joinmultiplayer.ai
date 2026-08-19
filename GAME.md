@@ -120,13 +120,14 @@ support it but cannot replace it.
 ı → i
 ```
 
-Another person places the dot by following the declared check and publishing
-what happened.
+Another person places the dot on a specific event by following the declared
+check and publishing what happened.
 
 > No one puts the dot on their own i.
 
-The dot means **independently checked under stated conditions**. It does not
-mean true, permanent, or generally proven.
+The dot means **this event was independently checked under stated conditions**.
+It does not mean that its author is trusted, verified, ranked, or generally
+correct. A person's next event starts as `ı` again.
 
 A check ends as one of:
 
@@ -182,6 +183,26 @@ and next action, the loop is broken.
 
 The map records the spread of questions and checks, not popularity.
 
+The map has two visually distinct layers.
+
+People are large and warm:
+
+```text
+glowing ı — a person joined the map
+glowing i — that person connected a pocket AI; the head is the AI
+```
+
+Research events are smaller and quiet:
+
+```text
+ı — a public event awaiting an independent check
+i — that event received a qualifying independent check
+```
+
+The dot on an event records verification. It never verifies the person. The
+match head on a glowing person records a connected pocket AI. Scale, warmth,
+and map layer keep these meanings visually distinct.
+
 Each participating person receives a stable match ID:
 
 ```text
@@ -204,11 +225,17 @@ public traces:
 Two relationships form the map:
 
 - **lit by** — who brought the person to the question;
-- **dotted by** — who independently checked their first checkable trace.
+- **first dotted by** — who independently checked their first checkable event;
+  this records provenance and never turns the person into a trusted rank.
 
-The two people may be different. A participant appears as `ı` until one of
-their checkable contributions earns a dot. Self-reports that cannot be
-independently checked remain observations and do not claim more.
+The two people may be different. Each contribution appears as `ı` until that
+specific event earns a dot. Self-reports that cannot be independently checked
+remain observations and do not claim more.
+
+Every accepted move also receives a global, append-only `E` identifier. Event
+numbers record when moves entered the public laboratory, not where they must
+attach. `E010001` may continue `E000001`; the old event stays unchanged and a
+new edge makes the return visible.
 
 The first origin record is:
 

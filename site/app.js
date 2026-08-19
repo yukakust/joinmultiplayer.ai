@@ -259,9 +259,23 @@ const contributionCopy = {
     dataIntro: "Read the corpus here or download it without an account. JSON is convenient for inspection; JSONL gives one complete trace per line for agents and scripts.",
     downloadJson: "DOWNLOAD JSON",
     downloadJsonl: "DOWNLOAD JSONL",
+    downloadEvents: "DOWNLOAD EVENTS",
     dataEmpty: "No public traces yet.",
     agentPrompt: "Give this URL to your agent",
-    dataError: "The public corpus could not be loaded."
+    dataError: "The public corpus could not be loaded.",
+    continueConversation: "CONTINUE THE CONVERSATION",
+    continuingTrace: "CONTINUING",
+    continuationIntro: "Return to the same AI conversations. Ask each AI the same next question and bring back every complete answer. Their earlier contexts differ; this continuation records that honestly.",
+    continuationOf: "Continues trace",
+    continuations: "CONTINUATIONS",
+    map: "LIVE MAP",
+    mapTitle: "Every move remains open to continuation.",
+    mapIntro: "Large glowing marks are people. A match head means they connected a pocket AI. Small quiet ı marks are public events; an independent check adds the dot.",
+    mapEmpty: "The first public event has not appeared yet.",
+    eventPublished: "trace published",
+    eventContinued: "conversation continued",
+    mapLegendPeople: "people: glowing ı → glowing i with a pocket AI",
+    mapLegendEvents: "events: ı awaiting a check → i independently checked"
   },
   ru: {
     leaveTrace: "ОСТАВИТЬ СЛЕД",
@@ -322,9 +336,23 @@ const contributionCopy = {
     dataIntro: "Читайте корпус здесь или скачивайте без аккаунта. JSON удобен для просмотра, JSONL содержит по одному полному следу в строке — для агентов и скриптов.",
     downloadJson: "СКАЧАТЬ JSON",
     downloadJsonl: "СКАЧАТЬ JSONL",
+    downloadEvents: "СКАЧАТЬ СОБЫТИЯ",
     dataEmpty: "Открытых следов пока нет.",
     agentPrompt: "Дайте эту ссылку своему агенту",
-    dataError: "Не удалось загрузить открытый корпус."
+    dataError: "Не удалось загрузить открытый корпус.",
+    continueConversation: "ПРОДОЛЖИТЬ РАЗГОВОР",
+    continuingTrace: "ПРОДОЛЖАЕМ",
+    continuationIntro: "Вернитесь в те же диалоги с ИИ. Задайте каждому один и тот же следующий вопрос и принесите все ответы целиком. Предыдущий контекст у моделей различается — продолжение честно это зафиксирует.",
+    continuationOf: "Продолжает след",
+    continuations: "ПРОДОЛЖЕНИЯ",
+    map: "ЖИВАЯ КАРТА",
+    mapTitle: "К любому событию можно вернуться и продолжить его.",
+    mapIntro: "Крупные горящие знаки — люди. Спичечная головка означает подключённый карманный ИИ. Маленькие спокойные ı — открытые события; независимая проверка добавляет точку.",
+    mapEmpty: "Первое открытое событие ещё не появилось.",
+    eventPublished: "след опубликован",
+    eventContinued: "разговор продолжен",
+    mapLegendPeople: "люди: горящая ı → горящая i с карманным ИИ",
+    mapLegendEvents: "события: ı ожидает проверки → i независимо проверено"
   }
 };
 
@@ -500,6 +528,7 @@ function home() {
       <p>${t("homeSub")}</p>
       <div class="links">
         <a class="button" href="#hand" data-action="enter-hand">${t("enter")}</a>
+        <a class="quiet-link" href="/map/">${c("map")}</a>
         <a class="quiet-link" href="/data/">${c("openData")}</a>
         <a class="quiet-link" href="${repository}">${t("openLab")}</a>
       </div>
@@ -590,12 +619,27 @@ let contributionStage = "compose";
 let contributionPreview = null;
 
 function contributionDraftKey(doorId) {
-  return `multiplayer-${doorId}-draft-v1`;
+  const parentId = continuationParentId();
+  return `multiplayer-${doorId}-${parentId || "new"}-draft-v2`;
+}
+
+function continuationParentId() {
+  const value = new URLSearchParams(location.search).get("from") || "";
+  return /^T\d{4,}$/.test(value) ? value : "";
+}
+
+function continuationSuggestion(parentId) {
+  if (parentId !== "T0001") return "";
+  return language === "ru"
+    ? "Если вы сами не замечаете, что вам не хватает знания или что оно устарело, кто или что может указать вам на этот пробел — и откуда затем берётся недостающее знание?"
+    : "If you do not notice that knowledge is missing or outdated, who or what can point out the gap—and where does the missing knowledge then come from?";
 }
 
 function loadContributionDraft(doorId) {
   try {
-    return JSON.parse(localStorage.getItem(contributionDraftKey(doorId)) || "{}");
+    const draft = JSON.parse(localStorage.getItem(contributionDraftKey(doorId)) || "{}");
+    if (!draft.question) draft.question = continuationSuggestion(continuationParentId());
+    return draft;
   } catch {
     return {};
   }
@@ -641,12 +685,14 @@ function answerFields(index, draft, required = false) {
 function contributionCompose(doorId) {
   const draft = loadContributionDraft(doorId);
   const isD04 = doorId === "d04";
+  const parentId = continuationParentId();
   return `
     <section class="flow-shell form-page contribution-page">
       <div class="flow-step">${doorId.toUpperCase()} · ${c("leaveTrace")}</div>
-      <h1>${c(isD04 ? "d04Title" : "d06Title")}</h1>
-      <p class="contribution-intro">${c(isD04 ? "d04Intro" : "d06Intro")}</p>
-      <form data-form="contribution-compose" data-door="${doorId}" class="research-form">
+      <h1>${c(parentId ? "continueConversation" : (isD04 ? "d04Title" : "d06Title"))}</h1>
+      <p class="contribution-intro">${c(parentId ? "continuationIntro" : (isD04 ? "d04Intro" : "d06Intro"))}</p>
+      ${parentId ? `<a class="continuation-parent" href="/record/?id=${parentId}">${c("continuationOf")} ${parentId} →</a>` : ""}
+      <form data-form="contribution-compose" data-door="${doorId}" data-parent="${parentId}" class="research-form">
         <label>
           ${c("exactQuestion")}
           <small>${c("questionHelp")}</small>
@@ -693,6 +739,7 @@ function collectContribution(form) {
   }
   return {
     door: form.dataset.door,
+    parent_id: form.dataset.parent || "",
     question: data.question.trim(),
     responses,
     mistake: (data.mistake || "").trim(),
@@ -716,6 +763,7 @@ function contributionReview() {
       <div class="flow-step">${contribution.door.toUpperCase()} · ${c("review")}</div>
       <h1>${c("review")}</h1>
       <p class="contribution-intro">${c("previewNote")}</p>
+      ${contribution.parent_id ? `<a class="continuation-parent" href="/record/?id=${contribution.parent_id}">${c("continuationOf")} ${contribution.parent_id} →</a>` : ""}
       <div class="contribution-preview">
         <span>${c("exactQuestion")}</span>
         <blockquote>${escapeHTML(contribution.question)}</blockquote>
@@ -768,6 +816,7 @@ function privateContributionMarkup(record) {
     <div class="flow-step">${escapeHTML(record.public_id)} · ${statusLabel(record.status)}</div>
     <h1>${c("privateTitle")}</h1>
     <p class="contribution-intro">${c("privateNote")}</p>
+    ${record.parent_public_id ? `<a class="continuation-parent" href="/record/?id=${encodeURIComponent(record.parent_public_id)}">${c("continuationOf")} ${escapeHTML(record.parent_public_id)} →</a>` : ""}
     <p class="status-next">${c(`next${record.status === "needs_changes" ? "Changes" : record.status.charAt(0).toUpperCase() + record.status.slice(1)}`)}</p>
     <div class="private-link-row">
       <code>${escapeHTML(location.href)}</code>
@@ -835,6 +884,7 @@ async function loadPublicRecord() {
     const record = await response.json();
     target.innerHTML = `
       <div class="flow-step">${escapeHTML(record.public_id)} · ${c("publicRecord")}</div>
+      ${record.parent_public_id ? `<a class="continuation-parent" href="/record/?id=${encodeURIComponent(record.parent_public_id)}">← ${c("continuationOf")} ${escapeHTML(record.parent_public_id)}</a>` : ""}
       <h1>${escapeHTML(record.payload.question)}</h1>
       <p class="contribution-intro">${escapeHTML(record.author)}</p>
       <div class="contribution-preview">
@@ -843,7 +893,16 @@ async function loadPublicRecord() {
           <span>${c("mistake")}</span><p>${escapeHTML(record.payload.mistake)}</p>
           <span>${c("verification")}</span><p>${escapeHTML(record.payload.verification)}</p>` : ""}
       </div>
-      <div class="actions"><a class="button secondary" href="/data/">${c("openData")}</a></div>`;
+      ${record.continuations.length ? `
+        <section class="record-continuations">
+          <div class="flow-step">${c("continuations")}</div>
+          ${record.continuations.map(child => `<a class="data-record" href="/record/?id=${encodeURIComponent(child.public_id)}"><span>${escapeHTML(child.public_id)}</span><strong>${escapeHTML(child.question)}</strong></a>`).join("")}
+        </section>` : ""}
+      <div class="actions">
+        <a class="button" href="/d04/?from=${encodeURIComponent(record.public_id)}">${c("continueConversation")}</a>
+        <a class="button secondary" href="/map/">${c("map")}</a>
+        <a class="button secondary" href="/data/">${c("openData")}</a>
+      </div>`;
   } catch {
     target.querySelector("h1").textContent = c("recordNotFound");
   }
@@ -858,7 +917,9 @@ function publicDataShell() {
       <div class="actions data-downloads">
         <a class="button" href="/api/public/records.json" download>${c("downloadJson")}</a>
         <a class="button secondary" href="/api/public/records.jsonl" download>${c("downloadJsonl")}</a>
+        <a class="button secondary" href="/api/public/events.jsonl" download>${c("downloadEvents")}</a>
       </div>
+      <a class="quiet-link" href="/map/">${c("map")} →</a>
       <div class="agent-data-link">
         <span>${c("agentPrompt")}</span>
         <code>https://joinmultiplayer.ai/api/public/records.json</code>
@@ -866,6 +927,45 @@ function publicDataShell() {
       </div>
       <div class="data-records"><p>${c("loading")}</p></div>
     </section>`);
+}
+
+function publicMapShell() {
+  return withLanguage(`
+    <section class="flow-shell form-page contribution-page map-page" id="public-map">
+      <div class="flow-step">${c("map")}</div>
+      <h1>${c("mapTitle")}</h1>
+      <p class="contribution-intro">${c("mapIntro")}</p>
+      <div class="map-grammar">
+        <span>${c("mapLegendPeople")}</span>
+        <span>${c("mapLegendEvents")}</span>
+      </div>
+      <div class="event-map"><p>${c("loading")}</p></div>
+      <div class="actions"><a class="button secondary" href="/data/">${c("openData")}</a></div>
+    </section>`);
+}
+
+async function loadPublicMap() {
+  const target = document.querySelector(".event-map");
+  if (!target) return;
+  try {
+    const response = await fetch("/api/public/events.json");
+    if (!response.ok) throw new Error("map failed");
+    const data = await response.json();
+    target.innerHTML = data.events.length ? data.events.map(event => {
+      const parent = event.links.find(link => link.relation === "continues");
+      return `
+        <article class="event-node ${event.verified ? "event-verified" : ""}">
+          <a class="event-mark" href="/record/?id=${encodeURIComponent(event.object_id)}" aria-label="${escapeHTML(event.event_id)}">${event.verified ? "i" : "ı"}</a>
+          <div>
+            <span>${escapeHTML(event.event_id)} · ${c(event.event_type === "trace_continued" ? "eventContinued" : "eventPublished")}</span>
+            <strong>${escapeHTML(event.payload.question)}</strong>
+            <small>${escapeHTML(event.object_id)} · ${escapeHTML(event.actor)}${parent ? ` · ${c("continuationOf")} ${escapeHTML(parent.target_id)}` : ""}</small>
+          </div>
+        </article>`;
+    }).join("") : `<p>${c("mapEmpty")}</p>`;
+  } catch {
+    target.innerHTML = `<p>${c("dataError")}</p>`;
+  }
 }
 
 async function loadPublicData() {
@@ -1274,6 +1374,10 @@ function render() {
     document.title = `${c("openData")} — i`;
     app.innerHTML = publicDataShell();
     loadPublicData();
+  } else if (path === "map") {
+    document.title = `${c("map")} — i`;
+    app.innerHTML = publicMapShell();
+    loadPublicMap();
   } else if (doors[path]) {
     document.title = `${path.toUpperCase()} — i`;
     app.innerHTML = withLanguage(door(path, getDoor(path)));
