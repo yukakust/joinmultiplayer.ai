@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://joinmultiplayer.ai/data/trace-schema-v0.2.json",
+  "title": "joinmultiplayer.ai public trace feed",
+  "type": "object",
+  "required": ["schema", "schema_version", "license", "records"],
+  "properties": {
+    "schema": { "const": "https://joinmultiplayer.ai/data/trace-schema-v0.2.json" },
+    "schema_version": { "const": "0.2" },
+    "license": { "type": "string", "format": "uri" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["public_id", "door", "payload", "author", "status", "created_at", "updated_at"],
+        "properties": {
+          "public_id": { "type": "string", "pattern": "^T[0-9]{4,}$" },
+          "door": { "enum": ["d04", "d06"] },
+          "author": { "type": "string" },
+          "status": { "const": "public" },
+          "parent_public_id": { "type": "string" },
+          "relation": { "enum": ["", "continues", "answers"] },
+          "payload": { "type": "object" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false
+}

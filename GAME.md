@@ -60,7 +60,9 @@ evaluation requirements.
 
 ## One move
 
-A click is not a move. A move leaves a trace another person can inspect.
+A click is not a move. A move changes the public task-and-evidence ledger in a
+way another person can inspect: it may open a question, leave a trace, publish a
+check, or connect earlier evidence.
 
 D04 and D06 use the same public contribution shell. The method changes with
 the door; account, identity, and handoff mechanics do not. One complete answer
@@ -76,6 +78,25 @@ Q — question
 T — trace
 V — verification
 ```
+
+A `Q` does not need to wait for its first answer. The current v0.1 path publishes
+it from a public trace; the wider contract can later preserve provenance back
+to a verification, experiment, or event. Its global `E` number records when it
+entered the laboratory; its typed link records where it belongs on the map.
+
+Every public `Q` has one primary action:
+
+```text
+TAKE THIS QUESTION TO MY AI
+```
+
+For the current laboratory this provides a task-ready record for an AI the
+participant already uses. The exact question stays fixed, the earlier context
+and provenance travel with it. Every question created by the deployed v0.1 form
+uses `next_move: answer` and links to the current `T` return form. Other move
+types stay in the future data contract until their accountless return paths have
+shipped. Taking a task is not itself a public event. Returning an accepted `T`,
+`V`, or a sharper derived `Q` is.
 
 The smallest move contains:
 
@@ -181,7 +202,17 @@ and next action, the loop is broken.
 
 ## The ignition map
 
-The map records the spread of questions and checks, not popularity.
+The map is the laboratory's shared task ledger. It records the spread of
+questions and checks, not popularity, and shows where another intelligence can
+do useful work next.
+
+Its visible grammar separates object identity from chronology:
+
+```text
+Q — an open question or task
+T — an answer, run, or observation
+E — the order in which that public move entered the laboratory
+```
 
 The map has two visually distinct layers.
 
@@ -237,6 +268,12 @@ numbers record when moves entered the public laboratory, not where they must
 attach. `E010001` may continue `E000001`; the old event stays unchanged and a
 new edge makes the return visible.
 
+Each node must reveal enough state to choose a next action: the question, what
+has already been attempted, what has or has not been independently checked, and
+the actions still open. A person can enter at any node. Returning to the first
+event after ten thousand later moves creates `E010001` beside that first branch;
+it does not move or renumber the earlier work.
+
 The first origin record is:
 
 ```text
@@ -249,6 +286,35 @@ Lit the first question.
 Being first grants provenance, not authority. Branch size grants no status.
 Names, images, location, and public appearance on the map require consent.
 Exact location is never required.
+
+## From the laboratory to pocket i
+
+The phrase **pocket i** names the intended user-controlled participant in the
+future network. It does not currently name a downloadable model. During the
+laboratory stage, people use AIs they already have and move questions and
+results manually through task-ready records.
+
+The transition is staged so the interface never promises a capability before
+it exists:
+
+1. **Portable work:** every public `Q` can be taken into an existing AI with
+   its context, provenance, conditions, and return path intact.
+2. **Read-only connector:** an open, inspectable client may read questions,
+   evidence, and map state without write access or private-memory access.
+3. **Local memory:** a person explicitly teaches the client selected context;
+   they can inspect, export, and delete it. No silent scan is implied.
+4. **Network identity:** a local key may create an optional pseudonymous `M`
+   identity. Connecting the client adds the warm head to the person's map mark.
+5. **Approved contribution:** the client can prepare `Q`, `T`, or `V` records,
+   but a person previews and approves exactly what leaves the device.
+6. **Collaboration and tests:** routing and coordination are introduced only
+   after their value, privacy, security, and resource cost can be measured.
+
+Installing a connector is not success by itself. The first accepted,
+inspectable contribution made with it is the activation event. Until the first
+four stages actually ship with documented install, removal, permissions, and
+revocation, the public product must say **Take this question to my AI**, not
+**Download your pocket AI** or **Join the agent network**.
 
 ## How new doors open
 

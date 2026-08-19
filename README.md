@@ -42,7 +42,35 @@ a match
 lab discovers → protocol emerges → network works → movement spreads
 ```
 
-The lab comes first. Architecture must earn its place through evidence.
+The laboratory is the first working layer of the network, not a content feed to
+consume indefinitely. Its questions are open tasks, its traces are work already
+done, and its verifications are checks another intelligence can repeat. The map
+is the shared task-and-evidence ledger that keeps those objects connected.
+
+In the standalone-question loop, a participant takes a public question into an
+AI they already use and keeps the complete result. The deployed v0.1 form opens
+answer-type tasks only, so every offered task can return that result as a linked
+trace. Other contribution types stay hidden until their return formats ship. The portable
+**task-ready record** carries the exact question, context, requested next move,
+provenance, and linked work without requiring an account or a project-specific
+agent.
+
+A network-capable pocket `i` is a later product stage. This repository does not
+currently offer a pocket-AI download or claim that opening a task pack connects
+an agent to a live network. The intended transition is explicit:
+
+```text
+open questions and evidence
+→ portable task packs
+→ read-only user-controlled connector
+→ local, explicitly taught memory
+→ consented network identity and human-approved contributions
+→ multiplayer experiments
+```
+
+The lab therefore comes first, but it is meant to become the work surface of
+the network. Architecture must earn its place through evidence, and each later
+capability must preserve local ownership, inspectability, and human control.
 
 ## The lab
 
@@ -74,11 +102,24 @@ ignition map behind that entrance.
 Questions, traces, and independent verifications follow the open
 [`Data Contract v0.1`](DATA.md).
 
+A question is a first-class record. It may be opened before anyone has answered
+it and picked up years later. The current v0.1 form grows a question from an
+older public trace; broader event sources remain part of the data contract, not
+the deployed form. The current honest action is **Take this question to my
+AI**: use the task pack with an AI you already control. It does not imply that a
+model or connector was downloaded.
+
 Public traces can be read at [joinmultiplayer.ai/data](https://joinmultiplayer.ai/data/)
 or consumed without an account as
 [JSON](https://joinmultiplayer.ai/api/public/records.json) and
 [JSONL](https://joinmultiplayer.ai/api/public/records.jsonl). Pending, withdrawn,
 and private moderation data are never included in these feeds.
+
+Agents that need the whole public task-and-evidence ledger can start with the
+unified [corpus JSON](https://joinmultiplayer.ai/api/public/corpus.json), which
+combines public questions, traces, and events without private moderation data.
+Its machine-readable contract is
+[Corpus Schema v0.2](https://joinmultiplayer.ai/data/corpus-schema-v0.2.json).
 
 Every published move also enters the append-only
 [event map](https://joinmultiplayer.ai/map/). A new trace may continue any older
@@ -101,7 +142,7 @@ whether it supports, challenges, or leaves the main question unanswered.
 
 An `i` may live in code, on paper, on a sticker, or on a wall.
 
-Bring a question. Run a test. Leave an `i`.
+Open a question. Take it to your AI. Return what happened. Leave an `i`.
 
 ## Participate
 

@@ -48,6 +48,8 @@ license:
 - Raw submitted text is UTF-8 and preserved exactly after publication.
 - Interpretation, moderation notes, and corrections never overwrite raw text.
 - A public record links every record it depends on.
+- Public `status` is object-specific. For `Q` it is research state such as
+  `open`; operational moderation state and review notes remain private.
 - `anonymous` hides public credit; private operational data may still be held
   briefly when needed to deliver or secure the submission.
 - Project-authored metadata is covered by [`DATA_LICENSE.md`](DATA_LICENSE.md).
@@ -66,22 +68,29 @@ Required public fields:
 id: Q0001
 question: exact wording
 why_it_matters:
-domain:
+needed:
 language:
 created_at:
 created_by: match ID | anonymous
-door_ids:
-knowledge_state: know | partly know | do not know
-check_path: source | reproduction | expert review | unknown
+source_trace_id: T0001
+source_event_id: E000001
+relation: derives_from
+next_move: answer | source | experiment | expert
 status: open | answered | disputed | withdrawn
 ```
 
 Optional public fields:
 
 ```text
+starting_point:
+sources:
+domain:
 context:
 constraints:
 suggested_expertise:
+door_ids:
+knowledge_state: know | partly know | do not know
+check_path: source | reproduction | expert review | unknown
 related_questions:
 related_hypotheses:
 ```
@@ -102,6 +111,76 @@ field after seeing the model answers or verification.
 A `Q` may be published without a `T`. Other participants may then ask their own
 AI systems, add a source, propose a check, or connect the question to another
 record.
+
+A question can be born from older public work. The v0.1 submission path requires
+a public source trace and records its publication event. The contract can later
+generalize this to other source types without inferring a relationship from
+chronology:
+
+```text
+derived_from:
+  - relation: derives_from | sharpens | challenges | returns_to
+    target_type: question | trace | verification | experiment | event
+    target_id: T0002
+```
+
+Opening `Q0101` after `E010000` does not make it a continuation of the newest
+work. If it derives from `T0001`, its new `E` event points to `T0001` and the old
+record remains unchanged.
+
+## Question task pack
+
+A task pack is a portable, machine-readable view of one public `Q`. In v0.1 the
+public `Q` detail response is itself the canonical task-ready record. It is not
+a new research record, does not receive its own ID, and does not claim that an
+agent joined the network. A person can copy it and give it to an AI they already
+control. The deployed v0.1 question form accepts only `next_move: answer`, which
+has a public return form and becomes a linked `T`. `source`, `experiment`, and
+`expert` remain reserved contract values until their accountless return formats
+exist; the interface must not offer them as dead ends.
+
+The v0.1 JSON shape is:
+
+```text
+public_id: Q0001
+payload:
+  question: exact wording
+  why_it_matters:
+  starting_point:
+  sources:
+  needed:
+  next_move: answer
+  language: en | ru | und
+source_trace_id: T0001
+source_event_id: E000001
+relation: derives_from
+author: match ID | pseudonym | anonymous
+status: open
+created_at:
+updated_at:
+traces:
+  - public_id: T0002
+    relation: answers
+```
+
+The browser may derive a Markdown task pack from this JSON by adding the stable
+question and source URLs, run instructions, and either the available return path
+or an explicit statement that none exists yet. That file is a portable
+rendering, not another public object. The instructions ask the runner
+to preserve the exact question, declare the model, date, context, and available
+tools, and return the complete unedited output. They must not suggest a
+preferred answer. Sealed fields, private moderation data, author secrets, and
+unpublished interpretations are never included.
+
+The human-facing action is:
+
+```text
+TAKE THIS QUESTION TO MY AI
+```
+
+Until a reviewed connector exists, this means copying the task-ready record for
+an existing AI. It is not an installer, an agent connection, or a background
+permission grant.
 
 ## T — trace
 
@@ -203,14 +282,15 @@ Every accepted public move receives the next global event ID:
 
 ```text
 event_id: E000001
-event_type: question opened | trace published | conversation continued |
-            verification published | experiment repeated | correction appended
+event_type: question_opened | trace_published | trace_continued | trace_answered |
+            verification_published | experiment_repeated | correction_appended
 object_type: question | trace | verification | match | experiment
 object_id:
 created_at:
 created_by: match ID | anonymous
 links:
-  - relation: continues | verifies | repeats | challenges | derives from | lit by
+  - relation: continues | answers | verifies | repeats | challenges |
+              derives_from | lit_by
     target_type:
     target_id:
 payload:
@@ -224,9 +304,31 @@ and the new edge points back without rewriting history.
 The portable event log is append-only. Current record pages, maps, timelines,
 and counters are derived views of that log.
 
+## Map as task ledger
+
+The map is a spatial view of the event log and the public objects it changes.
+It must help a participant answer three questions without reading the whole
+corpus:
+
+```text
+What is being asked?
+What has already been tried or checked?
+What useful action remains open?
+```
+
+Chronology supplies every move's global `E` number; links supply its location
+in the research graph. A new participant may pick up the first question after
+ten thousand later events. Their contribution receives the next `E` number but
+appears beside the old question it answers, checks, challenges, or sharpens.
+
+The map is not a ranking, consensus meter, or claim of truth. Node density shows
+activity. A dot shows a qualifying independent check. Open actions are derived
+from record state, such as taking an unanswered `Q`, adding a different run to a
+`T`, or independently checking a claim.
+
 ## Lifecycle
 
-Submissions move through explicit states:
+Submissions move through explicit private operational states:
 
 ```text
 local draft
@@ -246,6 +348,17 @@ local draft
 - `checked` means a qualifying verification exists, not that the claim is true.
 - `withdrawn` removes a record from normal project views when appropriate but
   cannot guarantee removal from prior exports, forks, caches, or archives.
+- The live event projection omits events whose object was withdrawn, so a
+  public sequence may contain an ID gap. The internal ID is not reused; the raw
+  withdrawn payload is not kept on the live map merely to make numbering look
+  continuous.
+
+Operational moderation state, review notes, and private return-token state are
+not public research fields. A public `Q` exposes `status`, sourced from its
+separate internal `research_status`, to describe the question's state in the
+laboratory. Publishing a question does not silently change `status: open` to
+answered; accepted traces and checks must support an explicit append-only state
+change.
 
 Before submission, the participant sees a preview and confirms:
 
@@ -279,7 +392,7 @@ pretending the earlier record never existed.
 Every public question page offers:
 
 ```text
-ASK MY AI
+TAKE THIS QUESTION TO MY AI
 ADD AN ANSWER
 PROPOSE A CHECK
 ```
@@ -321,6 +434,32 @@ Each line contains one complete JSON object with `schema_version`. Exports use
 stable ID order. The manifest records generation time, record counts, schema
 version, and SHA-256 checksums.
 
+A deployment may additionally expose Markdown or client-specific renderings of
+a public question. The canonical portable shape is the JSON detail defined
+above. Every rendering must point back to its stable `Q` URL and the place where
+a completed run can be returned.
+
+The standalone-question public endpoints are:
+
+```text
+/api/public/questions.json
+/api/public/questions.jsonl
+/data/questions.jsonl
+/api/public/Q0001
+/api/public/corpus.json
+```
+
+The detail endpoint is the machine-readable task-ready record. Additional
+Markdown or client-specific renderings are derived conveniences, not canonical
+new objects. The corpus endpoint is the simplest complete entry point for an
+agent: it returns all currently public object collections and no pending,
+moderation, token, or review data.
+
+The unified corpus uses schema version `0.2` and is described by
+`/data/corpus-schema-v0.2.json`. The trace-only `/api/public/records.json`
+response uses `/data/trace-schema-v0.2.json`, which adds `answers` without
+silently changing the immutable legacy `/data/schema-v0.1.json` contract.
+
 CSV, API responses, search indexes, notebooks, and visualizations are derived
 views. JSONL remains the portable public contract. No account is required to
 download it.
@@ -335,6 +474,8 @@ email_verified_at:
 status_token_hash:
 notification_preferences:
 security and abuse metadata:
+moderation_status:
+moderation_review_note:
 ```
 
 Email is optional and used for transactional updates only unless a person

@@ -47,11 +47,65 @@ It is checked out on `agent/game-loop-v0.1` and matches the current GitHub commi
    `/api/public/records.json` and `/api/public/records.jsonl`. Only records whose
    moderation status is `public` enter those feeds; the public GET endpoints allow
    cross-origin reads and cache for 60 seconds.
-7. A public D04 record can be continued from `/d04/?from=TNNNN`. The child trace
+7. A public trace can open a standalone question at
+   `/question/new/?from=TNNNN`. Question submissions use the same private
+   moderation boundary and return through `/question-submission/#TOKEN`.
+   Published questions live at `/question/?id=QNNNN`; the page can copy or
+   download a Markdown task pack and accept a new answer as a linked trace.
+8. `/api/public/corpus.json` is the unified agent entry point for public
+   questions, traces, and events. Question-specific feeds live at
+   `/api/public/questions.json`, `/api/public/questions.jsonl`, and
+   `/data/questions.jsonl`; `/api/public/QNNNN` is the task-ready detail. The
+   unified response follows `/data/corpus-schema-v0.2.json`; the trace feed uses
+   `/data/trace-schema-v0.2.json`, while `/data/schema-v0.1.json` remains the
+   immutable legacy contract.
+9. A public D04 record can be continued from `/d04/?from=TNNNN`. The child trace
    stores `parent_public_id` plus the `continues` relation. Publication appends a
    gap-free global `ENNNNNN` event; `/map/`, `/api/public/events.json`, and the
    JSONL equivalent are derived from that log.
-6. Morrow is a skippable fictional guide rendered as a face of match-head dots. The current pilot uses fixed authored lines, not an AI model, and Morrow is absent from the independent verifier view.
+10. Morrow is a skippable fictional guide rendered as a face of match-head dots. The current pilot uses fixed authored lines, not an AI model, and Morrow is absent from the independent verifier view.
+
+## Product boundary and next transition
+
+The research contract defines `Q`, `T`, `V`, `M`, and `E`, but do not confuse
+the contract with deployed capabilities. This branch implements standalone `Q`,
+`T`, and `E` records. It does not implement a connected pocket-AI client, local
+agent memory, live `M` identities, or agent-to-agent routing.
+
+The standalone `Q` is a separate public primitive: a question may be published
+without answers, link back to an older public trace and event, receive its own
+global event number, and appear on the map where it belongs rather than at the
+end of a forced linear story.
+
+Every public `Q` should be a task-ready record with the honest action **Take
+this question to my AI**. For now that means copy/download for an AI the
+participant already uses. Do not label it as a pocket-AI download, connection,
+installation, or network membership.
+
+The map should be treated as a task ledger, not merely a visualization: a
+visitor must be able to see what was asked, what has been tried or checked, and
+which action can move that branch. Reading or copying a question is private and
+creates no event; returning an accepted `Q`, `T`, or `V` creates the next global
+`E`.
+
+The staged route to the future product is:
+
+```text
+standalone Q + task-ready record
+→ read-only inspectable connector
+→ explicit local memory with export/delete
+→ optional pseudonymous M identity
+→ human-approved Q/T/V submission
+→ routing, collaboration, and controlled network experiments
+```
+
+The old agent-to-agent installer and client were removed when this repository
+was rebuilt as a laboratory. Historical code may inform a new implementation,
+but the current repository and site do not distribute it. Reintroduction
+requires a fresh security and privacy review, least-privilege permissions,
+signed versioned releases, uninstall and revocation paths, and an honest account
+of relay ownership. Installing a connector is not the activation metric; the
+first accepted contribution made with it is.
 
 ## Working principles
 
@@ -63,7 +117,18 @@ It is checked out on `agent/game-loop-v0.1` and matches the current GitHub commi
 
 ## Immediate next work
 
-Run D04 with a real question as the first player. Record where the flow causes friction before adding more doors, accounts, maps, or social mechanics.
+Complete and test the standalone-question loop before adding social mechanics:
+
+1. create a real `Q` derived from `T0002`;
+2. moderate and publish it without requiring a model answer;
+3. verify its provenance, public status, and task pack;
+4. confirm its event appears beside the source branch on the map;
+5. take it into an existing AI and return a new trace linked by `answers`.
+
+The deployed v0.1 question form accepts only `next_move: answer`. Keep the wider
+contract values hidden until each has an accountless return format.
+
+Keep deployed claims aligned with deployed capabilities throughout this work.
 
 ## Access and secrets
 
@@ -89,8 +154,8 @@ The `joinmultiplayer.ai` Caddy virtual host reverse-proxies to
 From `/home/yuka/projects/joinmultiplayer.ai`, deploy the app with:
 
 ```sh
-rsync -a --delete -e ssh site/ multiplayer-production:/srv/joinmultiplayer/public/
-rsync -a --delete -e ssh server/ multiplayer-production:/srv/joinmultiplayer/app/
+rsync -a --delete --chmod=D755,F644 -e ssh site/ multiplayer-production:/srv/joinmultiplayer/public/
+rsync -a --delete --chmod=D755,F644 -e ssh server/ multiplayer-production:/srv/joinmultiplayer/app/
 scp ops/joinmultiplayer-static.service multiplayer-production:/etc/systemd/system/joinmultiplayer-static.service
 ssh multiplayer-production 'systemctl daemon-reload && systemctl restart joinmultiplayer-static.service'
 curl -fsS -o /dev/null -w '%{http_code}\n' https://joinmultiplayer.ai/
@@ -109,4 +174,7 @@ SSH with:
 python3 /srv/joinmultiplayer/app/moderate.py list
 python3 /srv/joinmultiplayer/app/moderate.py show T0001
 python3 /srv/joinmultiplayer/app/moderate.py status T0001 public
+python3 /srv/joinmultiplayer/app/moderate.py show Q0001
+python3 /srv/joinmultiplayer/app/moderate.py status Q0001 public
+python3 /srv/joinmultiplayer/app/moderate.py research-status Q0001 disputed
 ```
