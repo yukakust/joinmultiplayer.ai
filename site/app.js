@@ -1,6 +1,7 @@
 const repository = "https://github.com/yukakust/joinmultiplayer.ai";
 const storageKey = "multiplayer-d04-prototype-v1";
 const languageStorageKey = "multiplayer-language-v1";
+const morrowStorageKey = "multiplayer-morrow-hidden-v1";
 
 const doors = {
   d01: {
@@ -161,6 +162,43 @@ const ui = {
   }
 };
 
+const morrowCopy = {
+  en: {
+    label: "MORROW · GUIDE",
+    scripted: "fixed lines for this pilot",
+    hide: "hide",
+    show: "call Morrow",
+    home: "I'm Morrow, a fictional guide. I lit the first question. I don't know its answer.",
+    hand: "Choose an i. The door gives you a way to look; the question stays yours.",
+    door: "I'll show you the rule. You decide what is worth investigating.",
+    intro: "This door looks for a blind spot shared by several AIs. Start with a real question.",
+    question: "Begin with a question that genuinely matters to you. Don't write one for the experiment.",
+    responsesEmpty: "Keep the wording frozen. Ask every AI exactly the same question.",
+    responsesPart: "Keep the complete answer. Don't choose the best one.",
+    responsesReady: "Agreement proves nothing yet. Now the trace needs an independent check.",
+    identity: "This trace is yours. Give it a name—or leave it anonymous.",
+    status: "Another i must place the dot. I can't judge the trace I helped you make.",
+    final: "Now you know the path. Light the next question."
+  },
+  ru: {
+    label: "MORROW · ПРОВОДНИК",
+    scripted: "пока говорит по сценарию",
+    hide: "убрать",
+    show: "позвать Morrow",
+    home: "Я Morrow, вымышленный проводник. Я зажёг первый вопрос, но не знаю ответа.",
+    hand: "Выберите i. Дверь подскажет, как искать. Вопрос останется вашим.",
+    door: "Я покажу правило. А что стоит исследовать — решаете вы.",
+    intro: "Эта дверь ищет слепое пятно, общее для нескольких ИИ. Начните с настоящего вопроса.",
+    question: "Начните с вопроса, который действительно важен вам. Не придумывайте его ради эксперимента.",
+    responsesEmpty: "Не меняйте формулировку. Задайте каждому ИИ один и тот же вопрос, слово в слово.",
+    responsesPart: "Сохраните ответ целиком. Не выбирайте лучший.",
+    responsesReady: "Совпадение ответов ещё ничего не доказывает. Теперь нужна независимая проверка.",
+    identity: "Этот след — ваш. Дайте ему имя или оставьте анонимным.",
+    status: "Точку должен поставить другой i. Я не могу судить след, который помогал создавать.",
+    final: "Теперь вы знаете путь. Зажгите следующий вопрос."
+  }
+};
+
 let language = localStorage.getItem(languageStorageKey) || (navigator.language?.toLowerCase().startsWith("ru") ? "ru" : "en");
 
 function t(key, variables = {}) {
@@ -188,6 +226,61 @@ function languageSwitch(inBanner = false) {
 
 function withLanguage(content) {
   return `${languageSwitch()}${content}`;
+}
+
+function morrowText(key) {
+  return morrowCopy[language][key];
+}
+
+function morrowFace(expression = "calm") {
+  return `
+    <svg class="morrow-face morrow-${expression}" viewBox="0 0 100 100" aria-hidden="true">
+      <g class="morrow-contour">
+        <circle cx="50" cy="9" r="3.2"/><circle cx="34" cy="13" r="3"/><circle cx="22" cy="23" r="2.8"/>
+        <circle cx="14" cy="38" r="3"/><circle cx="12" cy="54" r="2.7"/><circle cx="18" cy="70" r="3.1"/>
+        <circle cx="30" cy="82" r="2.8"/><circle cx="45" cy="89" r="3"/><circle cx="61" cy="87" r="2.7"/>
+        <circle cx="75" cy="78" r="3.1"/><circle cx="85" cy="64" r="2.8"/><circle cx="88" cy="48" r="3"/>
+        <circle cx="84" cy="32" r="2.7"/><circle cx="75" cy="19" r="3"/><circle cx="64" cy="12" r="2.8"/>
+      </g>
+      <g class="morrow-brow">
+        <circle cx="31" cy="37" r="2.2"/><circle cx="39" cy="35" r="2.1"/>
+        <circle cx="61" cy="35" r="2.1"/><circle cx="69" cy="37" r="2.2"/>
+      </g>
+      <g class="morrow-eyes">
+        <circle class="morrow-spark" cx="35" cy="47" r="4.1"/><circle class="morrow-spark" cx="65" cy="47" r="4.1"/>
+      </g>
+      <g class="morrow-nose">
+        <circle cx="50" cy="55" r="2"/>
+      </g>
+      <g class="morrow-mouth">
+        <circle cx="38" cy="67" r="2.3"/><circle cx="46" cy="70" r="2.2"/>
+        <circle cx="54" cy="70" r="2.2"/><circle cx="62" cy="67" r="2.3"/>
+      </g>
+      <circle class="morrow-spark morrow-pilot" cx="91" cy="18" r="1.8"/>
+    </svg>`;
+}
+
+function morrowGuide(message = "home", expression = "calm") {
+  return `
+    <aside class="morrow" data-morrow-message="${message}" aria-live="polite">
+      <div class="morrow-panel">
+        ${morrowFace(expression)}
+        <div class="morrow-copy">
+          <div class="morrow-heading">
+            <span>${morrowText("label")}</span>
+            <button class="morrow-hide" data-action="hide-morrow" aria-label="${morrowText("hide")}">×</button>
+          </div>
+          <p>${morrowText(message)}</p>
+          <small>${morrowText("scripted")}</small>
+        </div>
+      </div>
+      <button class="morrow-restore" data-action="show-morrow">${morrowText("show")}</button>
+    </aside>`;
+}
+
+function updateMorrow(message, expression = "calm") {
+  const current = document.querySelector(".morrow");
+  if (current) current.outerHTML = morrowGuide(message, expression);
 }
 
 const openDoors = ["d01", "d02", "d03", "d04", "d05", "d06", "d07", "d10"];
@@ -258,13 +351,14 @@ function home() {
       </h1>
       <p>${t("homeSub")}</p>
       <div class="links">
-        <a class="button" href="#hand">${t("enter")}</a>
+        <a class="button" href="#hand" data-action="enter-hand">${t("enter")}</a>
         <a class="quiet-link" href="${repository}">${t("openLab")}</a>
       </div>
     </section>
     <section class="hand-section" id="hand">
       <div class="equation-stage" id="equation-stage" aria-live="polite"></div>
-    </section>`;
+    </section>
+    ${morrowGuide("home", "curious")}`;
 }
 
 function revealedDoor(id) {
@@ -653,8 +747,20 @@ function d04Flow() {
     verifier: verifierPage,
     final: finalPage
   };
-  const screen = screens[prototype.stage] || d04Intro;
-  return `${prototypeBanner()}${screen()}`;
+  const stage = screens[prototype.stage] ? prototype.stage : "intro";
+  const screen = screens[stage];
+  if (stage === "verifier") return `${prototypeBanner()}${screen()}`;
+
+  let message = stage;
+  let expression = "calm";
+  if (stage === "intro") expression = "curious";
+  if (stage === "responses") {
+    message = prototype.responses.length === 0 ? "responsesEmpty" : prototype.responses.length < 3 ? "responsesPart" : "responsesReady";
+    expression = prototype.responses.length < 3 ? "thinking" : "quiet";
+  }
+  if (stage === "status") expression = "quiet";
+  if (stage === "final") expression = "lit";
+  return `${prototypeBanner()}${screen()}${morrowGuide(message, expression)}`;
 }
 
 function door(id, data) {
@@ -682,7 +788,8 @@ function door(id, data) {
         ${action}
         <a class="button secondary" href="/">${t("return")}</a>
       </div>
-    </section>`;
+    </section>
+    ${morrowGuide("door", "curious")}`;
 }
 
 function notFound() {
@@ -725,10 +832,22 @@ app.addEventListener("click", (event) => {
   if (revealButton) {
     activeDoorIndex = Number(revealButton.dataset.reveal);
     renderHand();
+    updateMorrow("door", "curious");
     return;
   }
 
   const action = event.target.closest("[data-action]")?.dataset.action;
+  if (action === "hide-morrow") {
+    document.documentElement.classList.add("morrow-hidden");
+    sessionStorage.setItem(morrowStorageKey, "true");
+    return;
+  }
+  if (action === "show-morrow") {
+    document.documentElement.classList.remove("morrow-hidden");
+    sessionStorage.removeItem(morrowStorageKey);
+    return;
+  }
+  if (action === "enter-hand") updateMorrow("hand", "calm");
   if (action === "set-language") {
     language = event.target.closest("[data-language]").dataset.language;
     localStorage.setItem(languageStorageKey, language);
@@ -739,6 +858,7 @@ app.addEventListener("click", (event) => {
     allDoorsVisible = !allDoorsVisible;
     renderHand();
     renderAllDoors();
+    updateMorrow("hand", "calm");
     if (allDoorsVisible) {
       const root = document.documentElement;
       const previousScrollBehavior = root.style.scrollBehavior;
@@ -751,6 +871,7 @@ app.addEventListener("click", (event) => {
     const previousIndex = activeDoorIndex;
     activeDoorIndex = null;
     renderHand();
+    updateMorrow("hand", "calm");
     document.querySelector(`[data-reveal="${previousIndex}"]`)?.focus({ preventScroll: true });
   }
   if (action === "start-question") {
@@ -855,5 +976,9 @@ app.addEventListener("submit", (event) => {
   render();
   scrollTo(0, 0);
 });
+
+if (sessionStorage.getItem(morrowStorageKey) === "true") {
+  document.documentElement.classList.add("morrow-hidden");
+}
 
 render();

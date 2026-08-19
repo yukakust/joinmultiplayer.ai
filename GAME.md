@@ -38,6 +38,26 @@ enter an advanced experiment immediately.
 
 `D08` and `D09` never enter the draw until real cases unlock them.
 
+## Morrow, the guide
+
+Morrow is a fictional character who helps a new visitor understand the next
+move. His face is a constellation of match-head dots: recognizably artificial,
+but close enough to a face to feel present.
+
+The first pilot uses a small set of fixed, authored lines. No model generates
+Morrow's replies yet. The guide is optional and can be hidden at any time.
+
+Morrow may explain a door or remind someone to keep a question and raw answers
+unchanged. He never supplies the participant's question, chooses the best
+answer, evaluates a trace, or receives a participant `M` identifier. He is an
+interface layer, not a member of the research record.
+
+Morrow disappears from the independent verifier view. Another `i` must make
+that judgment without help from the character who accompanied the creator.
+Only after this scripted pilot proves useful should a model-backed “Ask
+Morrow” interaction be tested with explicit personality, safety, privacy, and
+evaluation requirements.
+
 ## One move
 
 A click is not a move. A move leaves a trace another person can inspect.

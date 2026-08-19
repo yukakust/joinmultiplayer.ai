@@ -43,6 +43,7 @@ It is checked out on `agent/game-loop-v0.1` and matches the current GitHub commi
 3. "see all open questions" opens a separate catalog screen.
 4. `EN / RU` changes the interface and hook copy. Participant input stays in its original language.
 5. D04 is a browser-local UX prototype: it records a question, three raw AI answers, an interpretation, identity, and an independent check. It does not publish anything or send email yet.
+6. Morrow is a skippable fictional guide rendered as a face of match-head dots. The current pilot uses fixed authored lines, not an AI model, and Morrow is absent from the independent verifier view.
 
 ## Working principles
 

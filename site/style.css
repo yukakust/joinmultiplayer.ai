@@ -574,6 +574,123 @@ h1 {
   color: var(--ink);
 }
 
+.morrow {
+  bottom: clamp(1rem, 3vw, 2rem);
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  width: min(21rem, calc(100vw - 2rem));
+  z-index: 9;
+}
+
+.morrow-panel {
+  align-items: center;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  border: 1px solid var(--line);
+  box-shadow: 0 1rem 3rem color-mix(in srgb, var(--ink) 10%, transparent);
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: 5.2rem 1fr;
+  padding: 0.85rem;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.morrow-face {
+  color: var(--ink);
+  display: block;
+  height: 5.2rem;
+  overflow: visible;
+  width: 5.2rem;
+}
+
+.morrow-face circle {
+  fill: currentColor;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.morrow-face .morrow-spark {
+  fill: var(--ember);
+  filter: drop-shadow(0 0 0.24rem color-mix(in srgb, var(--ember) 70%, transparent));
+}
+
+.morrow-face .morrow-pilot {
+  animation: morrow-flicker 2.8s ease-in-out infinite;
+}
+
+.morrow-thinking .morrow-brow circle:first-child,
+.morrow-thinking .morrow-brow circle:nth-child(3) {
+  transform: translateY(2px);
+}
+
+.morrow-quiet .morrow-eyes circle {
+  transform: scaleY(0.35);
+}
+
+.morrow-lit .morrow-contour circle,
+.morrow-lit .morrow-mouth circle {
+  fill: var(--ember);
+  filter: drop-shadow(0 0 0.18rem color-mix(in srgb, var(--ember) 60%, transparent));
+}
+
+.morrow-heading {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.morrow-heading span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.morrow-copy p {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin: 0.45rem 0;
+}
+
+.morrow-copy small {
+  color: var(--muted);
+  font-size: 0.62rem;
+}
+
+.morrow-hide {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: var(--muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.1rem 0.2rem;
+}
+
+.morrow-restore {
+  background: var(--paper);
+  border-color: var(--line);
+  color: var(--muted);
+  display: none;
+  font-size: 0.7rem;
+  margin-left: auto;
+  padding: 0.6rem 0.8rem;
+}
+
+.morrow-hidden .morrow-panel {
+  display: none;
+}
+
+.morrow-hidden .morrow-restore {
+  display: block;
+}
+
+@keyframes morrow-flicker {
+  0%, 100% { opacity: 0.35; transform: scale(0.8); }
+  45% { opacity: 1; transform: scale(1.25); }
+  60% { opacity: 0.55; transform: scale(0.9); }
+}
+
 .form-page,
 .status-page,
 .final-page {
@@ -950,6 +1067,23 @@ blockquote {
 }
 
 @media (max-width: 34rem) {
+  .morrow {
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    left: max(0.75rem, env(safe-area-inset-left));
+    right: max(0.75rem, env(safe-area-inset-right));
+    width: auto;
+  }
+
+  .morrow-panel {
+    grid-template-columns: 4rem 1fr;
+    padding: 0.65rem;
+  }
+
+  .morrow-face {
+    height: 4rem;
+    width: 4rem;
+  }
+
   .mark {
     margin-bottom: 3.5rem;
   }
@@ -1079,7 +1213,8 @@ blockquote {
 
   .equation-i,
   .lit-door,
-  .lit-symbol {
+  .lit-symbol,
+  .morrow-face .morrow-pilot {
     animation: none;
     transition: none;
   }
