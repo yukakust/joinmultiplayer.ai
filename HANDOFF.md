@@ -65,17 +65,26 @@ The `yukabox` development user is already authenticated to GitHub as the project
 
 ### Deploy from yukabox
 
-The live Caddy virtual host serves this exact directory:
+The site lives in this persistent directory, outside the unrelated Aiconic
+release symlink:
 
 ```text
-/opt/aiconic-site/_multiplayer
+/srv/joinmultiplayer/public
 ```
+
+`joinmultiplayer-static.service` serves that directory on host-only port 8091.
+The `joinmultiplayer.ai` Caddy virtual host reverse-proxies to
+`127.0.0.1:8091`. The unit source is tracked in
+`ops/joinmultiplayer-static.service`.
 
 From `/home/yuka/projects/joinmultiplayer.ai`, deploy the static site with:
 
 ```sh
-rsync -a --delete -e ssh site/ multiplayer-production:/opt/aiconic-site/_multiplayer/
+rsync -a --delete -e ssh site/ multiplayer-production:/srv/joinmultiplayer/public/
 curl -fsS -o /dev/null -w '%{http_code}\n' https://joinmultiplayer.ai/
 ```
 
-The trailing `site/` and target `_multiplayer/` are intentional. Do not sync or delete any parent directory: it contains unrelated production sites.
+The trailing slashes are intentional. Do not deploy back into
+`/opt/aiconic-site/_multiplayer`: `/opt/aiconic-site` is a release symlink and
+another project's deployment can replace it. Do not sync or delete any parent
+directory under `/srv`.

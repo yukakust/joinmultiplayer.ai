@@ -1,0 +1,17 @@
+[Unit]
+Description=joinmultiplayer.ai static site
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -m http.server 8091 --bind 127.0.0.1 --directory /srv/joinmultiplayer/public
+Restart=on-failure
+RestartSec=2
+DynamicUser=true
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+
+[Install]
+WantedBy=multi-user.target
