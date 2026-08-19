@@ -10,8 +10,11 @@ data follow [`DATA.md`](DATA.md).
 
 ## Bring one observation
 
-Choose a [door](doors/) and open a
-[door observation](https://github.com/yukakust/joinmultiplayer.ai/issues/new?template=observation.yml).
+Choose a [door](doors/). D04 and D06 accept an accountless contribution directly
+on [joinmultiplayer.ai](https://joinmultiplayer.ai/); one complete AI answer is
+enough to start a trace. GitHub's
+[door observation](https://github.com/yukakust/joinmultiplayer.ai/issues/new?template=observation.yml)
+remains available for advanced and technical contributors.
 
 Bring:
 
@@ -24,6 +27,17 @@ Bring:
 
 An observation is not a verdict. It enters the journal only after the record is
 complete enough for another person to inspect.
+
+Website submissions are anonymous by default. A private return link lets the
+contributor revisit a pending trace and add more D04 answers without creating
+an account. Maintainers review the material before it becomes public.
+
+## Change the code
+
+The repository is public. Anyone may inspect it, fork it, run a local copy, and
+open a pull request. Direct write access to the main repository and production
+server is reserved for maintainers; it is not needed to experiment with the
+project or propose a change.
 
 ## Propose a test
 

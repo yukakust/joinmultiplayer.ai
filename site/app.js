@@ -199,6 +199,111 @@ const morrowCopy = {
   }
 };
 
+const contributionCopy = {
+  en: {
+    leaveTrace: "LEAVE A TRACE",
+    d04Title: "Ask one question. Keep every answer.",
+    d04Intro: "One complete answer is enough to start. Three make the comparison ready.",
+    d06Title: "Bring the mistake only experience could catch.",
+    d06Intro: "Keep the AI's complete answer, then explain what is wrong and how another person could check it.",
+    exactQuestion: "Exact question",
+    questionHelp: "Write it once. Use the same words for every AI.",
+    answer: "AI answer",
+    aiModel: "AI / model",
+    aiModelPlaceholder: "e.g. ChatGPT, Claude, Gemini",
+    completeAnswer: "Complete, unedited answer",
+    tools: "Tools",
+    toolsUnknown: "Unknown",
+    toolsNone: "None",
+    toolsBrowsing: "Browsing",
+    addOptional: "Add another AI answer (optional)",
+    mistake: "What is wrong here?",
+    mistakeHelp: "Explain it as a practitioner would to another practitioner.",
+    verification: "How could another person check it?",
+    verificationHelp: "A source, calculation, reproduction, or expert procedure.",
+    review: "Review before publishing",
+    previewNote: "This is exactly what the moderation team will review for the public research record.",
+    continue: "Review my trace",
+    back: "Back",
+    anonymous: "Publish anonymously",
+    pseudonymMode: "Use a pseudonym",
+    pseudonym: "Public pseudonym",
+    consent: "I removed private and restricted data, have the right to share this material, and understand that it may become public.",
+    submit: "Leave this trace",
+    sending: "Leaving trace…",
+    optionalPair: "Complete both the model and answer, or leave both empty.",
+    submitError: "The trace could not be saved. Please try again.",
+    source: "source code / contribute with code",
+    loading: "Finding your trace…",
+    missingToken: "This private link is incomplete.",
+    privateTitle: "Your trace is safe.",
+    privateNote: "Keep this private link. It is the key for returning without an account.",
+    copyLink: "copy private link",
+    pending: "AWAITING MODERATION",
+    needs_changes: "NEEDS A CHANGE",
+    public: "PUBLIC",
+    withdrawn: "WITHDRAWN",
+    answers: "AI answers",
+    addLater: "Add another AI answer",
+    add: "Add answer",
+    added: "Answer added.",
+    publicRecord: "PUBLIC TRACE",
+    recordNotFound: "This public trace does not exist yet.",
+    reviewerNote: "Note from the moderation team"
+  },
+  ru: {
+    leaveTrace: "ОСТАВИТЬ СЛЕД",
+    d04Title: "Один вопрос. Все ответы целиком.",
+    d04Intro: "Одного полного ответа достаточно, чтобы начать след. Три подготовят его к сравнению.",
+    d06Title: "Принесите ошибку, которую заметит только практик.",
+    d06Intro: "Сохраните полный ответ ИИ, затем объясните ошибку и как её сможет проверить другой человек.",
+    exactQuestion: "Точный вопрос",
+    questionHelp: "Запишите его один раз. Каждому ИИ задавайте слово в слово.",
+    answer: "Ответ ИИ",
+    aiModel: "ИИ / модель",
+    aiModelPlaceholder: "например: ChatGPT, Claude, Gemini",
+    completeAnswer: "Полный ответ без изменений",
+    tools: "Инструменты",
+    toolsUnknown: "Неизвестно",
+    toolsNone: "Нет",
+    toolsBrowsing: "Поиск в интернете",
+    addOptional: "Добавить ответ другого ИИ (необязательно)",
+    mistake: "Что здесь не так?",
+    mistakeHelp: "Объясните это так, как практик объяснил бы другому практику.",
+    verification: "Как это сможет проверить другой человек?",
+    verificationHelp: "Источник, расчёт, воспроизведение или профессиональная процедура.",
+    review: "Проверьте перед публикацией",
+    previewNote: "Именно это команда модерации проверит перед добавлением в открытый исследовательский журнал.",
+    continue: "Проверить мой след",
+    back: "Назад",
+    anonymous: "Опубликовать анонимно",
+    pseudonymMode: "Указать псевдоним",
+    pseudonym: "Публичный псевдоним",
+    consent: "Я удалил личные и закрытые данные, имею право поделиться материалом и понимаю, что он может стать общедоступным.",
+    submit: "Оставить этот след",
+    sending: "Оставляем след…",
+    optionalPair: "Заполните и модель, и ответ — или оставьте оба поля пустыми.",
+    submitError: "Не удалось сохранить след. Попробуйте ещё раз.",
+    source: "исходный код / предложить изменение",
+    loading: "Ищем ваш след…",
+    missingToken: "В этой приватной ссылке не хватает ключа.",
+    privateTitle: "Ваш след сохранён.",
+    privateNote: "Сохраните эту приватную ссылку. Она позволит вернуться без аккаунта.",
+    copyLink: "копировать приватную ссылку",
+    pending: "ОЖИДАЕТ МОДЕРАЦИИ",
+    needs_changes: "НУЖНО УТОЧНЕНИЕ",
+    public: "ОПУБЛИКОВАН",
+    withdrawn: "ОТОЗВАН",
+    answers: "ответов ИИ",
+    addLater: "Добавить ответ другого ИИ",
+    add: "Добавить ответ",
+    added: "Ответ добавлен.",
+    publicRecord: "ОТКРЫТЫЙ СЛЕД",
+    recordNotFound: "Такого открытого следа пока нет.",
+    reviewerNote: "Комментарий команды модерации"
+  }
+};
+
 let language = localStorage.getItem(languageStorageKey) || (navigator.language?.toLowerCase().startsWith("ru") ? "ru" : "en");
 
 function t(key, variables = {}) {
@@ -230,6 +335,10 @@ function withLanguage(content) {
 
 function morrowText(key) {
   return morrowCopy[language][key];
+}
+
+function c(key) {
+  return contributionCopy[language][key];
 }
 
 function morrowFace(expression = "calm") {
@@ -450,6 +559,266 @@ function prototypeBanner() {
       ${languageSwitch(true)}
       <button data-action="reset-prototype">${t("reset")}</button>
     </aside>`;
+}
+
+let contributionStage = "compose";
+let contributionPreview = null;
+
+function contributionDraftKey(doorId) {
+  return `multiplayer-${doorId}-draft-v1`;
+}
+
+function loadContributionDraft(doorId) {
+  try {
+    return JSON.parse(localStorage.getItem(contributionDraftKey(doorId)) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function draftValue(draft, key) {
+  return escapeHTML(draft[key] || "");
+}
+
+function toolsSelect(index, selected = "unknown") {
+  const options = [
+    ["unknown", c("toolsUnknown")],
+    ["none", c("toolsNone")],
+    ["browsing", c("toolsBrowsing")]
+  ];
+  return `
+    <label>
+      ${c("tools")}
+      <select name="tools_${index}">
+        ${options.map(([value, label]) => `<option value="${value}" ${selected === value ? "selected" : ""}>${label}</option>`).join("")}
+      </select>
+    </label>`;
+}
+
+function answerFields(index, draft, required = false) {
+  return `
+    <fieldset class="contribution-answer">
+      <legend>${c("answer")} ${index + 1}</legend>
+      <div class="form-grid">
+        <label>
+          ${c("aiModel")}
+          <input name="model_${index}" ${required ? "required" : ""} maxlength="200" value="${draftValue(draft, `model_${index}`)}" placeholder="${c("aiModelPlaceholder")}">
+        </label>
+        ${toolsSelect(index, draft[`tools_${index}`] || "unknown")}
+      </div>
+      <label>
+        ${c("completeAnswer")}
+        <textarea name="raw_${index}" rows="7" ${required ? "required" : ""}>${draftValue(draft, `raw_${index}`)}</textarea>
+      </label>
+    </fieldset>`;
+}
+
+function contributionCompose(doorId) {
+  const draft = loadContributionDraft(doorId);
+  const isD04 = doorId === "d04";
+  return `
+    <section class="flow-shell form-page contribution-page">
+      <div class="flow-step">${doorId.toUpperCase()} · ${c("leaveTrace")}</div>
+      <h1>${c(isD04 ? "d04Title" : "d06Title")}</h1>
+      <p class="contribution-intro">${c(isD04 ? "d04Intro" : "d06Intro")}</p>
+      <form data-form="contribution-compose" data-door="${doorId}" class="research-form">
+        <label>
+          ${c("exactQuestion")}
+          <small>${c("questionHelp")}</small>
+          <textarea name="question" rows="4" required maxlength="4000">${draftValue(draft, "question")}</textarea>
+        </label>
+        ${answerFields(0, draft, true)}
+        ${isD04 ? `
+          <details class="optional-answer" ${draft.model_1 || draft.raw_1 ? "open" : ""}>
+            <summary>${c("addOptional")}</summary>
+            ${answerFields(1, draft)}
+          </details>
+          <details class="optional-answer" ${draft.model_2 || draft.raw_2 ? "open" : ""}>
+            <summary>${c("addOptional")}</summary>
+            ${answerFields(2, draft)}
+          </details>` : `
+          <label>
+            ${c("mistake")}
+            <small>${c("mistakeHelp")}</small>
+            <textarea name="mistake" rows="5" required maxlength="20000">${draftValue(draft, "mistake")}</textarea>
+          </label>
+          <label>
+            ${c("verification")}
+            <small>${c("verificationHelp")}</small>
+            <textarea name="verification" rows="5" required maxlength="20000">${draftValue(draft, "verification")}</textarea>
+          </label>`}
+        <input class="form-honeypot" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="button" type="submit">${c("continue")}</button>
+      </form>
+      <a class="quiet-link contribution-source" href="${repository}">${c("source")}</a>
+    </section>
+    ${morrowGuide(isD04 ? "responsesEmpty" : "door", "calm")}`;
+}
+
+function collectContribution(form) {
+  const data = formData(form);
+  const responses = [];
+  for (let index = 0; index < 3; index += 1) {
+    const model = (data[`model_${index}`] || "").trim();
+    const raw = (data[`raw_${index}`] || "").trim();
+    if (!model && !raw) continue;
+    if (!model || !raw) throw new Error(c("optionalPair"));
+    responses.push({ model, raw, tools: data[`tools_${index}`] || "unknown" });
+  }
+  return {
+    door: form.dataset.door,
+    question: data.question.trim(),
+    responses,
+    mistake: (data.mistake || "").trim(),
+    verification: (data.verification || "").trim(),
+    website: data.website || ""
+  };
+}
+
+function previewResponses(responses) {
+  return responses.map((response, index) => `
+    <section class="preview-answer">
+      <span>${c("answer")} ${index + 1} · ${escapeHTML(response.model)}</span>
+      <p>${escapeHTML(response.raw)}</p>
+    </section>`).join("");
+}
+
+function contributionReview() {
+  const contribution = contributionPreview;
+  return `
+    <section class="flow-shell form-page contribution-page review-page">
+      <div class="flow-step">${contribution.door.toUpperCase()} · ${c("review")}</div>
+      <h1>${c("review")}</h1>
+      <p class="contribution-intro">${c("previewNote")}</p>
+      <div class="contribution-preview">
+        <span>${c("exactQuestion")}</span>
+        <blockquote>${escapeHTML(contribution.question)}</blockquote>
+        ${previewResponses(contribution.responses)}
+        ${contribution.door === "d06" ? `
+          <span>${c("mistake")}</span><p>${escapeHTML(contribution.mistake)}</p>
+          <span>${c("verification")}</span><p>${escapeHTML(contribution.verification)}</p>` : ""}
+      </div>
+      <form data-form="contribution-submit" class="research-form contribution-submit-form">
+        <label class="radio-label"><input type="radio" name="author_mode" value="anonymous" checked> ${c("anonymous")}</label>
+        <label class="radio-label"><input type="radio" name="author_mode" value="pseudonym"> ${c("pseudonymMode")}</label>
+        <label>
+          ${c("pseudonym")}
+          <input name="pseudonym" maxlength="80">
+        </label>
+        <label class="check-label consent-label">
+          <input type="checkbox" name="consent" required>
+          ${c("consent")}
+        </label>
+        <p class="form-error" role="alert"></p>
+        <div class="actions">
+          <button class="button" type="submit">${c("submit")}</button>
+          <button class="button secondary" type="button" data-action="edit-contribution">${c("back")}</button>
+        </div>
+      </form>
+    </section>
+    ${morrowGuide("identity", "quiet")}`;
+}
+
+function contributionFlow(doorId) {
+  return withLanguage(contributionStage === "review" && contributionPreview ? contributionReview() : contributionCompose(doorId));
+}
+
+function privateContributionShell() {
+  return withLanguage(`
+    <section class="flow-shell form-page contribution-page" id="private-contribution">
+      <div class="flow-step">${c("leaveTrace")}</div>
+      <h1>${c("loading")}</h1>
+    </section>
+    ${morrowGuide("status", "quiet")}`);
+}
+
+function statusLabel(status) {
+  return c(["pending", "needs_changes", "public", "withdrawn"].includes(status) ? status : "pending");
+}
+
+function privateContributionMarkup(record) {
+  const canAppend = record.door === "d04" && ["pending", "needs_changes"].includes(record.status) && record.payload.responses.length < 12;
+  return `
+    <div class="flow-step">${escapeHTML(record.public_id)} · ${statusLabel(record.status)}</div>
+    <h1>${c("privateTitle")}</h1>
+    <p class="contribution-intro">${c("privateNote")}</p>
+    <div class="private-link-row">
+      <code>${escapeHTML(location.href)}</code>
+      <button class="text-button" data-copy="private-contribution">${c("copyLink")}</button>
+    </div>
+    ${record.review_note ? `<div class="review-note"><span>${c("reviewerNote")}</span><p>${escapeHTML(record.review_note)}</p></div>` : ""}
+    <div class="contribution-preview">
+      <span>${c("exactQuestion")}</span>
+      <blockquote>${escapeHTML(record.payload.question)}</blockquote>
+      ${previewResponses(record.payload.responses)}
+      ${record.door === "d06" ? `
+        <span>${c("mistake")}</span><p>${escapeHTML(record.payload.mistake)}</p>
+        <span>${c("verification")}</span><p>${escapeHTML(record.payload.verification)}</p>` : ""}
+    </div>
+    ${record.public_path ? `<a class="button" href="${record.public_path}">${c("publicRecord")}</a>` : ""}
+    ${canAppend ? `
+      <details class="append-answer">
+        <summary>${c("addLater")}</summary>
+        <form data-form="append-answer" class="research-form">
+          <label>${c("aiModel")}<input name="model" required maxlength="200" placeholder="${c("aiModelPlaceholder")}"></label>
+          <label>${c("completeAnswer")}<textarea name="raw" rows="7" required></textarea></label>
+          ${toolsSelect("append")}
+          <p class="form-error" role="alert"></p>
+          <button class="button secondary" type="submit">${c("add")}</button>
+        </form>
+      </details>` : ""}`;
+}
+
+async function loadPrivateContribution() {
+  const target = document.querySelector("#private-contribution");
+  if (!target) return;
+  const token = location.hash.slice(1);
+  if (!token) {
+    target.querySelector("h1").textContent = c("missingToken");
+    return;
+  }
+  try {
+    const response = await fetch("/api/contributions/status", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token })
+    });
+    if (!response.ok) throw new Error("status failed");
+    target.innerHTML = privateContributionMarkup(await response.json());
+  } catch {
+    target.querySelector("h1").textContent = c("submitError");
+  }
+}
+
+function publicRecordShell() {
+  return withLanguage(`
+    <section class="flow-shell form-page contribution-page" id="public-record">
+      <div class="flow-step">${c("publicRecord")}</div>
+      <h1>${c("loading")}</h1>
+    </section>`);
+}
+
+async function loadPublicRecord() {
+  const target = document.querySelector("#public-record");
+  if (!target) return;
+  const id = new URLSearchParams(location.search).get("id") || "";
+  try {
+    const response = await fetch(`/api/public/${encodeURIComponent(id)}`);
+    if (!response.ok) throw new Error("not found");
+    const record = await response.json();
+    target.innerHTML = `
+      <div class="flow-step">${escapeHTML(record.public_id)} · ${c("publicRecord")}</div>
+      <h1>${escapeHTML(record.payload.question)}</h1>
+      <p class="contribution-intro">${escapeHTML(record.author)}</p>
+      <div class="contribution-preview">
+        ${previewResponses(record.payload.responses)}
+        ${record.door === "d06" ? `
+          <span>${c("mistake")}</span><p>${escapeHTML(record.payload.mistake)}</p>
+          <span>${c("verification")}</span><p>${escapeHTML(record.payload.verification)}</p>` : ""}
+      </div>`;
+  } catch {
+    target.querySelector("h1").textContent = c("recordNotFound");
+  }
 }
 
 function d04Intro() {
@@ -825,9 +1194,17 @@ function render() {
     app.innerHTML = withLanguage(home());
     renderHand();
     renderAllDoors();
-  } else if (path === "d04") {
-    document.title = "D04 — i";
-    app.innerHTML = d04Flow();
+  } else if (path === "d04" || path === "d06") {
+    document.title = `${path.toUpperCase()} — i`;
+    app.innerHTML = contributionFlow(path);
+  } else if (path === "contribution") {
+    document.title = `${c("leaveTrace")} — i`;
+    app.innerHTML = privateContributionShell();
+    loadPrivateContribution();
+  } else if (path === "record") {
+    document.title = `${c("publicRecord")} — i`;
+    app.innerHTML = publicRecordShell();
+    loadPublicRecord();
   } else if (doors[path]) {
     document.title = `${path.toUpperCase()} — i`;
     app.innerHTML = withLanguage(door(path, getDoor(path)));
@@ -860,6 +1237,12 @@ app.addEventListener("click", (event) => {
   if (action === "show-morrow") {
     document.documentElement.classList.remove("morrow-hidden");
     sessionStorage.removeItem(morrowStorageKey);
+    return;
+  }
+  if (action === "edit-contribution") {
+    contributionStage = "compose";
+    render();
+    scrollTo(0, 0);
     return;
   }
   if (action === "enter-hand") updateMorrow("hand", "calm");
@@ -919,16 +1302,91 @@ app.addEventListener("click", (event) => {
   }
 
   const copyButton = event.target.closest("[data-copy]");
+  if (copyButton?.dataset.copy === "private-contribution") copyText(location.href, copyButton);
   if (copyButton?.dataset.copy === "question") copyText(prototype.question.text, copyButton);
   if (copyButton?.dataset.copy === "status") {
     copyText(`${location.origin}/d04/#status-${prototype.profile.statusToken}`, copyButton);
   }
 });
 
-app.addEventListener("submit", (event) => {
+app.addEventListener("input", (event) => {
+  const form = event.target.closest('form[data-form="contribution-compose"]');
+  if (!form) return;
+  localStorage.setItem(contributionDraftKey(form.dataset.door), JSON.stringify(formData(form)));
+});
+
+app.addEventListener("submit", async (event) => {
   event.preventDefault();
   const form = event.target;
   const data = formData(form);
+
+  if (form.dataset.form === "contribution-compose") {
+    try {
+      contributionPreview = collectContribution(form);
+      localStorage.setItem(contributionDraftKey(form.dataset.door), JSON.stringify(data));
+      contributionStage = "review";
+      render();
+      scrollTo(0, 0);
+    } catch (error) {
+      alert(error.message);
+    }
+    return;
+  }
+
+  if (form.dataset.form === "contribution-submit") {
+    const errorTarget = form.querySelector(".form-error");
+    const button = form.querySelector('button[type="submit"]');
+    if (data.author_mode === "pseudonym" && !data.pseudonym.trim()) {
+      errorTarget.textContent = c("pseudonym");
+      return;
+    }
+    button.disabled = true;
+    button.textContent = c("sending");
+    try {
+      const response = await fetch("/api/contributions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...contributionPreview,
+          author_mode: data.author_mode,
+          pseudonym: data.pseudonym.trim(),
+          consent: data.consent === "on"
+        })
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || c("submitError"));
+      localStorage.removeItem(contributionDraftKey(contributionPreview.door));
+      contributionPreview = null;
+      contributionStage = "compose";
+      location.href = result.status_path;
+    } catch (error) {
+      errorTarget.textContent = error.message || c("submitError");
+      button.disabled = false;
+      button.textContent = c("submit");
+    }
+    return;
+  }
+
+  if (form.dataset.form === "append-answer") {
+    const errorTarget = form.querySelector(".form-error");
+    const token = location.hash.slice(1);
+    try {
+      const response = await fetch("/api/contributions/append", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token,
+          response: { model: data.model.trim(), raw: data.raw.trim(), tools: data.tools_append || "unknown" }
+        })
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || c("submitError"));
+      await loadPrivateContribution();
+    } catch (error) {
+      errorTarget.textContent = error.message || c("submitError");
+    }
+    return;
+  }
 
   if (form.dataset.form === "question") {
     prototype.question = {

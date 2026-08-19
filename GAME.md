@@ -62,6 +62,12 @@ evaluation requirements.
 
 A click is not a move. A move leaves a trace another person can inspect.
 
+D04 and D06 use the same public contribution shell. The method changes with
+the door; account, identity, and handoff mechanics do not. One complete answer
+may start a trace. Additional D04 answers can be added later through a private
+return link. Submissions are anonymous by default and stay in a private queue
+until moderation.
+
 The participant brings the question. The laboratory gives it a stable `Q` ID;
 model runs become `T` traces; independent checks become `V` verifications.
 

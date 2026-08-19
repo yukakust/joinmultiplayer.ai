@@ -42,7 +42,7 @@ It is checked out on `agent/game-loop-v0.1` and matches the current GitHub commi
 2. Three initial `i` reveal D04, D06, and D10.
 3. "see all open questions" opens a separate catalog screen.
 4. `EN / RU` changes the interface and hook copy. Participant input stays in its original language.
-5. D04 is a browser-local UX prototype: it records a question, three raw AI answers, an interpretation, identity, and an independent check. It does not publish anything or send email yet.
+5. D04 and D06 share an accountless contribution flow. Submissions enter a private SQLite moderation queue; one D04 answer is enough to start and more can be added through a private return link.
 6. Morrow is a skippable fictional guide rendered as a face of match-head dots. The current pilot uses fixed authored lines, not an AI model, and Morrow is absent from the independent verifier view.
 
 ## Working principles
@@ -72,15 +72,19 @@ release symlink:
 /srv/joinmultiplayer/public
 ```
 
-`joinmultiplayer-static.service` serves that directory on host-only port 8091.
+`joinmultiplayer-static.service` serves that directory and the contribution API
+on host-only port 8091.
 The `joinmultiplayer.ai` Caddy virtual host reverse-proxies to
 `127.0.0.1:8091`. The unit source is tracked in
 `ops/joinmultiplayer-static.service`.
 
-From `/home/yuka/projects/joinmultiplayer.ai`, deploy the static site with:
+From `/home/yuka/projects/joinmultiplayer.ai`, deploy the app with:
 
 ```sh
 rsync -a --delete -e ssh site/ multiplayer-production:/srv/joinmultiplayer/public/
+rsync -a --delete -e ssh server/ multiplayer-production:/srv/joinmultiplayer/app/
+scp ops/joinmultiplayer-static.service multiplayer-production:/etc/systemd/system/joinmultiplayer-static.service
+ssh multiplayer-production 'systemctl daemon-reload && systemctl restart joinmultiplayer-static.service'
 curl -fsS -o /dev/null -w '%{http_code}\n' https://joinmultiplayer.ai/
 ```
 
@@ -88,3 +92,13 @@ The trailing slashes are intentional. Do not deploy back into
 `/opt/aiconic-site/_multiplayer`: `/opt/aiconic-site` is a release symlink and
 another project's deployment can replace it. Do not sync or delete any parent
 directory under `/srv`.
+
+The private database is `/var/lib/joinmultiplayer/contributions.sqlite3` and is
+created by systemd's `StateDirectory`; never rsync or commit it. Moderate over
+SSH with:
+
+```sh
+python3 /srv/joinmultiplayer/app/moderate.py list
+python3 /srv/joinmultiplayer/app/moderate.py show T0001
+python3 /srv/joinmultiplayer/app/moderate.py status T0001 public
+```

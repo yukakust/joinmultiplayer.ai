@@ -712,6 +712,168 @@ h1 {
   width: 100%;
 }
 
+.contribution-page {
+  width: min(100%, 58rem);
+}
+
+.contribution-page h1 {
+  max-width: 18ch;
+}
+
+.contribution-intro {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 44rem;
+}
+
+.contribution-answer {
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin: 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.contribution-answer legend {
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  padding: 0 0.5rem;
+}
+
+.optional-answer {
+  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  padding: 1rem 0;
+}
+
+.optional-answer + .optional-answer {
+  border-top: 0;
+}
+
+.optional-answer summary,
+.append-answer summary {
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.optional-answer[open] summary,
+.append-answer[open] summary {
+  margin-bottom: 1rem;
+}
+
+.form-honeypot {
+  height: 1px;
+  left: -10000px;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 1px;
+}
+
+.contribution-source {
+  align-self: flex-start;
+  margin-top: 1rem;
+}
+
+.contribution-preview {
+  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  width: 100%;
+}
+
+.contribution-preview > span,
+.preview-answer > span,
+.review-note > span {
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+.contribution-preview blockquote,
+.contribution-preview p {
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.preview-answer {
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1rem;
+}
+
+.radio-label {
+  align-items: center;
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.radio-label input {
+  width: auto;
+}
+
+.consent-label {
+  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  padding: 1.25rem 0;
+}
+
+.form-error {
+  color: var(--ember);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.form-error:empty {
+  display: none;
+}
+
+.private-link-row {
+  align-items: center;
+  border: 1px solid var(--line);
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.private-link-row code {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.private-link-row button {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.review-note {
+  border-left: 2px solid var(--ember);
+  padding-left: 1rem;
+}
+
+.review-note p {
+  line-height: 1.6;
+}
+
+.append-answer {
+  border-top: 1px solid var(--line);
+  padding-top: 1.25rem;
+  width: 100%;
+}
+
 .research-form label,
 .seal-form label {
   display: flex;
