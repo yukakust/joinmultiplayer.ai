@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import re
 import secrets
 import sqlite3
@@ -46,7 +47,7 @@ EXPERIMENT_EVENT_TYPES = {
     "run_completed",
 }
 RUN_STATUSES = {"created", "running", "completed", "failed", "stopped"}
-SPA_ROUTES = {"/experiment", "/experiment/connector", "/experiment/run"}
+SPA_ROUTES = {"/experiment", "/experiment/connector", "/experiment/run", "/network"}
 PUBLIC_EVENT_KEYS = {
     "text",
     "status",
@@ -115,6 +116,26 @@ E002 = {
     },
 }
 
+E003 = {
+    "public_id": "E003",
+    "hypothesis_id": "H0001",
+    "status": "ready_for_first_physical_run",
+    "protocol_version": "E003-draft-v0.1",
+    "title": {
+        "en": "First three-device pocket i swarm",
+        "ru": "Первый swarm pocket i на трёх устройствах",
+    },
+    "claim_boundary": (
+        "This tests real device identity, local weight updates, task dispatch, complete-only "
+        "capsules, and three-way composition. It does not test a language model, neural ABI, "
+        "WAN token streaming, or the main hypothesis."
+    ),
+    "devices": 3,
+    "local_classes": 16,
+    "answer_space": 4096,
+    "guess_probability": 1 / 4096,
+}
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
@@ -122,6 +143,38 @@ def utc_now() -> str:
 
 def token_hash(token: str) -> str:
     return hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def new_physical_table() -> list[int]:
+    """Controlled random shard delivered only through one device token."""
+    return [secrets.randbelow(16) for _ in range(16)]
+
+
+def physical_tasks(room_id: str, count: int) -> list[list[int]]:
+    tasks = []
+    for index in range(count):
+        digest = hashlib.sha256(f"{room_id}:task:{index}".encode("utf-8")).digest()
+        tasks.append([digest[role] % 16 for role in range(3)])
+    return tasks
+
+
+def validate_logits(value: object, task_count: int) -> list[list[float]]:
+    if not isinstance(value, list) or len(value) != task_count:
+        raise ValueError("a complete capsule batch is required")
+    batch: list[list[float]] = []
+    for capsule in value:
+        if not isinstance(capsule, list) or len(capsule) != 16:
+            raise ValueError("each capsule must contain 16 logits")
+        clean = []
+        for item in capsule:
+            if not isinstance(item, (int, float)) or isinstance(item, bool):
+                raise ValueError("capsule logits must be numeric")
+            number = float(item)
+            if not math.isfinite(number) or abs(number) > 100:
+                raise ValueError("capsule logit is outside the neural ABI budget")
+            clean.append(number)
+        batch.append(clean)
+    return batch
 
 
 def clean_text(value: object, field: str, *, required: bool = True, limit: int = 10_000) -> str:
@@ -151,7 +204,7 @@ def validate_experiment_run(value: object) -> tuple[str, str, bool]:
     if value.get("consent") is not True:
         raise ValueError("live publication consent is required")
     experiment_id = clean_text(value.get("experiment_id", ""), "experiment", limit=20).upper()
-    if experiment_id != "E002":
+    if experiment_id not in {"E002", "E003"}:
         raise ValueError("experiment is unavailable")
     agent = clean_text(value.get("agent", "codex"), "agent", limit=30).lower()
     if agent != "codex":
@@ -407,6 +460,54 @@ def init_db(path: Path) -> None:
             "CREATE INDEX IF NOT EXISTS experiment_run_events_run "
             "ON experiment_run_events(run_public_id, sequence)"
         )
+        db.execute(
+            """
+            CREATE TABLE IF NOT EXISTS physical_rooms (
+                row_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                public_id TEXT UNIQUE,
+                owner_token_hash TEXT UNIQUE NOT NULL,
+                join_token_hash TEXT UNIQUE NOT NULL,
+                author TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'waiting',
+                task_count INTEGER NOT NULL DEFAULT 0,
+                tasks TEXT NOT NULL DEFAULT '[]',
+                result TEXT NOT NULL DEFAULT '{}',
+                public INTEGER NOT NULL DEFAULT 0,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )
+            """
+        )
+        db.execute(
+            """
+            CREATE TABLE IF NOT EXISTS physical_nodes (
+                row_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                room_public_id TEXT NOT NULL,
+                node_public_id TEXT UNIQUE,
+                token_hash TEXT UNIQUE NOT NULL,
+                role INTEGER NOT NULL,
+                label TEXT NOT NULL,
+                training_table TEXT NOT NULL DEFAULT '[]',
+                status TEXT NOT NULL DEFAULT 'joined',
+                metrics TEXT NOT NULL DEFAULT '{}',
+                contribution TEXT NOT NULL DEFAULT '[]',
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
+                UNIQUE(room_public_id, role),
+                FOREIGN KEY(room_public_id) REFERENCES physical_rooms(public_id)
+            )
+            """
+        )
+        db.execute(
+            "CREATE INDEX IF NOT EXISTS physical_nodes_room ON physical_nodes(room_public_id, role)"
+        )
+        physical_node_columns = {
+            row[1] for row in db.execute("PRAGMA table_info(physical_nodes)")
+        }
+        if "training_table" not in physical_node_columns:
+            db.execute(
+                "ALTER TABLE physical_nodes ADD COLUMN training_table TEXT NOT NULL DEFAULT '[]'"
+            )
         public_ids = db.execute(
             "SELECT public_id FROM contributions WHERE status = 'public' ORDER BY row_id"
         ).fetchall()
@@ -629,6 +730,20 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                 self.get_experiment_run_status(body)
             elif path == "/api/experiment-runs/events":
                 self.append_experiment_run_event(body)
+            elif path == "/api/pocket-network/rooms":
+                self.create_physical_room(body)
+            elif path == "/api/pocket-network/join":
+                self.join_physical_room(body)
+            elif path == "/api/pocket-network/status":
+                self.physical_status(body)
+            elif path == "/api/pocket-network/ready":
+                self.ready_physical_node(body)
+            elif path == "/api/pocket-network/start":
+                self.start_physical_room(body)
+            elif path == "/api/pocket-network/contribute":
+                self.contribute_physical_node(body)
+            elif path == "/api/pocket-network/publish":
+                self.publish_physical_room(body)
             else:
                 self.send_json(HTTPStatus.NOT_FOUND, {"error": "not found"})
         except ValueError as error:
@@ -849,6 +964,21 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         self.send_json(HTTPStatus.OK, {"ok": True, "answers": len(payload["responses"])})
 
     def experiment_task_prompt(self, run_id: str) -> str:
+        with sqlite3.connect(self.db_path) as db:
+            row = db.execute(
+                "SELECT experiment_id FROM experiment_runs WHERE public_id = ?", (run_id,)
+            ).fetchone()
+        experiment_id = row[0] if row else "E002"
+        if experiment_id == "E003":
+            return f"""You are continuing public laboratory run {run_id} for E003.
+
+Goal H0001:
+{MAIN_HYPOTHESIS['question']['en']}
+
+Read experiments/E003-first-physical-swarm/PROTOCOL.md before changing code. E003 is a real-device control-plane test: three physical devices, three distinct locally updated toy weight matrices, atomic capsule batches, and one 4,096-class composed answer. Preserve the boundary that this is not yet a language model, the final neural ABI, a privacy proof, or evidence that H0001 is true.
+
+Keep the work inspectable. Record failures and aggregate metrics, never private owner/join/node tokens, controlled tables, weights, or capsules. Do not publish a room result without the owner's explicit approval.
+"""
         return f"""You are starting public laboratory run {run_id} for E002.
 
 Goal H0001:
@@ -880,7 +1010,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
                     experiment_id,
                     author,
                     1 if public_live else 0,
-                    E002["protocol_version"],
+                    E002["protocol_version"] if experiment_id == "E002" else E003["protocol_version"],
                     now,
                     now,
                 ),
@@ -1026,6 +1156,331 @@ First, explain the proposed protocol and its falsification criteria in a concise
         response["runs"] = self.public_experiment_runs("E002")
         self.send_json(HTTPStatus.OK, response, public=True, max_age=2)
 
+    def create_physical_room(self, body: object) -> None:
+        if not self.limiter.allow(self.client_key()):
+            self.send_json(HTTPStatus.TOO_MANY_REQUESTS, {"error": "too many rooms; try later"})
+            return
+        if not isinstance(body, dict) or body.get("consent") is not True:
+            raise ValueError("private room consent is required")
+        author = validate_author(body)
+        owner_token = secrets.token_urlsafe(32)
+        join_token = secrets.token_urlsafe(24)
+        now = utc_now()
+        with sqlite3.connect(self.db_path) as db:
+            cursor = db.execute(
+                "INSERT INTO physical_rooms "
+                "(owner_token_hash, join_token_hash, author, created_at, updated_at) "
+                "VALUES (?, ?, ?, ?, ?)",
+                (token_hash(owner_token), token_hash(join_token), author, now, now),
+            )
+            room_id = f"N{cursor.lastrowid:04d}"
+            db.execute(
+                "UPDATE physical_rooms SET public_id = ? WHERE row_id = ?",
+                (room_id, cursor.lastrowid),
+            )
+        self.send_json(
+            HTTPStatus.CREATED,
+            {
+                "room_id": room_id,
+                "owner_token": owner_token,
+                "join_token": join_token,
+                "owner_path": f"/network/#owner={owner_token}",
+                "join_path": f"/network/#join={join_token}",
+            },
+        )
+
+    def join_physical_room(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid join request")
+        join_token = clean_text(body.get("join_token", ""), "join token", limit=200)
+        label = clean_text(body.get("label", "device"), "device label", limit=40)
+        now = utc_now()
+        node_token = secrets.token_urlsafe(32)
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            db.execute("BEGIN IMMEDIATE")
+            room = db.execute(
+                "SELECT public_id, status FROM physical_rooms WHERE join_token_hash = ?",
+                (token_hash(join_token),),
+            ).fetchone()
+            if room is None:
+                self.send_json(HTTPStatus.NOT_FOUND, {"error": "room not found"})
+                return
+            if room["status"] != "waiting":
+                raise ValueError("room is no longer accepting devices")
+            roles = {
+                row[0]
+                for row in db.execute(
+                    "SELECT role FROM physical_nodes WHERE room_public_id = ?", (room["public_id"],)
+                ).fetchall()
+            }
+            available = [role for role in range(3) if role not in roles]
+            if not available:
+                raise ValueError("all three device slots are occupied")
+            role = available[0]
+            training_table = new_physical_table()
+            cursor = db.execute(
+                "INSERT INTO physical_nodes "
+                "(room_public_id, token_hash, role, label, training_table, created_at, updated_at) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (
+                    room["public_id"], token_hash(node_token), role, label,
+                    json.dumps(training_table), now, now,
+                ),
+            )
+            node_id = f"{room['public_id']}-I{role + 1}"
+            db.execute(
+                "UPDATE physical_nodes SET node_public_id = ? WHERE row_id = ?",
+                (node_id, cursor.lastrowid),
+            )
+        self.send_json(
+            HTTPStatus.CREATED,
+            {
+                "room_id": room["public_id"],
+                "node_id": node_id,
+                "node_token": node_token,
+                "role": role,
+                "training_table": training_table,
+                "node_path": f"/network/#node={node_token}",
+            },
+        )
+
+    def physical_access(self, token: object) -> tuple[str, sqlite3.Row, sqlite3.Row | None] | None:
+        if not isinstance(token, str) or len(token) > 200:
+            return None
+        digest = token_hash(token)
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            room = db.execute(
+                "SELECT * FROM physical_rooms WHERE owner_token_hash = ?", (digest,)
+            ).fetchone()
+            if room is not None:
+                return "owner", room, None
+            node = db.execute(
+                "SELECT * FROM physical_nodes WHERE token_hash = ?", (digest,)
+            ).fetchone()
+            if node is None:
+                return None
+            room = db.execute(
+                "SELECT * FROM physical_rooms WHERE public_id = ?", (node["room_public_id"],)
+            ).fetchone()
+            return ("node", room, node) if room else None
+
+    def physical_status(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid status request")
+        access = self.physical_access(body.get("token"))
+        if access is None:
+            self.send_json(HTTPStatus.NOT_FOUND, {"error": "room access not found"})
+            return
+        kind, room, node = access
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            nodes = db.execute(
+                "SELECT node_public_id, role, label, status, metrics, created_at, updated_at "
+                "FROM physical_nodes WHERE room_public_id = ? ORDER BY role",
+                (room["public_id"],),
+            ).fetchall()
+        response = {
+            "access": kind,
+            "room_id": room["public_id"],
+            "author": room["author"],
+            "status": room["status"],
+            "task_count": room["task_count"],
+            "nodes": [
+                {**dict(item), "metrics": json.loads(item["metrics"])} for item in nodes
+            ],
+            "result": json.loads(room["result"]),
+            "public": bool(room["public"]),
+        }
+        if node is not None:
+            tasks = json.loads(room["tasks"])
+            response.update(
+                {
+                    "node_id": node["node_public_id"],
+                    "role": node["role"],
+                    "label": node["label"],
+                    "node_status": node["status"],
+                    "training_table": json.loads(node["training_table"]),
+                    "task_keys": [task[node["role"]] for task in tasks],
+                }
+            )
+        self.send_json(HTTPStatus.OK, response)
+
+    def ready_physical_node(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid ready request")
+        access = self.physical_access(body.get("node_token"))
+        if access is None or access[0] != "node" or access[2] is None:
+            self.send_json(HTTPStatus.NOT_FOUND, {"error": "node not found"})
+            return
+        _, room, node = access
+        if room["status"] != "waiting":
+            raise ValueError("training phase is closed")
+        metrics_value = body.get("metrics")
+        if not isinstance(metrics_value, dict):
+            raise ValueError("training metrics are required")
+        accuracy = metrics_value.get("accuracy")
+        delta_norm = metrics_value.get("delta_norm")
+        if not isinstance(accuracy, (int, float)) or not 0 <= float(accuracy) <= 1:
+            raise ValueError("invalid local accuracy")
+        if not isinstance(delta_norm, (int, float)) or not math.isfinite(float(delta_norm)):
+            raise ValueError("invalid weight delta norm")
+        metrics = {
+            "accuracy": float(accuracy),
+            "delta_norm": min(abs(float(delta_norm)), 1_000_000),
+            "weight_checksum": clean_text(
+                metrics_value.get("weight_checksum", ""), "weight checksum", limit=128
+            ),
+            "runtime": clean_text(metrics_value.get("runtime", "browser"), "runtime", limit=80),
+        }
+        now = utc_now()
+        with sqlite3.connect(self.db_path) as db:
+            db.execute(
+                "UPDATE physical_nodes SET status = 'ready', metrics = ?, updated_at = ? "
+                "WHERE row_id = ?",
+                (json.dumps(metrics, sort_keys=True), now, node["row_id"]),
+            )
+            db.execute(
+                "UPDATE physical_rooms SET updated_at = ? WHERE public_id = ?",
+                (now, room["public_id"]),
+            )
+        self.send_json(HTTPStatus.OK, {"ok": True, "node_id": node["node_public_id"]})
+
+    def start_physical_room(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid start request")
+        access = self.physical_access(body.get("owner_token"))
+        if access is None or access[0] != "owner":
+            self.send_json(HTTPStatus.NOT_FOUND, {"error": "room not found"})
+            return
+        room = access[1]
+        count = body.get("task_count", 64)
+        if not isinstance(count, int) or isinstance(count, bool) or not 16 <= count <= 256:
+            raise ValueError("choose between 16 and 256 tasks")
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            statuses = db.execute(
+                "SELECT status FROM physical_nodes WHERE room_public_id = ? ORDER BY role",
+                (room["public_id"],),
+            ).fetchall()
+            if len(statuses) != 3 or any(row["status"] != "ready" for row in statuses):
+                raise ValueError("all three devices must finish local training first")
+            tasks = physical_tasks(room["public_id"], count)
+            now = utc_now()
+            db.execute(
+                "UPDATE physical_rooms SET status = 'running', task_count = ?, tasks = ?, "
+                "updated_at = ? WHERE public_id = ? AND status = 'waiting'",
+                (count, json.dumps(tasks), now, room["public_id"]),
+            )
+        self.send_json(HTTPStatus.OK, {"ok": True, "tasks": count})
+
+    def calculate_physical_result(self, db: sqlite3.Connection, room_id: str) -> dict | None:
+        db.row_factory = sqlite3.Row
+        room = db.execute(
+            "SELECT * FROM physical_rooms WHERE public_id = ?", (room_id,)
+        ).fetchone()
+        nodes = db.execute(
+            "SELECT role, training_table, contribution FROM physical_nodes "
+            "WHERE room_public_id = ? ORDER BY role",
+            (room_id,),
+        ).fetchall()
+        if room is None or len(nodes) != 3 or any(not json.loads(node["contribution"]) for node in nodes):
+            return None
+        tasks = json.loads(room["tasks"])
+        batches = {node["role"]: json.loads(node["contribution"]) for node in nodes}
+        tables = {node["role"]: json.loads(node["training_table"]) for node in nodes}
+        exact = 0
+        role_correct = [0, 0, 0]
+        remove_correct = [0, 0, 0]
+        for index, keys in enumerate(tasks):
+            expected_digits = [tables[role][keys[role]] for role in range(3)]
+            predicted = [
+                max(range(16), key=lambda item: batches[role][index][item]) for role in range(3)
+            ]
+            role_correct = [
+                role_correct[role] + int(predicted[role] == expected_digits[role])
+                for role in range(3)
+            ]
+            exact += int(predicted == expected_digits)
+            for removed in range(3):
+                ablated = predicted.copy()
+                ablated[removed] = 0
+                remove_correct[removed] += int(ablated == expected_digits)
+        count = len(tasks)
+        return {
+            "task_count": count,
+            "answer_space": 4096,
+            "random_guess_probability": 1 / 4096,
+            "exact_accuracy": exact / count,
+            "per_node_accuracy": [value / count for value in role_correct],
+            "remove_one_accuracy": [value / count for value in remove_correct],
+            "all_three_complete": True,
+            "claim_boundary": E003["claim_boundary"],
+        }
+
+    def contribute_physical_node(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid contribution request")
+        access = self.physical_access(body.get("node_token"))
+        if access is None or access[0] != "node" or access[2] is None:
+            self.send_json(HTTPStatus.NOT_FOUND, {"error": "node not found"})
+            return
+        _, room, node = access
+        if room["status"] != "running":
+            raise ValueError("room is not running")
+        batch = validate_logits(body.get("capsules"), room["task_count"])
+        now = utc_now()
+        with sqlite3.connect(self.db_path) as db:
+            db.execute("BEGIN IMMEDIATE")
+            db.execute(
+                "UPDATE physical_nodes SET status = 'complete', contribution = ?, updated_at = ? "
+                "WHERE row_id = ?",
+                (json.dumps(batch), now, node["row_id"]),
+            )
+            result = self.calculate_physical_result(db, room["public_id"])
+            if result is not None:
+                db.execute(
+                    "UPDATE physical_rooms SET status = 'complete', result = ?, updated_at = ? "
+                    "WHERE public_id = ?",
+                    (json.dumps(result), now, room["public_id"]),
+                )
+        self.send_json(HTTPStatus.OK, {"ok": True, "node_id": node["node_public_id"]})
+
+    def publish_physical_room(self, body: object) -> None:
+        if not isinstance(body, dict) or body.get("consent") is not True:
+            raise ValueError("publication consent is required")
+        access = self.physical_access(body.get("owner_token"))
+        if access is None or access[0] != "owner":
+            self.send_json(HTTPStatus.NOT_FOUND, {"error": "room not found"})
+            return
+        room = access[1]
+        if room["status"] != "complete":
+            raise ValueError("the physical run is not complete")
+        with sqlite3.connect(self.db_path) as db:
+            db.execute(
+                "UPDATE physical_rooms SET public = 1, updated_at = ? WHERE public_id = ?",
+                (utc_now(), room["public_id"]),
+            )
+        self.send_json(HTTPStatus.OK, {"ok": True, "public_path": f"/network/?id={room['public_id']}"})
+
+    def public_physical_rooms(self) -> list[dict]:
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            rows = db.execute(
+                "SELECT public_id, author, status, task_count, result, created_at, updated_at "
+                "FROM physical_rooms WHERE public = 1 ORDER BY row_id DESC"
+            ).fetchall()
+        return [{**dict(row), "result": json.loads(row["result"])} for row in rows]
+
+    def get_public_e003(self) -> None:
+        response = dict(E003)
+        response["object_type"] = "experiment"
+        response["hypothesis"] = MAIN_HYPOTHESIS
+        response["runs"] = self.public_physical_rooms()
+        response["codex_runs"] = self.public_experiment_runs("E003")
+        self.send_json(HTTPStatus.OK, response, public=True, max_age=2)
+
     def get_public(self, public_id: str) -> None:
         public_id = public_id.upper()
         if public_id == "H0001":
@@ -1033,6 +1488,9 @@ First, explain the proposed protocol and its falsification criteria in a concise
             return
         if public_id == "E002":
             self.get_public_experiment()
+            return
+        if public_id == "E003":
+            self.get_public_e003()
             return
         if RUN_ID_RE.fullmatch(public_id):
             record = self.public_experiment_run(public_id)

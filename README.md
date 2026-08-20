@@ -94,6 +94,13 @@ After reviewing and trusting the hook, opt in from that task with
 `$pocket-i-lab start E002 as <pseudonym>`. Inactive hooks perform no network
 request. `$pocket-i-lab finish` closes the public run.
 
+[`E003`](experiments/E003-first-physical-swarm/README.md) is the first physical
+device step. `/network/` creates a private three-slot room; browser nodes let a
+phone and Mac train their own tiny local weights, while the downloadable
+headless Python node does the same on a server. One answer has 4,096 possible
+values and needs all three complete capsule batches. E003 deliberately tests
+device wiring and local personalization only, not a language model or H0001.
+
 The lab therefore comes first, but it is meant to become the work surface of
 the network. Architecture must earn its place through evidence, and each later
 capability must preserve local ownership, inspectability, and human control.

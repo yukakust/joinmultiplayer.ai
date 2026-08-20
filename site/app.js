@@ -198,6 +198,7 @@ const labCopy = {
     createRun: "COPY START PROMPT",
     creatingRun: "COPYING…",
     startPromptCopied: "PROMPT COPIED — SEND IT IN CODEX",
+    openPhysical: "OPEN THE THREE-DEVICE EXPERIMENT",
     runCreateError: "The run could not be created.",
     connectorTitle: "Connect this run to Codex",
     connectorPrivate: "This page contains the private run key. Keep the URL and key private. Observers only receive the public journal.",
@@ -271,6 +272,7 @@ const labCopy = {
     createRun: "КОПИРОВАТЬ КОМАНДУ ЗАПУСКА",
     creatingRun: "КОПИРУЕМ…",
     startPromptCopied: "КОМАНДА СКОПИРОВАНА — ОТПРАВЬТЕ ЕЁ В CODEX",
+    openPhysical: "ОТКРЫТЬ ЭКСПЕРИМЕНТ НА ТРЁХ УСТРОЙСТВАХ",
     runCreateError: "Не удалось создать запуск.",
     connectorTitle: "Подключить этот запуск к Codex",
     connectorPrivate: "На этой странице есть приватный ключ запуска. Не делитесь ссылкой и ключом. Наблюдатели видят только открытый журнал.",
@@ -310,6 +312,93 @@ const labCopy = {
     copiedKey: "ПРИВАТНЫЙ КЛЮЧ СКОПИРОВАН"
   }
 };
+
+const networkCopy = {
+  en: {
+    step: "E003 · FIRST PHYSICAL SWARM",
+    title: "Make three devices think together.",
+    intro: "Phone, Mac, and server each receive a different controlled private shard and train their own local weights. One answer needs all three devices.",
+    boundary: "This proves only real-device wiring, local weight updates, and three-way composition. It is not yet a language model or the final neural ABI.",
+    create: "CREATE A PRIVATE ROOM",
+    pseudonym: "Public pseudonym for a later result",
+    consent: "Create a private three-device room. Nothing becomes public until I approve the completed result.",
+    createButton: "CREATE ROOM",
+    joinTitle: "Turn this device into a pocket i.",
+    label: "Device name",
+    labelPlaceholder: "phone, MacBook, yukabox",
+    join: "JOIN THIS DEVICE",
+    owner: "ROOM OWNER",
+    joinLink: "PRIVATE JOIN LINK",
+    copyLink: "COPY JOIN LINK",
+    sendLink: "Open this same private link on exactly three devices. The owner page is only the conductor; it does not count as a pocket i.",
+    headless: "For a headless server: download the node, run it, and paste only the token after #join= when prompted.",
+    headlessCommand: "python3 pocket_node.py --label yukabox",
+    waiting: "Waiting for three locally trained devices.",
+    train: "TRAIN THIS POCKET i LOCALLY",
+    trained: "LOCAL WEIGHTS CHANGED",
+    ready: "ready",
+    joined: "joined",
+    running: "running",
+    complete: "complete",
+    start: "SEND 64 TASKS TO THE THREE DEVICES",
+    contribute: "COMPUTE AND RETURN MY COMPLETE CAPSULE BATCH",
+    result: "THREE-WAY RESULT",
+    publish: "PUBLISH THIS RESULT",
+    publishConsent: "Publish only aggregate metrics and the experiment boundary; device tokens, private tables, weights, and capsules remain private.",
+    exact: "Exact 3-device accuracy",
+    remove: "Accuracy when each i is removed",
+    guess: "Random whole-answer guess",
+    answerSpace: "possible answers",
+    noAccess: "This private device link is missing or invalid.",
+    publicRuns: "PUBLIC PHYSICAL RUNS",
+    noPublic: "No physical run has been published yet.",
+    refresh: "REFRESH",
+    localOnly: "The server privately delivers this controlled table and never shows it to peers or the public. Trained weights stay in this browser; only a checksum, metrics, and complete 16-logit capsules return."
+  },
+  ru: {
+    step: "E003 · ПЕРВЫЙ ФИЗИЧЕСКИЙ SWARM",
+    title: "Заставьте три устройства думать вместе.",
+    intro: "Телефон, Mac и сервер получают разные контролируемые приватные части знания и обучают собственные локальные веса. Для одного ответа нужны все три устройства.",
+    boundary: "Здесь мы проверяем только связь реальных устройств, изменение локальных весов и композицию трёх вкладов. Это ещё не языковая модель и не финальный neural ABI.",
+    create: "СОЗДАТЬ ПРИВАТНУЮ КОМНАТУ",
+    pseudonym: "Публичный псевдоним для будущего результата",
+    consent: "Создать приватную комнату для трёх устройств. Ничего не станет публичным, пока я не подтвержу готовый результат.",
+    createButton: "СОЗДАТЬ КОМНАТУ",
+    joinTitle: "Превратите это устройство в pocket i.",
+    label: "Имя устройства",
+    labelPlaceholder: "телефон, MacBook, yukabox",
+    join: "ПОДКЛЮЧИТЬ ЭТО УСТРОЙСТВО",
+    owner: "ВЛАДЕЛЕЦ КОМНАТЫ",
+    joinLink: "ПРИВАТНАЯ ССЫЛКА ПОДКЛЮЧЕНИЯ",
+    copyLink: "КОПИРОВАТЬ ССЫЛКУ",
+    sendLink: "Откройте эту приватную ссылку ровно на трёх устройствах. Страница владельца — только дирижёр и не считается pocket i.",
+    headless: "Для сервера без браузера: скачайте node, запустите и по запросу вставьте только токен после #join=.",
+    headlessCommand: "python3 pocket_node.py --label yukabox",
+    waiting: "Ждём три устройства, которые закончат локальное обучение.",
+    train: "ОБУЧИТЬ ЭТОТ POCKET i ЛОКАЛЬНО",
+    trained: "ЛОКАЛЬНЫЕ ВЕСА ИЗМЕНИЛИСЬ",
+    ready: "готов",
+    joined: "подключён",
+    running: "считает",
+    complete: "закончил",
+    start: "ОТПРАВИТЬ 64 ЗАДАЧИ ТРЁМ УСТРОЙСТВАМ",
+    contribute: "ПОСЧИТАТЬ И ВЕРНУТЬ ПОЛНЫЙ НАБОР КАПСУЛ",
+    result: "РЕЗУЛЬТАТ ТРЁХ УСТРОЙСТВ",
+    publish: "ОПУБЛИКОВАТЬ РЕЗУЛЬТАТ",
+    publishConsent: "Опубликовать только агрегированные метрики и границы эксперимента; токены устройств, приватные таблицы, веса и капсулы останутся закрытыми.",
+    exact: "Точность полного ответа трёх устройств",
+    remove: "Точность при удалении каждого i",
+    guess: "Случайное угадывание целого ответа",
+    answerSpace: "вариантов ответа",
+    noAccess: "Приватная ссылка устройства отсутствует или недействительна.",
+    publicRuns: "ОПУБЛИКОВАННЫЕ ФИЗИЧЕСКИЕ ЗАПУСКИ",
+    noPublic: "Пока ни один физический запуск не опубликован.",
+    refresh: "ОБНОВИТЬ",
+    localOnly: "Сервер приватно выдаёт этому устройству контролируемую таблицу и не показывает её другим участникам или публике. Обученные веса остаются в браузере; назад уходят только checksum, метрики и полный набор 16-мерных капсул."
+  }
+};
+
+function n(key) { return networkCopy[language]?.[key] || networkCopy.en[key] || key; }
 
 const morrowCopy = {
   en: {
@@ -2223,6 +2312,7 @@ async function loadExperiment() {
           <p class="form-error" role="alert"></p>
           <button class="button" type="submit">${l("createRun")}</button>
         </form>
+        <div class="actions"><a class="button secondary" href="/network/">${l("openPhysical")}</a></div>
       </section>`;
   } catch {
     target.querySelector(".experiment-loading").textContent = l("runCreateError");
@@ -2338,6 +2428,218 @@ async function loadPublicRun() {
   }
 }
 
+let networkState = null;
+let networkTimer = null;
+let networkWeights = null;
+
+function networkShell() {
+  return `
+    <section class="flow-shell network-page" id="network-page">
+      <div class="flow-step">${n("step")}</div>
+      <h1>${n("title")}</h1>
+      <p class="contribution-intro">${n("intro")}</p>
+      <section class="privacy-boundary"><span>${l("privacyBoundary")}</span><p>${n("boundary")}</p></section>
+      <div class="network-content"><p>${c("loading")}</p></div>
+    </section>`;
+}
+
+async function networkPost(path, payload) {
+  const response = await fetch(`/api/pocket-network/${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  const value = await response.json();
+  if (!response.ok) throw new Error(value.error || "network request failed");
+  return value;
+}
+
+function networkHash() {
+  return new URLSearchParams(location.hash.slice(1));
+}
+
+function networkCreateMarkup(publicRuns = []) {
+  return `
+    <section class="start-run-panel">
+      <div class="flow-step">${n("create")}</div>
+      <form data-form="network-create" class="research-form">
+        <label>${n("pseudonym")}<input name="pseudonym" maxlength="80" placeholder="Morrow"></label>
+        <label class="check-label"><input type="checkbox" name="consent" required>${n("consent")}</label>
+        <p class="form-error" role="alert"></p>
+        <button class="button" type="submit">${n("createButton")}</button>
+      </form>
+    </section>
+    <section class="experiment-runs">
+      <div class="flow-step">${n("publicRuns")}</div>
+      <div class="experiment-run-list">${publicRuns.length ? publicRuns.map(run => `
+        <a class="experiment-run-card" href="/network/?id=${encodeURIComponent(run.public_id)}">
+          <span>${escapeHTML(run.public_id)} · ${escapeHTML(run.status)}</span>
+          <strong>${escapeHTML(run.author || "anonymous")}</strong>
+          <small>${Number(run.result?.exact_accuracy || 0) * 100}%</small>
+        </a>`).join("") : `<p>${n("noPublic")}</p>`}</div>
+    </section>`;
+}
+
+function networkJoinMarkup() {
+  return `
+    <section class="start-run-panel">
+      <div class="flow-step">${n("step")}</div>
+      <h2>${n("joinTitle")}</h2>
+      <form data-form="network-join" class="research-form">
+        <label>${n("label")}<input name="label" maxlength="40" required placeholder="${n("labelPlaceholder")}"></label>
+        <p class="form-error" role="alert"></p>
+        <button class="button" type="submit">${n("join")}</button>
+      </form>
+    </section>`;
+}
+
+function nodeStatusLabel(status) {
+  return n(status) || status;
+}
+
+function networkNodesMarkup(nodes = []) {
+  return `<div class="physical-nodes">${[0, 1, 2].map(role => {
+    const node = nodes.find(item => Number(item.role) === role);
+    return `<article class="physical-node ${node ? `is-${escapeHTML(node.status)}` : "is-empty"}">
+      <i>i<small>${role + 1}</small></i>
+      <strong>${escapeHTML(node?.label || "—")}</strong>
+      <span>${node ? nodeStatusLabel(node.status) : n("waiting")}</span>
+      ${node?.metrics?.accuracy !== undefined ? `<small>local ${(Number(node.metrics.accuracy) * 100).toFixed(0)}% · Δ ${Number(node.metrics.delta_norm).toFixed(2)}</small>` : ""}
+    </article>`;
+  }).join("")}</div>`;
+}
+
+function networkResultMarkup(result = {}, roomId = "") {
+  if (!result.exact_accuracy && result.exact_accuracy !== 0) return "";
+  return `<section class="development-result network-result">
+    <div class="flow-step">${n("result")} · ${escapeHTML(roomId)}</div>
+    <div class="network-metrics">
+      <article><strong>${(Number(result.exact_accuracy) * 100).toFixed(1)}%</strong><span>${n("exact")}</span></article>
+      <article><strong>1 / ${Number(result.answer_space || 4096).toLocaleString()}</strong><span>${n("guess")}</span></article>
+      <article><strong>${(result.remove_one_accuracy || []).map(value => `${(Number(value) * 100).toFixed(1)}%`).join(" · ")}</strong><span>${n("remove")}</span></article>
+    </div>
+    <p class="control-warning">${escapeHTML(result.claim_boundary || n("boundary"))}</p>
+  </section>`;
+}
+
+function networkOwnerMarkup(state, ownerToken) {
+  const joinLink = localStorage.getItem(`network-join:${ownerToken}`) || "";
+  const allReady = state.nodes?.length === 3 && state.nodes.every(node => node.status === "ready");
+  return `
+    <div class="connector-run-id">${escapeHTML(state.room_id)} · ${escapeHTML(state.status)}</div>
+    <section class="join-link-card">
+      <span>${n("joinLink")}</span>
+      <p>${n("sendLink")}</p>
+      <code>${escapeHTML(joinLink || n("noAccess"))}</code>
+      ${joinLink ? `<button class="text-button" data-action="copy-network-link">${n("copyLink")}</button>` : ""}
+      <p>${n("headless")}</p>
+      <a class="quiet-link" href="/network/pocket_node.py" download>pocket_node.py</a>
+      <code>${escapeHTML(n("headlessCommand"))}</code>
+    </section>
+    ${networkNodesMarkup(state.nodes)}
+    ${state.status === "waiting" ? `<div class="actions"><button class="button" data-action="network-start" ${allReady ? "" : "disabled"}>${n("start")}</button></div>` : ""}
+    ${networkResultMarkup(state.result, state.room_id)}
+    ${state.status === "complete" && !state.public ? `<form data-form="network-publish" class="research-form"><label class="check-label"><input type="checkbox" name="consent" required>${n("publishConsent")}</label><p class="form-error"></p><button class="button" type="submit">${n("publish")}</button></form>` : ""}
+    ${state.public ? `<a class="button secondary" href="/network/?id=${encodeURIComponent(state.room_id)}">${n("result")}</a>` : ""}`;
+}
+
+function weightsStorageKey(state) {
+  return `pocket-i-weights:${state.room_id}:${state.node_id}`;
+}
+
+function loadLocalWeights(state) {
+  try {
+    return JSON.parse(localStorage.getItem(weightsStorageKey(state)) || "null");
+  } catch { return null; }
+}
+
+function trainLocalPocket(table) {
+  const weights = Array.from({ length: 16 }, () => Array(16).fill(0));
+  const learningRate = 0.35;
+  for (let epoch = 0; epoch < 180; epoch += 1) {
+    for (let key = 0; key < 16; key += 1) {
+      const row = weights[key];
+      const maxValue = Math.max(...row);
+      const exps = row.map(value => Math.exp(value - maxValue));
+      const total = exps.reduce((sum, value) => sum + value, 0);
+      for (let output = 0; output < 16; output += 1) {
+        const gradient = exps[output] / total - Number(output === table[key]);
+        row[output] -= learningRate * gradient;
+      }
+    }
+  }
+  return weights;
+}
+
+async function weightChecksum(weights) {
+  const bytes = new TextEncoder().encode(JSON.stringify(weights));
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return [...new Uint8Array(digest)].map(value => value.toString(16).padStart(2, "0")).join("");
+}
+
+function localWeightMetrics(weights, table) {
+  const predictions = weights.map(row => row.indexOf(Math.max(...row)));
+  const correct = predictions.filter((value, key) => value === table[key]).length;
+  const deltaNorm = Math.sqrt(weights.flat().reduce((sum, value) => sum + value * value, 0));
+  return { accuracy: correct / 16, delta_norm: deltaNorm };
+}
+
+function weightPicture(weights) {
+  if (!weights) return "";
+  return `<div class="weight-picture" aria-label="trained local weight matrix">${weights.map(row => row.map(value => `<i style="--weight:${Math.max(0.04, Math.min(1, (Number(value) + 1) / 8))}"></i>`).join("")).join("")}</div>`;
+}
+
+function networkNodeMarkup(state) {
+  networkWeights = loadLocalWeights(state);
+  return `
+    <div class="connector-run-id">${escapeHTML(state.node_id)} · ${escapeHTML(state.label)} · role ${Number(state.role) + 1}</div>
+    ${networkNodesMarkup(state.nodes)}
+    <section class="local-pocket-card">
+      <span>${networkWeights ? n("trained") : n("joinTitle")}</span>
+      <p>${n("localOnly")}</p>
+      ${weightPicture(networkWeights)}
+      ${state.node_status === "joined" ? `<button class="button" data-action="network-train">${n("train")}</button>` : ""}
+      ${state.status === "running" && state.node_status === "ready" ? `<button class="button" data-action="network-contribute">${n("contribute")}</button>` : ""}
+    </section>
+    ${networkResultMarkup(state.result, state.room_id)}`;
+}
+
+async function loadNetwork() {
+  const target = document.querySelector("#network-page .network-content");
+  if (!target) return;
+  clearTimeout(networkTimer);
+  const publicId = new URLSearchParams(location.search).get("id");
+  const hash = networkHash();
+  try {
+    if (publicId) {
+      const response = await fetch("/api/public/E003", { cache: "no-store" });
+      if (!response.ok) throw new Error(n("noAccess"));
+      const experiment = await response.json();
+      const run = (experiment.runs || []).find(item => item.public_id === publicId);
+      if (!run) throw new Error(n("noAccess"));
+      target.innerHTML = networkResultMarkup(run.result, run.public_id);
+      return;
+    }
+    if (hash.has("join")) {
+      target.innerHTML = networkJoinMarkup();
+      return;
+    }
+    const kind = hash.has("owner") ? "owner" : hash.has("node") ? "node" : "";
+    const token = hash.get(kind);
+    if (!kind || !token) {
+      const response = await fetch("/api/public/E003", { cache: "no-store" });
+      const experiment = response.ok ? await response.json() : { runs: [] };
+      target.innerHTML = networkCreateMarkup(experiment.runs || []);
+      return;
+    }
+    networkState = await networkPost("status", { token });
+    target.innerHTML = kind === "owner" ? networkOwnerMarkup(networkState, token) : networkNodeMarkup(networkState);
+    if (!["complete"].includes(networkState.status)) networkTimer = setTimeout(loadNetwork, 2000);
+  } catch (error) {
+    target.innerHTML = `<p class="form-error">${escapeHTML(error.message || n("noAccess"))}</p><a class="button secondary" href="/network/">${t("return")}</a>`;
+  }
+}
+
 function notFound() {
   document.title = language === "ru" ? "Не найдено — i" : "Not found — i";
   return `
@@ -2403,6 +2705,10 @@ function render() {
     document.title = `${l("journal")} — i`;
     app.innerHTML = withLanguage(publicRunShell());
     loadPublicRun();
+  } else if (path === "network") {
+    document.title = `E003 — pocket i`;
+    app.innerHTML = withLanguage(networkShell());
+    loadNetwork();
   } else if (doors[path]) {
     document.title = `${path.toUpperCase()} — i`;
     app.innerHTML = withLanguage(door(path, getDoor(path)));
@@ -2418,7 +2724,7 @@ function formData(form) {
 
 const app = document.querySelector("#app");
 
-app.addEventListener("click", (event) => {
+app.addEventListener("click", async (event) => {
   const revealButton = event.target.closest("[data-reveal]");
   if (revealButton) {
     activeDoorIndex = Number(revealButton.dataset.reveal);
@@ -2436,6 +2742,43 @@ app.addEventListener("click", (event) => {
   if (action === "show-morrow") {
     document.documentElement.classList.remove("morrow-hidden");
     sessionStorage.removeItem(morrowStorageKey);
+    return;
+  }
+  if (action === "copy-network-link") {
+    const ownerToken = networkHash().get("owner") || "";
+    const value = localStorage.getItem(`network-join:${ownerToken}`) || "";
+    if (value) await copyText(value, event.target.closest("[data-action]"));
+    return;
+  }
+  if (action === "network-train" && networkState) {
+    const button = event.target.closest("[data-action]");
+    button.disabled = true;
+    const weights = trainLocalPocket(networkState.training_table);
+    const metrics = localWeightMetrics(weights, networkState.training_table);
+    const checksum = await weightChecksum(weights);
+    localStorage.setItem(weightsStorageKey(networkState), JSON.stringify(weights));
+    await networkPost("ready", {
+      node_token: networkHash().get("node"),
+      metrics: { ...metrics, weight_checksum: checksum, runtime: navigator.userAgent.slice(0, 80) }
+    });
+    await loadNetwork();
+    return;
+  }
+  if (action === "network-start") {
+    const button = event.target.closest("[data-action]");
+    button.disabled = true;
+    await networkPost("start", { owner_token: networkHash().get("owner"), task_count: 64 });
+    await loadNetwork();
+    return;
+  }
+  if (action === "network-contribute" && networkState) {
+    const button = event.target.closest("[data-action]");
+    button.disabled = true;
+    const weights = loadLocalWeights(networkState);
+    if (!weights) throw new Error("local weights are missing on this device");
+    const capsules = (networkState.task_keys || []).map(key => weights[key]);
+    await networkPost("contribute", { node_token: networkHash().get("node"), capsules });
+    await loadNetwork();
     return;
   }
   if (action === "edit-contribution") {
@@ -2542,6 +2885,50 @@ app.addEventListener("submit", async (event) => {
   event.preventDefault();
   const form = event.target;
   const data = formData(form);
+
+  if (form.dataset.form === "network-create") {
+    const errorTarget = form.querySelector(".form-error");
+    try {
+      const pseudonym = String(data.pseudonym || "").trim();
+      const room = await networkPost("rooms", {
+        author_mode: pseudonym ? "pseudonym" : "anonymous",
+        pseudonym,
+        consent: data.consent === "on"
+      });
+      localStorage.setItem(`network-join:${room.owner_token}`, `${location.origin}${room.join_path}`);
+      location.href = room.owner_path;
+    } catch (error) {
+      errorTarget.textContent = error.message || n("noAccess");
+    }
+    return;
+  }
+
+  if (form.dataset.form === "network-join") {
+    const errorTarget = form.querySelector(".form-error");
+    try {
+      const node = await networkPost("join", {
+        join_token: networkHash().get("join"),
+        label: String(data.label || "device").trim()
+      });
+      location.href = node.node_path;
+    } catch (error) {
+      errorTarget.textContent = error.message || n("noAccess");
+    }
+    return;
+  }
+
+  if (form.dataset.form === "network-publish") {
+    const errorTarget = form.querySelector(".form-error");
+    try {
+      const result = await networkPost("publish", {
+        owner_token: networkHash().get("owner"), consent: data.consent === "on"
+      });
+      location.href = result.public_path;
+    } catch (error) {
+      errorTarget.textContent = error.message || n("noAccess");
+    }
+    return;
+  }
 
   if (form.dataset.form === "experiment-run") {
     const errorTarget = form.querySelector(".form-error");

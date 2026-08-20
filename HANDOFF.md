@@ -166,6 +166,16 @@ committed source revision. Its preferred interactive artifact is
 `/experiments/E002/R0001-v0.4/microscope.html`. It remains development-only:
 oracle routing is supplied, and exact RAG/symbolic synthesis also reach 100%.
 
+E003 is the first physical-device room at `/network/`. Its backend tables are
+`physical_rooms` and `physical_nodes`; private owner/join/node tokens are stored
+only as hashes on the server and in URL fragments/local device state. Three
+browser nodes (or two browsers plus `site/network/pocket_node.py`) train separate
+16×16 classifiers from the same zero base, then submit atomic 16-logit capsule
+batches for 64 tasks. The whole answer has 4,096 classes. Publication is a
+separate owner-consent step and exposes aggregate metrics only. The controlled
+training shards are hidden from peers but known to the experiment server, so
+E003 makes no privacy or language-model claim.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

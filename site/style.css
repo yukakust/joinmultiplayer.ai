@@ -327,6 +327,107 @@ button:disabled {
   align-self: flex-start;
 }
 
+.network-page {
+  min-height: 100vh;
+}
+
+.join-link-card,
+.local-pocket-card {
+  border: 1px solid var(--line);
+  margin: 2rem 0;
+  padding: 1.5rem;
+}
+
+.join-link-card code {
+  display: block;
+  margin: 1rem 0;
+  overflow-wrap: anywhere;
+}
+
+.physical-nodes {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 2rem 0;
+}
+
+.physical-node {
+  align-items: center;
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 0.65rem;
+  min-height: 14rem;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.physical-node i {
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 4rem;
+  font-style: normal;
+  line-height: 1;
+}
+
+.physical-node i small {
+  color: var(--ember);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+}
+
+.physical-node > span,
+.physical-node > small {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.physical-node.is-ready i,
+.physical-node.is-complete i {
+  text-shadow: 0 0 1.25rem color-mix(in srgb, var(--ember) 65%, transparent);
+}
+
+.weight-picture {
+  background: var(--bg);
+  display: grid;
+  gap: 2px;
+  grid-template-columns: repeat(16, 1fr);
+  margin: 1.5rem 0;
+  max-width: 32rem;
+  padding: 0.5rem;
+}
+
+.weight-picture i {
+  aspect-ratio: 1;
+  background: color-mix(in srgb, var(--ember) calc(var(--weight) * 100%), var(--bg));
+  display: block;
+}
+
+.network-metrics {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 1.5rem 0;
+}
+
+.network-metrics article {
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 9rem;
+  padding: 1.25rem;
+}
+
+.network-metrics strong {
+  font-size: clamp(1.4rem, 3vw, 2.6rem);
+}
+
+.network-metrics span {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
 .run-heading {
   align-items: flex-start;
   border-bottom: 1px solid var(--line);
@@ -2071,6 +2172,15 @@ blockquote {
   .experiment-run-card,
   .journal-event {
     grid-template-columns: 1fr;
+  }
+
+  .physical-nodes,
+  .network-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .physical-node {
+    min-height: 9rem;
   }
 
   .run-heading {

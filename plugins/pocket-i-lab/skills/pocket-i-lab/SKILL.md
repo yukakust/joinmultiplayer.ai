@@ -13,6 +13,9 @@ Tell the user that the journal is public and filtered, then ask them to send thi
 
 `$pocket-i-lab start E002 as <pseudonym>`
 
+Use `E003` instead when the user is working on the first three-device physical
+swarm. Only experiments currently accepted by the laboratory API can start.
+
 Use `anonymous` when they do not want a pseudonym. Starting means explicit consent to publish the filtered journal. The hook returns the public run URL as additional context. Repeat that URL to the user.
 
 ## While active

@@ -11,6 +11,8 @@ from server import (
     ApplicationHandler,
     RateLimiter,
     init_db,
+    new_physical_table,
+    physical_tasks,
     record_publication_event,
     record_question_publication_event,
     token_hash,
@@ -165,6 +167,11 @@ class SubmissionTests(unittest.TestCase):
                 self.assertIsNotNone(db.execute("SELECT name FROM sqlite_master WHERE name = 'events'").fetchone())
                 question_columns = {row[1] for row in db.execute("PRAGMA table_info(questions)")}
                 self.assertIn("research_status", question_columns)
+                self.assertIsNotNone(
+                    db.execute(
+                        "SELECT name FROM sqlite_master WHERE name = 'physical_rooms'"
+                    ).fetchone()
+                )
 
     def test_public_corpus_excludes_pending_records(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -636,6 +643,78 @@ class SubmissionTests(unittest.TestCase):
                 handler.sent[1]["development_run"]["status"],
                 "draft_gates_passed_not_a_result",
             )
+
+    def test_e003_accepts_same_task_codex_journal_without_changing_claim_boundary(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.create_experiment_run(
+                {"experiment_id": "E003", "agent": "codex", "consent": True}
+            )
+            token = handler.sent[1]["token"]
+            handler.get_experiment_run_status({"token": token})
+            self.assertEqual(handler.sent[1]["experiment_id"], "E003")
+            self.assertEqual(handler.sent[1]["protocol_version"], "E003-draft-v0.1")
+            self.assertIn("not yet a language model", handler.sent[1]["task_prompt"])
+
+    def test_three_physical_devices_train_compose_and_publish(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.create_physical_room(
+                {"author_mode": "pseudonym", "pseudonym": "Morrow", "consent": True}
+            )
+            self.assertEqual(handler.sent[0], HTTPStatus.CREATED)
+            room = handler.sent[1]
+            owner_token = room["owner_token"]
+            node_tokens = []
+            for label in ("phone", "mac", "server"):
+                handler.join_physical_room({"join_token": room["join_token"], "label": label})
+                node = handler.sent[1]
+                node_tokens.append(node["node_token"])
+                handler.ready_physical_node(
+                    {
+                        "node_token": node["node_token"],
+                        "metrics": {
+                            "accuracy": 1.0,
+                            "delta_norm": 12.0 + node["role"],
+                            "weight_checksum": f"weights-{node['role']}",
+                            "runtime": "test",
+                        },
+                    }
+                )
+            handler.start_physical_room({"owner_token": owner_token, "task_count": 32})
+            self.assertEqual(handler.sent[0], HTTPStatus.OK)
+            for token in node_tokens:
+                handler.physical_status({"token": token})
+                status = handler.sent[1]
+                table = status["training_table"]
+                capsules = []
+                for key in status["task_keys"]:
+                    target = table[key]
+                    capsules.append([8.0 if index == target else -1.0 for index in range(16)])
+                handler.contribute_physical_node(
+                    {"node_token": token, "capsules": capsules}
+                )
+            handler.physical_status({"token": owner_token})
+            final = handler.sent[1]
+            self.assertEqual(final["status"], "complete")
+            self.assertEqual(final["result"]["exact_accuracy"], 1.0)
+            self.assertEqual(final["result"]["answer_space"], 4096)
+            self.assertTrue(
+                all(value < 1 for value in final["result"]["remove_one_accuracy"])
+            )
+            handler.publish_physical_room({"owner_token": owner_token, "consent": True})
+            self.assertEqual(handler.sent[0], HTTPStatus.OK)
+            self.assertEqual(handler.public_physical_rooms()[0]["public_id"], room["room_id"])
+
+    def test_physical_tasks_are_deterministic_and_private_shards_are_bounded(self):
+        self.assertEqual(physical_tasks("N0001", 5), physical_tasks("N0001", 5))
+        table = new_physical_table()
+        self.assertEqual(len(table), 16)
+        self.assertTrue(all(0 <= value < 16 for value in table))
 
 
 if __name__ == "__main__":
