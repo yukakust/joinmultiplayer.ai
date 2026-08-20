@@ -631,6 +631,11 @@ class SubmissionTests(unittest.TestCase):
             self.assertEqual(handler.sent[0], HTTPStatus.OK)
             self.assertEqual(handler.sent[1]["hypothesis"]["public_id"], "H0001")
             self.assertEqual(len(handler.sent[1]["runs"]), 1)
+            self.assertEqual(handler.sent[1]["protocol_version"], "E002-draft-v0.4")
+            self.assertEqual(
+                handler.sent[1]["development_run"]["status"],
+                "draft_gates_passed_not_a_result",
+            )
 
 
 if __name__ == "__main__":

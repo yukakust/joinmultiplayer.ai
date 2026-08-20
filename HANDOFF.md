@@ -151,6 +151,15 @@ allowlisted journal. It is laboratory infrastructure, not a downloadable pocket
 i. Run keys are private; never paste them into issues, logs, docs, or commands
 that will be published.
 
+Public run `R0001` exercised that path end to end under the Morrow pseudonym.
+Its filtered journal is `/experiment/run/?id=R0001`. The run preserved a failed
+v0.2 rehearsal and two v0.3 revisions. Human review then found that v0.3 tested
+composition depth but not quality growth on one fixed workload. Draft v0.4 adds
+that fixed workload, verifies weight changes for every pocket, and records a
+committed source revision. Its preferred interactive artifact is
+`/experiments/E002/R0001-v0.4/microscope.html`. It remains development-only:
+oracle routing is supplied, and exact RAG/symbolic synthesis also reach 100%.
+
 ## Immediate next work
 
 Verify the E002 vertical slice in this order:

@@ -47,12 +47,27 @@ counted key→value associations, not mathematically unique byte values, and the
 weight-change gate inspected only the visible two-pocket case. Draft v0.4
 corrects all three issues and retains this artifact unchanged.
 
-## R0001-v0.4 — pending versioned development run
+## R0001-v0.4-fixed-workload — passing development rehearsal
 
-Status: **code under human review; protocol still DRAFT**
+Status: **all v0.4 draft gates passed; protocol still DRAFT; awaiting human inspection**
 
 The v0.4 runner adds a fixed 32-pocket workload with evenly covered ordered
 expert pairs. It evaluates that exact workload while 2, 4, 8, 16, and 32 owners
 are available, alongside the original all-N composition-depth curve. A final
 development artifact must point to the committed source revision that produced
 it and include a verified content manifest.
+
+The run points to source revision `d68b9031947f19170fe9e4c6068d9e1bf159a9f3`
+and its manifest verifies. On the fixed 1,984-task workload, accuracy rose:
+
+```text
+available pocket i:   2      4      8      16      32
+accuracy:            0.7%   1.7%   6.1%   24.5%   100.0%
+```
+
+The oracle-answerable fractions are approximately 0.2%, 1.2%, 5.6%, 24.2%,
+and 100%; the small excess is chance prediction on tasks whose required owner
+is unavailable. This curve therefore demonstrates coverage under oracle
+routing, not learned discovery or superiority over exact retrieval. The
+separate composition-depth curve remains 100% at every N and shows only that
+the synthetic merge continues to work as fan-in increases.

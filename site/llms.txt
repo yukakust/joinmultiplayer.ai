@@ -6,6 +6,10 @@ Main hypothesis H0001: Can many personal pocket i—each preserving its own know
 Current experiment: https://joinmultiplayer.ai/experiment/?id=E002
 Experiment API: https://joinmultiplayer.ai/api/public/E002
 Public Codex run index: https://joinmultiplayer.ai/api/public/experiment-runs.json
+E002 v0.4 interactive development microscope: https://joinmultiplayer.ai/experiments/E002/R0001-v0.4/microscope.html
+E002 v0.4 machine summary: https://joinmultiplayer.ai/experiments/E002/R0001-v0.4/summary.json
+
+E002 v0.4 is an unlocked synthetic development rehearsal, not an accepted result. Its fixed-workload accuracy rises as 2, 4, 8, 16, and 32 owners become available, but routing is oracle-selected and exact RAG plus symbolic synthesis also reach 100%. Do not claim superiority or that H0001 is proven.
 
 The public map is a task-and-evidence ledger. A question may exist before it has an answer and may derive from an older public trace. A later event can return to the earliest question without changing or renumbering the earlier record.
 

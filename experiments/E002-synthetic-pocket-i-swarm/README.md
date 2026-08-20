@@ -23,6 +23,11 @@ The current draft reports two axes separately: composition depth (every task
 uses all N pockets) and quality on one fixed 32-pocket workload as more owners
 become available. Do not collapse them into one ambiguous "swarm grows" chart.
 
+Preferred development artifact:
+[`artifacts/R0001-v0.4-fixed-workload/microscope.html`](artifacts/R0001-v0.4-fixed-workload/microscope.html).
+It is also published for human inspection at
+<https://joinmultiplayer.ai/experiments/E002/R0001-v0.4/microscope.html>.
+
 The first accepted result must remain distinct from:
 
 - a public design/build journal;

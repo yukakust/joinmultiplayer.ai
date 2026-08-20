@@ -84,8 +84,8 @@ MAIN_HYPOTHESIS = {
 E002 = {
     "public_id": "E002",
     "hypothesis_id": "H0001",
-    "status": "designing",
-    "protocol_version": "E002-draft-v0.1",
+    "status": "development_review_required",
+    "protocol_version": "E002-draft-v0.4",
     "title": {
         "en": "Synthetic pocket i swarm",
         "ru": "Синтетический swarm pocket i",
@@ -96,7 +96,23 @@ E002 = {
     },
     "scales": [2, 4, 8, 16, 32],
     "answer_space": 256,
-    "phase": "protocol_and_implementation",
+    "phase": "development_artifact_awaiting_human_review",
+    "development_run": {
+        "run_id": "R0001-v0.4-fixed-workload",
+        "status": "draft_gates_passed_not_a_result",
+        "source_revision": "d68b9031947f19170fe9e4c6068d9e1bf159a9f3",
+        "microscope_path": "/experiments/E002/R0001-v0.4/microscope.html",
+        "summary_path": "/experiments/E002/R0001-v0.4/summary.json",
+        "tasks_path": "/experiments/E002/R0001-v0.4/tasks.jsonl",
+        "fixed_workload_curve": [
+            {"available_pockets": 2, "accuracy": 0.00655241935483871},
+            {"available_pockets": 4, "accuracy": 0.01663306451612903},
+            {"available_pockets": 8, "accuracy": 0.06098790322580645},
+            {"available_pockets": 16, "accuracy": 0.24546370967741934},
+            {"available_pockets": 32, "accuracy": 1.0},
+        ],
+        "claim_boundary": "Synthetic composition and oracle-routed coverage only; exact RAG and symbolic synthesis also reach 100%.",
+    },
 }
 
 

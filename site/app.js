@@ -168,7 +168,7 @@ const labCopy = {
     goal: "Can many personal pocket i—each preserving its own knowledge and individuality—temporarily unite into a single distributed neural network and grow stronger as the swarm scales?",
     currentExperiment: "CURRENT EXPERIMENT · E002",
     experimentTitle: "Synthetic pocket i swarm",
-    experimentStatus: "DESIGNING — NOT LOCKED",
+    experimentStatus: "DEVELOPMENT ARTIFACT — HUMAN REVIEW REQUIRED",
     experimentIntro: "Start with two inspectable synthetic pocket i, then scale the same mechanism to 4, 8, 16, and 32. Each must learn different private knowledge by changing its own weights.",
     microscope: "FIRST UNDER THE MICROSCOPE",
     microscopeCopy: "Two i begin from one shared base. Each sees a different private table. The source must combine both learned deltas with the public z₀ path to choose one answer from 256 classes.",
@@ -176,6 +176,11 @@ const labCopy = {
     scaleCopy: "We measure whether unique coverage and compositional quality grow as independent i and total distributed compute are added. Equal-budget controls only reveal the price of coordination.",
     falsify: "WHAT WOULD DISPROVE IT",
     falsifyCopy: "A single i solves the task; z₀ is unnecessary; the merger memorizes test values; personal weights do not change; exact RAG explains every gain more simply; or quality stops growing with useful new i.",
+    inspectResult: "INSPECT WHAT ACTUALLY HAPPENED",
+    inspectResultCopy: "The v0.4 development run separates two claims: composition still works when one answer needs up to 32 i, and accuracy on one fixed workload rises as 2 → 32 owners become available. This is oracle-routed synthetic evidence, not a locked result.",
+    openMicroscope: "OPEN INTERACTIVE MICROSCOPE",
+    downloadTasks: "DOWNLOAD ALL 1,280 COMPOSITION TASKS",
+    exactControls: "Exact RAG and symbolic synthesis also score 100%. The neural path has not beaten them.",
     protocol: "READ THE DRAFT PROTOCOL",
     runs: "PUBLIC CODEX RUNS",
     noRuns: "No public Codex run has started yet.",
@@ -229,7 +234,7 @@ const labCopy = {
     goal: "Может ли множество личных pocket i, сохраняя собственные знания и индивидуальность, временно объединяться в одну распределённую нейросеть — и становиться сильнее по мере роста swarm?",
     currentExperiment: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E002",
     experimentTitle: "Синтетический swarm pocket i",
-    experimentStatus: "ПРОЕКТИРУЕТСЯ — НЕ ЗАФИКСИРОВАН",
+    experimentStatus: "ЕСТЬ DEVELOPMENT-АРТЕФАКТ — НУЖНА ПРОВЕРКА ЧЕЛОВЕКА",
     experimentIntro: "Начинаем с двух наглядных синтетических pocket i, затем масштабируем тот же механизм до 4, 8, 16 и 32. Каждый должен выучить своё приватное знание, действительно изменив собственные веса.",
     microscope: "СНАЧАЛА — ПОД МИКРОСКОПОМ",
     microscopeCopy: "Два i начинают с общей базы. Каждый видит свою приватную таблицу. Источник должен сложить обе выученные дельты с публичным путём z₀ и выбрать один ответ из 256 классов.",
@@ -237,6 +242,11 @@ const labCopy = {
     scaleCopy: "Мы измеряем, растут ли уникальное покрытие и качество композиции вместе с независимыми i и суммарным распределённым compute. Равный бюджет лишь показывает цену координации.",
     falsify: "ЧТО ОПРОВЕРГНЕТ МЕХАНИЗМ",
     falsifyCopy: "Задачу решает один i; z₀ не нужен; merger запоминает test-значения; личные веса не меняются; exact RAG проще объясняет весь выигрыш; либо качество перестаёт расти с добавлением полезных i.",
+    inspectResult: "ПОСМОТРЕТЬ, ЧТО ПРОИЗОШЛО НА САМОМ ДЕЛЕ",
+    inspectResultCopy: "Development-run v0.4 разделяет два утверждения: композиция работает, когда для ответа нужны до 32 i; а на одном неизменном наборе задач точность растёт по мере появления 2 → 32 владельцев знаний. Это синтетика с oracle-routing, а не зафиксированный результат.",
+    openMicroscope: "ОТКРЫТЬ ИНТЕРАКТИВНЫЙ МИКРОСКОП",
+    downloadTasks: "СКАЧАТЬ ВСЕ 1 280 ЗАДАЧ КОМПОЗИЦИИ",
+    exactControls: "Exact RAG и символический synthesis тоже дают 100%. Нейронный путь их пока не победил.",
     protocol: "ПРОЧИТАТЬ ЧЕРНОВИК ПРОТОКОЛА",
     runs: "ОТКРЫТЫЕ ЗАПУСКИ CODEX",
     noRuns: "Ни одного открытого запуска Codex пока нет.",
@@ -2144,6 +2154,8 @@ async function loadExperiment() {
     if (!response.ok) throw new Error("experiment unavailable");
     const experiment = await response.json();
     const runs = experiment.runs || [];
+    const development = experiment.development_run || {};
+    const fixedCurve = development.fixed_workload_curve || [];
     target.querySelector(".experiment-loading").outerHTML = `
       <div class="experiment-status">${l("experimentStatus")}</div>
       <section class="hypothesis-card">
@@ -2171,6 +2183,13 @@ async function loadExperiment() {
       <div class="actions experiment-actions">
         <a class="button secondary" href="${repository}/blob/agent/game-loop-v0.1/experiments/E002-synthetic-pocket-i-swarm/PROTOCOL.md">${l("protocol")}</a>
       </div>
+      ${development.microscope_path ? `<section class="development-result">
+        <div class="flow-step">${l("inspectResult")}</div>
+        <p>${l("inspectResultCopy")}</p>
+        <div class="fixed-curve" aria-label="fixed workload swarm curve">${fixedCurve.map(point => `<div><span>${escapeHTML(point.available_pockets)}i</span><i style="--accuracy:${Math.max(0.02, Number(point.accuracy || 0))}"></i><b>${(Number(point.accuracy || 0) * 100).toFixed(1)}%</b></div>`).join("")}</div>
+        <p class="control-warning">${l("exactControls")}</p>
+        <div class="actions"><a class="button" href="${escapeHTML(development.microscope_path)}">${l("openMicroscope")}</a><a class="button secondary" href="${escapeHTML(development.tasks_path)}" download>${l("downloadTasks")}</a></div>
+      </section>` : ""}
       <section class="experiment-runs">
         <div class="flow-step">${l("runs")}</div>
         <div class="experiment-run-list">${runs.length ? runs.map(experimentRunCard).join("") : `<p>${l("noRuns")}</p>`}</div>
