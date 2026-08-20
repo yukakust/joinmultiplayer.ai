@@ -56,12 +56,6 @@ from .routing import (
 )
 
 
-FRESH_DELTA_TOLERANCE = 2e-6
-COLLECTIVE_LIFT_THRESHOLD = 0.10
-CAUSAL_LOSS_THRESHOLD = 0.10
-BACKUP_MAX_LOSS = 0.10
-
-
 @dataclass(slots=True)
 class TrainedPocketI:
     logical_id: str
@@ -71,6 +65,19 @@ class TrainedPocketI:
     capsules: dict[str, Tensor]
     validation_quality: float
     stats: dict[str, Any]
+
+
+def _development_gate_defaults() -> dict[str, float]:
+    """Visible convenience thresholds; locked configs must state their own."""
+
+    return {
+        "fresh_delta_max": 2e-6,
+        "collective_lift_min": 0.10,
+        "macro_collective_lift_min": 0.10,
+        "causal_loss_min": 0.10,
+        "backup_loss_max": 0.10,
+        "z0_norm_error_max": 1e-6,
+    }
 
 
 def _repo_root() -> Path:
@@ -373,6 +380,22 @@ def _task_capsules(
     return first, second, (first_audit, second_audit)
 
 
+def _trusted_source_z0(first_cls: Tensor, second_cls: Tensor) -> Tensor:
+    """Fixed order-aware source ABI: Normalize(I·first + P2·second).
+
+    ``P2`` is the fixed cyclic coordinate permutation implemented by
+    ``torch.roll(..., 1)``.  The transform is orthogonal, label-free, and has
+    no parameters.  Swapping task roles therefore changes the local state.
+    """
+
+    if first_cls.shape != second_cls.shape or first_cls.ndim < 1:
+        raise ValueError("source CLS tensors must have the same non-scalar shape")
+    if first_cls.shape[-1] < 2:
+        raise ValueError("source ABI needs at least two coordinates")
+    combined = first_cls + torch.roll(second_cls, shifts=1, dims=-1)
+    return F.normalize(combined, dim=-1).detach()
+
+
 def _features_for_tasks(
     tasks: Sequence[PrivateWorldTask],
     *,
@@ -405,14 +428,13 @@ def _features_for_tasks(
             force_primary_failure=force_primary_failure,
             poison_variant=poison_variant,
         )
-        trusted_mean = (
-            source_cls[(task.first.specialty, task.first.key)]
-            + source_cls[(task.second.specialty, task.second.key)]
-        ) / 2.0
         # Fixed, source-owned ABI transform.  It sees no label and has no
         # trainable parameters; normalization keeps a bounded merge update
         # comparable to the local path instead of drowning in ||base||≈sqrt(d).
-        z0 = F.normalize(trusted_mean.unsqueeze(0), dim=-1).squeeze(0).detach()
+        z0 = _trusted_source_z0(
+            source_cls[(task.first.specialty, task.first.key)],
+            source_cls[(task.second.specialty, task.second.key)],
+        )
         source_states.append(z0)
         first_capsules.append(first)
         second_capsules.append(second)
@@ -444,8 +466,9 @@ def _train_heads(
     torch.manual_seed(seed)
     heads = {
         "pdt": SourceMerger(abi_dim=abi_dim, hidden_dim=hidden_dim),
+        "pdt_without_z0": SourceMerger(abi_dim=abi_dim, hidden_dim=hidden_dim),
         "base_only": SourceMerger(abi_dim=abi_dim, hidden_dim=hidden_dim),
-        "zero_clones": SourceMerger(abi_dim=abi_dim, hidden_dim=hidden_dim),
+        "fresh_clones": SourceMerger(abi_dim=abi_dim, hidden_dim=hidden_dim),
         "single_first": SourceMerger(abi_dim=abi_dim, hidden_dim=hidden_dim),
         "single_second": SourceMerger(abi_dim=abi_dim, hidden_dim=hidden_dim),
     }
@@ -477,13 +500,17 @@ def _train_heads(
         pdt_loss = F.cross_entropy(
             heads["pdt"](batch_z0, batch_first, batch_second), batch_labels
         )
-        # Base-only omits Merge entirely.  The zero-clone control executes the
-        # same SourceMerger graph as PDT but supplies two fresh zero deltas.
+        pdt_without_z0_loss = F.cross_entropy(
+            heads["pdt_without_z0"](zero, batch_first, batch_second), batch_labels
+        )
+        # Base-only omits Merge entirely.  Fresh clones preserve the declared
+        # depth/interface but have no personalization and emit zero deltas;
+        # this is not a claim of executed-FLOP matching in the buffered pilot.
         base_loss = F.cross_entropy(
             heads["base_only"].final_layers(batch_z0), batch_labels
         )
         clone_loss = F.cross_entropy(
-            heads["zero_clones"](batch_z0, zero, zero), batch_labels
+            heads["fresh_clones"](batch_z0, zero, zero), batch_labels
         )
         first_loss = F.cross_entropy(
             heads["single_first"](batch_z0, batch_control_first, zero), batch_labels
@@ -495,13 +522,22 @@ def _train_heads(
             prior_logits.unsqueeze(0).expand(batch_labels.shape[0], -1),
             batch_labels,
         )
-        total = pdt_loss + base_loss + clone_loss + first_loss + second_loss + prior_loss
+        total = (
+            pdt_loss
+            + pdt_without_z0_loss
+            + base_loss
+            + clone_loss
+            + first_loss
+            + second_loss
+            + prior_loss
+        )
         total.backward()
         optimizer.step()
         losses = {
             "pdt": float(pdt_loss.detach().item()),
+            "pdt_without_z0": float(pdt_without_z0_loss.detach().item()),
             "base_only_z0": float(base_loss.detach().item()),
-            "zero_clone_compute_matched": float(clone_loss.detach().item()),
+            "fresh_clone_no_personalization": float(clone_loss.detach().item()),
             "single_first": float(first_loss.detach().item()),
             "single_second": float(second_loss.detach().item()),
             "no_knowledge_prior": float(prior_loss.detach().item()),
@@ -519,8 +555,31 @@ def _predict(module: nn.Module, *inputs: Tensor) -> list[int]:
 def _validate_config(config: Mapping[str, Any]) -> None:
     if config.get("experiment_id") != "E001":
         raise ValueError("config experiment_id must be E001")
-    if config.get("stage", "development") not in ("development", "locked_pilot"):
+    stage = config.get("stage", "development")
+    if stage not in ("development", "locked_pilot"):
         raise ValueError("stage must be development or locked_pilot")
+    required_gates = set(_development_gate_defaults())
+    supplied_gates = config.get("gates")
+    if stage == "locked_pilot":
+        if not isinstance(supplied_gates, Mapping):
+            raise ValueError("locked_pilot config requires an explicit gates object")
+        missing = required_gates - set(supplied_gates)
+        if missing:
+            raise ValueError(
+                "locked_pilot config is missing required gates: "
+                + ", ".join(sorted(missing))
+            )
+    if supplied_gates is not None:
+        if not isinstance(supplied_gates, Mapping):
+            raise ValueError("gates must be a JSON object")
+        unknown = set(supplied_gates) - required_gates
+        if unknown:
+            raise ValueError("unknown gates: " + ", ".join(sorted(unknown)))
+        for name, value in supplied_gates.items():
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                raise ValueError(f"gate {name} must be numeric")
+            if not math.isfinite(float(value)) or float(value) < 0:
+                raise ValueError(f"gate {name} must be finite and non-negative")
     world = config["world"]
     model = config["model"]
     if world["specialties"] != len(SPECIALTIES):
@@ -542,6 +601,9 @@ def _validate_config(config: Mapping[str, Any]) -> None:
 def _effective_config(config: Mapping[str, Any], smoke: bool) -> dict[str, Any]:
     effective = copy.deepcopy(dict(config))
     effective.setdefault("stage", "development")
+    gate_values = _development_gate_defaults()
+    gate_values.update(effective.get("gates", {}))
+    effective["gates"] = gate_values
     if smoke:
         # 70/15/15 with eight keys yields a useful 5/1/2 train/validation/test
         # partition per specialty while remaining tiny.
@@ -871,6 +933,33 @@ def run_experiment(
         failure_seed=seed + 4000,
         source_cls=source_cls_by_ref,
     )
+    reversed_z0 = torch.stack(
+        [
+            _trusted_source_z0(
+                source_cls_by_ref[(task.second.specialty, task.second.key)],
+                source_cls_by_ref[(task.first.specialty, task.first.key)],
+            )
+            for task in test_tasks
+        ]
+    )
+    order_distances = torch.linalg.vector_norm(normal_z0 - reversed_z0, dim=-1)
+    nonidentical_source_refs = [
+        not torch.equal(
+            source_cls_by_ref[(task.first.specialty, task.first.key)],
+            source_cls_by_ref[(task.second.specialty, task.second.key)],
+        )
+        for task in test_tasks
+    ]
+    order_aware_count = sum(
+        bool(distance > 1e-6) and nonidentical
+        for distance, nonidentical in zip(
+            order_distances.tolist(), nonidentical_source_refs, strict=True
+        )
+    )
+    nonidentical_count = sum(nonidentical_source_refs)
+    source_z0_order_aware = order_aware_count == nonidentical_count
+    if not source_z0_order_aware:
+        raise RuntimeError("trusted source z0 did not preserve ordered task roles")
     configured_z0, configured_first, configured_second, _, configured_audits = _features_for_tasks(
         test_tasks,
         router=router,
@@ -937,9 +1026,12 @@ def run_experiment(
         "pdt_forced_primary_failures": _predict(
             heads["pdt"], forced_z0, forced_first, forced_second
         ),
+        "pdt_without_z0": _predict(
+            heads["pdt_without_z0"], zero, normal_first, normal_second
+        ),
         "base_only_z0": _predict(heads["base_only"].final_layers, normal_z0),
-        "zero_clone_compute_matched": _predict(
-            heads["zero_clones"], normal_z0, zero, zero
+        "fresh_clone_no_personalization": _predict(
+            heads["fresh_clones"], normal_z0, zero, zero
         ),
         "single_first_learned": _predict(
             heads["single_first"], normal_z0, normal_first, zero
@@ -996,7 +1088,7 @@ def run_experiment(
     causal_loss = accuracies["pdt_normal"] - causal_retained
     primary_control_names = (
         "base_only_z0",
-        "zero_clone_compute_matched",
+        "fresh_clone_no_personalization",
         "single_first_learned",
         "single_second_learned",
     )
@@ -1014,6 +1106,17 @@ def run_experiment(
     macro_collective_lift = (
         macro_accuracies["pdt_normal"] - strongest_macro_control_accuracy
     )
+    source_z0_contribution = {
+        "pass_fail_gate": False,
+        "micro_accuracy_difference": accuracies["pdt_normal"]
+        - accuracies["pdt_without_z0"],
+        "macro_accuracy_difference": macro_accuracies["pdt_normal"]
+        - macro_accuracies["pdt_without_z0"],
+        "interpretation": (
+            "Positive means the full PDT head outperformed a separately trained "
+            "two-delta head whose trusted source state was replaced by zero."
+        ),
+    }
     backup_loss = (
         accuracies["pdt_normal"]
         - accuracies["pdt_forced_primary_failures"]
@@ -1078,6 +1181,7 @@ def run_experiment(
                 "source_z0_norm": float(
                     torch.linalg.vector_norm(normal_z0[index]).item()
                 ),
+                "source_z0_reversal_distance": float(order_distances[index].item()),
                 "predictions": task_predictions,
                 "strict_collaborative_success": strict_flags[index],
                 "routing": {
@@ -1110,23 +1214,37 @@ def run_experiment(
     fresh_max = max(stat["fresh_max_delta_norm"] for stat in expert_stats)
     z0_norms = torch.linalg.vector_norm(normal_z0, dim=-1)
     z0_max_unit_error = float((z0_norms - 1.0).abs().max().item())
+    gate_config = effective["gates"]
     gates = {
-        "key_disjoint_merger_split": {"pass": key_split_audit["all_disjoint"]},
+        "key_disjoint_merger_split": {
+            "pass": key_split_audit["all_disjoint"],
+            "configured_threshold": {"expected": True},
+        },
         "frozen_information_boundary": {
             "pass": all(frozen_assertions.values()),
             "assertions": frozen_assertions,
+            "configured_threshold": {"expected": True},
         },
         "trusted_source_z0_normalized": {
-            "pass": z0_max_unit_error <= 1e-6,
+            "pass": z0_max_unit_error <= gate_config["z0_norm_error_max"],
             "max_unit_norm_error": z0_max_unit_error,
-            "threshold_max": 1e-6,
+            "configured_threshold": {
+                "operator": "<=",
+                "value": gate_config["z0_norm_error_max"],
+            },
         },
         "fresh_delta_within_tolerance": {
-            "pass": fresh_max <= FRESH_DELTA_TOLERANCE,
+            "pass": fresh_max <= gate_config["fresh_delta_max"],
             "value": fresh_max,
-            "threshold_max": FRESH_DELTA_TOLERANCE,
+            "configured_threshold": {
+                "operator": "<=",
+                "value": gate_config["fresh_delta_max"],
+            },
         },
-        "distinct_top_two": {"pass": all_routes_distinct},
+        "distinct_top_two": {
+            "pass": all_routes_distinct,
+            "configured_threshold": {"expected": True},
+        },
         "transactional_partial_discard": {
             "pass": partial_merged_count == 0
             and all_forced_used_backup
@@ -1136,23 +1254,40 @@ def run_experiment(
             "all_forced_routes_used_backup": all_forced_used_backup,
             "distinct_poisoned_partials": poisoned_partials_distinct,
             "selected_backup_and_result_identical": poisoned_partial_result_identical,
+            "configured_threshold": {"partial_payloads_merged": 0},
         },
         "backup_quality_preserved": {
-            "pass": backup_loss <= BACKUP_MAX_LOSS
-            and accuracies["pdt_forced_primary_failures"]
-            >= strongest_control_accuracy + COLLECTIVE_LIFT_THRESHOLD,
+            "pass": backup_loss <= gate_config["backup_loss_max"],
             "normal_minus_forced_accuracy": backup_loss,
-            "threshold_max_loss": BACKUP_MAX_LOSS,
+            "configured_threshold": {
+                "operator": "<=",
+                "value": gate_config["backup_loss_max"],
+            },
         },
         "collective_lift": {
-            "pass": collective_lift >= COLLECTIVE_LIFT_THRESHOLD,
+            "pass": collective_lift >= gate_config["collective_lift_min"],
             "value": collective_lift,
-            "threshold_min": COLLECTIVE_LIFT_THRESHOLD,
+            "configured_threshold": {
+                "operator": ">=",
+                "value": gate_config["collective_lift_min"],
+            },
+        },
+        "macro_collective_lift": {
+            "pass": macro_collective_lift
+            >= gate_config["macro_collective_lift_min"],
+            "value": macro_collective_lift,
+            "configured_threshold": {
+                "operator": ">=",
+                "value": gate_config["macro_collective_lift_min"],
+            },
         },
         "causal_specialty_loss": {
-            "pass": causal_loss >= CAUSAL_LOSS_THRESHOLD,
+            "pass": causal_loss >= gate_config["causal_loss_min"],
             "value": causal_loss,
-            "threshold_min": CAUSAL_LOSS_THRESHOLD,
+            "configured_threshold": {
+                "operator": ">=",
+                "value": gate_config["causal_loss_min"],
+            },
         },
     }
     pilot_gate_pass = all(bool(gate["pass"]) for gate in gates.values())
@@ -1172,7 +1307,7 @@ def run_experiment(
         stage=str(effective["stage"]), smoke=smoke, gates_passed=pilot_gate_pass
     )
     summary: dict[str, Any] = {
-        "schema_version": 2,
+        "schema_version": 3,
         "experiment_id": "E001",
         "stage": effective["stage"],
         "status": status,
@@ -1223,8 +1358,14 @@ def run_experiment(
         },
         "neural_abi": {
             "equation": "logits = FinalLayers(z0 + Clip(Merge(delta_first, delta_second)))",
-            "trusted_source_z0": "L2Normalize((Base24CLS(first_ref) + Base24CLS(second_ref)) / 2)",
+            "trusted_source_z0": "L2Normalize(I·Base24CLS(first_ref) + P2·Base24CLS(second_ref)); P2=cyclic coordinate roll by 1",
             "z0_is_source_owned": True,
+            "z0_is_order_aware": source_z0_order_aware,
+            "z0_order_audit": {
+                "nonidentical_reference_pairs": nonidentical_count,
+                "pairs_changed_when_roles_reversed": order_aware_count,
+                "minimum_reversal_distance": float(order_distances.min().item()),
+            },
             "z0_transform_trainable": False,
             "z0_transform_label_access": False,
             "dimension": abi_dim,
@@ -1249,8 +1390,9 @@ def run_experiment(
             "final_head_losses": head_losses,
             "central_head_conditions": {
                 "pdt": "z0 + two complete routed deltas; preferred failures sampled during training",
+                "pdt_without_z0": "zero source state + two complete routed deltas; separately trained diagnostic",
                 "base_only": "FinalLayers(z0), with Merge omitted",
-                "zero_clones": "z0 + two compute-matched zero deltas",
+                "fresh_clone_no_personalization": "z0 + two canonical zero deltas from depth/interface-matched fresh clones; executed FLOPs are not matched",
                 "single_first": "z0 + primary first-role delta + zero",
                 "single_second": "z0 + zero + primary second-role delta",
                 "no_knowledge_prior": "four learned class logits and no task input",
@@ -1273,6 +1415,7 @@ def run_experiment(
             "macro_strongest_control": strongest_macro_control_name,
             "macro_strongest_control_accuracy": strongest_macro_control_accuracy,
             "macro_collective_lift_over_strongest_control": macro_collective_lift,
+            "source_z0_contribution_diagnostic": source_z0_contribution,
             "strict_joint_ablation_diagnostic": {
                 "pass_fail_gate": False,
                 "count": sum(strict_flags),
@@ -1361,8 +1504,7 @@ def run_suite(
     if len(set(normalized_seeds)) != len(normalized_seeds):
         raise ValueError("run_suite seeds must be distinct")
 
-    suite_config = copy.deepcopy(dict(config))
-    suite_config.setdefault("stage", "development")
+    suite_config = _effective_config(config, smoke=False)
     root = _resolve_artifacts_root(suite_config, artifacts_root)
     default_identifier = (
         run_id(normalized_seeds[0]).split("-seed-", 1)[0]
@@ -1416,6 +1558,15 @@ def run_suite(
                 "collective_lift": summary["metrics"][
                     "collective_lift_over_strongest_control"
                 ],
+                "macro_strongest_control": summary["metrics"][
+                    "macro_strongest_control"
+                ],
+                "macro_strongest_control_accuracy": summary["metrics"][
+                    "macro_strongest_control_accuracy"
+                ],
+                "macro_collective_lift": summary["metrics"][
+                    "macro_collective_lift_over_strongest_control"
+                ],
                 "backup_accuracy": summary["metrics"]["accuracy"][
                     "pdt_forced_primary_failures"
                 ],
@@ -1441,6 +1592,8 @@ def run_suite(
             "pdt_accuracy",
             "strongest_control_accuracy",
             "collective_lift",
+            "macro_strongest_control_accuracy",
+            "macro_collective_lift",
             "backup_accuracy",
             "backup_accuracy_loss",
         )

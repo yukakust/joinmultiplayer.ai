@@ -5,11 +5,18 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import torch
+
 
 EXPERIMENT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(EXPERIMENT_ROOT / "src"))
 
-from e001.run import _run_labels, run_experiment, run_suite  # noqa: E402
+from e001.run import (  # noqa: E402
+    _run_labels,
+    _trusted_source_z0,
+    run_experiment,
+    run_suite,
+)
 
 
 class RunnerTests(unittest.TestCase):
@@ -73,6 +80,7 @@ class RunnerTests(unittest.TestCase):
             )
             self.assertIn("z0 + Clip(Merge", summary["neural_abi"]["equation"])
             self.assertFalse(summary["neural_abi"]["z0_transform_trainable"])
+            self.assertTrue(summary["neural_abi"]["z0_is_order_aware"])
             self.assertEqual(len(summary["metrics"]["per_ordered_specialty_pair"]), 12)
             self.assertEqual(
                 sum(summary["world"]["class_distribution"]["test"]),
@@ -88,10 +96,28 @@ class RunnerTests(unittest.TestCase):
             )
             self.assertIn("matched_no_knowledge_prior", summary["metrics"]["accuracy"])
             self.assertIn("base_only_z0", summary["metrics"]["accuracy"])
-            self.assertIn("zero_clone_compute_matched", summary["metrics"]["accuracy"])
+            self.assertIn(
+                "fresh_clone_no_personalization", summary["metrics"]["accuracy"]
+            )
+            self.assertIn("pdt_without_z0", summary["metrics"]["accuracy"])
+            self.assertIn(
+                "source_z0_contribution_diagnostic", summary["metrics"]
+            )
             self.assertIn("single_first_learned", summary["metrics"]["accuracy"])
             self.assertIn("single_second_learned", summary["metrics"]["accuracy"])
             self.assertIn("oracle_memory", summary["metrics"]["accuracy"])
+            self.assertIn("macro_collective_lift", summary["gates"])
+            configured_gates = summary["effective_config"]["gates"]
+            self.assertEqual(
+                summary["gates"]["collective_lift"]["configured_threshold"]["value"],
+                configured_gates["collective_lift_min"],
+            )
+            self.assertEqual(
+                summary["gates"]["macro_collective_lift"][
+                    "configured_threshold"
+                ]["value"],
+                configured_gates["macro_collective_lift_min"],
+            )
 
             summary_path = Path(summary["audit"]["summary_json"])
             tasks_path = Path(summary["audit"]["task_jsonl"])
@@ -107,6 +133,7 @@ class RunnerTests(unittest.TestCase):
             self.assertGreater(len(records), 0)
             for record in records:
                 self.assertAlmostEqual(record["source_z0_norm"], 1.0, places=5)
+                self.assertGreater(record["source_z0_reversal_distance"], 0.0)
                 for role in record["routing"]["forced_primary_failures"]:
                     self.assertTrue(role["primary_failed"])
                     self.assertEqual(role["selected"], role["candidates"][1])
@@ -141,9 +168,38 @@ class RunnerTests(unittest.TestCase):
             ("development_smoke", "informational_smoke_only"),
         )
 
+    def test_locked_stage_requires_every_numeric_gate(self) -> None:
+        config = copy.deepcopy(self.config)
+        config["stage"] = "locked_pilot"
+        config.pop("gates", None)
+        with self.assertRaisesRegex(ValueError, "requires an explicit gates"):
+            run_experiment(config, smoke=True, artifacts_root=Path("/tmp/unused"))
+
+        config["gates"] = {"fresh_delta_max": 2e-6}
+        with self.assertRaisesRegex(ValueError, "missing required gates"):
+            run_experiment(config, smoke=True, artifacts_root=Path("/tmp/unused"))
+
+    def test_trusted_source_z0_is_role_aware_and_unit_norm(self) -> None:
+        first = torch.tensor([1.0, 2.0, 3.0, 4.0])
+        second = torch.tensor([-2.0, 0.5, 1.0, 3.0])
+
+        forward = _trusted_source_z0(first, second)
+        reversed_roles = _trusted_source_z0(second, first)
+
+        self.assertAlmostEqual(float(torch.linalg.vector_norm(forward)), 1.0, places=6)
+        self.assertFalse(torch.allclose(forward, reversed_roles))
+
     def test_two_seed_smoke_suite_has_separate_runs_and_honest_aggregate(self) -> None:
         config = copy.deepcopy(self.config)
         config["stage"] = "locked_pilot"
+        config["gates"] = {
+            "fresh_delta_max": 2e-6,
+            "collective_lift_min": 0.10,
+            "macro_collective_lift_min": 0.10,
+            "causal_loss_min": 0.10,
+            "backup_loss_max": 0.10,
+            "z0_norm_error_max": 1e-6,
+        }
         with tempfile.TemporaryDirectory() as temporary:
             summary = run_suite(
                 config,

@@ -28,5 +28,13 @@
     "preferred_failure_probability": 0.5,
     "seeds": [17082026, 17082027, 17082028]
   },
+  "gates": {
+    "fresh_delta_max": 0.000002,
+    "collective_lift_min": 0.1,
+    "macro_collective_lift_min": 0.1,
+    "causal_loss_min": 0.1,
+    "backup_loss_max": 0.1,
+    "z0_norm_error_max": 0.000001
+  },
   "artifacts_dir": "experiments/E001-personal-delta-towers/artifacts"
 }

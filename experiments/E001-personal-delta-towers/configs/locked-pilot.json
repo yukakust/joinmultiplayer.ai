@@ -1,11 +1,11 @@
 {
   "experiment_id": "E001",
   "stage": "locked_pilot",
-  "protocol_version": "E001-v0.2",
-  "protocol_locked_at": "2026-08-20T07:41:07Z",
+  "protocol_version": "E001-v0.3",
+  "protocol_locked_at": "2026-08-20T07:55:12Z",
   "source_door": "D02",
   "hypothesis": "Two complete specialty-specific personal delta towers can compose an answer that the shared base, fresh clones, or either single specialty cannot recover alone.",
-  "seed": 17082101,
+  "seed": 17082201,
   "world": {
     "specialties": 4,
     "experts_per_specialty": 2,
@@ -30,7 +30,15 @@
   },
   "evaluation": {
     "preferred_failure_probability": 0.5,
-    "seeds": [17082101, 17082102, 17082103]
+    "seeds": [17082201, 17082202, 17082203]
+  },
+  "gates": {
+    "fresh_delta_max": 0.000002,
+    "collective_lift_min": 0.1,
+    "macro_collective_lift_min": 0.1,
+    "causal_loss_min": 0.1,
+    "backup_loss_max": 0.1,
+    "z0_norm_error_max": 0.000001
   },
   "artifacts_dir": "experiments/E001-personal-delta-towers/artifacts"
 }
