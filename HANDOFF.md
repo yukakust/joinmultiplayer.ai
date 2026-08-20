@@ -145,11 +145,17 @@ asks whether useful capability grows with additional independent data and
 compute. Equal budget is a diagnostic control, not the project's ultimate
 claim.
 
-The site exposes H0001, E002, public experiment runs, and a Codex Lab Connector.
-The connector uses the operator's existing Codex login and publishes only an
-allowlisted journal. It is laboratory infrastructure, not a downloadable pocket
-i. Run keys are private; never paste them into issues, logs, docs, or commands
-that will be published.
+The site exposes H0001, E002, public experiment runs, and two Codex journal
+bridges. The legacy one-shot connector in `site/connector/` starts a second
+`codex exec` process and remains only for compatibility with existing private
+run links. The preferred bridge is the repo marketplace plugin in
+`plugins/pocket-i-lab`: after explicit consent in a prompt, lifecycle hooks
+journal the Codex task the participant is already using. The plugin is inactive
+until `$pocket-i-lab start E002 as <pseudonym>` and stores its run key only in
+the plugin data directory with local `0600` permissions. It publishes an
+allowlist and never reads `transcript_path`. It is laboratory infrastructure,
+not a downloadable pocket i. Run keys are private; never paste them into issues,
+logs, docs, or commands that will be published.
 
 Public run `R0001` exercised that path end to end under the Morrow pseudonym.
 Its filtered journal is `/experiment/run/?id=R0001`. The run preserved a failed
@@ -162,15 +168,17 @@ oracle routing is supplied, and exact RAG/symbolic synthesis also reach 100%.
 
 ## Immediate next work
 
-Verify the E002 vertical slice in this order:
+Verify the preferred E002 vertical slice in this order:
 
-1. create a public run from `/experiment/?id=E002` with explicit consent;
-2. use the private fragment page to download and inspect the connector;
-3. validate the key with `--check-only`, then start Codex in a clean public
-   checkout;
-4. watch the filtered journal at `/experiment/run/?id=RNNNN` and confirm no raw
-   command output, file contents, absolute paths, environment data, reasoning,
-   or credentials appear;
+1. install the repo marketplace and `pocket-i-lab` plugin, then start a new
+   Codex task and review/trust its hook definition;
+2. send `$pocket-i-lab start E002 as <pseudonym>`; the hook creates the run,
+   stores the private key locally, and returns the public URL as context;
+3. work in that same task and watch `/experiment/run/?id=RNNNN`; confirm that
+   inactive sessions produce no network calls and active sessions expose no raw
+   commands/output, tool arguments/results, file contents, absolute paths,
+   environment data, session identifiers, reasoning, or credentials;
+4. send `$pocket-i-lab finish` and verify the run closes;
 5. lock E002 thresholds/seeds only after a human reviews its draft and the
    two-i microscope; then run and publish a result separately from the design
    journal.

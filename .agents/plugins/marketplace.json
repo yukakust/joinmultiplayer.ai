@@ -1,0 +1,20 @@
+{
+  "name": "joinmultiplayer-lab",
+  "interface": {
+    "displayName": "Joinmultiplayer Lab"
+  },
+  "plugins": [
+    {
+      "name": "pocket-i-lab",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pocket-i-lab"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "developer-tools"
+    }
+  ]
+}

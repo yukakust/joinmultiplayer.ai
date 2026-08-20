@@ -73,11 +73,26 @@ open questions and evidence
 ```
 
 The current build starts the first synthetic swarm experiment at
-[`E002`](experiments/E002-synthetic-pocket-i-swarm/README.md). Its public Codex
-run journal deliberately exposes only filtered progress: messages, plan,
-action status, relative changed filenames, and metrics. It excludes raw
-reasoning, command output, file contents, environment data, local absolute
-paths, and credentials.
+[`E002`](experiments/E002-synthetic-pocket-i-swarm/README.md). The repository
+also contains the installable [`Pocket i Lab`](plugins/pocket-i-lab) Codex
+plugin. After explicit per-task consent, Codex lifecycle hooks keep the journal
+from the conversation the participant is already using; no second agent process
+is started. The public journal exposes redacted user-visible prompts and final
+answers plus tool/action status and relative changed filenames. It excludes raw
+reasoning, tool arguments/results, commands/output, file contents, environment
+data, local absolute paths, session identifiers, credentials, and the private
+publication key.
+
+Install the repository marketplace and plugin, then begin a new Codex task:
+
+```text
+codex plugin marketplace add yukakust/joinmultiplayer.ai --ref agent/game-loop-v0.1
+codex plugin add pocket-i-lab@joinmultiplayer-lab
+```
+
+After reviewing and trusting the hook, opt in from that task with
+`$pocket-i-lab start E002 as <pseudonym>`. Inactive hooks perform no network
+request. `$pocket-i-lab finish` closes the public run.
 
 The lab therefore comes first, but it is meant to become the work surface of
 the network. Architecture must earn its place through evidence, and each later

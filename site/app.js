@@ -184,13 +184,20 @@ const labCopy = {
     protocol: "READ THE DRAFT PROTOCOL",
     runs: "PUBLIC CODEX RUNS",
     noRuns: "No public Codex run has started yet.",
-    startRun: "START A PUBLIC CODEX RUN",
-    startRunHelp: "The protocol is still a draft. This run designs and implements it; it cannot publish a scientific result or place a dot.",
+    startRun: "CONNECT THE CODEX YOU ALREADY USE",
+    startRunHelp: "Stay in your normal Codex task. Install Pocket i Lab once, then that same Codex keeps a filtered public journal while it works.",
+    pluginStep1: "1 · Install the laboratory plugin",
+    pluginStep2: "2 · Start a new Codex task and review the hook before trusting it",
+    pluginStep3: "3 · Send this opt-in prompt in that task",
+    pluginMarketplaceCommand: "codex plugin marketplace add yukakust/joinmultiplayer.ai --ref agent/game-loop-v0.1",
+    pluginInstallCommand: "codex plugin add pocket-i-lab@joinmultiplayer-lab",
+    pluginTrust: "Codex will show the hook for review. It is inactive until you explicitly start a run.",
     publicName: "Public pseudonym",
     publicNameHelp: "Optional. Leave empty to appear as anonymous.",
-    liveConsent: "I understand that the connector will publish its filtered journal live. It excludes raw reasoning, command output, file contents, environment data, absolute paths, credentials, and the private run key.",
-    createRun: "CREATE RUN + PRIVATE KEY",
-    creatingRun: "CREATING RUN…",
+    liveConsent: "I understand that this Codex task will publish its filtered journal live. It excludes raw reasoning, commands and output, tool arguments and output, file contents, environment data, absolute paths, credentials, session IDs, and the private run key.",
+    createRun: "COPY START PROMPT",
+    creatingRun: "COPYING…",
+    startPromptCopied: "PROMPT COPIED — SEND IT IN CODEX",
     runCreateError: "The run could not be created.",
     connectorTitle: "Connect this run to Codex",
     connectorPrivate: "This page contains the private run key. Keep the URL and key private. Observers only receive the public journal.",
@@ -250,13 +257,20 @@ const labCopy = {
     protocol: "ПРОЧИТАТЬ ЧЕРНОВИК ПРОТОКОЛА",
     runs: "ОТКРЫТЫЕ ЗАПУСКИ CODEX",
     noRuns: "Ни одного открытого запуска Codex пока нет.",
-    startRun: "НАЧАТЬ ОТКРЫТЫЙ ЗАПУСК CODEX",
-    startRunHelp: "Протокол пока черновой. Этот запуск проектирует и реализует его — он не может опубликовать научный результат или поставить точку.",
+    startRun: "ПОДКЛЮЧИТЬ CODEX, КОТОРЫМ ВЫ УЖЕ ПОЛЬЗУЕТЕСЬ",
+    startRunHelp: "Оставайтесь в своей обычной задаче Codex. Один раз установите Pocket i Lab — и тот же Codex сам будет вести очищенный открытый журнал во время работы.",
+    pluginStep1: "1 · Установите plugin лаборатории",
+    pluginStep2: "2 · Начните новую задачу Codex и прочитайте hook перед тем, как ему доверять",
+    pluginStep3: "3 · Отправьте в этой задаче команду согласия",
+    pluginMarketplaceCommand: "codex plugin marketplace add yukakust/joinmultiplayer.ai --ref agent/game-loop-v0.1",
+    pluginInstallCommand: "codex plugin add pocket-i-lab@joinmultiplayer-lab",
+    pluginTrust: "Codex покажет hook для проверки. Пока вы явно не начали запуск, он ничего не публикует.",
     publicName: "Публичный псевдоним",
     publicNameHelp: "Необязательно. Оставьте пустым, чтобы быть анонимом.",
-    liveConsent: "Я понимаю, что connector будет публиковать очищенный журнал в реальном времени. В него не входят сырые рассуждения, вывод команд, содержимое файлов, environment, абсолютные пути, ключи и приватный ключ запуска.",
-    createRun: "СОЗДАТЬ ЗАПУСК + ПРИВАТНЫЙ КЛЮЧ",
-    creatingRun: "СОЗДАЁМ ЗАПУСК…",
+    liveConsent: "Я понимаю, что эта задача Codex будет публиковать очищенный журнал в реальном времени. В него не входят сырые рассуждения, команды и их вывод, аргументы и результаты инструментов, содержимое файлов, environment, абсолютные пути, ключи, идентификаторы сессии и приватный ключ запуска.",
+    createRun: "КОПИРОВАТЬ КОМАНДУ ЗАПУСКА",
+    creatingRun: "КОПИРУЕМ…",
+    startPromptCopied: "КОМАНДА СКОПИРОВАНА — ОТПРАВЬТЕ ЕЁ В CODEX",
     runCreateError: "Не удалось создать запуск.",
     connectorTitle: "Подключить этот запуск к Codex",
     connectorPrivate: "На этой странице есть приватный ключ запуска. Не делитесь ссылкой и ключом. Наблюдатели видят только открытый журнал.",
@@ -2197,6 +2211,11 @@ async function loadExperiment() {
       <section class="start-run-panel">
         <div class="flow-step">${l("startRun")}</div>
         <p>${l("startRunHelp")}</p>
+        <div class="connector-steps plugin-steps">
+          <section><span>${l("pluginStep1")}</span><code>${escapeHTML(l("pluginMarketplaceCommand"))}</code><code>${escapeHTML(l("pluginInstallCommand"))}</code><button class="text-button" data-copy="plugin-install">${l("copyCommand")}</button></section>
+          <section><span>${l("pluginStep2")}</span><p>${l("pluginTrust")}</p></section>
+          <section><span>${l("pluginStep3")}</span><code>$pocket-i-lab start E002 as Morrow</code></section>
+        </div>
         <form data-form="experiment-run" class="research-form">
           <label>${l("publicName")}<small>${l("publicNameHelp")}</small><input name="pseudonym" maxlength="80"></label>
           <label class="honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
@@ -2502,6 +2521,7 @@ app.addEventListener("click", (event) => {
   if (copyButton?.dataset.copy === "public-corpus") copyText("https://joinmultiplayer.ai/api/public/corpus.json", copyButton);
   if (copyButton?.dataset.copy === "question") copyText(prototype.question.text, copyButton);
   if (copyButton?.dataset.copy === "connector-command") copyText(l("connectorCommand"), copyButton);
+  if (copyButton?.dataset.copy === "plugin-install") copyText(`${l("pluginMarketplaceCommand")}\n${l("pluginInstallCommand")}`, copyButton);
   if (copyButton?.dataset.copy === "run-key" && activePrivateRun) copyText(activePrivateRun.token, copyButton);
   if (copyButton?.dataset.copy === "status") {
     copyText(`${location.origin}/d04/#status-${prototype.profile.statusToken}`, copyButton);
@@ -2526,30 +2546,14 @@ app.addEventListener("submit", async (event) => {
   if (form.dataset.form === "experiment-run") {
     const errorTarget = form.querySelector(".form-error");
     const button = form.querySelector('button[type="submit"]');
-    button.disabled = true;
-    button.textContent = l("creatingRun");
-    try {
-      const pseudonym = String(data.pseudonym || "").trim();
-      const response = await fetch("/api/experiment-runs", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          experiment_id: "E002",
-          agent: "codex",
-          author_mode: pseudonym ? "pseudonym" : "anonymous",
-          pseudonym,
-          consent: data.consent === "on",
-          website: data.website || ""
-        })
-      });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || l("runCreateError"));
-      location.href = result.private_path;
-    } catch (error) {
-      errorTarget.textContent = error.message || l("runCreateError");
-      button.disabled = false;
-      button.textContent = l("createRun");
+    if (data.consent !== "on") {
+      errorTarget.textContent = l("liveConsent");
+      return;
     }
+    const pseudonym = String(data.pseudonym || "").trim() || "anonymous";
+    const prompt = `$pocket-i-lab start E002 as ${pseudonym}`;
+    await copyText(prompt, button);
+    button.textContent = l("startPromptCopied");
     return;
   }
 

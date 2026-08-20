@@ -1,0 +1,53 @@
+{
+  "description": "Opt-in public experiment journal. Hooks do nothing until the user explicitly starts Pocket i Lab in a prompt.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$PLUGIN_ROOT/scripts/journal_hook.py\"",
+            "timeout": 20,
+            "statusMessage": "Updating the Pocket i Lab journal"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$PLUGIN_ROOT/scripts/journal_hook.py\"",
+            "async": true,
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$PLUGIN_ROOT/scripts/journal_hook.py\"",
+            "timeout": 20,
+            "statusMessage": "Saving the Pocket i Lab checkpoint"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$PLUGIN_ROOT/scripts/journal_hook.py\"",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

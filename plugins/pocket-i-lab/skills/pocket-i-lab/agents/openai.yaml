@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pocket i Lab"
+  short_description: "Keep a safe public experiment journal from this Codex task"
+  default_prompt: "Start or continue a joinmultiplayer experiment journal in this Codex task."

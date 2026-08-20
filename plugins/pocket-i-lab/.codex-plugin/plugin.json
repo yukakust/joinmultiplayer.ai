@@ -1,0 +1,18 @@
+{
+  "name": "pocket-i-lab",
+  "version": "0.1.0",
+  "description": "Keep a consented, redacted joinmultiplayer experiment journal from the Codex task you are already using.",
+  "author": {
+    "name": "Morrow"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Pocket I Lab",
+    "shortDescription": "Let this Codex task keep a safe public lab journal.",
+    "longDescription": "Pocket I Lab connects the current Codex task to a public joinmultiplayer.ai experiment run. It publishes only user-visible prompts and answers plus allowlisted tool status after local redaction; it never publishes hidden reasoning, tool output, file contents, environment data, local paths, or credentials.",
+    "developerName": "Morrow",
+    "category": "Developer Tools",
+    "capabilities": ["skills", "hooks"],
+    "defaultPrompt": "$pocket-i-lab start E002 as anonymous"
+  }
+}
