@@ -14,6 +14,7 @@ from server import (
     record_publication_event,
     record_question_publication_event,
     token_hash,
+    validate_run_event,
     validate_question_submission,
     validate_submission,
 )
@@ -517,6 +518,110 @@ class SubmissionTests(unittest.TestCase):
                     "SELECT status FROM contributions WHERE public_id = 'T0002'"
                 ).fetchone()[0]
             self.assertEqual(status, "pending")
+
+    def test_experiment_run_live_journal_round_trip(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.create_experiment_run(
+                {
+                    "experiment_id": "E002",
+                    "agent": "codex",
+                    "author_mode": "anonymous",
+                    "consent": True,
+                }
+            )
+            self.assertEqual(handler.sent[0], HTTPStatus.CREATED)
+            run_id = handler.sent[1]["id"]
+            token = handler.sent[1]["token"]
+            self.assertTrue(run_id.startswith("R"))
+
+            handler.append_experiment_run_event(
+                {
+                    "token": token,
+                    "sequence": 1,
+                    "event_type": "run_started",
+                    "payload": {"model": "gpt-test", "client_version": "test"},
+                }
+            )
+            handler.append_experiment_run_event(
+                {
+                    "token": token,
+                    "sequence": 2,
+                    "event_type": "agent_message",
+                    "payload": {"text": "I will implement the falsification controls."},
+                }
+            )
+            public = handler.public_experiment_run(run_id)
+            self.assertEqual(public["status"], "running")
+            self.assertEqual([event["sequence"] for event in public["events"]], [1, 2])
+            self.assertNotIn("token", public)
+
+            handler.append_experiment_run_event(
+                {
+                    "token": token,
+                    "sequence": 3,
+                    "event_type": "run_completed",
+                    "payload": {"status": "completed", "summary": "Design complete."},
+                }
+            )
+            self.assertEqual(handler.public_experiment_run(run_id)["status"], "completed")
+
+    def test_public_journal_rejects_secrets_and_redacts_local_paths(self):
+        with self.assertRaisesRegex(ValueError, "possible secret"):
+            validate_run_event(
+                {
+                    "token": "run-token",
+                    "sequence": 1,
+                    "event_type": "agent_message",
+                    "payload": {"text": "authorization: Bearer very-secret-value"},
+                }
+            )
+        _, _, _, payload = validate_run_event(
+            {
+                "token": "run-token",
+                "sequence": 1,
+                "event_type": "agent_message",
+                "payload": {"text": "Read /home/alice/public-repo/PROTOCOL.md"},
+            }
+        )
+        self.assertEqual(payload["text"], "Read <local-path>")
+
+    def test_experiment_run_events_are_idempotent_but_not_replaceable(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.create_experiment_run(
+                {"experiment_id": "E002", "agent": "codex", "consent": True}
+            )
+            token = handler.sent[1]["token"]
+            event = {
+                "token": token,
+                "sequence": 1,
+                "event_type": "checkpoint",
+                "payload": {"text": "Protocol read."},
+            }
+            handler.append_experiment_run_event(event)
+            handler.append_experiment_run_event(event)
+            self.assertTrue(handler.sent[1]["duplicate"])
+            changed = {**event, "payload": {"text": "Different event."}}
+            with self.assertRaisesRegex(ValueError, "already exists"):
+                handler.append_experiment_run_event(changed)
+
+    def test_e002_public_record_includes_live_runs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.create_experiment_run(
+                {"experiment_id": "E002", "agent": "codex", "consent": True}
+            )
+            handler.get_public_experiment()
+            self.assertEqual(handler.sent[0], HTTPStatus.OK)
+            self.assertEqual(handler.sent[1]["hypothesis"]["public_id"], "H0001")
+            self.assertEqual(len(handler.sent[1]["runs"]), 1)
 
 
 if __name__ == "__main__":

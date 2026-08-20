@@ -162,6 +162,131 @@ const ui = {
   }
 };
 
+const labCopy = {
+  en: {
+    goalLabel: "H0001 · THE GOAL",
+    goal: "Can many personal pocket i—each preserving its own knowledge and individuality—temporarily unite into a single distributed neural network and grow stronger as the swarm scales?",
+    currentExperiment: "CURRENT EXPERIMENT · E002",
+    experimentTitle: "Synthetic pocket i swarm",
+    experimentStatus: "DESIGNING — NOT LOCKED",
+    experimentIntro: "Start with two inspectable synthetic pocket i, then scale the same mechanism to 4, 8, 16, and 32. Each must learn different private knowledge by changing its own weights.",
+    microscope: "FIRST UNDER THE MICROSCOPE",
+    microscopeCopy: "Two i begin from one shared base. Each sees a different private table. The source must combine both learned deltas with the public z₀ path to choose one answer from 256 classes.",
+    scale: "THE SWARM CURVE",
+    scaleCopy: "We measure whether unique coverage and compositional quality grow as independent i and total distributed compute are added. Equal-budget controls only reveal the price of coordination.",
+    falsify: "WHAT WOULD DISPROVE IT",
+    falsifyCopy: "A single i solves the task; z₀ is unnecessary; the merger memorizes test values; personal weights do not change; exact RAG explains every gain more simply; or quality stops growing with useful new i.",
+    protocol: "READ THE DRAFT PROTOCOL",
+    runs: "PUBLIC CODEX RUNS",
+    noRuns: "No public Codex run has started yet.",
+    startRun: "START A PUBLIC CODEX RUN",
+    startRunHelp: "The protocol is still a draft. This run designs and implements it; it cannot publish a scientific result or place a dot.",
+    publicName: "Public pseudonym",
+    publicNameHelp: "Optional. Leave empty to appear as anonymous.",
+    liveConsent: "I understand that the connector will publish its filtered journal live. It excludes raw reasoning, command output, file contents, environment data, absolute paths, credentials, and the private run key.",
+    createRun: "CREATE RUN + PRIVATE KEY",
+    creatingRun: "CREATING RUN…",
+    runCreateError: "The run could not be created.",
+    connectorTitle: "Connect this run to Codex",
+    connectorPrivate: "This page contains the private run key. Keep the URL and key private. Observers only receive the public journal.",
+    connectorStep1: "1 · Download and inspect the connector",
+    connectorStep2: "2 · Run it inside a public joinmultiplayer.ai checkout",
+    connectorStep3: "3 · Paste the private run key when the terminal asks",
+    connectorDownload: "DOWNLOAD CONNECTOR .PY",
+    connectorChecksum: "VERIFY SHA-256",
+    connectorCommand: "python3 codex_lab_connector.py --workspace /path/to/joinmultiplayer.ai",
+    runKey: "PRIVATE RUN KEY",
+    copyKey: "COPY PRIVATE KEY",
+    copyCommand: "COPY COMMAND",
+    publicRun: "OPEN PUBLIC RUN",
+    privateRunMissing: "This private run link is incomplete or unavailable.",
+    runLabel: "PUBLIC RUN",
+    runAgent: "Codex Lab Connector",
+    runWaiting: "Waiting for the owner to connect Codex.",
+    runLive: "LIVE",
+    runCompleted: "COMPLETED",
+    runFailed: "FAILED",
+    runStopped: "STOPPED",
+    journal: "PUBLIC RUN JOURNAL",
+    journalEmpty: "The first filtered event has not arrived yet.",
+    eventRunStarted: "Codex connected",
+    eventUserMessage: "Experiment task",
+    eventAgentMessage: "Codex",
+    eventPlan: "Plan",
+    eventCheckpoint: "Checkpoint",
+    eventCommand: "Command status",
+    eventTool: "Tool status",
+    eventFile: "Changed files",
+    eventMetric: "Metric",
+    eventCompleted: "Run finished",
+    privacyBoundary: "PUBLIC BOUNDARY",
+    privacyBoundaryCopy: "This is not the complete private Codex context. It is an allowlisted, redacted research journal: enough to inspect the work without publishing secrets or hidden chain-of-thought.",
+    backExperiment: "BACK TO E002",
+    copiedKey: "PRIVATE KEY COPIED"
+  },
+  ru: {
+    goalLabel: "H0001 · ЦЕЛЬ",
+    goal: "Может ли множество личных pocket i, сохраняя собственные знания и индивидуальность, временно объединяться в одну распределённую нейросеть — и становиться сильнее по мере роста swarm?",
+    currentExperiment: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E002",
+    experimentTitle: "Синтетический swarm pocket i",
+    experimentStatus: "ПРОЕКТИРУЕТСЯ — НЕ ЗАФИКСИРОВАН",
+    experimentIntro: "Начинаем с двух наглядных синтетических pocket i, затем масштабируем тот же механизм до 4, 8, 16 и 32. Каждый должен выучить своё приватное знание, действительно изменив собственные веса.",
+    microscope: "СНАЧАЛА — ПОД МИКРОСКОПОМ",
+    microscopeCopy: "Два i начинают с общей базы. Каждый видит свою приватную таблицу. Источник должен сложить обе выученные дельты с публичным путём z₀ и выбрать один ответ из 256 классов.",
+    scale: "КРИВАЯ SWARM",
+    scaleCopy: "Мы измеряем, растут ли уникальное покрытие и качество композиции вместе с независимыми i и суммарным распределённым compute. Равный бюджет лишь показывает цену координации.",
+    falsify: "ЧТО ОПРОВЕРГНЕТ МЕХАНИЗМ",
+    falsifyCopy: "Задачу решает один i; z₀ не нужен; merger запоминает test-значения; личные веса не меняются; exact RAG проще объясняет весь выигрыш; либо качество перестаёт расти с добавлением полезных i.",
+    protocol: "ПРОЧИТАТЬ ЧЕРНОВИК ПРОТОКОЛА",
+    runs: "ОТКРЫТЫЕ ЗАПУСКИ CODEX",
+    noRuns: "Ни одного открытого запуска Codex пока нет.",
+    startRun: "НАЧАТЬ ОТКРЫТЫЙ ЗАПУСК CODEX",
+    startRunHelp: "Протокол пока черновой. Этот запуск проектирует и реализует его — он не может опубликовать научный результат или поставить точку.",
+    publicName: "Публичный псевдоним",
+    publicNameHelp: "Необязательно. Оставьте пустым, чтобы быть анонимом.",
+    liveConsent: "Я понимаю, что connector будет публиковать очищенный журнал в реальном времени. В него не входят сырые рассуждения, вывод команд, содержимое файлов, environment, абсолютные пути, ключи и приватный ключ запуска.",
+    createRun: "СОЗДАТЬ ЗАПУСК + ПРИВАТНЫЙ КЛЮЧ",
+    creatingRun: "СОЗДАЁМ ЗАПУСК…",
+    runCreateError: "Не удалось создать запуск.",
+    connectorTitle: "Подключить этот запуск к Codex",
+    connectorPrivate: "На этой странице есть приватный ключ запуска. Не делитесь ссылкой и ключом. Наблюдатели видят только открытый журнал.",
+    connectorStep1: "1 · Скачайте и прочитайте connector",
+    connectorStep2: "2 · Запустите его внутри открытой копии joinmultiplayer.ai",
+    connectorStep3: "3 · Вставьте приватный ключ по запросу терминала",
+    connectorDownload: "СКАЧАТЬ CONNECTOR .PY",
+    connectorChecksum: "ПРОВЕРИТЬ SHA-256",
+    connectorCommand: "python3 codex_lab_connector.py --workspace /path/to/joinmultiplayer.ai",
+    runKey: "ПРИВАТНЫЙ КЛЮЧ ЗАПУСКА",
+    copyKey: "КОПИРОВАТЬ ПРИВАТНЫЙ КЛЮЧ",
+    copyCommand: "КОПИРОВАТЬ КОМАНДУ",
+    publicRun: "ОТКРЫТЬ ПУБЛИЧНЫЙ ЗАПУСК",
+    privateRunMissing: "Приватная ссылка запуска неполна или недоступна.",
+    runLabel: "ОТКРЫТЫЙ ЗАПУСК",
+    runAgent: "Codex Lab Connector",
+    runWaiting: "Ждём, когда владелец подключит Codex.",
+    runLive: "ИДЁТ",
+    runCompleted: "ЗАВЕРШЁН",
+    runFailed: "ОШИБКА",
+    runStopped: "ОСТАНОВЛЕН",
+    journal: "ОТКРЫТЫЙ ЖУРНАЛ ЗАПУСКА",
+    journalEmpty: "Первое очищенное событие ещё не пришло.",
+    eventRunStarted: "Codex подключён",
+    eventUserMessage: "Задание эксперимента",
+    eventAgentMessage: "Codex",
+    eventPlan: "План",
+    eventCheckpoint: "Контрольная точка",
+    eventCommand: "Статус команды",
+    eventTool: "Статус инструмента",
+    eventFile: "Изменённые файлы",
+    eventMetric: "Метрика",
+    eventCompleted: "Запуск закончен",
+    privacyBoundary: "ПУБЛИЧНАЯ ГРАНИЦА",
+    privacyBoundaryCopy: "Это не весь приватный контекст Codex. Это очищенный журнал по белому списку: достаточно, чтобы следить за работой, но без секретов и скрытой цепочки рассуждений.",
+    backExperiment: "НАЗАД К E002",
+    copiedKey: "ПРИВАТНЫЙ КЛЮЧ СКОПИРОВАН"
+  }
+};
+
 const morrowCopy = {
   en: {
     label: "MORROW",
@@ -541,6 +666,19 @@ function c(key) {
   return contributionCopy[language][key];
 }
 
+function l(key) {
+  return labCopy[language][key];
+}
+
+function goalRibbon() {
+  return `
+    <a class="goal-ribbon" href="/experiment/?id=E002">
+      <span>${l("goalLabel")}</span>
+      <strong>${l("goal")}</strong>
+      <b>${l("currentExperiment")} →</b>
+    </a>`;
+}
+
 function morrowFace(expression = "calm") {
   return `
     <svg class="morrow-face morrow-${expression}" viewBox="0 0 120 138" aria-hidden="true">
@@ -676,6 +814,7 @@ function home() {
       <p>${t("homeSub")}</p>
       <div class="links">
         <a class="button" href="#hand" data-action="enter-hand">${t("enter")}</a>
+        <a class="button secondary" href="/experiment/?id=E002">${l("currentExperiment")}</a>
         <a class="button secondary" href="/map/#open">${c("openQuestionsCTA")}</a>
         <a class="quiet-link" href="/data/">${c("openData")}</a>
         <a class="quiet-link" href="${repository}">${t("openLab")}</a>
@@ -1978,6 +2117,189 @@ function door(id, data) {
     ${morrowGuide("door", "curious")}`;
 }
 
+function experimentShell() {
+  return `
+    <section class="flow-shell experiment-page" id="experiment-page">
+      <div class="flow-step">${l("currentExperiment")}</div>
+      <h1>${l("experimentTitle")}</h1>
+      <p class="contribution-intro">${l("experimentIntro")}</p>
+      <div class="experiment-loading">${c("loading")}</div>
+    </section>`;
+}
+
+function experimentRunCard(run) {
+  return `
+    <a class="experiment-run-card" href="/experiment/run/?id=${encodeURIComponent(run.public_id)}">
+      <span>${escapeHTML(run.public_id)} · ${escapeHTML(run.status)}</span>
+      <strong>${escapeHTML(run.author || "anonymous")}</strong>
+      <small>${escapeHTML(run.updated_at || run.created_at || "")}</small>
+    </a>`;
+}
+
+async function loadExperiment() {
+  const target = document.querySelector("#experiment-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/api/public/E002", { cache: "no-store" });
+    if (!response.ok) throw new Error("experiment unavailable");
+    const experiment = await response.json();
+    const runs = experiment.runs || [];
+    target.querySelector(".experiment-loading").outerHTML = `
+      <div class="experiment-status">${l("experimentStatus")}</div>
+      <section class="hypothesis-card">
+        <span>${l("goalLabel")}</span>
+        <p>${escapeHTML(experiment.hypothesis?.question?.[language] || l("goal"))}</p>
+      </section>
+      <div class="experiment-grid">
+        <section>
+          <span>${l("microscope")}</span>
+          <p>${l("microscopeCopy")}</p>
+          <div class="synthetic-pair" aria-label="two synthetic pocket i">
+            <i>i<small>A</small></i><b>+</b><i>i<small>B</small></i><b>→</b><strong>1 / 256</strong>
+          </div>
+        </section>
+        <section>
+          <span>${l("scale")}</span>
+          <p>${l("scaleCopy")}</p>
+          <div class="swarm-scale">${(experiment.scales || [2, 4, 8, 16, 32]).map(value => `<b>${value}i</b>`).join("<i>→</i>")}</div>
+        </section>
+        <section>
+          <span>${l("falsify")}</span>
+          <p>${l("falsifyCopy")}</p>
+        </section>
+      </div>
+      <div class="actions experiment-actions">
+        <a class="button secondary" href="${repository}/blob/agent/game-loop-v0.1/experiments/E002-synthetic-pocket-i-swarm/PROTOCOL.md">${l("protocol")}</a>
+      </div>
+      <section class="experiment-runs">
+        <div class="flow-step">${l("runs")}</div>
+        <div class="experiment-run-list">${runs.length ? runs.map(experimentRunCard).join("") : `<p>${l("noRuns")}</p>`}</div>
+      </section>
+      <section class="start-run-panel">
+        <div class="flow-step">${l("startRun")}</div>
+        <p>${l("startRunHelp")}</p>
+        <form data-form="experiment-run" class="research-form">
+          <label>${l("publicName")}<small>${l("publicNameHelp")}</small><input name="pseudonym" maxlength="80"></label>
+          <label class="honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+          <label class="check-label"><input type="checkbox" name="consent" required>${l("liveConsent")}</label>
+          <p class="form-error" role="alert"></p>
+          <button class="button" type="submit">${l("createRun")}</button>
+        </form>
+      </section>`;
+  } catch {
+    target.querySelector(".experiment-loading").textContent = l("runCreateError");
+  }
+}
+
+function connectorShell() {
+  return `
+    <section class="flow-shell experiment-page connector-page" id="connector-page">
+      <div class="flow-step">${l("currentExperiment")}</div>
+      <h1>${l("connectorTitle")}</h1>
+      <p class="contribution-intro">${l("connectorPrivate")}</p>
+      <div class="connector-loading">${c("loading")}</div>
+    </section>`;
+}
+
+let activePrivateRun = null;
+
+async function loadConnectorRun() {
+  const target = document.querySelector("#connector-page");
+  const token = location.hash.slice(1);
+  if (!target || !token) {
+    if (target) target.querySelector(".connector-loading").textContent = l("privateRunMissing");
+    return;
+  }
+  try {
+    const response = await fetch("/api/experiment-runs/status", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token })
+    });
+    if (!response.ok) throw new Error("run unavailable");
+    activePrivateRun = { ...(await response.json()), token };
+    target.querySelector(".connector-loading").outerHTML = `
+      <div class="connector-run-id">${escapeHTML(activePrivateRun.public_id)} · ${escapeHTML(activePrivateRun.status)}</div>
+      <div class="connector-steps">
+        <section><span>${l("connectorStep1")}</span><a class="button secondary" href="/connector/codex_lab_connector.py" download>${l("connectorDownload")}</a><a class="quiet-link" href="/connector/SHA256SUMS">${l("connectorChecksum")}</a></section>
+        <section><span>${l("connectorStep2")}</span><code>${escapeHTML(l("connectorCommand"))}</code><button class="text-button" data-copy="connector-command">${l("copyCommand")}</button></section>
+        <section><span>${l("connectorStep3")}</span><code class="private-key">${escapeHTML(token)}</code><button class="text-button" data-copy="run-key">${l("copyKey")}</button></section>
+      </div>
+      <section class="privacy-boundary"><span>${l("privacyBoundary")}</span><p>${l("privacyBoundaryCopy")}</p></section>
+      <div class="actions"><a class="button" href="${escapeHTML(activePrivateRun.public_path)}">${l("publicRun")}</a><a class="button secondary" href="/experiment/?id=E002">${l("backExperiment")}</a></div>`;
+  } catch {
+    target.querySelector(".connector-loading").textContent = l("privateRunMissing");
+  }
+}
+
+function publicRunShell() {
+  return `
+    <section class="flow-shell experiment-page public-run-page" id="public-run-page">
+      <div class="flow-step">${l("runLabel")}</div>
+      <h1>${l("journal")}</h1>
+      <div class="run-loading">${c("loading")}</div>
+    </section>`;
+}
+
+function runStatusLabel(status) {
+  return ({
+    created: l("runWaiting"), running: l("runLive"), completed: l("runCompleted"),
+    failed: l("runFailed"), stopped: l("runStopped")
+  })[status] || status;
+}
+
+function eventLabel(type) {
+  return l(({
+    run_started: "eventRunStarted", user_message: "eventUserMessage", agent_message: "eventAgentMessage",
+    plan: "eventPlan", checkpoint: "eventCheckpoint", command_status: "eventCommand",
+    tool_status: "eventTool", file_change: "eventFile", metric: "eventMetric", run_completed: "eventCompleted"
+  })[type] || "eventCheckpoint");
+}
+
+function eventBody(event) {
+  const payload = event.payload || {};
+  if (payload.text) return `<p>${escapeHTML(payload.text)}</p>`;
+  if (event.event_type === "file_change") return `<p>${(payload.files || []).map(escapeHTML).join(" · ") || "—"}</p>`;
+  if (event.event_type === "metric") return `<p>${escapeHTML(payload.name)}: <strong>${escapeHTML(payload.value)}</strong> ${escapeHTML(payload.unit || "")}</p>`;
+  const summary = [payload.command, payload.tool, payload.model, payload.status, payload.summary].filter(Boolean).join(" · ");
+  return `<p>${escapeHTML(summary || "—")}</p>`;
+}
+
+function publicJournalMarkup(run) {
+  const events = run.events || [];
+  return `
+    <div class="run-heading">
+      <div><span>${escapeHTML(run.public_id)} · ${escapeHTML(run.experiment_id)}</span><strong>${escapeHTML(run.author || "anonymous")}</strong></div>
+      <b class="run-status status-${escapeHTML(run.status)}">${escapeHTML(runStatusLabel(run.status))}</b>
+    </div>
+    <p class="contribution-intro">${l("runAgent")} · ${escapeHTML(run.protocol_version)}</p>
+    <section class="privacy-boundary"><span>${l("privacyBoundary")}</span><p>${l("privacyBoundaryCopy")}</p></section>
+    <div class="public-journal">${events.length ? events.map(event => `
+      <article class="journal-event event-${escapeHTML(event.event_type)}">
+        <span>${String(event.sequence).padStart(4, "0")} · ${eventLabel(event.event_type)}</span>
+        ${eventBody(event)}
+        <time>${escapeHTML(event.created_at || "")}</time>
+      </article>`).join("") : `<p>${l("journalEmpty")}</p>`}</div>
+    <div class="actions"><a class="button secondary" href="/experiment/?id=E002">${l("backExperiment")}</a></div>`;
+}
+
+async function loadPublicRun() {
+  const target = document.querySelector("#public-run-page");
+  const id = new URLSearchParams(location.search).get("id") || "";
+  if (!target || !/^R\d{4,}$/i.test(id)) return;
+  try {
+    const response = await fetch(`/api/public/${encodeURIComponent(id)}`, { cache: "no-store" });
+    if (!response.ok) throw new Error("run unavailable");
+    const run = await response.json();
+    const loading = target.querySelector(".run-loading");
+    if (loading) loading.outerHTML = `<div class="run-content">${publicJournalMarkup(run)}</div>`;
+    else target.querySelector(".run-content").innerHTML = publicJournalMarkup(run);
+    if (["created", "running"].includes(run.status)) setTimeout(loadPublicRun, 2000);
+  } catch {
+    target.querySelector(".run-loading")?.replaceChildren(document.createTextNode(l("privateRunMissing")));
+  }
+}
+
 function notFound() {
   document.title = language === "ru" ? "Не найдено — i" : "Not found — i";
   return `
@@ -2031,12 +2353,25 @@ function render() {
     if (location.hash === "#open") {
       requestAnimationFrame(() => document.querySelector("#open")?.scrollIntoView());
     }
+  } else if (path === "experiment") {
+    document.title = `E002 — i`;
+    app.innerHTML = withLanguage(experimentShell());
+    loadExperiment();
+  } else if (path === "experiment/connector") {
+    document.title = `${l("connectorTitle")} — i`;
+    app.innerHTML = withLanguage(connectorShell());
+    loadConnectorRun();
+  } else if (path === "experiment/run") {
+    document.title = `${l("journal")} — i`;
+    app.innerHTML = withLanguage(publicRunShell());
+    loadPublicRun();
   } else if (doors[path]) {
     document.title = `${path.toUpperCase()} — i`;
     app.innerHTML = withLanguage(door(path, getDoor(path)));
   } else {
     app.innerHTML = withLanguage(notFound());
   }
+  app.insertAdjacentHTML("afterbegin", goalRibbon());
 }
 
 function formData(form) {
@@ -2147,6 +2482,8 @@ app.addEventListener("click", (event) => {
   if (copyButton?.dataset.copy === "public-data") copyText("https://joinmultiplayer.ai/api/public/records.json", copyButton);
   if (copyButton?.dataset.copy === "public-corpus") copyText("https://joinmultiplayer.ai/api/public/corpus.json", copyButton);
   if (copyButton?.dataset.copy === "question") copyText(prototype.question.text, copyButton);
+  if (copyButton?.dataset.copy === "connector-command") copyText(l("connectorCommand"), copyButton);
+  if (copyButton?.dataset.copy === "run-key" && activePrivateRun) copyText(activePrivateRun.token, copyButton);
   if (copyButton?.dataset.copy === "status") {
     copyText(`${location.origin}/d04/#status-${prototype.profile.statusToken}`, copyButton);
   }
@@ -2166,6 +2503,36 @@ app.addEventListener("submit", async (event) => {
   event.preventDefault();
   const form = event.target;
   const data = formData(form);
+
+  if (form.dataset.form === "experiment-run") {
+    const errorTarget = form.querySelector(".form-error");
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    button.textContent = l("creatingRun");
+    try {
+      const pseudonym = String(data.pseudonym || "").trim();
+      const response = await fetch("/api/experiment-runs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          experiment_id: "E002",
+          agent: "codex",
+          author_mode: pseudonym ? "pseudonym" : "anonymous",
+          pseudonym,
+          consent: data.consent === "on",
+          website: data.website || ""
+        })
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || l("runCreateError"));
+      location.href = result.private_path;
+    } catch (error) {
+      errorTarget.textContent = error.message || l("runCreateError");
+      button.disabled = false;
+      button.textContent = l("createRun");
+    }
+    return;
+  }
 
   if (form.dataset.form === "question-create") {
     const errorTarget = form.querySelector(".form-error");

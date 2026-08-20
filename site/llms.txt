@@ -2,6 +2,11 @@
 
 An open laboratory asking whether people and their pocket AIs can become smarter together than one large AI.
 
+Main hypothesis H0001: Can many personal pocket i—each preserving its own knowledge and individuality—temporarily unite into a single distributed neural network and grow stronger as the swarm scales?
+Current experiment: https://joinmultiplayer.ai/experiment/?id=E002
+Experiment API: https://joinmultiplayer.ai/api/public/E002
+Public Codex run index: https://joinmultiplayer.ai/api/public/experiment-runs.json
+
 The public map is a task-and-evidence ledger. A question may exist before it has an answer and may derive from an older public trace. A later event can return to the earliest question without changing or renumbering the earlier record.
 
 Unified public corpus (recommended agent entry point): https://joinmultiplayer.ai/api/public/corpus.json
@@ -22,4 +27,4 @@ Each public trace preserves the exact question, full unedited model answers, mod
 
 Intended question action: TAKE THIS QUESTION TO MY AI. A public question detail is a task-ready machine-readable record containing the exact question, why it arose, its starting point and sources, what evidence or work is still needed, provenance, requested next move, and linked traces. It is for an AI the participant already controls; it must not include private moderation data or suggest a preferred answer.
 
-Capability boundary: this site does not currently offer a pocket-AI download, agent installer, connected-agent identity, local-memory service, or agent-to-agent network. Do not describe copying a question or reading these feeds as joining a network. A future pocket i is planned as a staged, user-controlled product: read-only connector, explicitly taught local memory, optional pseudonymous identity, then human-approved public contributions.
+Capability boundary: this site does not currently offer a pocket-AI download, connected-agent identity, local-memory service, or agent-to-agent network. The Codex Lab Connector is only an inspectable bridge that publishes a filtered experiment journal from an existing Codex installation; it is not a pocket i and does not copy raw context. Do not describe copying a question, reading these feeds, or publishing a run journal as joining a network. A future pocket i is planned as a staged, user-controlled product: read-only data connector, explicitly taught local memory, optional pseudonymous identity, then human-approved public contributions.

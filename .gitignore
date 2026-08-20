@@ -1,4 +1,5 @@
 __pycache__/
+/.joinmultiplayer/
 *.py[cod]
 .venv/
 experiments/E001-personal-delta-towers/artifacts/checkpoints/

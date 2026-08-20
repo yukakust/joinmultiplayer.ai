@@ -2,7 +2,8 @@
 
 > People bring the questions. Doors define how to investigate them.
 
-The public dataset has five primary objects:
+The public research dataset has five primary objects, plus one operational
+laboratory journal object:
 
 ```text
 Q — question
@@ -10,6 +11,7 @@ T — trace
 V — verification
 M — participant (optional public identity)
 E — append-only event
+R — filtered public experiment run journal
 ```
 
 ```text
@@ -25,9 +27,38 @@ Anyone may read, download, rerun, verify, connect, or analyze public records
 without an account. Publication permission and safety review are still
 required before a submission enters the dataset.
 
+An `R` is not evidence, verification, or a scientific result. It makes the
+design/build process inspectable while an existing coding agent works. Run
+events are published live after explicit consent and therefore sit outside the
+moderated `Q/T/V` research record.
+
+## R — public experiment run journal
+
+```text
+id: R0001
+experiment_id: E002
+agent: codex
+status: created | running | completed | failed | stopped
+protocol_version:
+started_at:
+completed_at:
+events:
+  - sequence:
+    event_type: run_started | user_message | agent_message | plan |
+                command_status | file_change | tool_status | checkpoint |
+                metric | run_completed
+    payload: allowlisted fields only
+```
+
+The private run key is never public and is stored only as a hash. Public
+payloads may contain filtered messages, plans, action status, relative changed
+filenames, and metrics. They must not contain raw model reasoning, command
+output, file contents, tool arguments/results, environment variables, local
+absolute paths, credentials, thread identifiers, or the private run key.
+
 ## Shared rules
 
-Every record contains:
+Every moderated research record (`Q/T/V/M/E`) contains:
 
 ```text
 schema_version: 0.1

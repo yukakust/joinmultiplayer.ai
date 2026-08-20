@@ -19,6 +19,10 @@ Keep code, inputs, outputs, and surprises together.
 - [`E001 — Personal Delta Towers`](E001-personal-delta-towers/README.md): locked
   three-seed mechanism pilot passed; H027 remains dotless until independent
   replication.
+- [`E002 — Synthetic pocket i swarm`](E002-synthetic-pocket-i-swarm/README.md):
+  draft protocol and public implementation journal. It begins with two
+  inspectable, weight-changing synthetic i and then tests the swarm at
+  `N = 2, 4, 8, 16, 32` before any real pocket i is promised.
 
 When the test is complete, write its result in [`i/`](../i/). A pilot proves
 that the procedure runs; it does not place the dot on a general claim.

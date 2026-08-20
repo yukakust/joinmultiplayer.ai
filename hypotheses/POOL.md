@@ -6,6 +6,7 @@
 
 ## Composition
 
+- `H0001` `→` Many personal pocket i can preserve their own knowledge and individuality, temporarily unite into one distributed neural network, and grow stronger as the swarm scales. E002 is drafting the first synthetic test.
 - `H001` `ı` A team of small models can beat one large model on decomposable tasks under the same total inference budget.
 - `H002` `ı` A heterogeneous team can outperform a same-size team of identical models.
 - `H003` `ı` Small specialists can outperform an equally priced generalist when the task crosses several domains.

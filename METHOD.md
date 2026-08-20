@@ -1,8 +1,10 @@
 # Method v0.1
 
-The public question is deliberately simple:
+The main hypothesis is:
 
-> Can many small intelligences become smarter than one big AI?
+> Can many personal pocket i—each preserving its own knowledge and
+> individuality—temporarily unite into a single distributed neural network and
+> grow stronger as the swarm scales?
 
 An experiment must make every word measurable before it begins.
 
@@ -15,12 +17,20 @@ Every experiment records:
 - what makes them meaningfully different;
 - the task and why it can or cannot be decomposed;
 - the frontier or single-system baseline;
-- the shared resource budget: cost, tokens, time, tools, and latency;
+- total and active resources: compute, data, cost, tokens, time, tools, bytes,
+  and latency;
+- whether the comparison holds resources equal or deliberately tests a larger
+  swarm with more distributed resources;
 - the primary metric and pass/fail condition chosen before the run.
 
 Do not call several prompts to the same base model independent without testing
 that assumption. Record model family, language, tools, context, and information
 sources as possible sources of diversity.
+
+Equal-resource controls measure coordination efficiency. They are required
+when relevant, but the main scaling hypothesis may intentionally give a larger
+swarm more independent experience and total compute. Never hide that asymmetry;
+plot quality and cost together.
 
 ## Name the stage honestly
 

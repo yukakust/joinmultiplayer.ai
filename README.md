@@ -14,12 +14,14 @@ Let's find out together.
 
 ## The goal
 
-Can we build a shared global intelligence from small AIs owned by individual
-people?
+**Can many personal pocket i—each preserving its own knowledge and
+individuality—temporarily unite into a single distributed neural network and
+grow stronger as the swarm scales?**
 
-If cooperation works, how many people—and what diversity of knowledge—are
-needed before their combined intelligence outperforms a frontier model under a
-fair resource budget?
+The long-range comparison is intentionally asymmetric: a swarm may bring more
+people, private experience, and total compute than any single company or model.
+Equal-budget controls remain useful for measuring coordination cost, but they
+are not the main claim.
 
 This repository is the open laboratory around that question. It does not assume
 that the answer is yes.
@@ -57,7 +59,9 @@ agent.
 
 A network-capable pocket `i` is a later product stage. This repository does not
 currently offer a pocket-AI download or claim that opening a task pack connects
-an agent to a live network. The intended transition is explicit:
+an agent to a live network. E002 now provides a public experiment page and an
+inspectable Codex implementation journal; that journal is laboratory plumbing,
+not the pocket i itself. The intended transition is explicit:
 
 ```text
 open questions and evidence
@@ -67,6 +71,13 @@ open questions and evidence
 → consented network identity and human-approved contributions
 → multiplayer experiments
 ```
+
+The current build starts the first synthetic swarm experiment at
+[`E002`](experiments/E002-synthetic-pocket-i-swarm/README.md). Its public Codex
+run journal deliberately exposes only filtered progress: messages, plan,
+action status, relative changed filenames, and metrics. It excludes raw
+reasoning, command output, file contents, environment data, local absolute
+paths, and credentials.
 
 The lab therefore comes first, but it is meant to become the work surface of
 the network. Architecture must earn its place through evidence, and each later

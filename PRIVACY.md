@@ -1,6 +1,6 @@
 # Privacy
 
-_Last updated: 2026-08-18._
+_Last updated: 2026-08-20._
 
 The website has no account system, advertising, or project analytics. D04 and
 D06 accept contributions through the project server without requiring GitHub
@@ -35,6 +35,23 @@ details.
 GitHub remains available for source-code contributions and advanced research
 work. A GitHub issue or pull request exposes the account identity and content
 under GitHub's own terms and privacy policy.
+
+## Public experiment runs
+
+Starting an experiment run requires explicit consent to live publication and
+creates a private run key. The key is shown once, kept in the browser URL
+fragment, sent only in POST bodies, and stored by the server only as a one-way
+hash.
+
+The Codex Lab Connector uses an existing Codex login and does not ask for an
+OpenAI API key. It publishes an allowlisted run journal: filtered agent
+messages, plan text, action status, relative changed filenames, and explicit
+metrics. It does not publish raw reasoning, command output, file contents, tool
+arguments or results, environment variables, thread identifiers, local
+absolute paths, or the private run key. Obvious credential patterns are blocked
+again by the server. Automated redaction is not a guarantee, so the connector
+is restricted to a public checkout of this repository and must not be used for
+private work.
 
 Do not submit:
 

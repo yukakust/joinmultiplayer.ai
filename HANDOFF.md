@@ -115,7 +115,7 @@ first accepted contribution made with it is.
 - Prefer small, inspectable changes and verification before claims.
 - Do not add data collection, email delivery, accounts, or public publishing without an explicit privacy and moderation design.
 
-## Personal Delta Tower experiment
+## Pocket i swarm experiments
 
 `experiments/E001-personal-delta-towers/` now contains the first executable
 mechanism pilot for H027. On yukabox it trains eight distinct 6/12/24-layer
@@ -137,22 +137,34 @@ neural capsules can compose and that a second distinct specialist can replace
 an incomplete preferred specialist. It does not test language, learned
 routing, WAN token streaming, emergent ABI alignment, privacy, or Byzantine
 experts. H027 remains dotless until independent replication. The next neural
-step is E002 on a small open 24-layer language model. Its task must require
-knowledge from both `z0` and personal deltas because the E001 `without z0`
-ablation also reached 100%. Do not jump directly to a 32-device network.
+step is E002, which deliberately begins synthetically rather than pretending a
+real pocket i exists. Two inspectable branches must update their own weights on
+disjoint private data and solve a 256-class task requiring both deltas and
+`z0`; the scale axis then grows through `N = 2, 4, 8, 16, 32`. Its main curve
+asks whether useful capability grows with additional independent data and
+compute. Equal budget is a diagnostic control, not the project's ultimate
+claim.
+
+The site exposes H0001, E002, public experiment runs, and a Codex Lab Connector.
+The connector uses the operator's existing Codex login and publishes only an
+allowlisted journal. It is laboratory infrastructure, not a downloadable pocket
+i. Run keys are private; never paste them into issues, logs, docs, or commands
+that will be published.
 
 ## Immediate next work
 
-Complete and test the standalone-question loop before adding social mechanics:
+Verify the E002 vertical slice in this order:
 
-1. create a real `Q` derived from `T0002`;
-2. moderate and publish it without requiring a model answer;
-3. verify its provenance, public status, and task pack;
-4. confirm its event appears beside the source branch on the map;
-5. take it into an existing AI and return a new trace linked by `answers`.
-
-The deployed v0.1 question form accepts only `next_move: answer`. Keep the wider
-contract values hidden until each has an accountless return format.
+1. create a public run from `/experiment/?id=E002` with explicit consent;
+2. use the private fragment page to download and inspect the connector;
+3. validate the key with `--check-only`, then start Codex in a clean public
+   checkout;
+4. watch the filtered journal at `/experiment/run/?id=RNNNN` and confirm no raw
+   command output, file contents, absolute paths, environment data, reasoning,
+   or credentials appear;
+5. lock E002 thresholds/seeds only after a human reviews its draft and the
+   two-i microscope; then run and publish a result separately from the design
+   journal.
 
 Keep deployed claims aligned with deployed capabilities throughout this work.
 
