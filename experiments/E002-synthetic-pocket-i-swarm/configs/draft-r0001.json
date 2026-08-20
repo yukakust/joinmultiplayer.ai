@@ -1,0 +1,28 @@
+{
+  "experiment_id": "E002",
+  "run_id": "R0001",
+  "stage": "development_unlocked",
+  "protocol_version": "E002-draft-v0.4",
+  "seed": 20020001,
+  "swarm_sizes": [2, 4, 8, 16, 32],
+  "keys_per_pocket": 8,
+  "tasks_per_size": 256,
+  "fixed_workload_tasks": 1984,
+  "training": {
+    "steps": 40,
+    "learning_rate": 4.0,
+    "max_delta_norm": 24.0
+  },
+  "draft_gates": {
+    "full_accuracy_min": 0.95,
+    "causal_control_accuracy_max": 0.10,
+    "fresh_base_accuracy_max": 0.05,
+    "fixed_workload_final_accuracy_min": 0.95,
+    "fixed_workload_lift_min": 0.80,
+    "fixed_workload_monotonic_tolerance": 0.02,
+    "changed_parameters_min": 1,
+    "coverage_strictly_increases": true,
+    "incomplete_payload_invariance": true
+  },
+  "artifacts_dir": "experiments/E002-synthetic-pocket-i-swarm/artifacts"
+}

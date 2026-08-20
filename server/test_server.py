@@ -587,6 +587,15 @@ class SubmissionTests(unittest.TestCase):
             }
         )
         self.assertEqual(payload["text"], "Read <local-path>")
+        _, _, _, payload = validate_run_event(
+            {
+                "token": "run-token",
+                "sequence": 2,
+                "event_type": "agent_message",
+                "payload": {"text": "See [artifact](/home/alice/public/microscope.html)."},
+            }
+        )
+        self.assertEqual(payload["text"], "See [artifact](<local-path>).")
 
     def test_experiment_run_events_are_idempotent_but_not_replaceable(self):
         with tempfile.TemporaryDirectory() as directory:

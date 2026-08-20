@@ -70,7 +70,7 @@ SECRET_PATTERNS = (
     re.compile(r"(?i)\bauthorization\s*[:=]\s*bearer\s+[^\s,;]+"),
     re.compile(r"(?i)\b(?:authorization|api[_-]?key|access[_-]?token|refresh[_-]?token|password)\s*[:=]\s*[^\s,;]{8,}"),
 )
-LOCAL_PATH_RE = re.compile(r"(?<![A-Za-z0-9_.-])(?:/home|/Users)/[^\s\"'<>]+")
+LOCAL_PATH_RE = re.compile(r"(?<![A-Za-z0-9_.-])(?:/home|/Users)/[^\s\"'<>)\]]+")
 
 MAIN_HYPOTHESIS = {
     "public_id": "H0001",

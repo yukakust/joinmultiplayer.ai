@@ -36,7 +36,7 @@ SECRET_PATTERNS = (
         r"\s*[:=]\s*[^\s,;]{6,}"
     ),
 )
-LOCAL_PATH_RE = re.compile(r"(?<![A-Za-z0-9_.-])(?:/home|/Users)/[^\s\"'<>]+")
+LOCAL_PATH_RE = re.compile(r"(?<![A-Za-z0-9_.-])(?:/home|/Users)/[^\s\"'<>)\]]+")
 ENV_ALLOWLIST = {
     "HOME",
     "USER",

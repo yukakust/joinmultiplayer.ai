@@ -1,0 +1,347 @@
+{
+  "all_draft_gates_passed": true,
+  "all_pocket_removals_accuracy": 0.0021421370967741934,
+  "answer_classes": 256,
+  "audit": {
+    "failed_runs_preserved_by_unique_directory": true,
+    "raw_private_training_data_published": true,
+    "task_records": 1280
+  },
+  "claim_boundary": "Synthetic mechanism evidence only; cannot prove H0001 or superiority to RAG/frontier models.",
+  "config_sha256": "7d58c7278e14ff7deb296096301b728bfe48da40139c035748c6c3aac53c2de7",
+  "draft_gate_results": {
+    "causal_controls": true,
+    "coverage_strictly_increases": true,
+    "fresh_base": true,
+    "full_accuracy": true,
+    "incomplete_payload_invariance": true,
+    "personal_weights_changed": true
+  },
+  "effective_config": {
+    "artifacts_dir": "experiments/E002-synthetic-pocket-i-swarm/artifacts",
+    "draft_gates": {
+      "causal_control_accuracy_max": 0.1,
+      "changed_parameters_min": 1,
+      "coverage_strictly_increases": true,
+      "fresh_base_accuracy_max": 0.05,
+      "full_accuracy_min": 0.95,
+      "incomplete_payload_invariance": true
+    },
+    "experiment_id": "E002",
+    "keys_per_pocket": 8,
+    "protocol_version": "E002-draft-v0.3",
+    "run_id": "R0001",
+    "seed": 20020001,
+    "stage": "development_unlocked",
+    "swarm_sizes": [
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "tasks_per_size": 256,
+    "training": {
+      "learning_rate": 4.0,
+      "max_delta_norm": 24.0,
+      "steps": 40
+    }
+  },
+  "experiment_id": "E002",
+  "git_revision": null,
+  "protocol_version": "E002-draft-v0.3",
+  "resources": {
+    "device": "cpu",
+    "peak_rss_kib": 413136,
+    "python": "3.14.4",
+    "torch": "2.13.0+cpu",
+    "wall_seconds": 8.518502416001866
+  },
+  "run_id": "R0001",
+  "scaling": [
+    {
+      "accuracy": {
+        "base_only": 0.00390625,
+        "exact_rag": 1.0,
+        "full_swarm": 1.0,
+        "incomplete_then_backup": 1.0,
+        "malicious_bounded": 0.0,
+        "no_z0": 0.0,
+        "remove_last": 0.00390625,
+        "repeated_base": 0.00390625,
+        "shuffled": 0.0,
+        "text_ensemble": 1.0
+      },
+      "n": 2,
+      "resources": {
+        "active_branches": 2,
+        "bytes_per_task": 2048,
+        "personal_parameters": 4096,
+        "train_steps": 80
+      },
+      "unique_private_values": 16
+    },
+    {
+      "accuracy": {
+        "base_only": 0.0,
+        "exact_rag": 1.0,
+        "full_swarm": 1.0,
+        "incomplete_then_backup": 1.0,
+        "malicious_bounded": 0.0,
+        "no_z0": 0.00390625,
+        "remove_last": 0.0,
+        "repeated_base": 0.0,
+        "shuffled": 0.0078125,
+        "text_ensemble": 1.0
+      },
+      "n": 4,
+      "resources": {
+        "active_branches": 4,
+        "bytes_per_task": 4096,
+        "personal_parameters": 8192,
+        "train_steps": 160
+      },
+      "unique_private_values": 32
+    },
+    {
+      "accuracy": {
+        "base_only": 0.0,
+        "exact_rag": 1.0,
+        "full_swarm": 1.0,
+        "incomplete_then_backup": 1.0,
+        "malicious_bounded": 0.0,
+        "no_z0": 0.01171875,
+        "remove_last": 0.0,
+        "repeated_base": 0.0,
+        "shuffled": 0.00390625,
+        "text_ensemble": 1.0
+      },
+      "n": 8,
+      "resources": {
+        "active_branches": 8,
+        "bytes_per_task": 8192,
+        "personal_parameters": 16384,
+        "train_steps": 320
+      },
+      "unique_private_values": 64
+    },
+    {
+      "accuracy": {
+        "base_only": 0.0078125,
+        "exact_rag": 1.0,
+        "full_swarm": 1.0,
+        "incomplete_then_backup": 1.0,
+        "malicious_bounded": 0.0,
+        "no_z0": 0.00390625,
+        "remove_last": 0.0078125,
+        "repeated_base": 0.0078125,
+        "shuffled": 0.0,
+        "text_ensemble": 1.0
+      },
+      "n": 16,
+      "resources": {
+        "active_branches": 16,
+        "bytes_per_task": 16384,
+        "personal_parameters": 32768,
+        "train_steps": 640
+      },
+      "unique_private_values": 128
+    },
+    {
+      "accuracy": {
+        "base_only": 0.0,
+        "exact_rag": 1.0,
+        "full_swarm": 1.0,
+        "incomplete_then_backup": 1.0,
+        "malicious_bounded": 0.0,
+        "no_z0": 0.0,
+        "remove_last": 0.0,
+        "repeated_base": 0.0,
+        "shuffled": 0.0,
+        "text_ensemble": 1.0
+      },
+      "n": 32,
+      "resources": {
+        "active_branches": 32,
+        "bytes_per_task": 32768,
+        "personal_parameters": 65536,
+        "train_steps": 1280
+      },
+      "unique_private_values": 256
+    }
+  ],
+  "seed": 20020001,
+  "status": "development_unlocked_protocol_draft",
+  "visible_two_pockets": [
+    {
+      "after_sha256": "344ca80e1102cb9b79defd433b02d4ab493187b7f0dffda10b1fdce51463f784",
+      "before_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "changed_parameters": 2048,
+      "example_delta_norm": 8.064359664916992,
+      "loss_curve": [
+        5.545177459716797,
+        5.047708511352539,
+        4.553117752075195,
+        4.063197612762451,
+        3.5807738304138184,
+        3.110163688659668,
+        2.6576597690582275,
+        2.2317516803741455,
+        1.8425816297531128,
+        1.5001227855682373,
+        1.2112677097320557,
+        0.9773393869400024,
+        0.793840229511261,
+        0.6525787115097046,
+        0.5444466471672058,
+        0.461308091878891,
+        0.39669954776763916,
+        0.3457898199558258,
+        0.3050723075866699,
+        0.27202296257019043,
+        0.24482013285160065,
+        0.2221391201019287,
+        0.20300285518169403,
+        0.18668510019779205,
+        0.1726347804069519,
+        0.16043077409267426,
+        0.1497456431388855,
+        0.140324205160141,
+        0.13196207582950592,
+        0.12449508160352707,
+        0.11779262125492096,
+        0.11174609512090683,
+        0.10626628994941711,
+        0.10127907991409302,
+        0.09672306478023529,
+        0.09254520386457443,
+        0.08870112150907516,
+        0.08515452593564987,
+        0.08187235891819,
+        0.07882583886384964
+      ],
+      "loss_end": 0.07882583886384964,
+      "loss_start": 5.545177459716797,
+      "pocket_id": "pocket-00",
+      "private_examples": [
+        {
+          "key": "pocket-00/private-key-00",
+          "value": 158
+        },
+        {
+          "key": "pocket-00/private-key-01",
+          "value": 172
+        },
+        {
+          "key": "pocket-00/private-key-02",
+          "value": 31
+        },
+        {
+          "key": "pocket-00/private-key-03",
+          "value": 217
+        },
+        {
+          "key": "pocket-00/private-key-04",
+          "value": 141
+        },
+        {
+          "key": "pocket-00/private-key-05",
+          "value": 16
+        },
+        {
+          "key": "pocket-00/private-key-06",
+          "value": 35
+        },
+        {
+          "key": "pocket-00/private-key-07",
+          "value": 51
+        }
+      ]
+    },
+    {
+      "after_sha256": "43c7c5a3561720e21851602aeaae79cc7e8e202dc3df3fbabb6b75fa1eac0e0f",
+      "before_sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "changed_parameters": 2048,
+      "example_delta_norm": 8.064358711242676,
+      "loss_curve": [
+        5.545177459716797,
+        5.047708511352539,
+        4.553117752075195,
+        4.063197612762451,
+        3.5807738304138184,
+        3.110163688659668,
+        2.6576597690582275,
+        2.2317516803741455,
+        1.8425816297531128,
+        1.5001227855682373,
+        1.2112677097320557,
+        0.9773393869400024,
+        0.7938402891159058,
+        0.6525786519050598,
+        0.544446587562561,
+        0.461308091878891,
+        0.3966994881629944,
+        0.3457898199558258,
+        0.3050723373889923,
+        0.2720229923725128,
+        0.24482019245624542,
+        0.22213910520076752,
+        0.2030028998851776,
+        0.18668513000011444,
+        0.1726347804069519,
+        0.16043072938919067,
+        0.1497456282377243,
+        0.1403241604566574,
+        0.13196201622486115,
+        0.12449513375759125,
+        0.11779267340898514,
+        0.1117461770772934,
+        0.10626629739999771,
+        0.1012791097164154,
+        0.0967230573296547,
+        0.09254518151283264,
+        0.08870111405849457,
+        0.08515452593564987,
+        0.08187227696180344,
+        0.07882583886384964
+      ],
+      "loss_end": 0.07882583886384964,
+      "loss_start": 5.545177459716797,
+      "pocket_id": "pocket-01",
+      "private_examples": [
+        {
+          "key": "pocket-01/private-key-00",
+          "value": 104
+        },
+        {
+          "key": "pocket-01/private-key-01",
+          "value": 81
+        },
+        {
+          "key": "pocket-01/private-key-02",
+          "value": 60
+        },
+        {
+          "key": "pocket-01/private-key-03",
+          "value": 95
+        },
+        {
+          "key": "pocket-01/private-key-04",
+          "value": 85
+        },
+        {
+          "key": "pocket-01/private-key-05",
+          "value": 177
+        },
+        {
+          "key": "pocket-01/private-key-06",
+          "value": 143
+        },
+        {
+          "key": "pocket-01/private-key-07",
+          "value": 236
+        }
+      ]
+    }
+  ]
+}

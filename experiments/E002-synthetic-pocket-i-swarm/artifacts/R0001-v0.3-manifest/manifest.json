@@ -1,0 +1,14 @@
+{
+  "microscope.html": {
+    "bytes": 1825763,
+    "sha256": "5e67c0060e84462acda7a450d3be0e0922a2fe3832ea7b085a132b0926236368"
+  },
+  "summary.json": {
+    "bytes": 9158,
+    "sha256": "e9795c392bd8c52babb1ea703b4cb24dda7cb795052ed73a216647714491a288"
+  },
+  "tasks.jsonl": {
+    "bytes": 1815034,
+    "sha256": "7c1813480a307ed5fb8e8910b4c2b9ce9ea10cdea0a85fdbcca43639c024d6f6"
+  }
+}

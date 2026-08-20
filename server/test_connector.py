@@ -17,6 +17,10 @@ class ConnectorTests(unittest.TestCase):
             "Read /home/alice/repo/file.txt with api_key=super-secret-value"
         )
         self.assertEqual(value, "Read <local-path> with <redacted-secret>")
+        self.assertEqual(
+            connector.redact_text("See [file](/home/alice/repo/file.txt)."),
+            "See [file](<local-path>).",
+        )
 
     def test_safe_environment_drops_provider_and_git_secrets(self):
         previous = dict(os.environ)
@@ -82,4 +86,3 @@ class ConnectorTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
