@@ -11,6 +11,7 @@
 - `H003` `ı` Small specialists can outperform an equally priced generalist when the task crosses several domains.
 - `H004` `ı` Assigning roles dynamically can outperform giving every intelligence a fixed role.
 - `H005` `ı` Giving tools to small intelligences can close more of the performance gap than adding parameters to one model.
+- `H027` `→` ABI-compatible personal delta towers can compose information that the shared base, fresh clones, or either single tower lacks. E001 passed; independent replication is pending.
 
 ## Deliberation
 

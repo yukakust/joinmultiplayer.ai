@@ -1,2 +1,5 @@
 __pycache__/
 *.py[cod]
+.venv/
+experiments/E001-personal-delta-towers/artifacts/checkpoints/
+experiments/E001-personal-delta-towers/artifacts/*/

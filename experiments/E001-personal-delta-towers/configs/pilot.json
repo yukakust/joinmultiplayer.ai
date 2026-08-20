@@ -1,0 +1,32 @@
+{
+  "experiment_id": "E001",
+  "stage": "development",
+  "seed": 17082026,
+  "world": {
+    "specialties": 4,
+    "experts_per_specialty": 2,
+    "keys": 64,
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15
+  },
+  "model": {
+    "d_model": 32,
+    "nhead": 4,
+    "feedforward": 64,
+    "dropout": 0.0,
+    "tower_depths": [6, 12, 24, 6, 12, 24, 6, 12],
+    "max_delta_norm": 2.0
+  },
+  "training": {
+    "expert_steps": 240,
+    "expert_learning_rate": 0.002,
+    "merger_steps": 360,
+    "merger_learning_rate": 0.003,
+    "failure_training_probability": 0.35
+  },
+  "evaluation": {
+    "preferred_failure_probability": 0.5,
+    "seeds": [17082026, 17082027, 17082028]
+  },
+  "artifacts_dir": "experiments/E001-personal-delta-towers/artifacts"
+}

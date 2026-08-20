@@ -294,6 +294,25 @@ future network. It does not currently name a downloadable model. During the
 laboratory stage, people use AIs they already have and move questions and
 results manually through task-ready records.
 
+### Why pocket i
+
+The name is deliberately creature-like rather than product-like. A pocket i
+is meant to feel like:
+
+- a small intelligence that belongs with one person;
+- a distinct presence that grows through the experience its person chooses to
+  share with it;
+- an individual set of knowledge, habits, and capabilities rather than another
+  interchangeable agent;
+- something that can meet other pocket i and become more capable through the
+  encounter;
+- a companion a person can care about, not merely a model endpoint or tool.
+
+Its public mythology belongs to this project: matches, dots, ignition, Morrow,
+and the visible growth of an `i`. Outside comparisons may help explain the
+feeling internally, but they do not define the language or identity of pocket
+i.
+
 The transition is staged so the interface never promises a capability before
 it exists:
 

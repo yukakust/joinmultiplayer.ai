@@ -115,6 +115,31 @@ first accepted contribution made with it is.
 - Prefer small, inspectable changes and verification before claims.
 - Do not add data collection, email delivery, accounts, or public publishing without an explicit privacy and moderation design.
 
+## Personal Delta Tower experiment
+
+`experiments/E001-personal-delta-towers/` now contains the first executable
+mechanism pilot for H027. On yukabox it trains eight distinct 6/12/24-layer
+pocket i, routes two candidates for each required specialty, and computes:
+
+```text
+FinalLayers(z0 + Clip(Merge(delta_first, delta_second)))
+```
+
+The locked config ran three previously untouched seeds with 64 private facts
+per specialty and key-disjoint central train/validation/test partitions. All
+three passed every gate: PDT and forced-backup accuracy were 100%; the strongest
+trained control averaged 49.36%; mean lift was +50.64 percentage points. The
+canonical aggregate is
+`experiments/E001-personal-delta-towers/artifacts/20260820T074133Z-suite-3-seeds/suite-summary.json`.
+
+Interpret this narrowly. E001 shows that explicitly supervised compatible
+neural capsules can compose and that a second distinct specialist can replace
+an incomplete preferred specialist. It does not test language, learned
+routing, WAN token streaming, emergent ABI alignment, privacy, or Byzantine
+experts. H027 remains dotless until independent replication. The next neural
+step is E002 on a small open 24-layer language model; do not jump directly to a
+32-device network.
+
 ## Immediate next work
 
 Complete and test the standalone-question loop before adding social mechanics:
