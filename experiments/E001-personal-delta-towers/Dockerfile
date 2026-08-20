@@ -11,4 +11,4 @@ RUN python -m pip install --no-cache-dir -r /tmp/requirements-cpu.txt
 
 COPY . /work
 
-CMD ["python", "-m", "e001.run", "--config", "configs/pilot.json"]
+CMD ["python", "-m", "e001.run", "--config", "configs/locked-pilot.json", "--all-seeds"]

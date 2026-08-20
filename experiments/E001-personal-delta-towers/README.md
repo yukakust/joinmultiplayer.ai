@@ -102,8 +102,8 @@ The architecture advances to a larger language-model test only if:
   percentage points on every locked seed;
 - removing a necessary specialty causes a measurable, pre-specified loss.
 
-The thresholds were locked in `configs/locked-pilot.json` before seeds
-`17082101`, `17082102`, and `17082103` were executed.
+The thresholds were locked and hashed in `configs/locked-pilot.json` before
+seeds `17082201`, `17082202`, and `17082203` were executed.
 
 ## Locked result
 
@@ -113,18 +113,20 @@ All three unseen worlds passed every gate. Across seeds:
 | --- | ---: | ---: | ---: |
 | Personal Delta Towers | 100.00% | 100.00% | 100.00% |
 | forced preferred-expert failure | 100.00% | 100.00% | 100.00% |
-| strongest trained control | 49.36% | 46.28% | 55.44% |
-| collective lift | +50.64 pp | +44.56 pp | +53.72 pp |
+| strongest trained control | 55.46% | 54.27% | 56.06% |
+| collective lift | +44.54 pp | +43.94 pp | +45.73 pp |
 
 The complete suite summary is
-[`artifacts/20260820T074133Z-suite-3-seeds/suite-summary.json`](artifacts/20260820T074133Z-suite-3-seeds/suite-summary.json).
+[`artifacts/20260820T075542Z-suite-3-seeds/suite-summary.json`](artifacts/20260820T075542Z-suite-3-seeds/suite-summary.json).
 Each seed directory contains all 1,452 task records, routes, completion states,
 control predictions, hashes, resource use, and gate outcomes.
 
 Conclusion: E001 supports moving to a less scripted experiment. It proves
 neither emergent latent alignment nor useful language reasoning: every pocket
 i was explicitly taught a shared one-hot neural ABI, routing was given, and all
-computation ran in one CPU process.
+computation ran in one CPU process. The separately trained `PDT without z0`
+ablation also scored 100%, so this world proves delta composition but does not
+yet show that the common base path contributes necessary knowledge.
 
 ## Reproduction
 

@@ -128,17 +128,18 @@ FinalLayers(z0 + Clip(Merge(delta_first, delta_second)))
 The locked config ran three previously untouched seeds with 64 private facts
 per specialty and key-disjoint central train/validation/test partitions. All
 three passed every gate: PDT and forced-backup accuracy were 100%; the strongest
-trained control averaged 49.36%; mean lift was +50.64 percentage points. The
+trained control averaged 55.46%; mean lift was +44.54 percentage points. The
 canonical aggregate is
-`experiments/E001-personal-delta-towers/artifacts/20260820T074133Z-suite-3-seeds/suite-summary.json`.
+`experiments/E001-personal-delta-towers/artifacts/20260820T075542Z-suite-3-seeds/suite-summary.json`.
 
 Interpret this narrowly. E001 shows that explicitly supervised compatible
 neural capsules can compose and that a second distinct specialist can replace
 an incomplete preferred specialist. It does not test language, learned
 routing, WAN token streaming, emergent ABI alignment, privacy, or Byzantine
 experts. H027 remains dotless until independent replication. The next neural
-step is E002 on a small open 24-layer language model; do not jump directly to a
-32-device network.
+step is E002 on a small open 24-layer language model. Its task must require
+knowledge from both `z0` and personal deltas because the E001 `without z0`
+ablation also reached 100%. Do not jump directly to a 32-device network.
 
 ## Immediate next work
 
