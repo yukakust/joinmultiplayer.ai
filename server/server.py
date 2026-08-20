@@ -46,6 +46,7 @@ EXPERIMENT_EVENT_TYPES = {
     "run_completed",
 }
 RUN_STATUSES = {"created", "running", "completed", "failed", "stopped"}
+SPA_ROUTES = {"/experiment", "/experiment/connector", "/experiment/run"}
 PUBLIC_EVENT_KEYS = {
     "text",
     "status",
@@ -578,6 +579,14 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
             return
         if path.startswith("/api/public/"):
             self.get_public(path.removeprefix("/api/public/"))
+            return
+        if path.rstrip("/") in SPA_ROUTES:
+            original_path = self.path
+            self.path = "/index.html"
+            try:
+                super().do_GET()
+            finally:
+                self.path = original_path
             return
         super().do_GET()
 
