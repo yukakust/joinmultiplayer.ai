@@ -28,3 +28,8 @@ The five-frame Miro explanation has a durable text companion in
 [POCKET-I-SWARM-MAP.md](POCKET-I-SWARM-MAP.md). The boundary between reusable
 research and the architecture that still has to be invented is recorded in
 [PERSONAL-DELTA-LM-ARCHITECTURE.md](PERSONAL-DELTA-LM-ARCHITECTURE.md).
+
+The approved direction for the first trainable language branches is local
+DoRA fine-tuning with mandatory human gates and a public experiment microscope.
+The detailed, still-unexecuted plan is in
+[DORA-LANGUAGE-SWARM-PLAN.md](DORA-LANGUAGE-SWARM-PLAN.md).

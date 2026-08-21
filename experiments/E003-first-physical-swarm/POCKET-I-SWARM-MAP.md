@@ -91,7 +91,7 @@ The layer counts are starting hypotheses, not promises:
 
 | Device | First intended branch | Honest first limitation |
 | --- | --- | --- |
-| Phone | short branch, around 6 blocks | may begin with memory and a small adapter rather than training six full blocks |
+| Phone | short branch, around 6 blocks | begins with memory and a small DoRA update rather than training six full blocks |
 | MacBook | medium branch, around 12 blocks | likely source device and local answer merger |
 | yukabox | deep branch, around 24 blocks | prepares models and performs the heaviest training |
 
@@ -108,8 +108,8 @@ Build order:
 6. Enable local training on each physical device only after checkpoint,
    deletion, evaluation, and rollback work there.
 
-If a device cannot support the planned depth, reduce the depth or start with an
-adapter. Never label a browser adapter update as full transformer training.
+If a device cannot support the planned depth, reduce the depth or start with a
+DoRA update. Never label browser DoRA fine-tuning as full transformer training.
 
 ## 4. How each pocket i learns
 

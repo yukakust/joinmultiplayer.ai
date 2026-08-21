@@ -28,7 +28,7 @@ What we reuse:
 
 - tokenizer, embeddings, and pretrained language representations;
 - transformer blocks and pretrained weights;
-- local fine-tuning and adapter tooling;
+- local fine-tuning and DoRA/adapter tooling;
 - quantization and device runtimes;
 - known approaches to elastic depth, distributed execution, modular experts,
   and representation composition.
@@ -222,7 +222,7 @@ syntax, semantics, common world patterns, and ordinary language generation.
 The feasibility study adds:
 
 1. depth-specific base references;
-2. personal copies or adapters;
+2. personal copies with DoRA updates in the first experiment;
 3. learned frozen ingress/egress projections;
 4. a bounded set-aware merger;
 5. isolation, training, and evaluation boundaries.
@@ -249,8 +249,8 @@ The first development sequence is:
 8. Assert numerically that every fresh personal branch returns delta near zero.
 9. Freeze the projections and common path before personal learning.
 
-For the phone alpha, a short tower plus adapter is the likely first target. The
-experiment must report adapter training as adapter training. Full continual
+For the phone alpha, a short tower plus DoRA is the selected first target. The
+experiment must report DoRA as parameter-efficient fine-tuning. Full continual
 training of six transformer blocks on the phone is a later hardware result, not
 an assumption.
 
@@ -261,7 +261,7 @@ neural ABI, and final path remain frozen in the first study.
 
 ```text
 mutable exact fact      -> local inspectable memory / RAG
-stable personal skill   -> local adapter or personal middle blocks
+stable personal skill   -> local DoRA or later personal middle-block FT
 shared language ability -> frozen pretrained base
 ```
 

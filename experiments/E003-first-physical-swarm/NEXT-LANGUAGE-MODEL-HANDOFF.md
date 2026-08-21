@@ -11,7 +11,9 @@ Read alongside:
 - [`POCKET-I-SWARM-MAP.md`](POCKET-I-SWARM-MAP.md) — the durable text version
   of the five Miro frames;
 - [`PERSONAL-DELTA-LM-ARCHITECTURE.md`](PERSONAL-DELTA-LM-ARCHITECTURE.md) —
-  what can be reused and what the experiment must invent and falsify.
+  what can be reused and what the experiment must invent and falsify;
+- [`DORA-LANGUAGE-SWARM-PLAN.md`](DORA-LANGUAGE-SWARM-PLAN.md) — the selected
+  DoRA training method, mandatory human gates, and public UI contract.
 
 ## Start the new Codex task
 
@@ -22,12 +24,13 @@ $pocket-i-lab start E003 as Morrow
 ```
 
 ```text
-Read experiments/E003-first-physical-swarm/NEXT-LANGUAGE-MODEL-HANDOFF.md in
-full. First explain in plain Russian what will be trained, where the base model
-will come from, how 6/12/24-layer branches can share one neural ABI, and what
-would falsify the idea. Do not download a model, install GPU software, revive
-N0001, or start training until I approve that explanation and the proposed
-model shortlist.
+Read experiments/E003-first-physical-swarm/NEXT-LANGUAGE-MODEL-HANDOFF.md and
+experiments/E003-first-physical-swarm/DORA-LANGUAGE-SWARM-PLAN.md in full.
+First explain in plain Russian what will be trained, where the base model will
+come from, how 6/12/24-layer branches can share one neural ABI, and what would
+falsify the idea. Do not download a model, install GPU software, revive N0001,
+or start training until I approve that explanation and the proposed model
+shortlist. No later gate may advance without my visible approval either.
 ```
 
 The first command is explicit consent to the plugin's filtered public journal.
@@ -182,11 +185,12 @@ random checkpoint. Build an elastic family deliberately:
 - give each depth its own frozen projection into the same ABI space;
 - freeze the ingress, egress, norm budget, and shared final path during local
   personalization;
-- locally update only the allowed middle personal parameters and adapters;
+- locally update only the allowed personal DoRA parameters in declared middle
+  modules;
 - reject a checkpoint that fails the compatibility and calibration suite.
 
 The layer counts are hypotheses, not branding. Measure them. If the phone can
-honestly support only four blocks or a small adapter in the first alpha, report
+honestly support only four blocks or a small DoRA update in the first alpha, report
 that instead of forcing six.
 
 ## What trains locally
@@ -203,9 +207,11 @@ the fact.
 ### 2. Stable personal capability
 
 Use local weight updates for stable skills, procedures, preferences, and
-representations that are difficult to reduce to document lookup. Begin with a
-small adapter or a restricted personal middle tower. Full local continual
-pretraining is not required for the first test.
+representations that are difficult to reduce to document lookup. The selected
+first PEFT method is DoRA: train the declared magnitude and low-rank directional
+parameters in personal middle modules while the common base and neural ABI stay
+frozen. Full local continual pretraining is not required for the first test.
+The detailed gate and UI contract is in `DORA-LANGUAGE-SWARM-PLAN.md`.
 
 ### 3. Shared general competence
 
@@ -312,8 +318,9 @@ Run three isolated owner directories/processes on `yukabox`:
   held-out local accuracy, and rollback checkpoint;
 - training failure or data leakage remains visible in the journal.
 
-The initial experiment may use adapters for all three depths. Do not call an
-adapter update “full-model training.”
+The initial experiment uses DoRA for all three depths. Do not call a DoRA update
+“full-model training”: it is parameter-efficient fine-tuning. Track magnitude
+and direction changes separately and prove that shared weights did not change.
 
 ### Phase 4 — compose and ablate
 
@@ -365,7 +372,7 @@ then request explicit approval before adding it to `joinmultiplayer.ai`.
 
 Only after the language mechanism passes:
 
-- benchmark the 6-layer/adapter branch on the actual phone;
+- benchmark the 6-layer/DoRA branch on the actual phone;
 - benchmark the 12-layer branch on the Mac;
 - keep the 24-layer branch on `yukabox`;
 - define signed identity, checkpoint version, allowed memory capsule, and
@@ -374,7 +381,7 @@ Only after the language mechanism passes:
 - enable local training only after per-device rollback and deletion work;
 - create a fresh private room rather than reusing `N0001`.
 
-The phone may begin as inference plus memory or adapter training. Do not claim
+The phone may begin as inference plus memory or DoRA training. Do not claim
 that a browser trained six full transformer blocks unless the recorded run
 actually did so.
 
