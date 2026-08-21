@@ -13,7 +13,7 @@ Read alongside:
 - [`PERSONAL-DELTA-LM-ARCHITECTURE.md`](PERSONAL-DELTA-LM-ARCHITECTURE.md) —
   what can be reused and what the experiment must invent and falsify;
 - [`DORA-LANGUAGE-SWARM-PLAN.md`](DORA-LANGUAGE-SWARM-PLAN.md) — the selected
-  DoRA training method, mandatory human gates, and public UI contract.
+  DoRA training method, three owner checkpoints, and minimal public UI contract.
 
 ## Start the new Codex task
 
@@ -30,7 +30,8 @@ First explain in plain Russian what will be trained, where the base model will
 come from, how 6/12/24-layer branches can share one neural ABI, and what would
 falsify the idea. Do not download a model, install GPU software, revive N0001,
 or start training until I approve that explanation and the proposed model
-shortlist. No later gate may advance without my visible approval either.
+shortlist. Stop again after local DoRA learning and before accepting the final
+result, as defined by the three checkpoints in the minimal plan.
 ```
 
 The first command is explicit consent to the plugin's filtered public journal.

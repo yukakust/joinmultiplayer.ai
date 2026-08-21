@@ -100,8 +100,8 @@ phone and Mac train their own tiny local weights, while the downloadable
 headless Python node does the same on a server. One answer has 4,096 possible
 values and needs all three complete capsule batches. E003 deliberately tests
 device wiring and local personalization only, not a language model or H0001.
-The unexecuted next-step design selects local DoRA fine-tuning and requires a
-public experiment microscope plus explicit human approval at every gate; see
+The unexecuted next-step design selects local DoRA fine-tuning, one public
+experiment microscope, and three visible owner checkpoints; see
 [`DORA-LANGUAGE-SWARM-PLAN.md`](experiments/E003-first-physical-swarm/DORA-LANGUAGE-SWARM-PLAN.md).
 
 The lab therefore comes first, but it is meant to become the work surface of
