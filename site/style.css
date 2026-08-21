@@ -221,6 +221,98 @@ button:disabled {
   padding: 0.5rem 0.65rem;
 }
 
+.e004-section {
+  margin: 3rem 0;
+}
+
+.e004-pockets {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 1rem;
+}
+
+.e004-pockets article {
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 0.7rem;
+  min-height: 15rem;
+  padding: 1.5rem;
+}
+
+.e004-pockets i {
+  color: var(--muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 4rem;
+  font-style: normal;
+}
+
+.e004-pockets span,
+.e004-pockets small,
+.e004-two-column p,
+.e004-checkpoint p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.e004-pockets small {
+  margin-top: auto;
+}
+
+.e004-checkpoint {
+  align-items: center;
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr auto;
+  margin: 3rem 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.e004-checkpoint span,
+.e004-two-column span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+}
+
+.e004-checkpoint strong {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.e004-checkpoint b {
+  border: 1px solid var(--ember);
+  color: var(--ember);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding: 0.8rem;
+}
+
+.e004-two-column {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 3rem 0;
+}
+
+.e004-two-column > section {
+  border: 1px solid var(--line);
+  min-height: 15rem;
+  padding: 1.5rem;
+}
+
+.e004-placeholder {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
 .experiment-runs,
 .start-run-panel {
   border-top: 1px solid var(--line);
@@ -2163,6 +2255,17 @@ blockquote {
 
   .experiment-grid {
     grid-template-columns: 1fr;
+  }
+
+  .e004-pockets,
+  .e004-two-column,
+  .e004-checkpoint {
+    grid-template-columns: 1fr;
+  }
+
+  .e004-pockets article,
+  .e004-two-column > section {
+    min-height: 0;
   }
 
   .experiment-grid > section {

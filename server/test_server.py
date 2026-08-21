@@ -658,6 +658,35 @@ class SubmissionTests(unittest.TestCase):
             self.assertEqual(handler.sent[1]["protocol_version"], "E003-draft-v0.1")
             self.assertIn("not yet a language model", handler.sent[1]["task_prompt"])
 
+    def test_e004_public_record_is_an_empty_pretraining_shell(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.get_public("E004")
+            self.assertEqual(handler.sent[0], HTTPStatus.OK)
+            experiment = handler.sent[1]
+            self.assertEqual(experiment["status"], "checkpoint_1_preparing")
+            self.assertEqual(experiment["method"], "DoRA")
+            self.assertEqual(experiment["checkpoint"]["number"], 1)
+            self.assertEqual(len(experiment["pockets"]), 3)
+            self.assertTrue(all(item["status"] == "not_created" for item in experiment["pockets"]))
+            self.assertEqual(experiment["artifacts"], [])
+            self.assertIn("not a result", experiment["claim_boundary"]["en"])
+
+    def test_e004_artifact_schema_is_public_json_schema(self):
+        schema_path = (
+            Path(__file__).resolve().parents[1]
+            / "site"
+            / "experiments"
+            / "E004"
+            / "artifact-schema-v0.1.json"
+        )
+        schema = json.loads(schema_path.read_text())
+        self.assertEqual(schema["$schema"], "https://json-schema.org/draft/2020-12/schema")
+        self.assertEqual(schema["properties"]["experiment_id"]["const"], "E004")
+        self.assertEqual(schema["properties"]["checkpoint"]["maximum"], 3)
+
     def test_three_physical_devices_train_compose_and_publish(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "test.sqlite3"

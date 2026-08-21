@@ -136,6 +136,60 @@ E003 = {
     "guess_probability": 1 / 4096,
 }
 
+E004 = {
+    "public_id": "E004",
+    "hypothesis_id": "H0001",
+    "status": "checkpoint_1_preparing",
+    "protocol_version": "E004-draft-v0.1",
+    "title": {
+        "en": "The smallest useful DoRA language-swarm test",
+        "ru": "Минимальный языковой swarm-тест с DoRA",
+    },
+    "question": {
+        "en": (
+            "Can three language pocket i learn different small skills in their own DoRA "
+            "weights and solve new tasks together that the base model, any one pocket i, "
+            "and every pair cannot solve?"
+        ),
+        "ru": (
+            "Могут ли три языковых pocket i выучить разные небольшие навыки в собственных "
+            "DoRA-весах и вместе решить новые задачи, которые не решают базовая модель, "
+            "один pocket i или любая пара?"
+        ),
+    },
+    "phase": "setup",
+    "method": "DoRA",
+    "checkpoint": {
+        "number": 1,
+        "status": "preparing",
+        "label": {
+            "en": "Approve the test before training",
+            "ru": "Утвердить тест до обучения",
+        },
+    },
+    "pockets": [
+        {"id": "E004-I1", "role": "short", "planned_depth": 6, "status": "not_created"},
+        {"id": "E004-I2", "role": "medium", "planned_depth": 12, "status": "not_created"},
+        {"id": "E004-I3", "role": "deep", "planned_depth": 24, "status": "not_created"},
+    ],
+    "artifacts": [],
+    "artifact_schema": "/experiments/E004/artifact-schema-v0.1.json",
+    "protocol_path": (
+        "https://github.com/yukakust/joinmultiplayer.ai/blob/agent/game-loop-v0.1/"
+        "experiments/E003-first-physical-swarm/DORA-LANGUAGE-SWARM-PLAN.md"
+    ),
+    "claim_boundary": {
+        "en": (
+            "No model has been selected, downloaded, or trained. This page is the empty "
+            "public shell for a proposed development experiment, not a result."
+        ),
+        "ru": (
+            "Модель ещё не выбрана, не скачана и не обучалась. Это пустой публичный каркас "
+            "будущего development-эксперимента, а не результат."
+        ),
+    },
+}
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
@@ -1481,6 +1535,13 @@ First, explain the proposed protocol and its falsification criteria in a concise
         response["codex_runs"] = self.public_experiment_runs("E003")
         self.send_json(HTTPStatus.OK, response, public=True, max_age=2)
 
+    def get_public_e004(self) -> None:
+        response = dict(E004)
+        response["object_type"] = "experiment"
+        response["hypothesis"] = MAIN_HYPOTHESIS
+        response["runs"] = self.public_experiment_runs("E004")
+        self.send_json(HTTPStatus.OK, response, public=True, max_age=2)
+
     def get_public(self, public_id: str) -> None:
         public_id = public_id.upper()
         if public_id == "H0001":
@@ -1491,6 +1552,9 @@ First, explain the proposed protocol and its falsification criteria in a concise
             return
         if public_id == "E003":
             self.get_public_e003()
+            return
+        if public_id == "E004":
+            self.get_public_e004()
             return
         if RUN_ID_RE.fullmatch(public_id):
             record = self.public_experiment_run(public_id)

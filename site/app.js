@@ -2230,12 +2230,58 @@ function door(id, data) {
     ${morrowGuide("door", "curious")}`;
 }
 
-function experimentShell() {
+const e004Copy = {
+  en: {
+    step: "CURRENT EXPERIMENT · E004",
+    intro: "One small test: three synthetic language pocket i learn different skills with DoRA and try to solve new tasks together.",
+    status: "SETUP · NOT A RESULT",
+    question: "THE QUESTION",
+    pockets: "THREE POCKET i",
+    planned: "planned depth",
+    notCreated: "not created",
+    checkpoint: "CHECKPOINT 1 OF 3",
+    checkpointCopy: "We are preparing the base-model recommendation, readable tasks, DoRA recipe, chance baseline, and run budget. Training cannot begin before Yuka reviews them.",
+    waiting: "PREPARING EVIDENCE · NO TRAINING",
+    microscope: "MICROSCOPE",
+    microscopeCopy: "After the run, choose a task and compare the base, singles, pairs, full swarm, no-z₀, missing-pocket, and exact-RAG answers here.",
+    result: "RESULT AND FILES",
+    resultCopy: "No result exists. Reviewed checkpoint artifacts will appear here without replacing failed runs.",
+    protocol: "READ THE MINIMAL PLAN",
+    schema: "ARTIFACT SCHEMA",
+    boundary: "BOUNDARY"
+  },
+  ru: {
+    step: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
+    intro: "Один небольшой тест: три синтетических языковых pocket i учат разные навыки через DoRA и пытаются вместе решить новые задачи.",
+    status: "ПОДГОТОВКА · ЭТО НЕ РЕЗУЛЬТАТ",
+    question: "ВОПРОС",
+    pockets: "ТРИ POCKET i",
+    planned: "планируемая глубина",
+    notCreated: "ещё не создан",
+    checkpoint: "КОНТРОЛЬНАЯ ТОЧКА 1 ИЗ 3",
+    checkpointCopy: "Мы готовим рекомендацию базовой модели, понятные задачи, DoRA-рецепт, вероятность угадывания и бюджет запуска. Обучение не начнётся, пока Yuka всё это не проверит.",
+    waiting: "ГОТОВИМ МАТЕРИАЛЫ · ОБУЧЕНИЯ НЕТ",
+    microscope: "МИКРОСКОП",
+    microscopeCopy: "После запуска здесь можно будет выбрать задачу и сравнить ответы базы, одиночных i, пар, полного swarm, варианта без z₀, без одного i и exact RAG.",
+    result: "РЕЗУЛЬТАТ И ФАЙЛЫ",
+    resultCopy: "Результата пока нет. Проверенные артефакты контрольных точек появятся здесь, не заменяя неудачные запуски.",
+    protocol: "ЧИТАТЬ МИНИМАЛЬНЫЙ ПЛАН",
+    schema: "СХЕМА АРТЕФАКТОВ",
+    boundary: "ГРАНИЦА УТВЕРЖДЕНИЯ"
+  }
+};
+
+function e4(key) {
+  return (e004Copy[language] || e004Copy.en)[key] || key;
+}
+
+function experimentShell(experimentId = "E002") {
+  const isE004 = experimentId === "E004";
   return `
     <section class="flow-shell experiment-page" id="experiment-page">
-      <div class="flow-step">${l("currentExperiment")}</div>
-      <h1>${l("experimentTitle")}</h1>
-      <p class="contribution-intro">${l("experimentIntro")}</p>
+      <div class="flow-step">${isE004 ? e4("step") : l("currentExperiment")}</div>
+      <h1>${isE004 ? "E004" : l("experimentTitle")}</h1>
+      <p class="contribution-intro">${isE004 ? e4("intro") : l("experimentIntro")}</p>
       <div class="experiment-loading">${c("loading")}</div>
     </section>`;
 }
@@ -2252,10 +2298,58 @@ function experimentRunCard(run) {
 async function loadExperiment() {
   const target = document.querySelector("#experiment-page");
   if (!target) return;
+  const requestedId = (new URLSearchParams(location.search).get("id") || "E002").toUpperCase();
+  const experimentId = requestedId === "E004" ? "E004" : "E002";
   try {
-    const response = await fetch("/api/public/E002", { cache: "no-store" });
+    const response = await fetch(`/api/public/${experimentId}`, { cache: "no-store" });
     if (!response.ok) throw new Error("experiment unavailable");
     const experiment = await response.json();
+    if (experimentId === "E004") {
+      const pockets = experiment.pockets || [];
+      target.querySelector("h1").textContent = experiment.title?.[language] || "E004";
+      target.querySelector(".experiment-loading").outerHTML = `
+        <div class="experiment-status">${e4("status")}</div>
+        <section class="hypothesis-card">
+          <span>${e4("question")}</span>
+          <p>${escapeHTML(experiment.question?.[language] || "")}</p>
+        </section>
+        <section class="e004-section">
+          <div class="flow-step">${e4("pockets")}</div>
+          <div class="e004-pockets">${pockets.map(pocket => `
+            <article>
+              <i>i</i>
+              <strong>${escapeHTML(pocket.id)}</strong>
+              <span>${e4("planned")} · ${escapeHTML(pocket.planned_depth)} blocks</span>
+              <small>${e4("notCreated")}</small>
+            </article>`).join("")}</div>
+        </section>
+        <section class="e004-checkpoint">
+          <div>
+            <span>${e4("checkpoint")}</span>
+            <strong>${escapeHTML(experiment.checkpoint?.label?.[language] || "")}</strong>
+            <p>${e4("checkpointCopy")}</p>
+          </div>
+          <b>${e4("waiting")}</b>
+        </section>
+        <div class="e004-two-column">
+          <section>
+            <span>${e4("microscope")}</span>
+            <p>${e4("microscopeCopy")}</p>
+            <div class="e004-placeholder">z₀ + Δi₁ + Δi₂ + Δi₃ → ?</div>
+          </section>
+          <section>
+            <span>${e4("result")}</span>
+            <p>${e4("resultCopy")}</p>
+            <div class="actions"><a class="quiet-link" href="${escapeHTML(experiment.artifact_schema)}">${e4("schema")}</a></div>
+          </section>
+        </div>
+        <section class="privacy-boundary">
+          <span>${e4("boundary")}</span>
+          <p>${escapeHTML(experiment.claim_boundary?.[language] || "")}</p>
+        </section>
+        <div class="actions experiment-actions"><a class="button secondary" href="${escapeHTML(experiment.protocol_path)}">${e4("protocol")}</a></div>`;
+      return;
+    }
     const runs = experiment.runs || [];
     const development = experiment.development_run || {};
     const fixedCurve = development.fixed_workload_curve || [];
@@ -2694,8 +2788,9 @@ function render() {
       requestAnimationFrame(() => document.querySelector("#open")?.scrollIntoView());
     }
   } else if (path === "experiment") {
-    document.title = `E002 — i`;
-    app.innerHTML = withLanguage(experimentShell());
+    const experimentId = (new URLSearchParams(location.search).get("id") || "E002").toUpperCase() === "E004" ? "E004" : "E002";
+    document.title = `${experimentId} — i`;
+    app.innerHTML = withLanguage(experimentShell(experimentId));
     loadExperiment();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
