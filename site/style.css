@@ -313,6 +313,80 @@ button:disabled {
   padding-top: 1.5rem;
 }
 
+.e004-evidence {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 3rem 0;
+}
+
+.e004-evidence article,
+.e004-examples article,
+.e004-decision {
+  border: 1px solid var(--line);
+  padding: 1.5rem;
+}
+
+.e004-evidence article {
+  min-height: 13rem;
+}
+
+.e004-evidence span,
+.e004-examples article > span,
+.e004-decision > span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+}
+
+.e004-evidence strong {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+  overflow-wrap: anywhere;
+}
+
+.e004-evidence p,
+.e004-evidence small,
+.e004-decision p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.e004-evidence code {
+  color: var(--muted);
+  display: block;
+  font-size: 0.68rem;
+  overflow-wrap: anywhere;
+}
+
+.e004-examples {
+  margin: 3rem 0;
+}
+
+.e004-examples article {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 7rem 1fr auto;
+}
+
+.e004-examples p {
+  line-height: 1.5;
+  margin: 0;
+}
+
+.e004-examples strong {
+  white-space: nowrap;
+}
+
+.e004-decision {
+  border-color: var(--ember);
+  margin: 3rem 0;
+}
+
 .experiment-runs,
 .start-run-panel {
   border-top: 1px solid var(--line);
@@ -2259,7 +2333,9 @@ blockquote {
 
   .e004-pockets,
   .e004-two-column,
-  .e004-checkpoint {
+  .e004-checkpoint,
+  .e004-evidence,
+  .e004-examples article {
     grid-template-columns: 1fr;
   }
 

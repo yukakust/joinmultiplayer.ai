@@ -666,12 +666,12 @@ class SubmissionTests(unittest.TestCase):
             handler.get_public("E004")
             self.assertEqual(handler.sent[0], HTTPStatus.OK)
             experiment = handler.sent[1]
-            self.assertEqual(experiment["status"], "checkpoint_1_preparing")
+            self.assertEqual(experiment["status"], "checkpoint_1_needs_review")
             self.assertEqual(experiment["method"], "DoRA")
             self.assertEqual(experiment["checkpoint"]["number"], 1)
             self.assertEqual(len(experiment["pockets"]), 3)
             self.assertTrue(all(item["status"] == "not_created" for item in experiment["pockets"]))
-            self.assertEqual(experiment["artifacts"], [])
+            self.assertEqual(experiment["artifacts"], ["/experiments/E004/checkpoint-1.json"])
             self.assertIn("not a result", experiment["claim_boundary"]["en"])
 
     def test_e004_artifact_schema_is_public_json_schema(self):

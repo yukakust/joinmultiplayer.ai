@@ -139,7 +139,7 @@ E003 = {
 E004 = {
     "public_id": "E004",
     "hypothesis_id": "H0001",
-    "status": "checkpoint_1_preparing",
+    "status": "checkpoint_1_needs_review",
     "protocol_version": "E004-draft-v0.1",
     "title": {
         "en": "The smallest useful DoRA language-swarm test",
@@ -161,7 +161,7 @@ E004 = {
     "method": "DoRA",
     "checkpoint": {
         "number": 1,
-        "status": "preparing",
+        "status": "needs_review",
         "label": {
             "en": "Approve the test before training",
             "ru": "Утвердить тест до обучения",
@@ -172,7 +172,8 @@ E004 = {
         {"id": "E004-I2", "role": "medium", "planned_depth": 12, "status": "not_created"},
         {"id": "E004-I3", "role": "deep", "planned_depth": 24, "status": "not_created"},
     ],
-    "artifacts": [],
+    "artifacts": ["/experiments/E004/checkpoint-1.json"],
+    "checkpoint_artifact": "/experiments/E004/checkpoint-1.json",
     "artifact_schema": "/experiments/E004/artifact-schema-v0.1.json",
     "protocol_path": (
         "https://github.com/yukakust/joinmultiplayer.ai/blob/agent/game-loop-v0.1/"

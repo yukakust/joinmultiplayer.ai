@@ -2241,7 +2241,17 @@ const e004Copy = {
     notCreated: "not created",
     checkpoint: "CHECKPOINT 1 OF 3",
     checkpointCopy: "We are preparing the base-model recommendation, readable tasks, DoRA recipe, chance baseline, and run budget. Training cannot begin before Yuka reviews them.",
-    waiting: "PREPARING EVIDENCE · NO TRAINING",
+    waiting: "WAITING FOR YUKA · NO TRAINING",
+    model: "RECOMMENDED BASE",
+    hardware: "YUKABOX",
+    task: "TASK WORLD",
+    dora: "DORA RECIPE",
+    examples: "ILLUSTRATIVE EXAMPLES · NOT LOCKED",
+    chance: "blind whole-answer chance",
+    pairChance: "perfect pair guessing the missing segment",
+    decision: "DECISION REQUESTED",
+    modelSize: "BF16 weights",
+    noRuntime: "Memory and disk fit. GPU runtime is not configured; speed is still unknown.",
     microscope: "MICROSCOPE",
     microscopeCopy: "After the run, choose a task and compare the base, singles, pairs, full swarm, no-z₀, missing-pocket, and exact-RAG answers here.",
     result: "RESULT AND FILES",
@@ -2260,7 +2270,17 @@ const e004Copy = {
     notCreated: "ещё не создан",
     checkpoint: "КОНТРОЛЬНАЯ ТОЧКА 1 ИЗ 3",
     checkpointCopy: "Мы готовим рекомендацию базовой модели, понятные задачи, DoRA-рецепт, вероятность угадывания и бюджет запуска. Обучение не начнётся, пока Yuka всё это не проверит.",
-    waiting: "ГОТОВИМ МАТЕРИАЛЫ · ОБУЧЕНИЯ НЕТ",
+    waiting: "ЖДЁМ YUKA · ОБУЧЕНИЯ НЕТ",
+    model: "РЕКОМЕНДУЕМАЯ БАЗА",
+    hardware: "YUKABOX",
+    task: "МИР ЗАДАЧ",
+    dora: "DORA-РЕЦЕПТ",
+    examples: "ПРИМЕРЫ · ЕЩЁ НЕ LOCKED",
+    chance: "шанс угадать весь ответ",
+    pairChance: "шанс идеальной пары угадать недостающий сегмент",
+    decision: "КАКОЕ РЕШЕНИЕ НУЖНО",
+    modelSize: "BF16-веса",
+    noRuntime: "Памяти и диска достаточно. GPU-runtime не настроен; скорость пока неизвестна.",
     microscope: "МИКРОСКОП",
     microscopeCopy: "После запуска здесь можно будет выбрать задачу и сравнить ответы базы, одиночных i, пар, полного swarm, варианта без z₀, без одного i и exact RAG.",
     result: "РЕЗУЛЬТАТ И ФАЙЛЫ",
@@ -2305,7 +2325,16 @@ async function loadExperiment() {
     if (!response.ok) throw new Error("experiment unavailable");
     const experiment = await response.json();
     if (experimentId === "E004") {
-      const pockets = experiment.pockets || [];
+      let checkpoint = {};
+      if (experiment.checkpoint_artifact) {
+        const checkpointResponse = await fetch(experiment.checkpoint_artifact, { cache: "no-store" });
+        if (checkpointResponse.ok) checkpoint = await checkpointResponse.json();
+      }
+      const pockets = checkpoint.pockets || experiment.pockets || [];
+      const model = checkpoint.model_candidate || {};
+      const hardware = checkpoint.hardware || {};
+      const taskWorld = checkpoint.task_world || {};
+      const dora = checkpoint.dora_recipe || {};
       target.querySelector("h1").textContent = experiment.title?.[language] || "E004";
       target.querySelector(".experiment-loading").outerHTML = `
         <div class="experiment-status">${e4("status")}</div>
@@ -2319,7 +2348,7 @@ async function loadExperiment() {
             <article>
               <i>i</i>
               <strong>${escapeHTML(pocket.id)}</strong>
-              <span>${e4("planned")} · ${escapeHTML(pocket.planned_depth)} blocks</span>
+              <span>${e4("planned")} · ${escapeHTML(pocket.depth || pocket.planned_depth)} blocks · DoRA r${escapeHTML(pocket.dora_rank || "—")}</span>
               <small>${e4("notCreated")}</small>
             </article>`).join("")}</div>
         </section>
@@ -2331,6 +2360,38 @@ async function loadExperiment() {
           </div>
           <b>${e4("waiting")}</b>
         </section>
+        <div class="e004-evidence">
+          <article>
+            <span>${e4("model")}</span>
+            <strong>${escapeHTML(model.id || "—")}</strong>
+            <p>${escapeHTML(model.layers || "—")} blocks · ${escapeHTML(model.license || "—")}<br>${e4("modelSize")} · ${model.weight_bytes ? (Number(model.weight_bytes) / 1e9).toFixed(2) : "—"} GB</p>
+            <code>${escapeHTML(model.revision || "")}</code>
+          </article>
+          <article>
+            <span>${e4("hardware")}</span>
+            <strong>${escapeHTML(hardware.cpu || "—")}</strong>
+            <p>${escapeHTML(hardware.threads || "—")} threads · ${escapeHTML(hardware.ram_gib || "—")} GiB RAM · ${escapeHTML(hardware.free_disk_gib || "—")} GiB free</p>
+            <small>${e4("noRuntime")}</small>
+          </article>
+          <article>
+            <span>${e4("task")}</span>
+            <strong>${Number(taskWorld.answer_space || 0).toLocaleString(language)}</strong>
+            <p>${e4("chance")} · 1 / ${Number(taskWorld.answer_space || 1).toLocaleString(language)}<br>${e4("pairChance")} · 1 / 32</p>
+          </article>
+          <article>
+            <span>${e4("dora")}</span>
+            <strong>rank ${escapeHTML(dora.rank || "—")}</strong>
+            <p>${(dora.planned_depths || []).map(value => `${value} blocks`).join(" · ")}<br>${(dora.target_modules || []).map(escapeHTML).join(" · ")}</p>
+          </article>
+        </div>
+        <section class="e004-examples">
+          <div class="flow-step">${e4("examples")}</div>
+          ${(taskWorld.examples || []).map(example => `<article><span>${escapeHTML(example.id)}</span><p>${escapeHTML(example.prompt)}</p><strong>${escapeHTML(example.answer)}</strong></article>`).join("")}
+        </section>
+        <section class="e004-decision">
+          <span>${e4("decision")}</span>
+          <p>${escapeHTML(checkpoint.decision_requested || "")}</p>
+        </section>
         <div class="e004-two-column">
           <section>
             <span>${e4("microscope")}</span>
@@ -2340,7 +2401,7 @@ async function loadExperiment() {
           <section>
             <span>${e4("result")}</span>
             <p>${e4("resultCopy")}</p>
-            <div class="actions"><a class="quiet-link" href="${escapeHTML(experiment.artifact_schema)}">${e4("schema")}</a></div>
+            <div class="actions"><a class="quiet-link" href="${escapeHTML(experiment.checkpoint_artifact)}">CHECKPOINT JSON</a><a class="quiet-link" href="${escapeHTML(experiment.artifact_schema)}">${e4("schema")}</a></div>
           </section>
         </div>
         <section class="privacy-boundary">

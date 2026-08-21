@@ -1,0 +1,519 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E004",
+  "status": "illustrative_not_locked",
+  "seed": 17082026,
+  "answer_alphabet_per_pocket": 32,
+  "complete_answer_space": 32768,
+  "blind_guess_probability": 3.0517578125e-05,
+  "pair_missing_segment_guess_probability": 0.03125,
+  "rules": {
+    "kite": {
+      "arity": 2,
+      "coefficients": [
+        7,
+        11
+      ],
+      "bias": 3
+    },
+    "tide": {
+      "arity": 3,
+      "coefficients": [
+        5,
+        9,
+        13
+      ],
+      "bias": 1
+    },
+    "ember": {
+      "arity": 2,
+      "coefficients": [
+        3,
+        15
+      ],
+      "bias": 7
+    }
+  },
+  "tasks": [
+    {
+      "id": "SAMPLE-01",
+      "prompt": "Encode Kite(15, 3), Tide(16, 16, 25), and Ember(23, 26). Kite first, Tide second, and Ember last. Return only the three segments.",
+      "order": [
+        "kite",
+        "tide",
+        "ember"
+      ],
+      "answer": "K-0D / T-06 / E-12",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            15,
+            3
+          ],
+          "calculation": "7×15 + 11×3 + 3 mod 32",
+          "value": 13,
+          "segment": "K-0D"
+        },
+        "tide": {
+          "inputs": [
+            16,
+            16,
+            25
+          ],
+          "calculation": "5×16 + 9×16 + 13×25 + 1 mod 32",
+          "value": 6,
+          "segment": "T-06"
+        },
+        "ember": {
+          "inputs": [
+            23,
+            26
+          ],
+          "calculation": "3×23 + 15×26 + 7 mod 32",
+          "value": 18,
+          "segment": "E-12"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-02",
+      "prompt": "Encode Kite(12, 4), Tide(26, 28, 19), and Ember(2, 27). Tide first, then Ember, and finish with Kite. Return only the three segments.",
+      "order": [
+        "tide",
+        "ember",
+        "kite"
+      ],
+      "answer": "T-16 / E-02 / K-03",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            12,
+            4
+          ],
+          "calculation": "7×12 + 11×4 + 3 mod 32",
+          "value": 3,
+          "segment": "K-03"
+        },
+        "tide": {
+          "inputs": [
+            26,
+            28,
+            19
+          ],
+          "calculation": "5×26 + 9×28 + 13×19 + 1 mod 32",
+          "value": 22,
+          "segment": "T-16"
+        },
+        "ember": {
+          "inputs": [
+            2,
+            27
+          ],
+          "calculation": "3×2 + 15×27 + 7 mod 32",
+          "value": 2,
+          "segment": "E-02"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-03",
+      "prompt": "Encode Kite(4, 23), Tide(7, 25, 18), and Ember(10, 19). Begin with Ember, follow with Kite, and end with Tide. Return only the three segments.",
+      "order": [
+        "ember",
+        "kite",
+        "tide"
+      ],
+      "answer": "E-02 / K-1C / T-0F",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            4,
+            23
+          ],
+          "calculation": "7×4 + 11×23 + 3 mod 32",
+          "value": 28,
+          "segment": "K-1C"
+        },
+        "tide": {
+          "inputs": [
+            7,
+            25,
+            18
+          ],
+          "calculation": "5×7 + 9×25 + 13×18 + 1 mod 32",
+          "value": 15,
+          "segment": "T-0F"
+        },
+        "ember": {
+          "inputs": [
+            10,
+            19
+          ],
+          "calculation": "3×10 + 15×19 + 7 mod 32",
+          "value": 2,
+          "segment": "E-02"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-04",
+      "prompt": "Encode Kite(12, 3), Tide(8, 11, 8), and Ember(15, 30). Report Kite, then Ember, then Tide. Return only the three segments.",
+      "order": [
+        "kite",
+        "ember",
+        "tide"
+      ],
+      "answer": "K-18 / E-16 / T-14",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            12,
+            3
+          ],
+          "calculation": "7×12 + 11×3 + 3 mod 32",
+          "value": 24,
+          "segment": "K-18"
+        },
+        "tide": {
+          "inputs": [
+            8,
+            11,
+            8
+          ],
+          "calculation": "5×8 + 9×11 + 13×8 + 1 mod 32",
+          "value": 20,
+          "segment": "T-14"
+        },
+        "ember": {
+          "inputs": [
+            15,
+            30
+          ],
+          "calculation": "3×15 + 15×30 + 7 mod 32",
+          "value": 22,
+          "segment": "E-16"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-05",
+      "prompt": "Encode Kite(0, 21), Tide(1, 16, 24), and Ember(14, 23). Start with Tide, put Kite in the middle, and Ember last. Return only the three segments.",
+      "order": [
+        "tide",
+        "kite",
+        "ember"
+      ],
+      "answer": "T-0E / K-0A / E-0A",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            0,
+            21
+          ],
+          "calculation": "7×0 + 11×21 + 3 mod 32",
+          "value": 10,
+          "segment": "K-0A"
+        },
+        "tide": {
+          "inputs": [
+            1,
+            16,
+            24
+          ],
+          "calculation": "5×1 + 9×16 + 13×24 + 1 mod 32",
+          "value": 14,
+          "segment": "T-0E"
+        },
+        "ember": {
+          "inputs": [
+            14,
+            23
+          ],
+          "calculation": "3×14 + 15×23 + 7 mod 32",
+          "value": 10,
+          "segment": "E-0A"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-06",
+      "prompt": "Encode Kite(24, 12), Tide(16, 24, 17), and Ember(24, 26). Use the order Ember, Tide, Kite. Return only the three segments.",
+      "order": [
+        "ember",
+        "tide",
+        "kite"
+      ],
+      "answer": "E-15 / T-06 / K-0F",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            24,
+            12
+          ],
+          "calculation": "7×24 + 11×12 + 3 mod 32",
+          "value": 15,
+          "segment": "K-0F"
+        },
+        "tide": {
+          "inputs": [
+            16,
+            24,
+            17
+          ],
+          "calculation": "5×16 + 9×24 + 13×17 + 1 mod 32",
+          "value": 6,
+          "segment": "T-06"
+        },
+        "ember": {
+          "inputs": [
+            24,
+            26
+          ],
+          "calculation": "3×24 + 15×26 + 7 mod 32",
+          "value": 21,
+          "segment": "E-15"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-07",
+      "prompt": "Encode Kite(6, 26), Tide(6, 21, 7), and Ember(0, 27). Kite first, Tide second, and Ember last. Return only the three segments.",
+      "order": [
+        "kite",
+        "tide",
+        "ember"
+      ],
+      "answer": "K-0B / T-17 / E-1C",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            6,
+            26
+          ],
+          "calculation": "7×6 + 11×26 + 3 mod 32",
+          "value": 11,
+          "segment": "K-0B"
+        },
+        "tide": {
+          "inputs": [
+            6,
+            21,
+            7
+          ],
+          "calculation": "5×6 + 9×21 + 13×7 + 1 mod 32",
+          "value": 23,
+          "segment": "T-17"
+        },
+        "ember": {
+          "inputs": [
+            0,
+            27
+          ],
+          "calculation": "3×0 + 15×27 + 7 mod 32",
+          "value": 28,
+          "segment": "E-1C"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-08",
+      "prompt": "Encode Kite(5, 11), Tide(7, 24, 3), and Ember(8, 23). Tide first, then Ember, and finish with Kite. Return only the three segments.",
+      "order": [
+        "tide",
+        "ember",
+        "kite"
+      ],
+      "answer": "T-03 / E-18 / K-1F",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            5,
+            11
+          ],
+          "calculation": "7×5 + 11×11 + 3 mod 32",
+          "value": 31,
+          "segment": "K-1F"
+        },
+        "tide": {
+          "inputs": [
+            7,
+            24,
+            3
+          ],
+          "calculation": "5×7 + 9×24 + 13×3 + 1 mod 32",
+          "value": 3,
+          "segment": "T-03"
+        },
+        "ember": {
+          "inputs": [
+            8,
+            23
+          ],
+          "calculation": "3×8 + 15×23 + 7 mod 32",
+          "value": 24,
+          "segment": "E-18"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-09",
+      "prompt": "Encode Kite(8, 5), Tide(22, 8, 2), and Ember(18, 0). Begin with Ember, follow with Kite, and end with Tide. Return only the three segments.",
+      "order": [
+        "ember",
+        "kite",
+        "tide"
+      ],
+      "answer": "E-1D / K-12 / T-11",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            8,
+            5
+          ],
+          "calculation": "7×8 + 11×5 + 3 mod 32",
+          "value": 18,
+          "segment": "K-12"
+        },
+        "tide": {
+          "inputs": [
+            22,
+            8,
+            2
+          ],
+          "calculation": "5×22 + 9×8 + 13×2 + 1 mod 32",
+          "value": 17,
+          "segment": "T-11"
+        },
+        "ember": {
+          "inputs": [
+            18,
+            0
+          ],
+          "calculation": "3×18 + 15×0 + 7 mod 32",
+          "value": 29,
+          "segment": "E-1D"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-10",
+      "prompt": "Encode Kite(12, 6), Tide(19, 24, 1), and Ember(1, 31). Report Kite, then Ember, then Tide. Return only the three segments.",
+      "order": [
+        "kite",
+        "ember",
+        "tide"
+      ],
+      "answer": "K-19 / E-1B / T-05",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            12,
+            6
+          ],
+          "calculation": "7×12 + 11×6 + 3 mod 32",
+          "value": 25,
+          "segment": "K-19"
+        },
+        "tide": {
+          "inputs": [
+            19,
+            24,
+            1
+          ],
+          "calculation": "5×19 + 9×24 + 13×1 + 1 mod 32",
+          "value": 5,
+          "segment": "T-05"
+        },
+        "ember": {
+          "inputs": [
+            1,
+            31
+          ],
+          "calculation": "3×1 + 15×31 + 7 mod 32",
+          "value": 27,
+          "segment": "E-1B"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-11",
+      "prompt": "Encode Kite(18, 11), Tide(15, 5, 8), and Ember(2, 3). Start with Tide, put Kite in the middle, and Ember last. Return only the three segments.",
+      "order": [
+        "tide",
+        "kite",
+        "ember"
+      ],
+      "answer": "T-01 / K-1A / E-1A",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            18,
+            11
+          ],
+          "calculation": "7×18 + 11×11 + 3 mod 32",
+          "value": 26,
+          "segment": "K-1A"
+        },
+        "tide": {
+          "inputs": [
+            15,
+            5,
+            8
+          ],
+          "calculation": "5×15 + 9×5 + 13×8 + 1 mod 32",
+          "value": 1,
+          "segment": "T-01"
+        },
+        "ember": {
+          "inputs": [
+            2,
+            3
+          ],
+          "calculation": "3×2 + 15×3 + 7 mod 32",
+          "value": 26,
+          "segment": "E-1A"
+        }
+      }
+    },
+    {
+      "id": "SAMPLE-12",
+      "prompt": "Encode Kite(5, 19), Tide(4, 25, 16), and Ember(9, 13). Use the order Ember, Tide, Kite. Return only the three segments.",
+      "order": [
+        "ember",
+        "tide",
+        "kite"
+      ],
+      "answer": "E-05 / T-06 / K-17",
+      "derivation": {
+        "kite": {
+          "inputs": [
+            5,
+            19
+          ],
+          "calculation": "7×5 + 11×19 + 3 mod 32",
+          "value": 23,
+          "segment": "K-17"
+        },
+        "tide": {
+          "inputs": [
+            4,
+            25,
+            16
+          ],
+          "calculation": "5×4 + 9×25 + 13×16 + 1 mod 32",
+          "value": 6,
+          "segment": "T-06"
+        },
+        "ember": {
+          "inputs": [
+            9,
+            13
+          ],
+          "calculation": "3×9 + 15×13 + 7 mod 32",
+          "value": 5,
+          "segment": "E-05"
+        }
+      }
+    }
+  ]
+}
