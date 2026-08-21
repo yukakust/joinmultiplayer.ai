@@ -6,6 +6,13 @@ lock.
 Execution host for the first phase: `yukabox`.  
 Status: **design and feasibility task; do not describe it as a result**.
 
+Read alongside:
+
+- [`POCKET-I-SWARM-MAP.md`](POCKET-I-SWARM-MAP.md) — the durable text version
+  of the five Miro frames;
+- [`PERSONAL-DELTA-LM-ARCHITECTURE.md`](PERSONAL-DELTA-LM-ARCHITECTURE.md) —
+  what can be reused and what the experiment must invent and falsify.
+
 ## Start the new Codex task
 
 Open a new Codex task in this repository and send these two messages in order:

@@ -23,3 +23,8 @@ model study is in
 [NEXT-LANGUAGE-MODEL-HANDOFF.md](NEXT-LANGUAGE-MODEL-HANDOFF.md). It is a
 design task for a new plugin-enabled Codex journal, not an E003 result and not
 permission to restart the private room.
+
+The five-frame Miro explanation has a durable text companion in
+[POCKET-I-SWARM-MAP.md](POCKET-I-SWARM-MAP.md). The boundary between reusable
+research and the architecture that still has to be invented is recorded in
+[PERSONAL-DELTA-LM-ARCHITECTURE.md](PERSONAL-DELTA-LM-ARCHITECTURE.md).
