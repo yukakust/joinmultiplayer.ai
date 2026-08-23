@@ -1,0 +1,47 @@
+{
+  "experiment_id": "E004",
+  "protocol_version": "arena-v0.1",
+  "kind": "common_harness_smoke",
+  "status": "passed",
+  "recorded_at": "2026-08-23T20:45:00Z",
+  "shared_tasks_sha256": "f3fd2cb5730ab602ef232ddf6dfa8b8f0376561234ab050a42543fd94a685370",
+  "checks": {
+    "recomputes_all_12": true,
+    "missing_is_incomplete": true,
+    "partial_is_incomplete": true,
+    "duplicate_is_rejected": true,
+    "wrong_task_is_rejected": true
+  },
+  "exact_rag_control": {
+    "complete_exact_match": 1.0,
+    "segment_exact_match": 1.0,
+    "estimated_network_bytes": 1717,
+    "task_family_accuracy": {
+      "single": 1.0,
+      "pair": 1.0,
+      "triple": 1.0,
+      "updated_fact": 1.0,
+      "deletion": 1.0
+    },
+    "failures": []
+  },
+  "accessible_task_counts": {"1": 1, "2": 2, "4": 3, "8": 12},
+  "rows": [
+    {"task_id": "PUBLIC-01", "expected": "P01:297 | SEAL:594", "actual": "P01:297 | SEAL:594", "correct": true},
+    {"task_id": "PUBLIC-02", "expected": "P06:619 | SEAL:241", "actual": "P06:619 | SEAL:241", "correct": true},
+    {"task_id": "PUBLIC-03", "expected": "P02:424 | P05:212 | SEAL:487", "actual": "P02:424 | P05:212 | SEAL:487", "correct": true},
+    {"task_id": "PUBLIC-04", "expected": "P03:174 | P08:819 | SEAL:811", "actual": "P03:174 | P08:819 | SEAL:811", "correct": true},
+    {"task_id": "PUBLIC-05", "expected": "P01:039 | P07:883 | SEAL:733", "actual": "P01:039 | P07:883 | SEAL:733", "correct": true},
+    {"task_id": "PUBLIC-06", "expected": "P01:431 | P04:801 | P08:121 | SEAL:758", "actual": "P01:431 | P04:801 | P08:121 | SEAL:758", "correct": true},
+    {"task_id": "PUBLIC-07", "expected": "P02:605 | P05:414 | P07:538 | SEAL:616", "actual": "P02:605 | P05:414 | P07:538 | SEAL:616", "correct": true},
+    {"task_id": "PUBLIC-08", "expected": "P03:101 | P06:802 | P08:958 | SEAL:458", "actual": "P03:101 | P06:802 | P08:958 | SEAL:458", "correct": true},
+    {"task_id": "PUBLIC-09", "expected": "P04:665 | P05:759 | P06:696 | SEAL:409", "actual": "P04:665 | P05:759 | P06:696 | SEAL:409", "correct": true},
+    {"task_id": "PUBLIC-10", "expected": "P01:259 | P02:594 | SEAL:306", "actual": "P01:259 | P02:594 | SEAL:306", "correct": true},
+    {"task_id": "PUBLIC-11", "expected": "P03:ABSTAIN", "actual": "P03:ABSTAIN", "correct": true},
+    {"task_id": "PUBLIC-12", "expected": "P08:ABSTAIN", "actual": "P08:ABSTAIN", "correct": true}
+  ],
+  "claim_boundary": {
+    "en": "This validates only the shared scorer and atomic transaction rules. Exact RAG is an upper control, not a neural result.",
+    "ru": "Это проверяет только общий scorer и правила атомарной транзакции. Exact RAG — верхний контроль, а не нейронный результат."
+  }
+}

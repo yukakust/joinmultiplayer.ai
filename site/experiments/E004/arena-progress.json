@@ -1,18 +1,18 @@
 {
   "experiment_id": "E004",
   "protocol_version": "arena-v0.1",
-  "updated_at": "2026-08-23T20:40:00Z",
+  "updated_at": "2026-08-23T20:45:00Z",
   "phase": "public_development",
   "status": "harness_building",
   "protocol_artifact": "/experiments/E004/arena-protocol-v0.1.json",
   "shared_tasks_artifact": "/experiments/E004/sample-tasks.json",
   "steps": [
     {"id": "protocol", "status": "passed", "en": "Shared books, tasks, routing, metrics, and stop rules frozen.", "ru": "Общие книги, задачи, routing, метрики и stop-rules заморожены."},
-    {"id": "harness", "status": "active", "en": "Common harness and controls are being built.", "ru": "Строятся общий harness и контроли."},
+    {"id": "harness", "status": "passed", "en": "All 12 answers recomputed; missing, partial, duplicate, and wrong-task contributions are rejected.", "ru": "Все 12 ответов пересчитаны; отсутствующие, частичные, дублированные и чужие вклады отклоняются.", "result": "/experiments/E004/harness-smoke-v0.1.json"},
     {"id": "comparison", "status": "waiting", "en": "No four-way comparison exists yet.", "ru": "Сравнения четырёх методов пока нет."}
   ],
   "architectures": [
-    {"id": "rag_swarm", "status": "waiting", "result": null},
+    {"id": "rag_swarm", "status": "active", "result": null},
     {"id": "neural_memory", "status": "waiting", "result": null},
     {"id": "latent_delta", "status": "waiting", "result": null},
     {"id": "token_moe", "status": "waiting", "result": null}

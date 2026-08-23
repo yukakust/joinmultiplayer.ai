@@ -55,6 +55,7 @@ Current files:
 - [`../../site/experiments/E004/two-pocket-smoke-attempt-2.json`](../../site/experiments/E004/two-pocket-smoke-attempt-2.json) — public passing development retry;
 - [`../../site/experiments/E004/checkpoint-2.json`](../../site/experiments/E004/checkpoint-2.json) — owner review boundary before the full arena;
 - [`ARENA-PROTOCOL-v0.1.md`](ARENA-PROTOCOL-v0.1.md) — frozen four-interface comparison contract;
+- [`src/arena_common.py`](src/arena_common.py) — shared hash-locked loader, atomic assembler, and scorer;
 - [`CHECKPOINT-1-DRAFT.md`](CHECKPOINT-1-DRAFT.md) — owner-facing arena decision;
 - [`DATA-WORLD.md`](DATA-WORLD.md) — human-readable public data contract;
 - [`sample-tasks.json`](sample-tasks.json) — eight public demo books and twelve

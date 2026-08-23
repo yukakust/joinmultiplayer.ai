@@ -2464,7 +2464,7 @@ async function loadExperiment() {
         </section>` : ""}
         ${arenaProgress.status ? `<section class="e004-section">
           <div class="flow-step">${e4("arenaProgress")}</div>
-          <div class="e004-list">${(arenaProgress.steps || []).map(step => `<p><strong>${escapeHTML(step.id)} · ${escapeHTML(step.status)}</strong>${escapeHTML(step[language] || step.en || "")}</p>`).join("")}</div>
+          <div class="e004-list">${(arenaProgress.steps || []).map(step => `<p><strong>${escapeHTML(step.id)} · ${escapeHTML(step.status)}</strong>${escapeHTML(step[language] || step.en || "")}${step.result ? `<br><a href="${escapeHTML(step.result)}">JSON ↗</a>` : ""}</p>`).join("")}</div>
           <div class="actions"><a class="quiet-link" href="${escapeHTML(arenaProgress.protocol_artifact || "#")}">${e4("openArenaProtocol")}</a><a class="quiet-link" href="${escapeHTML(arenaProgress.shared_tasks_artifact || "#")}">${e4("openSharedTasks")}</a></div>
         </section>` : ""}
         <section class="e004-decision">
