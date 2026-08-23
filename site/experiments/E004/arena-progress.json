@@ -1,15 +1,16 @@
 {
   "experiment_id": "E004",
   "protocol_version": "arena-v0.1",
-  "updated_at": "2026-08-23T20:53:44Z",
-  "phase": "public_development",
-  "status": "harness_building",
+  "updated_at": "2026-08-23T20:54:59Z",
+  "phase": "locked_arena_preparation",
+  "status": "public_development_complete",
   "protocol_artifact": "/experiments/E004/arena-protocol-v0.1.json",
   "shared_tasks_artifact": "/experiments/E004/sample-tasks.json",
   "steps": [
     {"id": "protocol", "status": "passed", "en": "Shared books, tasks, routing, metrics, and stop rules frozen.", "ru": "Общие книги, задачи, routing, метрики и stop-rules заморожены."},
     {"id": "harness", "status": "passed", "en": "All 12 answers recomputed; missing, partial, duplicate, and wrong-task contributions are rejected.", "ru": "Все 12 ответов пересчитаны; отсутствующие, частичные, дублированные и чужие вклады отклоняются.", "result": "/experiments/E004/harness-smoke-v0.1.json"},
-    {"id": "comparison", "status": "active", "en": "All four public-development runs exist; comparison is being assembled.", "ru": "Все четыре открытых development-запуска готовы; собирается сравнение."}
+    {"id": "comparison", "status": "passed", "en": "Four-way public development comparison published; no scientific winner.", "ru": "Сравнение четырёх public-development методов опубликовано; научного победителя нет.", "result": "/experiments/E004/comparison-public-development-v0.1.json"},
+    {"id": "locked_world", "status": "active", "en": "Disjoint surrogate/final world and commitment are next.", "ru": "Следом создаются непересекающиеся surrogate/final world и commitment."}
   ],
   "architectures": [
     {"id": "rag_swarm", "status": "passed_with_limitation", "result": "/experiments/E004/result-rag-swarm-v0.1.json", "metric": "12/12 normal · 0/3 stale detected"},
@@ -17,6 +18,7 @@
     {"id": "latent_delta", "status": "passed_plumbing_only", "result": "/experiments/E004/result-latent-delta-v0.1.json", "metric": "δ birth=0 · 12/12 · without z₀=0/64"},
     {"id": "token_moe", "status": "failed", "result": "/experiments/E004/result-token-moe-v0.1.json", "metric": "1/12 tasks · 20.83% segments · 65.10% symbols"}
   ],
+  "comparison_artifact": "/experiments/E004/comparison-public-development-v0.1.json",
   "failed_runs": [
     {"architecture_id": "neural_memory", "attempt": 1, "result": "/experiments/E004/result-neural-memory-attempt-1.json"},
     {"architecture_id": "token_moe", "attempt": 1, "result": "/experiments/E004/result-token-moe-v0.1.json"}

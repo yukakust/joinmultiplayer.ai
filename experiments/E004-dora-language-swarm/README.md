@@ -61,6 +61,7 @@ Current files:
 - [`../../site/experiments/E004/result-neural-memory-attempt-2.json`](../../site/experiments/E004/result-neural-memory-attempt-2.json) — A2 plumbing pass with explicit non-held-out boundary;
 - [`../../site/experiments/E004/result-latent-delta-v0.1.json`](../../site/experiments/E004/result-latent-delta-v0.1.json) — A3 bounded-delta plumbing pass and z0 ablation;
 - [`../../site/experiments/E004/result-token-moe-v0.1.json`](../../site/experiments/E004/result-token-moe-v0.1.json) — failed A4 run with every wrong task preserved;
+- [`../../site/experiments/E004/comparison-public-development-v0.1.json`](../../site/experiments/E004/comparison-public-development-v0.1.json) — four-way public comparison with no scientific winner;
 - [`CHECKPOINT-1-DRAFT.md`](CHECKPOINT-1-DRAFT.md) — owner-facing arena decision;
 - [`DATA-WORLD.md`](DATA-WORLD.md) — human-readable public data contract;
 - [`sample-tasks.json`](sample-tasks.json) — eight public demo books and twelve

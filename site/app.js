@@ -2282,7 +2282,9 @@ const e004Copy = {
     passedAttempt: "OPEN PASSED ATTEMPT",
     arenaProgress: "FOUR-INTERFACE ARENA",
     openArenaProtocol: "OPEN FROZEN PROTOCOL",
-    openSharedTasks: "OPEN SHARED BOOKS + TASKS"
+    openSharedTasks: "OPEN SHARED BOOKS + TASKS",
+    publicComparison: "PUBLIC DEVELOPMENT COMPARISON",
+    noWinner: "NO SCIENTIFIC WINNER"
   },
   ru: {
     step: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
@@ -2335,7 +2337,9 @@ const e004Copy = {
     passedAttempt: "ОТКРЫТЬ УДАЧНУЮ ПОПЫТКУ",
     arenaProgress: "АРЕНА ЧЕТЫРЁХ ИНТЕРФЕЙСОВ",
     openArenaProtocol: "ОТКРЫТЬ ЗАМОРОЖЕННЫЙ ПРОТОКОЛ",
-    openSharedTasks: "ОТКРЫТЬ ОБЩИЕ КНИГИ И ЗАДАЧИ"
+    openSharedTasks: "ОТКРЫТЬ ОБЩИЕ КНИГИ И ЗАДАЧИ",
+    publicComparison: "СРАВНЕНИЕ PUBLIC DEVELOPMENT",
+    noWinner: "НАУЧНОГО ПОБЕДИТЕЛЯ НЕТ"
   }
 };
 
@@ -2401,6 +2405,11 @@ async function loadExperiment() {
       if (experiment.arena_progress_artifact) {
         const arenaResponse = await fetch(experiment.arena_progress_artifact, { cache: "no-store" });
         if (arenaResponse.ok) arenaProgress = await arenaResponse.json();
+      }
+      let arenaComparison = {};
+      if (arenaProgress.comparison_artifact) {
+        const comparisonResponse = await fetch(arenaProgress.comparison_artifact, { cache: "no-store" });
+        if (comparisonResponse.ok) arenaComparison = await comparisonResponse.json();
       }
       const architectures = checkpoint.architecture_candidates || [];
       const arenaArchitecture = new Map((arenaProgress.architectures || []).map(item => [item.id, item]));
@@ -2468,6 +2477,20 @@ async function loadExperiment() {
           <div class="flow-step">${e4("arenaProgress")}</div>
           <div class="e004-list">${(arenaProgress.steps || []).map(step => `<p><strong>${escapeHTML(step.id)} · ${escapeHTML(step.status)}</strong>${escapeHTML(step[language] || step.en || "")}${step.result ? `<br><a href="${escapeHTML(step.result)}">JSON ↗</a>` : ""}</p>`).join("")}</div>
           <div class="actions"><a class="quiet-link" href="${escapeHTML(arenaProgress.protocol_artifact || "#")}">${e4("openArenaProtocol")}</a><a class="quiet-link" href="${escapeHTML(arenaProgress.shared_tasks_artifact || "#")}">${e4("openSharedTasks")}</a></div>
+        </section>` : ""}
+        ${arenaComparison.status ? `<section class="e004-section development-result">
+          <div class="flow-step">${e4("publicComparison")}</div>
+          <div class="e004-architectures">${(arenaComparison.rows || []).map(row => `<article>
+            <strong>${escapeHTML(row.architecture_id)}</strong>
+            <b>${(Number(row.complete_exact_match || 0) * 100).toFixed(1)}%</b>
+            <p>segment · ${(Number(row.segment_exact_match || 0) * 100).toFixed(1)}%<br>bytes · ${Number(row.estimated_network_bytes || 0).toLocaleString(language)}<br>params · ${Number(row.trainable_parameters || 0).toLocaleString(language)}</p>
+            <span>${escapeHTML(row.key_control || "")}</span>
+            <small>${escapeHTML(row.status)}</small>
+            <a href="${escapeHTML(row.result)}">JSON ↗</a>
+          </article>`).join("")}</div>
+          <strong>${e4("noWinner")}</strong>
+          <p class="control-warning">${escapeHTML(e4Localized(arenaComparison.conclusion))}</p>
+          <div class="actions"><a class="quiet-link" href="${escapeHTML(arenaProgress.comparison_artifact)}">COMPARISON JSON ↗</a></div>
         </section>` : ""}
         <section class="e004-decision">
           <span>${e4("visibilityRule")}</span>
