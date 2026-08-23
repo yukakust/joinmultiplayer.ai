@@ -1,0 +1,11 @@
+{
+  "model_id": "Qwen/Qwen3-0.6B-Base",
+  "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "license": "apache-2.0",
+  "parameter_count": 596049920,
+  "non_embedding_parameter_count_reported": "0.44B",
+  "layers": 28,
+  "tensor_type": "BF16",
+  "source": "https://huggingface.co/Qwen/Qwen3-0.6B-Base",
+  "download_status": "not_downloaded_at_gate_1"
+}

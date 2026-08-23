@@ -44,6 +44,9 @@ evaluation exists yet. Checkpoint 1 is a design artifact, not a result.
 
 Current files:
 
+- [`ENVIRONMENT.md`](ENVIRONMENT.md) — accepted Gate 1 host/model/dependency boundary;
+- [`model-lock.json`](model-lock.json) — exact frozen-base revision;
+- [`requirements-lock.txt`](requirements-lock.txt) — complete development package lock;
 - [`CHECKPOINT-1-DRAFT.md`](CHECKPOINT-1-DRAFT.md) — owner-facing arena decision;
 - [`DATA-WORLD.md`](DATA-WORLD.md) — human-readable public data contract;
 - [`sample-tasks.json`](sample-tasks.json) — eight public demo books and twelve
