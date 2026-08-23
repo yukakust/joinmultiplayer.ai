@@ -669,15 +669,17 @@ class SubmissionTests(unittest.TestCase):
             experiment = handler.sent[1]
             self.assertEqual(experiment["status"], "checkpoint_1_needs_review")
             self.assertEqual(experiment["method"], "architecture_arena")
-            self.assertEqual(experiment["protocol_version"], "E004-architecture-arena-v0.2")
+            self.assertEqual(experiment["protocol_version"], "E004-architecture-arena-v0.3")
             self.assertEqual(experiment["checkpoint"]["number"], 1)
             self.assertIn("what changed", experiment["visibility_rule"]["en"])
             self.assertIn("На каждом значимом этапе", experiment["visibility_rule"]["ru"])
             self.assertEqual(len(experiment["pockets"]), 9)
             self.assertEqual(experiment["pockets"][-1]["id"], "I09")
             self.assertTrue(all(item["status"] == "not_generated" for item in experiment["pockets"]))
-            self.assertEqual(len(experiment["architectures"]), 5)
+            self.assertEqual(len(experiment["architectures"]), 4)
             self.assertTrue(all(item["status"] == "planned_not_run" for item in experiment["architectures"]))
+            self.assertEqual(len(experiment["local_learning"]), 5)
+            self.assertNotIn("dora_assembly", {item["id"] for item in experiment["architectures"]})
             self.assertEqual(experiment["checkpoint_artifact"], "/experiments/E004/checkpoint-1-v0.2.json")
             self.assertIn("not a result", experiment["claim_boundary"]["en"])
 
@@ -695,11 +697,17 @@ class SubmissionTests(unittest.TestCase):
         self.assertEqual(schema["properties"]["checkpoint"]["const"], 1)
         self.assertEqual(schema["properties"]["schema_version"]["const"], "0.2")
 
-    def test_e004_checkpoint_links_five_candidates_and_verified_public_data(self):
+    def test_e004_checkpoint_links_live_candidates_and_verified_public_data(self):
         root = Path(__file__).resolve().parents[1] / "site" / "experiments" / "E004"
         checkpoint = json.loads((root / "checkpoint-1-v0.2.json").read_text())
         data_world = json.loads((root / "sample-tasks.json").read_text())
-        self.assertEqual(len(checkpoint["architecture_candidates"]), 5)
+        self.assertEqual(len(checkpoint["architecture_candidates"]), 4)
+        self.assertEqual(len(checkpoint["local_learning_candidates"]), 5)
+        self.assertNotIn(
+            "dora_assembly", {item["id"] for item in checkpoint["architecture_candidates"]}
+        )
+        rag = next(item for item in checkpoint["architecture_candidates"] if item["id"] == "rag_swarm")
+        self.assertIn("Raw private records never leave", rag["description"]["en"])
         self.assertEqual(len(checkpoint["population"]["final_ids"]), 8)
         self.assertEqual(checkpoint["population"]["post_freeze_plugin_id"], "I09")
         self.assertEqual(len(data_world["books"]), 8)

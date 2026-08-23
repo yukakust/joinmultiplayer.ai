@@ -14,8 +14,10 @@ Repeated multi-round model conversation is excluded.
 
 The public Checkpoint 1 page will show:
 
-- five architecture cards: RAG, neural memory, latent delta, token-MoE, and
-  DoRA assembly;
+- four swarm-interface cards: owner-approved RAG evidence capsules, neural
+  memory, latent delta, and token-MoE;
+- five separate local-learning cards: local RAG, DoRA, partial/full
+  fine-tuning, trainable neural memory, and a hybrid;
 - eight final pocket slots and one post-freeze plug-in slot;
 - readable examples from a separate public fictional world;
 - controls and pre-registered success thresholds;
@@ -33,9 +35,11 @@ enter central training.
 ## Training plan after approval
 
 The shared Qwen 0.6B lineage is reused, but its base remains an audited frozen
-reference. Actual gradient training compares DoRA, a partial/full fine-tuning
-capacity control, trainable neural memory, personal MoE experts, routers, and
-mergers. RAG is the non-weight control.
+reference. Local learning compares DoRA, a partial/full fine-tuning capacity
+control, trainable neural memory, and a hybrid; RAG is the non-weight control.
+Swarm composition separately compares evidence capsules, memory tokens,
+bounded latent deltas, and personal token-MoE. Personal adapters are not sent
+over the network per request.
 
 The first optimizer work is only a two-surrogate smoke. It must publish visible
 before/after evidence and stop at Checkpoint 2 before full arena training.

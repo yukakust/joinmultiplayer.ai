@@ -2233,10 +2233,13 @@ function door(id, data) {
 const e004Copy = {
   en: {
     step: "CURRENT EXPERIMENT · E004",
-    intro: "Five ways for personal pocket i to keep different knowledge and join one temporary neural network. We choose by evidence, not preference.",
+    intro: "Four ways for independent pocket i to join one temporary neural network, tested separately from how each pocket learns locally.",
     status: "CHECKPOINT 1 · DESIGN · NO TRAINING",
     question: "THE QUESTION",
-    architectures: "FIVE ARCHITECTURES",
+    architectures: "FOUR SWARM INTERFACES",
+    localLearning: "HOW ONE POCKET LEARNS",
+    bestFor: "best for",
+    recommended: "current product candidate · not run",
     plannedNotRun: "planned · not run",
     onePass: "one parallel pass",
     population: "THE FINAL SWARM",
@@ -2270,10 +2273,13 @@ const e004Copy = {
   },
   ru: {
     step: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
-    intro: "Пять способов хранить разные знания в личных pocket i и собирать их во временную нейросеть. Победителя выберут данные, а не наши предпочтения.",
+    intro: "Четыре способа объединить независимые pocket i во временную нейросеть. Отдельно проверяем, как каждый pocket i учится локально.",
     status: "КОНТРОЛЬНАЯ ТОЧКА 1 · ПРОЕКТ · ОБУЧЕНИЯ НЕТ",
     question: "ВОПРОС",
-    architectures: "ПЯТЬ АРХИТЕКТУР",
+    architectures: "ЧЕТЫРЕ СПОСОБА ОБЪЕДИНЕНИЯ",
+    localLearning: "КАК УЧИТСЯ ОДИН POCKET I",
+    bestFor: "лучше всего для",
+    recommended: "текущий кандидат для продукта · не запускался",
     plannedNotRun: "в плане · не запускалась",
     onePass: "один параллельный проход",
     population: "ФИНАЛЬНЫЙ SWARM",
@@ -2356,6 +2362,7 @@ async function loadExperiment() {
         if (dataResponse.ok) dataWorld = await dataResponse.json();
       }
       const architectures = checkpoint.architecture_candidates || [];
+      const localLearning = checkpoint.local_learning_candidates || [];
       const population = checkpoint.population || {};
       const books = dataWorld.books || [];
       const taskTypes = ["single", "pair", "triple", "updated_fact", "deletion"];
@@ -2369,7 +2376,7 @@ async function loadExperiment() {
           <span>${e4("question")}</span>
           <p>${escapeHTML(experiment.question?.[language] || "")}</p>
         </section>
-        <div class="actions experiment-actions"><a class="button secondary" href="#architectures">${e4("architectures")}</a><a class="button secondary" href="#data-world">${e4("dataWorld")}</a></div>
+        <div class="actions experiment-actions"><a class="button secondary" href="#architectures">${e4("architectures")}</a><a class="button secondary" href="#local-learning">${e4("localLearning")}</a><a class="button secondary" href="#data-world">${e4("dataWorld")}</a></div>
         <section class="e004-section" id="architectures">
           <div class="flow-step">${e4("architectures")}</div>
           <div class="e004-architectures">${architectures.map((architecture, index) => `
@@ -2379,6 +2386,16 @@ async function loadExperiment() {
               <p>${escapeHTML(e4Localized(architecture.description))}</p>
               <span>${escapeHTML(e4Localized(architecture.network))}</span>
               <small>${e4("plannedNotRun")}</small>
+            </article>`).join("")}</div>
+        </section>
+        <section class="e004-section" id="local-learning">
+          <div class="flow-step">${e4("localLearning")}</div>
+          <div class="e004-architectures">${localLearning.map(method => `
+            <article>
+              <strong>${escapeHTML(e4Localized(method.name))}</strong>
+              <p>${escapeHTML(e4Localized(method.description))}</p>
+              <span>${e4("bestFor")} · ${escapeHTML(e4Localized(method.best_for))}</span>
+              <small>${method.status === "recommended_not_run" ? e4("recommended") : e4("plannedNotRun")}</small>
             </article>`).join("")}</div>
         </section>
         <section class="e004-checkpoint">

@@ -23,7 +23,7 @@
     {
       "id": "rag_swarm",
       "name": {"en": "RAG swarm", "ru": "RAG swarm"},
-      "description": {"en": "Each pocket returns private evidence records; the source writes one answer.", "ru": "Каждый pocket i возвращает найденные локальные записи; исходный i собирает один ответ."},
+      "description": {"en": "Each pocket searches locally and returns only an owner-approved evidence capsule. Raw private records never leave the device.", "ru": "Каждый pocket i ищет локально и возвращает только разрешённую владельцем капсулу доказательств. Сырые приватные записи не покидают устройство."},
       "network": {"en": "One parallel request per prompt", "ru": "Один параллельный запрос на промпт"},
       "status": "planned_not_run"
     },
@@ -47,13 +47,43 @@
       "description": {"en": "Selected pocket i act as neural experts for each generated token.", "ru": "Выбранные pocket i работают как нейронные эксперты для каждого генерируемого токена."},
       "network": {"en": "One parallel fan-out/fan-in per token", "ru": "Одна параллельная рассылка/сборка на токен"},
       "status": "planned_not_run"
+    }
+  ],
+  "local_learning_candidates": [
+    {
+      "id": "local_rag",
+      "name": {"en": "Local RAG", "ru": "Локальный RAG"},
+      "description": {"en": "Keeps exact, changing, and deletable facts in a private local store; no gradient training.", "ru": "Хранит точные, меняющиеся и удаляемые факты в приватной локальной базе; без обучения весов."},
+      "best_for": {"en": "facts", "ru": "факты"},
+      "status": "planned_not_run"
     },
     {
-      "id": "dora_assembly",
-      "name": {"en": "DoRA assembly", "ru": "Сборка DoRA"},
-      "description": {"en": "Selected personal adapters temporarily form one sparse model at the source.", "ru": "Выбранные персональные адаптеры временно образуют одну разреженную модель у исходного i."},
-      "network": {"en": "Adapters transfer before local generation", "ru": "Адаптеры передаются до локальной генерации"},
+      "id": "dora",
+      "name": {"en": "Local DoRA", "ru": "Локальная DoRA"},
+      "description": {"en": "Changes a compact personal adapter on the owner's device to learn recurring behavior and skills.", "ru": "Меняет компактный персональный адаптер на устройстве владельца, чтобы учить повторяющееся поведение и навыки."},
+      "best_for": {"en": "skills", "ru": "навыки"},
       "status": "planned_not_run"
+    },
+    {
+      "id": "partial_full_ft",
+      "name": {"en": "Partial / full fine-tuning", "ru": "Частичный / полный fine-tuning"},
+      "description": {"en": "Changes more model weights as a capacity control: stronger but heavier and more prone to interface drift.", "ru": "Меняет больше весов как контроль ёмкости: потенциально сильнее, но тяжелее и опаснее для совместимости."},
+      "best_for": {"en": "capacity control", "ru": "контроль ёмкости"},
+      "status": "planned_not_run"
+    },
+    {
+      "id": "trainable_memory",
+      "name": {"en": "Trainable neural memory", "ru": "Обучаемая нейронная память"},
+      "description": {"en": "Learns a small set of memory vectors without changing the whole language model.", "ru": "Обучает небольшой набор векторов памяти, не меняя всю языковую модель."},
+      "best_for": {"en": "compact learned context", "ru": "компактный выученный контекст"},
+      "status": "planned_not_run"
+    },
+    {
+      "id": "hybrid",
+      "name": {"en": "Hybrid", "ru": "Гибрид"},
+      "description": {"en": "Local RAG for exact facts plus DoRA or fine-tuning for skills. This is the current product candidate, not a presumed winner.", "ru": "Локальный RAG для точных фактов плюс DoRA или fine-tuning для навыков. Это текущий кандидат для продукта, но не назначенный победитель."},
+      "best_for": {"en": "facts + skills", "ru": "факты + навыки"},
+      "status": "recommended_not_run"
     }
   ],
   "population": {
@@ -102,8 +132,8 @@
     "accelerator": "Only after a measured compatibility smoke"
   },
   "decision_requested": {
-    "en": "Review the architectures, public books, controls, thresholds, and schedule. Approval permits only environment preparation, pinned downloads, and short development smokes; it does not permit full or locked training.",
-    "ru": "Проверьте архитектуры, открытые книги, контроли, пороги и расписание. Подтверждение разрешит только подготовку окружения, закреплённые загрузки и короткие development-smoke; полный и locked-запуск оно не разрешает."
+    "en": "Review the four swarm interfaces, five local learning methods, public books, controls, thresholds, and schedule. Approval permits only environment preparation, pinned downloads, and short development smokes; it does not permit full or locked training.",
+    "ru": "Проверьте четыре способа объединения swarm, пять способов локального обучения, открытые книги, контроли, пороги и расписание. Подтверждение разрешит только подготовку окружения, закреплённые загрузки и короткие development-smoke; полный и locked-запуск оно не разрешает."
   },
   "files": [
     {"label": "Public books and tasks", "path": "/experiments/E004/sample-tasks.json", "sha256": "f3fd2cb5730ab602ef232ddf6dfa8b8f0376561234ab050a42543fd94a685370"},

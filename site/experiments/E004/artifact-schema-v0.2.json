@@ -4,7 +4,7 @@
   "title": "E004 Architecture Arena checkpoint artifact",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "experiment_id", "checkpoint", "status", "claim_status", "created_at", "source_revision", "summary", "question", "evidence_rule", "architecture_candidates", "population", "data_world", "controls", "success_criteria", "schedule", "decision_requested", "files"],
+  "required": ["schema_version", "experiment_id", "checkpoint", "status", "claim_status", "created_at", "source_revision", "summary", "question", "evidence_rule", "architecture_candidates", "local_learning_candidates", "population", "data_world", "controls", "success_criteria", "schedule", "decision_requested", "files"],
   "$defs": {
     "localized": {
       "type": "object",
@@ -30,18 +30,35 @@
     "evidence_rule": {"$ref": "#/$defs/localized"},
     "architecture_candidates": {
       "type": "array",
-      "minItems": 5,
-      "maxItems": 5,
+      "minItems": 4,
+      "maxItems": 4,
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": ["id", "name", "description", "network", "status"],
         "properties": {
-          "id": {"enum": ["rag_swarm", "neural_memory", "latent_delta", "token_moe", "dora_assembly"]},
+          "id": {"enum": ["rag_swarm", "neural_memory", "latent_delta", "token_moe"]},
           "name": {"$ref": "#/$defs/localized"},
           "description": {"$ref": "#/$defs/localized"},
           "network": {"$ref": "#/$defs/localized"},
           "status": {"enum": ["planned_not_run", "smoke_running", "smoke_passed", "failed", "rejected"]}
+        }
+      }
+    },
+    "local_learning_candidates": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "description", "best_for", "status"],
+        "properties": {
+          "id": {"enum": ["local_rag", "dora", "partial_full_ft", "trainable_memory", "hybrid"]},
+          "name": {"$ref": "#/$defs/localized"},
+          "description": {"$ref": "#/$defs/localized"},
+          "best_for": {"$ref": "#/$defs/localized"},
+          "status": {"enum": ["planned_not_run", "recommended_not_run", "smoke_running", "smoke_passed", "failed", "rejected"]}
         }
       }
     },

@@ -140,7 +140,7 @@ E004 = {
     "public_id": "E004",
     "hypothesis_id": "H0001",
     "status": "checkpoint_1_needs_review",
-    "protocol_version": "E004-architecture-arena-v0.2",
+    "protocol_version": "E004-architecture-arena-v0.3",
     "title": {
         "en": "Architecture Arena for a growing pocket i swarm",
         "ru": "Арена архитектур для растущего swarm pocket i",
@@ -189,7 +189,11 @@ E004 = {
     ],
     "architectures": [
         {"id": value, "status": "planned_not_run"}
-        for value in ("rag_swarm", "neural_memory", "latent_delta", "token_moe", "dora_assembly")
+        for value in ("rag_swarm", "neural_memory", "latent_delta", "token_moe")
+    ],
+    "local_learning": [
+        {"id": value, "status": "planned_not_run"}
+        for value in ("local_rag", "dora", "partial_full_ft", "trainable_memory", "hybrid")
     ],
     "artifacts": [
         "/experiments/E004/checkpoint-1-v0.2.json",

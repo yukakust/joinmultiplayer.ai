@@ -8,17 +8,17 @@ whether a new ninth pocket can join after the central system is frozen.
 
 Current public page: <https://joinmultiplayer.ai/experiment/?id=E004>
 
-The approved planning direction compares five single-pass swarm interfaces:
+The planning direction compares four single-pass swarm interfaces:
 
 1. RAG evidence;
 2. learned memory tokens;
 3. bounded latent deltas;
-4. personal token-MoE experts;
-5. temporary DoRA adapter assembly.
+4. personal token-MoE experts.
 
-It also compares how one pocket stores unique knowledge: RAG, DoRA,
-partial/full fine-tuning, trainable neural memory, and a hybrid. Recurrent
-multi-round agent debate is excluded.
+It separately compares how one pocket stores unique knowledge: local RAG,
+DoRA, partial/full fine-tuning, trainable neural memory, and a hybrid. DoRA is a
+local learning method, not a swarm interface: adapters are not transferred per
+request. Recurrent multi-round agent debate is excluded.
 
 The synthetic population contains 16 surrogate pockets for central training,
 8 unseen final pockets for locked evaluation, and a ninth plug-in pocket added
