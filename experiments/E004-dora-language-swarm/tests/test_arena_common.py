@@ -13,6 +13,7 @@ from arena_common import (  # noqa: E402
     harness_self_test,
     load_world,
 )
+from run_rag_swarm import adversarial_controls  # noqa: E402
 
 
 class ArenaCommonTests(unittest.TestCase):
@@ -46,6 +47,15 @@ class ArenaCommonTests(unittest.TestCase):
             assemble(task, [Contribution(task["id"], "P09", 1)]).reason,
             "unexpected_pocket",
         )
+
+    def test_rag_controls_expose_stale_record_limitation(self):
+        controls = adversarial_controls(self.world)
+        self.assertEqual(controls["missing_required_safe_rate"], 1.0)
+        self.assertEqual(controls["partial_safe_rate"], 1.0)
+        self.assertEqual(controls["duplicate_rejection_rate"], 1.0)
+        self.assertEqual(controls["irrelevant_rejection_rate"], 1.0)
+        self.assertEqual(controls["stale_detection_rate"], 0.0)
+        self.assertGreater(len(controls["stale_failures"]), 0)
 
 
 if __name__ == "__main__":

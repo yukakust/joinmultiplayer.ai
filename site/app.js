@@ -2422,13 +2422,15 @@ async function loadExperiment() {
         <section class="e004-section" id="architectures">
           <div class="flow-step">${e4("architectures")}</div>
           <div class="e004-architectures">${architectures.map((architecture, index) => `
+            ${(() => { const live = arenaArchitecture.get(architecture.id); return `
             <article>
               <b>${String(index + 1).padStart(2, "0")}</b>
               <strong>${escapeHTML(e4Localized(architecture.name))}</strong>
               <p>${escapeHTML(e4Localized(architecture.description))}</p>
               <span>${escapeHTML(e4Localized(architecture.network))}</span>
-              <small>${escapeHTML(arenaArchitecture.get(architecture.id)?.status || e4("plannedNotRun"))}</small>
-            </article>`).join("")}</div>
+              <small>${escapeHTML(live?.status || e4("plannedNotRun"))}${live?.metric ? `<br>${escapeHTML(live.metric)}` : ""}</small>
+              ${live?.result ? `<a href="${escapeHTML(live.result)}">JSON ↗</a>` : ""}
+            </article>`; })()}`).join("")}</div>
         </section>
         <section class="e004-section" id="local-learning">
           <div class="flow-step">${e4("localLearning")}</div>

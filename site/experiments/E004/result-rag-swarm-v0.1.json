@@ -1,0 +1,41 @@
+{
+  "experiment_id": "E004",
+  "protocol_version": "arena-v0.1",
+  "architecture_id": "rag_swarm",
+  "status": "passed_with_stale_record_limitation",
+  "claim_status": "public_development_only",
+  "recorded_at": "2026-08-23T20:48:00Z",
+  "implementation": "local current-state lookup + local procedure + typed atomic capsule",
+  "gradient_training": false,
+  "trainable_parameters": 0,
+  "elapsed_seconds": 0.001621,
+  "normal": {
+    "tasks": 12,
+    "complete_exact_match": 1.0,
+    "segment_exact_match": 1.0,
+    "task_family_accuracy": {"single": 1.0, "pair": 1.0, "triple": 1.0, "updated_fact": 1.0, "deletion": 1.0},
+    "estimated_network_bytes": 1717,
+    "failures": [],
+    "all_task_rows": "/experiments/E004/harness-smoke-v0.1.json"
+  },
+  "controls": {
+    "missing_required_safe_rate": 1.0,
+    "partial_safe_rate": 1.0,
+    "duplicate_rejection_rate": 1.0,
+    "irrelevant_rejection_rate": 1.0,
+    "stale_detection_rate": 0.0,
+    "stale_failures": [
+      {"task_id": "PUBLIC-10", "expected": "P01:259 | P02:594 | SEAL:306", "actual": "P01:727 | P02:446 | SEAL:798", "rejected": false},
+      {"task_id": "PUBLIC-11", "expected": "P03:ABSTAIN", "actual": "P03:386 | SEAL:772", "rejected": false},
+      {"task_id": "PUBLIC-12", "expected": "P08:ABSTAIN", "actual": "P08:959 | SEAL:921", "rejected": false}
+    ]
+  },
+  "privacy_surface": {
+    "raw_book_transferred": false,
+    "capsule_fields": ["task_id", "pocket_id", "result", "complete"]
+  },
+  "conclusion": {
+    "en": "A1 transports current public facts correctly and fails closed for missing, partial, duplicate, and irrelevant capsules. It cannot detect a stale but well-formed answer; signed freshness/version lineage is required.",
+    "ru": "A1 правильно переносит текущие открытые факты и закрывается при missing, partial, duplicate и irrelevant капсулах. Он не распознаёт устаревший, но корректно оформленный ответ; нужна подписанная линия свежести/версий."
+  }
+}
