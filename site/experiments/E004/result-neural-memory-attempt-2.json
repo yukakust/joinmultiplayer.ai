@@ -1,0 +1,39 @@
+{
+  "experiment_id": "E004",
+  "protocol_version": "arena-v0.1",
+  "architecture_id": "neural_memory",
+  "attempt": 2,
+  "status": "passed_plumbing_only",
+  "claim_status": "public_development_only",
+  "recorded_at": "2026-08-23T20:47:50Z",
+  "seed": 17082026,
+  "base_embedding_sha256": "81b47dc94031ba701e041294642ac2c5f618612832d5f0320e72437d6c6854e7",
+  "base_trainable_parameters": 0,
+  "capsule_dim": 64,
+  "memory_slots_per_pocket": 16,
+  "training": {
+    "examples": 64,
+    "steps": 2000,
+    "learning_rate": 0.01,
+    "trainable_parameters": 605670,
+    "before_accuracy": 0.0,
+    "after_accuracy": 1.0,
+    "first_loss": 7.1040940284729,
+    "last_loss": 0.00006465928163379431
+  },
+  "evaluation": {
+    "tasks": 12,
+    "complete_exact_match": 1.0,
+    "segment_exact_match": 1.0,
+    "estimated_network_bytes": 6144,
+    "failures": [],
+    "all_task_rows": "/experiments/E004/harness-smoke-v0.1.json"
+  },
+  "elapsed_seconds": 24.0966,
+  "peak_rss_mib": 3885.93,
+  "failed_attempt": "/experiments/E004/result-neural-memory-attempt-1.json",
+  "claim_boundary": {
+    "en": "Training and evaluation reuse the same 64 public records. This validates storage and one-pass capsule decoding, not held-out generalization.",
+    "ru": "Обучение и проверка используют те же 64 открытые записи. Это проверяет хранение и одношаговое чтение капсулы, а не обобщение на невиданные данные."
+  }
+}
