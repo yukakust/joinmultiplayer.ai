@@ -15,7 +15,7 @@
       "number": 2,
       "status": "passed",
       "title": {"en": "Pinned base download", "ru": "Загрузка закреплённой базы"},
-      "evidence": {"en": "Pinned revision downloaded: 9 files, 1,203,630,286 bytes; every SHA-256 recomputed.", "ru": "Закреплённая ревизия скачана: 9 файлов, 1 203 630 286 байт; каждый SHA-256 пересчитан."}
+      "evidence": {"en": "Pinned revision downloaded: 9 files, 1,203,640,286 bytes; every SHA-256 recomputed.", "ru": "Закреплённая ревизия скачана: 9 файлов, 1 203 640 286 байт; каждый SHA-256 пересчитан."}
     },
     {
       "number": 3,

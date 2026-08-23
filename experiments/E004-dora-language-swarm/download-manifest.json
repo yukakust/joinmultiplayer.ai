@@ -2,7 +2,7 @@
   "model_id": "Qwen/Qwen3-0.6B-Base",
   "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
   "downloaded_at": "2026-08-23T20:18:00Z",
-  "total_bytes": 1203630286,
+  "total_bytes": 1203640286,
   "files": [
     {"path": "LICENSE", "bytes": 11343, "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"},
     {"path": "README.md", "bytes": 2973, "sha256": "910d9be25c648ab1cb5a7b1d20d67ca6d43d43559a705010198886f9af68e8f1"},
