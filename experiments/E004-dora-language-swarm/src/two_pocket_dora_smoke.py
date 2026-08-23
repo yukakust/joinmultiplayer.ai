@@ -23,8 +23,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
 POCKETS = {
-    "I01": {"Orin": "VEKU", "Pavo": "NIMRA", "Selen": "JOTI"},
-    "I02": {"Flint": "ROKA", "Gale": "TAVEN", "Harbor": "MIPU"},
+    "I01": {"Orin": "GPIO", "Pavo": "DWORD", "Selen": "UART"},
+    "I02": {"Flint": "UUID", "Gale": "TORT", "Harbor": "COVID"},
 }
 TEMPLATES = (
     "Pocket {pocket} memory. Question: What is {key}'s private code? Answer:",
@@ -117,10 +117,11 @@ def train_pocket(model_path: Path, tokenizer, pocket: str, output: Path, steps: 
         for template in TEMPLATES
     ]
     rng = random.Random(17082026 + int(pocket[-1]))
+    rng.shuffle(examples)
     losses = []
     model.train()
     for step in range(steps):
-        input_ids, labels = examples[rng.randrange(len(examples))]
+        input_ids, labels = examples[step % len(examples)]
         optimizer.zero_grad(set_to_none=True)
         loss = model(input_ids=input_ids, labels=labels).loss
         loss.backward()
@@ -148,7 +149,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("model_path", type=Path)
     parser.add_argument("adapter_root", type=Path)
-    parser.add_argument("--steps", type=int, default=48)
+    parser.add_argument("--steps", type=int, default=96)
     parser.add_argument("--lr", type=float, default=0.002)
     parser.add_argument("--threads", type=int, default=22)
     args = parser.parse_args()
@@ -182,7 +183,7 @@ def main() -> None:
         }
         del model, base
 
-    selected = {"I01": ("Orin", "VEKU"), "I02": ("Gale", "TAVEN")}
+    selected = {"I01": ("Orin", "GPIO"), "I02": ("Gale", "TORT")}
     combined_parts = []
     for pocket, (key, expected) in selected.items():
         row = next(item for item in matrix[pocket][pocket] if item["key"] == key)

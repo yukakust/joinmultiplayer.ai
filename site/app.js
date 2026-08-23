@@ -2270,7 +2270,15 @@ const e004Copy = {
     dataJson: "OPEN BOOKS + TASKS",
     schema: "ARTIFACT SCHEMA",
     boundary: "BOUNDARY",
-    progress: "DEVELOPMENT PROGRESS"
+    progress: "DEVELOPMENT PROGRESS",
+    pocketXray: "TWO POCKET i · BEFORE / AFTER",
+    beforeLearning: "frozen base · before learning",
+    ownMemory: "own memory",
+    otherMemory: "other pocket's memory",
+    together: "together · one logical round",
+    passed: "correct",
+    failedAttempt: "OPEN FAILED ATTEMPT",
+    passedAttempt: "OPEN PASSED ATTEMPT"
   },
   ru: {
     step: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
@@ -2311,7 +2319,15 @@ const e004Copy = {
     dataJson: "ОТКРЫТЫЕ КНИГИ И ЗАДАЧИ",
     schema: "СХЕМА АРТЕФАКТОВ",
     boundary: "ГРАНИЦА УТВЕРЖДЕНИЯ",
-    progress: "ХОД DEVELOPMENT-ЭТАПА"
+    progress: "ХОД DEVELOPMENT-ЭТАПА",
+    pocketXray: "ДВА POCKET i · ДО / ПОСЛЕ",
+    beforeLearning: "замороженная база · до обучения",
+    ownMemory: "своя память",
+    otherMemory: "память другого pocket i",
+    together: "вместе · один логический раунд",
+    passed: "верно",
+    failedAttempt: "ОТКРЫТЬ НЕУДАЧНУЮ ПОПЫТКУ",
+    passedAttempt: "ОТКРЫТЬ УДАЧНУЮ ПОПЫТКУ"
   }
 };
 
@@ -2368,6 +2384,11 @@ async function loadExperiment() {
         const progressResponse = await fetch(experiment.development_progress_artifact, { cache: "no-store" });
         if (progressResponse.ok) developmentProgress = await progressResponse.json();
       }
+      let developmentResult = {};
+      if (developmentProgress.result_artifact) {
+        const resultResponse = await fetch(developmentProgress.result_artifact, { cache: "no-store" });
+        if (resultResponse.ok) developmentResult = await resultResponse.json();
+      }
       const architectures = checkpoint.architecture_candidates || [];
       const localLearning = checkpoint.local_learning_candidates || [];
       const population = checkpoint.population || {};
@@ -2417,6 +2438,16 @@ async function loadExperiment() {
           <div class="flow-step">${e4("progress")}</div>
           <div class="e004-list">${(developmentProgress.gates || []).map(gate => `<p><strong>G${gate.number} · ${escapeHTML(gate.status)}</strong>${escapeHTML(e4Localized(gate.title))}<br><small>${escapeHTML(e4Localized(gate.evidence))}</small>${gate.artifact ? `<br><a href="${escapeHTML(gate.artifact)}">JSON ↗</a>` : ""}</p>`).join("")}</div>
         </section>
+        ${developmentResult.status ? `<section class="e004-section development-result">
+          <div class="flow-step">${e4("pocketXray")}</div>
+          <div class="e004-architectures">
+            <article><b>0/6</b><strong>${e4("beforeLearning")}</strong><p>${escapeHTML((developmentResult.base?.outputs || []).join(" · "))}</p></article>
+            ${(developmentResult.pockets || []).map(pocket => `<article><b>i</b><strong>${escapeHTML(pocket.id)} · ${e4("ownMemory")} ${escapeHTML(pocket.own_accuracy)}</strong><p>${Object.entries(pocket.knowledge || {}).map(([key, value]) => `${escapeHTML(key)} → ${escapeHTML(value)}`).join("<br>")}</p><span>${e4("otherMemory")} · ${escapeHTML(pocket.other_accuracy)}</span></article>`).join("")}
+            <article><b>✓</b><strong>${e4("together")}</strong><p>${escapeHTML(developmentResult.combined?.actual || "")}</p><span>${developmentResult.combined?.correct ? e4("passed") : "—"}</span></article>
+          </div>
+          <p class="control-warning">${escapeHTML(e4Localized(developmentResult.claim_boundary))}</p>
+          <div class="actions"><a class="quiet-link" href="${escapeHTML(developmentProgress.failed_artifact || "#")}">${e4("failedAttempt")}</a><a class="quiet-link" href="${escapeHTML(developmentProgress.result_artifact || "#")}">${e4("passedAttempt")}</a></div>
+        </section>` : ""}
         <section class="e004-decision">
           <span>${e4("visibilityRule")}</span>
           <p>${escapeHTML(experiment.visibility_rule?.[language] || "")}</p>

@@ -51,6 +51,8 @@ Current files:
 - [`requirements-lock.txt`](requirements-lock.txt) — complete development package lock;
 - [`src/frozen_base_smoke.py`](src/frozen_base_smoke.py) — offline CPU launch check that cannot train weights;
 - [`../../site/experiments/E004/frozen-base-smoke.json`](../../site/experiments/E004/frozen-base-smoke.json) — public measured Gate 3 evidence;
+- [`../../site/experiments/E004/two-pocket-smoke-attempt-1.json`](../../site/experiments/E004/two-pocket-smoke-attempt-1.json) — public failed first DoRA smoke;
+- [`../../site/experiments/E004/two-pocket-smoke-attempt-2.json`](../../site/experiments/E004/two-pocket-smoke-attempt-2.json) — public passing development retry;
 - [`CHECKPOINT-1-DRAFT.md`](CHECKPOINT-1-DRAFT.md) — owner-facing arena decision;
 - [`DATA-WORLD.md`](DATA-WORLD.md) — human-readable public data contract;
 - [`sample-tasks.json`](sample-tasks.json) — eight public demo books and twelve
