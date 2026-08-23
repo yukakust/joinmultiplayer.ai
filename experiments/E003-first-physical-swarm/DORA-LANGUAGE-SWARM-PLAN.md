@@ -1,6 +1,6 @@
 # E004 plan — Architecture Arena for a growing pocket i swarm
 
-Status: `CHECKPOINT 1 REBUILDING · NO MODEL DOWNLOADED · NO TRAINING`
+Status: `CHECKPOINT 2 APPROVED · FOUR-INTERFACE DEVELOPMENT ARENA STARTING`
 
 ## Question
 
@@ -51,7 +51,7 @@ the differences. DoRA is a candidate, not the assumed winner.
 
 ### B. How do several pocket i become one temporary network?
 
-The arena compares five single-pass interfaces:
+The arena compares four single-pass interfaces:
 
 1. **RAG swarm** — pockets return evidence records; the source synthesizes.
 2. **Memory-token swarm** — pockets return a fixed number of learned memory
@@ -60,9 +60,6 @@ The arena compares five single-pass interfaces:
    shared base representation.
 4. **Personal token-MoE** — remote personal FFN experts are selected and fused
    for each token.
-5. **DoRA adapter assembly** — selected personal adapters temporarily form a
-   larger local sparse model at the source.
-
 A hybrid of the strongest storage and composition methods is evaluated only
 after the component tournament. Recurrent multi-round deliberation is excluded.
 
@@ -128,13 +125,15 @@ After approval:
 1. pin the environment, model files, tokenizer, code, and checksums;
 2. benchmark one inference and one gradient step on CPU and any verified AMD
    path;
-3. run a two-surrogate smoke for each storage method;
+3. run a two-surrogate DoRA learning smoke;
 4. publish before/after evidence and stop for owner review;
-5. train surrogate pockets and the candidate routers/mergers;
-6. freeze central components and all thresholds;
-7. create/train final `I01..I08` independently;
-8. run the locked scaling evaluation once on multiple frozen seeds;
-9. attach `I09` without central retraining and evaluate again.
+5. after Checkpoint 2 approval, run all four interfaces against the same books,
+   task splits, oracle routing, answer contract, and metrics;
+6. train surrogate pockets and the candidate routers/mergers;
+7. freeze central components and all thresholds;
+8. create/train final `I01..I08` independently;
+9. run the locked scaling evaluation once on multiple frozen seeds;
+10. attach `I09` without central retraining and evaluate again.
 
 RAG indexing is not weight training. DoRA, partial/full fine-tuning, neural
 memory, routers, mergers, and MoE experts all use real gradient updates and must

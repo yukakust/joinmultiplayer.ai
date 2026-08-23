@@ -659,7 +659,7 @@ class SubmissionTests(unittest.TestCase):
             self.assertEqual(handler.sent[1]["protocol_version"], "E003-draft-v0.1")
             self.assertIn("not yet a language model", handler.sent[1]["task_prompt"])
 
-    def test_e004_public_record_stops_at_checkpoint_2_before_full_arena(self):
+    def test_e004_public_record_runs_authorized_development_arena(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "test.sqlite3"
             init_db(path)
@@ -667,7 +667,7 @@ class SubmissionTests(unittest.TestCase):
             handler.get_public("E004")
             self.assertEqual(handler.sent[0], HTTPStatus.OK)
             experiment = handler.sent[1]
-            self.assertEqual(experiment["status"], "checkpoint_2_needs_review")
+            self.assertEqual(experiment["status"], "arena_development_running")
             self.assertEqual(experiment["method"], "architecture_arena")
             self.assertEqual(experiment["protocol_version"], "E004-architecture-arena-v0.3")
             self.assertEqual(experiment["checkpoint"]["number"], 2)
@@ -682,6 +682,7 @@ class SubmissionTests(unittest.TestCase):
             self.assertNotIn("dora_assembly", {item["id"] for item in experiment["architectures"]})
             self.assertEqual(experiment["checkpoint_artifact"], "/experiments/E004/checkpoint-1-v0.2.json")
             self.assertEqual(experiment["review_checkpoint_artifact"], "/experiments/E004/checkpoint-2.json")
+            self.assertEqual(experiment["arena_progress_artifact"], "/experiments/E004/arena-progress.json")
             self.assertEqual(
                 experiment["development_progress_artifact"],
                 "/experiments/E004/development-progress.json",

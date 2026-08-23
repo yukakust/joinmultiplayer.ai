@@ -139,7 +139,7 @@ E003 = {
 E004 = {
     "public_id": "E004",
     "hypothesis_id": "H0001",
-    "status": "checkpoint_2_needs_review",
+    "status": "arena_development_running",
     "protocol_version": "E004-architecture-arena-v0.3",
     "title": {
         "en": "Architecture Arena for a growing pocket i swarm",
@@ -157,14 +157,14 @@ E004 = {
             "может подключиться без переобучения центральной системы?"
         ),
     },
-    "phase": "development_smoke_review",
+    "phase": "public_development_arena",
     "method": "architecture_arena",
     "checkpoint": {
         "number": 2,
-        "status": "needs_review",
+        "status": "approved",
         "label": {
-            "en": "Review the two-pocket smoke before the full arena",
-            "ru": "Проверить smoke двух pocket i до полной арены",
+            "en": "Two-pocket smoke reviewed; four-interface development arena authorized",
+            "ru": "Smoke двух pocket i проверен; development-арена четырёх интерфейсов разрешена",
         },
     },
     "visibility_rule": {
@@ -201,11 +201,15 @@ E004 = {
         "/experiments/E004/frozen-base-smoke.json",
         "/experiments/E004/two-pocket-smoke-attempt-1.json",
         "/experiments/E004/two-pocket-smoke-attempt-2.json",
+        "/experiments/E004/arena-protocol-v0.1.json",
+        "/experiments/E004/arena-progress.json",
         "/experiments/E004/sample-tasks.json",
     ],
     "checkpoint_artifact": "/experiments/E004/checkpoint-1-v0.2.json",
     "review_checkpoint_artifact": "/experiments/E004/checkpoint-2.json",
     "development_progress_artifact": "/experiments/E004/development-progress.json",
+    "arena_protocol_artifact": "/experiments/E004/arena-protocol-v0.1.json",
+    "arena_progress_artifact": "/experiments/E004/arena-progress.json",
     "artifact_schema": "/experiments/E004/artifact-schema-v0.2.json",
     "protocol_path": (
         "https://github.com/yukakust/joinmultiplayer.ai/blob/agent/game-loop-v0.1/"
@@ -213,13 +217,13 @@ E004 = {
     ),
     "claim_boundary": {
         "en": (
-            "A pinned frozen base launch and a two-pocket local DoRA development smoke "
-            "are complete. The four swarm interfaces, physical network, private-data "
+            "A pinned frozen base and two-pocket DoRA smoke are complete. The public "
+            "four-interface arena is now running; physical networking, private-data "
             "safety, scale growth, generalization, and locked evaluation remain untested."
         ),
         "ru": (
             "Закреплённая замороженная база запущена, development-smoke двух локальных "
-            "DoRA pocket i завершён. Четыре интерфейса swarm, физическая сеть, безопасность "
+            "DoRA pocket i завершён. Открытая арена четырёх интерфейсов запущена; физическая сеть, безопасность "
             "приватных данных, рост с масштабом, обобщение и locked-оценка ещё не проверены."
         ),
     },

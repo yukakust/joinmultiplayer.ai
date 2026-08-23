@@ -1,6 +1,6 @@
 # E004 — Architecture Arena
 
-Status: `CHECKPOINT 2 · DEVELOPMENT SMOKE COMPLETE · FULL ARENA STOPPED`
+Status: `CHECKPOINT 2 APPROVED · FOUR-INTERFACE DEVELOPMENT ARENA RUNNING`
 
 E004 asks whether accessible knowledge and solution quality grow as `1, 2, 4,
 8` independent pocket i join one temporary distributed neural network, and
@@ -54,6 +54,7 @@ Current files:
 - [`../../site/experiments/E004/two-pocket-smoke-attempt-1.json`](../../site/experiments/E004/two-pocket-smoke-attempt-1.json) — public failed first DoRA smoke;
 - [`../../site/experiments/E004/two-pocket-smoke-attempt-2.json`](../../site/experiments/E004/two-pocket-smoke-attempt-2.json) — public passing development retry;
 - [`../../site/experiments/E004/checkpoint-2.json`](../../site/experiments/E004/checkpoint-2.json) — owner review boundary before the full arena;
+- [`ARENA-PROTOCOL-v0.1.md`](ARENA-PROTOCOL-v0.1.md) — frozen four-interface comparison contract;
 - [`CHECKPOINT-1-DRAFT.md`](CHECKPOINT-1-DRAFT.md) — owner-facing arena decision;
 - [`DATA-WORLD.md`](DATA-WORLD.md) — human-readable public data contract;
 - [`sample-tasks.json`](sample-tasks.json) — eight public demo books and twelve

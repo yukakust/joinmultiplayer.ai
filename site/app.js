@@ -2234,7 +2234,7 @@ const e004Copy = {
   en: {
     step: "CURRENT EXPERIMENT · E004",
     intro: "Four ways for independent pocket i to join one temporary neural network, tested separately from how each pocket learns locally.",
-    status: "CHECKPOINT 2 · DEVELOPMENT SMOKE COMPLETE",
+    status: "CHECKPOINT 2 APPROVED · DEVELOPMENT ARENA RUNNING",
     question: "THE QUESTION",
     architectures: "FOUR SWARM INTERFACES",
     localLearning: "HOW ONE POCKET LEARNS",
@@ -2248,7 +2248,7 @@ const e004Copy = {
     surrogates: "16 separate surrogate pocket i will teach the router and merger. These final i remain unseen.",
     checkpoint: "CHECKPOINT 2 OF 3",
     checkpointCopy: "The frozen base and two local DoRA pocket i are visible below. The full architecture arena and locked evaluation have not started.",
-    waiting: "WAITING FOR YUKA · FULL ARENA STOPPED",
+    waiting: "AUTHORIZED · PUBLIC DEVELOPMENT ONLY",
     visibilityRule: "OWNER-VISIBLE EVIDENCE RULE",
     dataWorld: "EIGHT OPEN DEMO BOOKS",
     bookRule: "personal rule",
@@ -2279,12 +2279,15 @@ const e004Copy = {
     together: "together · one logical round",
     passed: "correct",
     failedAttempt: "OPEN FAILED ATTEMPT",
-    passedAttempt: "OPEN PASSED ATTEMPT"
+    passedAttempt: "OPEN PASSED ATTEMPT",
+    arenaProgress: "FOUR-INTERFACE ARENA",
+    openArenaProtocol: "OPEN FROZEN PROTOCOL",
+    openSharedTasks: "OPEN SHARED BOOKS + TASKS"
   },
   ru: {
     step: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
     intro: "Четыре способа объединить независимые pocket i во временную нейросеть. Отдельно проверяем, как каждый pocket i учится локально.",
-    status: "КОНТРОЛЬНАЯ ТОЧКА 2 · DEVELOPMENT-SMOKE ЗАВЕРШЁН",
+    status: "КОНТРОЛЬНАЯ ТОЧКА 2 ПРИНЯТА · DEVELOPMENT-АРЕНА ИДЁТ",
     question: "ВОПРОС",
     architectures: "ЧЕТЫРЕ СПОСОБА ОБЪЕДИНЕНИЯ",
     localLearning: "КАК УЧИТСЯ ОДИН POCKET I",
@@ -2298,7 +2301,7 @@ const e004Copy = {
     surrogates: "16 отдельных учебных pocket i научат router и merger. Эти финальные i останутся для них невиданными.",
     checkpoint: "КОНТРОЛЬНАЯ ТОЧКА 2 ИЗ 3",
     checkpointCopy: "Замороженная база и два локальных DoRA pocket i показаны ниже. Полная арена архитектур и locked-оценка не запускались.",
-    waiting: "ЖДЁМ YUKA · ПОЛНАЯ АРЕНА ОСТАНОВЛЕНА",
+    waiting: "РАЗРЕШЕНО · ТОЛЬКО ОТКРЫТЫЙ DEVELOPMENT",
     visibilityRule: "ПРАВИЛО ВИДИМОГО ДОКАЗАТЕЛЬСТВА",
     dataWorld: "ВОСЕМЬ ОТКРЫТЫХ ДЕМО-КНИГ",
     bookRule: "личное правило",
@@ -2329,7 +2332,10 @@ const e004Copy = {
     together: "вместе · один логический раунд",
     passed: "верно",
     failedAttempt: "ОТКРЫТЬ НЕУДАЧНУЮ ПОПЫТКУ",
-    passedAttempt: "ОТКРЫТЬ УДАЧНУЮ ПОПЫТКУ"
+    passedAttempt: "ОТКРЫТЬ УДАЧНУЮ ПОПЫТКУ",
+    arenaProgress: "АРЕНА ЧЕТЫРЁХ ИНТЕРФЕЙСОВ",
+    openArenaProtocol: "ОТКРЫТЬ ЗАМОРОЖЕННЫЙ ПРОТОКОЛ",
+    openSharedTasks: "ОТКРЫТЬ ОБЩИЕ КНИГИ И ЗАДАЧИ"
   }
 };
 
@@ -2391,7 +2397,13 @@ async function loadExperiment() {
         const resultResponse = await fetch(developmentProgress.result_artifact, { cache: "no-store" });
         if (resultResponse.ok) developmentResult = await resultResponse.json();
       }
+      let arenaProgress = {};
+      if (experiment.arena_progress_artifact) {
+        const arenaResponse = await fetch(experiment.arena_progress_artifact, { cache: "no-store" });
+        if (arenaResponse.ok) arenaProgress = await arenaResponse.json();
+      }
       const architectures = checkpoint.architecture_candidates || [];
+      const arenaArchitecture = new Map((arenaProgress.architectures || []).map(item => [item.id, item]));
       const localLearning = checkpoint.local_learning_candidates || [];
       const population = checkpoint.population || {};
       const books = dataWorld.books || [];
@@ -2415,7 +2427,7 @@ async function loadExperiment() {
               <strong>${escapeHTML(e4Localized(architecture.name))}</strong>
               <p>${escapeHTML(e4Localized(architecture.description))}</p>
               <span>${escapeHTML(e4Localized(architecture.network))}</span>
-              <small>${e4("plannedNotRun")}</small>
+              <small>${escapeHTML(arenaArchitecture.get(architecture.id)?.status || e4("plannedNotRun"))}</small>
             </article>`).join("")}</div>
         </section>
         <section class="e004-section" id="local-learning">
@@ -2449,6 +2461,11 @@ async function loadExperiment() {
           </div>
           <p class="control-warning">${escapeHTML(e4Localized(developmentResult.claim_boundary))}</p>
           <div class="actions"><a class="quiet-link" href="${escapeHTML(developmentProgress.failed_artifact || "#")}">${e4("failedAttempt")}</a><a class="quiet-link" href="${escapeHTML(developmentProgress.result_artifact || "#")}">${e4("passedAttempt")}</a></div>
+        </section>` : ""}
+        ${arenaProgress.status ? `<section class="e004-section">
+          <div class="flow-step">${e4("arenaProgress")}</div>
+          <div class="e004-list">${(arenaProgress.steps || []).map(step => `<p><strong>${escapeHTML(step.id)} · ${escapeHTML(step.status)}</strong>${escapeHTML(step[language] || step.en || "")}</p>`).join("")}</div>
+          <div class="actions"><a class="quiet-link" href="${escapeHTML(arenaProgress.protocol_artifact || "#")}">${e4("openArenaProtocol")}</a><a class="quiet-link" href="${escapeHTML(arenaProgress.shared_tasks_artifact || "#")}">${e4("openSharedTasks")}</a></div>
         </section>` : ""}
         <section class="e004-decision">
           <span>${e4("visibilityRule")}</span>
