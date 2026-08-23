@@ -2415,7 +2415,7 @@ async function loadExperiment() {
         </section>
         <section class="e004-section">
           <div class="flow-step">${e4("progress")}</div>
-          <div class="e004-list">${(developmentProgress.gates || []).map(gate => `<p><strong>G${gate.number} · ${escapeHTML(gate.status)}</strong>${escapeHTML(e4Localized(gate.title))}<br><small>${escapeHTML(e4Localized(gate.evidence))}</small></p>`).join("")}</div>
+          <div class="e004-list">${(developmentProgress.gates || []).map(gate => `<p><strong>G${gate.number} · ${escapeHTML(gate.status)}</strong>${escapeHTML(e4Localized(gate.title))}<br><small>${escapeHTML(e4Localized(gate.evidence))}</small>${gate.artifact ? `<br><a href="${escapeHTML(gate.artifact)}">JSON ↗</a>` : ""}</p>`).join("")}</div>
         </section>
         <section class="e004-decision">
           <span>${e4("visibilityRule")}</span>

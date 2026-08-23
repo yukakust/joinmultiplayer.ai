@@ -1,6 +1,6 @@
 # E004 — Architecture Arena
 
-Status: `CHECKPOINT 1 REBUILDING · NO TRAINING`
+Status: `DEVELOPMENT GATES · NO TRAINING YET`
 
 E004 asks whether accessible knowledge and solution quality grow as `1, 2, 4,
 8` independent pocket i join one temporary distributed neural network, and
@@ -38,9 +38,10 @@ owner review.
 
 ## Current boundary
 
-No model weight or ML dependency has been downloaded for E004. No optimizer
-step, RAG index, neural memory, router, merger, adapter, MoE expert, or locked
-evaluation exists yet. Checkpoint 1 is a design artifact, not a result.
+The exact frozen base and development dependencies are now present on yukabox.
+No optimizer step, RAG index, neural memory, router, merger, adapter, MoE
+expert, or locked evaluation exists yet. Checkpoint 1 is a design artifact,
+not a result.
 
 Current files:
 
@@ -48,6 +49,8 @@ Current files:
 - [`model-lock.json`](model-lock.json) — exact frozen-base revision;
 - [`download-manifest.json`](download-manifest.json) — downloaded file sizes and SHA-256 digests;
 - [`requirements-lock.txt`](requirements-lock.txt) — complete development package lock;
+- [`src/frozen_base_smoke.py`](src/frozen_base_smoke.py) — offline CPU launch check that cannot train weights;
+- [`../../site/experiments/E004/frozen-base-smoke.json`](../../site/experiments/E004/frozen-base-smoke.json) — public measured Gate 3 evidence;
 - [`CHECKPOINT-1-DRAFT.md`](CHECKPOINT-1-DRAFT.md) — owner-facing arena decision;
 - [`DATA-WORLD.md`](DATA-WORLD.md) — human-readable public data contract;
 - [`sample-tasks.json`](sample-tasks.json) — eight public demo books and twelve

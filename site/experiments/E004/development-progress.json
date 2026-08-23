@@ -1,9 +1,9 @@
 {
   "experiment_id": "E004",
   "kind": "development_progress",
-  "updated_at": "2026-08-23T20:18:00Z",
+  "updated_at": "2026-08-23T20:23:00Z",
   "claim_status": "not_a_result",
-  "current_gate": 3,
+  "current_gate": 4,
   "gates": [
     {
       "number": 1,
@@ -19,13 +19,14 @@
     },
     {
       "number": 3,
-      "status": "active",
+      "status": "passed",
       "title": {"en": "Frozen-base launch", "ru": "Запуск замороженной базы"},
-      "evidence": {"en": "Weights present; measured launch not run yet.", "ru": "Веса получены; измеренный запуск ещё не выполнялся."}
+      "evidence": {"en": "Frozen 596,049,920-parameter base ran on CPU: 0 trainable parameters, finite logits, 6.93 generated tokens/s, 3,883.51 MiB peak RSS.", "ru": "Замороженная база на 596 049 920 параметров запустилась на CPU: 0 обучаемых параметров, конечные logits, 6,93 токена/с, пик RAM 3 883,51 МиБ."},
+      "artifact": "/experiments/E004/frozen-base-smoke.json"
     },
     {
       "number": 4,
-      "status": "waiting",
+      "status": "active",
       "title": {"en": "Two-pocket smoke", "ru": "Smoke двух pocket i"},
       "evidence": {"en": "No optimizer step yet.", "ru": "Ни одного шага оптимизатора ещё не было."}
     },
