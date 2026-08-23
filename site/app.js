@@ -2234,7 +2234,7 @@ const e004Copy = {
   en: {
     step: "CURRENT EXPERIMENT · E004",
     intro: "Four ways for independent pocket i to join one temporary neural network, tested separately from how each pocket learns locally.",
-    status: "CHECKPOINT 1 · DESIGN · NO TRAINING",
+    status: "CHECKPOINT 2 · DEVELOPMENT SMOKE COMPLETE",
     question: "THE QUESTION",
     architectures: "FOUR SWARM INTERFACES",
     localLearning: "HOW ONE POCKET LEARNS",
@@ -2246,9 +2246,9 @@ const e004Copy = {
     notGenerated: "not generated",
     plugin: "joins after the center is frozen",
     surrogates: "16 separate surrogate pocket i will teach the router and merger. These final i remain unseen.",
-    checkpoint: "CHECKPOINT 1 OF 3",
-    checkpointCopy: "The architecture candidates, public books, controls, thresholds, and compute window are ready for visual review. No model setup or training may begin yet.",
-    waiting: "WAITING FOR YUKA · NO TRAINING",
+    checkpoint: "CHECKPOINT 2 OF 3",
+    checkpointCopy: "The frozen base and two local DoRA pocket i are visible below. The full architecture arena and locked evaluation have not started.",
+    waiting: "WAITING FOR YUKA · FULL ARENA STOPPED",
     visibilityRule: "OWNER-VISIBLE EVIDENCE RULE",
     dataWorld: "EIGHT OPEN DEMO BOOKS",
     bookRule: "personal rule",
@@ -2265,7 +2265,8 @@ const e004Copy = {
     microscope: "MICROSCOPE",
     microscopeCopy: "After training, open any task and compare the base, singles, pairs, full swarm, missing pocket, and exact RAG. For now the public derivation is the microscope.",
     result: "RESULT AND FILES",
-    resultCopy: "No result exists. Every candidate is untrained and unrun. Failed variants will stay visible here later.",
+    resultCopy: "A development pipeline result exists below, together with its failed first attempt. It is not a result for the main swarm hypothesis.",
+    devPassed: "development smoke passed · not locked",
     protocol: "READ THE ARENA PLAN",
     dataJson: "OPEN BOOKS + TASKS",
     schema: "ARTIFACT SCHEMA",
@@ -2283,7 +2284,7 @@ const e004Copy = {
   ru: {
     step: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
     intro: "Четыре способа объединить независимые pocket i во временную нейросеть. Отдельно проверяем, как каждый pocket i учится локально.",
-    status: "КОНТРОЛЬНАЯ ТОЧКА 1 · ПРОЕКТ · ОБУЧЕНИЯ НЕТ",
+    status: "КОНТРОЛЬНАЯ ТОЧКА 2 · DEVELOPMENT-SMOKE ЗАВЕРШЁН",
     question: "ВОПРОС",
     architectures: "ЧЕТЫРЕ СПОСОБА ОБЪЕДИНЕНИЯ",
     localLearning: "КАК УЧИТСЯ ОДИН POCKET I",
@@ -2295,9 +2296,9 @@ const e004Copy = {
     notGenerated: "ещё не создан",
     plugin: "подключится после заморозки центра",
     surrogates: "16 отдельных учебных pocket i научат router и merger. Эти финальные i останутся для них невиданными.",
-    checkpoint: "КОНТРОЛЬНАЯ ТОЧКА 1 ИЗ 3",
-    checkpointCopy: "Архитектуры, открытые книги, контроли, пороги и окно вычислений готовы для визуальной проверки. Настройка и обучение моделей пока запрещены.",
-    waiting: "ЖДЁМ YUKA · ОБУЧЕНИЯ НЕТ",
+    checkpoint: "КОНТРОЛЬНАЯ ТОЧКА 2 ИЗ 3",
+    checkpointCopy: "Замороженная база и два локальных DoRA pocket i показаны ниже. Полная арена архитектур и locked-оценка не запускались.",
+    waiting: "ЖДЁМ YUKA · ПОЛНАЯ АРЕНА ОСТАНОВЛЕНА",
     visibilityRule: "ПРАВИЛО ВИДИМОГО ДОКАЗАТЕЛЬСТВА",
     dataWorld: "ВОСЕМЬ ОТКРЫТЫХ ДЕМО-КНИГ",
     bookRule: "личное правило",
@@ -2314,7 +2315,8 @@ const e004Copy = {
     microscope: "МИКРОСКОП",
     microscopeCopy: "После обучения здесь можно будет открыть задачу и сравнить базу, одиночных i, пары, полный swarm, отсутствие нужного i и exact RAG. Сейчас микроскопом служит открытый расчёт.",
     result: "РЕЗУЛЬТАТ И ФАЙЛЫ",
-    resultCopy: "Результата пока нет. Все кандидаты не обучены и не запускались. Позже неудачные варианты тоже останутся видимыми.",
+    resultCopy: "Ниже есть результат development-трубопровода и первая неудачная попытка. Это не результат главной гипотезы swarm.",
+    devPassed: "development-smoke пройден · не locked",
     protocol: "ЧИТАТЬ ПЛАН АРЕНЫ",
     dataJson: "ОТКРЫТЫЕ КНИГИ И ЗАДАЧИ",
     schema: "СХЕМА АРТЕФАКТОВ",
@@ -2423,7 +2425,7 @@ async function loadExperiment() {
               <strong>${escapeHTML(e4Localized(method.name))}</strong>
               <p>${escapeHTML(e4Localized(method.description))}</p>
               <span>${e4("bestFor")} · ${escapeHTML(e4Localized(method.best_for))}</span>
-              <small>${method.status === "recommended_not_run" ? e4("recommended") : e4("plannedNotRun")}</small>
+              <small>${method.id === "dora" && developmentResult.status === "passed" ? e4("devPassed") : method.status === "recommended_not_run" ? e4("recommended") : e4("plannedNotRun")}</small>
             </article>`).join("")}</div>
         </section>
         <section class="e004-checkpoint">
@@ -2511,7 +2513,7 @@ async function loadExperiment() {
           <section>
             <span>${e4("result")}</span>
             <p>${e4("resultCopy")}</p>
-            <div class="actions"><a class="quiet-link" href="${escapeHTML(experiment.checkpoint_artifact)}">CHECKPOINT JSON</a><a class="quiet-link" href="${escapeHTML(checkpoint.data_world?.artifact || "#")}">${e4("dataJson")}</a><a class="quiet-link" href="${escapeHTML(experiment.artifact_schema)}">${e4("schema")}</a></div>
+            <div class="actions"><a class="quiet-link" href="${escapeHTML(experiment.review_checkpoint_artifact || experiment.checkpoint_artifact)}">CHECKPOINT JSON</a><a class="quiet-link" href="${escapeHTML(checkpoint.data_world?.artifact || "#")}">${e4("dataJson")}</a><a class="quiet-link" href="${escapeHTML(experiment.artifact_schema)}">${e4("schema")}</a></div>
           </section>
         </div>
         <section class="privacy-boundary">

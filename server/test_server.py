@@ -659,7 +659,7 @@ class SubmissionTests(unittest.TestCase):
             self.assertEqual(handler.sent[1]["protocol_version"], "E003-draft-v0.1")
             self.assertIn("not yet a language model", handler.sent[1]["task_prompt"])
 
-    def test_e004_public_record_is_an_untrained_architecture_arena(self):
+    def test_e004_public_record_stops_at_checkpoint_2_before_full_arena(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "test.sqlite3"
             init_db(path)
@@ -667,10 +667,10 @@ class SubmissionTests(unittest.TestCase):
             handler.get_public("E004")
             self.assertEqual(handler.sent[0], HTTPStatus.OK)
             experiment = handler.sent[1]
-            self.assertEqual(experiment["status"], "checkpoint_1_needs_review")
+            self.assertEqual(experiment["status"], "checkpoint_2_needs_review")
             self.assertEqual(experiment["method"], "architecture_arena")
             self.assertEqual(experiment["protocol_version"], "E004-architecture-arena-v0.3")
-            self.assertEqual(experiment["checkpoint"]["number"], 1)
+            self.assertEqual(experiment["checkpoint"]["number"], 2)
             self.assertIn("what changed", experiment["visibility_rule"]["en"])
             self.assertIn("На каждом значимом этапе", experiment["visibility_rule"]["ru"])
             self.assertEqual(len(experiment["pockets"]), 9)
@@ -681,11 +681,12 @@ class SubmissionTests(unittest.TestCase):
             self.assertEqual(len(experiment["local_learning"]), 5)
             self.assertNotIn("dora_assembly", {item["id"] for item in experiment["architectures"]})
             self.assertEqual(experiment["checkpoint_artifact"], "/experiments/E004/checkpoint-1-v0.2.json")
+            self.assertEqual(experiment["review_checkpoint_artifact"], "/experiments/E004/checkpoint-2.json")
             self.assertEqual(
                 experiment["development_progress_artifact"],
                 "/experiments/E004/development-progress.json",
             )
-            self.assertIn("not a result", experiment["claim_boundary"]["en"])
+            self.assertIn("remain untested", experiment["claim_boundary"]["en"])
 
     def test_e004_artifact_schema_is_public_json_schema(self):
         schema_path = (

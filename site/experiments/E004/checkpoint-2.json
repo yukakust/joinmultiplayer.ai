@@ -1,0 +1,39 @@
+{
+  "experiment_id": "E004",
+  "checkpoint": 2,
+  "status": "needs_owner_review",
+  "claim_status": "development_smoke_only",
+  "created_at": "2026-08-23T20:32:00Z",
+  "source_revision": "eccdb7265f607e509bb0193abdbb77b472298f51",
+  "summary": {
+    "en": "The pinned Qwen3-0.6B Base runs frozen on yukabox. Two independent local DoRA adapters learned three disjoint public synthetic memories each and their selected answers assembled correctly after an honestly recorded failed first attempt.",
+    "ru": "Закреплённая Qwen3-0.6B Base запускается на yukabox в замороженном виде. Два независимых локальных DoRA-адаптера выучили по три разных открытых синтетических знания, а их выбранные ответы собрались верно после честно записанной первой неудачной попытки."
+  },
+  "gates": [
+    {"number": 1, "status": "passed", "artifact": "/experiments/E004/development-progress.json"},
+    {"number": 2, "status": "passed", "artifact": "https://github.com/yukakust/joinmultiplayer.ai/blob/agent/game-loop-v0.1/experiments/E004-dora-language-swarm/download-manifest.json"},
+    {"number": 3, "status": "passed", "artifact": "/experiments/E004/frozen-base-smoke.json"},
+    {"number": 4, "status": "passed_after_failed_attempt", "failed_artifact": "/experiments/E004/two-pocket-smoke-attempt-1.json", "passed_artifact": "/experiments/E004/two-pocket-smoke-attempt-2.json"}
+  ],
+  "observed": {
+    "frozen_base_trainable_parameters": 0,
+    "frozen_base_tokens_per_second": 6.9338,
+    "base_memory_accuracy": "0/6",
+    "I01_own_other": "3/3 · 0/3",
+    "I02_own_other": "3/3 · 0/3",
+    "assembled_answer_correct": true
+  },
+  "not_tested": [
+    "held-out generalization",
+    "the four swarm interfaces",
+    "neural fusion",
+    "physical networking across devices",
+    "private-data safety",
+    "1/2/4/8 growth",
+    "locked final evaluation"
+  ],
+  "decision_requested": {
+    "en": "Inspect the visible before/after result and failure. Explicit approval is required before building the full architecture arena or running locked training.",
+    "ru": "Проверьте наглядный результат до/после и неудачную попытку. Для сборки полной арены архитектур или locked-обучения требуется отдельное явное подтверждение."
+  }
+}

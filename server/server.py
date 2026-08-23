@@ -139,7 +139,7 @@ E003 = {
 E004 = {
     "public_id": "E004",
     "hypothesis_id": "H0001",
-    "status": "checkpoint_1_needs_review",
+    "status": "checkpoint_2_needs_review",
     "protocol_version": "E004-architecture-arena-v0.3",
     "title": {
         "en": "Architecture Arena for a growing pocket i swarm",
@@ -157,14 +157,14 @@ E004 = {
             "может подключиться без переобучения центральной системы?"
         ),
     },
-    "phase": "design_review",
+    "phase": "development_smoke_review",
     "method": "architecture_arena",
     "checkpoint": {
-        "number": 1,
+        "number": 2,
         "status": "needs_review",
         "label": {
-            "en": "Approve the arena before model setup or training",
-            "ru": "Утвердить арену до настройки и обучения моделей",
+            "en": "Review the two-pocket smoke before the full arena",
+            "ru": "Проверить smoke двух pocket i до полной арены",
         },
     },
     "visibility_rule": {
@@ -197,9 +197,14 @@ E004 = {
     ],
     "artifacts": [
         "/experiments/E004/checkpoint-1-v0.2.json",
+        "/experiments/E004/checkpoint-2.json",
+        "/experiments/E004/frozen-base-smoke.json",
+        "/experiments/E004/two-pocket-smoke-attempt-1.json",
+        "/experiments/E004/two-pocket-smoke-attempt-2.json",
         "/experiments/E004/sample-tasks.json",
     ],
     "checkpoint_artifact": "/experiments/E004/checkpoint-1-v0.2.json",
+    "review_checkpoint_artifact": "/experiments/E004/checkpoint-2.json",
     "development_progress_artifact": "/experiments/E004/development-progress.json",
     "artifact_schema": "/experiments/E004/artifact-schema-v0.2.json",
     "protocol_path": (
@@ -208,14 +213,14 @@ E004 = {
     ),
     "claim_boundary": {
         "en": (
-            "No E004 model or ML dependency has been downloaded or trained. Public books "
-            "are illustrative and unlocked. This checkpoint is a proposed synthetic "
-            "experiment design, not a result."
+            "A pinned frozen base launch and a two-pocket local DoRA development smoke "
+            "are complete. The four swarm interfaces, physical network, private-data "
+            "safety, scale growth, generalization, and locked evaluation remain untested."
         ),
         "ru": (
-            "Для E004 ещё не скачивали и не обучали модели или ML-зависимости. Открытые "
-            "книги — только примеры, они не входят в locked-тест. Эта контрольная точка — "
-            "проект синтетического эксперимента, а не результат."
+            "Закреплённая замороженная база запущена, development-smoke двух локальных "
+            "DoRA pocket i завершён. Четыре интерфейса swarm, физическая сеть, безопасность "
+            "приватных данных, рост с масштабом, обобщение и locked-оценка ещё не проверены."
         ),
     },
 }
