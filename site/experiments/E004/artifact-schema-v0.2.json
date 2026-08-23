@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://joinmultiplayer.ai/experiments/E004/artifact-schema-v0.2.json",
+  "title": "E004 Architecture Arena checkpoint artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "experiment_id", "checkpoint", "status", "claim_status", "created_at", "source_revision", "summary", "question", "evidence_rule", "architecture_candidates", "population", "data_world", "controls", "success_criteria", "schedule", "decision_requested", "files"],
+  "$defs": {
+    "localized": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["en", "ru"],
+      "properties": {
+        "en": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "ru": {"type": "string", "minLength": 1, "maxLength": 2000}
+      }
+    }
+  },
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": "0.2"},
+    "experiment_id": {"const": "E004"},
+    "checkpoint": {"const": 1},
+    "status": {"enum": ["preparing", "needs_review", "accepted", "rejected", "failed"]},
+    "claim_status": {"enum": ["not_a_result", "supported_in_task_world", "not_supported", "inconclusive"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "summary": {"$ref": "#/$defs/localized"},
+    "question": {"$ref": "#/$defs/localized"},
+    "evidence_rule": {"$ref": "#/$defs/localized"},
+    "architecture_candidates": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "description", "network", "status"],
+        "properties": {
+          "id": {"enum": ["rag_swarm", "neural_memory", "latent_delta", "token_moe", "dora_assembly"]},
+          "name": {"$ref": "#/$defs/localized"},
+          "description": {"$ref": "#/$defs/localized"},
+          "network": {"$ref": "#/$defs/localized"},
+          "status": {"enum": ["planned_not_run", "smoke_running", "smoke_passed", "failed", "rejected"]}
+        }
+      }
+    },
+    "population": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surrogate_ids", "final_ids", "post_freeze_plugin_id", "status"],
+      "properties": {
+        "surrogate_ids": {"type": "array", "minItems": 16, "maxItems": 16, "items": {"type": "string", "pattern": "^S[0-9]{2}$"}},
+        "final_ids": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"type": "string", "pattern": "^I0[1-8]$"}},
+        "post_freeze_plugin_id": {"const": "I09"},
+        "status": {"enum": ["not_generated", "generated", "trained", "failed"]}
+      }
+    },
+    "data_world": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "public_demo_ids", "public_book_count", "public_task_count", "planned_exact_facts_per_private_book", "planned_procedure_examples_per_private_book", "planned_updates_or_deletions_per_private_book", "largest_answer_space", "triple_blind_guess_probability", "pair_missing_segment_guess_probability", "artifact"],
+      "properties": {
+        "status": {"const": "public_demo_not_locked"},
+        "public_demo_ids": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"type": "string", "pattern": "^P0[1-8]$"}},
+        "public_book_count": {"const": 8},
+        "public_task_count": {"const": 12},
+        "planned_exact_facts_per_private_book": {"type": "integer", "minimum": 1},
+        "planned_procedure_examples_per_private_book": {"type": "integer", "minimum": 1},
+        "planned_updates_or_deletions_per_private_book": {"type": "integer", "minimum": 1},
+        "largest_answer_space": {"type": "integer", "minimum": 1000000},
+        "triple_blind_guess_probability": {"type": "number", "exclusiveMinimum": 0, "maximum": 0.000001},
+        "pair_missing_segment_guess_probability": {"type": "number", "exclusiveMinimum": 0, "maximum": 0.01},
+        "artifact": {"type": "string", "pattern": "^/experiments/E004/"}
+      }
+    },
+    "controls": {"type": "array", "minItems": 6, "items": {"$ref": "#/$defs/localized"}},
+    "success_criteria": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "threshold", "en", "ru"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z_]+$"},
+          "threshold": {"type": "string", "minLength": 1, "maxLength": 200},
+          "en": {"type": "string", "minLength": 1, "maxLength": 500},
+          "ru": {"type": "string", "minLength": 1, "maxLength": 500}
+        }
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["timezone", "run_window", "checkpoint_at", "hard_stop_at", "blackout", "cpu_threads_max", "ram_gib_max", "accelerator"],
+      "properties": {
+        "timezone": {"type": "string", "maxLength": 300},
+        "run_window": {"type": "string"},
+        "checkpoint_at": {"type": "string"},
+        "hard_stop_at": {"type": "string"},
+        "blackout": {"type": "string"},
+        "cpu_threads_max": {"type": "integer", "minimum": 1, "maximum": 24},
+        "ram_gib_max": {"type": "integer", "minimum": 1, "maximum": 59},
+        "accelerator": {"type": "string", "maxLength": 300}
+      }
+    },
+    "decision_requested": {"$ref": "#/$defs/localized"},
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "path", "sha256"],
+        "properties": {
+          "label": {"type": "string", "minLength": 1, "maxLength": 160},
+          "path": {"type": "string", "pattern": "^/experiments/E004/"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}

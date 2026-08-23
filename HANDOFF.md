@@ -176,6 +176,19 @@ separate owner-consent step and exposes aggregate metrics only. The controlled
 training shards are hidden from peers but known to the experiment server, so
 E003 makes no privacy or language-model claim.
 
+E004 is the current untrained Architecture Arena at
+`/experiment/?id=E004`. Protocol `E004-architecture-arena-v0.2` compares five
+single-pass interfaces: RAG evidence, learned memory tokens, bounded latent
+deltas, personal token-MoE, and temporary DoRA adapter assembly. Its public
+Checkpoint 1 artifact is `/experiments/E004/checkpoint-1-v0.2.json`; the eight
+open demo books and twelve mechanically derived tasks are in
+`/experiments/E004/sample-tasks.json`. Sixteen surrogate i may later train
+central components, while locked `I01..I08` and post-freeze `I09` remain unseen.
+No E004 model, ML dependency, locked book, optimizer step, or result exists.
+Do not start environment setup or training until the owner visually reviews and
+explicitly approves Checkpoint 1. Every meaningful later stage must publish or
+show owner-inspectable evidence before work advances.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

@@ -2233,61 +2233,75 @@ function door(id, data) {
 const e004Copy = {
   en: {
     step: "CURRENT EXPERIMENT · E004",
-    intro: "One small test: three synthetic language pocket i learn different skills with DoRA and try to solve new tasks together.",
-    status: "SETUP · NOT A RESULT",
+    intro: "Five ways for personal pocket i to keep different knowledge and join one temporary neural network. We choose by evidence, not preference.",
+    status: "CHECKPOINT 1 · DESIGN · NO TRAINING",
     question: "THE QUESTION",
-    pockets: "THREE POCKET i",
-    planned: "planned depth",
-    notCreated: "not created",
+    architectures: "FIVE ARCHITECTURES",
+    plannedNotRun: "planned · not run",
+    onePass: "one parallel pass",
+    population: "THE FINAL SWARM",
+    notGenerated: "not generated",
+    plugin: "joins after the center is frozen",
+    surrogates: "16 separate surrogate pocket i will teach the router and merger. These final i remain unseen.",
     checkpoint: "CHECKPOINT 1 OF 3",
-    checkpointCopy: "We are preparing the base-model recommendation, readable tasks, DoRA recipe, chance baseline, and run budget. Training cannot begin before Yuka reviews them.",
+    checkpointCopy: "The architecture candidates, public books, controls, thresholds, and compute window are ready for visual review. No model setup or training may begin yet.",
     waiting: "WAITING FOR YUKA · NO TRAINING",
     visibilityRule: "OWNER-VISIBLE EVIDENCE RULE",
-    model: "RECOMMENDED BASE",
-    hardware: "YUKABOX",
-    task: "TASK WORLD",
-    dora: "DORA RECIPE",
-    examples: "ILLUSTRATIVE EXAMPLES · NOT LOCKED",
-    chance: "blind whole-answer chance",
-    pairChance: "perfect pair guessing the missing segment",
+    dataWorld: "EIGHT OPEN DEMO BOOKS",
+    bookRule: "personal rule",
+    updated: "updated",
+    deleted: "deleted",
+    examples: "FIVE TASKS YOU CAN CHECK BY HAND · NOT LOCKED",
+    answerSpace: "three-pocket answer space",
+    pairChance: "chance to guess one missing segment",
+    criteria: "WHAT COUNTS AS SUCCESS",
+    controls: "WHAT WE COMPARE AGAINST",
+    schedule: "YUKABOX WINDOW",
+    scheduleCopy: "Heavy jobs: 08:00–23:45. Checkpoint at 23:45, hard stop at 23:55, no training 00:00–08:00. Timezone still needs one owner confirmation.",
     decision: "DECISION REQUESTED",
-    modelSize: "BF16 weights",
-    noRuntime: "Memory and disk fit. GPU runtime is not configured; speed is still unknown.",
     microscope: "MICROSCOPE",
-    microscopeCopy: "After the run, choose a task and compare the base, singles, pairs, full swarm, no-z₀, missing-pocket, and exact-RAG answers here.",
+    microscopeCopy: "After training, open any task and compare the base, singles, pairs, full swarm, missing pocket, and exact RAG. For now the public derivation is the microscope.",
     result: "RESULT AND FILES",
-    resultCopy: "No result exists. Reviewed checkpoint artifacts will appear here without replacing failed runs.",
-    protocol: "READ THE MINIMAL PLAN",
+    resultCopy: "No result exists. Every candidate is untrained and unrun. Failed variants will stay visible here later.",
+    protocol: "READ THE ARENA PLAN",
+    dataJson: "OPEN BOOKS + TASKS",
     schema: "ARTIFACT SCHEMA",
     boundary: "BOUNDARY"
   },
   ru: {
     step: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
-    intro: "Один небольшой тест: три синтетических языковых pocket i учат разные навыки через DoRA и пытаются вместе решить новые задачи.",
-    status: "ПОДГОТОВКА · ЭТО НЕ РЕЗУЛЬТАТ",
+    intro: "Пять способов хранить разные знания в личных pocket i и собирать их во временную нейросеть. Победителя выберут данные, а не наши предпочтения.",
+    status: "КОНТРОЛЬНАЯ ТОЧКА 1 · ПРОЕКТ · ОБУЧЕНИЯ НЕТ",
     question: "ВОПРОС",
-    pockets: "ТРИ POCKET i",
-    planned: "планируемая глубина",
-    notCreated: "ещё не создан",
+    architectures: "ПЯТЬ АРХИТЕКТУР",
+    plannedNotRun: "в плане · не запускалась",
+    onePass: "один параллельный проход",
+    population: "ФИНАЛЬНЫЙ SWARM",
+    notGenerated: "ещё не создан",
+    plugin: "подключится после заморозки центра",
+    surrogates: "16 отдельных учебных pocket i научат router и merger. Эти финальные i останутся для них невиданными.",
     checkpoint: "КОНТРОЛЬНАЯ ТОЧКА 1 ИЗ 3",
-    checkpointCopy: "Мы готовим рекомендацию базовой модели, понятные задачи, DoRA-рецепт, вероятность угадывания и бюджет запуска. Обучение не начнётся, пока Yuka всё это не проверит.",
+    checkpointCopy: "Архитектуры, открытые книги, контроли, пороги и окно вычислений готовы для визуальной проверки. Настройка и обучение моделей пока запрещены.",
     waiting: "ЖДЁМ YUKA · ОБУЧЕНИЯ НЕТ",
     visibilityRule: "ПРАВИЛО ВИДИМОГО ДОКАЗАТЕЛЬСТВА",
-    model: "РЕКОМЕНДУЕМАЯ БАЗА",
-    hardware: "YUKABOX",
-    task: "МИР ЗАДАЧ",
-    dora: "DORA-РЕЦЕПТ",
-    examples: "ПРИМЕРЫ · ЕЩЁ НЕ LOCKED",
-    chance: "шанс угадать весь ответ",
-    pairChance: "шанс идеальной пары угадать недостающий сегмент",
+    dataWorld: "ВОСЕМЬ ОТКРЫТЫХ ДЕМО-КНИГ",
+    bookRule: "личное правило",
+    updated: "обновлено",
+    deleted: "удалено",
+    examples: "ПЯТЬ ЗАДАЧ ДЛЯ РУЧНОЙ ПРОВЕРКИ · НЕ LOCKED",
+    answerSpace: "вариантов ответа для трёх pocket i",
+    pairChance: "шанс угадать один недостающий сегмент",
+    criteria: "ЧТО СЧИТАЕМ УСПЕХОМ",
+    controls: "С ЧЕМ СРАВНИВАЕМ",
+    schedule: "ОКНО YUKABOX",
+    scheduleCopy: "Тяжёлые задачи: 08:00–23:45. Checkpoint в 23:45, полная остановка в 23:55, с 00:00 до 08:00 обучения нет. Часовой пояс нужно один раз подтвердить.",
     decision: "КАКОЕ РЕШЕНИЕ НУЖНО",
-    modelSize: "BF16-веса",
-    noRuntime: "Памяти и диска достаточно. GPU-runtime не настроен; скорость пока неизвестна.",
     microscope: "МИКРОСКОП",
-    microscopeCopy: "После запуска здесь можно будет выбрать задачу и сравнить ответы базы, одиночных i, пар, полного swarm, варианта без z₀, без одного i и exact RAG.",
+    microscopeCopy: "После обучения здесь можно будет открыть задачу и сравнить базу, одиночных i, пары, полный swarm, отсутствие нужного i и exact RAG. Сейчас микроскопом служит открытый расчёт.",
     result: "РЕЗУЛЬТАТ И ФАЙЛЫ",
-    resultCopy: "Результата пока нет. Проверенные артефакты контрольных точек появятся здесь, не заменяя неудачные запуски.",
-    protocol: "ЧИТАТЬ МИНИМАЛЬНЫЙ ПЛАН",
+    resultCopy: "Результата пока нет. Все кандидаты не обучены и не запускались. Позже неудачные варианты тоже останутся видимыми.",
+    protocol: "ЧИТАТЬ ПЛАН АРЕНЫ",
+    dataJson: "ОТКРЫТЫЕ КНИГИ И ЗАДАЧИ",
     schema: "СХЕМА АРТЕФАКТОВ",
     boundary: "ГРАНИЦА УТВЕРЖДЕНИЯ"
   }
@@ -2295,6 +2309,10 @@ const e004Copy = {
 
 function e4(key) {
   return (e004Copy[language] || e004Copy.en)[key] || key;
+}
+
+function e4Localized(value) {
+  return value?.[language] || value?.en || "";
 }
 
 function experimentShell(experimentId = "E002") {
@@ -2332,11 +2350,18 @@ async function loadExperiment() {
         const checkpointResponse = await fetch(experiment.checkpoint_artifact, { cache: "no-store" });
         if (checkpointResponse.ok) checkpoint = await checkpointResponse.json();
       }
-      const pockets = checkpoint.pockets || experiment.pockets || [];
-      const model = checkpoint.model_candidate || {};
-      const hardware = checkpoint.hardware || {};
-      const taskWorld = checkpoint.task_world || {};
-      const dora = checkpoint.dora_recipe || {};
+      let dataWorld = {};
+      if (checkpoint.data_world?.artifact) {
+        const dataResponse = await fetch(checkpoint.data_world.artifact, { cache: "no-store" });
+        if (dataResponse.ok) dataWorld = await dataResponse.json();
+      }
+      const architectures = checkpoint.architecture_candidates || [];
+      const population = checkpoint.population || {};
+      const books = dataWorld.books || [];
+      const taskTypes = ["single", "pair", "triple", "updated_fact", "deletion"];
+      const visibleTasks = taskTypes
+        .map(type => (dataWorld.tasks || []).find(task => task.type === type))
+        .filter(Boolean);
       target.querySelector("h1").textContent = experiment.title?.[language] || "E004";
       target.querySelector(".experiment-loading").outerHTML = `
         <div class="experiment-status">${e4("status")}</div>
@@ -2345,13 +2370,14 @@ async function loadExperiment() {
           <p>${escapeHTML(experiment.question?.[language] || "")}</p>
         </section>
         <section class="e004-section">
-          <div class="flow-step">${e4("pockets")}</div>
-          <div class="e004-pockets">${pockets.map(pocket => `
+          <div class="flow-step">${e4("architectures")}</div>
+          <div class="e004-architectures">${architectures.map((architecture, index) => `
             <article>
-              <i>i</i>
-              <strong>${escapeHTML(pocket.id)}</strong>
-              <span>${e4("planned")} · ${escapeHTML(pocket.depth || pocket.planned_depth)} blocks · DoRA r${escapeHTML(pocket.dora_rank || "—")}</span>
-              <small>${e4("notCreated")}</small>
+              <b>${String(index + 1).padStart(2, "0")}</b>
+              <strong>${escapeHTML(e4Localized(architecture.name))}</strong>
+              <p>${escapeHTML(e4Localized(architecture.description))}</p>
+              <span>${escapeHTML(e4Localized(architecture.network))}</span>
+              <small>${e4("plannedNotRun")}</small>
             </article>`).join("")}</div>
         </section>
         <section class="e004-checkpoint">
@@ -2366,48 +2392,66 @@ async function loadExperiment() {
           <span>${e4("visibilityRule")}</span>
           <p>${escapeHTML(experiment.visibility_rule?.[language] || "")}</p>
         </section>
-        <div class="e004-evidence">
-          <article>
-            <span>${e4("model")}</span>
-            <strong>${escapeHTML(model.id || "—")}</strong>
-            <p>${escapeHTML(model.layers || "—")} blocks · ${escapeHTML(model.license || "—")}<br>${e4("modelSize")} · ${model.weight_bytes ? (Number(model.weight_bytes) / 1e9).toFixed(2) : "—"} GB</p>
-            <code>${escapeHTML(model.revision || "")}</code>
-          </article>
-          <article>
-            <span>${e4("hardware")}</span>
-            <strong>${escapeHTML(hardware.cpu || "—")}</strong>
-            <p>${escapeHTML(hardware.threads || "—")} threads · ${escapeHTML(hardware.ram_gib || "—")} GiB RAM · ${escapeHTML(hardware.free_disk_gib || "—")} GiB free</p>
-            <small>${e4("noRuntime")}</small>
-          </article>
-          <article>
-            <span>${e4("task")}</span>
-            <strong>${Number(taskWorld.answer_space || 0).toLocaleString(language)}</strong>
-            <p>${e4("chance")} · 1 / ${Number(taskWorld.answer_space || 1).toLocaleString(language)}<br>${e4("pairChance")} · 1 / 32</p>
-          </article>
-          <article>
-            <span>${e4("dora")}</span>
-            <strong>rank ${escapeHTML(dora.rank || "—")}</strong>
-            <p>${(dora.planned_depths || []).map(value => `${value} blocks`).join(" · ")}<br>${(dora.target_modules || []).map(escapeHTML).join(" · ")}</p>
-          </article>
-        </div>
+        <section class="e004-section">
+          <div class="flow-step">${e4("population")}</div>
+          <p class="e004-section-copy">${e4("surrogates")}</p>
+          <div class="e004-population">${(population.final_ids || []).map(id => `
+            <article><i>i</i><strong>${escapeHTML(id)}</strong><small>${e4("notGenerated")}</small></article>`).join("")}
+            <article class="plugin"><i>i</i><strong>${escapeHTML(population.post_freeze_plugin_id || "I09")}</strong><small>${e4("plugin")}</small></article>
+          </div>
+        </section>
+        <section class="e004-section">
+          <div class="flow-step">${e4("dataWorld")}</div>
+          <div class="e004-books">${books.map(book => {
+            const updated = (book.preview_facts || []).find(fact => fact.current_version === 2 && fact.status === "active") || {};
+            const deleted = (book.preview_facts || []).find(fact => fact.status === "deleted") || {};
+            return `<article>
+              <div><i>i</i><span>${escapeHTML(book.pocket_id)} · ${escapeHTML(book.codename)}</span></div>
+              <strong>${e4("bookRule")}</strong>
+              <code>(${escapeHTML(book.procedure?.multiplier)} × value + ${escapeHTML(book.procedure?.bias)}) mod ${escapeHTML(book.procedure?.modulus)}</code>
+              <small>${e4("updated")} · ${escapeHTML(updated.key || "—")}<br>${e4("deleted")} · ${escapeHTML(deleted.key || "—")}</small>
+            </article>`;
+          }).join("")}</div>
+          <div class="e004-data-summary">
+            <strong>${Number(checkpoint.data_world?.largest_answer_space || 0).toLocaleString(language)}</strong>
+            <span>${e4("answerSpace")}</span>
+            <strong>1 / ${Math.round(1 / Number(checkpoint.data_world?.pair_missing_segment_guess_probability || 1)).toLocaleString(language)}</strong>
+            <span>${e4("pairChance")}</span>
+          </div>
+        </section>
         <section class="e004-examples">
           <div class="flow-step">${e4("examples")}</div>
-          ${(taskWorld.examples || []).map(example => `<article><span>${escapeHTML(example.id)}</span><p>${escapeHTML(example.prompt)}</p><strong>${escapeHTML(example.answer)}</strong></article>`).join("")}
+          ${visibleTasks.map(task => `<article><span>${escapeHTML(task.id)} · ${escapeHTML(task.type)}</span><p>${escapeHTML(e4Localized(task.prompt))}</p><strong>${escapeHTML(task.answer)}</strong></article>`).join("")}
+        </section>
+        <div class="e004-two-column">
+          <section>
+            <span>${e4("criteria")}</span>
+            <div class="e004-list">${(checkpoint.success_criteria || []).map(item => `<p><strong>${escapeHTML(item.threshold)}</strong>${escapeHTML(item[language] || item.en || "")}</p>`).join("")}</div>
+          </section>
+          <section>
+            <span>${e4("controls")}</span>
+            <div class="e004-list">${(checkpoint.controls || []).map(item => `<p>${escapeHTML(e4Localized(item))}</p>`).join("")}</div>
+          </section>
+        </div>
+        <section class="e004-decision">
+          <span>${e4("schedule")}</span>
+          <p>${e4("scheduleCopy")}</p>
+          <strong>${escapeHTML(checkpoint.schedule?.run_window || "08:00–23:45")} · ${escapeHTML(checkpoint.schedule?.cpu_threads_max || "—")} CPU · ${escapeHTML(checkpoint.schedule?.ram_gib_max || "—")} GiB RAM</strong>
         </section>
         <section class="e004-decision">
           <span>${e4("decision")}</span>
-          <p>${escapeHTML(checkpoint.decision_requested || "")}</p>
+          <p>${escapeHTML(e4Localized(checkpoint.decision_requested))}</p>
         </section>
         <div class="e004-two-column">
           <section>
             <span>${e4("microscope")}</span>
             <p>${e4("microscopeCopy")}</p>
-            <div class="e004-placeholder">z₀ + Δi₁ + Δi₂ + Δi₃ → ?</div>
+            <div class="e004-placeholder">question → i₁ + i₂ + i₃ in parallel → one answer</div>
           </section>
           <section>
             <span>${e4("result")}</span>
             <p>${e4("resultCopy")}</p>
-            <div class="actions"><a class="quiet-link" href="${escapeHTML(experiment.checkpoint_artifact)}">CHECKPOINT JSON</a><a class="quiet-link" href="${escapeHTML(experiment.artifact_schema)}">${e4("schema")}</a></div>
+            <div class="actions"><a class="quiet-link" href="${escapeHTML(experiment.checkpoint_artifact)}">CHECKPOINT JSON</a><a class="quiet-link" href="${escapeHTML(checkpoint.data_world?.artifact || "#")}">${e4("dataJson")}</a><a class="quiet-link" href="${escapeHTML(experiment.artifact_schema)}">${e4("schema")}</a></div>
           </section>
         </div>
         <section class="privacy-boundary">

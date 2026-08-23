@@ -1,3 +1,4 @@
+import hashlib
 import json
 import sqlite3
 import subprocess
@@ -658,7 +659,7 @@ class SubmissionTests(unittest.TestCase):
             self.assertEqual(handler.sent[1]["protocol_version"], "E003-draft-v0.1")
             self.assertIn("not yet a language model", handler.sent[1]["task_prompt"])
 
-    def test_e004_public_record_is_an_empty_pretraining_shell(self):
+    def test_e004_public_record_is_an_untrained_architecture_arena(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "test.sqlite3"
             init_db(path)
@@ -667,13 +668,17 @@ class SubmissionTests(unittest.TestCase):
             self.assertEqual(handler.sent[0], HTTPStatus.OK)
             experiment = handler.sent[1]
             self.assertEqual(experiment["status"], "checkpoint_1_needs_review")
-            self.assertEqual(experiment["method"], "DoRA")
+            self.assertEqual(experiment["method"], "architecture_arena")
+            self.assertEqual(experiment["protocol_version"], "E004-architecture-arena-v0.2")
             self.assertEqual(experiment["checkpoint"]["number"], 1)
             self.assertIn("what changed", experiment["visibility_rule"]["en"])
             self.assertIn("На каждом значимом этапе", experiment["visibility_rule"]["ru"])
-            self.assertEqual(len(experiment["pockets"]), 3)
-            self.assertTrue(all(item["status"] == "not_created" for item in experiment["pockets"]))
-            self.assertEqual(experiment["artifacts"], ["/experiments/E004/checkpoint-1.json"])
+            self.assertEqual(len(experiment["pockets"]), 9)
+            self.assertEqual(experiment["pockets"][-1]["id"], "I09")
+            self.assertTrue(all(item["status"] == "not_generated" for item in experiment["pockets"]))
+            self.assertEqual(len(experiment["architectures"]), 5)
+            self.assertTrue(all(item["status"] == "planned_not_run" for item in experiment["architectures"]))
+            self.assertEqual(experiment["checkpoint_artifact"], "/experiments/E004/checkpoint-1-v0.2.json")
             self.assertIn("not a result", experiment["claim_boundary"]["en"])
 
     def test_e004_artifact_schema_is_public_json_schema(self):
@@ -682,12 +687,26 @@ class SubmissionTests(unittest.TestCase):
             / "site"
             / "experiments"
             / "E004"
-            / "artifact-schema-v0.1.json"
+            / "artifact-schema-v0.2.json"
         )
         schema = json.loads(schema_path.read_text())
         self.assertEqual(schema["$schema"], "https://json-schema.org/draft/2020-12/schema")
         self.assertEqual(schema["properties"]["experiment_id"]["const"], "E004")
-        self.assertEqual(schema["properties"]["checkpoint"]["maximum"], 3)
+        self.assertEqual(schema["properties"]["checkpoint"]["const"], 1)
+        self.assertEqual(schema["properties"]["schema_version"]["const"], "0.2")
+
+    def test_e004_checkpoint_links_five_candidates_and_verified_public_data(self):
+        root = Path(__file__).resolve().parents[1] / "site" / "experiments" / "E004"
+        checkpoint = json.loads((root / "checkpoint-1-v0.2.json").read_text())
+        data_world = json.loads((root / "sample-tasks.json").read_text())
+        self.assertEqual(len(checkpoint["architecture_candidates"]), 5)
+        self.assertEqual(len(checkpoint["population"]["final_ids"]), 8)
+        self.assertEqual(checkpoint["population"]["post_freeze_plugin_id"], "I09")
+        self.assertEqual(len(data_world["books"]), 8)
+        self.assertEqual(len(data_world["tasks"]), 12)
+        for item in checkpoint["files"]:
+            path = root / Path(item["path"]).name
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), item["sha256"])
 
     def test_three_physical_devices_train_compose_and_publish(self):
         with tempfile.TemporaryDirectory() as directory:

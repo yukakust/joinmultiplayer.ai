@@ -3,13 +3,19 @@
 An open laboratory asking whether people and their pocket AIs can become smarter together than one large AI.
 
 Main hypothesis H0001: Can many personal pocket i—each preserving its own knowledge and individuality—temporarily unite into a single distributed neural network and grow stronger as the swarm scales?
-Current experiment: https://joinmultiplayer.ai/experiment/?id=E002
-Experiment API: https://joinmultiplayer.ai/api/public/E002
+Current design checkpoint: https://joinmultiplayer.ai/experiment/?id=E004
+E004 API: https://joinmultiplayer.ai/api/public/E004
+E004 checkpoint JSON: https://joinmultiplayer.ai/experiments/E004/checkpoint-1-v0.2.json
+E004 public demo books and tasks: https://joinmultiplayer.ai/experiments/E004/sample-tasks.json
+Earlier synthetic experiment: https://joinmultiplayer.ai/experiment/?id=E002
+E002 API: https://joinmultiplayer.ai/api/public/E002
 Public Codex run index: https://joinmultiplayer.ai/api/public/experiment-runs.json
 E002 v0.4 interactive development microscope: https://joinmultiplayer.ai/experiments/E002/R0001-v0.4/microscope.html
 E002 v0.4 machine summary: https://joinmultiplayer.ai/experiments/E002/R0001-v0.4/summary.json
 First physical-device experiment E003: https://joinmultiplayer.ai/network/
 E003 API: https://joinmultiplayer.ai/api/public/E003
+
+E004 Architecture Arena is an untrained design checkpoint. It proposes five one-pass swarm interfaces—RAG evidence, learned memory tokens, bounded latent deltas, personal token-MoE, and temporary DoRA adapter assembly—over eight unseen final pocket i plus one post-freeze plug-in. Its checked-in books use a separate public demo seed. No E004 model, ML dependency, locked book, optimizer step, router, merger, adapter, memory, or result exists yet.
 
 E002 v0.4 is an unlocked synthetic development rehearsal, not an accepted result. Its fixed-workload accuracy rises as 2, 4, 8, 16, and 32 owners become available, but routing is oracle-selected and exact RAG plus symbolic synthesis also reach 100%. Do not claim superiority or that H0001 is proven.
 

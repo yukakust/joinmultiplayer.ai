@@ -1,0 +1,112 @@
+{
+  "$schema": "/experiments/E004/artifact-schema-v0.2.json",
+  "schema_version": "0.2",
+  "experiment_id": "E004",
+  "checkpoint": 1,
+  "status": "needs_review",
+  "claim_status": "not_a_result",
+  "created_at": "2026-08-23T19:22:02Z",
+  "source_revision": "32da7b3cc723778a713578f38e40c44abc068eb7",
+  "summary": {
+    "en": "A proposed one-pass architecture tournament with eight unseen final pocket i and one post-freeze plug-in. No model or ML dependency has been downloaded or trained.",
+    "ru": "Проект турнира одношаговых архитектур с восемью невиданными финальными pocket i и одним i, подключаемым после заморозки. Модели и ML-зависимости не скачивались и не обучались."
+  },
+  "question": {
+    "en": "Does accessible knowledge and solution quality grow as 1, 2, 4, and 8 independent pocket i join one temporary distributed neural network, while a new pocket i can join without retraining the central system?",
+    "ru": "Растут ли доступные знания и качество решений, когда 1, 2, 4 и 8 независимых pocket i объединяются во временную распределённую нейросеть, а новый pocket i может подключиться без переобучения центральной системы?"
+  },
+  "evidence_rule": {
+    "en": "Every meaningful stage shows what changed, inspectable evidence, the metric or failure, and the proposed next step before work advances.",
+    "ru": "Каждый значимый этап до продолжения работы показывает, что изменилось, наглядное доказательство, метрику или ошибку и следующий шаг."
+  },
+  "architecture_candidates": [
+    {
+      "id": "rag_swarm",
+      "name": {"en": "RAG swarm", "ru": "RAG swarm"},
+      "description": {"en": "Each pocket returns private evidence records; the source writes one answer.", "ru": "Каждый pocket i возвращает найденные локальные записи; исходный i собирает один ответ."},
+      "network": {"en": "One parallel request per prompt", "ru": "Один параллельный запрос на промпт"},
+      "status": "planned_not_run"
+    },
+    {
+      "id": "neural_memory",
+      "name": {"en": "Neural memory", "ru": "Нейронная память"},
+      "description": {"en": "Each pocket returns learned memory tokens that the source reads once.", "ru": "Каждый pocket i возвращает обученные токены памяти, которые исходный i читает один раз."},
+      "network": {"en": "One parallel request per prompt", "ru": "Один параллельный запрос на промпт"},
+      "status": "planned_not_run"
+    },
+    {
+      "id": "latent_delta",
+      "name": {"en": "Latent delta", "ru": "Латентная дельта"},
+      "description": {"en": "Each pocket returns a bounded residual: what its personal model adds beyond the shared base.", "ru": "Каждый pocket i возвращает ограниченную дельту — то, что его личная модель добавляет сверх общей базы."},
+      "network": {"en": "Parallel fan-out and one fusion point", "ru": "Параллельная рассылка и одна точка объединения"},
+      "status": "planned_not_run"
+    },
+    {
+      "id": "token_moe",
+      "name": {"en": "Personal token-MoE", "ru": "Персональный token-MoE"},
+      "description": {"en": "Selected pocket i act as neural experts for each generated token.", "ru": "Выбранные pocket i работают как нейронные эксперты для каждого генерируемого токена."},
+      "network": {"en": "One parallel fan-out/fan-in per token", "ru": "Одна параллельная рассылка/сборка на токен"},
+      "status": "planned_not_run"
+    },
+    {
+      "id": "dora_assembly",
+      "name": {"en": "DoRA assembly", "ru": "Сборка DoRA"},
+      "description": {"en": "Selected personal adapters temporarily form one sparse model at the source.", "ru": "Выбранные персональные адаптеры временно образуют одну разреженную модель у исходного i."},
+      "network": {"en": "Adapters transfer before local generation", "ru": "Адаптеры передаются до локальной генерации"},
+      "status": "planned_not_run"
+    }
+  ],
+  "population": {
+    "surrogate_ids": ["S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08", "S09", "S10", "S11", "S12", "S13", "S14", "S15", "S16"],
+    "final_ids": ["I01", "I02", "I03", "I04", "I05", "I06", "I07", "I08"],
+    "post_freeze_plugin_id": "I09",
+    "status": "not_generated"
+  },
+  "data_world": {
+    "status": "public_demo_not_locked",
+    "public_demo_ids": ["P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08"],
+    "public_book_count": 8,
+    "public_task_count": 12,
+    "planned_exact_facts_per_private_book": 256,
+    "planned_procedure_examples_per_private_book": 256,
+    "planned_updates_or_deletions_per_private_book": 64,
+    "largest_answer_space": 991026973,
+    "triple_blind_guess_probability": 1.0090542712201234e-9,
+    "pair_missing_segment_guess_probability": 0.0010030090270812437,
+    "artifact": "/experiments/E004/sample-tasks.json"
+  },
+  "controls": [
+    {"en": "Frozen Qwen 0.6B alone", "ru": "Замороженная Qwen 0.6B без pocket i"},
+    {"en": "Best single pocket and every relevant pair", "ru": "Лучший одиночный pocket i и каждая релевантная пара"},
+    {"en": "Text and logit ensembles", "ru": "Текстовый и logit-ансамбль"},
+    {"en": "Central 0.6B trained on the allowed union", "ru": "Центральная 0.6B, обученная на разрешённом объединении данных"},
+    {"en": "Qwen 1.7B dense scale reference", "ru": "Плотная Qwen 1.7B как масштабная линейка"},
+    {"en": "Exact relevant-data RAG", "ru": "RAG с точно релевантными данными"}
+  ],
+  "success_criteria": [
+    {"id": "local_learning", "threshold": ">= 90%", "en": "Local held-out procedure accuracy for every trained pocket", "ru": "Точность каждого обученного pocket i на локальном held-out правиле"},
+    {"id": "growth", "threshold": ">= 75% of ideal linear growth", "en": "Accessible unique items at N=8 versus N=1", "ru": "Рост доступных уникальных знаний при N=8 относительно N=1"},
+    {"id": "composition", "threshold": ">= +20 percentage points", "en": "Full swarm exact-match lift over the strongest single or relevant pair", "ru": "Прирост exact match полного swarm над лучшим одиночным i или парой"},
+    {"id": "irrelevant", "threshold": "<= 5 percentage points change", "en": "Effect of irrelevant or duplicate pockets", "ru": "Влияние нерелевантных или дублирующих pocket i"},
+    {"id": "missing", "threshold": ">= 15 point loss or correct abstention", "en": "Removing a required pocket", "ru": "Удаление необходимого pocket i"},
+    {"id": "plugin", "threshold": "within 10 points", "en": "Unseen I09 versus comparable existing pockets without central retraining", "ru": "Новый I09 относительно похожих существующих i без центрального переобучения"}
+  ],
+  "schedule": {
+    "timezone": "Central European local time; Europe/Berlin versus fixed CET still requires owner confirmation",
+    "run_window": "08:00–23:45",
+    "checkpoint_at": "23:45",
+    "hard_stop_at": "23:55",
+    "blackout": "00:00–08:00",
+    "cpu_threads_max": 22,
+    "ram_gib_max": 52,
+    "accelerator": "Only after a measured compatibility smoke"
+  },
+  "decision_requested": {
+    "en": "Review the architectures, public books, controls, thresholds, and schedule. Approval permits only environment preparation, pinned downloads, and short development smokes; it does not permit full or locked training.",
+    "ru": "Проверьте архитектуры, открытые книги, контроли, пороги и расписание. Подтверждение разрешит только подготовку окружения, закреплённые загрузки и короткие development-smoke; полный и locked-запуск оно не разрешает."
+  },
+  "files": [
+    {"label": "Public books and tasks", "path": "/experiments/E004/sample-tasks.json", "sha256": "f3fd2cb5730ab602ef232ddf6dfa8b8f0376561234ab050a42543fd94a685370"},
+    {"label": "Deterministic public generator", "path": "/experiments/E004/task_world.py", "sha256": "59431ca9c98ed327d0c4ade06db2d2ebc82db09829dcf01642303cce3496eb70"}
+  ]
+}

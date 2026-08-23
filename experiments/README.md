@@ -23,6 +23,11 @@ Keep code, inputs, outputs, and surprises together.
   draft protocol and public implementation journal. It begins with two
   inspectable, weight-changing synthetic i and then tests the swarm at
   `N = 2, 4, 8, 16, 32` before any real pocket i is promised.
+- [`E003 — First physical swarm`](E003-first-physical-swarm/README.md): private
+  three-device toy wiring test; it is not yet a language-model network.
+- [`E004 — Architecture Arena`](E004-dora-language-swarm/README.md): untrained
+  design checkpoint comparing five one-pass ways to store and compose unique
+  knowledge across eight unseen final pocket i and one post-freeze plug-in.
 
 When the test is complete, write its result in [`i/`](../i/). A pilot proves
 that the procedure runs; it does not place the dot on a general claim.

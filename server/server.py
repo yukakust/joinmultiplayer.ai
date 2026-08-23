@@ -140,31 +140,31 @@ E004 = {
     "public_id": "E004",
     "hypothesis_id": "H0001",
     "status": "checkpoint_1_needs_review",
-    "protocol_version": "E004-draft-v0.1",
+    "protocol_version": "E004-architecture-arena-v0.2",
     "title": {
-        "en": "The smallest useful DoRA language-swarm test",
-        "ru": "Минимальный языковой swarm-тест с DoRA",
+        "en": "Architecture Arena for a growing pocket i swarm",
+        "ru": "Арена архитектур для растущего swarm pocket i",
     },
     "question": {
         "en": (
-            "Can three language pocket i learn different small skills in their own DoRA "
-            "weights and solve new tasks together that the base model, any one pocket i, "
-            "and every pair cannot solve?"
+            "Does accessible knowledge and solution quality grow as 1, 2, 4, and 8 "
+            "independent pocket i join one temporary distributed neural network, while "
+            "a new pocket i can join without retraining the central system?"
         ),
         "ru": (
-            "Могут ли три языковых pocket i выучить разные небольшие навыки в собственных "
-            "DoRA-весах и вместе решить новые задачи, которые не решают базовая модель, "
-            "один pocket i или любая пара?"
+            "Растут ли доступные знания и качество решений, когда 1, 2, 4 и 8 независимых "
+            "pocket i объединяются во временную распределённую нейросеть, а новый pocket i "
+            "может подключиться без переобучения центральной системы?"
         ),
     },
-    "phase": "setup",
-    "method": "DoRA",
+    "phase": "design_review",
+    "method": "architecture_arena",
     "checkpoint": {
         "number": 1,
         "status": "needs_review",
         "label": {
-            "en": "Approve the test before training",
-            "ru": "Утвердить тест до обучения",
+            "en": "Approve the arena before model setup or training",
+            "ru": "Утвердить арену до настройки и обучения моделей",
         },
     },
     "visibility_rule": {
@@ -181,25 +181,36 @@ E004 = {
         ),
     },
     "pockets": [
-        {"id": "E004-I1", "role": "short", "planned_depth": 6, "status": "not_created"},
-        {"id": "E004-I2", "role": "medium", "planned_depth": 12, "status": "not_created"},
-        {"id": "E004-I3", "role": "deep", "planned_depth": 24, "status": "not_created"},
+        *[
+            {"id": f"I{index:02d}", "role": "locked_final", "status": "not_generated"}
+            for index in range(1, 9)
+        ],
+        {"id": "I09", "role": "post_freeze_plugin", "status": "not_generated"},
     ],
-    "artifacts": ["/experiments/E004/checkpoint-1.json"],
-    "checkpoint_artifact": "/experiments/E004/checkpoint-1.json",
-    "artifact_schema": "/experiments/E004/artifact-schema-v0.1.json",
+    "architectures": [
+        {"id": value, "status": "planned_not_run"}
+        for value in ("rag_swarm", "neural_memory", "latent_delta", "token_moe", "dora_assembly")
+    ],
+    "artifacts": [
+        "/experiments/E004/checkpoint-1-v0.2.json",
+        "/experiments/E004/sample-tasks.json",
+    ],
+    "checkpoint_artifact": "/experiments/E004/checkpoint-1-v0.2.json",
+    "artifact_schema": "/experiments/E004/artifact-schema-v0.2.json",
     "protocol_path": (
         "https://github.com/yukakust/joinmultiplayer.ai/blob/agent/game-loop-v0.1/"
         "experiments/E003-first-physical-swarm/DORA-LANGUAGE-SWARM-PLAN.md"
     ),
     "claim_boundary": {
         "en": (
-            "No model has been selected, downloaded, or trained. This page is the empty "
-            "public shell for a proposed development experiment, not a result."
+            "No E004 model or ML dependency has been downloaded or trained. Public books "
+            "are illustrative and unlocked. This checkpoint is a proposed synthetic "
+            "experiment design, not a result."
         ),
         "ru": (
-            "Модель ещё не выбрана, не скачана и не обучалась. Это пустой публичный каркас "
-            "будущего development-эксперимента, а не результат."
+            "Для E004 ещё не скачивали и не обучали модели или ML-зависимости. Открытые "
+            "книги — только примеры, они не входят в locked-тест. Эта контрольная точка — "
+            "проект синтетического эксперимента, а не результат."
         ),
     },
 }
