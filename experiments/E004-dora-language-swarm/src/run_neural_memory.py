@@ -60,12 +60,14 @@ def frozen_query_embeddings(model_path: Path, world: dict) -> tuple[dict[tuple[s
     base.eval().requires_grad_(False)
     embedding = base.get_input_embeddings()
     result = {}
-    with torch.inference_mode():
+    with torch.no_grad():
         for book in world["books"]:
             for fact in book["preview_facts"]:
                 text = f"Pocket {book['pocket_id']} local record {fact['key']}"
                 ids = tokenizer(text, return_tensors="pt", add_special_tokens=False).input_ids
-                result[(book["pocket_id"], fact["key"])] = embedding(ids).mean(dim=1).squeeze(0).cpu()
+                result[(book["pocket_id"], fact["key"])] = (
+                    embedding(ids).mean(dim=1).squeeze(0).detach().cpu().clone()
+                )
     digest = hashlib.sha256(embedding.weight.detach().cpu().numpy().tobytes()).hexdigest()
     del base
     return result, digest
