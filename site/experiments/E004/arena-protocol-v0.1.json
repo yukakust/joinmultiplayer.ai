@@ -3,7 +3,7 @@
   "protocol_version": "arena-v0.1",
   "status": "pre_registered",
   "claim_status": "no_arena_result_yet",
-  "created_at": "2026-08-23T20:40:00Z",
+  "created_at": "2026-08-23T20:39:41Z",
   "base": {
     "model_id": "Qwen/Qwen3-0.6B-Base",
     "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd"

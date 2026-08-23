@@ -4,7 +4,7 @@
   "architecture_id": "rag_swarm",
   "status": "passed_with_stale_record_limitation",
   "claim_status": "public_development_only",
-  "recorded_at": "2026-08-23T20:48:00Z",
+  "recorded_at": "2026-08-23T20:43:48Z",
   "implementation": "local current-state lookup + local procedure + typed atomic capsule",
   "gradient_training": false,
   "trainable_parameters": 0,
