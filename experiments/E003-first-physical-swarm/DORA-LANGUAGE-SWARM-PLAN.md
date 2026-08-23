@@ -50,6 +50,29 @@ There is no separate approval backend and no eight-stage ceremony. Work stops
 three times and the evidence is shown to the owner in Codex and on the public
 experiment page.
 
+## Non-negotiable owner-visible evidence rule
+
+Every meaningful step or scientific stage must produce something the owner can
+inspect with their own eyes before the work silently moves on. The preferred
+surface is the public E004 page on `joinmultiplayer.ai`; if a safe website
+snapshot is not yet possible, show the evidence in Codex first and publish the
+reviewed snapshot to the site next.
+
+Each visible stage must answer four questions:
+
+1. What changed?
+2. What can the owner inspect: examples, before/after outputs, a diagram, a
+   table, a curve, or a downloadable artifact?
+3. Which metric, failure, or uncertainty did it reveal?
+4. What is the proposed next step?
+
+Small mechanical actions may be grouped into one stage. Model download,
+environment validation, data locking, every distinct training method, merger
+training, architecture selection, and locked evaluation may not be hidden
+inside a later summary. Checkpoint transitions still require explicit owner
+review. Public evidence must remain redacted and must never expose private
+lessons, secrets, tokens, raw personal memory, or unsafe hidden states.
+
 ### Checkpoint 1 — approve the test before training
 
 Show together on one screen:

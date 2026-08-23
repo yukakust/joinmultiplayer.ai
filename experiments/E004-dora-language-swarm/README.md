@@ -22,6 +22,12 @@ No model weights have been downloaded. No dependency has been installed. No
 compatibility distillation, DoRA update, merger training, or evaluation has
 started.
 
+Standing rule: every meaningful step must leave owner-visible evidence. Prefer
+an inspectable snapshot on the public E004 page; otherwise show it in Codex
+first and publish the reviewed version next. Every snapshot states what
+changed, shows the evidence, records the metric or failure, and names the next
+step. No checkpoint advances without owner review.
+
 Files:
 
 - [`CHECKPOINT-1-DRAFT.md`](CHECKPOINT-1-DRAFT.md) — owner-facing decision;
@@ -29,4 +35,3 @@ Files:
 - [`sample-tasks.json`](sample-tasks.json) — deterministic illustrative tasks;
 - [`src/task_world.py`](src/task_world.py) — stdlib-only sample generator;
 - [`tests/test_task_world.py`](tests/test_task_world.py) — chance and integrity checks.
-

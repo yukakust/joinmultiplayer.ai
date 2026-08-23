@@ -2,6 +2,13 @@
 
 Status: `NEEDS OWNER REVIEW · NO TRAINING`
 
+## Owner-visible evidence rule
+
+Every meaningful stage must be shown to the owner, preferably on the public
+E004 page, before the experiment silently advances. Each snapshot must show
+what changed, inspectable evidence, the observed metric or failure, and the
+proposed next step. Private lessons and unsafe raw internals remain private.
+
 ## Recommendation
 
 Use `Qwen/Qwen3-0.6B-Base` at revision
@@ -163,4 +170,3 @@ Approve only these actions:
 
 No locked evaluation and no physical-device training are authorized by this
 checkpoint.
-

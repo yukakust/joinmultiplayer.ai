@@ -167,6 +167,19 @@ E004 = {
             "ru": "Утвердить тест до обучения",
         },
     },
+    "visibility_rule": {
+        "en": (
+            "Every meaningful stage must show owner-inspectable evidence: what changed, "
+            "what can be seen, the metric or failure, and the proposed next step. Prefer "
+            "this public page; use Codex first only when a safe site snapshot is not ready."
+        ),
+        "ru": (
+            "На каждом значимом этапе вы должны своими глазами увидеть: что изменилось, "
+            "доказательство, метрику или ошибку и предлагаемый следующий шаг. В первую "
+            "очередь — на этой странице; в Codex — только если безопасный снимок для "
+            "сайта ещё не готов."
+        ),
+    },
     "pockets": [
         {"id": "E004-I1", "role": "short", "planned_depth": 6, "status": "not_created"},
         {"id": "E004-I2", "role": "medium", "planned_depth": 12, "status": "not_created"},

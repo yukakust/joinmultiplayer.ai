@@ -669,6 +669,8 @@ class SubmissionTests(unittest.TestCase):
             self.assertEqual(experiment["status"], "checkpoint_1_needs_review")
             self.assertEqual(experiment["method"], "DoRA")
             self.assertEqual(experiment["checkpoint"]["number"], 1)
+            self.assertIn("what changed", experiment["visibility_rule"]["en"])
+            self.assertIn("На каждом значимом этапе", experiment["visibility_rule"]["ru"])
             self.assertEqual(len(experiment["pockets"]), 3)
             self.assertTrue(all(item["status"] == "not_created" for item in experiment["pockets"]))
             self.assertEqual(experiment["artifacts"], ["/experiments/E004/checkpoint-1.json"])

@@ -2242,6 +2242,7 @@ const e004Copy = {
     checkpoint: "CHECKPOINT 1 OF 3",
     checkpointCopy: "We are preparing the base-model recommendation, readable tasks, DoRA recipe, chance baseline, and run budget. Training cannot begin before Yuka reviews them.",
     waiting: "WAITING FOR YUKA · NO TRAINING",
+    visibilityRule: "OWNER-VISIBLE EVIDENCE RULE",
     model: "RECOMMENDED BASE",
     hardware: "YUKABOX",
     task: "TASK WORLD",
@@ -2271,6 +2272,7 @@ const e004Copy = {
     checkpoint: "КОНТРОЛЬНАЯ ТОЧКА 1 ИЗ 3",
     checkpointCopy: "Мы готовим рекомендацию базовой модели, понятные задачи, DoRA-рецепт, вероятность угадывания и бюджет запуска. Обучение не начнётся, пока Yuka всё это не проверит.",
     waiting: "ЖДЁМ YUKA · ОБУЧЕНИЯ НЕТ",
+    visibilityRule: "ПРАВИЛО ВИДИМОГО ДОКАЗАТЕЛЬСТВА",
     model: "РЕКОМЕНДУЕМАЯ БАЗА",
     hardware: "YUKABOX",
     task: "МИР ЗАДАЧ",
@@ -2359,6 +2361,10 @@ async function loadExperiment() {
             <p>${e4("checkpointCopy")}</p>
           </div>
           <b>${e4("waiting")}</b>
+        </section>
+        <section class="e004-decision">
+          <span>${e4("visibilityRule")}</span>
+          <p>${escapeHTML(experiment.visibility_rule?.[language] || "")}</p>
         </section>
         <div class="e004-evidence">
           <article>
