@@ -59,6 +59,7 @@ Current files:
 - [`../../site/experiments/E004/result-rag-swarm-v0.1.json`](../../site/experiments/E004/result-rag-swarm-v0.1.json) — A1 result including stale-record failures;
 - [`../../site/experiments/E004/result-neural-memory-attempt-1.json`](../../site/experiments/E004/result-neural-memory-attempt-1.json) — A2 implementation crash before optimizer step 1;
 - [`../../site/experiments/E004/result-neural-memory-attempt-2.json`](../../site/experiments/E004/result-neural-memory-attempt-2.json) — A2 plumbing pass with explicit non-held-out boundary;
+- [`../../site/experiments/E004/result-latent-delta-v0.1.json`](../../site/experiments/E004/result-latent-delta-v0.1.json) — A3 bounded-delta plumbing pass and z0 ablation;
 - [`CHECKPOINT-1-DRAFT.md`](CHECKPOINT-1-DRAFT.md) — owner-facing arena decision;
 - [`DATA-WORLD.md`](DATA-WORLD.md) — human-readable public data contract;
 - [`sample-tasks.json`](sample-tasks.json) — eight public demo books and twelve

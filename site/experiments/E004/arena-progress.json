@@ -1,7 +1,7 @@
 {
   "experiment_id": "E004",
   "protocol_version": "arena-v0.1",
-  "updated_at": "2026-08-23T20:47:50Z",
+  "updated_at": "2026-08-23T20:50:15Z",
   "phase": "public_development",
   "status": "harness_building",
   "protocol_artifact": "/experiments/E004/arena-protocol-v0.1.json",
@@ -14,8 +14,8 @@
   "architectures": [
     {"id": "rag_swarm", "status": "passed_with_limitation", "result": "/experiments/E004/result-rag-swarm-v0.1.json", "metric": "12/12 normal · 0/3 stale detected"},
     {"id": "neural_memory", "status": "passed_plumbing_only", "result": "/experiments/E004/result-neural-memory-attempt-2.json", "metric": "0/64 → 64/64 memory · 12/12 tasks · not held-out"},
-    {"id": "latent_delta", "status": "active", "result": null},
-    {"id": "token_moe", "status": "waiting", "result": null}
+    {"id": "latent_delta", "status": "passed_plumbing_only", "result": "/experiments/E004/result-latent-delta-v0.1.json", "metric": "δ birth=0 · 12/12 · without z₀=0/64"},
+    {"id": "token_moe", "status": "active", "result": null}
   ],
   "failed_runs": [
     {"architecture_id": "neural_memory", "attempt": 1, "result": "/experiments/E004/result-neural-memory-attempt-1.json"}
