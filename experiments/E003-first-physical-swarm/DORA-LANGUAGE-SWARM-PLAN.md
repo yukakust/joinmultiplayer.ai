@@ -1,275 +1,263 @@
-# E004 plan — the smallest useful DoRA language-swarm test
+# E004 plan — Architecture Arena for a growing pocket i swarm
 
-Status: `DRAFT · no model downloaded or trained`
+Status: `CHECKPOINT 1 REBUILDING · NO MODEL DOWNLOADED · NO TRAINING`
 
-## Goal
+## Question
 
-Run one understandable experiment and publish enough evidence on
-`joinmultiplayer.ai` for a person to see what happened.
+> Does accessible knowledge and solution quality grow as 1, 2, 4, and 8
+> independent pocket i join one temporary distributed neural network, while a
+> new pocket i can join without retraining the central system?
 
-Question:
+The swarm is allowed to use more total private data, parameters, and compute as
+it grows. That scaling advantage is the hypothesis, not a confound to remove.
+Equal-compute, equal-byte, and equal-latency comparisons remain diagnostic
+controls: they explain the gain but are not the project's final objective.
 
-> Can three language pocket i learn different small skills in their own DoRA
-> weights and solve new tasks together that the base model, any one pocket i,
-> and every pair cannot solve?
+Passing E004 would support only a synthetic mechanism on one host. It would not
+prove useful personal AI, internet latency, privacy, security, or billion-device
+scaling.
 
-Passing this experiment supports only this small mechanism. It does not prove a
-billion-device swarm, privacy, or superiority over every RAG system.
+## One parallel pass
 
-## What we are building
-
-Use one small pretrained language model for language and create three personal
-paths from the same lineage:
-
-```text
-shared prompt -> shared representation z0
-                     |-> pocket i A -> delta A
-                     |-> pocket i B -> delta B
-                     |-> pocket i C -> delta C
-
-answer = shared final path(z0 + merge(delta A, delta B, delta C))
-```
-
-Each personal path learns with **DoRA**, not LoRA:
+E004 excludes repeated rounds of agent conversation:
 
 ```text
-base weight:       W0 = m0 * V0 / ||V0||
-personal weight:   Wi = mi * (V0 + Bi Ai) / ||V0 + Bi Ai||
-train locally:     mi, Ai, Bi
+question -> select relevant pocket i
+         -> all selected i compute in parallel
+         -> each returns one complete contribution
+         -> source i fuses the completed contributions
+         -> answer
 ```
 
-The base, neural interface, and other pockets remain frozen. A fresh pocket
-must initially behave like its matching base and return a delta near zero.
+For token-level MoE, selected experts fan out in parallel once per generated
+token. Autoregressive tokens remain sequential, but there are no additional
+whole-answer debate rounds.
 
-Mutable facts still belong in local inspectable RAG. This experiment uses DoRA
-for a stable rule or procedure, not as a database.
+## The two questions inside the arena
 
-## Only three visible checkpoints
+### A. How does one pocket i keep unique knowledge?
 
-There is no separate approval backend and no eight-stage ceremony. Work stops
-three times and the evidence is shown to the owner in Codex and on the public
-experiment page.
+Every method receives the same private book:
+
+1. **Local RAG** — exact, inspectable, mutable records; no weight training.
+2. **DoRA** — parameter-efficient supervised fine-tuning of personal weights.
+3. **Partial/full fine-tuning** — a capacity control for DoRA, promoted only if
+   the hardware smoke is practical.
+4. **Trainable neural memory** — sparse learned key/value capacity.
+5. **Hybrid** — DoRA for procedures plus neural memory and RAG for exact facts.
+
+The shared Qwen lineage supplies language. Personal training and memory create
+the differences. DoRA is a candidate, not the assumed winner.
+
+### B. How do several pocket i become one temporary network?
+
+The arena compares five single-pass interfaces:
+
+1. **RAG swarm** — pockets return evidence records; the source synthesizes.
+2. **Memory-token swarm** — pockets return a fixed number of learned memory
+   tokens; the source cross-attends to them once.
+3. **Latent-delta towers** — pockets return bounded residuals relative to the
+   shared base representation.
+4. **Personal token-MoE** — remote personal FFN experts are selected and fused
+   for each token.
+5. **DoRA adapter assembly** — selected personal adapters temporarily form a
+   larger local sparse model at the source.
+
+A hybrid of the strongest storage and composition methods is evaluated only
+after the component tournament. Recurrent multi-round deliberation is excluded.
+
+## The synthetic population
+
+A deterministic generator creates disjoint fictional books:
+
+- `S01..S16`: surrogate pocket i used to train routers and mergers;
+- `I01..I08`: final pocket i never seen during central training;
+- `I09`: a new pocket i attached only after the central system is frozen;
+- a separate public seed: readable examples that never enter evaluation.
+
+Each book contains:
+
+- 256 unique exact facts;
+- 256 examples of one stable local procedure;
+- 64 updates or deletions that supersede older facts;
+- paraphrased questions and deterministic answers.
+
+Splits are disjoint by entities and rules, not merely by prompt wording. Test
+questions use unseen combinations. The central router/merger never receives the
+final pockets' books, labels, retrieval indexes, or personal weights.
+
+The task families are:
+
+1. retrieve knowledge held by one pocket;
+2. compose knowledge held by two or three pockets;
+3. apply a learned procedure to a new example;
+4. honor an update or deletion instead of repeating stale knowledge;
+5. abstain when the required pocket is absent.
+
+Answers use large structured spaces. Binary answers are forbidden as the main
+metric.
+
+## Shared base and controls
+
+The initial shared lineage remains `Qwen/Qwen3-0.6B-Base` at the already pinned
+revision. The first arena keeps all pocket models at the full compatible depth;
+`6/12/24` elastic branches are postponed because depth is not the present
+question.
+
+Required controls:
+
+- frozen Qwen 0.6B alone;
+- best single pocket and every relevant pair;
+- text and logit ensembles;
+- one central 0.6B trained on the union of allowed lessons;
+- Qwen 1.7B as a larger dense reference when the smoke confirms the run fits;
+- exact relevant-data RAG;
+- missing, irrelevant, duplicate, stale, and malformed pocket contributions;
+- swarm sizes `N = 1, 2, 4, 8`, followed by unseen `I09`.
+
+The 1.7B reference is a ruler, not a pass condition. E004 asks whether accessible
+unique capacity grows with owners, not whether three 0.6B models literally
+become one dense 1.8B checkpoint.
+
+## Training boundary
+
+No model is trained before Checkpoint 1 approval.
+
+After approval:
+
+1. pin the environment, model files, tokenizer, code, and checksums;
+2. benchmark one inference and one gradient step on CPU and any verified AMD
+   path;
+3. run a two-surrogate smoke for each storage method;
+4. publish before/after evidence and stop for owner review;
+5. train surrogate pockets and the candidate routers/mergers;
+6. freeze central components and all thresholds;
+7. create/train final `I01..I08` independently;
+8. run the locked scaling evaluation once on multiple frozen seeds;
+9. attach `I09` without central retraining and evaluate again.
+
+RAG indexing is not weight training. DoRA, partial/full fine-tuning, neural
+memory, routers, mergers, and MoE experts all use real gradient updates and must
+publish declared trainable parameter groups plus frozen-weight hash checks.
+
+## Pre-registered success conditions
+
+At least one architecture must satisfy all of these on locked seeds:
+
+- every trained pocket reaches at least 90% on its local held-out procedure;
+- correct accessible unique items at `N=8` reach at least 75% of ideal linear
+  growth from `N=1`;
+- full-swarm exact match on multi-pocket tasks beats the strongest single or
+  relevant pair by at least 20 percentage points;
+- adding irrelevant or duplicate pockets changes exact-match accuracy by no
+  more than 5 percentage points;
+- removing a required pocket causes at least a 15-point loss or a correct
+  abstention rather than a fabricated complete answer;
+- unseen `I09` reaches within 10 points of comparable existing pockets without
+  central retraining;
+- private final books cannot be reconstructed from public artifacts or appear
+  in central training inputs;
+- failures, exact-RAG wins, and negative architecture results remain visible.
+
+Fact retrieval and procedural transfer are reported separately. If learned
+weights do not improve procedural tasks beyond exact RAG, the result does not
+justify neural personalization.
 
 ## Non-negotiable owner-visible evidence rule
 
-Every meaningful step or scientific stage must produce something the owner can
-inspect with their own eyes before the work silently moves on. The preferred
-surface is the public E004 page on `joinmultiplayer.ai`; if a safe website
-snapshot is not yet possible, show the evidence in Codex first and publish the
-reviewed snapshot to the site next.
+Every meaningful step produces something the owner can inspect before work
+silently moves on. Prefer the public E004 page on `joinmultiplayer.ai`; if a safe
+site snapshot is not ready, show it in Codex first and publish the reviewed
+snapshot next.
 
-Each visible stage must answer four questions:
+Every visible stage answers:
 
 1. What changed?
-2. What can the owner inspect: examples, before/after outputs, a diagram, a
-   table, a curve, or a downloadable artifact?
-3. Which metric, failure, or uncertainty did it reveal?
+2. What can be inspected: examples, before/after outputs, diagram, table,
+   curve, or downloadable artifact?
+3. Which metric, failure, or uncertainty appeared?
 4. What is the proposed next step?
 
-Small mechanical actions may be grouped into one stage. Model download,
-environment validation, data locking, every distinct training method, merger
-training, architecture selection, and locked evaluation may not be hidden
-inside a later summary. Checkpoint transitions still require explicit owner
-review. Public evidence must remain redacted and must never expose private
-lessons, secrets, tokens, raw personal memory, or unsafe hidden states.
+Small mechanical actions may be grouped. Environment validation, data locking,
+every distinct training method, merger training, architecture selection, and
+locked evaluation may not be hidden inside a later summary. Public evidence is
+redacted and never exposes private lessons, credentials, tokens, raw personal
+memory, or unsafe hidden states.
 
-### Checkpoint 1 — approve the test before training
+## Three owner checkpoints
 
-Show together on one screen:
+### Checkpoint 1 — approve the arena before training
 
-- the recommended base model and exact revision;
-- whether yukabox can run it;
-- three example private skills, one per pocket;
-- example combined questions and their human-readable solutions;
-- complete answer space and blind-guess probability;
-- DoRA target modules, rank, trainable parameter count, and expected run time;
-- the few numerical criteria below.
+The site shows the hypotheses, five architectures, data-world examples,
+controls, success thresholds, hardware window, and explicit non-claims. The
+owner may change or approve the design. Nothing is downloaded or trained.
 
-The owner can change the task or say “start.” No model training happens before
-this decision. A read-only hardware check and model download/checksum are setup,
-not separate checkpoints.
+### Checkpoint 2 — review real learning smokes
 
-### Checkpoint 2 — prove that the three pockets learned
+For each storage method the site shows lessons, before/after outputs, local
+held-out score, loss curve, changed parameter groups, base-hash proof, memory
+size, elapsed time, and failures. Full arena training waits for owner approval.
 
-After three isolated DoRA training runs, show for each pocket:
+### Checkpoint 3 — inspect the locked result
 
-- exactly which synthetic lesson it received;
-- before/after answers on local held-out examples;
-- held-out score;
-- changed parameter groups (`m`, `A`, `B` only);
-- magnitude change, direction-update norm, and final bounded-delta norm;
-- proof that shared weights and the neural ABI did not change;
-- one rollback example.
+The site shows scaling curves, the complete comparison table, `I09` plug-in
+test, limitations, and a microscope for successful and failed tasks. The owner
+records `supported in this task world`, `not supported`, or `inconclusive`.
 
-The owner sees the evidence before merger evaluation starts. If one pocket did
-not learn or broke compatibility, stop and report it.
+## Yukabox execution window
 
-### Checkpoint 3 — inspect and accept the result
+Heavy experiment jobs may run only from `08:00` to `23:45` in the agreed
+Central European local timezone. At `23:45` they checkpoint; by `23:55` they
+stop. No E004 training runs between `00:00` and `08:00`.
 
-Show individual tasks and the complete result table:
+Initial safe ceiling:
 
-- base only;
-- each trained pocket alone;
-- every pair;
-- all three together;
-- all three without `z0`;
-- wrong or missing pocket;
-- exact relevant-data RAG.
+- at most 22 of 24 CPU threads;
+- at most 52 of 59 GiB RAM;
+- accelerator use only after a measured compatible smoke;
+- resumable checkpoints for any job longer than one window.
 
-The owner can open a successful task and a failed task and trace:
+Before scheduling, record whether the intended clock is `Europe/Berlin`
+(including daylight saving) or fixed `CET` (`UTC+1`).
 
-```text
-question -> contribution A/B/C -> merge -> token probabilities -> answer
-```
+## Public E004 page
 
-Then record one conclusion: supported in this task world, not supported, or
-inconclusive.
+`/experiment/?id=E004` must show:
 
-## The test data
+1. question, boundary, current checkpoint, and visible-evidence rule;
+2. eight pocket slots plus the unseen plug-in slot;
+3. five architecture cards and their honest status;
+4. public example books and task derivations;
+5. success thresholds and server schedule;
+6. after training: learning cards, scale curves, task microscope, failures,
+   hashes, JSON/JSONL artifacts, and reproduction commands.
 
-Create three fictional micro-domains. Each pocket receives different symbols
-and a small transformation or procedure. A locked question requires all three
-procedures plus ordinary language competence from `z0`.
+Static reviewed snapshots are sufficient. E004 does not require live loss
+streaming, user accounts, or on-site approval buttons.
 
-Requirements:
+## Immediate execution order
 
-- the answer is not a bit and cannot be guessed with meaningful probability;
-- a single pocket or pair lacks information required for the whole answer;
-- test questions use unseen combinations;
-- the central merger never receives the pockets' locked lessons or answers;
-- every task has a deterministic generator and readable derivation;
-- one subset tests fact composition and another tests a learned procedure.
-
-If exact RAG explains the entire gain, report that plainly.
-
-## Minimal training sequence
-
-### 1. Choose and prepare the base
-
-- Pick one small, permissively licensed pretrained model.
-- Pin revision, tokenizer, license, and checksum.
-- Verify ordinary generation on yukabox.
-- Produce compatible short, medium, and deep paths from the same lineage. The
-  exact depths may be `6/12/24` only if the chosen model and hardware support
-  them; otherwise record honest smaller depths.
-- Freeze the shared path and the versioned neural ABI.
-- Verify that fresh personal deltas are near zero.
-
-This compatibility preparation may use distillation. It is not the personal
-experiment result.
-
-### 2. Train three synthetic pocket i with DoRA
-
-- Give each isolated process only its own synthetic lesson.
-- Use the same DoRA rank and target-module classes initially so the comparison
-  is understandable.
-- Update only declared `m`, `A`, and `B` parameters.
-- Keep a local held-out set and a rollback checkpoint.
-- Record before/after behavior and general-language regression.
-
-### 3. Train the merger
-
-- Freeze the three personal pockets.
-- Train the merger only on separate calibration tasks.
-- Randomly omit and reorder pockets during calibration.
-- Reject incomplete, non-finite, or over-budget deltas.
-
-### 4. Run the locked evaluation once
-
-- Freeze code, config, data split, model hashes, and seeds.
-- Run all conditions listed in Checkpoint 3.
-- Do not change thresholds after results appear.
-- Preserve negative and failed runs.
-
-## Minimal success criteria
-
-Choose exact numbers at Checkpoint 1. At minimum:
-
-- fresh pocket deltas are near zero;
-- only DoRA personal parameters change;
-- every pocket learns its local held-out procedure without unacceptable common
-  language regression;
-- all three together beat base, every single pocket, and every pair on locked
-  tasks;
-- removing any required pocket causes a measurable loss;
-- removing `z0` hurts tasks requiring shared language competence;
-- invalid or partial deltas contribute nothing;
-- the result is reproducible from the pinned config and public-safe artifacts.
-
-## The one required UI
-
-Extend the existing experiment page:
-
-```text
-/experiment/?id=E004
-```
-
-It needs only five sections:
-
-1. **Question and boundary** — hypothesis, current status, and what the test
-   cannot prove.
-2. **Three pocket i** — depth, DoRA configuration, fresh/trained state, local
-   held-out score, and delta summaries.
-3. **Checkpoint** — what is waiting for owner review. The actual approval can
-   remain in Codex for the MVP; the site only records the decision.
-4. **Microscope** — choose one task and toggle base, singles, pairs, swarm,
-   no-`z0`, missing pocket, and RAG.
-5. **Result and files** — result table plus protocol, frozen config, summary,
-   task records, hashes, limitations, and reproduction command.
-
-The page reads versioned public-safe JSON artifacts. We do not need WebSockets,
-live loss charts, a new approval API, device temperature, raw hidden states, or
-private training examples for the first test. During training the page may
-simply say `running`; after a checkpoint it receives a reviewed snapshot.
-
-## Repository deliverables
-
-```text
-experiments/E004-dora-language-swarm/
-  README.md
-  PROTOCOL.md
-  MODEL_CARD.md
-  DATA_CARD.md
-  config.json
-  src/
-  tests/
-  artifacts/<run-id>/
-    checkpoint.json
-    summary.json
-    tasks.jsonl
-    microscope.json
-```
-
-The existing filtered Codex journal records progress. Static experiment
-artifacts carry the scientific evidence. We do not build a second journal.
-
-## Execution order
-
-1. Build the empty E004 page and artifact schema.
-2. Inspect yukabox, recommend one base, and generate sample tasks.
-3. Show Checkpoint 1 and wait.
-4. Prepare the compatible base paths and train the three DoRA pockets.
-5. Publish the reviewed learning snapshot; show Checkpoint 2 and wait.
-6. Train the merger and run the locked controls once.
-7. Publish the microscope and table; show Checkpoint 3 and record the decision.
-8. Only after this result decide whether to move the paths onto phone, Mac, and
-   yukabox as a separate physical experiment.
+1. Rewrite the E004 protocol and public shell as Architecture Arena.
+2. Implement and test the public deterministic data-world generator.
+3. Publish Checkpoint 1 and wait for owner review.
+4. Only after explicit approval: prepare the ML environment and run smokes.
+5. Stop again at Checkpoint 2 before full training.
+6. Run development, freeze, then locked evaluation.
+7. Only after Checkpoint 3 choose a winner for phone, Mac, and yukabox.
 
 ## Explicitly postponed
 
-- training on the three physical devices;
-- per-token WAN streaming;
-- automatic expert routing;
-- user accounts and on-site approval buttons;
-- live training telemetry;
-- decorative growth/face animations;
 - personal human data;
-- continuous learning and model updates;
-- billion-device scaling and Byzantine security.
+- training on the three physical devices;
+- production WAN activation streaming;
+- automatic global expert routing;
+- account systems;
+- continuous autonomous learning;
+- billion-device security and Byzantine robustness.
 
-These are important later. None is needed to answer the first question.
+## Method references
 
-## Method reference
-
-DoRA follows *DoRA: Weight-Decomposed Low-Rank Adaptation* (Liu et al., ICML
-2024): <https://arxiv.org/abs/2402.09353>.
+- DoRA: <https://arxiv.org/abs/2402.09353>
+- CALM model composition: <https://arxiv.org/abs/2401.02412>
+- Branch-Train-MiX: <https://arxiv.org/abs/2403.07816>
+- Memory Layers at Scale: <https://arxiv.org/abs/2412.09764>
