@@ -1,0 +1,29 @@
+{
+  "kind": "two_pocket_dora_development_smoke",
+  "attempt": 1,
+  "status": "failed",
+  "recorded_at": "2026-08-23T20:27:00Z",
+  "model_id": "Qwen/Qwen3-0.6B-Base",
+  "method": "DoRA r=4 on q/k/v/o projections",
+  "elapsed_seconds": 101.7,
+  "steps_per_pocket": 48,
+  "trainable_parameters_per_pocket": 1290240,
+  "base_accuracy": "0/6",
+  "own_memory_accuracy": {"I01": "1/3", "I02": "2/3"},
+  "cross_memory_accuracy": {"I01_on_I02": "0/3", "I02_on_I01": "0/3"},
+  "combined": {
+    "expected": "VEKU | TAVEN",
+    "actual": "VE1 | TAVEN",
+    "correct": false
+  },
+  "weight_change_evidence": {
+    "I01_before": "0248799df28a6a3550828989f0021c8aa5e813c9b36048b8642b29b3a82f9014",
+    "I01_after": "876477449013cfc6c99ebfbb1fa11d43ffe1754651f1d19883d1a16d0ce521dc",
+    "I02_before": "426951fbbb3ae07faa48e081974beaccfc9243825ed7be9257a2c6023a272a0d",
+    "I02_after": "031f96ab5db699045bc001929eb418ed10972f8652557341b19a303fa67be4f2"
+  },
+  "diagnosis": {
+    "en": "The gate did not pass. Random single-example sampling exposed memories unevenly, and every nonce answer occupied three tokens. Attempt 2 changes the test protocol, not the success threshold: balanced exposure and six distinct single-token codes.",
+    "ru": "Gate не пройден. При случайном выборе одиночных примеров знания повторялись неравномерно, а каждый искусственный ответ занимал три токена. Во второй попытке меняется протокол теста, а не порог успеха: равномерный показ и шесть разных однотокенных кодов."
+  }
+}

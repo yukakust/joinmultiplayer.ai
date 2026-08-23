@@ -1,7 +1,7 @@
 {
   "experiment_id": "E004",
   "kind": "development_progress",
-  "updated_at": "2026-08-23T20:23:00Z",
+  "updated_at": "2026-08-23T20:27:00Z",
   "claim_status": "not_a_result",
   "current_gate": 4,
   "gates": [
@@ -28,7 +28,8 @@
       "number": 4,
       "status": "active",
       "title": {"en": "Two-pocket smoke", "ru": "Smoke двух pocket i"},
-      "evidence": {"en": "No optimizer step yet.", "ru": "Ни одного шага оптимизатора ещё не было."}
+      "evidence": {"en": "Attempt 1 failed honestly: real DoRA weights changed, but I01 recalled 1/3 and I02 2/3; combined answer was wrong. A corrected balanced attempt is next.", "ru": "Первая попытка честно провалилась: настоящие веса DoRA изменились, но I01 вспомнил 1/3, I02 — 2/3; общий ответ неверен. Следом — исправленная равномерная попытка."},
+      "artifact": "/experiments/E004/two-pocket-smoke-attempt-1.json"
     },
     {
       "number": 5,
