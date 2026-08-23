@@ -45,7 +45,8 @@ evaluation exists yet. Checkpoint 1 is a design artifact, not a result.
 Current files:
 
 - [`CHECKPOINT-1-DRAFT.md`](CHECKPOINT-1-DRAFT.md) — owner-facing arena decision;
-- [`sample-tasks.json`](sample-tasks.json) — legacy three-pocket illustration,
-  to be replaced by the arena data world;
-- [`src/task_world.py`](src/task_world.py) — legacy generator, to be replaced;
+- [`DATA-WORLD.md`](DATA-WORLD.md) — human-readable public data contract;
+- [`sample-tasks.json`](sample-tasks.json) — eight public demo books and twelve
+  mechanically derived tasks;
+- [`src/task_world.py`](src/task_world.py) — deterministic public generator;
 - [`tests/test_task_world.py`](tests/test_task_world.py) — integrity tests.
