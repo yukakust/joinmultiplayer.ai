@@ -2275,6 +2275,11 @@ const e004Copy = {
     deletedRecord: "deleted record",
     architectureOutput: "WHAT THE ARCHITECTURE RETURNED",
     openEvidence: "OPEN MICROSCOPE JSON",
+    answersHere: "QUESTIONS AND ANSWERS ARE HERE →",
+    answersHereCopy: "A separate page with all 12 questions, every participating pocket i, and every recorded architecture answer.",
+    answersPageTitle: "All E004 questions and answers",
+    answersPageIntro: "Nothing else: 12 public-development questions, what every pocket i received, and the recorded outputs of all four connection architectures.",
+    backToExperiment: "BACK TO E004",
     result: "RESULT AND FILES",
     resultCopy: "A development pipeline result exists below, together with its failed first attempt. It is not a result for the main swarm hypothesis.",
     devPassed: "development smoke passed · not locked",
@@ -2341,6 +2346,11 @@ const e004Copy = {
     deletedRecord: "запись удалена",
     architectureOutput: "ЧТО ВЕРНУЛ СПОСОБ СОЕДИНЕНИЯ",
     openEvidence: "ОТКРЫТЬ JSON МИКРОСКОПА",
+    answersHere: "ВОПРОСЫ И ОТВЕТЫ ТУТ →",
+    answersHereCopy: "Отдельная страница: все 12 вопросов, каждый участвующий pocket i и все сохранённые ответы архитектур.",
+    answersPageTitle: "Все вопросы и ответы E004",
+    answersPageIntro: "Ничего лишнего: 12 открытых development-вопросов, вход каждого pocket i и сохранённые ответы всех четырёх способов соединения.",
+    backToExperiment: "ВЕРНУТЬСЯ К E004",
     result: "РЕЗУЛЬТАТ И ФАЙЛЫ",
     resultCopy: "Ниже есть результат development-трубопровода и первая неудачная попытка. Это не результат главной гипотезы swarm.",
     devPassed: "development-smoke пройден · не locked",
@@ -2382,6 +2392,67 @@ function experimentShell(experimentId = "E004") {
       <p class="contribution-intro">${isE004 ? e4("intro") : l("experimentIntro")}</p>
       <div class="experiment-loading">${c("loading")}</div>
     </section>`;
+}
+
+function e004AnswersShell() {
+  return `
+    <section class="flow-shell e004-answers-page">
+      <div class="flow-step">E004 · ${e4("microscope")}</div>
+      <h1>${e4("answersPageTitle")}</h1>
+      <p class="contribution-intro">${e4("answersPageIntro")}</p>
+      <div class="experiment-loading">${c("loading")}</div>
+    </section>`;
+}
+
+async function loadE004Answers() {
+  const target = document.querySelector(".e004-answers-page");
+  if (!target) return;
+  try {
+    const [worldResponse, microscopeResponse] = await Promise.all([
+      fetch("/experiments/E004/sample-tasks.json", { cache: "no-store" }),
+      fetch("/experiments/E004/microscope-public-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!worldResponse.ok || !microscopeResponse.ok) throw new Error("E004 answers unavailable");
+    const world = await worldResponse.json();
+    const microscope = await microscopeResponse.json();
+    const tasksById = new Map((world.tasks || []).map(task => [task.id, task]));
+    const booksById = new Map((world.books || []).map(book => [book.pocket_id, book]));
+    const taskMarkup = (record, index) => {
+      const task = tasksById.get(record.id) || {};
+      const inputs = (task.derivation?.contributions || []).map(requested => {
+        const book = booksById.get(requested.pocket_id) || {};
+        const fact = (book.preview_facts || []).find(item => item.key === requested.fact_key) || {};
+        const procedure = book.procedure || {};
+        return `<section>
+          <span>${escapeHTML(requested.pocket_id)} · ${escapeHTML(requested.fact_key)} · v${escapeHTML(requested.fact_version)}</span>
+          <code>${fact.status === "deleted" ? e4("deletedRecord") : `${e4("currentValue")} = ${escapeHTML(fact.current_value)}`}</code>
+          <code>${e4("localRule")} · (${escapeHTML(procedure.multiplier)} × value + ${escapeHTML(procedure.bias)}) mod ${escapeHTML(procedure.modulus)}</code>
+          <strong>${e4("localResult")} · ${requested.result === null ? "ABSTAIN" : String(requested.result).padStart(3, "0")}</strong>
+        </section>`;
+      }).join("");
+      return `<article class="e004-answer-record" id="${escapeHTML(record.id.toLowerCase())}">
+        <div class="e004-answer-number">${String(index + 1).padStart(2, "0")} / ${String(microscope.tasks.length).padStart(2, "0")}</div>
+        <span>${escapeHTML(record.id)} · ${escapeHTML(task.type || "")} · ${e4("requiredPockets")} ${escapeHTML((task.required_pockets || []).join(" + "))}</span>
+        <h2>${escapeHTML(e4Localized(task.prompt))}</h2>
+        <div class="e004-microscope-label">${e4("pocketInputs")}</div>
+        <div class="e004-pocket-inputs">${inputs}</div>
+        <div class="e004-expected"><span>${e4("expectedAnswer")}</span><code>${escapeHTML(record.expected)}</code></div>
+        <div class="e004-microscope-label">${e4("architectureOutput")}</div>
+        <div class="e004-answer-grid">${Object.entries(record.answers || {}).map(([architectureId, actual]) => {
+          const correct = actual === record.expected;
+          const name = e4Localized(microscope.architecture_names?.[architectureId]) || architectureId;
+          return `<section class="${correct ? "is-correct" : "is-wrong"}"><span>${escapeHTML(name)}</span><b>${correct ? e4("correctAnswer") : e4("wrongAnswer")}</b><div class="e004-segments">${actual.split(" | ").map(segment => `<code>${escapeHTML(segment)}</code>`).join("")}</div></section>`;
+        }).join("")}</div>
+      </article>`;
+    };
+    target.querySelector(".experiment-loading").outerHTML = `
+      <a class="button secondary" href="/experiment/?id=E004">${e4("backToExperiment")}</a>
+      <p class="control-warning">${escapeHTML(e4Localized(microscope.claim_boundary))}</p>
+      <div class="e004-answer-records">${(microscope.tasks || []).map(taskMarkup).join("")}</div>
+      <div class="actions"><a class="quiet-link" href="/experiments/E004/microscope-public-v0.1.json">${e4("openEvidence")} ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
 }
 
 function experimentRunCard(run) {
@@ -2487,7 +2558,8 @@ async function loadExperiment() {
           <span>${e4("question")}</span>
           <p>${escapeHTML(experiment.question?.[language] || "")}</p>
         </section>
-        <div class="actions experiment-actions"><a class="button" href="#task-microscope">${e4("microscope")}</a><a class="button secondary" href="#architectures">${e4("architectures")}</a><a class="button secondary" href="#local-learning">${e4("localLearning")}</a><a class="button secondary" href="#data-world">${e4("dataWorld")}</a></div>
+        <a class="e004-answers-banner" href="/experiment/answers/"><strong>${e4("answersHere")}</strong><span>${e4("answersHereCopy")}</span></a>
+        <div class="actions experiment-actions"><a class="button" href="/experiment/answers/">${e4("answersHere")}</a><a class="button secondary" href="#architectures">${e4("architectures")}</a><a class="button secondary" href="#local-learning">${e4("localLearning")}</a><a class="button secondary" href="#data-world">${e4("dataWorld")}</a></div>
         <section class="e004-section" id="architectures">
           <div class="flow-step">${e4("architectures")}</div>
           <div class="e004-architectures">${architectures.map((architecture, index) => `
@@ -3080,6 +3152,10 @@ function render() {
     document.title = `${experimentId} — i`;
     app.innerHTML = withLanguage(experimentShell(experimentId));
     loadExperiment();
+  } else if (path === "experiment/answers") {
+    document.title = `${e4("answersPageTitle")} — i`;
+    app.innerHTML = withLanguage(e004AnswersShell());
+    loadE004Answers();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
