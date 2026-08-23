@@ -482,28 +482,29 @@ button:disabled {
   padding: clamp(1.25rem, 3vw, 2rem);
 }
 
-.e004-microscope-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 1.5rem 0;
+.e004-microscope-list {
+  border-top: 1px solid var(--line);
+  margin: 2rem 0;
 }
 
-.e004-microscope-tabs button {
-  background: transparent;
-  border: 1px solid var(--line);
-  color: var(--muted);
+.e004-microscope-list details {
+  border-bottom: 1px solid var(--line);
+}
+
+.e004-microscope-list summary {
+  align-items: start;
   cursor: pointer;
-  font: inherit;
-  min-height: 2.5rem;
-  min-width: 2.8rem;
-  padding: 0.45rem 0.65rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 7rem 1fr;
+  line-height: 1.45;
+  padding: 1.2rem 0;
 }
 
-.e004-microscope-tabs button:hover,
-.e004-microscope-tabs button.is-active {
-  background: var(--paper);
-  color: var(--ink);
+.e004-microscope-list summary b {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
 }
 
 .e004-microscope-task > span,
@@ -516,12 +517,44 @@ button:disabled {
   letter-spacing: 0.08em;
 }
 
-.e004-microscope-task h2 {
+.e004-microscope-task h3 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(1.35rem, 3vw, 2.4rem);
   line-height: 1.15;
   margin: 0.9rem 0;
   max-width: 58rem;
+}
+
+.e004-microscope-task {
+  padding: 1rem 0 2.5rem;
+}
+
+.e004-microscope-label {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 2rem 0 0.8rem;
+}
+
+.e004-pocket-inputs {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.e004-pocket-inputs section {
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem;
+}
+
+.e004-pocket-inputs span,
+.e004-pocket-inputs code,
+.e004-pocket-inputs strong {
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
 }
 
 .e004-microscope-task > small {
@@ -562,6 +595,25 @@ button:disabled {
   margin-top: 0.8rem;
 }
 
+.e004-answer-grid section p {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.e004-segments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+}
+
+.e004-segments code {
+  border: 1px solid var(--line);
+  margin: 0;
+  padding: 0.35rem 0.5rem;
+}
+
 .e004-answer-grid section.is-wrong {
   border-color: var(--ember);
 }
@@ -571,12 +623,13 @@ button:disabled {
 }
 
 @media (max-width: 620px) {
-  .e004-answer-grid {
+  .e004-answer-grid,
+  .e004-pocket-inputs {
     grid-template-columns: 1fr;
   }
 
-  .e004-microscope-tabs button {
-    flex: 1 0 3rem;
+  .e004-microscope-list summary {
+    grid-template-columns: 1fr;
   }
 }
 

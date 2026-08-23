@@ -2263,11 +2263,17 @@ const e004Copy = {
     scheduleCopy: "Heavy jobs: 08:00–23:45. Checkpoint at 23:45, hard stop at 23:55, no training 00:00–08:00. Timezone still needs one owner confirmation.",
     decision: "DECISION REQUESTED",
     microscope: "QUESTION → FOUR ANSWERS",
-    microscopeCopy: "Choose a public task. Read the question, the expected answer, and what each architecture actually returned — including failures.",
+    microscopeCopy: "Four means four connection architectures, not four pocket i. Open any of the 12 tasks to see every participating pocket's input and local result, followed by the final answer from every architecture — including failures.",
     expectedAnswer: "EXPECTED ANSWER",
     correctAnswer: "CORRECT",
     wrongAnswer: "WRONG",
     requiredPockets: "needed pocket i",
+    pocketInputs: "WHAT EACH POCKET i RECEIVED",
+    currentValue: "current value",
+    localRule: "local rule",
+    localResult: "expected local result",
+    deletedRecord: "deleted record",
+    architectureOutput: "WHAT THE ARCHITECTURE RETURNED",
     openEvidence: "OPEN MICROSCOPE JSON",
     result: "RESULT AND FILES",
     resultCopy: "A development pipeline result exists below, together with its failed first attempt. It is not a result for the main swarm hypothesis.",
@@ -2323,11 +2329,17 @@ const e004Copy = {
     scheduleCopy: "Тяжёлые задачи: 08:00–23:45. Checkpoint в 23:45, полная остановка в 23:55, с 00:00 до 08:00 обучения нет. Часовой пояс нужно один раз подтвердить.",
     decision: "КАКОЕ РЕШЕНИЕ НУЖНО",
     microscope: "ВОПРОС → ЧЕТЫРЕ ОТВЕТА",
-    microscopeCopy: "Выберите открытую задачу. Ниже видны сам вопрос, правильный ответ и то, что реально вернула каждая архитектура — включая ошибки.",
+    microscopeCopy: "Четыре — это четыре способа соединения, а не четыре pocket i. Откройте любую из 12 задач: внутри показаны вход и локальный результат каждого участвующего pocket i, а затем итог каждого способа соединения — включая ошибки.",
     expectedAnswer: "ПРАВИЛЬНЫЙ ОТВЕТ",
     correctAnswer: "ВЕРНО",
     wrongAnswer: "НЕВЕРНО",
     requiredPockets: "нужные pocket i",
+    pocketInputs: "ЧТО ПОЛУЧИЛ КАЖДЫЙ POCKET I",
+    currentValue: "текущее значение",
+    localRule: "личное правило",
+    localResult: "ожидаемый локальный результат",
+    deletedRecord: "запись удалена",
+    architectureOutput: "ЧТО ВЕРНУЛ СПОСОБ СОЕДИНЕНИЯ",
     openEvidence: "ОТКРЫТЬ JSON МИКРОСКОПА",
     result: "РЕЗУЛЬТАТ И ФАЙЛЫ",
     resultCopy: "Ниже есть результат development-трубопровода и первая неудачная попытка. Это не результат главной гипотезы swarm.",
@@ -2427,6 +2439,7 @@ async function loadExperiment() {
         if (microscopeResponse.ok) arenaMicroscope = await microscopeResponse.json();
       }
       const architectures = checkpoint.architecture_candidates || [];
+      const architecturesById = new Map(architectures.map(architecture => [architecture.id, architecture]));
       const arenaArchitecture = new Map((arenaProgress.architectures || []).map(item => [item.id, item]));
       const localLearning = checkpoint.local_learning_candidates || [];
       const population = checkpoint.population || {};
@@ -2436,17 +2449,34 @@ async function loadExperiment() {
         .map(type => (dataWorld.tasks || []).find(task => task.type === type))
         .filter(Boolean);
       const tasksById = new Map((dataWorld.tasks || []).map(task => [task.id, task]));
+      const booksById = new Map(books.map(book => [book.pocket_id, book]));
       const microscopeTask = record => {
         const task = tasksById.get(record.id) || {};
+        const inputs = (task.derivation?.contributions || []).map(requested => {
+          const book = booksById.get(requested.pocket_id) || {};
+          const fact = (book.preview_facts || []).find(item => item.key === requested.fact_key) || {};
+          const procedure = book.procedure || {};
+          return `<section>
+            <span>${escapeHTML(requested.pocket_id)} · ${escapeHTML(requested.fact_key)} · v${escapeHTML(requested.fact_version)}</span>
+            <code>${fact.status === "deleted" ? e4("deletedRecord") : `${e4("currentValue")} = ${escapeHTML(fact.current_value)}`}</code>
+            <code>${e4("localRule")} · (${escapeHTML(procedure.multiplier)} × value + ${escapeHTML(procedure.bias)}) mod ${escapeHTML(procedure.modulus)}</code>
+            <strong>${e4("localResult")} · ${requested.result === null ? "ABSTAIN" : String(requested.result).padStart(3, "0")}</strong>
+          </section>`;
+        }).join("");
         return `<article class="e004-microscope-task">
-          <span>${escapeHTML(record.id)} · ${escapeHTML(task.type || "")}</span>
-          <h2>${escapeHTML(e4Localized(task.prompt))}</h2>
+          <span>${escapeHTML(record.id)} · ${escapeHTML(task.type || "")} · ${e4("requiredPockets")} ${escapeHTML((task.required_pockets || []).join(" + "))}</span>
+          <h3>${escapeHTML(e4Localized(task.prompt))}</h3>
           <small>${e4("requiredPockets")} · ${escapeHTML((task.required_pockets || []).join(" + "))}</small>
+          <div class="e004-microscope-label">${e4("pocketInputs")}</div>
+          <div class="e004-pocket-inputs">${inputs}</div>
           <div class="e004-expected"><span>${e4("expectedAnswer")}</span><code>${escapeHTML(record.expected)}</code></div>
+          <div class="e004-microscope-label">${e4("architectureOutput")}</div>
           <div class="e004-answer-grid">${Object.entries(record.answers || {}).map(([architectureId, actual]) => {
             const correct = actual === record.expected;
             const architectureName = e4Localized(arenaMicroscope.architecture_names?.[architectureId]) || architectureId;
-            return `<section class="${correct ? "is-correct" : "is-wrong"}"><span>${escapeHTML(architectureName)}</span><b>${correct ? e4("correctAnswer") : e4("wrongAnswer")}</b><code>${escapeHTML(actual)}</code></section>`;
+            const architecture = architecturesById.get(architectureId) || {};
+            const segments = actual.split(" | ");
+            return `<section class="${correct ? "is-correct" : "is-wrong"}"><span>${escapeHTML(architectureName)}</span><b>${correct ? e4("correctAnswer") : e4("wrongAnswer")}</b><p>${escapeHTML(e4Localized(architecture.description))}</p><div class="e004-segments">${segments.map(segment => `<code>${escapeHTML(segment)}</code>`).join("")}</div></section>`;
           }).join("")}</div>
         </article>`;
       };
@@ -2525,8 +2555,10 @@ async function loadExperiment() {
         ${(arenaMicroscope.tasks || []).length ? `<section class="e004-section e004-microscope" id="task-microscope">
           <div class="flow-step">${e4("microscope")}</div>
           <p class="e004-section-copy">${e4("microscopeCopy")}</p>
-          <div class="e004-microscope-tabs">${arenaMicroscope.tasks.map((record, index) => `<button type="button" class="${index === 0 ? "is-active" : ""}" data-e004-task="${escapeHTML(record.id)}">${escapeHTML(record.id.replace("PUBLIC-", ""))}</button>`).join("")}</div>
-          <div data-e004-microscope-panel>${microscopeTask(arenaMicroscope.tasks[0])}</div>
+          <div class="e004-microscope-list">${arenaMicroscope.tasks.map((record, index) => {
+            const task = tasksById.get(record.id) || {};
+            return `<details ${index === 0 ? "open" : ""}><summary><b>${escapeHTML(record.id)}</b><span>${escapeHTML(e4Localized(task.prompt))}</span></summary>${microscopeTask(record)}</details>`;
+          }).join("")}</div>
           <p class="control-warning">${escapeHTML(e4Localized(arenaMicroscope.claim_boundary))}</p>
           <div class="actions"><a class="quiet-link" href="${escapeHTML(arenaProgress.microscope_artifact)}">${e4("openEvidence")} ↗</a></div>
         </section>` : ""}
@@ -2601,13 +2633,9 @@ async function loadExperiment() {
           <p>${escapeHTML(experiment.claim_boundary?.[language] || "")}</p>
         </section>
         <div class="actions experiment-actions"><a class="button secondary" href="${escapeHTML(experiment.protocol_path)}">${e4("protocol")}</a></div>`;
-      const microscopeRecords = new Map((arenaMicroscope.tasks || []).map(record => [record.id, record]));
-      const microscopePanel = target.querySelector("[data-e004-microscope-panel]");
-      target.querySelectorAll("[data-e004-task]").forEach(button => button.addEventListener("click", () => {
-        target.querySelectorAll("[data-e004-task]").forEach(item => item.classList.toggle("is-active", item === button));
-        const record = microscopeRecords.get(button.dataset.e004Task);
-        if (record && microscopePanel) microscopePanel.innerHTML = microscopeTask(record);
-      }));
+      if (location.hash === "#task-microscope") {
+        requestAnimationFrame(() => target.querySelector("#task-microscope")?.scrollIntoView({ block: "start" }));
+      }
       return;
     }
     const runs = experiment.runs || [];
