@@ -1,0 +1,39 @@
+{
+  "experiment_id": "E004",
+  "protocol_version": "arena-v0.1",
+  "kind": "public_task_microscope",
+  "status": "public_development_complete",
+  "claim_status": "public_development_only",
+  "recorded_at": "2026-08-23T21:05:39Z",
+  "task_source": "/experiments/E004/sample-tasks.json",
+  "source_results": {
+    "rag_swarm": "/experiments/E004/result-rag-swarm-v0.1.json",
+    "neural_memory": "/experiments/E004/result-neural-memory-attempt-2.json",
+    "latent_delta": "/experiments/E004/result-latent-delta-v0.1.json",
+    "token_moe": "/experiments/E004/result-token-moe-v0.1.json"
+  },
+  "architecture_names": {
+    "rag_swarm": {"en": "RAG swarm", "ru": "RAG-swarm"},
+    "neural_memory": {"en": "Neural memory", "ru": "Нейронная память"},
+    "latent_delta": {"en": "Latent delta", "ru": "Латентная дельта"},
+    "token_moe": {"en": "Personal token MoE", "ru": "Персональный token MoE"}
+  },
+  "tasks": [
+    {"id":"PUBLIC-01","expected":"P01:297 | SEAL:594","answers":{"rag_swarm":"P01:297 | SEAL:594","neural_memory":"P01:297 | SEAL:594","latent_delta":"P01:297 | SEAL:594","token_moe":"P01:297 | SEAL:594"}},
+    {"id":"PUBLIC-02","expected":"P06:619 | SEAL:241","answers":{"rag_swarm":"P06:619 | SEAL:241","neural_memory":"P06:619 | SEAL:241","latent_delta":"P06:619 | SEAL:241","token_moe":"P06:696 | SEAL:395"}},
+    {"id":"PUBLIC-03","expected":"P02:424 | P05:212 | SEAL:487","answers":{"rag_swarm":"P02:424 | P05:212 | SEAL:487","neural_memory":"P02:424 | P05:212 | SEAL:487","latent_delta":"P02:424 | P05:212 | SEAL:487","token_moe":"P02:645 | P05:414 | SEAL:538"}},
+    {"id":"PUBLIC-04","expected":"P03:174 | P08:819 | SEAL:811","answers":{"rag_swarm":"P03:174 | P08:819 | SEAL:811","neural_memory":"P03:174 | P08:819 | SEAL:811","latent_delta":"P03:174 | P08:819 | SEAL:811","token_moe":"P03:174 | P08:186 | SEAL:906"}},
+    {"id":"PUBLIC-05","expected":"P01:039 | P07:883 | SEAL:733","answers":{"rag_swarm":"P01:039 | P07:883 | SEAL:733","neural_memory":"P01:039 | P07:883 | SEAL:733","latent_delta":"P01:039 | P07:883 | SEAL:733","token_moe":"P01:297 | P07:542 | SEAL:226"}},
+    {"id":"PUBLIC-06","expected":"P01:431 | P04:801 | P08:121 | SEAL:758","answers":{"rag_swarm":"P01:431 | P04:801 | P08:121 | SEAL:758","neural_memory":"P01:431 | P04:801 | P08:121 | SEAL:758","latent_delta":"P01:431 | P04:801 | P08:121 | SEAL:758","token_moe":"P01:297 | P04:732 | P08:186 | SEAL:543"}},
+    {"id":"PUBLIC-07","expected":"P02:605 | P05:414 | P07:538 | SEAL:616","answers":{"rag_swarm":"P02:605 | P05:414 | P07:538 | SEAL:616","neural_memory":"P02:605 | P05:414 | P07:538 | SEAL:616","latent_delta":"P02:605 | P05:414 | P07:538 | SEAL:616","token_moe":"P02:605 | P05:414 | P07:542 | SEAL:632"}},
+    {"id":"PUBLIC-08","expected":"P03:101 | P06:802 | P08:958 | SEAL:458","answers":{"rag_swarm":"P03:101 | P06:802 | P08:958 | SEAL:458","neural_memory":"P03:101 | P06:802 | P08:958 | SEAL:458","latent_delta":"P03:101 | P06:802 | P08:958 | SEAL:458","token_moe":"P03:082 | P06:696 | P08:186 | SEAL:005"}},
+    {"id":"PUBLIC-09","expected":"P04:665 | P05:759 | P06:696 | SEAL:409","answers":{"rag_swarm":"P04:665 | P05:759 | P06:696 | SEAL:409","neural_memory":"P04:665 | P05:759 | P06:696 | SEAL:409","latent_delta":"P04:665 | P05:759 | P06:696 | SEAL:409","token_moe":"P04:732 | P05:414 | P06:696 | SEAL:505"}},
+    {"id":"PUBLIC-10","expected":"P01:259 | P02:594 | SEAL:306","answers":{"rag_swarm":"P01:259 | P02:594 | SEAL:306","neural_memory":"P01:259 | P02:594 | SEAL:306","latent_delta":"P01:259 | P02:594 | SEAL:306","token_moe":"P01:276 | P02:605 | SEAL:373"}},
+    {"id":"PUBLIC-11","expected":"P03:ABSTAIN","answers":{"rag_swarm":"P03:ABSTAIN","neural_memory":"P03:ABSTAIN","latent_delta":"P03:ABSTAIN","token_moe":"P03:082 | SEAL:164"}},
+    {"id":"PUBLIC-12","expected":"P08:ABSTAIN","answers":{"rag_swarm":"P08:ABSTAIN","neural_memory":"P08:ABSTAIN","latent_delta":"P08:ABSTAIN","token_moe":"P08:186 | SEAL:372"}}
+  ],
+  "claim_boundary": {
+    "en": "These are public-development tasks seen while building the interfaces. They let a person audit the mechanics by eye; they are not locked evidence of generalization.",
+    "ru": "Это открытые development-задачи, которые были видны при сборке интерфейсов. По ним можно глазами проверить механику, но они не являются locked-доказательством обобщения."
+  }
+}

@@ -19,6 +19,7 @@
     {"id": "token_moe", "status": "failed", "result": "/experiments/E004/result-token-moe-v0.1.json", "metric": "1/12 tasks · 20.83% segments · 65.10% symbols"}
   ],
   "comparison_artifact": "/experiments/E004/comparison-public-development-v0.1.json",
+  "microscope_artifact": "/experiments/E004/microscope-public-v0.1.json",
   "failed_runs": [
     {"architecture_id": "neural_memory", "attempt": 1, "result": "/experiments/E004/result-neural-memory-attempt-1.json"},
     {"architecture_id": "token_moe", "attempt": 1, "result": "/experiments/E004/result-token-moe-v0.1.json"}
