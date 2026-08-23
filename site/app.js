@@ -166,7 +166,7 @@ const labCopy = {
   en: {
     goalLabel: "H0001 · THE GOAL",
     goal: "Can many personal pocket i—each preserving its own knowledge and individuality—temporarily unite into a single distributed neural network and grow stronger as the swarm scales?",
-    currentExperiment: "CURRENT EXPERIMENT · E002",
+    currentExperiment: "CURRENT EXPERIMENT · E004",
     experimentTitle: "Synthetic pocket i swarm",
     experimentStatus: "DEVELOPMENT ARTIFACT — HUMAN REVIEW REQUIRED",
     experimentIntro: "Start with two inspectable synthetic pocket i, then scale the same mechanism to 4, 8, 16, and 32. Each must learn different private knowledge by changing its own weights.",
@@ -240,7 +240,7 @@ const labCopy = {
   ru: {
     goalLabel: "H0001 · ЦЕЛЬ",
     goal: "Может ли множество личных pocket i, сохраняя собственные знания и индивидуальность, временно объединяться в одну распределённую нейросеть — и становиться сильнее по мере роста swarm?",
-    currentExperiment: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E002",
+    currentExperiment: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
     experimentTitle: "Синтетический swarm pocket i",
     experimentStatus: "ЕСТЬ DEVELOPMENT-АРТЕФАКТ — НУЖНА ПРОВЕРКА ЧЕЛОВЕКА",
     experimentIntro: "Начинаем с двух наглядных синтетических pocket i, затем масштабируем тот же механизм до 4, 8, 16 и 32. Каждый должен выучить своё приватное знание, действительно изменив собственные веса.",
@@ -785,7 +785,7 @@ function l(key) {
 
 function goalRibbon() {
   return `
-    <a class="goal-ribbon" href="/experiment/?id=E002">
+    <a class="goal-ribbon" href="/experiment/?id=E004">
       <span>${l("goalLabel")}</span>
       <strong>${l("goal")}</strong>
       <b>${l("currentExperiment")} →</b>
@@ -927,7 +927,7 @@ function home() {
       <p>${t("homeSub")}</p>
       <div class="links">
         <a class="button" href="#hand" data-action="enter-hand">${t("enter")}</a>
-        <a class="button secondary" href="/experiment/?id=E002">${l("currentExperiment")}</a>
+        <a class="button secondary" href="/experiment/?id=E004">${l("currentExperiment")}</a>
         <a class="button secondary" href="/map/#open">${c("openQuestionsCTA")}</a>
         <a class="quiet-link" href="/data/">${c("openData")}</a>
         <a class="quiet-link" href="${repository}">${t("openLab")}</a>
@@ -2315,7 +2315,7 @@ function e4Localized(value) {
   return value?.[language] || value?.en || "";
 }
 
-function experimentShell(experimentId = "E002") {
+function experimentShell(experimentId = "E004") {
   const isE004 = experimentId === "E004";
   return `
     <section class="flow-shell experiment-page" id="experiment-page">
@@ -2338,7 +2338,7 @@ function experimentRunCard(run) {
 async function loadExperiment() {
   const target = document.querySelector("#experiment-page");
   if (!target) return;
-  const requestedId = (new URLSearchParams(location.search).get("id") || "E002").toUpperCase();
+  const requestedId = (new URLSearchParams(location.search).get("id") || "E004").toUpperCase();
   const experimentId = requestedId === "E004" ? "E004" : "E002";
   try {
     const response = await fetch(`/api/public/${experimentId}`, { cache: "no-store" });
@@ -2369,7 +2369,8 @@ async function loadExperiment() {
           <span>${e4("question")}</span>
           <p>${escapeHTML(experiment.question?.[language] || "")}</p>
         </section>
-        <section class="e004-section">
+        <div class="actions experiment-actions"><a class="button secondary" href="#architectures">${e4("architectures")}</a><a class="button secondary" href="#data-world">${e4("dataWorld")}</a></div>
+        <section class="e004-section" id="architectures">
           <div class="flow-step">${e4("architectures")}</div>
           <div class="e004-architectures">${architectures.map((architecture, index) => `
             <article>
@@ -2400,7 +2401,7 @@ async function loadExperiment() {
             <article class="plugin"><i>i</i><strong>${escapeHTML(population.post_freeze_plugin_id || "I09")}</strong><small>${e4("plugin")}</small></article>
           </div>
         </section>
-        <section class="e004-section">
+        <section class="e004-section" id="data-world">
           <div class="flow-step">${e4("dataWorld")}</div>
           <div class="e004-books">${books.map(book => {
             const updated = (book.preview_facts || []).find(fact => fact.current_version === 2 && fact.status === "active") || {};
@@ -2899,7 +2900,7 @@ function render() {
       requestAnimationFrame(() => document.querySelector("#open")?.scrollIntoView());
     }
   } else if (path === "experiment") {
-    const experimentId = (new URLSearchParams(location.search).get("id") || "E002").toUpperCase() === "E004" ? "E004" : "E002";
+    const experimentId = (new URLSearchParams(location.search).get("id") || "E004").toUpperCase() === "E004" ? "E004" : "E002";
     document.title = `${experimentId} — i`;
     app.innerHTML = withLanguage(experimentShell(experimentId));
     loadExperiment();
