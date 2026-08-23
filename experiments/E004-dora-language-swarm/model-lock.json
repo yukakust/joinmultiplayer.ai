@@ -7,5 +7,6 @@
   "layers": 28,
   "tensor_type": "BF16",
   "source": "https://huggingface.co/Qwen/Qwen3-0.6B-Base",
-  "download_status": "not_downloaded_at_gate_1"
+  "download_status": "downloaded_and_sha256_verified_at_gate_2",
+  "download_manifest": "download-manifest.json"
 }

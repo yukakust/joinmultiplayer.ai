@@ -1,9 +1,9 @@
 {
   "experiment_id": "E004",
   "kind": "development_progress",
-  "updated_at": "2026-08-23T20:16:00Z",
+  "updated_at": "2026-08-23T20:18:00Z",
   "claim_status": "not_a_result",
-  "current_gate": 2,
+  "current_gate": 3,
   "gates": [
     {
       "number": 1,
@@ -13,15 +13,15 @@
     },
     {
       "number": 2,
-      "status": "active",
+      "status": "passed",
       "title": {"en": "Pinned base download", "ru": "Загрузка закреплённой базы"},
-      "evidence": {"en": "Not downloaded yet.", "ru": "Ещё не скачана."}
+      "evidence": {"en": "Pinned revision downloaded: 9 files, 1,203,630,286 bytes; every SHA-256 recomputed.", "ru": "Закреплённая ревизия скачана: 9 файлов, 1 203 630 286 байт; каждый SHA-256 пересчитан."}
     },
     {
       "number": 3,
-      "status": "waiting",
+      "status": "active",
       "title": {"en": "Frozen-base launch", "ru": "Запуск замороженной базы"},
-      "evidence": {"en": "Waiting for Gate 2.", "ru": "Ждёт Gate 2."}
+      "evidence": {"en": "Weights present; measured launch not run yet.", "ru": "Веса получены; измеренный запуск ещё не выполнялся."}
     },
     {
       "number": 4,

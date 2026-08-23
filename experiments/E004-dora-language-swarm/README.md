@@ -46,6 +46,7 @@ Current files:
 
 - [`ENVIRONMENT.md`](ENVIRONMENT.md) — accepted Gate 1 host/model/dependency boundary;
 - [`model-lock.json`](model-lock.json) — exact frozen-base revision;
+- [`download-manifest.json`](download-manifest.json) — downloaded file sizes and SHA-256 digests;
 - [`requirements-lock.txt`](requirements-lock.txt) — complete development package lock;
 - [`CHECKPOINT-1-DRAFT.md`](CHECKPOINT-1-DRAFT.md) — owner-facing arena decision;
 - [`DATA-WORLD.md`](DATA-WORLD.md) — human-readable public data contract;
