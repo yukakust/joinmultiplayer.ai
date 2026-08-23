@@ -681,6 +681,10 @@ class SubmissionTests(unittest.TestCase):
             self.assertEqual(len(experiment["local_learning"]), 5)
             self.assertNotIn("dora_assembly", {item["id"] for item in experiment["architectures"]})
             self.assertEqual(experiment["checkpoint_artifact"], "/experiments/E004/checkpoint-1-v0.2.json")
+            self.assertEqual(
+                experiment["development_progress_artifact"],
+                "/experiments/E004/development-progress.json",
+            )
             self.assertIn("not a result", experiment["claim_boundary"]["en"])
 
     def test_e004_artifact_schema_is_public_json_schema(self):

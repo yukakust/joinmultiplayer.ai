@@ -200,6 +200,7 @@ E004 = {
         "/experiments/E004/sample-tasks.json",
     ],
     "checkpoint_artifact": "/experiments/E004/checkpoint-1-v0.2.json",
+    "development_progress_artifact": "/experiments/E004/development-progress.json",
     "artifact_schema": "/experiments/E004/artifact-schema-v0.2.json",
     "protocol_path": (
         "https://github.com/yukakust/joinmultiplayer.ai/blob/agent/game-loop-v0.1/"

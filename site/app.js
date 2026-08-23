@@ -2269,7 +2269,8 @@ const e004Copy = {
     protocol: "READ THE ARENA PLAN",
     dataJson: "OPEN BOOKS + TASKS",
     schema: "ARTIFACT SCHEMA",
-    boundary: "BOUNDARY"
+    boundary: "BOUNDARY",
+    progress: "DEVELOPMENT PROGRESS"
   },
   ru: {
     step: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
@@ -2309,7 +2310,8 @@ const e004Copy = {
     protocol: "ЧИТАТЬ ПЛАН АРЕНЫ",
     dataJson: "ОТКРЫТЫЕ КНИГИ И ЗАДАЧИ",
     schema: "СХЕМА АРТЕФАКТОВ",
-    boundary: "ГРАНИЦА УТВЕРЖДЕНИЯ"
+    boundary: "ГРАНИЦА УТВЕРЖДЕНИЯ",
+    progress: "ХОД DEVELOPMENT-ЭТАПА"
   }
 };
 
@@ -2361,6 +2363,11 @@ async function loadExperiment() {
         const dataResponse = await fetch(checkpoint.data_world.artifact, { cache: "no-store" });
         if (dataResponse.ok) dataWorld = await dataResponse.json();
       }
+      let developmentProgress = {};
+      if (experiment.development_progress_artifact) {
+        const progressResponse = await fetch(experiment.development_progress_artifact, { cache: "no-store" });
+        if (progressResponse.ok) developmentProgress = await progressResponse.json();
+      }
       const architectures = checkpoint.architecture_candidates || [];
       const localLearning = checkpoint.local_learning_candidates || [];
       const population = checkpoint.population || {};
@@ -2405,6 +2412,10 @@ async function loadExperiment() {
             <p>${e4("checkpointCopy")}</p>
           </div>
           <b>${e4("waiting")}</b>
+        </section>
+        <section class="e004-section">
+          <div class="flow-step">${e4("progress")}</div>
+          <div class="e004-list">${(developmentProgress.gates || []).map(gate => `<p><strong>G${gate.number} · ${escapeHTML(gate.status)}</strong>${escapeHTML(e4Localized(gate.title))}<br><small>${escapeHTML(e4Localized(gate.evidence))}</small></p>`).join("")}</div>
         </section>
         <section class="e004-decision">
           <span>${e4("visibilityRule")}</span>

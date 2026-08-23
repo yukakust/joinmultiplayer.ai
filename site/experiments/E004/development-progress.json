@@ -1,0 +1,39 @@
+{
+  "experiment_id": "E004",
+  "kind": "development_progress",
+  "updated_at": "2026-08-23T20:16:00Z",
+  "claim_status": "not_a_result",
+  "current_gate": 2,
+  "gates": [
+    {
+      "number": 1,
+      "status": "passed",
+      "title": {"en": "Pinned environment", "ru": "Закреплённое окружение"},
+      "evidence": {"en": "CPU-only imports verified; exact package and model revisions recorded.", "ru": "CPU-only окружение проверено; точные версии пакетов и модели записаны."}
+    },
+    {
+      "number": 2,
+      "status": "active",
+      "title": {"en": "Pinned base download", "ru": "Загрузка закреплённой базы"},
+      "evidence": {"en": "Not downloaded yet.", "ru": "Ещё не скачана."}
+    },
+    {
+      "number": 3,
+      "status": "waiting",
+      "title": {"en": "Frozen-base launch", "ru": "Запуск замороженной базы"},
+      "evidence": {"en": "Waiting for Gate 2.", "ru": "Ждёт Gate 2."}
+    },
+    {
+      "number": 4,
+      "status": "waiting",
+      "title": {"en": "Two-pocket smoke", "ru": "Smoke двух pocket i"},
+      "evidence": {"en": "No optimizer step yet.", "ru": "Ни одного шага оптимизатора ещё не было."}
+    },
+    {
+      "number": 5,
+      "status": "waiting",
+      "title": {"en": "Checkpoint 2", "ru": "Контрольная точка 2"},
+      "evidence": {"en": "No result yet.", "ru": "Результата ещё нет."}
+    }
+  ]
+}
