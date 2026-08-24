@@ -227,6 +227,13 @@ Frozen Base and instruction-trained Qwen are compared; missing-capsule and
 question-only controls remain. This is still a text protocol, not the planned
 parallel neural-track architecture.
 
+Gate 5A.3 failed but improved the interface result. Human review scored the
+semantic-capsule Base at 11/24 and instruction-Qwen at 17/24, below the locked
+20/24 threshold. The previous coded Base interface scored 4/24. Instruction
+Qwen scored 11/12 in English and 6/12 in Russian; none of its main answers hit
+the 192-token limit. Question-only and either-capsule-missing controls scored
+0/24. The semantic codebook helped, but a 0.6B final merger remained unreliable.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

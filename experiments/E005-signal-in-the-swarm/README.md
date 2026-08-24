@@ -248,3 +248,10 @@ It keeps the same 24 questions and trained pocket adapters, expands their actual
 labels through one public semantic codebook, raises the answer budget to 192
 tokens, and compares frozen Base Qwen with frozen instruction-trained Qwen.
 This is a text-interface experiment, not latent or distributed-track merging.
+
+Gate 5A.3 then ran and failed its 20/24 rule. Human review scored Base with
+semantic capsules at 11/24 and instruction-Qwen at 17/24; the prior coded Base
+interface scored 4/24. Instruction-Qwen reached 11/12 English and 6/12 Russian,
+with zero cut-off main answers. All missing-pocket controls remained 0/24. The
+complete 168 raw outputs are published at
+`/experiment/e005/gate-5a/semantic/results/`.

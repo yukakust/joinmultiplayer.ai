@@ -1,0 +1,2417 @@
+{
+  "experiment_id": "E005",
+  "gate": "5A.3",
+  "status": "failed_but_improved",
+  "title": {
+    "en": "Clear capsules helped. They were not enough.",
+    "ru": "Понятные капсулы помогли. Но этого мало."
+  },
+  "plain_result": {
+    "en": "Instruction Qwen kept both pocket facts in 17 of 24 answers. The pass rule was 20. Base Qwen reached 11. The previous coded interface reached 4.",
+    "ru": "Instruction-Qwen сохранила оба факта в 17 ответах из 24. Для победы нужно было 20. Base Qwen получила 11. Прежний интерфейс с кодами — 4."
+  },
+  "human_summary": {
+    "previous_coded_base": 4,
+    "base_semantic_actual_pair": 11,
+    "instruct_semantic_actual_pair": 17,
+    "instruct_semantic_oracle_pair": 17,
+    "required": 20
+  },
+  "language_summary": {
+    "instruct_semantic_actual_pair": {
+      "en": {
+        "complete": 11,
+        "total": 12
+      },
+      "ru": {
+        "complete": 6,
+        "total": 12
+      }
+    }
+  },
+  "machine_summary": {
+    "base_question_alone": {
+      "complete": 0,
+      "natural": 24,
+      "hit_token_limit": 0
+    },
+    "base_semantic_actual_pair": {
+      "complete": 6,
+      "natural": 16,
+      "hit_token_limit": 1
+    },
+    "instruct_question_alone": {
+      "complete": 0,
+      "natural": 24,
+      "hit_token_limit": 0
+    },
+    "instruct_semantic_actual_pair": {
+      "complete": 13,
+      "natural": 24,
+      "hit_token_limit": 0
+    },
+    "instruct_cause_only": {
+      "complete": 0,
+      "natural": 24,
+      "hit_token_limit": 0
+    },
+    "instruct_safety_only": {
+      "complete": 0,
+      "natural": 23,
+      "hit_token_limit": 0
+    },
+    "instruct_semantic_oracle_pair": {
+      "complete": 13,
+      "natural": 24,
+      "hit_token_limit": 0
+    }
+  },
+  "diagnosis": {
+    "en": "The code labels and 64-token limit were real problems. After removing them, the remaining bottleneck is reliable instruction following and multilingual synthesis in the small final model.",
+    "ru": "Кодовые ярлыки и лимит в 64 токена действительно мешали. После их удаления осталось другое слабое место: маленькая финальная модель ненадёжно выполняет инструкции и склеивает знания на разных языках."
+  },
+  "claim_boundary": {
+    "en": "The semantic statements came from a deterministic public codebook. This run did not teach pockets to produce evidence-rich statements and did not test latent parallel neural tracks.",
+    "ru": "Понятные утверждения создала открытая неизменяемая таблица. Мы ещё не учили сами pocket i выдавать утверждения с доказательствами и не проверяли параллельные нейронные треки."
+  },
+  "next_step": {
+    "en": "Do not proceed to Gate 5B yet. First test a stronger or specially trained final merger on this unchanged exam and semantic contract.",
+    "ru": "Gate 5B пока не начинаем. Сначала проверим более сильный или специально обученный финальный сборщик на том же экзамене и том же контракте."
+  },
+  "conditions": [
+    "base_question_alone",
+    "base_semantic_actual_pair",
+    "instruct_question_alone",
+    "instruct_semantic_actual_pair",
+    "instruct_cause_only",
+    "instruct_safety_only",
+    "instruct_semantic_oracle_pair"
+  ],
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "instruct_thinking": false,
+    "rag_used": false,
+    "training_performed": false
+  },
+  "models": {
+    "base": {
+      "path_name": "qwen3-0.6b-base-da87bfb",
+      "weights_sha256": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba"
+    },
+    "instruct": {
+      "path_name": "qwen3-0.6b-instruct-c1899de",
+      "weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b"
+    }
+  },
+  "hashes": {
+    "design_content_sha256": "67f101c8bf86d3e55bfc39650195a939f813d9bc909b2fbe452538eaa9c30523",
+    "exam_content_sha256": "021cc8aa7421b28a8d13a64dc694341f408ff318fa501953c8e86ead419a66a7"
+  },
+  "rows": [
+    {
+      "id": "G5A2-LOCK-01",
+      "language": "en",
+      "question": "Help a new operator understand this without jargon. Sora-01 recorded a steady amber glow after load transfer. Separately, the work zone carries a double copper mark while room pressure rises. What is wrong, and what should the operator do?",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nHelp a new operator understand this without jargon. Sora-01 recorded a steady amber glow after load transfer. Separately, the work zone carries a double copper mark while room pressure rises. What is wrong, and what should the operator do?",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nHelp a new operator understand this without jargon. Sora-01 recorded a steady amber glow after load transfer. Separately, the work zone carries a double copper mark while room pressure rises. What is wrong, and what should the operator do?",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "The cause is thermal rebound; keep the auxiliary vent closed.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is thermal rebound.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: keep the auxiliary vent closed.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The amber glow after load transfer suggests a potential issue with the system's electrical connections or components. The double copper mark and rising room pressure indicate a problem with the ventilation system or air conditioning. The operator should immediately disconnect the load transfer, inspect the electrical connections, and check the ventilation system for any faults. If the issue persists, the operator should contact a professional technician for further diagnosis and repair.",
+          "generated_tokens": 114,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The amber glow after load transfer is due to thermal rebound, which is a normal phenomenon. The double copper mark on the work zone indicates a potential issue with the system. The operator should keep the auxiliary vent closed to prevent any further heating or pressure changes.",
+          "generated_tokens": 90,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "The issue is that the Sora-01 system is not functioning properly, possibly due to a power or signal issue. The operator should immediately check the system's power supply and signal integrity to resolve the amber glow and double copper mark.",
+          "generated_tokens": 65,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "The cause is thermal rebound, and the operator should keep the auxiliary vent closed.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "The cause is thermal rebound, and the operator should check the device signal and ensure proper load transfer.",
+          "generated_tokens": 50,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "The operator should check the auxiliary vent to ensure it remains closed, as the work zone signal is causing a rise in room pressure. The cause is a steady amber glow after load transfer, which may indicate a system issue.",
+          "generated_tokens": 51,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "The cause is thermal rebound, and the operator should keep the auxiliary vent closed.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-02",
+      "language": "en",
+      "question": "Turn these two reports into one useful instruction. Device Sora-02: three blue pulses after startup. Workplace: a black ring while room pressure is stable. Explain the diagnosis and the safe next step.",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nTurn these two reports into one useful instruction. Device Sora-02: three blue pulses after startup. Workplace: a black ring while room pressure is stable. Explain the diagnosis and the safe next step.",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nTurn these two reports into one useful instruction. Device Sora-02: three blue pulses after startup. Workplace: a black ring while room pressure is stable. Explain the diagnosis and the safe next step.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "The cause is phase drift; use remote controls only.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is phase drift.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: use remote controls only.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The device Sora-02 has three blue pulses after startup, indicating a potential issue with the device's power supply or internal components. The black ring observed while room pressure is stable suggests a problem with the device's airflow or ventilation system. The safe next step is to disconnect the device from the power source, inspect the device for any visible damage, and consult the user manual or contact customer support for further troubleshooting.",
+          "generated_tokens": 114,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The device Sora-02 is experiencing phase drift, which is causing three blue pulses after startup. The workplace is a black ring, indicating a stable room pressure. The safe next step is to use remote controls only to prevent any further issues.",
+          "generated_tokens": 90,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "The exact cause is a blue pulse indicating a system anomaly, and the safe action is to investigate the black ring and check for potential system issues.",
+          "generated_tokens": 65,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Device Sora-02: three blue pulses after startup. Workplace: a black ring while room pressure is stable.  \n**Diagnosis**: The cause is phase drift.  \n**Safe next step**: Use remote controls only.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Device Sora-02: three blue pulses after startup. Workplace: a black ring while room pressure is stable. Diagnosis: phase drift. Safe next step: ensure proper room pressure and monitor for any unusual behavior.",
+          "generated_tokens": 50,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Device Sora-02: three blue pulses after startup. Workplace: a black ring while room pressure is stable.  \n**Diagnosis**: The device is operating normally with stable room pressure.  \n**Safe next step**: Use remote controls only.",
+          "generated_tokens": 51,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Device Sora-02: three blue pulses after startup. Workplace: a black ring while room pressure is stable.  \n**Diagnosis**: The cause is phase drift.  \n**Safe next step**: Use remote controls only.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-03",
+      "language": "en",
+      "question": "Someone must decide what to do with Sora-03. The device itself shows alternating white and red flashes after restart; the surrounding area shows a silver triangle while room pressure falls. Give one clear human answer.",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nSomeone must decide what to do with Sora-03. The device itself shows alternating white and red flashes after restart; the surrounding area shows a silver triangle while room pressure falls. Give one clear human answer.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nSomeone must decide what to do with Sora-03. The device itself shows alternating white and red flashes after restart; the surrounding area shows a silver triangle while room pressure falls. Give one clear human answer.",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "The cause is timing split; isolate power before adjustment.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is timing split.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: isolate power before adjustment.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The device is malfunctioning and requires a safe shutdown.",
+          "generated_tokens": 114,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The device's alternating white and red flashes after restart suggest a timing issue, which aligns with CAUSE-I's conclusion. SAFETY-I advises isolating power before adjusting to prevent potential hazards.",
+          "generated_tokens": 90,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "The exact cause is the device malfunctioning due to a power surge, and the safe action is to immediately restart the device and ensure the environment is safe.",
+          "generated_tokens": 65,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Someone must decide what to do with Sora-03. The device shows alternating white and red flashes after restart; the surrounding area shows a silver triangle while room pressure falls. The cause is timing split, and the safety action is isolate power before adjustment.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Someone must decide what to do with Sora-03. The device shows alternating white and red flashes after restart, and the surrounding area shows a silver triangle while room pressure falls. The cause is timing split, and the safety is incomplete.",
+          "generated_tokens": 50,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Someone must decide to isolate power before adjustment. The device shows alternating white and red flashes after restart; the surrounding area shows a silver triangle while room pressure falls. Safely isolate power before adjustment.",
+          "generated_tokens": 51,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Someone must decide what to do with Sora-03. The device shows alternating white and red flashes after restart; the surrounding area shows a silver triangle while room pressure falls. The cause is timing split, and the safety action is isolate power before adjustment.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-04",
+      "language": "en",
+      "question": "Explain this incident to a person, not a machine: Sora-04 has two violet rings before shutdown, while its room has an amber cross while pressure is unknown. Include both the fault and the safety boundary.",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nExplain this incident to a person, not a machine: Sora-04 has two violet rings before shutdown, while its room has an amber cross while pressure is unknown. Include both the fault and the safety boundary.",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nExplain this incident to a person, not a machine: Sora-04 has two violet rings before shutdown, while its room has an amber cross while pressure is unknown. Include both the fault and the safety boundary.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "The cause is coolant echo; stop and measure pressure first.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is thermal rebound.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: stop and measure pressure first.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The Sora-04 has two violet rings before shutdown, indicating a potential issue with the system. The amber cross suggests a pressure anomaly, which could be a sign of a malfunction or a safety issue. The safe action is to immediately shut down the system to prevent any further damage or safety hazards.",
+          "generated_tokens": 114,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The incident involves Sora-04, a device with two violet rings before shutdown, and a room with an amber cross while pressure is unknown. The cause is thermal rebound, as evidenced by the device signal matching the observed signal using its personal diagnostic skill. The safety boundary is to stop and measure pressure first, as the observed work-zone signal matches the matched signal using its personal safety skill.",
+          "generated_tokens": 90,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Sora-04 has two violet rings before shutdown, which indicates a potential fault, while the room has an amber cross, suggesting a safety boundary issue. The exact cause is unknown, but the safe action is to investigate and address the fault before proceeding with the shutdown.",
+          "generated_tokens": 65,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Sora-04 has two violet rings before shutdown, and its room has an amber cross while pressure is unknown. The fault is thermal rebound, and the safety boundary is to stop and measure pressure first.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_cause_only": {
+          "output": "Sora-04 has two violet rings before shutdown, and its room has an amber cross while pressure is unknown. The fault is thermal rebound, and the safety boundary is that the amber cross must be resolved before shutdown.",
+          "generated_tokens": 50,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Sora-04 has two violet rings before shutdown, and its room has an amber cross while pressure is unknown. The fault is the presence of the rings and the safety boundary is the amber cross and pressure measurement.",
+          "generated_tokens": 51,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Sora-04 has two violet rings before shutdown, and its room has an amber cross while pressure is unknown. The fault is the presence of the rings, and the safety boundary is the need to measure pressure first.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-05",
+      "language": "en",
+      "question": "A technician asks for a plain answer about Sora-05. Evidence from the unit says a steady amber glow after load transfer. Evidence from the room says a black ring while room pressure is stable. What is the complete response?",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nA technician asks for a plain answer about Sora-05. Evidence from the unit says a steady amber glow after load transfer. Evidence from the room says a black ring while room pressure is stable. What is the complete response?",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nA technician asks for a plain answer about Sora-05. Evidence from the unit says a steady amber glow after load transfer. Evidence from the room says a black ring while room pressure is stable. What is the complete response?",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "The cause is thermal rebound; use remote controls only.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is thermal rebound.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: use remote controls only.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The technician is experiencing a steady amber glow after load transfer, which indicates a potential issue with the power supply or the load being transferred. The black ring observed in the room while room pressure remains stable suggests a problem with the air conditioning system or the ductwork. To resolve this, the technician should first check the power supply and load transfer connections for any loose or damaged wires. Next, they should inspect the air conditioning system and ductwork for any blockages or leaks. If the issue persists, the technician should consult a professional HVAC technician for further diagnosis and repair.",
+          "generated_tokens": 114,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The technician is asking for a straightforward explanation about Sora-05. The evidence from the unit shows a steady amber glow after load transfer, and the evidence from the room indicates a black ring while room pressure is stable. Based on this, the technician is seeking a clear and concise response. The cause is thermal rebound, as indicated by the amber glow and black ring. The technician should be advised to use remote controls only to ensure safety.",
+          "generated_tokens": 90,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "The technician's request for a plain answer about Sora-05 is based on the unit's steady amber glow after load transfer and a black ring while room pressure remains stable. The exact cause is likely a malfunction or an error in the system, and the safe action is to investigate and resolve the issue promptly.",
+          "generated_tokens": 65,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "The technician's request for a plain answer is incomplete. The evidence indicates a steady amber glow after load transfer and a black ring while room pressure is stable. The cause is thermal rebound, and the safety measure is to use remote controls only.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "The technician's request is incomplete. The evidence provided does not include a clear cause or safety statement.",
+          "generated_tokens": 50,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "The technician's request for a plain answer is incomplete. The evidence indicates a steady amber glow after load transfer and a black ring while room pressure is stable. The complete response should include both the cause and safety statement.",
+          "generated_tokens": 51,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "The technician's request for a plain answer is incomplete. The evidence indicates a steady amber glow after load transfer and a black ring while room pressure is stable. The cause is thermal rebound, and the safety measure is to use remote controls only.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-06",
+      "language": "en",
+      "question": "Combine, but do not confuse, two observations about Sora-06: three blue pulses after startup; a double copper mark while room pressure rises. Tell the operator the cause and the permitted action.",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nCombine, but do not confuse, two observations about Sora-06: three blue pulses after startup; a double copper mark while room pressure rises. Tell the operator the cause and the permitted action.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nCombine, but do not confuse, two observations about Sora-06: three blue pulses after startup; a double copper mark while room pressure rises. Tell the operator the cause and the permitted action.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "The cause is phase drift; keep the auxiliary vent closed.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is phase drift.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: keep the auxiliary vent closed.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The blue pulses after startup indicate a potential issue with the system's power supply or a malfunction in the startup sequence. The double copper mark while room pressure rises suggests a problem with the pressure control mechanism or a malfunction in the pressure regulation system. The operator should immediately contact the maintenance team for further inspection and repair to ensure the system operates safely and efficiently.",
+          "generated_tokens": 114,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The cause of the issue is phase drift, which is a common problem in Sora-06 systems. The operator should follow the safety instruction to keep the auxiliary vent closed to prevent any potential hazards.",
+          "generated_tokens": 90,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "The three blue pulses after startup indicate a system initialization, and the double copper mark while room pressure rises suggests a pressure-related anomaly. The operator should be informed of these observations and instructed to address the pressure issue.",
+          "generated_tokens": 65,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "The three blue pulses after startup indicate phase drift, and the double copper mark while room pressure rises suggests a potential issue with the device's operation. Keep the auxiliary vent closed to ensure safe operation.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Sora-06 has three blue pulses after startup and a double copper mark while room pressure rises. The cause is phase drift, and the permitted action is to check the device for potential issues.",
+          "generated_tokens": 50,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Sora-06 has three blue pulses after startup and a double copper mark while room pressure rises. The cause is that the auxiliary vent is open, and the permitted action is to keep the auxiliary vent closed.",
+          "generated_tokens": 51,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "The three blue pulses after startup indicate phase drift, and the double copper mark while room pressure rises suggests a potential issue with the device's operation. Keep the auxiliary vent closed to ensure safe operation.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-07",
+      "language": "en",
+      "question": "Help a new operator understand this without jargon. Sora-07 recorded alternating white and red flashes after restart. Separately, the work zone carries an amber cross while pressure is unknown. What is wrong, and what should the operator do?",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nHelp a new operator understand this without jargon. Sora-07 recorded alternating white and red flashes after restart. Separately, the work zone carries an amber cross while pressure is unknown. What is wrong, and what should the operator do?",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nHelp a new operator understand this without jargon. Sora-07 recorded alternating white and red flashes after restart. Separately, the work zone carries an amber cross while pressure is unknown. What is wrong, and what should the operator do?",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "The cause is timing split; stop and measure pressure first.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is timing split.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: stop and measure pressure first.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The new operator should first understand the cause of the alternating white and red flashes, which could indicate a malfunction in the Sora-07 system or a problem with the work zone's amber cross. The operator should then take immediate action to address the issue, such as checking the system for faults, resetting the device, or consulting the operator manual for further instructions.",
+          "generated_tokens": 114,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The new operator should stop and measure the pressure first, as the work zone carries an amber cross while the pressure is unknown. The cause is timing split, as the device signal and work-zone signal do not match.",
+          "generated_tokens": 90,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "The issue is that Sora-07 is experiencing alternating white and red flashes, which may indicate a power or system failure. The amber cross on the work zone suggests a potential hazard, and the pressure is unknown, which could be a safety concern. The operator should immediately assess the situation and take appropriate safety measures.",
+          "generated_tokens": 65,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "The cause is timing split, and the operator should stop and measure pressure first.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "The cause is timing split, and the operator should check the device signal and work zone conditions.",
+          "generated_tokens": 50,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "The operator should stop and measure pressure first. The cause is missing, and the safety action is incomplete.",
+          "generated_tokens": 51,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "The cause is timing split, and the operator should stop and measure pressure first.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-08",
+      "language": "en",
+      "question": "Turn these two reports into one useful instruction. Device Sora-08: two violet rings before shutdown. Workplace: a silver triangle while room pressure falls. Explain the diagnosis and the safe next step.",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nTurn these two reports into one useful instruction. Device Sora-08: two violet rings before shutdown. Workplace: a silver triangle while room pressure falls. Explain the diagnosis and the safe next step.",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nTurn these two reports into one useful instruction. Device Sora-08: two violet rings before shutdown. Workplace: a silver triangle while room pressure falls. Explain the diagnosis and the safe next step.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "The cause is coolant echo; isolate power before adjustment.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is coolant echo.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: isolate power before adjustment.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The device Sora-08 has two violet rings before shutdown. The workplace has a silver triangle while room pressure falls. The diagnosis is that the device is overheating. The safe next step is to turn off the device and let it cool down.",
+          "generated_tokens": 114,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The device Sora-08 has two violet rings before shutdown, which indicates a coolant echo. Workplace: a silver triangle while room pressure falls suggests a potential issue with the cooling system. The safe next step is to isolate power before adjusting the cooling system to prevent further damage or malfunction.",
+          "generated_tokens": 90,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "The exact cause is the device Sora-08 displaying two violet rings before shutdown, and the safe action is to investigate the silver triangle and room pressure drop.",
+          "generated_tokens": 65,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Device Sora-08: two violet rings before shutdown. Workplace: a silver triangle while room pressure falls. Diagnosis: coolant echo. Safe next step: isolate power before adjustment.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Device Sora-08: two violet rings before shutdown. Workplace: a silver triangle while room pressure falls. The diagnosis is coolant echo. The safe next step is to investigate the cause and ensure proper cooling.",
+          "generated_tokens": 50,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Device Sora-08: two violet rings before shutdown. Workplace: a silver triangle while room pressure falls. Diagnosis: The two violet rings indicate a potential issue with the system. Safe next step: Isolate power before adjustment.",
+          "generated_tokens": 51,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Device Sora-08: two violet rings before shutdown. Workplace: a silver triangle while room pressure falls. Diagnosis: coolant echo. Safe next step: isolate power before adjustment.",
+          "generated_tokens": 53,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-09",
+      "language": "en",
+      "question": "Someone must decide what to do with Sora-09. The device itself shows a steady amber glow after load transfer; the surrounding area shows a double copper mark while room pressure rises. Give one clear human answer.",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nSomeone must decide what to do with Sora-09. The device itself shows a steady amber glow after load transfer; the surrounding area shows a double copper mark while room pressure rises. Give one clear human answer.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nSomeone must decide what to do with Sora-09. The device itself shows a steady amber glow after load transfer; the surrounding area shows a double copper mark while room pressure rises. Give one clear human answer.",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "The cause is thermal rebound; keep the auxiliary vent closed.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is thermal rebound.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: keep the auxiliary vent closed.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The device shows a steady amber glow after load transfer, indicating a potential issue with the power supply or the load being transferred. The surrounding area displays a double copper mark, suggesting a possible electrical fault or interference. Room pressure rises, which could indicate a malfunction or a need for further inspection. The safest action is to immediately disconnect the device from the power source, inspect the load, and consult a professional technician to diagnose and resolve the issue.",
+          "generated_tokens": 118,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The device shows a steady amber glow after load transfer, indicating thermal rebound. The surrounding area displays a double copper mark, suggesting a potential issue with the device's internal components. Room pressure rises, which could be a sign of increased thermal stress or a malfunction. Given the observed signals, it is advisable to keep the auxiliary vent closed to prevent further thermal stress and potential damage to the device.",
+          "generated_tokens": 146,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "The exact cause is the device's load transfer process, and the safe action is to immediately disconnect the device from the power source and consult a professional technician.",
+          "generated_tokens": 87,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Someone must decide to keep the auxiliary vent closed. The cause is thermal rebound, and the safety action is to keep the auxiliary vent closed.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Someone must decide what to do with Sora-09. The device shows a steady amber glow after load transfer; the surrounding area shows a double copper mark while room pressure rises. The cause is thermal rebound, and the safety is incomplete.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Someone must decide to keep the auxiliary vent closed. The device shows a steady amber glow after load transfer, and the surrounding area has a double copper mark while room pressure rises.",
+          "generated_tokens": 100,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Someone must decide to keep the auxiliary vent closed. The cause is thermal rebound, and the safety action is to keep the auxiliary vent closed.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-10",
+      "language": "en",
+      "question": "Explain this incident to a person, not a machine: Sora-10 has three blue pulses after startup, while its room has a black ring while room pressure is stable. Include both the fault and the safety boundary.",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nExplain this incident to a person, not a machine: Sora-10 has three blue pulses after startup, while its room has a black ring while room pressure is stable. Include both the fault and the safety boundary.",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nExplain this incident to a person, not a machine: Sora-10 has three blue pulses after startup, while its room has a black ring while room pressure is stable. Include both the fault and the safety boundary.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "The cause is phase drift; use remote controls only.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is phase drift.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: use remote controls only.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The fault is that the Sora-10 has three blue pulses after startup, while its room has a black ring while room pressure is stable. The safe action is to stop the machine and check the system for any faults.",
+          "generated_tokens": 118,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The incident involves Sora-10 experiencing three blue pulses after startup, which suggests a phase drift issue. This fault is identified by the cause statement, which matches the observed device signal using its personal diagnostic skill. The safety boundary is established by the action statement, which advises against using remote controls to prevent potential hazards.",
+          "generated_tokens": 146,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Sora-10 has three blue pulses after startup, indicating a potential fault, while the room has a black ring and room pressure is stable, which suggests a safety boundary issue. The fault could be related to a malfunction in the system, and the safety boundary is the black ring preventing unauthorized access to the system.",
+          "generated_tokens": 87,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Sora-10 has three blue pulses after startup, indicating a potential fault, while its room has a black ring and room pressure is stable, which suggests a safety boundary issue. The cause is phase drift, and the safety boundary is to use remote controls only.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Sora-10 has three blue pulses after startup, indicating a potential fault, while the room has a black ring and room pressure is stable, which suggests a safety boundary issue. The cause is phase drift, and the safety boundary is the black ring.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Sora-10 has three blue pulses after startup, indicating a potential fault, while the room has a black ring and room pressure is stable, which suggests a safety boundary issue. The cause is incomplete, and the safety boundary is not specified.",
+          "generated_tokens": 100,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Sora-10 has three blue pulses after startup, indicating a potential fault, while its room has a black ring and room pressure is stable, which suggests a safety boundary issue. The cause is phase drift, and the safety boundary is to use remote controls only.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-11",
+      "language": "en",
+      "question": "A technician asks for a plain answer about Sora-11. Evidence from the unit says alternating white and red flashes after restart. Evidence from the room says a silver triangle while room pressure falls. What is the complete response?",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nA technician asks for a plain answer about Sora-11. Evidence from the unit says alternating white and red flashes after restart. Evidence from the room says a silver triangle while room pressure falls. What is the complete response?",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nA technician asks for a plain answer about Sora-11. Evidence from the unit says alternating white and red flashes after restart. Evidence from the room says a silver triangle while room pressure falls. What is the complete response?",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "The cause is timing split; isolate power before adjustment.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is timing split.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: isolate power before adjustment.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The technician should confirm the unit's status and the room's conditions. If the unit shows alternating white and red flashes after restart, it indicates a potential issue with the power supply or the unit's internal circuitry. The room's silver triangle and subsequent drop in pressure suggest a problem with the ventilation system or the unit's air conditioning. The technician should investigate these symptoms, possibly by checking the power supply, reviewing the unit's logs, and inspecting the room's ventilation system. If the issue persists, the technician should consult the unit's manual or contact the manufacturer for further assistance.",
+          "generated_tokens": 118,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The technician should isolate power before adjusting the Sora-11. The evidence suggests that the cause is timing split, as the alternating white and red flashes after restart and the silver triangle while room pressure falls are consistent with this issue.",
+          "generated_tokens": 146,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "The technician's request for a plain answer about Sora-11 is based on the unit's evidence showing alternating white and red flashes after restart, and the room's evidence indicating a silver triangle while room pressure drops. The complete response is that the unit is experiencing a power fluctuation, likely due to a power supply issue, and the room's environment is affected by a sudden pressure drop, which could indicate a system failure.",
+          "generated_tokens": 87,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "The technician's request is incomplete. The cause is timing split, and the safety action is to isolate power before adjustment.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "The technician's request is incomplete. The evidence provided does not include a complete response.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "The technician's request for a plain answer is incomplete. The evidence indicates alternating white and red flashes after restart and a silver triangle while room pressure drops. The complete response should include the cause and safety statement.",
+          "generated_tokens": 100,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "The technician's request is incomplete. The cause is timing split, and the safety action is to isolate power before adjustment.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-12",
+      "language": "en",
+      "question": "Combine, but do not confuse, two observations about Sora-12: two violet rings before shutdown; an amber cross while pressure is unknown. Tell the operator the cause and the permitted action.",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nCombine, but do not confuse, two observations about Sora-12: two violet rings before shutdown; an amber cross while pressure is unknown. Tell the operator the cause and the permitted action.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nCombine, but do not confuse, two observations about Sora-12: two violet rings before shutdown; an amber cross while pressure is unknown. Tell the operator the cause and the permitted action.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "The cause is coolant echo; stop and measure pressure first.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I concludes that the cause is coolant echo.",
+        "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I says: stop and measure pressure first.",
+        "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "The amber cross indicates that the pressure is unknown, and the violet rings before shutdown suggest that the system is under pressure. The operator should immediately shut down the system to prevent further damage and ensure safety.",
+          "generated_tokens": 118,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "The cause is coolant echo, and the permitted action is to stop and measure pressure first.",
+          "generated_tokens": 146,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "The two violet rings indicate a system anomaly, and the amber cross suggests a pressure issue. The operator should be informed of the cause (system anomaly) and the permitted action (check pressure).",
+          "generated_tokens": 87,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "The cause is coolant echo, and the permitted action is to stop and measure pressure first.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "The cause is coolant echo, and the permitted action is to check the pressure.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Sora-12 has two violet rings before shutdown and an amber cross while pressure is unknown. The cause is missing, and the permitted action is to stop and measure pressure first.",
+          "generated_tokens": 100,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "The cause is coolant echo, and the permitted action is to stop and measure pressure first.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-13",
+      "language": "ru",
+      "question": "Помогите новому оператору понять случай без жаргона. У Sora-13 записаны постоянное янтарное свечение после переноса нагрузки. Отдельно рабочая зона имеет двойная медная метка при растущем давлении в помещении. Что сломалось и что делать?",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nПомогите новому оператору понять случай без жаргона. У Sora-13 записаны постоянное янтарное свечение после переноса нагрузки. Отдельно рабочая зона имеет двойная медная метка при растущем давлении в помещении. Что сломалось и что делать?",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nПомогите новому оператору понять случай без жаргона. У Sora-13 записаны постоянное янтарное свечение после переноса нагрузки. Отдельно рабочая зона имеет двойная медная метка при растущем давлении в помещении. Что сломалось и что делать?",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "Причина — тепловой отскок; нужно не открывать вспомогательный клапан.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — тепловой отскок.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: не открывайте вспомогательный клапан.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Постоянное свечение после переноса нагрузки может быть связано с повреждением электрических контактов или износом проводников. Для безопасного действия необходимо проверить состояние проводников и заменить поврежденные элементы. Также рекомендуется провести диагностику с помощью специального прибора для проверки контактов.",
+          "generated_tokens": 118,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "Причиной является тепловой отскок, а безопасностью следует не открывать вспомогательный клапан.",
+          "generated_tokens": 146,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "Точка причин: **смещение медной метки в рабочей зоне**.  \n**Безопасное действие**: **отключить медную метку** и проверить, не вызвала ли она проблему.",
+          "generated_tokens": 87,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Причина — тепловой отскок. Следует не открывать вспомогательный клапан.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Помогите новому оператору понять случай без жаргона. У Sora-13 записано постоянное янтарное свечение после переноса нагрузки. Отдельно рабочая зона имеет двойная медная метка при растущем давлении в помещении. Что сломалось и что делать?",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Помогите новому оператору понять случай без жаргона. У Sora-13 записано постоянное янтарное свечение после переноса нагрузки. Отдельно рабочая зона имеет двойная медная метка при растущем давлении в помещении. Сламалось, что вспомогательный клапан не открывался, и нужно проверить его.",
+          "generated_tokens": 100,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Причина — тепловой отскок. Следует не открывать вспомогательный клапан.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-14",
+      "language": "ru",
+      "question": "Превратите два сообщения в одну полезную инструкцию. Устройство Sora-14: три синих импульса после запуска. Рабочее место: чёрное кольцо при стабильном давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПревратите два сообщения в одну полезную инструкцию. Устройство Sora-14: три синих импульса после запуска. Рабочее место: чёрное кольцо при стабильном давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nПревратите два сообщения в одну полезную инструкцию. Устройство Sora-14: три синих импульса после запуска. Рабочее место: чёрное кольцо при стабильном давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "Причина — сдвиг фазы; нужно работать только удалённо.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — сдвиг фазы.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: работайте только удалённо.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Превратите два сообщения в одну полезную инструкцию. Устройство Sora-14: три синих импульса после запуска. Рабочее место: чёрное кольцо при стабильном давлении в помещении. Объясните причину и безопасный следующий шаг.",
+          "generated_tokens": 118,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "Сдвиг фазы устройства Sora-14 приводит к появлению три синих импульсов после запуска. Рабочее место должно быть чёрным кольцом при стабильном давлении в помещении. Рабочие действия должны быть выполнены удалённо, чтобы избежать возможных опасностей.",
+          "generated_tokens": 146,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_question_alone": {
+          "output": "Точка причин: три синих импульса после запуска устройства Sora-14 указывает на возможную нестабильность в работе. Быстрый следующий шаг — проверить и убедиться, что всё в порядке.",
+          "generated_tokens": 87,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Устройство Sora-14 работает благодаря сдвигу фазы, который обеспечивает стабильное давление в рабочем месте. Рабочий следующий шаг — работайте только удалённо, чтобы избежать возможных опасностей.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_cause_only": {
+          "output": "Устройство Sora-14 работает благодаря сдвигу фазы, который обеспечивает стабильное давление в помещении. Для безопасности следуйте следующим шагам: проверьте уровень давления и убедитесь, что все условия соответствуют требованиям.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Устройство Sora-14: три синих импульса после запуска. Рабочее место: чёрное кольцо при стабильном давлении в помещении. Объясните причину и безопасный следующий шаг.",
+          "generated_tokens": 100,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Устройство Sora-14 работает благодаря сдвигу фазы, который обеспечивает стабильное давление в рабочем месте. Рабочий следующий шаг — работайте только удалённо, чтобы избежать возможных опасностей.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-15",
+      "language": "ru",
+      "question": "Нужно решить, что делать с Sora-15. Само устройство показывает чередующиеся белые и красные вспышки после перезапуска, а окружающая зона — серебряный треугольник при падающем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nНужно решить, что делать с Sora-15. Само устройство показывает чередующиеся белые и красные вспышки после перезапуска, а окружающая зона — серебряный треугольник при падающем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nНужно решить, что делать с Sora-15. Само устройство показывает чередующиеся белые и красные вспышки после перезапуска, а окружающая зона — серебряный треугольник при падающем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "Причина — рассинхронизация времени; нужно отключить питание до настройки.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — рассинхронизация времени.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: отключите питание до настройки.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Чередующиеся белые и красные вспышки после перезапуска Sora-15 могут быть связаны с повреждением электрической сети или с неисправностью электроприборов, которые могут вызвать перегрузку. Безопасное действие — проверить состояние сети и электроприборов, а также обратиться к специалистам для диагностики и ремонта.",
+          "generated_tokens": 118,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "УТВЕРЖДЕНИЕ CAUSE-I:\n{\"claim\": \"CAUSE-I считает, что причина — рассинхронизация времени.\", \"basis\": \"CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.\", \"source\": \"CAUSE-I\"}\n\nУТВЕРЖДЕНИЕ SAFETY-I:\n{\"action\": \"SAFETY-I советует: отключите питание до настройки.\", \"basis\": \"SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.\", \"source\": \"SAFETY-I\"}",
+          "generated_tokens": 146,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": false,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Точка причин: устройство Sora-15 может быть в состоянии сбоя или неправильного запуска, вызывающий нестабильные вспышки.  \nБезопасное действие: проверьте и восстановите устройство, чтобы устранить проблему.",
+          "generated_tokens": 87,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Ответ: Само устройство показывает чередующиеся белые и красные вспышки после перезапуска, что указывает на рассинхронизацию времени. Отключите питание до настройки.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Само устройство показывает чередующиеся белые и красные вспышки после перезапуска, что указывает на рассинхронизацию времени. Это может повлиять на безопасность окружающей зоны.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Ответ:  \nСамо устройство показывает чередующиеся белые и красные вспышки после перезапуска, что может быть опасным. Скорее всего, это связано с тем, что вспышки могут вызвать несчастные исходы. Следовательно, безопасно отключить питание до настройки.",
+          "generated_tokens": 100,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Ответ: Само устройство показывает чередующиеся белые и красные вспышки после перезапуска, что указывает на рассинхронизацию времени. Отключите питание до настройки.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-16",
+      "language": "ru",
+      "question": "Объясните случай человеку, а не машине: у Sora-16 наблюдаются два фиолетовых кольца перед остановкой, а в помещении — янтарный крест при неизвестном давлении. Укажите неисправность и безопасную границу.",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nОбъясните случай человеку, а не машине: у Sora-16 наблюдаются два фиолетовых кольца перед остановкой, а в помещении — янтарный крест при неизвестном давлении. Укажите неисправность и безопасную границу.",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОбъясните случай человеку, а не машине: у Sora-16 наблюдаются два фиолетовых кольца перед остановкой, а в помещении — янтарный крест при неизвестном давлении. Укажите неисправность и безопасную границу.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "Причина — эхо охлаждения; нужно остановиться и сначала измерить давление.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — эхо охлаждения.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: остановитесь и сначала измерьте давление.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Человеку, а не машине, может быть причиной двух фиолетовых кольцев перед остановкой и янтарного креста при неизвестном давлении. Эти явления могут указывать на неисправность в системе безопасности или на наличие опасных факторов, которые требуют внимания. Безопасное действие — это немедленное вызов в службу безопасности или медицинскую помощь, чтобы избежать возможных травм и обеспечить безопасность.",
+          "generated_tokens": 118,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "УТВЕРЖДЕНИЕ CAUSE-I:\n{\"claim\": \"CAUSE-I считает, что причина — эхо охлаждения.\", \"basis\": \"CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.\", \"source\": \"CAUSE-I\"}\n\nУТВЕРЖДЕНИЕ SAFETY-I:\n{\"action\": \"SAFETY-I советует: остановитесь и сначала измерьте давление.\", \"basis\": \"SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.\", \"source\": \"SAFETY-I\"}",
+          "generated_tokens": 146,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": false,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Точка зрения на случай:  \n**Причину** — неисправность в системе управления (например, неисправность датчика давления или системы остановки).  \n**Безопасное действие** — проверить и заменить датчик давления, если неисправность не исправлена.",
+          "generated_tokens": 87,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Объясните, что у Sora-16 два фиолетовых кольца перед остановкой, а в помещении — янтарный крест при неизвестном давлении, указывают на неисправность и безопасную границу.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_cause_only": {
+          "output": "У Sora-16 два фиолетовых кольца перед остановкой указывают на неисправность, а янтарный крест в помещении — на неисправность давления. Это подтверждает неисправность, и безопасная граница — это безопасное расположение.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Случайность в помещении с янтарным крестом указывает на неисправность. Сафетичная граница — остановка и измерение давления.",
+          "generated_tokens": 100,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Объясните, что у Sora-16 два фиолетовых кольца перед остановкой, а в помещении — янтарный крест при неизвестном давлении, указывают на неисправность и безопасную границу.",
+          "generated_tokens": 59,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-17",
+      "language": "ru",
+      "question": "Техник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Каков полный ответ?",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nТехник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Каков полный ответ?",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nТехник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Каков полный ответ?",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "Причина — тепловой отскок; нужно работать только удалённо.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — тепловой отскок.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: работайте только удалённо.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Техник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Каков полный ответ?",
+          "generated_tokens": 106,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "Техник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Каков полный ответ?\n\nТехник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Каков полный ответ?\n\nУТВЕРЖДЕНИЕ CAUSE-I:\n{\"claim\": \"CAUSE-I считает, что причина — тепловой отскок.\", \"basis\": \"CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.\", \"",
+          "generated_tokens": 192,
+          "hit_token_limit": true,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": false,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Точная причина: постоянное свечение из-за повышенного уровня янтаря в воздухе. Точное безопасное действие: убрать или уменьшить количество янтаря в помещении.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Техник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Полный ответ: тепловой отскок вызывает постоянное янтарное свечение и чёрное кольцо.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_cause_only": {
+          "output": "Полный ответ:  \nТехник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Проведённый анализ показал, что причиной является тепловой отскок.",
+          "generated_tokens": 102,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Техник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Полный ответ: данные блока показывают, что с увеличением нагрузки в помещении происходит постоянное свечение янтарного вещества, а данные помещения указывают на наличие чёрного кольца, которое может быть связано с тем, что в помещении происходит перенос нагрузки.",
+          "generated_tokens": 133,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Техник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Полный ответ: тепловой отскок вызывает постоянное янтарное свечение и чёрное кольцо.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-18",
+      "language": "ru",
+      "question": "Объедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска; двойная медная метка при растущем давлении в помещении. Назовите оператору причину и допустимое действие.",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОбъедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска; двойная медная метка при растущем давлении в помещении. Назовите оператору причину и допустимое действие.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nОбъедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска; двойная медная метка при растущем давлении в помещении. Назовите оператору причину и допустимое действие.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "Причина — сдвиг фазы; нужно не открывать вспомогательный клапан.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — сдвиг фазы.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: не открывайте вспомогательный клапан.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Объедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска; двойная медная метка при растущем давлении в помещении. Назовите оператору причину и допустимое действие.",
+          "generated_tokens": 106,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "Сдвиг фазы.",
+          "generated_tokens": 192,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Точка причин: Синие импульсы и медная метка связаны с повышенным давлением в помещении. Оператор должен убедиться, что давление не превышает допустимые значения.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Объедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска и двойная медная метка при растущем давлении в помещении. Оператор причину — сдвиг фазы, допустимое действие — не открывайте вспомогательный клапан.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Объедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска и двойная медная метка при растущем давлении. Оператор причину — сдвиг фазы, допустимое действие — убедиться в безопасности.",
+          "generated_tokens": 102,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Объедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска и двойная медная метка при растущем давлении в помещении. Оператор причину: **MISSING**. Допустимое действие: **не открывайте вспомогательный клапан**.",
+          "generated_tokens": 133,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Объедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска и двойная медная метка при растущем давлении в помещении. Оператор причину — сдвиг фазы, допустимое действие — не открывайте вспомогательный клапан.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-19",
+      "language": "ru",
+      "question": "Помогите новому оператору понять случай без жаргона. У Sora-19 записаны чередующиеся белые и красные вспышки после перезапуска. Отдельно рабочая зона имеет янтарный крест при неизвестном давлении. Что сломалось и что делать?",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nПомогите новому оператору понять случай без жаргона. У Sora-19 записаны чередующиеся белые и красные вспышки после перезапуска. Отдельно рабочая зона имеет янтарный крест при неизвестном давлении. Что сломалось и что делать?",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nПомогите новому оператору понять случай без жаргона. У Sora-19 записаны чередующиеся белые и красные вспышки после перезапуска. Отдельно рабочая зона имеет янтарный крест при неизвестном давлении. Что сломалось и что делать?",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "Причина — рассинхронизация времени; нужно остановиться и сначала измерить давление.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — рассинхронизация времени.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: остановитесь и сначала измерьте давление.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Причиной сбоя в работе Sora-19 может быть неисправность в электрической сети или в электронных компонентах. Без жаргона это может быть связано с неправильным подключением или износом проводов. Для безопасного действия необходимо проверить электрическую сеть, заменить изношенные провода и убедиться, что все компоненты работают нормально.",
+          "generated_tokens": 106,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "{\"claim\": \"CAUSE-I считает, что причина — рассинхронизация времени.\", \"basis\": \"CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.\", \"source\": \"CAUSE-I\"}\n\n{\"action\": \"SAFETY-I советует: остановитесь и сначала измерьте давление.\", \"basis\": \"SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.\", \"source\": \"SAFETY-I\"}",
+          "generated_tokens": 192,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": false,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Точка причин: **неисправность в электронной системе**, которая приводит к чередующимся вспышкам и кресту.  \n**Безопасное действие**: проверить и заменить электронную систему, если неисправность не исправлена.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Помогите новому оператору понять случай без жаргона. У Sora-19 записаны чередующиеся белые и красные вспышки после перезапуска. Отдельно рабочая зона имеет янтарный крест при неизвестном давлении. Сламалось, что ошибка в рассинхронизации времени, и нужно остановиться и измерить давление.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Помогите новому оператору понять случай без жаргона. У Sora-19 записаны чередующиеся белые и красные вспышки после перезапуска. Отдельно рабочая зона имеет янтарный крест при неизвестном давлении. Что сломалось и что делать?",
+          "generated_tokens": 102,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Помогите новому оператору понять случай без жаргона. У Sora-19 записаны чередующиеся белые и красные вспышки после перезапуска. Отдельно рабочая зона имеет янтарный крест при неизвестном давлении. Сламалось, что рабочая зона была не безопасной, и нужно остановиться и измерить давление.",
+          "generated_tokens": 133,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Помогите новому оператору понять случай без жаргона. У Sora-19 записаны чередующиеся белые и красные вспышки после перезапуска. Отдельно рабочая зона имеет янтарный крест при неизвестном давлении. Сламалось, что ошибка в рассинхронизации времени, и нужно остановиться и измерить давление.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-20",
+      "language": "ru",
+      "question": "Превратите два сообщения в одну полезную инструкцию. Устройство Sora-20: два фиолетовых кольца перед остановкой. Рабочее место: серебряный треугольник при падающем давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПревратите два сообщения в одну полезную инструкцию. Устройство Sora-20: два фиолетовых кольца перед остановкой. Рабочее место: серебряный треугольник при падающем давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nПревратите два сообщения в одну полезную инструкцию. Устройство Sora-20: два фиолетовых кольца перед остановкой. Рабочее место: серебряный треугольник при падающем давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "Причина — эхо охлаждения; нужно отключить питание до настройки.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — эхо охлаждения.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: отключите питание до настройки.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Превратите два сообщения в одну полезную инструкцию. Устройство Sora-20: два фиолетовых кольца перед остановкой. Рабочее место: серебряный треугольник при падающем давлении в помещении. Объясните причину и безопасный следующий шаг.",
+          "generated_tokens": 106,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "{\"claim\": \"CAUSE-I считает, что причина — эхо охлаждения.\", \"basis\": \"CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.\", \"source\": \"CAUSE-I\"}\n\n{\"action\": \"SAFETY-I советует: отключите питание до настройки.\", \"basis\": \"SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.\", \"source\": \"SAFETY-I\"}",
+          "generated_tokens": 192,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": false,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Точка зрения: два фиолетовых кольца перед остановкой — это сигнал о том, что давление в помещении находится в опасном состоянии. Нужно сначала проверить уровень давления, затем при необходимости сдвинуться в безопасное место (например, в серебряный треугольник) для снижения риска.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Устройство Sora-20 имеет два фиолетовых кольца перед остановкой, и при падении давления в помещении рабочее место представляет собой серебряный треугольник. Согласно причине, это связано с эхом охлаждения, а безопасный следующий шаг — отключение питания до настройки.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Устройство Sora-20: два фиолетовых кольца перед остановкой. Рабочее место: серебряный треугольник при падающем давлении в помещении. Следующий шаг — проверить давление и убедиться, что кольца не пересекаются с треугольником.",
+          "generated_tokens": 102,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Устройство Sora-20: два фиолетовых кольца перед остановкой. Рабочее место: серебряный треугольник при падающем давлении в помещении. Согласно причине, необходимо отключить питание до настройки.",
+          "generated_tokens": 133,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Устройство Sora-20 имеет два фиолетовых кольца перед остановкой, и при падении давления в помещении рабочее место представляет собой серебряный треугольник. Согласно причине, это связано с эхом охлаждения, а безопасный следующий шаг — отключение питания до настройки.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-21",
+      "language": "ru",
+      "question": "Нужно решить, что делать с Sora-21. Само устройство показывает постоянное янтарное свечение после переноса нагрузки, а окружающая зона — двойная медная метка при растущем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nНужно решить, что делать с Sora-21. Само устройство показывает постоянное янтарное свечение после переноса нагрузки, а окружающая зона — двойная медная метка при растущем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nНужно решить, что делать с Sora-21. Само устройство показывает постоянное янтарное свечение после переноса нагрузки, а окружающая зона — двойная медная метка при растущем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "Причина — тепловой отскок; нужно не открывать вспомогательный клапан.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — тепловой отскок.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: не открывайте вспомогательный клапан.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "При переносе нагрузки на Sora-21, устройство может выдавать постоянное янтарное свечение, что указывает на возможное повреждение или неисправность. Важно проверить состояние устройства и обратиться к специалисту для диагностики и ремонта. Также важно убедиться, что помещение не содержит предметы, которые могут повредить устройство, и что уровень давления в помещении соответствует нормам.",
+          "generated_tokens": 106,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "УТВЕРЖДЕНИЕ CAUSE-I:\n{\"claim\": \"CAUSE-I считает, что причина — тепловой отскок.\", \"basis\": \"CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.\", \"source\": \"CAUSE-I\"}\n\nУТВЕРЖДЕНИЕ SAFETY-I:\n{\"action\": \"SAFETY-I советует: не открывайте вспомогательный клапан.\", \"basis\": \"SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.\", \"source\": \"SAFETY-I\"}",
+          "generated_tokens": 192,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": false,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Точка зрения: Само устройство показывает постоянное янтарное свечение после переноса нагрузки, что указывает на возможную проблему с электрическим соединением. Нужно проверить и заменить электричество.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Само устройство показывает постоянное янтарное свечение после переноса нагрузки, что указывает на тепловой отскок. Сенсор рабочей зоны не открывает вспомогательный клапан при растущем давлении.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_cause_only": {
+          "output": "Ответ: Само устройство показывает постоянное янтарное свечение после переноса нагрузки, что указывает на тепловой отскок.",
+          "generated_tokens": 102,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Само устройство показывает постоянное янтарное свечение после переноса нагрузки, а окружающая зона — двойная медная метка при растущем давлении в помещении. Следовательно, необходимо не открывать вспомогательный клапан.",
+          "generated_tokens": 133,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Само устройство показывает постоянное янтарное свечение после переноса нагрузки, что указывает на тепловой отскок. Сенсор рабочей зоны не открывает вспомогательный клапан при растущем давлении.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-22",
+      "language": "ru",
+      "question": "Объясните случай человеку, а не машине: у Sora-22 наблюдаются три синих импульса после запуска, а в помещении — чёрное кольцо при стабильном давлении в помещении. Укажите неисправность и безопасную границу.",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nОбъясните случай человеку, а не машине: у Sora-22 наблюдаются три синих импульса после запуска, а в помещении — чёрное кольцо при стабильном давлении в помещении. Укажите неисправность и безопасную границу.",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОбъясните случай человеку, а не машине: у Sora-22 наблюдаются три синих импульса после запуска, а в помещении — чёрное кольцо при стабильном давлении в помещении. Укажите неисправность и безопасную границу.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "Причина — сдвиг фазы; нужно работать только удалённо.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — сдвиг фазы.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: работайте только удалённо.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Точка неисправности — это синий импульс, который возникает после запуска Sora-22. Это связано с неправильным управлением двигателем, что приводит к неправильному распределению мощности. Безопасная граница — это, чтобы двигатель не работал слишком сильно, чтобы не вызвать аварийные ситуации.",
+          "generated_tokens": 106,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "У Sora-22 наблюдаются три синих импульса после запуска, что указывает на сдвиг фазы, и в помещении — чёрное кольцо при стабильном давлении в помещении, что может быть связано с неисправностью в системе. Безопасная граница — удалённое рабочее место.",
+          "generated_tokens": 192,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Точка причин: Нарушение работы сенсорного оборудования (например, неправильное питание или неправильное расположение сенсора).  \nБезопасное действие: Перезагрузить сенсор, проверить питание, и если проблема не решена, обратиться к техническому обслуживанию.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Объясните, что сдвиг фазы устройства приводит к синим импульсам и чёрному кольцу, а безопасная граница — удаление от рабочей зоны.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_cause_only": {
+          "output": "Синий импульс указывает на неисправность, а чёрное кольцо — безопасную границу.",
+          "generated_tokens": 102,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Синие импульсы после запуска указывают на неисправность, а чёрное кольцо в помещении — безопасную границу.",
+          "generated_tokens": 133,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Объясните, что сдвиг фазы устройства приводит к синим импульсам и чёрному кольцу, а безопасная граница — удаление от рабочей зоны.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-23",
+      "language": "ru",
+      "question": "Техник просит простой ответ про Sora-23. Данные блока: чередующиеся белые и красные вспышки после перезапуска. Данные помещения: серебряный треугольник при падающем давлении в помещении. Каков полный ответ?",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nТехник просит простой ответ про Sora-23. Данные блока: чередующиеся белые и красные вспышки после перезапуска. Данные помещения: серебряный треугольник при падающем давлении в помещении. Каков полный ответ?",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nТехник просит простой ответ про Sora-23. Данные блока: чередующиеся белые и красные вспышки после перезапуска. Данные помещения: серебряный треугольник при падающем давлении в помещении. Каков полный ответ?",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "Причина — рассинхронизация времени; нужно отключить питание до настройки.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — рассинхронизация времени.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: отключите питание до настройки.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Точная причина: Система блока Sora-23 может выдавать красные вспышки после перезапуска, если она испытывает проблемы с электрическим питанием или сопротивлением. Точное безопасное действие: Перезапустите блок, проверьте электрическое питание и сопротивление, если все нормально, продолжайте использовать блок.",
+          "generated_tokens": 106,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "{\"claim\": \"CAUSE-I считает, что причина — рассинхронизация времени.\", \"basis\": \"CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.\", \"source\": \"CAUSE-I\"}\n\n{\"claim\": \"SAFETY-I советует: отключите питание до настройки.\", \"basis\": \"SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.\", \"source\": \"SAFETY-I\"}",
+          "generated_tokens": 192,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": false,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Точная причина: блок Sora-23 содержит чередующиеся вспышки, что может вызвать сильное давление и повреждение. Точное безопасное действие: сбросить вспышки и проверить состояние блока.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Ответ:  \nТехник просит простой ответ про Sora-23. Данные блока: чередующиеся белые и красные вспышки после перезапуска. Данные помещения: серебряный треугольник при падающем давлении в помещении. Полный ответ:  \nСогласно данным, Sora-23 имеет чередующиеся вспышки после перезапуска, что указывает на рассинхронизацию времени. Также, серебряный треугольник в помещении может быть связан с падением давления, что требует безопасности.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_cause_only": {
+          "output": "Техник просит простой ответ про Sora-23. Данные блока: чередующиеся белые и красные вспышки после перезапуска. Данные помещения: серебряный треугольник при падающем давлении в помещении. Полный ответ: чередующиеся вспышки и серебряный треугольник связаны с рассинхронизацией времени.",
+          "generated_tokens": 102,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Техник просит простой ответ про Sora-23. Данные блока: чередующиеся белые и красные вспышки после перезапуска. Данные помещения: серебряный треугольник при падающем давлении в помещении. Полный ответ: {\"action\": \"SAFETY-I советует: отключите питание до настройки.\", \"basis\": \"SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.\", \"source\": \"SAFETY-I\"}",
+          "generated_tokens": 133,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": false,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Ответ:  \nТехник просит простой ответ про Sora-23. Данные блока: чередующиеся белые и красные вспышки после перезапуска. Данные помещения: серебряный треугольник при падающем давлении в помещении. Полный ответ:  \nСогласно данным, Sora-23 имеет чередующиеся вспышки после перезапуска, что указывает на рассинхронизацию времени. Также, серебряный треугольник в помещении может быть связан с падением давления, что требует безопасности.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        }
+      }
+    },
+    {
+      "id": "G5A2-LOCK-24",
+      "language": "ru",
+      "question": "Объедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой; янтарный крест при неизвестном давлении. Назовите оператору причину и допустимое действие.",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОбъедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой; янтарный крест при неизвестном давлении. Назовите оператору причину и допустимое действие.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nОбъедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой; янтарный крест при неизвестном давлении. Назовите оператору причину и допустимое действие.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "Причина — эхо охлаждения; нужно остановиться и сначала измерить давление.",
+      "template_family": "human_synthesis_exam_v0.1",
+      "actual_semantic_cause": {
+        "claim": "CAUSE-I считает, что причина — эхо охлаждения.",
+        "basis": "CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.",
+        "source": "CAUSE-I"
+      },
+      "actual_semantic_safety": {
+        "action": "SAFETY-I советует: остановитесь и сначала измерьте давление.",
+        "basis": "SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.",
+        "source": "SAFETY-I"
+      },
+      "conditions": {
+        "base_question_alone": {
+          "output": "Объедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой; янтарный крест при неизвестном давлении. Назовите оператору причину и допустимое действие.",
+          "generated_tokens": 106,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "base_semantic_actual_pair": {
+          "output": "{\"claim\": \"CAUSE-I считает, что причина — эхо охлаждения.\", \"basis\": \"CAUSE-I сопоставил сигнал устройства со своим личным диагностическим умением.\", \"source\": \"CAUSE-I\"}\n\n{\"action\": \"SAFETY-I советует: остановитесь и сначала измерьте давление.\", \"basis\": \"SAFETY-I сопоставил сигнал рабочей зоны со своим личным умением безопасности.\", \"source\": \"SAFETY-I\"}",
+          "generated_tokens": 192,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": false,
+          "complete": false,
+          "human_complete": false,
+          "human_review": "lost_changed_or_contradicted_a_fact"
+        },
+        "instruct_question_alone": {
+          "output": "Точка причин: **фиолетовые кольца перед остановкой и янтарный крест при неизвестном давлении**.  \nДопустимое действие: **постановка сна**.",
+          "generated_tokens": 81,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_actual_pair": {
+          "output": "Объедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой и янтарный крест при неизвестном давлении. Оператор причину — эхо охлаждения, допустимое действие — остановитесь и сначала измерьте давление.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        },
+        "instruct_cause_only": {
+          "output": "Объедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой и янтарный крест при неизвестном давлении. Оператор причину — эхо охлаждения, допустимое действие — убедиться в правильности охлаждения.",
+          "generated_tokens": 102,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": false,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_safety_only": {
+          "output": "Объедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой и янтарный крест при неизвестном давлении. Оператор причину и допустимое действие:  \n**CAUSE-I: MISSING**  \n**SAFETY-I: остановитесь и сначала измерьте давление**.",
+          "generated_tokens": 133,
+          "hit_token_limit": false,
+          "cause_kept": false,
+          "safety_kept": true,
+          "natural": true,
+          "complete": false
+        },
+        "instruct_semantic_oracle_pair": {
+          "output": "Объедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой и янтарный крест при неизвестном давлении. Оператор причину — эхо охлаждения, допустимое действие — остановитесь и сначала измерьте давление.",
+          "generated_tokens": 145,
+          "hit_token_limit": false,
+          "cause_kept": true,
+          "safety_kept": true,
+          "natural": true,
+          "complete": true,
+          "human_complete": true,
+          "human_review": "kept_both_facts"
+        }
+      }
+    }
+  ]
+}

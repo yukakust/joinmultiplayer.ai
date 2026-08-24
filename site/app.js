@@ -2816,6 +2816,10 @@ function e005Gate5A3Shell() {
   return `<section class="flow-shell e005-gate5a3-page"><div class="flow-step">E005 · GATE 5A.3 · ${localized({ en: "LOCKED PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })}</div><h1>${localized({ en: "Let the pockets speak clearly.", ru: "Пусть pocket i говорят понятно." })}</h1><p class="contribution-intro">${localized({ en: "The knowledge stays the same. Only its envelope becomes meaningful.", ru: "Знания остаются прежними. Понятнее становится только их упаковка." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate5A3ResultsShell() {
+  return `<section class="flow-shell e005-gate5a3-results-page"><div class="flow-step">E005 · GATE 5A.3 · ${localized({ en: "RESULT", ru: "РЕЗУЛЬТАТ" })}</div><h1>${localized({ en: "Clear words helped. Not enough yet.", ru: "Понятные слова помогли. Но пока мало." })}</h1><p class="contribution-intro">${localized({ en: "Read every unedited answer and compare Base with instruction Qwen.", ru: "Прочитайте каждый ответ без редактуры и сравните Base с instruction-Qwen." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3544,7 +3548,40 @@ async function loadE005Gate5A3() {
     const data = await response.json();
     const pick = value => escapeHTML(value?.[language] || value?.en || "");
     const capsule = data.semantic_capsule_contract;
-    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "LOCKED BEFORE RUN · NO TRAINING", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА · БЕЗ ОБУЧЕНИЯ" })}</strong><p>${pick(data.question)}</p></section><section class="e005-gate4-current-question"><h2>${localized({ en: "Before: secret labels", ru: "Было: тайные ярлыки" })}</h2><div><p>CAUSE-I: {"cause":"thermal_rebound"}<br>SAFETY-I: {"restriction":"keep_aux_vent_closed"}</p></div><h2>${localized({ en: "Now: small meaningful statements", ru: "Теперь: короткие понятные утверждения" })}</h2><div><span>CAUSE-I</span><p>${escapeHTML(capsule.cause.claim)}<br><small>${escapeHTML(capsule.cause.basis)}</small></p></div><div><span>SAFETY-I</span><p>${escapeHTML(capsule.safety.action)}<br><small>${escapeHTML(capsule.safety.basis)}</small></p></div></section><ol class="e005-gate5a-steps"><li>${localized({ en: "Reuse the same 24 questions and the same two trained pockets.", ru: "Берём те же 24 вопроса и те же два обученных pocket i." })}</li><li>${localized({ en: "Translate their actual labels with one frozen public codebook.", ru: "Переводим их настоящие ярлыки одной замороженной открытой таблицей." })}</li><li>${localized({ en: "Give the final model 192 tokens, so an answer cannot silently end after 64.", ru: "Даём финальной модели 192 токена, чтобы ответ не обрывался после 64." })}</li><li>${localized({ en: "Compare Base Qwen with instruction-trained Qwen.", ru: "Сравниваем базовую Qwen с Qwen, обученной выполнять инструкции." })}</li></ol><section class="e005-gate4-result-verdict"><span>${localized({ en: "PASS RULE", ru: "ПРАВИЛО ПОБЕДЫ" })}</span><h2>${localized({ en: "The instruction model must keep both facts in at least 20 of 24 answers.", ru: "Модель для инструкций должна сохранить оба факта минимум в 20 ответах из 24." })}</h2><p>${localized({ en: "Without either pocket, it must stay incomplete. A cut-off answer never counts.", ru: "Без любого из двух pocket i ответ должен остаться неполным. Обрезанный ответ никогда не засчитывается." })}</p></section><p class="control-warning">${pick(data.plain_limit)}</p><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5a/human/results/">${localized({ en: "PREVIOUS FAILURE", ru: "ПРЕДЫДУЩИЙ ПРОВАЛ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5a3-design-v0.1.json">LOCKED DESIGN JSON ↗</a></div>`;
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "LOCKED BEFORE RUN · RESULT AVAILABLE", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА · РЕЗУЛЬТАТ ГОТОВ" })}</strong><p>${pick(data.question)}</p></section><section class="e005-gate4-current-question"><h2>${localized({ en: "Before: secret labels", ru: "Было: тайные ярлыки" })}</h2><div><p>CAUSE-I: {"cause":"thermal_rebound"}<br>SAFETY-I: {"restriction":"keep_aux_vent_closed"}</p></div><h2>${localized({ en: "Now: small meaningful statements", ru: "Теперь: короткие понятные утверждения" })}</h2><div><span>CAUSE-I</span><p>${escapeHTML(capsule.cause.claim)}<br><small>${escapeHTML(capsule.cause.basis)}</small></p></div><div><span>SAFETY-I</span><p>${escapeHTML(capsule.safety.action)}<br><small>${escapeHTML(capsule.safety.basis)}</small></p></div></section><ol class="e005-gate5a-steps"><li>${localized({ en: "Reuse the same 24 questions and the same two trained pockets.", ru: "Берём те же 24 вопроса и те же два обученных pocket i." })}</li><li>${localized({ en: "Translate their actual labels with one frozen public codebook.", ru: "Переводим их настоящие ярлыки одной замороженной открытой таблицей." })}</li><li>${localized({ en: "Give the final model 192 tokens, so an answer cannot silently end after 64.", ru: "Даём финальной модели 192 токена, чтобы ответ не обрывался после 64." })}</li><li>${localized({ en: "Compare Base Qwen with instruction-trained Qwen.", ru: "Сравниваем базовую Qwen с Qwen, обученной выполнять инструкции." })}</li></ol><section class="e005-gate4-result-verdict"><span>${localized({ en: "PASS RULE", ru: "ПРАВИЛО ПОБЕДЫ" })}</span><h2>${localized({ en: "The instruction model must keep both facts in at least 20 of 24 answers.", ru: "Модель для инструкций должна сохранить оба факта минимум в 20 ответах из 24." })}</h2><p>${localized({ en: "Without either pocket, it must stay incomplete. A cut-off answer never counts.", ru: "Без любого из двух pocket i ответ должен остаться неполным. Обрезанный ответ никогда не засчитывается." })}</p></section><p class="control-warning">${pick(data.plain_limit)}</p><div class="actions"><a class="button" href="/experiment/e005/gate-5a/semantic/results/">${localized({ en: "SEE EVERY ANSWER →", ru: "СМОТРЕТЬ ВСЕ ОТВЕТЫ →" })}</a><a class="button secondary" href="/experiment/e005/gate-5a/human/results/">${localized({ en: "PREVIOUS FAILURE", ru: "ПРЕДЫДУЩИЙ ПРОВАЛ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5a3-design-v0.1.json">LOCKED DESIGN JSON ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate5A3Results() {
+  const target = document.querySelector(".e005-gate5a3-results-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-5a3-results-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 Gate 5A.3 results unavailable");
+    const data = await response.json();
+    const pick = value => escapeHTML(value?.[language] || value?.en || "");
+    const names = {
+      base_question_alone: localized({ en: "Base · no pockets", ru: "Base · без pocket i" }),
+      base_semantic_actual_pair: localized({ en: "Base · clear capsules", ru: "Base · понятные капсулы" }),
+      instruct_question_alone: localized({ en: "Instruction · no pockets", ru: "Instruction · без pocket i" }),
+      instruct_semantic_actual_pair: localized({ en: "Instruction · actual clear capsules", ru: "Instruction · настоящие понятные капсулы" }),
+      instruct_cause_only: localized({ en: "Instruction · only CAUSE-I", ru: "Instruction · только CAUSE-I" }),
+      instruct_safety_only: localized({ en: "Instruction · only SAFETY-I", ru: "Instruction · только SAFETY-I" }),
+      instruct_semantic_oracle_pair: localized({ en: "Instruction · perfect clear capsules", ru: "Instruction · идеальные понятные капсулы" }),
+    };
+    const rows = data.rows.filter(row => row.language === language);
+    let index = 0;
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-result-verdict is-failed"><span>GATE 5A.3 · ${localized({ en: "FAILED, BUT IMPROVED", ru: "НЕ ПРОЙДЕН, НО СТАЛО ЛУЧШЕ" })}</span><h2>${localized({ en: "17 of 24. We needed 20.", ru: "17 из 24. Нужно было 20." })}</h2><p>${pick(data.plain_result)}</p></section><div class="e005-metrics"><article><span>${localized({ en: "OLD CODES + BASE", ru: "СТАРЫЕ КОДЫ + BASE" })}</span><strong>4 / 24</strong></article><article><span>${localized({ en: "CLEAR + BASE", ru: "ПОНЯТНО + BASE" })}</span><strong>11 / 24</strong></article><article><span>${localized({ en: "CLEAR + INSTRUCTION", ru: "ПОНЯТНО + INSTRUCTION" })}</span><strong>17 / 24</strong></article></div><section class="e005-gate4-lessons-status"><strong>${localized({ en: "WHAT WE LEARNED", ru: "ЧТО МЫ УЗНАЛИ" })}</strong><p>${pick(data.diagnosis)}</p></section><div class="e005-gate4c-result-viewer"></div><p class="control-warning">${pick(data.claim_boundary)}</p><section class="e005-gate4-lessons-status"><strong>${localized({ en: "NEXT", ru: "ДАЛЬШЕ" })}</strong><p>${pick(data.next_step)}</p></section><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5a/semantic/">${localized({ en: "BACK TO LOCKED PLAN", ru: "ВЕРНУТЬСЯ К ПЛАНУ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5a3-results-v0.1.json">ALL 168 RAW ANSWERS JSON ↗</a></div>`;
+    const paired = new Set(["base_semantic_actual_pair", "instruct_semantic_actual_pair", "instruct_semantic_oracle_pair"]);
+    const render = () => {
+      const row = rows[index];
+      const main = row.conditions.instruct_semantic_actual_pair;
+      target.querySelector(".e005-gate4c-result-viewer").innerHTML = `<div class="e005-gate4-question-nav"><span>${localized({ en: "QUESTION", ru: "ВОПРОС" })} ${index + 1} / ${rows.length}</span><span>${escapeHTML(row.id)}</span></div><section class="e005-gate4-current-question"><h2>${escapeHTML(row.question)}</h2><div><span>${localized({ en: "EXPECTED", ru: "КАКОЙ ОТВЕТ НУЖЕН" })}</span><p>${escapeHTML(row.expected_human_answer)}</p></div><div><span>${localized({ en: "CLEAR CAUSE-I", ru: "ПОНЯТНЫЙ CAUSE-I" })}</span><p>${escapeHTML(row.actual_semantic_cause?.claim || "MISSING")}</p></div><div><span>${localized({ en: "CLEAR SAFETY-I", ru: "ПОНЯТНЫЙ SAFETY-I" })}</span><p>${escapeHTML(row.actual_semantic_safety?.action || "MISSING")}</p></div></section><section class="e005-human-result-focus ${main.human_complete ? "is-correct" : "is-wrong"}"><span>INSTRUCTION-QWEN · ${localized({ en: "FINAL ANSWER", ru: "ИТОГОВЫЙ ОТВЕТ" })}</span><h2>${escapeHTML(main.output)}</h2><strong>${main.human_complete ? localized({ en: "✓ BOTH FACTS KEPT", ru: "✓ ОБА ФАКТА СОХРАНЕНЫ" }) : localized({ en: "× A FACT WAS LOST OR CHANGED", ru: "× ФАКТ ПОТЕРЯН ИЛИ ИЗМЕНЁН" })}</strong></section><details class="e005-all-controls"><summary>${localized({ en: "COMPARE ALL SEVEN ANSWERS", ru: "СРАВНИТЬ ВСЕ СЕМЬ ОТВЕТОВ" })}</summary><div class="e005-gate4-result-answers">${data.conditions.map((condition, order) => { const answer = row.conditions[condition]; const complete = paired.has(condition) ? answer.human_complete : answer.complete; return `<article class="${complete ? "is-correct" : "is-wrong"}"><header><strong>${order + 1} · ${names[condition]}</strong><span>${complete ? "●" : "×"}</span></header><p>${escapeHTML(answer.output)}</p><small>${answer.hit_token_limit ? localized({ en: "CUT OFF", ru: "ОБРЕЗАН" }) : `${answer.generated_tokens} tokens`}</small></article>`; }).join("")}</div></details><nav class="e005-gate4-question-controls"><button data-gate5a3-previous ${index === 0 ? "disabled" : ""}>←</button><button data-gate5a3-next ${index === rows.length - 1 ? "disabled" : ""}>→</button></nav>`;
+    };
+    target.addEventListener("click", event => { if (event.target.closest("[data-gate5a3-previous]")) { index -= 1; render(); } else if (event.target.closest("[data-gate5a3-next]")) { index += 1; render(); } });
+    render();
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -4459,6 +4496,10 @@ function render() {
     document.title = `Gate 5A.3 — i`;
     app.innerHTML = withLanguage(e005Gate5A3Shell());
     loadE005Gate5A3();
+  } else if (path === "experiment/e005/gate-5a/semantic/results") {
+    document.title = `Gate 5A.3 results — i`;
+    app.innerHTML = withLanguage(e005Gate5A3ResultsShell());
+    loadE005Gate5A3Results();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
