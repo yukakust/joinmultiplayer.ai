@@ -2,9 +2,20 @@
   "experiment_id": "E005",
   "gate": 4,
   "version": "procedure-learning-design-v0.1",
-  "status": "awaiting_owner_review_before_training",
+  "status": "training_authorized_data_frozen",
   "claim_status": "design_only_no_results",
   "weights_changed": false,
+  "owner_authorization": {
+    "approved_at": "2026-08-24",
+    "scope": "Gate 4 development DoRA training and held-out evaluation",
+    "approved": true
+  },
+  "dataset": {
+    "path": "/experiments/E005/gate-4-data-v0.1.json",
+    "content_sha256": "76cbe15ec0eb7c305b1ec0dd14518ced76504ffc375466cbbacd88b1abfd909d",
+    "examples": 336,
+    "private_data": false
+  },
   "base_model": {
     "id": "Qwen/Qwen3-0.6B-Base",
     "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
@@ -103,5 +114,5 @@
       "ru": "Опубликовать неудачу и остановиться до обучения routing, если хотя бы один личный навык не проходит порог."
     }
   },
-  "next_action": "owner_reviews_design_then_explicitly_authorizes_training"
+  "next_action": "run_small_development_smoke_before_full_training"
 }

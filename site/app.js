@@ -2490,7 +2490,9 @@ const e005Copy = {
     ownerStopCopy: "Nothing trains from this page. After you inspect the examples and gates, training still requires a separate explicit go-ahead.",
     trainCount: "training examples per skill",
     heldoutCount: "held-out examples per skill",
-    baseFrozen: "shared Qwen base stays frozen"
+    baseFrozen: "shared Qwen base stays frozen",
+    dataReady: "THE LESSONS ARE READY · THE MODEL HAS NOT TRAINED YET",
+    viewDataset: "OPEN ALL 336 LESSONS →"
   },
   ru: {
     step: "СЛЕДУЮЩИЙ ЭКСПЕРИМЕНТ · E005",
@@ -2594,7 +2596,9 @@ const e005Copy = {
     ownerStopCopy: "С этой страницы ничего не обучается. После проверки примеров и порогов для запуска обучения всё равно понадобится отдельное явное подтверждение.",
     trainCount: "учебных примеров на навык",
     heldoutCount: "скрытых проверочных примеров на навык",
-    baseFrozen: "общая база Qwen остаётся замороженной"
+    baseFrozen: "общая база Qwen остаётся замороженной",
+    dataReady: "УРОКИ ГОТОВЫ · МОДЕЛЬ ЕЩЁ НЕ УЧИЛАСЬ",
+    viewDataset: "ОТКРЫТЬ ВСЕ 336 УРОКОВ →"
   }
 };
 
@@ -2943,7 +2947,7 @@ async function loadE005Gate4() {
     const passFail = Object.entries(design.pass_fail).map(([key, value], index) => `
       <article><span>${String(index + 1).padStart(2, "0")} · ${escapeHTML(key.replaceAll("_", " "))}</span><p>${localized(value)}</p></article>`).join("");
     target.querySelector(".experiment-loading").outerHTML = `
-      <div class="experiment-status">${e5("noTraining")}</div>
+      <div class="experiment-status">${design.dataset ? e5("dataReady") : e5("noTraining")}</div>
       <section class="hypothesis-card"><span>E005 · GATE 4</span><p>${localized(design.question)}</p></section>
       <p class="control-warning">${localized(design.boundary)}</p>
       <div class="e005-gate4-metrics">
@@ -2962,7 +2966,7 @@ async function loadE005Gate4() {
       <section class="e005-gate4-controls"><div class="flow-step">${e5("controls")}</div><div>${comparisonLabels.map((label, index) => `<article><strong>${index + 1}</strong><span>${escapeHTML(label)}</span></article>`).join("")}</div></section>
       <section class="e005-gate4-gates"><div class="flow-step">${e5("passFail")}</div><div>${passFail}</div></section>
       <section class="e004-decision"><span>${e5("ownerStop")}</span><p>${e5("ownerStopCopy")}</p></section>
-      <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/gate-4-design-v0.1.json">JSON ↗</a></div>`;
+      <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/gate-4-data-v0.1.json">${e5("viewDataset")}</a><a class="quiet-link" href="/experiments/E005/gate-4-design-v0.1.json">PLAN JSON ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }

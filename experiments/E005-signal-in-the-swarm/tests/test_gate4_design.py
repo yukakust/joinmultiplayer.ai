@@ -7,14 +7,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 DESIGN = json.loads((ROOT / "site/experiments/E005/gate-4-design-v0.1.json").read_text(encoding="utf-8"))
+DATA = json.loads((ROOT / "site/experiments/E005/gate-4-data-v0.1.json").read_text(encoding="utf-8"))
 
 
 class Gate4DesignTests(unittest.TestCase):
     def test_design_cannot_claim_training_or_results(self) -> None:
-        self.assertEqual(DESIGN["status"], "awaiting_owner_review_before_training")
+        self.assertEqual(DESIGN["status"], "training_authorized_data_frozen")
         self.assertEqual(DESIGN["claim_status"], "design_only_no_results")
         self.assertFalse(DESIGN["weights_changed"])
         self.assertTrue(DESIGN["base_model"]["frozen"])
+        self.assertTrue(DESIGN["owner_authorization"]["approved"])
+        self.assertEqual(DESIGN["dataset"]["examples"], 336)
+        self.assertEqual(DESIGN["dataset"]["content_sha256"], DATA["content_sha256"])
 
     def test_personal_skills_have_disjoint_entities(self) -> None:
         all_train = set()
