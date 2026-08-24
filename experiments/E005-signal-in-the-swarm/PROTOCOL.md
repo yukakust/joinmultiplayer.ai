@@ -260,6 +260,10 @@ shared model stayed unchanged, and CAUSE-I stayed byte-for-byte unchanged while
 SAFETY-I learned. This is a training result only: the merger and locked exam were
 still untouched.
 
+The hidden-state merger smoke loaded both saved tracks, froze them, and ran two
+steps on four merger lessons. Loss moved 2.865→1.280; only the 395,650 merger
+parameters changed. The locked exam remained untouched.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

@@ -277,3 +277,7 @@ The full isolated training checkpoint completed two passes over 128 lessons for
 each track. CAUSE-I mean loss moved 2.056→0.00036; SAFETY-I moved
 2.406→0.00066. Shared Qwen stayed unchanged and the frozen first track did not
 move while the second learned. This does not yet test transfer or composition.
+
+The merger development smoke then loaded and froze both saved tracks. Across
+two steps on four lessons its loss moved 2.865→1.280. Only the 395,650 bridge
+parameters changed; the locked exam remained untouched.
