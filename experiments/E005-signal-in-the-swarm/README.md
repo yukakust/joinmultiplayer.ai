@@ -187,3 +187,12 @@ below 8/24. Removing either capsule must destroy at least ten correct answers.
 This checkpoint changes no weights and creates no training or locked exam data.
 It is visible at `/experiment/e005/gate-5a/`; the exact design is
 `site/experiments/E005/gate-5a-design-v0.1.json`.
+
+Gate 5A data checkpoint freezes 384 unique training inputs, split evenly across
+the two pocket roles and English/Russian, plus 24 locked questions with new
+device names and wording. Every exam item declares the cause capsule, safety
+capsule, and complete answer before training. The curriculum content hash is
+`68ee208d666aa7a48f4627b449a012e34929d3db8afe920deac3cbb8fb90da0c`; the
+exam content hash is
+`20d2468ae3cb65f4c84f71c7cc3e5d133dcef1249b562d8e5df730a8b1e00cde`.
+No weights changed and the exam has not run at this checkpoint.
