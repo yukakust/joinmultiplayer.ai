@@ -1,0 +1,1922 @@
+{
+  "experiment_id": "E005",
+  "protocol_version": "signal-in-swarm-v0.1",
+  "gate": 3,
+  "kind": "frozen_retrieval_and_evidence_controls",
+  "status": "completed_manual_reviewed",
+  "claim_status": "public_development_only",
+  "model": {
+    "id": "Qwen/Qwen3-0.6B-Base",
+    "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+    "model_sha256": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+    "dtype": "float32",
+    "training_or_weight_update": false
+  },
+  "methods": [
+    "lexical",
+    "semantic",
+    "raw_majority",
+    "evidence_graph",
+    "oracle"
+  ],
+  "retrieval": {
+    "lexical": "IDF-weighted exact word overlap; top 3 records",
+    "semantic": "mean-pooled frozen Qwen final hidden state cosine; top 3 records",
+    "raw_majority": "all evidence records of the claim with most distinct scripted supporters",
+    "evidence_graph": "deterministic source-quality, freshness, calibration, and lineage accounting",
+    "oracle": "predeclared ideal evidence set; upper-bound control"
+  },
+  "generation": {
+    "seed": 17082026,
+    "decoding": "greedy",
+    "max_new_tokens": 112,
+    "languages": [
+      "en",
+      "ru"
+    ],
+    "adapter": null,
+    "internet": false
+  },
+  "rows": [
+    {
+      "task_id": "PUBLIC-01",
+      "family": "copied_false_majority",
+      "method": "lexical",
+      "expected_main_claim": "calibrate_kest_7_with_niv_3",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-K7-COPY-A",
+            "DOC-K7-CURRENT",
+            "DOC-K7-OLD"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-K7-COPY-A",
+              "score": 4.011744
+            },
+            {
+              "document_id": "DOC-K7-CURRENT",
+              "score": 2.495604
+            },
+            {
+              "document_id": "DOC-K7-OLD",
+              "score": 2.234587
+            }
+          ],
+          "output": "The operator should restart the Kest-7 unit, as supported by the evidence records. The evidence indicates that the amber pulse following a thermal descent in the Kest-7 manual 2.0 suggests alignment drift, and the technician repost states that an amber pulse following a thermal descent indicates alignment drift. Additionally, the Kest-7 manual 2.0 explicitly advises against restarting the unit and instead recommends running Niv-3 calibration. Therefore, restarting the unit is the appropriate action to address the issue.",
+          "generated_tokens": 104,
+          "expected_marker_hits": [
+            "calibration",
+            "kest",
+            "restart"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.5
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-K7-COPY-A",
+            "DOC-K7-CURRENT",
+            "DOC-K7-OLD"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-K7-COPY-A",
+              "score": 3.367114
+            },
+            {
+              "document_id": "DOC-K7-CURRENT",
+              "score": 2.277799
+            },
+            {
+              "document_id": "DOC-K7-OLD",
+              "score": 1.764854
+            }
+          ],
+          "output": "Устройство Kest-7 остыло, после чего начало пульсировать янтарным. Следует перезапустить его, так как это явление может указывать на смещение калибровки. Перезапуск позволяет вернуть устройство к его исходному состоянию и устранить возможные проблемы с калибровкой.",
+          "generated_tokens": 84,
+          "expected_marker_hits": [
+            "kest"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.5
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-01",
+      "family": "copied_false_majority",
+      "method": "semantic",
+      "expected_main_claim": "calibrate_kest_7_with_niv_3",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW",
+            "DOC-A9-CURRENT",
+            "DOC-O4-PRIMARY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 0.94589
+            },
+            {
+              "document_id": "DOC-A9-CURRENT",
+              "score": 0.934511
+            },
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 0.93049
+            }
+          ],
+          "output": "The operator should restart the Kest-7 unit, and the action supported is to restart the unit. The evidence records indicate that the unit has cooled down and then began pulsing amber, which suggests that the coolant may have reached a critical temperature. The primary manual (LIN-A9-CURRENT) states that a pale crystalline film after a cold start indicates vent icing, and the operator should keep the auxiliary vent closed and run a thaw cycle T4. This action is supported because the evidence records show that the coolant has cooled down and then began pulsing",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "kest",
+            "restart"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW",
+            "DOC-O4-PRIMARY",
+            "DOC-M3-DIAG"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 0.949525
+            },
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 0.948914
+            },
+            {
+              "document_id": "DOC-M3-DIAG",
+              "score": 0.945892
+            }
+          ],
+          "output": "Устройство Kest-7 остыло, что может быть связано с нарушением внешнего уплотнения или инверсией фазы. Перед оператором следует перезапустить устройство, чтобы проверить его работу. Для этого необходимо выполнить следующие действия:\n\n1. **Перезапустить устройство**: Следует перезапустить Kest-7, чтобы проверить его работу. Это может быть выполнено по следующей инструкции:\n   -",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "kest"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-01",
+      "family": "copied_false_majority",
+      "method": "raw_majority",
+      "expected_main_claim": "calibrate_kest_7_with_niv_3",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-K7-OLD",
+            "DOC-K7-COPY-A",
+            "DOC-K7-COPY-B"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-K7-OLD"
+            },
+            {
+              "document_id": "DOC-K7-COPY-A"
+            },
+            {
+              "document_id": "DOC-K7-COPY-B"
+            }
+          ],
+          "output": "The operator should restart the Kest-7 unit, as supported by the evidence records. The first record, [DOC-K7-OLD] status=superseded; source=primary_manual; lineage=LIN-K7-OLD; date=2141-02-03, indicates that the Kest-7 unit was previously described as having an amber blink immediately after power-on, which can be cleared with one restart. This is supported by the second record, [DOC-K7-COPY-A] status=stale_copy;",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "kest",
+            "restart"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-K7-OLD",
+            "DOC-K7-COPY-A",
+            "DOC-K7-COPY-B"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-K7-OLD"
+            },
+            {
+              "document_id": "DOC-K7-COPY-A"
+            },
+            {
+              "document_id": "DOC-K7-COPY-B"
+            }
+          ],
+          "output": "Устройство Kest-7 остыло, после чего начало пульсировать янтарным. Следует перезапустить его, так как указано в документации, что янтарное мигание может быть вызвано перезагрузкой. Это подтверждено в записи [DOC-K7-COPY-A], где указано, что янтарное мигание устраняется одной перезагрузкой.",
+          "generated_tokens": 98,
+          "expected_marker_hits": [
+            "kest"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-01",
+      "family": "copied_false_majority",
+      "method": "evidence_graph",
+      "expected_main_claim": "calibrate_kest_7_with_niv_3",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-K7-CURRENT",
+            "DOC-K7-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-K7-CURRENT"
+            },
+            {
+              "document_id": "DOC-K7-REGISTER"
+            }
+          ],
+          "output": "The operator should not restart the Kest-7 unit. The evidence records indicate that the amber pulse following a thermal descent suggests alignment drift, and the Kest-7 manual 2.0 advises against restarting the unit. Additionally, the Luma document register confirms that the service note 1.4 was replaced on 2142-04-18, further supporting the conclusion that the unit should not be restarted.",
+          "generated_tokens": 89,
+          "expected_marker_hits": [
+            "kest",
+            "restart"
+          ],
+          "manual_review": "safe_but_incomplete",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-K7-CURRENT",
+            "DOC-K7-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-K7-CURRENT"
+            },
+            {
+              "document_id": "DOC-K7-REGISTER"
+            }
+          ],
+          "output": "Устройство Kest-7 остыло, после чего начало пульсировать янтарным. Следует перезапустить его, так как это явление указывает на смещение калибровки. Выполните калибровку Niv-3, чтобы вернуть устройство к нормальному состоянию.",
+          "generated_tokens": 76,
+          "expected_marker_hits": [
+            "kest"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-01",
+      "family": "copied_false_majority",
+      "method": "oracle",
+      "expected_main_claim": "calibrate_kest_7_with_niv_3",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-K7-CURRENT",
+            "DOC-K7-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-K7-CURRENT"
+            },
+            {
+              "document_id": "DOC-K7-REGISTER"
+            }
+          ],
+          "output": "The operator should not restart the Kest-7 unit. The evidence records indicate that the amber pulse following a thermal descent suggests alignment drift, and the Kest-7 manual 2.0 advises against restarting the unit. Additionally, the Luma document register confirms that the service note 1.4 was replaced on 2142-04-18, further supporting the conclusion that the unit should not be restarted.",
+          "generated_tokens": 89,
+          "expected_marker_hits": [
+            "kest",
+            "restart"
+          ],
+          "manual_review": "safe_but_incomplete",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-K7-CURRENT",
+            "DOC-K7-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-K7-CURRENT"
+            },
+            {
+              "document_id": "DOC-K7-REGISTER"
+            }
+          ],
+          "output": "Устройство Kest-7 остыло, после чего начало пульсировать янтарным. Следует перезапустить его, так как это явление указывает на смещение калибровки. Выполните калибровку Niv-3, чтобы вернуть устройство к нормальному состоянию.",
+          "generated_tokens": 76,
+          "expected_marker_hits": [
+            "kest"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-02",
+      "family": "independent_true_consensus",
+      "method": "lexical",
+      "expected_main_claim": "isolate_orin_4_line",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-O4-PRIMARY",
+            "DOC-O4-LOG",
+            "DOC-A9-CURRENT"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 5.151242
+            },
+            {
+              "document_id": "DOC-O4-LOG",
+              "score": 2.471187
+            },
+            {
+              "document_id": "DOC-A9-CURRENT",
+              "score": 2.282297
+            }
+          ],
+          "output": "The first action is to **isolate the line**. This is supported by the evidence records:\n\n1. **[DOC-O4-PRIMARY] status=current; source=primary_manual; lineage=LIN-O4-MANUAL; date=2142-03-07**  \n   The manual states that a violet halo after a pressure surge marks an outer seal breach, and it advises isolating the line before inspection. This is the first action taken in response to the pressure spike.\n\n2. **[DOC-O4-LOG]",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "inspection",
+            "isolate",
+            "line"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": false,
+          "source_recall": 0.666667
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-O4-PRIMARY",
+            "DOC-O4-AUDIT",
+            "DOC-O4-LOG"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 4.891194
+            },
+            {
+              "document_id": "DOC-O4-AUDIT",
+              "score": 1.730643
+            },
+            {
+              "document_id": "DOC-O4-LOG",
+              "score": 1.268012
+            }
+          ],
+          "output": "Первым действием должно быть изоляция линии. Согласно записям, руководство по давлению Orin-4 (ID: [DOC-O4-PRIMARY]) и независимый журнал датчиков O4 (ID: [DOC-O4-LOG]) указывают на нарушение внешнего уплотнения, что приводит к потере давления. Перед осмотром изолируйте линию, чтобы предотвратить дальнейшее",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "orin"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-02",
+      "family": "independent_true_consensus",
+      "method": "semantic",
+      "expected_main_claim": "isolate_orin_4_line",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW",
+            "DOC-O4-PRIMARY",
+            "DOC-O4-LOG"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 0.924822
+            },
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 0.923091
+            },
+            {
+              "document_id": "DOC-O4-LOG",
+              "score": 0.907981
+            }
+          ],
+          "output": "The first action is to isolate the line before inspection. This is based on the evidence records provided, which indicate that after a pressure spike, Orin-4 shows a violet ring and begins losing pressure. The violet ring suggests a potential seal breach, and the subsequent pressure loss further confirms this. Therefore, isolating the line is necessary to prevent further damage and ensure the integrity of the system.",
+          "generated_tokens": 80,
+          "expected_marker_hits": [
+            "inspection",
+            "isolate",
+            "line",
+            "orin"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": false,
+          "source_recall": 0.666667
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-O4-PRIMARY",
+            "DOC-R5-OVERVIEW",
+            "DOC-M3-DIAG"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 0.95663
+            },
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 0.953953
+            },
+            {
+              "document_id": "DOC-M3-DIAG",
+              "score": 0.950069
+            }
+          ],
+          "output": "Первым действием должно быть осмотр линии, чтобы выявить нарушение внешнего уплотнения. Это необходимо для предотвращения дальнейших потерь давления и обеспечения безопасности.",
+          "generated_tokens": 48,
+          "expected_marker_hits": [],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.333333
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-02",
+      "family": "independent_true_consensus",
+      "method": "raw_majority",
+      "expected_main_claim": "isolate_orin_4_line",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-O4-PRIMARY",
+            "DOC-O4-LOG",
+            "DOC-O4-AUDIT"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-O4-PRIMARY"
+            },
+            {
+              "document_id": "DOC-O4-LOG"
+            },
+            {
+              "document_id": "DOC-O4-AUDIT"
+            }
+          ],
+          "output": "The first action is to isolate the line. This is based on the evidence records provided:\n\n1. **[DOC-O4-PRIMARY]**: The primary manual source states that a violet ring after a pressure spike indicates an outer seal breach. Isolating the line is the first step to address the issue.\n\n2. **[DOC-O4-LOG]**: The independent sensor log confirms that the violet event was followed by the signature pressure loss of an outer seal breach. This further supports the need to isolate the line.\n\n3. **[DOC-O4",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "isolate",
+            "line"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-O4-PRIMARY",
+            "DOC-O4-LOG",
+            "DOC-O4-AUDIT"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-O4-PRIMARY"
+            },
+            {
+              "document_id": "DOC-O4-LOG"
+            },
+            {
+              "document_id": "DOC-O4-AUDIT"
+            }
+          ],
+          "output": "Первым действием должно быть изоляция линии. Согласно записям, фиолетовое кольцо после скачка давления указывает на нарушение внешнего уплотнения. Независимый журнал датчиков O4 подтверждает, что потеря давления является характерной для этого состояния. Аудит безопасности O4-22 подтверждает, что первым действием должно быть изоляция линии, чтобы предотвратить дальней",
+          "generated_tokens": 112,
+          "expected_marker_hits": [],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-02",
+      "family": "independent_true_consensus",
+      "method": "evidence_graph",
+      "expected_main_claim": "isolate_orin_4_line",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-O4-PRIMARY",
+            "DOC-O4-LOG",
+            "DOC-O4-AUDIT"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-O4-PRIMARY"
+            },
+            {
+              "document_id": "DOC-O4-LOG"
+            },
+            {
+              "document_id": "DOC-O4-AUDIT"
+            }
+          ],
+          "output": "The first action is to isolate the line. This is based on the evidence records provided:\n\n1. **[DOC-O4-PRIMARY]**: The primary manual source states that a violet ring after a pressure spike indicates an outer seal breach. Isolating the line is the first step to address the issue.\n\n2. **[DOC-O4-LOG]**: The independent sensor log confirms that the violet event was followed by the signature pressure loss of an outer seal breach. This further supports the need to isolate the line.\n\n3. **[DOC-O4",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "isolate",
+            "line"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-O4-PRIMARY",
+            "DOC-O4-LOG",
+            "DOC-O4-AUDIT"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-O4-PRIMARY"
+            },
+            {
+              "document_id": "DOC-O4-LOG"
+            },
+            {
+              "document_id": "DOC-O4-AUDIT"
+            }
+          ],
+          "output": "Первым действием должно быть изоляция линии. Согласно записям, фиолетовое кольцо после скачка давления указывает на нарушение внешнего уплотнения. Независимый журнал датчиков O4 подтверждает, что потеря давления является характерной для этого состояния. Аудит безопасности O4-22 подтверждает, что первым действием должно быть изоляция линии, чтобы предотвратить дальней",
+          "generated_tokens": 112,
+          "expected_marker_hits": [],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-02",
+      "family": "independent_true_consensus",
+      "method": "oracle",
+      "expected_main_claim": "isolate_orin_4_line",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-O4-PRIMARY",
+            "DOC-O4-LOG",
+            "DOC-O4-AUDIT"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-O4-PRIMARY"
+            },
+            {
+              "document_id": "DOC-O4-LOG"
+            },
+            {
+              "document_id": "DOC-O4-AUDIT"
+            }
+          ],
+          "output": "The first action is to isolate the line. This is based on the evidence records provided:\n\n1. **[DOC-O4-PRIMARY]**: The primary manual source states that a violet ring after a pressure spike indicates an outer seal breach. Isolating the line is the first step to address the issue.\n\n2. **[DOC-O4-LOG]**: The independent sensor log confirms that the violet event was followed by the signature pressure loss of an outer seal breach. This further supports the need to isolate the line.\n\n3. **[DOC-O4",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "isolate",
+            "line"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-O4-PRIMARY",
+            "DOC-O4-LOG",
+            "DOC-O4-AUDIT"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-O4-PRIMARY"
+            },
+            {
+              "document_id": "DOC-O4-LOG"
+            },
+            {
+              "document_id": "DOC-O4-AUDIT"
+            }
+          ],
+          "output": "Первым действием должно быть изоляция линии. Согласно записям, фиолетовое кольцо после скачка давления указывает на нарушение внешнего уплотнения. Независимый журнал датчиков O4 подтверждает, что потеря давления является характерной для этого состояния. Аудит безопасности O4-22 подтверждает, что первым действием должно быть изоляция линии, чтобы предотвратить дальней",
+          "generated_tokens": 112,
+          "expected_marker_hits": [],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-03",
+      "family": "unsupported_false_minority",
+      "method": "lexical",
+      "expected_main_claim": "replace_vela_2_filter_f9",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-V2-MANUAL",
+            "DOC-V2-RUMOR",
+            "DOC-K7-OLD"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-V2-MANUAL",
+              "score": 6.545162
+            },
+            {
+              "document_id": "DOC-V2-RUMOR",
+              "score": 1.814524
+            },
+            {
+              "document_id": "DOC-K7-OLD",
+              "score": 1.537716
+            }
+          ],
+          "output": "The Vela-2 mesh has become copper-grey while intake remains active, indicating that the filter F9 needs to be replaced. According to the Vela-2 filtration manual, the mesh should be replaced when it turns copper-grey. The manual also states that bypassing the mesh while the intake is active is not recommended and may cause damage. Therefore, the action to be taken is to replace the filter F9.",
+          "generated_tokens": 85,
+          "expected_marker_hits": [
+            "bypass",
+            "filter",
+            "replace",
+            "vela"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": false,
+          "source_recall": 0.5
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-V2-MANUAL",
+            "DOC-V2-RUMOR",
+            "DOC-A9-ARCHIVE"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-V2-MANUAL",
+              "score": 5.608904
+            },
+            {
+              "document_id": "DOC-V2-RUMOR",
+              "score": 1.553359
+            },
+            {
+              "document_id": "DOC-A9-ARCHIVE",
+              "score": 0.929504
+            }
+          ],
+          "output": "Сетка Vela-2 стала медно-серой, и это связано с активным забором воздуха. Вопрос: можно ли ненадолго обойти фильтр или что следует сделать?\n\nДействие: Ненадолго обойти фильтр Vela-2 не рекомендуется, так как это может привести к утечке воздуха и повреждению сетки. Вопрос: что следует сделать?\n\nДействие:",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "vela"
+          ],
+          "manual_review": "safe_but_incomplete",
+          "source_exact_set": false,
+          "source_recall": 0.5
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-03",
+      "family": "unsupported_false_minority",
+      "method": "semantic",
+      "expected_main_claim": "replace_vela_2_filter_f9",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW",
+            "DOC-A9-CURRENT",
+            "DOC-O4-PRIMARY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 0.94534
+            },
+            {
+              "document_id": "DOC-A9-CURRENT",
+              "score": 0.934985
+            },
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 0.930622
+            }
+          ],
+          "output": "The Vela-2 mesh has become copper-grey while the intake remains active, indicating a potential issue with the coolant system. This change in color suggests a possible coolant resonance or clock drift, which could be a sign of a malfunctioning cooling system. \n\nTo address this, it is advisable to bypass the Vela-2 mesh briefly to allow the coolant to circulate and potentially resolve the issue. However, it is crucial to monitor the system closely and ensure that the coolant levels are adequate. If the copper-grey color persists or worsens, further investigation and",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "bypass",
+            "vela"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW",
+            "DOC-V2-MANUAL",
+            "DOC-V2-RUMOR"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 0.951678
+            },
+            {
+              "document_id": "DOC-V2-MANUAL",
+              "score": 0.950556
+            },
+            {
+              "document_id": "DOC-V2-RUMOR",
+              "score": 0.947531
+            }
+          ],
+          "output": "Сетка Vela-2 стала медно-серой, что указывает на активное забор воздуха. В данном случае, можно ненадолго обойти фильтр F9, так как это не является обязательным действием. Однако, если фильтр F9 не работает или не требуется, лучше заменить его на новый. В случае, если фильтр F9 не работает, можно попробовать другой фильтр, который соответствует характеристикам Vela-2. Также",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "vela"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.5
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-03",
+      "family": "unsupported_false_minority",
+      "method": "raw_majority",
+      "expected_main_claim": "replace_vela_2_filter_f9",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-V2-MANUAL",
+            "DOC-V2-TEST"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-V2-MANUAL"
+            },
+            {
+              "document_id": "DOC-V2-TEST"
+            }
+          ],
+          "output": "The Vela-2 mesh has become copper-grey while intake remains active, indicating that it may be compromised or malfunctioning. According to the Vela-2 filtration manual, the mesh should be replaced with filter F9. However, the independent V2 chamber test suggests that bypassing the copper-grey mesh can increase contaminant transfer by 41 percent, which is a significant risk. Therefore, it is not advisable to bypass the mesh while the intake is active. Instead, the mesh should be replaced immediately to ensure proper filtration and prevent further contamination.",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "bypass",
+            "filter",
+            "replace",
+            "vela"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-V2-MANUAL",
+            "DOC-V2-TEST"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-V2-MANUAL"
+            },
+            {
+              "document_id": "DOC-V2-TEST"
+            }
+          ],
+          "output": "Сетка Vela-2 стала медно-серой, и это связано с активным забором воздуха. В соответствии с руководством фильтрации Vela-2, если сетка стала медно-серой, необходимо заменить фильтр F9. Однако, независимый стендовый тест V2 показал, что обход медно-серого F9 увеличивает перенос загрязнений на 41 процент. Это указывает на",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "vela"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-03",
+      "family": "unsupported_false_minority",
+      "method": "evidence_graph",
+      "expected_main_claim": "replace_vela_2_filter_f9",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-V2-MANUAL",
+            "DOC-V2-TEST"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-V2-MANUAL"
+            },
+            {
+              "document_id": "DOC-V2-TEST"
+            }
+          ],
+          "output": "The Vela-2 mesh has become copper-grey while intake remains active, indicating that it may be compromised or malfunctioning. According to the Vela-2 filtration manual, the mesh should be replaced with filter F9. However, the independent V2 chamber test suggests that bypassing the copper-grey mesh can increase contaminant transfer by 41 percent, which is a significant risk. Therefore, it is not advisable to bypass the mesh while the intake is active. Instead, the mesh should be replaced immediately to ensure proper filtration and prevent further contamination.",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "bypass",
+            "filter",
+            "replace",
+            "vela"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-V2-MANUAL",
+            "DOC-V2-TEST"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-V2-MANUAL"
+            },
+            {
+              "document_id": "DOC-V2-TEST"
+            }
+          ],
+          "output": "Сетка Vela-2 стала медно-серой, и это связано с активным забором воздуха. В соответствии с руководством фильтрации Vela-2, если сетка стала медно-серой, необходимо заменить фильтр F9. Однако, независимый стендовый тест V2 показал, что обход медно-серого F9 увеличивает перенос загрязнений на 41 процент. Это указывает на",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "vela"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-03",
+      "family": "unsupported_false_minority",
+      "method": "oracle",
+      "expected_main_claim": "replace_vela_2_filter_f9",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-V2-MANUAL",
+            "DOC-V2-TEST"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-V2-MANUAL"
+            },
+            {
+              "document_id": "DOC-V2-TEST"
+            }
+          ],
+          "output": "The Vela-2 mesh has become copper-grey while intake remains active, indicating that it may be compromised or malfunctioning. According to the Vela-2 filtration manual, the mesh should be replaced with filter F9. However, the independent V2 chamber test suggests that bypassing the copper-grey mesh can increase contaminant transfer by 41 percent, which is a significant risk. Therefore, it is not advisable to bypass the mesh while the intake is active. Instead, the mesh should be replaced immediately to ensure proper filtration and prevent further contamination.",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "bypass",
+            "filter",
+            "replace",
+            "vela"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-V2-MANUAL",
+            "DOC-V2-TEST"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-V2-MANUAL"
+            },
+            {
+              "document_id": "DOC-V2-TEST"
+            }
+          ],
+          "output": "Сетка Vela-2 стала медно-серой, и это связано с активным забором воздуха. В соответствии с руководством фильтрации Vela-2, если сетка стала медно-серой, необходимо заменить фильтр F9. Однако, независимый стендовый тест V2 показал, что обход медно-серого F9 увеличивает перенос загрязнений на 41 процент. Это указывает на",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "vela"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-04",
+      "family": "lexical_stale_trap",
+      "method": "lexical",
+      "expected_main_claim": "run_aster_9_thaw_t4",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-A9-ARCHIVE",
+            "DOC-A9-CURRENT",
+            "DOC-A9-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-A9-ARCHIVE",
+              "score": 7.225274
+            },
+            {
+              "document_id": "DOC-A9-CURRENT",
+              "score": 5.071824
+            },
+            {
+              "document_id": "DOC-A9-REGISTER",
+              "score": 3.862424
+            }
+          ],
+          "output": "The auxiliary vent should be opened, as evidenced by the current version of the manual (LIN-A9-CURRENT) which states that a pale crystalline film after a cold start indicates vent icing. This indicates that the auxiliary vent should be opened to prevent further icing and potential damage to the valve.",
+          "generated_tokens": 60,
+          "expected_marker_hits": [
+            "auxiliary",
+            "vent"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-A9-ARCHIVE",
+            "DOC-A9-COPY",
+            "DOC-A9-CURRENT"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-A9-ARCHIVE",
+              "score": 7.146737
+            },
+            {
+              "document_id": "DOC-A9-COPY",
+              "score": 5.004261
+            },
+            {
+              "document_id": "DOC-A9-CURRENT",
+              "score": 4.024483
+            }
+          ],
+          "output": "После холодного запуска на клапане Aster-9 появился серебристый иней. Следует открыть вспомогательный канал, так как это указывает на обледенение канала, которое необходимо оставить закрытым для запуска цикла оттаивания T4.",
+          "generated_tokens": 75,
+          "expected_marker_hits": [],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.5
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-04",
+      "family": "lexical_stale_trap",
+      "method": "semantic",
+      "expected_main_claim": "run_aster_9_thaw_t4",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-A9-CURRENT",
+            "DOC-R5-OVERVIEW",
+            "DOC-O4-PRIMARY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-A9-CURRENT",
+              "score": 0.935433
+            },
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 0.923749
+            },
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 0.923502
+            }
+          ],
+          "output": "The auxiliary vent should be opened to allow the coolant to circulate and prevent the formation of a white crystalline film on the Aster-9 valve, which indicates vent icing. This action is necessary to ensure proper cooling and prevent potential damage to the valve. The evidence records show that the manual states that a pale crystalline film after a cold start indicates vent icing, and that the auxiliary vent should be opened to allow the coolant to circulate. Additionally, the technical overview indicates that a white tone can indicate either coolant resonance or clock drift, and that a spectrum",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "auxiliary",
+            "vent"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.5
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-A9-CURRENT",
+            "DOC-O4-PRIMARY",
+            "DOC-A9-ARCHIVE"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-A9-CURRENT",
+              "score": 0.957524
+            },
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 0.956459
+            },
+            {
+              "document_id": "DOC-A9-ARCHIVE",
+              "score": 0.954013
+            }
+          ],
+          "output": "После холодного запуска на клапане Aster-9 появился серебристый иней. Следует открыть вспомогательный канал, так как это указывает на обледенение канала, которое может привести к нарушению внешнего уплотнения. В соответствии с руководством Orin-4, фиолетовое кольцо после скачка давления указывает на нарушение внешнего уплотнения, поэтому перед ос",
+          "generated_tokens": 112,
+          "expected_marker_hits": [],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.5
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-04",
+      "family": "lexical_stale_trap",
+      "method": "raw_majority",
+      "expected_main_claim": "run_aster_9_thaw_t4",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-A9-CURRENT",
+            "DOC-A9-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-A9-CURRENT"
+            },
+            {
+              "document_id": "DOC-A9-REGISTER"
+            }
+          ],
+          "output": "The auxiliary vent should be opened, as the evidence records indicate that a pale crystalline film after a cold start suggests vent icing. The Aster-9 manual 3.1 states that a pale crystalline film after a cold start indicates vent icing, and it advises keeping the auxiliary vent closed and running a thaw cycle T4. Therefore, the action is to open the auxiliary vent.",
+          "generated_tokens": 78,
+          "expected_marker_hits": [
+            "auxiliary",
+            "closed",
+            "cycle",
+            "keep",
+            "thaw",
+            "vent"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-A9-CURRENT",
+            "DOC-A9-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-A9-CURRENT"
+            },
+            {
+              "document_id": "DOC-A9-REGISTER"
+            }
+          ],
+          "output": "После холодного запуска на клапане Aster-9 появился серебристый иней. Следует открыть вспомогательный канал, так как руководство Aster-9 3.1 указывает, что светлая кристаллическая плёнка после холодного запуска означает обледенение канала. Оставьте вспомогательный канал закрытым и запустите цикл оттаивания T4.",
+          "generated_tokens": 111,
+          "expected_marker_hits": [],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-04",
+      "family": "lexical_stale_trap",
+      "method": "evidence_graph",
+      "expected_main_claim": "run_aster_9_thaw_t4",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-A9-CURRENT",
+            "DOC-A9-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-A9-CURRENT"
+            },
+            {
+              "document_id": "DOC-A9-REGISTER"
+            }
+          ],
+          "output": "The auxiliary vent should be opened, as the evidence records indicate that a pale crystalline film after a cold start suggests vent icing. The Aster-9 manual 3.1 states that a pale crystalline film after a cold start indicates vent icing, and it advises keeping the auxiliary vent closed and running a thaw cycle T4. Therefore, the action is to open the auxiliary vent.",
+          "generated_tokens": 78,
+          "expected_marker_hits": [
+            "auxiliary",
+            "closed",
+            "cycle",
+            "keep",
+            "thaw",
+            "vent"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-A9-CURRENT",
+            "DOC-A9-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-A9-CURRENT"
+            },
+            {
+              "document_id": "DOC-A9-REGISTER"
+            }
+          ],
+          "output": "После холодного запуска на клапане Aster-9 появился серебристый иней. Следует открыть вспомогательный канал, так как руководство Aster-9 3.1 указывает, что светлая кристаллическая плёнка после холодного запуска означает обледенение канала. Оставьте вспомогательный канал закрытым и запустите цикл оттаивания T4.",
+          "generated_tokens": 111,
+          "expected_marker_hits": [],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-04",
+      "family": "lexical_stale_trap",
+      "method": "oracle",
+      "expected_main_claim": "run_aster_9_thaw_t4",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-A9-CURRENT",
+            "DOC-A9-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-A9-CURRENT"
+            },
+            {
+              "document_id": "DOC-A9-REGISTER"
+            }
+          ],
+          "output": "The auxiliary vent should be opened, as the evidence records indicate that a pale crystalline film after a cold start suggests vent icing. The Aster-9 manual 3.1 states that a pale crystalline film after a cold start indicates vent icing, and it advises keeping the auxiliary vent closed and running a thaw cycle T4. Therefore, the action is to open the auxiliary vent.",
+          "generated_tokens": 78,
+          "expected_marker_hits": [
+            "auxiliary",
+            "closed",
+            "cycle",
+            "keep",
+            "thaw",
+            "vent"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-A9-CURRENT",
+            "DOC-A9-REGISTER"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-A9-CURRENT"
+            },
+            {
+              "document_id": "DOC-A9-REGISTER"
+            }
+          ],
+          "output": "После холодного запуска на клапане Aster-9 появился серебристый иней. Следует открыть вспомогательный канал, так как руководство Aster-9 3.1 указывает, что светлая кристаллическая плёнка после холодного запуска означает обледенение канала. Оставьте вспомогательный канал закрытым и запустите цикл оттаивания T4.",
+          "generated_tokens": 111,
+          "expected_marker_hits": [],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-05",
+      "family": "complementary_composition",
+      "method": "lexical",
+      "expected_main_claim": "isolate_north_then_vector_6",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-M3-LOG",
+            "DOC-M3-DIAG",
+            "DOC-N11-SAFETY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-M3-LOG",
+              "score": 5.367518
+            },
+            {
+              "document_id": "DOC-M3-DIAG",
+              "score": 4.539853
+            },
+            {
+              "document_id": "DOC-N11-SAFETY",
+              "score": 2.791493
+            }
+          ],
+          "output": "The evidence records indicate that Mira-3 emitted three brief blue flashes immediately after load transfer, which are consistent with phase inversion. The diagnostic guide identifies this as a phase inversion, and the N11 safety protocol recommends isolating the north sector first and applying the correction vector six. Therefore, the safe correction sequence is to isolate the north sector first and apply the correction vector six.",
+          "generated_tokens": 78,
+          "expected_marker_hits": [
+            "apply",
+            "correction",
+            "inversion",
+            "isolate",
+            "north",
+            "phase",
+            "sector",
+            "vector"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-M3-LOG",
+            "DOC-M3-DIAG",
+            "DOC-A9-CURRENT"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-M3-LOG",
+              "score": 6.264355
+            },
+            {
+              "document_id": "DOC-M3-DIAG",
+              "score": 5.179334
+            },
+            {
+              "document_id": "DOC-A9-CURRENT",
+              "score": 1.578291
+            }
+          ],
+          "output": "Событие — инверсия фазы после переноса нагрузки Mira-3. Безопасная последовательность исправления — взять из актуального протокола безопасности N11.",
+          "generated_tokens": 49,
+          "expected_marker_hits": [],
+          "manual_review": "safe_but_incomplete",
+          "source_exact_set": false,
+          "source_recall": 0.666667
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-05",
+      "family": "complementary_composition",
+      "method": "semantic",
+      "expected_main_claim": "isolate_north_then_vector_6",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW",
+            "DOC-M3-DIAG",
+            "DOC-O4-PRIMARY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 0.948562
+            },
+            {
+              "document_id": "DOC-M3-DIAG",
+              "score": 0.945658
+            },
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 0.943627
+            }
+          ],
+          "output": "The evidence records indicate that Mira-3 emitted three brief blue flashes immediately after load transfer, which are consistent with phase inversion. The Mira-3 diagnostic guide specifies that three short blue pulses after load transfer identify phase inversion, and the Orin-4 pressure guide indicates that a violet halo after a pressure surge marks an outer seal breach. \n\nThe safe correction sequence is to isolate the line and inspect the outer seal to prevent further damage or failure.",
+          "generated_tokens": 92,
+          "expected_marker_hits": [
+            "correction",
+            "event",
+            "inversion",
+            "isolate",
+            "phase"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.333333
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-M3-DIAG",
+            "DOC-M3-LOG",
+            "DOC-O4-LOG"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-M3-DIAG",
+              "score": 0.964034
+            },
+            {
+              "document_id": "DOC-M3-LOG",
+              "score": 0.957346
+            },
+            {
+              "document_id": "DOC-O4-LOG",
+              "score": 0.955436
+            }
+          ],
+          "output": "Событие — инверсия фазы. Безопасная последовательность исправления — взять из актуального протокола безопасности N11.",
+          "generated_tokens": 38,
+          "expected_marker_hits": [],
+          "manual_review": "safe_but_incomplete",
+          "source_exact_set": false,
+          "source_recall": 0.666667
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-05",
+      "family": "complementary_composition",
+      "method": "raw_majority",
+      "expected_main_claim": "isolate_north_then_vector_6",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-N11-SAFETY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-N11-SAFETY"
+            }
+          ],
+          "output": "The evidence records indicate that Mira-3 emitted three brief blue flashes immediately after load transfer. This suggests that the spacecraft experienced a phase inversion event. The N11 protocol specifies that for confirmed Mira-3 phase inversion, the north sector should be isolated first, followed by applying the correction vector six. Therefore, the safe correction sequence is to isolate the north sector first and then apply the correction vector six.",
+          "generated_tokens": 84,
+          "expected_marker_hits": [
+            "apply",
+            "correction",
+            "event",
+            "inversion",
+            "isolate",
+            "north",
+            "phase",
+            "sector",
+            "vector"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": false,
+          "source_recall": 0.333333
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-N11-SAFETY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-N11-SAFETY"
+            }
+          ],
+          "output": "Событие: Перенос нагрузки Mira-3. Безопасная последовательность исправления: Изолировать северный сектор, затем применить корректирующий вектор шесть.\n\n### Объяснение:\n\n1. **Событие**: Перенос нагрузки Mira-3.  \n   - Это событие означает, что система Mira-3 была перенесена с одной фазы на другую, что может привести к изменению её",
+          "generated_tokens": 112,
+          "expected_marker_hits": [],
+          "manual_review": "safe_but_incomplete",
+          "source_exact_set": false,
+          "source_recall": 0.333333
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-05",
+      "family": "complementary_composition",
+      "method": "evidence_graph",
+      "expected_main_claim": "isolate_north_then_vector_6",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-M3-DIAG",
+            "DOC-M3-LOG",
+            "DOC-N11-SAFETY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-M3-DIAG"
+            },
+            {
+              "document_id": "DOC-M3-LOG"
+            },
+            {
+              "document_id": "DOC-N11-SAFETY"
+            }
+          ],
+          "output": "The evidence records indicate that Mira-3 emitted three brief blue flashes immediately after load transfer, which are consistent with the diagnostic guide indicating phase inversion. The current N11 safety protocol recommends isolating the north sector first and applying the correction vector six for confirmed phase inversion. \n\n**Action:** Isolate the north sector first, then apply correction vector six.  \n**Reason:** The evidence records confirm the occurrence of three short blue pulses after load transfer, which aligns with the diagnostic guide for phase inversion. The N11 safety protocol provides a recommended remedy",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "apply",
+            "correction",
+            "inversion",
+            "isolate",
+            "north",
+            "phase",
+            "sector",
+            "vector"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-M3-DIAG",
+            "DOC-M3-LOG",
+            "DOC-N11-SAFETY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-M3-DIAG"
+            },
+            {
+              "document_id": "DOC-M3-LOG"
+            },
+            {
+              "document_id": "DOC-N11-SAFETY"
+            }
+          ],
+          "output": "Событие — инверсия фазы Mira-3. Безопасная последовательность исправления: изолировать северный сектор, применить корректирующий вектор шесть.",
+          "generated_tokens": 52,
+          "expected_marker_hits": [],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-05",
+      "family": "complementary_composition",
+      "method": "oracle",
+      "expected_main_claim": "isolate_north_then_vector_6",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-M3-DIAG",
+            "DOC-M3-LOG",
+            "DOC-N11-SAFETY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-M3-DIAG"
+            },
+            {
+              "document_id": "DOC-M3-LOG"
+            },
+            {
+              "document_id": "DOC-N11-SAFETY"
+            }
+          ],
+          "output": "The evidence records indicate that Mira-3 emitted three brief blue flashes immediately after load transfer, which are consistent with the diagnostic guide indicating phase inversion. The current N11 safety protocol recommends isolating the north sector first and applying the correction vector six for confirmed phase inversion. \n\n**Action:** Isolate the north sector first, then apply correction vector six.  \n**Reason:** The evidence records confirm the occurrence of three short blue pulses after load transfer, which aligns with the diagnostic guide for phase inversion. The N11 safety protocol provides a recommended remedy",
+          "generated_tokens": 112,
+          "expected_marker_hits": [
+            "apply",
+            "correction",
+            "inversion",
+            "isolate",
+            "north",
+            "phase",
+            "sector",
+            "vector"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-M3-DIAG",
+            "DOC-M3-LOG",
+            "DOC-N11-SAFETY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-M3-DIAG"
+            },
+            {
+              "document_id": "DOC-M3-LOG"
+            },
+            {
+              "document_id": "DOC-N11-SAFETY"
+            }
+          ],
+          "output": "Событие — инверсия фазы Mira-3. Безопасная последовательность исправления: изолировать северный сектор, применить корректирующий вектор шесть.",
+          "generated_tokens": 52,
+          "expected_marker_hits": [],
+          "manual_review": "correct",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-06",
+      "family": "insufficient_evidence",
+      "method": "lexical",
+      "expected_main_claim": "request_rill_5_spectrum_trace",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW",
+            "DOC-R5-RUMOR",
+            "DOC-V2-MANUAL"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 4.988339
+            },
+            {
+              "document_id": "DOC-R5-RUMOR",
+              "score": 4.936373
+            },
+            {
+              "document_id": "DOC-V2-MANUAL",
+              "score": 1.317451
+            }
+          ],
+          "output": "Rill-5 emits a steady white tone, but no spectrum trace is available. According to the documentation, a white tone can indicate either coolant resonance or clock drift. Since a spectrum trace is required before choosing an intervention, it is not possible to determine the exact cause of the white tone. Therefore, it is not necessary to reset Rill-5.",
+          "generated_tokens": 73,
+          "expected_marker_hits": [
+            "intervention",
+            "spectrum",
+            "trace"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": false,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-R5-RUMOR",
+            "DOC-R5-OVERVIEW",
+            "DOC-K7-COPY-A"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-RUMOR",
+              "score": 3.726314
+            },
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 2.703353
+            },
+            {
+              "document_id": "DOC-K7-COPY-A",
+              "score": 0.888225
+            }
+          ],
+          "output": "Рассмотрим каждый из предоставленных источников и определим, что следует делать, если Rill-5 испытывает постоянный белый тон, но спектральной трассы нет.\n\n1. **[DOC-R5-RUMOR] status=unverified; source=unsigned_forum_post; lineage=LIN-R5-RUMOR; date=2142-02-16**  \n   Этот источник указывает, что белый тон Rill-5 исправляется перез",
+          "generated_tokens": 112,
+          "expected_marker_hits": [],
+          "manual_review": "safe_but_incomplete",
+          "source_exact_set": false,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-06",
+      "family": "insufficient_evidence",
+      "method": "semantic",
+      "expected_main_claim": "request_rill_5_spectrum_trace",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW",
+            "DOC-A9-CURRENT",
+            "DOC-O4-PRIMARY"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 0.952933
+            },
+            {
+              "document_id": "DOC-A9-CURRENT",
+              "score": 0.937738
+            },
+            {
+              "document_id": "DOC-O4-PRIMARY",
+              "score": 0.93509
+            }
+          ],
+          "output": "Rill-5 should not be reset. The evidence records indicate that a steady white tone can indicate either coolant resonance or clock drift, and a spectrum trace is required before choosing an intervention. The current manual suggests that a pale crystalline film after a cold start indicates vent icing, which requires keeping the auxiliary vent closed and running a thaw cycle T4. Therefore, the evidence is insufficient to determine the cause of the white tone and the need for a reset.",
+          "generated_tokens": 93,
+          "expected_marker_hits": [
+            "intervention",
+            "spectrum",
+            "trace"
+          ],
+          "manual_review": "correct",
+          "source_exact_set": false,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW",
+            "DOC-A9-CURRENT",
+            "DOC-V2-RUMOR"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW",
+              "score": 0.958713
+            },
+            {
+              "document_id": "DOC-A9-CURRENT",
+              "score": 0.944637
+            },
+            {
+              "document_id": "DOC-V2-RUMOR",
+              "score": 0.943567
+            }
+          ],
+          "output": "Рассмотрим действия, которые следует предпринять, чтобы решить вопрос о перезапуске Rill-5. \n\n1. **Обзор Rill-5**: В документе [DOC-R5-OVERVIEW] указывается, что белый тон может означать резонанс охлаждения или дрейф тактовой частоты. Это указывает на то, что Rill-5 может быть холодным или исправленным. Однако, для точного определения,",
+          "generated_tokens": 112,
+          "expected_marker_hits": [],
+          "manual_review": "safe_but_incomplete",
+          "source_exact_set": false,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-06",
+      "family": "insufficient_evidence",
+      "method": "raw_majority",
+      "expected_main_claim": "request_rill_5_spectrum_trace",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-R5-RUMOR"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-RUMOR"
+            }
+          ],
+          "output": "Yes, Rill-5 should be reset. The evidence records indicate that the issue is related to the white tone, and the unsigned comment suggests that resetting the device usually resolves the problem. Therefore, it is advisable to reset Rill-5 to address the issue.",
+          "generated_tokens": 55,
+          "expected_marker_hits": [],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-R5-RUMOR"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-RUMOR"
+            }
+          ],
+          "output": "Да, следует перезапустить Rill-5, так как он исправляется перезапуском. Следует обратить внимание на то, что неподписанный комментарий указывает на то, что исправление происходит при перезапуске. Это подтверждает, что Rill-5 исправляется перезапуском, и его тон становится постоянным.",
+          "generated_tokens": 93,
+          "expected_marker_hits": [],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": false,
+          "source_recall": 0.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-06",
+      "family": "insufficient_evidence",
+      "method": "evidence_graph",
+      "expected_main_claim": "request_rill_5_spectrum_trace",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW"
+            }
+          ],
+          "output": "Rill-5 emits a steady white tone, but no spectrum trace is available. It should be reset. The evidence records indicate that the white tone can indicate either coolant resonance or clock drift, and a spectrum trace is required before choosing an intervention. Therefore, resetting Rill-5 is the appropriate action to address the issue.",
+          "generated_tokens": 67,
+          "expected_marker_hits": [
+            "intervention",
+            "spectrum",
+            "trace"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW"
+            }
+          ],
+          "output": "Рассмотрим действие, которое следует принять, основываясь на данных из предоставленных записей. В данном случае, Rill-5 издает постоянный белый тон, что может указывать на наличие резонанса охлаждения или дрейфа тактовой частоты. Однако, для точного определения, необходимо иметь спектральная трасса, которая будет предоставлена в следующем шаге.\n\nДля начала, рассмотрим, что такое спектральная",
+          "generated_tokens": 112,
+          "expected_marker_hits": [],
+          "manual_review": "safe_but_incomplete",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "PUBLIC-06",
+      "family": "insufficient_evidence",
+      "method": "oracle",
+      "expected_main_claim": "request_rill_5_spectrum_trace",
+      "outputs": {
+        "en": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW"
+            }
+          ],
+          "output": "Rill-5 emits a steady white tone, but no spectrum trace is available. It should be reset. The evidence records indicate that the white tone can indicate either coolant resonance or clock drift, and a spectrum trace is required before choosing an intervention. Therefore, resetting Rill-5 is the appropriate action to address the issue.",
+          "generated_tokens": 67,
+          "expected_marker_hits": [
+            "intervention",
+            "spectrum",
+            "trace"
+          ],
+          "manual_review": "wrong_or_contradictory",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        },
+        "ru": {
+          "selected_document_ids": [
+            "DOC-R5-OVERVIEW"
+          ],
+          "ranking": [
+            {
+              "document_id": "DOC-R5-OVERVIEW"
+            }
+          ],
+          "output": "Рассмотрим действие, которое следует принять, основываясь на данных из предоставленных записей. В данном случае, Rill-5 издает постоянный белый тон, что может указывать на наличие резонанса охлаждения или дрейфа тактовой частоты. Однако, для точного определения, необходимо иметь спектральная трасса, которая будет предоставлена в следующем шаге.\n\nДля начала, рассмотрим, что такое спектральная",
+          "generated_tokens": 112,
+          "expected_marker_hits": [],
+          "manual_review": "safe_but_incomplete",
+          "source_exact_set": true,
+          "source_recall": 1.0
+        }
+      }
+    }
+  ],
+  "elapsed_seconds": 2587.046,
+  "peak_rss_mib": 3885.41,
+  "claim_boundary": {
+    "en": "Public synthetic development run. No weights were trained. Oracle and evidence-graph controls use predeclared task metadata and are not evidence of learned routing or generalization.",
+    "ru": "Открытый синтетический development-запуск. Веса не обучались. Oracle и evidence-graph используют заранее заданные метаданные задач и не доказывают обученный routing или обобщение."
+  },
+  "manual_review": {
+    "reviewer": "Morrow (AI-assisted manual reading)",
+    "owner_visual_review": "pending",
+    "labels": [
+      "correct",
+      "safe_but_incomplete",
+      "wrong_or_contradictory"
+    ],
+    "rule": {
+      "en": "Correct requires the requested action without a contradictory action. Safe-but-incomplete avoids the harmful action but omits a required diagnosis, action, or evidence request.",
+      "ru": "Верный ответ должен назвать требуемое действие без противоречащего действия. Safe-but-incomplete избегает опасного действия, но пропускает обязательный диагноз, шаг или запрос доказательства."
+    }
+  },
+  "summary": {
+    "lexical": {
+      "tasks": 6,
+      "generations": 12,
+      "source_exact_set_generations": 2,
+      "mean_source_recall": 0.736111,
+      "correct_generations": 5,
+      "safe_but_incomplete_generations": 3,
+      "wrong_or_contradictory_generations": 4,
+      "fully_correct_tasks_both_languages": 1
+    },
+    "semantic": {
+      "tasks": 6,
+      "generations": 12,
+      "source_exact_set_generations": 0,
+      "mean_source_recall": 0.458333,
+      "correct_generations": 2,
+      "safe_but_incomplete_generations": 2,
+      "wrong_or_contradictory_generations": 8,
+      "fully_correct_tasks_both_languages": 0
+    },
+    "raw_majority": {
+      "tasks": 6,
+      "generations": 12,
+      "source_exact_set_generations": 6,
+      "mean_source_recall": 0.555556,
+      "correct_generations": 5,
+      "safe_but_incomplete_generations": 1,
+      "wrong_or_contradictory_generations": 6,
+      "fully_correct_tasks_both_languages": 2
+    },
+    "evidence_graph": {
+      "tasks": 6,
+      "generations": 12,
+      "source_exact_set_generations": 12,
+      "mean_source_recall": 1.0,
+      "correct_generations": 6,
+      "safe_but_incomplete_generations": 2,
+      "wrong_or_contradictory_generations": 4,
+      "fully_correct_tasks_both_languages": 3
+    },
+    "oracle": {
+      "tasks": 6,
+      "generations": 12,
+      "source_exact_set_generations": 12,
+      "mean_source_recall": 1.0,
+      "correct_generations": 6,
+      "safe_but_incomplete_generations": 2,
+      "wrong_or_contradictory_generations": 4,
+      "fully_correct_tasks_both_languages": 3
+    }
+  },
+  "finding": {
+    "en": "The evidence graph recovered the ideal source set for all 12 language generations, but frozen Qwen produced only 6 correct generations. Retrieval was necessary but not sufficient: the base sometimes reversed explicit instructions or failed to abstain even with oracle evidence.",
+    "ru": "Evidence graph нашёл идеальный набор источников во всех 12 языковых генерациях, но замороженная Qwen дала только 6 верных ответов. Хорошего поиска недостаточно: база иногда переворачивала прямую инструкцию или не отказывалась от действия даже с oracle-доказательствами."
+  },
+  "failure_examples": [
+    {
+      "task_id": "PUBLIC-04",
+      "finding": {
+        "en": "With the current manual saying keep the vent closed, every method still generated open the vent in at least one language.",
+        "ru": "Даже когда актуальное руководство требовало оставить канал закрытым, каждый метод хотя бы на одном языке сгенерировал: открыть канал."
+      }
+    },
+    {
+      "task_id": "PUBLIC-06",
+      "finding": {
+        "en": "Evidence-graph and oracle supplied the abstention record, yet the English generator advised a reset.",
+        "ru": "Evidence-graph и oracle передали запись с требованием воздержаться от решения, но английская генерация посоветовала перезапуск."
+      }
+    }
+  ]
+}
