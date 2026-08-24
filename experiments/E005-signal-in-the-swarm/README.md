@@ -131,3 +131,14 @@ Gate 4B is frozen by hashes in
 `site/experiments/E005/gate-4b-checkpoint-v0.1.json`. Later training and
 evaluation must create new versioned artifacts; they must not overwrite the
 questions, answers, labels, or adapter identities recorded by this checkpoint.
+
+Gate 4C Step 2 freezes a new curriculum before changing any weights. Each of
+the two skills has 192 synthetic lessons: 96 English and 96 Russian. Each skill
+now covers four policy cases, six visibly different question formats, and six
+answer styles. The 384 inputs are unique, and none of the Gate 4B locked entity
+names occur in these lessons. This is training material, not a result. Training
+status remains `not_started`. The public artifact is
+`site/experiments/E005/gate-4c-lessons-v0.1.json`, with canonical content hash
+`08e12b86987bb6d49103f18fe9e1e3cad305abefd3af85d2cbcb2d2bb55badf1`, and a
+human-readable lesson viewer is rendered at
+`/experiment/e005/gate-4/lessons/`.

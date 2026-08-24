@@ -2760,6 +2760,20 @@ function e005Gate4ResultsShell() {
   </section>`;
 }
 
+function e005Gate4LessonsShell() {
+  const title = localized({ en: "The new lessons — before training", ru: "Новые уроки — до обучения" });
+  const intro = localized({
+    en: "Look at every lesson the two future pocket i will see. We change the wording again and again, but keep the skill the same.",
+    ru: "Посмотрите каждый урок, который увидят два будущих pocket i. Мы много раз меняем слова, но оставляем одно и то же умение.",
+  });
+  return `<section class="flow-shell e005-gate4-lessons-page">
+    <div class="flow-step">E005 · GATE 4C · STEP 2</div>
+    <h1>${title}</h1>
+    <p class="contribution-intro">${intro}</p>
+    <div class="experiment-loading">${c("loading")}</div>
+  </section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3088,6 +3102,7 @@ async function loadE005Gate4() {
       <section class="e005-gate4-gates"><div class="flow-step">${e5("passFail")}</div><div>${passFail}</div></section>
       <section class="e004-decision"><span>${e5("ownerStop")}</span><p>${e5("ownerStopCopy")}</p></section>
       <a class="e005-answer-button" href="/experiment/e005/gate-4/results/">${e5("gate4ResultsButton")}</a>
+      <a class="e005-answer-button" href="/experiment/e005/gate-4/lessons/">${localized({ en: "SEE THE 384 NEW LESSONS BEFORE TRAINING →", ru: "СМОТРЕТЬ 384 НОВЫХ УРОКА ДО ОБУЧЕНИЯ →" })}</a>
       <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/gate-4-data-v0.1.json">${e5("viewDataset")}</a><a class="quiet-link" href="/experiments/E005/gate-4-results-v0.1.json">RESULTS JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-archivist-microscope-v0.1.json">ARCHIVIST JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-safety-microscope-v0.1.json">SAFETY JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-smoke-v0.1.json">SMOKE JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-design-v0.1.json">PLAN JSON ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
@@ -3201,6 +3216,83 @@ async function loadE005Gate4Results() {
     renderQuestion();
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate4Lessons() {
+  const target = document.querySelector(".e005-gate4-lessons-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-4c-lessons-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 Gate 4C lessons unavailable");
+    const data = await response.json();
+    const text = {
+      en: {
+        frozen: "LESSONS FROZEN · TRAINING HAS NOT STARTED",
+        source_work: "Skill 1 · choose trustworthy sources",
+        safe_action: "Skill 2 · act only with enough evidence",
+        lesson: "LESSON",
+        sees: "WHAT POCKET I SEES",
+        learns: "WHAT WE TEACH IT TO ANSWER",
+        previous: "← PREVIOUS",
+        next: "NEXT →",
+        note: "192 lessons per skill · 96 English + 96 Russian · 6 different shapes of question · 4 kinds of situation",
+        back: "BACK TO GATE 4",
+      },
+      ru: {
+        frozen: "УРОКИ ЗАМОРОЖЕНЫ · ОБУЧЕНИЕ ЕЩЁ НЕ НАЧАЛОСЬ",
+        source_work: "Умение 1 · выбирать надёжные источники",
+        safe_action: "Умение 2 · действовать, только когда доказательств хватает",
+        lesson: "УРОК",
+        sees: "ЧТО ВИДИТ POCKET I",
+        learns: "КАКОМУ ОТВЕТУ МЫ ЕГО УЧИМ",
+        previous: "← НАЗАД",
+        next: "ДАЛЬШЕ →",
+        note: "192 урока на умение · 96 русских + 96 английских · 6 разных форм вопроса · 4 вида ситуации",
+        back: "ВЕРНУТЬСЯ К GATE 4",
+      },
+    }[lang];
+    let skill = "source_work";
+    let index = 0;
+    const visible = () => data.lessons.filter(item => item.skill === skill && item.language === lang);
+    target.innerHTML = `
+      <section class="e005-gate4-lessons-status"><strong>${text.frozen}</strong><p>${text.note}</p></section>
+      <nav class="e005-gate4-skill-tabs">
+        <button type="button" data-lesson-skill="source_work">${text.source_work}</button>
+        <button type="button" data-lesson-skill="safe_action">${text.safe_action}</button>
+      </nav>
+      <div class="e005-gate4-lesson-viewer"></div>
+      <div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/">${text.back}</a><a class="quiet-link" href="/experiments/E005/gate-4c-lessons-v0.1.json">JSON ↗</a></div>`;
+    const render = () => {
+      const rows = visible();
+      index = Math.max(0, Math.min(index, rows.length - 1));
+      const row = rows[index];
+      target.querySelectorAll("[data-lesson-skill]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.lessonSkill === skill)));
+      target.querySelector(".e005-gate4-lesson-viewer").innerHTML = `
+        <div class="e005-gate4-question-nav"><span>${text.lesson} ${index + 1} / ${rows.length}</span><span>${escapeHTML(row.policy_case)} · ${Number(row.format) + 1}/6</span></div>
+        <article class="e005-gate4-lesson-card">
+          <section><span>${text.sees}</span><p>${escapeHTML(row.input)}</p></section>
+          <section><span>${text.learns}</span><p>${escapeHTML(row.target)}</p></section>
+        </article>
+        <nav class="e005-gate4-question-controls"><button type="button" data-lesson-previous ${index === 0 ? "disabled" : ""}>${text.previous}</button><button type="button" data-lesson-next ${index === rows.length - 1 ? "disabled" : ""}>${text.next}</button></nav>`;
+    };
+    target.addEventListener("click", event => {
+      const skillButton = event.target.closest("[data-lesson-skill]");
+      if (skillButton) {
+        skill = skillButton.dataset.lessonSkill;
+        index = 0;
+        render();
+      } else if (event.target.closest("[data-lesson-previous]")) {
+        index -= 1;
+        render();
+      } else if (event.target.closest("[data-lesson-next]")) {
+        index += 1;
+        render();
+      }
+    });
+    render();
+  } catch (error) {
+    target.innerHTML = `<p class="control-warning">${escapeHTML(error.message)}</p>`;
   }
 }
 
@@ -4077,6 +4169,10 @@ function render() {
     document.title = `${e5("gate4ResultsTitle")} — i`;
     app.innerHTML = withLanguage(e005Gate4ResultsShell());
     loadE005Gate4Results();
+  } else if (path === "experiment/e005/gate-4/lessons") {
+    document.title = `${localized({ en: "Gate 4C lessons", ru: "Уроки Gate 4C" })} — i`;
+    app.innerHTML = withLanguage(e005Gate4LessonsShell());
+    loadE005Gate4Lessons();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
