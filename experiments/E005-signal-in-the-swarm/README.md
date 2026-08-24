@@ -234,3 +234,11 @@ avoid JSON in at least 20/24 answers, and remain incomplete when either capsule
 is missing. No source-model weights change. The visible checkpoint is
 `/experiment/e005/gate-5a/human/`; its locked exam content hash is
 `021cc8aa7421b28a8d13a64dc694341f408ff318fa501953c8e86ead419a66a7`.
+
+Gate 5A.2 was then run without training, RAG, internet, or sampling. It failed:
+human review found 4/24 complete natural answers against a 20/24 pass rule
+(English 4/12, Russian 0/12). The strict phrase checker counted 1/24. Perfect
+oracle capsules also reached only 4/24, so the frozen 0.6B source model—not just
+the learned pockets—was unable to preserve both facts reliably. See every raw
+answer at `/experiment/e005/gate-5a/human/results/` and the public artifact at
+`site/experiments/E005/gate-5a2-results-v0.1.json`.

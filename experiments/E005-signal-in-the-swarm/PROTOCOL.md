@@ -209,6 +209,17 @@ facts and exposes neither JSON nor field names. Question-only and missing-one-
 capsule controls test whether the source model invents absent knowledge. This
 remains explicit text-capsule synthesis, not learned or latent merging.
 
+Gate 5A.2 failed. CAUSE-I and SAFETY-I still emitted their raw capsules, but the
+frozen source Qwen preserved both required facts in only 4 of 24 natural answers
+under human review (the frozen phrase checker counted 1 of 24). The preregistered
+gate required 20 of 24. English scored 4 of 12; Russian scored 0 of 12. Even the
+oracle capsules scored 4 of 24 under the same human review, isolating the failure
+to the final language synthesizer rather than to capsule retrieval alone.
+
+This result is public at `/experiment/e005/gate-5a/human/results/`. Every raw
+answer remains visible. Gate 5B must not begin until a source merger is tested on
+this unchanged exam without changing the questions or pocket capsules.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

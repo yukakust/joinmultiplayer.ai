@@ -2808,6 +2808,10 @@ function e005Gate5A2Shell() {
   return `<section class="flow-shell e005-gate5a2-page"><div class="flow-step">E005 · GATE 5A.2 · ${localized({ en: "LOCKED PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })}</div><h1>${localized({ en: "From machine capsules to a human answer", ru: "Из машинных капсул — в человеческий ответ" })}</h1><p class="contribution-intro">${localized({ en: "Can frozen Qwen explain both pocket i naturally without losing either part?", ru: "Может ли замороженная Qwen естественно объяснить вывод двух pocket i, не потеряв ни одну часть?" })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate5A2ResultsShell() {
+  return `<section class="flow-shell e005-gate5a2-results-page"><div class="flow-step">E005 · GATE 5A.2 · ${localized({ en: "RESULT", ru: "РЕЗУЛЬТАТ" })}</div><h1>${localized({ en: "The pockets knew. The final i forgot.", ru: "Pocket i знали. Финальный i забыл." })}</h1><p class="contribution-intro">${localized({ en: "Open every question and read every unedited answer.", ru: "Откройте любой вопрос и прочитайте все ответы без редактуры." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3491,7 +3495,37 @@ async function loadE005Gate5A2() {
     const design = await designResponse.json();
     const exam = await examResponse.json();
     const pick = value => escapeHTML(value?.[language] || value?.en || "");
-    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "LOCKED BEFORE RUN · SOURCE QWEN UNCHANGED", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА · ИСХОДНАЯ QWEN НЕ ИЗМЕНЕНА" })}</strong><p>${pick(design.question)}</p></section><ol class="e005-gate5a-steps"><li>${localized({ en: "CAUSE-I and SAFETY-I answer independently.", ru: "CAUSE-I и SAFETY-I отвечают независимо." })}</li><li>${localized({ en: "Frozen Qwen receives the question and their two raw capsules.", ru: "Замороженная Qwen получает вопрос и две сырые капсулы." })}</li><li>${localized({ en: "It writes one natural answer without JSON.", ru: "Она пишет один естественный ответ без JSON." })}</li><li>${localized({ en: "Missing-capsule controls check that it does not invent the other half.", ru: "Контроли без одной капсулы проверяют, что она не выдумывает вторую половину." })}</li></ol><section class="e005-gate4-result-verdict"><span>${localized({ en: "PASS RULE", ru: "ПРАВИЛО ПОБЕДЫ" })}</span><h2>${localized({ en: "At least 20/24 complete natural answers; no more than 8/24 when either capsule is missing.", ru: "Не меньше 20/24 полных человеческих ответов; не больше 8/24 без любой из капсул." })}</h2><p>${pick(design.output_rule)}</p></section><section class="e005-task-section"><div class="flow-step">${localized({ en: "ALL 24 NEW QUESTIONS", ru: "ВСЕ 24 НОВЫХ ВОПРОСА" })}</div><div class="e005-tasks">${exam.questions.map((row, index) => `<details class="e005-task" ${index === 0 ? "open" : ""}><summary><b>${escapeHTML(row.id)}</b><span>${escapeHTML(row.question)}</span></summary><div class="e005-task-body"><div class="e005-claim-grid"><article><span>CAUSE-I</span><strong>${escapeHTML(JSON.stringify(row.expected_cause_capsule))}</strong></article><article><span>SAFETY-I</span><strong>${escapeHTML(JSON.stringify(row.expected_safety_capsule))}</strong></article></div><div class="e005-answer"><span>${localized({ en: "EXPECTED HUMAN ANSWER", ru: "ОЖИДАЕМЫЙ ЧЕЛОВЕЧЕСКИЙ ОТВЕТ" })}</span><strong>${escapeHTML(row.expected_human_answer)}</strong></div></div></details>`).join("")}</div></section><p class="control-warning">${localized({ en: "This still uses explicit text capsules. Learned and latent merging belong to Gate 5B.", ru: "Здесь всё ещё используются явные текстовые капсулы. Обученное и скрытое нейронное объединение относится к Gate 5B." })}</p><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5a/results/">${localized({ en: "BACK TO GATE 5A", ru: "ВЕРНУТЬСЯ К GATE 5A" })}</a><a class="quiet-link" href="/experiments/E005/gate-5a2-locked-test-v0.1.json">LOCKED EXAM JSON ↗</a></div>`;
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "TEST COMPLETE · RESULT FAILED", ru: "ТЕСТ ЗАВЕРШЁН · РЕЗУЛЬТАТ НЕ ПРОШЁЛ" })}</strong><p>${pick(design.question)}</p></section><ol class="e005-gate5a-steps"><li>${localized({ en: "CAUSE-I and SAFETY-I answer independently.", ru: "CAUSE-I и SAFETY-I отвечают независимо." })}</li><li>${localized({ en: "Frozen Qwen receives the question and their two raw capsules.", ru: "Замороженная Qwen получает вопрос и две сырые капсулы." })}</li><li>${localized({ en: "It writes one natural answer without JSON.", ru: "Она пишет один естественный ответ без JSON." })}</li><li>${localized({ en: "Missing-capsule controls check that it does not invent the other half.", ru: "Контроли без одной капсулы проверяют, что она не выдумывает вторую половину." })}</li></ol><section class="e005-gate4-result-verdict"><span>${localized({ en: "PASS RULE", ru: "ПРАВИЛО ПОБЕДЫ" })}</span><h2>${localized({ en: "At least 20/24 complete natural answers; no more than 8/24 when either capsule is missing.", ru: "Не меньше 20/24 полных человеческих ответов; не больше 8/24 без любой из капсул." })}</h2><p>${pick(design.output_rule)}</p></section><div class="actions"><a class="button" href="/experiment/e005/gate-5a/human/results/">${localized({ en: "SEE EVERY ANSWER →", ru: "СМОТРЕТЬ ВСЕ ОТВЕТЫ →" })}</a><a class="button secondary" href="/experiment/e005/gate-5a/results/">${localized({ en: "BACK TO GATE 5A", ru: "ВЕРНУТЬСЯ К GATE 5A" })}</a><a class="quiet-link" href="/experiments/E005/gate-5a2-locked-test-v0.1.json">LOCKED EXAM JSON ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate5A2Results() {
+  const target = document.querySelector(".e005-gate5a2-results-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-5a2-results-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 Gate 5A.2 results unavailable");
+    const data = await response.json();
+    const pick = value => escapeHTML(value?.[language] || value?.en || "");
+    const names = {
+      question_alone: localized({ en: "Qwen without pockets", ru: "Qwen без pocket i" }),
+      actual_pair: localized({ en: "Actual CAUSE-I + SAFETY-I", ru: "Настоящие CAUSE-I + SAFETY-I" }),
+      cause_only: localized({ en: "Only CAUSE-I", ru: "Только CAUSE-I" }),
+      safety_only: localized({ en: "Only SAFETY-I", ru: "Только SAFETY-I" }),
+      oracle_pair: localized({ en: "Two perfect capsules", ru: "Две идеальные капсулы" }),
+    };
+    const rows = data.rows.filter(row => row.language === language);
+    let index = 0;
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-result-verdict is-failed"><span>GATE 5A.2 · ${localized({ en: "FAILED", ru: "НЕ ПРОЙДЕН" })}</span><h2>${localized({ en: "4 of 24 complete answers. We needed 20.", ru: "4 полных ответа из 24. Нужно было 20." })}</h2><p>${pick(data.plain_result)}</p></section><div class="e005-metrics"><article><span>${localized({ en: "HUMAN REVIEW", ru: "ПРОВЕРКА ЧЕЛОВЕКОМ" })}</span><strong>4 / 24</strong><small>${localized({ en: "kept both facts", ru: "сохранили оба факта" })}</small></article><article><span>${localized({ en: "ENGLISH", ru: "АНГЛИЙСКИЙ" })}</span><strong>4 / 12</strong><small>${localized({ en: "complete", ru: "полных" })}</small></article><article><span>${localized({ en: "RUSSIAN", ru: "РУССКИЙ" })}</span><strong>0 / 12</strong><small>${localized({ en: "complete", ru: "полных" })}</small></article></div><p class="control-warning">${pick(data.why_two_numbers)}</p><section class="e005-gate4-lessons-status"><strong>${localized({ en: "WHAT BROKE", ru: "ЧТО СЛОМАЛОСЬ" })}</strong><p>${pick(data.diagnosis)}</p></section><div class="e005-gate4c-result-viewer"></div><p class="control-warning">${pick(data.claim_boundary)}</p><section class="e005-gate4-lessons-status"><strong>${localized({ en: "NEXT", ru: "ДАЛЬШЕ" })}</strong><p>${pick(data.next_step)}</p></section><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5a/human/">${localized({ en: "BACK TO LOCKED PLAN", ru: "ВЕРНУТЬСЯ К ПЛАНУ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5a2-results-v0.1.json">ALL RAW ANSWERS JSON ↗</a></div>`;
+    const render = () => {
+      const row = rows[index];
+      const actual = row.conditions.actual_pair;
+      target.querySelector(".e005-gate4c-result-viewer").innerHTML = `<div class="e005-gate4-question-nav"><span>${localized({ en: "QUESTION", ru: "ВОПРОС" })} ${index + 1} / ${rows.length}</span><span>${escapeHTML(row.id)}</span></div><section class="e005-gate4-current-question"><h2>${escapeHTML(row.question)}</h2><div><span>${localized({ en: "EXPECTED HUMAN ANSWER", ru: "КАКОЙ ОТВЕТ НУЖЕН" })}</span><p>${escapeHTML(row.expected_human_answer)}</p></div><div><span>${localized({ en: "WHAT THE TWO POCKET I SENT", ru: "ЧТО ПРИСЛАЛИ ДВА POCKET I" })}</span><p>CAUSE-I: ${escapeHTML(row.actual_cause_capsule_raw)}<br>SAFETY-I: ${escapeHTML(row.actual_safety_capsule_raw)}</p></div></section><section class="e005-human-result-focus ${actual.human_complete ? "is-correct" : "is-wrong_or_contradictory"}"><span>${localized({ en: "FINAL HUMAN ANSWER", ru: "ИТОГОВЫЙ ОТВЕТ ЧЕЛОВЕКУ" })}</span><h2>${escapeHTML(actual.output)}</h2><strong>${actual.human_complete ? localized({ en: "✓ BOTH FACTS KEPT", ru: "✓ ОБА ФАКТА СОХРАНЕНЫ" }) : localized({ en: "× A FACT WAS LOST OR CHANGED", ru: "× ОДИН ИЗ ФАКТОВ ПОТЕРЯН ИЛИ ИЗМЕНЁН" })}</strong></section><details class="e005-all-controls"><summary>${localized({ en: "COMPARE ALL FIVE ANSWERS", ru: "СРАВНИТЬ ВСЕ ПЯТЬ ОТВЕТОВ" })}</summary><div class="e005-gate4-result-answers">${data.conditions.map((condition, order) => { const answer = row.conditions[condition]; const complete = condition === "actual_pair" || condition === "oracle_pair" ? answer.human_complete : answer.complete; return `<article class="${complete ? "is-correct" : "is-wrong_or_contradictory"}"><header><strong>${order + 1} · ${names[condition]}</strong><span>${complete ? "●" : "×"}</span></header><p>${escapeHTML(answer.output)}</p></article>`; }).join("")}</div></details><nav class="e005-gate4-question-controls"><button data-gate5a2-previous ${index === 0 ? "disabled" : ""}>←</button><button data-gate5a2-next ${index === rows.length - 1 ? "disabled" : ""}>→</button></nav>`;
+    };
+    target.addEventListener("click", event => { if (event.target.closest("[data-gate5a2-previous]")) { index -= 1; render(); } else if (event.target.closest("[data-gate5a2-next]")) { index += 1; render(); } });
+    render();
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -4398,6 +4432,10 @@ function render() {
     document.title = `Gate 5A.2 — i`;
     app.innerHTML = withLanguage(e005Gate5A2Shell());
     loadE005Gate5A2();
+  } else if (path === "experiment/e005/gate-5a/human/results") {
+    document.title = `Gate 5A.2 results — i`;
+    app.innerHTML = withLanguage(e005Gate5A2ResultsShell());
+    loadE005Gate5A2Results();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

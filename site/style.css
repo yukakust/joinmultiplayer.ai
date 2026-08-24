@@ -1543,6 +1543,10 @@ button:disabled {
   border-top: 0.35rem solid #dc735f;
 }
 
+.e005-gate4-result-answers article.is-wrong_or_contradictory {
+  border-top: 0.35rem solid #dc735f;
+}
+
 .e005-gate4-result-answers article.is-partial {
   border-top: 0.35rem solid #dfa853;
 }
@@ -4331,4 +4335,45 @@ blockquote {
   position: absolute;
   left: 1rem;
   color: var(--muted);
+}
+
+.e005-human-result-focus {
+  margin: 1.5rem 0;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border: 1px solid var(--line);
+  border-top: 5px solid #dc735f;
+}
+
+.e005-human-result-focus.is-correct {
+  border-top-color: #8ebc87;
+}
+
+.e005-human-result-focus.is-wrong_or_contradictory {
+  border-top-color: #dc735f;
+}
+
+.e005-human-result-focus span,
+.e005-human-result-focus strong {
+  display: block;
+  font: 700 0.78rem/1.2 var(--mono);
+  letter-spacing: 0.08em;
+}
+
+.e005-human-result-focus h2 {
+  max-width: 42ch;
+  margin: 1rem 0 1.5rem;
+  font-size: clamp(1.35rem, 2.5vw, 2.35rem);
+  line-height: 1.2;
+}
+
+.e005-all-controls {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.e005-all-controls > summary {
+  padding: 1.2rem 0;
+  cursor: pointer;
+  font: 700 0.9rem/1.2 var(--mono);
 }
