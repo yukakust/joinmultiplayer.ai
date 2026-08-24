@@ -220,6 +220,13 @@ This result is public at `/experiment/e005/gate-5a/human/results/`. Every raw
 answer remains visible. Gate 5B must not begin until a source merger is tested on
 this unchanged exam without changing the questions or pocket capsules.
 
+Gate 5A.3 isolates the interface failure. It reuses the same questions and
+trained adapters, but a frozen public codebook expands each actual label into a
+short meaningful claim with pocket provenance. The answer budget is 192 tokens.
+Frozen Base and instruction-trained Qwen are compared; missing-capsule and
+question-only controls remain. This is still a text protocol, not the planned
+parallel neural-track architecture.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

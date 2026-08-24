@@ -242,3 +242,9 @@ oracle capsules also reached only 4/24, so the frozen 0.6B source model—not ju
 the learned pockets—was unable to preserve both facts reliably. See every raw
 answer at `/experiment/e005/gate-5a/human/results/` and the public artifact at
 `site/experiments/E005/gate-5a2-results-v0.1.json`.
+
+Gate 5A.3 is frozen before execution at `/experiment/e005/gate-5a/semantic/`.
+It keeps the same 24 questions and trained pocket adapters, expands their actual
+labels through one public semantic codebook, raises the answer budget to 192
+tokens, and compares frozen Base Qwen with frozen instruction-trained Qwen.
+This is a text-interface experiment, not latent or distributed-track merging.

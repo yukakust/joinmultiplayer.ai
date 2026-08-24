@@ -1,0 +1,59 @@
+{
+  "experiment_id": "E005",
+  "gate": "5A.3",
+  "kind": "locked_semantic_capsule_synthesis_design",
+  "status": "locked_not_run",
+  "reuses_exam_content_sha256": "021cc8aa7421b28a8d13a64dc694341f408ff318fa501953c8e86ead419a66a7",
+  "question": {
+    "en": "Can a final i preserve two pocket i when their capsules contain meaningful statements instead of secret codes?",
+    "ru": "Сможет ли финальный i сохранить знания двух pocket i, если в капсулах будут понятные утверждения, а не тайные коды?"
+  },
+  "fixed": [
+    "the same 24 Gate 5A.2 questions",
+    "the same trained CAUSE-I and SAFETY-I adapters",
+    "greedy generation without internet or RAG",
+    "one round: both pockets answer in parallel, then one source model answers"
+  ],
+  "changed": [
+    "a deterministic codebook expands each actual pocket label into a human-readable claim",
+    "the capsule names the observed signal and its pocket as provenance",
+    "the answer budget grows from 64 to 192 tokens",
+    "frozen Qwen3-0.6B-Base is compared with frozen Qwen3-0.6B post-trained for instructions"
+  ],
+  "semantic_capsule_contract": {
+    "cause": {
+      "claim": "CAUSE-I concludes that the cause is thermal rebound.",
+      "basis": "CAUSE-I matched the observed device signal using its personal diagnostic skill.",
+      "source": "CAUSE-I"
+    },
+    "safety": {
+      "action": "Keep the auxiliary vent closed.",
+      "basis": "SAFETY-I matched the observed work-zone signal using its personal safety skill.",
+      "source": "SAFETY-I"
+    }
+  },
+  "conditions": [
+    "base_question_alone",
+    "base_semantic_actual_pair",
+    "instruct_question_alone",
+    "instruct_semantic_actual_pair",
+    "instruct_cause_only",
+    "instruct_safety_only",
+    "instruct_semantic_oracle_pair"
+  ],
+  "pass_rule": {
+    "instruct_actual_complete_at_least": 20,
+    "instruct_actual_natural_at_least": 20,
+    "instruct_question_alone_complete_at_most": 8,
+    "instruct_each_missing_capsule_complete_at_most": 8,
+    "instruct_oracle_complete_at_least": 20,
+    "no_output_may_be_scored_after_token_cutoff": true
+  },
+  "plain_limit": {
+    "en": "This tests a text protocol between pocket i. It is not the planned neural network with parallel hidden-state tracks.",
+    "ru": "Это тест текстового протокола между pocket i. Это ещё не запланированная нейросеть с параллельными скрытыми треками."
+  },
+  "training_performed": false,
+  "run_performed": false,
+  "content_sha256": "67f101c8bf86d3e55bfc39650195a939f813d9bc909b2fbe452538eaa9c30523"
+}

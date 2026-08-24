@@ -2812,6 +2812,10 @@ function e005Gate5A2ResultsShell() {
   return `<section class="flow-shell e005-gate5a2-results-page"><div class="flow-step">E005 · GATE 5A.2 · ${localized({ en: "RESULT", ru: "РЕЗУЛЬТАТ" })}</div><h1>${localized({ en: "The pockets knew. The final i forgot.", ru: "Pocket i знали. Финальный i забыл." })}</h1><p class="contribution-intro">${localized({ en: "Open every question and read every unedited answer.", ru: "Откройте любой вопрос и прочитайте все ответы без редактуры." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate5A3Shell() {
+  return `<section class="flow-shell e005-gate5a3-page"><div class="flow-step">E005 · GATE 5A.3 · ${localized({ en: "LOCKED PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })}</div><h1>${localized({ en: "Let the pockets speak clearly.", ru: "Пусть pocket i говорят понятно." })}</h1><p class="contribution-intro">${localized({ en: "The knowledge stays the same. Only its envelope becomes meaningful.", ru: "Знания остаются прежними. Понятнее становится только их упаковка." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3526,6 +3530,21 @@ async function loadE005Gate5A2Results() {
     };
     target.addEventListener("click", event => { if (event.target.closest("[data-gate5a2-previous]")) { index -= 1; render(); } else if (event.target.closest("[data-gate5a2-next]")) { index += 1; render(); } });
     render();
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate5A3() {
+  const target = document.querySelector(".e005-gate5a3-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-5a3-design-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 Gate 5A.3 checkpoint unavailable");
+    const data = await response.json();
+    const pick = value => escapeHTML(value?.[language] || value?.en || "");
+    const capsule = data.semantic_capsule_contract;
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "LOCKED BEFORE RUN · NO TRAINING", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА · БЕЗ ОБУЧЕНИЯ" })}</strong><p>${pick(data.question)}</p></section><section class="e005-gate4-current-question"><h2>${localized({ en: "Before: secret labels", ru: "Было: тайные ярлыки" })}</h2><div><p>CAUSE-I: {"cause":"thermal_rebound"}<br>SAFETY-I: {"restriction":"keep_aux_vent_closed"}</p></div><h2>${localized({ en: "Now: small meaningful statements", ru: "Теперь: короткие понятные утверждения" })}</h2><div><span>CAUSE-I</span><p>${escapeHTML(capsule.cause.claim)}<br><small>${escapeHTML(capsule.cause.basis)}</small></p></div><div><span>SAFETY-I</span><p>${escapeHTML(capsule.safety.action)}<br><small>${escapeHTML(capsule.safety.basis)}</small></p></div></section><ol class="e005-gate5a-steps"><li>${localized({ en: "Reuse the same 24 questions and the same two trained pockets.", ru: "Берём те же 24 вопроса и те же два обученных pocket i." })}</li><li>${localized({ en: "Translate their actual labels with one frozen public codebook.", ru: "Переводим их настоящие ярлыки одной замороженной открытой таблицей." })}</li><li>${localized({ en: "Give the final model 192 tokens, so an answer cannot silently end after 64.", ru: "Даём финальной модели 192 токена, чтобы ответ не обрывался после 64." })}</li><li>${localized({ en: "Compare Base Qwen with instruction-trained Qwen.", ru: "Сравниваем базовую Qwen с Qwen, обученной выполнять инструкции." })}</li></ol><section class="e005-gate4-result-verdict"><span>${localized({ en: "PASS RULE", ru: "ПРАВИЛО ПОБЕДЫ" })}</span><h2>${localized({ en: "The instruction model must keep both facts in at least 20 of 24 answers.", ru: "Модель для инструкций должна сохранить оба факта минимум в 20 ответах из 24." })}</h2><p>${localized({ en: "Without either pocket, it must stay incomplete. A cut-off answer never counts.", ru: "Без любого из двух pocket i ответ должен остаться неполным. Обрезанный ответ никогда не засчитывается." })}</p></section><p class="control-warning">${pick(data.plain_limit)}</p><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5a/human/results/">${localized({ en: "PREVIOUS FAILURE", ru: "ПРЕДЫДУЩИЙ ПРОВАЛ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5a3-design-v0.1.json">LOCKED DESIGN JSON ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -4436,6 +4455,10 @@ function render() {
     document.title = `Gate 5A.2 results — i`;
     app.innerHTML = withLanguage(e005Gate5A2ResultsShell());
     loadE005Gate5A2Results();
+  } else if (path === "experiment/e005/gate-5a/semantic") {
+    document.title = `Gate 5A.3 — i`;
+    app.innerHTML = withLanguage(e005Gate5A3Shell());
+    loadE005Gate5A3();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
