@@ -1176,6 +1176,18 @@ button:disabled {
   width: 100%;
 }
 
+.flow-shell.e005-gate5b-results-page {
+  margin-inline: 0;
+  max-width: none;
+  padding-inline: clamp(1rem, 2.2vw, 2.5rem);
+  padding-top: clamp(6rem, 8vw, 8rem);
+  width: 100%;
+}
+
+.e005-gate5b-results-page .e005-gate4-result-answers {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .e005-gate4-result-metrics {
   display: grid;
   gap: 1px;

@@ -294,3 +294,10 @@ The first execution attempt was stopped after three base answers because the
 sequential implementation was too slow. It changed no weights or experiment
 rules. The replacement only batches independent questions under the same frozen
 greedy decoding and 40-token budget.
+
+The locked Gate 5B exam then completed in batches of two. Provisional strict
+scores were shared 0/32, both singles 0/32 complete, wrong pair 0/32, text
+capsules 4/32, and correct neural pair 2/32 versus the required 26/32. In the
+correct pair, CAUSE-I survived on 32/32 questions but SAFETY-I on only 2/32: the
+first hidden-state bridge silenced one voice. All 192 raw answers are published
+for human review at `/experiment/e005/gate-5b/results/`.

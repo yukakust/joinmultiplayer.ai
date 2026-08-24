@@ -278,6 +278,14 @@ only because one-question-at-a-time decoding would overrun the compute window.
 No weights, exam items, decoding rule, or thresholds changed. v0.2 batches
 independent questions while preserving the frozen inference semantics.
 
+Execution attempt v0.2 with batches of eight was also stopped because it filled
+swap and became slower. The completed run used batches of two. Its provisional
+strict score was: shared 0/32; each single 0/32 complete; wrong pair 0/32; text
+capsules 4/32; correct neural pair 2/32 against the frozen 26/32 requirement.
+CAUSE-I still supplied its half on 32/32 paired answers, while SAFETY-I survived
+only 2/32. The first merger therefore failed by silencing one personal track.
+All 192 raw answers await human review.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the
