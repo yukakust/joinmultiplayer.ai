@@ -272,3 +272,8 @@ Gate 5B training smoke preserves both attempts. v0.1 stopped before training on
 an empty assistant-target mask. v0.2 corrected the prefix construction and ran
 two steps per track: CAUSE-I loss 5.988→4.509 and SAFETY-I 5.818→3.275. Shared
 Qwen and the other personal path stayed unchanged. Merger and exam were not run.
+
+The full isolated training checkpoint completed two passes over 128 lessons for
+each track. CAUSE-I mean loss moved 2.056→0.00036; SAFETY-I moved
+2.406→0.00066. Shared Qwen stayed unchanged and the frozen first track did not
+move while the second learned. This does not yet test transfer or composition.

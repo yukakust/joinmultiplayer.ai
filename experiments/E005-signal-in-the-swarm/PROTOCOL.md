@@ -254,6 +254,12 @@ v0.2 smoke ran two steps per track. CAUSE-I loss moved 5.988→4.509 and SAFETY-
 5.818→3.275. Shared Qwen stayed unchanged, and training SAFETY-I did not change
 CAUSE-I. The merger and locked exam remained untouched.
 
+The full personal-track checkpoint then ran two passes over 128 lessons per
+track. Mean CAUSE-I loss moved 2.056→0.00036 and SAFETY-I 2.406→0.00066. The
+shared model stayed unchanged, and CAUSE-I stayed byte-for-byte unchanged while
+SAFETY-I learned. This is a training result only: the merger and locked exam were
+still untouched.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

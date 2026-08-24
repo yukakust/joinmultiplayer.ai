@@ -1,0 +1,32 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "personal_track_training",
+  "status": "trained_exam_not_run",
+  "seed": 24082026,
+  "rank": 8,
+  "track_layers": [6, 21],
+  "lessons_per_track": 128,
+  "epochs": 2,
+  "cause": {
+    "steps": 64,
+    "loss_mean_first": 2.056329593062401,
+    "loss_mean_last": 0.00035660767389344983,
+    "adapter_sha256": "afd703741350c5fa243ea5ad6c7db6e37f435bed2064a33c4a80fe498e97e86c"
+  },
+  "safety": {
+    "steps": 64,
+    "loss_mean_first": 2.4061048179864883,
+    "loss_mean_last": 0.0006645693974860478,
+    "adapter_sha256": "0d2077a7eb96aadd63cbfacb141a8819c821e714b069ee558f04d1ac074974d2"
+  },
+  "shared_unchanged": true,
+  "cause_unchanged_during_safety_training": true,
+  "safety_changed_only_during_own_training": true,
+  "merger_trained": false,
+  "exam_run": false,
+  "plain_language": {
+    "en": "Both personal tracks finished their own lessons. Each changed only its own DoRA weights. This does not yet show that the skills work on new questions or combine.",
+    "ru": "Оба личных трека закончили свои уроки. Каждый менял только собственные DoRA-веса. Это ещё не показывает, что умения работают на новых вопросах или умеют объединяться."
+  }
+}
