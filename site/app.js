@@ -2787,6 +2787,10 @@ function e005Gate4TrainingShell() {
   return `<section class="flow-shell e005-gate4-training-page"><div class="flow-step">E005 · GATE 4C · STEP 4</div><h1>${localized({ en: "Two pocket i have studied", ru: "Два pocket i прошли обучение" })}</h1><p class="contribution-intro">${localized({ en: "Only their small personal DoRA weights changed. The exam has not run yet.", ru: "Изменились только их маленькие личные DoRA-веса. Экзамен ещё не запускался." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate4CResultsShell() {
+  return `<section class="flow-shell e005-gate4c-results-page"><div class="flow-step">E005 · GATE 4C · STEP 5</div><h1>${localized({ en: "One skill transferred. One failed.", ru: "Одно умение перенеслось. Второе провалилось." })}</h1><p class="contribution-intro">${localized({ en: "Inspect every question and all four unedited answers. The labels are preliminary until you confirm them.", ru: "Посмотрите каждый вопрос и четыре неотредактированных ответа. Оценки предварительные, пока вы их не подтвердите." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3359,10 +3363,37 @@ async function loadE005Gate4Training() {
     const data = await response.json();
     const names = { source_work: localized({ en: "Trustworthy sources", ru: "Надёжные источники" }), safe_action: localized({ en: "Safe action", ru: "Безопасное действие" }) };
     const cards = data.runs.map(run => `<article><span>POCKET I · DORA</span><h2>${names[run.skill]}</h2><div class="e005-gate4-metrics"><section><strong>${run.examples}</strong><small>${localized({ en: "lessons", ru: "урока" })}</small></section><section><strong>${run.trainable_parameters.toLocaleString(lang)}</strong><small>${localized({ en: "personal weights", ru: "личных весов" })}</small></section><section><strong>${run.loss_mean_first_24.toFixed(2)} → ${run.loss_mean_last_24.toFixed(2)}</strong><small>${localized({ en: "training error", ru: "ошибка обучения" })}</small></section><section><strong>${run.base_unchanged ? "✓" : "×"}</strong><small>${localized({ en: "base unchanged", ru: "база не изменилась" })}</small></section></div></article>`).join("");
-    target.innerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "TRAINING COMPLETE · EXAM NOT RUN", ru: "ОБУЧЕНИЕ ЗАВЕРШЕНО · ЭКЗАМЕН НЕ ЗАПУСКАЛСЯ" })}</strong><p>${localized(data.plain_language)}</p></section><div class="e005-gate4-training-cards">${cards}</div><p class="control-warning">${localized({ en: "A smaller error on lessons is not proof of understanding. New questions decide that next.", ru: "Меньшая ошибка на уроках — ещё не доказательство понимания. Это решат новые вопросы на следующем шаге." })}</p><div class="actions"><a class="button" href="/experiment/e005/gate-4/exam/">${localized({ en: "SEE THE EXAM →", ru: "СМОТРЕТЬ ЭКЗАМЕН →" })}</a><a class="quiet-link" href="/experiments/E005/gate-4c-training-v0.1.json">JSON ↗</a></div>`;
+    target.innerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "TRAINING COMPLETE · EXAM RESULT AVAILABLE", ru: "ОБУЧЕНИЕ ЗАВЕРШЕНО · РЕЗУЛЬТАТ ЭКЗАМЕНА ГОТОВ" })}</strong><p>${localized(data.plain_language)}</p></section><div class="e005-gate4-training-cards">${cards}</div><p class="control-warning">${localized({ en: "A smaller error on lessons was not proof of understanding. The locked exam tested that next.", ru: "Меньшая ошибка на уроках не была доказательством понимания. Это проверил замороженный экзамен." })}</p><div class="actions"><a class="button" href="/experiment/e005/gate-4/gate-4c-results/">${localized({ en: "SEE ALL EXAM ANSWERS →", ru: "СМОТРЕТЬ ВСЕ ОТВЕТЫ ЭКЗАМЕНА →" })}</a><a class="button secondary" href="/experiment/e005/gate-4/exam/">${localized({ en: "EXAM PLAN", ru: "ПЛАН ЭКЗАМЕНА" })}</a><a class="quiet-link" href="/experiments/E005/gate-4c-training-v0.1.json">JSON ↗</a></div>`;
   } catch (error) {
     target.innerHTML = `<p class="control-warning">${escapeHTML(error.message)}</p>`;
   }
+}
+
+async function loadE005Gate4CResults() {
+  const target = document.querySelector(".e005-gate4c-results-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-4c-results-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 Gate 4C results unavailable");
+    const data = await response.json();
+    const names = {
+      frozen_base: localized({ en: "Clean Qwen", ru: "Чистая Qwen" }),
+      matching_dora: localized({ en: "Right DoRA skill", ru: "Подходящее DoRA-умение" }),
+      wrong_skill_dora: localized({ en: "Other pocket i's DoRA", ru: "DoRA другого pocket i" }),
+      shuffled_lessons_dora: localized({ en: "Shuffled lessons", ru: "Перепутанные уроки" }),
+    };
+    const skillNames = { source_work: localized({ en: "Trustworthy sources", ru: "Надёжные источники" }), safe_action: localized({ en: "Safe action", ru: "Безопасное действие" }) };
+    let skill = "source_work", index = 0;
+    const visible = () => data.rows.filter(row => row.skill === skill && row.language === lang);
+    target.innerHTML = `<section class="e005-gate4-result-verdict is-failed"><span>GATE 4C · ${localized({ en: "FAILED OVERALL", ru: "ОБЩИЙ РЕЗУЛЬТАТ — ПРОВАЛ" })}</span><h2>${localized({ en: "Sources 6/24 · Safe action 23/24", ru: "Источники 6/24 · Безопасное действие 23/24" })}</h2><p>${localized({ en: "The source skill still followed stale advice. The safe-action skill passed, but the whole gate fails when either skill fails.", ru: "Умение источников всё ещё следовало старым советам. Безопасное действие прошло порог, но весь gate провален, если провалено хотя бы одно умение." })}</p></section><nav class="e005-gate4-skill-tabs"><button data-result-skill="source_work">${skillNames.source_work} · 6/24</button><button data-result-skill="safe_action">${skillNames.safe_action} · 23/24</button></nav><div class="e005-gate4c-result-viewer"></div><div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/training/">${localized({ en: "BACK TO TRAINING", ru: "ВЕРНУТЬСЯ К ОБУЧЕНИЮ" })}</a><a class="quiet-link" href="/experiments/E005/gate-4c-results-v0.1.json">ALL RAW JSON ↗</a></div>`;
+    const render = () => {
+      const rows = visible(); index = Math.max(0, Math.min(index, rows.length - 1)); const row = rows[index];
+      target.querySelectorAll("[data-result-skill]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.resultSkill === skill)));
+      target.querySelector(".e005-gate4c-result-viewer").innerHTML = `<div class="e005-gate4-question-nav"><span>${localized({ en: "QUESTION", ru: "ВОПРОС" })} ${index + 1} / ${rows.length}</span><span>${row.id}</span></div><section class="e005-gate4-current-question"><h2>${escapeHTML(row.prompt)}</h2><div><span>${localized({ en: "EXPECTED", ru: "ОЖИДАЕМЫЙ ОТВЕТ" })}</span><p>${escapeHTML(row.reference_answer)}</p></div></section><div class="e005-gate4-result-answers">${data.conditions.map((condition, i) => { const answer = row.conditions[condition]; return `<article class="is-${answer.review}"><header><strong>${i + 1} · ${names[condition]}</strong><span>${answer.review === "correct" ? "●" : "×"}</span></header><p>${escapeHTML(answer.output)}</p><small>${escapeHTML(answer.reason)}</small></article>`; }).join("")}</div><nav class="e005-gate4-question-controls"><button data-result-previous ${index === 0 ? "disabled" : ""}>←</button><button data-result-next ${index === rows.length - 1 ? "disabled" : ""}>→</button></nav>`;
+    };
+    target.addEventListener("click", event => { const button = event.target.closest("[data-result-skill]"); if (button) { skill = button.dataset.resultSkill; index = 0; render(); } else if (event.target.closest("[data-result-previous]")) { index--; render(); } else if (event.target.closest("[data-result-next]")) { index++; render(); } });
+    render();
+  } catch (error) { target.innerHTML = `<p class="control-warning">${escapeHTML(error.message)}</p>`; }
 }
 
 async function loadE005() {
@@ -4250,6 +4281,10 @@ function render() {
     document.title = `${localized({ en: "Gate 4C training", ru: "Обучение Gate 4C" })} — i`;
     app.innerHTML = withLanguage(e005Gate4TrainingShell());
     loadE005Gate4Training();
+  } else if (path === "experiment/e005/gate-4/gate-4c-results") {
+    document.title = `Gate 4C — i`;
+    app.innerHTML = withLanguage(e005Gate4CResultsShell());
+    loadE005Gate4CResults();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

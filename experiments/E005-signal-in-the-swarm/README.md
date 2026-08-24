@@ -163,3 +163,13 @@ The locked exam was not read or run, and no RAG was used. This proves only that
 the training pipe changed personal weights and reduced lesson loss. The public
 checkpoint is `site/experiments/E005/gate-4c-training-v0.1.json`; the readable
 view is `/experiment/e005/gate-4/training/`.
+
+Gate 4C Step 5 generated 192 raw answers from four conditions on the locked
+exam. A strict preliminary structured review scored the matching source-work
+DoRA 6/24 and the matching safe-action DoRA 23/24. Source work therefore failed
+its 20/24 threshold and language thresholds; safe action passed its score and
+control-lead thresholds. Gate 4C fails overall because both skills had to pass.
+All labels remain owner-reviewable. The complete raw outputs, reasons, summary,
+and failed gates are preserved in
+`site/experiments/E005/gate-4c-results-v0.1.json` and rendered at
+`/experiment/e005/gate-4/gate-4c-results/`.
