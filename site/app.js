@@ -2516,7 +2516,20 @@ const e005Copy = {
     expectedAnswerFull: "EXPECTED ANSWER",
     exactMatch: "exact match",
     noExactMatch: "not an exact match",
-    ownerReviewPending: "THE PROGRAM CHECKED EXACT MATCHES. YOUR REVIEW IS STILL NEEDED."
+    ownerReviewPending: "THE PROGRAM CHECKED EXACT MATCHES. YOUR REVIEW IS STILL NEEDED.",
+    smallTestYes: "YES — IN THIS SMALL TEST",
+    resultInOneLine: "The right personal skill answered every new question. The base, the wrong skill, and shuffled lessons did not.",
+    howToRead: "FOUR VERSIONS OF THE SAME QWEN",
+    baseSimple: "No personal skill",
+    personalSimple: "The right personal skill",
+    wrongSimple: "Another pocket i's skill",
+    shuffledSimple: "Shuffled lessons",
+    choosePocket: "CHOOSE A POCKET I",
+    questionNumber: "QUESTION",
+    previousQuestion: "← PREVIOUS",
+    nextQuestionSimple: "NEXT →",
+    shownLanguage: "questions shown in this language",
+    openLimits: "WHY THIS IS NOT YET PROOF OF A SWARM"
   },
   ru: {
     step: "СЛЕДУЮЩИЙ ЭКСПЕРИМЕНТ · E005",
@@ -2646,7 +2659,20 @@ const e005Copy = {
     expectedAnswerFull: "ОЖИДАЕМЫЙ ОТВЕТ",
     exactMatch: "совпал точно",
     noExactMatch: "не совпал точно",
-    ownerReviewPending: "ТОЧНОЕ СОВПАДЕНИЕ ПРОВЕРИЛА ПРОГРАММА. НУЖНА ЕЩЁ ВАША ПРОВЕРКА."
+    ownerReviewPending: "ТОЧНОЕ СОВПАДЕНИЕ ПРОВЕРИЛА ПРОГРАММА. НУЖНА ЕЩЁ ВАША ПРОВЕРКА.",
+    smallTestYes: "ДА — В ЭТОМ МАЛЕНЬКОМ ТЕСТЕ",
+    resultInOneLine: "Нужное личное умение ответило на все новые вопросы. База, чужое умение и перепутанные уроки — нет.",
+    howToRead: "ЧЕТЫРЕ ВЕРСИИ ОДНОЙ И ТОЙ ЖЕ QWEN",
+    baseSimple: "Без личного умения",
+    personalSimple: "С нужным личным умением",
+    wrongSimple: "С умением другого pocket i",
+    shuffledSimple: "С перепутанными уроками",
+    choosePocket: "ВЫБЕРИТЕ POCKET I",
+    questionNumber: "ВОПРОС",
+    previousQuestion: "← НАЗАД",
+    nextQuestionSimple: "СЛЕДУЮЩИЙ →",
+    shownLanguage: "вопросов показано на этом языке",
+    openLimits: "ПОЧЕМУ ЭТО ЕЩЁ НЕ ДОКАЗАТЕЛЬСТВО SWARM"
   }
 };
 
@@ -3054,29 +3080,68 @@ async function loadE005Gate4Results() {
       ? (skill === "archivist" ? "Архивист" : "Хранитель безопасности")
       : (skill === "archivist" ? "Archivist" : "Safety Keeper");
     const methodOrder = ["base", "personal_dora", "wrong_specialist", "shuffled_lessons"];
-    const taskMarkup = row => `<details class="e005-gate4-result-task">
-      <summary><b>${escapeHTML(row.task_id)}</b><span>${escapeHTML(row.question)}</span></summary>
-      <div class="e005-gate4-result-body">
-        <section class="e005-gate4-result-expected"><span>${e5("expectedAnswerFull")}</span><p>${escapeHTML(row.expected_answer)}</p></section>
-        <div class="e005-gate4-result-answers">${methodOrder.map(method => {
-          const answer = row.conditions[method];
-          const exact = answer.exact_target_match;
-          return `<article class="${exact ? "is-exact" : "is-not-exact"}"><header><span>${localized(result.methods[method])}</span><b>${exact ? "✓ " + e5("exactMatch") : "× " + e5("noExactMatch")}</b></header><p>${escapeHTML(answer.output)}</p></article>`;
-        }).join("")}</div>
-      </div>
-    </details>`;
+    const simpleMethodNames = {
+      base: e5("baseSimple"),
+      personal_dora: e5("personalSimple"),
+      wrong_specialist: e5("wrongSimple"),
+      shuffled_lessons: e5("shuffledSimple")
+    };
     target.querySelector(".experiment-loading").outerHTML = `
-      <section class="hypothesis-card"><span>${e5("learnedSkill")}</span><p>${localized(result.answer)}</p></section>
+      <section class="e005-gate4-result-verdict"><span>${e5("learnedSkill")}</span><h2>${e5("smallTestYes")}</h2><p>${e5("resultInOneLine")}</p></section>
       <div class="e005-gate4-result-metrics">
+        <article><strong>${result.totals.personal_dora_exact}/${result.totals.unique_questions}</strong><span>${e5("exactAnswers")}</span></article>
+        <article><strong>${result.totals.base_exact + result.totals.wrong_specialist_exact + result.totals.shuffled_lessons_exact}/${result.totals.unique_questions * 3}</strong><span>${e5("controlExactAnswers")}</span></article>
         <article><strong>${result.totals.unique_questions}</strong><span>${e5("uniqueQuestions")}</span></article>
-        <article><strong>${result.totals.personal_dora_exact}</strong><span>${e5("exactAnswers")}</span></article>
-        <article><strong>${result.totals.base_exact + result.totals.wrong_specialist_exact + result.totals.shuffled_lessons_exact}</strong><span>${e5("controlExactAnswers")}</span></article>
         <article><strong>${result.totals.duplicate_rows_excluded}</strong><span>${e5("excludedRepeats")}</span></article>
       </div>
+      <section class="e005-gate4-method-guide"><div class="flow-step">${e5("howToRead")}</div><div>${methodOrder.map((method, index) => `<article class="${method === "personal_dora" ? "is-personal" : ""}"><strong>${index + 1}</strong><span>${escapeHTML(simpleMethodNames[method])}</span></article>`).join("")}</div></section>
+      <section class="e005-gate4-reviewer">
+        <header><div class="flow-step">${e5("choosePocket")}</div><div class="e005-gate4-skill-tabs">${result.skills.map(skill => `<button type="button" data-gate4-skill="${escapeHTML(skill.skill)}">${skillName(skill.skill)} · ${skill.summary.personal_dora.exact_target_matches}/${skill.unique_questions}</button>`).join("")}</div><small>${result.skills.reduce((sum, skill) => sum + skill.rows.filter(row => row.language === language).length, 0)} ${e5("shownLanguage")}</small></header>
+        <div class="e005-gate4-viewer"></div>
+      </section>
       <p class="control-warning">${e5("ownerReviewPending")}</p>
-      <section class="e005-gate4-limitations"><div class="flow-step">${e5("limitsTitle")}</div>${result.limits.map(limit => `<p>${localized(limit)}</p>`).join("")}</section>
-      ${result.skills.map(skill => `<section class="e005-gate4-result-skill"><header><span>POCKET I · ${escapeHTML(skill.skill.toUpperCase())}</span><h2>${skillName(skill.skill)} · ${skill.summary.personal_dora.exact_target_matches}/${skill.unique_questions}</h2><p>${skill.unique_questions} ${e5("uniqueQuestions")} · ${skill.duplicate_rows_excluded} ${e5("excludedRepeats")}</p></header><div>${skill.rows.map(taskMarkup).join("")}</div></section>`).join("")}
+      <details class="e005-gate4-limitations"><summary>${e5("openLimits")}</summary><div>${result.limits.map(limit => `<p>${localized(limit)}</p>`).join("")}</div></details>
       <div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/">GATE 4</a><a class="quiet-link" href="/experiments/E005/gate-4-results-v0.1.json">JSON ↗</a></div>`;
+
+    let activeSkill = result.skills[0]?.skill || "archivist";
+    let activeQuestion = 0;
+    const renderQuestion = () => {
+      const skill = result.skills.find(item => item.skill === activeSkill) || result.skills[0];
+      const rows = skill.rows.filter(row => row.language === language);
+      activeQuestion = Math.max(0, Math.min(activeQuestion, rows.length - 1));
+      const row = rows[activeQuestion];
+      target.querySelectorAll("[data-gate4-skill]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.gate4Skill === activeSkill)));
+      if (!row) {
+        target.querySelector(".e005-gate4-viewer").innerHTML = "";
+        return;
+      }
+      target.querySelector(".e005-gate4-viewer").innerHTML = `
+        <div class="e005-gate4-question-nav"><span>${e5("questionNumber")} ${activeQuestion + 1} / ${rows.length}</span><span>${escapeHTML(row.task_id)}</span></div>
+        <section class="e005-gate4-current-question"><h2>${escapeHTML(row.question)}</h2><div><span>${e5("expectedAnswerFull")}</span><p>${escapeHTML(row.expected_answer)}</p></div></section>
+        <div class="e005-gate4-result-answers">${methodOrder.map((method, index) => {
+          const answer = row.conditions[method];
+          const exact = answer.exact_target_match;
+          return `<article class="${exact ? "is-exact" : "is-not-exact"}"><header><i>${index + 1}</i><span>${escapeHTML(simpleMethodNames[method])}</span><b>${exact ? "✓ " + e5("exactMatch") : "× " + e5("noExactMatch")}</b></header><p>${escapeHTML(answer.output)}</p></article>`;
+        }).join("")}</div>
+        <nav class="e005-gate4-question-controls"><button type="button" data-gate4-previous ${activeQuestion === 0 ? "disabled" : ""}>${e5("previousQuestion")}</button><button type="button" data-gate4-next ${activeQuestion === rows.length - 1 ? "disabled" : ""}>${e5("nextQuestionSimple")}</button></nav>`;
+    };
+    target.addEventListener("click", event => {
+      const skillButton = event.target.closest("[data-gate4-skill]");
+      if (skillButton) {
+        activeSkill = skillButton.dataset.gate4Skill;
+        activeQuestion = 0;
+        renderQuestion();
+        return;
+      }
+      if (event.target.closest("[data-gate4-previous]")) {
+        activeQuestion -= 1;
+        renderQuestion();
+      } else if (event.target.closest("[data-gate4-next]")) {
+        activeQuestion += 1;
+        renderQuestion();
+      }
+    });
+    renderQuestion();
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }

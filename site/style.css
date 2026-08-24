@@ -1183,6 +1183,31 @@ button:disabled {
   margin: 3rem 0;
 }
 
+.e005-gate4-result-verdict {
+  border-top: 0.4rem solid var(--ink);
+  margin-top: 3rem;
+  padding: clamp(2rem, 5vw, 5rem) 0;
+}
+
+.e005-gate4-result-verdict > span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.e005-gate4-result-verdict h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(3rem, 9vw, 9rem);
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  margin: 1rem 0 2rem;
+}
+
+.e005-gate4-result-verdict p {
+  font-size: clamp(1.2rem, 2.4vw, 2.4rem);
+  line-height: 1.35;
+  max-width: 70rem;
+}
+
 .e005-gate4-result-metrics article {
   border: 1px solid var(--line);
   min-height: 10rem;
@@ -1211,6 +1236,134 @@ button:disabled {
   margin: 3rem 0 6rem;
   max-width: 80rem;
   padding: 1.25rem 1.5rem;
+}
+
+.e005-gate4-limitations summary {
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.e005-gate4-limitations > div {
+  margin-top: 1.5rem;
+}
+
+.e005-gate4-method-guide {
+  margin: 5rem 0;
+}
+
+.e005-gate4-method-guide > div:last-child {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.e005-gate4-method-guide article {
+  align-items: center;
+  border: 1px solid var(--line);
+  display: flex;
+  gap: 1rem;
+  min-height: 6rem;
+  padding: 1rem;
+}
+
+.e005-gate4-method-guide article.is-personal {
+  border-top: 0.35rem solid #8ebc87;
+}
+
+.e005-gate4-method-guide article strong {
+  align-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  display: inline-flex;
+  flex: 0 0 2rem;
+  height: 2rem;
+  justify-content: center;
+}
+
+.e005-gate4-method-guide article span {
+  line-height: 1.35;
+}
+
+.e005-gate4-reviewer {
+  border-top: 0.4rem solid var(--ink);
+  margin: 5rem 0;
+  padding-top: 2rem;
+}
+
+.e005-gate4-reviewer > header small {
+  color: var(--muted);
+  display: block;
+  margin-top: 1rem;
+}
+
+.e005-gate4-skill-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.e005-gate4-skill-tabs button,
+.e005-gate4-question-controls button {
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  padding: 0.8rem 1.1rem;
+}
+
+.e005-gate4-skill-tabs button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.e005-gate4-viewer {
+  margin-top: 2rem;
+}
+
+.e005-gate4-question-nav {
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  display: flex;
+  font-size: 0.72rem;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+}
+
+.e005-gate4-current-question {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 5rem);
+  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+  padding: clamp(2rem, 5vw, 5rem) 0;
+}
+
+.e005-gate4-current-question h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(2rem, 4.5vw, 4.8rem);
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  margin: 0;
+}
+
+.e005-gate4-current-question > div {
+  border-left: 0.35rem solid var(--ember);
+  padding: 1rem 1.2rem;
+}
+
+.e005-gate4-current-question > div span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.68rem;
+  margin-bottom: 0.8rem;
+}
+
+.e005-gate4-current-question > div p {
+  line-height: 1.5;
+  margin: 0;
 }
 
 .e005-gate4-limitations p {
@@ -1299,9 +1452,32 @@ button:disabled {
   margin-bottom: 1rem;
 }
 
+.e005-gate4-result-answers header i {
+  align-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  display: inline-flex;
+  font-style: normal;
+  height: 1.8rem;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+  width: 1.8rem;
+}
+
 .e005-gate4-result-answers p {
   line-height: 1.45;
   overflow-wrap: anywhere;
+}
+
+.e005-gate4-question-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.e005-gate4-question-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
 }
 
 .e005-gate4-metrics {
@@ -1510,7 +1686,9 @@ button:disabled {
   .e005-gate4-gates > div:last-child,
   .e005-gate4-microscope .answers,
   .e005-gate4-result-metrics,
-  .e005-gate4-result-answers {
+  .e005-gate4-result-answers,
+  .e005-gate4-method-guide > div:last-child,
+  .e005-gate4-current-question {
     grid-template-columns: 1fr;
   }
 
