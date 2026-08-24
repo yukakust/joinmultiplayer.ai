@@ -3411,8 +3411,8 @@ async function loadE005Gate5A() {
   try {
     const [response, lessonsResponse, examResponse] = await Promise.all([
       fetch("/experiments/E005/gate-5a-design-v0.1.json", { cache: "no-store" }),
-      fetch("/experiments/E005/gate-5a-lessons-v0.1.json", { cache: "no-store" }),
-      fetch("/experiments/E005/gate-5a-locked-test-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5a-lessons-v0.2.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5a-locked-test-v0.2.json", { cache: "no-store" }),
     ]);
     if (!response.ok || !lessonsResponse.ok || !examResponse.ok) throw new Error("E005 Gate 5A checkpoint unavailable");
     const data = await response.json();
@@ -3422,6 +3422,7 @@ async function loadE005Gate5A() {
     const plan = data.plain_plan[language] || data.plain_plan.en;
     target.querySelector(".experiment-loading").outerHTML = `
       <section class="e005-gate4-lessons-status"><strong>${localized({ en: "LESSONS AND EXAM FROZEN · NO TRAINING", ru: "УРОКИ И ЭКЗАМЕН ЗАМОРОЖЕНЫ · ОБУЧЕНИЯ НЕ БЫЛО" })}</strong><p>${localized({ en: "384 different lessons and 24 new exam questions now cannot change.", ru: "384 разных урока и 24 новых экзаменационных вопроса теперь нельзя менять." })}</p></section>
+      <p class="control-warning">${localized({ en: "The first exam draft was rejected before training: it reused the lesson sentence frames. This v0.2 exam uses new wording. The rejected v0.1 files remain public.", ru: "Первый черновик экзамена отброшен до обучения: он повторял каркасы фраз из уроков. В этом экзамене v0.2 формулировки новые. Отброшенные файлы v0.1 остаются открытыми." })}</p>
       <ol class="e005-gate5a-steps">${plan.map(step => `<li>${escapeHTML(step)}</li>`).join("")}</ol>
       <div class="e005-gate4-training-cards">${data.pockets.map(pocket => `<article><span>${escapeHTML(pocket.id)} · DORA</span><h2>${pick(pocket.name)}</h2><p><strong>${localized({ en: "LEARNS", ru: "УЧИТСЯ" })}</strong><br>${pick(pocket.learns)}</p><p><strong>${localized({ en: "CANNOT KNOW ALONE", ru: "НЕ МОЖЕТ ЗНАТЬ В ОДИНОЧКУ" })}</strong><br>${pick(pocket.cannot_know)}</p></article>`).join("")}</div>
       <section class="e005-gate4-current-question"><h2>${pick(data.example.question)}</h2><div><span>${localized({ en: "CAUSE-I ALONE", ru: "ТОЛЬКО CAUSE-I" })}</span><p>${pick(data.example.cause_i_only)}</p></div><div><span>${localized({ en: "SAFETY-I ALONE", ru: "ТОЛЬКО SAFETY-I" })}</span><p>${pick(data.example.safety_i_only)}</p></div><div><span>${localized({ en: "TOGETHER", ru: "ВМЕСТЕ" })}</span><p>${pick(data.example.together)}</p></div></section>
@@ -3429,7 +3430,7 @@ async function loadE005Gate5A() {
       <section class="e005-task-section"><div class="flow-step">${localized({ en: "EXAM · ALL 24 QUESTIONS", ru: "ЭКЗАМЕН · ВСЕ 24 ВОПРОСА" })}</div><div class="e005-tasks">${exam.questions.map((row, index) => `<details class="e005-task" ${index === 0 ? "open" : ""}><summary><b>${escapeHTML(row.id)}</b><span>${escapeHTML(row.question)}</span></summary><div class="e005-task-body"><div class="e005-claim-grid"><article><span>CAUSE-I</span><strong>${escapeHTML(JSON.stringify(row.expected_cause_capsule))}</strong></article><article><span>SAFETY-I</span><strong>${escapeHTML(JSON.stringify(row.expected_safety_capsule))}</strong></article></div><div class="e005-answer"><span>${localized({ en: "COMPLETE ANSWER", ru: "ПОЛНЫЙ ОТВЕТ" })}</span><strong>${escapeHTML(row.expected_complete_answer)}</strong></div></div></details>`).join("")}</div></section>
       <section class="e005-task-section"><div class="flow-step">${localized({ en: "LESSON SAMPLE · 4 OF 384", ru: "ПРИМЕР УРОКОВ · 4 ИЗ 384" })}</div><div class="e005-tasks">${lessons.lessons.filter((_, index) => index % 96 === 0).map(row => `<details class="e005-task"><summary><b>${escapeHTML(row.id)}</b><span>${escapeHTML(row.input)}</span></summary><div class="e005-task-body"><div class="e005-answer"><span>${localized({ en: "TRAINING TARGET", ru: "УЧЕБНЫЙ ОТВЕТ" })}</span><strong>${escapeHTML(row.target)}</strong></div></div></details>`).join("")}</div></section>
       <p class="control-warning">${localized({ en: "This tests composition only. It does not yet test automatic routing, many-pocket scaling, or a latent neural merge.", ru: "Здесь проверяется только объединение. Автоматический выбор pocket i, рост большого swarm и объединение скрытых нейронных состояний будут позже." })}</p>
-      <div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/gate-4c-results/">${localized({ en: "PREVIOUS RESULT", ru: "ПРЕДЫДУЩИЙ РЕЗУЛЬТАТ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5a-lessons-v0.1.json">ALL LESSONS JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-5a-locked-test-v0.1.json">EXAM JSON ↗</a></div>`;
+      <div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/gate-4c-results/">${localized({ en: "PREVIOUS RESULT", ru: "ПРЕДЫДУЩИЙ РЕЗУЛЬТАТ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5a-lessons-v0.2.json">ALL LESSONS JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-5a-locked-test-v0.2.json">EXAM V0.2 JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-5a-locked-test-v0.1.json">REJECTED V0.1 ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }

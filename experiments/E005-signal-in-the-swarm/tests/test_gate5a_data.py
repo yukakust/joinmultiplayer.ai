@@ -36,6 +36,10 @@ class Gate5ADataTests(unittest.TestCase):
             self.assertNotIn(row["safety_prompt"], lesson_inputs)
             self.assertTrue(row["expected_cause_capsule"])
             self.assertTrue(row["expected_safety_capsule"])
+            self.assertEqual(row["template_family"], "locked_exam_v0.2")
+        self.assertEqual({row["template_family"] for row in lessons}, {"training_v0.1"})
+        self.assertTrue(set(MODULE.EN_TEMPLATES).isdisjoint(MODULE.EN_EXAM_TEMPLATES))
+        self.assertTrue(set(MODULE.RU_TEMPLATES).isdisjoint(MODULE.RU_EXAM_TEMPLATES))
 
     def test_public_files_match_the_builder(self):
         lessons = json.loads(MODULE.LESSONS_OUT.read_text(encoding="utf-8"))
@@ -44,7 +48,7 @@ class Gate5ADataTests(unittest.TestCase):
         self.assertEqual(exam, MODULE.build_exam())
 
     def test_checkpoint_freezes_the_exact_files_before_training(self):
-        checkpoint = json.loads((ROOT / "site/experiments/E005/gate-5a-data-checkpoint-v0.1.json").read_text(encoding="utf-8"))
+        checkpoint = json.loads((ROOT / "site/experiments/E005/gate-5a-data-checkpoint-v0.2.json").read_text(encoding="utf-8"))
         self.assertFalse(checkpoint["weights_changed"])
         self.assertFalse(checkpoint["exam_run"])
         for name, path in (("lessons", MODULE.LESSONS_OUT), ("exam", MODULE.EXAM_OUT)):

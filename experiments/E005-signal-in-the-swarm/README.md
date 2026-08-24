@@ -196,3 +196,12 @@ capsule, and complete answer before training. The curriculum content hash is
 exam content hash is
 `20d2468ae3cb65f4c84f71c7cc3e5d133dcef1249b562d8e5df730a8b1e00cde`.
 No weights changed and the exam has not run at this checkpoint.
+
+Pre-training review rejected that v0.1 exam because its strings were new but
+its six sentence frames were reused from training. The files remain public and
+no model trained on them. Gate 5A data v0.2 uses a disjoint set of exam sentence
+frames. Its curriculum content hash is
+`9f23a13a079b2fe05863ef99040adaedc0fca8a4cc0504f81a7cd7f86dc3f4ce`; its
+exam content hash is
+`1bb8ac4664612ceaee7b438a3d4ca57e076a43230dc943db8ca484d70314127e`.
+This v0.2 checkpoint is the only Gate 5A data authorized for training.

@@ -1,0 +1,26 @@
+{
+  "experiment_id": "E005",
+  "gate": "5A",
+  "kind": "frozen_data_checkpoint",
+  "status": "lessons_and_exam_frozen_no_training",
+  "supersedes": "gate-5a-data-checkpoint-v0.1.json",
+  "why_v0_1_was_rejected": "The questions were new strings but reused the six training sentence frames. No model trained on v0.1.",
+  "lessons": {
+    "total": 384,
+    "per_pocket": 192,
+    "english_per_pocket": 96,
+    "russian_per_pocket": 96,
+    "content_sha256": "9f23a13a079b2fe05863ef99040adaedc0fca8a4cc0504f81a7cd7f86dc3f4ce",
+    "file_sha256": "db4894fbc6bbad639a9a2bb16f79f169813ec9b75e75da28bbb5c364a5514843"
+  },
+  "exam": {
+    "questions": 24,
+    "english": 12,
+    "russian": 12,
+    "uses_training_sentence_frames": false,
+    "content_sha256": "1bb8ac4664612ceaee7b438a3d4ca57e076a43230dc943db8ca484d70314127e",
+    "file_sha256": "bcd89809e2a33f12be05f1823f6c891f924abe5552cbadc9de15d09a066a8c8e"
+  },
+  "weights_changed": false,
+  "exam_run": false
+}

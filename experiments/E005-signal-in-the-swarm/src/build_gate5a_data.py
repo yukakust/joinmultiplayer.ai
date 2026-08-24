@@ -6,8 +6,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[3]
-LESSONS_OUT = ROOT / "site/experiments/E005/gate-5a-lessons-v0.1.json"
-EXAM_OUT = ROOT / "site/experiments/E005/gate-5a-locked-test-v0.1.json"
+LESSONS_OUT = ROOT / "site/experiments/E005/gate-5a-lessons-v0.2.json"
+EXAM_OUT = ROOT / "site/experiments/E005/gate-5a-locked-test-v0.2.json"
 
 CAUSES = [
     ("three blue pulses after startup", "три синих импульса после запуска", "phase_drift", "phase drift", "сдвиг фазы"),
@@ -44,6 +44,24 @@ RU_TEMPLATES = [
     "В журнале {name} записаны {cause}. В заметке площадки указана {safety}. Объясните неисправность и допустимое действие.",
 ]
 
+EN_EXAM_TEMPLATES = [
+    "Two notes reached the desk. The machine note for {name}: {cause}. The site note: {safety}. Decide the diagnosis and the safe response.",
+    "What follows from this pair of clues? On {name}, {cause}. Around it, {safety}. Give both parts of the decision.",
+    "Do not treat this as one clue: {cause} was observed on {name}, whereas the work area has {safety}. What failed, and what boundary applies?",
+    "A crew wants one complete instruction for {name}. Its symptom is {cause}; its location is marked by {safety}. Supply the missing cause and safety rule.",
+    "Before anyone touches {name}, interpret two independent facts: the unit has {cause}, and the room has {safety}. What is the combined instruction?",
+    "Complete the incident card for {name}. Equipment evidence: {cause}. Workplace evidence: {safety}. Name the fault, then the permitted action."
+]
+
+RU_EXAM_TEMPLATES = [
+    "На стол пришли две записки. О машине {name}: {cause}. О площадке: {safety}. Определите причину и безопасное действие.",
+    "Что следует из двух подсказок? У {name} наблюдаются {cause}. Вокруг него — {safety}. Дайте обе части решения.",
+    "Не считайте это одной подсказкой: у {name} заметили {cause}, а рабочая зона имеет {safety}. Что сломалось и какое ограничение действует?",
+    "Команде нужна одна полная инструкция для {name}. Симптом: {cause}; место отмечено так: {safety}. Назовите причину и правило безопасности.",
+    "Прежде чем трогать {name}, разберите два независимых факта: у блока {cause}, а в помещении {safety}. Какова общая инструкция?",
+    "Заполните карточку случая для {name}. Данные оборудования: {cause}. Данные площадки: {safety}. Назовите неисправность, затем допустимое действие."
+]
+
 
 def canonical_hash(payload: dict) -> str:
     clean = {key: value for key, value in payload.items() if key != "content_sha256"}
@@ -51,10 +69,11 @@ def canonical_hash(payload: dict) -> str:
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-def observation(name: str, cause_index: int, safety_index: int, language: str, variant: int) -> str:
+def observation(name: str, cause_index: int, safety_index: int, language: str, variant: int, *, exam: bool = False) -> str:
     cause = CAUSES[cause_index][0 if language == "en" else 1]
     safety = SAFETY[safety_index][0 if language == "en" else 1]
-    template = (EN_TEMPLATES if language == "en" else RU_TEMPLATES)[variant % 6]
+    templates = (EN_EXAM_TEMPLATES if language == "en" else RU_EXAM_TEMPLATES) if exam else (EN_TEMPLATES if language == "en" else RU_TEMPLATES)
+    template = templates[variant % 6]
     return template.format(name=name, cause=cause, safety=safety)
 
 
@@ -93,6 +112,7 @@ def build_lessons() -> dict:
                     "target": json.dumps(target, separators=(",", ":")),
                     "cause_class": CAUSES[cause_index][2],
                     "restriction_class": SAFETY[safety_index][2],
+                    "template_family": "training_v0.1",
                 })
     payload = {
         "experiment_id": "E005",
@@ -114,7 +134,7 @@ def build_exam() -> dict:
         safety_index = (local // 4 + local + 1) % 4
         variant = (local + 3) % 6
         name = EXAM_NAMES[index]
-        text = observation(name, cause_index, safety_index, language, variant)
+        text = observation(name, cause_index, safety_index, language, variant, exam=True)
         cause_label, cause_en, cause_ru = CAUSES[cause_index][2:]
         restriction_label, restriction_en, restriction_ru = SAFETY[safety_index][2:]
         final = (
@@ -131,6 +151,7 @@ def build_exam() -> dict:
             "expected_cause_capsule": {"cause": cause_label},
             "expected_safety_capsule": {"restriction": restriction_label},
             "expected_complete_answer": final,
+            "template_family": "locked_exam_v0.2",
         })
     payload = {
         "experiment_id": "E005",
