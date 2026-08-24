@@ -214,3 +214,15 @@ changed 1,232,896 personal parameters. The shared Qwen file hash remained
 The locked exam had not run at this checkpoint. These numbers show lesson fit,
 not transfer or composition. The public training record is
 `site/experiments/E005/gate-5a-training-v0.1.json`.
+
+The locked Gate 5A run then preserved 216 raw generations across eight
+conditions. Frozen Qwen alone, either pocket alone, frozen Qwen acting in both
+roles, and both wrong same-skill pairs each produced 0/24 complete answers. The
+correct CAUSE-I + SAFETY-I pair produced 22/24; oracle capsules produced 24/24.
+CAUSE-I made both errors, while SAFETY-I supplied 24/24 correct capsules. All
+preregistered gates passed. This supports explicit one-round text-capsule
+composition with a deterministic renderer. It does not establish learned
+routing, latent neural merging, multiple-device execution, or swarm scaling.
+Every question and raw answer is published at
+`/experiment/e005/gate-5a/results/` and in
+`site/experiments/E005/gate-5a-results-v0.1.json`.
