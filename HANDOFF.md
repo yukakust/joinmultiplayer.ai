@@ -194,11 +194,13 @@ reviewed development artifact is
 `/experiment/e005/gate-3/`, and the exhaustive raw audit is
 `/experiment/e005/gate-3/raw/`. Review confirmations and label corrections are
 stored in browser localStorage only until the owner explicitly asks to publish
-the checkpoint. The evidence graph selected the ideal records in
+the checkpoint. The owner accepted and froze Gate 3 on 2026-08-24; no further
+retrieval-store tuning belongs in this artifact. The evidence graph selected the ideal records in
 12/12 language generations, while frozen Qwen produced only 6/12 correct
 generations. This demonstrates a generator bottleneck in the synthetic fixture,
-not learned routing or swarm generalization. Gate 4 personal DoRA procedure
-training must not begin until the owner visually reviews Gate 3.
+not learned routing or swarm generalization. Before any Gate 4 personal DoRA
+training, publish an owner-readable checkpoint with the exact skill, visible
+training examples, held-out examples, frozen-base control, and pass/fail rule.
 The review matrix deliberately reports a stable paired RU+EN rating: both
 correct = green, either wrong = red, otherwise yellow. The global language
 switch translates the whole review but must not change matrix correctness. Gate

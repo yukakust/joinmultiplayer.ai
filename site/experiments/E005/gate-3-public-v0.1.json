@@ -5,6 +5,12 @@
   "kind": "frozen_retrieval_and_evidence_controls",
   "status": "completed_manual_reviewed",
   "claim_status": "public_development_only",
+  "owner_checkpoint": {
+    "reviewed_at": "2026-08-24",
+    "decision": "accepted_and_frozen",
+    "retrieval_iteration": "stopped_for_this_artifact",
+    "next_gate": "publish_procedure_learning_design_before_training"
+  },
   "model": {
     "id": "Qwen/Qwen3-0.6B-Base",
     "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",

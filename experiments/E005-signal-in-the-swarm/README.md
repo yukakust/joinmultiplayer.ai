@@ -10,8 +10,9 @@ The experiment begins with a public natural-language development world. No
 weight training may begin until the owner has inspected that world on
 joinmultiplayer.ai.
 
-Current status: **Gate 3 development controls completed and manually reviewed;
-owner visual checkpoint active before any personal-weight training**.
+Current status: **Gate 3 development controls completed, manually reviewed by
+the owner, and frozen. Gate 4 design is next; no personal-weight training has
+started**.
 
 Gate 3 compared exact-word retrieval, frozen-Qwen semantic retrieval, raw
 majority, the deterministic evidence graph, and an oracle source set across six
@@ -35,5 +36,15 @@ site-wide EN/RU control changes the complete interface and the visible raw
 generation; it never changes that paired rating. All five Gate 3 columns use the
 same frozen Qwen3-0.6B Base with no DoRA and no fine-tuning; only evidence
 selection differs.
+
+Owner decision on 2026-08-24: preserve Gate 3 v0.1 exactly as run and stop
+iterating on retrieval stores in this branch of the experiment. In this
+synthetic fixture the deterministic evidence graph matched the predeclared
+oracle source set on all 12 language generations. This validates the accounting
+harness only when source lineage, freshness, and claim metadata are already
+correctly supplied; it does not show that a real swarm can construct those
+metadata or discover the right evidence. Because identical ideal evidence still
+produced only 6/12 correct generations, the next experiment isolates procedure
+learning and generation rather than improving retrieval on these records.
 
 See [PROTOCOL.md](PROTOCOL.md).

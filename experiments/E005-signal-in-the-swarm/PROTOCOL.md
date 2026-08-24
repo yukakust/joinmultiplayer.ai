@@ -166,15 +166,23 @@ answer reliably is excluded before later data are locked.
 Lexical, semantic, majority, evidence-graph, and oracle controls run without
 personal weight updates. Failure artifacts remain public.
 
-Status: **development run complete; owner visual review pending**. The source
-selection and frozen-generation stages are reported separately. Perfect source
-selection did not guarantee a correct generated action.
+Status: **development run complete; owner visual review accepted and artifact
+frozen on 2026-08-24**. The source selection and frozen-generation stages are
+reported separately. Perfect source selection did not guarantee a correct
+generated action. The evidence graph matched the oracle only inside the curated
+synthetic fixture, where lineage, freshness, and expected claim structure were
+predeclared. No further retrieval tuning belongs in Gate 3 v0.1.
 
 ### Gate 4 — procedure learning
 
 Surrogate pocket i train personal DoRA skills on examples that are disjoint from
 evaluation facts, entities, source texts, and answers. The site shows before and
 after on held-out procedure tasks.
+
+Before training, publish one owner-readable checkpoint containing the exact
+skill being taught, examples visible to the adapter, held-out examples it cannot
+see, the frozen-base control, and the pass/fail rule. Preparing this checkpoint
+does not authorize training; the owner starts training only after inspecting it.
 
 ### Gate 5 — learned routing and merging
 
