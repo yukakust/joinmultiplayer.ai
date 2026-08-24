@@ -2426,7 +2426,12 @@ const e005Copy = {
     rawEnglish: "RAW ENGLISH ANSWER",
     rawRussian: "RAW RUSSIAN ANSWER",
     manualReview: "manual review",
-    modelAnswer: "QWEN BASE-ONLY ANSWERS"
+    modelAnswer: "QWEN BASE-ONLY ANSWERS",
+    viewAllAnswers: "VIEW ALL QUESTIONS AND ANSWERS →",
+    answersTitle: "Every raw Qwen answer",
+    answersIntro: "Six questions, twelve unedited generations, and the expected action. No RAG, adapter, internet, or weight update.",
+    expectedAction: "EXPECTED ACTION",
+    backToE005: "BACK TO E005"
   },
   ru: {
     step: "СЛЕДУЮЩИЙ ЭКСПЕРИМЕНТ · E005",
@@ -2466,7 +2471,12 @@ const e005Copy = {
     rawEnglish: "СЫРОЙ ОТВЕТ НА АНГЛИЙСКОМ",
     rawRussian: "СЫРОЙ ОТВЕТ НА РУССКОМ",
     manualReview: "ручная оценка",
-    modelAnswer: "ОТВЕТЫ ЧИСТОЙ QWEN"
+    modelAnswer: "ОТВЕТЫ ЧИСТОЙ QWEN",
+    viewAllAnswers: "СМОТРЕТЬ ВСЕ ВОПРОСЫ И ОТВЕТЫ →",
+    answersTitle: "Все сырые ответы Qwen",
+    answersIntro: "Шесть вопросов, двенадцать неотредактированных генераций и ожидаемое действие. Без RAG, адаптера, интернета и изменения весов.",
+    expectedAction: "ОЖИДАЕМОЕ ДЕЙСТВИЕ",
+    backToE005: "ВЕРНУТЬСЯ К E005"
   }
 };
 
@@ -2481,6 +2491,48 @@ function e005Shell() {
     <p class="contribution-intro">${e5("intro")}</p>
     <div class="experiment-loading">${c("loading")}</div>
   </section>`;
+}
+
+function e005AnswersShell() {
+  return `<section class="flow-shell e005-answers-page">
+    <div class="flow-step">E005 · GATE 2</div>
+    <h1>${e5("answersTitle")}</h1>
+    <p class="contribution-intro">${e5("answersIntro")}</p>
+    <div class="experiment-loading">${c("loading")}</div>
+  </section>`;
+}
+
+async function loadE005Answers() {
+  const target = document.querySelector(".e005-answers-page");
+  if (!target) return;
+  try {
+    const [worldResponse, baseResponse] = await Promise.all([
+      fetch("/experiments/E005/world-public-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/base-preflight-public-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!worldResponse.ok || !baseResponse.ok) throw new Error("E005 answers unavailable");
+    const world = await worldResponse.json();
+    const base = await baseResponse.json();
+    const tasks = new Map(world.tasks.map(task => [task.id, task]));
+    target.querySelector(".experiment-loading").outerHTML = `
+      <a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a>
+      <p class="control-warning">${escapeHTML(e4Localized(base.claim_boundary))}</p>
+      <div class="e005-raw-records">${base.rows.map((row, index) => {
+        const task = tasks.get(row.task_id) || {};
+        return `<article class="e005-raw-record">
+          <div class="e004-answer-number">${String(index + 1).padStart(2, "0")} / ${String(base.rows.length).padStart(2, "0")} · ${escapeHTML(row.task_id)}</div>
+          <h2>${escapeHTML(e4Localized(task.question))}</h2>
+          <section class="e005-expected-standalone"><span>${e5("expectedAction")}</span><strong>${escapeHTML(e4Localized(task.expected?.main_answer))}</strong></section>
+          <div class="e005-raw-answer-grid">
+            <section><span>${e5("rawRussian")}</span><p>${escapeHTML(row.outputs.ru.output)}</p><small>${e5("manualReview")} · ${escapeHTML(row.outputs.ru.manual_review)}</small></section>
+            <section><span>${e5("rawEnglish")}</span><p>${escapeHTML(row.outputs.en.output)}</p><small>${e5("manualReview")} · ${escapeHTML(row.outputs.en.manual_review)}</small></section>
+          </div>
+        </article>`;
+      }).join("")}</div>
+      <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/base-preflight-public-v0.1.json">JSON ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
 }
 
 async function loadE005() {
@@ -2544,7 +2596,7 @@ async function loadE005() {
         <article><span>${e5("evidence")}</span><strong>${percent(harness.evidence_graph_accuracy)}</strong><small>6 / 6 · scripted claims</small></article>
         <article><span>${e5("minority")}</span><strong>${percent(harness.minority_policy_accuracy)}</strong><small>6 / 6 · scripted claims</small></article>
       </div>
-      <section class="e005-base-section"><div class="flow-step">${e5("basePreflight")}</div><p>${e5("basePreflightCopy")}</p><div class="e005-metrics"><article><span>${e5("fullyCorrect")}</span><strong>${basePreflight.summary.fully_correct_generations} / ${basePreflight.summary.generations}</strong></article><article><span>${e5("recognizedUnknown")}</span><strong>${basePreflight.summary.recognized_missing_evidence_generations} / ${basePreflight.summary.generations}</strong></article><article><span>${e5("wrongOutputs")}</span><strong>${basePreflight.summary.hallucinated_or_wrong_generations} / ${basePreflight.summary.generations}</strong></article></div><p class="control-warning">${escapeHTML(e4Localized(basePreflight.claim_boundary))}</p></section>
+      <section class="e005-base-section"><div class="flow-step">${e5("basePreflight")}</div><p>${e5("basePreflightCopy")}</p><a class="e005-answer-button" href="/experiment/e005/answers/">${e5("viewAllAnswers")}</a><div class="e005-metrics"><article><span>${e5("fullyCorrect")}</span><strong>${basePreflight.summary.fully_correct_generations} / ${basePreflight.summary.generations}</strong></article><article><span>${e5("recognizedUnknown")}</span><strong>${basePreflight.summary.recognized_missing_evidence_generations} / ${basePreflight.summary.generations}</strong></article><article><span>${e5("wrongOutputs")}</span><strong>${basePreflight.summary.hallucinated_or_wrong_generations} / ${basePreflight.summary.generations}</strong></article></div><p class="control-warning">${escapeHTML(e4Localized(basePreflight.claim_boundary))}</p></section>
       <section class="e005-pocket-section"><div class="flow-step">${e5("pockets")}</div><p class="control-warning">${e5("pocketWarning")}</p><div class="e005-pockets">${world.pockets.map(pocket => `<article><i>i</i><strong>${escapeHTML(pocket.id)} · ${escapeHTML(pocket.name)}</strong><span>${escapeHTML(e4Localized(pocket.skill))}</span><small>fixture · ${percent(pocket.calibration)}</small></article>`).join("")}</div></section>
       <section class="e005-task-section"><div class="flow-step">${e5("tasks")}</div><div class="e005-tasks">${world.tasks.map(taskMarkup).join("")}</div></section>
       <section class="e004-decision"><span>${e5("review")}</span><p>${e5("reviewCopy")}</p></section>
@@ -3332,6 +3384,10 @@ function render() {
     document.title = `${e5("title")} — i`;
     app.innerHTML = withLanguage(e005Shell());
     loadE005();
+  } else if (path === "experiment/e005/answers") {
+    document.title = `${e5("answersTitle")} — i`;
+    app.innerHTML = withLanguage(e005AnswersShell());
+    loadE005Answers();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

@@ -724,6 +724,88 @@ button:disabled {
   line-height: 1.5;
 }
 
+.e005-answer-button {
+  border: 2px solid var(--ember);
+  color: var(--ember);
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.2rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin: 2rem 0;
+  padding: clamp(1rem, 3vw, 1.8rem);
+  text-decoration: none;
+}
+
+.e005-answer-button:hover {
+  background: var(--ember);
+  color: var(--bg);
+}
+
+.e005-answers-page {
+  width: min(100%, 78rem);
+}
+
+.e005-answers-page > h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: -0.07em;
+  line-height: 0.9;
+}
+
+.e005-raw-records {
+  margin: 3rem 0;
+}
+
+.e005-raw-record {
+  border-top: 2px solid var(--ink);
+  padding: clamp(2.5rem, 6vw, 5rem) 0;
+}
+
+.e005-raw-record h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  line-height: 1.12;
+  margin: 1rem 0 2rem;
+}
+
+.e005-expected-standalone {
+  border-left: 0.3rem solid var(--ember);
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 1px;
+  padding: 1.2rem;
+}
+
+.e005-expected-standalone span,
+.e005-raw-answer-grid span,
+.e005-raw-answer-grid small {
+  color: var(--muted);
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.e005-expected-standalone strong {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+}
+
+.e005-raw-answer-grid {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.e005-raw-answer-grid section {
+  border: 1px solid var(--line);
+  padding: 1.2rem;
+}
+
+.e005-raw-answer-grid p {
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
 .e005-base-answers {
   display: grid;
   gap: 1px;
@@ -757,6 +839,10 @@ button:disabled {
   }
 
   .e005-base-answers {
+    grid-template-columns: 1fr;
+  }
+
+  .e005-raw-answer-grid {
     grid-template-columns: 1fr;
   }
 
