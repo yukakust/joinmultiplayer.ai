@@ -57,6 +57,12 @@ those splits. Its public artifact is
 `76cbe15ec0eb7c305b1ec0dd14518ced76504ffc375466cbbacd88b1abfd909d`.
 No weights had changed at this data checkpoint.
 
+A two-step DoRA plumbing smoke then trained 1,232,896 personal parameters for
+the Archivist. Loss stayed finite and moved from 1.943 to 1.410 in 7.839 seconds;
+the shared model file hash was unchanged. This only shows that local DoRA
+training works on yukabox. It is not evidence that the skill was learned. The
+public artifact is `site/experiments/E005/gate-4-smoke-v0.1.json`.
+
 The pre-training Gate 4 checkpoint is
 `site/experiments/E005/gate-4-design-v0.1.json` and is rendered at
 `/experiment/e005/gate-4/`. It proposes two separate DoRA adapters: one learns

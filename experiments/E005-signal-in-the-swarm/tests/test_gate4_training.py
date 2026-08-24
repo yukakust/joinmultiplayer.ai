@@ -15,6 +15,7 @@ TRAIN = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 SPEC.loader.exec_module(TRAIN)
 DATA_PATH = ROOT / "site/experiments/E005/gate-4-data-v0.1.json"
+SMOKE_PATH = ROOT / "site/experiments/E005/gate-4-smoke-v0.1.json"
 
 
 class FakeTokenizer:
@@ -59,6 +60,12 @@ class Gate4TrainingTests(unittest.TestCase):
         labels = encoded["labels"]
         self.assertTrue((labels == -100).any())
         self.assertTrue((labels != -100).any())
+
+    def test_public_smoke_is_not_claimed_as_skill_evidence(self) -> None:
+        smoke = json.loads(SMOKE_PATH.read_text(encoding="utf-8"))
+        self.assertEqual(smoke["claim_status"], "plumbing_only_not_skill_evidence")
+        self.assertTrue(smoke["result"]["base_unchanged"])
+        self.assertEqual(smoke["method"]["adapter"], "DoRA")
 
 
 if __name__ == "__main__":
