@@ -53,6 +53,11 @@ class Gate4TrainingTests(unittest.TestCase):
         _payload, shuffled = TRAIN.load_rows(DATA_PATH, "safety_keeper", "shuffled")
         self.assertEqual([row["input"] for row in correct], [row["input"] for row in shuffled])
         self.assertNotEqual([row["target"] for row in correct], [row["target"] for row in shuffled])
+        for correct_row, shuffled_row in zip(correct, shuffled, strict=True):
+            self.assertIn(correct_row["entity"], shuffled_row["target"])
+            self.assertEqual(correct_row["language"], shuffled_row["language"])
+            if correct_row["language"] == "ru":
+                self.assertNotIn("The required evidence", shuffled_row["target"])
 
     def test_prompt_tokens_are_hidden_from_loss(self) -> None:
         _payload, rows = TRAIN.load_rows(DATA_PATH, "archivist", "correct")

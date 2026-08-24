@@ -34,10 +34,15 @@ def load_rows(data_path: Path, skill: str, control: str) -> tuple[dict, list[dic
     if not rows:
         raise ValueError(f"no training rows for {skill}")
     if control == "shuffled":
-        targets = [row["target"] for row in rows]
-        shift = 7
+        groups: dict[tuple[str, str], list[int]] = {}
         for index, row in enumerate(rows):
-            row["target"] = targets[(index + shift) % len(targets)]
+            groups.setdefault((row["language"], row["entity"]), []).append(index)
+        original = [row["target"] for row in rows]
+        for indices in groups.values():
+            if len(indices) < 2:
+                raise ValueError("shuffled control needs two same-language examples per entity")
+            for position, index in enumerate(indices):
+                rows[index]["target"] = original[indices[(position + 1) % len(indices)]]
     return payload, rows
 
 
