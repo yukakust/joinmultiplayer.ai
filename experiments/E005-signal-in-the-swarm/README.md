@@ -72,6 +72,14 @@ is a small development microscope, not the final Gate 4 result. Raw questions,
 answers, preliminary labels, and manual review are public in
 `site/experiments/E005/gate-4-archivist-microscope-v0.1.json`.
 
+The Safety Keeper then trained on its separate 96-example skill. Its first four
+held-out questions also scored frozen base 0/4 and personal DoRA 4/4 under human
+review. In one English and one Russian base answer, Qwen proposed acting despite
+the explicitly missing measurement. The raw public artifact is
+`site/experiments/E005/gate-4-safety-microscope-v0.1.json`. Both microscopes are
+small development checks; wrong-specialist and shuffled-label controls are
+still required.
+
 The pre-training Gate 4 checkpoint is
 `site/experiments/E005/gate-4-design-v0.1.json` and is rendered at
 `/experiment/e005/gate-4/`. It proposes two separate DoRA adapters: one learns

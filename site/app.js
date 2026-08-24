@@ -2500,7 +2500,10 @@ const e005Copy = {
     cleanBase: "CLEAN QWEN",
     trainedPocket: "QWEN + ARCHIVIST",
     expectedAnswer: "WHAT SHOULD HAPPEN",
-    checkerMistake: "The first automatic checker mistook two repeated Russian questions for answers. Human review corrected them."
+    checkerMistake: "The first automatic checker mistook two repeated Russian questions for answers. Human review corrected them.",
+    safetyMicroscopeTitle: "THE SAFETY KEEPER'S FIRST FOUR NEW QUESTIONS",
+    safetyMicroscopeCopy: "The clean Qwen got 0 of 4. The Safety Keeper got 4 of 4. The clean model sometimes suggested acting without the required measurement.",
+    trainedSafetyPocket: "QWEN + SAFETY KEEPER"
   },
   ru: {
     step: "СЛЕДУЮЩИЙ ЭКСПЕРИМЕНТ · E005",
@@ -2614,7 +2617,10 @@ const e005Copy = {
     cleanBase: "ЧИСТАЯ QWEN",
     trainedPocket: "QWEN + АРХИВАРИУС",
     expectedAnswer: "ЧТО ДОЛЖНО ПРОИЗОЙТИ",
-    checkerMistake: "Первый автоматический проверяющий принял два повторённых русских вопроса за ответы. Ручная проверка исправила ошибки."
+    checkerMistake: "Первый автоматический проверяющий принял два повторённых русских вопроса за ответы. Ручная проверка исправила ошибки.",
+    safetyMicroscopeTitle: "ПЕРВЫЕ ЧЕТЫРЕ НОВЫХ ВОПРОСА ХРАНИТЕЛЯ",
+    safetyMicroscopeCopy: "Чистая Qwen справилась с 0 из 4. Хранитель — с 4 из 4. Чистая модель иногда советовала действовать без обязательного измерения.",
+    trainedSafetyPocket: "QWEN + ХРАНИТЕЛЬ"
   }
 };
 
@@ -2945,15 +2951,17 @@ async function loadE005Gate4() {
   const target = document.querySelector(".e005-gate4-page");
   if (!target) return;
   try {
-    const [response, smokeResponse, microscopeResponse] = await Promise.all([
+    const [response, smokeResponse, microscopeResponse, safetyResponse] = await Promise.all([
       fetch("/experiments/E005/gate-4-design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E005/gate-4-smoke-v0.1.json", { cache: "no-store" }),
-      fetch("/experiments/E005/gate-4-archivist-microscope-v0.1.json", { cache: "no-store" })
+      fetch("/experiments/E005/gate-4-archivist-microscope-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-4-safety-microscope-v0.1.json", { cache: "no-store" })
     ]);
-    if (!response.ok || !smokeResponse.ok || !microscopeResponse.ok) throw new Error("E005 Gate 4 design unavailable");
+    if (!response.ok || !smokeResponse.ok || !microscopeResponse.ok || !safetyResponse.ok) throw new Error("E005 Gate 4 design unavailable");
     const design = await response.json();
     const smoke = await smokeResponse.json();
     const microscope = await microscopeResponse.json();
+    const safetyMicroscope = await safetyResponse.json();
     const localized = value => escapeHTML(e4Localized(value));
     const comparisonLabels = language === "ru" ? [
       "Чистая замороженная Qwen без адаптера",
@@ -2966,6 +2974,7 @@ async function loadE005Gate4() {
       "The other pocket i's DoRA adapter",
       "DoRA trained on shuffled actions"
     ];
+    const microscopeMarkup = (result, title, copy, trainedLabel, warning = "") => `<section class="e005-gate4-microscope"><div class="flow-step">${title}</div><h2>${copy}</h2>${warning ? `<p class="control-warning">${warning}</p>` : ""}<div>${result.rows.map(row => `<article><header><span>${escapeHTML(row.task_id)} · ${escapeHTML(row.language.toUpperCase())}</span><h3>${escapeHTML(row.question)}</h3></header><section class="expected"><span>${e5("expectedAnswer")}</span><p>${escapeHTML(row.expected_answer)}</p></section><div class="answers"><section class="is-${escapeHTML(row.base.manual_review)}"><span>${e5("cleanBase")} · ${escapeHTML(row.base.manual_review)}</span><p>${escapeHTML(row.base.output)}</p></section><section class="is-${escapeHTML(row.personal_dora.manual_review)}"><span>${trainedLabel} · ${escapeHTML(row.personal_dora.manual_review)}</span><p>${escapeHTML(row.personal_dora.output)}</p></section></div></article>`).join("")}</div></section>`;
     const passFail = Object.entries(design.pass_fail).map(([key, value], index) => `
       <article><span>${String(index + 1).padStart(2, "0")} · ${escapeHTML(key.replaceAll("_", " "))}</span><p>${localized(value)}</p></article>`).join("");
     target.querySelector(".experiment-loading").outerHTML = `
@@ -2979,7 +2988,8 @@ async function loadE005Gate4() {
         <article><strong>0</strong><span>${e5("baseFrozen")}</span></article>
       </div>
       <section class="e005-gate4-smoke"><div class="flow-step">${e5("smokeTitle")}</div><div class="e005-gate4-metrics"><article><strong>${smoke.method.steps}</strong><span>DoRA steps</span></article><article><strong>${(smoke.result.trainable_parameters / 1000000).toFixed(2)}M</strong><span>personal weights changed</span></article><article><strong>${smoke.result.losses[0].toFixed(2)} → ${smoke.result.losses.at(-1).toFixed(2)}</strong><span>training error</span></article><article><strong>${smoke.result.base_unchanged ? "✓" : "×"}</strong><span>${e5("baseFrozen")}</span></article></div><p class="control-warning">${e5("smokeNotProof")}</p></section>
-      <section class="e005-gate4-microscope"><div class="flow-step">${e5("microscopeTitle")}</div><h2>${e5("microscopeCopy")}</h2><p class="control-warning">${e5("checkerMistake")}</p><div>${microscope.rows.map(row => `<article><header><span>${escapeHTML(row.task_id)} · ${escapeHTML(row.language.toUpperCase())}</span><h3>${escapeHTML(row.question)}</h3></header><section class="expected"><span>${e5("expectedAnswer")}</span><p>${escapeHTML(row.expected_answer)}</p></section><div class="answers"><section class="is-${escapeHTML(row.base.manual_review)}"><span>${e5("cleanBase")} · ${escapeHTML(row.base.manual_review)}</span><p>${escapeHTML(row.base.output)}</p></section><section class="is-${escapeHTML(row.personal_dora.manual_review)}"><span>${e5("trainedPocket")} · ${escapeHTML(row.personal_dora.manual_review)}</span><p>${escapeHTML(row.personal_dora.output)}</p></section></div></article>`).join("")}</div></section>
+      ${microscopeMarkup(microscope, e5("microscopeTitle"), e5("microscopeCopy"), e5("trainedPocket"), e5("checkerMistake"))}
+      ${microscopeMarkup(safetyMicroscope, e5("safetyMicroscopeTitle"), e5("safetyMicroscopeCopy"), e5("trainedSafetyPocket"))}
       <section class="e005-gate4-pockets">${design.pockets.map(pocket => `
         <article>
           <header><i>i</i><div><span>${escapeHTML(pocket.id)} · ${localized(pocket.name)}</span><h2>${localized(pocket.skill)}</h2></div></header>
@@ -2990,7 +3000,7 @@ async function loadE005Gate4() {
       <section class="e005-gate4-controls"><div class="flow-step">${e5("controls")}</div><div>${comparisonLabels.map((label, index) => `<article><strong>${index + 1}</strong><span>${escapeHTML(label)}</span></article>`).join("")}</div></section>
       <section class="e005-gate4-gates"><div class="flow-step">${e5("passFail")}</div><div>${passFail}</div></section>
       <section class="e004-decision"><span>${e5("ownerStop")}</span><p>${e5("ownerStopCopy")}</p></section>
-      <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/gate-4-data-v0.1.json">${e5("viewDataset")}</a><a class="quiet-link" href="/experiments/E005/gate-4-archivist-microscope-v0.1.json">ANSWERS JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-smoke-v0.1.json">SMOKE JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-design-v0.1.json">PLAN JSON ↗</a></div>`;
+      <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/gate-4-data-v0.1.json">${e5("viewDataset")}</a><a class="quiet-link" href="/experiments/E005/gate-4-archivist-microscope-v0.1.json">ARCHIVIST JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-safety-microscope-v0.1.json">SAFETY JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-smoke-v0.1.json">SMOKE JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-design-v0.1.json">PLAN JSON ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }

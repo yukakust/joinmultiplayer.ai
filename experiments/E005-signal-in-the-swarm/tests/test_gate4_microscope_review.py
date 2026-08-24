@@ -22,6 +22,12 @@ class Gate4MicroscopeReviewTests(unittest.TestCase):
         self.assertEqual(len(payload["review_finding"]["automatic_scorer_false_positives"]), 2)
         self.assertEqual(payload["claim_status"], "development_microscope_manually_reviewed")
 
+    def test_safety_review_preserves_all_raw_failures(self) -> None:
+        path = ROOT / "site/experiments/E005/gate-4-safety-microscope-v0.1.json"
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(payload["manual_summary"], {"base_correct": 0, "personal_dora_correct": 4, "tasks": 4})
+        self.assertEqual(payload["review_finding"]["automatic_scorer_false_positives"], [])
+
 
 if __name__ == "__main__":
     unittest.main()
