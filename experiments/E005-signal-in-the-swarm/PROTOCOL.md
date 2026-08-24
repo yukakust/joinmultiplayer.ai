@@ -194,6 +194,14 @@ artifact is `/experiments/E005/gate-4-design-v0.1.json`.
 Router and merger train only on surrogate pockets. Frozen response-capsule and
 minority-report contracts remain enforced by the harness.
 
+Gate 5A first isolates the smaller composition claim. Two pocket i receive
+different, necessary halves of each task. Neither pocket, the frozen base, nor
+an intentionally wrong pair may solve the complete task reliably. The selected
+pair answers once in parallel; a frozen merger receives only their bounded
+capsules and the public question. Success requires the correct pair to beat
+every single-pocket and wrong-pair control on a locked set. This is a test of
+complementary composition, not yet learned routing or swarm scaling.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

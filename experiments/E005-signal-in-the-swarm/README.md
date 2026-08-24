@@ -169,6 +169,10 @@ exam. A strict preliminary structured review scored the matching source-work
 DoRA 6/24 and the matching safe-action DoRA 23/24. Source work therefore failed
 its 20/24 threshold and language thresholds; safe action passed its score and
 control-lead thresholds. Gate 4C fails overall because both skills had to pass.
+The scientific conclusion is therefore **partial**: this run gives one concrete
+example in which a small personal adapter learned a skill that transferred to
+new wording, but it does not establish that arbitrary skills transfer. It also
+does not test routing, cooperation, or swarm composition.
 All labels remain owner-reviewable. The complete raw outputs, reasons, summary,
 and failed gates are preserved in
 `site/experiments/E005/gate-4c-results-v0.1.json` and rendered at
