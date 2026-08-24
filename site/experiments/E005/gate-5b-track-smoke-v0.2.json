@@ -1,0 +1,29 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "personal_track_training_smoke",
+  "status": "passed_development_smoke",
+  "attempts": [
+    {
+      "version": "v0.1",
+      "status": "stopped_before_first_step",
+      "failure": "The chat-template prefix mask incorrectly hid the whole assistant target.",
+      "weights_changed": false
+    },
+    {
+      "version": "v0.2",
+      "status": "passed",
+      "cause_losses": [5.988463, 4.509481],
+      "safety_losses": [5.817897, 3.274685],
+      "lessons_per_track": 4,
+      "shared_unchanged": true,
+      "cause_unchanged_during_safety_training": true,
+      "merger_trained": false,
+      "exam_run": false
+    }
+  ],
+  "plain_language": {
+    "en": "The first smoke found a masking bug before learning. After the fix, both isolated personal paths learned for two steps without changing Qwen or each other.",
+    "ru": "Первый smoke нашёл ошибку маски до обучения. После исправления оба изолированных личных трека сделали по два учебных шага, не меняя Qwen и друг друга."
+  }
+}

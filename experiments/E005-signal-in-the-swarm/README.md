@@ -267,3 +267,8 @@ The real Qwen preflight then confirmed that each separate middle path has 112
 DoRA modules and 3,080,192 trainable personal parameters. Before training both
 personal deltas and the maximum output-logit difference from untouched Qwen are
 exactly zero. This is an architecture check, not a learned result.
+
+Gate 5B training smoke preserves both attempts. v0.1 stopped before training on
+an empty assistant-target mask. v0.2 corrected the prefix construction and ran
+two steps per track: CAUSE-I loss 5.988→4.509 and SAFETY-I 5.818→3.275. Shared
+Qwen and the other personal path stayed unchanged. Merger and exam were not run.

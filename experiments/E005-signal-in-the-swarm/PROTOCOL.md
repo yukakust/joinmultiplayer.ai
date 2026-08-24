@@ -248,6 +248,12 @@ fresh deltas and the maximum logit difference from untouched Qwen were exactly
 zero. Selecting CAUSE-I or SAFETY-I exposed trainable parameters only inside the
 selected middle path.
 
+Training smoke v0.1 stopped before its first optimizer step because the chat
+template made the assistant-target mask empty; no weights changed. The corrected
+v0.2 smoke ran two steps per track. CAUSE-I loss moved 5.988→4.509 and SAFETY-I
+5.818→3.275. Shared Qwen stayed unchanged, and training SAFETY-I did not change
+CAUSE-I. The merger and locked exam remained untouched.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the
