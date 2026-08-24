@@ -269,6 +269,10 @@ loss moved 1.138→0.642. Both personal tracks remained unchanged and only the
 395,650 merger parameters moved. This modest training result was published
 before opening the locked exam.
 
+Before opening the exam, evaluation protocol v0.1 froze greedy decoding, 40 new
+tokens, all six conditions, an alternating CAUSE×CAUSE / SAFETY×SAFETY wrong
+pair, and a provisional exact-statement score followed by required human review.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

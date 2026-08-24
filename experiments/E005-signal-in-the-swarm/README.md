@@ -285,3 +285,7 @@ parameters changed; the locked exam remained untouched.
 The full merger checkpoint completed 96 steps over 192 lessons. Mean loss moved
 1.138→0.642. Both personal tracks remained unchanged. This modest training
 curve was published before opening the locked exam.
+
+Evaluation protocol v0.1 was committed before the exam: six fixed conditions,
+greedy decoding up to 40 new tokens, a deterministic wrong-pair rule, provisional
+string scoring, and required review of every raw answer.

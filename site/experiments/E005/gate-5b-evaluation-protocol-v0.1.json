@@ -1,0 +1,19 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "locked_evaluation_protocol",
+  "status": "locked_before_exam",
+  "decoding": "greedy",
+  "max_new_tokens": 40,
+  "conditions": {
+    "shared_qwen_alone": "Untouched shared Qwen; no personal delta.",
+    "cause_track_alone": "Only CAUSE-I delta is added.",
+    "safety_track_alone": "Only SAFETY-I delta is added.",
+    "wrong_same_role_pair": "Even-indexed questions use CAUSE-I twice; odd-indexed questions use SAFETY-I twice.",
+    "semantic_text_capsules": "Untouched shared Qwen receives the same two correct claims as readable text.",
+    "correct_neural_pair": "CAUSE-I and SAFETY-I hidden deltas are joined by the trained bridge. No claims are added as text."
+  },
+  "automatic_score": "A response is provisionally complete only when normalized text contains both frozen expected statements.",
+  "human_review_required": true,
+  "exam_run": false
+}
