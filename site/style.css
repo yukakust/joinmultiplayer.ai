@@ -4308,3 +4308,27 @@ blockquote {
     transition: none;
   }
 }
+
+.e005-gate5a-steps {
+  display: grid;
+  gap: 0;
+  margin: 2rem 0;
+  padding: 0;
+  counter-reset: gate5a;
+  list-style: none;
+}
+
+.e005-gate5a-steps li {
+  border-top: 1px solid var(--line);
+  padding: 1.1rem 1rem 1.1rem 4rem;
+  position: relative;
+  font-size: clamp(1rem, 1.7vw, 1.35rem);
+}
+
+.e005-gate5a-steps li::before {
+  counter-increment: gate5a;
+  content: counter(gate5a);
+  position: absolute;
+  left: 1rem;
+  color: var(--muted);
+}

@@ -2796,6 +2796,10 @@ function e005Gate4CResultsShell() {
   return `<section class="flow-shell e005-gate4c-results-page"><div class="flow-step">E005 · GATE 4C · STEP 5</div><h1>${localized({ en: "One skill transferred. One failed.", ru: "Одно умение перенеслось. Второе провалилось." })}</h1><p class="contribution-intro">${localized({ en: "Inspect every question and all four unedited answers. The labels are preliminary until you confirm them.", ru: "Посмотрите каждый вопрос и четыре неотредактированных ответа. Оценки предварительные, пока вы их не подтвердите." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate5AShell() {
+  return `<section class="flow-shell e005-gate5a-page"><div class="flow-step">E005 · GATE 5A · ${localized({ en: "DESIGN", ru: "ЧЕРТЁЖ" })}</div><h1>${localized({ en: "Two pocket i. One answer.", ru: "Два pocket i. Один ответ." })}</h1><p class="contribution-intro">${localized({ en: "Can two different personal skills solve a task that neither can solve alone?", ru: "Могут ли два разных личных умения решить задачу, которую ни одно не решает в одиночку?" })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3390,7 +3394,7 @@ async function loadE005Gate4CResults() {
     const skillNames = { source_work: localized({ en: "Trustworthy sources", ru: "Надёжные источники" }), safe_action: localized({ en: "Safe action", ru: "Безопасное действие" }) };
     let skill = "source_work", index = 0;
     const visible = () => data.rows.filter(row => row.skill === skill && row.language === language);
-    target.innerHTML = `<section class="e005-gate4-result-verdict is-failed"><span>GATE 4C · ${localized({ en: "PARTLY SUPPORTED", ru: "ЧАСТИЧНО ПОДТВЕРЖДЕНО" })}</span><h2>${localized({ en: "One skill transferred. One did not.", ru: "Одно умение перенеслось. Второе — нет." })}</h2><p>${localized({ en: "Safe action scored 23/24 on new wording. Source work scored 6/24. We found one real example of a personal skill living in small DoRA weights, but not a rule that works for every skill.", ru: "Безопасное действие получило 23/24 на новых формулировках. Работа с источниками — 6/24. Мы нашли один настоящий пример личного умения в маленьких DoRA-весах, но не доказали, что так можно выучить любое умение." })}</p></section><nav class="e005-gate4-skill-tabs"><button data-result-skill="source_work">${skillNames.source_work} · 6/24</button><button data-result-skill="safe_action">${skillNames.safe_action} · 23/24</button></nav><div class="e005-gate4c-result-viewer"></div><div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/training/">${localized({ en: "BACK TO TRAINING", ru: "ВЕРНУТЬСЯ К ОБУЧЕНИЮ" })}</a><a class="quiet-link" href="/experiments/E005/gate-4c-results-v0.1.json">ALL RAW ANSWERS ↗</a><a class="quiet-link" href="/experiments/E005/gate-4c-conclusion-v0.1.json">CONCLUSION JSON ↗</a></div>`;
+    target.innerHTML = `<section class="e005-gate4-result-verdict is-failed"><span>GATE 4C · ${localized({ en: "PARTLY SUPPORTED", ru: "ЧАСТИЧНО ПОДТВЕРЖДЕНО" })}</span><h2>${localized({ en: "One skill transferred. One did not.", ru: "Одно умение перенеслось. Второе — нет." })}</h2><p>${localized({ en: "Safe action scored 23/24 on new wording. Source work scored 6/24. We found one real example of a personal skill living in small DoRA weights, but not a rule that works for every skill.", ru: "Безопасное действие получило 23/24 на новых формулировках. Работа с источниками — 6/24. Мы нашли один настоящий пример личного умения в маленьких DoRA-весах, но не доказали, что так можно выучить любое умение." })}</p></section><nav class="e005-gate4-skill-tabs"><button data-result-skill="source_work">${skillNames.source_work} · 6/24</button><button data-result-skill="safe_action">${skillNames.safe_action} · 23/24</button></nav><div class="e005-gate4c-result-viewer"></div><div class="actions"><a class="button" href="/experiment/e005/gate-5a/">${localized({ en: "NEXT: COMBINE TWO POCKET I →", ru: "ДАЛЬШЕ: ОБЪЕДИНИТЬ ДВА POCKET I →" })}</a><a class="button secondary" href="/experiment/e005/gate-4/training/">${localized({ en: "BACK TO TRAINING", ru: "ВЕРНУТЬСЯ К ОБУЧЕНИЮ" })}</a><a class="quiet-link" href="/experiments/E005/gate-4c-results-v0.1.json">ALL RAW ANSWERS ↗</a><a class="quiet-link" href="/experiments/E005/gate-4c-conclusion-v0.1.json">CONCLUSION JSON ↗</a></div>`;
     const render = () => {
       const rows = visible(); index = Math.max(0, Math.min(index, rows.length - 1)); const row = rows[index];
       target.querySelectorAll("[data-result-skill]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.resultSkill === skill)));
@@ -3399,6 +3403,28 @@ async function loadE005Gate4CResults() {
     target.addEventListener("click", event => { const button = event.target.closest("[data-result-skill]"); if (button) { skill = button.dataset.resultSkill; index = 0; render(); } else if (event.target.closest("[data-result-previous]")) { index--; render(); } else if (event.target.closest("[data-result-next]")) { index++; render(); } });
     render();
   } catch (error) { target.innerHTML = `<p class="control-warning">${escapeHTML(error.message)}</p>`; }
+}
+
+async function loadE005Gate5A() {
+  const target = document.querySelector(".e005-gate5a-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-5a-design-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 Gate 5A design unavailable");
+    const data = await response.json();
+    const pick = value => escapeHTML(value?.[language] || value?.en || "");
+    const plan = data.plain_plan[language] || data.plain_plan.en;
+    target.querySelector(".experiment-loading").outerHTML = `
+      <section class="e005-gate4-lessons-status"><strong>${localized({ en: "FROZEN BEFORE TRAINING", ru: "ЗАМОРОЖЕНО ДО ОБУЧЕНИЯ" })}</strong><p>${localized({ en: "No model has studied and no exam has run.", ru: "Ни одна модель ещё не училась, экзамен не запускался." })}</p></section>
+      <ol class="e005-gate5a-steps">${plan.map(step => `<li>${escapeHTML(step)}</li>`).join("")}</ol>
+      <div class="e005-gate4-training-cards">${data.pockets.map(pocket => `<article><span>${escapeHTML(pocket.id)} · DORA</span><h2>${pick(pocket.name)}</h2><p><strong>${localized({ en: "LEARNS", ru: "УЧИТСЯ" })}</strong><br>${pick(pocket.learns)}</p><p><strong>${localized({ en: "CANNOT KNOW ALONE", ru: "НЕ МОЖЕТ ЗНАТЬ В ОДИНОЧКУ" })}</strong><br>${pick(pocket.cannot_know)}</p></article>`).join("")}</div>
+      <section class="e005-gate4-current-question"><h2>${pick(data.example.question)}</h2><div><span>${localized({ en: "CAUSE-I ALONE", ru: "ТОЛЬКО CAUSE-I" })}</span><p>${pick(data.example.cause_i_only)}</p></div><div><span>${localized({ en: "SAFETY-I ALONE", ru: "ТОЛЬКО SAFETY-I" })}</span><p>${pick(data.example.safety_i_only)}</p></div><div><span>${localized({ en: "TOGETHER", ru: "ВМЕСТЕ" })}</span><p>${pick(data.example.together)}</p></div></section>
+      <section class="e005-gate4-result-verdict"><span>${localized({ en: "PASS RULE", ru: "ПРАВИЛО ПОБЕДЫ" })}</span><h2>${localized({ en: "The pair must get at least 20/24. Every single pocket and the wrong pair must stay at 8/24 or lower.", ru: "Правильная пара должна получить не меньше 20/24. Каждый одиночный pocket i и неправильная пара — не больше 8/24." })}</h2><p>${localized({ en: "We will remove each capsule in turn. If the answer stays correct, the task did not really need both pocket i.", ru: "Мы по очереди уберём каждую капсулу. Если ответ останется верным, значит задача на самом деле не требовала обоих pocket i." })}</p></section>
+      <p class="control-warning">${localized({ en: "This tests composition only. It does not yet test automatic routing, many-pocket scaling, or a latent neural merge.", ru: "Здесь проверяется только объединение. Автоматический выбор pocket i, рост большого swarm и объединение скрытых нейронных состояний будут позже." })}</p>
+      <div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/gate-4c-results/">${localized({ en: "PREVIOUS RESULT", ru: "ПРЕДЫДУЩИЙ РЕЗУЛЬТАТ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5a-design-v0.1.json">DESIGN JSON ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
 }
 
 async function loadE005() {
@@ -4290,6 +4316,10 @@ function render() {
     document.title = `Gate 4C — i`;
     app.innerHTML = withLanguage(e005Gate4CResultsShell());
     loadE005Gate4CResults();
+  } else if (path === "experiment/e005/gate-5a") {
+    document.title = `Gate 5A — i`;
+    app.innerHTML = withLanguage(e005Gate5AShell());
+    loadE005Gate5A();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

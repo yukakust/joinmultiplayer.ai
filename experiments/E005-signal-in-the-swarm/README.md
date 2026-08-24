@@ -177,3 +177,13 @@ All labels remain owner-reviewable. The complete raw outputs, reasons, summary,
 and failed gates are preserved in
 `site/experiments/E005/gate-4c-results-v0.1.json` and rendered at
 `/experiment/e005/gate-4/gate-4c-results/`.
+
+Gate 5A begins with a frozen, owner-readable composition design. One pocket i
+must identify a cause but cannot know the safety restriction; the other must
+identify the restriction but cannot know the cause. They answer once in
+parallel, and a source i combines the two bounded capsules. The correct pair
+must score at least 20/24 while either pocket alone and a wrong pair stay at or
+below 8/24. Removing either capsule must destroy at least ten correct answers.
+This checkpoint changes no weights and creates no training or locked exam data.
+It is visible at `/experiment/e005/gate-5a/`; the exact design is
+`site/experiments/E005/gate-5a-design-v0.1.json`.
