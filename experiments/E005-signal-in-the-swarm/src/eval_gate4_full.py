@@ -10,7 +10,7 @@ import torch
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from eval_gate4 import generate, preliminary_score, prompt_for
+from eval_gate4 import preliminary_score, prompt_for
 
 
 METHODS = ("base", "personal_dora", "wrong_specialist", "shuffled_lessons")
@@ -28,6 +28,29 @@ def save_checkpoint(path: Path, payload: dict) -> None:
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     os.replace(temporary, path)
+
+
+def generate_batch(model, tokenizer, prompts: list[str], max_new_tokens: int) -> list[str]:
+    """Generate several independent answers in one forward pass.
+
+    Left padding keeps the last prompt token aligned for decoder-only generation.
+    The questions, decoding settings, and scoring stay identical to the serial run.
+    """
+    tokenizer.padding_side = "left"
+    encoded = tokenizer(prompts, return_tensors="pt", padding=True)
+    prompt_width = encoded["input_ids"].shape[1]
+    with torch.inference_mode():
+        generated = model.generate(
+            **encoded,
+            do_sample=False,
+            max_new_tokens=max_new_tokens,
+            pad_token_id=tokenizer.eos_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+        )
+    return [
+        tokenizer.decode(row[prompt_width:], skip_special_tokens=True).strip()
+        for row in generated
+    ]
 
 
 def run(args: argparse.Namespace) -> dict:
@@ -54,34 +77,36 @@ def run(args: argparse.Namespace) -> dict:
         "methods": list(METHODS),
         "rows": output_rows,
     }
-    for index, row in enumerate(rows, start=1):
-        prompt = prompt_for(row)
+    for batch_start in range(0, len(rows), args.batch_size):
+        batch = rows[batch_start:batch_start + args.batch_size]
+        prompts = [prompt_for(row) for row in batch]
         results = {}
         with model.disable_adapter():
-            base_output = generate(model, tokenizer, prompt, args.max_new_tokens)
-        results["base"] = base_output
+            results["base"] = generate_batch(model, tokenizer, prompts, args.max_new_tokens)
         for method in METHODS[1:]:
             model.set_adapter(method)
-            results[method] = generate(model, tokenizer, prompt, args.max_new_tokens)
-        reviewed = {}
-        for method, output in results.items():
-            reviewed[method] = {
-                "output": output,
-                "exact_target_match": exact_target_match(row["target"], output),
-                "preliminary": preliminary_score(row, output),
-            }
-        output_rows.append({
-            "task_id": row["id"],
-            "language": row["language"],
-            "entity": row["entity"],
-            "question": row["input"],
-            "expected_answer": row["target"],
-            "conditions": reviewed,
-        })
-        payload["completed_tasks"] = index
+            results[method] = generate_batch(model, tokenizer, prompts, args.max_new_tokens)
+        for offset, row in enumerate(batch):
+            reviewed = {}
+            for method in METHODS:
+                output = results[method][offset]
+                reviewed[method] = {
+                    "output": output,
+                    "exact_target_match": exact_target_match(row["target"], output),
+                    "preliminary": preliminary_score(row, output),
+                }
+            output_rows.append({
+                "task_id": row["id"],
+                "language": row["language"],
+                "entity": row["entity"],
+                "question": row["input"],
+                "expected_answer": row["target"],
+                "conditions": reviewed,
+            })
+        payload["completed_tasks"] = len(output_rows)
         payload["elapsed_seconds"] = round(time.monotonic() - started, 3)
         save_checkpoint(args.output, payload)
-        print(json.dumps({"task": index, "of": len(rows), "id": row["id"], "exact": {method: reviewed[method]["exact_target_match"] for method in METHODS}}), flush=True)
+        print(json.dumps({"completed": len(output_rows), "of": len(rows), "last_id": batch[-1]["id"]}), flush=True)
     payload["claim_status"] = "development_automatic_exact_match_unreviewed"
     payload["summary"] = {
         method: {
@@ -107,6 +132,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--limit", type=int, default=48)
     parser.add_argument("--max-new-tokens", type=int, default=96)
     parser.add_argument("--threads", type=int, default=4)
+    parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--output", required=True, type=Path)
     return parser.parse_args()
 
