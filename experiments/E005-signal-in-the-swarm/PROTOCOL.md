@@ -242,6 +242,12 @@ boundary. The first run is a one-computer simulation before physical-network
 replication. The curriculum contains 256 track lessons and 192 disjoint merger
 lessons; the locked bilingual exam contains 32 unseen devices and prompts.
 
+The real-model preflight passed before training. Each personal path contains 112
+DoRA-wrapped linear modules and 3,080,192 trainable personal parameters. Both
+fresh deltas and the maximum logit difference from untouched Qwen were exactly
+zero. Selecting CAUSE-I or SAFETY-I exposed trainable parameters only inside the
+selected middle path.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

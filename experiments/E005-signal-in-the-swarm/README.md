@@ -262,3 +262,8 @@ DoRA middle tracks at layers 6–21, bounded residual merging, and shared layers
 22–27. It freezes 256 track lessons, 192 disjoint merger lessons, and a 32-item
 bilingual exam with new entities and sentence frames. No Gate 5B weights have
 changed and the exam has not run at this checkpoint.
+
+The real Qwen preflight then confirmed that each separate middle path has 112
+DoRA modules and 3,080,192 trainable personal parameters. Before training both
+personal deltas and the maximum output-logit difference from untouched Qwen are
+exactly zero. This is an architecture check, not a learned result.
