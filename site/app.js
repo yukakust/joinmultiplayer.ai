@@ -3268,10 +3268,10 @@ async function loadE005Gate4Lessons() {
         note: "192 урока на умение · 96 русских + 96 английских · 6 разных форм вопроса · 4 вида ситуации",
         back: "ВЕРНУТЬСЯ К GATE 4",
       },
-    }[lang];
+    }[language];
     let skill = "source_work";
     let index = 0;
-    const visible = () => data.lessons.filter(item => item.skill === skill && item.language === lang);
+    const visible = () => data.lessons.filter(item => item.skill === skill && item.language === language);
     target.innerHTML = `
       <section class="e005-gate4-lessons-status"><strong>${text.frozen}</strong><p>${text.note}</p></section>
       <nav class="e005-gate4-skill-tabs">
@@ -3323,10 +3323,10 @@ async function loadE005Gate4Exam() {
     const text = {
       en: { frozen: "LOCKED · NOT RUN", rule: "To pass: at least 20/24 for each skill, at least 9/12 in each language, and at least 6 more right answers than every control.", source_work: "Skill 1 · trustworthy sources", safe_action: "Skill 2 · safe action", question: "QUESTION", expected: "WHAT COUNTS AS A GOOD ANSWER", previous: "← PREVIOUS", next: "NEXT →" },
       ru: { frozen: "ЗАМОРОЖЕН · ЕЩЁ НЕ ЗАПУЩЕН", rule: "Для успеха: минимум 20/24 по каждому умению, минимум 9/12 на каждом языке и хотя бы на 6 верных ответов больше каждого контроля.", source_work: "Умение 1 · надёжные источники", safe_action: "Умение 2 · безопасное действие", question: "ВОПРОС", expected: "КАКОЙ ОТВЕТ МЫ ЗАСЧИТАЕМ", previous: "← НАЗАД", next: "ДАЛЬШЕ →" },
-    }[lang];
+    }[language];
     let skill = "source_work";
     let index = 0;
-    const visible = () => data.questions.filter(item => item.skill === skill && item.language === lang);
+    const visible = () => data.questions.filter(item => item.skill === skill && item.language === language);
     target.innerHTML = `
       <section class="e005-gate4-lessons-status"><strong>${text.frozen}</strong><p>${text.rule}</p></section>
       <nav class="e005-gate4-skill-tabs"><button type="button" data-exam-skill="source_work">${text.source_work}</button><button type="button" data-exam-skill="safe_action">${text.safe_action}</button></nav>
@@ -3362,7 +3362,7 @@ async function loadE005Gate4Training() {
     if (!response.ok) throw new Error("E005 Gate 4C training unavailable");
     const data = await response.json();
     const names = { source_work: localized({ en: "Trustworthy sources", ru: "Надёжные источники" }), safe_action: localized({ en: "Safe action", ru: "Безопасное действие" }) };
-    const cards = data.runs.map(run => `<article><span>POCKET I · DORA</span><h2>${names[run.skill]}</h2><div class="e005-gate4-metrics"><section><strong>${run.examples}</strong><small>${localized({ en: "lessons", ru: "урока" })}</small></section><section><strong>${run.trainable_parameters.toLocaleString(lang)}</strong><small>${localized({ en: "personal weights", ru: "личных весов" })}</small></section><section><strong>${run.loss_mean_first_24.toFixed(2)} → ${run.loss_mean_last_24.toFixed(2)}</strong><small>${localized({ en: "training error", ru: "ошибка обучения" })}</small></section><section><strong>${run.base_unchanged ? "✓" : "×"}</strong><small>${localized({ en: "base unchanged", ru: "база не изменилась" })}</small></section></div></article>`).join("");
+    const cards = data.runs.map(run => `<article><span>POCKET I · DORA</span><h2>${names[run.skill]}</h2><div class="e005-gate4-metrics"><section><strong>${run.examples}</strong><small>${localized({ en: "lessons", ru: "урока" })}</small></section><section><strong>${run.trainable_parameters.toLocaleString(language)}</strong><small>${localized({ en: "personal weights", ru: "личных весов" })}</small></section><section><strong>${run.loss_mean_first_24.toFixed(2)} → ${run.loss_mean_last_24.toFixed(2)}</strong><small>${localized({ en: "training error", ru: "ошибка обучения" })}</small></section><section><strong>${run.base_unchanged ? "✓" : "×"}</strong><small>${localized({ en: "base unchanged", ru: "база не изменилась" })}</small></section></div></article>`).join("");
     target.innerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "TRAINING COMPLETE · EXAM RESULT AVAILABLE", ru: "ОБУЧЕНИЕ ЗАВЕРШЕНО · РЕЗУЛЬТАТ ЭКЗАМЕНА ГОТОВ" })}</strong><p>${localized(data.plain_language)}</p></section><div class="e005-gate4-training-cards">${cards}</div><p class="control-warning">${localized({ en: "A smaller error on lessons was not proof of understanding. The locked exam tested that next.", ru: "Меньшая ошибка на уроках не была доказательством понимания. Это проверил замороженный экзамен." })}</p><div class="actions"><a class="button" href="/experiment/e005/gate-4/gate-4c-results/">${localized({ en: "SEE ALL EXAM ANSWERS →", ru: "СМОТРЕТЬ ВСЕ ОТВЕТЫ ЭКЗАМЕНА →" })}</a><a class="button secondary" href="/experiment/e005/gate-4/exam/">${localized({ en: "EXAM PLAN", ru: "ПЛАН ЭКЗАМЕНА" })}</a><a class="quiet-link" href="/experiments/E005/gate-4c-training-v0.1.json">JSON ↗</a></div>`;
   } catch (error) {
     target.innerHTML = `<p class="control-warning">${escapeHTML(error.message)}</p>`;
@@ -3384,7 +3384,7 @@ async function loadE005Gate4CResults() {
     };
     const skillNames = { source_work: localized({ en: "Trustworthy sources", ru: "Надёжные источники" }), safe_action: localized({ en: "Safe action", ru: "Безопасное действие" }) };
     let skill = "source_work", index = 0;
-    const visible = () => data.rows.filter(row => row.skill === skill && row.language === lang);
+    const visible = () => data.rows.filter(row => row.skill === skill && row.language === language);
     target.innerHTML = `<section class="e005-gate4-result-verdict is-failed"><span>GATE 4C · ${localized({ en: "FAILED OVERALL", ru: "ОБЩИЙ РЕЗУЛЬТАТ — ПРОВАЛ" })}</span><h2>${localized({ en: "Sources 6/24 · Safe action 23/24", ru: "Источники 6/24 · Безопасное действие 23/24" })}</h2><p>${localized({ en: "The source skill still followed stale advice. The safe-action skill passed, but the whole gate fails when either skill fails.", ru: "Умение источников всё ещё следовало старым советам. Безопасное действие прошло порог, но весь gate провален, если провалено хотя бы одно умение." })}</p></section><nav class="e005-gate4-skill-tabs"><button data-result-skill="source_work">${skillNames.source_work} · 6/24</button><button data-result-skill="safe_action">${skillNames.safe_action} · 23/24</button></nav><div class="e005-gate4c-result-viewer"></div><div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/training/">${localized({ en: "BACK TO TRAINING", ru: "ВЕРНУТЬСЯ К ОБУЧЕНИЮ" })}</a><a class="quiet-link" href="/experiments/E005/gate-4c-results-v0.1.json">ALL RAW JSON ↗</a></div>`;
     const render = () => {
       const rows = visible(); index = Math.max(0, Math.min(index, rows.length - 1)); const row = rows[index];
