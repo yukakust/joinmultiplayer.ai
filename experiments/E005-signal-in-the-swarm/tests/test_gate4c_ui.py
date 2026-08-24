@@ -7,6 +7,12 @@ APP = ROOT / "site/app.js"
 
 
 class Gate4CUITests(unittest.TestCase):
+    def test_route_shells_have_a_global_localized_helper(self):
+        source = APP.read_text(encoding="utf-8")
+        helper = source.index("function localized(value)")
+        shell = source.index("function e005Gate4LessonsShell")
+        self.assertLess(helper, shell)
+
     def test_gate4c_pages_use_the_real_global_language_name(self):
         source = APP.read_text(encoding="utf-8")
         gate4c = source[source.index("function e005Gate4LessonsShell"):source.index("function e005MethodName")]

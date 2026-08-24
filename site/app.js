@@ -2387,6 +2387,11 @@ function e4Localized(value) {
   return value?.[language] || value?.en || "";
 }
 
+// Route shells use this before their page-specific JSON loader starts.
+function localized(value) {
+  return escapeHTML(e4Localized(value));
+}
+
 const e005Copy = {
   en: {
     step: "NEXT EXPERIMENT · E005",
