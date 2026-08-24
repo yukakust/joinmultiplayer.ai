@@ -16,6 +16,17 @@ from eval_gate4 import preliminary_score, prompt_for
 METHODS = ("base", "personal_dora", "wrong_specialist", "shuffled_lessons")
 
 
+def keep_unique_inputs(rows: list[dict]) -> list[dict]:
+    seen = set()
+    unique = []
+    for row in rows:
+        if row["input"] in seen:
+            continue
+        seen.add(row["input"])
+        unique.append(row)
+    return unique
+
+
 def exact_target_match(target: str, output: str) -> bool:
     normalize = lambda value: " ".join(value.lower().replace("ё", "е").split()).strip(" .")
     expected = normalize(target)
@@ -56,7 +67,8 @@ def generate_batch(model, tokenizer, prompts: list[str], max_new_tokens: int) ->
 def run(args: argparse.Namespace) -> dict:
     torch.set_num_threads(args.threads)
     data = json.loads(args.data.read_text(encoding="utf-8"))
-    rows = [row for row in data["examples"] if row["skill"] == args.skill and row["split"] == "held_out"][: args.limit]
+    held_out_rows = [row for row in data["examples"] if row["skill"] == args.skill and row["split"] == "held_out"][: args.limit]
+    rows = keep_unique_inputs(held_out_rows) if args.unique_inputs else held_out_rows
     tokenizer = AutoTokenizer.from_pretrained(args.model, local_files_only=True)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -75,6 +87,10 @@ def run(args: argparse.Namespace) -> dict:
         "skill": args.skill,
         "data_sha256": data["content_sha256"],
         "methods": list(METHODS),
+        "source_held_out_rows": len(held_out_rows),
+        "unique_input_count": len(keep_unique_inputs(held_out_rows)),
+        "evaluated_unique_inputs_only": args.unique_inputs,
+        "duplicate_rows_not_independent_evidence": len(held_out_rows) - len(keep_unique_inputs(held_out_rows)),
         "rows": output_rows,
     }
     for batch_start in range(0, len(rows), args.batch_size):
@@ -133,6 +149,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-new-tokens", type=int, default=96)
     parser.add_argument("--threads", type=int, default=4)
     parser.add_argument("--batch-size", type=int, default=8)
+    parser.add_argument("--unique-inputs", action="store_true")
     parser.add_argument("--output", required=True, type=Path)
     return parser.parse_args()
 

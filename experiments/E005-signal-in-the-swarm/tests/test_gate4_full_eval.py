@@ -29,6 +29,17 @@ class Gate4FullEvalTests(unittest.TestCase):
         self.assertIn('model.set_adapter(method)', source)
         self.assertIn('row["split"] == "held_out"', source)
 
+    def test_duplicate_questions_do_not_count_as_new_evidence(self) -> None:
+        rows = [
+            {"id": "one", "input": "same"},
+            {"id": "two", "input": "different"},
+            {"id": "three", "input": "same"},
+        ]
+        self.assertEqual(
+            [row["id"] for row in FULL.keep_unique_inputs(rows)],
+            ["one", "two"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
