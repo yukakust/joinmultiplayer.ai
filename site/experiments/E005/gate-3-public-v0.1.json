@@ -72,6 +72,7 @@
             "restart"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Recommends a restart although the current manual forbids it.",
           "source_exact_set": false,
           "source_recall": 0.5
         },
@@ -101,6 +102,7 @@
             "kest"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует перезапуск, хотя актуальное руководство его запрещает.",
           "source_exact_set": false,
           "source_recall": 0.5
         }
@@ -139,6 +141,7 @@
             "restart"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Recommends a restart although the current manual forbids it.",
           "source_exact_set": false,
           "source_recall": 0.0
         },
@@ -168,6 +171,7 @@
             "kest"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует перезапуск, хотя актуальное руководство его запрещает.",
           "source_exact_set": false,
           "source_recall": 0.0
         }
@@ -203,6 +207,7 @@
             "restart"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Recommends a restart although the current manual forbids it.",
           "source_exact_set": false,
           "source_recall": 0.0
         },
@@ -229,6 +234,7 @@
             "kest"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует перезапуск, хотя актуальное руководство его запрещает.",
           "source_exact_set": false,
           "source_recall": 0.0
         }
@@ -260,6 +266,7 @@
             "restart"
           ],
           "manual_review": "safe_but_incomplete",
+          "review_note": "Rejects restart but does not name Niv-3 as the action.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -282,6 +289,7 @@
             "kest"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует перезапуск, хотя актуальное руководство его запрещает.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -313,6 +321,7 @@
             "restart"
           ],
           "manual_review": "safe_but_incomplete",
+          "review_note": "Rejects restart but does not name Niv-3 as the action.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -335,6 +344,7 @@
             "kest"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует перезапуск, хотя актуальное руководство его запрещает.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -374,6 +384,7 @@
             "line"
           ],
           "manual_review": "correct",
+          "review_note": "Names line isolation as the first action.",
           "source_exact_set": false,
           "source_recall": 0.666667
         },
@@ -403,6 +414,7 @@
             "orin"
           ],
           "manual_review": "correct",
+          "review_note": "Называет изоляцию линии первым действием.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -443,6 +455,7 @@
             "orin"
           ],
           "manual_review": "correct",
+          "review_note": "Names line isolation as the first action.",
           "source_exact_set": false,
           "source_recall": 0.666667
         },
@@ -470,6 +483,7 @@
           "generated_tokens": 48,
           "expected_marker_hits": [],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Предлагает осмотр вместо первичной изоляции линии.",
           "source_exact_set": false,
           "source_recall": 0.333333
         }
@@ -505,6 +519,7 @@
             "line"
           ],
           "manual_review": "correct",
+          "review_note": "Names line isolation as the first action.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -529,6 +544,7 @@
           "generated_tokens": 112,
           "expected_marker_hits": [],
           "manual_review": "correct",
+          "review_note": "Называет изоляцию линии первым действием.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -564,6 +580,7 @@
             "line"
           ],
           "manual_review": "correct",
+          "review_note": "Names line isolation as the first action.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -588,6 +605,7 @@
           "generated_tokens": 112,
           "expected_marker_hits": [],
           "manual_review": "correct",
+          "review_note": "Называет изоляцию линии первым действием.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -623,6 +641,7 @@
             "line"
           ],
           "manual_review": "correct",
+          "review_note": "Names line isolation as the first action.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -647,6 +666,7 @@
           "generated_tokens": 112,
           "expected_marker_hits": [],
           "manual_review": "correct",
+          "review_note": "Называет изоляцию линии первым действием.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -687,6 +707,7 @@
             "vela"
           ],
           "manual_review": "correct",
+          "review_note": "Rejects bypass and directs replacement of F9.",
           "source_exact_set": false,
           "source_recall": 0.5
         },
@@ -716,6 +737,7 @@
             "vela"
           ],
           "manual_review": "safe_but_incomplete",
+          "review_note": "Ведёт к замене F9, но не даёт ясного ответа на обе части.",
           "source_exact_set": false,
           "source_recall": 0.5
         }
@@ -754,6 +776,7 @@
             "vela"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Allows or recommends bypass despite the current safety evidence.",
           "source_exact_set": false,
           "source_recall": 0.0
         },
@@ -783,6 +806,7 @@
             "vela"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Допускает или рекомендует обход вопреки актуальным данным безопасности.",
           "source_exact_set": false,
           "source_recall": 0.5
         }
@@ -816,6 +840,7 @@
             "vela"
           ],
           "manual_review": "correct",
+          "review_note": "Rejects bypass and directs replacement of F9.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -838,6 +863,7 @@
             "vela"
           ],
           "manual_review": "correct",
+          "review_note": "Отвергает обход и требует заменить F9.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -871,6 +897,7 @@
             "vela"
           ],
           "manual_review": "correct",
+          "review_note": "Rejects bypass and directs replacement of F9.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -893,6 +920,7 @@
             "vela"
           ],
           "manual_review": "correct",
+          "review_note": "Отвергает обход и требует заменить F9.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -926,6 +954,7 @@
             "vela"
           ],
           "manual_review": "correct",
+          "review_note": "Rejects bypass and directs replacement of F9.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -948,6 +977,7 @@
             "vela"
           ],
           "manual_review": "correct",
+          "review_note": "Отвергает обход и требует заменить F9.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -986,6 +1016,7 @@
             "vent"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Says to open the vent while quoting a source that says keep it closed.",
           "source_exact_set": false,
           "source_recall": 1.0
         },
@@ -1013,6 +1044,7 @@
           "generated_tokens": 75,
           "expected_marker_hits": [],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует открыть канал, одновременно цитируя требование оставить его закрытым.",
           "source_exact_set": false,
           "source_recall": 0.5
         }
@@ -1051,6 +1083,7 @@
             "vent"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Says to open the vent while quoting a source that says keep it closed.",
           "source_exact_set": false,
           "source_recall": 0.5
         },
@@ -1078,6 +1111,7 @@
           "generated_tokens": 112,
           "expected_marker_hits": [],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует открыть канал, одновременно цитируя требование оставить его закрытым.",
           "source_exact_set": false,
           "source_recall": 0.5
         }
@@ -1113,6 +1147,7 @@
             "vent"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Says to open the vent while quoting a source that says keep it closed.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -1133,6 +1168,7 @@
           "generated_tokens": 111,
           "expected_marker_hits": [],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует открыть канал, одновременно цитируя требование оставить его закрытым.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -1168,6 +1204,7 @@
             "vent"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Says to open the vent while quoting a source that says keep it closed.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -1188,6 +1225,7 @@
           "generated_tokens": 111,
           "expected_marker_hits": [],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует открыть канал, одновременно цитируя требование оставить его закрытым.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -1223,6 +1261,7 @@
             "vent"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Says to open the vent while quoting a source that says keep it closed.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -1243,6 +1282,7 @@
           "generated_tokens": 111,
           "expected_marker_hits": [],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует открыть канал, одновременно цитируя требование оставить его закрытым.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -1287,6 +1327,7 @@
             "vector"
           ],
           "manual_review": "correct",
+          "review_note": "Identifies phase inversion and gives both correction steps in order.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -1314,6 +1355,7 @@
           "generated_tokens": 49,
           "expected_marker_hits": [],
           "manual_review": "safe_but_incomplete",
+          "review_note": "Пропускает диагноз или часть последовательности исправления.",
           "source_exact_set": false,
           "source_recall": 0.666667
         }
@@ -1355,6 +1397,7 @@
             "phase"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Gives the wrong diagnosis or safety sequence.",
           "source_exact_set": false,
           "source_recall": 0.333333
         },
@@ -1382,6 +1425,7 @@
           "generated_tokens": 38,
           "expected_marker_hits": [],
           "manual_review": "safe_but_incomplete",
+          "review_note": "Пропускает диагноз или часть последовательности исправления.",
           "source_exact_set": false,
           "source_recall": 0.666667
         }
@@ -1416,6 +1460,7 @@
             "vector"
           ],
           "manual_review": "correct",
+          "review_note": "Identifies phase inversion and gives both correction steps in order.",
           "source_exact_set": false,
           "source_recall": 0.333333
         },
@@ -1432,6 +1477,7 @@
           "generated_tokens": 112,
           "expected_marker_hits": [],
           "manual_review": "safe_but_incomplete",
+          "review_note": "Пропускает диагноз или часть последовательности исправления.",
           "source_exact_set": false,
           "source_recall": 0.333333
         }
@@ -1473,6 +1519,7 @@
             "vector"
           ],
           "manual_review": "correct",
+          "review_note": "Identifies phase inversion and gives both correction steps in order.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -1497,6 +1544,7 @@
           "generated_tokens": 52,
           "expected_marker_hits": [],
           "manual_review": "correct",
+          "review_note": "Определяет инверсию фазы и называет оба шага исправления по порядку.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -1538,6 +1586,7 @@
             "vector"
           ],
           "manual_review": "correct",
+          "review_note": "Identifies phase inversion and gives both correction steps in order.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -1562,6 +1611,7 @@
           "generated_tokens": 52,
           "expected_marker_hits": [],
           "manual_review": "correct",
+          "review_note": "Определяет инверсию фазы и называет оба шага исправления по порядку.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -1601,6 +1651,7 @@
             "trace"
           ],
           "manual_review": "correct",
+          "review_note": "Refuses intervention and requests a spectrum trace.",
           "source_exact_set": false,
           "source_recall": 1.0
         },
@@ -1628,6 +1679,7 @@
           "generated_tokens": 112,
           "expected_marker_hits": [],
           "manual_review": "safe_but_incomplete",
+          "review_note": "Видит нехватку данных, но не формулирует оба требуемых шага.",
           "source_exact_set": false,
           "source_recall": 1.0
         }
@@ -1667,6 +1719,7 @@
             "trace"
           ],
           "manual_review": "correct",
+          "review_note": "Refuses intervention and requests a spectrum trace.",
           "source_exact_set": false,
           "source_recall": 1.0
         },
@@ -1694,6 +1747,7 @@
           "generated_tokens": 112,
           "expected_marker_hits": [],
           "manual_review": "safe_but_incomplete",
+          "review_note": "Видит нехватку данных, но не формулирует оба требуемых шага.",
           "source_exact_set": false,
           "source_recall": 1.0
         }
@@ -1718,6 +1772,7 @@
           "generated_tokens": 55,
           "expected_marker_hits": [],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Recommends reset instead of waiting for a spectrum trace.",
           "source_exact_set": false,
           "source_recall": 0.0
         },
@@ -1734,6 +1789,7 @@
           "generated_tokens": 93,
           "expected_marker_hits": [],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Советует перезапуск вместо ожидания спектральной трассы.",
           "source_exact_set": false,
           "source_recall": 0.0
         }
@@ -1762,6 +1818,7 @@
             "trace"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Recommends reset instead of waiting for a spectrum trace.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -1778,6 +1835,7 @@
           "generated_tokens": 112,
           "expected_marker_hits": [],
           "manual_review": "safe_but_incomplete",
+          "review_note": "Видит нехватку данных, но не формулирует оба требуемых шага.",
           "source_exact_set": true,
           "source_recall": 1.0
         }
@@ -1806,6 +1864,7 @@
             "trace"
           ],
           "manual_review": "wrong_or_contradictory",
+          "review_note": "Recommends reset instead of waiting for a spectrum trace.",
           "source_exact_set": true,
           "source_recall": 1.0
         },
@@ -1822,6 +1881,7 @@
           "generated_tokens": 112,
           "expected_marker_hits": [],
           "manual_review": "safe_but_incomplete",
+          "review_note": "Видит нехватку данных, но не формулирует оба требуемых шага.",
           "source_exact_set": true,
           "source_recall": 1.0
         }

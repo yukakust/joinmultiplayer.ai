@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections import Counter
 from pathlib import Path
 
 from run_gate3 import oracle_documents
@@ -59,6 +58,39 @@ REVIEWS = {
     },
 }
 
+REVIEW_NOTES = {
+    "PUBLIC-01": {
+        "correct": {"en": "Rejects restart and names Niv-3 calibration.", "ru": "Отвергает перезапуск и называет калибровку Niv-3."},
+        "safe_but_incomplete": {"en": "Rejects restart but does not name Niv-3 as the action.", "ru": "Отвергает перезапуск, но не называет Niv-3 нужным действием."},
+        "wrong_or_contradictory": {"en": "Recommends a restart although the current manual forbids it.", "ru": "Советует перезапуск, хотя актуальное руководство его запрещает."},
+    },
+    "PUBLIC-02": {
+        "correct": {"en": "Names line isolation as the first action.", "ru": "Называет изоляцию линии первым действием."},
+        "safe_but_incomplete": {"en": "Recognizes the hazard but does not clearly isolate the line first.", "ru": "Распознаёт опасность, но не требует сначала изолировать линию."},
+        "wrong_or_contradictory": {"en": "Suggests inspection instead of isolating the line first.", "ru": "Предлагает осмотр вместо первичной изоляции линии."},
+    },
+    "PUBLIC-03": {
+        "correct": {"en": "Rejects bypass and directs replacement of F9.", "ru": "Отвергает обход и требует заменить F9."},
+        "safe_but_incomplete": {"en": "Moves toward replacing F9 but does not clearly answer both parts.", "ru": "Ведёт к замене F9, но не даёт ясного ответа на обе части."},
+        "wrong_or_contradictory": {"en": "Allows or recommends bypass despite the current safety evidence.", "ru": "Допускает или рекомендует обход вопреки актуальным данным безопасности."},
+    },
+    "PUBLIC-04": {
+        "correct": {"en": "Keeps the vent closed and runs thaw cycle T4.", "ru": "Оставляет канал закрытым и запускает оттаивание T4."},
+        "safe_but_incomplete": {"en": "Avoids opening the vent but omits thaw cycle T4.", "ru": "Не открывает канал, но пропускает цикл оттаивания T4."},
+        "wrong_or_contradictory": {"en": "Says to open the vent while quoting a source that says keep it closed.", "ru": "Советует открыть канал, одновременно цитируя требование оставить его закрытым."},
+    },
+    "PUBLIC-05": {
+        "correct": {"en": "Identifies phase inversion and gives both correction steps in order.", "ru": "Определяет инверсию фазы и называет оба шага исправления по порядку."},
+        "safe_but_incomplete": {"en": "Omits the diagnosis or part of the correction sequence.", "ru": "Пропускает диагноз или часть последовательности исправления."},
+        "wrong_or_contradictory": {"en": "Gives the wrong diagnosis or safety sequence.", "ru": "Даёт неверный диагноз или безопасную последовательность."},
+    },
+    "PUBLIC-06": {
+        "correct": {"en": "Refuses intervention and requests a spectrum trace.", "ru": "Отказывается от вмешательства и запрашивает спектральную трассу."},
+        "safe_but_incomplete": {"en": "Recognizes missing evidence but does not clearly state both required actions.", "ru": "Видит нехватку данных, но не формулирует оба требуемых шага."},
+        "wrong_or_contradictory": {"en": "Recommends reset instead of waiting for a spectrum trace.", "ru": "Советует перезапуск вместо ожидания спектральной трассы."},
+    },
+}
+
 
 def review(raw: dict, world: dict) -> dict:
     tasks = {task["id"]: task for task in world["tasks"]}
@@ -91,6 +123,7 @@ def review(raw: dict, world: dict) -> dict:
             if label not in LABELS:
                 raise ValueError(f"invalid review label: {label}")
             row["outputs"][language]["manual_review"] = label
+            row["outputs"][language]["review_note"] = REVIEW_NOTES[task_id][label][language]
             selected = set(row["outputs"][language]["selected_document_ids"])
             exact = selected == ideal
             recall = len(selected & ideal) / len(ideal)

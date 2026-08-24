@@ -31,6 +31,14 @@ class Gate3ReviewTests(unittest.TestCase):
             "wrong_or_contradictory",
         )
 
+    def test_every_task_and_label_has_a_bilingual_reason(self) -> None:
+        self.assertEqual(set(REVIEW.REVIEW_NOTES), set(REVIEW.REVIEWS))
+        for notes in REVIEW.REVIEW_NOTES.values():
+            self.assertEqual(set(notes), REVIEW.LABELS)
+            for localized in notes.values():
+                self.assertEqual(set(localized), {"en", "ru"})
+                self.assertTrue(all(localized.values()))
+
 
 if __name__ == "__main__":
     unittest.main()
