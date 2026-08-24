@@ -202,6 +202,13 @@ capsules and the public question. Success requires the correct pair to beat
 every single-pocket and wrong-pair control on a locked set. This is a test of
 complementary composition, not yet learned routing or swarm scaling.
 
+Gate 5A.2 closes the user-answer gap left by Gate 5A. The same trained pockets
+answer a newly locked set, then frozen Qwen receives the public question and
+their two raw capsules. It must produce one natural answer that preserves both
+facts and exposes neither JSON nor field names. Question-only and missing-one-
+capsule controls test whether the source model invents absent knowledge. This
+remains explicit text-capsule synthesis, not learned or latent merging.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

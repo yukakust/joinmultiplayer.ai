@@ -1,0 +1,36 @@
+{
+  "experiment_id": "E005",
+  "gate": "5A.2",
+  "kind": "human_synthesis_design",
+  "status": "frozen_before_run",
+  "question": {
+    "en": "Can a frozen source i turn two machine capsules into one natural human answer without losing either part?",
+    "ru": "Может ли замороженный исходный i превратить две машинные капсулы в один естественный ответ человеку, не потеряв ни одну часть?"
+  },
+  "source_i": "Frozen Qwen3-0.6B Base; no adapter, no training, no RAG",
+  "input": ["public question", "raw CAUSE-I capsule", "raw SAFETY-I capsule"],
+  "output_rule": {
+    "en": "One natural answer. Keep both facts. Do not show JSON or field names. If a capsule is missing or invalid, say the answer cannot be completed.",
+    "ru": "Один естественный ответ. Сохранить оба факта. Не показывать JSON и названия полей. Если капсулы нет или она неверна, сказать, что полный ответ составить нельзя."
+  },
+  "conditions": [
+    "question alone",
+    "actual correct pair",
+    "cause capsule only",
+    "safety capsule only",
+    "oracle capsules"
+  ],
+  "pass_rule": {
+    "actual_pair_complete_at_least": 20,
+    "actual_pair_natural_no_json_at_least": 20,
+    "question_alone_complete_at_most": 8,
+    "each_missing_capsule_complete_at_most": 8,
+    "actual_pair_leads_best_incomplete_control_by_at_least": 10,
+    "oracle_complete_at_least": 20
+  },
+  "boundaries": [
+    "This tests natural-language synthesis from explicit capsules.",
+    "It does not test a learned merger, latent-state merging, routing, devices, or swarm scaling.",
+    "No source-i weights will change."
+  ]
+}

@@ -1,0 +1,369 @@
+{
+  "experiment_id": "E005",
+  "gate": "5A.2",
+  "kind": "locked_human_synthesis_exam",
+  "status": "locked_not_run",
+  "questions": [
+    {
+      "id": "G5A2-LOCK-01",
+      "language": "en",
+      "question": "Help a new operator understand this without jargon. Sora-01 recorded a steady amber glow after load transfer. Separately, the work zone carries a double copper mark while room pressure rises. What is wrong, and what should the operator do?",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nHelp a new operator understand this without jargon. Sora-01 recorded a steady amber glow after load transfer. Separately, the work zone carries a double copper mark while room pressure rises. What is wrong, and what should the operator do?",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nHelp a new operator understand this without jargon. Sora-01 recorded a steady amber glow after load transfer. Separately, the work zone carries a double copper mark while room pressure rises. What is wrong, and what should the operator do?",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "The cause is thermal rebound; keep the auxiliary vent closed.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-02",
+      "language": "en",
+      "question": "Turn these two reports into one useful instruction. Device Sora-02: three blue pulses after startup. Workplace: a black ring while room pressure is stable. Explain the diagnosis and the safe next step.",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nTurn these two reports into one useful instruction. Device Sora-02: three blue pulses after startup. Workplace: a black ring while room pressure is stable. Explain the diagnosis and the safe next step.",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nTurn these two reports into one useful instruction. Device Sora-02: three blue pulses after startup. Workplace: a black ring while room pressure is stable. Explain the diagnosis and the safe next step.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "The cause is phase drift; use remote controls only.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-03",
+      "language": "en",
+      "question": "Someone must decide what to do with Sora-03. The device itself shows alternating white and red flashes after restart; the surrounding area shows a silver triangle while room pressure falls. Give one clear human answer.",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nSomeone must decide what to do with Sora-03. The device itself shows alternating white and red flashes after restart; the surrounding area shows a silver triangle while room pressure falls. Give one clear human answer.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nSomeone must decide what to do with Sora-03. The device itself shows alternating white and red flashes after restart; the surrounding area shows a silver triangle while room pressure falls. Give one clear human answer.",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "The cause is timing split; isolate power before adjustment.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-04",
+      "language": "en",
+      "question": "Explain this incident to a person, not a machine: Sora-04 has two violet rings before shutdown, while its room has an amber cross while pressure is unknown. Include both the fault and the safety boundary.",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nExplain this incident to a person, not a machine: Sora-04 has two violet rings before shutdown, while its room has an amber cross while pressure is unknown. Include both the fault and the safety boundary.",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nExplain this incident to a person, not a machine: Sora-04 has two violet rings before shutdown, while its room has an amber cross while pressure is unknown. Include both the fault and the safety boundary.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "The cause is coolant echo; stop and measure pressure first.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-05",
+      "language": "en",
+      "question": "A technician asks for a plain answer about Sora-05. Evidence from the unit says a steady amber glow after load transfer. Evidence from the room says a black ring while room pressure is stable. What is the complete response?",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nA technician asks for a plain answer about Sora-05. Evidence from the unit says a steady amber glow after load transfer. Evidence from the room says a black ring while room pressure is stable. What is the complete response?",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nA technician asks for a plain answer about Sora-05. Evidence from the unit says a steady amber glow after load transfer. Evidence from the room says a black ring while room pressure is stable. What is the complete response?",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "The cause is thermal rebound; use remote controls only.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-06",
+      "language": "en",
+      "question": "Combine, but do not confuse, two observations about Sora-06: three blue pulses after startup; a double copper mark while room pressure rises. Tell the operator the cause and the permitted action.",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nCombine, but do not confuse, two observations about Sora-06: three blue pulses after startup; a double copper mark while room pressure rises. Tell the operator the cause and the permitted action.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nCombine, but do not confuse, two observations about Sora-06: three blue pulses after startup; a double copper mark while room pressure rises. Tell the operator the cause and the permitted action.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "The cause is phase drift; keep the auxiliary vent closed.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-07",
+      "language": "en",
+      "question": "Help a new operator understand this without jargon. Sora-07 recorded alternating white and red flashes after restart. Separately, the work zone carries an amber cross while pressure is unknown. What is wrong, and what should the operator do?",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nHelp a new operator understand this without jargon. Sora-07 recorded alternating white and red flashes after restart. Separately, the work zone carries an amber cross while pressure is unknown. What is wrong, and what should the operator do?",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nHelp a new operator understand this without jargon. Sora-07 recorded alternating white and red flashes after restart. Separately, the work zone carries an amber cross while pressure is unknown. What is wrong, and what should the operator do?",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "The cause is timing split; stop and measure pressure first.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-08",
+      "language": "en",
+      "question": "Turn these two reports into one useful instruction. Device Sora-08: two violet rings before shutdown. Workplace: a silver triangle while room pressure falls. Explain the diagnosis and the safe next step.",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nTurn these two reports into one useful instruction. Device Sora-08: two violet rings before shutdown. Workplace: a silver triangle while room pressure falls. Explain the diagnosis and the safe next step.",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nTurn these two reports into one useful instruction. Device Sora-08: two violet rings before shutdown. Workplace: a silver triangle while room pressure falls. Explain the diagnosis and the safe next step.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "The cause is coolant echo; isolate power before adjustment.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-09",
+      "language": "en",
+      "question": "Someone must decide what to do with Sora-09. The device itself shows a steady amber glow after load transfer; the surrounding area shows a double copper mark while room pressure rises. Give one clear human answer.",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nSomeone must decide what to do with Sora-09. The device itself shows a steady amber glow after load transfer; the surrounding area shows a double copper mark while room pressure rises. Give one clear human answer.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nSomeone must decide what to do with Sora-09. The device itself shows a steady amber glow after load transfer; the surrounding area shows a double copper mark while room pressure rises. Give one clear human answer.",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "The cause is thermal rebound; keep the auxiliary vent closed.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-10",
+      "language": "en",
+      "question": "Explain this incident to a person, not a machine: Sora-10 has three blue pulses after startup, while its room has a black ring while room pressure is stable. Include both the fault and the safety boundary.",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nExplain this incident to a person, not a machine: Sora-10 has three blue pulses after startup, while its room has a black ring while room pressure is stable. Include both the fault and the safety boundary.",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nExplain this incident to a person, not a machine: Sora-10 has three blue pulses after startup, while its room has a black ring while room pressure is stable. Include both the fault and the safety boundary.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "The cause is phase drift; use remote controls only.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-11",
+      "language": "en",
+      "question": "A technician asks for a plain answer about Sora-11. Evidence from the unit says alternating white and red flashes after restart. Evidence from the room says a silver triangle while room pressure falls. What is the complete response?",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nA technician asks for a plain answer about Sora-11. Evidence from the unit says alternating white and red flashes after restart. Evidence from the room says a silver triangle while room pressure falls. What is the complete response?",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nA technician asks for a plain answer about Sora-11. Evidence from the unit says alternating white and red flashes after restart. Evidence from the room says a silver triangle while room pressure falls. What is the complete response?",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "The cause is timing split; isolate power before adjustment.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-12",
+      "language": "en",
+      "question": "Combine, but do not confuse, two observations about Sora-12: two violet rings before shutdown; an amber cross while pressure is unknown. Tell the operator the cause and the permitted action.",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nCombine, but do not confuse, two observations about Sora-12: two violet rings before shutdown; an amber cross while pressure is unknown. Tell the operator the cause and the permitted action.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nCombine, but do not confuse, two observations about Sora-12: two violet rings before shutdown; an amber cross while pressure is unknown. Tell the operator the cause and the permitted action.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "The cause is coolant echo; stop and measure pressure first.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-13",
+      "language": "ru",
+      "question": "Помогите новому оператору понять случай без жаргона. У Sora-13 записаны постоянное янтарное свечение после переноса нагрузки. Отдельно рабочая зона имеет двойная медная метка при растущем давлении в помещении. Что сломалось и что делать?",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nПомогите новому оператору понять случай без жаргона. У Sora-13 записаны постоянное янтарное свечение после переноса нагрузки. Отдельно рабочая зона имеет двойная медная метка при растущем давлении в помещении. Что сломалось и что делать?",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nПомогите новому оператору понять случай без жаргона. У Sora-13 записаны постоянное янтарное свечение после переноса нагрузки. Отдельно рабочая зона имеет двойная медная метка при растущем давлении в помещении. Что сломалось и что делать?",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "Причина — тепловой отскок; нужно не открывать вспомогательный клапан.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-14",
+      "language": "ru",
+      "question": "Превратите два сообщения в одну полезную инструкцию. Устройство Sora-14: три синих импульса после запуска. Рабочее место: чёрное кольцо при стабильном давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПревратите два сообщения в одну полезную инструкцию. Устройство Sora-14: три синих импульса после запуска. Рабочее место: чёрное кольцо при стабильном давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nПревратите два сообщения в одну полезную инструкцию. Устройство Sora-14: три синих импульса после запуска. Рабочее место: чёрное кольцо при стабильном давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "Причина — сдвиг фазы; нужно работать только удалённо.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-15",
+      "language": "ru",
+      "question": "Нужно решить, что делать с Sora-15. Само устройство показывает чередующиеся белые и красные вспышки после перезапуска, а окружающая зона — серебряный треугольник при падающем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nНужно решить, что делать с Sora-15. Само устройство показывает чередующиеся белые и красные вспышки после перезапуска, а окружающая зона — серебряный треугольник при падающем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nНужно решить, что делать с Sora-15. Само устройство показывает чередующиеся белые и красные вспышки после перезапуска, а окружающая зона — серебряный треугольник при падающем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "Причина — рассинхронизация времени; нужно отключить питание до настройки.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-16",
+      "language": "ru",
+      "question": "Объясните случай человеку, а не машине: у Sora-16 наблюдаются два фиолетовых кольца перед остановкой, а в помещении — янтарный крест при неизвестном давлении. Укажите неисправность и безопасную границу.",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nОбъясните случай человеку, а не машине: у Sora-16 наблюдаются два фиолетовых кольца перед остановкой, а в помещении — янтарный крест при неизвестном давлении. Укажите неисправность и безопасную границу.",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОбъясните случай человеку, а не машине: у Sora-16 наблюдаются два фиолетовых кольца перед остановкой, а в помещении — янтарный крест при неизвестном давлении. Укажите неисправность и безопасную границу.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "Причина — эхо охлаждения; нужно остановиться и сначала измерить давление.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-17",
+      "language": "ru",
+      "question": "Техник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Каков полный ответ?",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nТехник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Каков полный ответ?",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nТехник просит простой ответ про Sora-17. Данные блока: постоянное янтарное свечение после переноса нагрузки. Данные помещения: чёрное кольцо при стабильном давлении в помещении. Каков полный ответ?",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "Причина — тепловой отскок; нужно работать только удалённо.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-18",
+      "language": "ru",
+      "question": "Объедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска; двойная медная метка при растущем давлении в помещении. Назовите оператору причину и допустимое действие.",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОбъедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска; двойная медная метка при растущем давлении в помещении. Назовите оператору причину и допустимое действие.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nОбъедините, но не смешивайте два наблюдения о Sora-18: три синих импульса после запуска; двойная медная метка при растущем давлении в помещении. Назовите оператору причину и допустимое действие.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "Причина — сдвиг фазы; нужно не открывать вспомогательный клапан.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-19",
+      "language": "ru",
+      "question": "Помогите новому оператору понять случай без жаргона. У Sora-19 записаны чередующиеся белые и красные вспышки после перезапуска. Отдельно рабочая зона имеет янтарный крест при неизвестном давлении. Что сломалось и что делать?",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nПомогите новому оператору понять случай без жаргона. У Sora-19 записаны чередующиеся белые и красные вспышки после перезапуска. Отдельно рабочая зона имеет янтарный крест при неизвестном давлении. Что сломалось и что делать?",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nПомогите новому оператору понять случай без жаргона. У Sora-19 записаны чередующиеся белые и красные вспышки после перезапуска. Отдельно рабочая зона имеет янтарный крест при неизвестном давлении. Что сломалось и что делать?",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "Причина — рассинхронизация времени; нужно остановиться и сначала измерить давление.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-20",
+      "language": "ru",
+      "question": "Превратите два сообщения в одну полезную инструкцию. Устройство Sora-20: два фиолетовых кольца перед остановкой. Рабочее место: серебряный треугольник при падающем давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПревратите два сообщения в одну полезную инструкцию. Устройство Sora-20: два фиолетовых кольца перед остановкой. Рабочее место: серебряный треугольник при падающем давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nПревратите два сообщения в одну полезную инструкцию. Устройство Sora-20: два фиолетовых кольца перед остановкой. Рабочее место: серебряный треугольник при падающем давлении в помещении. Объясните причину и безопасный следующий шаг.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "Причина — эхо охлаждения; нужно отключить питание до настройки.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-21",
+      "language": "ru",
+      "question": "Нужно решить, что делать с Sora-21. Само устройство показывает постоянное янтарное свечение после переноса нагрузки, а окружающая зона — двойная медная метка при растущем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nНужно решить, что делать с Sora-21. Само устройство показывает постоянное янтарное свечение после переноса нагрузки, а окружающая зона — двойная медная метка при растущем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nНужно решить, что делать с Sora-21. Само устройство показывает постоянное янтарное свечение после переноса нагрузки, а окружающая зона — двойная медная метка при растущем давлении в помещении. Дайте один ясный человеческий ответ.",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_human_answer": "Причина — тепловой отскок; нужно не открывать вспомогательный клапан.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-22",
+      "language": "ru",
+      "question": "Объясните случай человеку, а не машине: у Sora-22 наблюдаются три синих импульса после запуска, а в помещении — чёрное кольцо при стабильном давлении в помещении. Укажите неисправность и безопасную границу.",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nОбъясните случай человеку, а не машине: у Sora-22 наблюдаются три синих импульса после запуска, а в помещении — чёрное кольцо при стабильном давлении в помещении. Укажите неисправность и безопасную границу.",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОбъясните случай человеку, а не машине: у Sora-22 наблюдаются три синих импульса после запуска, а в помещении — чёрное кольцо при стабильном давлении в помещении. Укажите неисправность и безопасную границу.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_human_answer": "Причина — сдвиг фазы; нужно работать только удалённо.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-23",
+      "language": "ru",
+      "question": "Техник просит простой ответ про Sora-23. Данные блока: чередующиеся белые и красные вспышки после перезапуска. Данные помещения: серебряный треугольник при падающем давлении в помещении. Каков полный ответ?",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nТехник просит простой ответ про Sora-23. Данные блока: чередующиеся белые и красные вспышки после перезапуска. Данные помещения: серебряный треугольник при падающем давлении в помещении. Каков полный ответ?",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nТехник просит простой ответ про Sora-23. Данные блока: чередующиеся белые и красные вспышки после перезапуска. Данные помещения: серебряный треугольник при падающем давлении в помещении. Каков полный ответ?",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_human_answer": "Причина — рассинхронизация времени; нужно отключить питание до настройки.",
+      "template_family": "human_synthesis_exam_v0.1"
+    },
+    {
+      "id": "G5A2-LOCK-24",
+      "language": "ru",
+      "question": "Объедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой; янтарный крест при неизвестном давлении. Назовите оператору причину и допустимое действие.",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОбъедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой; янтарный крест при неизвестном давлении. Назовите оператору причину и допустимое действие.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nОбъедините, но не смешивайте два наблюдения о Sora-24: два фиолетовых кольца перед остановкой; янтарный крест при неизвестном давлении. Назовите оператору причину и допустимое действие.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_human_answer": "Причина — эхо охлаждения; нужно остановиться и сначала измерить давление.",
+      "template_family": "human_synthesis_exam_v0.1"
+    }
+  ],
+  "content_sha256": "021cc8aa7421b28a8d13a64dc694341f408ff318fa501953c8e86ead419a66a7"
+}

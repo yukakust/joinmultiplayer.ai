@@ -226,3 +226,11 @@ routing, latent neural merging, multiple-device execution, or swarm scaling.
 Every question and raw answer is published at
 `/experiment/e005/gate-5a/results/` and in
 `site/experiments/E005/gate-5a-results-v0.1.json`.
+
+Gate 5A.2 is frozen before any synthesis run because Gate 5A's deterministic
+renderer did not test a human-facing answer. It adds 24 new questions and a
+frozen source-Qwen prompt. The source must preserve both real pocket capsules,
+avoid JSON in at least 20/24 answers, and remain incomplete when either capsule
+is missing. No source-model weights change. The visible checkpoint is
+`/experiment/e005/gate-5a/human/`; its locked exam content hash is
+`021cc8aa7421b28a8d13a64dc694341f408ff318fa501953c8e86ead419a66a7`.
