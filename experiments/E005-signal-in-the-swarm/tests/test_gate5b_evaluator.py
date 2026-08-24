@@ -32,6 +32,12 @@ class Gate5BEvaluatorTests(unittest.TestCase):
         self.assertIn('"wrong_cause" if', source)
         self.assertIn('"wrong_safety"', source)
 
+    def test_wrong_pair_batches_cannot_mix_modes(self):
+        cause_row = {"id": "G5B-LOCK-EN-02"}
+        safety_row = {"id": "G5B-LOCK-EN-01"}
+        self.assertEqual(MODULE.mode_for(cause_row, "wrong_same_role_pair"), "wrong_cause")
+        self.assertEqual(MODULE.mode_for(safety_row, "wrong_same_role_pair"), "wrong_safety")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -55,10 +55,7 @@ def prompt_for(tokenizer, row: dict, condition: str) -> list[int]:
     return tokenizer.encode(text, add_special_tokens=False)
 
 
-@torch.inference_mode()
-def greedy_answer(model, tokenizer, row: dict, condition: str, max_new_tokens: int) -> str:
-    ids = torch.tensor([prompt_for(tokenizer, row, condition)], dtype=torch.long)
-    attention = torch.ones_like(ids)
+def mode_for(row: dict, condition: str) -> str:
     mode = {
         "shared_qwen_alone": "base",
         "cause_track_alone": "cause",
@@ -69,16 +66,38 @@ def greedy_answer(model, tokenizer, row: dict, condition: str, max_new_tokens: i
     if condition == "wrong_same_role_pair":
         number = int(row["id"].rsplit("-", 1)[-1])
         mode = "wrong_cause" if number % 2 == 0 else "wrong_safety"
-    generated: list[int] = []
+    return mode
+
+
+@torch.inference_mode()
+def greedy_answers(model, tokenizer, rows: list[dict], condition: str, max_new_tokens: int) -> list[str]:
+    prompts = [prompt_for(tokenizer, row, condition) for row in rows]
+    width = max(map(len, prompts))
+    pad_id = tokenizer.pad_token_id
+    padded = [[pad_id] * (width - len(ids)) + ids for ids in prompts]
+    masks = [[0] * (width - len(ids)) + [1] * len(ids) for ids in prompts]
+    ids = torch.tensor(padded, dtype=torch.long)
+    attention = torch.tensor(masks, dtype=torch.long)
+    mode = mode_for(rows[0], condition)
+    if any(mode_for(row, condition) != mode for row in rows):
+        raise ValueError("one batch cannot mix neural modes")
+    generated: list[list[int]] = [[] for _ in rows]
+    finished = [False] * len(rows)
     for _ in range(max_new_tokens):
         output = model(input_ids=ids, attention_mask=attention, mode=mode)
-        next_id = int(output.logits[0, -1].argmax())
-        if next_id == tokenizer.eos_token_id:
+        next_ids = output.logits[:, -1].argmax(dim=-1).tolist()
+        for index, next_id in enumerate(next_ids):
+            if finished[index]:
+                next_ids[index] = tokenizer.eos_token_id
+            elif next_id == tokenizer.eos_token_id:
+                finished[index] = True
+            else:
+                generated[index].append(next_id)
+        if all(finished):
             break
-        generated.append(next_id)
-        ids = torch.cat((ids, torch.tensor([[next_id]], dtype=torch.long)), dim=1)
-        attention = torch.cat((attention, torch.ones((1, 1), dtype=attention.dtype)), dim=1)
-    return tokenizer.decode(generated, skip_special_tokens=True).strip()
+        ids = torch.cat((ids, torch.tensor(next_ids, dtype=torch.long).unsqueeze(1)), dim=1)
+        attention = torch.cat((attention, torch.ones((len(rows), 1), dtype=attention.dtype)), dim=1)
+    return [tokenizer.decode(tokens, skip_special_tokens=True).strip() for tokens in generated]
 
 
 def run(args: argparse.Namespace) -> dict:
@@ -96,6 +115,8 @@ def run(args: argparse.Namespace) -> dict:
         raise ValueError("condition order differs from frozen design")
 
     tokenizer = AutoTokenizer.from_pretrained(args.model, local_files_only=True)
+    tokenizer.pad_token = tokenizer.pad_token or tokenizer.eos_token
+    tokenizer.padding_side = "left"
     base = AutoModelForCausalLM.from_pretrained(
         args.model, local_files_only=True, dtype=torch.float32, low_cpu_mem_usage=True
     ).eval()
@@ -107,20 +128,24 @@ def run(args: argparse.Namespace) -> dict:
     started = time.monotonic()
     records = []
     for condition in CONDITIONS:
+        rows_by_mode: dict[str, list[dict]] = {}
         for row in exam["questions"]:
-            answer = greedy_answer(model, tokenizer, row, condition, args.max_new_tokens)
+            rows_by_mode.setdefault(mode_for(row, condition), []).append(row)
+        answer_by_id = {}
+        for rows in rows_by_mode.values():
+            for start in range(0, len(rows), args.batch_size):
+                batch = rows[start : start + args.batch_size]
+                answers = greedy_answers(model, tokenizer, batch, condition, args.max_new_tokens)
+                answer_by_id.update(zip((row["id"] for row in batch), answers))
+        for row in exam["questions"]:
+            answer = answer_by_id[row["id"]]
             provisional = score_answer(answer, row)
-            record = {
-                "question_id": row["id"],
-                "language": row["language"],
-                "condition": condition,
-                "question": row["question"],
-                "expected_cause": row["expected_cause"],
-                "expected_safety": row["expected_safety"],
-                "answer": answer,
+            records.append({
+                "question_id": row["id"], "language": row["language"], "condition": condition,
+                "question": row["question"], "expected_cause": row["expected_cause"],
+                "expected_safety": row["expected_safety"], "answer": answer,
                 "automatic_score": provisional,
-            }
-            records.append(record)
+            })
             print(json.dumps({"condition": condition, "question": row["id"], **provisional}), flush=True)
 
     counts = {condition: sum(record["automatic_score"]["complete"] for record in records if record["condition"] == condition) for condition in CONDITIONS}
@@ -164,6 +189,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--merger-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--max-new-tokens", type=int, default=40)
+    parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--threads", type=int, default=20)
     return parser.parse_args()
 

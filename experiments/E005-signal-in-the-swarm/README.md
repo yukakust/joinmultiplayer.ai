@@ -289,3 +289,8 @@ curve was published before opening the locked exam.
 Evaluation protocol v0.1 was committed before the exam: six fixed conditions,
 greedy decoding up to 40 new tokens, a deterministic wrong-pair rule, provisional
 string scoring, and required review of every raw answer.
+
+The first execution attempt was stopped after three base answers because the
+sequential implementation was too slow. It changed no weights or experiment
+rules. The replacement only batches independent questions under the same frozen
+greedy decoding and 40-token budget.

@@ -273,6 +273,11 @@ Before opening the exam, evaluation protocol v0.1 froze greedy decoding, 40 new
 tokens, all six conditions, an alternating CAUSE×CAUSE / SAFETY×SAFETY wrong
 pair, and a provisional exact-statement score followed by required human review.
 
+Execution attempt v0.1 generated three untouched-base answers and was stopped
+only because one-question-at-a-time decoding would overrun the compute window.
+No weights, exam items, decoding rule, or thresholds changed. v0.2 batches
+independent questions while preserving the frozen inference semantics.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the
