@@ -1,0 +1,83 @@
+{
+  "experiment_id": "E005",
+  "gate": "4C",
+  "version": "training-v0.1",
+  "kind": "public_synthetic_development_training_checkpoint",
+  "status": "two_personal_adapters_trained_exam_not_run",
+  "runner_git_revision": "8798ebf",
+  "runs": [
+    {
+      "skill": "source_work",
+      "control": "correct",
+      "seed": 24082028,
+      "model_id": "Qwen/Qwen3-0.6B-Base",
+      "model_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+      "curriculum_content_sha256": "08e12b86987bb6d49103f18fe9e1e3cad305abefd3af85d2cbcb2d2bb55badf1",
+      "examples": 192,
+      "epochs": 1,
+      "steps": 192,
+      "max_length": 320,
+      "rank": 8,
+      "alpha": 16,
+      "learning_rate": 0.0002,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "use_dora": true,
+      "trainable_parameters": 1232896,
+      "total_parameters": 597282816,
+      "loss_first": 1.9889720678329468,
+      "loss_last": 0.23817144334316254,
+      "loss_mean_first_24": 1.9562508439024289,
+      "loss_mean_last_24": 0.20374639658257365,
+      "elapsed_seconds": 727.854,
+      "base_hash_before": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+      "base_hash_after": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+      "base_unchanged": true,
+      "adapter_sha256": "28d76f34ea3bb4a3811ac3dd98e879afff36d3d665e067a6f70e8f067a64bc73"
+    },
+    {
+      "skill": "safe_action",
+      "control": "correct",
+      "seed": 24082028,
+      "model_id": "Qwen/Qwen3-0.6B-Base",
+      "model_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+      "curriculum_content_sha256": "08e12b86987bb6d49103f18fe9e1e3cad305abefd3af85d2cbcb2d2bb55badf1",
+      "examples": 192,
+      "epochs": 1,
+      "steps": 192,
+      "max_length": 320,
+      "rank": 8,
+      "alpha": 16,
+      "learning_rate": 0.0002,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "use_dora": true,
+      "trainable_parameters": 1232896,
+      "total_parameters": 597282816,
+      "loss_first": 2.520245313644409,
+      "loss_last": 0.3289186656475067,
+      "loss_mean_first_24": 2.4102497349182763,
+      "loss_mean_last_24": 0.41530856241782504,
+      "elapsed_seconds": 711.049,
+      "base_hash_before": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+      "base_hash_after": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+      "base_unchanged": true,
+      "adapter_sha256": "5a103dff25ac3bcc7ffcb2224dc73e326eb5810203725115b16909b098cf2138"
+    }
+  ],
+  "checks": {
+    "all_runs_used_same_frozen_base": true,
+    "base_unchanged_after_every_run": true,
+    "exam_was_read_by_training_runner": false,
+    "rag_used": false
+  },
+  "plain_language": {
+    "en": "Two new pocket i changed only their small personal DoRA weights. Their training error fell. This proves the training pipe worked, not that either skill transfers to new questions.",
+    "ru": "Два новых pocket i изменили только свои маленькие личные DoRA-веса. Ошибка на уроках снизилась. Это доказывает работу обучения, но ещё не перенос умения на новые вопросы."
+  },
+  "content_sha256": "5ea7a0ed5db85b055615a580e4083d4c7fc6a45e8da42a699fc22179cd78385c"
+}

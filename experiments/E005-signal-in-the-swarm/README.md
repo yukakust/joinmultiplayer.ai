@@ -152,3 +152,14 @@ review. The artifact is
 `site/experiments/E005/gate-4c-locked-test-v0.1.json`, with canonical content
 hash `e2066400520551eba4e033b24debca1c8313994dd8ea4bde76beb3de0455a7da`, and
 the human-readable exam is rendered at `/experiment/e005/gate-4/exam/`.
+
+Gate 4C Step 4 trained two fresh correct DoRA adapters for one 192-example pass
+each, using the frozen runner at commit `8798ebf`. The source-work adapter's
+mean loss moved from 1.956 over the first 24 lessons to 0.204 over the last 24;
+the safe-action adapter moved from 2.410 to 0.415. Each changed 1,232,896
+personal parameters, while the shared base hash stayed
+`cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba`.
+The locked exam was not read or run, and no RAG was used. This proves only that
+the training pipe changed personal weights and reduced lesson loss. The public
+checkpoint is `site/experiments/E005/gate-4c-training-v0.1.json`; the readable
+view is `/experiment/e005/gate-4/training/`.

@@ -1397,6 +1397,33 @@ button:disabled {
   line-height: 1.55;
 }
 
+.e005-gate4-training-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.e005-gate4-training-cards > article {
+  padding: clamp(1.2rem, 3vw, 2.4rem);
+  border: 1px solid var(--line);
+}
+
+.e005-gate4-training-cards > article > span,
+.e005-gate4-training-cards small {
+  display: block;
+  font-family: var(--mono);
+  color: var(--muted);
+}
+
+.e005-gate4-training-cards .e005-gate4-metrics {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 760px) {
+  .e005-gate4-training-cards { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 760px) {
   .e005-gate4-lesson-card { grid-template-columns: 1fr; }
   .e005-gate4-lesson-card section { min-height: 0; }
