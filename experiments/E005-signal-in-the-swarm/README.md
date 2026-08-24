@@ -23,4 +23,10 @@ requirement to wait for more evidence. This is a public synthetic development
 result, not evidence of learned routing or generalization. The complete artifact
 is `site/experiments/E005/gate-3-public-v0.1.json`.
 
+The primary browser review at `/experiment/e005/gate-3/` groups results by
+question in a 6×5 matrix and keeps source selection separate from answer
+correctness. Owner confirmations and corrections are browser-local until the
+owner explicitly asks Morrow to publish the checkpoint. The previous exhaustive
+method-first rendering remains available at `/experiment/e005/gate-3/raw/`.
+
 See [PROTOCOL.md](PROTOCOL.md).

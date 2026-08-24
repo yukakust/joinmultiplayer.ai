@@ -191,7 +191,10 @@ word retrieval, frozen-Qwen semantic retrieval, raw majority, a deterministic
 evidence graph, and an oracle source set without training weights. The complete
 reviewed development artifact is
 `/experiments/E005/gate-3-public-v0.1.json`; the human-readable microscope is
-`/experiment/e005/gate-3/`. The evidence graph selected the ideal records in
+`/experiment/e005/gate-3/`, and the exhaustive raw audit is
+`/experiment/e005/gate-3/raw/`. Review confirmations and label corrections are
+stored in browser localStorage only until the owner explicitly asks to publish
+the checkpoint. The evidence graph selected the ideal records in
 12/12 language generations, while frozen Qwen produced only 6/12 correct
 generations. This demonstrates a generator bottleneck in the synthetic fixture,
 not learned routing or swarm generalization. Gate 4 personal DoRA procedure

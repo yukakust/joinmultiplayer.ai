@@ -2436,8 +2436,25 @@ const e005Copy = {
     gate3Copy: "The same frozen Qwen answered after five different methods selected evidence. No adapter or weight update was used.",
     gate3Finding: "Perfect retrieval was not enough: the evidence graph found the ideal records 12/12 times, but Qwen produced only 6/12 correct generations.",
     gate3Button: "VIEW EVERY GATE 3 QUESTION AND ANSWER →",
-    gate3AnswersTitle: "What five methods actually answered",
-    gate3AnswersIntro: "Thirty method–question pairs, sixty unedited generations, their selected records, and the expected action.",
+    gate3AnswersTitle: "Review Gate 3 without holding it all in your head",
+    gate3AnswersIntro: "Start with the map. Choose one question and compare all five methods beside the expected action.",
+    rawAuditTitle: "Complete raw Gate 3 audit",
+    rawAuditIntro: "Thirty method–question pairs, sixty unedited generations, their selected records, and the expected action.",
+    rawAudit: "OPEN THE COMPLETE RAW AUDIT →",
+    reviewedProgress: "QUESTIONS YOU REVIEWED",
+    reviewLocalOnly: "Your confirmations stay in this browser until you tell Morrow to publish the checkpoint.",
+    confirmQuestion: "I AGREE WITH THESE RATINGS",
+    changeRatings: "CHANGE RATINGS",
+    saveRatings: "SAVE MY RATINGS",
+    nextQuestion: "NEXT QUESTION →",
+    preliminaryRating: "Morrow's preliminary rating",
+    whyRating: "WHY",
+    answerExcerpt: "ANSWER EXCERPT",
+    sourcesExact: "ideal sources",
+    sourcesPartial: "some required sources",
+    sourcesWrong: "required sources missing",
+    reviewed: "reviewed",
+    notReviewed: "not reviewed",
     sourceExact: "ideal source set",
     correctAnswers: "correct generations",
     fullyCorrectTasks: "tasks correct in both languages",
@@ -2500,8 +2517,25 @@ const e005Copy = {
     gate3Copy: "Одна и та же замороженная Qwen отвечала после того, как пять разных методов выбирали доказательства. Без адаптера и изменения весов.",
     gate3Finding: "Идеального поиска оказалось недостаточно: evidence graph нашёл правильные записи 12/12 раз, но Qwen дала лишь 6/12 верных генераций.",
     gate3Button: "СМОТРЕТЬ ВСЕ ВОПРОСЫ И ОТВЕТЫ GATE 3 →",
-    gate3AnswersTitle: "Что на самом деле ответили пять методов",
-    gate3AnswersIntro: "Тридцать пар «метод–вопрос», шестьдесят неотредактированных генераций, выбранные записи и ожидаемое действие.",
+    gate3AnswersTitle: "Проверьте Gate 3, не удерживая всё в голове",
+    gate3AnswersIntro: "Начните с карты. Выберите один вопрос и сравните пять методов рядом с правильным ответом.",
+    rawAuditTitle: "Полный сырой аудит Gate 3",
+    rawAuditIntro: "Тридцать пар «метод–вопрос», шестьдесят неотредактированных генераций, выбранные записи и ожидаемое действие.",
+    rawAudit: "ОТКРЫТЬ ПОЛНЫЙ СЫРОЙ АУДИТ →",
+    reviewedProgress: "ВОПРОСОВ ПРОВЕРЕНО ВАМИ",
+    reviewLocalOnly: "Ваши подтверждения хранятся в этом браузере, пока вы не попросите Morrow опубликовать контрольную точку.",
+    confirmQuestion: "СОГЛАСЕН С ЭТИМИ ОЦЕНКАМИ",
+    changeRatings: "ИСПРАВИТЬ ОЦЕНКИ",
+    saveRatings: "СОХРАНИТЬ МОИ ОЦЕНКИ",
+    nextQuestion: "СЛЕДУЮЩИЙ ВОПРОС →",
+    preliminaryRating: "предварительная оценка Morrow",
+    whyRating: "ПОЧЕМУ",
+    answerExcerpt: "ФРАГМЕНТ ОТВЕТА",
+    sourcesExact: "идеальные источники",
+    sourcesPartial: "часть нужных источников",
+    sourcesWrong: "нужные источники не найдены",
+    reviewed: "проверено",
+    notReviewed: "не проверено",
     sourceExact: "идеальный набор источников",
     correctAnswers: "верных генераций",
     fullyCorrectTasks: "задач верны на обоих языках",
@@ -2549,6 +2583,15 @@ function e005Gate3Shell() {
   </section>`;
 }
 
+function e005Gate3RawShell() {
+  return `<section class="flow-shell e005-gate3-page e005-gate3-raw-page">
+    <div class="flow-step">E005 · GATE 3 · RAW</div>
+    <h1>${e5("rawAuditTitle")}</h1>
+    <p class="contribution-intro">${e5("rawAuditIntro")}</p>
+    <div class="experiment-loading">${c("loading")}</div>
+  </section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -2569,8 +2612,153 @@ function e005ReviewLabel(label) {
   return e5(labels[label] || label);
 }
 
+const E005_OWNER_REVIEW_KEY = "e005-gate3-owner-review-v1";
+
+function e005OwnerReviewLoad() {
+  try {
+    return JSON.parse(localStorage.getItem(E005_OWNER_REVIEW_KEY) || "{}") || {};
+  } catch (_error) {
+    return {};
+  }
+}
+
+function e005OwnerReviewSave(value) {
+  localStorage.setItem(E005_OWNER_REVIEW_KEY, JSON.stringify(value));
+}
+
+function e005Excerpt(value, limit = 360) {
+  const compact = String(value || "").replace(/\s+/g, " ").trim();
+  return compact.length <= limit ? compact : `${compact.slice(0, limit).trim()}…`;
+}
+
 async function loadE005Gate3() {
-  const target = document.querySelector(".e005-gate3-page");
+  const target = document.querySelector(".e005-gate3-page:not(.e005-gate3-raw-page)");
+  if (!target) return;
+  try {
+    const [worldResponse, resultResponse] = await Promise.all([
+      fetch("/experiments/E005/world-public-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-3-public-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!worldResponse.ok || !resultResponse.ok) throw new Error("E005 Gate 3 unavailable");
+    const world = await worldResponse.json();
+    const result = await resultResponse.json();
+    const tasks = new Map(world.tasks.map(task => [task.id, task]));
+    const rows = new Map(result.rows.map(row => [`${row.task_id}:${row.method}`, row]));
+    const taskIds = world.tasks.map(task => task.id);
+    let reviewLanguage = language === "en" ? "en" : "ru";
+    let selectedTaskId = taskIds.includes(location.hash.slice(1)) ? location.hash.slice(1) : taskIds[0];
+    let editing = false;
+    const ownerReview = e005OwnerReviewLoad();
+    const languageReview = () => ownerReview[reviewLanguage] || (ownerReview[reviewLanguage] = {});
+    const effectiveLabel = (taskId, method) => (
+      languageReview()[taskId]?.overrides?.[method]
+      || rows.get(`${taskId}:${method}`).outputs[reviewLanguage].manual_review
+    );
+    const sourceState = output => (
+      output.source_exact_set ? ["exact", e5("sourcesExact")]
+      : output.source_recall > 0 ? ["partial", e5("sourcesPartial")]
+      : ["wrong", e5("sourcesWrong")]
+    );
+    const symbols = { correct: "●", safe_but_incomplete: "◐", wrong_or_contradictory: "×" };
+
+    target.querySelector(".experiment-loading").outerHTML = `
+      <div class="e005-review-toolbar">
+        <a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a>
+        <a class="quiet-link" href="/experiment/e005/gate-3/raw/">${e5("rawAudit")}</a>
+      </div>
+      <p class="control-warning">${escapeHTML(e4Localized(result.claim_boundary))}</p>
+      <div id="e005-review-app"></div>`;
+
+    const reviewApp = target.querySelector("#e005-review-app");
+    const render = () => {
+      const reviewedCount = taskIds.filter(taskId => languageReview()[taskId]?.confirmed).length;
+      const currentTask = tasks.get(selectedTaskId);
+      const currentIndex = taskIds.indexOf(selectedTaskId);
+      reviewApp.innerHTML = `
+        <section class="e005-review-overview">
+          <div class="e005-review-progress"><span>${e5("reviewedProgress")}</span><strong>${reviewedCount} / ${taskIds.length}</strong><small>${e5("reviewLocalOnly")}</small></div>
+          <div class="e005-review-language"><button type="button" data-review-lang="ru" class="${reviewLanguage === "ru" ? "is-active" : ""}">RU</button><button type="button" data-review-lang="en" class="${reviewLanguage === "en" ? "is-active" : ""}">EN</button></div>
+          <div class="e005-review-legend"><span class="review-correct">● ${e5("labelCorrect")}</span><span class="review-safe_but_incomplete">◐ ${e5("labelSafeButIncomplete")}</span><span class="review-wrong_or_contradictory">× ${e5("labelWrongOrContradictory")}</span></div>
+          <div class="e005-review-matrix-wrap"><table class="e005-review-matrix"><thead><tr><th>${e5("tasks")}</th>${result.methods.map(method => `<th>${escapeHTML(e005MethodName(method))}</th>`).join("")}</tr></thead><tbody>${world.tasks.map(task => `<tr class="${task.id === selectedTaskId ? "is-selected" : ""}"><th><button type="button" data-review-task="${escapeHTML(task.id)}"><b>${escapeHTML(task.id)}</b><span>${escapeHTML(e005Excerpt(task.question[reviewLanguage], 92))}</span>${languageReview()[task.id]?.confirmed ? `<small>✓ ${e5("reviewed")}</small>` : ""}</button></th>${result.methods.map(method => {
+            const output = rows.get(`${task.id}:${method}`).outputs[reviewLanguage];
+            const label = effectiveLabel(task.id, method);
+            const [sourceClass, sourceCopy] = sourceState(output);
+            return `<td><button type="button" data-review-task="${escapeHTML(task.id)}" class="review-${escapeHTML(label)}"><strong>${symbols[label]}</strong><span>${escapeHTML(e005ReviewLabel(label))}</span><small class="source-${sourceClass}">${escapeHTML(sourceCopy)}</small></button></td>`;
+          }).join("")}</tr>`).join("")}</tbody></table></div>
+        </section>
+        <section class="e005-question-review" id="question-review">
+          <div class="e004-answer-number">${String(currentIndex + 1).padStart(2, "0")} / ${String(taskIds.length).padStart(2, "0")} · ${escapeHTML(selectedTaskId)}</div>
+          <h2>${escapeHTML(currentTask.question[reviewLanguage])}</h2>
+          <section class="e005-expected-standalone"><span>${e5("expectedAction")}</span><strong>${escapeHTML(currentTask.expected.main_answer[reviewLanguage])}</strong><p>${escapeHTML(currentTask.expected.explanation[reviewLanguage])}</p></section>
+          <div class="e005-compare-cards">${result.methods.map(method => {
+            const row = rows.get(`${selectedTaskId}:${method}`);
+            const output = row.outputs[reviewLanguage];
+            const label = effectiveLabel(selectedTaskId, method);
+            const [sourceClass, sourceCopy] = sourceState(output);
+            return `<article class="review-${escapeHTML(label)}">
+              <header><span>${escapeHTML(e005MethodName(method))}</span><strong>${symbols[label]} ${escapeHTML(e005ReviewLabel(label))}</strong></header>
+              <div class="e005-source-verdict source-${sourceClass}">${escapeHTML(sourceCopy)} · ${output.selected_document_ids.map(escapeHTML).join(" · ")}</div>
+              <small>${e5("answerExcerpt")}</small><p>${escapeHTML(e005Excerpt(output.output))}</p>
+              <div class="e005-review-reason"><span>${e5("whyRating")}</span>${escapeHTML(output.review_note)}</div>
+              ${editing ? `<label>${e5("changeRatings")}<select data-rating-method="${escapeHTML(method)}"><option value="correct" ${label === "correct" ? "selected" : ""}>${e5("labelCorrect")}</option><option value="safe_but_incomplete" ${label === "safe_but_incomplete" ? "selected" : ""}>${e5("labelSafeButIncomplete")}</option><option value="wrong_or_contradictory" ${label === "wrong_or_contradictory" ? "selected" : ""}>${e5("labelWrongOrContradictory")}</option></select></label>` : `<small>${e5("preliminaryRating")}</small>`}
+              <a href="/experiment/e005/gate-3/raw/#raw-${escapeHTML(selectedTaskId)}-${escapeHTML(method)}">${e5("rawAudit")}</a>
+            </article>`;
+          }).join("")}</div>
+          <div class="e005-review-actions">
+            ${editing ? `<button class="button" type="button" data-save-ratings>${e5("saveRatings")}</button>` : `<button class="button" type="button" data-confirm-ratings>${e5("confirmQuestion")}</button><button class="button secondary" type="button" data-edit-ratings>${e5("changeRatings")}</button>`}
+            <button class="quiet-link" type="button" data-next-question>${e5("nextQuestion")}</button>
+          </div>
+        </section>`;
+
+      reviewApp.querySelectorAll("[data-review-task]").forEach(button => button.addEventListener("click", () => {
+        selectedTaskId = button.dataset.reviewTask;
+        editing = false;
+        history.replaceState(null, "", `#${selectedTaskId}`);
+        render();
+        reviewApp.querySelector("#question-review")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }));
+      reviewApp.querySelectorAll("[data-review-lang]").forEach(button => button.addEventListener("click", () => {
+        reviewLanguage = button.dataset.reviewLang;
+        editing = false;
+        render();
+      }));
+      reviewApp.querySelector("[data-confirm-ratings]")?.addEventListener("click", () => {
+        const taskReview = languageReview()[selectedTaskId] || (languageReview()[selectedTaskId] = {});
+        taskReview.confirmed = true;
+        e005OwnerReviewSave(ownerReview);
+        render();
+      });
+      reviewApp.querySelector("[data-edit-ratings]")?.addEventListener("click", () => {
+        editing = true;
+        render();
+      });
+      reviewApp.querySelector("[data-save-ratings]")?.addEventListener("click", () => {
+        const taskReview = languageReview()[selectedTaskId] || (languageReview()[selectedTaskId] = {});
+        taskReview.overrides = {};
+        reviewApp.querySelectorAll("[data-rating-method]").forEach(select => {
+          taskReview.overrides[select.dataset.ratingMethod] = select.value;
+        });
+        taskReview.confirmed = true;
+        e005OwnerReviewSave(ownerReview);
+        editing = false;
+        render();
+      });
+      reviewApp.querySelector("[data-next-question]")?.addEventListener("click", () => {
+        selectedTaskId = taskIds[(currentIndex + 1) % taskIds.length];
+        editing = false;
+        history.replaceState(null, "", `#${selectedTaskId}`);
+        render();
+        reviewApp.querySelector("#question-review")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    };
+    render();
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate3Raw() {
+  const target = document.querySelector(".e005-gate3-raw-page");
   if (!target) return;
   try {
     const [worldResponse, resultResponse] = await Promise.all([
@@ -2600,7 +2788,7 @@ async function loadE005Gate3() {
           <div class="e005-metrics"><article><span>${e5("sourceExact")}</span><strong>${stats.source_exact_set_generations} / 12</strong></article><article><span>${e5("correctAnswers")}</span><strong>${stats.correct_generations} / 12</strong></article><article><span>${e5("fullyCorrectTasks")}</span><strong>${stats.fully_correct_tasks_both_languages} / 6</strong></article></div>
           <div class="e005-raw-records">${rowsByMethod.get(method).map((row, index) => {
             const task = tasks.get(row.task_id) || {};
-            return `<article class="e005-raw-record">
+            return `<article class="e005-raw-record" id="raw-${escapeHTML(row.task_id)}-${escapeHTML(method)}">
               <div class="e004-answer-number">${String(index + 1).padStart(2, "0")} / 06 · ${escapeHTML(row.task_id)}</div>
               <h2>${escapeHTML(e4Localized(task.question))}</h2>
               <section class="e005-expected-standalone"><span>${e5("expectedAction")}</span><strong>${escapeHTML(e4Localized(task.expected?.main_answer))}</strong></section>
@@ -2613,6 +2801,10 @@ async function loadE005Gate3() {
         </section>`;
       }).join("")}</div>
       <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/gate-3-public-v0.1.json">JSON ↗</a></div>`;
+    requestAnimationFrame(() => {
+      const targetId = location.hash.slice(1);
+      if (targetId) document.getElementById(targetId)?.scrollIntoView({ block: "start" });
+    });
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -3511,6 +3703,10 @@ function render() {
     document.title = `${e5("gate3AnswersTitle")} — i`;
     app.innerHTML = withLanguage(e005Gate3Shell());
     loadE005Gate3();
+  } else if (path === "experiment/e005/gate-3/raw") {
+    document.title = `${e5("rawAuditTitle")} — i`;
+    app.innerHTML = withLanguage(e005Gate3RawShell());
+    loadE005Gate3Raw();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
