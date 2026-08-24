@@ -142,3 +142,13 @@ status remains `not_started`. The public artifact is
 `08e12b86987bb6d49103f18fe9e1e3cad305abefd3af85d2cbcb2d2bb55badf1`, and a
 human-readable lesson viewer is rendered at
 `/experiment/e005/gate-4/lessons/`.
+
+Gate 4C Step 3 locks the next transfer exam before any new training. It contains
+48 questions: 24 per skill and 12 per language per skill. The matching DoRA
+must score at least 20/24 for each skill, at least 9/12 in each language, and
+beat every control by at least 6 answers. Exact-string scoring, RAG, internet,
+and changing questions after training are forbidden; final labels require owner
+review. The artifact is
+`site/experiments/E005/gate-4c-locked-test-v0.1.json`, with canonical content
+hash `e2066400520551eba4e033b24debca1c8313994dd8ea4bde76beb3de0455a7da`, and
+the human-readable exam is rendered at `/experiment/e005/gate-4/exam/`.
