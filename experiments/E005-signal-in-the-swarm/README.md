@@ -205,3 +205,12 @@ frames. Its curriculum content hash is
 exam content hash is
 `1bb8ac4664612ceaee7b438a3d4ca57e076a43230dc943db8ca484d70314127e`.
 This v0.2 checkpoint is the only Gate 5A data authorized for training.
+
+Gate 5A then trained two fresh rank-8 DoRA adapters for one pass over 192
+lessons each. CAUSE-I's mean loss moved from 2.432 on the first 24 lessons to
+0.000086 on the last 24; SAFETY-I moved from 2.806 to 0.000564. Each adapter
+changed 1,232,896 personal parameters. The shared Qwen file hash remained
+`cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba`.
+The locked exam had not run at this checkpoint. These numbers show lesson fit,
+not transfer or composition. The public training record is
+`site/experiments/E005/gate-5a-training-v0.1.json`.

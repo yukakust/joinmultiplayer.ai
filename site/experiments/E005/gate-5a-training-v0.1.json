@@ -1,0 +1,38 @@
+{
+  "experiment_id": "E005",
+  "gate": "5A",
+  "kind": "training_checkpoint",
+  "status": "two_adapters_trained_exam_not_run",
+  "model_id": "Qwen/Qwen3-0.6B-Base",
+  "model_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "curriculum_content_sha256": "9f23a13a079b2fe05863ef99040adaedc0fca8a4cc0504f81a7cd7f86dc3f4ce",
+  "base_sha256": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+  "base_unchanged": true,
+  "exam_run": false,
+  "runs": [
+    {
+      "skill": "cause",
+      "examples": 192,
+      "epochs": 1,
+      "trainable_parameters": 1232896,
+      "loss_mean_first_24": 2.4320136408011117,
+      "loss_mean_last_24": 0.00008596810766903218,
+      "elapsed_seconds": 1657.068,
+      "adapter_sha256": "abb18b37d163223c8a3496552c8b9f23d1517c83024a1372d2fd8a07c157e009"
+    },
+    {
+      "skill": "safety",
+      "examples": 192,
+      "epochs": 1,
+      "trainable_parameters": 1232896,
+      "loss_mean_first_24": 2.8056106021006904,
+      "loss_mean_last_24": 0.000564382389105352,
+      "elapsed_seconds": 1660.354,
+      "adapter_sha256": "51bebff74e3f8b5af318011b480f0c29330e9d20c1f2f100b090ed2bd606b629"
+    }
+  ],
+  "claim_boundary": {
+    "en": "Both adapters fit their lessons. This does not show transfer or composition; the locked exam has not run.",
+    "ru": "Оба адаптера усвоили свои уроки. Это ещё не доказывает перенос или объединение: замороженный экзамен не запускался."
+  }
+}
