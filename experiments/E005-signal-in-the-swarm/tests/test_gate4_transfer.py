@@ -74,7 +74,7 @@ class Gate4TransferTests(unittest.TestCase):
         self.assertTrue(checkpoint["immutable"])
         self.assertEqual(checkpoint["status"], "frozen_development_failure")
         for record in checkpoint["files"].values():
-            path = ROOT / record["path"].lstrip("/")
+            path = ROOT / "site" / record["path"].lstrip("/")
             self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), record["sha256"])
 
 
