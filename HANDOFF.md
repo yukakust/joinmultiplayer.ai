@@ -201,6 +201,9 @@ generations. This demonstrates a generator bottleneck in the synthetic fixture,
 not learned routing or swarm generalization. Before any Gate 4 personal DoRA
 training, publish an owner-readable checkpoint with the exact skill, visible
 training examples, held-out examples, frozen-base control, and pass/fail rule.
+That Gate 4 design is now public at `/experiment/e005/gate-4/` with artifact
+`/experiments/E005/gate-4-design-v0.1.json`. It is design-only and records zero
+weight changes; training still requires a separate explicit owner approval.
 The review matrix deliberately reports a stable paired RU+EN rating: both
 correct = green, either wrong = red, otherwise yellow. The global language
 switch translates the whole review but must not change matrix correctness. Gate

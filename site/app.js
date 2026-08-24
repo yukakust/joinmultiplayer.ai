@@ -2475,7 +2475,22 @@ const e005Copy = {
     methodOracleDetail: "predeclared perfect records → frozen Qwen; upper bound",
     labelCorrect: "correct",
     labelSafeButIncomplete: "safe but incomplete",
-    labelWrongOrContradictory: "wrong or contradictory"
+    labelWrongOrContradictory: "wrong or contradictory",
+    gate4Title: "Gate 4 before any training",
+    gate4Intro: "Inspect exactly what two personal adapters would learn and how we will tell reusable skill from memorization.",
+    gate4Button: "INSPECT THE GATE 4 LEARNING DESIGN →",
+    noTraining: "DESIGN ONLY · ZERO WEIGHTS CHANGED",
+    whatChanges: "WHAT CHANGES",
+    seesInTraining: "VISIBLE DURING TRAINING",
+    hiddenTest: "HELD OUT FROM TRAINING",
+    expectedBehavior: "EXPECTED HELD-OUT BEHAVIOR",
+    controls: "FOUR ANSWERS WE WILL COMPARE",
+    passFail: "PASS / FAIL BEFORE ROUTING",
+    ownerStop: "OWNER CHECKPOINT",
+    ownerStopCopy: "Nothing trains from this page. After you inspect the examples and gates, training still requires a separate explicit go-ahead.",
+    trainCount: "training examples per skill",
+    heldoutCount: "held-out examples per skill",
+    baseFrozen: "shared Qwen base stays frozen"
   },
   ru: {
     step: "СЛЕДУЮЩИЙ ЭКСПЕРИМЕНТ · E005",
@@ -2564,7 +2579,22 @@ const e005Copy = {
     methodOracleDetail: "заранее известные идеальные записи → замороженная Qwen; верхняя граница",
     labelCorrect: "верно",
     labelSafeButIncomplete: "безопасно, но неполно",
-    labelWrongOrContradictory: "ошибка или противоречие"
+    labelWrongOrContradictory: "ошибка или противоречие",
+    gate4Title: "Gate 4 до любого обучения",
+    gate4Intro: "Проверьте глазами, чему будут учиться два личных адаптера и как мы отличим переносимый навык от запоминания.",
+    gate4Button: "ПОСМОТРЕТЬ ПЛАН ОБУЧЕНИЯ GATE 4 →",
+    noTraining: "ТОЛЬКО ПЛАН · НИ ОДИН ВЕС НЕ ИЗМЕНЁН",
+    whatChanges: "ЧТО МЕНЯЕТСЯ",
+    seesInTraining: "ВИДИТ ВО ВРЕМЯ ОБУЧЕНИЯ",
+    hiddenTest: "НЕ ВИДИТ ВО ВРЕМЯ ОБУЧЕНИЯ",
+    expectedBehavior: "ОЖИДАЕМОЕ ПОВЕДЕНИЕ НА ПРОВЕРКЕ",
+    controls: "ЧЕТЫРЕ ОТВЕТА ДЛЯ СРАВНЕНИЯ",
+    passFail: "ПОРОГ УСПЕХА / НЕУДАЧИ ДО ROUTING",
+    ownerStop: "КОНТРОЛЬНАЯ ТОЧКА ЮКИ",
+    ownerStopCopy: "С этой страницы ничего не обучается. После проверки примеров и порогов для запуска обучения всё равно понадобится отдельное явное подтверждение.",
+    trainCount: "учебных примеров на навык",
+    heldoutCount: "скрытых проверочных примеров на навык",
+    baseFrozen: "общая база Qwen остаётся замороженной"
   }
 };
 
@@ -2604,6 +2634,15 @@ function e005Gate3RawShell() {
     <div class="flow-step">E005 · GATE 3 · RAW</div>
     <h1>${e5("rawAuditTitle")}</h1>
     <p class="contribution-intro">${e5("rawAuditIntro")}</p>
+    <div class="experiment-loading">${c("loading")}</div>
+  </section>`;
+}
+
+function e005Gate4Shell() {
+  return `<section class="flow-shell e005-gate4-page">
+    <div class="flow-step">E005 · GATE 4 · DESIGN</div>
+    <h1>${e5("gate4Title")}</h1>
+    <p class="contribution-intro">${e5("gate4Intro")}</p>
     <div class="experiment-loading">${c("loading")}</div>
   </section>`;
 }
@@ -2882,6 +2921,53 @@ async function loadE005Answers() {
   }
 }
 
+async function loadE005Gate4() {
+  const target = document.querySelector(".e005-gate4-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-4-design-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 Gate 4 design unavailable");
+    const design = await response.json();
+    const localized = value => escapeHTML(e4Localized(value));
+    const comparisonLabels = language === "ru" ? [
+      "Чистая замороженная Qwen без адаптера",
+      "Правильный личный DoRA-адаптер",
+      "DoRA-адаптер другого pocket i",
+      "DoRA, обученная на перемешанных действиях"
+    ] : [
+      "Frozen Qwen without an adapter",
+      "The matching personal DoRA adapter",
+      "The other pocket i's DoRA adapter",
+      "DoRA trained on shuffled actions"
+    ];
+    const passFail = Object.entries(design.pass_fail).map(([key, value], index) => `
+      <article><span>${String(index + 1).padStart(2, "0")} · ${escapeHTML(key.replaceAll("_", " "))}</span><p>${localized(value)}</p></article>`).join("");
+    target.querySelector(".experiment-loading").outerHTML = `
+      <div class="experiment-status">${e5("noTraining")}</div>
+      <section class="hypothesis-card"><span>E005 · GATE 4</span><p>${localized(design.question)}</p></section>
+      <p class="control-warning">${localized(design.boundary)}</p>
+      <div class="e005-gate4-metrics">
+        <article><strong>${design.pockets.length}</strong><span>pocket i · DoRA</span></article>
+        <article><strong>${design.training.train_examples_per_skill}</strong><span>${e5("trainCount")}</span></article>
+        <article><strong>${design.training.held_out_examples_per_skill}</strong><span>${e5("heldoutCount")}</span></article>
+        <article><strong>0</strong><span>${e5("baseFrozen")}</span></article>
+      </div>
+      <section class="e005-gate4-pockets">${design.pockets.map(pocket => `
+        <article>
+          <header><i>i</i><div><span>${escapeHTML(pocket.id)} · ${localized(pocket.name)}</span><h2>${localized(pocket.skill)}</h2></div></header>
+          <div class="e005-gate4-example is-training"><span>${e5("seesInTraining")}</span><p>${localized(pocket.visible_training_example)}</p><small>${pocket.train_entities.map(escapeHTML).join(" · ")}</small></div>
+          <div class="e005-gate4-example is-heldout"><span>${e5("hiddenTest")}</span><p>${localized(pocket.held_out_example)}</p><small>${pocket.held_out_entities.map(escapeHTML).join(" · ")}</small></div>
+          <div class="e005-gate4-expected"><span>${e5("expectedBehavior")}</span><strong>${localized(pocket.expected_held_out_behavior)}</strong></div>
+        </article>`).join("")}</section>
+      <section class="e005-gate4-controls"><div class="flow-step">${e5("controls")}</div><div>${comparisonLabels.map((label, index) => `<article><strong>${index + 1}</strong><span>${escapeHTML(label)}</span></article>`).join("")}</div></section>
+      <section class="e005-gate4-gates"><div class="flow-step">${e5("passFail")}</div><div>${passFail}</div></section>
+      <section class="e004-decision"><span>${e5("ownerStop")}</span><p>${e5("ownerStopCopy")}</p></section>
+      <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/gate-4-design-v0.1.json">JSON ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
 async function loadE005() {
   const target = document.querySelector(".e005-page");
   if (!target) return;
@@ -2947,6 +3033,7 @@ async function loadE005() {
       </div>
       <section class="e005-base-section"><div class="flow-step">${e5("basePreflight")}</div><p>${e5("basePreflightCopy")}</p><a class="e005-answer-button" href="/experiment/e005/answers/">${e5("viewAllAnswers")}</a><div class="e005-metrics"><article><span>${e5("fullyCorrect")}</span><strong>${basePreflight.summary.fully_correct_generations} / ${basePreflight.summary.generations}</strong></article><article><span>${e5("recognizedUnknown")}</span><strong>${basePreflight.summary.recognized_missing_evidence_generations} / ${basePreflight.summary.generations}</strong></article><article><span>${e5("wrongOutputs")}</span><strong>${basePreflight.summary.hallucinated_or_wrong_generations} / ${basePreflight.summary.generations}</strong></article></div><p class="control-warning">${escapeHTML(e4Localized(basePreflight.claim_boundary))}</p></section>
       <section class="e005-base-section e005-gate3-summary"><div class="flow-step">${e5("gate3Title")}</div><p>${e5("gate3Copy")}</p><a class="e005-answer-button" href="/experiment/e005/gate-3/">${e5("gate3Button")}</a><div class="e005-metrics"><article><span>${e5("methodLexical")}</span><strong>${gate3.summary.lexical.correct_generations} / 12</strong><small>${e5("correctAnswers")}</small></article><article><span>${e5("methodSemantic")}</span><strong>${gate3.summary.semantic.correct_generations} / 12</strong><small>${e5("correctAnswers")}</small></article><article><span>${e5("methodEvidenceGraph")}</span><strong>${gate3.summary.evidence_graph.correct_generations} / 12</strong><small>${e5("correctAnswers")}</small></article></div><p class="control-warning">${e5("gate3Finding")}</p></section>
+      <section class="e005-base-section e005-gate4-summary"><div class="flow-step">E005 · GATE 4 · DESIGN</div><p>${e5("gate4Intro")}</p><a class="e005-answer-button" href="/experiment/e005/gate-4/">${e5("gate4Button")}</a><p class="control-warning">${e5("noTraining")}</p></section>
       <section class="e005-pocket-section"><div class="flow-step">${e5("pockets")}</div><p class="control-warning">${e5("pocketWarning")}</p><div class="e005-pockets">${world.pockets.map(pocket => `<article><i>i</i><strong>${escapeHTML(pocket.id)} · ${escapeHTML(pocket.name)}</strong><span>${escapeHTML(e4Localized(pocket.skill))}</span><small>fixture · ${percent(pocket.calibration)}</small></article>`).join("")}</div></section>
       <section class="e005-task-section"><div class="flow-step">${e5("tasks")}</div><div class="e005-tasks">${world.tasks.map(taskMarkup).join("")}</div></section>
       <section class="e004-decision"><span>${e5("review")}</span><p>${e5("reviewCopy")}</p></section>
@@ -3746,6 +3833,10 @@ function render() {
     document.title = `${e5("rawAuditTitle")} — i`;
     app.innerHTML = withLanguage(e005Gate3RawShell());
     loadE005Gate3Raw();
+  } else if (path === "experiment/e005/gate-4") {
+    document.title = `${e5("gate4Title")} — i`;
+    app.innerHTML = withLanguage(e005Gate4Shell());
+    loadE005Gate4();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

@@ -184,6 +184,10 @@ skill being taught, examples visible to the adapter, held-out examples it cannot
 see, the frozen-base control, and the pass/fail rule. Preparing this checkpoint
 does not authorize training; the owner starts training only after inspecting it.
 
+Status: **design v0.1 published; awaiting owner review; zero weights changed**.
+The visible checkpoint is `/experiment/e005/gate-4/`; its machine-readable
+artifact is `/experiments/E005/gate-4-design-v0.1.json`.
+
 ### Gate 5 — learned routing and merging
 
 Router and merger train only on surrogate pockets. Frozen response-capsule and

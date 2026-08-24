@@ -11,8 +11,8 @@ weight training may begin until the owner has inspected that world on
 joinmultiplayer.ai.
 
 Current status: **Gate 3 development controls completed, manually reviewed by
-the owner, and frozen. Gate 4 design is next; no personal-weight training has
-started**.
+the owner, and frozen. The Gate 4 learning design is public for owner review;
+no personal-weight training has started**.
 
 Gate 3 compared exact-word retrieval, frozen-Qwen semantic retrieval, raw
 majority, the deterministic evidence graph, and an oracle source set across six
@@ -48,3 +48,11 @@ produced only 6/12 correct generations, the next experiment isolates procedure
 learning and generation rather than improving retrieval on these records.
 
 See [PROTOCOL.md](PROTOCOL.md).
+
+The pre-training Gate 4 checkpoint is
+`site/experiments/E005/gate-4-design-v0.1.json` and is rendered at
+`/experiment/e005/gate-4/`. It proposes two separate DoRA adapters: one learns
+source precedence and lineage accounting; the other learns evidence-to-action
+translation and safe abstention. Their held-out entities and answers do not
+occur in training. This artifact is a design, not a result or permission to
+train.
