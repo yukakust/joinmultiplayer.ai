@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import unittest
 from collections import Counter
 from difflib import SequenceMatcher
@@ -11,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[3]
 OLD_DATA = ROOT / "site/experiments/E005/gate-4-data-v0.1.json"
 TRANSFER_DATA = ROOT / "site/experiments/E005/gate-4-transfer-data-v0.1.json"
 TRANSFER_RESULTS = ROOT / "site/experiments/E005/gate-4-transfer-results-v0.1.json"
+CHECKPOINT = ROOT / "site/experiments/E005/gate-4b-checkpoint-v0.1.json"
 
 
 class Gate4TransferTests(unittest.TestCase):
@@ -66,6 +68,14 @@ class Gate4TransferTests(unittest.TestCase):
         self.assertEqual(result["summary"]["safety_keeper"]["personal_dora"]["correct"], 5)
         self.assertIn("owner_review_pending", result["claim_status"])
         self.assertNotIn("/home/", TRANSFER_RESULTS.read_text(encoding="utf-8"))
+
+    def test_gate4b_checkpoint_freezes_public_evidence(self) -> None:
+        checkpoint = json.loads(CHECKPOINT.read_text(encoding="utf-8"))
+        self.assertTrue(checkpoint["immutable"])
+        self.assertEqual(checkpoint["status"], "frozen_development_failure")
+        for record in checkpoint["files"].values():
+            path = ROOT / record["path"].lstrip("/")
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), record["sha256"])
 
 
 if __name__ == "__main__":

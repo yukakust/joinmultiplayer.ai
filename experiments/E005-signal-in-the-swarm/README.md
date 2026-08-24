@@ -126,3 +126,8 @@ including the earlier template answers, remains available in
 `site/experiments/E005/gate-4-transfer-results-v0.1.json` and on
 `/experiment/e005/gate-4/results/`. The semantic labels still require owner
 review.
+
+Gate 4B is frozen by hashes in
+`site/experiments/E005/gate-4b-checkpoint-v0.1.json`. Later training and
+evaluation must create new versioned artifacts; they must not overwrite the
+questions, answers, labels, or adapter identities recorded by this checkpoint.
