@@ -907,6 +907,17 @@ button:disabled {
   margin-bottom: 1rem;
 }
 
+.e005-architecture-note {
+  border: 2px solid var(--ember);
+  color: var(--ember);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  line-height: 1.5;
+  margin: 1.5rem 0;
+  padding: 1rem;
+}
+
 .review-correct {
   --review-color: #8ebc87;
 }
@@ -945,6 +956,22 @@ button:disabled {
   color: var(--muted);
   font-size: 0.68rem;
   padding: 0.75rem;
+}
+
+.e005-review-matrix thead th b,
+.e005-review-matrix thead th small {
+  display: block;
+  line-height: 1.35;
+}
+
+.e005-review-matrix thead th b {
+  color: var(--ink);
+  font-size: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.e005-review-matrix thead th small {
+  font-weight: 400;
 }
 
 .e005-review-matrix button {
@@ -1049,6 +1076,13 @@ button:disabled {
   font-size: 0.72rem;
 }
 
+.e005-compare-cards header span small {
+  display: block;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-top: 0.35rem;
+}
+
 .e005-compare-cards header strong {
   color: var(--review-color);
   font-family: Arial, Helvetica, sans-serif;
@@ -1084,6 +1118,18 @@ button:disabled {
   display: block;
   font-size: 0.65rem;
   margin-bottom: 0.35rem;
+}
+
+.e005-generation-rating {
+  color: var(--review-color);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.e005-bilingual-rating {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: 1fr 1fr;
 }
 
 .e005-compare-cards label {

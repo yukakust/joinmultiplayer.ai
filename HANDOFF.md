@@ -199,6 +199,11 @@ the checkpoint. The evidence graph selected the ideal records in
 generations. This demonstrates a generator bottleneck in the synthetic fixture,
 not learned routing or swarm generalization. Gate 4 personal DoRA procedure
 training must not begin until the owner visually reviews Gate 3.
+The review matrix deliberately reports a stable paired RU+EN rating: both
+correct = green, either wrong = red, otherwise yellow. The global language
+switch translates the whole review but must not change matrix correctness. Gate
+3 method labels must continue to state that all five use the same frozen base
+and that no DoRA or fine-tuning has occurred.
 
 ## Immediate next work
 

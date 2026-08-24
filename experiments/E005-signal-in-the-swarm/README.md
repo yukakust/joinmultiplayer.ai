@@ -28,5 +28,12 @@ question in a 6×5 matrix and keeps source selection separate from answer
 correctness. Owner confirmations and corrections are browser-local until the
 owner explicitly asks Morrow to publish the checkpoint. The previous exhaustive
 method-first rendering remains available at `/experiment/e005/gate-3/raw/`.
+The matrix uses one conservative bilingual rating per task and method: green
+requires both RU and EN generations to be correct, red means at least one is
+wrong or contradictory, and yellow covers the remaining incomplete cases. The
+site-wide EN/RU control changes the complete interface and the visible raw
+generation; it never changes that paired rating. All five Gate 3 columns use the
+same frozen Qwen3-0.6B Base with no DoRA and no fine-tuning; only evidence
+selection differs.
 
 See [PROTOCOL.md](PROTOCOL.md).

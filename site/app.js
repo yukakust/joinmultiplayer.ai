@@ -2460,11 +2460,19 @@ const e005Copy = {
     fullyCorrectTasks: "tasks correct in both languages",
     selectedSources: "SELECTED RECORDS",
     method: "METHOD",
-    methodLexical: "Exact word overlap",
-    methodSemantic: "Frozen-Qwen semantic retrieval",
-    methodRawMajority: "Raw majority",
-    methodEvidenceGraph: "Evidence graph",
-    methodOracle: "Oracle source set",
+    gate3ArchitectureNote: "ALL FIVE COLUMNS USE THE SAME FROZEN QWEN3-0.6B BASE. DORA: NONE. FINE-TUNING: NONE. ONLY THE WAY EVIDENCE IS SELECTED CHANGES.",
+    pairRating: "combined RU + EN rating",
+    currentGenerationRating: "this generation",
+    methodLexical: "RAG · exact words",
+    methodSemantic: "RAG · Qwen embeddings",
+    methodRawMajority: "Swarm vote · scripted",
+    methodEvidenceGraph: "Evidence RAG · provenance",
+    methodOracle: "Oracle RAG · ideal sources",
+    methodLexicalDetail: "word overlap → top 3 records → frozen Qwen",
+    methodSemanticDetail: "Qwen hidden-state similarity → top 3 records → frozen Qwen",
+    methodRawMajorityDetail: "most scripted supporters → their records → frozen Qwen",
+    methodEvidenceGraphDetail: "freshness + lineage + source quality → frozen Qwen",
+    methodOracleDetail: "predeclared perfect records → frozen Qwen; upper bound",
     labelCorrect: "correct",
     labelSafeButIncomplete: "safe but incomplete",
     labelWrongOrContradictory: "wrong or contradictory"
@@ -2541,11 +2549,19 @@ const e005Copy = {
     fullyCorrectTasks: "задач верны на обоих языках",
     selectedSources: "ВЫБРАННЫЕ ЗАПИСИ",
     method: "МЕТОД",
-    methodLexical: "Точное совпадение слов",
-    methodSemantic: "Семантический поиск замороженной Qwen",
-    methodRawMajority: "Простое большинство",
-    methodEvidenceGraph: "Карта доказательств",
-    methodOracle: "Oracle-набор источников",
+    gate3ArchitectureNote: "ВО ВСЕХ ПЯТИ КОЛОНКАХ ОДНА И ТА ЖЕ ЗАМОРОЖЕННАЯ QWEN3-0.6B BASE. DORA: НЕТ. FINE-TUNING: НЕТ. МЕНЯЕТСЯ ТОЛЬКО СПОСОБ ВЫБОРА ДОКАЗАТЕЛЬСТВ.",
+    pairRating: "общая оценка RU + EN",
+    currentGenerationRating: "эта генерация",
+    methodLexical: "RAG · точные слова",
+    methodSemantic: "RAG · эмбеддинги Qwen",
+    methodRawMajority: "Голос swarm · сценарный",
+    methodEvidenceGraph: "Evidence RAG · происхождение",
+    methodOracle: "Oracle RAG · идеальные источники",
+    methodLexicalDetail: "совпадение слов → 3 записи → замороженная Qwen",
+    methodSemanticDetail: "сходство hidden states Qwen → 3 записи → замороженная Qwen",
+    methodRawMajorityDetail: "больше сценарных сторонников → их записи → замороженная Qwen",
+    methodEvidenceGraphDetail: "свежесть + lineage + качество источника → замороженная Qwen",
+    methodOracleDetail: "заранее известные идеальные записи → замороженная Qwen; верхняя граница",
     labelCorrect: "верно",
     labelSafeButIncomplete: "безопасно, но неполно",
     labelWrongOrContradictory: "ошибка или противоречие"
@@ -2603,6 +2619,17 @@ function e005MethodName(method) {
   return e5(names[method] || method);
 }
 
+function e005MethodDetail(method) {
+  const details = {
+    lexical: "methodLexicalDetail",
+    semantic: "methodSemanticDetail",
+    raw_majority: "methodRawMajorityDetail",
+    evidence_graph: "methodEvidenceGraphDetail",
+    oracle: "methodOracleDetail",
+  };
+  return e5(details[method] || method);
+}
+
 function e005ReviewLabel(label) {
   const labels = {
     correct: "labelCorrect",
@@ -2645,20 +2672,33 @@ async function loadE005Gate3() {
     const tasks = new Map(world.tasks.map(task => [task.id, task]));
     const rows = new Map(result.rows.map(row => [`${row.task_id}:${row.method}`, row]));
     const taskIds = world.tasks.map(task => task.id);
-    let reviewLanguage = language === "en" ? "en" : "ru";
+    const reviewLanguage = language === "en" ? "en" : "ru";
     let selectedTaskId = taskIds.includes(location.hash.slice(1)) ? location.hash.slice(1) : taskIds[0];
     let editing = false;
     const ownerReview = e005OwnerReviewLoad();
-    const languageReview = () => ownerReview[reviewLanguage] || (ownerReview[reviewLanguage] = {});
-    const effectiveLabel = (taskId, method) => (
-      languageReview()[taskId]?.overrides?.[method]
-      || rows.get(`${taskId}:${method}`).outputs[reviewLanguage].manual_review
+    const languageReview = lang => ownerReview[lang] || (ownerReview[lang] = {});
+    const combinedReview = ownerReview.combined || (ownerReview.combined = {});
+    const effectiveLabel = (taskId, method, lang) => (
+      languageReview(lang)[taskId]?.overrides?.[method]
+      || rows.get(`${taskId}:${method}`).outputs[lang].manual_review
     );
+    const pairLabel = (taskId, method) => {
+      const labels = [effectiveLabel(taskId, method, "ru"), effectiveLabel(taskId, method, "en")];
+      if (labels.every(label => label === "correct")) return "correct";
+      if (labels.some(label => label === "wrong_or_contradictory")) return "wrong_or_contradictory";
+      return "safe_but_incomplete";
+    };
     const sourceState = output => (
       output.source_exact_set ? ["exact", e5("sourcesExact")]
       : output.source_recall > 0 ? ["partial", e5("sourcesPartial")]
       : ["wrong", e5("sourcesWrong")]
     );
+    const pairSourceState = row => {
+      const outputs = [row.outputs.ru, row.outputs.en];
+      if (outputs.every(output => output.source_exact_set)) return ["exact", e5("sourcesExact")];
+      if (outputs.some(output => output.source_recall > 0)) return ["partial", e5("sourcesPartial")];
+      return ["wrong", e5("sourcesWrong")];
+    };
     const symbols = { correct: "●", safe_but_incomplete: "◐", wrong_or_contradictory: "×" };
 
     target.querySelector(".experiment-loading").outerHTML = `
@@ -2671,18 +2711,18 @@ async function loadE005Gate3() {
 
     const reviewApp = target.querySelector("#e005-review-app");
     const render = () => {
-      const reviewedCount = taskIds.filter(taskId => languageReview()[taskId]?.confirmed).length;
+      const reviewedCount = taskIds.filter(taskId => combinedReview[taskId]?.confirmed).length;
       const currentTask = tasks.get(selectedTaskId);
       const currentIndex = taskIds.indexOf(selectedTaskId);
       reviewApp.innerHTML = `
         <section class="e005-review-overview">
           <div class="e005-review-progress"><span>${e5("reviewedProgress")}</span><strong>${reviewedCount} / ${taskIds.length}</strong><small>${e5("reviewLocalOnly")}</small></div>
-          <div class="e005-review-language"><button type="button" data-review-lang="ru" class="${reviewLanguage === "ru" ? "is-active" : ""}">RU</button><button type="button" data-review-lang="en" class="${reviewLanguage === "en" ? "is-active" : ""}">EN</button></div>
+          <p class="e005-architecture-note">${e5("gate3ArchitectureNote")}</p>
           <div class="e005-review-legend"><span class="review-correct">● ${e5("labelCorrect")}</span><span class="review-safe_but_incomplete">◐ ${e5("labelSafeButIncomplete")}</span><span class="review-wrong_or_contradictory">× ${e5("labelWrongOrContradictory")}</span></div>
-          <div class="e005-review-matrix-wrap"><table class="e005-review-matrix"><thead><tr><th>${e5("tasks")}</th>${result.methods.map(method => `<th>${escapeHTML(e005MethodName(method))}</th>`).join("")}</tr></thead><tbody>${world.tasks.map(task => `<tr class="${task.id === selectedTaskId ? "is-selected" : ""}"><th><button type="button" data-review-task="${escapeHTML(task.id)}"><b>${escapeHTML(task.id)}</b><span>${escapeHTML(e005Excerpt(task.question[reviewLanguage], 92))}</span>${languageReview()[task.id]?.confirmed ? `<small>✓ ${e5("reviewed")}</small>` : ""}</button></th>${result.methods.map(method => {
-            const output = rows.get(`${task.id}:${method}`).outputs[reviewLanguage];
-            const label = effectiveLabel(task.id, method);
-            const [sourceClass, sourceCopy] = sourceState(output);
+          <div class="e005-review-matrix-wrap"><table class="e005-review-matrix"><thead><tr><th>${e5("tasks")}</th>${result.methods.map(method => `<th><b>${escapeHTML(e005MethodName(method))}</b><small>${escapeHTML(e005MethodDetail(method))}</small></th>`).join("")}</tr></thead><tbody>${world.tasks.map(task => `<tr class="${task.id === selectedTaskId ? "is-selected" : ""}"><th><button type="button" data-review-task="${escapeHTML(task.id)}"><b>${escapeHTML(task.id)}</b><span>${escapeHTML(e005Excerpt(task.question[reviewLanguage], 92))}</span>${combinedReview[task.id]?.confirmed ? `<small>✓ ${e5("reviewed")}</small>` : ""}</button></th>${result.methods.map(method => {
+            const row = rows.get(`${task.id}:${method}`);
+            const label = pairLabel(task.id, method);
+            const [sourceClass, sourceCopy] = pairSourceState(row);
             return `<td><button type="button" data-review-task="${escapeHTML(task.id)}" class="review-${escapeHTML(label)}"><strong>${symbols[label]}</strong><span>${escapeHTML(e005ReviewLabel(label))}</span><small class="source-${sourceClass}">${escapeHTML(sourceCopy)}</small></button></td>`;
           }).join("")}</tr>`).join("")}</tbody></table></div>
         </section>
@@ -2693,14 +2733,16 @@ async function loadE005Gate3() {
           <div class="e005-compare-cards">${result.methods.map(method => {
             const row = rows.get(`${selectedTaskId}:${method}`);
             const output = row.outputs[reviewLanguage];
-            const label = effectiveLabel(selectedTaskId, method);
+            const label = pairLabel(selectedTaskId, method);
+            const generationLabel = effectiveLabel(selectedTaskId, method, reviewLanguage);
             const [sourceClass, sourceCopy] = sourceState(output);
             return `<article class="review-${escapeHTML(label)}">
-              <header><span>${escapeHTML(e005MethodName(method))}</span><strong>${symbols[label]} ${escapeHTML(e005ReviewLabel(label))}</strong></header>
+              <header><span>${escapeHTML(e005MethodName(method))}<small>${escapeHTML(e005MethodDetail(method))}</small></span><strong>${symbols[label]} ${escapeHTML(e005ReviewLabel(label))}</strong><small>${e5("pairRating")}</small></header>
               <div class="e005-source-verdict source-${sourceClass}">${escapeHTML(sourceCopy)} · ${output.selected_document_ids.map(escapeHTML).join(" · ")}</div>
-              <small>${e5("answerExcerpt")}</small><p>${escapeHTML(e005Excerpt(output.output))}</p>
+              <small>${e5("answerExcerpt")} · ${reviewLanguage.toUpperCase()}</small><p>${escapeHTML(e005Excerpt(output.output))}</p>
+              <div class="e005-generation-rating review-${escapeHTML(generationLabel)}">${e5("currentGenerationRating")} · ${escapeHTML(e005ReviewLabel(generationLabel))}</div>
               <div class="e005-review-reason"><span>${e5("whyRating")}</span>${escapeHTML(output.review_note)}</div>
-              ${editing ? `<label>${e5("changeRatings")}<select data-rating-method="${escapeHTML(method)}"><option value="correct" ${label === "correct" ? "selected" : ""}>${e5("labelCorrect")}</option><option value="safe_but_incomplete" ${label === "safe_but_incomplete" ? "selected" : ""}>${e5("labelSafeButIncomplete")}</option><option value="wrong_or_contradictory" ${label === "wrong_or_contradictory" ? "selected" : ""}>${e5("labelWrongOrContradictory")}</option></select></label>` : `<small>${e5("preliminaryRating")}</small>`}
+              ${editing ? `<div class="e005-bilingual-rating"><label>RU<select data-rating-method="${escapeHTML(method)}" data-rating-language="ru">${["correct", "safe_but_incomplete", "wrong_or_contradictory"].map(value => `<option value="${value}" ${effectiveLabel(selectedTaskId, method, "ru") === value ? "selected" : ""}>${e005ReviewLabel(value)}</option>`).join("")}</select></label><label>EN<select data-rating-method="${escapeHTML(method)}" data-rating-language="en">${["correct", "safe_but_incomplete", "wrong_or_contradictory"].map(value => `<option value="${value}" ${effectiveLabel(selectedTaskId, method, "en") === value ? "selected" : ""}>${e005ReviewLabel(value)}</option>`).join("")}</select></label></div>` : `<small>${e5("preliminaryRating")}</small>`}
               <a href="/experiment/e005/gate-3/raw/#raw-${escapeHTML(selectedTaskId)}-${escapeHTML(method)}">${e5("rawAudit")}</a>
             </article>`;
           }).join("")}</div>
@@ -2717,13 +2759,8 @@ async function loadE005Gate3() {
         render();
         reviewApp.querySelector("#question-review")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }));
-      reviewApp.querySelectorAll("[data-review-lang]").forEach(button => button.addEventListener("click", () => {
-        reviewLanguage = button.dataset.reviewLang;
-        editing = false;
-        render();
-      }));
       reviewApp.querySelector("[data-confirm-ratings]")?.addEventListener("click", () => {
-        const taskReview = languageReview()[selectedTaskId] || (languageReview()[selectedTaskId] = {});
+        const taskReview = combinedReview[selectedTaskId] || (combinedReview[selectedTaskId] = {});
         taskReview.confirmed = true;
         e005OwnerReviewSave(ownerReview);
         render();
@@ -2733,12 +2770,14 @@ async function loadE005Gate3() {
         render();
       });
       reviewApp.querySelector("[data-save-ratings]")?.addEventListener("click", () => {
-        const taskReview = languageReview()[selectedTaskId] || (languageReview()[selectedTaskId] = {});
-        taskReview.overrides = {};
         reviewApp.querySelectorAll("[data-rating-method]").forEach(select => {
+          const taskReview = languageReview(select.dataset.ratingLanguage)[selectedTaskId]
+            || (languageReview(select.dataset.ratingLanguage)[selectedTaskId] = {});
+          taskReview.overrides = taskReview.overrides || {};
           taskReview.overrides[select.dataset.ratingMethod] = select.value;
         });
-        taskReview.confirmed = true;
+        const combinedTaskReview = combinedReview[selectedTaskId] || (combinedReview[selectedTaskId] = {});
+        combinedTaskReview.confirmed = true;
         e005OwnerReviewSave(ownerReview);
         editing = false;
         render();
