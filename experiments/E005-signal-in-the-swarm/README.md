@@ -63,6 +63,15 @@ the shared model file hash was unchanged. This only shows that local DoRA
 training works on yukabox. It is not evidence that the skill was learned. The
 public artifact is `site/experiments/E005/gate-4-smoke-v0.1.json`.
 
+The first real Archivist adapter then trained for one 96-example pass. A
+four-question held-out microscope used only unseen entities. Human review scored
+the frozen base 0/4 and the personal DoRA adapter 4/4. The first automatic
+marker incorrectly scored two Russian base outputs as correct because Qwen had
+repeated the question; that checker failure is preserved in the artifact. This
+is a small development microscope, not the final Gate 4 result. Raw questions,
+answers, preliminary labels, and manual review are public in
+`site/experiments/E005/gate-4-archivist-microscope-v0.1.json`.
+
 The pre-training Gate 4 checkpoint is
 `site/experiments/E005/gate-4-design-v0.1.json` and is rendered at
 `/experiment/e005/gate-4/`. It proposes two separate DoRA adapters: one learns

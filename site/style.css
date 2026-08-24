@@ -1306,11 +1306,73 @@ button:disabled {
   line-height: 1.45;
 }
 
+.e005-gate4-microscope {
+  border-top: 0.35rem solid var(--ink);
+  margin: 6rem 0;
+  padding-top: 2rem;
+}
+
+.e005-gate4-microscope > h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1.05;
+  max-width: 70rem;
+}
+
+.e005-gate4-microscope > div > article {
+  border-top: 1px solid var(--line);
+  padding: 3rem 0;
+}
+
+.e005-gate4-microscope header span,
+.e005-gate4-microscope section > span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.68rem;
+  margin-bottom: 0.7rem;
+}
+
+.e005-gate4-microscope h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0 0 2rem;
+  max-width: 75rem;
+}
+
+.e005-gate4-microscope .expected {
+  border-left: 0.3rem solid var(--ember);
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.e005-gate4-microscope .answers {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.e005-gate4-microscope .answers section {
+  border: 1px solid var(--line);
+  min-height: 12rem;
+  padding: 1rem;
+}
+
+.e005-gate4-microscope .answers .is-correct {
+  border-top: 0.35rem solid #8ebc87;
+}
+
+.e005-gate4-microscope .answers .is-wrong,
+.e005-gate4-microscope .answers .is-no_answer {
+  border-top: 0.35rem solid #dc735f;
+}
+
 @media (max-width: 800px) {
   .e005-gate4-metrics,
   .e005-gate4-pockets,
   .e005-gate4-controls > div:last-child,
-  .e005-gate4-gates > div:last-child {
+  .e005-gate4-gates > div:last-child,
+  .e005-gate4-microscope .answers {
     grid-template-columns: 1fr;
   }
 }
