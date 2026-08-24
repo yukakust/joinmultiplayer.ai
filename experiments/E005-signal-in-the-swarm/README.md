@@ -10,9 +10,9 @@ The experiment begins with a public natural-language development world. No
 weight training may begin until the owner has inspected that world on
 joinmultiplayer.ai.
 
-Current status: **Gate 3 development controls completed, manually reviewed by
-the owner, and frozen. The Gate 4 learning design is public for owner review;
-no personal-weight training has started**.
+Current status: **Gate 3 is frozen. Gate 4 development training and all four
+controls are complete. The raw Gate 4 answers are public and await the owner's
+question-by-question review. Routing and swarm composition have not started**.
 
 Gate 3 compared exact-word retrieval, frozen-Qwen semantic retrieval, raw
 majority, the deterministic evidence graph, and an oracle source set across six
@@ -87,3 +87,21 @@ source precedence and lineage accounting; the other learns evidence-to-action
 translation and safe abstention. Their held-out entities and answers do not
 occur in training. This artifact is a design, not a result or permission to
 train.
+
+After owner authorization, both matching adapters and both shuffled-lesson
+controls trained for one 96-example pass. The frozen base, matching adapter,
+wrong specialist, and shuffled-lesson adapter then answered the held-out set
+without RAG. A data audit found that the 48 held-out rows per skill were not 48
+independent questions: the Archivist had 8 unique questions and the Safety
+Keeper had 16. The repeated rows remain in the source dataset, but they are not
+counted as new evidence.
+
+Across the 24 unique questions, the matching personal DoRA produced the exact
+predeclared answer 24/24 times. The frozen base, wrong specialist, and shuffled
+control produced 0 exact answers. This is a small templated synthetic
+development result. It shows that these adapters stored and reused the two
+tested procedures on unseen entity names; it does not yet show broad transfer,
+real-world safety, routing, or swarm composition. The automatic exact-match
+result and every raw answer are public at
+`site/experiments/E005/gate-4-results-v0.1.json` and rendered at
+`/experiment/e005/gate-4/results/`. Owner review is still pending.

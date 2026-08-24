@@ -2476,9 +2476,9 @@ const e005Copy = {
     labelCorrect: "correct",
     labelSafeButIncomplete: "safe but incomplete",
     labelWrongOrContradictory: "wrong or contradictory",
-    gate4Title: "Gate 4 before any training",
-    gate4Intro: "Inspect exactly what two personal adapters would learn and how we will tell reusable skill from memorization.",
-    gate4Button: "INSPECT THE GATE 4 LEARNING DESIGN →",
+    gate4Title: "Gate 4 · two personal skills in weights",
+    gate4Intro: "Two personal DoRA adapters have trained. Inspect what they learned, every hidden question, and all controls.",
+    gate4Button: "OPEN GATE 4 AND ITS RESULTS →",
     noTraining: "DESIGN ONLY · ZERO WEIGHTS CHANGED",
     whatChanges: "WHAT CHANGES",
     seesInTraining: "VISIBLE DURING TRAINING",
@@ -2486,12 +2486,12 @@ const e005Copy = {
     expectedBehavior: "EXPECTED HELD-OUT BEHAVIOR",
     controls: "FOUR ANSWERS WE WILL COMPARE",
     passFail: "PASS / FAIL BEFORE ROUTING",
-    ownerStop: "OWNER CHECKPOINT",
-    ownerStopCopy: "Nothing trains from this page. After you inspect the examples and gates, training still requires a separate explicit go-ahead.",
+    ownerStop: "OWNER REVIEW",
+    ownerStopCopy: "Training is complete. Review all 24 different questions before we call Gate 4 confirmed. Routing and the swarm have not started.",
     trainCount: "training examples per skill",
-    heldoutCount: "held-out examples per skill",
+    heldoutCount: "held-out rows per skill · repeats disclosed",
     baseFrozen: "shared Qwen base stays frozen",
-    dataReady: "THE LESSONS ARE READY · THE MODEL HAS NOT TRAINED YET",
+    dataReady: "TRAINING COMPLETE · DEVELOPMENT RESULTS READY",
     viewDataset: "OPEN ALL 336 LESSONS →",
     smokeTitle: "THE FIRST TWO TRAINING STEPS WORKED",
     smokeNotProof: "This only checks the machine and the training pipe. It does not show that the skill was learned.",
@@ -2503,7 +2503,20 @@ const e005Copy = {
     checkerMistake: "The first automatic checker mistook two repeated Russian questions for answers. Human review corrected them.",
     safetyMicroscopeTitle: "THE SAFETY KEEPER'S FIRST FOUR NEW QUESTIONS",
     safetyMicroscopeCopy: "The clean Qwen got 0 of 4. The Safety Keeper got 4 of 4. The clean model sometimes suggested acting without the required measurement.",
-    trainedSafetyPocket: "QWEN + SAFETY KEEPER"
+    trainedSafetyPocket: "QWEN + SAFETY KEEPER",
+    gate4ResultsTitle: "Did the two pocket i learn their skills?",
+    gate4ResultsIntro: "See the short answer first. Then open any question and compare all four raw answers.",
+    gate4ResultsButton: "SEE ALL 24 QUESTIONS AND ANSWERS →",
+    uniqueQuestions: "different hidden questions",
+    exactAnswers: "exact answers from the right pocket i",
+    controlExactAnswers: "exact answers from all three controls",
+    excludedRepeats: "repeated rows not counted as new proof",
+    learnedSkill: "WHAT THIS SMALL TEST SHOWS",
+    limitsTitle: "WHAT IT DOES NOT SHOW YET",
+    expectedAnswerFull: "EXPECTED ANSWER",
+    exactMatch: "exact match",
+    noExactMatch: "not an exact match",
+    ownerReviewPending: "THE PROGRAM CHECKED EXACT MATCHES. YOUR REVIEW IS STILL NEEDED."
   },
   ru: {
     step: "СЛЕДУЮЩИЙ ЭКСПЕРИМЕНТ · E005",
@@ -2593,9 +2606,9 @@ const e005Copy = {
     labelCorrect: "верно",
     labelSafeButIncomplete: "безопасно, но неполно",
     labelWrongOrContradictory: "ошибка или противоречие",
-    gate4Title: "Gate 4 до любого обучения",
-    gate4Intro: "Проверьте глазами, чему будут учиться два личных адаптера и как мы отличим переносимый навык от запоминания.",
-    gate4Button: "ПОСМОТРЕТЬ ПЛАН ОБУЧЕНИЯ GATE 4 →",
+    gate4Title: "Gate 4 · два личных умения в весах",
+    gate4Intro: "Два личных DoRA-адаптера обучены. Проверьте, чему они научились, все скрытые вопросы и контрольные варианты.",
+    gate4Button: "ОТКРЫТЬ GATE 4 И ЕГО РЕЗУЛЬТАТЫ →",
     noTraining: "ТОЛЬКО ПЛАН · НИ ОДИН ВЕС НЕ ИЗМЕНЁН",
     whatChanges: "ЧТО МЕНЯЕТСЯ",
     seesInTraining: "ВИДИТ ВО ВРЕМЯ ОБУЧЕНИЯ",
@@ -2603,12 +2616,12 @@ const e005Copy = {
     expectedBehavior: "ОЖИДАЕМОЕ ПОВЕДЕНИЕ НА ПРОВЕРКЕ",
     controls: "ЧЕТЫРЕ ОТВЕТА ДЛЯ СРАВНЕНИЯ",
     passFail: "ПОРОГ УСПЕХА / НЕУДАЧИ ДО ROUTING",
-    ownerStop: "КОНТРОЛЬНАЯ ТОЧКА ЮКИ",
-    ownerStopCopy: "С этой страницы ничего не обучается. После проверки примеров и порогов для запуска обучения всё равно понадобится отдельное явное подтверждение.",
+    ownerStop: "ПРОВЕРКА ЮКИ",
+    ownerStopCopy: "Обучение закончено. Проверьте все 24 разных вопроса, прежде чем мы назовём Gate 4 подтверждённым. Routing и swarm ещё не запускались.",
     trainCount: "учебных примеров на навык",
-    heldoutCount: "скрытых проверочных примеров на навык",
+    heldoutCount: "скрытых строк на навык · повторы раскрыты",
     baseFrozen: "общая база Qwen остаётся замороженной",
-    dataReady: "УРОКИ ГОТОВЫ · МОДЕЛЬ ЕЩЁ НЕ УЧИЛАСЬ",
+    dataReady: "ОБУЧЕНИЕ ЗАКОНЧЕНО · DEVELOPMENT-РЕЗУЛЬТАТЫ ГОТОВЫ",
     viewDataset: "ОТКРЫТЬ ВСЕ 336 УРОКОВ →",
     smokeTitle: "ПЕРВЫЕ ДВА ШАГА ОБУЧЕНИЯ СРАБОТАЛИ",
     smokeNotProof: "Это проверка машины и процесса обучения. Она ещё не показывает, что умение выучено.",
@@ -2620,7 +2633,20 @@ const e005Copy = {
     checkerMistake: "Первый автоматический проверяющий принял два повторённых русских вопроса за ответы. Ручная проверка исправила ошибки.",
     safetyMicroscopeTitle: "ПЕРВЫЕ ЧЕТЫРЕ НОВЫХ ВОПРОСА ХРАНИТЕЛЯ",
     safetyMicroscopeCopy: "Чистая Qwen справилась с 0 из 4. Хранитель — с 4 из 4. Чистая модель иногда советовала действовать без обязательного измерения.",
-    trainedSafetyPocket: "QWEN + ХРАНИТЕЛЬ"
+    trainedSafetyPocket: "QWEN + ХРАНИТЕЛЬ",
+    gate4ResultsTitle: "Два pocket i выучили свои умения?",
+    gate4ResultsIntro: "Сначала посмотрите короткий ответ. Потом откройте любой вопрос и сравните все четыре сырых ответа.",
+    gate4ResultsButton: "СМОТРЕТЬ ВСЕ 24 ВОПРОСА И ОТВЕТА →",
+    uniqueQuestions: "разных скрытых вопроса",
+    exactAnswers: "точных ответов нужного pocket i",
+    controlExactAnswers: "точных ответов у трёх контрольных вариантов",
+    excludedRepeats: "повторов не засчитаны как новые доказательства",
+    learnedSkill: "ЧТО ПОКАЗАЛ ЭТОТ МАЛЕНЬКИЙ ТЕСТ",
+    limitsTitle: "ЧЕГО ОН ПОКА НЕ ПОКАЗАЛ",
+    expectedAnswerFull: "ОЖИДАЕМЫЙ ОТВЕТ",
+    exactMatch: "совпал точно",
+    noExactMatch: "не совпал точно",
+    ownerReviewPending: "ТОЧНОЕ СОВПАДЕНИЕ ПРОВЕРИЛА ПРОГРАММА. НУЖНА ЕЩЁ ВАША ПРОВЕРКА."
   }
 };
 
@@ -2669,6 +2695,15 @@ function e005Gate4Shell() {
     <div class="flow-step">E005 · GATE 4 · DESIGN</div>
     <h1>${e5("gate4Title")}</h1>
     <p class="contribution-intro">${e5("gate4Intro")}</p>
+    <div class="experiment-loading">${c("loading")}</div>
+  </section>`;
+}
+
+function e005Gate4ResultsShell() {
+  return `<section class="flow-shell e005-gate4-results-page">
+    <div class="flow-step">E005 · GATE 4 · RESULTS</div>
+    <h1>${e5("gate4ResultsTitle")}</h1>
+    <p class="contribution-intro">${e5("gate4ResultsIntro")}</p>
     <div class="experiment-loading">${c("loading")}</div>
   </section>`;
 }
@@ -3000,7 +3035,48 @@ async function loadE005Gate4() {
       <section class="e005-gate4-controls"><div class="flow-step">${e5("controls")}</div><div>${comparisonLabels.map((label, index) => `<article><strong>${index + 1}</strong><span>${escapeHTML(label)}</span></article>`).join("")}</div></section>
       <section class="e005-gate4-gates"><div class="flow-step">${e5("passFail")}</div><div>${passFail}</div></section>
       <section class="e004-decision"><span>${e5("ownerStop")}</span><p>${e5("ownerStopCopy")}</p></section>
-      <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/gate-4-data-v0.1.json">${e5("viewDataset")}</a><a class="quiet-link" href="/experiments/E005/gate-4-archivist-microscope-v0.1.json">ARCHIVIST JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-safety-microscope-v0.1.json">SAFETY JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-smoke-v0.1.json">SMOKE JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-design-v0.1.json">PLAN JSON ↗</a></div>`;
+      <a class="e005-answer-button" href="/experiment/e005/gate-4/results/">${e5("gate4ResultsButton")}</a>
+      <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/gate-4-data-v0.1.json">${e5("viewDataset")}</a><a class="quiet-link" href="/experiments/E005/gate-4-results-v0.1.json">RESULTS JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-archivist-microscope-v0.1.json">ARCHIVIST JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-safety-microscope-v0.1.json">SAFETY JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-smoke-v0.1.json">SMOKE JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-design-v0.1.json">PLAN JSON ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate4Results() {
+  const target = document.querySelector(".e005-gate4-results-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-4-results-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 Gate 4 results unavailable");
+    const result = await response.json();
+    const localized = value => escapeHTML(e4Localized(value));
+    const skillName = skill => language === "ru"
+      ? (skill === "archivist" ? "Архивист" : "Хранитель безопасности")
+      : (skill === "archivist" ? "Archivist" : "Safety Keeper");
+    const methodOrder = ["base", "personal_dora", "wrong_specialist", "shuffled_lessons"];
+    const taskMarkup = row => `<details class="e005-gate4-result-task">
+      <summary><b>${escapeHTML(row.task_id)}</b><span>${escapeHTML(row.question)}</span></summary>
+      <div class="e005-gate4-result-body">
+        <section class="e005-gate4-result-expected"><span>${e5("expectedAnswerFull")}</span><p>${escapeHTML(row.expected_answer)}</p></section>
+        <div class="e005-gate4-result-answers">${methodOrder.map(method => {
+          const answer = row.conditions[method];
+          const exact = answer.exact_target_match;
+          return `<article class="${exact ? "is-exact" : "is-not-exact"}"><header><span>${localized(result.methods[method])}</span><b>${exact ? "✓ " + e5("exactMatch") : "× " + e5("noExactMatch")}</b></header><p>${escapeHTML(answer.output)}</p></article>`;
+        }).join("")}</div>
+      </div>
+    </details>`;
+    target.querySelector(".experiment-loading").outerHTML = `
+      <section class="hypothesis-card"><span>${e5("learnedSkill")}</span><p>${localized(result.answer)}</p></section>
+      <div class="e005-gate4-result-metrics">
+        <article><strong>${result.totals.unique_questions}</strong><span>${e5("uniqueQuestions")}</span></article>
+        <article><strong>${result.totals.personal_dora_exact}</strong><span>${e5("exactAnswers")}</span></article>
+        <article><strong>${result.totals.base_exact + result.totals.wrong_specialist_exact + result.totals.shuffled_lessons_exact}</strong><span>${e5("controlExactAnswers")}</span></article>
+        <article><strong>${result.totals.duplicate_rows_excluded}</strong><span>${e5("excludedRepeats")}</span></article>
+      </div>
+      <p class="control-warning">${e5("ownerReviewPending")}</p>
+      <section class="e005-gate4-limitations"><div class="flow-step">${e5("limitsTitle")}</div>${result.limits.map(limit => `<p>${localized(limit)}</p>`).join("")}</section>
+      ${result.skills.map(skill => `<section class="e005-gate4-result-skill"><header><span>POCKET I · ${escapeHTML(skill.skill.toUpperCase())}</span><h2>${skillName(skill.skill)} · ${skill.summary.personal_dora.exact_target_matches}/${skill.unique_questions}</h2><p>${skill.unique_questions} ${e5("uniqueQuestions")} · ${skill.duplicate_rows_excluded} ${e5("excludedRepeats")}</p></header><div>${skill.rows.map(taskMarkup).join("")}</div></section>`).join("")}
+      <div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/">GATE 4</a><a class="quiet-link" href="/experiments/E005/gate-4-results-v0.1.json">JSON ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -3875,6 +3951,10 @@ function render() {
     document.title = `${e5("gate4Title")} — i`;
     app.innerHTML = withLanguage(e005Gate4Shell());
     loadE005Gate4();
+  } else if (path === "experiment/e005/gate-4/results") {
+    document.title = `${e5("gate4ResultsTitle")} — i`;
+    app.innerHTML = withLanguage(e005Gate4ResultsShell());
+    loadE005Gate4Results();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

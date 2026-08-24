@@ -1168,6 +1168,142 @@ button:disabled {
   width: min(100% - clamp(2rem, 6vw, 7rem), 100rem);
 }
 
+.flow-shell.e005-gate4-results-page {
+  margin-inline: 0;
+  max-width: none;
+  padding-inline: clamp(1rem, 2.2vw, 2.5rem);
+  padding-top: clamp(6rem, 8vw, 8rem);
+  width: 100%;
+}
+
+.e005-gate4-result-metrics {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 3rem 0;
+}
+
+.e005-gate4-result-metrics article {
+  border: 1px solid var(--line);
+  min-height: 10rem;
+  padding: 1rem;
+}
+
+.e005-gate4-result-metrics strong,
+.e005-gate4-result-metrics span {
+  display: block;
+}
+
+.e005-gate4-result-metrics strong {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(3rem, 7vw, 7rem);
+  line-height: 1;
+}
+
+.e005-gate4-result-metrics span {
+  color: var(--muted);
+  line-height: 1.35;
+  margin-top: 1rem;
+}
+
+.e005-gate4-limitations {
+  border-left: 0.35rem solid var(--ember);
+  margin: 3rem 0 6rem;
+  max-width: 80rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.e005-gate4-limitations p {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0.65rem 0;
+}
+
+.e005-gate4-result-skill {
+  border-top: 0.35rem solid var(--ink);
+  margin: 5rem 0;
+  padding-top: 2rem;
+}
+
+.e005-gate4-result-skill > header h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1;
+  margin: 0.5rem 0;
+}
+
+.e005-gate4-result-skill > header span,
+.e005-gate4-result-skill > header p {
+  color: var(--muted);
+}
+
+.e005-gate4-result-task {
+  border-top: 1px solid var(--line);
+}
+
+.e005-gate4-result-task summary {
+  align-items: baseline;
+  cursor: pointer;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(12rem, 0.2fr) 1fr;
+  line-height: 1.4;
+  padding: 1.5rem 0;
+}
+
+.e005-gate4-result-task summary b {
+  color: var(--muted);
+}
+
+.e005-gate4-result-body {
+  padding: 0 0 3rem;
+}
+
+.e005-gate4-result-expected {
+  border-left: 0.35rem solid var(--ember);
+  margin-bottom: 1px;
+  padding: 1rem;
+}
+
+.e005-gate4-result-expected span,
+.e005-gate4-result-answers header span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.68rem;
+  margin-bottom: 0.6rem;
+}
+
+.e005-gate4-result-answers {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.e005-gate4-result-answers article {
+  border: 1px solid var(--line);
+  min-width: 0;
+  padding: 1rem;
+}
+
+.e005-gate4-result-answers article.is-exact {
+  border-top: 0.35rem solid #8ebc87;
+}
+
+.e005-gate4-result-answers article.is-not-exact {
+  border-top: 0.35rem solid #dc735f;
+}
+
+.e005-gate4-result-answers header b {
+  display: block;
+  font-size: 0.72rem;
+  margin-bottom: 1rem;
+}
+
+.e005-gate4-result-answers p {
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
 .e005-gate4-metrics {
   display: grid;
   gap: 1px;
@@ -1372,7 +1508,13 @@ button:disabled {
   .e005-gate4-pockets,
   .e005-gate4-controls > div:last-child,
   .e005-gate4-gates > div:last-child,
-  .e005-gate4-microscope .answers {
+  .e005-gate4-microscope .answers,
+  .e005-gate4-result-metrics,
+  .e005-gate4-result-answers {
+    grid-template-columns: 1fr;
+  }
+
+  .e005-gate4-result-task summary {
     grid-template-columns: 1fr;
   }
 }

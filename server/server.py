@@ -47,7 +47,7 @@ EXPERIMENT_EVENT_TYPES = {
     "run_completed",
 }
 RUN_STATUSES = {"created", "running", "completed", "failed", "stopped"}
-SPA_ROUTES = {"/experiment", "/experiment/answers", "/experiment/e005", "/experiment/e005/answers", "/experiment/e005/gate-3", "/experiment/e005/gate-3/raw", "/experiment/e005/gate-4", "/experiment/connector", "/experiment/run", "/network"}
+SPA_ROUTES = {"/experiment", "/experiment/answers", "/experiment/e005", "/experiment/e005/answers", "/experiment/e005/gate-3", "/experiment/e005/gate-3/raw", "/experiment/e005/gate-4", "/experiment/e005/gate-4/results", "/experiment/connector", "/experiment/run", "/network"}
 PUBLIC_EVENT_KEYS = {
     "text",
     "status",
