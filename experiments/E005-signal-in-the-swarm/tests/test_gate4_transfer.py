@@ -40,6 +40,14 @@ class Gate4TransferTests(unittest.TestCase):
         self.assertFalse(self.data["rag_used"])
         self.assertTrue(self.data["pass_rule"]["final_score_requires_human_review"])
 
+    def test_transfer_runner_only_generates_raw_answers(self) -> None:
+        source = (ROOT / "experiments/E005-signal-in-the-swarm/src/eval_gate4_transfer.py").read_text(encoding="utf-8")
+        self.assertIn('"training_performed": False', source)
+        self.assertIn('"rag_used": False', source)
+        self.assertIn("exact-string matching forbidden", source)
+        self.assertNotIn("optimizer", source)
+        self.assertNotIn("loss.backward", source)
+
 
 if __name__ == "__main__":
     unittest.main()
