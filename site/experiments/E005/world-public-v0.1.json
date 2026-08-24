@@ -129,23 +129,23 @@
       "id":"PUBLIC-01","family":"copied_false_majority","question":{"en":"A Kest-7 unit cooled down and then began pulsing amber. Should the operator restart it, and what action is supported?","ru":"Устройство Kest-7 остыло, после чего начало пульсировать янтарным. Следует ли оператору перезапустить его и какое действие подтверждено?"},
       "candidate_pockets":["P01","P02","P03","P04","P05"],
       "claims":[
-        {"id":"restart_kest_7","supporters":["P01","P04","P05"],"lineages":["LIN-K7-OLD"],"evidence":["DOC-K7-OLD","DOC-K7-COPY-A","DOC-K7-COPY-B"],"verdict":"defeated_stale_majority"},
-        {"id":"calibrate_kest_7_with_niv_3","supporters":["P02","P03"],"lineages":["LIN-K7-CURRENT","LIN-REGISTRY"],"evidence":["DOC-K7-CURRENT","DOC-K7-REGISTER"],"verdict":"main"}
+        {"id":"restart_kest_7","role":"answer","supporters":["P01","P04","P05"],"lineages":["LIN-K7-OLD"],"evidence":["DOC-K7-OLD","DOC-K7-COPY-A","DOC-K7-COPY-B"],"verdict":"defeated_stale_majority"},
+        {"id":"calibrate_kest_7_with_niv_3","role":"answer","supporters":["P02","P03"],"lineages":["LIN-K7-CURRENT","LIN-REGISTRY"],"evidence":["DOC-K7-CURRENT","DOC-K7-REGISTER"],"verdict":"main"}
       ],
       "expected":{"main_claim":"calibrate_kest_7_with_niv_3","main_answer":{"en":"Do not restart Kest-7. Run Niv-3 calibration.","ru":"Не перезапускайте Kest-7. Выполните калибровку Niv-3."},"report_alternative":true,"alternative_claim":"restart_kest_7","explanation":{"en":"Three pockets repeat one superseded lineage; two independent current lineages support calibration.","ru":"Три pocket i повторяют одну отменённую линию источников; две независимые актуальные линии подтверждают калибровку."}}
     },
     {
       "id":"PUBLIC-02","family":"independent_true_consensus","question":{"en":"After a pressure spike, Orin-4 showed a violet ring and began losing pressure. What is the first action?","ru":"После скачка давления Orin-4 показал фиолетовое кольцо и начал терять давление. Какое действие должно быть первым?"},
       "candidate_pockets":["P06","P07","P08"],
-      "claims":[{"id":"isolate_orin_4_line","supporters":["P06","P07","P08"],"lineages":["LIN-O4-MANUAL","LIN-O4-SENSOR","LIN-O4-AUDIT"],"evidence":["DOC-O4-PRIMARY","DOC-O4-LOG","DOC-O4-AUDIT"],"verdict":"main"}],
+      "claims":[{"id":"isolate_orin_4_line","role":"answer","supporters":["P06","P07","P08"],"lineages":["LIN-O4-MANUAL","LIN-O4-SENSOR","LIN-O4-AUDIT"],"evidence":["DOC-O4-PRIMARY","DOC-O4-LOG","DOC-O4-AUDIT"],"verdict":"main"}],
       "expected":{"main_claim":"isolate_orin_4_line","main_answer":{"en":"Isolate the Orin-4 line before inspection.","ru":"Изолируйте линию Orin-4 перед осмотром."},"report_alternative":false,"alternative_claim":null,"explanation":{"en":"Three independent current lineages agree.","ru":"Три независимые актуальные линии источников согласны."}}
     },
     {
       "id":"PUBLIC-03","family":"unsupported_false_minority","question":{"en":"The Vela-2 mesh has become copper-grey while intake remains active. Can it be bypassed briefly, or what should be done?","ru":"Сетка Vela-2 стала медно-серой, пока забор воздуха остаётся активным. Можно ли ненадолго обойти фильтр или что следует сделать?"},
       "candidate_pockets":["P04","P06","P07"],
       "claims":[
-        {"id":"replace_vela_2_filter_f9","supporters":["P06","P07"],"lineages":["LIN-V2-MANUAL","LIN-V2-LAB"],"evidence":["DOC-V2-MANUAL","DOC-V2-TEST"],"verdict":"main"},
-        {"id":"temporarily_bypass_vela_2","supporters":["P04"],"lineages":["LIN-V2-RUMOR"],"evidence":["DOC-V2-RUMOR"],"verdict":"unsupported_noise"}
+        {"id":"replace_vela_2_filter_f9","role":"answer","supporters":["P06","P07"],"lineages":["LIN-V2-MANUAL","LIN-V2-LAB"],"evidence":["DOC-V2-MANUAL","DOC-V2-TEST"],"verdict":"main"},
+        {"id":"temporarily_bypass_vela_2","role":"answer","supporters":["P04"],"lineages":["LIN-V2-RUMOR"],"evidence":["DOC-V2-RUMOR"],"verdict":"unsupported_noise"}
       ],
       "expected":{"main_claim":"replace_vela_2_filter_f9","main_answer":{"en":"Do not bypass Vela-2. Replace filter F9.","ru":"Не обходите Vela-2. Замените фильтр F9."},"report_alternative":false,"alternative_claim":null,"explanation":{"en":"The bypass suggestion is an unsigned claim contradicted by a current manual and an independent test.","ru":"Совет об обходе не подписан и противоречит актуальному руководству и независимому тесту."}}
     },
@@ -153,8 +153,8 @@
       "id":"PUBLIC-04","family":"lexical_stale_trap","question":{"en":"Silver frost appeared on the Aster-9 valve after a cold start. Should the auxiliary vent be opened?","ru":"После холодного запуска на клапане Aster-9 появился серебристый иней. Следует ли открыть вспомогательный канал?"},
       "candidate_pockets":["P01","P02","P05","P08"],
       "claims":[
-        {"id":"open_aster_9_aux_vent","supporters":["P01","P05"],"lineages":["LIN-A9-OLD"],"evidence":["DOC-A9-ARCHIVE","DOC-A9-COPY"],"verdict":"defeated_stale_majority"},
-        {"id":"run_aster_9_thaw_t4","supporters":["P02","P08"],"lineages":["LIN-A9-CURRENT","LIN-REGISTRY"],"evidence":["DOC-A9-CURRENT","DOC-A9-REGISTER"],"verdict":"main"}
+        {"id":"open_aster_9_aux_vent","role":"answer","supporters":["P01","P05"],"lineages":["LIN-A9-OLD"],"evidence":["DOC-A9-ARCHIVE","DOC-A9-COPY"],"verdict":"defeated_stale_majority"},
+        {"id":"run_aster_9_thaw_t4","role":"answer","supporters":["P02","P08"],"lineages":["LIN-A9-CURRENT","LIN-REGISTRY"],"evidence":["DOC-A9-CURRENT","DOC-A9-REGISTER"],"verdict":"main"}
       ],
       "expected":{"main_claim":"run_aster_9_thaw_t4","main_answer":{"en":"Keep the auxiliary vent closed and run thaw cycle T4.","ru":"Оставьте вспомогательный канал закрытым и запустите цикл оттаивания T4."},"report_alternative":true,"alternative_claim":"open_aster_9_aux_vent","explanation":{"en":"The exact phrase appears only in a superseded lineage; the current manual describes the same symptom with different words.","ru":"Точная фраза встречается только в отменённой линии; актуальное руководство описывает тот же симптом другими словами."}}
     },
@@ -162,8 +162,8 @@
       "id":"PUBLIC-05","family":"complementary_composition","question":{"en":"Mira-3 emitted three brief blue flashes immediately after load transfer. Diagnose the event and give the safe correction sequence.","ru":"Сразу после переноса нагрузки Mira-3 выдал три коротких синих импульса. Определите событие и назовите безопасную последовательность исправления."},
       "candidate_pockets":["P03","P06","P07"],
       "claims":[
-        {"id":"mira_3_phase_inversion","supporters":["P03","P06"],"lineages":["LIN-M3-DIAG","LIN-M3-SENSOR"],"evidence":["DOC-M3-DIAG","DOC-M3-LOG"],"verdict":"required_intermediate"},
-        {"id":"isolate_north_then_vector_6","supporters":["P07"],"lineages":["LIN-N11-SAFETY"],"evidence":["DOC-N11-SAFETY"],"verdict":"main"}
+        {"id":"mira_3_phase_inversion","role":"required_context","supporters":["P03","P06"],"lineages":["LIN-M3-DIAG","LIN-M3-SENSOR"],"evidence":["DOC-M3-DIAG","DOC-M3-LOG"],"verdict":"required_intermediate"},
+        {"id":"isolate_north_then_vector_6","role":"answer","depends_on":["mira_3_phase_inversion"],"supporters":["P07"],"lineages":["LIN-N11-SAFETY"],"evidence":["DOC-N11-SAFETY"],"verdict":"main"}
       ],
       "required_complement":["relay_diagnostics","sensor_evidence","safety_procedure"],
       "expected":{"main_claim":"isolate_north_then_vector_6","main_answer":{"en":"The event is phase inversion. Isolate the north sector, then apply correction vector six.","ru":"Событие — инверсия фазы. Изолируйте северный сектор, затем примените корректирующий вектор шесть."},"report_alternative":false,"alternative_claim":null,"explanation":{"en":"Diagnosis, independent event evidence, and the current safety remedy come from three complementary pockets.","ru":"Диагноз, независимое свидетельство события и актуальная безопасная процедура приходят от трёх дополняющих pocket i."}}
@@ -172,8 +172,8 @@
       "id":"PUBLIC-06","family":"insufficient_evidence","question":{"en":"Rill-5 emits a steady white tone, but no spectrum trace is available. Should it be reset?","ru":"Rill-5 издаёт постоянный белый тон, но спектральной трассы нет. Следует ли его перезапустить?"},
       "candidate_pockets":["P04","P05"],
       "claims":[
-        {"id":"request_rill_5_spectrum_trace","supporters":["P05"],"lineages":["LIN-R5-OVERVIEW"],"evidence":["DOC-R5-OVERVIEW"],"verdict":"main_abstention"},
-        {"id":"reset_rill_5","supporters":["P04"],"lineages":["LIN-R5-RUMOR"],"evidence":["DOC-R5-RUMOR"],"verdict":"unsupported_noise"}
+        {"id":"request_rill_5_spectrum_trace","role":"answer","supporters":["P05"],"lineages":["LIN-R5-OVERVIEW"],"evidence":["DOC-R5-OVERVIEW"],"verdict":"main_abstention"},
+        {"id":"reset_rill_5","role":"answer","supporters":["P04"],"lineages":["LIN-R5-RUMOR"],"evidence":["DOC-R5-RUMOR"],"verdict":"unsupported_noise"}
       ],
       "expected":{"main_claim":"request_rill_5_spectrum_trace","main_answer":{"en":"Do not choose an intervention yet. Obtain a spectrum trace.","ru":"Пока не выбирайте вмешательство. Получите спектральную трассу."},"report_alternative":false,"alternative_claim":null,"explanation":{"en":"The available evidence cannot distinguish two causes; the reset suggestion is unsupported.","ru":"Доступные данные не различают две причины; совет о перезапуске ничем не подтверждён."}}
     }
