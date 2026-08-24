@@ -1,0 +1,200 @@
+# E005 protocol v0.1 — Signal in the Swarm
+
+Status: **FROZEN BEFORE PUBLIC DEVELOPMENT DATA**  
+Parent: E004  
+Claim class: synthetic development until a separately committed locked run
+
+## Question
+
+Can a growing swarm find the right combination of understanding and evidence,
+preserve a well-supported minority, and avoid treating dependent copies as
+independent consensus?
+
+Russian:
+
+> Может ли растущий swarm находить правильное сочетание понимания и
+> доказательств, сохранять обоснованное мнение меньшинства и не принимать
+> множество зависимых копий за независимый консенсус?
+
+## Separation of responsibilities
+
+- The frozen base provides language and general reasoning.
+- A personal DoRA adapter learns a stable skill: interpreting a domain,
+  reformulating a search, comparing versions, evaluating sources, or applying a
+  procedure. It must not see locked facts or locked answers.
+- Local RAG stores exact, mutable, attributable, and deletable records.
+- The router predicts the marginal usefulness of candidate pocket i.
+- The merger builds a claim-and-evidence graph. It does not count raw votes as
+  independent evidence.
+
+## Public natural-language world
+
+The public development world uses fictional devices, places, and protocols that
+could not have appeared in the base model's training data. Questions paraphrase
+the records and include:
+
+1. a copied false majority versus a current primary-source minority;
+2. a correct consensus supported by independent lineages;
+3. an attractive but unsupported minority that must not receive false balance;
+4. a stale exact lexical match versus a current semantic match;
+5. a question requiring complementary skills and evidence from multiple pocket i;
+6. insufficient evidence, where the correct action is to abstain.
+
+A separate prior-conflict stress split may later contradict plausible base-model
+assumptions. It must never be merged into the neutral-world headline metric.
+
+## Pocket contract
+
+Each pocket i owns:
+
+- one capability card earned from held-out calibration tasks;
+- one local RAG shard;
+- a source-lineage graph for those records;
+- an optional personal DoRA adapter trained only on transferable procedures;
+- an append-only outcome history.
+
+Self-reported confidence or expertise is not accepted as evidence. The router
+may use calibrated performance, source availability, freshness, latency, and
+lineage diversity.
+
+## One-round network contract
+
+Candidate discovery uses a periodically updated safe capability index. It is not
+an inference round. The source chooses a bounded candidate set and sends the
+question to all selected pocket i once, in parallel. Each returns one capsule:
+
+```json
+{
+  "claim": "calibrate_with_niv_3",
+  "evidence_ids": ["DOC-017"],
+  "source_lineages": ["LINEAGE-MANUAL-K7-CURRENT"],
+  "source_dates": ["2142-04-18"],
+  "capability": "thermal relay diagnostics",
+  "confidence": 0.74,
+  "limitations": ["no maintenance history"]
+}
+```
+
+Raw private memory is never part of a capsule. All selected pockets answer in
+parallel; there is no multi-round model discussion.
+
+## Deterministic minority-report policy
+
+Before a learned merger is allowed, the harness constructs a claim graph and
+reports:
+
+- raw supporter count;
+- independent source-lineage count;
+- primary/current source count;
+- stale or withdrawn source count;
+- calibrated capability support;
+- contradictions and missing evidence.
+
+An alternative is shown only when it is material and has at least one credible
+independent evidence lineage that has not been defeated by a stronger current
+source. Random dissent is not promoted merely to appear balanced. If the
+minority has stronger evidence, it becomes the main answer and the numerical
+majority is described as dependent or stale.
+
+## Compared systems
+
+1. lexical nearest record;
+2. semantic retrieval only;
+3. raw majority vote;
+4. highest calibrated expertise only;
+5. evidence-aware router without personal DoRA;
+6. DoRA + local RAG + evidence-aware router + claim merger;
+7. oracle candidate set and oracle evidence graph.
+
+## Required ablations
+
+- remove personal DoRA;
+- remove local RAG;
+- hide lineage metadata;
+- duplicate one wrong lineage 20 times;
+- remove the credible minority;
+- remove one necessary complementary specialist;
+- replace the current source with its stale predecessor;
+- swap fictional entity names while preserving meaning.
+
+## Scaling curve
+
+Run the same committed task families with 8, 16, 32, 128, and 512 available
+pocket i. More pockets may add useful capabilities or correlated noise. Active
+compute and network bytes are recorded, but the scientific claim concerns the
+growth of total swarm resources rather than equal-compute superiority.
+
+## Metrics
+
+Primary:
+
+- final answer accuracy;
+- required-complement set recall;
+- credible-minority preservation recall;
+- false-minority report rate;
+- copied-majority resistance;
+- evidence precision and recall;
+- routing regret against the oracle.
+
+Secondary:
+
+- calibration error;
+- update and deletion response accuracy;
+- citation/claim entailment;
+- active pockets, bytes, latency, and source-lineage diversity;
+- marginal contribution when each selected pocket i is removed.
+
+## Development gates
+
+### Gate 0 — protocol
+
+Protocol, claim boundary, controls, and metrics are committed. **No training.**
+
+### Gate 1 — public world
+
+All public records, paraphrased questions, source lineages, expected claim maps,
+and copied-majority traps are visible on joinmultiplayer.ai. The owner reviews
+them by eye. **No training.**
+
+### Gate 2 — base-only preflight
+
+The frozen base answers without RAG or adapters. Any neutral-world item it can
+answer reliably is excluded before later data are locked.
+
+### Gate 3 — deterministic harness
+
+Lexical, semantic, majority, evidence-graph, and oracle controls run without
+personal weight updates. Failure artifacts remain public.
+
+### Gate 4 — procedure learning
+
+Surrogate pocket i train personal DoRA skills on examples that are disjoint from
+evaluation facts, entities, source texts, and answers. The site shows before and
+after on held-out procedure tasks.
+
+### Gate 5 — learned routing and merging
+
+Router and merger train only on surrogate pockets. Frozen response-capsule and
+minority-report contracts remain enforced by the harness.
+
+### Gate 6 — locked final swarm
+
+Generate unseen final pockets and tasks after publishing a commitment. Run the
+8 → 512 scaling curve once. Do not tune on locked failures.
+
+### Gate 7 — decision
+
+Publish all systems, ablations, failures, costs, and examples. Advance only if
+quality improves with useful swarm growth while correlated noise does not gain
+false epistemic weight.
+
+## Stop conditions
+
+Stop and preserve the failure if:
+
+- training facts overlap evaluation facts or answers;
+- a claimed independent lineage is actually copied;
+- the public development set is presented as locked evidence;
+- an alternative opinion is generated without attributable evidence;
+- private source text appears in a public capsule;
+- model training begins before the owner approves Gate 1.
