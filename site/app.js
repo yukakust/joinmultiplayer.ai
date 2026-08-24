@@ -2277,6 +2277,8 @@ const e004Copy = {
     openEvidence: "OPEN MICROSCOPE JSON",
     answersHere: "QUESTIONS AND ANSWERS ARE HERE →",
     answersHereCopy: "A separate page with all 12 questions, every participating pocket i, and every recorded architecture answer.",
+    nextExperiment: "NEXT · E005 SIGNAL IN THE SWARM →",
+    nextExperimentCopy: "Inspect the new natural-language evidence world before any model training begins.",
     answersPageTitle: "All E004 questions and answers",
     answersPageIntro: "Nothing else: 12 public-development questions, what every pocket i received, and the recorded outputs of all four connection architectures.",
     backToExperiment: "BACK TO E004",
@@ -2348,6 +2350,8 @@ const e004Copy = {
     openEvidence: "ОТКРЫТЬ JSON МИКРОСКОПА",
     answersHere: "ВОПРОСЫ И ОТВЕТЫ ТУТ →",
     answersHereCopy: "Отдельная страница: все 12 вопросов, каждый участвующий pocket i и все сохранённые ответы архитектур.",
+    nextExperiment: "ДАЛЬШЕ · E005 СИГНАЛ ВНУТРИ SWARM →",
+    nextExperimentCopy: "Проверьте новый естественно-языковой мир доказательств до начала обучения моделей.",
     answersPageTitle: "Все вопросы и ответы E004",
     answersPageIntro: "Ничего лишнего: 12 открытых development-вопросов, вход каждого pocket i и сохранённые ответы всех четырёх способов соединения.",
     backToExperiment: "ВЕРНУТЬСЯ К E004",
@@ -2381,6 +2385,145 @@ function e4(key) {
 
 function e4Localized(value) {
   return value?.[language] || value?.en || "";
+}
+
+const e005Copy = {
+  en: {
+    step: "NEXT EXPERIMENT · E005",
+    title: "Signal in the Swarm",
+    question: "Can a growing swarm find the right combination of understanding and evidence, preserve a well-supported minority, and avoid treating dependent copies as independent consensus?",
+    intro: "A public natural-language world for inspecting the next test before any model is trained.",
+    status: "GATE 1 · OWNER REVIEW · NO TRAINING HAS STARTED",
+    boundary: "This page shows a scripted public fixture and a deterministic accounting harness. It is not evidence that Qwen understands, retrieves, routes, or generalizes.",
+    majority: "RAW MAJORITY",
+    evidence: "EVIDENCE GRAPH",
+    minority: "MINORITY POLICY",
+    tasks: "SIX QUESTIONS TO INSPECT",
+    pockets: "EIGHT SCRIPTED POCKET i",
+    pocketWarning: "Capability scores are test fixtures, not measured abilities.",
+    supporters: "pocket supporters",
+    lineages: "independent lineages",
+    score: "evidence score",
+    main: "MAIN ANSWER",
+    alternative: "ALTERNATIVE TO REPORT",
+    noAlternative: "NO ALTERNATIVE REPORTED",
+    rawChoice: "majority chooses",
+    harnessChoice: "harness chooses",
+    documents: "SOURCE DOCUMENTS",
+    current: "current",
+    source: "source",
+    owner: "held by",
+    review: "CHECKPOINT FOR YUKA",
+    reviewCopy: "Read the six questions and their documents. If this world tests the right failure modes, approve Gate 1. Only then may base-only preflight and model work begin.",
+    jsonWorld: "OPEN THE COMPLETE WORLD JSON",
+    jsonHarness: "OPEN THE HARNESS RESULT",
+    back: "BACK TO E004"
+  },
+  ru: {
+    step: "СЛЕДУЮЩИЙ ЭКСПЕРИМЕНТ · E005",
+    title: "Сигнал внутри swarm",
+    question: "Может ли растущий swarm находить правильное сочетание понимания и доказательств, сохранять обоснованное мнение меньшинства и не принимать множество зависимых копий за независимый консенсус?",
+    intro: "Открытый естественно-языковой мир, чтобы глазами проверить следующий тест до обучения любой модели.",
+    status: "GATE 1 · ПРОВЕРКА ЮКОЙ · ОБУЧЕНИЕ НЕ НАЧИНАЛОСЬ",
+    boundary: "На странице показаны сценарная открытая заготовка и детерминированный harness учёта. Это не доказательство того, что Qwen понимает, ищет, маршрутизирует или обобщает.",
+    majority: "ОБЫЧНОЕ БОЛЬШИНСТВО",
+    evidence: "КАРТА ДОКАЗАТЕЛЬСТВ",
+    minority: "ПОЛИТИКА МЕНЬШИНСТВА",
+    tasks: "ШЕСТЬ ВОПРОСОВ ДЛЯ ПРОВЕРКИ",
+    pockets: "ВОСЕМЬ СЦЕНАРНЫХ POCKET I",
+    pocketWarning: "Оценки способностей — параметры сценария, а не измеренные навыки.",
+    supporters: "поддерживающих pocket i",
+    lineages: "независимых линий",
+    score: "вес доказательств",
+    main: "ОСНОВНОЙ ОТВЕТ",
+    alternative: "АЛЬТЕРНАТИВА, КОТОРУЮ ПОКАЖЕМ",
+    noAlternative: "АЛЬТЕРНАТИВА НЕ ПОКАЗЫВАЕТСЯ",
+    rawChoice: "большинство выбирает",
+    harnessChoice: "harness выбирает",
+    documents: "ИСХОДНЫЕ ДОКУМЕНТЫ",
+    current: "статус",
+    source: "тип источника",
+    owner: "хранится у",
+    review: "КОНТРОЛЬНАЯ ТОЧКА ДЛЯ ЮКИ",
+    reviewCopy: "Прочитайте шесть вопросов и документы под ними. Если мир проверяет нужные ловушки, подтвердите Gate 1. Только после этого можно запускать base-only preflight и работу с моделью.",
+    jsonWorld: "ОТКРЫТЬ ВЕСЬ МИР В JSON",
+    jsonHarness: "ОТКРЫТЬ РЕЗУЛЬТАТ HARNESS",
+    back: "ВЕРНУТЬСЯ К E004"
+  }
+};
+
+function e5(key) {
+  return (e005Copy[language] || e005Copy.en)[key] || key;
+}
+
+function e005Shell() {
+  return `<section class="flow-shell e005-page">
+    <div class="flow-step">${e5("step")}</div>
+    <h1>${e5("title")}</h1>
+    <p class="contribution-intro">${e5("intro")}</p>
+    <div class="experiment-loading">${c("loading")}</div>
+  </section>`;
+}
+
+async function loadE005() {
+  const target = document.querySelector(".e005-page");
+  if (!target) return;
+  try {
+    const [worldResponse, harnessResponse] = await Promise.all([
+      fetch("/experiments/E005/world-public-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/harness-public-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!worldResponse.ok || !harnessResponse.ok) throw new Error("E005 checkpoint unavailable");
+    const world = await worldResponse.json();
+    const harness = await harnessResponse.json();
+    const documents = new Map(world.documents.map(document => [document.id, document]));
+    const rows = new Map(harness.rows.map(row => [row.task_id, row]));
+    const percent = value => `${(Number(value) * 100).toFixed(1)}%`;
+    const documentMarkup = evidenceId => {
+      const document = documents.get(evidenceId) || {};
+      return `<article class="e005-document ${["superseded", "stale_copy", "unverified"].includes(document.status) ? "is-weak" : ""}">
+        <span>${escapeHTML(document.id)} · ${e5("owner")} ${escapeHTML(document.owner)}</span>
+        <p>${escapeHTML(e4Localized(document.content))}</p>
+        <small>${e5("source")} · ${escapeHTML(document.source_type)}<br>${e5("current")} · ${escapeHTML(document.status)}<br>lineage · ${escapeHTML(document.lineage)}</small>
+      </article>`;
+    };
+    const taskMarkup = (task, index) => {
+      const row = rows.get(task.id) || {};
+      const stats = new Map((row.claims || []).map(claim => [claim.claim_id, claim]));
+      const evidenceIds = [...new Set(task.claims.flatMap(claim => claim.evidence))];
+      const mainStats = stats.get(row.selected_main_claim) || {};
+      return `<details class="e005-task" ${index === 0 ? "open" : ""}>
+        <summary><b>${escapeHTML(task.id)}</b><span>${escapeHTML(e4Localized(task.question))}</span></summary>
+        <div class="e005-task-body">
+          <div class="e005-choice-line"><span>${e5("rawChoice")}</span><code>${escapeHTML(row.raw_majority_claim)}</code><span>${e5("harnessChoice")}</span><code>${escapeHTML(row.selected_main_claim)}</code></div>
+          <div class="e005-claim-grid">${task.claims.map(claim => {
+            const claimStats = stats.get(claim.id) || {};
+            const selected = claim.id === row.selected_main_claim;
+            return `<article class="${selected ? "is-main" : ""}"><span>${escapeHTML(claim.id)}</span><strong>${claimStats.raw_supporters} ${e5("supporters")}</strong><strong>${claimStats.independent_lineages} ${e5("lineages")}</strong><small>${e5("score")} · ${escapeHTML(claimStats.evidence_score)}</small></article>`;
+          }).join("")}</div>
+          <div class="e005-answer"><span>${e5("main")}</span><strong>${escapeHTML(e4Localized(task.expected.main_answer))}</strong><p>${escapeHTML(e4Localized(task.expected.explanation))}</p><small>${mainStats.raw_supporters} ${e5("supporters")} · ${mainStats.independent_lineages} ${e5("lineages")}</small></div>
+          <div class="e005-alternative ${task.expected.report_alternative ? "is-reported" : ""}"><span>${task.expected.report_alternative ? e5("alternative") : e5("noAlternative")}</span>${task.expected.report_alternative ? `<code>${escapeHTML(task.expected.alternative_claim)}</code>` : ""}</div>
+          <div class="e004-microscope-label">${e5("documents")}</div>
+          <div class="e005-documents">${evidenceIds.map(documentMarkup).join("")}</div>
+        </div>
+      </details>`;
+    };
+    target.querySelector(".experiment-loading").outerHTML = `
+      <div class="experiment-status">${e5("status")}</div>
+      <section class="hypothesis-card"><span>E005 · ${e4("question")}</span><p>${e5("question")}</p></section>
+      <p class="control-warning">${e5("boundary")}</p>
+      <div class="e005-metrics">
+        <article><span>${e5("majority")}</span><strong>${percent(harness.raw_majority_accuracy)}</strong><small>4 / 6</small></article>
+        <article><span>${e5("evidence")}</span><strong>${percent(harness.evidence_graph_accuracy)}</strong><small>6 / 6 · scripted claims</small></article>
+        <article><span>${e5("minority")}</span><strong>${percent(harness.minority_policy_accuracy)}</strong><small>6 / 6 · scripted claims</small></article>
+      </div>
+      <section class="e005-pocket-section"><div class="flow-step">${e5("pockets")}</div><p class="control-warning">${e5("pocketWarning")}</p><div class="e005-pockets">${world.pockets.map(pocket => `<article><i>i</i><strong>${escapeHTML(pocket.id)} · ${escapeHTML(pocket.name)}</strong><span>${escapeHTML(e4Localized(pocket.skill))}</span><small>fixture · ${percent(pocket.calibration)}</small></article>`).join("")}</div></section>
+      <section class="e005-task-section"><div class="flow-step">${e5("tasks")}</div><div class="e005-tasks">${world.tasks.map(taskMarkup).join("")}</div></section>
+      <section class="e004-decision"><span>${e5("review")}</span><p>${e5("reviewCopy")}</p></section>
+      <div class="actions"><a class="button secondary" href="/experiment/?id=E004">${e5("back")}</a><a class="quiet-link" href="/experiments/E005/world-public-v0.1.json">${e5("jsonWorld")} ↗</a><a class="quiet-link" href="/experiments/E005/harness-public-v0.1.json">${e5("jsonHarness")} ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
 }
 
 function experimentShell(experimentId = "E004") {
@@ -2559,6 +2702,7 @@ async function loadExperiment() {
           <p>${escapeHTML(experiment.question?.[language] || "")}</p>
         </section>
         <a class="e004-answers-banner" href="/experiment/answers/"><strong>${e4("answersHere")}</strong><span>${e4("answersHereCopy")}</span></a>
+        <a class="e004-answers-banner" href="/experiment/e005/"><strong>${e4("nextExperiment")}</strong><span>${e4("nextExperimentCopy")}</span></a>
         <div class="actions experiment-actions"><a class="button" href="/experiment/answers/">${e4("answersHere")}</a><a class="button secondary" href="#architectures">${e4("architectures")}</a><a class="button secondary" href="#local-learning">${e4("localLearning")}</a><a class="button secondary" href="#data-world">${e4("dataWorld")}</a></div>
         <section class="e004-section" id="architectures">
           <div class="flow-step">${e4("architectures")}</div>
@@ -3156,6 +3300,10 @@ function render() {
     document.title = `${e4("answersPageTitle")} — i`;
     app.innerHTML = withLanguage(e004AnswersShell());
     loadE004Answers();
+  } else if (path === "experiment/e005") {
+    document.title = `${e5("title")} — i`;
+    app.innerHTML = withLanguage(e005Shell());
+    loadE005();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
