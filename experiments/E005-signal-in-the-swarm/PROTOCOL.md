@@ -264,6 +264,11 @@ The hidden-state merger smoke loaded both saved tracks, froze them, and ran two
 steps on four merger lessons. Loss moved 2.865→1.280; only the 395,650 merger
 parameters changed. The locked exam remained untouched.
 
+The full merger checkpoint ran two passes over all 192 merger lessons. Mean
+loss moved 1.138→0.642. Both personal tracks remained unchanged and only the
+395,650 merger parameters moved. This modest training result was published
+before opening the locked exam.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

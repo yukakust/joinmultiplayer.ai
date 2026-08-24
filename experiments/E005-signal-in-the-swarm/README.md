@@ -281,3 +281,7 @@ move while the second learned. This does not yet test transfer or composition.
 The merger development smoke then loaded and froze both saved tracks. Across
 two steps on four lessons its loss moved 2.865→1.280. Only the 395,650 bridge
 parameters changed; the locked exam remained untouched.
+
+The full merger checkpoint completed 96 steps over 192 lessons. Mean loss moved
+1.138→0.642. Both personal tracks remained unchanged. This modest training
+curve was published before opening the locked exam.
