@@ -3582,6 +3582,14 @@ blockquote {
   width: min(100%, 72rem);
 }
 
+.flow-shell.e005-gate3-page {
+  margin-inline: 0;
+  max-width: none;
+  padding-inline: clamp(1rem, 2.2vw, 2.5rem);
+  padding-top: clamp(6rem, 8vw, 8rem);
+  width: 100%;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
