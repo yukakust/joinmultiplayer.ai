@@ -2820,6 +2820,10 @@ function e005Gate5A3ResultsShell() {
   return `<section class="flow-shell e005-gate5a3-results-page"><div class="flow-step">E005 · GATE 5A.3 · ${localized({ en: "RESULT", ru: "РЕЗУЛЬТАТ" })}</div><h1>${localized({ en: "Clear words helped. Not enough yet.", ru: "Понятные слова помогли. Но пока мало." })}</h1><p class="contribution-intro">${localized({ en: "Read every unedited answer and compare Base with instruction Qwen.", ru: "Прочитайте каждый ответ без редактуры и сравните Base с instruction-Qwen." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate5BShell() {
+  return `<section class="flow-shell e005-gate5b-page"><div class="flow-step">E005 · GATE 5B · ${localized({ en: "LOCKED BEFORE TRAINING", ru: "ЗАМОРОЖЕНО ДО ОБУЧЕНИЯ" })}</div><h1>${localized({ en: "Two real neural tracks.", ru: "Два настоящих нейронных трека." })}</h1><p class="contribution-intro">${localized({ en: "No JSON passes between them. They combine hidden additions inside one Qwen.", ru: "Между ними нет JSON. Они объединяют скрытые добавки внутри одной Qwen." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3582,6 +3586,30 @@ async function loadE005Gate5A3Results() {
     };
     target.addEventListener("click", event => { if (event.target.closest("[data-gate5a3-previous]")) { index -= 1; render(); } else if (event.target.closest("[data-gate5a3-next]")) { index += 1; render(); } });
     render();
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate5B() {
+  const target = document.querySelector(".e005-gate5b-page");
+  if (!target) return;
+  try {
+    const [designResponse, curriculumResponse, examResponse] = await Promise.all([
+      fetch("/experiments/E005/gate-5b-design-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5b-curriculum-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5b-locked-test-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!designResponse.ok || !curriculumResponse.ok || !examResponse.ok) throw new Error("E005 Gate 5B checkpoint unavailable");
+    const design = await designResponse.json();
+    const curriculum = await curriculumResponse.json();
+    const exam = await examResponse.json();
+    const pick = value => escapeHTML(value?.[language] || value?.en || "");
+    const causeExample = curriculum.track_lessons.find(row => row.role === "cause" && row.language === language);
+    const safetyExample = curriculum.track_lessons.find(row => row.role === "safety" && row.language === language);
+    const mergeExample = curriculum.merger_lessons.find(row => row.language === language);
+    const examRows = exam.questions.filter(row => row.language === language);
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "NO WEIGHTS CHANGED · EXAM NEVER RUN", ru: "ВЕСА НЕ МЕНЯЛИСЬ · ЭКЗАМЕН НЕ ЗАПУСКАЛСЯ" })}</strong><p>${pick(design.hypothesis)}</p></section><section class="e005-neural-track-diagram"><div class="track-stem"><span>QWEN · 0—5</span><strong>${localized({ en: "SHARED BEGINNING", ru: "ОБЩЕЕ НАЧАЛО" })}</strong></div><div class="track-branches"><article><span>CAUSE-I · 6—21</span><strong>DoRA → δcause</strong></article><article><span>SAFETY-I · 6—21</span><strong>DoRA → δsafety</strong></article></div><div class="track-merge"><span>z₀ + MERGE(δcause, δsafety)</span></div><div class="track-tail"><span>QWEN · 22—27</span><strong>${localized({ en: "SHARED HUMAN ANSWER", ru: "ОБЩИЙ ОТВЕТ ЧЕЛОВЕКУ" })}</strong></div></section><div class="e005-gate4-training-cards"><article><span>CAUSE-I · ${localized({ en: "LESSON", ru: "УРОК" })}</span><h2>${escapeHTML(causeExample.prompt)}</h2><p>${escapeHTML(causeExample.target)}</p></article><article><span>SAFETY-I · ${localized({ en: "LESSON", ru: "УРОК" })}</span><h2>${escapeHTML(safetyExample.prompt)}</h2><p>${escapeHTML(safetyExample.target)}</p></article><article><span>MERGER · ${localized({ en: "SEPARATE LESSON", ru: "ОТДЕЛЬНЫЙ УРОК" })}</span><h2>${escapeHTML(mergeExample.prompt)}</h2><p>${escapeHTML(mergeExample.target)}</p></article></div><section class="e005-gate4-result-verdict"><span>${localized({ en: "PASS RULE", ru: "ПРАВИЛО ПОБЕДЫ" })}</span><h2>${localized({ en: "Correct neural pair: at least 26/32. Every single or wrong pair: at most 10/32.", ru: "Правильная нейронная пара: минимум 26/32. Каждый одиночный или неправильный вариант: максимум 10/32." })}</h2><p>${localized({ en: "The pair must beat the best single track by at least 12 and stay within two answers of the text-capsule baseline.", ru: "Пара должна обогнать лучший одиночный трек минимум на 12 ответов и отстать от текстовых капсул не больше чем на два ответа." })}</p></section><section class="e005-task-section"><div class="flow-step">${localized({ en: "LOCKED EXAM · ALL 32 QUESTIONS", ru: "ЗАМОРОЖЕННЫЙ ЭКЗАМЕН · ВСЕ 32 ВОПРОСА" })}</div><div class="e005-tasks">${examRows.map((row, index) => `<details class="e005-task" ${index === 0 ? "open" : ""}><summary><b>${escapeHTML(row.id)}</b><span>${escapeHTML(row.question)}</span></summary><div class="e005-task-body"><div class="e005-claim-grid"><article><span>CAUSE-I</span><strong>${escapeHTML(row.expected_cause)}</strong></article><article><span>SAFETY-I</span><strong>${escapeHTML(row.expected_safety)}</strong></article></div><div class="e005-answer"><span>${localized({ en: "COMPLETE ANSWER", ru: "ПОЛНЫЙ ОТВЕТ" })}</span><strong>${escapeHTML(row.expected_answer)}</strong></div></div></details>`).join("")}</div></section><p class="control-warning">${pick(design.claim_boundary)}</p><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5a/semantic/results/">${localized({ en: "PREVIOUS TEXT TEST", ru: "ПРЕДЫДУЩИЙ ТЕКСТОВЫЙ ТЕСТ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5b-design-v0.1.json">DESIGN JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-5b-curriculum-v0.1.json">ALL LESSONS JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-5b-locked-test-v0.1.json">LOCKED EXAM JSON ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -4500,6 +4528,10 @@ function render() {
     document.title = `Gate 5A.3 results — i`;
     app.innerHTML = withLanguage(e005Gate5A3ResultsShell());
     loadE005Gate5A3Results();
+  } else if (path === "experiment/e005/gate-5b") {
+    document.title = `Gate 5B — i`;
+    app.innerHTML = withLanguage(e005Gate5BShell());
+    loadE005Gate5B();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

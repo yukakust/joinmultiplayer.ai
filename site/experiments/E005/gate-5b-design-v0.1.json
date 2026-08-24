@@ -1,0 +1,63 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "locked_parallel_neural_track_design",
+  "status": "locked_not_run",
+  "hypothesis": {
+    "en": "Can two separately trained neural tracks combine hidden contributions and solve a task neither track solves alone?",
+    "ru": "Смогут ли два отдельно обученных нейронных трека объединить скрытые добавки и решить задачу, которую ни один трек не решает в одиночку?"
+  },
+  "architecture": {
+    "shared_model": "Qwen/Qwen3-0.6B",
+    "total_layers": 28,
+    "shared_stem_layers": [
+      0,
+      5
+    ],
+    "personal_track_layers": [
+      6,
+      21
+    ],
+    "shared_tail_layers": [
+      22,
+      27
+    ],
+    "personal_update": "rank-8 DoRA only inside each personal track",
+    "equation": "z = z0 + Merge(clip(track_cause(h)-z0), clip(track_safety(h)-z0)); answer = shared_tail(z)",
+    "first_run_location": "one yukabox process; physical distribution is a later replication"
+  },
+  "training_order": [
+    "freeze shared stem, untouched base-middle path, shared tail, and LM head",
+    "train CAUSE-I DoRA only on cause lessons",
+    "train SAFETY-I DoRA only on safety lessons",
+    "freeze both tracks",
+    "train only the bounded merger on merger lessons",
+    "run the locked exam once"
+  ],
+  "conditions": [
+    "shared_qwen_alone",
+    "cause_track_alone",
+    "safety_track_alone",
+    "wrong_same_role_pair",
+    "semantic_text_capsules",
+    "correct_neural_pair"
+  ],
+  "pass_rule": {
+    "correct_neural_pair_at_least": 26,
+    "shared_qwen_alone_at_most": 10,
+    "each_single_track_at_most": 10,
+    "wrong_pair_at_most": 10,
+    "correct_pair_lead_over_best_single_at_least": 12,
+    "correct_pair_may_trail_text_capsules_by_at_most": 2,
+    "total_questions": 32
+  },
+  "curriculum_content_sha256": "49fccef34c99a51a5d96ac5985e7aea1c4c4c9d9a9ec7a505a4f0a8fb919086d",
+  "exam_content_sha256": "28fb6dfbb996cd9045fe0f9ac24a2a7477bcbbe8cea2673af27851c14ff0dfcb",
+  "training_performed": false,
+  "exam_run": false,
+  "claim_boundary": {
+    "en": "This is the first real hidden-state track test, but it runs on one computer. It does not yet prove network transport, many-user scaling, privacy, or Byzantine safety.",
+    "ru": "Это первый настоящий тест треков со скрытыми состояниями, но он идёт на одном компьютере. Он ещё не доказывает передачу по сети, рост до множества пользователей, приватность и защиту от злых узлов."
+  },
+  "content_sha256": "55090bc0640f9078c5f0325fc20385784545ffafa083133ad3d75d098e56f571"
+}

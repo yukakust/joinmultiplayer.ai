@@ -234,6 +234,14 @@ Qwen scored 11/12 in English and 6/12 in Russian; none of its main answers hit
 the 192-token limit. Question-only and either-capsule-missing controls scored
 0/24. The semantic codebook helped, but a 0.6B final merger remained unreliable.
 
+Gate 5B is frozen as the first real hidden-state track experiment. Qwen's 28
+layers are split into shared stem 0–5, personal middle tracks 6–21, and shared
+tail 22–27. Each personal track receives only rank-8 DoRA updates. The merger
+combines bounded `track_i(h) - z0` residuals; no text capsule crosses the track
+boundary. The first run is a one-computer simulation before physical-network
+replication. The curriculum contains 256 track lessons and 192 disjoint merger
+lessons; the locked bilingual exam contains 32 unseen devices and prompts.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

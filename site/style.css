@@ -4377,3 +4377,46 @@ blockquote {
   cursor: pointer;
   font: 700 0.9rem/1.2 var(--mono);
 }
+
+.e005-neural-track-diagram {
+  display: grid;
+  gap: 1px;
+  margin: clamp(2rem, 6vw, 5rem) 0;
+  text-align: center;
+}
+
+.e005-neural-track-diagram > div,
+.e005-neural-track-diagram article {
+  border: 1px solid var(--line);
+  padding: 1.2rem;
+}
+
+.e005-neural-track-diagram span,
+.e005-neural-track-diagram strong {
+  display: block;
+}
+
+.e005-neural-track-diagram span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  margin-bottom: 0.45rem;
+}
+
+.e005-neural-track-diagram .track-branches {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.e005-neural-track-diagram .track-branches article:first-child {
+  border-top: 4px solid #dc735f;
+}
+
+.e005-neural-track-diagram .track-branches article:last-child {
+  border-top: 4px solid #8ebc87;
+}
+
+.e005-neural-track-diagram .track-merge {
+  background: var(--ink);
+  color: var(--paper);
+}
