@@ -2529,7 +2529,20 @@ const e005Copy = {
     previousQuestion: "← PREVIOUS",
     nextQuestionSimple: "NEXT →",
     shownLanguage: "questions shown in this language",
-    openLimits: "WHY THIS IS NOT YET PROOF OF A SWARM"
+    openLimits: "WHY THIS IS NOT YET PROOF OF A SWARM",
+    transferFailed: "NOT YET — THE SKILL DID NOT TRANSFER RELIABLY",
+    transferFinding: "The familiar template gave 24/24. With genuinely different wording, the Archivist got 4/8 and the Safety Keeper 5/8.",
+    archivistTransfer: "Archivist on new wording",
+    safetyTransfer: "Safety Keeper on new wording",
+    baseArchivistTransfer: "clean Qwen · Archivist tasks",
+    baseSafetyTransfer: "clean Qwen · Safety tasks",
+    chooseStage: "CHOOSE WHAT TO INSPECT",
+    transferStage: "NEW · DIFFERENT WORDING",
+    templateStage: "PREVIOUS · FAMILIAR TEMPLATE",
+    partialAnswer: "partly right",
+    correctAnswer: "right",
+    wrongAnswer: "wrong",
+    whyReview: "WHY MORROW MARKED IT THIS WAY"
   },
   ru: {
     step: "СЛЕДУЮЩИЙ ЭКСПЕРИМЕНТ · E005",
@@ -2672,7 +2685,20 @@ const e005Copy = {
     previousQuestion: "← НАЗАД",
     nextQuestionSimple: "СЛЕДУЮЩИЙ →",
     shownLanguage: "вопросов показано на этом языке",
-    openLimits: "ПОЧЕМУ ЭТО ЕЩЁ НЕ ДОКАЗАТЕЛЬСТВО SWARM"
+    openLimits: "ПОЧЕМУ ЭТО ЕЩЁ НЕ ДОКАЗАТЕЛЬСТВО SWARM",
+    transferFailed: "ПОКА НЕТ — УМЕНИЕ ПЕРЕНОСИТСЯ НЕНАДЁЖНО",
+    transferFinding: "На знакомом шаблоне было 24/24. На действительно иначе написанных вопросах Архивист получил 4/8, а Хранитель — 5/8.",
+    archivistTransfer: "Архивист · новые формулировки",
+    safetyTransfer: "Хранитель · новые формулировки",
+    baseArchivistTransfer: "чистая Qwen · задачи Архивиста",
+    baseSafetyTransfer: "чистая Qwen · задачи Хранителя",
+    chooseStage: "ВЫБЕРИТЕ, ЧТО ПРОВЕРЯТЬ",
+    transferStage: "НОВЫЙ · ДРУГИЕ ФОРМУЛИРОВКИ",
+    templateStage: "ПРЕДЫДУЩИЙ · ЗНАКОМЫЙ ШАБЛОН",
+    partialAnswer: "частично верно",
+    correctAnswer: "верно",
+    wrongAnswer: "ошибка",
+    whyReview: "ПОЧЕМУ MORROW ПОСТАВИЛ ТАКУЮ ОЦЕНКУ"
   }
 };
 
@@ -3072,9 +3098,13 @@ async function loadE005Gate4Results() {
   const target = document.querySelector(".e005-gate4-results-page");
   if (!target) return;
   try {
-    const response = await fetch("/experiments/E005/gate-4-results-v0.1.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("E005 Gate 4 results unavailable");
-    const result = await response.json();
+    const [templateResponse, transferResponse] = await Promise.all([
+      fetch("/experiments/E005/gate-4-results-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-4-transfer-results-v0.1.json", { cache: "no-store" })
+    ]);
+    if (!templateResponse.ok || !transferResponse.ok) throw new Error("E005 Gate 4 results unavailable");
+    const template = await templateResponse.json();
+    const transfer = await transferResponse.json();
     const localized = value => escapeHTML(e4Localized(value));
     const skillName = skill => language === "ru"
       ? (skill === "archivist" ? "Архивист" : "Хранитель безопасности")
@@ -3087,45 +3117,72 @@ async function loadE005Gate4Results() {
       shuffled_lessons: e5("shuffledSimple")
     };
     target.querySelector(".experiment-loading").outerHTML = `
-      <section class="e005-gate4-result-verdict"><span>${e5("learnedSkill")}</span><h2>${e5("smallTestYes")}</h2><p>${e5("resultInOneLine")}</p></section>
+      <section class="e005-gate4-result-verdict is-failed"><span>GATE 4B · ${e5("learnedSkill")}</span><h2>${e5("transferFailed")}</h2><p>${e5("transferFinding")}</p></section>
       <div class="e005-gate4-result-metrics">
-        <article><strong>${result.totals.personal_dora_exact}/${result.totals.unique_questions}</strong><span>${e5("exactAnswers")}</span></article>
-        <article><strong>${result.totals.base_exact + result.totals.wrong_specialist_exact + result.totals.shuffled_lessons_exact}/${result.totals.unique_questions * 3}</strong><span>${e5("controlExactAnswers")}</span></article>
-        <article><strong>${result.totals.unique_questions}</strong><span>${e5("uniqueQuestions")}</span></article>
-        <article><strong>${result.totals.duplicate_rows_excluded}</strong><span>${e5("excludedRepeats")}</span></article>
+        <article><strong>${transfer.summary.archivist.personal_dora.correct}/8</strong><span>${e5("archivistTransfer")}</span></article>
+        <article><strong>${transfer.summary.safety_keeper.personal_dora.correct}/8</strong><span>${e5("safetyTransfer")}</span></article>
+        <article><strong>${transfer.summary.archivist.base.correct}/8</strong><span>${e5("baseArchivistTransfer")}</span></article>
+        <article><strong>${transfer.summary.safety_keeper.base.correct}/8</strong><span>${e5("baseSafetyTransfer")}</span></article>
       </div>
-      <section class="e005-gate4-method-guide"><div class="flow-step">${e5("howToRead")}</div><div>${methodOrder.map((method, index) => `<article class="${method === "personal_dora" ? "is-personal" : ""}"><strong>${index + 1}</strong><span>${escapeHTML(simpleMethodNames[method])}</span></article>`).join("")}</div></section>
       <section class="e005-gate4-reviewer">
-        <header><div class="flow-step">${e5("choosePocket")}</div><div class="e005-gate4-skill-tabs">${result.skills.map(skill => `<button type="button" data-gate4-skill="${escapeHTML(skill.skill)}">${skillName(skill.skill)} · ${skill.summary.personal_dora.exact_target_matches}/${skill.unique_questions}</button>`).join("")}</div><small>${result.skills.reduce((sum, skill) => sum + skill.rows.filter(row => row.language === language).length, 0)} ${e5("shownLanguage")}</small></header>
+        <header>
+          <div class="flow-step">${e5("chooseStage")}</div>
+          <div class="e005-gate4-stage-tabs"><button type="button" data-gate4-stage="transfer">${e5("transferStage")}</button><button type="button" data-gate4-stage="template">${e5("templateStage")}</button></div>
+          <div class="flow-step">${e5("choosePocket")}</div>
+          <div class="e005-gate4-skill-tabs"></div>
+          <small class="e005-gate4-visible-count"></small>
+        </header>
+        <section class="e005-gate4-method-guide"><div class="flow-step">${e5("howToRead")}</div><div>${methodOrder.map((method, index) => `<article class="${method === "personal_dora" ? "is-personal" : ""}"><strong>${index + 1}</strong><span>${escapeHTML(simpleMethodNames[method])}</span></article>`).join("")}</div></section>
         <div class="e005-gate4-viewer"></div>
       </section>
       <p class="control-warning">${e5("ownerReviewPending")}</p>
-      <details class="e005-gate4-limitations"><summary>${e5("openLimits")}</summary><div>${result.limits.map(limit => `<p>${localized(limit)}</p>`).join("")}</div></details>
-      <div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/">GATE 4</a><a class="quiet-link" href="/experiments/E005/gate-4-results-v0.1.json">JSON ↗</a></div>`;
+      <details class="e005-gate4-limitations"><summary>${e5("openLimits")}</summary><div><p>${localized(transfer.limits)}</p>${template.limits.map(limit => `<p>${localized(limit)}</p>`).join("")}</div></details>
+      <div class="actions"><a class="button secondary" href="/experiment/e005/gate-4/">GATE 4</a><a class="quiet-link" href="/experiments/E005/gate-4-transfer-results-v0.1.json">TRANSFER JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-4-results-v0.1.json">TEMPLATE JSON ↗</a></div>`;
 
-    let activeSkill = result.skills[0]?.skill || "archivist";
+    let activeStage = "transfer";
+    let activeSkill = "archivist";
     let activeQuestion = 0;
+    const stageSkills = () => activeStage === "transfer"
+      ? [
+          { skill: "archivist", rows: transfer.rows.filter(row => row.task_id.startsWith("G4B-ARC")), score: transfer.summary.archivist.personal_dora.correct, total: 8 },
+          { skill: "safety_keeper", rows: transfer.rows.filter(row => row.task_id.startsWith("G4B-SAF")), score: transfer.summary.safety_keeper.personal_dora.correct, total: 8 }
+        ]
+      : template.skills.map(skill => ({ skill: skill.skill, rows: skill.rows, score: skill.summary.personal_dora.exact_target_matches, total: skill.unique_questions }));
     const renderQuestion = () => {
-      const skill = result.skills.find(item => item.skill === activeSkill) || result.skills[0];
+      const skills = stageSkills();
+      const skill = skills.find(item => item.skill === activeSkill) || skills[0];
       const rows = skill.rows.filter(row => row.language === language);
       activeQuestion = Math.max(0, Math.min(activeQuestion, rows.length - 1));
       const row = rows[activeQuestion];
+      target.querySelectorAll("[data-gate4-stage]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.gate4Stage === activeStage)));
+      target.querySelector(".e005-gate4-skill-tabs").innerHTML = skills.map(item => `<button type="button" data-gate4-skill="${escapeHTML(item.skill)}">${skillName(item.skill)} · ${item.score}/${item.total}</button>`).join("");
       target.querySelectorAll("[data-gate4-skill]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.gate4Skill === activeSkill)));
+      target.querySelector(".e005-gate4-visible-count").textContent = `${rows.length} ${e5("shownLanguage")}`;
       if (!row) {
         target.querySelector(".e005-gate4-viewer").innerHTML = "";
         return;
       }
+      const expected = activeStage === "transfer" ? row.reference_answer : row.expected_answer;
       target.querySelector(".e005-gate4-viewer").innerHTML = `
         <div class="e005-gate4-question-nav"><span>${e5("questionNumber")} ${activeQuestion + 1} / ${rows.length}</span><span>${escapeHTML(row.task_id)}</span></div>
-        <section class="e005-gate4-current-question"><h2>${escapeHTML(row.question)}</h2><div><span>${e5("expectedAnswerFull")}</span><p>${escapeHTML(row.expected_answer)}</p></div></section>
+        <section class="e005-gate4-current-question"><h2>${escapeHTML(row.question)}</h2><div><span>${e5("expectedAnswerFull")}</span><p>${escapeHTML(expected)}</p></div></section>
         <div class="e005-gate4-result-answers">${methodOrder.map((method, index) => {
           const answer = row.conditions[method];
-          const exact = answer.exact_target_match;
-          return `<article class="${exact ? "is-exact" : "is-not-exact"}"><header><i>${index + 1}</i><span>${escapeHTML(simpleMethodNames[method])}</span><b>${exact ? "✓ " + e5("exactMatch") : "× " + e5("noExactMatch")}</b></header><p>${escapeHTML(answer.output)}</p></article>`;
+          const review = activeStage === "transfer" ? answer.review : (answer.exact_target_match ? "correct" : "wrong");
+          const reviewLabel = review === "correct" ? `✓ ${e5("correctAnswer")}` : review === "partial" ? `◐ ${e5("partialAnswer")}` : `× ${e5("wrongAnswer")}`;
+          return `<article class="is-${escapeHTML(review)}"><header><i>${index + 1}</i><span>${escapeHTML(simpleMethodNames[method])}</span><b>${reviewLabel}</b></header><p>${escapeHTML(answer.output)}</p>${answer.reason ? `<details><summary>${e5("whyReview")}</summary><p>${escapeHTML(answer.reason)}</p></details>` : ""}</article>`;
         }).join("")}</div>
         <nav class="e005-gate4-question-controls"><button type="button" data-gate4-previous ${activeQuestion === 0 ? "disabled" : ""}>${e5("previousQuestion")}</button><button type="button" data-gate4-next ${activeQuestion === rows.length - 1 ? "disabled" : ""}>${e5("nextQuestionSimple")}</button></nav>`;
     };
     target.addEventListener("click", event => {
+      const stageButton = event.target.closest("[data-gate4-stage]");
+      if (stageButton) {
+        activeStage = stageButton.dataset.gate4Stage;
+        activeSkill = "archivist";
+        activeQuestion = 0;
+        renderQuestion();
+        return;
+      }
       const skillButton = event.target.closest("[data-gate4-skill]");
       if (skillButton) {
         activeSkill = skillButton.dataset.gate4Skill;

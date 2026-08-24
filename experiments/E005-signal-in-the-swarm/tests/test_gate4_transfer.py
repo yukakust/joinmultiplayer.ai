@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 OLD_DATA = ROOT / "site/experiments/E005/gate-4-data-v0.1.json"
 TRANSFER_DATA = ROOT / "site/experiments/E005/gate-4-transfer-data-v0.1.json"
+TRANSFER_RESULTS = ROOT / "site/experiments/E005/gate-4-transfer-results-v0.1.json"
 
 
 class Gate4TransferTests(unittest.TestCase):
@@ -47,6 +48,24 @@ class Gate4TransferTests(unittest.TestCase):
         self.assertIn("exact-string matching forbidden", source)
         self.assertNotIn("optimizer", source)
         self.assertNotIn("loss.backward", source)
+
+    def test_public_failure_preserves_every_answer_and_review(self) -> None:
+        result = json.loads(TRANSFER_RESULTS.read_text(encoding="utf-8"))
+        self.assertFalse(result["result"]["passed"])
+        self.assertEqual(len(result["rows"]), 16)
+        for row in result["rows"]:
+            self.assertEqual(set(row["conditions"]), {"base", "personal_dora", "wrong_specialist", "shuffled_lessons"})
+            for condition in row["conditions"].values():
+                self.assertIn(condition["review"], {"correct", "partial", "wrong"})
+                self.assertTrue(condition["output"])
+                self.assertTrue(condition["reason"])
+
+    def test_public_score_records_limited_transfer(self) -> None:
+        result = json.loads(TRANSFER_RESULTS.read_text(encoding="utf-8"))
+        self.assertEqual(result["summary"]["archivist"]["personal_dora"]["correct"], 4)
+        self.assertEqual(result["summary"]["safety_keeper"]["personal_dora"]["correct"], 5)
+        self.assertIn("owner_review_pending", result["claim_status"])
+        self.assertNotIn("/home/", TRANSFER_RESULTS.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

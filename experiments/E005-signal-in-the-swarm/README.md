@@ -10,8 +10,9 @@ The experiment begins with a public natural-language development world. No
 weight training may begin until the owner has inspected that world on
 joinmultiplayer.ai.
 
-Current status: **Gate 3 is frozen. Gate 4 development training and all four
-controls are complete. The raw Gate 4 answers are public and await the owner's
+Current status: **Gate 3 is frozen. Gate 4A exposed template learning. Gate 4B
+tested the same adapters on differently written questions and failed its
+predeclared transfer gates. All raw answers are public and await the owner's
 question-by-question review. Routing and swarm composition have not started**.
 
 Gate 3 compared exact-word retrieval, frozen-Qwen semantic retrieval, raw
@@ -105,3 +106,23 @@ real-world safety, routing, or swarm composition. The automatic exact-match
 result and every raw answer are public at
 `site/experiments/E005/gate-4-results-v0.1.json` and rendered at
 `/experiment/e005/gate-4/results/`. Owner review is still pending.
+
+That `24/24` result was then audited for structural leakage. Although no exact
+training answer crossed into the held-out split, held-out reference answers
+were 94–98% similar to training targets because one generator wrote both from
+the same templates. Gate 4A therefore demonstrates narrow template completion,
+not reliable procedure transfer.
+
+Gate 4B froze 16 new natural-language questions before inference. Their
+reference answers were only 30–78% similar to the nearest training target. The
+same existing adapters answered without new training or RAG, and exact-string
+scoring was forbidden. Under Morrow's semantic review, the matching Archivist
+scored 4/8 correct and the matching Safety Keeper 5/8. The frozen base scored
+1/8 and 4/8 respectively. Both skills missed the predeclared 6/8 minimum, and
+the Safety Keeper led its base by only 12.5 percentage points instead of the
+required 25. Gate 4B therefore failed: the adapters retained parts of the
+procedures but did not transfer them reliably to new wording. Every raw answer,
+including the earlier template answers, remains available in
+`site/experiments/E005/gate-4-transfer-results-v0.1.json` and on
+`/experiment/e005/gate-4/results/`. The semantic labels still require owner
+review.
