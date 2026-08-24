@@ -176,7 +176,7 @@ separate owner-consent step and exposes aggregate metrics only. The controlled
 training shards are hidden from peers but known to the experiment server, so
 E003 makes no privacy or language-model claim.
 
-E004 is the current untrained Architecture Arena at
+E004 is the Architecture Arena at
 `/experiment/?id=E004`. Protocol `E004-architecture-arena-v0.2` compares five
 single-pass interfaces: RAG evidence, learned memory tokens, bounded latent
 deltas, personal token-MoE, and temporary DoRA adapter assembly. Its public
@@ -184,10 +184,18 @@ Checkpoint 1 artifact is `/experiments/E004/checkpoint-1-v0.2.json`; the eight
 open demo books and twelve mechanically derived tasks are in
 `/experiments/E004/sample-tasks.json`. Sixteen surrogate i may later train
 central components, while locked `I01..I08` and post-freeze `I09` remain unseen.
-No E004 model, ML dependency, locked book, optimizer step, or result exists.
-Do not start environment setup or training until the owner visually reviews and
-explicitly approves Checkpoint 1. Every meaningful later stage must publish or
-show owner-inspectable evidence before work advances.
+Its development artifacts remain public and must not be deleted.
+
+E005 is the current experiment at `/experiment/e005/`. Gate 3 compares exact
+word retrieval, frozen-Qwen semantic retrieval, raw majority, a deterministic
+evidence graph, and an oracle source set without training weights. The complete
+reviewed development artifact is
+`/experiments/E005/gate-3-public-v0.1.json`; the human-readable microscope is
+`/experiment/e005/gate-3/`. The evidence graph selected the ideal records in
+12/12 language generations, while frozen Qwen produced only 6/12 correct
+generations. This demonstrates a generator bottleneck in the synthetic fixture,
+not learned routing or swarm generalization. Gate 4 personal DoRA procedure
+training must not begin until the owner visually reviews Gate 3.
 
 ## Immediate next work
 

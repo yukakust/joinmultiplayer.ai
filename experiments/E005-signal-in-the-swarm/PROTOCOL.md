@@ -166,6 +166,10 @@ answer reliably is excluded before later data are locked.
 Lexical, semantic, majority, evidence-graph, and oracle controls run without
 personal weight updates. Failure artifacts remain public.
 
+Status: **development run complete; owner visual review pending**. The source
+selection and frozen-generation stages are reported separately. Perfect source
+selection did not guarantee a correct generated action.
+
 ### Gate 4 — procedure learning
 
 Surrogate pocket i train personal DoRA skills on examples that are disjoint from

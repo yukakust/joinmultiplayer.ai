@@ -2393,7 +2393,7 @@ const e005Copy = {
     title: "Signal in the Swarm",
     question: "Can a growing swarm find the right combination of understanding and evidence, preserve a well-supported minority, and avoid treating dependent copies as independent consensus?",
     intro: "A public natural-language world for inspecting the next test before any model is trained.",
-    status: "GATE 2 · BASE-ONLY COMPLETE · NO TRAINING HAS STARTED",
+    status: "GATE 3 · RETRIEVAL CONTROLS COMPLETE · NO TRAINING HAS STARTED",
     boundary: "This page shows a scripted public fixture and a deterministic accounting harness. It is not evidence that Qwen understands, retrieves, routes, or generalizes.",
     majority: "RAW MAJORITY",
     evidence: "EVIDENCE GRAPH",
@@ -2431,14 +2431,33 @@ const e005Copy = {
     answersTitle: "Every raw Qwen answer",
     answersIntro: "Six questions, twelve unedited generations, and the expected action. No RAG, adapter, internet, or weight update.",
     expectedAction: "EXPECTED ACTION",
-    backToE005: "BACK TO E005"
+    backToE005: "BACK TO E005",
+    gate3Title: "GATE 3 · FIVE WAYS TO FIND THE ANSWER",
+    gate3Copy: "The same frozen Qwen answered after five different methods selected evidence. No adapter or weight update was used.",
+    gate3Finding: "Perfect retrieval was not enough: the evidence graph found the ideal records 12/12 times, but Qwen produced only 6/12 correct generations.",
+    gate3Button: "VIEW EVERY GATE 3 QUESTION AND ANSWER →",
+    gate3AnswersTitle: "What five methods actually answered",
+    gate3AnswersIntro: "Thirty method–question pairs, sixty unedited generations, their selected records, and the expected action.",
+    sourceExact: "ideal source set",
+    correctAnswers: "correct generations",
+    fullyCorrectTasks: "tasks correct in both languages",
+    selectedSources: "SELECTED RECORDS",
+    method: "METHOD",
+    methodLexical: "Exact word overlap",
+    methodSemantic: "Frozen-Qwen semantic retrieval",
+    methodRawMajority: "Raw majority",
+    methodEvidenceGraph: "Evidence graph",
+    methodOracle: "Oracle source set",
+    labelCorrect: "correct",
+    labelSafeButIncomplete: "safe but incomplete",
+    labelWrongOrContradictory: "wrong or contradictory"
   },
   ru: {
     step: "СЛЕДУЮЩИЙ ЭКСПЕРИМЕНТ · E005",
     title: "Сигнал внутри swarm",
     question: "Может ли растущий swarm находить правильное сочетание понимания и доказательств, сохранять обоснованное мнение меньшинства и не принимать множество зависимых копий за независимый консенсус?",
     intro: "Открытый естественно-языковой мир, чтобы глазами проверить следующий тест до обучения любой модели.",
-    status: "GATE 2 · BASE-ONLY ЗАВЕРШЁН · ОБУЧЕНИЕ НЕ НАЧИНАЛОСЬ",
+    status: "GATE 3 · ПОИСКОВЫЕ BASELINE ЗАВЕРШЕНЫ · ОБУЧЕНИЕ НЕ НАЧИНАЛОСЬ",
     boundary: "На странице показаны сценарная открытая заготовка и детерминированный harness учёта. Это не доказательство того, что Qwen понимает, ищет, маршрутизирует или обобщает.",
     majority: "ОБЫЧНОЕ БОЛЬШИНСТВО",
     evidence: "КАРТА ДОКАЗАТЕЛЬСТВ",
@@ -2459,7 +2478,7 @@ const e005Copy = {
     source: "тип источника",
     owner: "хранится у",
     review: "КОНТРОЛЬНАЯ ТОЧКА ДЛЯ ЮКИ",
-    reviewCopy: "Прочитайте двенадцать сырых ответов базы рядом с ожидаемыми действиями. Следующий шаг — retrieval-baselines; обучение персональных весов остаётся отдельным будущим gate.",
+    reviewCopy: "Прочитайте ответы пяти методов и подтвердите Gate 3 глазами. Только после этого можно переходить к Gate 4 — обучению переносимых DoRA-навыков.",
     jsonWorld: "ОТКРЫТЬ ВЕСЬ МИР В JSON",
     jsonHarness: "ОТКРЫТЬ РЕЗУЛЬТАТ HARNESS",
     back: "ВЕРНУТЬСЯ К E004",
@@ -2476,7 +2495,26 @@ const e005Copy = {
     answersTitle: "Все сырые ответы Qwen",
     answersIntro: "Шесть вопросов, двенадцать неотредактированных генераций и ожидаемое действие. Без RAG, адаптера, интернета и изменения весов.",
     expectedAction: "ОЖИДАЕМОЕ ДЕЙСТВИЕ",
-    backToE005: "ВЕРНУТЬСЯ К E005"
+    backToE005: "ВЕРНУТЬСЯ К E005",
+    gate3Title: "GATE 3 · ПЯТЬ СПОСОБОВ НАЙТИ ОТВЕТ",
+    gate3Copy: "Одна и та же замороженная Qwen отвечала после того, как пять разных методов выбирали доказательства. Без адаптера и изменения весов.",
+    gate3Finding: "Идеального поиска оказалось недостаточно: evidence graph нашёл правильные записи 12/12 раз, но Qwen дала лишь 6/12 верных генераций.",
+    gate3Button: "СМОТРЕТЬ ВСЕ ВОПРОСЫ И ОТВЕТЫ GATE 3 →",
+    gate3AnswersTitle: "Что на самом деле ответили пять методов",
+    gate3AnswersIntro: "Тридцать пар «метод–вопрос», шестьдесят неотредактированных генераций, выбранные записи и ожидаемое действие.",
+    sourceExact: "идеальный набор источников",
+    correctAnswers: "верных генераций",
+    fullyCorrectTasks: "задач верны на обоих языках",
+    selectedSources: "ВЫБРАННЫЕ ЗАПИСИ",
+    method: "МЕТОД",
+    methodLexical: "Точное совпадение слов",
+    methodSemantic: "Семантический поиск замороженной Qwen",
+    methodRawMajority: "Простое большинство",
+    methodEvidenceGraph: "Карта доказательств",
+    methodOracle: "Oracle-набор источников",
+    labelCorrect: "верно",
+    labelSafeButIncomplete: "безопасно, но неполно",
+    labelWrongOrContradictory: "ошибка или противоречие"
   }
 };
 
@@ -2500,6 +2538,84 @@ function e005AnswersShell() {
     <p class="contribution-intro">${e5("answersIntro")}</p>
     <div class="experiment-loading">${c("loading")}</div>
   </section>`;
+}
+
+function e005Gate3Shell() {
+  return `<section class="flow-shell e005-gate3-page">
+    <div class="flow-step">E005 · GATE 3</div>
+    <h1>${e5("gate3AnswersTitle")}</h1>
+    <p class="contribution-intro">${e5("gate3AnswersIntro")}</p>
+    <div class="experiment-loading">${c("loading")}</div>
+  </section>`;
+}
+
+function e005MethodName(method) {
+  const names = {
+    lexical: "methodLexical",
+    semantic: "methodSemantic",
+    raw_majority: "methodRawMajority",
+    evidence_graph: "methodEvidenceGraph",
+    oracle: "methodOracle",
+  };
+  return e5(names[method] || method);
+}
+
+function e005ReviewLabel(label) {
+  const labels = {
+    correct: "labelCorrect",
+    safe_but_incomplete: "labelSafeButIncomplete",
+    wrong_or_contradictory: "labelWrongOrContradictory",
+  };
+  return e5(labels[label] || label);
+}
+
+async function loadE005Gate3() {
+  const target = document.querySelector(".e005-gate3-page");
+  if (!target) return;
+  try {
+    const [worldResponse, resultResponse] = await Promise.all([
+      fetch("/experiments/E005/world-public-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-3-public-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!worldResponse.ok || !resultResponse.ok) throw new Error("E005 Gate 3 unavailable");
+    const world = await worldResponse.json();
+    const result = await resultResponse.json();
+    const tasks = new Map(world.tasks.map(task => [task.id, task]));
+    const documents = new Map(world.documents.map(document => [document.id, document]));
+    const rowsByMethod = new Map(result.methods.map(method => [method, result.rows.filter(row => row.method === method)]));
+    const recordList = (ids, lang) => `<div class="e005-gate3-sources">${ids.map(id => {
+      const document = documents.get(id) || {};
+      return `<article><strong>${escapeHTML(id)}</strong><small>${escapeHTML(document.status)} · ${escapeHTML(document.lineage)}</small><p>${escapeHTML(document.content?.[lang] || "")}</p></article>`;
+    }).join("")}</div>`;
+    target.querySelector(".experiment-loading").outerHTML = `
+      <a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a>
+      <p class="control-warning">${escapeHTML(e4Localized(result.claim_boundary))}</p>
+      <section class="e005-gate3-headline"><strong>12 / 12</strong><span>${e5("sourceExact")}</span><b>≠</b><strong>6 / 12</strong><span>${e5("correctAnswers")}</span></section>
+      <p class="e005-gate3-finding">${escapeHTML(e4Localized(result.finding))}</p>
+      <nav class="e005-method-nav">${result.methods.map(method => `<a href="#${escapeHTML(method)}">${escapeHTML(e005MethodName(method))}</a>`).join("")}</nav>
+      <div class="e005-method-sections">${result.methods.map(method => {
+        const stats = result.summary[method];
+        return `<section class="e005-method-section" id="${escapeHTML(method)}">
+          <div class="flow-step">${e5("method")} · ${escapeHTML(e005MethodName(method))}</div>
+          <div class="e005-metrics"><article><span>${e5("sourceExact")}</span><strong>${stats.source_exact_set_generations} / 12</strong></article><article><span>${e5("correctAnswers")}</span><strong>${stats.correct_generations} / 12</strong></article><article><span>${e5("fullyCorrectTasks")}</span><strong>${stats.fully_correct_tasks_both_languages} / 6</strong></article></div>
+          <div class="e005-raw-records">${rowsByMethod.get(method).map((row, index) => {
+            const task = tasks.get(row.task_id) || {};
+            return `<article class="e005-raw-record">
+              <div class="e004-answer-number">${String(index + 1).padStart(2, "0")} / 06 · ${escapeHTML(row.task_id)}</div>
+              <h2>${escapeHTML(e4Localized(task.question))}</h2>
+              <section class="e005-expected-standalone"><span>${e5("expectedAction")}</span><strong>${escapeHTML(e4Localized(task.expected?.main_answer))}</strong></section>
+              <div class="e005-raw-answer-grid">
+                <section><span>${e5("rawRussian")}</span><div class="e005-source-ids">${e5("selectedSources")} · ${row.outputs.ru.selected_document_ids.map(escapeHTML).join(" · ")}</div><p>${escapeHTML(row.outputs.ru.output)}</p><small class="review-${escapeHTML(row.outputs.ru.manual_review)}">${e5("manualReview")} · ${escapeHTML(e005ReviewLabel(row.outputs.ru.manual_review))}</small><details><summary>${e5("selectedSources")}</summary>${recordList(row.outputs.ru.selected_document_ids, "ru")}</details></section>
+                <section><span>${e5("rawEnglish")}</span><div class="e005-source-ids">${e5("selectedSources")} · ${row.outputs.en.selected_document_ids.map(escapeHTML).join(" · ")}</div><p>${escapeHTML(row.outputs.en.output)}</p><small class="review-${escapeHTML(row.outputs.en.manual_review)}">${e5("manualReview")} · ${escapeHTML(e005ReviewLabel(row.outputs.en.manual_review))}</small><details><summary>${e5("selectedSources")}</summary>${recordList(row.outputs.en.selected_document_ids, "en")}</details></section>
+              </div>
+            </article>`;
+          }).join("")}</div>
+        </section>`;
+      }).join("")}</div>
+      <div class="actions"><a class="button secondary" href="/experiment/e005/">${e5("backToE005")}</a><a class="quiet-link" href="/experiments/E005/gate-3-public-v0.1.json">JSON ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
 }
 
 async function loadE005Answers() {
@@ -2539,15 +2655,17 @@ async function loadE005() {
   const target = document.querySelector(".e005-page");
   if (!target) return;
   try {
-    const [worldResponse, harnessResponse, baseResponse] = await Promise.all([
+    const [worldResponse, harnessResponse, baseResponse, gate3Response] = await Promise.all([
       fetch("/experiments/E005/world-public-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E005/harness-public-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E005/base-preflight-public-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-3-public-v0.1.json", { cache: "no-store" }),
     ]);
-    if (!worldResponse.ok || !harnessResponse.ok || !baseResponse.ok) throw new Error("E005 checkpoint unavailable");
+    if (!worldResponse.ok || !harnessResponse.ok || !baseResponse.ok || !gate3Response.ok) throw new Error("E005 checkpoint unavailable");
     const world = await worldResponse.json();
     const harness = await harnessResponse.json();
     const basePreflight = await baseResponse.json();
+    const gate3 = await gate3Response.json();
     const documents = new Map(world.documents.map(document => [document.id, document]));
     const rows = new Map(harness.rows.map(row => [row.task_id, row]));
     const baseRows = new Map(basePreflight.rows.map(row => [row.task_id, row]));
@@ -2597,6 +2715,7 @@ async function loadE005() {
         <article><span>${e5("minority")}</span><strong>${percent(harness.minority_policy_accuracy)}</strong><small>6 / 6 · scripted claims</small></article>
       </div>
       <section class="e005-base-section"><div class="flow-step">${e5("basePreflight")}</div><p>${e5("basePreflightCopy")}</p><a class="e005-answer-button" href="/experiment/e005/answers/">${e5("viewAllAnswers")}</a><div class="e005-metrics"><article><span>${e5("fullyCorrect")}</span><strong>${basePreflight.summary.fully_correct_generations} / ${basePreflight.summary.generations}</strong></article><article><span>${e5("recognizedUnknown")}</span><strong>${basePreflight.summary.recognized_missing_evidence_generations} / ${basePreflight.summary.generations}</strong></article><article><span>${e5("wrongOutputs")}</span><strong>${basePreflight.summary.hallucinated_or_wrong_generations} / ${basePreflight.summary.generations}</strong></article></div><p class="control-warning">${escapeHTML(e4Localized(basePreflight.claim_boundary))}</p></section>
+      <section class="e005-base-section e005-gate3-summary"><div class="flow-step">${e5("gate3Title")}</div><p>${e5("gate3Copy")}</p><a class="e005-answer-button" href="/experiment/e005/gate-3/">${e5("gate3Button")}</a><div class="e005-metrics"><article><span>${e5("methodLexical")}</span><strong>${gate3.summary.lexical.correct_generations} / 12</strong><small>${e5("correctAnswers")}</small></article><article><span>${e5("methodSemantic")}</span><strong>${gate3.summary.semantic.correct_generations} / 12</strong><small>${e5("correctAnswers")}</small></article><article><span>${e5("methodEvidenceGraph")}</span><strong>${gate3.summary.evidence_graph.correct_generations} / 12</strong><small>${e5("correctAnswers")}</small></article></div><p class="control-warning">${e5("gate3Finding")}</p></section>
       <section class="e005-pocket-section"><div class="flow-step">${e5("pockets")}</div><p class="control-warning">${e5("pocketWarning")}</p><div class="e005-pockets">${world.pockets.map(pocket => `<article><i>i</i><strong>${escapeHTML(pocket.id)} · ${escapeHTML(pocket.name)}</strong><span>${escapeHTML(e4Localized(pocket.skill))}</span><small>fixture · ${percent(pocket.calibration)}</small></article>`).join("")}</div></section>
       <section class="e005-task-section"><div class="flow-step">${e5("tasks")}</div><div class="e005-tasks">${world.tasks.map(taskMarkup).join("")}</div></section>
       <section class="e004-decision"><span>${e5("review")}</span><p>${e5("reviewCopy")}</p></section>
@@ -3388,6 +3507,10 @@ function render() {
     document.title = `${e5("answersTitle")} — i`;
     app.innerHTML = withLanguage(e005AnswersShell());
     loadE005Answers();
+  } else if (path === "experiment/e005/gate-3") {
+    document.title = `${e5("gate3AnswersTitle")} — i`;
+    app.innerHTML = withLanguage(e005Gate3Shell());
+    loadE005Gate3();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

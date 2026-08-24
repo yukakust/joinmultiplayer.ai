@@ -745,11 +745,108 @@ button:disabled {
   width: min(100%, 78rem);
 }
 
-.e005-answers-page > h1 {
+.e005-gate3-page {
+  width: min(100%, 88rem);
+}
+
+.e005-answers-page > h1,
+.e005-gate3-page > h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(3rem, 8vw, 7rem);
   letter-spacing: -0.07em;
   line-height: 0.9;
+}
+
+.e005-gate3-headline {
+  align-items: baseline;
+  border-block: 2px solid var(--ink);
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: auto 1fr auto auto 1fr;
+  margin: 3rem 0 1.5rem;
+  padding: 2rem 0;
+}
+
+.e005-gate3-headline strong {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(2.5rem, 6vw, 6rem);
+}
+
+.e005-gate3-headline span,
+.e005-gate3-headline b {
+  color: var(--muted);
+}
+
+.e005-gate3-finding {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.2rem, 2.2vw, 2rem);
+  line-height: 1.35;
+}
+
+.e005-method-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 3rem 0;
+}
+
+.e005-method-nav a {
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 0.7rem 0.9rem;
+  text-decoration: none;
+}
+
+.e005-method-section {
+  border-top: 4px solid var(--ink);
+  padding-top: 3rem;
+  scroll-margin-top: 2rem;
+}
+
+.e005-source-ids {
+  color: var(--ember);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  margin: 0.7rem 0;
+}
+
+.e005-raw-answer-grid small.review-correct {
+  color: #8ebc87;
+}
+
+.e005-raw-answer-grid small.review-safe_but_incomplete {
+  color: #d8aa63;
+}
+
+.e005-raw-answer-grid small.review-wrong_or_contradictory {
+  color: #dc735f;
+}
+
+.e005-raw-answer-grid details {
+  border-top: 1px solid var(--line);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.e005-raw-answer-grid details summary {
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.e005-gate3-sources article {
+  border-left: 2px solid var(--line);
+  margin-top: 1rem;
+  padding-left: 0.8rem;
+}
+
+.e005-gate3-sources strong,
+.e005-gate3-sources small {
+  display: block;
+}
+
+.e005-gate3-sources p {
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 .e005-raw-records {
@@ -843,6 +940,10 @@ button:disabled {
   }
 
   .e005-raw-answer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .e005-gate3-headline {
     grid-template-columns: 1fr;
   }
 
