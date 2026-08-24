@@ -109,6 +109,11 @@ first accepted contribution made with it is.
 
 ## Working principles
 
+- **Eight-year-old law:** every public explanation must be understandable to
+  an eight-year-old child on the first reading. Use short sentences, common
+  words, and one idea at a time. If a technical term is necessary, explain it
+  immediately with a concrete example. Complexity may live in the experiment,
+  never in the wording.
 - Preserve raw submitted material. Translations are views, not replacements.
 - Do not invent research results or cases.
 - Keep the public surface minimal; do not explain the `i` symbol at length.

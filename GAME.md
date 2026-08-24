@@ -289,6 +289,13 @@ Exact location is never required.
 
 ## From the laboratory to pocket i
 
+### The eight-year-old law
+
+Everything the laboratory says in public must be clear to an eight-year-old on
+the first reading. Use short sentences, familiar words, and one idea at a time.
+When a technical word cannot be removed, explain it immediately with a simple
+example. The science may be difficult. The explanation must not be.
+
 The phrase **pocket i** names the intended user-controlled participant in the
 future network. It does not currently name a downloadable model. During the
 laboratory stage, people use AIs they already have and move questions and
