@@ -1,0 +1,54 @@
+from __future__ import annotations
+
+import ast
+import importlib.util
+import unittest
+from pathlib import Path
+
+
+EXPERIMENT = Path(__file__).resolve().parents[1]
+SOURCE = EXPERIMENT / "src" / "run_base_preflight.py"
+
+
+class BasePreflightContractTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.source = SOURCE.read_text(encoding="utf-8")
+        cls.tree = ast.parse(cls.source)
+
+    def test_runner_never_imports_training_or_adapter_packages(self) -> None:
+        imported = {
+            alias.name
+            for node in ast.walk(self.tree)
+            if isinstance(node, (ast.Import, ast.ImportFrom))
+            for alias in node.names
+        }
+        self.assertNotIn("peft", imported)
+        self.assertNotIn("trl", imported)
+
+    def test_runner_uses_greedy_generation_and_local_model_only(self) -> None:
+        self.assertIn("do_sample=False", self.source)
+        self.assertIn("local_files_only=True", self.source)
+        self.assertIn('"rag": False', self.source)
+        self.assertIn('"documents_in_prompt": False', self.source)
+
+    def test_prompt_templates_do_not_contain_fixture_entities_or_answers(self) -> None:
+        spec = importlib.util.spec_from_file_location("e005_base_preflight", SOURCE)
+        module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(module)
+        serialized = " ".join(module.PROMPTS.values()).lower()
+        for forbidden in ("kest", "orin", "vela", "aster", "mira", "rill", "niv-3", "t4"):
+            self.assertNotIn(forbidden, serialized)
+
+    def test_all_six_tasks_have_bilingual_review_markers(self) -> None:
+        spec = importlib.util.spec_from_file_location("e005_base_preflight_markers", SOURCE)
+        module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(module)
+        self.assertEqual(set(module.TARGET_MARKERS), {f"PUBLIC-{index:02d}" for index in range(1, 7)})
+        self.assertTrue(all(set(markers) == {"en", "ru"} for markers in module.TARGET_MARKERS.values()))
+
+
+if __name__ == "__main__":
+    unittest.main()
