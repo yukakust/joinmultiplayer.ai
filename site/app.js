@@ -2393,7 +2393,7 @@ const e005Copy = {
     title: "Signal in the Swarm",
     question: "Can a growing swarm find the right combination of understanding and evidence, preserve a well-supported minority, and avoid treating dependent copies as independent consensus?",
     intro: "A public natural-language world for inspecting the next test before any model is trained.",
-    status: "GATE 1 · OWNER REVIEW · NO TRAINING HAS STARTED",
+    status: "GATE 2 · BASE-ONLY COMPLETE · NO TRAINING HAS STARTED",
     boundary: "This page shows a scripted public fixture and a deterministic accounting harness. It is not evidence that Qwen understands, retrieves, routes, or generalizes.",
     majority: "RAW MAJORITY",
     evidence: "EVIDENCE GRAPH",
@@ -2414,17 +2414,26 @@ const e005Copy = {
     source: "source",
     owner: "held by",
     review: "CHECKPOINT FOR YUKA",
-    reviewCopy: "Read the six questions and their documents. If this world tests the right failure modes, approve Gate 1. Only then may base-only preflight and model work begin.",
+    reviewCopy: "Read the twelve raw base answers beside the expected actions. The next step is retrieval baselines; personal weight training remains a later, separately visible gate.",
     jsonWorld: "OPEN THE COMPLETE WORLD JSON",
     jsonHarness: "OPEN THE HARNESS RESULT",
-    back: "BACK TO E004"
+    back: "BACK TO E004",
+    basePreflight: "GATE 2 · FROZEN QWEN WITHOUT DOCUMENTS",
+    basePreflightCopy: "The base answered every question in English and Russian with no RAG, adapter, internet, or weight update.",
+    fullyCorrect: "fully correct",
+    recognizedUnknown: "recognized missing evidence",
+    wrongOutputs: "wrong or hallucinated",
+    rawEnglish: "RAW ENGLISH ANSWER",
+    rawRussian: "RAW RUSSIAN ANSWER",
+    manualReview: "manual review",
+    modelAnswer: "QWEN BASE-ONLY ANSWERS"
   },
   ru: {
     step: "СЛЕДУЮЩИЙ ЭКСПЕРИМЕНТ · E005",
     title: "Сигнал внутри swarm",
     question: "Может ли растущий swarm находить правильное сочетание понимания и доказательств, сохранять обоснованное мнение меньшинства и не принимать множество зависимых копий за независимый консенсус?",
     intro: "Открытый естественно-языковой мир, чтобы глазами проверить следующий тест до обучения любой модели.",
-    status: "GATE 1 · ПРОВЕРКА ЮКОЙ · ОБУЧЕНИЕ НЕ НАЧИНАЛОСЬ",
+    status: "GATE 2 · BASE-ONLY ЗАВЕРШЁН · ОБУЧЕНИЕ НЕ НАЧИНАЛОСЬ",
     boundary: "На странице показаны сценарная открытая заготовка и детерминированный harness учёта. Это не доказательство того, что Qwen понимает, ищет, маршрутизирует или обобщает.",
     majority: "ОБЫЧНОЕ БОЛЬШИНСТВО",
     evidence: "КАРТА ДОКАЗАТЕЛЬСТВ",
@@ -2445,10 +2454,19 @@ const e005Copy = {
     source: "тип источника",
     owner: "хранится у",
     review: "КОНТРОЛЬНАЯ ТОЧКА ДЛЯ ЮКИ",
-    reviewCopy: "Прочитайте шесть вопросов и документы под ними. Если мир проверяет нужные ловушки, подтвердите Gate 1. Только после этого можно запускать base-only preflight и работу с моделью.",
+    reviewCopy: "Прочитайте двенадцать сырых ответов базы рядом с ожидаемыми действиями. Следующий шаг — retrieval-baselines; обучение персональных весов остаётся отдельным будущим gate.",
     jsonWorld: "ОТКРЫТЬ ВЕСЬ МИР В JSON",
     jsonHarness: "ОТКРЫТЬ РЕЗУЛЬТАТ HARNESS",
-    back: "ВЕРНУТЬСЯ К E004"
+    back: "ВЕРНУТЬСЯ К E004",
+    basePreflight: "GATE 2 · ЗАМОРОЖЕННАЯ QWEN БЕЗ ДОКУМЕНТОВ",
+    basePreflightCopy: "База ответила на каждый вопрос по-английски и по-русски без RAG, адаптера, интернета и изменения весов.",
+    fullyCorrect: "полностью верных",
+    recognizedUnknown: "признала нехватку данных",
+    wrongOutputs: "ошибочных или выдуманных",
+    rawEnglish: "СЫРОЙ ОТВЕТ НА АНГЛИЙСКОМ",
+    rawRussian: "СЫРОЙ ОТВЕТ НА РУССКОМ",
+    manualReview: "ручная оценка",
+    modelAnswer: "ОТВЕТЫ ЧИСТОЙ QWEN"
   }
 };
 
@@ -2469,15 +2487,18 @@ async function loadE005() {
   const target = document.querySelector(".e005-page");
   if (!target) return;
   try {
-    const [worldResponse, harnessResponse] = await Promise.all([
+    const [worldResponse, harnessResponse, baseResponse] = await Promise.all([
       fetch("/experiments/E005/world-public-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E005/harness-public-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/base-preflight-public-v0.1.json", { cache: "no-store" }),
     ]);
-    if (!worldResponse.ok || !harnessResponse.ok) throw new Error("E005 checkpoint unavailable");
+    if (!worldResponse.ok || !harnessResponse.ok || !baseResponse.ok) throw new Error("E005 checkpoint unavailable");
     const world = await worldResponse.json();
     const harness = await harnessResponse.json();
+    const basePreflight = await baseResponse.json();
     const documents = new Map(world.documents.map(document => [document.id, document]));
     const rows = new Map(harness.rows.map(row => [row.task_id, row]));
+    const baseRows = new Map(basePreflight.rows.map(row => [row.task_id, row]));
     const percent = value => `${(Number(value) * 100).toFixed(1)}%`;
     const documentMarkup = evidenceId => {
       const document = documents.get(evidenceId) || {};
@@ -2489,6 +2510,7 @@ async function loadE005() {
     };
     const taskMarkup = (task, index) => {
       const row = rows.get(task.id) || {};
+      const baseRow = baseRows.get(task.id) || { outputs: {} };
       const stats = new Map((row.claims || []).map(claim => [claim.claim_id, claim]));
       const evidenceIds = [...new Set(task.claims.flatMap(claim => claim.evidence))];
       const mainStats = stats.get(row.selected_main_claim) || {};
@@ -2503,6 +2525,11 @@ async function loadE005() {
           }).join("")}</div>
           <div class="e005-answer"><span>${e5("main")}</span><strong>${escapeHTML(e4Localized(task.expected.main_answer))}</strong><p>${escapeHTML(e4Localized(task.expected.explanation))}</p><small>${mainStats.raw_supporters} ${e5("supporters")} · ${mainStats.independent_lineages} ${e5("lineages")}</small></div>
           <div class="e005-alternative ${task.expected.report_alternative ? "is-reported" : ""}"><span>${task.expected.report_alternative ? e5("alternative") : e5("noAlternative")}</span>${task.expected.report_alternative ? `<code>${escapeHTML(task.expected.alternative_claim)}</code>` : ""}</div>
+          <div class="e004-microscope-label">${e5("modelAnswer")}</div>
+          <div class="e005-base-answers">
+            <article><span>${e5("rawEnglish")}</span><p>${escapeHTML(baseRow.outputs.en?.output || "—")}</p><small>${e5("manualReview")} · ${escapeHTML(baseRow.outputs.en?.manual_review || "—")}</small></article>
+            <article><span>${e5("rawRussian")}</span><p>${escapeHTML(baseRow.outputs.ru?.output || "—")}</p><small>${e5("manualReview")} · ${escapeHTML(baseRow.outputs.ru?.manual_review || "—")}</small></article>
+          </div>
           <div class="e004-microscope-label">${e5("documents")}</div>
           <div class="e005-documents">${evidenceIds.map(documentMarkup).join("")}</div>
         </div>
@@ -2517,10 +2544,11 @@ async function loadE005() {
         <article><span>${e5("evidence")}</span><strong>${percent(harness.evidence_graph_accuracy)}</strong><small>6 / 6 · scripted claims</small></article>
         <article><span>${e5("minority")}</span><strong>${percent(harness.minority_policy_accuracy)}</strong><small>6 / 6 · scripted claims</small></article>
       </div>
+      <section class="e005-base-section"><div class="flow-step">${e5("basePreflight")}</div><p>${e5("basePreflightCopy")}</p><div class="e005-metrics"><article><span>${e5("fullyCorrect")}</span><strong>${basePreflight.summary.fully_correct_generations} / ${basePreflight.summary.generations}</strong></article><article><span>${e5("recognizedUnknown")}</span><strong>${basePreflight.summary.recognized_missing_evidence_generations} / ${basePreflight.summary.generations}</strong></article><article><span>${e5("wrongOutputs")}</span><strong>${basePreflight.summary.hallucinated_or_wrong_generations} / ${basePreflight.summary.generations}</strong></article></div><p class="control-warning">${escapeHTML(e4Localized(basePreflight.claim_boundary))}</p></section>
       <section class="e005-pocket-section"><div class="flow-step">${e5("pockets")}</div><p class="control-warning">${e5("pocketWarning")}</p><div class="e005-pockets">${world.pockets.map(pocket => `<article><i>i</i><strong>${escapeHTML(pocket.id)} · ${escapeHTML(pocket.name)}</strong><span>${escapeHTML(e4Localized(pocket.skill))}</span><small>fixture · ${percent(pocket.calibration)}</small></article>`).join("")}</div></section>
       <section class="e005-task-section"><div class="flow-step">${e5("tasks")}</div><div class="e005-tasks">${world.tasks.map(taskMarkup).join("")}</div></section>
       <section class="e004-decision"><span>${e5("review")}</span><p>${e5("reviewCopy")}</p></section>
-      <div class="actions"><a class="button secondary" href="/experiment/?id=E004">${e5("back")}</a><a class="quiet-link" href="/experiments/E005/world-public-v0.1.json">${e5("jsonWorld")} ↗</a><a class="quiet-link" href="/experiments/E005/harness-public-v0.1.json">${e5("jsonHarness")} ↗</a></div>`;
+      <div class="actions"><a class="button secondary" href="/experiment/?id=E004">${e5("back")}</a><a class="quiet-link" href="/experiments/E005/world-public-v0.1.json">${e5("jsonWorld")} ↗</a><a class="quiet-link" href="/experiments/E005/harness-public-v0.1.json">${e5("jsonHarness")} ↗</a><a class="quiet-link" href="/experiments/E005/base-preflight-public-v0.1.json">BASE OUTPUTS JSON ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }

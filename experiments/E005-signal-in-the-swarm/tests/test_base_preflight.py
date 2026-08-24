@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import ast
 import importlib.util
+import json
 import unittest
 from pathlib import Path
 
 
 EXPERIMENT = Path(__file__).resolve().parents[1]
 SOURCE = EXPERIMENT / "src" / "run_base_preflight.py"
+RESULT = EXPERIMENT.parents[1] / "site" / "experiments" / "E005" / "base-preflight-public-v0.1.json"
 
 
 class BasePreflightContractTests(unittest.TestCase):
@@ -48,6 +50,25 @@ class BasePreflightContractTests(unittest.TestCase):
         spec.loader.exec_module(module)
         self.assertEqual(set(module.TARGET_MARKERS), {f"PUBLIC-{index:02d}" for index in range(1, 7)})
         self.assertTrue(all(set(markers) == {"en", "ru"} for markers in module.TARGET_MARKERS.values()))
+
+    def test_public_result_preserves_all_twelve_raw_generations(self) -> None:
+        result = json.loads(RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(len(result["rows"]), 6)
+        self.assertTrue(all(set(row["outputs"]) == {"en", "ru"} for row in result["rows"]))
+        self.assertTrue(all(row["outputs"][language]["output"] for row in result["rows"] for language in ("en", "ru")))
+        self.assertFalse(result["model"]["training_or_weight_update"])
+        self.assertFalse(result["inference"]["rag"])
+        self.assertIsNone(result["inference"]["adapter"])
+
+    def test_manual_review_summary_matches_labels(self) -> None:
+        result = json.loads(RESULT.read_text(encoding="utf-8"))
+        labels = [row["outputs"][language]["manual_review"] for row in result["rows"] for language in ("en", "ru")]
+        safe_incomplete = sum(label == "safe_but_incomplete" for label in labels)
+        wrong = sum(label.startswith("wrong_") for label in labels)
+        self.assertEqual(result["summary"]["generations"], len(labels))
+        self.assertEqual(result["summary"]["safe_but_incomplete_generations"], safe_incomplete)
+        self.assertEqual(result["summary"]["hallucinated_or_wrong_generations"], wrong)
+        self.assertEqual(result["summary"]["fully_correct_generations"], 0)
 
 
 if __name__ == "__main__":

@@ -713,11 +713,50 @@ button:disabled {
   line-height: 1.5;
 }
 
+.e005-base-section {
+  border-block: 1px solid var(--line);
+  margin: 5rem 0;
+  padding: 3rem 0;
+}
+
+.e005-base-section > p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.e005-base-answers {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.e005-base-answers article {
+  border: 1px solid var(--line);
+  padding: 1.2rem;
+}
+
+.e005-base-answers span,
+.e005-base-answers small {
+  color: var(--muted);
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.e005-base-answers p {
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
 @media (max-width: 760px) {
   .e005-metrics,
   .e005-pockets,
   .e005-claim-grid,
   .e005-documents {
+    grid-template-columns: 1fr;
+  }
+
+  .e005-base-answers {
     grid-template-columns: 1fr;
   }
 

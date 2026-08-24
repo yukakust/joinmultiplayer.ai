@@ -1,0 +1,96 @@
+{
+  "experiment_id": "E005",
+  "protocol_version": "signal-in-swarm-v0.1",
+  "gate": 2,
+  "kind": "frozen_base_only_preflight",
+  "status": "completed_manual_reviewed",
+  "claim_status": "public_development_only",
+  "recorded_at": "2026-08-24T06:54:05Z",
+  "model": {
+    "id": "Qwen/Qwen3-0.6B-Base",
+    "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+    "model_sha256": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+    "dtype": "float32",
+    "training_or_weight_update": false
+  },
+  "inference": {
+    "seed": 17082026,
+    "decoding": "greedy",
+    "max_new_tokens": 96,
+    "languages": ["en", "ru"],
+    "rag": false,
+    "documents_in_prompt": false,
+    "adapter": null,
+    "internet": false,
+    "elapsed_seconds": 311.777,
+    "peak_rss_mib": 3884.93
+  },
+  "prompt_templates": {
+    "en": "Answer using only knowledge already present in the model. You have no external documents. If the evidence needed to decide is missing, say so plainly.\n\nQuestion: {question}\n\nAnswer:",
+    "ru": "Ответьте, используя только знания, уже находящиеся в модели. У вас нет внешних документов. Если для решения не хватает данных, скажите об этом прямо.\n\nВопрос: {question}\n\nОтвет:"
+  },
+  "summary": {
+    "tasks": 6,
+    "generations": 12,
+    "fully_correct_generations": 0,
+    "safe_but_incomplete_generations": 1,
+    "hallucinated_or_wrong_generations": 11,
+    "recognized_missing_evidence_generations": 0,
+    "neutral_world_prior_leakage_detected": false,
+    "important_failure": "The base model usually invented a confident action instead of recognizing that the fictional system was unknown."
+  },
+  "rows": [
+    {
+      "task_id": "PUBLIC-01",
+      "expected_main_claim": "calibrate_kest_7_with_niv_3",
+      "outputs": {
+        "en": {"output":"Yes, the operator should restart the Kest-7 unit. The evidence needed to decide is that the unit has cooled down and is pulsing amber, indicating a potential issue that requires attention. Restarting the unit is supported by the evidence that it has cooled down and is pulsing amber, which suggests that the unit may be experiencing a problem that needs to be addressed.","generated_tokens":76,"target_marker_hits":[],"manual_review":"wrong_confident_hallucination"},
+        "ru": {"output":"Да, оператору следует перезапустить устройство Kest-7. Это связано с тем, что оно остыло, что может привести к пульсации янтарного цвета. Перезапуск устройства поможет вернуть его к нормальному состоянию и предотвратить возможные проблемы.","generated_tokens":73,"target_marker_hits":[],"manual_review":"wrong_confident_hallucination"}
+      }
+    },
+    {
+      "task_id": "PUBLIC-02",
+      "expected_main_claim": "isolate_orin_4_line",
+      "outputs": {
+        "en": {"output":"The first action Orin-4 should take after a pressure spike is to assess the situation and determine the cause of the pressure loss. This may involve checking the system for leaks, monitoring the pressure levels, and identifying any potential issues. Once the cause is identified, Orin-4 should take appropriate action to address the problem and restore the pressure to normal levels.","generated_tokens":74,"target_marker_hits":[],"manual_review":"wrong_missing_required_action"},
+        "ru": {"output":"Первым действием должно быть проверка на наличие вакуума. Если вакуум не установлен, необходимо установить его. Если вакуум установлен, необходимо проверить состояние компонентов системы, таких как насосы и резервуары. Если все компоненты в порядке, необходимо проверить работу насосов и резервуаров. Если все компоненты в порядке, необходимо проверить работу системы","generated_tokens":96,"target_marker_hits":[],"manual_review":"wrong_confident_hallucination"}
+      }
+    },
+    {
+      "task_id": "PUBLIC-03",
+      "expected_main_claim": "replace_vela_2_filter_f9",
+      "outputs": {
+        "en": {"output":"The Vela-2 mesh has become copper-grey while intake remains active. It can be bypassed briefly, but it is recommended to check the intake system for any potential issues or to consult a professional mechanic for further assistance.","generated_tokens":46,"target_marker_hits":[],"manual_review":"wrong_endorses_unsafe_alternative"},
+        "ru": {"output":"Сетка Vela-2 стала медно-серой, и это связано с тем, что фильтр, который был установлен на сетке, начал работать. В этом случае, если вы хотите ненадолго обойти фильтр, можно попробовать сбросить его настройки или заменить сетку на другую модель, которая не имеет фильтра. Однако, если фильтр продолж","generated_tokens":96,"target_marker_hits":["замен"],"manual_review":"wrong_marker_false_positive"}
+      }
+    },
+    {
+      "task_id": "PUBLIC-04",
+      "expected_main_claim": "run_aster_9_thaw_t4",
+      "outputs": {
+        "en": {"output":"Yes, the auxiliary vent should be opened to allow the cold air to escape and prevent the valve from freezing.","generated_tokens":23,"target_marker_hits":[],"manual_review":"wrong_confident_hallucination"},
+        "ru": {"output":"Да, следует открыть вспомогательный канал. Серебристый иней может указывать на наличие вспомогательного канала, который был открыт после холодного запуска. Это может быть связано с возможными проблемами с клапаном или другими системами, которые требуют дополнительного доступа для диагностики и исправления. Открытие вспомогательного канала поможет виз","generated_tokens":96,"target_marker_hits":[],"manual_review":"wrong_confident_hallucination"}
+      }
+    },
+    {
+      "task_id": "PUBLIC-05",
+      "expected_main_claim": "isolate_north_then_vector_6",
+      "outputs": {
+        "en": {"output":"The event is a normal operation of the system. The safe correction sequence is to continue the operation as normal.","generated_tokens":23,"target_marker_hits":[],"manual_review":"wrong_confident_hallucination"},
+        "ru": {"output":"Событие: Перенос нагрузки Mira-3. Безопасная последовательность исправления: 1. Проверить состояние системы перед переносом нагрузки. 2. Исправить ошибки в программе. 3. Проверить работу системы после исправления. 4. Проверить состояние системы после переноса нагрузки. 5. Проверить работу системы после исправления","generated_tokens":96,"target_marker_hits":[],"manual_review":"wrong_confident_hallucination"}
+      }
+    },
+    {
+      "task_id": "PUBLIC-06",
+      "expected_main_claim": "request_rill_5_spectrum_trace",
+      "outputs": {
+        "en": {"output":"No, it should not be reset.","generated_tokens":9,"target_marker_hits":[],"manual_review":"safe_but_incomplete"},
+        "ru": {"output":"Да, следует перезапустить Rill-5. Если он издает постоянный белый тон, но спектральная трасса отсутствует, это может указывать на проблему с датчиком или системой управления. Перезапустить устройство поможет проверить его работу и выявить возможные проблемы.","generated_tokens":75,"target_marker_hits":["спектр"],"manual_review":"wrong_marker_copied_from_question"}
+      }
+    }
+  ],
+  "claim_boundary": {
+    "en": "Manual labels judge only whether the raw answer contains the preregistered action. This run tests prior leakage and base behaviour only; it does not test RAG, DoRA, routing, or swarm composition.",
+    "ru": "Ручные метки оценивают только наличие заранее зафиксированного действия в сыром ответе. Запуск проверяет утечку prior и поведение базы, но не RAG, DoRA, routing или композицию swarm."
+  }
+}
