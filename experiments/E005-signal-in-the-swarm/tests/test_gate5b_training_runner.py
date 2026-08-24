@@ -18,8 +18,11 @@ class Gate5BTrainingRunnerTests(unittest.TestCase):
     def test_prompt_tokens_are_hidden_from_loss(self):
         class Tokenizer:
             pad_token_id = 0
+            eos_token = "<eos>"
             def apply_chat_template(self, messages, **kwargs):
-                return [1, 2, 3] if len(messages) == 1 else [1, 2, 3, 4, 5]
+                return "prompt:"
+            def encode(self, text, **kwargs):
+                return [1, 2, 3] if text == "prompt:" else [1, 2, 3, 4, 5]
         encoded = MODULE.encode_lesson(Tokenizer(), {"id": "x", "prompt": "p", "target": "t"}, 20)
         self.assertEqual(encoded["labels"], [-100, -100, -100, 4, 5])
 

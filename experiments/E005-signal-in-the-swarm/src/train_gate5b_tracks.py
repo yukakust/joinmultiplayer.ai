@@ -25,12 +25,13 @@ def sha256_file(path: Path) -> str:
 
 def encode_lesson(tokenizer, lesson: dict, max_length: int) -> dict:
     user = [{"role": "user", "content": lesson["prompt"]}]
-    full = user + [{"role": "assistant", "content": lesson["target"]}]
-    prompt_ids = tokenizer.apply_chat_template(
-        user, tokenize=True, add_generation_prompt=True, enable_thinking=False
+    prompt_text = tokenizer.apply_chat_template(
+        user, tokenize=False, add_generation_prompt=True, enable_thinking=False
     )
-    full_ids = tokenizer.apply_chat_template(
-        full, tokenize=True, add_generation_prompt=False, enable_thinking=False
+    prompt_ids = tokenizer.encode(prompt_text, add_special_tokens=False)
+    full_ids = tokenizer.encode(
+        prompt_text + lesson["target"] + tokenizer.eos_token,
+        add_special_tokens=False,
     )[:max_length]
     labels = [-100] * min(len(prompt_ids), len(full_ids)) + full_ids[len(prompt_ids) :]
     if not any(value != -100 for value in labels):
