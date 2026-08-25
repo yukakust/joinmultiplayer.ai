@@ -365,6 +365,13 @@ provided. The precommitted stop was applied: J2 is rejected, scored zero
 calibration cases, and saw zero E005 answers. Neither pinned judge is allowed to
 score the experiment. A replacement evaluation design requires a new checkpoint.
 
+Protocol v0.4 replaces both rejected judges before any E005 answer is opened.
+Judge A is Qwen3 8B BF16 and Judge B is Qwen3 14B BF16. Their prompts hide the
+answer-producing model and condition, while the technical protocol keeps exact
+model identities and revisions public. A fresh bilingual 12-case calibration
+uses seal fatigue and battery disconnection. Each judge still needs 12/12. Both
+share one model family, so agreement is redundancy, not independent lineage.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

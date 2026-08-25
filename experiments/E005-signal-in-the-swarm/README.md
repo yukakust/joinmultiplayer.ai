@@ -370,3 +370,9 @@ Phi failed that final format retry in the same way and is now rejected. Both
 pinned judges failed before seeing any E005 answer. The 192 answers therefore
 remain frozen and semantically unscored; changing the judge or evaluation form
 requires a new public protocol checkpoint.
+
+Protocol v0.4 now locks two ungated replacements: Qwen3 8B and Qwen3 14B in
+BF16. They never see which model or condition produced an answer. Their exact
+identities remain public in the protocol for reproducibility. Both must pass a
+new 12-case bilingual calibration perfectly; shared Qwen3 lineage remains an
+explicit limitation.

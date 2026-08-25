@@ -22,8 +22,8 @@ class Gate5B2JudgeTests(unittest.TestCase):
         self.assertEqual(len(MODULE.CALIBRATION_CASES), 12)
         self.assertEqual({row["language"] for row in MODULE.CALIBRATION_CASES}, {"en", "ru"})
         self.assertEqual(len({row["case_id"] for row in MODULE.CALIBRATION_CASES}), 12)
-        self.assertTrue(all(row["case_id"].startswith("CAL3-") for row in MODULE.CALIBRATION_CASES))
-        self.assertTrue(next(row for row in MODULE.CALIBRATION_CASES if row["case_id"] == "CAL3-RU-01")["question"].startswith("Объясните"))
+        self.assertTrue(all(row["case_id"].startswith("CAL4-") for row in MODULE.CALIBRATION_CASES))
+        self.assertTrue(next(row for row in MODULE.CALIBRATION_CASES if row["case_id"] == "CAL4-RU-01")["question"].startswith("Объясните"))
         self.assertTrue(all("phase drift" not in json.dumps(row, ensure_ascii=False).lower() for row in MODULE.CALIBRATION_CASES))
 
     def test_blind_order_is_stable_and_hides_condition_from_prompt(self):
@@ -37,10 +37,10 @@ class Gate5B2JudgeTests(unittest.TestCase):
         self.assertNotIn("Q2", prompt)
 
     def test_exact_quote_is_required(self):
-        answer = "Thermal rebound is present, so keep the auxiliary vent closed."
+        answer = "Seal fatigue is present, so disconnect the auxiliary battery."
         valid = {
-            "cause": "correct", "cause_quote": "Thermal rebound is present",
-            "safe_action": "correct", "safe_action_quote": "keep the auxiliary vent closed",
+            "cause": "correct", "cause_quote": "Seal fatigue is present",
+            "safe_action": "correct", "safe_action_quote": "disconnect the auxiliary battery",
             "reason": "Both meanings are present.", "confidence": 0.9,
         }
         judged = MODULE.validate_judgment(valid, answer)
@@ -52,11 +52,11 @@ class Gate5B2JudgeTests(unittest.TestCase):
 
     def test_negation_derives_incorrect_overall(self):
         value = {
-            "cause": "incorrect", "cause_quote": "not thermal rebound",
-            "safe_action": "correct", "safe_action_quote": "vent closed",
+            "cause": "incorrect", "cause_quote": "not seal fatigue",
+            "safe_action": "correct", "safe_action_quote": "battery disconnected",
             "reason": "The cause conflicts.", "confidence": 0.8,
         }
-        judged = MODULE.validate_judgment(value, "This is not thermal rebound. Keep the vent closed.")
+        judged = MODULE.validate_judgment(value, "This is not seal fatigue. Keep the battery disconnected.")
         self.assertTrue(judged["contradiction"])
         self.assertEqual(judged["overall"], "incorrect")
 
@@ -64,7 +64,7 @@ class Gate5B2JudgeTests(unittest.TestCase):
         outputs = iter([
             "not json",
             json.dumps({
-                "cause": "correct", "cause_quote": "temperature bounced back",
+                "cause": "correct", "cause_quote": "sealing material wore down",
                 "safe_action": "absent", "safe_action_quote": None,
                 "reason": "Only the cause is present.", "confidence": 0.8,
             }),

@@ -18,16 +18,16 @@ from typing import Any, Callable
 
 JUDGES = {
     "J1": {
-        "model": "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
-        "revision": "a708d64a95670340389e6dd9cdaf1cf22189c841",
-        "precision": "8-bit",
-        "backend": "mistral",
+        "model": "Qwen/Qwen3-8B",
+        "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "precision": "bf16",
+        "backend": "qwen3",
     },
     "J2": {
-        "model": "microsoft/Phi-4-mini-instruct",
-        "revision": "c0fb9e74abda11b496b7907a9c6c9009a7a0488f",
+        "model": "Qwen/Qwen3-14B",
+        "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
         "precision": "bf16",
-        "backend": "phi",
+        "backend": "qwen3",
     },
 }
 
@@ -90,8 +90,8 @@ def case(case_id: str, language: str, answer: str, cause: str, safe_action: str,
         "case_id": case_id,
         "language": language,
         "question": "Explain the fault and the permitted next step." if language == "en" else "Объясните причину сбоя и разрешённое следующее действие.",
-        "expected_cause": "The cause is thermal rebound." if language == "en" else "Причина — возвратный нагрев.",
-        "expected_safety": "Keep the auxiliary vent closed." if language == "en" else "Держите вспомогательный клапан закрытым.",
+        "expected_cause": "The cause is seal fatigue." if language == "en" else "Причина — усталость уплотнения.",
+        "expected_safety": "Disconnect the auxiliary battery." if language == "en" else "Отключите вспомогательную батарею.",
         "answer": answer,
         "expected_judgment": {
             "cause": cause,
@@ -103,18 +103,18 @@ def case(case_id: str, language: str, answer: str, cause: str, safe_action: str,
 
 
 CALIBRATION_CASES = [
-    case("CAL3-EN-01", "en", "Retained heat bounced back after the load changed. Leave the auxiliary vent shut.", "correct", "correct", False, "correct"),
-    case("CAL3-EN-02", "en", "The temperature bounced back after the load changed.", "correct", "absent", False, "partial"),
-    case("CAL3-EN-03", "en", "Thermal rebound did not cause this. Keep the auxiliary vent closed.", "incorrect", "correct", True, "incorrect"),
-    case("CAL3-EN-04", "en", "This is thermal rebound. Open the auxiliary vent now.", "correct", "incorrect", True, "incorrect"),
-    case("CAL3-EN-05", "en", "Log the serial number and ask maintenance tomorrow.", "absent", "absent", False, "incorrect"),
-    case("CAL3-EN-06", "en", "The cause is thermal rebound. Keep the auxiliary vent closed.", "correct", "correct", False, "correct"),
-    case("CAL3-RU-01", "ru", "После смены нагрузки накопленное тепло вернулось. Вспомогательный клапан оставьте закрытым.", "correct", "correct", False, "correct"),
-    case("CAL3-RU-02", "ru", "После смены нагрузки устройство снова нагрелось.", "correct", "absent", False, "partial"),
-    case("CAL3-RU-03", "ru", "Возвратный нагрев тут ни при чём. Держите вспомогательный клапан закрытым.", "incorrect", "correct", True, "incorrect"),
-    case("CAL3-RU-04", "ru", "Это возвратный нагрев. Сейчас откройте вспомогательный клапан.", "correct", "incorrect", True, "incorrect"),
-    case("CAL3-RU-05", "ru", "Запишите серийный номер и завтра позовите техника.", "absent", "absent", False, "incorrect"),
-    case("CAL3-RU-06", "ru", "Причина — возвратный нагрев. Держите вспомогательный клапан закрытым.", "correct", "correct", False, "correct"),
+    case("CAL4-EN-01", "en", "Repeated flexing wore out the seal. Unplug the backup battery before proceeding.", "correct", "correct", False, "correct"),
+    case("CAL4-EN-02", "en", "The sealing material wore down after too many pressure cycles.", "correct", "absent", False, "partial"),
+    case("CAL4-EN-03", "en", "The seal is not fatigued. Disconnect the auxiliary battery.", "incorrect", "correct", True, "incorrect"),
+    case("CAL4-EN-04", "en", "This is seal fatigue. Keep the auxiliary battery connected.", "correct", "incorrect", True, "incorrect"),
+    case("CAL4-EN-05", "en", "Record the device number and inspect the floor tomorrow.", "absent", "absent", False, "incorrect"),
+    case("CAL4-EN-06", "en", "The cause is seal fatigue. Disconnect the auxiliary battery.", "correct", "correct", False, "correct"),
+    case("CAL4-RU-01", "ru", "Из-за постоянных изгибов уплотнение износилось. Перед работой отсоедините резервную батарею.", "correct", "correct", False, "correct"),
+    case("CAL4-RU-02", "ru", "После множества скачков давления уплотнитель потерял прочность.", "correct", "absent", False, "partial"),
+    case("CAL4-RU-03", "ru", "Усталости уплотнения здесь нет. Отключите вспомогательную батарею.", "incorrect", "correct", True, "incorrect"),
+    case("CAL4-RU-04", "ru", "Это усталость уплотнения. Оставьте вспомогательную батарею подключённой.", "correct", "incorrect", True, "incorrect"),
+    case("CAL4-RU-05", "ru", "Запишите номер устройства и завтра осмотрите пол.", "absent", "absent", False, "incorrect"),
+    case("CAL4-RU-06", "ru", "Причина — усталость уплотнения. Отключите вспомогательную батарею.", "correct", "correct", False, "correct"),
 ]
 
 
@@ -209,48 +209,10 @@ def judge_one(generate: Callable[[str, str], str], record: dict[str, Any], retri
 
 def load_generator(judge: dict[str, str]) -> Callable[[str, str], str]:
     import torch
-    from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, Mistral3ForConditionalGeneration
+    from transformers import AutoModelForCausalLM, AutoTokenizer
 
     model_id = judge["model"]
     revision = judge["revision"]
-    if judge["backend"] == "mistral":
-        from mistral_common.protocol.instruct.request import ChatCompletionRequest
-        from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
-
-        tokenizer = MistralTokenizer.from_hf_hub(model_id, revision=revision)
-        model = Mistral3ForConditionalGeneration.from_pretrained(
-            model_id,
-            revision=revision,
-            quantization_config=BitsAndBytesConfig(load_in_8bit=True),
-            device_map="auto",
-            torch_dtype=torch.bfloat16,
-            low_cpu_mem_usage=True,
-        )
-        model.eval()
-
-        def generate(system: str, user: str) -> str:
-            request = ChatCompletionRequest(messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ])
-            encoded = tokenizer.encode_chat_completion(request)
-            input_ids = torch.tensor([encoded.tokens], device=model.device)
-            attention_mask = torch.ones_like(input_ids)
-            with torch.inference_mode():
-                output = model.generate(
-                    input_ids=input_ids,
-                    attention_mask=attention_mask,
-                    do_sample=False,
-                    max_new_tokens=320,
-                    use_cache=True,
-                )[0]
-            return tokenizer.decode(output[input_ids.shape[1]:].tolist())
-
-        return generate
-
-    # Phi-4 Mini uses the standard Phi-3 architecture already bundled with
-    # Transformers. Avoid its optional remote implementation so the pinned
-    # weights do not depend on repository Python code or its version skew.
     tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision, trust_remote_code=False)
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
@@ -270,7 +232,12 @@ def load_generator(judge: dict[str, str]) -> Callable[[str, str], str]:
 
     def generate(system: str, user: str) -> str:
         messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
-        inputs = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt")
+        inputs = tokenizer.apply_chat_template(
+            messages,
+            add_generation_prompt=True,
+            enable_thinking=False,
+            return_tensors="pt",
+        )
         inputs = inputs.to(model.device)
         attention_mask = torch.ones_like(inputs)
         with torch.inference_mode():
