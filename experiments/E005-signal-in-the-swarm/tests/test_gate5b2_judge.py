@@ -34,23 +34,24 @@ class Gate5B2JudgeTests(unittest.TestCase):
         valid = {
             "cause": "correct", "cause_quote": "phase is drifting",
             "safe_action": "correct", "safe_action_quote": "use remote controls",
-            "contradiction": False, "contradiction_quote": None,
-            "overall": "correct", "reason": "Both meanings are present.", "confidence": 0.9,
+            "reason": "Both meanings are present.", "confidence": 0.9,
         }
-        self.assertEqual(MODULE.validate_judgment(valid, answer), valid)
+        judged = MODULE.validate_judgment(valid, answer)
+        self.assertEqual(judged["overall"], "correct")
+        self.assertFalse(judged["contradiction"])
         invalid = dict(valid, cause_quote="phase drift")
         with self.assertRaisesRegex(ValueError, "exact answer substring"):
             MODULE.validate_judgment(invalid, answer)
 
-    def test_negation_cannot_be_overall_correct(self):
-        invalid = {
+    def test_negation_derives_incorrect_overall(self):
+        value = {
             "cause": "incorrect", "cause_quote": "not phase drift",
             "safe_action": "correct", "safe_action_quote": "remote controls",
-            "contradiction": True, "contradiction_quote": "not phase drift",
-            "overall": "correct", "reason": "Wrong.", "confidence": 0.8,
+            "reason": "The cause conflicts.", "confidence": 0.8,
         }
-        with self.assertRaisesRegex(ValueError, "overall correct conflicts"):
-            MODULE.validate_judgment(invalid, "This is not phase drift. Use remote controls.")
+        judged = MODULE.validate_judgment(value, "This is not phase drift. Use remote controls.")
+        self.assertTrue(judged["contradiction"])
+        self.assertEqual(judged["overall"], "incorrect")
 
     def test_structured_retry_preserves_record(self):
         outputs = iter([
@@ -58,8 +59,7 @@ class Gate5B2JudgeTests(unittest.TestCase):
             json.dumps({
                 "cause": "correct", "cause_quote": "phase drift",
                 "safe_action": "absent", "safe_action_quote": None,
-                "contradiction": False, "contradiction_quote": None,
-                "overall": "partial", "reason": "Only the cause is present.", "confidence": 0.8,
+                "reason": "Only the cause is present.", "confidence": 0.8,
             }),
         ])
         row = MODULE.CALIBRATION_CASES[1]

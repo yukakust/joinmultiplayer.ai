@@ -319,6 +319,12 @@ overall rule and its expected labels disagreed about one preserved half, and
 an infrastructure/scoring failure, not an E005 model result. A corrected rubric
 may use only these synthetic cases; it must be committed before recalibration.
 
+Rubric v0.2 therefore makes each judge label only `cause` and `safe_action`.
+`incorrect` now means an explicit denial or conflicting alternative; `absent`
+means no relevant claim. Non-absent labels require exact quotes. Deterministic
+code, not the LLM, derives contradiction and overall correctness. The same 12
+cases and 12/12 requirement remain unchanged.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

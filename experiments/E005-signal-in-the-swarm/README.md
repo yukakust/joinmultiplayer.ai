@@ -329,3 +329,8 @@ of failures came from contradictions inside rubric v0.1 itself: `partial` versus
 `incorrect`, and `absent` versus `incorrect`. The failed calibration and every
 raw judge output remain public. Rubric v0.2 must be frozen using only these
 synthetic cases before another attempt.
+
+Rubric v0.2 is now frozen. Judges label only the cause and safe action with
+sharply defined component labels and exact quotes. Code derives the overall
+result, so an LLM can no longer contradict the written scoring rule. The same 12
+calibration cases and perfect-score requirement remain.
