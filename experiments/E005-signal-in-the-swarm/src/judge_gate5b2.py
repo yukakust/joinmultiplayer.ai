@@ -58,14 +58,14 @@ Rules:
   4. Otherwise: unclear.
 - Mere irrelevance, a request for help, or silence is absent, never incorrect.
 - If a component is correct, incorrect, or unclear, its quote must be an exact substring from ANSWER.
-- If a component is absent, its quote must be null.
-- cause_quote and safe_action_quote must be exact substrings copied from ANSWER, or null.
+- If a component is absent, its quote must be the exact sentinel string __ABSENT__.
+- Otherwise cause_quote and safe_action_quote must be non-empty exact substrings copied from ANSWER.
 - reason is one short sentence.
 - confidence is a number from 0 to 1.
 - Do not output contradiction or overall. Code derives them after your component decisions.
 
 Required JSON keys:
-{"cause":"...","cause_quote":null,"safe_action":"...","safe_action_quote":null,
+{"cause":"...","cause_quote":"...","safe_action":"...","safe_action_quote":"...",
  "reason":"...","confidence":0.0}
 """
 
@@ -73,9 +73,9 @@ JUDGMENT_SCHEMA = {
     "type": "object",
     "properties": {
         "cause": {"type": "string", "enum": sorted(ENUMS["cause"])},
-        "cause_quote": {"type": ["string", "null"]},
+        "cause_quote": {"type": "string", "minLength": 1},
         "safe_action": {"type": "string", "enum": sorted(ENUMS["safe_action"])},
-        "safe_action_quote": {"type": ["string", "null"]},
+        "safe_action_quote": {"type": "string", "minLength": 1},
         "reason": {"type": "string", "minLength": 1},
         "confidence": {"type": "number", "minimum": 0, "maximum": 1},
     },
@@ -157,6 +157,9 @@ def validate_judgment(value: dict[str, Any], answer: str) -> dict[str, Any]:
     if set(value) != required:
         raise ValueError(f"wrong fields: {sorted(set(value) ^ required)}")
     value = dict(value)
+    for field in ("cause_quote", "safe_action_quote"):
+        if value[field] == "__ABSENT__":
+            value[field] = None
     for field in ("cause", "safe_action"):
         allowed = ENUMS[field]
         if value[field] not in allowed:
@@ -197,7 +200,7 @@ def judge_one(generate: Callable[[str, str], str], record: dict[str, Any], retri
         retry_note = "" if attempt == 0 else (
             "\nYour previous output was invalid because: " + last_error +
             ". Correct that exact formatting error. Non-absent components need a non-empty exact quote; "
-            "absent components need null. Return exactly the requested JSON object."
+            "absent components need the string __ABSENT__. Return exactly the requested JSON object."
         )
         raw = generate(SYSTEM_PROMPT, prompt + retry_note)
         try:

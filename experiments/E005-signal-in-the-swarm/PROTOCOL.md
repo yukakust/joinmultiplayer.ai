@@ -372,6 +372,13 @@ model identities and revisions public. A fresh bilingual 12-case calibration
 uses seal fatigue and battery disconnection. Each judge still needs 12/12. Both
 share one model family, so agreement is redundancy, not independent lineage.
 
+Judge A's first v0.4 process exposed a harness contradiction before any E005
+answer: the JSON grammar allowed null quotes while the validator rejected null
+for non-absent labels. The semantic score is unavailable. Transport v0.4.1 now
+requires a non-empty quote string and represents absence with `__ABSENT__`, which
+is normalized to null after generation. No semantic rule or calibration answer
+changed.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

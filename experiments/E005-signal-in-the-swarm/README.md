@@ -376,3 +376,8 @@ BF16. They never see which model or condition produced an answer. Their exact
 identities remain public in the protocol for reproducibility. Both must pass a
 new 12-case bilingual calibration perfectly; shared Qwen3 lineage remains an
 explicit limitation.
+
+The first 8B calibration process stopped on a contradiction in our output form,
+not a semantic result: grammar allowed a null quote that validation forbade. The
+fixed transport requires a string and uses `__ABSENT__` only for a missing claim.
+No E005 answer was seen and the calibration meanings remain unchanged.

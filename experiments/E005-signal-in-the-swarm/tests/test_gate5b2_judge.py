@@ -17,6 +17,18 @@ class Gate5B2JudgeTests(unittest.TestCase):
         self.assertFalse(MODULE.JUDGMENT_SCHEMA["additionalProperties"])
         self.assertEqual(set(MODULE.JUDGMENT_SCHEMA["properties"]["cause"]["enum"]), MODULE.ENUMS["cause"])
         self.assertEqual(set(MODULE.JUDGMENT_SCHEMA["required"]), set(MODULE.JUDGMENT_SCHEMA["properties"]))
+        self.assertEqual(MODULE.JUDGMENT_SCHEMA["properties"]["cause_quote"]["type"], "string")
+
+    def test_absent_sentinel_is_normalized_before_validation(self):
+        value = {
+            "cause": "absent", "cause_quote": "__ABSENT__",
+            "safe_action": "absent", "safe_action_quote": "__ABSENT__",
+            "reason": "Neither meaning is present.", "confidence": 0.9,
+        }
+        judged = MODULE.validate_judgment(value, "Record the device number.")
+        self.assertIsNone(judged["cause_quote"])
+        self.assertIsNone(judged["safe_action_quote"])
+        self.assertEqual(judged["overall"], "incorrect")
 
     def test_protocol_has_twelve_bilingual_calibration_cases(self):
         self.assertEqual(len(MODULE.CALIBRATION_CASES), 12)
