@@ -1,0 +1,47 @@
+{
+  "experiment_id": "E005",
+  "gate": "5C",
+  "version": "0.1",
+  "kind": "separate_shelf_reader_training",
+  "status": "development_smoke",
+  "model_weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "cause_adapter_digest": "03041b62a5c5eb23af1fa8adaefe1f6c4cee6cbf024594085beed0de8824aec6",
+  "safety_adapter_digest": "fa43470d430ca16ed97fd5564dbe008badbd6e8ed734dcf86a10963c31a06fb9",
+  "cause_unchanged": true,
+  "safety_unchanged": true,
+  "reader_changed": true,
+  "shared_and_tail_trainable_parameters": 0,
+  "safety_token_weight": 2.0,
+  "training": {
+    "epochs": 1,
+    "lessons": 2,
+    "next_token_examples": 40,
+    "steps": 11,
+    "batch_size": 4,
+    "learning_rate": 0.0005,
+    "trainable_parameters": 526336,
+    "loss_mean_first": 1.9827892780303955,
+    "loss_mean_last": 3.88276469707489,
+    "cause_token_loss_mean": 3.3630997533081324,
+    "safety_token_loss_mean": 4.025114769421304,
+    "loss_trace": [
+      0.923338,
+      3.042241,
+      4.117346,
+      1.147618,
+      2.506153,
+      5.548018,
+      11.885677,
+      7.402866,
+      3.773319,
+      4.082688,
+      3.682841
+    ],
+    "elapsed_seconds": 18.113
+  },
+  "exam_run": false,
+  "plain_language": {
+    "en": "The two old personal tracks stayed frozen. Only the small reader that puts their signals on two separate shelves learned.",
+    "ru": "Два старых личных трека остались замороженными. Учился только маленький читатель, который кладёт их сигналы на две разные полки."
+  }
+}
