@@ -38,7 +38,9 @@ class Gate5CDesignTest(unittest.TestCase):
         server = (ROOT / "server/server.py").read_text()
         self.assertIn('path === "experiment/e005/gate-5c"', app)
         self.assertIn('"/experiment/e005/gate-5c"', server)
+        self.assertIn('"/experiment/e005/gate-5c/results"', server)
         self.assertIn("gate-5c-design-v0.1.json", app)
+        self.assertIn("gate-5c-results-v0.1.json", app)
 
     def test_corrected_smoke_uses_fixed_before_after_evaluation(self):
         result = json.loads((ROOT / "site/experiments/E005/gate-5c-reader-smoke-v0.3.json").read_text())

@@ -1184,6 +1184,34 @@ button:disabled {
   width: 100%;
 }
 
+.flow-shell.e005-gate5c-results-page {
+  margin-inline: 0;
+  max-width: none;
+  padding-inline: clamp(1rem, 2.2vw, 2.5rem);
+  padding-top: clamp(6rem, 8vw, 8rem);
+  width: 100%;
+}
+
+.e005-answer-condition {
+  display: grid;
+  gap: 0.6rem;
+  margin: 2rem 0;
+  max-width: 42rem;
+}
+
+.e005-answer-condition span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.e005-answer-condition select {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font: inherit;
+  padding: 1rem;
+}
+
 .e005-gate5b-results-page .e005-gate4-result-answers {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }

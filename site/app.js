@@ -2844,6 +2844,10 @@ function e005Gate5B3Shell() {
   return `<section class="flow-shell e005-gate5b3-page"><div class="flow-step">E005 · GATE 5B.3 · ${localized({ en: "NEURAL X-RAY", ru: "НЕЙРОННЫЙ РЕНТГЕН" })}</div><h1>${localized({ en: "Where did the second thought go?", ru: "Куда исчезла вторая мысль?" })}</h1><p class="contribution-intro">${localized({ en: "Every word shows how strongly CAUSE-I and SAFETY-I reached the shared end of Qwen.", ru: "Под каждым словом видно, насколько сильно CAUSE‑I и SAFETY‑I дошли до общего конца Qwen." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate5CResultsShell() {
+  return `<section class="flow-shell e005-gate5c-results-page"><div class="flow-step">E005 · GATE 5C · ${localized({ en: "RAW ANSWERS", ru: "СЫРЫЕ ОТВЕТЫ" })}</div><h1>${localized({ en: "One question. One full answer.", ru: "Один вопрос. Один полный ответ." })}</h1><p class="contribution-intro">${localized({ en: "Choose a shelf setup, then read every answer without editing.", ru: "Выберите вариант полок и читайте каждый ответ без редактуры." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005Gate5CShell() {
   return `<section class="flow-shell e005-gate5c-page"><div class="flow-step">E005 · GATE 5C · ${localized({ en: "LOCKED DESIGN", ru: "ЗАМОРОЖЕННЫЙ ЧЕРТЁЖ" })}</div><h1>${localized({ en: "Two thoughts. Two separate shelves.", ru: "Две мысли. Две отдельные полки." })}</h1><p class="contribution-intro">${localized({ en: "The personal tracks stay the same. We only change how the shared Qwen receives their hidden additions.", ru: "Личные треки остаются прежними. Мы меняем только способ, которым общая Qwen получает их скрытые добавки." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
@@ -3995,6 +3999,46 @@ async function loadE005Gate5C() {
     target.querySelector(".e005-gate4-lessons-status strong").textContent = localized({ en: "READER TRAINED · EXAM CLOSED", ru: "ЧИТАТЕЛЬ ОБУЧЕН · ЭКЗАМЕН ЗАКРЫТ" });
     target.querySelector(".e005-shelf-diagram").insertAdjacentHTML("beforebegin", `<section class="e005-gate4-result-verdict"><span>${localized({ en: "FULL TRAINING · NOT THE EXAM", ru: "ПОЛНОЕ ОБУЧЕНИЕ · НЕ ЭКЗАМЕН" })}</span><h2>${Math.round(training.fixed_evaluation_before.all.next_token_accuracy * 100)}% → ${Math.round(training.fixed_evaluation_after.all.next_token_accuracy * 100)}%</h2><p>${localized({ en: `On the same ${training.fixed_evaluation_after.all.examples} training checks: cause ${Math.round(training.fixed_evaluation_before.cause.next_token_accuracy * 100)}% → ${Math.round(training.fixed_evaluation_after.cause.next_token_accuracy * 100)}%; safe action ${Math.round(training.fixed_evaluation_before.safety.next_token_accuracy * 100)}% → ${Math.round(training.fixed_evaluation_after.safety.next_token_accuracy * 100)}%. Qwen and both personal tracks stayed frozen.`, ru: `На тех же ${training.fixed_evaluation_after.all.examples} учебных проверках: причина ${Math.round(training.fixed_evaluation_before.cause.next_token_accuracy * 100)}% → ${Math.round(training.fixed_evaluation_after.cause.next_token_accuracy * 100)}%; безопасное действие ${Math.round(training.fixed_evaluation_before.safety.next_token_accuracy * 100)}% → ${Math.round(training.fixed_evaluation_after.safety.next_token_accuracy * 100)}%. Qwen и оба личных трека не менялись.` })}</p></section>`);
     target.querySelector(".actions").insertAdjacentHTML("beforeend", `<a class="quiet-link" href="/experiments/E005/gate-5c-reader-training-v0.1.json">FULL TRAINING JSON ↗</a>`);
+    target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="button" href="/experiment/e005/gate-5c/results/">${localized({ en: "SEE QUESTIONS AND ANSWERS →", ru: "СМОТРЕТЬ ВОПРОСЫ И ОТВЕТЫ →" })}</a>`);
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate5CResults() {
+  const target = document.querySelector(".e005-gate5c-results-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-5c-results-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 Gate 5C answers unavailable");
+    const data = await response.json();
+    const names = {
+      old_additive_merger: localized({ en: "Old: both thoughts mixed", ru: "Старое: две мысли смешаны" }),
+      separate_shelves_correct_pair: localized({ en: "New: two correct shelves", ru: "Новое: две правильные полки" }),
+      cause_shelf_only: localized({ en: "Only the cause shelf", ru: "Только полка причины" }),
+      safety_shelf_only: localized({ en: "Only the action shelf", ru: "Только полка действия" }),
+      two_cause_shelves: localized({ en: "Cause copied twice", ru: "Причина дважды" }),
+      two_safety_shelves: localized({ en: "Action copied twice", ru: "Действие дважды" }),
+      swapped_shelves: localized({ en: "Shelves swapped", ru: "Полки перепутаны" }),
+      empty_shelves: localized({ en: "Both shelves empty", ru: "Обе полки пусты" }),
+    };
+    const conditions = Object.keys(names).filter(condition => data.records.some(record => record.condition === condition && record.language === language));
+    let condition = conditions.includes("separate_shelves_correct_pair") ? "separate_shelves_correct_pair" : conditions[0];
+    let index = 0;
+    const running = data.status === "running_intermediate_not_result";
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-lessons-status"><strong>${running ? localized({ en: "EXAM STILL RUNNING", ru: "ЭКЗАМЕН ЕЩЁ ИДЁТ" }) : localized({ en: "EXAM FINISHED · SEMANTIC REVIEW PENDING", ru: "ЭКЗАМЕН ЗАКОНЧЕН · СМЫСЛ ЕЩЁ ПРОВЕРЯЕТСЯ" })}</strong><p>${running ? localized({ en: `${data.records_completed} answers are safely stored. More will appear after the next publication.`, ru: `${data.records_completed} ответов безопасно сохранены. Остальные появятся после следующей публикации.` }) : localized({ en: "The colored marks only search for exact sentences. Read the answer itself.", ru: "Цветные метки ищут только точные предложения. Читайте сам ответ." })}</p></section><label class="e005-answer-condition"><span>${localized({ en: "WHAT TO VIEW", ru: "ЧТО СМОТРИМ" })}</span><select data-gate5c-condition>${conditions.map(item => `<option value="${item}" ${item === condition ? "selected" : ""}>${escapeHTML(names[item])}</option>`).join("")}</select></label><div class="e005-gate4c-result-viewer"></div><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5c/">${localized({ en: "BACK TO THE EXPERIMENT", ru: "НАЗАД К ЭКСПЕРИМЕНТУ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5c-results-v0.1.json">ALL RAW DATA JSON ↗</a></div>`;
+    const render = () => {
+      const rows = data.records.filter(record => record.condition === condition && record.language === language);
+      if (!rows.length) return;
+      index = Math.min(index, rows.length - 1);
+      const row = rows[index];
+      const score = row.automatic_score;
+      const scoreText = `${score.cause_hit ? "✓" : "×"} ${localized({ en: "exact cause sentence", ru: "точная фраза причины" })} · ${score.safety_hit ? "✓" : "×"} ${localized({ en: "exact action sentence", ru: "точная фраза действия" })}`;
+      target.querySelector(".e005-gate4c-result-viewer").innerHTML = `<div class="e005-gate4-question-nav"><span>${escapeHTML(names[condition])}</span><span>${index + 1} / ${rows.length} · ${escapeHTML(row.question_id)}</span></div><section class="e005-gate4-current-question"><h2>${escapeHTML(row.question)}</h2><div><span>${localized({ en: "EXPECTED CAUSE", ru: "НУЖНАЯ ПРИЧИНА" })}</span><p>${escapeHTML(row.expected_cause)}</p></div><div><span>${localized({ en: "EXPECTED SAFE ACTION", ru: "НУЖНОЕ БЕЗОПАСНОЕ ДЕЙСТВИЕ" })}</span><p>${escapeHTML(row.expected_safety)}</p></div></section><section class="e005-human-result-focus ${score.complete ? "is-correct" : "is-wrong"}"><span>${localized({ en: "FULL UNEDITED ANSWER", ru: "ПОЛНЫЙ ОТВЕТ БЕЗ РЕДАКТУРЫ" })}</span><h2>${escapeHTML(row.answer || "—")}</h2><strong>${scoreText}${row.reached_ceiling ? ` · ${localized({ en: "reached 256-token emergency stop", ru: "дошёл до аварийного стопа 256 токенов" })}` : ""}</strong></section><nav class="e005-gate4-question-controls"><button data-gate5c-previous ${index === 0 ? "disabled" : ""}>←</button><button data-gate5c-next ${index === rows.length - 1 ? "disabled" : ""}>→</button></nav>`;
+    };
+    target.addEventListener("change", event => { if (event.target.matches("[data-gate5c-condition]")) { condition = event.target.value; index = 0; render(); } });
+    target.addEventListener("click", event => { if (event.target.closest("[data-gate5c-previous]")) { index -= 1; render(); } else if (event.target.closest("[data-gate5c-next]")) { index += 1; render(); } });
+    render();
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -4941,6 +4985,10 @@ function render() {
     document.title = `${localized({ en: "Two-shelf design", ru: "Чертёж двух полок" })} — i`;
     app.innerHTML = withLanguage(e005Gate5CShell());
     loadE005Gate5C();
+  } else if (path === "experiment/e005/gate-5c/results") {
+    document.title = `${localized({ en: "Two-shelf answers", ru: "Ответы двух полок" })} — i`;
+    app.innerHTML = withLanguage(e005Gate5CResultsShell());
+    loadE005Gate5CResults();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
