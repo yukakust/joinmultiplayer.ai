@@ -170,7 +170,7 @@ def run(args: argparse.Namespace) -> dict:
     }
     if args.output.exists():
         checkpoint = json.loads(args.output.read_text(encoding="utf-8"))
-        if checkpoint.get("status") != "running_intermediate_not_result":
+        if checkpoint.get("status") not in {"running_intermediate_not_result", "paused_for_reserved_compute_window"}:
             raise ValueError("existing output is not a resumable Gate 5C checkpoint")
         for key, value in metadata.items():
             if checkpoint.get(key) != value:
