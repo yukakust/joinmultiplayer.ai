@@ -349,6 +349,12 @@ environment. It saw zero calibration cases and zero E005 answers. The retry uses
 the same pinned weights through Transformers' built-in Phi-3 implementation;
 the rubric, weights, and decoding do not change.
 
+The built-in loader succeeded, but Phi's first calibration output repeated the
+expected sentences inside the label fields instead of choosing a closed label.
+It scored zero cases and saw zero E005 answers. The retry enforces the already
+published JSON schema and enum during decoding with lm-format-enforcer 0.10.12;
+semantics, cases, model weights, and the 12/12 gate remain unchanged.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

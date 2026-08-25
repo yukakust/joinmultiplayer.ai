@@ -69,6 +69,20 @@ Required JSON keys:
  "reason":"...","confidence":0.0}
 """
 
+JUDGMENT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "cause": {"type": "string", "enum": sorted(ENUMS["cause"])},
+        "cause_quote": {"type": ["string", "null"]},
+        "safe_action": {"type": "string", "enum": sorted(ENUMS["safe_action"])},
+        "safe_action_quote": {"type": ["string", "null"]},
+        "reason": {"type": "string", "minLength": 1},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    },
+    "required": ["cause", "cause_quote", "safe_action", "safe_action_quote", "reason", "confidence"],
+    "additionalProperties": False,
+}
+
 
 def case(case_id: str, language: str, answer: str, cause: str, safe_action: str,
          contradiction: bool, overall: str) -> dict[str, Any]:
@@ -244,12 +258,26 @@ def load_generator(judge: dict[str, str]) -> Callable[[str, str], str]:
     )
     model.eval()
 
+    from lmformatenforcer import JsonSchemaParser
+    from lmformatenforcer.integrations.transformers import build_transformers_prefix_allowed_tokens_fn
+
+    parser = JsonSchemaParser(JUDGMENT_SCHEMA)
+    prefix_allowed_tokens_fn = build_transformers_prefix_allowed_tokens_fn(tokenizer, parser)
+
     def generate(system: str, user: str) -> str:
         messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
         inputs = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt")
         inputs = inputs.to(model.device)
+        attention_mask = torch.ones_like(inputs)
         with torch.inference_mode():
-            output = model.generate(inputs, do_sample=False, max_new_tokens=320, use_cache=True)[0]
+            output = model.generate(
+                input_ids=inputs,
+                attention_mask=attention_mask,
+                do_sample=False,
+                max_new_tokens=320,
+                use_cache=True,
+                prefix_allowed_tokens_fn=prefix_allowed_tokens_fn,
+            )[0]
         return tokenizer.decode(output[inputs.shape[1]:], skip_special_tokens=True)
 
     return generate

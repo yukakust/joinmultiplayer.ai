@@ -13,6 +13,11 @@ SPEC.loader.exec_module(MODULE)
 
 
 class Gate5B2JudgeTests(unittest.TestCase):
+    def test_output_schema_closes_labels_and_fields(self):
+        self.assertFalse(MODULE.JUDGMENT_SCHEMA["additionalProperties"])
+        self.assertEqual(set(MODULE.JUDGMENT_SCHEMA["properties"]["cause"]["enum"]), MODULE.ENUMS["cause"])
+        self.assertEqual(set(MODULE.JUDGMENT_SCHEMA["required"]), set(MODULE.JUDGMENT_SCHEMA["properties"]))
+
     def test_protocol_has_twelve_bilingual_calibration_cases(self):
         self.assertEqual(len(MODULE.CALIBRATION_CASES), 12)
         self.assertEqual({row["language"] for row in MODULE.CALIBRATION_CASES}, {"en", "ru"})

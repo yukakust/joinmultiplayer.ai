@@ -356,3 +356,8 @@ Phi J2's first load attempt failed before inference because its optional remote
 model code expected a different Transformers API. No case or experiment answer
 was seen. The retry disables remote model code and uses the built-in Phi-3
 implementation with the exact same pinned checkpoint.
+
+That loader succeeded, but Phi filled the closed label fields with full answer
+sentences. The first semantic explanation was correct, yet the protocol output
+was invalid, so no calibration case was scored. The next retry constrains JSON
+and enum syntax during decoding; it does not alter the rubric or any answer.
