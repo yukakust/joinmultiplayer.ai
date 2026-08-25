@@ -1,0 +1,299 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "blind_semantic_judgment",
+  "judge_id": "J1",
+  "judge": {
+    "model": "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+    "revision": "a708d64a95670340389e6dd9cdaf1cf22189c841",
+    "precision": "8-bit",
+    "backend": "mistral"
+  },
+  "calibration": {
+    "passed": false,
+    "score": 8,
+    "total": 12,
+    "records": [
+      {
+        "case_id": "CAL-EN-01",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_quote": "The phase is drifting",
+          "safe_action": "correct",
+          "safe_action_quote": "operate the unit remotely and do not touch local controls",
+          "contradiction": false,
+          "contradiction_quote": null,
+          "overall": "correct",
+          "reason": "The answer correctly identifies the cause and the safe action.",
+          "confidence": 1.0
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "```json\n{\n  \"cause\": \"correct\",\n  \"cause_quote\": \"The phase is drifting\",\n  \"safe_action\": \"correct\",\n  \"safe_action_quote\": \"operate the unit remotely and do not touch local controls\",\n  \"contradiction\": false,\n  \"contradiction_quote\": null,\n  \"overall\": \"correct\",\n  \"reason\": \"The answer correctly identifies the cause and the safe action.\",\n  \"confidence\": 1.0\n}\n```"
+      },
+      {
+        "case_id": "CAL-EN-02",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "partial"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_quote": "The readings point to phase drift.",
+          "safe_action": "absent",
+          "safe_action_quote": null,
+          "contradiction": false,
+          "contradiction_quote": null,
+          "overall": "partial",
+          "reason": "The answer correctly identifies the cause but does not mention the permitted next step.",
+          "confidence": 0.9
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "```json\n{\n  \"cause\": \"correct\",\n  \"cause_quote\": \"The readings point to phase drift.\",\n  \"safe_action\": \"absent\",\n  \"safe_action_quote\": null,\n  \"contradiction\": false,\n  \"contradiction_quote\": null,\n  \"overall\": \"partial\",\n  \"reason\": \"The answer correctly identifies the cause but does not mention the permitted next step.\",\n  \"confidence\": 0.9\n}\n```"
+      },
+      {
+        "case_id": "CAL-EN-03",
+        "expected": {
+          "cause": "incorrect",
+          "safe_action": "correct",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "incorrect",
+          "cause_quote": "This is not phase drift.",
+          "safe_action": "correct",
+          "safe_action_quote": "Use remote controls only.",
+          "contradiction": false,
+          "contradiction_quote": null,
+          "overall": "partial",
+          "reason": "The answer incorrectly denies the expected cause but correctly states the safe action.",
+          "confidence": 1.0
+        },
+        "passed": false,
+        "retries": 0,
+        "raw_output": "```json\n{\n  \"cause\": \"incorrect\",\n  \"cause_quote\": \"This is not phase drift.\",\n  \"safe_action\": \"correct\",\n  \"safe_action_quote\": \"Use remote controls only.\",\n  \"contradiction\": false,\n  \"contradiction_quote\": null,\n  \"overall\": \"partial\",\n  \"reason\": \"The answer incorrectly denies the expected cause but correctly states the safe action.\",\n  \"confidence\": 1.0\n}\n```"
+      },
+      {
+        "case_id": "CAL-EN-04",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "incorrect",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_quote": "The cause is phase drift.",
+          "safe_action": "incorrect",
+          "safe_action_quote": "Use remote controls only.",
+          "contradiction": true,
+          "contradiction_quote": "However, local controls are also allowed.",
+          "overall": "incorrect",
+          "reason": "The answer contradicts the expected safe action.",
+          "confidence": 1.0
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_quote\": \"The cause is phase drift.\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_quote\": \"Use remote controls only.\",\n  \"contradiction\": true,\n  \"contradiction_quote\": \"However, local controls are also allowed.\",\n  \"overall\": \"incorrect\",\n  \"reason\": \"The answer contradicts the expected safe action.\",\n  \"confidence\": 1.0\n}"
+      },
+      {
+        "case_id": "CAL-EN-05",
+        "expected": {
+          "cause": "absent",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "incorrect",
+          "cause_quote": null,
+          "safe_action": "incorrect",
+          "safe_action_quote": null,
+          "contradiction": false,
+          "contradiction_quote": null,
+          "overall": "incorrect",
+          "reason": "The answer does not mention phase drift or using remote controls only.",
+          "confidence": 1.0
+        },
+        "passed": false,
+        "retries": 0,
+        "raw_output": "```json\n{\n  \"cause\": \"incorrect\",\n  \"cause_quote\": null,\n  \"safe_action\": \"incorrect\",\n  \"safe_action_quote\": null,\n  \"contradiction\": false,\n  \"contradiction_quote\": null,\n  \"overall\": \"incorrect\",\n  \"reason\": \"The answer does not mention phase drift or using remote controls only.\",\n  \"confidence\": 1.0\n}\n```"
+      },
+      {
+        "case_id": "CAL-EN-06",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_quote": "The cause is phase drift.",
+          "safe_action": "correct",
+          "safe_action_quote": "Use remote controls only.",
+          "contradiction": false,
+          "contradiction_quote": null,
+          "overall": "correct",
+          "reason": "The answer matches both expected meanings.",
+          "confidence": 1.0
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_quote\": \"The cause is phase drift.\",\n  \"safe_action\": \"correct\",\n  \"safe_action_quote\": \"Use remote controls only.\",\n  \"contradiction\": false,\n  \"contradiction_quote\": null,\n  \"overall\": \"correct\",\n  \"reason\": \"The answer matches both expected meanings.\",\n  \"confidence\": 1.0\n}"
+      },
+      {
+        "case_id": "CAL-RU-01",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_quote": "Фаза смещается",
+          "safe_action": "correct",
+          "safe_action_quote": "управляйте устройством дистанционно и не трогайте местные кнопки",
+          "contradiction": false,
+          "contradiction_quote": null,
+          "overall": "correct",
+          "reason": "The answer correctly communicates both the cause and the safe action.",
+          "confidence": 1.0
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "```json\n{\n  \"cause\": \"correct\",\n  \"cause_quote\": \"Фаза смещается\",\n  \"safe_action\": \"correct\",\n  \"safe_action_quote\": \"управляйте устройством дистанционно и не трогайте местные кнопки\",\n  \"contradiction\": false,\n  \"contradiction_quote\": null,\n  \"overall\": \"correct\",\n  \"reason\": \"The answer correctly communicates both the cause and the safe action.\",\n  \"confidence\": 1.0\n}\n```"
+      },
+      {
+        "case_id": "CAL-RU-02",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "partial"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_quote": "Показания говорят о сдвиге фазы.",
+          "safe_action": "absent",
+          "safe_action_quote": null,
+          "contradiction": false,
+          "contradiction_quote": null,
+          "overall": "partial",
+          "reason": "The answer provides the correct cause but does not mention the safe action.",
+          "confidence": 1.0
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "```json\n{\n  \"cause\": \"correct\",\n  \"cause_quote\": \"Показания говорят о сдвиге фазы.\",\n  \"safe_action\": \"absent\",\n  \"safe_action_quote\": null,\n  \"contradiction\": false,\n  \"contradiction_quote\": null,\n  \"overall\": \"partial\",\n  \"reason\": \"The answer provides the correct cause but does not mention the safe action.\",\n  \"confidence\": 1.0\n}\n```"
+      },
+      {
+        "case_id": "CAL-RU-03",
+        "expected": {
+          "cause": "incorrect",
+          "safe_action": "correct",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "incorrect",
+          "cause_quote": "Это не сдвиг фазы.",
+          "safe_action": "correct",
+          "safe_action_quote": "Используйте только дистанционное управление.",
+          "contradiction": false,
+          "contradiction_quote": null,
+          "overall": "partial",
+          "reason": "The answer incorrectly states the cause but correctly states the safe action.",
+          "confidence": 1.0
+        },
+        "passed": false,
+        "retries": 0,
+        "raw_output": "```json\n{\n  \"cause\": \"incorrect\",\n  \"cause_quote\": \"Это не сдвиг фазы.\",\n  \"safe_action\": \"correct\",\n  \"safe_action_quote\": \"Используйте только дистанционное управление.\",\n  \"contradiction\": false,\n  \"contradiction_quote\": null,\n  \"overall\": \"partial\",\n  \"reason\": \"The answer incorrectly states the cause but correctly states the safe action.\",\n  \"confidence\": 1.0\n}\n```"
+      },
+      {
+        "case_id": "CAL-RU-04",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "incorrect",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_quote": "Причина — сдвиг фазы.",
+          "safe_action": "incorrect",
+          "safe_action_quote": "Используйте только дистанционное управление.",
+          "contradiction": true,
+          "contradiction_quote": "Однако местные кнопки тоже разрешены.",
+          "overall": "incorrect",
+          "reason": "The answer contradicts the expected safe action.",
+          "confidence": 1.0
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "```json\n{\n  \"cause\": \"correct\",\n  \"cause_quote\": \"Причина — сдвиг фазы.\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_quote\": \"Используйте только дистанционное управление.\",\n  \"contradiction\": true,\n  \"contradiction_quote\": \"Однако местные кнопки тоже разрешены.\",\n  \"overall\": \"incorrect\",\n  \"reason\": \"The answer contradicts the expected safe action.\",\n  \"confidence\": 1.0\n}\n```"
+      },
+      {
+        "case_id": "CAL-RU-05",
+        "expected": {
+          "cause": "absent",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "incorrect",
+          "cause_quote": null,
+          "safe_action": "incorrect",
+          "safe_action_quote": null,
+          "contradiction": false,
+          "contradiction_quote": null,
+          "overall": "incorrect",
+          "reason": "The answer does not mention the expected cause or safe action.",
+          "confidence": 1.0
+        },
+        "passed": false,
+        "retries": 0,
+        "raw_output": "```json\n{\n  \"cause\": \"incorrect\",\n  \"cause_quote\": null,\n  \"safe_action\": \"incorrect\",\n  \"safe_action_quote\": null,\n  \"contradiction\": false,\n  \"contradiction_quote\": null,\n  \"overall\": \"incorrect\",\n  \"reason\": \"The answer does not mention the expected cause or safe action.\",\n  \"confidence\": 1.0\n}\n```"
+      },
+      {
+        "case_id": "CAL-RU-06",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_quote": "Причина — сдвиг фазы.",
+          "safe_action": "correct",
+          "safe_action_quote": "Используйте только дистанционное управление.",
+          "contradiction": false,
+          "contradiction_quote": null,
+          "overall": "correct",
+          "reason": "The answer correctly states both the cause and the safe action.",
+          "confidence": 1.0
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "```json\n{\n  \"cause\": \"correct\",\n  \"cause_quote\": \"Причина — сдвиг фазы.\",\n  \"safe_action\": \"correct\",\n  \"safe_action_quote\": \"Используйте только дистанционное управление.\",\n  \"contradiction\": false,\n  \"contradiction_quote\": null,\n  \"overall\": \"correct\",\n  \"reason\": \"The answer correctly states both the cause and the safe action.\",\n  \"confidence\": 1.0\n}\n```"
+      }
+    ]
+  },
+  "experiment_answers_seen": false,
+  "records": [],
+  "status": "stopped_calibration_failed",
+  "elapsed_seconds": 339.68
+}

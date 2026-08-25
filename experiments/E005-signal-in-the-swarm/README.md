@@ -322,3 +322,10 @@ both RTX 3090 GPUs were visible, a CUDA tensor operation passed, and 54 GiB of
 disk remained after the pinned environment install. The instance has no
 persistent volume, so every judge result must be copied back before its model is
 removed. No experiment answer had been judged at this checkpoint.
+
+Mistral J1 failed the first synthetic calibration at 8/12 and the runner stopped
+before exposing any of the 192 experiment answers. Review showed that two pairs
+of failures came from contradictions inside rubric v0.1 itself: `partial` versus
+`incorrect`, and `absent` versus `incorrect`. The failed calibration and every
+raw judge output remain public. Rubric v0.2 must be frozen using only these
+synthetic cases before another attempt.

@@ -1,0 +1,20 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "judge_calibration_result",
+  "protocol_version": "0.1",
+  "status": "stopped_before_experiment_answers",
+  "judge_id": "J1",
+  "score": 8,
+  "required": 12,
+  "experiment_answers_seen": false,
+  "failed_cases": ["CAL-EN-03", "CAL-EN-05", "CAL-RU-03", "CAL-RU-05"],
+  "diagnosis": {
+    "en": "The stop exposed two rubric bugs. The written rule called one preserved half 'partial', while the expected calibration label called it 'incorrect'. It also failed to define absent versus incorrect sharply enough. This is a ruler failure, not an E005 model result.",
+    "ru": "Остановка нашла две ошибки в нашей линейке. Написанное правило называло один сохранённый смысл «частичным» ответом, а ожидаемая метка — «неверным». Ещё мы недостаточно чётко разделили «нет ответа» и «дан неверный ответ». Это ошибка линейки, а не результат моделей E005."
+  },
+  "decision": {
+    "en": "Preserve v0.1, clarify the component labels using only these synthetic cases, freeze v0.2, and recalibrate from zero. Do not inspect or tune on experiment answers.",
+    "ru": "Сохранить v0.1, уточнить метки только по этим искусственным примерам, заморозить v0.2 и начать калибровку заново. Не смотреть ответы эксперимента и не подгонять правила под них."
+  }
+}

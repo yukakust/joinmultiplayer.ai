@@ -312,6 +312,13 @@ machine had 54 GiB free after installing the pinned software environment. It has
 no persistent volume, so judges must run sequentially and each result must be
 copied off the instance immediately. No judge had seen an experiment answer.
 
+Judge J1 then stopped at calibration v0.1 with 8/12. It saw zero experiment
+answers. The four failures exposed ambiguity in the ruler itself: the written
+overall rule and its expected labels disagreed about one preserved half, and
+`absent` versus `incorrect` was not defined sharply enough. This is preserved as
+an infrastructure/scoring failure, not an E005 model result. A corrected rubric
+may use only these synthetic cases; it must be committed before recalibration.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the
