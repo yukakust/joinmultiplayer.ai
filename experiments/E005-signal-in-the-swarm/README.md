@@ -301,3 +301,10 @@ capsules 4/32, and correct neural pair 2/32 versus the required 26/32. In the
 correct pair, CAUSE-I survived on 32/32 questions but SAFETY-I on only 2/32: the
 first hidden-state bridge silenced one voice. All 192 raw answers are published
 for human review at `/experiment/e005/gate-5b/results/`.
+
+Gate 5B.1 then removed the visible 40-token cutoff without changing training or
+the exam. All 41 affected answers extended; 40 ended naturally and one looping
+base answer hit the 256-token emergency ceiling. No neural-pair answer had been
+cut off, so its result stayed unchanged. The UI now calls its automatic marks
+literal phrase checks, not correctness. `G5B-LOCK-EN-06` is recorded as a human-
+confirmed semantic false negative of that literal checker.

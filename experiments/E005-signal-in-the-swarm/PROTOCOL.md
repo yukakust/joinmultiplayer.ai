@@ -286,6 +286,14 @@ CAUSE-I still supplied its half on 32/32 paired answers, while SAFETY-I survived
 only 2/32. The first merger therefore failed by silencing one personal track.
 All 192 raw answers await human review.
 
+Gate 5B.1 corrected only decoding. Forty-one records that reached the original
+40-token ceiling were deterministically regenerated with the same frozen prefix
+and an emergency ceiling of 256. All 41 extended; 40 ended naturally and one
+base-Qwen Russian answer reached 256. No correct-neural-pair record had been cut
+off, so its result did not change. Literal counts also stayed unchanged. Human
+review identified `G5B-LOCK-EN-06` text capsules as a clear false negative: both
+facts were present as a paraphrase, not as the two exact expected sentences.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the
