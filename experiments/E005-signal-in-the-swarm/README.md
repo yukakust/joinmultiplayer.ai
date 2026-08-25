@@ -365,3 +365,8 @@ and enum syntax during decoding; it does not alter the rubric or any answer.
 The enum constraint worked, but Phi then omitted a required exact quote. The
 validator stopped before scoring any case. The final format retry reports the
 specific malformed field back to Phi; another transport failure rejects J2.
+
+Phi failed that final format retry in the same way and is now rejected. Both
+pinned judges failed before seeing any E005 answer. The 192 answers therefore
+remain frozen and semantically unscored; changing the judge or evaluation form
+requires a new public protocol checkpoint.

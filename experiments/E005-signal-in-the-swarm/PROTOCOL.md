@@ -360,6 +360,11 @@ non-absent safe-action label with a null supporting quote on all retries. Zero
 cases were scored and zero E005 answers were seen. One final transport-only retry
 will include the exact validator error. Another format failure rejects Phi J2.
 
+Phi repeated the same missing-quote failure after the exact validator error was
+provided. The precommitted stop was applied: J2 is rejected, scored zero
+calibration cases, and saw zero E005 answers. Neither pinned judge is allowed to
+score the experiment. A replacement evaluation design requires a new checkpoint.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the
