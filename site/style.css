@@ -4533,6 +4533,73 @@ blockquote {
   font-size: clamp(1rem, 2vw, 1.4rem);
 }
 
+.e005-pair-comparison {
+  margin: 3rem 0;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border: 2px solid var(--ink);
+}
+
+.e005-pair-comparison > h2 {
+  max-width: 26ch;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  line-height: 1;
+}
+
+.e005-pair-viewer {
+  margin-top: 2rem;
+  border-top: 1px solid var(--line);
+  padding-top: 2rem;
+}
+
+.e005-pair-answers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.e005-pair-answers > article {
+  display: flex;
+  flex-direction: column;
+  min-height: 22rem;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  border: 1px solid var(--line);
+}
+
+.e005-pair-answers > article.is-text {
+  border-top: 6px solid #8ebc87;
+}
+
+.e005-pair-answers > article.is-neural {
+  border-top: 6px solid #dc735f;
+}
+
+.e005-pair-answers span,
+.e005-pair-scores {
+  font: 700 0.74rem/1.35 var(--mono);
+  letter-spacing: 0.04em;
+}
+
+.e005-pair-answers h3 {
+  margin: 0.75rem 0;
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.e005-pair-answers > article > p {
+  flex: 1;
+  white-space: pre-wrap;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.e005-pair-scores {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  gap: 0.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
 .e005-simple-disagreement {
   margin-top: 2rem;
 }
@@ -4567,6 +4634,18 @@ blockquote {
   }
 
   .e005-simple-two-judges {
+    grid-template-columns: 1fr;
+  }
+
+  .e005-pair-answers {
+    grid-template-columns: 1fr;
+  }
+
+  .e005-pair-answers > article {
+    min-height: 0;
+  }
+
+  .e005-pair-scores {
     grid-template-columns: 1fr;
   }
 }

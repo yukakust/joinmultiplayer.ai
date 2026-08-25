@@ -3828,13 +3828,19 @@ async function loadE005Gate5B2Simple() {
   const target = document.querySelector(".e005-gate5b2-simple-page");
   if (!target) return;
   try {
-    const [summaryResponse, auditResponse] = await Promise.all([
+    const [summaryResponse, auditResponse, answersResponse, judgeAResponse, judgeBResponse] = await Promise.all([
       fetch("/experiments/E005/gate-5b2-two-judge-summary-v0.6.json", { cache: "no-store" }),
       fetch("/experiments/E005/gate-5b2-owner-audit-v0.6.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5b1-results-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5b2-qwen25-32b-full-v0.6.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5b2-qwen14b-full-v0.4.2.json", { cache: "no-store" }),
     ]);
-    if (!summaryResponse.ok || !auditResponse.ok) throw new Error("E005 judge results unavailable");
+    if (!summaryResponse.ok || !auditResponse.ok || !answersResponse.ok || !judgeAResponse.ok || !judgeBResponse.ok) throw new Error("E005 judge results unavailable");
     const summary = await summaryResponse.json();
     const audit = await auditResponse.json();
+    const answers = await answersResponse.json();
+    const judgeA = await judgeAResponse.json();
+    const judgeB = await judgeBResponse.json();
     const names = {
       shared_qwen_alone: localized({ en: "Small Qwen alone", ru: "Маленькая Qwen одна" }),
       cause_track_alone: localized({ en: "Only the cause skill", ru: "Только умение находить причину" }),
@@ -3860,16 +3866,47 @@ async function loadE005Gate5B2Simple() {
     }).join("");
     const disagreements = audit.items.filter(item => item.reason === "overall_disagreement");
     let disagreementIndex = 0;
+    const recordKey = row => `${row.question_id}|${row.language}|${row.condition}`;
+    const answerByKey = new Map(answers.records.map(row => [recordKey(row), row]));
+    const judgeAByKey = new Map(judgeA.records.map(row => [recordKey(row), row.judgment]));
+    const judgeBByKey = new Map(judgeB.records.map(row => [recordKey(row), row.judgment]));
+    const pairQuestions = answers.records
+      .filter(row => row.condition === "semantic_text_capsules" && row.language === language)
+      .sort((left, right) => left.question_id.localeCompare(right.question_id));
+    let pairIndex = 0;
+    const comparisonMarkup = `<section class="e005-pair-comparison"><div class="flow-step">${localized({ en: "THE TWO MAIN VARIANTS", ru: "ДВА ГЛАВНЫХ ВАРИАНТА" })}</div><h2>${localized({ en: "Same question. Two different ways to unite.", ru: "Один вопрос. Два способа объединиться." })}</h2><p>${localized({ en: "On the left, each pocket i explains its part in words. On the right, their hidden neural additions are merged.", ru: "Слева каждый pocket i объясняет свою часть словами. Справа объединяются их скрытые нейронные добавки." })}</p><button class="button" data-pair-open>${localized({ en: "SEE QUESTIONS AND ANSWERS", ru: "СМОТРЕТЬ ВОПРОСЫ И ОТВЕТЫ" })}</button><div class="e005-pair-viewer" hidden></div></section>`;
     target.querySelector(".experiment-loading").outerHTML = `<section class="e005-simple-verdict"><span>${localized({ en: "SHORT ANSWER", ru: "КОРОТКИЙ ОТВЕТ" })}</span><h2>${localized({ en: "Clear messages worked. Neural joining did not—yet.", ru: "Понятные сообщения сработали. Нейронное объединение — пока нет." })}</h2><p>${localized({ en: "The judges counted a complete answer only when it had both the cause and the safe action.", ru: "Судьи считали ответ полным, только если в нём были и причина, и безопасное действие." })}</p></section><div class="e005-simple-results"><header><span>${localized({ en: "SYSTEM", ru: "ВАРИАНТ" })}</span><span>32B</span><span>14B</span></header>${rows}</div><section class="e005-simple-takeaway"><strong>24–26 / 32</strong><p>${localized({ en: "when the two i sent clear text", ru: "когда два i передавали понятный текст" })}</p><strong>2–3 / 32</strong><p>${localized({ en: "when their hidden neural additions were merged", ru: "когда объединялись их скрытые нейронные добавки" })}</p></section><section class="e005-task-section"><div class="flow-step">${localized({ en: "WHERE THE JUDGES DISAGREED", ru: "ГДЕ СУДЬИ НЕ СОГЛАСИЛИСЬ" })}</div><p>${localized({ en: "They gave different final labels to 21 of 192 answers. Open them only if you want to inspect the edge cases.", ru: "Они по-разному оценили 21 из 192 ответов. Откройте их, только если хотите посмотреть пограничные случаи." })}</p><button class="button secondary" data-simple-disagreements>${localized({ en: "SHOW 21 DISAGREEMENTS", ru: "ПОКАЗАТЬ 21 РАЗНОГЛАСИЕ" })}</button><div class="e005-simple-disagreement" hidden></div></section><section class="e005-simple-boundary"><p>${localized({ en: "This is still provisional: both judges are from the Qwen family, and you have not completed the human audit.", ru: "Это всё ещё предварительный результат: оба судьи из семейства Qwen, а человеческая проверка ещё не закончена." })}</p></section><div class="actions"><a class="button" href="/experiment/e005/gate-5b/owner-audit/">${localized({ en: "START HUMAN CHECK", ru: "НАЧАТЬ ПРОВЕРКУ ЧЕЛОВЕКОМ" })}</a><a class="quiet-link" href="/experiment/e005/gate-5b/semantic-review/">${localized({ en: "TECHNICAL JOURNAL", ru: "ТЕХНИЧЕСКИЙ ЖУРНАЛ" })} ↗</a></div>`;
+    target.querySelector(".e005-simple-takeaway").insertAdjacentHTML("afterend", comparisonMarkup);
     const resultLabel = value => ({ correct: localized({ en: "fully correct", ru: "полностью верно" }), partial: localized({ en: "partly correct", ru: "частично верно" }), incorrect: localized({ en: "incorrect", ru: "неверно" }) }[value] || value);
     const component = value => value === "correct" ? "✓" : value === "incorrect" ? "×" : "—";
+    const renderPair = () => {
+      const textRecord = pairQuestions[pairIndex];
+      const neuralKey = `${textRecord.question_id}|${textRecord.language}|correct_neural_pair`;
+      const neuralRecord = answerByKey.get(neuralKey);
+      const textKey = recordKey(textRecord);
+      const score = (key, title) => {
+        const a = judgeAByKey.get(key);
+        const b = judgeBByKey.get(key);
+        return `<div class="e005-pair-scores"><span>${title}</span><b>32B: ${resultLabel(a.overall)}</b><b>14B: ${resultLabel(b.overall)}</b></div>`;
+      };
+      const panel = target.querySelector(".e005-pair-viewer");
+      panel.innerHTML = `<div class="e005-gate4-question-nav"><span>${localized({ en: "QUESTION", ru: "ВОПРОС" })} ${pairIndex + 1} / ${pairQuestions.length}</span><span>${language.toUpperCase()} · ${escapeHTML(textRecord.question_id)}</span></div><section class="e005-gate4-current-question"><h2>${escapeHTML(textRecord.question)}</h2><div><span>${localized({ en: "A COMPLETE ANSWER NEEDS", ru: "В ПОЛНОМ ОТВЕТЕ НУЖНЫ" })}</span><p><b>${localized({ en: "Cause", ru: "Причина" })}:</b> ${escapeHTML(textRecord.expected_cause)}<br><b>${localized({ en: "Safe action", ru: "Действие" })}:</b> ${escapeHTML(textRecord.expected_safety)}</p></div></section><div class="e005-pair-answers"><article class="is-text"><span>${localized({ en: "A · THE TWO i SPEAK IN WORDS", ru: "A · ДВА i ГОВОРЯТ СЛОВАМИ" })}</span><h3>${localized({ en: "Clear text messages", ru: "Понятные текстовые сообщения" })}</h3><p>${escapeHTML(textRecord.answer || "—")}</p>${score(textKey, "A")}</article><article class="is-neural"><span>${localized({ en: "B · THE TWO i MERGE TRACKS", ru: "B · ДВА i ОБЪЕДИНЯЮТ ТРЕКИ" })}</span><h3>${localized({ en: "Hidden neural additions", ru: "Скрытые нейронные добавки" })}</h3><p>${escapeHTML(neuralRecord?.answer || "—")}</p>${score(neuralKey, "B")}</article></div><nav class="e005-gate4-question-controls"><button data-pair-previous ${pairIndex === 0 ? "disabled" : ""}>←</button><button data-pair-next ${pairIndex === pairQuestions.length - 1 ? "disabled" : ""}>→</button></nav>`;
+    };
     const renderDisagreement = () => {
       const item = disagreements[disagreementIndex];
       const panel = target.querySelector(".e005-simple-disagreement");
       panel.innerHTML = `<div class="e005-gate4-question-nav"><span>${disagreementIndex + 1} / ${disagreements.length}</span><span>${escapeHTML(item.question_id)}</span></div><section class="e005-gate4-current-question"><h2>${escapeHTML(item.question)}</h2><div><span>${localized({ en: "ANSWER", ru: "ОТВЕТ" })}</span><p>${escapeHTML(item.answer)}</p></div></section><div class="e005-simple-two-judges"><article><small>32B</small><h2>${resultLabel(item.judge_a3.overall)}</h2><p>${component(item.judge_a3.cause)} ${localized({ en: "cause", ru: "причина" })} · ${component(item.judge_a3.safe_action)} ${localized({ en: "safe action", ru: "действие" })}</p></article><article><small>14B</small><h2>${resultLabel(item.judge_b.overall)}</h2><p>${component(item.judge_b.cause)} ${localized({ en: "cause", ru: "причина" })} · ${component(item.judge_b.safe_action)} ${localized({ en: "safe action", ru: "действие" })}</p></article></div><nav class="e005-gate4-question-controls"><button data-simple-previous ${disagreementIndex === 0 ? "disabled" : ""}>←</button><button data-simple-next ${disagreementIndex === disagreements.length - 1 ? "disabled" : ""}>→</button></nav>`;
     };
     target.addEventListener("click", event => {
-      if (event.target.closest("[data-simple-disagreements]")) {
+      if (event.target.closest("[data-pair-open]")) {
+        const panel = target.querySelector(".e005-pair-viewer");
+        panel.hidden = !panel.hidden;
+        if (!panel.hidden) renderPair();
+      } else if (event.target.closest("[data-pair-previous]") && pairIndex > 0) {
+        pairIndex -= 1; renderPair();
+      } else if (event.target.closest("[data-pair-next]") && pairIndex < pairQuestions.length - 1) {
+        pairIndex += 1; renderPair();
+      } else if (event.target.closest("[data-simple-disagreements]")) {
         const panel = target.querySelector(".e005-simple-disagreement");
         panel.hidden = !panel.hidden;
         if (!panel.hidden) renderDisagreement();
