@@ -346,3 +346,8 @@ decision tree: missing claim, explicit conflict, matching meaning, or unclear.
 It also replaces the old calibration examples with 12 new bilingual examples
 about thermal rebound and a closed auxiliary vent. The perfect-score threshold
 and the ban on viewing E005 answers before calibration are unchanged.
+
+Mistral J1 scored 8/12 on v0.3 and again saw no E005 answer. Two failures were
+internally inconsistent: its written reason said the cause was affirmed while
+its component label said incorrect. This failed judge is preserved rather than
+prompt-tuned again. The frozen v0.3 ruler now goes unchanged to Phi J2.

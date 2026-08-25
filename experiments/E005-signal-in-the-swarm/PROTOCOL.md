@@ -338,6 +338,11 @@ Silence is never a contradiction. A fresh bilingual 12-case set uses thermal
 rebound and a closed auxiliary vent, not the facts from v0.1/v0.2. The threshold
 remains 12/12 and no E005 answer may be opened first.
 
+Mistral J1 then failed v0.3 at 8/12 while still seeing zero E005 answers. In two
+cases its prose said the answer affirmed the expected cause while its structured
+label marked that cause incorrect. A fourth Mistral prompt revision is forbidden;
+the already-pinned independent Phi judge is calibrated next on unchanged v0.3.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the
