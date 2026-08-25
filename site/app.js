@@ -2828,6 +2828,10 @@ function e005Gate5BResultsShell() {
   return `<section class="flow-shell e005-gate5b-results-page"><div class="flow-step">E005 · GATE 5B.1 · ${localized({ en: "FULL ANSWERS", ru: "ПОЛНЫЕ ОТВЕТЫ" })}</div><h1>${localized({ en: "Read first. Judge second.", ru: "Сначала прочитайте. Потом судите." })}</h1><p class="contribution-intro">${localized({ en: "Every cut-off answer can now finish. Automatic marks only check literal phrases.", ru: "Теперь каждый оборванный ответ может закончиться. Автоматические метки проверяют только буквальные фразы." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate5B2Shell() {
+  return `<section class="flow-shell e005-gate5b2-page"><div class="flow-step">E005 · GATE 5B.2 · ${localized({ en: "LOCKED BEFORE JUDGING", ru: "ЗАМОРОЖЕНО ДО ПРОВЕРКИ" })}</div><h1>${localized({ en: "Two blind judges. Then you.", ru: "Два слепых судьи. Потом вы." })}</h1><p class="contribution-intro">${localized({ en: "They read meaning, quote their evidence, and never see which system wrote the answer.", ru: "Они читают смысл, цитируют доказательство и не видят, какая система написала ответ." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3655,7 +3659,7 @@ async function loadE005Gate5BResults() {
     const rows = data.records.filter(record => record.condition === conditions[0] && record.language === language);
     let index = 0;
     const countCards = conditions.map(condition => `<article><span>${names[condition]} · ${localized({ en: "literal", ru: "буквально" })}</span><strong>${data.counts[condition]} / 32</strong></article>`).join("");
-    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-result-verdict is-failed"><span>GATE 5B.1 · ${localized({ en: "AUTOMATIC LITERAL CHECK FAILED", ru: "БУКВАЛЬНАЯ АВТОПРОВЕРКА НЕ ПРОЙДЕНА" })}</span><h2>${localized({ en: "The neural pair repeated both exact sentences in 2 of 32 answers. It needed 26.", ru: "Нейронная пара повторила обе точные фразы в 2 ответах из 32. Нужно было 26." })}</h2><p>${localized({ en: "This is not yet a semantic human score. The raw answers are the result; the colored marks are only a cheap search aid.", ru: "Это ещё не человеческая оценка смысла. Результат — сами ответы; цветные метки лишь помогают искать." })}</p></section><div class="e005-metrics">${countCards}</div><section class="e005-gate4-lessons-status"><strong>${localized({ en: "41 CUT-OFF ANSWERS FINISHED", ru: "41 ОБОРВАННЫЙ ОТВЕТ ДОПИСАН" })}</strong><p>${localized({ en: "Forty ended naturally. One looping clean-Qwen answer reached the 256-token emergency stop. No neural-pair answer had been cut off.", ru: "Сорок закончились сами. Один зацикленный ответ чистой Qwen дошёл до аварийного стопа 256 токенов. Ни один ответ нейронной пары не был обрезан." })}</p></section><p class="control-warning">${localized({ en: "× means ‘the exact expected sentence was not found’. It does not mean ‘a human proved this answer wrong’.", ru: "× означает «точная ожидаемая фраза не найдена». Это не означает «человек доказал, что ответ неверный»." })}</p><div class="e005-gate4c-result-viewer"></div><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5b/">${localized({ en: "BACK TO THE EXPERIMENT", ru: "НАЗАД К ЭКСПЕРИМЕНТУ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5b1-results-v0.1.json">CORRECTED 192 ANSWERS JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-5b-results-v0.1.json">ORIGINAL 40-TOKEN RUN ↗</a></div>`;
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-result-verdict is-failed"><span>GATE 5B.1 · ${localized({ en: "AUTOMATIC LITERAL CHECK FAILED", ru: "БУКВАЛЬНАЯ АВТОПРОВЕРКА НЕ ПРОЙДЕНА" })}</span><h2>${localized({ en: "The neural pair repeated both exact sentences in 2 of 32 answers. It needed 26.", ru: "Нейронная пара повторила обе точные фразы в 2 ответах из 32. Нужно было 26." })}</h2><p>${localized({ en: "This is not yet a semantic human score. The raw answers are the result; the colored marks are only a cheap search aid.", ru: "Это ещё не человеческая оценка смысла. Результат — сами ответы; цветные метки лишь помогают искать." })}</p></section><div class="e005-metrics">${countCards}</div><section class="e005-gate4-lessons-status"><strong>${localized({ en: "41 CUT-OFF ANSWERS FINISHED", ru: "41 ОБОРВАННЫЙ ОТВЕТ ДОПИСАН" })}</strong><p>${localized({ en: "Forty ended naturally. One looping clean-Qwen answer reached the 256-token emergency stop. No neural-pair answer had been cut off.", ru: "Сорок закончились сами. Один зацикленный ответ чистой Qwen дошёл до аварийного стопа 256 токенов. Ни один ответ нейронной пары не был обрезан." })}</p></section><p class="control-warning">${localized({ en: "× means ‘the exact expected sentence was not found’. It does not mean ‘a human proved this answer wrong’.", ru: "× означает «точная ожидаемая фраза не найдена». Это не означает «человек доказал, что ответ неверный»." })}</p><div class="e005-gate4c-result-viewer"></div><div class="actions"><a class="button" href="/experiment/e005/gate-5b/semantic-review/">${localized({ en: "SEE THE FROZEN SEMANTIC REVIEW →", ru: "СМОТРЕТЬ ПЛАН СМЫСЛОВОЙ ПРОВЕРКИ →" })}</a><a class="button secondary" href="/experiment/e005/gate-5b/">${localized({ en: "BACK TO THE EXPERIMENT", ru: "НАЗАД К ЭКСПЕРИМЕНТУ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5b1-results-v0.1.json">CORRECTED 192 ANSWERS JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-5b-results-v0.1.json">ORIGINAL 40-TOKEN RUN ↗</a></div>`;
     const render = () => {
       const base = rows[index];
       const answers = Object.fromEntries(conditions.map(condition => [condition, data.records.find(record => record.question_id === base.question_id && record.condition === condition)]));
@@ -3666,6 +3670,22 @@ async function loadE005Gate5BResults() {
     };
     target.addEventListener("click", event => { if (event.target.closest("[data-gate5b-previous]")) { index -= 1; render(); } else if (event.target.closest("[data-gate5b-next]")) { index += 1; render(); } });
     render();
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate5B2() {
+  const target = document.querySelector(".e005-gate5b2-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-5b2-judge-protocol-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 Gate 5B.2 protocol unavailable");
+    const data = await response.json();
+    const pick = value => escapeHTML(value?.[language] || value?.en || "");
+    const rubric = data.rubric.map((row, index) => `<article><span>${index + 1}</span><h2>${escapeHTML(row.field.replace("_", " "))}</h2><p>${escapeHTML(row.rule)}</p></article>`).join("");
+    const judges = data.judges.map(judge => `<article><span>${escapeHTML(judge.judge_id)} · ${escapeHTML(judge.role)}</span><h2>${escapeHTML(judge.model.split("/").at(-1))}</h2><p>${pick(judge.why)}</p><small>${escapeHTML(judge.precision)} · temperature 0 · ${escapeHTML(judge.revision.slice(0, 8))}</small></article>`).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "NO JUDGE HAS SEEN AN ANSWER", ru: "НИ ОДИН СУДЬЯ ЕЩЁ НЕ ВИДЕЛ ОТВЕТЫ" })}</strong><p>${pick(data.hypothesis)}</p></section><section class="e005-task-section"><div class="flow-step">${localized({ en: "WHO JUDGES", ru: "КТО СУДИТ" })}</div><div class="e005-gate4-training-cards">${judges}</div></section><section class="e005-task-section"><div class="flow-step">${localized({ en: "WHAT EACH JUDGE CHECKS", ru: "ЧТО ПРОВЕРЯЕТ КАЖДЫЙ СУДЬЯ" })}</div><div class="e005-gate4-training-cards">${rubric}</div></section><section class="e005-gate4-result-verdict"><span>${localized({ en: "PROOF, NOT A VIBE", ru: "ДОКАЗАТЕЛЬСТВО, А НЕ ВПЕЧАТЛЕНИЕ" })}</span><h2>${localized({ en: "Every yes needs an exact quote from the answer.", ru: "Каждое «да» требует точную цитату из ответа." })}</h2><p>${localized({ en: "A made-up quote is rejected automatically. A negation or contradiction cannot pass just because it contains the expected words.", ru: "Выдуманная цитата автоматически отклоняется. Отрицание или противоречие не пройдёт только потому, что содержит нужные слова." })}</p></section><section class="e005-gate4-result-verdict"><span>${localized({ en: "YOUR CHECK", ru: "ВАША ПРОВЕРКА" })}</span><h2>${localized({ en: "All disagreements + 24 agreements", ru: "Все разногласия + 24 совпадения" })}</h2><p>${localized({ en: "If you correct more than two sampled agreements, every remaining answer must be reviewed by a human.", ru: "Если вы исправите больше двух совпавших оценок, человеку придётся проверить все оставшиеся ответы." })}</p></section><p class="control-warning">${pick(data.claim_boundary)}</p><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5b/results/">${localized({ en: "BACK TO FULL ANSWERS", ru: "НАЗАД КО ВСЕМ ОТВЕТАМ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5b2-judge-protocol-v0.1.json">FROZEN PROTOCOL JSON ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -4592,6 +4612,10 @@ function render() {
     document.title = `Gate 5B results — i`;
     app.innerHTML = withLanguage(e005Gate5BResultsShell());
     loadE005Gate5BResults();
+  } else if (path === "experiment/e005/gate-5b/semantic-review") {
+    document.title = `Gate 5B.2 — i`;
+    app.innerHTML = withLanguage(e005Gate5B2Shell());
+    loadE005Gate5B2();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

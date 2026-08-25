@@ -308,3 +308,11 @@ base answer hit the 256-token emergency ceiling. No neural-pair answer had been
 cut off, so its result stayed unchanged. The UI now calls its automatic marks
 literal phrase checks, not correctness. `G5B-LOCK-EN-06` is recorded as a human-
 confirmed semantic false negative of that literal checker.
+
+Gate 5B.2 freezes a blind semantic review before either judge sees an experiment
+answer. Mistral Small 3.2 24B and Phi-4 Mini independently grade one anonymous
+answer at a time, provide exact quotes for both required meanings, and flag
+contradictions. Both must pass a 12-case bilingual calibration first. The owner
+then reviews every disagreement and 24 stratified agreements. The old literal
+marks remain visible but no longer pretend to be semantic correctness. The
+owner-readable checkpoint is `/experiment/e005/gate-5b/semantic-review/`.

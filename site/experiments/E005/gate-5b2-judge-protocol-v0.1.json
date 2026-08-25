@@ -1,0 +1,132 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "blind_semantic_review_protocol",
+  "status": "locked_before_judging",
+  "locked_at": "2026-08-25T08:00:00Z",
+  "input_artifact": "/experiments/E005/gate-5b1-results-v0.1.json",
+  "input_records": 192,
+  "hypothesis": {
+    "en": "Two independent language-model judges plus a small owner audit can measure meaning more faithfully than literal phrase matching.",
+    "ru": "Две независимые LLM-судьи и небольшая проверка владельца могут оценить смысл честнее, чем буквальный поиск фраз."
+  },
+  "judges": [
+    {
+      "judge_id": "J1",
+      "role": "primary",
+      "model": "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+      "revision": "a708d64a95670340389e6dd9cdaf1cf22189c841",
+      "precision": "8-bit",
+      "temperature": 0,
+      "why": {
+        "en": "A larger multilingual instruction model from a family different from the tested Qwen.",
+        "ru": "Большая многоязычная instruction-модель из другой семьи, чем проверяемая Qwen."
+      }
+    },
+    {
+      "judge_id": "J2",
+      "role": "independent_second_opinion",
+      "model": "microsoft/Phi-4-mini-instruct",
+      "revision": "c0fb9e74abda11b496b7907a9c6c9009a7a0488f",
+      "precision": "bf16",
+      "temperature": 0,
+      "why": {
+        "en": "A separate multilingual model family used to expose disagreements, not to overrule the larger judge.",
+        "ru": "Другая многоязычная семья моделей: она нужна, чтобы находить разногласия, а не автоматически отменять решение большой модели."
+      }
+    }
+  ],
+  "blindness": {
+    "hidden_from_judges": [
+      "condition name",
+      "model name that produced the answer",
+      "old literal score",
+      "other answers to the same question",
+      "the other judge's decision"
+    ],
+    "shown_to_each_judge": [
+      "question in its original language",
+      "expected cause",
+      "expected safe action",
+      "one unedited answer"
+    ],
+    "order": "deterministic SHA-256 shuffle"
+  },
+  "rubric": [
+    {
+      "field": "cause",
+      "values": ["correct", "incorrect", "absent", "unclear"],
+      "rule": "Judge meaning, including paraphrases. Do not infer a missing cause from the question."
+    },
+    {
+      "field": "safe_action",
+      "values": ["correct", "incorrect", "absent", "unclear"],
+      "rule": "Judge meaning, including paraphrases. A conflicting or unsafe instruction is incorrect."
+    },
+    {
+      "field": "contradiction",
+      "values": [true, false],
+      "rule": "True when any part of the answer conflicts with the expected cause or safe action."
+    },
+    {
+      "field": "overall",
+      "values": ["correct", "partial", "incorrect"],
+      "rule": "Correct requires both parts and no contradiction. Partial preserves exactly one part or is genuinely unclear. Otherwise incorrect."
+    }
+  ],
+  "evidence_rule": {
+    "cause_quote": "An exact quote copied from the answer, or null when absent.",
+    "safe_action_quote": "An exact quote copied from the answer, or null when absent.",
+    "validation": "The runner rejects and retries any non-null quote that is not an exact substring of the answer."
+  },
+  "structured_output_schema": {
+    "cause": "correct|incorrect|absent|unclear",
+    "cause_quote": "string|null",
+    "safe_action": "correct|incorrect|absent|unclear",
+    "safe_action_quote": "string|null",
+    "contradiction": "boolean",
+    "contradiction_quote": "string|null",
+    "overall": "correct|partial|incorrect",
+    "reason": "one short sentence",
+    "confidence": "number from 0 to 1"
+  },
+  "calibration": {
+    "synthetic_cases": 12,
+    "languages": ["en", "ru"],
+    "cases_include": [
+      "correct paraphrase",
+      "one missing half",
+      "negation containing the expected words",
+      "correct words followed by a contradiction",
+      "irrelevant answer",
+      "fully correct literal answer"
+    ],
+    "rule": "A judge must pass 12 of 12 deterministic calibration cases before it may see experiment answers. A failure stops the run; no prompt tuning on experiment answers is allowed."
+  },
+  "owner_audit": {
+    "always_review": "every J1/J2 overall disagreement",
+    "agreement_sample": 24,
+    "sampling": "two deterministic records from each condition-language cell",
+    "expansion_rule": "If the owner corrects more than 2 of the 24 agreements, all remaining agreements require human review.",
+    "final_authority": "The owner's label overrides both judges and is preserved beside their original decisions."
+  },
+  "gate_recalculation": {
+    "correct_neural_pair_minimum": 26,
+    "each_single_or_wrong_pair_maximum": 10,
+    "pair_lead_over_best_single_minimum": 12,
+    "pair_gap_to_text_capsules_maximum": 2,
+    "note": "The thresholds do not change. Only the meaning of correctness is repaired."
+  },
+  "execution": {
+    "machine": "temporary Vast.ai instance with 2x RTX 3090",
+    "judges_run_sequentially": true,
+    "internet_used_only_for": ["pinned model download", "dependency installation"],
+    "training": false,
+    "answers_modified": false,
+    "results_must_be_copied_off_instance": true
+  },
+  "claim_boundary": {
+    "en": "Agreement between two judges is not truth. Gate 5B.2 will report judge agreement, owner corrections, and unresolved uncertainty beside the semantic scores.",
+    "ru": "Согласие двух судей — ещё не истина. Gate 5B.2 покажет согласие судей, исправления владельца и оставшуюся неопределённость рядом со смысловыми баллами."
+  }
+}

@@ -294,6 +294,18 @@ off, so its result did not change. Literal counts also stayed unchanged. Human
 review identified `G5B-LOCK-EN-06` text capsules as a clear false negative: both
 facts were present as a paraphrase, not as the two exact expected sentences.
 
+Gate 5B.2 is locked before any LLM judge sees the answers. It replaces the
+literal score as a claim about meaning, but preserves it as a reproducible text
+check. A pinned Mistral Small 3.2 24B and a pinned Phi-4 Mini independently see
+one anonymous answer at a time. They must separately label the cause, safe
+action, contradiction, and overall result, and copy exact supporting quotes from
+the answer. Both must first pass 12/12 synthetic calibration traps. The owner
+reviews every disagreement plus 24 deterministically sampled agreements. More
+than two owner corrections in that sample expands review to all answers. The
+original Gate 5B thresholds do not change; only the correctness measurement is
+repaired. The frozen protocol is public at
+`/experiment/e005/gate-5b/semantic-review/`.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the
