@@ -8,7 +8,7 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from evaluate_gate5c import CONDITIONS, SHELF_CONDITIONS, old_additive_records  # noqa: E402
+from evaluate_gate5c import CONDITIONS, SHELF_CONDITIONS, old_additive_records, write_checkpoint  # noqa: E402
 
 
 class Gate5CEvaluationTest(unittest.TestCase):
@@ -38,6 +38,25 @@ class Gate5CEvaluationTest(unittest.TestCase):
         logical_position = attention.sum(dim=-1) - 1
         self.assertEqual(last_index.tolist(), [4, 4])
         self.assertEqual(logical_position.tolist(), [2, 3])
+
+    def test_checkpoint_is_atomic_and_resumable(self):
+        from tempfile import TemporaryDirectory
+        from types import SimpleNamespace
+
+        with TemporaryDirectory() as directory:
+            output = Path(directory) / "result.json"
+            args = SimpleNamespace(output=output)
+            records = [{"condition": "old_additive_merger", "question_id": "Q1"}]
+            write_checkpoint(
+                args,
+                records,
+                status="running_intermediate_not_result",
+                metadata={"max_new_tokens": 256},
+            )
+            saved = __import__("json").loads(output.read_text())
+            self.assertEqual(saved["records_completed"], 1)
+            self.assertEqual(saved["records"], records)
+            self.assertFalse(output.with_suffix(".json.tmp").exists())
 
 
 if __name__ == "__main__":

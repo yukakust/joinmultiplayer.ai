@@ -112,6 +112,23 @@ def old_additive_records(old_result: dict) -> list[dict]:
     ]
 
 
+def write_checkpoint(args: argparse.Namespace, records: list[dict], *, status: str, metadata: dict) -> None:
+    payload = {
+        "experiment_id": "E005",
+        "gate": "5C",
+        "version": "1.0.1",
+        "kind": "locked_separate_shelf_exam",
+        "status": status,
+        **metadata,
+        "records_completed": len(records),
+        "records": records,
+    }
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    temporary = args.output.with_suffix(args.output.suffix + ".tmp")
+    temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(args.output)
+
+
 def run(args: argparse.Namespace) -> dict:
     torch.set_num_threads(args.threads)
     torch.manual_seed(25082026)
@@ -142,10 +159,35 @@ def run(args: argparse.Namespace) -> dict:
         raise ValueError("base model hash differs from training checkpoint")
 
     started = time.monotonic()
-    records = old_additive_records(old_result)
+    metadata = {
+        "model_weights_sha256": training["model_weights_sha256"],
+        "cause_adapter_digest": cause_digest,
+        "safety_adapter_digest": safety_digest,
+        "shelf_reader_digest": shelf_digest,
+        "old_additive_source": "/experiments/E005/gate-5b1-results-v0.1.json",
+        "max_new_tokens": args.max_new_tokens,
+        "batch_size": args.batch_size,
+    }
+    if args.output.exists():
+        checkpoint = json.loads(args.output.read_text(encoding="utf-8"))
+        if checkpoint.get("status") != "running_intermediate_not_result":
+            raise ValueError("existing output is not a resumable Gate 5C checkpoint")
+        for key, value in metadata.items():
+            if checkpoint.get(key) != value:
+                raise ValueError(f"resume metadata differs for {key}")
+        records = checkpoint["records"]
+    else:
+        records = old_additive_records(old_result)
+        write_checkpoint(args, records, status="running_intermediate_not_result", metadata=metadata)
+    completed = {(record["condition"], record["question_id"]) for record in records}
     for condition, mode in SHELF_CONDITIONS.items():
         for start in range(0, len(exam["questions"]), args.batch_size):
-            rows = exam["questions"][start : start + args.batch_size]
+            rows = [
+                row for row in exam["questions"][start : start + args.batch_size]
+                if (condition, row["id"]) not in completed
+            ]
+            if not rows:
+                continue
             outputs = greedy_answers(model, tokenizer, rows, mode, args.max_new_tokens)
             for row, output in zip(rows, outputs):
                 provisional = score_answer(output["answer"], row)
@@ -160,7 +202,9 @@ def run(args: argparse.Namespace) -> dict:
                     "automatic_score": provisional,
                 }
                 records.append(record)
+                completed.add((condition, row["id"]))
                 print(json.dumps({"condition": condition, "question": row["id"], **provisional}), flush=True)
+            write_checkpoint(args, records, status="running_intermediate_not_result", metadata=metadata)
 
     counts = {
         condition: sum(record["automatic_score"]["complete"] for record in records if record["condition"] == condition)
@@ -180,15 +224,10 @@ def run(args: argparse.Namespace) -> dict:
     result = {
         "experiment_id": "E005",
         "gate": "5C",
-        "version": "1.0",
+        "version": "1.0.1",
         "kind": "locked_separate_shelf_exam",
         "status": "provisional_literal_score_awaiting_semantic_and_owner_review",
-        "model_weights_sha256": training["model_weights_sha256"],
-        "cause_adapter_digest": cause_digest,
-        "safety_adapter_digest": safety_digest,
-        "shelf_reader_digest": shelf_digest,
-        "old_additive_source": "/experiments/E005/gate-5b1-results-v0.1.json",
-        "max_new_tokens": args.max_new_tokens,
+        **metadata,
         "counts": counts,
         "gates": gates,
         "all_provisional_literal_gates_passed": all(gates.values()),
@@ -196,8 +235,9 @@ def run(args: argparse.Namespace) -> dict:
         "elapsed_seconds": round(time.monotonic() - started, 3),
         "records": records,
     }
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary = args.output.with_suffix(args.output.suffix + ".tmp")
+    temporary.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(args.output)
     return result
 
 

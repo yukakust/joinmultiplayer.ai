@@ -1,0 +1,24 @@
+{
+  "experiment_id": "E005",
+  "gate": "5C",
+  "version": "0.1",
+  "kind": "locked_separate_shelf_exam_attempt",
+  "status": "interrupted_infrastructure_attempt_not_a_result",
+  "scientific_inputs_changed": false,
+  "completed_before_interrupt": {
+    "separate_shelves_correct_pair": 32,
+    "cause_shelf_only": 8
+  },
+  "provisional_literal_observations": {
+    "separate_shelves_correct_pair_complete": 1,
+    "cause_shelf_only_complete_in_first_8": 0
+  },
+  "failure": {
+    "en": "The runner kept raw answers only in memory until the entire exam ended. Missing-shelf controls often generated to the 256-token emergency ceiling, so continuing risked losing hours of work and crossing the reserved compute window. The process was stopped. Raw answers from this attempt were not persisted and are not treated as results.",
+    "ru": "Обвязка держала сырые ответы только в памяти до конца всего экзамена. Контроли с пропавшей полкой часто доходили до аварийного потолка 256 токенов, поэтому продолжение грозило потерей часов работы и заходом в занятое вычислительное окно. Процесс остановлен. Сырые ответы этой попытки не сохранились и не считаются результатом."
+  },
+  "correction": {
+    "en": "v0.1.1 saves every completed batch atomically and can resume. The model, weights, questions, shelf conditions, greedy decoding, and 256-token ceiling do not change.",
+    "ru": "v0.1.1 атомарно сохраняет каждый готовый пакет и умеет продолжать. Модель, веса, вопросы, варианты полок, жадная генерация и потолок 256 токенов не меняются."
+  }
+}
