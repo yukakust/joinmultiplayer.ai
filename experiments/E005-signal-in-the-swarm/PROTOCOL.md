@@ -1,5 +1,19 @@
 # E005 protocol v0.1 — Signal in the Swarm
 
+## Gate 5B.3 — token-by-token x-ray
+
+Gate 5B.3 keeps the locked Gate 5B questions, base model, CAUSE-I adapter,
+SAFETY-I adapter, merger, and greedy decoding unchanged. It does not train.
+For every generated token of the correct neural pair it records both merger
+gates, both bounded contribution norms, and the cosine similarity between the
+two bounded deltas.
+
+The frozen protocol is published as
+`/experiments/E005/gate-5b3-xray-protocol-v0.1.json`. The x-ray can locate a
+numerical suppression or interference point. It cannot translate a hidden
+vector into a human-readable fact, and it cannot by itself prove that a large
+norm contains the expected meaning.
+
 Status: **FROZEN BEFORE PUBLIC DEVELOPMENT DATA**  
 Parent: E004  
 Claim class: synthetic development until a separately committed locked run
