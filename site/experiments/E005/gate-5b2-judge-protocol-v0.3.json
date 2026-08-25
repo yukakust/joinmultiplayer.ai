@@ -1,0 +1,41 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "blind_semantic_review_protocol",
+  "version": "0.3",
+  "status": "locked_before_recalibration",
+  "supersedes": "/experiments/E005/gate-5b2-judge-protocol-v0.2.json",
+  "input_artifact": "/experiments/E005/gate-5b1-results-v0.1.json",
+  "input_sha256": "83c59e9c57e7e733c2489f629b9165079c70a497ab18864151e58b2615a5eb85",
+  "reason_for_revision": {
+    "en": "v0.2 still confused silence with contradiction and rejected a valid Russian paraphrase. No E005 answer had been seen.",
+    "ru": "v0.2 всё ещё путала отсутствие ответа с противоречием и отвергла верный русский пересказ. Ни один ответ E005 судья не видел."
+  },
+  "decision_tree": [
+    "No relevant claim about the component: absent.",
+    "Explicit denial or conflicting alternative: incorrect.",
+    "Same expected meaning, including a paraphrase without the word cause: correct.",
+    "Relevant but undecidable: unclear."
+  ],
+  "calibration": {
+    "fresh_unseen_cases": true,
+    "cases": 12,
+    "languages": ["en", "ru"],
+    "synthetic_fact": "thermal rebound + keep auxiliary vent closed",
+    "required": "12/12 exact component decisions",
+    "failure_action": "stop before experiment answers"
+  },
+  "unchanged": [
+    "two pinned independent judges",
+    "temperature 0",
+    "blind one-answer-at-a-time review",
+    "exact supporting quotes",
+    "deterministic shuffle",
+    "owner reviews all disagreements plus 24 agreements",
+    "original Gate 5B thresholds"
+  ],
+  "claim_boundary": {
+    "en": "This freezes a ruler, not a result. Calibration may fail again, and that failure will remain public.",
+    "ru": "Это замороженная линейка, а не результат. Калибровка снова может провалиться, и этот провал останется публичным."
+  }
+}

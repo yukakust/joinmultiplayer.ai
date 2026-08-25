@@ -331,6 +331,13 @@ one valid Russian paraphrase for not literally saying "cause". The pass threshol
 will not be lowered. v0.3 must freeze a mechanical decision order and a fresh
 unseen synthetic calibration set before another attempt.
 
+Rubric v0.3 is frozen before the third calibration. For each half, the judge
+must ask in order: is there a relevant claim; does it explicitly conflict; does
+it preserve the expected meaning as a paraphrase; otherwise is it unclear.
+Silence is never a contradiction. A fresh bilingual 12-case set uses thermal
+rebound and a closed auxiliary vent, not the facts from v0.1/v0.2. The threshold
+remains 12/12 and no E005 answer may be opened first.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

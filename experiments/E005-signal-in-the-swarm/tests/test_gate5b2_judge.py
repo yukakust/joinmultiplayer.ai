@@ -17,7 +17,9 @@ class Gate5B2JudgeTests(unittest.TestCase):
         self.assertEqual(len(MODULE.CALIBRATION_CASES), 12)
         self.assertEqual({row["language"] for row in MODULE.CALIBRATION_CASES}, {"en", "ru"})
         self.assertEqual(len({row["case_id"] for row in MODULE.CALIBRATION_CASES}), 12)
-        self.assertTrue(next(row for row in MODULE.CALIBRATION_CASES if row["case_id"] == "CAL-RU-01")["question"].startswith("Объясните"))
+        self.assertTrue(all(row["case_id"].startswith("CAL3-") for row in MODULE.CALIBRATION_CASES))
+        self.assertTrue(next(row for row in MODULE.CALIBRATION_CASES if row["case_id"] == "CAL3-RU-01")["question"].startswith("Объясните"))
+        self.assertTrue(all("phase drift" not in json.dumps(row, ensure_ascii=False).lower() for row in MODULE.CALIBRATION_CASES))
 
     def test_blind_order_is_stable_and_hides_condition_from_prompt(self):
         rows = [
@@ -30,26 +32,26 @@ class Gate5B2JudgeTests(unittest.TestCase):
         self.assertNotIn("Q2", prompt)
 
     def test_exact_quote_is_required(self):
-        answer = "The phase is drifting, so use remote controls."
+        answer = "Thermal rebound is present, so keep the auxiliary vent closed."
         valid = {
-            "cause": "correct", "cause_quote": "phase is drifting",
-            "safe_action": "correct", "safe_action_quote": "use remote controls",
+            "cause": "correct", "cause_quote": "Thermal rebound is present",
+            "safe_action": "correct", "safe_action_quote": "keep the auxiliary vent closed",
             "reason": "Both meanings are present.", "confidence": 0.9,
         }
         judged = MODULE.validate_judgment(valid, answer)
         self.assertEqual(judged["overall"], "correct")
         self.assertFalse(judged["contradiction"])
-        invalid = dict(valid, cause_quote="phase drift")
+        invalid = dict(valid, cause_quote="retained heat")
         with self.assertRaisesRegex(ValueError, "exact answer substring"):
             MODULE.validate_judgment(invalid, answer)
 
     def test_negation_derives_incorrect_overall(self):
         value = {
-            "cause": "incorrect", "cause_quote": "not phase drift",
-            "safe_action": "correct", "safe_action_quote": "remote controls",
+            "cause": "incorrect", "cause_quote": "not thermal rebound",
+            "safe_action": "correct", "safe_action_quote": "vent closed",
             "reason": "The cause conflicts.", "confidence": 0.8,
         }
-        judged = MODULE.validate_judgment(value, "This is not phase drift. Use remote controls.")
+        judged = MODULE.validate_judgment(value, "This is not thermal rebound. Keep the vent closed.")
         self.assertTrue(judged["contradiction"])
         self.assertEqual(judged["overall"], "incorrect")
 
@@ -57,7 +59,7 @@ class Gate5B2JudgeTests(unittest.TestCase):
         outputs = iter([
             "not json",
             json.dumps({
-                "cause": "correct", "cause_quote": "phase drift",
+                "cause": "correct", "cause_quote": "temperature bounced back",
                 "safe_action": "absent", "safe_action_quote": None,
                 "reason": "Only the cause is present.", "confidence": 0.8,
             }),

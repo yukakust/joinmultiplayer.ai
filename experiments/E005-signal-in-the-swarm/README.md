@@ -340,3 +340,9 @@ confused a missing cause with a conflicting cause and rejected one valid Russian
 paraphrase for lacking the literal word "cause". This failure is preserved. The
 threshold stays 12/12; the next revision needs an explicit decision tree and a
 fresh synthetic calibration set.
+
+Rubric v0.3 is now frozen before execution. It gives the judge a four-step
+decision tree: missing claim, explicit conflict, matching meaning, or unclear.
+It also replaces the old calibration examples with 12 new bilingual examples
+about thermal rebound and a closed auxiliary vent. The perfect-score threshold
+and the ban on viewing E005 answers before calibration are unchanged.
