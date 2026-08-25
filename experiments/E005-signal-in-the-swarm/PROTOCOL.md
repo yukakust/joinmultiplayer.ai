@@ -29,7 +29,15 @@ their exact hashes. Missing, duplicated, swapped, and empty shelf controls are
 required. The public frozen design is
 `/experiments/E005/gate-5c-design-v0.1.json`.
 
-Status: **FROZEN BEFORE PUBLIC DEVELOPMENT DATA**  
+Status: **READER TRAINED; LOCKED EXAM NOT RUN**
+
+The first full reader training used all 192 frozen merger lessons and 3,576
+next-token examples. On an identical fixed measurement before and after
+training, next-token accuracy moved 30.4%→86.9% overall, 27.4%→87.3% for the
+cause shelf, and 33.3%→86.5% for the safety shelf. The two personal tracks and
+the shared Qwen stayed unchanged; only 526,336 shelf-reader parameters trained.
+This is a training result, not evidence of transfer to the 32 locked questions.
+
 Parent: E004  
 Claim class: synthetic development until a separately committed locked run
 

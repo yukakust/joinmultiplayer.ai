@@ -50,6 +50,18 @@ class Gate5CDesignTest(unittest.TestCase):
         self.assertTrue(result["safety_unchanged"])
         self.assertEqual(result["shared_and_tail_trainable_parameters"], 0)
 
+    def test_full_training_keeps_exam_closed_and_tracks_frozen(self):
+        result = json.loads((ROOT / "site/experiments/E005/gate-5c-reader-training-v0.1.json").read_text())
+        self.assertEqual(result["status"], "reader_trained_exam_not_run")
+        self.assertFalse(result["exam_run"])
+        self.assertTrue(result["cause_unchanged"])
+        self.assertTrue(result["safety_unchanged"])
+        self.assertEqual(result["shared_and_tail_trainable_parameters"], 0)
+        self.assertGreater(
+            result["fixed_evaluation_after"]["all"]["next_token_accuracy"],
+            result["fixed_evaluation_before"]["all"]["next_token_accuracy"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
