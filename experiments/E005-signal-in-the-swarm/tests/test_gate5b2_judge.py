@@ -17,13 +17,13 @@ class Gate5B2JudgeTests(unittest.TestCase):
         self.assertFalse(MODULE.JUDGMENT_SCHEMA["additionalProperties"])
         self.assertEqual(set(MODULE.JUDGMENT_SCHEMA["properties"]["cause"]["enum"]), MODULE.ENUMS["cause"])
         self.assertEqual(set(MODULE.JUDGMENT_SCHEMA["required"]), set(MODULE.JUDGMENT_SCHEMA["properties"]))
-        self.assertEqual(MODULE.JUDGMENT_SCHEMA["properties"]["cause_quote"]["type"], "string")
+        self.assertEqual(MODULE.JUDGMENT_SCHEMA["properties"]["cause_evidence"]["type"], "string")
 
     def test_absent_sentinel_is_normalized_before_validation(self):
         value = {
-            "cause": "absent", "cause_quote": "__ABSENT__",
-            "safe_action": "absent", "safe_action_quote": "__ABSENT__",
-            "reason": "Neither meaning is present.", "confidence": 0.9,
+            "cause": "absent", "cause_evidence": "__ABSENT__",
+            "safe_action": "absent", "safe_action_evidence": "__ABSENT__",
+            "confidence": 0.9,
         }
         judged = MODULE.validate_judgment(value, "Record the device number.")
         self.assertIsNone(judged["cause_quote"])
@@ -48,25 +48,30 @@ class Gate5B2JudgeTests(unittest.TestCase):
         self.assertNotIn("secret-b", prompt)
         self.assertNotIn("Q2", prompt)
 
+    def test_russian_answer_is_represented_by_ascii_segment_ids(self):
+        segments = MODULE.answer_segments("Причина найдена. Отключите батарею.")
+        self.assertEqual([row["id"] for row in segments], ["S1", "S2"])
+        self.assertEqual(segments[1]["text"], "Отключите батарею.")
+
     def test_exact_quote_is_required(self):
         answer = "Seal fatigue is present, so disconnect the auxiliary battery."
         valid = {
-            "cause": "correct", "cause_quote": "Seal fatigue is present",
-            "safe_action": "correct", "safe_action_quote": "disconnect the auxiliary battery",
-            "reason": "Both meanings are present.", "confidence": 0.9,
+            "cause": "correct", "cause_evidence": "S1",
+            "safe_action": "correct", "safe_action_evidence": "S1",
+            "confidence": 0.9,
         }
         judged = MODULE.validate_judgment(valid, answer)
         self.assertEqual(judged["overall"], "correct")
         self.assertFalse(judged["contradiction"])
-        invalid = dict(valid, cause_quote="retained heat")
-        with self.assertRaisesRegex(ValueError, "exact answer substring"):
+        invalid = dict(valid, cause_evidence="S9")
+        with self.assertRaisesRegex(ValueError, "unknown cause evidence segment"):
             MODULE.validate_judgment(invalid, answer)
 
     def test_negation_derives_incorrect_overall(self):
         value = {
-            "cause": "incorrect", "cause_quote": "not seal fatigue",
-            "safe_action": "correct", "safe_action_quote": "battery disconnected",
-            "reason": "The cause conflicts.", "confidence": 0.8,
+            "cause": "incorrect", "cause_evidence": "S1",
+            "safe_action": "correct", "safe_action_evidence": "S2",
+            "confidence": 0.8,
         }
         judged = MODULE.validate_judgment(value, "This is not seal fatigue. Keep the battery disconnected.")
         self.assertTrue(judged["contradiction"])
@@ -76,9 +81,9 @@ class Gate5B2JudgeTests(unittest.TestCase):
         outputs = iter([
             "not json",
             json.dumps({
-                "cause": "correct", "cause_quote": "sealing material wore down",
-                "safe_action": "absent", "safe_action_quote": None,
-                "reason": "Only the cause is present.", "confidence": 0.8,
+                "cause": "correct", "cause_evidence": "S1",
+                "safe_action": "absent", "safe_action_evidence": "__ABSENT__",
+                "confidence": 0.8,
             }),
         ])
         row = MODULE.CALIBRATION_CASES[1]

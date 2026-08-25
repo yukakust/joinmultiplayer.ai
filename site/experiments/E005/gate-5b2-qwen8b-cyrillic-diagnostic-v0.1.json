@@ -1,0 +1,13 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "judge_id": "J1",
+  "kind": "calibration_transport_diagnostic",
+  "status": "failed_transport_not_semantic_score",
+  "experiment_answers_seen": 0,
+  "english": "Five English records produced valid JSON; the irrelevant record mislabeled absence as incorrect and was rejected by quote validation.",
+  "russian": "All six Russian records began a quote with the correct Cyrillic text, then the constrained decoder repeated whitespace until the token limit and left invalid JSON.",
+  "diagnosis": "The schema-constrained decoder is unreliable when the model must copy arbitrary Cyrillic text.",
+  "replacement": "Pre-segment each answer as S1, S2, and so on. The judge selects an ASCII segment ID; code restores the exact original quote.",
+  "semantic_rubric_changed": false
+}

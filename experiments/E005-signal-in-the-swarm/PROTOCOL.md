@@ -379,6 +379,13 @@ requires a non-empty quote string and represents absence with `__ABSENT__`, whic
 is normalized to null after generation. No semantic rule or calibration answer
 changed.
 
+The diagnostic pass showed valid structured output on five English cases but
+broken constrained generation on every Russian quote: only the first Cyrillic
+character was emitted before whitespace repeated to the limit. Transport v0.4.2
+therefore segments each original answer as S1, S2, and so on. Judges select an
+ASCII segment ID; code restores the exact source text. Free-form reason text is
+removed. The semantic decision tree and expected labels remain unchanged.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

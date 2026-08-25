@@ -3715,6 +3715,7 @@ async function loadE005Gate5B2() {
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-j2-rejection-v0.1.json">PHI REJECTED ↗</a>`);
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-judge-protocol-v0.4.json">FROZEN NEW JUDGES v0.4 ↗</a>`);
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-qwen8b-format-attempt-v0.1.json">8B FORM FAILURE ↗</a>`);
+    target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-qwen8b-cyrillic-diagnostic-v0.1.json">CYRILLIC DIAGNOSTIC ↗</a>`);
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }

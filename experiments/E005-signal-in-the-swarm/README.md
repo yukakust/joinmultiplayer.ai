@@ -381,3 +381,9 @@ The first 8B calibration process stopped on a contradiction in our output form,
 not a semantic result: grammar allowed a null quote that validation forbade. The
 fixed transport requires a string and uses `__ABSENT__` only for a missing claim.
 No E005 answer was seen and the calibration meanings remain unchanged.
+
+A raw diagnostic isolated the failure to constrained Cyrillic copying: English
+JSON worked, while every Russian quote stalled after its first character. The
+new transport presents numbered answer segments and asks only for ASCII IDs.
+Exact quotes are restored by code, not retyped by the judge. Semantic rules stay
+the same.
