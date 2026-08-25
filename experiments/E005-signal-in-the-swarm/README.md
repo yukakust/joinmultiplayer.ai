@@ -395,3 +395,9 @@ is rejected without seeing E005 answers. The same locked ruler now goes to 14B.
 Judge B, Qwen3 14B, passed the same calibration at 12/12 without seeing an E005
 answer. Its full blind run may now proceed. One passing judge is not the planned
 two-judge result, so Judge A still requires a separately calibrated replacement.
+
+Judge B's blind run completed 192/192 records. Clear text capsules scored 26/32
+complete while the neural pair scored 3/32; its cause survived 32/32 but its safe
+action only 3/32. Every judgment and evidence segment is preserved. These counts
+remain provisional until a replacement judge and owner audit agree or resolve
+their disagreements.

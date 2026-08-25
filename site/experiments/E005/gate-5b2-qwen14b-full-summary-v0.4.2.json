@@ -1,0 +1,31 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "judge_id": "J2",
+  "public_alias": "Judge B",
+  "model": "Qwen/Qwen3-14B",
+  "status": "single_judge_complete_awaiting_second_judge_and_owner_audit",
+  "calibration": "12/12",
+  "records": 192,
+  "input_sha256": "83c59e9c57e7e733c2489f629b9165079c70a497ab18864151e58b2615a5eb85",
+  "conditions": [
+    {"id": "shared_qwen_alone", "complete": 0, "partial": 6, "incorrect": 26, "cause_correct": 0, "safe_action_correct": 6, "total": 32},
+    {"id": "cause_track_alone", "complete": 0, "partial": 28, "incorrect": 4, "cause_correct": 32, "safe_action_correct": 0, "total": 32},
+    {"id": "safety_track_alone", "complete": 0, "partial": 27, "incorrect": 5, "cause_correct": 0, "safe_action_correct": 27, "total": 32},
+    {"id": "wrong_same_role_pair", "complete": 0, "partial": 30, "incorrect": 2, "cause_correct": 16, "safe_action_correct": 14, "total": 32},
+    {"id": "semantic_text_capsules", "complete": 26, "partial": 3, "incorrect": 3, "cause_correct": 28, "safe_action_correct": 29, "total": 32},
+    {"id": "correct_neural_pair", "complete": 3, "partial": 19, "incorrect": 10, "cause_correct": 32, "safe_action_correct": 3, "total": 32}
+  ],
+  "language": {
+    "en": {"complete": 17, "partial": 52, "incorrect": 27, "total": 96},
+    "ru": {"complete": 12, "partial": 61, "incorrect": 23, "total": 96}
+  },
+  "plain_result": {
+    "en": "Clear text capsules reached 26/32 complete answers. The neural hidden-state pair reached only 3/32 because the safety skill survived in just 3 answers.",
+    "ru": "Понятные текстовые капсулы дали 26/32 полных ответов. Нейронная пара скрытых состояний дала лишь 3/32: безопасное действие сохранилось только в трёх ответах."
+  },
+  "claim_boundary": {
+    "en": "This is one calibrated judge, not the final score. A replacement second judge and the owner audit are still required.",
+    "ru": "Это оценка одного откалиброванного судьи, а не финальный результат. Нужны второй судья и проверка владельца."
+  }
+}

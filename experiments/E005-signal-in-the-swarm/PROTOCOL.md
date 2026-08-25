@@ -396,6 +396,12 @@ handled English and Russian paraphrases, absent claims, and explicit conflicts,
 while seeing zero E005 answers. This licenses its blind run but does not yet
 create a two-judge result; Judge A still needs a replacement.
 
+Judge B then completed all 192 blind judgments. Its provisional complete-answer
+counts are: shared Qwen 0/32, CAUSE-I only 0/32, SAFETY-I only 0/32, wrong-role
+pair 0/32, semantic text capsules 26/32, and neural hidden-state pair 3/32. The
+neural pair preserved the cause on 32/32 but the safe action on only 3/32. This
+is a single calibrated judge result, pending a replacement judge and owner audit.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

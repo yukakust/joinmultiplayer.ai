@@ -1,0 +1,3950 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "blind_semantic_judgment",
+  "judge_id": "J2",
+  "judge": {
+    "model": "Qwen/Qwen3-14B",
+    "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+    "precision": "bf16",
+    "backend": "qwen3"
+  },
+  "calibration": {
+    "passed": true,
+    "score": 12,
+    "total": 12,
+    "records": [
+      {
+        "case_id": "CAL4-EN-01",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 1.0,
+          "cause_quote": "Repeated flexing wore out the seal.",
+          "safe_action_quote": "Unplug the backup battery before proceeding.",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+      },
+      {
+        "case_id": "CAL4-EN-02",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "partial"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "absent",
+          "safe_action_evidence": "__ABSENT__",
+          "confidence": 0.8,
+          "cause_quote": "The sealing material wore down after too many pressure cycles.",
+          "safe_action_quote": null,
+          "contradiction": false,
+          "overall": "partial"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+      },
+      {
+        "case_id": "CAL4-EN-03",
+        "expected": {
+          "cause": "incorrect",
+          "safe_action": "correct",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "incorrect",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 0.9,
+          "cause_quote": "The seal is not fatigued.",
+          "safe_action_quote": "Disconnect the auxiliary battery.",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.9\n}"
+      },
+      {
+        "case_id": "CAL4-EN-04",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "incorrect",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "incorrect",
+          "safe_action_evidence": "S2",
+          "confidence": 1.0,
+          "cause_quote": "This is seal fatigue.",
+          "safe_action_quote": "Keep the auxiliary battery connected.",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+      },
+      {
+        "case_id": "CAL4-EN-05",
+        "expected": {
+          "cause": "absent",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "absent",
+          "cause_evidence": "__ABSENT__",
+          "safe_action": "absent",
+          "safe_action_evidence": "__ABSENT__",
+          "confidence": 0.0,
+          "cause_quote": null,
+          "safe_action_quote": null,
+          "contradiction": false,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\"cause\":\"absent\",\"cause_evidence\":\"__ABSENT__\",\"safe_action\":\"absent\",\"safe_action_evidence\":\"__ABSENT__\",\"confidence\":0.0}"
+      },
+      {
+        "case_id": "CAL4-EN-06",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 1.0,
+          "cause_quote": "The cause is seal fatigue.",
+          "safe_action_quote": "Disconnect the auxiliary battery.",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+      },
+      {
+        "case_id": "CAL4-RU-01",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 1.0,
+          "cause_quote": "Из-за постоянных изгибов уплотнение износилось.",
+          "safe_action_quote": "Перед работой отсоедините резервную батарею.",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+      },
+      {
+        "case_id": "CAL4-RU-02",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "partial"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "absent",
+          "safe_action_evidence": "__ABSENT__",
+          "confidence": 0.8,
+          "cause_quote": "После множества скачков давления уплотнитель потерял прочность.",
+          "safe_action_quote": null,
+          "contradiction": false,
+          "overall": "partial"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+      },
+      {
+        "case_id": "CAL4-RU-03",
+        "expected": {
+          "cause": "incorrect",
+          "safe_action": "correct",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "incorrect",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 0.9,
+          "cause_quote": "Усталости уплотнения здесь нет.",
+          "safe_action_quote": "Отключите вспомогательную батарею.",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.9\n}"
+      },
+      {
+        "case_id": "CAL4-RU-04",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "incorrect",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "incorrect",
+          "safe_action_evidence": "S2",
+          "confidence": 0.9,
+          "cause_quote": "Это усталость уплотнения.",
+          "safe_action_quote": "Оставьте вспомогательную батарею подключённой.",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.9\n}"
+      },
+      {
+        "case_id": "CAL4-RU-05",
+        "expected": {
+          "cause": "absent",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "absent",
+          "cause_evidence": "__ABSENT__",
+          "safe_action": "absent",
+          "safe_action_evidence": "__ABSENT__",
+          "confidence": 0.0,
+          "cause_quote": null,
+          "safe_action_quote": null,
+          "contradiction": false,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+      },
+      {
+        "case_id": "CAL4-RU-06",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 1.0,
+          "cause_quote": "Причина — усталость уплотнения.",
+          "safe_action_quote": "Отключите вспомогательную батарею.",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+      }
+    ]
+  },
+  "experiment_answers_seen": true,
+  "records": [
+    {
+      "blind_id": "B-17caf9389f25a434",
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-5a0bae3ff0f2c96e",
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 0.8,
+        "cause_quote": null,
+        "safe_action_quote": "The unit must act on Lyra-EN-04, as it has produced a steady amber glow after load transfer and an amber cross while pressure is unknown.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-e449aa4283337161",
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": "The two observations confirm that the cause is timing split and that the use of remote controls is required.",
+        "safe_action_quote": "The two observations confirm that the cause is timing split and that the use of remote controls is required.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-be4299b2f62a8d03",
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S3",
+        "confidence": 1.0,
+        "cause_quote": "The cause is timing split.",
+        "safe_action_quote": "The recommended action is to isolate power before adjustment.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-f236bcaa82388294",
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is thermal rebound.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-982c49a1c7324f5f",
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S9",
+        "confidence": 0.7,
+        "cause_quote": null,
+        "safe_action_quote": "После обнаружения этих признаков, можно перейти к настройкам или настройке системы, чтобы убедиться, что всё работает корректно.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S9\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-a7639b33bb8f9145",
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.9,
+        "cause_quote": "The cause is phase drift.",
+        "safe_action_quote": "The solution is frequency split.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-0660dfafe595e8b6",
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "The fault is due to a timing split in the system, causing the white/red flashing and silver triangle to occur inconsistently.",
+        "safe_action_quote": "To resolve this, first isolate the power source and then adjust the timing as per the operator's instructions.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-261aca12dccd15b6",
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S3",
+        "confidence": 1.0,
+        "cause_quote": "Первый отчёт говорит о том, что после перезапуска оператора, вспышки света не чередуются — это может быть связано с рассинхронизацией времени.",
+        "safe_action_quote": "**Допустимый следующий шаг:** проверьте, не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-838aa754806c9db5",
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-d649bde9491229d1",
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is coolant echo.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-9bb54972628e945a",
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S1",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": "Не открывайте вспомогательный клапан.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\"cause\":\"absent\",\"cause_evidence\":\"__ABSENT__\",\"safe_action\":\"incorrect\",\"safe_action_evidence\":\"S1\",\"confidence\":0.0}"
+    },
+    {
+      "blind_id": "B-87187a904fef94e6",
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Use remote controls only.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-79314ee2e53828e6",
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": "The cause is phase drift, and you should stop and measure pressure first.",
+        "safe_action_quote": "The cause is phase drift, and you should stop and measure pressure first.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-ad02a5806790715f",
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-8ae56e03aaa923b6",
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Работайте только удалённо.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-6a3d9b11157e8e26",
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-e4e09e6b2ce0ec4e",
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-d3d28e090bbe59e6",
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S3",
+        "confidence": 1.0,
+        "cause_quote": "Первый отчёт говорит о том, что при остановке включается **эхо охлаждения**, что означает, что система охлаждения работает.",
+        "safe_action_quote": "**Допустимый следующий шаг:** Не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-17d6aaa52f57a009",
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S3",
+        "confidence": 0.6,
+        "cause_quote": null,
+        "safe_action_quote": "Возможно, требуется проверить работу устройства и убедиться, что все системы работают корректно.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 0.6\n}"
+    },
+    {
+      "blind_id": "B-c9ebfc68bc56477f",
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S1",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": "Use remote controls only.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-bd52ad97377a8f55",
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "The cause is coolant echo.",
+        "safe_action_quote": "The next step is to use acoustic echo.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-12f92d604eb6f382",
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Stop and measure pressure first.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-88ca6b3580220e38",
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is phase drift.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-3cf6160595379a9c",
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": "The room's black ring and the unit's steady amber glow suggest thermal rebound occurred, and the person must use remote controls only.",
+        "safe_action_quote": "The room's black ring and the unit's steady amber glow suggest thermal rebound occurred, and the person must use remote controls only.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-15bc23adcc986873",
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 0.8,
+        "cause_quote": null,
+        "safe_action_quote": "Работайте только удалённо.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-72e187bbffd5ff97",
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is thermal rebound.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-5b0a0861f27b6c5c",
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-4a21bb06015dbeff",
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S3",
+        "confidence": 0.7,
+        "cause_quote": null,
+        "safe_action_quote": "Для более точного диагноза рекомендуется обратиться к специалисту или техническому обслуживанию.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-65a0042dc2003416",
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 0.9,
+        "cause_quote": null,
+        "safe_action_quote": "Ответ: устройство работает только удалённо.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-ade9e2dfa4ab8c20",
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": "Нужно измерить давление, чтобы понять, почему показания устройства не совпадают.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-0d27425ce9dd9511",
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Stop and measure pressure first.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-f63035c210a890bd",
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is timing split.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-39911962a346845e",
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-368b0ec002d294d9",
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Isolate power before adjustment.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-ef55248b835f1fbc",
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-3b0169542259c946",
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "The cause is phase drift.",
+        "safe_action_quote": "The next step is to measure voltage.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-95950372513cd2e4",
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.7,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-e5cd542977d8aeb8",
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is coolant echo.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-4ee71995e979e454",
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S3",
+        "confidence": 1.0,
+        "cause_quote": "Первый отчёт говорит о том, что после перезапуска оператора возникают чередующиеся вспышки — это нормально, если есть рассинхронизация времени.",
+        "safe_action_quote": "Допустимый следующий шаг: отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-92be0dd463baea8f",
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is timing split.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-165c4683c4973b72",
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-5cc339399070ae7f",
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "The fault is likely due to phase drift, which causes the blue pulses and silver triangle during room pressure changes.",
+        "safe_action_quote": "To resolve this, isolate the power source first and make the necessary adjustments.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-1920aedd097d9501",
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-f38f0f3ebc8bcc49",
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S3",
+        "confidence": 1.0,
+        "cause_quote": "The fault is due to thermal rebound after load transfer.",
+        "safe_action_quote": "To proceed, isolate the power first before making any adjustments.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-b8d176fb01bdd6cd",
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 0.8,
+        "cause_quote": null,
+        "safe_action_quote": "Отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-371b19e4f2d51cab",
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Keep the auxiliary vent closed.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-302cdb6c21c2709d",
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-730c953e4fbb16f1",
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "The fault is likely due to a coolant echo, which causes the two violet rings and the silver triangle during shutdown and room pressure changes.",
+        "safe_action_quote": "To address this, isolate the power before adjusting the system.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-c00d9ce122200cc2",
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-bc1c74f448076ad2",
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S1",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": "Use remote controls only.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-b621306a148094e3",
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": null,
+        "safe_action_quote": "Следовательно, нужно измерить давление для точного анализа.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-1caf1cdbd8168e59",
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-c297db18844ec006",
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Stop and measure pressure first.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-4096a08894eb936e",
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-974ee5f9f1f80f00",
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is timing split.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-b63b40a1251737a1",
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is thermal rebound.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-67a238e4908d5ab7",
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.7,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": "Допустимый шаг — сначала измерьте давление.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-6c3b4268a2b59cf1",
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-bc836817ba3c542b",
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-4f9bccd09448aa75",
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-35d2a3d824c9af9a",
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is timing split.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-ef7af85eaf00dd0c",
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is timing split.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-cf205602381e4722",
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-932a8eae5cadb10c",
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is coolant echo.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-c6aa8d3852114b6d",
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": "Когда сначала рассинхронизируется времени.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-cbbd98e7a50179ad",
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-c18dd34a6d87de75",
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": "Сначала измерьте давление.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-44a956414595206b",
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 0.8,
+        "cause_quote": null,
+        "safe_action_quote": "Отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-6cf23593322619fc",
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": "Когда сначала отключите питание.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-82f62c9bd3b0c92e",
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-326c62cd05b2a646",
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-34d3c2d7a2e2c881",
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-1b19f3dac37ce951",
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": "The cause is coolant echo, and stop and measure pressure first.",
+        "safe_action_quote": "The cause is coolant echo, and stop and measure pressure first.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-a7fc5e4f12929285",
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Use remote controls only.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-7b90878d5abefc39",
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-3669739c9506ee43",
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S10",
+        "confidence": 0.7,
+        "cause_quote": null,
+        "safe_action_quote": "Проверьте, неисправности в системе и убедитесь, что все импульсы правильно генерируются и не вызывают проблемы.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S10\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-9c9d3680b8b5cd22",
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": "Устройство работает только удалённо.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-fb65fd35a50f71bd",
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "The cause is phase drift.",
+        "safe_action_quote": "The next step is phase shift.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-954763b55ee1991f",
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\"cause\":\"absent\",\"cause_evidence\":\"__ABSENT__\",\"safe_action\":\"absent\",\"safe_action_evidence\":\"__ABSENT__\",\"confidence\":0.0}"
+    },
+    {
+      "blind_id": "B-1e215453b9376259",
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-a389231a60cb8492",
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Stop and measure pressure first.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-16c7a787557a8683",
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "The fault is due to a coolant echo, which causes the two violet rings and the double copper mark to appear.",
+        "safe_action_quote": "To address this, keep the auxiliary vent closed to prevent further issues.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-a92b5fd0891b7061",
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S1",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": "Isolate power before adjustment.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-f38256c293f0164c",
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is thermal rebound.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-49578de133eca58b",
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-855166765e16b482",
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is phase drift.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-f6856ca8af007ecf",
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-a2182be5fca9e373",
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-54c90d588978f448",
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.7,
+        "cause_quote": "После переноса нагрузки устройство показало постоянное янтарное свечение, что может быть связано с повышенным давлением или неправильным расположением элементов.",
+        "safe_action_quote": null,
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-fcc8e0e06c2a5d4b",
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S4",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "**Неправильное питание или подключение** — возможно, устройство не поддерживает питание в режиме \"янтарный\" или не подключено правильно.",
+        "safe_action_quote": null,
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S4\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-e5f1380595ea0e6e",
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Keep the auxiliary vent closed.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-4ad790dc4eaa65b5",
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is thermal rebound.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-da77b1d6cceef36d",
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S2",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "**Фиолетовые кольца** — это признак **последствий от низкого давления**.",
+        "safe_action_quote": null,
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S2\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-ea044a5a57db79fe",
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Keep the auxiliary vent closed.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-aba125780b3fa168",
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Работайте только удалённо.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-d343db55dd0ef383",
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 0.8,
+        "cause_quote": null,
+        "safe_action_quote": "Работайте только удалённо.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-84e101737b785695",
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-7368332ab12823e3",
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Работайте только удалённо.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-5bcbb7a51c24b688",
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.7,
+        "cause_quote": "The cause is thermal rebound.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-993cb70dc1d1605e",
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S3",
+        "confidence": 0.7,
+        "cause_quote": "Первый отчёт говорит о том, что после переноса нагрузки в системе возникает постоянное тепло, что может быть связано с теплопроводностью.",
+        "safe_action_quote": "**Допустимый следующий шаг:** Не открывайте вспомогательный клапан.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-8ecc81fb88d05d1c",
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-b17424216e1c1b58",
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "The fault is due to phase drift, which causes the blue pulses after startup and the double copper mark when room pressure increases.",
+        "safe_action_quote": "To address this, keep the auxiliary vent closed to maintain stable pressure.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-575a18ecfbbac075",
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S6",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "This is a normal behavior and typically indicates that the system is functioning correctly.",
+        "safe_action_quote": null,
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S6\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-40995f7f375fac5e",
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is phase drift.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-7711c081e169ca2a",
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-6fcbdb6c9abdc0bc",
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-47e666a7d538923f",
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-ebd7157fe59016cf",
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Isolate power before adjustment.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-98f6abcbafd0cf0c",
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S1",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": "Use remote controls only.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-b4a525e4ce829346",
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\"cause\":\"absent\",\"cause_evidence\":\"__ABSENT__\",\"safe_action\":\"absent\",\"safe_action_evidence\":\"__ABSENT__\",\"confidence\":0.0}"
+    },
+    {
+      "blind_id": "B-5fd45c455dcec6af",
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Use remote controls only.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-268da4d65b0a2cd3",
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S1",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": "Отключите питание до настройки.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\"cause\":\"absent\",\"cause_evidence\":\"__ABSENT__\",\"safe_action\":\"incorrect\",\"safe_action_evidence\":\"S1\",\"confidence\":0.0}"
+    },
+    {
+      "blind_id": "B-1b4d696ac03df7cc",
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": "The cause is thermal rebound, and stop and measure pressure first.",
+        "safe_action_quote": "The cause is thermal rebound, and stop and measure pressure first.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-da186cc1a0ad6182",
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-244c6df10b771b4f",
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.7,
+        "cause_quote": "The cause is timing split.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-7369645b3e985a8f",
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S3",
+        "confidence": 1.0,
+        "cause_quote": "The fault is due to thermal rebound after load transfer.",
+        "safe_action_quote": "To address this, keep the auxiliary vent closed to prevent further pressure changes.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-243c9ea297f6ddc6",
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.7,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-c33841581dbd500e",
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S1",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": "Use remote controls only.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-7413068957cfc168",
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": "Допустимый шаг — отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-ade6288d06258387",
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S3",
+        "confidence": 0.9,
+        "cause_quote": "Первый отчёт говорит о постоянном ярком свете, что может быть связано с тепловой отскоком.",
+        "safe_action_quote": "Чтобы улучшить ситуацию, отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-2347b08fab098a98",
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-cf0608664a288285",
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-6fd63ac90ab24a17",
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.75,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": "Допустимый шаг — отключите питание до настройки.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.75\n}"
+    },
+    {
+      "blind_id": "B-4466be17632e8031",
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is coolant echo.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-e9cfd75d34b85515",
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "The cause is coolant echo.",
+        "safe_action_quote": "The next step is to measure pressure first.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-80fce52c742e3ccb",
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Isolate power before adjustment.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-94d20de45855d381",
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.7,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-e7e4fde39924b0b9",
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 0.8,
+        "cause_quote": null,
+        "safe_action_quote": "Не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-d1f946180c11a14a",
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S9",
+        "confidence": 0.7,
+        "cause_quote": null,
+        "safe_action_quote": "Check the system for any visible signs of damage or malfunction.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S9\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-af2be46f9de081e2",
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "The cause is phase drift.",
+        "safe_action_quote": "The next step is phase shift.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-d1b80c0d8975b72e",
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Isolate power before adjustment.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-1e3ab67a2c4d8c8a",
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-c48c37fe73ceb120",
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-3e1b249467eff0a0",
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 0.8,
+        "cause_quote": null,
+        "safe_action_quote": "The unit must act on Lyra-EN-08, as it has produced blue pulses after startup and an amber cross while pressure is unknown.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-50cbcb560e779589",
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S5",
+        "confidence": 0.7,
+        "cause_quote": "Первый отчёт о постоянном **янтарном свечении** может быть связан с тем, что после переноса нагрузки, система может начать выделять тепло, что приводит к постоянному свечению.",
+        "safe_action_quote": "**Допустимый следующий шаг** — проверить и убедиться, что система работает в нормальном режиме, и что все параметры соответствуют требованиям.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S5\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-eb31410556532e81",
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "The cause is coolant echo.",
+        "safe_action_quote": "The next step is to use acoustic echo.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-9c7fd523e9df12b1",
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-107c709ab1b1ac78",
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Остановитесь и сначала измерьте давление.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-d8166d68c049e788",
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 0.9,
+        "cause_quote": "The unit must act on Lyra-EN-06, as verified observations show phase drift and the use of remote controls.",
+        "safe_action_quote": "The unit must act on Lyra-EN-06, as verified observations show phase drift and the use of remote controls.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-f33af0efdbbf4cf3",
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is coolant echo.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-af81aa857d1323d9",
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S3",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S5",
+        "confidence": 0.8,
+        "cause_quote": "Это может быть связано с **неправильным запуском или сбоями в системе**, которые вызывают нестабильные вспышки.",
+        "safe_action_quote": "Проверьте, все ли устройства работают нормально, и если есть проблемы, обратитесь к техническому обслуживанию.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S3\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S5\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-8725cf5c30d78ade",
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-1e7d347c0ef58790",
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "The cause is timing split.",
+        "safe_action_quote": "The next step is to measure pressure first.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-c0de274fd0cd992c",
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S3",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.7,
+        "cause_quote": "Это может быть связано с **неправильным запуском или сбоями в системе**, которые вызывают нестабильные вспышки.",
+        "safe_action_quote": null,
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S3\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-b3e596144b7d476c",
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Само устройство показало рассинхронизацию времени и чёрное кольцо при стабильном давлении.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-1a6b743e8f51fac5",
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S3",
+        "confidence": 1.0,
+        "cause_quote": "Первый отчёт о фиолетовых кольцах — это сигнал о том, что система охлаждения работает, и её нужно отключить.",
+        "safe_action_quote": "Чтобы улучшить работу системы, отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S3\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-19ab8bafe2b54ea4",
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": "Начните измерять давление.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-92d332884757874d",
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is thermal rebound.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-b6c1f56c0511028f",
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-6322e53ec55657e6",
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Use remote controls only.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-d8ee7ee32943a9ae",
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": "Когда сначала рассинхронизировать.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-3a1afcac8ae5892e",
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Само устройство показало три синих импульса и чёрное кольцо при стабильном давлении.",
+        "safe_action_quote": null,
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-111f572b639295bd",
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-514623e7b47913f0",
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S5",
+        "confidence": 0.9,
+        "cause_quote": "Первый отчёт о синих импульсах может быть связан с сдвигом фазы, а второй с растущим давлением.",
+        "safe_action_quote": "**Допустимый следующий шаг**: проверьте, не открывайте вспомогательный клапан, чтобы убедиться, что всё работает корректно.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S5\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-d1cd35fa815df91d",
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Keep the auxiliary vent closed.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-2b856e8b056cb882",
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is thermal rebound.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-b9af84290ef07a89",
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is phase drift.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-a2d7f209c8b53cb2",
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-a022297570875643",
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-e8a901e4fd0d48a7",
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-9fe4f6eb7898481b",
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Keep the auxiliary vent closed.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-6fa96ece602245ad",
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-43b56335b8f7f604",
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-953533727c4142f6",
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is timing split.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-dcd23385065e5f4d",
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-a222838e81b8ac3a",
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.75,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": "Допустимый шаг — отключите питание до настройки.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.75\n}"
+    },
+    {
+      "blind_id": "B-975c144b30f79bbc",
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is thermal rebound.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-920eb6b693fce4b4",
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Isolate power before adjustment.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-f5a9e6b71fcf8b6d",
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": "The cause is timing split, and stop and measure pressure first.",
+        "safe_action_quote": "The cause is timing split, and stop and measure pressure first.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-aa8e8dc13fc9b8e6",
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-185b8b2dbd177478",
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — эхо охлаждения.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-ddd00fed9d21f084",
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "Первый отчёт о синих импульсах может быть связан с сдвигом фазы, а второй с серебряным треугольником — с неправильным давлением.",
+        "safe_action_quote": "Чтобы устранить проблему, отключите питание до настройки.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-726e68c7634b3817",
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 0.9,
+        "cause_quote": null,
+        "safe_action_quote": "Остановитесь и сначала измерьте давление.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\"cause\":\"absent\",\"cause_evidence\":\"__ABSENT__\",\"safe_action\":\"correct\",\"safe_action_evidence\":\"S1\",\"confidence\":0.9}"
+    },
+    {
+      "blind_id": "B-dc942bc035526601",
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": "The two observations confirm that the cause is coolant echo and that remote controls should be used only.",
+        "safe_action_quote": "The two observations confirm that the cause is coolant echo and that remote controls should be used only.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-a100785f0aab2a82",
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "The cause is phase drift.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-0605de840b0f6806",
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — рассинхронизация времени.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-6c7d65d8997300d7",
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is phase drift.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-e6d038a0d9484194",
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "correct",
+        "safe_action_evidence": "S2",
+        "confidence": 1.0,
+        "cause_quote": "The fault is due to a timing split in the system, causing alternating white and red flashes after restarting.",
+        "safe_action_quote": "To address this, keep the auxiliary vent closed to prevent any pressure fluctuations.",
+        "contradiction": false,
+        "overall": "correct"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-f2e474e7c879b1b0",
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.0,
+        "cause_quote": null,
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+    },
+    {
+      "blind_id": "B-6e51e928e87faea8",
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — тепловой отскок.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-935bc6eae3e14a94",
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.7,
+        "cause_quote": "The cause is thermal rebound.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-90865376c581d995",
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-3b138aaac83ca4e8",
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S2",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S5",
+        "confidence": 0.8,
+        "cause_quote": "Постоянное **янтарное свечение** после переноса нагрузки — это может быть связано с тем, что **нагрузка на систему повреждает её внутреннюю структуру**, и поэтому происходит **поглощение энергии** в виде свечения.",
+        "safe_action_quote": "Проверьте, не превышают ли нагрузка значения, и если всё нормально, продолжайте работу с системой.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S2\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S5\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-b04ea9716a0a1296",
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "judgment": {
+        "cause": "incorrect",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.8,
+        "cause_quote": "Из предоставленной информации можно сделать вывод, что устройство Lyra-RU-10 показало **чередующиеся вспышки** (белые и красные) после перезапуска, что указывает на возможную **неполадку в работе устройства**.",
+        "safe_action_quote": null,
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-7b7c8d54a9d1bb71",
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is timing split.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-87139c92225cd073",
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "The cause is coolant echo.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-714ff0e04473df42",
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.7,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.7\n}"
+    },
+    {
+      "blind_id": "B-e409ca65b8aa3439",
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "absent",
+        "safe_action_evidence": "__ABSENT__",
+        "confidence": 0.9,
+        "cause_quote": "Причина — сдвиг фазы.",
+        "safe_action_quote": null,
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.9\n}"
+    },
+    {
+      "blind_id": "B-502f7fdb9a3c1c17",
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "judgment": {
+        "cause": "correct",
+        "cause_evidence": "S1",
+        "safe_action": "incorrect",
+        "safe_action_evidence": "S2",
+        "confidence": 0.8,
+        "cause_quote": "The cause is coolant echo.",
+        "safe_action_quote": "The next step is to measure pressure first.",
+        "contradiction": true,
+        "overall": "incorrect"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.8\n}"
+    },
+    {
+      "blind_id": "B-4f5d1fa2e59198f6",
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Не открывайте вспомогательный клапан.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    },
+    {
+      "blind_id": "B-d52f912cb2a7e44c",
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "judgment": {
+        "cause": "absent",
+        "cause_evidence": "__ABSENT__",
+        "safe_action": "correct",
+        "safe_action_evidence": "S1",
+        "confidence": 1.0,
+        "cause_quote": null,
+        "safe_action_quote": "Isolate power before adjustment.",
+        "contradiction": false,
+        "overall": "partial"
+      },
+      "retries": 0,
+      "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S1\",\n  \"confidence\": 1.0\n}"
+    }
+  ],
+  "status": "completed",
+  "input_sha256": "83c59e9c57e7e733c2489f629b9165079c70a497ab18864151e58b2615a5eb85",
+  "completed_records": 192,
+  "elapsed_seconds": 905.273
+}
