@@ -1436,6 +1436,68 @@ button:disabled {
   .e005-gate4-training-cards { grid-template-columns: 1fr; }
 }
 
+.e005-shelf-diagram {
+  display: grid;
+  gap: 1px;
+  margin: 3rem 0;
+  text-align: center;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.e005-shelf-diagram > div,
+.e005-shelf-diagram article {
+  padding: clamp(1rem, 2.5vw, 2rem);
+  background: var(--paper);
+}
+
+.e005-shelf-diagram span {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+  font: 700 0.72rem/1.2 var(--mono);
+}
+
+.e005-shelf-diagram .is-tracks,
+.e005-shelf-diagram .is-shelves {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  padding: 0;
+  background: var(--line);
+}
+
+.e005-shelf-diagram .is-tracks article:first-child,
+.e005-shelf-diagram .is-shelves article:first-child { border-top: 6px solid #dc735f; }
+.e005-shelf-diagram .is-tracks article:last-child,
+.e005-shelf-diagram .is-shelves article:last-child { border-top: 6px solid #6c9fd2; }
+.e005-shelf-diagram .is-tail { background: var(--ink); color: var(--paper); }
+
+.e005-shelf-controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.e005-shelf-controls article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: center;
+  min-height: 7rem;
+  padding: 1rem;
+  background: var(--paper);
+}
+
+.e005-shelf-controls article.is-main { box-shadow: inset 0 6px 0 #8ebc87; }
+.e005-shelf-controls span { color: var(--muted); }
+
+@media (max-width: 760px) {
+  .e005-shelf-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 760px) {
   .e005-gate4-lesson-card { grid-template-columns: 1fr; }
   .e005-gate4-lesson-card section { min-height: 0; }

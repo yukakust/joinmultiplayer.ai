@@ -14,6 +14,21 @@ numerical suppression or interference point. It cannot translate a hidden
 vector into a human-readable fact, and it cannot by itself prove that a large
 norm contains the expected meaning.
 
+## Gate 5C — separate latent shelves
+
+Gate 5C reuses the unchanged base model, CAUSE-I track, SAFETY-I track, merger
+lessons, and 32-question locked exam from Gate 5B. Instead of adding both
+deltas into one hidden vector, it appends two distinct hidden positions after
+the current context. One position can receive only CAUSE-I; the other can
+receive only SAFETY-I. The frozen shared tail reads both positions and predicts
+the next token.
+
+Only two rank-128 shelf projectors and two shelf-type embeddings may train.
+The base, both personal tracks, shared tail, LM head, and locked exam must keep
+their exact hashes. Missing, duplicated, swapped, and empty shelf controls are
+required. The public frozen design is
+`/experiments/E005/gate-5c-design-v0.1.json`.
+
 Status: **FROZEN BEFORE PUBLIC DEVELOPMENT DATA**  
 Parent: E004  
 Claim class: synthetic development until a separately committed locked run

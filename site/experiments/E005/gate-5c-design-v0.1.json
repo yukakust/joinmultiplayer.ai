@@ -1,0 +1,72 @@
+{
+  "experiment_id": "E005",
+  "gate": "5C",
+  "version": "0.1",
+  "status": "locked_before_training",
+  "kind": "separate_latent_shelves_design",
+  "hypothesis": {
+    "en": "Can two separate latent shelves preserve two personal neural skills better than adding both skills into one hidden vector?",
+    "ru": "Смогут ли две отдельные скрытые полки сохранить два личных нейронных умения лучше, чем сложение обоих умений в одном векторе?"
+  },
+  "frozen_inputs": {
+    "base_model": "the same pinned Qwen3-0.6B used in Gate 5B",
+    "cause_track": "the unchanged Gate 5B CAUSE-I adapter",
+    "safety_track": "the unchanged Gate 5B SAFETY-I adapter",
+    "reader_lessons": "/experiments/E005/gate-5b-curriculum-v0.1.json#merger_lessons",
+    "locked_exam": "/experiments/E005/gate-5b-locked-test-v0.1.json",
+    "old_additive_result": "/experiments/E005/gate-5b1-results-v0.1.json",
+    "question_count": 32
+  },
+  "architecture": {
+    "shared_stem": "Qwen layers 0-5, frozen",
+    "personal_tracks": "CAUSE-I and SAFETY-I layers 6-21, frozen",
+    "shared_tail": "Qwen layers 22-27 and language head, frozen",
+    "cause_shelf": "one extra hidden token made only from the bounded CAUSE-I delta",
+    "safety_shelf": "one extra hidden token made only from the bounded SAFETY-I delta",
+    "reader": "two separate rank-128 projectors plus two shelf-type embeddings",
+    "prediction": "the shared tail reads the original context, then CAUSE shelf, then SAFETY shelf, and predicts one next token",
+    "equation": "next_token = frozen_tail([z0_context; z0_last + Pcause(delta_cause); z0_last + Psafety(delta_safety)])"
+  },
+  "training": {
+    "changes": [
+      "cause shelf projector",
+      "safety shelf projector",
+      "two shelf-type embeddings"
+    ],
+    "does_not_change": [
+      "base Qwen weights",
+      "CAUSE-I weights",
+      "SAFETY-I weights",
+      "shared tail weights",
+      "locked exam"
+    ],
+    "loss": "next-token loss at the final shelf; tokens belonging to the safe action receive double weight so the old cause-first shortcut is not enough"
+  },
+  "conditions": [
+    "old_additive_merger",
+    "separate_shelves_correct_pair",
+    "cause_shelf_only",
+    "safety_shelf_only",
+    "two_cause_shelves",
+    "two_safety_shelves",
+    "swapped_shelves",
+    "empty_shelves"
+  ],
+  "provisional_literal_pass_rule": {
+    "correct_pair_at_least": 26,
+    "each_missing_or_duplicate_control_at_most": 10,
+    "lead_over_best_missing_or_duplicate_control_at_least": 12,
+    "total_questions": 32,
+    "warning": "Literal scoring is only a first alarm. Every raw answer remains public and semantic review is required before a scientific pass."
+  },
+  "falsification": {
+    "en": "If empty or single shelves perform like the correct pair, the reader learned the task centrally instead of composing the two personal tracks. If the correct pair still loses the safe action, separate positions alone are not a sufficient neural ABI.",
+    "ru": "Если пустые или одиночные полки работают как правильная пара, читатель выучил задачу централизованно, а не объединил два личных трека. Если правильная пара всё ещё теряет безопасное действие, одних раздельных мест недостаточно для нейронного ABI."
+  },
+  "claim_boundary": {
+    "en": "The shelves have fixed roles and still run on one computer. Even a pass would not yet prove open-ended routing, arbitrary skills, network transport, or scaling to many pocket i.",
+    "ru": "У полок заранее заданы роли, и всё ещё работает на одном компьютере. Даже успех пока не докажет свободный routing, произвольные умения, передачу по сети или рост до множества pocket i."
+  },
+  "training_started": false,
+  "exam_run": false
+}
