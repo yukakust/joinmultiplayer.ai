@@ -391,3 +391,7 @@ the same.
 The repaired 8B run produced a real semantic calibration score: 9/12. It twice
 confused absence with contradiction and missed one Russian paraphrase. Judge A
 is rejected without seeing E005 answers. The same locked ruler now goes to 14B.
+
+Judge B, Qwen3 14B, passed the same calibration at 12/12 without seeing an E005
+answer. Its full blind run may now proceed. One passing judge is not the planned
+two-judge result, so Judge A still requires a separately calibrated replacement.

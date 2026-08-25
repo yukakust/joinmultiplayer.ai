@@ -391,6 +391,11 @@ at 9/12 and saw zero E005 answers. It mislabeled two irrelevant answers as
 contradictions and rejected one valid Russian paraphrase. The frozen 12/12 rule
 rejects Judge A; no further prompt tuning is allowed. Judge B proceeds unchanged.
 
+Judge B (Qwen3 14B) then passed the unchanged calibration at 12/12. It correctly
+handled English and Russian paraphrases, absent claims, and explicit conflicts,
+while seeing zero E005 answers. This licenses its blind run but does not yet
+create a two-judge result; Judge A still needs a replacement.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

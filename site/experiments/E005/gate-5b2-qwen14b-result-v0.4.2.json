@@ -1,0 +1,16 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "judge_id": "J2",
+  "public_alias": "Judge B",
+  "model": "Qwen/Qwen3-14B",
+  "status": "calibration_passed_awaiting_blind_run",
+  "score": 12,
+  "required": 12,
+  "experiment_answers_seen": 0,
+  "plain_result": {
+    "en": "The 14B judge correctly handled all English and Russian traps, including paraphrases, missing claims, and contradictions.",
+    "ru": "Судья 14B правильно разобрал все английские и русские ловушки: пересказы, отсутствие ответа и противоречия."
+  },
+  "claim_boundary": "This proves only that the judge passed synthetic calibration. It has not scored E005 yet."
+}

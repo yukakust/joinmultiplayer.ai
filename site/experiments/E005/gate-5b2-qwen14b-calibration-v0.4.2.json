@@ -1,0 +1,299 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "blind_semantic_judgment",
+  "judge_id": "J2",
+  "judge": {
+    "model": "Qwen/Qwen3-14B",
+    "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+    "precision": "bf16",
+    "backend": "qwen3"
+  },
+  "calibration": {
+    "passed": true,
+    "score": 12,
+    "total": 12,
+    "records": [
+      {
+        "case_id": "CAL4-EN-01",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 1.0,
+          "cause_quote": "Repeated flexing wore out the seal.",
+          "safe_action_quote": "Unplug the backup battery before proceeding.",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+      },
+      {
+        "case_id": "CAL4-EN-02",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "partial"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "absent",
+          "safe_action_evidence": "__ABSENT__",
+          "confidence": 0.8,
+          "cause_quote": "The sealing material wore down after too many pressure cycles.",
+          "safe_action_quote": null,
+          "contradiction": false,
+          "overall": "partial"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+      },
+      {
+        "case_id": "CAL4-EN-03",
+        "expected": {
+          "cause": "incorrect",
+          "safe_action": "correct",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "incorrect",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 0.9,
+          "cause_quote": "The seal is not fatigued.",
+          "safe_action_quote": "Disconnect the auxiliary battery.",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.9\n}"
+      },
+      {
+        "case_id": "CAL4-EN-04",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "incorrect",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "incorrect",
+          "safe_action_evidence": "S2",
+          "confidence": 1.0,
+          "cause_quote": "This is seal fatigue.",
+          "safe_action_quote": "Keep the auxiliary battery connected.",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+      },
+      {
+        "case_id": "CAL4-EN-05",
+        "expected": {
+          "cause": "absent",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "absent",
+          "cause_evidence": "__ABSENT__",
+          "safe_action": "absent",
+          "safe_action_evidence": "__ABSENT__",
+          "confidence": 0.0,
+          "cause_quote": null,
+          "safe_action_quote": null,
+          "contradiction": false,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\"cause\":\"absent\",\"cause_evidence\":\"__ABSENT__\",\"safe_action\":\"absent\",\"safe_action_evidence\":\"__ABSENT__\",\"confidence\":0.0}"
+      },
+      {
+        "case_id": "CAL4-EN-06",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 1.0,
+          "cause_quote": "The cause is seal fatigue.",
+          "safe_action_quote": "Disconnect the auxiliary battery.",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+      },
+      {
+        "case_id": "CAL4-RU-01",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 1.0,
+          "cause_quote": "Из-за постоянных изгибов уплотнение износилось.",
+          "safe_action_quote": "Перед работой отсоедините резервную батарею.",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+      },
+      {
+        "case_id": "CAL4-RU-02",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "partial"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "absent",
+          "safe_action_evidence": "__ABSENT__",
+          "confidence": 0.8,
+          "cause_quote": "После множества скачков давления уплотнитель потерял прочность.",
+          "safe_action_quote": null,
+          "contradiction": false,
+          "overall": "partial"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.8\n}"
+      },
+      {
+        "case_id": "CAL4-RU-03",
+        "expected": {
+          "cause": "incorrect",
+          "safe_action": "correct",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "incorrect",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 0.9,
+          "cause_quote": "Усталости уплотнения здесь нет.",
+          "safe_action_quote": "Отключите вспомогательную батарею.",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"incorrect\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.9\n}"
+      },
+      {
+        "case_id": "CAL4-RU-04",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "incorrect",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "incorrect",
+          "safe_action_evidence": "S2",
+          "confidence": 0.9,
+          "cause_quote": "Это усталость уплотнения.",
+          "safe_action_quote": "Оставьте вспомогательную батарею подключённой.",
+          "contradiction": true,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"incorrect\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 0.9\n}"
+      },
+      {
+        "case_id": "CAL4-RU-05",
+        "expected": {
+          "cause": "absent",
+          "safe_action": "absent",
+          "contradiction": false,
+          "overall": "incorrect"
+        },
+        "judgment": {
+          "cause": "absent",
+          "cause_evidence": "__ABSENT__",
+          "safe_action": "absent",
+          "safe_action_evidence": "__ABSENT__",
+          "confidence": 0.0,
+          "cause_quote": null,
+          "safe_action_quote": null,
+          "contradiction": false,
+          "overall": "incorrect"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"absent\",\n  \"cause_evidence\": \"__ABSENT__\",\n  \"safe_action\": \"absent\",\n  \"safe_action_evidence\": \"__ABSENT__\",\n  \"confidence\": 0.0\n}"
+      },
+      {
+        "case_id": "CAL4-RU-06",
+        "expected": {
+          "cause": "correct",
+          "safe_action": "correct",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "judgment": {
+          "cause": "correct",
+          "cause_evidence": "S1",
+          "safe_action": "correct",
+          "safe_action_evidence": "S2",
+          "confidence": 1.0,
+          "cause_quote": "Причина — усталость уплотнения.",
+          "safe_action_quote": "Отключите вспомогательную батарею.",
+          "contradiction": false,
+          "overall": "correct"
+        },
+        "passed": true,
+        "retries": 0,
+        "raw_output": "{\n  \"cause\": \"correct\",\n  \"cause_evidence\": \"S1\",\n  \"safe_action\": \"correct\",\n  \"safe_action_evidence\": \"S2\",\n  \"confidence\": 1.0\n}"
+      }
+    ]
+  },
+  "experiment_answers_seen": false,
+  "records": [],
+  "status": "calibration_passed",
+  "elapsed_seconds": 59.355
+}
