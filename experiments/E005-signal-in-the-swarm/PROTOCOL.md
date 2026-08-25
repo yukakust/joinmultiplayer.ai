@@ -306,6 +306,12 @@ original Gate 5B thresholds do not change; only the correctness measurement is
 repaired. The frozen protocol is public at
 `/experiment/e005/gate-5b/semantic-review/`.
 
+The Gate 5B.2 Vast preflight then passed before model download. Two RTX 3090
+GPUs were visible and a real CUDA tensor operation succeeded. The temporary
+machine had 54 GiB free after installing the pinned software environment. It has
+no persistent volume, so judges must run sequentially and each result must be
+copied off the instance immediately. No judge had seen an experiment answer.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

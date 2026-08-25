@@ -316,3 +316,9 @@ contradictions. Both must pass a 12-case bilingual calibration first. The owner
 then reviews every disagreement and 24 stratified agreements. The old literal
 marks remain visible but no longer pretend to be semantic correctness. The
 owner-readable checkpoint is `/experiment/e005/gate-5b/semantic-review/`.
+
+The temporary judge machine passed preflight before downloading either model:
+both RTX 3090 GPUs were visible, a CUDA tensor operation passed, and 54 GiB of
+disk remained after the pinned environment install. The instance has no
+persistent volume, so every judge result must be copied back before its model is
+removed. No experiment answer had been judged at this checkpoint.
