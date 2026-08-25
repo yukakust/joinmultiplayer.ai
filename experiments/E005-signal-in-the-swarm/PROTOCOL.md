@@ -386,6 +386,11 @@ therefore segments each original answer as S1, S2, and so on. Judges select an
 ASCII segment ID; code restores the exact source text. Free-form reason text is
 removed. The semantic decision tree and expected labels remain unchanged.
 
+With the repaired segment transport, Judge A (Qwen3 8B) completed calibration
+at 9/12 and saw zero E005 answers. It mislabeled two irrelevant answers as
+contradictions and rejected one valid Russian paraphrase. The frozen 12/12 rule
+rejects Judge A; no further prompt tuning is allowed. Judge B proceeds unchanged.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

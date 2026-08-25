@@ -387,3 +387,7 @@ JSON worked, while every Russian quote stalled after its first character. The
 new transport presents numbered answer segments and asks only for ASCII IDs.
 Exact quotes are restored by code, not retyped by the judge. Semantic rules stay
 the same.
+
+The repaired 8B run produced a real semantic calibration score: 9/12. It twice
+confused absence with contradiction and missed one Russian paraphrase. Judge A
+is rejected without seeing E005 answers. The same locked ruler now goes to 14B.
