@@ -18,10 +18,10 @@ from typing import Any, Callable
 
 JUDGES = {
     "J1": {
-        "model": "Qwen/Qwen3-8B",
-        "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "model": "Qwen/Qwen2.5-14B-Instruct",
+        "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
         "precision": "bf16",
-        "backend": "qwen3",
+        "backend": "qwen2.5",
     },
     "J2": {
         "model": "Qwen/Qwen3-14B",

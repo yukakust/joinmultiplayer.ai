@@ -401,3 +401,8 @@ complete while the neural pair scored 3/32; its cause survived 32/32 but its saf
 action only 3/32. Every judgment and evidence segment is preserved. These counts
 remain provisional until a replacement judge and owner audit agree or resolve
 their disagreements.
+
+Judge A2 is now locked as Qwen2.5 14B Instruct in BF16 before calibration. It is
+a different generation and a 48-layer architecture, replacing rejected Qwen3
+8B. The shared Qwen lineage is still a limitation. All scoring and stop rules are
+unchanged.

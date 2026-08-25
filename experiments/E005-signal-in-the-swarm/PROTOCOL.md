@@ -402,6 +402,12 @@ pair 0/32, semantic text capsules 26/32, and neural hidden-state pair 3/32. The
 neural pair preserved the cause on 32/32 but the safe action on only 3/32. This
 is a single calibrated judge result, pending a replacement judge and owner audit.
 
+Replacement protocol v0.5 locks Judge A2 as Qwen2.5 14B Instruct BF16 before it
+sees calibration or E005 answers. It has 48 layers versus Judge B's Qwen3 14B at
+40 layers and comes from an earlier generation, but both still share Qwen lineage.
+The same frozen 12 cases, segment evidence, 12/12 gate, input hash, and owner
+audit remain unchanged.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the
