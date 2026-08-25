@@ -343,6 +343,12 @@ cases its prose said the answer affirmed the expected cause while its structured
 label marked that cause incorrect. A fourth Mistral prompt revision is forbidden;
 the already-pinned independent Phi judge is calibrated next on unchanged v0.3.
 
+Phi J2's first process stopped before model load because the repository's
+optional remote Python code was incompatible with the pinned Transformers
+environment. It saw zero calibration cases and zero E005 answers. The retry uses
+the same pinned weights through Transformers' built-in Phi-3 implementation;
+the rubric, weights, and decoding do not change.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

@@ -230,13 +230,16 @@ def load_generator(judge: dict[str, str]) -> Callable[[str, str], str]:
 
         return generate
 
-    tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision, trust_remote_code=True)
+    # Phi-4 Mini uses the standard Phi-3 architecture already bundled with
+    # Transformers. Avoid its optional remote implementation so the pinned
+    # weights do not depend on repository Python code or its version skew.
+    tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision, trust_remote_code=False)
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
         revision=revision,
         device_map="auto",
         torch_dtype=torch.bfloat16,
-        trust_remote_code=True,
+        trust_remote_code=False,
         low_cpu_mem_usage=True,
     )
     model.eval()

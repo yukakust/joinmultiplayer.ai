@@ -1,0 +1,12 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "judge_id": "J2",
+  "status": "stopped_before_model_load",
+  "calibration_cases_seen": 0,
+  "experiment_answers_seen": 0,
+  "failure": "The model repository's optional remote Python implementation imported an API absent from the pinned Transformers environment.",
+  "fix": "Load the same pinned Phi weights through the built-in Phi-3 implementation with trust_remote_code disabled.",
+  "rubric_changed": false,
+  "model_weights_changed": false
+}
