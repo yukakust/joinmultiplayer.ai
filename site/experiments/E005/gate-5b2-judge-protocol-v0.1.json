@@ -5,6 +5,7 @@
   "status": "locked_before_judging",
   "locked_at": "2026-08-25T08:00:00Z",
   "input_artifact": "/experiments/E005/gate-5b1-results-v0.1.json",
+  "input_sha256": "83c59e9c57e7e733c2489f629b9165079c70a497ab18864151e58b2615a5eb85",
   "input_records": 192,
   "hypothesis": {
     "en": "Two independent language-model judges plus a small owner audit can measure meaning more faithfully than literal phrase matching.",
