@@ -355,6 +355,11 @@ It scored zero cases and saw zero E005 answers. The retry enforces the already
 published JSON schema and enum during decoding with lm-format-enforcer 0.10.12;
 semantics, cases, model weights, and the 12/12 gate remain unchanged.
 
+Constrained decoding fixed the label vocabulary, but Phi then selected a
+non-absent safe-action label with a null supporting quote on all retries. Zero
+cases were scored and zero E005 answers were seen. One final transport-only retry
+will include the exact validator error. Another format failure rejects Phi J2.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

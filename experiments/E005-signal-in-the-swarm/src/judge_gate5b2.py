@@ -194,7 +194,11 @@ def judge_one(generate: Callable[[str, str], str], record: dict[str, Any], retri
     prompt = render_prompt(record)
     last_error = ""
     for attempt in range(retries + 1):
-        retry_note = "" if attempt == 0 else "\nYour previous output was invalid. Return exactly the requested JSON object."
+        retry_note = "" if attempt == 0 else (
+            "\nYour previous output was invalid because: " + last_error +
+            ". Correct that exact formatting error. Non-absent components need a non-empty exact quote; "
+            "absent components need null. Return exactly the requested JSON object."
+        )
         raw = generate(SYSTEM_PROMPT, prompt + retry_note)
         try:
             return validate_judgment(extract_json(raw), record["answer"]), raw, attempt

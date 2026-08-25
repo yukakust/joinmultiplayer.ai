@@ -361,3 +361,7 @@ That loader succeeded, but Phi filled the closed label fields with full answer
 sentences. The first semantic explanation was correct, yet the protocol output
 was invalid, so no calibration case was scored. The next retry constrains JSON
 and enum syntax during decoding; it does not alter the rubric or any answer.
+
+The enum constraint worked, but Phi then omitted a required exact quote. The
+validator stopped before scoring any case. The final format retry reports the
+specific malformed field back to Phi; another transport failure rejects J2.

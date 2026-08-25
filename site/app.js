@@ -3709,6 +3709,7 @@ async function loadE005Gate5B2() {
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-judge-protocol-v0.3.json">FROZEN RUBRIC v0.3 ↗</a>`);
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-j1-calibration-v0.3.json">ALL 12 RAW v0.3 ANSWERS ↗</a>`);
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-j2-format-attempt-v0.1.json">PHI FORMAT FAILURE ↗</a>`);
+    target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-j2-quote-attempt-v0.1.json">PHI QUOTE FAILURE ↗</a>`);
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
