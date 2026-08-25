@@ -71,6 +71,7 @@ SPA_ROUTES = {
     "/experiment/e005/gate-5b/semantic-review",
     "/experiment/e005/gate-5b/owner-audit",
     "/experiment/e005/gate-5b/judge-results",
+    "/experiment/e005/gate-5b/xray",
     "/experiment/connector",
     "/experiment/run",
     "/network",

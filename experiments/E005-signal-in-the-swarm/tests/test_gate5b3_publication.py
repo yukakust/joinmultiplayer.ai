@@ -18,7 +18,9 @@ class Gate5B3PublicationTest(unittest.TestCase):
 
     def test_xray_page_is_routed_and_links_raw_data(self):
         app = (ROOT / "site/app.js").read_text()
+        server = (ROOT / "server/server.py").read_text()
         self.assertIn('path === "experiment/e005/gate-5b/xray"', app)
+        self.assertIn('"/experiment/e005/gate-5b/xray"', server)
         self.assertIn("gate-5b3-xray-results-v0.1.json", app)
         self.assertIn("ОТКРЫТЬ НЕЙРОННЫЙ РЕНТГЕН", app)
 
