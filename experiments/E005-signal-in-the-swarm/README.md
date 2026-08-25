@@ -334,3 +334,9 @@ Rubric v0.2 is now frozen. Judges label only the cause and safe action with
 sharply defined component labels and exact quotes. Code derives the overall
 result, so an LLM can no longer contradict the written scoring rule. The same 12
 calibration cases and perfect-score requirement remain.
+
+J1 then reached only 9/12 on v0.2 and again saw zero experiment answers. It still
+confused a missing cause with a conflicting cause and rejected one valid Russian
+paraphrase for lacking the literal word "cause". This failure is preserved. The
+threshold stays 12/12; the next revision needs an explicit decision tree and a
+fresh synthetic calibration set.

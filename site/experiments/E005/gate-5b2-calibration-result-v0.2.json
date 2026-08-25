@@ -1,0 +1,20 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "judge_calibration_result",
+  "protocol_version": "0.2",
+  "status": "stopped_before_experiment_answers",
+  "judge_id": "J1",
+  "score": 9,
+  "required": 12,
+  "experiment_answers_seen": false,
+  "failed_cases": ["CAL-EN-05", "CAL-RU-02", "CAL-RU-05"],
+  "diagnosis": {
+    "en": "Mistral still treated a missing cause as a wrong cause, and rejected one valid Russian paraphrase because it did not literally say 'cause'. The label definitions need a mechanical decision order, not a lower pass threshold.",
+    "ru": "Mistral всё ещё путала отсутствующую причину с неверной, а один правильный русский пересказ отклонила, потому что там буквально не было слова «причина». Нужен механический порядок решения, а не снижение проходного балла."
+  },
+  "decision": {
+    "en": "Preserve v0.2. Freeze a decision tree using only calibration evidence, create a new unseen synthetic calibration set, and require 12/12 again.",
+    "ru": "Сохранить v0.2. Зафиксировать дерево решений только по калибровочным данным, создать новый невиданный набор искусственных примеров и снова требовать 12/12."
+  }
+}

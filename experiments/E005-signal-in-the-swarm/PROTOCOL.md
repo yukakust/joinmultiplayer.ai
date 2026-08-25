@@ -325,6 +325,12 @@ means no relevant claim. Non-absent labels require exact quotes. Deterministic
 code, not the LLM, derives contradiction and overall correctness. The same 12
 cases and 12/12 requirement remain unchanged.
 
+J1 also stopped on rubric v0.2, now at 9/12 and still before all experiment
+answers. It continued to label a missing cause as an incorrect cause and rejected
+one valid Russian paraphrase for not literally saying "cause". The pass threshold
+will not be lowered. v0.3 must freeze a mechanical decision order and a fresh
+unseen synthetic calibration set before another attempt.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the
