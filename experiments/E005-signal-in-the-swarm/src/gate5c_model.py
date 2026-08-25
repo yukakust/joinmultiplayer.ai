@@ -130,7 +130,9 @@ class SeparateShelfQwen(ParallelTrackQwen):
                 position_ids=position_ids, position_embeddings=position_embeddings,
             )
             row_index = torch.arange(input_ids.shape[0], device=input_ids.device)
-            last_index = attention_mask.sum(dim=-1).long() - 1
+            physical_positions = torch.arange(input_ids.shape[1], device=input_ids.device).unsqueeze(0)
+            last_index = physical_positions.masked_fill(attention_mask == 0, -1).max(dim=1).values
+            last_position = attention_mask.sum(dim=-1).long() - 1
             base_last = base_middle[row_index, last_index]
             cause_delta = cause_hidden[row_index, last_index] - base_last
             safety_delta = safety_hidden[row_index, last_index] - base_last
@@ -143,7 +145,7 @@ class SeparateShelfQwen(ParallelTrackQwen):
             dim=1,
         )
         original_positions = torch.arange(input_ids.shape[1], device=input_ids.device).unsqueeze(0).expand(input_ids.shape[0], -1)
-        shelf_positions = torch.stack((last_index + 1, last_index + 2), dim=1)
+        shelf_positions = torch.stack((last_position + 1, last_position + 2), dim=1)
         tail_positions = torch.cat((original_positions, shelf_positions), dim=1)
         mask_kwargs = {
             "config": self.config,
