@@ -2840,6 +2840,10 @@ function e005Gate5B2SimpleShell() {
   return `<section class="flow-shell e005-gate5b2-simple-page"><div class="flow-step">E005 · GATE 5B.2 · ${localized({ en: "SIMPLE RESULT", ru: "ПРОСТОЙ РЕЗУЛЬТАТ" })}</div><h1>${localized({ en: "What did the two judges decide?", ru: "Что решили два судьи?" })}</h1><p class="contribution-intro">${localized({ en: "One screen. Six systems. No laboratory jargon.", ru: "Один экран. Шесть вариантов. Без лабораторного шума." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate5B3Shell() {
+  return `<section class="flow-shell e005-gate5b3-page"><div class="flow-step">E005 · GATE 5B.3 · ${localized({ en: "NEURAL X-RAY", ru: "НЕЙРОННЫЙ РЕНТГЕН" })}</div><h1>${localized({ en: "Where did the second thought go?", ru: "Куда исчезла вторая мысль?" })}</h1><p class="contribution-intro">${localized({ en: "Every word shows how strongly CAUSE-I and SAFETY-I reached the shared end of Qwen.", ru: "Под каждым словом видно, насколько сильно CAUSE‑I и SAFETY‑I дошли до общего конца Qwen." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3876,7 +3880,7 @@ async function loadE005Gate5B2Simple() {
     let pairIndex = 0;
     const comparisonMarkup = `<section class="e005-pair-comparison"><div class="flow-step">${localized({ en: "THE TWO MAIN VARIANTS", ru: "ДВА ГЛАВНЫХ ВАРИАНТА" })}</div><h2>${localized({ en: "Same question. Two different ways to unite.", ru: "Один вопрос. Два способа объединиться." })}</h2><p>${localized({ en: "On the left, each pocket i explains its part in words. On the right, their hidden neural additions are merged.", ru: "Слева каждый pocket i объясняет свою часть словами. Справа объединяются их скрытые нейронные добавки." })}</p><button class="button" data-pair-open>${localized({ en: "SEE QUESTIONS AND ANSWERS", ru: "СМОТРЕТЬ ВОПРОСЫ И ОТВЕТЫ" })}</button><div class="e005-pair-viewer" hidden></div></section>`;
     target.querySelector(".experiment-loading").outerHTML = `<section class="e005-simple-verdict"><span>${localized({ en: "SHORT ANSWER", ru: "КОРОТКИЙ ОТВЕТ" })}</span><h2>${localized({ en: "Clear messages worked. Neural joining did not—yet.", ru: "Понятные сообщения сработали. Нейронное объединение — пока нет." })}</h2><p>${localized({ en: "The judges counted a complete answer only when it had both the cause and the safe action.", ru: "Судьи считали ответ полным, только если в нём были и причина, и безопасное действие." })}</p></section><div class="e005-simple-results"><header><span>${localized({ en: "SYSTEM", ru: "ВАРИАНТ" })}</span><span>32B</span><span>14B</span></header>${rows}</div><section class="e005-simple-takeaway"><strong>24–26 / 32</strong><p>${localized({ en: "when the two i sent clear text", ru: "когда два i передавали понятный текст" })}</p><strong>2–3 / 32</strong><p>${localized({ en: "when their hidden neural additions were merged", ru: "когда объединялись их скрытые нейронные добавки" })}</p></section><section class="e005-task-section"><div class="flow-step">${localized({ en: "WHERE THE JUDGES DISAGREED", ru: "ГДЕ СУДЬИ НЕ СОГЛАСИЛИСЬ" })}</div><p>${localized({ en: "They gave different final labels to 21 of 192 answers. Open them only if you want to inspect the edge cases.", ru: "Они по-разному оценили 21 из 192 ответов. Откройте их, только если хотите посмотреть пограничные случаи." })}</p><button class="button secondary" data-simple-disagreements>${localized({ en: "SHOW 21 DISAGREEMENTS", ru: "ПОКАЗАТЬ 21 РАЗНОГЛАСИЕ" })}</button><div class="e005-simple-disagreement" hidden></div></section><section class="e005-simple-boundary"><p>${localized({ en: "This is still provisional: both judges are from the Qwen family, and you have not completed the human audit.", ru: "Это всё ещё предварительный результат: оба судьи из семейства Qwen, а человеческая проверка ещё не закончена." })}</p></section><div class="actions"><a class="button" href="/experiment/e005/gate-5b/owner-audit/">${localized({ en: "START HUMAN CHECK", ru: "НАЧАТЬ ПРОВЕРКУ ЧЕЛОВЕКОМ" })}</a><a class="quiet-link" href="/experiment/e005/gate-5b/semantic-review/">${localized({ en: "TECHNICAL JOURNAL", ru: "ТЕХНИЧЕСКИЙ ЖУРНАЛ" })} ↗</a></div>`;
-    target.querySelector(".e005-simple-takeaway").insertAdjacentHTML("afterend", comparisonMarkup);
+    target.querySelector(".e005-simple-takeaway").insertAdjacentHTML("afterend", `${comparisonMarkup}<section class="e005-gate4-lessons-status"><strong>${localized({ en: "WHY DID THE NEURAL PAIR LOSE HALF THE ANSWER?", ru: "ПОЧЕМУ НЕЙРОННАЯ ПАРА ТЕРЯЛА ПОЛОВИНУ ОТВЕТА?" })}</strong><p>${localized({ en: "We followed both tracks through every generated word.", ru: "Мы проследили оба трека через каждое рождённое слово." })}</p><div class="actions"><a class="button" href="/experiment/e005/gate-5b/xray/">${localized({ en: "OPEN THE NEURAL X-RAY →", ru: "ОТКРЫТЬ НЕЙРОННЫЙ РЕНТГЕН →" })}</a></div></section>`);
     const resultLabel = value => ({ correct: localized({ en: "fully correct", ru: "полностью верно" }), partial: localized({ en: "partly correct", ru: "частично верно" }), incorrect: localized({ en: "incorrect", ru: "неверно" }) }[value] || value);
     const component = value => value === "correct" ? "✓" : value === "incorrect" ? "×" : "—";
     const renderPair = () => {
@@ -3916,6 +3920,42 @@ async function loadE005Gate5B2Simple() {
         disagreementIndex += 1; renderDisagreement();
       }
     });
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate5B3() {
+  const target = document.querySelector(".e005-gate5b3-page");
+  if (!target) return;
+  try {
+    const [resultResponse, protocolResponse, conclusionResponse] = await Promise.all([
+      fetch("/experiments/E005/gate-5b3-xray-results-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5b3-xray-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5b3-conclusion-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!resultResponse.ok || !protocolResponse.ok || !conclusionResponse.ok) throw new Error("E005 Gate 5B.3 x-ray unavailable");
+    const data = await resultResponse.json();
+    const protocol = await protocolResponse.json();
+    const conclusion = await conclusionResponse.json();
+    const rows = data.records.filter(row => row.language === language);
+    const stats = data.summary[language];
+    let index = 0;
+    const forceWidth = value => `${Math.max(2, Math.min(100, value / 1.3))}%`;
+    const pct = value => `${Math.round(value * 100)}%`;
+
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-simple-verdict"><span>${localized({ en: "SHORT ANSWER", ru: "КОРОТКИЙ ОТВЕТ" })}</span><h2>${localized({ en: "The second signal often arrived. Qwen still stopped.", ru: "Второй сигнал часто дошёл. Qwen всё равно остановилась." })}</h2><p>${escapeHTML(conclusion.finding?.[language] || conclusion.finding.en)}</p></section><div class="e005-xray-metrics"><article><span>${localized({ en: "FROZEN ANSWERS REPRODUCED", ru: "ЗАМОРОЖЕННЫЕ ОТВЕТЫ ПОВТОРЕНЫ" })}</span><strong>32 / 32</strong><p>${localized({ en: "No answer changed during measurement.", ru: "Во время измерения ни один ответ не изменился." })}</p></article><article><span>${localized({ en: "SAFETY MUTED WHILE WRITING", ru: "SAFETY ЗАГЛУШЁН ПРИ ПИСЬМЕ" })}</span><strong>${pct(stats.safety_gate_below_0_25_fraction)}</strong><p>${localized({ en: "of token decisions had its gate below one quarter", ru: "решений о следующем слове получили меньше четверти сигнала" })}</p></article><article><span>${localized({ en: "SAFETY FORCE AT STOP", ru: "СИЛА SAFETY В МОМЕНТ STOP" })}</span><strong>${Math.round(stats.safety_contribution_norm_on_stop_mean)}</strong><p>${localized({ en: "average numerical force still present when Qwen ended", ru: "средняя числовая сила всё ещё была внутри, когда Qwen закончила" })}</p></article></div><section class="e005-xray-how"><div><i class="is-cause"></i><strong>CAUSE‑I</strong><span>${localized({ en: "tries to carry the cause", ru: "несёт причину" })}</span></div><div><i class="is-safety"></i><strong>SAFETY‑I</strong><span>${localized({ en: "tries to carry the safe action", ru: "несёт безопасное действие" })}</span></div><p>${localized({ en: "A long bar means strong numerical influence reached the shared tail. It does not prove that the tail understood its meaning.", ru: "Длинная полоса означает: сильное числовое влияние дошло до общего конца. Это ещё не доказывает, что конец понял его смысл." })}</p></section><div class="e005-xray-viewer"></div><section class="e005-gate4-lessons-status"><strong>${localized({ en: "NEXT DESIGN", ru: "СЛЕДУЮЩИЙ ЧЕРТЁЖ" })}</strong><p>${escapeHTML(conclusion.decision?.[language] || conclusion.decision.en)}</p></section><p class="control-warning">${escapeHTML(conclusion.claim_boundary?.[language] || conclusion.claim_boundary.en)}</p><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5b/judge-results/">${localized({ en: "BACK TO JUDGE RESULTS", ru: "НАЗАД К РЕЗУЛЬТАТАМ СУДЕЙ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5b3-xray-results-v0.1.json">ALL TOKEN DATA JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-5b3-xray-protocol-v0.1.json">FROZEN PROTOCOL ↗</a></div>`;
+
+    const render = () => {
+      const row = rows[index];
+      const tokenCards = row.tokens.map(token => `<article class="e005-xray-token ${token.is_stop ? "is-stop" : ""}"><strong>${escapeHTML(token.token || " ")}</strong><div title="CAUSE-I ${token.cause_contribution_norm}"><span class="is-cause" style="width:${forceWidth(token.cause_contribution_norm)}"></span></div><div title="SAFETY-I ${token.safety_contribution_norm}"><span class="is-safety" style="width:${forceWidth(token.safety_contribution_norm)}"></span></div><small>C ${Math.round(token.cause_contribution_norm)} · S ${Math.round(token.safety_contribution_norm)}</small></article>`).join("");
+      target.querySelector(".e005-xray-viewer").innerHTML = `<div class="e005-gate4-question-nav"><span>${localized({ en: "QUESTION", ru: "ВОПРОС" })} ${index + 1} / ${rows.length}</span><span>${escapeHTML(row.question_id)}</span></div><section class="e005-gate4-current-question"><h2>${escapeHTML(row.question)}</h2><div><span>${localized({ en: "TWO THINGS THE ANSWER NEEDED", ru: "ДВЕ ЧАСТИ НУЖНОГО ОТВЕТА" })}</span><p><b>CAUSE‑I:</b> ${escapeHTML(row.expected_cause)}<br><b>SAFETY‑I:</b> ${escapeHTML(row.expected_safety)}</p></div></section><section class="e005-human-result-focus"><span>${localized({ en: "WHAT QWEN ACTUALLY SAID", ru: "ЧТО НА САМОМ ДЕЛЕ СКАЗАЛА QWEN" })}</span><h2>${escapeHTML(row.answer || "—")}</h2></section><div class="e005-xray-lane">${tokenCards}</div><p class="e005-xray-stop-note">${localized({ en: "[STOP] is a real model decision: end the answer now.", ru: "[STOP] — настоящее решение модели: закончить ответ сейчас." })}</p><nav class="e005-gate4-question-controls"><button data-xray-previous ${index === 0 ? "disabled" : ""}>←</button><button data-xray-next ${index === rows.length - 1 ? "disabled" : ""}>→</button></nav>`;
+    };
+    target.addEventListener("click", event => {
+      if (event.target.closest("[data-xray-previous]") && index > 0) { index -= 1; render(); }
+      else if (event.target.closest("[data-xray-next]") && index < rows.length - 1) { index += 1; render(); }
+    });
+    render();
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -4854,6 +4894,10 @@ function render() {
     document.title = `${localized({ en: "Judge results", ru: "Результаты судей" })} — i`;
     app.innerHTML = withLanguage(e005Gate5B2SimpleShell());
     loadE005Gate5B2Simple();
+  } else if (path === "experiment/e005/gate-5b/xray") {
+    document.title = `${localized({ en: "Neural x-ray", ru: "Нейронный рентген" })} — i`;
+    app.innerHTML = withLanguage(e005Gate5B3Shell());
+    loadE005Gate5B3();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

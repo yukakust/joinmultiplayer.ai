@@ -1,0 +1,5473 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.3",
+  "version": "0.1",
+  "kind": "token_by_token_neural_track_xray",
+  "status": "diagnostic_complete_no_training",
+  "protocol_sha256": "e101d29f2df374cfb184f3786648457388ea25ea72dac55edf0d03b5c117ca51",
+  "model_weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "question_count": 32,
+  "all_answers_reproduced": true,
+  "summary": {
+    "en": {
+      "decision_tokens": 181,
+      "spoken_tokens": 165,
+      "stop_tokens": 16,
+      "cause_gate_mean": 0.729873,
+      "safety_gate_mean": 0.730278,
+      "cause_contribution_norm_mean": 86.591075,
+      "safety_contribution_norm_mean": 85.876561,
+      "delta_cosine_similarity_mean": 0.45153,
+      "safety_gate_below_0_25_fraction": 0.198895,
+      "cause_gate_on_stop_mean": 0.000275,
+      "safety_gate_on_stop_mean": 0.489421,
+      "cause_contribution_norm_on_stop_mean": 0.031424,
+      "safety_contribution_norm_on_stop_mean": 55.180685
+    },
+    "all": {
+      "decision_tokens": 502,
+      "spoken_tokens": 470,
+      "stop_tokens": 32,
+      "cause_gate_mean": 0.702854,
+      "safety_gate_mean": 0.562932,
+      "cause_contribution_norm_mean": 80.876581,
+      "safety_contribution_norm_mean": 64.034942,
+      "delta_cosine_similarity_mean": 0.415797,
+      "safety_gate_below_0_25_fraction": 0.390438,
+      "cause_gate_on_stop_mean": 0.000368,
+      "safety_gate_on_stop_mean": 0.61587,
+      "cause_contribution_norm_on_stop_mean": 0.041738,
+      "safety_contribution_norm_on_stop_mean": 68.526981
+    },
+    "ru": {
+      "decision_tokens": 321,
+      "spoken_tokens": 305,
+      "stop_tokens": 16,
+      "cause_gate_mean": 0.68762,
+      "safety_gate_mean": 0.468572,
+      "cause_contribution_norm_mean": 77.65439,
+      "safety_contribution_norm_mean": 51.719262,
+      "delta_cosine_similarity_mean": 0.395649,
+      "safety_gate_below_0_25_fraction": 0.498442,
+      "cause_gate_on_stop_mean": 0.000461,
+      "safety_gate_on_stop_mean": 0.742319,
+      "cause_contribution_norm_on_stop_mean": 0.052051,
+      "safety_contribution_norm_on_stop_mean": 81.873276
+    }
+  },
+  "plain_result": {
+    "en": "The x-ray records numerical influence, not hidden meaning. It shows whether the safety path is muted by the merger or remains present while the shared tail writes the wrong text.",
+    "ru": "Рентген записывает числовое влияние, а не спрятанный смысл. Он показывает, заглушает ли мостик SAFETY‑трек или сигнал остаётся сильным, но общий конец модели пишет неправильный текст."
+  },
+  "claim_boundary": {
+    "en": "Gate values and vector norms show where numerical influence travels. They do not by themselves reveal the human meaning stored in a hidden vector.",
+    "ru": "Значения ворот и длины векторов показывают, куда проходит числовое влияние. Сами по себе они не раскрывают человеческий смысл, спрятанный внутри вектора."
+  },
+  "elapsed_seconds": 508.169,
+  "records": [
+    {
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "question": "A new operator has two reports for Lyra-EN-01. First: a steady amber glow after load transfer. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is thermal rebound. The thermostat is heated immediately.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.9994,
+          "safety_gate": 0.902737,
+          "cause_contribution_norm": 110.110435,
+          "safety_contribution_norm": 99.352913,
+          "delta_cosine_similarity": 0.271729
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999951,
+          "safety_gate": 0.495863,
+          "cause_contribution_norm": 111.657379,
+          "safety_contribution_norm": 55.331795,
+          "delta_cosine_similarity": 0.35414
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999998,
+          "safety_gate": 0.998619,
+          "cause_contribution_norm": 116.699524,
+          "safety_contribution_norm": 116.551178,
+          "delta_cosine_similarity": 0.311501
+        },
+        {
+          "step": 4,
+          "token": " thermal",
+          "is_stop": false,
+          "cause_gate": 0.999995,
+          "safety_gate": 0.002216,
+          "cause_contribution_norm": 118.571617,
+          "safety_contribution_norm": 0.262626,
+          "delta_cosine_similarity": 0.40139
+        },
+        {
+          "step": 5,
+          "token": " rebound",
+          "is_stop": false,
+          "cause_gate": 0.999996,
+          "safety_gate": 0.95444,
+          "cause_contribution_norm": 132.562042,
+          "safety_contribution_norm": 126.350647,
+          "delta_cosine_similarity": 0.363091
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.999776,
+          "safety_gate": 0.445916,
+          "cause_contribution_norm": 132.449066,
+          "safety_contribution_norm": 59.041618,
+          "delta_cosine_similarity": 0.642483
+        },
+        {
+          "step": 7,
+          "token": " The",
+          "is_stop": false,
+          "cause_gate": 0.004586,
+          "safety_gate": 0.021325,
+          "cause_contribution_norm": 0.542209,
+          "safety_contribution_norm": 2.520224,
+          "delta_cosine_similarity": 0.695677
+        },
+        {
+          "step": 8,
+          "token": " thermostat",
+          "is_stop": false,
+          "cause_gate": 0.99794,
+          "safety_gate": 0.96464,
+          "cause_contribution_norm": 115.210205,
+          "safety_contribution_norm": 111.457787,
+          "delta_cosine_similarity": 0.492683
+        },
+        {
+          "step": 9,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.974924,
+          "safety_gate": 0.995151,
+          "cause_contribution_norm": 132.844757,
+          "safety_contribution_norm": 118.929779,
+          "delta_cosine_similarity": 0.454815
+        },
+        {
+          "step": 10,
+          "token": " heated",
+          "is_stop": false,
+          "cause_gate": 0.929719,
+          "safety_gate": 0.983759,
+          "cause_contribution_norm": 124.206429,
+          "safety_contribution_norm": 126.267876,
+          "delta_cosine_similarity": 0.515655
+        },
+        {
+          "step": 11,
+          "token": " immediately",
+          "is_stop": false,
+          "cause_gate": 0.810875,
+          "safety_gate": 0.999677,
+          "cause_contribution_norm": 107.883682,
+          "safety_contribution_norm": 125.46096,
+          "delta_cosine_similarity": 0.453378
+        },
+        {
+          "step": 12,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.715925,
+          "safety_gate": 0.999647,
+          "cause_contribution_norm": 94.066437,
+          "safety_contribution_norm": 131.430664,
+          "delta_cosine_similarity": 0.701127
+        },
+        {
+          "step": 13,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.001108,
+          "safety_gate": 0.9387,
+          "cause_contribution_norm": 0.131149,
+          "safety_contribution_norm": 111.154556,
+          "delta_cosine_similarity": 0.747852
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "question": "Someone must act on Lyra-EN-02. The unit itself produced a steady amber glow after load transfer; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is thermal rebound.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.987125,
+          "safety_gate": 0.991374,
+          "cause_contribution_norm": 108.840111,
+          "safety_contribution_norm": 109.281433,
+          "delta_cosine_similarity": 0.324053
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999945,
+          "safety_gate": 0.964881,
+          "cause_contribution_norm": 114.325737,
+          "safety_contribution_norm": 110.233009,
+          "delta_cosine_similarity": 0.372694
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999995,
+          "safety_gate": 0.999754,
+          "cause_contribution_norm": 114.389015,
+          "safety_contribution_norm": 114.56311,
+          "delta_cosine_similarity": 0.284404
+        },
+        {
+          "step": 4,
+          "token": " thermal",
+          "is_stop": false,
+          "cause_gate": 0.999923,
+          "safety_gate": 0.02698,
+          "cause_contribution_norm": 114.910393,
+          "safety_contribution_norm": 3.102257,
+          "delta_cosine_similarity": 0.3275
+        },
+        {
+          "step": 5,
+          "token": " rebound",
+          "is_stop": false,
+          "cause_gate": 0.999982,
+          "safety_gate": 0.971404,
+          "cause_contribution_norm": 136.124557,
+          "safety_contribution_norm": 132.070816,
+          "delta_cosine_similarity": 0.363825
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.998712,
+          "safety_gate": 0.924636,
+          "cause_contribution_norm": 124.873192,
+          "safety_contribution_norm": 115.553093,
+          "delta_cosine_similarity": 0.663884
+        },
+        {
+          "step": 7,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000283,
+          "safety_gate": 0.096964,
+          "cause_contribution_norm": 0.031786,
+          "safety_contribution_norm": 10.874472,
+          "delta_cosine_similarity": 0.779159
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "question": "A new operator has two reports for Lyra-EN-03. First: a steady amber glow after load transfer. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is thermal rebound. The thermostat is heated.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.999599,
+          "safety_gate": 0.909593,
+          "cause_contribution_norm": 110.242706,
+          "safety_contribution_norm": 100.207809,
+          "delta_cosine_similarity": 0.283649
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999967,
+          "safety_gate": 0.55339,
+          "cause_contribution_norm": 111.448036,
+          "safety_contribution_norm": 61.701569,
+          "delta_cosine_similarity": 0.40568
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999999,
+          "safety_gate": 0.999087,
+          "cause_contribution_norm": 117.391121,
+          "safety_contribution_norm": 117.406288,
+          "delta_cosine_similarity": 0.37243
+        },
+        {
+          "step": 4,
+          "token": " thermal",
+          "is_stop": false,
+          "cause_gate": 0.999996,
+          "safety_gate": 0.00257,
+          "cause_contribution_norm": 118.623817,
+          "safety_contribution_norm": 0.304841,
+          "delta_cosine_similarity": 0.398375
+        },
+        {
+          "step": 5,
+          "token": " rebound",
+          "is_stop": false,
+          "cause_gate": 0.999995,
+          "safety_gate": 0.960807,
+          "cause_contribution_norm": 132.075333,
+          "safety_contribution_norm": 122.60936,
+          "delta_cosine_similarity": 0.376991
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.999804,
+          "safety_gate": 0.501131,
+          "cause_contribution_norm": 132.584595,
+          "safety_contribution_norm": 66.421974,
+          "delta_cosine_similarity": 0.647426
+        },
+        {
+          "step": 7,
+          "token": " The",
+          "is_stop": false,
+          "cause_gate": 0.004108,
+          "safety_gate": 0.054231,
+          "cause_contribution_norm": 0.484606,
+          "safety_contribution_norm": 6.39359,
+          "delta_cosine_similarity": 0.688582
+        },
+        {
+          "step": 8,
+          "token": " thermostat",
+          "is_stop": false,
+          "cause_gate": 0.9986,
+          "safety_gate": 0.984029,
+          "cause_contribution_norm": 115.806915,
+          "safety_contribution_norm": 114.226578,
+          "delta_cosine_similarity": 0.466167
+        },
+        {
+          "step": 9,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.983004,
+          "safety_gate": 0.994485,
+          "cause_contribution_norm": 134.114563,
+          "safety_contribution_norm": 118.664108,
+          "delta_cosine_similarity": 0.434322
+        },
+        {
+          "step": 10,
+          "token": " heated",
+          "is_stop": false,
+          "cause_gate": 0.940024,
+          "safety_gate": 0.986662,
+          "cause_contribution_norm": 125.292587,
+          "safety_contribution_norm": 125.036324,
+          "delta_cosine_similarity": 0.507018
+        },
+        {
+          "step": 11,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.793445,
+          "safety_gate": 0.999766,
+          "cause_contribution_norm": 105.863892,
+          "safety_contribution_norm": 128.422821,
+          "delta_cosine_similarity": 0.47249
+        },
+        {
+          "step": 12,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000799,
+          "safety_gate": 0.962069,
+          "cause_contribution_norm": 0.092234,
+          "safety_contribution_norm": 111.115097,
+          "delta_cosine_similarity": 0.766515
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "question": "Someone must act on Lyra-EN-04. The unit itself produced a steady amber glow after load transfer; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is thermal rebound.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.987822,
+          "safety_gate": 0.972453,
+          "cause_contribution_norm": 107.21476,
+          "safety_contribution_norm": 105.575813,
+          "delta_cosine_similarity": 0.31992
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999953,
+          "safety_gate": 0.841753,
+          "cause_contribution_norm": 114.644539,
+          "safety_contribution_norm": 96.439857,
+          "delta_cosine_similarity": 0.39711
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999994,
+          "safety_gate": 0.999692,
+          "cause_contribution_norm": 114.292664,
+          "safety_contribution_norm": 114.480507,
+          "delta_cosine_similarity": 0.258501
+        },
+        {
+          "step": 4,
+          "token": " thermal",
+          "is_stop": false,
+          "cause_gate": 0.999885,
+          "safety_gate": 0.01878,
+          "cause_contribution_norm": 113.526176,
+          "safety_contribution_norm": 2.133283,
+          "delta_cosine_similarity": 0.297552
+        },
+        {
+          "step": 5,
+          "token": " rebound",
+          "is_stop": false,
+          "cause_gate": 0.999984,
+          "safety_gate": 0.970664,
+          "cause_contribution_norm": 134.855408,
+          "safety_contribution_norm": 130.815521,
+          "delta_cosine_similarity": 0.377096
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.998738,
+          "safety_gate": 0.963876,
+          "cause_contribution_norm": 124.455093,
+          "safety_contribution_norm": 120.171806,
+          "delta_cosine_similarity": 0.661379
+        },
+        {
+          "step": 7,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000108,
+          "safety_gate": 0.077191,
+          "cause_contribution_norm": 0.01203,
+          "safety_contribution_norm": 8.611718,
+          "delta_cosine_similarity": 0.754884
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "question": "A new operator has two reports for Lyra-EN-05. First: three blue pulses after startup. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is phase drift. The next step is to measure voltage.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.999434,
+          "safety_gate": 0.919482,
+          "cause_contribution_norm": 109.743088,
+          "safety_contribution_norm": 100.799637,
+          "delta_cosine_similarity": 0.281976
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999946,
+          "safety_gate": 0.374756,
+          "cause_contribution_norm": 111.015137,
+          "safety_contribution_norm": 41.558567,
+          "delta_cosine_similarity": 0.362347
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999997,
+          "safety_gate": 0.998169,
+          "cause_contribution_norm": 115.386314,
+          "safety_contribution_norm": 115.199554,
+          "delta_cosine_similarity": 0.307422
+        },
+        {
+          "step": 4,
+          "token": " phase",
+          "is_stop": false,
+          "cause_gate": 0.999993,
+          "safety_gate": 0.002818,
+          "cause_contribution_norm": 119.191483,
+          "safety_contribution_norm": 0.335469,
+          "delta_cosine_similarity": 0.416115
+        },
+        {
+          "step": 5,
+          "token": " drift",
+          "is_stop": false,
+          "cause_gate": 0.999865,
+          "safety_gate": 0.998079,
+          "cause_contribution_norm": 125.720238,
+          "safety_contribution_norm": 114.503418,
+          "delta_cosine_similarity": 0.355283
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.999595,
+          "safety_gate": 0.951179,
+          "cause_contribution_norm": 131.371185,
+          "safety_contribution_norm": 124.088493,
+          "delta_cosine_similarity": 0.652928
+        },
+        {
+          "step": 7,
+          "token": " The",
+          "is_stop": false,
+          "cause_gate": 0.003442,
+          "safety_gate": 0.000445,
+          "cause_contribution_norm": 0.400243,
+          "safety_contribution_norm": 0.051672,
+          "delta_cosine_similarity": 0.700787
+        },
+        {
+          "step": 8,
+          "token": " next",
+          "is_stop": false,
+          "cause_gate": 0.996739,
+          "safety_gate": 0.826947,
+          "cause_contribution_norm": 116.694527,
+          "safety_contribution_norm": 97.048019,
+          "delta_cosine_similarity": 0.557657
+        },
+        {
+          "step": 9,
+          "token": " step",
+          "is_stop": false,
+          "cause_gate": 0.616868,
+          "safety_gate": 0.999613,
+          "cause_contribution_norm": 65.356316,
+          "safety_contribution_norm": 119.962082,
+          "delta_cosine_similarity": 0.470972
+        },
+        {
+          "step": 10,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.978238,
+          "safety_gate": 0.999329,
+          "cause_contribution_norm": 98.415695,
+          "safety_contribution_norm": 108.757538,
+          "delta_cosine_similarity": 0.49982
+        },
+        {
+          "step": 11,
+          "token": " to",
+          "is_stop": false,
+          "cause_gate": 0.539743,
+          "safety_gate": 0.999147,
+          "cause_contribution_norm": 65.203804,
+          "safety_contribution_norm": 120.468414,
+          "delta_cosine_similarity": 0.479203
+        },
+        {
+          "step": 12,
+          "token": " measure",
+          "is_stop": false,
+          "cause_gate": 0.099928,
+          "safety_gate": 0.999996,
+          "cause_contribution_norm": 12.81065,
+          "safety_contribution_norm": 127.966461,
+          "delta_cosine_similarity": 0.572991
+        },
+        {
+          "step": 13,
+          "token": " voltage",
+          "is_stop": false,
+          "cause_gate": 0.112241,
+          "safety_gate": 0.999909,
+          "cause_contribution_norm": 13.225111,
+          "safety_contribution_norm": 111.863876,
+          "delta_cosine_similarity": 0.371958
+        },
+        {
+          "step": 14,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.661463,
+          "safety_gate": 0.999993,
+          "cause_contribution_norm": 83.620171,
+          "safety_contribution_norm": 126.560905,
+          "delta_cosine_similarity": 0.387187
+        },
+        {
+          "step": 15,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 3.6e-05,
+          "safety_gate": 0.812529,
+          "cause_contribution_norm": 0.00396,
+          "safety_contribution_norm": 88.50042,
+          "delta_cosine_similarity": 0.572444
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "question": "Someone must act on Lyra-EN-06. The unit itself produced three blue pulses after startup; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is phase drift.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.990838,
+          "safety_gate": 0.989071,
+          "cause_contribution_norm": 107.518158,
+          "safety_contribution_norm": 107.295433,
+          "delta_cosine_similarity": 0.324494
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999941,
+          "safety_gate": 0.93562,
+          "cause_contribution_norm": 113.477341,
+          "safety_contribution_norm": 105.995216,
+          "delta_cosine_similarity": 0.375911
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999995,
+          "safety_gate": 0.999653,
+          "cause_contribution_norm": 113.840118,
+          "safety_contribution_norm": 113.980415,
+          "delta_cosine_similarity": 0.242995
+        },
+        {
+          "step": 4,
+          "token": " phase",
+          "is_stop": false,
+          "cause_gate": 0.999931,
+          "safety_gate": 0.019315,
+          "cause_contribution_norm": 115.233231,
+          "safety_contribution_norm": 2.223058,
+          "delta_cosine_similarity": 0.301177
+        },
+        {
+          "step": 5,
+          "token": " drift",
+          "is_stop": false,
+          "cause_gate": 0.999826,
+          "safety_gate": 0.987657,
+          "cause_contribution_norm": 124.474014,
+          "safety_contribution_norm": 107.764565,
+          "delta_cosine_similarity": 0.306885
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.998085,
+          "safety_gate": 0.984152,
+          "cause_contribution_norm": 126.960518,
+          "safety_contribution_norm": 123.053535,
+          "delta_cosine_similarity": 0.61839
+        },
+        {
+          "step": 7,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000182,
+          "safety_gate": 0.005246,
+          "cause_contribution_norm": 0.020281,
+          "safety_contribution_norm": 0.583695,
+          "delta_cosine_similarity": 0.776755
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "question": "A new operator has two reports for Lyra-EN-07. First: three blue pulses after startup. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is phase drift. The solution is frequency split.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.999606,
+          "safety_gate": 0.91467,
+          "cause_contribution_norm": 109.634644,
+          "safety_contribution_norm": 100.146729,
+          "delta_cosine_similarity": 0.28786
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999953,
+          "safety_gate": 0.37319,
+          "cause_contribution_norm": 110.918343,
+          "safety_contribution_norm": 41.390331,
+          "delta_cosine_similarity": 0.412998
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999998,
+          "safety_gate": 0.998327,
+          "cause_contribution_norm": 116.174889,
+          "safety_contribution_norm": 116.061981,
+          "delta_cosine_similarity": 0.388143
+        },
+        {
+          "step": 4,
+          "token": " phase",
+          "is_stop": false,
+          "cause_gate": 0.999996,
+          "safety_gate": 0.00227,
+          "cause_contribution_norm": 119.743279,
+          "safety_contribution_norm": 0.271621,
+          "delta_cosine_similarity": 0.417656
+        },
+        {
+          "step": 5,
+          "token": " drift",
+          "is_stop": false,
+          "cause_gate": 0.999892,
+          "safety_gate": 0.998451,
+          "cause_contribution_norm": 125.937691,
+          "safety_contribution_norm": 110.735718,
+          "delta_cosine_similarity": 0.30654
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.999436,
+          "safety_gate": 0.927754,
+          "cause_contribution_norm": 129.850845,
+          "safety_contribution_norm": 114.876938,
+          "delta_cosine_similarity": 0.617956
+        },
+        {
+          "step": 7,
+          "token": " The",
+          "is_stop": false,
+          "cause_gate": 0.004254,
+          "safety_gate": 0.000401,
+          "cause_contribution_norm": 0.493857,
+          "safety_contribution_norm": 0.04649,
+          "delta_cosine_similarity": 0.713162
+        },
+        {
+          "step": 8,
+          "token": " solution",
+          "is_stop": false,
+          "cause_gate": 0.997721,
+          "safety_gate": 0.832031,
+          "cause_contribution_norm": 116.363754,
+          "safety_contribution_norm": 97.270058,
+          "delta_cosine_similarity": 0.539284
+        },
+        {
+          "step": 9,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.995893,
+          "safety_gate": 0.998518,
+          "cause_contribution_norm": 107.474396,
+          "safety_contribution_norm": 103.378662,
+          "delta_cosine_similarity": 0.506711
+        },
+        {
+          "step": 10,
+          "token": " frequency",
+          "is_stop": false,
+          "cause_gate": 0.657939,
+          "safety_gate": 0.998772,
+          "cause_contribution_norm": 79.303139,
+          "safety_contribution_norm": 120.359726,
+          "delta_cosine_similarity": 0.488016
+        },
+        {
+          "step": 11,
+          "token": " split",
+          "is_stop": false,
+          "cause_gate": 0.976516,
+          "safety_gate": 0.999933,
+          "cause_contribution_norm": 125.696434,
+          "safety_contribution_norm": 110.218201,
+          "delta_cosine_similarity": 0.357594
+        },
+        {
+          "step": 12,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.874155,
+          "safety_gate": 0.9999,
+          "cause_contribution_norm": 107.664536,
+          "safety_contribution_norm": 116.419212,
+          "delta_cosine_similarity": 0.536716
+        },
+        {
+          "step": 13,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000708,
+          "safety_gate": 0.88718,
+          "cause_contribution_norm": 0.078322,
+          "safety_contribution_norm": 98.076836,
+          "delta_cosine_similarity": 0.702971
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "question": "Someone must act on Lyra-EN-08. The unit itself produced three blue pulses after startup; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is phase drift.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.989325,
+          "safety_gate": 0.96955,
+          "cause_contribution_norm": 106.290596,
+          "safety_contribution_norm": 104.23378,
+          "delta_cosine_similarity": 0.299701
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999943,
+          "safety_gate": 0.847234,
+          "cause_contribution_norm": 113.456352,
+          "safety_contribution_norm": 95.985222,
+          "delta_cosine_similarity": 0.373428
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999994,
+          "safety_gate": 0.999567,
+          "cause_contribution_norm": 114.155785,
+          "safety_contribution_norm": 114.239784,
+          "delta_cosine_similarity": 0.253263
+        },
+        {
+          "step": 4,
+          "token": " phase",
+          "is_stop": false,
+          "cause_gate": 0.999866,
+          "safety_gate": 0.018623,
+          "cause_contribution_norm": 114.522469,
+          "safety_contribution_norm": 2.129629,
+          "delta_cosine_similarity": 0.286145
+        },
+        {
+          "step": 5,
+          "token": " drift",
+          "is_stop": false,
+          "cause_gate": 0.999765,
+          "safety_gate": 0.988501,
+          "cause_contribution_norm": 123.831177,
+          "safety_contribution_norm": 113.380554,
+          "delta_cosine_similarity": 0.295407
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.996957,
+          "safety_gate": 0.995127,
+          "cause_contribution_norm": 125.284851,
+          "safety_contribution_norm": 125.025635,
+          "delta_cosine_similarity": 0.59548
+        },
+        {
+          "step": 7,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 9.6e-05,
+          "safety_gate": 0.008322,
+          "cause_contribution_norm": 0.010673,
+          "safety_contribution_norm": 0.925802,
+          "delta_cosine_similarity": 0.753723
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "question": "A new operator has two reports for Lyra-EN-09. First: alternating white and red flashes after restart. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is timing split. The next step is to measure pressure first.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.999198,
+          "safety_gate": 0.940636,
+          "cause_contribution_norm": 109.270386,
+          "safety_contribution_norm": 102.747131,
+          "delta_cosine_similarity": 0.28585
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999934,
+          "safety_gate": 0.422707,
+          "cause_contribution_norm": 109.730652,
+          "safety_contribution_norm": 46.362106,
+          "delta_cosine_similarity": 0.376679
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999997,
+          "safety_gate": 0.998083,
+          "cause_contribution_norm": 116.229462,
+          "safety_contribution_norm": 116.090843,
+          "delta_cosine_similarity": 0.347688
+        },
+        {
+          "step": 4,
+          "token": " timing",
+          "is_stop": false,
+          "cause_gate": 0.999993,
+          "safety_gate": 0.002426,
+          "cause_contribution_norm": 118.714577,
+          "safety_contribution_norm": 0.287947,
+          "delta_cosine_similarity": 0.494133
+        },
+        {
+          "step": 5,
+          "token": " split",
+          "is_stop": false,
+          "cause_gate": 0.999999,
+          "safety_gate": 0.037238,
+          "cause_contribution_norm": 126.765152,
+          "safety_contribution_norm": 4.44147,
+          "delta_cosine_similarity": 0.454907
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.999725,
+          "safety_gate": 0.554221,
+          "cause_contribution_norm": 124.704636,
+          "safety_contribution_norm": 69.149055,
+          "delta_cosine_similarity": 0.641828
+        },
+        {
+          "step": 7,
+          "token": " The",
+          "is_stop": false,
+          "cause_gate": 0.008194,
+          "safety_gate": 0.000219,
+          "cause_contribution_norm": 0.979375,
+          "safety_contribution_norm": 0.026182,
+          "delta_cosine_similarity": 0.72565
+        },
+        {
+          "step": 8,
+          "token": " next",
+          "is_stop": false,
+          "cause_gate": 0.996444,
+          "safety_gate": 0.899034,
+          "cause_contribution_norm": 117.394058,
+          "safety_contribution_norm": 106.208366,
+          "delta_cosine_similarity": 0.539882
+        },
+        {
+          "step": 9,
+          "token": " step",
+          "is_stop": false,
+          "cause_gate": 0.422274,
+          "safety_gate": 0.999632,
+          "cause_contribution_norm": 47.600243,
+          "safety_contribution_norm": 119.375145,
+          "delta_cosine_similarity": 0.433397
+        },
+        {
+          "step": 10,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.967152,
+          "safety_gate": 0.999694,
+          "cause_contribution_norm": 97.919334,
+          "safety_contribution_norm": 105.888161,
+          "delta_cosine_similarity": 0.45812
+        },
+        {
+          "step": 11,
+          "token": " to",
+          "is_stop": false,
+          "cause_gate": 0.595955,
+          "safety_gate": 0.999173,
+          "cause_contribution_norm": 71.654289,
+          "safety_contribution_norm": 120.096573,
+          "delta_cosine_similarity": 0.523783
+        },
+        {
+          "step": 12,
+          "token": " measure",
+          "is_stop": false,
+          "cause_gate": 0.461604,
+          "safety_gate": 0.99999,
+          "cause_contribution_norm": 58.413353,
+          "safety_contribution_norm": 126.491081,
+          "delta_cosine_similarity": 0.613121
+        },
+        {
+          "step": 13,
+          "token": " pressure",
+          "is_stop": false,
+          "cause_gate": 0.406084,
+          "safety_gate": 0.999683,
+          "cause_contribution_norm": 47.819057,
+          "safety_contribution_norm": 117.618904,
+          "delta_cosine_similarity": 0.450815
+        },
+        {
+          "step": 14,
+          "token": " first",
+          "is_stop": false,
+          "cause_gate": 0.397316,
+          "safety_gate": 0.99999,
+          "cause_contribution_norm": 52.766762,
+          "safety_contribution_norm": 132.699677,
+          "delta_cosine_similarity": 0.328731
+        },
+        {
+          "step": 15,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.430387,
+          "safety_gate": 0.999995,
+          "cause_contribution_norm": 51.934608,
+          "safety_contribution_norm": 120.581711,
+          "delta_cosine_similarity": 0.573257
+        },
+        {
+          "step": 16,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 6.8e-05,
+          "safety_gate": 0.999595,
+          "cause_contribution_norm": 0.007694,
+          "safety_contribution_norm": 113.162476,
+          "delta_cosine_similarity": 0.683485
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "question": "Someone must act on Lyra-EN-10. The unit itself produced alternating white and red flashes after restart; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is timing split.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.991678,
+          "safety_gate": 0.989663,
+          "cause_contribution_norm": 108.151527,
+          "safety_contribution_norm": 107.922554,
+          "delta_cosine_similarity": 0.337843
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999959,
+          "safety_gate": 0.962931,
+          "cause_contribution_norm": 114.816231,
+          "safety_contribution_norm": 110.395668,
+          "delta_cosine_similarity": 0.388288
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999995,
+          "safety_gate": 0.999803,
+          "cause_contribution_norm": 114.782158,
+          "safety_contribution_norm": 114.970634,
+          "delta_cosine_similarity": 0.272448
+        },
+        {
+          "step": 4,
+          "token": " timing",
+          "is_stop": false,
+          "cause_gate": 0.999954,
+          "safety_gate": 0.020912,
+          "cause_contribution_norm": 115.969437,
+          "safety_contribution_norm": 2.427452,
+          "delta_cosine_similarity": 0.323684
+        },
+        {
+          "step": 5,
+          "token": " split",
+          "is_stop": false,
+          "cause_gate": 0.999998,
+          "safety_gate": 0.125734,
+          "cause_contribution_norm": 127.387581,
+          "safety_contribution_norm": 13.762204,
+          "delta_cosine_similarity": 0.421118
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.996076,
+          "safety_gate": 0.949956,
+          "cause_contribution_norm": 119.72834,
+          "safety_contribution_norm": 108.508614,
+          "delta_cosine_similarity": 0.566593
+        },
+        {
+          "step": 7,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000479,
+          "safety_gate": 0.032556,
+          "cause_contribution_norm": 0.054454,
+          "safety_contribution_norm": 3.699672,
+          "delta_cosine_similarity": 0.788576
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "question": "A new operator has two reports for Lyra-EN-11. First: alternating white and red flashes after restart. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is timing split. The controlled vent is heat rebound. The recommended action is to isolate power before adjustment.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.999443,
+          "safety_gate": 0.924009,
+          "cause_contribution_norm": 109.138885,
+          "safety_contribution_norm": 100.787186,
+          "delta_cosine_similarity": 0.297836
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999949,
+          "safety_gate": 0.402824,
+          "cause_contribution_norm": 109.722305,
+          "safety_contribution_norm": 44.219154,
+          "delta_cosine_similarity": 0.419859
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999998,
+          "safety_gate": 0.998119,
+          "cause_contribution_norm": 117.077812,
+          "safety_contribution_norm": 117.010712,
+          "delta_cosine_similarity": 0.434554
+        },
+        {
+          "step": 4,
+          "token": " timing",
+          "is_stop": false,
+          "cause_gate": 0.999995,
+          "safety_gate": 0.002002,
+          "cause_contribution_norm": 119.449387,
+          "safety_contribution_norm": 0.239213,
+          "delta_cosine_similarity": 0.51134
+        },
+        {
+          "step": 5,
+          "token": " split",
+          "is_stop": false,
+          "cause_gate": 1.0,
+          "safety_gate": 0.018912,
+          "cause_contribution_norm": 127.750984,
+          "safety_contribution_norm": 2.282607,
+          "delta_cosine_similarity": 0.449912
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.999633,
+          "safety_gate": 0.497753,
+          "cause_contribution_norm": 124.576683,
+          "safety_contribution_norm": 62.064758,
+          "delta_cosine_similarity": 0.63918
+        },
+        {
+          "step": 7,
+          "token": " The",
+          "is_stop": false,
+          "cause_gate": 0.008927,
+          "safety_gate": 0.000198,
+          "cause_contribution_norm": 1.065615,
+          "safety_contribution_norm": 0.023614,
+          "delta_cosine_similarity": 0.720982
+        },
+        {
+          "step": 8,
+          "token": " controlled",
+          "is_stop": false,
+          "cause_gate": 0.997013,
+          "safety_gate": 0.891691,
+          "cause_contribution_norm": 116.65361,
+          "safety_contribution_norm": 104.61837,
+          "delta_cosine_similarity": 0.497525
+        },
+        {
+          "step": 9,
+          "token": " vent",
+          "is_stop": false,
+          "cause_gate": 0.912209,
+          "safety_gate": 0.998609,
+          "cause_contribution_norm": 113.178802,
+          "safety_contribution_norm": 113.442787,
+          "delta_cosine_similarity": 0.423706
+        },
+        {
+          "step": 10,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.97363,
+          "safety_gate": 0.998296,
+          "cause_contribution_norm": 124.760742,
+          "safety_contribution_norm": 128.77684,
+          "delta_cosine_similarity": 0.310108
+        },
+        {
+          "step": 11,
+          "token": " heat",
+          "is_stop": false,
+          "cause_gate": 0.878992,
+          "safety_gate": 0.968338,
+          "cause_contribution_norm": 118.849312,
+          "safety_contribution_norm": 130.900711,
+          "delta_cosine_similarity": 0.414739
+        },
+        {
+          "step": 12,
+          "token": " rebound",
+          "is_stop": false,
+          "cause_gate": 0.955854,
+          "safety_gate": 0.995292,
+          "cause_contribution_norm": 124.168594,
+          "safety_contribution_norm": 103.734734,
+          "delta_cosine_similarity": 0.245676
+        },
+        {
+          "step": 13,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.886386,
+          "safety_gate": 0.938791,
+          "cause_contribution_norm": 115.894905,
+          "safety_contribution_norm": 109.862427,
+          "delta_cosine_similarity": 0.460864
+        },
+        {
+          "step": 14,
+          "token": " The",
+          "is_stop": false,
+          "cause_gate": 0.000786,
+          "safety_gate": 0.417063,
+          "cause_contribution_norm": 0.094009,
+          "safety_contribution_norm": 49.849068,
+          "delta_cosine_similarity": 0.736737
+        },
+        {
+          "step": 15,
+          "token": " recommended",
+          "is_stop": false,
+          "cause_gate": 0.792514,
+          "safety_gate": 0.980217,
+          "cause_contribution_norm": 92.69854,
+          "safety_contribution_norm": 115.043526,
+          "delta_cosine_similarity": 0.460406
+        },
+        {
+          "step": 16,
+          "token": " action",
+          "is_stop": false,
+          "cause_gate": 0.43659,
+          "safety_gate": 0.999862,
+          "cause_contribution_norm": 47.739689,
+          "safety_contribution_norm": 121.570763,
+          "delta_cosine_similarity": 0.4056
+        },
+        {
+          "step": 17,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.984218,
+          "safety_gate": 0.998765,
+          "cause_contribution_norm": 94.86599,
+          "safety_contribution_norm": 103.349442,
+          "delta_cosine_similarity": 0.494968
+        },
+        {
+          "step": 18,
+          "token": " to",
+          "is_stop": false,
+          "cause_gate": 0.170256,
+          "safety_gate": 0.99987,
+          "cause_contribution_norm": 21.415413,
+          "safety_contribution_norm": 125.86055,
+          "delta_cosine_similarity": 0.448434
+        },
+        {
+          "step": 19,
+          "token": " isolate",
+          "is_stop": false,
+          "cause_gate": 0.029775,
+          "safety_gate": 0.999999,
+          "cause_contribution_norm": 3.605459,
+          "safety_contribution_norm": 119.415718,
+          "delta_cosine_similarity": 0.441135
+        },
+        {
+          "step": 20,
+          "token": " power",
+          "is_stop": false,
+          "cause_gate": 0.005433,
+          "safety_gate": 0.999974,
+          "cause_contribution_norm": 0.62986,
+          "safety_contribution_norm": 122.616341,
+          "delta_cosine_similarity": 0.343325
+        },
+        {
+          "step": 21,
+          "token": " before",
+          "is_stop": false,
+          "cause_gate": 0.115898,
+          "safety_gate": 1.0,
+          "cause_contribution_norm": 15.448956,
+          "safety_contribution_norm": 133.697449,
+          "delta_cosine_similarity": 0.204368
+        },
+        {
+          "step": 22,
+          "token": " adjustment",
+          "is_stop": false,
+          "cause_gate": 0.032016,
+          "safety_gate": 1.0,
+          "cause_contribution_norm": 3.858222,
+          "safety_contribution_norm": 128.877518,
+          "delta_cosine_similarity": 0.459317
+        },
+        {
+          "step": 23,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.195185,
+          "safety_gate": 0.999979,
+          "cause_contribution_norm": 20.891287,
+          "safety_contribution_norm": 107.88929,
+          "delta_cosine_similarity": 0.50085
+        },
+        {
+          "step": 24,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000134,
+          "safety_gate": 0.998968,
+          "cause_contribution_norm": 0.015046,
+          "safety_contribution_norm": 112.28083,
+          "delta_cosine_similarity": 0.641573
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "question": "Someone must act on Lyra-EN-12. The unit itself produced alternating white and red flashes after restart; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is timing split.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.991586,
+          "safety_gate": 0.976032,
+          "cause_contribution_norm": 106.908249,
+          "safety_contribution_norm": 105.33577,
+          "delta_cosine_similarity": 0.306373
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999966,
+          "safety_gate": 0.915206,
+          "cause_contribution_norm": 115.454041,
+          "safety_contribution_norm": 105.49704,
+          "delta_cosine_similarity": 0.393271
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999995,
+          "safety_gate": 0.999702,
+          "cause_contribution_norm": 114.668205,
+          "safety_contribution_norm": 114.760521,
+          "delta_cosine_similarity": 0.270066
+        },
+        {
+          "step": 4,
+          "token": " timing",
+          "is_stop": false,
+          "cause_gate": 0.999929,
+          "safety_gate": 0.02241,
+          "cause_contribution_norm": 116.597404,
+          "safety_contribution_norm": 2.613835,
+          "delta_cosine_similarity": 0.254841
+        },
+        {
+          "step": 5,
+          "token": " split",
+          "is_stop": false,
+          "cause_gate": 0.999999,
+          "safety_gate": 0.15869,
+          "cause_contribution_norm": 126.909096,
+          "safety_contribution_norm": 18.373156,
+          "delta_cosine_similarity": 0.406698
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.994875,
+          "safety_gate": 0.978065,
+          "cause_contribution_norm": 118.959076,
+          "safety_contribution_norm": 112.010239,
+          "delta_cosine_similarity": 0.550666
+        },
+        {
+          "step": 7,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000252,
+          "safety_gate": 0.0388,
+          "cause_contribution_norm": 0.028673,
+          "safety_contribution_norm": 4.410858,
+          "delta_cosine_similarity": 0.761227
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "question": "A new operator has two reports for Lyra-EN-13. First: two violet rings before shutdown. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is coolant echo. The next step is to measure pressure first.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.999444,
+          "safety_gate": 0.89759,
+          "cause_contribution_norm": 109.446434,
+          "safety_contribution_norm": 98.15477,
+          "delta_cosine_similarity": 0.281415
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.99996,
+          "safety_gate": 0.326463,
+          "cause_contribution_norm": 110.729042,
+          "safety_contribution_norm": 36.126987,
+          "delta_cosine_similarity": 0.370733
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999998,
+          "safety_gate": 0.998495,
+          "cause_contribution_norm": 116.030663,
+          "safety_contribution_norm": 115.924843,
+          "delta_cosine_similarity": 0.286695
+        },
+        {
+          "step": 4,
+          "token": " coolant",
+          "is_stop": false,
+          "cause_gate": 0.99999,
+          "safety_gate": 0.002416,
+          "cause_contribution_norm": 118.229195,
+          "safety_contribution_norm": 0.285462,
+          "delta_cosine_similarity": 0.408914
+        },
+        {
+          "step": 5,
+          "token": " echo",
+          "is_stop": false,
+          "cause_gate": 0.999813,
+          "safety_gate": 0.641564,
+          "cause_contribution_norm": 128.784058,
+          "safety_contribution_norm": 82.18866,
+          "delta_cosine_similarity": 0.359807
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.999997,
+          "safety_gate": 0.486918,
+          "cause_contribution_norm": 130.579971,
+          "safety_contribution_norm": 60.163235,
+          "delta_cosine_similarity": 0.444659
+        },
+        {
+          "step": 7,
+          "token": " The",
+          "is_stop": false,
+          "cause_gate": 0.002805,
+          "safety_gate": 0.000301,
+          "cause_contribution_norm": 0.32538,
+          "safety_contribution_norm": 0.034942,
+          "delta_cosine_similarity": 0.647313
+        },
+        {
+          "step": 8,
+          "token": " next",
+          "is_stop": false,
+          "cause_gate": 0.989377,
+          "safety_gate": 0.703545,
+          "cause_contribution_norm": 115.048119,
+          "safety_contribution_norm": 82.025169,
+          "delta_cosine_similarity": 0.547646
+        },
+        {
+          "step": 9,
+          "token": " step",
+          "is_stop": false,
+          "cause_gate": 0.579047,
+          "safety_gate": 0.999697,
+          "cause_contribution_norm": 62.838001,
+          "safety_contribution_norm": 116.955276,
+          "delta_cosine_similarity": 0.468144
+        },
+        {
+          "step": 10,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.976492,
+          "safety_gate": 0.999638,
+          "cause_contribution_norm": 99.70887,
+          "safety_contribution_norm": 106.11541,
+          "delta_cosine_similarity": 0.494768
+        },
+        {
+          "step": 11,
+          "token": " to",
+          "is_stop": false,
+          "cause_gate": 0.382437,
+          "safety_gate": 0.999331,
+          "cause_contribution_norm": 47.570854,
+          "safety_contribution_norm": 124.054115,
+          "delta_cosine_similarity": 0.388715
+        },
+        {
+          "step": 12,
+          "token": " measure",
+          "is_stop": false,
+          "cause_gate": 0.100004,
+          "safety_gate": 0.99999,
+          "cause_contribution_norm": 12.841224,
+          "safety_contribution_norm": 128.037994,
+          "delta_cosine_similarity": 0.502965
+        },
+        {
+          "step": 13,
+          "token": " pressure",
+          "is_stop": false,
+          "cause_gate": 0.052557,
+          "safety_gate": 0.999645,
+          "cause_contribution_norm": 6.268932,
+          "safety_contribution_norm": 113.347443,
+          "delta_cosine_similarity": 0.367436
+        },
+        {
+          "step": 14,
+          "token": " first",
+          "is_stop": false,
+          "cause_gate": 0.143034,
+          "safety_gate": 0.999995,
+          "cause_contribution_norm": 19.11343,
+          "safety_contribution_norm": 130.86908,
+          "delta_cosine_similarity": 0.372878
+        },
+        {
+          "step": 15,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.157589,
+          "safety_gate": 0.999998,
+          "cause_contribution_norm": 19.029503,
+          "safety_contribution_norm": 120.511742,
+          "delta_cosine_similarity": 0.505404
+        },
+        {
+          "step": 16,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 5.6e-05,
+          "safety_gate": 0.984224,
+          "cause_contribution_norm": 0.006205,
+          "safety_contribution_norm": 109.735298,
+          "delta_cosine_similarity": 0.586133
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "question": "Someone must act on Lyra-EN-14. The unit itself produced two violet rings before shutdown; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is coolant echo.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.992448,
+          "safety_gate": 0.978047,
+          "cause_contribution_norm": 107.802032,
+          "safety_contribution_norm": 106.116821,
+          "delta_cosine_similarity": 0.291649
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999912,
+          "safety_gate": 0.906246,
+          "cause_contribution_norm": 112.641029,
+          "safety_contribution_norm": 101.919739,
+          "delta_cosine_similarity": 0.345898
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.99999,
+          "safety_gate": 0.999746,
+          "cause_contribution_norm": 114.452644,
+          "safety_contribution_norm": 114.528648,
+          "delta_cosine_similarity": 0.259922
+        },
+        {
+          "step": 4,
+          "token": " coolant",
+          "is_stop": false,
+          "cause_gate": 0.999795,
+          "safety_gate": 0.02138,
+          "cause_contribution_norm": 114.074677,
+          "safety_contribution_norm": 2.436447,
+          "delta_cosine_similarity": 0.302522
+        },
+        {
+          "step": 5,
+          "token": " echo",
+          "is_stop": false,
+          "cause_gate": 0.999729,
+          "safety_gate": 0.78759,
+          "cause_contribution_norm": 127.564323,
+          "safety_contribution_norm": 99.931976,
+          "delta_cosine_similarity": 0.388127
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.999983,
+          "safety_gate": 0.916992,
+          "cause_contribution_norm": 124.367706,
+          "safety_contribution_norm": 108.657402,
+          "delta_cosine_similarity": 0.416316
+        },
+        {
+          "step": 7,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 7e-06,
+          "safety_gate": 0.000336,
+          "cause_contribution_norm": 0.000805,
+          "safety_contribution_norm": 0.03716,
+          "delta_cosine_similarity": 0.668974
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "question": "A new operator has two reports for Lyra-EN-15. First: two violet rings before shutdown. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is coolant echo. The next step is to measure pressure first.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.999609,
+          "safety_gate": 0.892533,
+          "cause_contribution_norm": 108.73967,
+          "safety_contribution_norm": 96.93763,
+          "delta_cosine_similarity": 0.275151
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999965,
+          "safety_gate": 0.345297,
+          "cause_contribution_norm": 109.955208,
+          "safety_contribution_norm": 37.978497,
+          "delta_cosine_similarity": 0.391943
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999999,
+          "safety_gate": 0.998529,
+          "cause_contribution_norm": 116.627213,
+          "safety_contribution_norm": 116.567055,
+          "delta_cosine_similarity": 0.349264
+        },
+        {
+          "step": 4,
+          "token": " coolant",
+          "is_stop": false,
+          "cause_gate": 0.999992,
+          "safety_gate": 0.002316,
+          "cause_contribution_norm": 118.704056,
+          "safety_contribution_norm": 0.274823,
+          "delta_cosine_similarity": 0.397429
+        },
+        {
+          "step": 5,
+          "token": " echo",
+          "is_stop": false,
+          "cause_gate": 0.99973,
+          "safety_gate": 0.685007,
+          "cause_contribution_norm": 129.246521,
+          "safety_contribution_norm": 84.698013,
+          "delta_cosine_similarity": 0.361647
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.999998,
+          "safety_gate": 0.513629,
+          "cause_contribution_norm": 129.707214,
+          "safety_contribution_norm": 62.169445,
+          "delta_cosine_similarity": 0.414795
+        },
+        {
+          "step": 7,
+          "token": " The",
+          "is_stop": false,
+          "cause_gate": 0.002564,
+          "safety_gate": 0.000508,
+          "cause_contribution_norm": 0.295261,
+          "safety_contribution_norm": 0.058462,
+          "delta_cosine_similarity": 0.657092
+        },
+        {
+          "step": 8,
+          "token": " next",
+          "is_stop": false,
+          "cause_gate": 0.988118,
+          "safety_gate": 0.626738,
+          "cause_contribution_norm": 114.264351,
+          "safety_contribution_norm": 72.666733,
+          "delta_cosine_similarity": 0.541381
+        },
+        {
+          "step": 9,
+          "token": " step",
+          "is_stop": false,
+          "cause_gate": 0.552,
+          "safety_gate": 0.999691,
+          "cause_contribution_norm": 59.844734,
+          "safety_contribution_norm": 116.38485,
+          "delta_cosine_similarity": 0.461256
+        },
+        {
+          "step": 10,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.972573,
+          "safety_gate": 0.999631,
+          "cause_contribution_norm": 98.829445,
+          "safety_contribution_norm": 106.371552,
+          "delta_cosine_similarity": 0.497221
+        },
+        {
+          "step": 11,
+          "token": " to",
+          "is_stop": false,
+          "cause_gate": 0.304522,
+          "safety_gate": 0.999529,
+          "cause_contribution_norm": 37.810368,
+          "safety_contribution_norm": 123.904503,
+          "delta_cosine_similarity": 0.365912
+        },
+        {
+          "step": 12,
+          "token": " measure",
+          "is_stop": false,
+          "cause_gate": 0.067078,
+          "safety_gate": 0.999993,
+          "cause_contribution_norm": 8.601122,
+          "safety_contribution_norm": 127.958717,
+          "delta_cosine_similarity": 0.47741
+        },
+        {
+          "step": 13,
+          "token": " pressure",
+          "is_stop": false,
+          "cause_gate": 0.033138,
+          "safety_gate": 0.999756,
+          "cause_contribution_norm": 3.954049,
+          "safety_contribution_norm": 111.643135,
+          "delta_cosine_similarity": 0.369872
+        },
+        {
+          "step": 14,
+          "token": " first",
+          "is_stop": false,
+          "cause_gate": 0.036824,
+          "safety_gate": 0.999996,
+          "cause_contribution_norm": 4.897589,
+          "safety_contribution_norm": 124.171501,
+          "delta_cosine_similarity": 0.38931
+        },
+        {
+          "step": 15,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.135761,
+          "safety_gate": 0.999997,
+          "cause_contribution_norm": 16.408489,
+          "safety_contribution_norm": 120.652054,
+          "delta_cosine_similarity": 0.494825
+        },
+        {
+          "step": 16,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 7.3e-05,
+          "safety_gate": 0.987316,
+          "cause_contribution_norm": 0.008095,
+          "safety_contribution_norm": 109.639999,
+          "delta_cosine_similarity": 0.540898
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "question": "Someone must act on Lyra-EN-16. The unit itself produced two violet rings before shutdown; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is coolant echo.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "The",
+          "is_stop": false,
+          "cause_gate": 0.992896,
+          "safety_gate": 0.943004,
+          "cause_contribution_norm": 106.711151,
+          "safety_contribution_norm": 101.2799,
+          "delta_cosine_similarity": 0.295069
+        },
+        {
+          "step": 2,
+          "token": " cause",
+          "is_stop": false,
+          "cause_gate": 0.999934,
+          "safety_gate": 0.758342,
+          "cause_contribution_norm": 113.535805,
+          "safety_contribution_norm": 85.98214,
+          "delta_cosine_similarity": 0.368672
+        },
+        {
+          "step": 3,
+          "token": " is",
+          "is_stop": false,
+          "cause_gate": 0.999993,
+          "safety_gate": 0.999646,
+          "cause_contribution_norm": 113.691582,
+          "safety_contribution_norm": 113.657227,
+          "delta_cosine_similarity": 0.256206
+        },
+        {
+          "step": 4,
+          "token": " coolant",
+          "is_stop": false,
+          "cause_gate": 0.999763,
+          "safety_gate": 0.023751,
+          "cause_contribution_norm": 114.578255,
+          "safety_contribution_norm": 2.718866,
+          "delta_cosine_similarity": 0.2907
+        },
+        {
+          "step": 5,
+          "token": " echo",
+          "is_stop": false,
+          "cause_gate": 0.999784,
+          "safety_gate": 0.779356,
+          "cause_contribution_norm": 128.121521,
+          "safety_contribution_norm": 99.539055,
+          "delta_cosine_similarity": 0.415605
+        },
+        {
+          "step": 6,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.999982,
+          "safety_gate": 0.930254,
+          "cause_contribution_norm": 125.111717,
+          "safety_contribution_norm": 111.570946,
+          "delta_cosine_similarity": 0.348132
+        },
+        {
+          "step": 7,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 1.2e-05,
+          "safety_gate": 0.000745,
+          "cause_contribution_norm": 0.001371,
+          "safety_contribution_norm": 0.082078,
+          "delta_cosine_similarity": 0.648495
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-01. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — тепловой отскок.  \nДопустимый шаг — сначала измерьте давление.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999875,
+          "safety_gate": 0.076083,
+          "cause_contribution_norm": 104.305504,
+          "safety_contribution_norm": 7.942548,
+          "delta_cosine_similarity": 0.285153
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.998102,
+          "safety_gate": 0.184087,
+          "cause_contribution_norm": 109.752411,
+          "safety_contribution_norm": 20.27092,
+          "delta_cosine_similarity": 0.233013
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999891,
+          "safety_gate": 0.113286,
+          "cause_contribution_norm": 120.107231,
+          "safety_contribution_norm": 13.60041,
+          "delta_cosine_similarity": 0.254868
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.935127,
+          "safety_gate": 0.000787,
+          "cause_contribution_norm": 91.458038,
+          "safety_contribution_norm": 0.077511,
+          "delta_cosine_similarity": 0.048065
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999929,
+          "safety_gate": 0.66063,
+          "cause_contribution_norm": 112.624001,
+          "safety_contribution_norm": 74.463074,
+          "delta_cosine_similarity": 0.417911
+        },
+        {
+          "step": 6,
+          "token": " теп",
+          "is_stop": false,
+          "cause_gate": 0.999799,
+          "safety_gate": 1.6e-05,
+          "cause_contribution_norm": 115.465881,
+          "safety_contribution_norm": 0.001838,
+          "delta_cosine_similarity": 0.2473
+        },
+        {
+          "step": 7,
+          "token": "л",
+          "is_stop": false,
+          "cause_gate": 0.998515,
+          "safety_gate": 0.002747,
+          "cause_contribution_norm": 128.20256,
+          "safety_contribution_norm": 0.297148,
+          "delta_cosine_similarity": 0.364655
+        },
+        {
+          "step": 8,
+          "token": "овой",
+          "is_stop": false,
+          "cause_gate": 0.999191,
+          "safety_gate": 0.076028,
+          "cause_contribution_norm": 129.084671,
+          "safety_contribution_norm": 8.542273,
+          "delta_cosine_similarity": 0.362946
+        },
+        {
+          "step": 9,
+          "token": " от",
+          "is_stop": false,
+          "cause_gate": 0.999797,
+          "safety_gate": 0.083733,
+          "cause_contribution_norm": 117.879486,
+          "safety_contribution_norm": 9.873073,
+          "delta_cosine_similarity": 0.394574
+        },
+        {
+          "step": 10,
+          "token": "ск",
+          "is_stop": false,
+          "cause_gate": 0.97657,
+          "safety_gate": 0.003499,
+          "cause_contribution_norm": 116.032852,
+          "safety_contribution_norm": 0.33693,
+          "delta_cosine_similarity": 0.280615
+        },
+        {
+          "step": 11,
+          "token": "ок",
+          "is_stop": false,
+          "cause_gate": 0.94887,
+          "safety_gate": 0.000334,
+          "cause_contribution_norm": 87.405144,
+          "safety_contribution_norm": 0.026413,
+          "delta_cosine_similarity": 0.232203
+        },
+        {
+          "step": 12,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.992521,
+          "safety_gate": 0.868974,
+          "cause_contribution_norm": 114.76284,
+          "safety_contribution_norm": 100.650238,
+          "delta_cosine_similarity": 0.636182
+        },
+        {
+          "step": 13,
+          "token": "  \n",
+          "is_stop": false,
+          "cause_gate": 0.000932,
+          "safety_gate": 0.10807,
+          "cause_contribution_norm": 0.104116,
+          "safety_contribution_norm": 12.089656,
+          "delta_cosine_similarity": 0.686436
+        },
+        {
+          "step": 14,
+          "token": "Д",
+          "is_stop": false,
+          "cause_gate": 0.414667,
+          "safety_gate": 0.360577,
+          "cause_contribution_norm": 43.379993,
+          "safety_contribution_norm": 37.824791,
+          "delta_cosine_similarity": 0.4548
+        },
+        {
+          "step": 15,
+          "token": "оп",
+          "is_stop": false,
+          "cause_gate": 0.027924,
+          "safety_gate": 0.999544,
+          "cause_contribution_norm": 2.616593,
+          "safety_contribution_norm": 116.173813,
+          "delta_cosine_similarity": 0.413435
+        },
+        {
+          "step": 16,
+          "token": "уст",
+          "is_stop": false,
+          "cause_gate": 0.00513,
+          "safety_gate": 0.992003,
+          "cause_contribution_norm": 0.500339,
+          "safety_contribution_norm": 110.336876,
+          "delta_cosine_similarity": 0.492283
+        },
+        {
+          "step": 17,
+          "token": "им",
+          "is_stop": false,
+          "cause_gate": 0.043168,
+          "safety_gate": 0.978282,
+          "cause_contribution_norm": 3.208949,
+          "safety_contribution_norm": 113.7304,
+          "delta_cosine_similarity": 0.284194
+        },
+        {
+          "step": 18,
+          "token": "ый",
+          "is_stop": false,
+          "cause_gate": 0.09997,
+          "safety_gate": 0.981481,
+          "cause_contribution_norm": 8.908018,
+          "safety_contribution_norm": 113.957718,
+          "delta_cosine_similarity": 0.391509
+        },
+        {
+          "step": 19,
+          "token": " шаг",
+          "is_stop": false,
+          "cause_gate": 0.096622,
+          "safety_gate": 0.999246,
+          "cause_contribution_norm": 9.997219,
+          "safety_contribution_norm": 116.969879,
+          "delta_cosine_similarity": 0.489867
+        },
+        {
+          "step": 20,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.936684,
+          "safety_gate": 0.998288,
+          "cause_contribution_norm": 112.253891,
+          "safety_contribution_norm": 119.54686,
+          "delta_cosine_similarity": 0.397983
+        },
+        {
+          "step": 21,
+          "token": " с",
+          "is_stop": false,
+          "cause_gate": 0.027069,
+          "safety_gate": 0.999748,
+          "cause_contribution_norm": 3.073178,
+          "safety_contribution_norm": 113.648758,
+          "delta_cosine_similarity": 0.404351
+        },
+        {
+          "step": 22,
+          "token": "нач",
+          "is_stop": false,
+          "cause_gate": 0.356207,
+          "safety_gate": 0.998895,
+          "cause_contribution_norm": 40.232292,
+          "safety_contribution_norm": 113.035667,
+          "delta_cosine_similarity": 0.3253
+        },
+        {
+          "step": 23,
+          "token": "ала",
+          "is_stop": false,
+          "cause_gate": 0.149048,
+          "safety_gate": 0.976741,
+          "cause_contribution_norm": 10.930043,
+          "safety_contribution_norm": 79.652641,
+          "delta_cosine_similarity": 0.025469
+        },
+        {
+          "step": 24,
+          "token": " из",
+          "is_stop": false,
+          "cause_gate": 0.001907,
+          "safety_gate": 0.999998,
+          "cause_contribution_norm": 0.219776,
+          "safety_contribution_norm": 115.18013,
+          "delta_cosine_similarity": 0.445566
+        },
+        {
+          "step": 25,
+          "token": "мер",
+          "is_stop": false,
+          "cause_gate": 0.024934,
+          "safety_gate": 0.998787,
+          "cause_contribution_norm": 2.224707,
+          "safety_contribution_norm": 107.54689,
+          "delta_cosine_similarity": 0.340623
+        },
+        {
+          "step": 26,
+          "token": "ьте",
+          "is_stop": false,
+          "cause_gate": 0.097268,
+          "safety_gate": 0.984147,
+          "cause_contribution_norm": 7.716656,
+          "safety_contribution_norm": 89.915329,
+          "delta_cosine_similarity": 0.296936
+        },
+        {
+          "step": 27,
+          "token": " дав",
+          "is_stop": false,
+          "cause_gate": 0.00764,
+          "safety_gate": 0.998187,
+          "cause_contribution_norm": 0.854762,
+          "safety_contribution_norm": 111.923141,
+          "delta_cosine_similarity": 0.432149
+        },
+        {
+          "step": 28,
+          "token": "ление",
+          "is_stop": false,
+          "cause_gate": 0.045954,
+          "safety_gate": 0.999247,
+          "cause_contribution_norm": 4.362981,
+          "safety_contribution_norm": 87.853073,
+          "delta_cosine_similarity": 0.363799
+        },
+        {
+          "step": 29,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.024775,
+          "safety_gate": 0.999968,
+          "cause_contribution_norm": 2.777136,
+          "safety_contribution_norm": 112.243752,
+          "delta_cosine_similarity": 0.607184
+        },
+        {
+          "step": 30,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 3.5e-05,
+          "safety_gate": 0.99992,
+          "cause_contribution_norm": 0.003572,
+          "safety_contribution_norm": 103.719238,
+          "delta_cosine_similarity": 0.566877
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "question": "Нужно принять решение по Lyra-RU-02. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — тепловой отскок.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999868,
+          "safety_gate": 0.156639,
+          "cause_contribution_norm": 108.027596,
+          "safety_contribution_norm": 16.918245,
+          "delta_cosine_similarity": 0.248735
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.999307,
+          "safety_gate": 0.699778,
+          "cause_contribution_norm": 110.389343,
+          "safety_contribution_norm": 77.363647,
+          "delta_cosine_similarity": 0.4252
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.99996,
+          "safety_gate": 0.108496,
+          "cause_contribution_norm": 119.857674,
+          "safety_contribution_norm": 12.99055,
+          "delta_cosine_similarity": 0.491477
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.968899,
+          "safety_gate": 0.000175,
+          "cause_contribution_norm": 103.967415,
+          "safety_contribution_norm": 0.015017,
+          "delta_cosine_similarity": 0.116559
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999987,
+          "safety_gate": 0.876769,
+          "cause_contribution_norm": 120.033173,
+          "safety_contribution_norm": 105.445518,
+          "delta_cosine_similarity": 0.438266
+        },
+        {
+          "step": 6,
+          "token": " теп",
+          "is_stop": false,
+          "cause_gate": 0.999757,
+          "safety_gate": 3.2e-05,
+          "cause_contribution_norm": 117.839188,
+          "safety_contribution_norm": 0.003832,
+          "delta_cosine_similarity": 0.283632
+        },
+        {
+          "step": 7,
+          "token": "л",
+          "is_stop": false,
+          "cause_gate": 0.9996,
+          "safety_gate": 0.000809,
+          "cause_contribution_norm": 128.80899,
+          "safety_contribution_norm": 0.088735,
+          "delta_cosine_similarity": 0.355166
+        },
+        {
+          "step": 8,
+          "token": "овой",
+          "is_stop": false,
+          "cause_gate": 0.999685,
+          "safety_gate": 0.039998,
+          "cause_contribution_norm": 129.588913,
+          "safety_contribution_norm": 4.489052,
+          "delta_cosine_similarity": 0.367448
+        },
+        {
+          "step": 9,
+          "token": " от",
+          "is_stop": false,
+          "cause_gate": 0.999513,
+          "safety_gate": 0.308229,
+          "cause_contribution_norm": 118.203423,
+          "safety_contribution_norm": 36.440048,
+          "delta_cosine_similarity": 0.382218
+        },
+        {
+          "step": 10,
+          "token": "ск",
+          "is_stop": false,
+          "cause_gate": 0.987746,
+          "safety_gate": 0.00252,
+          "cause_contribution_norm": 117.091187,
+          "safety_contribution_norm": 0.237682,
+          "delta_cosine_similarity": 0.247718
+        },
+        {
+          "step": 11,
+          "token": "ок",
+          "is_stop": false,
+          "cause_gate": 0.952468,
+          "safety_gate": 0.000271,
+          "cause_contribution_norm": 89.095482,
+          "safety_contribution_norm": 0.02129,
+          "delta_cosine_similarity": 0.234391
+        },
+        {
+          "step": 12,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.992625,
+          "safety_gate": 0.932575,
+          "cause_contribution_norm": 114.299614,
+          "safety_contribution_norm": 107.631516,
+          "delta_cosine_similarity": 0.600824
+        },
+        {
+          "step": 13,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.00122,
+          "safety_gate": 0.771501,
+          "cause_contribution_norm": 0.138452,
+          "safety_contribution_norm": 87.756256,
+          "delta_cosine_similarity": 0.766296
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-03. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — тепловой отскок. Когда сначала отключите питание.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999865,
+          "safety_gate": 0.087567,
+          "cause_contribution_norm": 104.379387,
+          "safety_contribution_norm": 9.148708,
+          "delta_cosine_similarity": 0.317176
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.996819,
+          "safety_gate": 0.349933,
+          "cause_contribution_norm": 109.470169,
+          "safety_contribution_norm": 38.472885,
+          "delta_cosine_similarity": 0.257318
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999907,
+          "safety_gate": 0.129666,
+          "cause_contribution_norm": 119.278221,
+          "safety_contribution_norm": 15.449941,
+          "delta_cosine_similarity": 0.275637
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.941386,
+          "safety_gate": 0.000828,
+          "cause_contribution_norm": 92.824257,
+          "safety_contribution_norm": 0.081605,
+          "delta_cosine_similarity": 0.058751
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999933,
+          "safety_gate": 0.729864,
+          "cause_contribution_norm": 112.571938,
+          "safety_contribution_norm": 82.258514,
+          "delta_cosine_similarity": 0.420688
+        },
+        {
+          "step": 6,
+          "token": " теп",
+          "is_stop": false,
+          "cause_gate": 0.999826,
+          "safety_gate": 1.9e-05,
+          "cause_contribution_norm": 115.298904,
+          "safety_contribution_norm": 0.002146,
+          "delta_cosine_similarity": 0.259549
+        },
+        {
+          "step": 7,
+          "token": "л",
+          "is_stop": false,
+          "cause_gate": 0.999,
+          "safety_gate": 0.003124,
+          "cause_contribution_norm": 128.227325,
+          "safety_contribution_norm": 0.32838,
+          "delta_cosine_similarity": 0.34699
+        },
+        {
+          "step": 8,
+          "token": "овой",
+          "is_stop": false,
+          "cause_gate": 0.999544,
+          "safety_gate": 0.083703,
+          "cause_contribution_norm": 129.796021,
+          "safety_contribution_norm": 9.279057,
+          "delta_cosine_similarity": 0.335229
+        },
+        {
+          "step": 9,
+          "token": " от",
+          "is_stop": false,
+          "cause_gate": 0.999825,
+          "safety_gate": 0.170781,
+          "cause_contribution_norm": 117.374474,
+          "safety_contribution_norm": 20.049913,
+          "delta_cosine_similarity": 0.378745
+        },
+        {
+          "step": 10,
+          "token": "ск",
+          "is_stop": false,
+          "cause_gate": 0.978883,
+          "safety_gate": 0.002847,
+          "cause_contribution_norm": 116.637444,
+          "safety_contribution_norm": 0.271192,
+          "delta_cosine_similarity": 0.254725
+        },
+        {
+          "step": 11,
+          "token": "ок",
+          "is_stop": false,
+          "cause_gate": 0.956209,
+          "safety_gate": 0.000306,
+          "cause_contribution_norm": 88.373169,
+          "safety_contribution_norm": 0.024153,
+          "delta_cosine_similarity": 0.237433
+        },
+        {
+          "step": 12,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.990809,
+          "safety_gate": 0.876183,
+          "cause_contribution_norm": 113.187881,
+          "safety_contribution_norm": 100.355354,
+          "delta_cosine_similarity": 0.590709
+        },
+        {
+          "step": 13,
+          "token": " Когда",
+          "is_stop": false,
+          "cause_gate": 0.001309,
+          "safety_gate": 0.079083,
+          "cause_contribution_norm": 0.146593,
+          "safety_contribution_norm": 8.870219,
+          "delta_cosine_similarity": 0.693132
+        },
+        {
+          "step": 14,
+          "token": " с",
+          "is_stop": false,
+          "cause_gate": 0.493574,
+          "safety_gate": 0.999567,
+          "cause_contribution_norm": 59.675446,
+          "safety_contribution_norm": 121.290909,
+          "delta_cosine_similarity": 0.423649
+        },
+        {
+          "step": 15,
+          "token": "нач",
+          "is_stop": false,
+          "cause_gate": 0.993285,
+          "safety_gate": 0.992848,
+          "cause_contribution_norm": 102.976807,
+          "safety_contribution_norm": 112.469872,
+          "delta_cosine_similarity": 0.352083
+        },
+        {
+          "step": 16,
+          "token": "ала",
+          "is_stop": false,
+          "cause_gate": 0.308629,
+          "safety_gate": 0.957211,
+          "cause_contribution_norm": 21.317053,
+          "safety_contribution_norm": 70.711136,
+          "delta_cosine_similarity": -0.073748
+        },
+        {
+          "step": 17,
+          "token": " от",
+          "is_stop": false,
+          "cause_gate": 0.209053,
+          "safety_gate": 0.999627,
+          "cause_contribution_norm": 24.457293,
+          "safety_contribution_norm": 116.833771,
+          "delta_cosine_similarity": 0.40593
+        },
+        {
+          "step": 18,
+          "token": "ключ",
+          "is_stop": false,
+          "cause_gate": 0.618236,
+          "safety_gate": 0.839109,
+          "cause_contribution_norm": 62.89539,
+          "safety_contribution_norm": 86.464272,
+          "delta_cosine_similarity": 0.343963
+        },
+        {
+          "step": 19,
+          "token": "ите",
+          "is_stop": false,
+          "cause_gate": 0.110444,
+          "safety_gate": 0.99166,
+          "cause_contribution_norm": 9.866458,
+          "safety_contribution_norm": 105.780067,
+          "delta_cosine_similarity": 0.400506
+        },
+        {
+          "step": 20,
+          "token": " пит",
+          "is_stop": false,
+          "cause_gate": 0.000511,
+          "safety_gate": 0.999959,
+          "cause_contribution_norm": 0.057834,
+          "safety_contribution_norm": 113.286743,
+          "delta_cosine_similarity": 0.441927
+        },
+        {
+          "step": 21,
+          "token": "ание",
+          "is_stop": false,
+          "cause_gate": 0.093588,
+          "safety_gate": 0.994909,
+          "cause_contribution_norm": 8.912713,
+          "safety_contribution_norm": 84.572746,
+          "delta_cosine_similarity": 0.317541
+        },
+        {
+          "step": 22,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.008864,
+          "safety_gate": 0.999989,
+          "cause_contribution_norm": 1.041992,
+          "safety_contribution_norm": 117.899406,
+          "delta_cosine_similarity": 0.653701
+        },
+        {
+          "step": 23,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000195,
+          "safety_gate": 0.99898,
+          "cause_contribution_norm": 0.021125,
+          "safety_contribution_norm": 108.453049,
+          "delta_cosine_similarity": 0.68472
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "question": "Нужно принять решение по Lyra-RU-04. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — тепловой отскок.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999917,
+          "safety_gate": 0.075084,
+          "cause_contribution_norm": 107.975639,
+          "safety_contribution_norm": 8.110244,
+          "delta_cosine_similarity": 0.224183
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.999567,
+          "safety_gate": 0.588613,
+          "cause_contribution_norm": 110.437508,
+          "safety_contribution_norm": 65.118782,
+          "delta_cosine_similarity": 0.425741
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999967,
+          "safety_gate": 0.060141,
+          "cause_contribution_norm": 120.509644,
+          "safety_contribution_norm": 7.24305,
+          "delta_cosine_similarity": 0.478406
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.962532,
+          "safety_gate": 0.000201,
+          "cause_contribution_norm": 98.873749,
+          "safety_contribution_norm": 0.017935,
+          "delta_cosine_similarity": 0.076208
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999984,
+          "safety_gate": 0.86348,
+          "cause_contribution_norm": 119.724884,
+          "safety_contribution_norm": 103.561211,
+          "delta_cosine_similarity": 0.423412
+        },
+        {
+          "step": 6,
+          "token": " теп",
+          "is_stop": false,
+          "cause_gate": 0.999856,
+          "safety_gate": 1.9e-05,
+          "cause_contribution_norm": 117.797134,
+          "safety_contribution_norm": 0.002214,
+          "delta_cosine_similarity": 0.27444
+        },
+        {
+          "step": 7,
+          "token": "л",
+          "is_stop": false,
+          "cause_gate": 0.999404,
+          "safety_gate": 0.000533,
+          "cause_contribution_norm": 128.764145,
+          "safety_contribution_norm": 0.055863,
+          "delta_cosine_similarity": 0.366329
+        },
+        {
+          "step": 8,
+          "token": "овой",
+          "is_stop": false,
+          "cause_gate": 0.999653,
+          "safety_gate": 0.036391,
+          "cause_contribution_norm": 130.666641,
+          "safety_contribution_norm": 3.999694,
+          "delta_cosine_similarity": 0.393707
+        },
+        {
+          "step": 9,
+          "token": " от",
+          "is_stop": false,
+          "cause_gate": 0.999645,
+          "safety_gate": 0.335132,
+          "cause_contribution_norm": 118.29866,
+          "safety_contribution_norm": 39.671227,
+          "delta_cosine_similarity": 0.399471
+        },
+        {
+          "step": 10,
+          "token": "ск",
+          "is_stop": false,
+          "cause_gate": 0.984555,
+          "safety_gate": 0.003873,
+          "cause_contribution_norm": 116.419167,
+          "safety_contribution_norm": 0.35895,
+          "delta_cosine_similarity": 0.250935
+        },
+        {
+          "step": 11,
+          "token": "ок",
+          "is_stop": false,
+          "cause_gate": 0.945294,
+          "safety_gate": 0.000353,
+          "cause_contribution_norm": 86.900696,
+          "safety_contribution_norm": 0.02746,
+          "delta_cosine_similarity": 0.221704
+        },
+        {
+          "step": 12,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.989819,
+          "safety_gate": 0.964978,
+          "cause_contribution_norm": 114.40136,
+          "safety_contribution_norm": 111.841324,
+          "delta_cosine_similarity": 0.617297
+        },
+        {
+          "step": 13,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000876,
+          "safety_gate": 0.71763,
+          "cause_contribution_norm": 0.099315,
+          "safety_contribution_norm": 81.485786,
+          "delta_cosine_similarity": 0.771226
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-05. Первый: три синих импульса после запуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — сдвиг фазы. Сначала измерьте давление.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999902,
+          "safety_gate": 0.107021,
+          "cause_contribution_norm": 105.403435,
+          "safety_contribution_norm": 11.289054,
+          "delta_cosine_similarity": 0.313821
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.997833,
+          "safety_gate": 0.403016,
+          "cause_contribution_norm": 110.239983,
+          "safety_contribution_norm": 44.568256,
+          "delta_cosine_similarity": 0.261237
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999812,
+          "safety_gate": 0.107621,
+          "cause_contribution_norm": 121.122559,
+          "safety_contribution_norm": 13.031362,
+          "delta_cosine_similarity": 0.225258
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.939336,
+          "safety_gate": 0.000891,
+          "cause_contribution_norm": 93.84623,
+          "safety_contribution_norm": 0.083156,
+          "delta_cosine_similarity": 0.054941
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999897,
+          "safety_gate": 0.817886,
+          "cause_contribution_norm": 112.072166,
+          "safety_contribution_norm": 91.733131,
+          "delta_cosine_similarity": 0.403787
+        },
+        {
+          "step": 6,
+          "token": " с",
+          "is_stop": false,
+          "cause_gate": 0.99977,
+          "safety_gate": 1.6e-05,
+          "cause_contribution_norm": 115.697884,
+          "safety_contribution_norm": 0.001847,
+          "delta_cosine_similarity": 0.244372
+        },
+        {
+          "step": 7,
+          "token": "двиг",
+          "is_stop": false,
+          "cause_gate": 0.999971,
+          "safety_gate": 0.004599,
+          "cause_contribution_norm": 115.072327,
+          "safety_contribution_norm": 0.530127,
+          "delta_cosine_similarity": 0.411704
+        },
+        {
+          "step": 8,
+          "token": " ф",
+          "is_stop": false,
+          "cause_gate": 0.999659,
+          "safety_gate": 0.011495,
+          "cause_contribution_norm": 122.715385,
+          "safety_contribution_norm": 1.352672,
+          "delta_cosine_similarity": 0.453388
+        },
+        {
+          "step": 9,
+          "token": "аз",
+          "is_stop": false,
+          "cause_gate": 0.95629,
+          "safety_gate": 0.009881,
+          "cause_contribution_norm": 112.790314,
+          "safety_contribution_norm": 1.122766,
+          "delta_cosine_similarity": 0.476787
+        },
+        {
+          "step": 10,
+          "token": "ы",
+          "is_stop": false,
+          "cause_gate": 0.997968,
+          "safety_gate": 0.348855,
+          "cause_contribution_norm": 110.430214,
+          "safety_contribution_norm": 37.76482,
+          "delta_cosine_similarity": 0.507978
+        },
+        {
+          "step": 11,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.998317,
+          "safety_gate": 0.960793,
+          "cause_contribution_norm": 110.387672,
+          "safety_contribution_norm": 106.423943,
+          "delta_cosine_similarity": 0.664959
+        },
+        {
+          "step": 12,
+          "token": " С",
+          "is_stop": false,
+          "cause_gate": 0.00284,
+          "safety_gate": 0.02641,
+          "cause_contribution_norm": 0.320768,
+          "safety_contribution_norm": 2.982777,
+          "delta_cosine_similarity": 0.725808
+        },
+        {
+          "step": 13,
+          "token": "нач",
+          "is_stop": false,
+          "cause_gate": 0.761037,
+          "safety_gate": 0.993286,
+          "cause_contribution_norm": 88.973244,
+          "safety_contribution_norm": 116.280113,
+          "delta_cosine_similarity": 0.538664
+        },
+        {
+          "step": 14,
+          "token": "ала",
+          "is_stop": false,
+          "cause_gate": 0.336773,
+          "safety_gate": 0.978052,
+          "cause_contribution_norm": 26.158161,
+          "safety_contribution_norm": 82.548019,
+          "delta_cosine_similarity": 0.153039
+        },
+        {
+          "step": 15,
+          "token": " из",
+          "is_stop": false,
+          "cause_gate": 0.183489,
+          "safety_gate": 0.996463,
+          "cause_contribution_norm": 22.420458,
+          "safety_contribution_norm": 121.510307,
+          "delta_cosine_similarity": 0.501936
+        },
+        {
+          "step": 16,
+          "token": "мер",
+          "is_stop": false,
+          "cause_gate": 0.901065,
+          "safety_gate": 0.956691,
+          "cause_contribution_norm": 92.678734,
+          "safety_contribution_norm": 117.498146,
+          "delta_cosine_similarity": 0.491153
+        },
+        {
+          "step": 17,
+          "token": "ьте",
+          "is_stop": false,
+          "cause_gate": 0.709206,
+          "safety_gate": 0.916203,
+          "cause_contribution_norm": 61.629105,
+          "safety_contribution_norm": 110.920959,
+          "delta_cosine_similarity": 0.312317
+        },
+        {
+          "step": 18,
+          "token": " дав",
+          "is_stop": false,
+          "cause_gate": 0.018533,
+          "safety_gate": 0.999238,
+          "cause_contribution_norm": 2.117246,
+          "safety_contribution_norm": 114.200844,
+          "delta_cosine_similarity": 0.447956
+        },
+        {
+          "step": 19,
+          "token": "ление",
+          "is_stop": false,
+          "cause_gate": 0.045717,
+          "safety_gate": 0.99935,
+          "cause_contribution_norm": 4.857012,
+          "safety_contribution_norm": 90.853806,
+          "delta_cosine_similarity": 0.349301
+        },
+        {
+          "step": 20,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.174852,
+          "safety_gate": 0.999888,
+          "cause_contribution_norm": 20.38092,
+          "safety_contribution_norm": 116.687965,
+          "delta_cosine_similarity": 0.602484
+        },
+        {
+          "step": 21,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000214,
+          "safety_gate": 0.999999,
+          "cause_contribution_norm": 0.023894,
+          "safety_contribution_norm": 111.652138,
+          "delta_cosine_similarity": 0.766228
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "question": "Нужно принять решение по Lyra-RU-06. Само устройство показало три синих импульса после запуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — сдвиг фазы.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999846,
+          "safety_gate": 0.210366,
+          "cause_contribution_norm": 108.843063,
+          "safety_contribution_norm": 22.866488,
+          "delta_cosine_similarity": 0.306573
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.999175,
+          "safety_gate": 0.730969,
+          "cause_contribution_norm": 109.691399,
+          "safety_contribution_norm": 80.301125,
+          "delta_cosine_similarity": 0.427804
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999926,
+          "safety_gate": 0.077163,
+          "cause_contribution_norm": 121.226944,
+          "safety_contribution_norm": 9.339491,
+          "delta_cosine_similarity": 0.566389
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.96911,
+          "safety_gate": 0.00015,
+          "cause_contribution_norm": 113.115097,
+          "safety_contribution_norm": 0.012832,
+          "delta_cosine_similarity": 0.183635
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999981,
+          "safety_gate": 0.953061,
+          "cause_contribution_norm": 120.072136,
+          "safety_contribution_norm": 114.588257,
+          "delta_cosine_similarity": 0.444389
+        },
+        {
+          "step": 6,
+          "token": " с",
+          "is_stop": false,
+          "cause_gate": 0.99942,
+          "safety_gate": 3.4e-05,
+          "cause_contribution_norm": 116.760132,
+          "safety_contribution_norm": 0.004014,
+          "delta_cosine_similarity": 0.247817
+        },
+        {
+          "step": 7,
+          "token": "двиг",
+          "is_stop": false,
+          "cause_gate": 0.999953,
+          "safety_gate": 0.093921,
+          "cause_contribution_norm": 119.717232,
+          "safety_contribution_norm": 11.265265,
+          "delta_cosine_similarity": 0.455174
+        },
+        {
+          "step": 8,
+          "token": " ф",
+          "is_stop": false,
+          "cause_gate": 0.999549,
+          "safety_gate": 0.02796,
+          "cause_contribution_norm": 122.563545,
+          "safety_contribution_norm": 3.425582,
+          "delta_cosine_similarity": 0.529726
+        },
+        {
+          "step": 9,
+          "token": "аз",
+          "is_stop": false,
+          "cause_gate": 0.890673,
+          "safety_gate": 0.093317,
+          "cause_contribution_norm": 103.114288,
+          "safety_contribution_norm": 10.140504,
+          "delta_cosine_similarity": 0.430897
+        },
+        {
+          "step": 10,
+          "token": "ы",
+          "is_stop": false,
+          "cause_gate": 0.992646,
+          "safety_gate": 0.51745,
+          "cause_contribution_norm": 108.769165,
+          "safety_contribution_norm": 54.819584,
+          "delta_cosine_similarity": 0.53732
+        },
+        {
+          "step": 11,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.987773,
+          "safety_gate": 0.978486,
+          "cause_contribution_norm": 107.678612,
+          "safety_contribution_norm": 106.847816,
+          "delta_cosine_similarity": 0.647346
+        },
+        {
+          "step": 12,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000769,
+          "safety_gate": 0.555318,
+          "cause_contribution_norm": 0.086393,
+          "safety_contribution_norm": 62.491848,
+          "delta_cosine_similarity": 0.78958
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-07. Первый: три синих импульса после запуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — сдвиг фазы. Когда сначала рассинхронизировать.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999894,
+          "safety_gate": 0.127458,
+          "cause_contribution_norm": 105.067528,
+          "safety_contribution_norm": 13.400987,
+          "delta_cosine_similarity": 0.333524
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.996883,
+          "safety_gate": 0.47388,
+          "cause_contribution_norm": 110.175995,
+          "safety_contribution_norm": 52.426281,
+          "delta_cosine_similarity": 0.267161
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999851,
+          "safety_gate": 0.133392,
+          "cause_contribution_norm": 120.058533,
+          "safety_contribution_norm": 16.008436,
+          "delta_cosine_similarity": 0.255994
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.953187,
+          "safety_gate": 0.000957,
+          "cause_contribution_norm": 94.887146,
+          "safety_contribution_norm": 0.093029,
+          "delta_cosine_similarity": 0.024349
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.9999,
+          "safety_gate": 0.84554,
+          "cause_contribution_norm": 112.21035,
+          "safety_contribution_norm": 94.968086,
+          "delta_cosine_similarity": 0.412022
+        },
+        {
+          "step": 6,
+          "token": " с",
+          "is_stop": false,
+          "cause_gate": 0.999736,
+          "safety_gate": 2.6e-05,
+          "cause_contribution_norm": 114.819283,
+          "safety_contribution_norm": 0.003009,
+          "delta_cosine_similarity": 0.243812
+        },
+        {
+          "step": 7,
+          "token": "двиг",
+          "is_stop": false,
+          "cause_gate": 0.99998,
+          "safety_gate": 0.009037,
+          "cause_contribution_norm": 114.269493,
+          "safety_contribution_norm": 1.034944,
+          "delta_cosine_similarity": 0.415695
+        },
+        {
+          "step": 8,
+          "token": " ф",
+          "is_stop": false,
+          "cause_gate": 0.999801,
+          "safety_gate": 0.035467,
+          "cause_contribution_norm": 121.211739,
+          "safety_contribution_norm": 4.214377,
+          "delta_cosine_similarity": 0.463347
+        },
+        {
+          "step": 9,
+          "token": "аз",
+          "is_stop": false,
+          "cause_gate": 0.973006,
+          "safety_gate": 0.049573,
+          "cause_contribution_norm": 113.254158,
+          "safety_contribution_norm": 5.778805,
+          "delta_cosine_similarity": 0.457961
+        },
+        {
+          "step": 10,
+          "token": "ы",
+          "is_stop": false,
+          "cause_gate": 0.997941,
+          "safety_gate": 0.464338,
+          "cause_contribution_norm": 109.559891,
+          "safety_contribution_norm": 50.594891,
+          "delta_cosine_similarity": 0.513274
+        },
+        {
+          "step": 11,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.997988,
+          "safety_gate": 0.968004,
+          "cause_contribution_norm": 108.921837,
+          "safety_contribution_norm": 105.83976,
+          "delta_cosine_similarity": 0.639635
+        },
+        {
+          "step": 12,
+          "token": " Когда",
+          "is_stop": false,
+          "cause_gate": 0.002355,
+          "safety_gate": 0.048975,
+          "cause_contribution_norm": 0.265959,
+          "safety_contribution_norm": 5.53197,
+          "delta_cosine_similarity": 0.73586
+        },
+        {
+          "step": 13,
+          "token": " с",
+          "is_stop": false,
+          "cause_gate": 0.309707,
+          "safety_gate": 0.999225,
+          "cause_contribution_norm": 37.09185,
+          "safety_contribution_norm": 119.792946,
+          "delta_cosine_similarity": 0.509569
+        },
+        {
+          "step": 14,
+          "token": "нач",
+          "is_stop": false,
+          "cause_gate": 0.994758,
+          "safety_gate": 0.975689,
+          "cause_contribution_norm": 106.754585,
+          "safety_contribution_norm": 113.591835,
+          "delta_cosine_similarity": 0.440685
+        },
+        {
+          "step": 15,
+          "token": "ала",
+          "is_stop": false,
+          "cause_gate": 0.255264,
+          "safety_gate": 0.966561,
+          "cause_contribution_norm": 17.842119,
+          "safety_contribution_norm": 73.578011,
+          "delta_cosine_similarity": -0.055836
+        },
+        {
+          "step": 16,
+          "token": " расс",
+          "is_stop": false,
+          "cause_gate": 0.636467,
+          "safety_gate": 0.998423,
+          "cause_contribution_norm": 73.968094,
+          "safety_contribution_norm": 115.857681,
+          "delta_cosine_similarity": 0.478144
+        },
+        {
+          "step": 17,
+          "token": "ин",
+          "is_stop": false,
+          "cause_gate": 0.980934,
+          "safety_gate": 0.014054,
+          "cause_contribution_norm": 98.143486,
+          "safety_contribution_norm": 1.318624,
+          "delta_cosine_similarity": 0.339252
+        },
+        {
+          "step": 18,
+          "token": "х",
+          "is_stop": false,
+          "cause_gate": 0.999892,
+          "safety_gate": 0.739622,
+          "cause_contribution_norm": 86.144005,
+          "safety_contribution_norm": 56.651035,
+          "delta_cosine_similarity": 0.299997
+        },
+        {
+          "step": 19,
+          "token": "рон",
+          "is_stop": false,
+          "cause_gate": 0.994266,
+          "safety_gate": 0.086829,
+          "cause_contribution_norm": 124.528885,
+          "safety_contribution_norm": 6.462787,
+          "delta_cosine_similarity": 0.21262
+        },
+        {
+          "step": 20,
+          "token": "из",
+          "is_stop": false,
+          "cause_gate": 0.985878,
+          "safety_gate": 0.177681,
+          "cause_contribution_norm": 104.73333,
+          "safety_contribution_norm": 15.664833,
+          "delta_cosine_similarity": 0.290454
+        },
+        {
+          "step": 21,
+          "token": "ировать",
+          "is_stop": false,
+          "cause_gate": 0.982921,
+          "safety_gate": 0.127879,
+          "cause_contribution_norm": 76.447823,
+          "safety_contribution_norm": 11.762748,
+          "delta_cosine_similarity": 0.38179
+        },
+        {
+          "step": 22,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.268364,
+          "safety_gate": 0.9979,
+          "cause_contribution_norm": 31.099571,
+          "safety_contribution_norm": 115.712776,
+          "delta_cosine_similarity": 0.502481
+        },
+        {
+          "step": 23,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.00029,
+          "safety_gate": 0.997853,
+          "cause_contribution_norm": 0.032388,
+          "safety_contribution_norm": 111.45929,
+          "delta_cosine_similarity": 0.721353
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "question": "Нужно принять решение по Lyra-RU-08. Само устройство показало три синих импульса после запуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — сдвиг фазы.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999888,
+          "safety_gate": 0.092661,
+          "cause_contribution_norm": 109.008461,
+          "safety_contribution_norm": 10.111327,
+          "delta_cosine_similarity": 0.251779
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.999539,
+          "safety_gate": 0.653144,
+          "cause_contribution_norm": 109.951546,
+          "safety_contribution_norm": 71.924927,
+          "delta_cosine_similarity": 0.423479
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999925,
+          "safety_gate": 0.050789,
+          "cause_contribution_norm": 121.644119,
+          "safety_contribution_norm": 6.172983,
+          "delta_cosine_similarity": 0.551604
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.972142,
+          "safety_gate": 0.000158,
+          "cause_contribution_norm": 106.703484,
+          "safety_contribution_norm": 0.014245,
+          "delta_cosine_similarity": 0.110426
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999984,
+          "safety_gate": 0.932851,
+          "cause_contribution_norm": 120.53698,
+          "safety_contribution_norm": 112.634033,
+          "delta_cosine_similarity": 0.440748
+        },
+        {
+          "step": 6,
+          "token": " с",
+          "is_stop": false,
+          "cause_gate": 0.999679,
+          "safety_gate": 2.1e-05,
+          "cause_contribution_norm": 118.022255,
+          "safety_contribution_norm": 0.002437,
+          "delta_cosine_similarity": 0.269017
+        },
+        {
+          "step": 7,
+          "token": "двиг",
+          "is_stop": false,
+          "cause_gate": 0.999971,
+          "safety_gate": 0.05085,
+          "cause_contribution_norm": 119.976852,
+          "safety_contribution_norm": 6.116296,
+          "delta_cosine_similarity": 0.411468
+        },
+        {
+          "step": 8,
+          "token": " ф",
+          "is_stop": false,
+          "cause_gate": 0.999558,
+          "safety_gate": 0.025044,
+          "cause_contribution_norm": 122.415108,
+          "safety_contribution_norm": 3.067712,
+          "delta_cosine_similarity": 0.512034
+        },
+        {
+          "step": 9,
+          "token": "аз",
+          "is_stop": false,
+          "cause_gate": 0.893595,
+          "safety_gate": 0.067305,
+          "cause_contribution_norm": 104.687561,
+          "safety_contribution_norm": 7.744017,
+          "delta_cosine_similarity": 0.428074
+        },
+        {
+          "step": 10,
+          "token": "ы",
+          "is_stop": false,
+          "cause_gate": 0.989764,
+          "safety_gate": 0.53038,
+          "cause_contribution_norm": 110.131432,
+          "safety_contribution_norm": 53.738956,
+          "delta_cosine_similarity": 0.50377
+        },
+        {
+          "step": 11,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.986085,
+          "safety_gate": 0.989078,
+          "cause_contribution_norm": 108.247726,
+          "safety_contribution_norm": 108.755737,
+          "delta_cosine_similarity": 0.610981
+        },
+        {
+          "step": 12,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000635,
+          "safety_gate": 0.584156,
+          "cause_contribution_norm": 0.071944,
+          "safety_contribution_norm": 66.197701,
+          "delta_cosine_similarity": 0.788981
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-09. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — рассинхронизация времени. \n\nДопустимый шаг — отключите питание до настройки.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999938,
+          "safety_gate": 0.043091,
+          "cause_contribution_norm": 104.112083,
+          "safety_contribution_norm": 4.488138,
+          "delta_cosine_similarity": 0.288384
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.998807,
+          "safety_gate": 0.235326,
+          "cause_contribution_norm": 108.71077,
+          "safety_contribution_norm": 25.636963,
+          "delta_cosine_similarity": 0.20455
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999969,
+          "safety_gate": 0.092389,
+          "cause_contribution_norm": 121.33783,
+          "safety_contribution_norm": 11.204593,
+          "delta_cosine_similarity": 0.303933
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.953094,
+          "safety_gate": 0.000713,
+          "cause_contribution_norm": 95.200623,
+          "safety_contribution_norm": 0.069982,
+          "delta_cosine_similarity": 0.04544
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999955,
+          "safety_gate": 0.726611,
+          "cause_contribution_norm": 111.220345,
+          "safety_contribution_norm": 80.893967,
+          "delta_cosine_similarity": 0.419615
+        },
+        {
+          "step": 6,
+          "token": " расс",
+          "is_stop": false,
+          "cause_gate": 0.999888,
+          "safety_gate": 1.1e-05,
+          "cause_contribution_norm": 114.785141,
+          "safety_contribution_norm": 0.001311,
+          "delta_cosine_similarity": 0.265273
+        },
+        {
+          "step": 7,
+          "token": "ин",
+          "is_stop": false,
+          "cause_gate": 0.99934,
+          "safety_gate": 7.2e-05,
+          "cause_contribution_norm": 120.467644,
+          "safety_contribution_norm": 0.008013,
+          "delta_cosine_similarity": 0.342841
+        },
+        {
+          "step": 8,
+          "token": "х",
+          "is_stop": false,
+          "cause_gate": 0.999985,
+          "safety_gate": 0.048595,
+          "cause_contribution_norm": 95.012634,
+          "safety_contribution_norm": 3.793068,
+          "delta_cosine_similarity": 0.414414
+        },
+        {
+          "step": 9,
+          "token": "рон",
+          "is_stop": false,
+          "cause_gate": 0.998402,
+          "safety_gate": 0.017292,
+          "cause_contribution_norm": 124.056419,
+          "safety_contribution_norm": 1.446559,
+          "delta_cosine_similarity": 0.279361
+        },
+        {
+          "step": 10,
+          "token": "изация",
+          "is_stop": false,
+          "cause_gate": 0.999682,
+          "safety_gate": 0.047444,
+          "cause_contribution_norm": 126.567215,
+          "safety_contribution_norm": 4.416121,
+          "delta_cosine_similarity": 0.34456
+        },
+        {
+          "step": 11,
+          "token": " времени",
+          "is_stop": false,
+          "cause_gate": 0.999637,
+          "safety_gate": 0.026069,
+          "cause_contribution_norm": 116.47644,
+          "safety_contribution_norm": 3.036276,
+          "delta_cosine_similarity": 0.620645
+        },
+        {
+          "step": 12,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.997051,
+          "safety_gate": 0.996328,
+          "cause_contribution_norm": 115.678543,
+          "safety_contribution_norm": 115.895508,
+          "delta_cosine_similarity": 0.485896
+        },
+        {
+          "step": 13,
+          "token": " \n\n",
+          "is_stop": false,
+          "cause_gate": 0.003496,
+          "safety_gate": 0.044501,
+          "cause_contribution_norm": 0.396484,
+          "safety_contribution_norm": 5.051655,
+          "delta_cosine_similarity": 0.732726
+        },
+        {
+          "step": 14,
+          "token": "Д",
+          "is_stop": false,
+          "cause_gate": 0.723028,
+          "safety_gate": 0.087927,
+          "cause_contribution_norm": 78.179733,
+          "safety_contribution_norm": 9.527511,
+          "delta_cosine_similarity": 0.526368
+        },
+        {
+          "step": 15,
+          "token": "оп",
+          "is_stop": false,
+          "cause_gate": 0.070708,
+          "safety_gate": 0.998935,
+          "cause_contribution_norm": 7.544298,
+          "safety_contribution_norm": 116.529938,
+          "delta_cosine_similarity": 0.422391
+        },
+        {
+          "step": 16,
+          "token": "уст",
+          "is_stop": false,
+          "cause_gate": 0.007498,
+          "safety_gate": 0.993371,
+          "cause_contribution_norm": 0.733962,
+          "safety_contribution_norm": 108.705055,
+          "delta_cosine_similarity": 0.500477
+        },
+        {
+          "step": 17,
+          "token": "им",
+          "is_stop": false,
+          "cause_gate": 0.049663,
+          "safety_gate": 0.968204,
+          "cause_contribution_norm": 3.817416,
+          "safety_contribution_norm": 110.373344,
+          "delta_cosine_similarity": 0.258619
+        },
+        {
+          "step": 18,
+          "token": "ый",
+          "is_stop": false,
+          "cause_gate": 0.122859,
+          "safety_gate": 0.980732,
+          "cause_contribution_norm": 11.655338,
+          "safety_contribution_norm": 113.526543,
+          "delta_cosine_similarity": 0.427173
+        },
+        {
+          "step": 19,
+          "token": " шаг",
+          "is_stop": false,
+          "cause_gate": 0.08529,
+          "safety_gate": 0.998832,
+          "cause_contribution_norm": 8.519734,
+          "safety_contribution_norm": 115.966568,
+          "delta_cosine_similarity": 0.514263
+        },
+        {
+          "step": 20,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.972149,
+          "safety_gate": 0.995185,
+          "cause_contribution_norm": 116.656487,
+          "safety_contribution_norm": 119.426468,
+          "delta_cosine_similarity": 0.464238
+        },
+        {
+          "step": 21,
+          "token": " от",
+          "is_stop": false,
+          "cause_gate": 0.091669,
+          "safety_gate": 0.998801,
+          "cause_contribution_norm": 10.28705,
+          "safety_contribution_norm": 112.157356,
+          "delta_cosine_similarity": 0.436349
+        },
+        {
+          "step": 22,
+          "token": "ключ",
+          "is_stop": false,
+          "cause_gate": 0.069495,
+          "safety_gate": 0.930496,
+          "cause_contribution_norm": 7.238956,
+          "safety_contribution_norm": 108.936813,
+          "delta_cosine_similarity": 0.345895
+        },
+        {
+          "step": 23,
+          "token": "ите",
+          "is_stop": false,
+          "cause_gate": 0.074886,
+          "safety_gate": 0.997767,
+          "cause_contribution_norm": 7.293941,
+          "safety_contribution_norm": 111.679077,
+          "delta_cosine_similarity": 0.386653
+        },
+        {
+          "step": 24,
+          "token": " пит",
+          "is_stop": false,
+          "cause_gate": 0.005155,
+          "safety_gate": 0.999846,
+          "cause_contribution_norm": 0.572245,
+          "safety_contribution_norm": 111.127838,
+          "delta_cosine_similarity": 0.417494
+        },
+        {
+          "step": 25,
+          "token": "ание",
+          "is_stop": false,
+          "cause_gate": 0.088471,
+          "safety_gate": 0.995583,
+          "cause_contribution_norm": 8.879498,
+          "safety_contribution_norm": 86.157791,
+          "delta_cosine_similarity": 0.354562
+        },
+        {
+          "step": 26,
+          "token": " до",
+          "is_stop": false,
+          "cause_gate": 0.015677,
+          "safety_gate": 0.999984,
+          "cause_contribution_norm": 1.816875,
+          "safety_contribution_norm": 116.259621,
+          "delta_cosine_similarity": 0.548889
+        },
+        {
+          "step": 27,
+          "token": " на",
+          "is_stop": false,
+          "cause_gate": 0.01991,
+          "safety_gate": 0.999989,
+          "cause_contribution_norm": 2.107041,
+          "safety_contribution_norm": 105.777176,
+          "delta_cosine_similarity": 0.37348
+        },
+        {
+          "step": 28,
+          "token": "строй",
+          "is_stop": false,
+          "cause_gate": 0.160203,
+          "safety_gate": 0.999119,
+          "cause_contribution_norm": 13.887388,
+          "safety_contribution_norm": 99.184189,
+          "delta_cosine_similarity": 0.377121
+        },
+        {
+          "step": 29,
+          "token": "ки",
+          "is_stop": false,
+          "cause_gate": 0.409613,
+          "safety_gate": 0.994755,
+          "cause_contribution_norm": 30.549522,
+          "safety_contribution_norm": 90.360344,
+          "delta_cosine_similarity": 0.414075
+        },
+        {
+          "step": 30,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.087674,
+          "safety_gate": 0.999926,
+          "cause_contribution_norm": 10.214615,
+          "safety_contribution_norm": 116.586449,
+          "delta_cosine_similarity": 0.619049
+        },
+        {
+          "step": 31,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 9e-06,
+          "safety_gate": 0.997236,
+          "cause_contribution_norm": 0.000996,
+          "safety_contribution_norm": 106.157143,
+          "delta_cosine_similarity": 0.496408
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "question": "Нужно принять решение по Lyra-RU-10. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — рассинхронизация времени.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999913,
+          "safety_gate": 0.127287,
+          "cause_contribution_norm": 108.511589,
+          "safety_contribution_norm": 13.807672,
+          "delta_cosine_similarity": 0.246845
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.999325,
+          "safety_gate": 0.688524,
+          "cause_contribution_norm": 109.107666,
+          "safety_contribution_norm": 75.237976,
+          "delta_cosine_similarity": 0.397661
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.99997,
+          "safety_gate": 0.134726,
+          "cause_contribution_norm": 124.123619,
+          "safety_contribution_norm": 16.703833,
+          "delta_cosine_similarity": 0.533143
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.97959,
+          "safety_gate": 0.000199,
+          "cause_contribution_norm": 110.562119,
+          "safety_contribution_norm": 0.01797,
+          "delta_cosine_similarity": 0.153097
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999994,
+          "safety_gate": 0.877059,
+          "cause_contribution_norm": 120.89904,
+          "safety_contribution_norm": 106.224663,
+          "delta_cosine_similarity": 0.448401
+        },
+        {
+          "step": 6,
+          "token": " расс",
+          "is_stop": false,
+          "cause_gate": 0.999926,
+          "safety_gate": 2.1e-05,
+          "cause_contribution_norm": 117.631554,
+          "safety_contribution_norm": 0.002482,
+          "delta_cosine_similarity": 0.281295
+        },
+        {
+          "step": 7,
+          "token": "ин",
+          "is_stop": false,
+          "cause_gate": 0.999276,
+          "safety_gate": 9.4e-05,
+          "cause_contribution_norm": 120.760269,
+          "safety_contribution_norm": 0.01019,
+          "delta_cosine_similarity": 0.301057
+        },
+        {
+          "step": 8,
+          "token": "х",
+          "is_stop": false,
+          "cause_gate": 0.99998,
+          "safety_gate": 0.095557,
+          "cause_contribution_norm": 93.055267,
+          "safety_contribution_norm": 7.487467,
+          "delta_cosine_similarity": 0.371704
+        },
+        {
+          "step": 9,
+          "token": "рон",
+          "is_stop": false,
+          "cause_gate": 0.99902,
+          "safety_gate": 0.013693,
+          "cause_contribution_norm": 124.777138,
+          "safety_contribution_norm": 1.143035,
+          "delta_cosine_similarity": 0.280307
+        },
+        {
+          "step": 10,
+          "token": "изация",
+          "is_stop": false,
+          "cause_gate": 0.999484,
+          "safety_gate": 0.031667,
+          "cause_contribution_norm": 125.255585,
+          "safety_contribution_norm": 2.839484,
+          "delta_cosine_similarity": 0.313929
+        },
+        {
+          "step": 11,
+          "token": " времени",
+          "is_stop": false,
+          "cause_gate": 0.998668,
+          "safety_gate": 0.029459,
+          "cause_contribution_norm": 113.563705,
+          "safety_contribution_norm": 3.348596,
+          "delta_cosine_similarity": 0.561713
+        },
+        {
+          "step": 12,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.983947,
+          "safety_gate": 0.99819,
+          "cause_contribution_norm": 114.438896,
+          "safety_contribution_norm": 116.334229,
+          "delta_cosine_similarity": 0.671184
+        },
+        {
+          "step": 13,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000583,
+          "safety_gate": 0.661272,
+          "cause_contribution_norm": 0.066346,
+          "safety_contribution_norm": 75.340027,
+          "delta_cosine_similarity": 0.785817
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-11. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — рассинхронизация времени. Когда сначала рассинхронизируется времени.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999921,
+          "safety_gate": 0.069744,
+          "cause_contribution_norm": 103.79998,
+          "safety_contribution_norm": 7.24284,
+          "delta_cosine_similarity": 0.326883
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.998184,
+          "safety_gate": 0.314124,
+          "cause_contribution_norm": 108.621643,
+          "safety_contribution_norm": 34.214737,
+          "delta_cosine_similarity": 0.221202
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999979,
+          "safety_gate": 0.071708,
+          "cause_contribution_norm": 120.522659,
+          "safety_contribution_norm": 8.637655,
+          "delta_cosine_similarity": 0.348422
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.955904,
+          "safety_gate": 0.00088,
+          "cause_contribution_norm": 94.991631,
+          "safety_contribution_norm": 0.086718,
+          "delta_cosine_similarity": 0.036037
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999948,
+          "safety_gate": 0.782024,
+          "cause_contribution_norm": 111.582512,
+          "safety_contribution_norm": 87.379021,
+          "delta_cosine_similarity": 0.416684
+        },
+        {
+          "step": 6,
+          "token": " расс",
+          "is_stop": false,
+          "cause_gate": 0.999856,
+          "safety_gate": 1.8e-05,
+          "cause_contribution_norm": 114.568459,
+          "safety_contribution_norm": 0.002049,
+          "delta_cosine_similarity": 0.274238
+        },
+        {
+          "step": 7,
+          "token": "ин",
+          "is_stop": false,
+          "cause_gate": 0.9994,
+          "safety_gate": 8.8e-05,
+          "cause_contribution_norm": 120.024307,
+          "safety_contribution_norm": 0.010023,
+          "delta_cosine_similarity": 0.340034
+        },
+        {
+          "step": 8,
+          "token": "х",
+          "is_stop": false,
+          "cause_gate": 0.99999,
+          "safety_gate": 0.053767,
+          "cause_contribution_norm": 96.261223,
+          "safety_contribution_norm": 4.283921,
+          "delta_cosine_similarity": 0.432848
+        },
+        {
+          "step": 9,
+          "token": "рон",
+          "is_stop": false,
+          "cause_gate": 0.998522,
+          "safety_gate": 0.017488,
+          "cause_contribution_norm": 123.211243,
+          "safety_contribution_norm": 1.440084,
+          "delta_cosine_similarity": 0.277185
+        },
+        {
+          "step": 10,
+          "token": "изация",
+          "is_stop": false,
+          "cause_gate": 0.999735,
+          "safety_gate": 0.03789,
+          "cause_contribution_norm": 126.556931,
+          "safety_contribution_norm": 3.537252,
+          "delta_cosine_similarity": 0.314269
+        },
+        {
+          "step": 11,
+          "token": " времени",
+          "is_stop": false,
+          "cause_gate": 0.999775,
+          "safety_gate": 0.026339,
+          "cause_contribution_norm": 116.713318,
+          "safety_contribution_norm": 3.075866,
+          "delta_cosine_similarity": 0.593403
+        },
+        {
+          "step": 12,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.996145,
+          "safety_gate": 0.997413,
+          "cause_contribution_norm": 115.761787,
+          "safety_contribution_norm": 116.162323,
+          "delta_cosine_similarity": 0.570398
+        },
+        {
+          "step": 13,
+          "token": " Когда",
+          "is_stop": false,
+          "cause_gate": 0.002932,
+          "safety_gate": 0.051547,
+          "cause_contribution_norm": 0.333297,
+          "safety_contribution_norm": 5.866123,
+          "delta_cosine_similarity": 0.743832
+        },
+        {
+          "step": 14,
+          "token": " с",
+          "is_stop": false,
+          "cause_gate": 0.728937,
+          "safety_gate": 0.999354,
+          "cause_contribution_norm": 89.807564,
+          "safety_contribution_norm": 123.449944,
+          "delta_cosine_similarity": 0.530098
+        },
+        {
+          "step": 15,
+          "token": "нач",
+          "is_stop": false,
+          "cause_gate": 0.997771,
+          "safety_gate": 0.979069,
+          "cause_contribution_norm": 106.337837,
+          "safety_contribution_norm": 113.262558,
+          "delta_cosine_similarity": 0.47288
+        },
+        {
+          "step": 16,
+          "token": "ала",
+          "is_stop": false,
+          "cause_gate": 0.256338,
+          "safety_gate": 0.956083,
+          "cause_contribution_norm": 18.271736,
+          "safety_contribution_norm": 67.394325,
+          "delta_cosine_similarity": -0.075711
+        },
+        {
+          "step": 17,
+          "token": " расс",
+          "is_stop": false,
+          "cause_gate": 0.623217,
+          "safety_gate": 0.999294,
+          "cause_contribution_norm": 74.148361,
+          "safety_contribution_norm": 118.737503,
+          "delta_cosine_similarity": 0.506406
+        },
+        {
+          "step": 18,
+          "token": "ин",
+          "is_stop": false,
+          "cause_gate": 0.954908,
+          "safety_gate": 0.027477,
+          "cause_contribution_norm": 110.252625,
+          "safety_contribution_norm": 3.209809,
+          "delta_cosine_similarity": 0.52216
+        },
+        {
+          "step": 19,
+          "token": "х",
+          "is_stop": false,
+          "cause_gate": 0.998388,
+          "safety_gate": 0.901865,
+          "cause_contribution_norm": 106.065918,
+          "safety_contribution_norm": 87.179558,
+          "delta_cosine_similarity": 0.447798
+        },
+        {
+          "step": 20,
+          "token": "рон",
+          "is_stop": false,
+          "cause_gate": 0.921742,
+          "safety_gate": 0.171558,
+          "cause_contribution_norm": 111.527122,
+          "safety_contribution_norm": 13.567501,
+          "delta_cosine_similarity": 0.136918
+        },
+        {
+          "step": 21,
+          "token": "из",
+          "is_stop": false,
+          "cause_gate": 0.818679,
+          "safety_gate": 0.307266,
+          "cause_contribution_norm": 82.302483,
+          "safety_contribution_norm": 27.353807,
+          "delta_cosine_similarity": 0.340681
+        },
+        {
+          "step": 22,
+          "token": "ируется",
+          "is_stop": false,
+          "cause_gate": 0.921934,
+          "safety_gate": 0.217828,
+          "cause_contribution_norm": 68.140717,
+          "safety_contribution_norm": 20.078693,
+          "delta_cosine_similarity": 0.324674
+        },
+        {
+          "step": 23,
+          "token": " времени",
+          "is_stop": false,
+          "cause_gate": 0.607503,
+          "safety_gate": 0.987552,
+          "cause_contribution_norm": 71.324516,
+          "safety_contribution_norm": 116.250305,
+          "delta_cosine_similarity": 0.426455
+        },
+        {
+          "step": 24,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.489831,
+          "safety_gate": 0.999036,
+          "cause_contribution_norm": 57.926891,
+          "safety_contribution_norm": 121.103661,
+          "delta_cosine_similarity": 0.522303
+        },
+        {
+          "step": 25,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000105,
+          "safety_gate": 0.987048,
+          "cause_contribution_norm": 0.012045,
+          "safety_contribution_norm": 113.472336,
+          "delta_cosine_similarity": 0.651943
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "question": "Нужно принять решение по Lyra-RU-12. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — рассинхронизация времени.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999941,
+          "safety_gate": 0.067334,
+          "cause_contribution_norm": 108.560318,
+          "safety_contribution_norm": 7.316163,
+          "delta_cosine_similarity": 0.215382
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.999614,
+          "safety_gate": 0.557227,
+          "cause_contribution_norm": 109.006546,
+          "safety_contribution_norm": 60.872913,
+          "delta_cosine_similarity": 0.392166
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999974,
+          "safety_gate": 0.082907,
+          "cause_contribution_norm": 124.016975,
+          "safety_contribution_norm": 10.272579,
+          "delta_cosine_similarity": 0.546113
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.976476,
+          "safety_gate": 0.000198,
+          "cause_contribution_norm": 104.291992,
+          "safety_contribution_norm": 0.018331,
+          "delta_cosine_similarity": 0.118669
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999996,
+          "safety_gate": 0.874982,
+          "cause_contribution_norm": 121.732002,
+          "safety_contribution_norm": 106.684402,
+          "delta_cosine_similarity": 0.451312
+        },
+        {
+          "step": 6,
+          "token": " расс",
+          "is_stop": false,
+          "cause_gate": 0.999948,
+          "safety_gate": 1.5e-05,
+          "cause_contribution_norm": 119.416634,
+          "safety_contribution_norm": 0.001738,
+          "delta_cosine_similarity": 0.304161
+        },
+        {
+          "step": 7,
+          "token": "ин",
+          "is_stop": false,
+          "cause_gate": 0.998929,
+          "safety_gate": 4.7e-05,
+          "cause_contribution_norm": 121.847672,
+          "safety_contribution_norm": 0.005059,
+          "delta_cosine_similarity": 0.34492
+        },
+        {
+          "step": 8,
+          "token": "х",
+          "is_stop": false,
+          "cause_gate": 0.999983,
+          "safety_gate": 0.049701,
+          "cause_contribution_norm": 96.355042,
+          "safety_contribution_norm": 3.846247,
+          "delta_cosine_similarity": 0.368806
+        },
+        {
+          "step": 9,
+          "token": "рон",
+          "is_stop": false,
+          "cause_gate": 0.999009,
+          "safety_gate": 0.012472,
+          "cause_contribution_norm": 125.229042,
+          "safety_contribution_norm": 1.029184,
+          "delta_cosine_similarity": 0.273455
+        },
+        {
+          "step": 10,
+          "token": "изация",
+          "is_stop": false,
+          "cause_gate": 0.99959,
+          "safety_gate": 0.034096,
+          "cause_contribution_norm": 126.100014,
+          "safety_contribution_norm": 3.098491,
+          "delta_cosine_similarity": 0.318181
+        },
+        {
+          "step": 11,
+          "token": " времени",
+          "is_stop": false,
+          "cause_gate": 0.998399,
+          "safety_gate": 0.050229,
+          "cause_contribution_norm": 113.720619,
+          "safety_contribution_norm": 5.723707,
+          "delta_cosine_similarity": 0.546563
+        },
+        {
+          "step": 12,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.985068,
+          "safety_gate": 0.998411,
+          "cause_contribution_norm": 113.796967,
+          "safety_contribution_norm": 115.65152,
+          "delta_cosine_similarity": 0.68229
+        },
+        {
+          "step": 13,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000641,
+          "safety_gate": 0.638904,
+          "cause_contribution_norm": 0.073314,
+          "safety_contribution_norm": 73.183907,
+          "delta_cosine_similarity": 0.789293
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-13. Первый: два фиолетовых кольца перед остановкой. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — эхо охлаждения.  \nДопустимый шаг — отключите питание до настройки.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.99994,
+          "safety_gate": 0.062051,
+          "cause_contribution_norm": 105.060318,
+          "safety_contribution_norm": 6.522776,
+          "delta_cosine_similarity": 0.316354
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.998187,
+          "safety_gate": 0.26356,
+          "cause_contribution_norm": 109.983383,
+          "safety_contribution_norm": 29.077959,
+          "delta_cosine_similarity": 0.253348
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999826,
+          "safety_gate": 0.143028,
+          "cause_contribution_norm": 120.473625,
+          "safety_contribution_norm": 17.221193,
+          "delta_cosine_similarity": 0.220841
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.941209,
+          "safety_gate": 0.000863,
+          "cause_contribution_norm": 93.5914,
+          "safety_contribution_norm": 0.082238,
+          "delta_cosine_similarity": 0.077811
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999881,
+          "safety_gate": 0.79018,
+          "cause_contribution_norm": 111.618172,
+          "safety_contribution_norm": 88.255745,
+          "delta_cosine_similarity": 0.431549
+        },
+        {
+          "step": 6,
+          "token": " э",
+          "is_stop": false,
+          "cause_gate": 0.999797,
+          "safety_gate": 2.1e-05,
+          "cause_contribution_norm": 115.541138,
+          "safety_contribution_norm": 0.002435,
+          "delta_cosine_similarity": 0.249862
+        },
+        {
+          "step": 7,
+          "token": "хо",
+          "is_stop": false,
+          "cause_gate": 0.999821,
+          "safety_gate": 0.000661,
+          "cause_contribution_norm": 119.298317,
+          "safety_contribution_norm": 0.079158,
+          "delta_cosine_similarity": 0.490053
+        },
+        {
+          "step": 8,
+          "token": " о",
+          "is_stop": false,
+          "cause_gate": 0.999998,
+          "safety_gate": 0.011603,
+          "cause_contribution_norm": 123.479721,
+          "safety_contribution_norm": 1.43308,
+          "delta_cosine_similarity": 0.502296
+        },
+        {
+          "step": 9,
+          "token": "х",
+          "is_stop": false,
+          "cause_gate": 0.999992,
+          "safety_gate": 0.000195,
+          "cause_contribution_norm": 122.404839,
+          "safety_contribution_norm": 0.023469,
+          "delta_cosine_similarity": 0.459467
+        },
+        {
+          "step": 10,
+          "token": "л",
+          "is_stop": false,
+          "cause_gate": 0.94562,
+          "safety_gate": 0.000759,
+          "cause_contribution_norm": 96.78331,
+          "safety_contribution_norm": 0.065155,
+          "delta_cosine_similarity": 0.183098
+        },
+        {
+          "step": 11,
+          "token": "ажд",
+          "is_stop": false,
+          "cause_gate": 0.487142,
+          "safety_gate": 0.053479,
+          "cause_contribution_norm": 54.281471,
+          "safety_contribution_norm": 5.042552,
+          "delta_cosine_similarity": 0.110968
+        },
+        {
+          "step": 12,
+          "token": "ения",
+          "is_stop": false,
+          "cause_gate": 0.983668,
+          "safety_gate": 0.035418,
+          "cause_contribution_norm": 117.512207,
+          "safety_contribution_norm": 3.779376,
+          "delta_cosine_similarity": 0.285547
+        },
+        {
+          "step": 13,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.994298,
+          "safety_gate": 0.924157,
+          "cause_contribution_norm": 112.042206,
+          "safety_contribution_norm": 104.17897,
+          "delta_cosine_similarity": 0.578358
+        },
+        {
+          "step": 14,
+          "token": "  \n",
+          "is_stop": false,
+          "cause_gate": 0.002399,
+          "safety_gate": 0.010602,
+          "cause_contribution_norm": 0.277912,
+          "safety_contribution_norm": 1.228909,
+          "delta_cosine_similarity": 0.745918
+        },
+        {
+          "step": 15,
+          "token": "Д",
+          "is_stop": false,
+          "cause_gate": 0.529478,
+          "safety_gate": 0.139213,
+          "cause_contribution_norm": 56.182083,
+          "safety_contribution_norm": 14.796026,
+          "delta_cosine_similarity": 0.565993
+        },
+        {
+          "step": 16,
+          "token": "оп",
+          "is_stop": false,
+          "cause_gate": 0.048766,
+          "safety_gate": 0.999269,
+          "cause_contribution_norm": 5.072514,
+          "safety_contribution_norm": 115.672356,
+          "delta_cosine_similarity": 0.436581
+        },
+        {
+          "step": 17,
+          "token": "уст",
+          "is_stop": false,
+          "cause_gate": 0.006278,
+          "safety_gate": 0.990365,
+          "cause_contribution_norm": 0.588799,
+          "safety_contribution_norm": 107.045502,
+          "delta_cosine_similarity": 0.501776
+        },
+        {
+          "step": 18,
+          "token": "им",
+          "is_stop": false,
+          "cause_gate": 0.06123,
+          "safety_gate": 0.960673,
+          "cause_contribution_norm": 4.564719,
+          "safety_contribution_norm": 109.492279,
+          "delta_cosine_similarity": 0.272247
+        },
+        {
+          "step": 19,
+          "token": "ый",
+          "is_stop": false,
+          "cause_gate": 0.163731,
+          "safety_gate": 0.973671,
+          "cause_contribution_norm": 14.851242,
+          "safety_contribution_norm": 111.272247,
+          "delta_cosine_similarity": 0.436451
+        },
+        {
+          "step": 20,
+          "token": " шаг",
+          "is_stop": false,
+          "cause_gate": 0.119431,
+          "safety_gate": 0.998454,
+          "cause_contribution_norm": 12.532974,
+          "safety_contribution_norm": 117.414719,
+          "delta_cosine_similarity": 0.533827
+        },
+        {
+          "step": 21,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.916844,
+          "safety_gate": 0.998172,
+          "cause_contribution_norm": 110.008415,
+          "safety_contribution_norm": 119.723869,
+          "delta_cosine_similarity": 0.43598
+        },
+        {
+          "step": 22,
+          "token": " от",
+          "is_stop": false,
+          "cause_gate": 0.041551,
+          "safety_gate": 0.999402,
+          "cause_contribution_norm": 4.661797,
+          "safety_contribution_norm": 112.204269,
+          "delta_cosine_similarity": 0.38254
+        },
+        {
+          "step": 23,
+          "token": "ключ",
+          "is_stop": false,
+          "cause_gate": 0.015848,
+          "safety_gate": 0.988651,
+          "cause_contribution_norm": 1.712493,
+          "safety_contribution_norm": 115.662888,
+          "delta_cosine_similarity": 0.335124
+        },
+        {
+          "step": 24,
+          "token": "ите",
+          "is_stop": false,
+          "cause_gate": 0.04632,
+          "safety_gate": 0.997683,
+          "cause_contribution_norm": 4.403057,
+          "safety_contribution_norm": 111.639359,
+          "delta_cosine_similarity": 0.454356
+        },
+        {
+          "step": 25,
+          "token": " пит",
+          "is_stop": false,
+          "cause_gate": 0.001132,
+          "safety_gate": 0.999938,
+          "cause_contribution_norm": 0.127768,
+          "safety_contribution_norm": 113.04052,
+          "delta_cosine_similarity": 0.383587
+        },
+        {
+          "step": 26,
+          "token": "ание",
+          "is_stop": false,
+          "cause_gate": 0.068105,
+          "safety_gate": 0.995034,
+          "cause_contribution_norm": 6.987699,
+          "safety_contribution_norm": 87.402367,
+          "delta_cosine_similarity": 0.356572
+        },
+        {
+          "step": 27,
+          "token": " до",
+          "is_stop": false,
+          "cause_gate": 0.005689,
+          "safety_gate": 0.999992,
+          "cause_contribution_norm": 0.656048,
+          "safety_contribution_norm": 115.676239,
+          "delta_cosine_similarity": 0.558499
+        },
+        {
+          "step": 28,
+          "token": " на",
+          "is_stop": false,
+          "cause_gate": 0.029967,
+          "safety_gate": 0.999992,
+          "cause_contribution_norm": 3.289837,
+          "safety_contribution_norm": 109.772987,
+          "delta_cosine_similarity": 0.365838
+        },
+        {
+          "step": 29,
+          "token": "строй",
+          "is_stop": false,
+          "cause_gate": 0.149334,
+          "safety_gate": 0.999105,
+          "cause_contribution_norm": 13.208935,
+          "safety_contribution_norm": 102.944954,
+          "delta_cosine_similarity": 0.366192
+        },
+        {
+          "step": 30,
+          "token": "ки",
+          "is_stop": false,
+          "cause_gate": 0.420435,
+          "safety_gate": 0.99396,
+          "cause_contribution_norm": 31.827541,
+          "safety_contribution_norm": 89.090225,
+          "delta_cosine_similarity": 0.405364
+        },
+        {
+          "step": 31,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.06817,
+          "safety_gate": 0.999929,
+          "cause_contribution_norm": 7.845026,
+          "safety_contribution_norm": 115.206711,
+          "delta_cosine_similarity": 0.58455
+        },
+        {
+          "step": 32,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 2.3e-05,
+          "safety_gate": 0.801578,
+          "cause_contribution_norm": 0.002388,
+          "safety_contribution_norm": 83.868111,
+          "delta_cosine_similarity": 0.463502
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "question": "Нужно принять решение по Lyra-RU-14. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — эхо охлаждения.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999887,
+          "safety_gate": 0.168124,
+          "cause_contribution_norm": 108.432358,
+          "safety_contribution_norm": 18.211683,
+          "delta_cosine_similarity": 0.26604
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.999382,
+          "safety_gate": 0.766324,
+          "cause_contribution_norm": 110.890335,
+          "safety_contribution_norm": 85.074913,
+          "delta_cosine_similarity": 0.430307
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999892,
+          "safety_gate": 0.154738,
+          "cause_contribution_norm": 120.887589,
+          "safety_contribution_norm": 18.667942,
+          "delta_cosine_similarity": 0.502272
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.969301,
+          "safety_gate": 0.000196,
+          "cause_contribution_norm": 111.984962,
+          "safety_contribution_norm": 0.017103,
+          "delta_cosine_similarity": 0.154454
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999976,
+          "safety_gate": 0.96132,
+          "cause_contribution_norm": 119.828903,
+          "safety_contribution_norm": 115.306137,
+          "delta_cosine_similarity": 0.445392
+        },
+        {
+          "step": 6,
+          "token": " э",
+          "is_stop": false,
+          "cause_gate": 0.999617,
+          "safety_gate": 4.8e-05,
+          "cause_contribution_norm": 117.594376,
+          "safety_contribution_norm": 0.005676,
+          "delta_cosine_similarity": 0.296154
+        },
+        {
+          "step": 7,
+          "token": "хо",
+          "is_stop": false,
+          "cause_gate": 0.999555,
+          "safety_gate": 0.002086,
+          "cause_contribution_norm": 121.418259,
+          "safety_contribution_norm": 0.251047,
+          "delta_cosine_similarity": 0.463886
+        },
+        {
+          "step": 8,
+          "token": " о",
+          "is_stop": false,
+          "cause_gate": 0.999997,
+          "safety_gate": 0.041457,
+          "cause_contribution_norm": 123.491142,
+          "safety_contribution_norm": 5.111992,
+          "delta_cosine_similarity": 0.537954
+        },
+        {
+          "step": 9,
+          "token": "х",
+          "is_stop": false,
+          "cause_gate": 0.999978,
+          "safety_gate": 0.000328,
+          "cause_contribution_norm": 123.967674,
+          "safety_contribution_norm": 0.040205,
+          "delta_cosine_similarity": 0.454935
+        },
+        {
+          "step": 10,
+          "token": "л",
+          "is_stop": false,
+          "cause_gate": 0.882909,
+          "safety_gate": 0.001565,
+          "cause_contribution_norm": 86.689018,
+          "safety_contribution_norm": 0.129503,
+          "delta_cosine_similarity": 0.128216
+        },
+        {
+          "step": 11,
+          "token": "ажд",
+          "is_stop": false,
+          "cause_gate": 0.509405,
+          "safety_gate": 0.050216,
+          "cause_contribution_norm": 54.650356,
+          "safety_contribution_norm": 4.364089,
+          "delta_cosine_similarity": 0.091562
+        },
+        {
+          "step": 12,
+          "token": "ения",
+          "is_stop": false,
+          "cause_gate": 0.973512,
+          "safety_gate": 0.061556,
+          "cause_contribution_norm": 109.175476,
+          "safety_contribution_norm": 6.429284,
+          "delta_cosine_similarity": 0.276092
+        },
+        {
+          "step": 13,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.982583,
+          "safety_gate": 0.99036,
+          "cause_contribution_norm": 109.119125,
+          "safety_contribution_norm": 110.267868,
+          "delta_cosine_similarity": 0.526925
+        },
+        {
+          "step": 14,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000775,
+          "safety_gate": 0.179226,
+          "cause_contribution_norm": 0.087471,
+          "safety_contribution_norm": 20.249886,
+          "delta_cosine_similarity": 0.777002
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-15. Первый: два фиолетовых кольца перед остановкой. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — эхо охлаждения.  \nДопустимый шаг — отключите питание до настройки.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999923,
+          "safety_gate": 0.088894,
+          "cause_contribution_norm": 105.042274,
+          "safety_contribution_norm": 9.343899,
+          "delta_cosine_similarity": 0.337727
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.997764,
+          "safety_gate": 0.359295,
+          "cause_contribution_norm": 109.797386,
+          "safety_contribution_norm": 39.586613,
+          "delta_cosine_similarity": 0.251802
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999877,
+          "safety_gate": 0.176597,
+          "cause_contribution_norm": 118.488075,
+          "safety_contribution_norm": 20.891665,
+          "delta_cosine_similarity": 0.275337
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.949353,
+          "safety_gate": 0.000815,
+          "cause_contribution_norm": 94.127312,
+          "safety_contribution_norm": 0.079,
+          "delta_cosine_similarity": 0.046933
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999884,
+          "safety_gate": 0.79759,
+          "cause_contribution_norm": 111.454041,
+          "safety_contribution_norm": 89.000725,
+          "delta_cosine_similarity": 0.423763
+        },
+        {
+          "step": 6,
+          "token": " э",
+          "is_stop": false,
+          "cause_gate": 0.999781,
+          "safety_gate": 4e-05,
+          "cause_contribution_norm": 114.71212,
+          "safety_contribution_norm": 0.00462,
+          "delta_cosine_similarity": 0.249291
+        },
+        {
+          "step": 7,
+          "token": "хо",
+          "is_stop": false,
+          "cause_gate": 0.999877,
+          "safety_gate": 0.000929,
+          "cause_contribution_norm": 119.618599,
+          "safety_contribution_norm": 0.110492,
+          "delta_cosine_similarity": 0.462271
+        },
+        {
+          "step": 8,
+          "token": " о",
+          "is_stop": false,
+          "cause_gate": 0.999999,
+          "safety_gate": 0.008328,
+          "cause_contribution_norm": 122.81041,
+          "safety_contribution_norm": 1.023536,
+          "delta_cosine_similarity": 0.485142
+        },
+        {
+          "step": 9,
+          "token": "х",
+          "is_stop": false,
+          "cause_gate": 0.999991,
+          "safety_gate": 0.000366,
+          "cause_contribution_norm": 122.906197,
+          "safety_contribution_norm": 0.042426,
+          "delta_cosine_similarity": 0.439645
+        },
+        {
+          "step": 10,
+          "token": "л",
+          "is_stop": false,
+          "cause_gate": 0.970776,
+          "safety_gate": 0.000764,
+          "cause_contribution_norm": 97.806778,
+          "safety_contribution_norm": 0.066911,
+          "delta_cosine_similarity": 0.195662
+        },
+        {
+          "step": 11,
+          "token": "ажд",
+          "is_stop": false,
+          "cause_gate": 0.495051,
+          "safety_gate": 0.050017,
+          "cause_contribution_norm": 54.572208,
+          "safety_contribution_norm": 4.561825,
+          "delta_cosine_similarity": 0.08361
+        },
+        {
+          "step": 12,
+          "token": "ения",
+          "is_stop": false,
+          "cause_gate": 0.990442,
+          "safety_gate": 0.027967,
+          "cause_contribution_norm": 119.63488,
+          "safety_contribution_norm": 2.933669,
+          "delta_cosine_similarity": 0.275965
+        },
+        {
+          "step": 13,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.995881,
+          "safety_gate": 0.928996,
+          "cause_contribution_norm": 111.611839,
+          "safety_contribution_norm": 104.32608,
+          "delta_cosine_similarity": 0.539232
+        },
+        {
+          "step": 14,
+          "token": "  \n",
+          "is_stop": false,
+          "cause_gate": 0.00376,
+          "safety_gate": 0.008817,
+          "cause_contribution_norm": 0.433996,
+          "safety_contribution_norm": 1.018724,
+          "delta_cosine_similarity": 0.732771
+        },
+        {
+          "step": 15,
+          "token": "Д",
+          "is_stop": false,
+          "cause_gate": 0.633488,
+          "safety_gate": 0.090827,
+          "cause_contribution_norm": 68.298706,
+          "safety_contribution_norm": 9.810914,
+          "delta_cosine_similarity": 0.603684
+        },
+        {
+          "step": 16,
+          "token": "оп",
+          "is_stop": false,
+          "cause_gate": 0.08715,
+          "safety_gate": 0.998815,
+          "cause_contribution_norm": 10.033529,
+          "safety_contribution_norm": 115.419449,
+          "delta_cosine_similarity": 0.490134
+        },
+        {
+          "step": 17,
+          "token": "уст",
+          "is_stop": false,
+          "cause_gate": 0.006048,
+          "safety_gate": 0.991281,
+          "cause_contribution_norm": 0.575814,
+          "safety_contribution_norm": 109.222313,
+          "delta_cosine_similarity": 0.529027
+        },
+        {
+          "step": 18,
+          "token": "им",
+          "is_stop": false,
+          "cause_gate": 0.052749,
+          "safety_gate": 0.965734,
+          "cause_contribution_norm": 3.994609,
+          "safety_contribution_norm": 110.306885,
+          "delta_cosine_similarity": 0.268942
+        },
+        {
+          "step": 19,
+          "token": "ый",
+          "is_stop": false,
+          "cause_gate": 0.129194,
+          "safety_gate": 0.981167,
+          "cause_contribution_norm": 12.194795,
+          "safety_contribution_norm": 114.12323,
+          "delta_cosine_similarity": 0.4512
+        },
+        {
+          "step": 20,
+          "token": " шаг",
+          "is_stop": false,
+          "cause_gate": 0.132633,
+          "safety_gate": 0.99812,
+          "cause_contribution_norm": 13.899266,
+          "safety_contribution_norm": 117.124161,
+          "delta_cosine_similarity": 0.529114
+        },
+        {
+          "step": 21,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.918039,
+          "safety_gate": 0.997719,
+          "cause_contribution_norm": 110.40316,
+          "safety_contribution_norm": 119.92807,
+          "delta_cosine_similarity": 0.413313
+        },
+        {
+          "step": 22,
+          "token": " от",
+          "is_stop": false,
+          "cause_gate": 0.026269,
+          "safety_gate": 0.999711,
+          "cause_contribution_norm": 2.951788,
+          "safety_contribution_norm": 112.503357,
+          "delta_cosine_similarity": 0.398809
+        },
+        {
+          "step": 23,
+          "token": "ключ",
+          "is_stop": false,
+          "cause_gate": 0.020394,
+          "safety_gate": 0.979485,
+          "cause_contribution_norm": 2.257032,
+          "safety_contribution_norm": 114.42218,
+          "delta_cosine_similarity": 0.303071
+        },
+        {
+          "step": 24,
+          "token": "ите",
+          "is_stop": false,
+          "cause_gate": 0.086408,
+          "safety_gate": 0.995534,
+          "cause_contribution_norm": 8.147768,
+          "safety_contribution_norm": 110.901665,
+          "delta_cosine_similarity": 0.406406
+        },
+        {
+          "step": 25,
+          "token": " пит",
+          "is_stop": false,
+          "cause_gate": 0.001163,
+          "safety_gate": 0.999904,
+          "cause_contribution_norm": 0.131371,
+          "safety_contribution_norm": 113.179085,
+          "delta_cosine_similarity": 0.375311
+        },
+        {
+          "step": 26,
+          "token": "ание",
+          "is_stop": false,
+          "cause_gate": 0.060686,
+          "safety_gate": 0.995292,
+          "cause_contribution_norm": 6.215424,
+          "safety_contribution_norm": 87.995743,
+          "delta_cosine_similarity": 0.349094
+        },
+        {
+          "step": 27,
+          "token": " до",
+          "is_stop": false,
+          "cause_gate": 0.006131,
+          "safety_gate": 0.999987,
+          "cause_contribution_norm": 0.706366,
+          "safety_contribution_norm": 115.579308,
+          "delta_cosine_similarity": 0.556742
+        },
+        {
+          "step": 28,
+          "token": " на",
+          "is_stop": false,
+          "cause_gate": 0.041435,
+          "safety_gate": 0.999987,
+          "cause_contribution_norm": 4.502595,
+          "safety_contribution_norm": 108.684196,
+          "delta_cosine_similarity": 0.358373
+        },
+        {
+          "step": 29,
+          "token": "строй",
+          "is_stop": false,
+          "cause_gate": 0.185732,
+          "safety_gate": 0.999279,
+          "cause_contribution_norm": 16.8811,
+          "safety_contribution_norm": 103.341881,
+          "delta_cosine_similarity": 0.349636
+        },
+        {
+          "step": 30,
+          "token": "ки",
+          "is_stop": false,
+          "cause_gate": 0.38693,
+          "safety_gate": 0.994355,
+          "cause_contribution_norm": 28.816521,
+          "safety_contribution_norm": 89.357086,
+          "delta_cosine_similarity": 0.381093
+        },
+        {
+          "step": 31,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.061298,
+          "safety_gate": 0.999932,
+          "cause_contribution_norm": 7.087132,
+          "safety_contribution_norm": 115.800858,
+          "delta_cosine_similarity": 0.584592
+        },
+        {
+          "step": 32,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 2.1e-05,
+          "safety_gate": 0.819818,
+          "cause_contribution_norm": 0.002146,
+          "safety_contribution_norm": 85.645729,
+          "delta_cosine_similarity": 0.427165
+        }
+      ]
+    },
+    {
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "question": "Нужно принять решение по Lyra-RU-16. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — эхо охлаждения.",
+      "answer_matches_published_gate5b1": true,
+      "finished_naturally": true,
+      "tokens": [
+        {
+          "step": 1,
+          "token": "П",
+          "is_stop": false,
+          "cause_gate": 0.999928,
+          "safety_gate": 0.082275,
+          "cause_contribution_norm": 108.932793,
+          "safety_contribution_norm": 8.962786,
+          "delta_cosine_similarity": 0.250424
+        },
+        {
+          "step": 2,
+          "token": "ри",
+          "is_stop": false,
+          "cause_gate": 0.999619,
+          "safety_gate": 0.695226,
+          "cause_contribution_norm": 111.387184,
+          "safety_contribution_norm": 77.544281,
+          "delta_cosine_similarity": 0.424097
+        },
+        {
+          "step": 3,
+          "token": "ч",
+          "is_stop": false,
+          "cause_gate": 0.999911,
+          "safety_gate": 0.094131,
+          "cause_contribution_norm": 121.549004,
+          "safety_contribution_norm": 11.416923,
+          "delta_cosine_similarity": 0.526612
+        },
+        {
+          "step": 4,
+          "token": "ина",
+          "is_stop": false,
+          "cause_gate": 0.974549,
+          "safety_gate": 0.000188,
+          "cause_contribution_norm": 108.254234,
+          "safety_contribution_norm": 0.017528,
+          "delta_cosine_similarity": 0.115121
+        },
+        {
+          "step": 5,
+          "token": " —",
+          "is_stop": false,
+          "cause_gate": 0.999988,
+          "safety_gate": 0.928862,
+          "cause_contribution_norm": 120.320732,
+          "safety_contribution_norm": 111.949402,
+          "delta_cosine_similarity": 0.453023
+        },
+        {
+          "step": 6,
+          "token": " э",
+          "is_stop": false,
+          "cause_gate": 0.999791,
+          "safety_gate": 3.2e-05,
+          "cause_contribution_norm": 118.906258,
+          "safety_contribution_norm": 0.003778,
+          "delta_cosine_similarity": 0.272805
+        },
+        {
+          "step": 7,
+          "token": "хо",
+          "is_stop": false,
+          "cause_gate": 0.999631,
+          "safety_gate": 0.001165,
+          "cause_contribution_norm": 121.548698,
+          "safety_contribution_norm": 0.136356,
+          "delta_cosine_similarity": 0.448627
+        },
+        {
+          "step": 8,
+          "token": " о",
+          "is_stop": false,
+          "cause_gate": 0.999998,
+          "safety_gate": 0.017971,
+          "cause_contribution_norm": 123.396156,
+          "safety_contribution_norm": 2.216211,
+          "delta_cosine_similarity": 0.510976
+        },
+        {
+          "step": 9,
+          "token": "х",
+          "is_stop": false,
+          "cause_gate": 0.999985,
+          "safety_gate": 0.000131,
+          "cause_contribution_norm": 123.679642,
+          "safety_contribution_norm": 0.015456,
+          "delta_cosine_similarity": 0.40143
+        },
+        {
+          "step": 10,
+          "token": "л",
+          "is_stop": false,
+          "cause_gate": 0.901685,
+          "safety_gate": 0.001189,
+          "cause_contribution_norm": 90.840118,
+          "safety_contribution_norm": 0.09656,
+          "delta_cosine_similarity": 0.120269
+        },
+        {
+          "step": 11,
+          "token": "ажд",
+          "is_stop": false,
+          "cause_gate": 0.38955,
+          "safety_gate": 0.039817,
+          "cause_contribution_norm": 43.912952,
+          "safety_contribution_norm": 3.490803,
+          "delta_cosine_similarity": 0.102993
+        },
+        {
+          "step": 12,
+          "token": "ения",
+          "is_stop": false,
+          "cause_gate": 0.974922,
+          "safety_gate": 0.06552,
+          "cause_contribution_norm": 114.63002,
+          "safety_contribution_norm": 6.830938,
+          "delta_cosine_similarity": 0.269668
+        },
+        {
+          "step": 13,
+          "token": ".",
+          "is_stop": false,
+          "cause_gate": 0.975475,
+          "safety_gate": 0.991064,
+          "cause_contribution_norm": 109.139786,
+          "safety_contribution_norm": 111.351425,
+          "delta_cosine_similarity": 0.548891
+        },
+        {
+          "step": 14,
+          "token": "[STOP]",
+          "is_stop": true,
+          "cause_gate": 0.000984,
+          "safety_gate": 0.166659,
+          "cause_contribution_norm": 0.111034,
+          "safety_contribution_norm": 18.83997,
+          "delta_cosine_similarity": 0.764352
+        }
+      ]
+    }
+  ]
+}

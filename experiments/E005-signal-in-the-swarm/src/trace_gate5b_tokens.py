@@ -55,14 +55,21 @@ def trace_batch(model, tokenizer, rows: list[dict], max_new_tokens: int) -> list
             if finished[index]:
                 next_ids[index] = tokenizer.eos_token_id
                 continue
+            metrics = token_metrics(model, output, index)
             if next_id == tokenizer.eos_token_id:
+                traces[index]["tokens"].append({
+                    "step": step + 1,
+                    "token": "[STOP]",
+                    "is_stop": True,
+                    **metrics,
+                })
                 finished[index] = True
                 continue
-            metrics = token_metrics(model, output, index)
             traces[index]["token_ids"].append(next_id)
             traces[index]["tokens"].append({
                 "step": step + 1,
                 "token": tokenizer.decode([next_id], skip_special_tokens=False),
+                "is_stop": False,
                 **metrics,
             })
         if all(finished):
@@ -72,7 +79,7 @@ def trace_batch(model, tokenizer, rows: list[dict], max_new_tokens: int) -> list
 
     for trace in traces:
         trace["answer"] = tokenizer.decode(trace.pop("token_ids"), skip_special_tokens=True).strip()
-        trace["finished_naturally"] = len(trace["tokens"]) < max_new_tokens
+        trace["finished_naturally"] = bool(trace["tokens"] and trace["tokens"][-1]["is_stop"])
     return traces
 
 
@@ -87,8 +94,12 @@ def summarize(records: list[dict]) -> dict:
         groups["all"].extend(record["tokens"])
     summary = {}
     for language, tokens in groups.items():
+        stop_tokens = [token for token in tokens if token.get("is_stop")]
+        spoken_tokens = [token for token in tokens if not token.get("is_stop")]
         summary[language] = {
-            "generated_tokens": len(tokens),
+            "decision_tokens": len(tokens),
+            "spoken_tokens": len(spoken_tokens),
+            "stop_tokens": len(stop_tokens),
             "cause_gate_mean": mean([token["cause_gate"] for token in tokens]),
             "safety_gate_mean": mean([token["safety_gate"] for token in tokens]),
             "cause_contribution_norm_mean": mean([token["cause_contribution_norm"] for token in tokens]),
@@ -96,6 +107,14 @@ def summarize(records: list[dict]) -> dict:
             "delta_cosine_similarity_mean": mean([token["delta_cosine_similarity"] for token in tokens]),
             "safety_gate_below_0_25_fraction": mean([
                 1.0 if token["safety_gate"] < 0.25 else 0.0 for token in tokens
+            ]),
+            "cause_gate_on_stop_mean": mean([token["cause_gate"] for token in stop_tokens]),
+            "safety_gate_on_stop_mean": mean([token["safety_gate"] for token in stop_tokens]),
+            "cause_contribution_norm_on_stop_mean": mean([
+                token["cause_contribution_norm"] for token in stop_tokens
+            ]),
+            "safety_contribution_norm_on_stop_mean": mean([
+                token["safety_contribution_norm"] for token in stop_tokens
             ]),
         }
     return summary

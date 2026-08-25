@@ -4649,3 +4649,130 @@ blockquote {
     grid-template-columns: 1fr;
   }
 }
+
+.e005-gate5b3-page {
+  width: calc(100% - clamp(1rem, 4vw, 4rem));
+  max-width: none;
+}
+
+.e005-xray-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 2rem 0;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.e005-xray-metrics article {
+  padding: clamp(1rem, 2.5vw, 2rem);
+  background: var(--paper);
+}
+
+.e005-xray-metrics span,
+.e005-xray-token small {
+  font: 700 0.72rem/1.3 var(--mono);
+  letter-spacing: 0.04em;
+}
+
+.e005-xray-metrics strong {
+  display: block;
+  margin: 0.8rem 0;
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 0.9;
+}
+
+.e005-xray-how {
+  display: grid;
+  grid-template-columns: auto auto minmax(16rem, 1fr);
+  gap: 1rem 2rem;
+  align-items: center;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.e005-xray-how div {
+  display: grid;
+  grid-template-columns: 0.8rem auto;
+  gap: 0.15rem 0.6rem;
+  align-items: center;
+}
+
+.e005-xray-how span {
+  grid-column: 2;
+  color: var(--muted);
+}
+
+.e005-xray-how i {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+}
+
+.e005-xray-how p { margin: 0; }
+.e005-xray-how .is-cause,
+.e005-xray-token span.is-cause { background: #dc735f; }
+.e005-xray-how .is-safety,
+.e005-xray-token span.is-safety { background: #6c9fd2; }
+
+.e005-xray-viewer {
+  margin: 3rem 0;
+}
+
+.e005-xray-lane {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem 0 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+}
+
+.e005-xray-token {
+  flex: 0 0 8.5rem;
+  min-height: 9rem;
+  padding: 0.8rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  scroll-snap-align: start;
+}
+
+.e005-xray-token.is-stop {
+  border: 3px solid var(--ink);
+  background: color-mix(in srgb, var(--ink) 7%, var(--paper));
+}
+
+.e005-xray-token > strong {
+  display: block;
+  min-height: 2.8rem;
+  overflow-wrap: anywhere;
+  font-size: 1.1rem;
+}
+
+.e005-xray-token > div {
+  height: 0.75rem;
+  margin: 0.55rem 0;
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.e005-xray-token > div span {
+  display: block;
+  height: 100%;
+}
+
+.e005-xray-token small {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--muted);
+}
+
+.e005-xray-stop-note {
+  color: var(--muted);
+}
+
+@media (max-width: 760px) {
+  .e005-xray-metrics,
+  .e005-xray-how {
+    grid-template-columns: 1fr;
+  }
+}
