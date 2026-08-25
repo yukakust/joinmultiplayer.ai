@@ -406,3 +406,17 @@ Judge A2 is now locked as Qwen2.5 14B Instruct in BF16 before calibration. It is
 a different generation and a 48-layer architecture, replacing rejected Qwen3
 8B. The shared Qwen lineage is still a limitation. All scoring and stop rules are
 unchanged.
+
+Judge A2 failed the frozen evidence format before completing calibration and saw
+zero E005 answers. It was rejected without prompt tuning. Replacement Judge A3
+was locked first as Qwen2.5 32B Instruct AWQ, revision
+`5c7cb76a268fc6cfbb9c4777eb24ba6e27f9ee6c`, with 64 layers. It passed 12/12
+English and Russian controls and then completed 192/192 blind judgments.
+
+The two judges agree on the main shape. Judge A3 scores clear text capsules
+24/32 and the neural hidden-state pair 2/32; Judge B scores them 26/32 and 3/32.
+Both report that the neural pair preserves the cause on 32/32 but almost always
+loses the safe action. They disagree on 21 overall labels and 42 component
+labels. The result remains provisional while the owner reviews all 21 overall
+disagreements plus 24 deterministic agreement samples. Both judges share Qwen
+lineage, so agreement is redundancy rather than independent evidence.

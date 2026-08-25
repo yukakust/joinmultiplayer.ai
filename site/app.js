@@ -2832,6 +2832,10 @@ function e005Gate5B2Shell() {
   return `<section class="flow-shell e005-gate5b2-page"><div class="flow-step">E005 · GATE 5B.2 · ${localized({ en: "LOCKED BEFORE JUDGING", ru: "ЗАМОРОЖЕНО ДО ПРОВЕРКИ" })}</div><h1>${localized({ en: "Two blind judges. Then you.", ru: "Два слепых судьи. Потом вы." })}</h1><p class="contribution-intro">${localized({ en: "They read meaning, quote their evidence, and never see which system wrote the answer.", ru: "Они читают смысл, цитируют доказательство и не видят, какая система написала ответ." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate5B2AuditShell() {
+  return `<section class="flow-shell e005-gate5b2-audit-page"><div class="flow-step">E005 · GATE 5B.2 · ${localized({ en: "YOUR CHECK", ru: "ВАША ПРОВЕРКА" })}</div><h1>${localized({ en: "Read one answer. Make one choice.", ru: "Прочитайте один ответ. Сделайте один выбор." })}</h1><p class="contribution-intro">${localized({ en: "The system name stays hidden until you decide. Your choices remain in this browser.", ru: "Название системы скрыто, пока вы не решите. Ваши решения остаются в этом браузере." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3679,7 +3683,7 @@ async function loadE005Gate5B2() {
   const target = document.querySelector(".e005-gate5b2-page");
   if (!target) return;
   try {
-    const [response, correctedResponse, rubricV3Response, rubricV4Response, rubricV5Response, rubricV6Response, qwen25RejectionResponse, qwen32CalibrationResponse, preflightResponse, calibrationResponse, calibrationV2Response, calibrationV3Response, phiLoadResponse, qwen8ResultResponse, qwen14ResultResponse, qwen14FullResponse] = await Promise.all([
+    const [response, correctedResponse, rubricV3Response, rubricV4Response, rubricV5Response, rubricV6Response, qwen25RejectionResponse, qwen32CalibrationResponse, twoJudgeResponse, auditResponse, preflightResponse, calibrationResponse, calibrationV2Response, calibrationV3Response, phiLoadResponse, qwen8ResultResponse, qwen14ResultResponse, qwen14FullResponse] = await Promise.all([
       fetch("/experiments/E005/gate-5b2-judge-protocol-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E005/gate-5b2-judge-protocol-v0.2.json", { cache: "no-store" }),
       fetch("/experiments/E005/gate-5b2-judge-protocol-v0.3.json", { cache: "no-store" }),
@@ -3688,6 +3692,8 @@ async function loadE005Gate5B2() {
       fetch("/experiments/E005/gate-5b2-judge-protocol-v0.6.json", { cache: "no-store" }),
       fetch("/experiments/E005/gate-5b2-qwen25-14b-rejection-v0.5.json", { cache: "no-store" }),
       fetch("/experiments/E005/gate-5b2-qwen25-32b-calibration-v0.6.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5b2-two-judge-summary-v0.6.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5b2-owner-audit-v0.6.json", { cache: "no-store" }),
       fetch("/experiments/E005/gate-5b2-vast-preflight-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E005/gate-5b2-calibration-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E005/gate-5b2-calibration-result-v0.2.json", { cache: "no-store" }),
@@ -3697,7 +3703,7 @@ async function loadE005Gate5B2() {
       fetch("/experiments/E005/gate-5b2-qwen14b-result-v0.4.2.json", { cache: "no-store" }),
       fetch("/experiments/E005/gate-5b2-qwen14b-full-summary-v0.4.2.json", { cache: "no-store" }),
     ]);
-    if (!response.ok || !correctedResponse.ok || !rubricV3Response.ok || !rubricV4Response.ok || !rubricV5Response.ok || !rubricV6Response.ok || !qwen25RejectionResponse.ok || !qwen32CalibrationResponse.ok || !preflightResponse.ok || !calibrationResponse.ok || !calibrationV2Response.ok || !calibrationV3Response.ok || !phiLoadResponse.ok || !qwen8ResultResponse.ok || !qwen14ResultResponse.ok || !qwen14FullResponse.ok) throw new Error("E005 Gate 5B.2 checkpoint unavailable");
+    if (!response.ok || !correctedResponse.ok || !rubricV3Response.ok || !rubricV4Response.ok || !rubricV5Response.ok || !rubricV6Response.ok || !qwen25RejectionResponse.ok || !qwen32CalibrationResponse.ok || !twoJudgeResponse.ok || !auditResponse.ok || !preflightResponse.ok || !calibrationResponse.ok || !calibrationV2Response.ok || !calibrationV3Response.ok || !phiLoadResponse.ok || !qwen8ResultResponse.ok || !qwen14ResultResponse.ok || !qwen14FullResponse.ok) throw new Error("E005 Gate 5B.2 checkpoint unavailable");
     const data = await response.json();
     const corrected = await correctedResponse.json();
     const rubricV3 = await rubricV3Response.json();
@@ -3706,6 +3712,8 @@ async function loadE005Gate5B2() {
     const rubricV6 = await rubricV6Response.json();
     const qwen25Rejection = await qwen25RejectionResponse.json();
     const qwen32Calibration = await qwen32CalibrationResponse.json();
+    const twoJudge = await twoJudgeResponse.json();
+    const audit = await auditResponse.json();
     const preflight = await preflightResponse.json();
     const calibration = await calibrationResponse.json();
     const calibrationV2 = await calibrationV2Response.json();
@@ -3719,14 +3727,20 @@ async function loadE005Gate5B2() {
     const judges = `<article><span>${escapeHTML(rubricV6.replacement.public_alias)}</span><h2>32B · 64 ${localized({ en: "layers", ru: "слоя" })}</h2><p>${localized({ en: "Passed 12/12; blind review may now begin.", ru: "Прошёл 12/12; теперь можно начинать слепую проверку." })}</p><small>AWQ INT4 · temperature 0 · ${escapeHTML(rubricV6.replacement.revision.slice(0, 8))}</small></article><article><span>${escapeHTML(rubricV6.existing_judge.public_alias)}</span><h2>14B · 40 ${localized({ en: "layers", ru: "слоёв" })}</h2><p>${localized({ en: "Passed 12/12 and completed 192 blind reviews.", ru: "Прошёл 12/12 и завершил 192 слепые проверки." })}</p><small>BF16 · temperature 0</small></article>`;
     const conditionNames = { shared_qwen_alone: localized({ en: "Clean Qwen", ru: "Чистая Qwen" }), cause_track_alone: localized({ en: "CAUSE-I only", ru: "Только умение причины" }), safety_track_alone: localized({ en: "SAFETY-I only", ru: "Только безопасное действие" }), wrong_same_role_pair: localized({ en: "Wrong-skill pair", ru: "Неподходящая пара" }), semantic_text_capsules: localized({ en: "Clear text capsules", ru: "Понятные текстовые капсулы" }), correct_neural_pair: localized({ en: "Neural hidden-state pair", ru: "Нейронная пара скрытых состояний" }) };
     const fullCounts = qwen14Full.conditions.map(row => `<article><span>${conditionNames[row.id]}</span><strong>${row.complete} / ${row.total}</strong><small>${localized({ en: `${row.cause_correct} cause · ${row.safe_action_correct} safe`, ru: `${row.cause_correct} причина · ${row.safe_action_correct} действие` })}</small></article>`).join("");
+    const pairedCounts = twoJudge.judge_a3.conditions.map(row => {
+      const other = twoJudge.judge_b.conditions.find(candidate => candidate.id === row.id);
+      return `<article><span>${conditionNames[row.id]}</span><strong>${row.complete} / ${other.complete}</strong><small>${localized({ en: "32B / 14B fully correct", ru: "полностью верно: 32B / 14B" })}</small></article>`;
+    }).join("");
+    const twoJudgeMarkup = `<section class="e005-gate4-result-verdict"><span>${localized({ en: "TWO BLIND JUDGES · 192 + 192 COMPLETE", ru: "ДВА СЛЕПЫХ СУДЬИ · 192 + 192 ГОТОВО" })}</span><h2>${localized({ en: "Text capsules: 24/32 and 26/32. Neural pair: 2/32 and 3/32.", ru: "Текстовые капсулы: 24/32 и 26/32. Нейронная пара: 2/32 и 3/32." })}</h2><p>${pick(twoJudge.plain_result)}</p><small>${pick(twoJudge.claim_boundary)}</small></section><div class="e005-metrics">${pairedCounts}</div><section class="e005-gate4-lessons-status"><strong>${localized({ en: `${twoJudge.agreement.overall_disagreements} DISAGREEMENTS NEED YOU`, ru: `${twoJudge.agreement.overall_disagreements} РАЗНОГЛАСИЕ НУЖДАЕТСЯ В ВАС` })}</strong><p>${localized({ en: `${audit.always_review_count} disagreements plus ${audit.agreement_sample_count} control agreements: ${audit.total} simple checks.`, ru: `${audit.always_review_count} разногласие и ${audit.agreement_sample_count} контрольных совпадения: всего ${audit.total} простых проверок.` })}</p><div class="actions"><a class="button" href="/experiment/e005/gate-5b/owner-audit/">${localized({ en: "START MY CHECK →", ru: "НАЧАТЬ МОЮ ПРОВЕРКУ →" })}</a></div></section>`;
     const calibrationMarkup = `<section class="e005-gate4-result-verdict"><span>${localized({ en: "JUDGE B · 192/192 COMPLETE", ru: "СУДЬЯ B · 192/192 ГОТОВО" })}</span><h2>${localized({ en: "Text capsules 26/32 · neural pair 3/32", ru: "Текстовые капсулы 26/32 · нейронная пара 3/32" })}</h2><p>${pick(qwen14Full.plain_result)}</p><small>${pick(qwen14Full.claim_boundary)}</small></section><div class="e005-metrics">${fullCounts}</div><section class="e005-gate4-lessons-status"><strong>${localized({ en: "REPLACEMENT JUDGE A3 LOCKED", ru: "НОВЫЙ СУДЬЯ A3 ЗАМОРОЖЕН" })}</strong><p>${localized({ en: "Qwen2.5 32B · 64 layers. It must pass 12/12 before seeing E005.", ru: "Qwen2.5 32B · 64 слоя. Он должен пройти 12/12 до доступа к E005." })}</p><small>${pick(rubricV6.limitation)}</small></section><section class="e005-gate4-result-verdict is-failed"><span>${localized({ en: "JUDGE A2 · 14B REJECTED", ru: "СУДЬЯ A2 · 14B ОТКЛОНЁН" })}</span><h2>${localized({ en: "FORMAT FAILURE", ru: "ОШИБКА ФОРМАТА" })}</h2><p>${localized({ en: qwen25Rejection.failure, ru: qwen25Rejection.failure_ru })}</p></section><section class="e005-gate4-result-verdict is-failed"><span>${localized({ en: "OLD JUDGE A · 8B REJECTED", ru: "СТАРЫЙ СУДЬЯ A · 8B ОТКЛОНЁН" })}</span><h2>${qwen8Result.score} / ${qwen8Result.required}</h2><p>${pick(qwen8Result.plain_result)}</p></section><details class="e005-all-controls"><summary>${localized({ en: "CALIBRATION HISTORY", ru: "ИСТОРИЯ КАЛИБРОВОК" })}</summary><p>Judge B · ${qwen14Result.score}/${qwen14Result.required}</p><p>Judge A2 · ${escapeHTML(qwen25Rejection.status)}</p><p>Judge A · ${qwen8Result.score}/${qwen8Result.required}</p><p>J1 v0.3 · ${calibrationV3.score}/${calibrationV3.required}</p><p>J1 v0.2 · ${calibrationV2.score}/${calibrationV2.required}</p><p>J1 v0.1 · ${calibration.score}/${calibration.required}</p><p>Phi · ${escapeHTML(phiLoad.status)}</p></details>`;
     target.querySelector(".experiment-loading").outerHTML = `${calibrationMarkup}<section class="e005-gate4-lessons-status"><strong>${localized({ en: "NO JUDGE HAS SEEN AN ANSWER", ru: "НИ ОДИН СУДЬЯ ЕЩЁ НЕ ВИДЕЛ ОТВЕТЫ" })}</strong><p>${pick(data.hypothesis)}</p></section><div class="e005-metrics"><article><span>GPU</span><strong>2 × 3090</strong></article><article><span>${localized({ en: "CUDA TEST", ru: "ТЕСТ CUDA" })}</span><strong>${localized({ en: "PASSED", ru: "ПРОЙДЕН" })}</strong></article><article><span>${localized({ en: "FREE DISK", ru: "СВОБОДНЫЙ ДИСК" })}</span><strong>${preflight.machine.disk_free_after_environment_gib} GiB</strong></article></div><p class="control-warning">${pick(preflight.plain_language)}</p><section class="e005-task-section"><div class="flow-step">${localized({ en: "WHO JUDGES", ru: "КТО СУДИТ" })}</div><div class="e005-gate4-training-cards">${judges}</div></section><section class="e005-task-section"><div class="flow-step">${localized({ en: "WHAT EACH JUDGE CHECKS", ru: "ЧТО ПРОВЕРЯЕТ КАЖДЫЙ СУДЬЯ" })}</div><div class="e005-gate4-training-cards">${rubric}</div></section><section class="e005-gate4-result-verdict"><span>${localized({ en: "PROOF, NOT A VIBE", ru: "ДОКАЗАТЕЛЬСТВО, А НЕ ВПЕЧАТЛЕНИЕ" })}</span><h2>${localized({ en: "Every yes needs an exact quote from the answer.", ru: "Каждое «да» требует точную цитату из ответа." })}</h2><p>${localized({ en: "A made-up quote is rejected automatically. A negation or contradiction cannot pass just because it contains the expected words.", ru: "Выдуманная цитата автоматически отклоняется. Отрицание или противоречие не пройдёт только потому, что содержит нужные слова." })}</p></section><section class="e005-gate4-result-verdict"><span>${localized({ en: "YOUR CHECK", ru: "ВАША ПРОВЕРКА" })}</span><h2>${localized({ en: "All disagreements + 24 agreements", ru: "Все разногласия + 24 совпадения" })}</h2><p>${localized({ en: "If you correct more than two sampled agreements, every remaining answer must be reviewed by a human.", ru: "Если вы исправите больше двух совпавших оценок, человеку придётся проверить все оставшиеся ответы." })}</p></section><p class="control-warning">${pick(data.claim_boundary)}</p><div class="actions"><a class="button secondary" href="/experiment/e005/gate-5b/results/">${localized({ en: "BACK TO FULL ANSWERS", ru: "НАЗАД КО ВСЕМ ОТВЕТАМ" })}</a><a class="quiet-link" href="/experiments/E005/gate-5b2-judge-protocol-v0.1.json">FROZEN PROTOCOL JSON ↗</a><a class="quiet-link" href="/experiments/E005/gate-5b2-vast-preflight-v0.1.json">MACHINE PREFLIGHT JSON ↗</a></div>`;
-    const replacementStatus = target.querySelectorAll(".e005-gate4-lessons-status")[0];
-    replacementStatus.querySelector("strong").textContent = localized({ en: "JUDGE A3 PASSED 12/12", ru: "СУДЬЯ A3 ПРОШЁЛ 12/12" });
-    replacementStatus.querySelector("p").textContent = localized({ en: "Qwen2.5 32B passed every frozen English and Russian control. It still saw zero E005 answers.", ru: "Qwen2.5 32B верно разобрал все английские и русские контрольные примеры. Ответов E005 он ещё не видел." });
-    const accessStatus = target.querySelectorAll(".e005-gate4-lessons-status")[1];
-    accessStatus.querySelector("strong").textContent = localized({ en: "ONLY THE PASSED JUDGE SAW E005", ru: "E005 ВИДЕЛ ТОЛЬКО ПРОШЕДШИЙ СУДЬЯ" });
-    accessStatus.querySelector("p").textContent = localized({ en: "Judge B saw all 192 answers only after passing 12/12. Rejected judges saw none.", ru: "Судья B увидел все 192 ответа только после результата 12/12. Отклонённые судьи не видели ни одного." });
+    target.insertAdjacentHTML("afterbegin", twoJudgeMarkup);
+    const replacementStatus = target.querySelectorAll(".e005-gate4-lessons-status")[1];
+    replacementStatus.querySelector("strong").textContent = localized({ en: "JUDGE A3 · 12/12 THEN 192/192", ru: "СУДЬЯ A3 · 12/12, ЗАТЕМ 192/192" });
+    replacementStatus.querySelector("p").textContent = localized({ en: "Qwen2.5 32B passed every frozen control before completing its blind review.", ru: "Qwen2.5 32B прошёл все замороженные контрольные примеры до начала слепой проверки." });
+    const accessStatus = target.querySelectorAll(".e005-gate4-lessons-status")[2];
+    accessStatus.querySelector("strong").textContent = localized({ en: "ONLY TWO PASSED JUDGES SAW E005", ru: "E005 ВИДЕЛИ ТОЛЬКО ДВА ПРОШЕДШИХ СУДЬИ" });
+    accessStatus.querySelector("p").textContent = localized({ en: "Both completed 192 blind reviews after passing 12/12. Rejected judges saw none.", ru: "Оба завершили 192 слепые проверки после результата 12/12. Отклонённые судьи не видели ни одного ответа." });
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-j1-calibration-v0.1.json">ALL 12 RAW CALIBRATION ANSWERS ↗</a>`);
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-judge-protocol-v0.2.json">CORRECTED FROZEN RUBRIC v0.2 ↗</a>`);
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-j1-calibration-v0.2.json">ALL 12 RAW v0.2 ANSWERS ↗</a>`);
@@ -3745,6 +3759,61 @@ async function loadE005Gate5B2() {
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-qwen25-14b-rejection-v0.5.json">14B REJECTION ↗</a>`);
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-judge-protocol-v0.6.json">FROZEN 32B REPLACEMENT v0.6 ↗</a>`);
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-qwen25-32b-calibration-v0.6.json">ALL 12 JUDGE A3 DECISIONS ↗</a>`);
+    target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-qwen25-32b-full-v0.6.json">ALL 192 JUDGE A3 DECISIONS ↗</a>`);
+    target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-two-judge-summary-v0.6.json">TWO-JUDGE SUMMARY ↗</a>`);
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate5B2Audit() {
+  const target = document.querySelector(".e005-gate5b2-audit-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E005/gate-5b2-owner-audit-v0.6.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E005 owner audit unavailable");
+    const data = await response.json();
+    const storageKey = "e005-gate5b2-owner-audit-v06";
+    const decisions = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    let index = Math.max(0, data.items.findIndex(item => !decisions[item.audit_id]));
+    if (index < 0) index = 0;
+    const label = value => ({
+      correct: localized({ en: "fully correct", ru: "полностью верно" }),
+      partial: localized({ en: "partly correct", ru: "частично верно" }),
+      incorrect: localized({ en: "incorrect", ru: "неверно" }),
+      absent: localized({ en: "absent", ru: "нет в ответе" }),
+      unclear: localized({ en: "unclear", ru: "неясно" }),
+    }[value] || value);
+    const judgeCard = (name, judgment) => `<article class="is-${judgment.overall === "correct" ? "correct" : judgment.overall === "partial" ? "partial" : "wrong"}"><header><strong>${name}</strong><span>${label(judgment.overall)}</span></header><p><b>${localized({ en: "Cause", ru: "Причина" })}:</b> ${label(judgment.cause)}${judgment.cause_quote ? `<br>“${escapeHTML(judgment.cause_quote)}”` : ""}</p><p><b>${localized({ en: "Safe action", ru: "Безопасное действие" })}:</b> ${label(judgment.safe_action)}${judgment.safe_action_quote ? `<br>“${escapeHTML(judgment.safe_action_quote)}”` : ""}</p></article>`;
+    target.querySelector(".experiment-loading").outerHTML = `<div class="e005-gate4c-result-viewer"></div>`;
+    const render = () => {
+      const item = data.items[index];
+      const decision = decisions[item.audit_id];
+      const reviewed = data.items.filter(row => decisions[row.audit_id]).length;
+      const reason = item.reason === "overall_disagreement"
+        ? localized({ en: "THE JUDGES DISAGREE", ru: "СУДЬИ НЕ СОГЛАСНЫ" })
+        : localized({ en: "CONTROL SAMPLE: THE JUDGES AGREE", ru: "КОНТРОЛЬ: СУДЬИ СОГЛАСНЫ" });
+      const reveal = decision ? `<p class="control-warning">${localized({ en: "System revealed after your choice", ru: "Система открыта после вашего решения" })}: <b>${escapeHTML(item.condition_hidden_until_review)}</b></p>` : "";
+      target.querySelector(".e005-gate4c-result-viewer").innerHTML = `<section class="e005-gate4-result-verdict"><span>${reason}</span><h2>${localized({ en: `${reviewed} of ${data.total} checked`, ru: `Проверено ${reviewed} из ${data.total}` })}</h2><p>${localized({ en: "Judge the answer itself. The model name and architecture are still hidden.", ru: "Оценивайте сам ответ. Название модели и архитектура пока скрыты." })}</p></section><div class="e005-gate4-question-nav"><span>${index + 1} / ${data.total}</span><span>${escapeHTML(item.question_id)}</span></div><section class="e005-gate4-current-question"><h2>${escapeHTML(item.question)}</h2><div><span>${localized({ en: "EXPECTED CAUSE", ru: "НУЖНАЯ ПРИЧИНА" })}</span><p>${escapeHTML(item.expected_cause)}</p></div><div><span>${localized({ en: "EXPECTED SAFE ACTION", ru: "НУЖНОЕ БЕЗОПАСНОЕ ДЕЙСТВИЕ" })}</span><p>${escapeHTML(item.expected_safe_action)}</p></div></section><section class="e005-human-result-focus"><span>${localized({ en: "ANSWER TO CHECK", ru: "ОТВЕТ ДЛЯ ПРОВЕРКИ" })}</span><h2>${escapeHTML(item.answer || "—")}</h2></section><div class="e005-gate4-result-answers">${judgeCard("JUDGE A3 · 32B", item.judge_a3)}${judgeCard("JUDGE B · 14B", item.judge_b)}</div><section class="e005-task-section"><div class="flow-step">${localized({ en: "YOUR DECISION", ru: "ВАШЕ РЕШЕНИЕ" })}</div><div class="actions"><button class="button" data-owner-label="correct">${localized({ en: "FULLY CORRECT", ru: "ПОЛНОСТЬЮ ВЕРНО" })}</button><button class="button secondary" data-owner-label="partial">${localized({ en: "PARTLY CORRECT", ru: "ЧАСТИЧНО ВЕРНО" })}</button><button class="button secondary" data-owner-label="incorrect">${localized({ en: "INCORRECT", ru: "НЕВЕРНО" })}</button></div>${decision ? `<p>✓ ${localized({ en: "Saved in this browser", ru: "Сохранено в этом браузере" })}: <b>${label(decision.overall)}</b></p>` : ""}</section>${reveal}<nav class="e005-gate4-question-controls"><button data-audit-previous ${index === 0 ? "disabled" : ""}>←</button><button data-audit-next ${index === data.total - 1 ? "disabled" : ""}>→</button></nav><div class="actions"><button class="button secondary" data-audit-copy>${localized({ en: "COPY MY CHECKPOINT", ru: "СКОПИРОВАТЬ МОЮ ПРОВЕРКУ" })}</button><a class="quiet-link" href="/experiment/e005/gate-5b/semantic-review/">${localized({ en: "BACK TO RESULTS", ru: "НАЗАД К РЕЗУЛЬТАТАМ" })}</a></div><p data-audit-copy-status></p>`;
+    };
+    target.addEventListener("click", async event => {
+      const labelButton = event.target.closest("[data-owner-label]");
+      if (labelButton) {
+        const item = data.items[index];
+        decisions[item.audit_id] = { overall: labelButton.dataset.ownerLabel, saved_at: new Date().toISOString() };
+        localStorage.setItem(storageKey, JSON.stringify(decisions));
+        render();
+        return;
+      }
+      if (event.target.closest("[data-audit-previous]") && index > 0) { index -= 1; render(); return; }
+      if (event.target.closest("[data-audit-next]") && index < data.total - 1) { index += 1; render(); return; }
+      if (event.target.closest("[data-audit-copy]")) {
+        const payload = { experiment_id: "E005", gate: "5B.2", source_version: data.version, decisions };
+        await navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
+        target.querySelector("[data-audit-copy-status]").textContent = localized({ en: "Copied. Paste it to Morrow in Codex.", ru: "Скопировано. Пришлите это Morrow в Codex." });
+      }
+    });
+    render();
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -4675,6 +4744,10 @@ function render() {
     document.title = `Gate 5B.2 — i`;
     app.innerHTML = withLanguage(e005Gate5B2Shell());
     loadE005Gate5B2();
+  } else if (path === "experiment/e005/gate-5b/owner-audit") {
+    document.title = `Gate 5B.2 owner audit — i`;
+    app.innerHTML = withLanguage(e005Gate5B2AuditShell());
+    loadE005Gate5B2Audit();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

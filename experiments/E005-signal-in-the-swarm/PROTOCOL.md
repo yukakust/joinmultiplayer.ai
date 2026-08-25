@@ -408,6 +408,21 @@ sees calibration or E005 answers. It has 48 layers versus Judge B's Qwen3 14B at
 The same frozen 12 cases, segment evidence, 12/12 gate, input hash, and owner
 audit remain unchanged.
 
+Judge A2 then violated the frozen structured-evidence contract during
+calibration and was rejected before seeing E005. Protocol v0.6 locks Judge A3 as
+Qwen2.5 32B Instruct AWQ, exact revision
+`5c7cb76a268fc6cfbb9c4777eb24ba6e27f9ee6c`, before its run. The quantized model
+has 64 layers and 32.5B parameters. It passed the same 12/12 bilingual controls
+and completed all 192 blind records.
+
+Judge A3 scores the six conditions at 0, 0, 0, 0, 24, and 2 complete answers;
+Judge B scores them at 0, 0, 0, 0, 26, and 3. The order is shared Qwen, CAUSE-I,
+SAFETY-I, wrong same-role pair, semantic text capsules, and neural pair. There
+are 21 overall disagreements and 42 cause-or-safety component disagreements.
+The deterministic owner queue contains every overall disagreement plus two
+overall agreements from each of the 12 condition-language cells, 45 records in
+total. No final gate decision is permitted before that audit.
+
 ### Gate 6 — locked final swarm
 
 Generate unseen final pockets and tasks after publishing a commitment. Run the

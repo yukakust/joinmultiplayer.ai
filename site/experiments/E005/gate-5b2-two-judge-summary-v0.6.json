@@ -1,0 +1,141 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "two_judge_provisional_summary",
+  "version": "0.6",
+  "status": "awaiting_owner_audit",
+  "judge_a3": {
+    "model": "Qwen/Qwen2.5-32B-Instruct-AWQ",
+    "calibration": "12/12",
+    "conditions": [
+      {
+        "id": "shared_qwen_alone",
+        "total": 32,
+        "complete": 0,
+        "partial": 1,
+        "incorrect": 31,
+        "cause_correct": 1,
+        "safe_action_correct": 0
+      },
+      {
+        "id": "cause_track_alone",
+        "total": 32,
+        "complete": 0,
+        "partial": 30,
+        "incorrect": 2,
+        "cause_correct": 32,
+        "safe_action_correct": 0
+      },
+      {
+        "id": "safety_track_alone",
+        "total": 32,
+        "complete": 0,
+        "partial": 25,
+        "incorrect": 7,
+        "cause_correct": 0,
+        "safe_action_correct": 25
+      },
+      {
+        "id": "wrong_same_role_pair",
+        "total": 32,
+        "complete": 0,
+        "partial": 29,
+        "incorrect": 3,
+        "cause_correct": 16,
+        "safe_action_correct": 13
+      },
+      {
+        "id": "semantic_text_capsules",
+        "total": 32,
+        "complete": 24,
+        "partial": 4,
+        "incorrect": 4,
+        "cause_correct": 27,
+        "safe_action_correct": 28
+      },
+      {
+        "id": "correct_neural_pair",
+        "total": 32,
+        "complete": 2,
+        "partial": 26,
+        "incorrect": 4,
+        "cause_correct": 32,
+        "safe_action_correct": 2
+      }
+    ]
+  },
+  "judge_b": {
+    "model": "Qwen/Qwen3-14B",
+    "calibration": "12/12",
+    "conditions": [
+      {
+        "id": "shared_qwen_alone",
+        "total": 32,
+        "complete": 0,
+        "partial": 6,
+        "incorrect": 26,
+        "cause_correct": 0,
+        "safe_action_correct": 6
+      },
+      {
+        "id": "cause_track_alone",
+        "total": 32,
+        "complete": 0,
+        "partial": 28,
+        "incorrect": 4,
+        "cause_correct": 32,
+        "safe_action_correct": 0
+      },
+      {
+        "id": "safety_track_alone",
+        "total": 32,
+        "complete": 0,
+        "partial": 27,
+        "incorrect": 5,
+        "cause_correct": 0,
+        "safe_action_correct": 27
+      },
+      {
+        "id": "wrong_same_role_pair",
+        "total": 32,
+        "complete": 0,
+        "partial": 30,
+        "incorrect": 2,
+        "cause_correct": 16,
+        "safe_action_correct": 14
+      },
+      {
+        "id": "semantic_text_capsules",
+        "total": 32,
+        "complete": 26,
+        "partial": 3,
+        "incorrect": 3,
+        "cause_correct": 28,
+        "safe_action_correct": 29
+      },
+      {
+        "id": "correct_neural_pair",
+        "total": 32,
+        "complete": 3,
+        "partial": 19,
+        "incorrect": 10,
+        "cause_correct": 32,
+        "safe_action_correct": 3
+      }
+    ]
+  },
+  "agreement": {
+    "overall_agreements": 171,
+    "overall_disagreements": 21,
+    "component_disagreements": 42,
+    "total": 192
+  },
+  "plain_result": {
+    "en": "Both judges strongly prefer clear text capsules to the neural hidden-state pair. The neural pair preserved the cause but usually lost the safe action.",
+    "ru": "Оба судьи намного выше оценили понятные текстовые капсулы, чем нейронную пару скрытых состояний. Нейронная пара сохранила причину, но почти всегда потеряла безопасное действие."
+  },
+  "claim_boundary": {
+    "en": "Provisional until the owner reviews every overall disagreement and 24 sampled agreements. Both judges share Qwen lineage.",
+    "ru": "Результат предварительный, пока владелец не проверит все итоговые разногласия и 24 выбранных совпадения. Оба судьи происходят из семейства Qwen."
+  }
+}
