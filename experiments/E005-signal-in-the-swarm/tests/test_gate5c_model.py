@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from gate5c_model import SeparateShelfReader, SeparateShelfQwen  # noqa: E402
-from train_gate5c_reader import encode_next_token_examples  # noqa: E402
+from train_gate5c_reader import encode_next_token_examples, evaluate_reader  # noqa: E402
 
 
 class Gate5CModelTest(unittest.TestCase):
@@ -62,6 +62,21 @@ class Gate5CModelTest(unittest.TestCase):
         }, 64)
         self.assertEqual({row["weight"] for row in rows if row["part"] == "cause"}, {1.0})
         self.assertEqual({row["weight"] for row in rows if row["part"] == "safety"}, {2.0})
+
+    def test_fixed_evaluation_uses_the_same_rows_once(self):
+        class DummyOutput:
+            next_logits = torch.tensor([[0.0, 2.0], [2.0, 0.0]])
+        class DummyModel:
+            def forward_shelves(self, input_ids, attention, mode):
+                return DummyOutput()
+        rows = [
+            {"lesson_id": "a", "part": "cause", "input_ids": [1], "target_id": 1, "weight": 1.0},
+            {"lesson_id": "b", "part": "safety", "input_ids": [1], "target_id": 1, "weight": 2.0},
+        ]
+        result = evaluate_reader(DummyModel(), rows, batch_size=2, pad_id=0)
+        self.assertEqual(result["all"]["examples"], 2)
+        self.assertEqual(result["cause"]["next_token_accuracy"], 1.0)
+        self.assertEqual(result["safety"]["next_token_accuracy"], 0.0)
 
 
 if __name__ == "__main__":

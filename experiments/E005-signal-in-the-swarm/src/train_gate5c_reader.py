@@ -83,6 +83,33 @@ def bucketed_batches(examples: list[dict], batch_size: int, seed: int) -> list[l
     return batches
 
 
+@torch.inference_mode()
+def evaluate_reader(model, examples: list[dict], *, batch_size: int, pad_id: int) -> dict:
+    totals = {"all": {"loss": 0.0, "weight": 0.0, "correct": 0, "count": 0}}
+    totals.update({part: {"loss": 0.0, "weight": 0.0, "correct": 0, "count": 0} for part in ("cause", "safety")})
+    ordered = sorted(examples, key=lambda row: (len(row["input_ids"]), row["lesson_id"], row["target_id"]))
+    for start in range(0, len(ordered), batch_size):
+        rows = ordered[start : start + batch_size]
+        input_ids, attention, targets, weights = collate_examples(rows, pad_id)
+        output = model.forward_shelves(input_ids, attention, mode="correct_shelves")
+        losses = torch.nn.functional.cross_entropy(output.next_logits, targets, reduction="none")
+        predictions = output.next_logits.argmax(dim=-1)
+        for loss, prediction, target, weight, row in zip(losses, predictions, targets, weights, rows):
+            for key in ("all", row["part"]):
+                totals[key]["loss"] += float(loss) * float(weight)
+                totals[key]["weight"] += float(weight)
+                totals[key]["correct"] += int(prediction == target)
+                totals[key]["count"] += 1
+    return {
+        key: {
+            "weighted_loss": value["loss"] / value["weight"],
+            "next_token_accuracy": value["correct"] / value["count"],
+            "examples": value["count"],
+        }
+        for key, value in totals.items()
+    }
+
+
 def train_reader(model, examples: list[dict], *, epochs: int, batch_size: int, learning_rate: float, seed: int, pad_id: int) -> dict:
     model.set_shelf_trainable()
     trainable = [parameter for parameter in model.parameters() if parameter.requires_grad]
@@ -152,6 +179,7 @@ def run(args: argparse.Namespace) -> dict:
 
     lessons = lesson_subset(curriculum["merger_lessons"], args.limit_per_language)
     examples = [example for lesson in lessons for example in encode_next_token_examples(tokenizer, lesson, args.max_length)]
+    evaluation_before = evaluate_reader(model, examples, batch_size=max(args.batch_size, 16), pad_id=tokenizer.pad_token_id)
     training = train_reader(
         model,
         examples,
@@ -161,10 +189,11 @@ def run(args: argparse.Namespace) -> dict:
         seed=args.seed,
         pad_id=tokenizer.pad_token_id,
     )
+    evaluation_after = evaluate_reader(model, examples, batch_size=max(args.batch_size, 16), pad_id=tokenizer.pad_token_id)
     result = {
         "experiment_id": "E005",
         "gate": "5C",
-        "version": "0.1",
+        "version": args.version,
         "kind": "separate_shelf_reader_training",
         "status": "development_smoke" if args.limit_per_language else "reader_trained_exam_not_run",
         "model_weights_sha256": base_hash,
@@ -176,12 +205,16 @@ def run(args: argparse.Namespace) -> dict:
         "shared_and_tail_trainable_parameters": 0,
         "safety_token_weight": 2.0,
         "training": training,
+        "fixed_evaluation_before": evaluation_before,
+        "fixed_evaluation_after": evaluation_after,
         "exam_run": False,
         "plain_language": {
             "en": "The two old personal tracks stayed frozen. Only the small reader that puts their signals on two separate shelves learned.",
             "ru": "Два старых личных трека остались замороженными. Учился только маленький читатель, который кладёт их сигналы на две разные полки."
         }
     }
+    if args.supersedes:
+        result["supersedes"] = args.supersedes
     args.output_dir.mkdir(parents=True, exist_ok=True)
     save_file(model.shelf_state(), str(args.output_dir / "shelf_reader.safetensors"))
     (args.output_dir / "summary.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -206,6 +239,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=25082026)
     parser.add_argument("--threads", type=int, default=20)
     parser.add_argument("--limit-per-language", type=int)
+    parser.add_argument("--version", default="0.1")
+    parser.add_argument("--supersedes")
     return parser.parse_args()
 
 

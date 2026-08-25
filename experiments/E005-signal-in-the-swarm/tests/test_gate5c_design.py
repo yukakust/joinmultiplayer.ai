@@ -40,6 +40,16 @@ class Gate5CDesignTest(unittest.TestCase):
         self.assertIn('"/experiment/e005/gate-5c"', server)
         self.assertIn("gate-5c-design-v0.1.json", app)
 
+    def test_corrected_smoke_uses_fixed_before_after_evaluation(self):
+        result = json.loads((ROOT / "site/experiments/E005/gate-5c-reader-smoke-v0.3.json").read_text())
+        self.assertLess(
+            result["fixed_evaluation_after"]["all"]["weighted_loss"],
+            result["fixed_evaluation_before"]["all"]["weighted_loss"],
+        )
+        self.assertTrue(result["cause_unchanged"])
+        self.assertTrue(result["safety_unchanged"])
+        self.assertEqual(result["shared_and_tail_trainable_parameters"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

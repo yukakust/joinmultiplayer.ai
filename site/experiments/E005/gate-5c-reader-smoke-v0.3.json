@@ -1,0 +1,110 @@
+{
+  "experiment_id": "E005",
+  "gate": "5C",
+  "version": "0.3",
+  "kind": "separate_shelf_reader_training",
+  "status": "development_smoke",
+  "model_weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "cause_adapter_digest": "03041b62a5c5eb23af1fa8adaefe1f6c4cee6cbf024594085beed0de8824aec6",
+  "safety_adapter_digest": "fa43470d430ca16ed97fd5564dbe008badbd6e8ed734dcf86a10963c31a06fb9",
+  "cause_unchanged": true,
+  "safety_unchanged": true,
+  "reader_changed": true,
+  "shared_and_tail_trainable_parameters": 0,
+  "safety_token_weight": 2.0,
+  "training": {
+    "epochs": 1,
+    "lessons": 16,
+    "next_token_examples": 294,
+    "steps": 39,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "trainable_parameters": 526336,
+    "loss_mean_first": 3.764655907948812,
+    "loss_mean_last": 3.7999914487202964,
+    "cause_token_loss_mean": 3.4802628208707964,
+    "safety_token_loss_mean": 4.051315566135366,
+    "loss_trace": [
+      1.031521,
+      3.884309,
+      4.476087,
+      7.156858,
+      1.683394,
+      3.651348,
+      1.212785,
+      5.876189,
+      4.909412,
+      5.864727,
+      3.240365,
+      6.607759,
+      0.577835,
+      1.142351,
+      1.873466,
+      3.151298,
+      1.716699,
+      4.713436,
+      1.382646,
+      3.735168,
+      2.743331,
+      4.084902,
+      4.597384,
+      5.062417,
+      2.989771,
+      6.262721,
+      6.305129,
+      6.940459,
+      4.981814,
+      5.715985,
+      1.588504,
+      1.780191,
+      3.347944,
+      4.53835,
+      3.903309,
+      6.02085,
+      3.306301,
+      7.911773,
+      1.802701
+    ],
+    "elapsed_seconds": 104.179
+  },
+  "fixed_evaluation_before": {
+    "all": {
+      "weighted_loss": 4.007572081559336,
+      "next_token_accuracy": 0.30612244897959184,
+      "examples": 294
+    },
+    "cause": {
+      "weighted_loss": 3.6863366046028854,
+      "next_token_accuracy": 0.3,
+      "examples": 140
+    },
+    "safety": {
+      "weighted_loss": 4.153588207448631,
+      "next_token_accuracy": 0.3116883116883117,
+      "examples": 154
+    }
+  },
+  "fixed_evaluation_after": {
+    "all": {
+      "weighted_loss": 3.5370308848904597,
+      "next_token_accuracy": 0.3877551020408163,
+      "examples": 294
+    },
+    "cause": {
+      "weighted_loss": 3.12267373185953,
+      "next_token_accuracy": 0.42142857142857143,
+      "examples": 140
+    },
+    "safety": {
+      "weighted_loss": 3.725375045359064,
+      "next_token_accuracy": 0.35714285714285715,
+      "examples": 154
+    }
+  },
+  "exam_run": false,
+  "plain_language": {
+    "en": "The two old personal tracks stayed frozen. Only the small reader that puts their signals on two separate shelves learned.",
+    "ru": "Два старых личных трека остались замороженными. Учился только маленький читатель, который кладёт их сигналы на две разные полки."
+  },
+  "supersedes": "/experiments/E005/gate-5c-reader-smoke-v0.2.json"
+}
