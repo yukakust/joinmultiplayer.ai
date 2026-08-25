@@ -2836,6 +2836,10 @@ function e005Gate5B2AuditShell() {
   return `<section class="flow-shell e005-gate5b2-audit-page"><div class="flow-step">E005 · GATE 5B.2 · ${localized({ en: "YOUR CHECK", ru: "ВАША ПРОВЕРКА" })}</div><h1>${localized({ en: "Read one answer. Make one choice.", ru: "Прочитайте один ответ. Сделайте один выбор." })}</h1><p class="contribution-intro">${localized({ en: "The system name stays hidden until you decide. Your choices remain in this browser.", ru: "Название системы скрыто, пока вы не решите. Ваши решения остаются в этом браузере." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e005Gate5B2SimpleShell() {
+  return `<section class="flow-shell e005-gate5b2-simple-page"><div class="flow-step">E005 · GATE 5B.2 · ${localized({ en: "SIMPLE RESULT", ru: "ПРОСТОЙ РЕЗУЛЬТАТ" })}</div><h1>${localized({ en: "What did the two judges decide?", ru: "Что решили два судьи?" })}</h1><p class="contribution-intro">${localized({ en: "One screen. Six systems. No laboratory jargon.", ru: "Один экран. Шесть вариантов. Без лабораторного шума." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -3761,6 +3765,7 @@ async function loadE005Gate5B2() {
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-qwen25-32b-calibration-v0.6.json">ALL 12 JUDGE A3 DECISIONS ↗</a>`);
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-qwen25-32b-full-v0.6.json">ALL 192 JUDGE A3 DECISIONS ↗</a>`);
     target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="quiet-link" href="/experiments/E005/gate-5b2-two-judge-summary-v0.6.json">TWO-JUDGE SUMMARY ↗</a>`);
+    target.querySelector(".actions").insertAdjacentHTML("afterbegin", `<a class="button" href="/experiment/e005/gate-5b/judge-results/">${localized({ en: "SIMPLE JUDGE RESULTS →", ru: "ПРОСТЫЕ РЕЗУЛЬТАТЫ СУДЕЙ →" })}</a>`);
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -3814,6 +3819,66 @@ async function loadE005Gate5B2Audit() {
       }
     });
     render();
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
+async function loadE005Gate5B2Simple() {
+  const target = document.querySelector(".e005-gate5b2-simple-page");
+  if (!target) return;
+  try {
+    const [summaryResponse, auditResponse] = await Promise.all([
+      fetch("/experiments/E005/gate-5b2-two-judge-summary-v0.6.json", { cache: "no-store" }),
+      fetch("/experiments/E005/gate-5b2-owner-audit-v0.6.json", { cache: "no-store" }),
+    ]);
+    if (!summaryResponse.ok || !auditResponse.ok) throw new Error("E005 judge results unavailable");
+    const summary = await summaryResponse.json();
+    const audit = await auditResponse.json();
+    const names = {
+      shared_qwen_alone: localized({ en: "Small Qwen alone", ru: "Маленькая Qwen одна" }),
+      cause_track_alone: localized({ en: "Only the cause skill", ru: "Только умение находить причину" }),
+      safety_track_alone: localized({ en: "Only the safety skill", ru: "Только умение выбирать действие" }),
+      wrong_same_role_pair: localized({ en: "Two copies of one skill", ru: "Два одинаковых умения" }),
+      semantic_text_capsules: localized({ en: "Two i send clear messages", ru: "Два i передают понятные сообщения" }),
+      correct_neural_pair: localized({ en: "Two i join neural tracks", ru: "Два i соединяют нейронные треки" }),
+    };
+    const explanations = {
+      shared_qwen_alone: localized({ en: "It did not know both needed parts.", ru: "Не знала обе нужные части ответа." }),
+      cause_track_alone: localized({ en: "It knew the cause, but not the safe action.", ru: "Знала причину, но не безопасное действие." }),
+      safety_track_alone: localized({ en: "It knew the action, but not the cause.", ru: "Знала действие, но не причину." }),
+      wrong_same_role_pair: localized({ en: "More of the same skill did not complete the answer.", ru: "Два одинаковых умения не собрали полный ответ." }),
+      semantic_text_capsules: localized({ en: "Best result: the two i explained their parts in words.", ru: "Лучший результат: два i объяснили свои части словами." }),
+      correct_neural_pair: localized({ en: "The cause survived, but the safe action was almost lost.", ru: "Причина сохранилась, а безопасное действие почти потерялось." }),
+    };
+    const bById = Object.fromEntries(summary.judge_b.conditions.map(row => [row.id, row]));
+    const rows = summary.judge_a3.conditions.map(row => {
+      const other = bById[row.id];
+      const best = row.id === "semantic_text_capsules";
+      const failedNeural = row.id === "correct_neural_pair";
+      return `<article class="e005-simple-result-row ${best ? "is-best" : ""} ${failedNeural ? "is-failed" : ""}"><div><span>${best ? localized({ en: "BEST", ru: "ЛУЧШИЙ" }) : failedNeural ? localized({ en: "MAIN TEST", ru: "ГЛАВНЫЙ ТЕСТ" }) : ""}</span><h2>${escapeHTML(names[row.id])}</h2><p>${escapeHTML(explanations[row.id])}</p></div><div class="e005-simple-judge-score"><small>32B</small><strong>${row.complete}<i>/32</i></strong></div><div class="e005-simple-judge-score"><small>14B</small><strong>${other.complete}<i>/32</i></strong></div></article>`;
+    }).join("");
+    const disagreements = audit.items.filter(item => item.reason === "overall_disagreement");
+    let disagreementIndex = 0;
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-simple-verdict"><span>${localized({ en: "SHORT ANSWER", ru: "КОРОТКИЙ ОТВЕТ" })}</span><h2>${localized({ en: "Clear messages worked. Neural joining did not—yet.", ru: "Понятные сообщения сработали. Нейронное объединение — пока нет." })}</h2><p>${localized({ en: "The judges counted a complete answer only when it had both the cause and the safe action.", ru: "Судьи считали ответ полным, только если в нём были и причина, и безопасное действие." })}</p></section><div class="e005-simple-results"><header><span>${localized({ en: "SYSTEM", ru: "ВАРИАНТ" })}</span><span>32B</span><span>14B</span></header>${rows}</div><section class="e005-simple-takeaway"><strong>24–26 / 32</strong><p>${localized({ en: "when the two i sent clear text", ru: "когда два i передавали понятный текст" })}</p><strong>2–3 / 32</strong><p>${localized({ en: "when their hidden neural additions were merged", ru: "когда объединялись их скрытые нейронные добавки" })}</p></section><section class="e005-task-section"><div class="flow-step">${localized({ en: "WHERE THE JUDGES DISAGREED", ru: "ГДЕ СУДЬИ НЕ СОГЛАСИЛИСЬ" })}</div><p>${localized({ en: "They gave different final labels to 21 of 192 answers. Open them only if you want to inspect the edge cases.", ru: "Они по-разному оценили 21 из 192 ответов. Откройте их, только если хотите посмотреть пограничные случаи." })}</p><button class="button secondary" data-simple-disagreements>${localized({ en: "SHOW 21 DISAGREEMENTS", ru: "ПОКАЗАТЬ 21 РАЗНОГЛАСИЕ" })}</button><div class="e005-simple-disagreement" hidden></div></section><section class="e005-simple-boundary"><p>${localized({ en: "This is still provisional: both judges are from the Qwen family, and you have not completed the human audit.", ru: "Это всё ещё предварительный результат: оба судьи из семейства Qwen, а человеческая проверка ещё не закончена." })}</p></section><div class="actions"><a class="button" href="/experiment/e005/gate-5b/owner-audit/">${localized({ en: "START HUMAN CHECK", ru: "НАЧАТЬ ПРОВЕРКУ ЧЕЛОВЕКОМ" })}</a><a class="quiet-link" href="/experiment/e005/gate-5b/semantic-review/">${localized({ en: "TECHNICAL JOURNAL", ru: "ТЕХНИЧЕСКИЙ ЖУРНАЛ" })} ↗</a></div>`;
+    const resultLabel = value => ({ correct: localized({ en: "fully correct", ru: "полностью верно" }), partial: localized({ en: "partly correct", ru: "частично верно" }), incorrect: localized({ en: "incorrect", ru: "неверно" }) }[value] || value);
+    const component = value => value === "correct" ? "✓" : value === "incorrect" ? "×" : "—";
+    const renderDisagreement = () => {
+      const item = disagreements[disagreementIndex];
+      const panel = target.querySelector(".e005-simple-disagreement");
+      panel.innerHTML = `<div class="e005-gate4-question-nav"><span>${disagreementIndex + 1} / ${disagreements.length}</span><span>${escapeHTML(item.question_id)}</span></div><section class="e005-gate4-current-question"><h2>${escapeHTML(item.question)}</h2><div><span>${localized({ en: "ANSWER", ru: "ОТВЕТ" })}</span><p>${escapeHTML(item.answer)}</p></div></section><div class="e005-simple-two-judges"><article><small>32B</small><h2>${resultLabel(item.judge_a3.overall)}</h2><p>${component(item.judge_a3.cause)} ${localized({ en: "cause", ru: "причина" })} · ${component(item.judge_a3.safe_action)} ${localized({ en: "safe action", ru: "действие" })}</p></article><article><small>14B</small><h2>${resultLabel(item.judge_b.overall)}</h2><p>${component(item.judge_b.cause)} ${localized({ en: "cause", ru: "причина" })} · ${component(item.judge_b.safe_action)} ${localized({ en: "safe action", ru: "действие" })}</p></article></div><nav class="e005-gate4-question-controls"><button data-simple-previous ${disagreementIndex === 0 ? "disabled" : ""}>←</button><button data-simple-next ${disagreementIndex === disagreements.length - 1 ? "disabled" : ""}>→</button></nav>`;
+    };
+    target.addEventListener("click", event => {
+      if (event.target.closest("[data-simple-disagreements]")) {
+        const panel = target.querySelector(".e005-simple-disagreement");
+        panel.hidden = !panel.hidden;
+        if (!panel.hidden) renderDisagreement();
+      } else if (event.target.closest("[data-simple-previous]") && disagreementIndex > 0) {
+        disagreementIndex -= 1; renderDisagreement();
+      } else if (event.target.closest("[data-simple-next]") && disagreementIndex < disagreements.length - 1) {
+        disagreementIndex += 1; renderDisagreement();
+      }
+    });
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -4748,6 +4813,10 @@ function render() {
     document.title = `Gate 5B.2 owner audit — i`;
     app.innerHTML = withLanguage(e005Gate5B2AuditShell());
     loadE005Gate5B2Audit();
+  } else if (path === "experiment/e005/gate-5b/judge-results") {
+    document.title = `${localized({ en: "Judge results", ru: "Результаты судей" })} — i`;
+    app.innerHTML = withLanguage(e005Gate5B2SimpleShell());
+    loadE005Gate5B2Simple();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
