@@ -18,10 +18,10 @@ from typing import Any, Callable
 
 JUDGES = {
     "J1": {
-        "model": "Qwen/Qwen2.5-14B-Instruct",
-        "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
-        "precision": "bf16",
-        "backend": "qwen2.5",
+        "model": "Qwen/Qwen2.5-32B-Instruct-AWQ",
+        "revision": "5c7cb76a268fc6cfbb9c4777eb24ba6e27f9ee6c",
+        "precision": "awq-int4",
+        "backend": "qwen2.5-awq",
     },
     "J2": {
         "model": "Qwen/Qwen3-14B",
@@ -217,14 +217,15 @@ def load_generator(judge: dict[str, str]) -> Callable[[str, str], str]:
     model_id = judge["model"]
     revision = judge["revision"]
     tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision, trust_remote_code=False)
-    model = AutoModelForCausalLM.from_pretrained(
-        model_id,
-        revision=revision,
-        device_map="auto",
-        torch_dtype=torch.bfloat16,
-        trust_remote_code=False,
-        low_cpu_mem_usage=True,
-    )
+    load_kwargs = {
+        "revision": revision,
+        "device_map": "auto",
+        "trust_remote_code": False,
+        "low_cpu_mem_usage": True,
+    }
+    if judge["precision"] == "bf16":
+        load_kwargs["torch_dtype"] = torch.bfloat16
+    model = AutoModelForCausalLM.from_pretrained(model_id, **load_kwargs)
     model.eval()
 
     from lmformatenforcer import JsonSchemaParser

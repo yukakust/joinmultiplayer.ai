@@ -6,3 +6,4 @@ experiments/E001-personal-delta-towers/artifacts/checkpoints/
 experiments/E001-personal-delta-towers/artifacts/*/
 experiments/E005-signal-in-the-swarm/artifacts/*/
 experiments/E005-signal-in-the-swarm/artifacts/*.json
+experiments/E005-signal-in-the-swarm/artifacts/*.log

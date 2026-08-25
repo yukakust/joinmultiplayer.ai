@@ -1,0 +1,35 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "blind_semantic_review_protocol",
+  "version": "0.6",
+  "status": "replacement_judge_locked_before_calibration",
+  "supersedes": "/experiments/E005/gate-5b2-judge-protocol-v0.5.json",
+  "reason": "Judge A2 Qwen2.5 14B was rejected before E005 after violating the frozen evidence format. The replacement is larger and remains blind.",
+  "replacement": {
+    "public_alias": "Judge A3",
+    "judge_id": "J1",
+    "model": "Qwen/Qwen2.5-32B-Instruct-AWQ",
+    "revision": "5c7cb76a268fc6cfbb9c4777eb24ba6e27f9ee6c",
+    "precision": "AWQ INT4",
+    "parameters": "32.5B",
+    "layers": 64,
+    "official_model": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct-AWQ"
+  },
+  "existing_judge": {
+    "public_alias": "Judge B",
+    "model": "Qwen/Qwen3-14B",
+    "calibration": "12/12",
+    "blind_records": 192
+  },
+  "calibration": {
+    "same_frozen_cases": 12,
+    "required": "12/12",
+    "failure_action": "reject before E005 answers"
+  },
+  "unchanged": ["semantic decision tree", "S1/S2 evidence transport", "temperature 0", "owner audit", "input hash", "Gate 5B thresholds"],
+  "limitation": {
+    "en": "Qwen2.5 32B and Qwen3 14B differ in generation, size and depth, but share an organizational lineage. Agreement is redundancy, not fully independent evidence.",
+    "ru": "Qwen2.5 32B и Qwen3 14B отличаются поколением, размером и глубиной, но у них общее происхождение. Их согласие — повторная проверка, а не полностью независимое доказательство."
+  }
+}

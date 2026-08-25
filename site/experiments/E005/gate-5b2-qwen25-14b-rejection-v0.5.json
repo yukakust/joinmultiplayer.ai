@@ -1,0 +1,21 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "judge_calibration_rejection",
+  "version": "0.5",
+  "judge": {
+    "public_alias": "Judge A2",
+    "model": "Qwen/Qwen2.5-14B-Instruct",
+    "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+    "precision": "bf16",
+    "parameters": "14.7B",
+    "layers": 48
+  },
+  "status": "rejected_before_e005",
+  "experiment_answers_seen": false,
+  "failure": "The judge failed the frozen structured-output contract after all allowed retries: a non-absent safe_action had no evidence segment ID.",
+  "failure_ru": "Судья не выполнил замороженный формат после всех разрешённых повторов: отметил безопасное действие как присутствующее, но не указал фрагмент ответа, где оно находится.",
+  "policy_result": "Rejected without prompt tuning. It saw zero E005 answers.",
+  "policy_result_ru": "Отклонён без подстройки промпта. Ни одного ответа E005 он не видел.",
+  "log_sha256": "4eb64e3c9f12902f8139a847cdb427c50705cd2c8a641f4d52b59e53734df22d"
+}
