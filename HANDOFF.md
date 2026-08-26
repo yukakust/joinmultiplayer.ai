@@ -224,11 +224,12 @@ identity, policy, document store, source lineage, and audit trail. This is a
 distributed-knowledge harness test, not a claim that 64 independently trained
 models exist.
 
-The public source of truth is `/experiments/E007/design-v0.1.json`; the detailed
-operator protocol is `experiments/E007-harness-mvp/PROTOCOL.md`. Checkpoint 0
-contains design only: no fictional world, question, answer, inference, or result
-exists. Do not generate the world or run a model until the owner approves this
-checkpoint.
+The public design is `/experiments/E007/design-v0.1.json`; the deterministic
+fictional dataset is `/experiments/E007/world-v0.1.json`; the detailed operator
+protocol is `experiments/E007-harness-mvp/PROTOCOL.md`. Checkpoint 0 is approved.
+Checkpoint 1 contains 64 capability cards, 422 separate local documents, and 30
+questions across five task families. No inference or result exists. Do not run
+the three-question smoke until the owner reviews Checkpoint 1.
 
 ## Immediate next work
 

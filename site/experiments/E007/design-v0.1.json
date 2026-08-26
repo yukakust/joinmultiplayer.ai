@@ -2,7 +2,7 @@
   "schema_version": "0.1",
   "experiment_id": "E007",
   "kind": "public_design_checkpoint",
-  "status": "awaiting_owner_review_before_world_generation",
+  "status": "checkpoint_0_approved_world_generated_for_review",
   "title": {
     "en": "A model-agnostic harness for 64 logical pocket i",
     "ru": "Независимый от модели harness для 64 логических pocket i"
@@ -57,8 +57,8 @@
     {"id": "G8", "metric": "public_trace", "pass": "all_answers_rejections_failures_traffic_and_owner_verdicts"}
   ],
   "checkpoints": [
-    {"id": 0, "name": "public_design_and_topology", "status": "current"},
-    {"id": 1, "name": "locked_world_capabilities_tasks_and_expected_evidence", "status": "blocked_on_owner_review"},
+    {"id": 0, "name": "public_design_and_topology", "status": "approved"},
+    {"id": 1, "name": "locked_world_capabilities_tasks_and_expected_evidence", "status": "current_awaiting_owner_review"},
     {"id": 2, "name": "three_task_yukabox_smoke", "status": "not_started"},
     {"id": 3, "name": "same_smoke_split_across_two_devices", "status": "not_started"},
     {"id": 4, "name": "locked_thirty_task_run", "status": "not_started"},

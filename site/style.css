@@ -4952,15 +4952,102 @@ blockquote {
   text-transform: uppercase;
 }
 
+.e007-pocket-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 1px;
+  margin: 24px 0 64px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.e007-pocket-grid article {
+  background: var(--paper);
+  min-height: 150px;
+  padding: 16px;
+}
+
+.e007-pocket-grid span,
+.e007-pocket-grid small,
+.e007-answer-grid span,
+.e007-source-grid span,
+.e007-source-grid small {
+  color: var(--muted);
+  display: block;
+  font-size: 11px;
+}
+
+.e007-pocket-grid strong {
+  display: block;
+  font-size: 20px;
+  margin: 16px 0 8px;
+}
+
+.e007-pocket-grid p {
+  color: var(--muted);
+  font-size: 12px;
+  min-height: 38px;
+}
+
+.e007-answer-grid,
+.e007-source-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.e007-answer-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.e007-source-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.e007-answer-grid article,
+.e007-source-grid article {
+  background: var(--paper);
+  padding: 20px;
+}
+
+.e007-answer-grid strong,
+.e007-source-grid strong {
+  display: block;
+  margin-top: 12px;
+}
+
+.e007-source-grid article.is-needed {
+  border-top: 4px solid #7cad72;
+}
+
+.e007-source-grid article.is-noise {
+  border-top: 4px solid var(--ember);
+}
+
+.e007-source-grid p {
+  min-height: 80px;
+}
+
+.e007-task-meta {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 20px 0;
+}
+
 @media (max-width: 1000px) {
   .e007-module-grid,
   .e007-family-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .e007-pocket-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 @media (max-width: 700px) {
   .e007-device-grid,
   .e007-module-grid,
-  .e007-family-grid { grid-template-columns: 1fr; }
+  .e007-family-grid,
+  .e007-answer-grid,
+  .e007-source-grid { grid-template-columns: 1fr; }
+  .e007-pocket-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .e007-gates li,
   .e007-checkpoints li { grid-template-columns: 40px 1fr; padding: 12px 0; }
   .e007-gates li b,

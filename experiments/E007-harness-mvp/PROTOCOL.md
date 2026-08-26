@@ -1,7 +1,7 @@
 # E007 — model-agnostic harness MVP
 
-Status: design checkpoint awaiting owner review. No world data has been generated,
-no model has run, and no result exists.
+Status: Checkpoint 0 approved. Checkpoint 1 fictional world awaits owner data
+review. No model has run and no result exists.
 
 ## Question
 
@@ -79,10 +79,9 @@ only after owner review.
 
 ## Checkpoints
 
-0. Public design and topology — current checkpoint.
-1. Public fictional world, 64 capability cards, 30 tasks, and expected evidence.
+0. Public design and topology — approved.
+1. Public fictional world, 64 capability cards, 30 tasks, and expected evidence — current checkpoint.
 2. Three-question single-device smoke on yukabox.
 3. The same smoke split between yukabox and MacBook.
 4. Locked 30-task run.
 5. Owner audit and public result.
-
