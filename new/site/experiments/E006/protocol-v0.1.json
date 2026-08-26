@@ -1,0 +1,73 @@
+{
+  "experiment_id": "E006",
+  "version": "0.1",
+  "status": "superseded_before_run",
+  "superseded_by": "/experiments/E006/protocol-v0.2.json",
+  "superseded_reason": "The central oracle-selected context was incorrectly labelled central RAG. No model had run.",
+  "stage": "oracle_selection_transport_and_composition",
+  "hypothesis": "When no pocket i has the complete answer, a minimal human-readable harness can preserve and combine distributed evidence at least as well as a central RAG and better than unstructured pocket-i messages.",
+  "scope": {
+    "language": "en",
+    "questions": 10,
+    "pocket_i": 8,
+    "selected_pocket_i_per_question": 3,
+    "routing": "oracle_frozen",
+    "training": false,
+    "world": "/experiments/E006/world-v0.1.json"
+  },
+  "conditions": [
+    {
+      "id": "central_rag",
+      "description": "One shared Qwen receives the three selected raw documents in one central context."
+    },
+    {
+      "id": "free_text_swarm",
+      "description": "The same three pocket i read only their own local document and send unrestricted text to the final Qwen."
+    },
+    {
+      "id": "minimal_harness",
+      "description": "The same three pocket i send a small claim-and-evidence capsule; the final Qwen may use only supported capsule claims."
+    }
+  ],
+  "minimal_capsule": {
+    "status": "found | not_found",
+    "claim": "one human-readable statement or null",
+    "source": "one local document id or null",
+    "quote": "one exact supporting quote or null",
+    "missing": "what is still unknown or null"
+  },
+  "harness_rules": [
+    "A claim without a source and exact quote is rejected before final assembly.",
+    "The final answer may not add a factual claim absent from accepted capsules.",
+    "A not_found capsule is preserved as missing knowledge, not converted into a guess.",
+    "The harness does not rank sources, remove shared lineages, resolve conflicts, or route experts in this first stage."
+  ],
+  "generation": {
+    "model": "Qwen/Qwen3-0.6B-Instruct-2507",
+    "weights": "same frozen local checkpoint used by every condition",
+    "decoding": "greedy",
+    "local_max_new_tokens": 128,
+    "final_max_new_tokens": 192,
+    "selected_documents_per_question": 3
+  },
+  "semantic_metrics": [
+    "cause_correct",
+    "action_correct",
+    "complete",
+    "required_sources_present",
+    "unsupported_claim",
+    "contradiction"
+  ],
+  "development_signal": {
+    "minimal_harness_complete_at_least": 7,
+    "minimal_harness_lead_over_free_text_at_least": 2,
+    "minimal_harness_no_more_than_one_behind_central_rag": true,
+    "minimal_harness_grounded_at_least": 8
+  },
+  "evaluation": {
+    "automatic_literal_checks": "diagnostic_only",
+    "semantic_review": "blind review required for all 30 final answers",
+    "owner_review": "required before any architecture claim"
+  },
+  "claim_boundary": "This ten-question English-only development experiment can discover useful harness rules. It cannot prove population-scale swarm intelligence, privacy, routing quality, multilingual transfer, or statistical significance."
+}

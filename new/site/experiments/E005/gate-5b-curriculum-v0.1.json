@@ -1,0 +1,4491 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "neural_track_curriculum",
+  "status": "frozen_before_training",
+  "track_lessons": [
+    {
+      "id": "G5B-CAUSE-EN-1-01",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-01",
+      "label": "thermal_rebound",
+      "prompt": "Neri-EN-1-01 reports a steady amber glow after load transfer. Give only the diagnosis.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-02",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-02",
+      "label": "thermal_rebound",
+      "prompt": "A technician saw a steady amber glow after load transfer on Neri-EN-1-02. What is the cause?",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-03",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-03",
+      "label": "thermal_rebound",
+      "prompt": "Name the fault behind this Neri-EN-1-03 signal: a steady amber glow after load transfer.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-04",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-04",
+      "label": "thermal_rebound",
+      "prompt": "For Neri-EN-1-04, interpret a steady amber glow after load transfer as one short diagnosis.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-05",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-05",
+      "label": "thermal_rebound",
+      "prompt": "Neri-EN-1-05 reports a steady amber glow after load transfer. Give only the diagnosis.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-06",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-06",
+      "label": "thermal_rebound",
+      "prompt": "A technician saw a steady amber glow after load transfer on Neri-EN-1-06. What is the cause?",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-07",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-07",
+      "label": "thermal_rebound",
+      "prompt": "Name the fault behind this Neri-EN-1-07 signal: a steady amber glow after load transfer.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-08",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-08",
+      "label": "thermal_rebound",
+      "prompt": "For Neri-EN-1-08, interpret a steady amber glow after load transfer as one short diagnosis.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-09",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-09",
+      "label": "thermal_rebound",
+      "prompt": "Neri-EN-1-09 reports a steady amber glow after load transfer. Give only the diagnosis.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-10",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-10",
+      "label": "thermal_rebound",
+      "prompt": "A technician saw a steady amber glow after load transfer on Neri-EN-1-10. What is the cause?",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-11",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-11",
+      "label": "thermal_rebound",
+      "prompt": "Name the fault behind this Neri-EN-1-11 signal: a steady amber glow after load transfer.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-12",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-12",
+      "label": "thermal_rebound",
+      "prompt": "For Neri-EN-1-12, interpret a steady amber glow after load transfer as one short diagnosis.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-13",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-13",
+      "label": "thermal_rebound",
+      "prompt": "Neri-EN-1-13 reports a steady amber glow after load transfer. Give only the diagnosis.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-14",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-14",
+      "label": "thermal_rebound",
+      "prompt": "A technician saw a steady amber glow after load transfer on Neri-EN-1-14. What is the cause?",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-15",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-15",
+      "label": "thermal_rebound",
+      "prompt": "Name the fault behind this Neri-EN-1-15 signal: a steady amber glow after load transfer.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-1-16",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-1-16",
+      "label": "thermal_rebound",
+      "prompt": "For Neri-EN-1-16, interpret a steady amber glow after load transfer as one short diagnosis.",
+      "target": "The cause is thermal rebound."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-01",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-01",
+      "label": "phase_drift",
+      "prompt": "Neri-EN-2-01 reports three blue pulses after startup. Give only the diagnosis.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-02",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-02",
+      "label": "phase_drift",
+      "prompt": "A technician saw three blue pulses after startup on Neri-EN-2-02. What is the cause?",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-03",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-03",
+      "label": "phase_drift",
+      "prompt": "Name the fault behind this Neri-EN-2-03 signal: three blue pulses after startup.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-04",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-04",
+      "label": "phase_drift",
+      "prompt": "For Neri-EN-2-04, interpret three blue pulses after startup as one short diagnosis.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-05",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-05",
+      "label": "phase_drift",
+      "prompt": "Neri-EN-2-05 reports three blue pulses after startup. Give only the diagnosis.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-06",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-06",
+      "label": "phase_drift",
+      "prompt": "A technician saw three blue pulses after startup on Neri-EN-2-06. What is the cause?",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-07",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-07",
+      "label": "phase_drift",
+      "prompt": "Name the fault behind this Neri-EN-2-07 signal: three blue pulses after startup.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-08",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-08",
+      "label": "phase_drift",
+      "prompt": "For Neri-EN-2-08, interpret three blue pulses after startup as one short diagnosis.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-09",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-09",
+      "label": "phase_drift",
+      "prompt": "Neri-EN-2-09 reports three blue pulses after startup. Give only the diagnosis.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-10",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-10",
+      "label": "phase_drift",
+      "prompt": "A technician saw three blue pulses after startup on Neri-EN-2-10. What is the cause?",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-11",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-11",
+      "label": "phase_drift",
+      "prompt": "Name the fault behind this Neri-EN-2-11 signal: three blue pulses after startup.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-12",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-12",
+      "label": "phase_drift",
+      "prompt": "For Neri-EN-2-12, interpret three blue pulses after startup as one short diagnosis.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-13",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-13",
+      "label": "phase_drift",
+      "prompt": "Neri-EN-2-13 reports three blue pulses after startup. Give only the diagnosis.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-14",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-14",
+      "label": "phase_drift",
+      "prompt": "A technician saw three blue pulses after startup on Neri-EN-2-14. What is the cause?",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-15",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-15",
+      "label": "phase_drift",
+      "prompt": "Name the fault behind this Neri-EN-2-15 signal: three blue pulses after startup.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-2-16",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-2-16",
+      "label": "phase_drift",
+      "prompt": "For Neri-EN-2-16, interpret three blue pulses after startup as one short diagnosis.",
+      "target": "The cause is phase drift."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-01",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-01",
+      "label": "timing_split",
+      "prompt": "Neri-EN-3-01 reports alternating white and red flashes after restart. Give only the diagnosis.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-02",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-02",
+      "label": "timing_split",
+      "prompt": "A technician saw alternating white and red flashes after restart on Neri-EN-3-02. What is the cause?",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-03",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-03",
+      "label": "timing_split",
+      "prompt": "Name the fault behind this Neri-EN-3-03 signal: alternating white and red flashes after restart.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-04",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-04",
+      "label": "timing_split",
+      "prompt": "For Neri-EN-3-04, interpret alternating white and red flashes after restart as one short diagnosis.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-05",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-05",
+      "label": "timing_split",
+      "prompt": "Neri-EN-3-05 reports alternating white and red flashes after restart. Give only the diagnosis.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-06",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-06",
+      "label": "timing_split",
+      "prompt": "A technician saw alternating white and red flashes after restart on Neri-EN-3-06. What is the cause?",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-07",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-07",
+      "label": "timing_split",
+      "prompt": "Name the fault behind this Neri-EN-3-07 signal: alternating white and red flashes after restart.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-08",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-08",
+      "label": "timing_split",
+      "prompt": "For Neri-EN-3-08, interpret alternating white and red flashes after restart as one short diagnosis.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-09",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-09",
+      "label": "timing_split",
+      "prompt": "Neri-EN-3-09 reports alternating white and red flashes after restart. Give only the diagnosis.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-10",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-10",
+      "label": "timing_split",
+      "prompt": "A technician saw alternating white and red flashes after restart on Neri-EN-3-10. What is the cause?",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-11",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-11",
+      "label": "timing_split",
+      "prompt": "Name the fault behind this Neri-EN-3-11 signal: alternating white and red flashes after restart.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-12",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-12",
+      "label": "timing_split",
+      "prompt": "For Neri-EN-3-12, interpret alternating white and red flashes after restart as one short diagnosis.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-13",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-13",
+      "label": "timing_split",
+      "prompt": "Neri-EN-3-13 reports alternating white and red flashes after restart. Give only the diagnosis.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-14",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-14",
+      "label": "timing_split",
+      "prompt": "A technician saw alternating white and red flashes after restart on Neri-EN-3-14. What is the cause?",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-15",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-15",
+      "label": "timing_split",
+      "prompt": "Name the fault behind this Neri-EN-3-15 signal: alternating white and red flashes after restart.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-3-16",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-3-16",
+      "label": "timing_split",
+      "prompt": "For Neri-EN-3-16, interpret alternating white and red flashes after restart as one short diagnosis.",
+      "target": "The cause is timing split."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-01",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-01",
+      "label": "coolant_echo",
+      "prompt": "Neri-EN-4-01 reports two violet rings before shutdown. Give only the diagnosis.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-02",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-02",
+      "label": "coolant_echo",
+      "prompt": "A technician saw two violet rings before shutdown on Neri-EN-4-02. What is the cause?",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-03",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-03",
+      "label": "coolant_echo",
+      "prompt": "Name the fault behind this Neri-EN-4-03 signal: two violet rings before shutdown.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-04",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-04",
+      "label": "coolant_echo",
+      "prompt": "For Neri-EN-4-04, interpret two violet rings before shutdown as one short diagnosis.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-05",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-05",
+      "label": "coolant_echo",
+      "prompt": "Neri-EN-4-05 reports two violet rings before shutdown. Give only the diagnosis.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-06",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-06",
+      "label": "coolant_echo",
+      "prompt": "A technician saw two violet rings before shutdown on Neri-EN-4-06. What is the cause?",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-07",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-07",
+      "label": "coolant_echo",
+      "prompt": "Name the fault behind this Neri-EN-4-07 signal: two violet rings before shutdown.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-08",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-08",
+      "label": "coolant_echo",
+      "prompt": "For Neri-EN-4-08, interpret two violet rings before shutdown as one short diagnosis.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-09",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-09",
+      "label": "coolant_echo",
+      "prompt": "Neri-EN-4-09 reports two violet rings before shutdown. Give only the diagnosis.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-10",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-10",
+      "label": "coolant_echo",
+      "prompt": "A technician saw two violet rings before shutdown on Neri-EN-4-10. What is the cause?",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-11",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-11",
+      "label": "coolant_echo",
+      "prompt": "Name the fault behind this Neri-EN-4-11 signal: two violet rings before shutdown.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-12",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-12",
+      "label": "coolant_echo",
+      "prompt": "For Neri-EN-4-12, interpret two violet rings before shutdown as one short diagnosis.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-13",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-13",
+      "label": "coolant_echo",
+      "prompt": "Neri-EN-4-13 reports two violet rings before shutdown. Give only the diagnosis.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-14",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-14",
+      "label": "coolant_echo",
+      "prompt": "A technician saw two violet rings before shutdown on Neri-EN-4-14. What is the cause?",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-15",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-15",
+      "label": "coolant_echo",
+      "prompt": "Name the fault behind this Neri-EN-4-15 signal: two violet rings before shutdown.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-CAUSE-EN-4-16",
+      "split": "track_train",
+      "role": "cause",
+      "language": "en",
+      "device": "Neri-EN-4-16",
+      "label": "coolant_echo",
+      "prompt": "For Neri-EN-4-16, interpret two violet rings before shutdown as one short diagnosis.",
+      "target": "The cause is coolant echo."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-01",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-01",
+      "label": "keep_aux_vent_closed",
+      "prompt": "The zone around Tavi-EN-1-01 shows a double copper mark while room pressure rises. Give only the safe action.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-02",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-02",
+      "label": "keep_aux_vent_closed",
+      "prompt": "A worker sees a double copper mark while room pressure rises near Tavi-EN-1-02. What must they do?",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-03",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-03",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Name the safe next step for Tavi-EN-1-03 when there is a double copper mark while room pressure rises.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-04",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-04",
+      "label": "keep_aux_vent_closed",
+      "prompt": "For Tavi-EN-1-04, turn a double copper mark while room pressure rises into one short safety instruction.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-05",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-05",
+      "label": "keep_aux_vent_closed",
+      "prompt": "The zone around Tavi-EN-1-05 shows a double copper mark while room pressure rises. Give only the safe action.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-06",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-06",
+      "label": "keep_aux_vent_closed",
+      "prompt": "A worker sees a double copper mark while room pressure rises near Tavi-EN-1-06. What must they do?",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-07",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-07",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Name the safe next step for Tavi-EN-1-07 when there is a double copper mark while room pressure rises.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-08",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-08",
+      "label": "keep_aux_vent_closed",
+      "prompt": "For Tavi-EN-1-08, turn a double copper mark while room pressure rises into one short safety instruction.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-09",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-09",
+      "label": "keep_aux_vent_closed",
+      "prompt": "The zone around Tavi-EN-1-09 shows a double copper mark while room pressure rises. Give only the safe action.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-10",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-10",
+      "label": "keep_aux_vent_closed",
+      "prompt": "A worker sees a double copper mark while room pressure rises near Tavi-EN-1-10. What must they do?",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-11",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-11",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Name the safe next step for Tavi-EN-1-11 when there is a double copper mark while room pressure rises.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-12",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-12",
+      "label": "keep_aux_vent_closed",
+      "prompt": "For Tavi-EN-1-12, turn a double copper mark while room pressure rises into one short safety instruction.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-13",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-13",
+      "label": "keep_aux_vent_closed",
+      "prompt": "The zone around Tavi-EN-1-13 shows a double copper mark while room pressure rises. Give only the safe action.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-14",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-14",
+      "label": "keep_aux_vent_closed",
+      "prompt": "A worker sees a double copper mark while room pressure rises near Tavi-EN-1-14. What must they do?",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-15",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-15",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Name the safe next step for Tavi-EN-1-15 when there is a double copper mark while room pressure rises.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-1-16",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-1-16",
+      "label": "keep_aux_vent_closed",
+      "prompt": "For Tavi-EN-1-16, turn a double copper mark while room pressure rises into one short safety instruction.",
+      "target": "Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-01",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-01",
+      "label": "remote_only",
+      "prompt": "The zone around Tavi-EN-2-01 shows a black ring while room pressure is stable. Give only the safe action.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-02",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-02",
+      "label": "remote_only",
+      "prompt": "A worker sees a black ring while room pressure is stable near Tavi-EN-2-02. What must they do?",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-03",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-03",
+      "label": "remote_only",
+      "prompt": "Name the safe next step for Tavi-EN-2-03 when there is a black ring while room pressure is stable.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-04",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-04",
+      "label": "remote_only",
+      "prompt": "For Tavi-EN-2-04, turn a black ring while room pressure is stable into one short safety instruction.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-05",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-05",
+      "label": "remote_only",
+      "prompt": "The zone around Tavi-EN-2-05 shows a black ring while room pressure is stable. Give only the safe action.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-06",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-06",
+      "label": "remote_only",
+      "prompt": "A worker sees a black ring while room pressure is stable near Tavi-EN-2-06. What must they do?",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-07",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-07",
+      "label": "remote_only",
+      "prompt": "Name the safe next step for Tavi-EN-2-07 when there is a black ring while room pressure is stable.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-08",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-08",
+      "label": "remote_only",
+      "prompt": "For Tavi-EN-2-08, turn a black ring while room pressure is stable into one short safety instruction.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-09",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-09",
+      "label": "remote_only",
+      "prompt": "The zone around Tavi-EN-2-09 shows a black ring while room pressure is stable. Give only the safe action.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-10",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-10",
+      "label": "remote_only",
+      "prompt": "A worker sees a black ring while room pressure is stable near Tavi-EN-2-10. What must they do?",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-11",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-11",
+      "label": "remote_only",
+      "prompt": "Name the safe next step for Tavi-EN-2-11 when there is a black ring while room pressure is stable.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-12",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-12",
+      "label": "remote_only",
+      "prompt": "For Tavi-EN-2-12, turn a black ring while room pressure is stable into one short safety instruction.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-13",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-13",
+      "label": "remote_only",
+      "prompt": "The zone around Tavi-EN-2-13 shows a black ring while room pressure is stable. Give only the safe action.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-14",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-14",
+      "label": "remote_only",
+      "prompt": "A worker sees a black ring while room pressure is stable near Tavi-EN-2-14. What must they do?",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-15",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-15",
+      "label": "remote_only",
+      "prompt": "Name the safe next step for Tavi-EN-2-15 when there is a black ring while room pressure is stable.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-2-16",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-2-16",
+      "label": "remote_only",
+      "prompt": "For Tavi-EN-2-16, turn a black ring while room pressure is stable into one short safety instruction.",
+      "target": "Use remote controls only."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-01",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-01",
+      "label": "isolate_power_first",
+      "prompt": "The zone around Tavi-EN-3-01 shows a silver triangle while room pressure falls. Give only the safe action.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-02",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-02",
+      "label": "isolate_power_first",
+      "prompt": "A worker sees a silver triangle while room pressure falls near Tavi-EN-3-02. What must they do?",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-03",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-03",
+      "label": "isolate_power_first",
+      "prompt": "Name the safe next step for Tavi-EN-3-03 when there is a silver triangle while room pressure falls.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-04",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-04",
+      "label": "isolate_power_first",
+      "prompt": "For Tavi-EN-3-04, turn a silver triangle while room pressure falls into one short safety instruction.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-05",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-05",
+      "label": "isolate_power_first",
+      "prompt": "The zone around Tavi-EN-3-05 shows a silver triangle while room pressure falls. Give only the safe action.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-06",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-06",
+      "label": "isolate_power_first",
+      "prompt": "A worker sees a silver triangle while room pressure falls near Tavi-EN-3-06. What must they do?",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-07",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-07",
+      "label": "isolate_power_first",
+      "prompt": "Name the safe next step for Tavi-EN-3-07 when there is a silver triangle while room pressure falls.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-08",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-08",
+      "label": "isolate_power_first",
+      "prompt": "For Tavi-EN-3-08, turn a silver triangle while room pressure falls into one short safety instruction.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-09",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-09",
+      "label": "isolate_power_first",
+      "prompt": "The zone around Tavi-EN-3-09 shows a silver triangle while room pressure falls. Give only the safe action.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-10",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-10",
+      "label": "isolate_power_first",
+      "prompt": "A worker sees a silver triangle while room pressure falls near Tavi-EN-3-10. What must they do?",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-11",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-11",
+      "label": "isolate_power_first",
+      "prompt": "Name the safe next step for Tavi-EN-3-11 when there is a silver triangle while room pressure falls.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-12",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-12",
+      "label": "isolate_power_first",
+      "prompt": "For Tavi-EN-3-12, turn a silver triangle while room pressure falls into one short safety instruction.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-13",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-13",
+      "label": "isolate_power_first",
+      "prompt": "The zone around Tavi-EN-3-13 shows a silver triangle while room pressure falls. Give only the safe action.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-14",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-14",
+      "label": "isolate_power_first",
+      "prompt": "A worker sees a silver triangle while room pressure falls near Tavi-EN-3-14. What must they do?",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-15",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-15",
+      "label": "isolate_power_first",
+      "prompt": "Name the safe next step for Tavi-EN-3-15 when there is a silver triangle while room pressure falls.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-3-16",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-3-16",
+      "label": "isolate_power_first",
+      "prompt": "For Tavi-EN-3-16, turn a silver triangle while room pressure falls into one short safety instruction.",
+      "target": "Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-01",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-01",
+      "label": "stop_and_measure",
+      "prompt": "The zone around Tavi-EN-4-01 shows an amber cross while pressure is unknown. Give only the safe action.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-02",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-02",
+      "label": "stop_and_measure",
+      "prompt": "A worker sees an amber cross while pressure is unknown near Tavi-EN-4-02. What must they do?",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-03",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-03",
+      "label": "stop_and_measure",
+      "prompt": "Name the safe next step for Tavi-EN-4-03 when there is an amber cross while pressure is unknown.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-04",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-04",
+      "label": "stop_and_measure",
+      "prompt": "For Tavi-EN-4-04, turn an amber cross while pressure is unknown into one short safety instruction.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-05",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-05",
+      "label": "stop_and_measure",
+      "prompt": "The zone around Tavi-EN-4-05 shows an amber cross while pressure is unknown. Give only the safe action.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-06",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-06",
+      "label": "stop_and_measure",
+      "prompt": "A worker sees an amber cross while pressure is unknown near Tavi-EN-4-06. What must they do?",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-07",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-07",
+      "label": "stop_and_measure",
+      "prompt": "Name the safe next step for Tavi-EN-4-07 when there is an amber cross while pressure is unknown.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-08",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-08",
+      "label": "stop_and_measure",
+      "prompt": "For Tavi-EN-4-08, turn an amber cross while pressure is unknown into one short safety instruction.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-09",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-09",
+      "label": "stop_and_measure",
+      "prompt": "The zone around Tavi-EN-4-09 shows an amber cross while pressure is unknown. Give only the safe action.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-10",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-10",
+      "label": "stop_and_measure",
+      "prompt": "A worker sees an amber cross while pressure is unknown near Tavi-EN-4-10. What must they do?",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-11",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-11",
+      "label": "stop_and_measure",
+      "prompt": "Name the safe next step for Tavi-EN-4-11 when there is an amber cross while pressure is unknown.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-12",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-12",
+      "label": "stop_and_measure",
+      "prompt": "For Tavi-EN-4-12, turn an amber cross while pressure is unknown into one short safety instruction.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-13",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-13",
+      "label": "stop_and_measure",
+      "prompt": "The zone around Tavi-EN-4-13 shows an amber cross while pressure is unknown. Give only the safe action.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-14",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-14",
+      "label": "stop_and_measure",
+      "prompt": "A worker sees an amber cross while pressure is unknown near Tavi-EN-4-14. What must they do?",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-15",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-15",
+      "label": "stop_and_measure",
+      "prompt": "Name the safe next step for Tavi-EN-4-15 when there is an amber cross while pressure is unknown.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-SAFETY-EN-4-16",
+      "split": "track_train",
+      "role": "safety",
+      "language": "en",
+      "device": "Tavi-EN-4-16",
+      "label": "stop_and_measure",
+      "prompt": "For Tavi-EN-4-16, turn an amber cross while pressure is unknown into one short safety instruction.",
+      "target": "Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-01",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-01",
+      "label": "thermal_rebound",
+      "prompt": "Устройство Neri-RU-1-01 показывает постоянное янтарное свечение после переноса нагрузки. Назовите только причину.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-02",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-02",
+      "label": "thermal_rebound",
+      "prompt": "Техник увидел у Neri-RU-1-02 постоянное янтарное свечение после переноса нагрузки. В чём причина?",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-03",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-03",
+      "label": "thermal_rebound",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-1-03: постоянное янтарное свечение после переноса нагрузки.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-04",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-04",
+      "label": "thermal_rebound",
+      "prompt": "Кратко определите причину для Neri-RU-1-04: постоянное янтарное свечение после переноса нагрузки.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-05",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-05",
+      "label": "thermal_rebound",
+      "prompt": "Устройство Neri-RU-1-05 показывает постоянное янтарное свечение после переноса нагрузки. Назовите только причину.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-06",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-06",
+      "label": "thermal_rebound",
+      "prompt": "Техник увидел у Neri-RU-1-06 постоянное янтарное свечение после переноса нагрузки. В чём причина?",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-07",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-07",
+      "label": "thermal_rebound",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-1-07: постоянное янтарное свечение после переноса нагрузки.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-08",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-08",
+      "label": "thermal_rebound",
+      "prompt": "Кратко определите причину для Neri-RU-1-08: постоянное янтарное свечение после переноса нагрузки.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-09",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-09",
+      "label": "thermal_rebound",
+      "prompt": "Устройство Neri-RU-1-09 показывает постоянное янтарное свечение после переноса нагрузки. Назовите только причину.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-10",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-10",
+      "label": "thermal_rebound",
+      "prompt": "Техник увидел у Neri-RU-1-10 постоянное янтарное свечение после переноса нагрузки. В чём причина?",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-11",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-11",
+      "label": "thermal_rebound",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-1-11: постоянное янтарное свечение после переноса нагрузки.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-12",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-12",
+      "label": "thermal_rebound",
+      "prompt": "Кратко определите причину для Neri-RU-1-12: постоянное янтарное свечение после переноса нагрузки.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-13",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-13",
+      "label": "thermal_rebound",
+      "prompt": "Устройство Neri-RU-1-13 показывает постоянное янтарное свечение после переноса нагрузки. Назовите только причину.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-14",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-14",
+      "label": "thermal_rebound",
+      "prompt": "Техник увидел у Neri-RU-1-14 постоянное янтарное свечение после переноса нагрузки. В чём причина?",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-15",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-15",
+      "label": "thermal_rebound",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-1-15: постоянное янтарное свечение после переноса нагрузки.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-1-16",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-1-16",
+      "label": "thermal_rebound",
+      "prompt": "Кратко определите причину для Neri-RU-1-16: постоянное янтарное свечение после переноса нагрузки.",
+      "target": "Причина — тепловой отскок."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-01",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-01",
+      "label": "phase_drift",
+      "prompt": "Устройство Neri-RU-2-01 показывает три синих импульса после запуска. Назовите только причину.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-02",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-02",
+      "label": "phase_drift",
+      "prompt": "Техник увидел у Neri-RU-2-02 три синих импульса после запуска. В чём причина?",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-03",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-03",
+      "label": "phase_drift",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-2-03: три синих импульса после запуска.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-04",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-04",
+      "label": "phase_drift",
+      "prompt": "Кратко определите причину для Neri-RU-2-04: три синих импульса после запуска.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-05",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-05",
+      "label": "phase_drift",
+      "prompt": "Устройство Neri-RU-2-05 показывает три синих импульса после запуска. Назовите только причину.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-06",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-06",
+      "label": "phase_drift",
+      "prompt": "Техник увидел у Neri-RU-2-06 три синих импульса после запуска. В чём причина?",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-07",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-07",
+      "label": "phase_drift",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-2-07: три синих импульса после запуска.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-08",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-08",
+      "label": "phase_drift",
+      "prompt": "Кратко определите причину для Neri-RU-2-08: три синих импульса после запуска.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-09",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-09",
+      "label": "phase_drift",
+      "prompt": "Устройство Neri-RU-2-09 показывает три синих импульса после запуска. Назовите только причину.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-10",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-10",
+      "label": "phase_drift",
+      "prompt": "Техник увидел у Neri-RU-2-10 три синих импульса после запуска. В чём причина?",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-11",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-11",
+      "label": "phase_drift",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-2-11: три синих импульса после запуска.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-12",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-12",
+      "label": "phase_drift",
+      "prompt": "Кратко определите причину для Neri-RU-2-12: три синих импульса после запуска.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-13",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-13",
+      "label": "phase_drift",
+      "prompt": "Устройство Neri-RU-2-13 показывает три синих импульса после запуска. Назовите только причину.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-14",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-14",
+      "label": "phase_drift",
+      "prompt": "Техник увидел у Neri-RU-2-14 три синих импульса после запуска. В чём причина?",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-15",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-15",
+      "label": "phase_drift",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-2-15: три синих импульса после запуска.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-2-16",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-2-16",
+      "label": "phase_drift",
+      "prompt": "Кратко определите причину для Neri-RU-2-16: три синих импульса после запуска.",
+      "target": "Причина — сдвиг фазы."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-01",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-01",
+      "label": "timing_split",
+      "prompt": "Устройство Neri-RU-3-01 показывает чередующиеся белые и красные вспышки после перезапуска. Назовите только причину.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-02",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-02",
+      "label": "timing_split",
+      "prompt": "Техник увидел у Neri-RU-3-02 чередующиеся белые и красные вспышки после перезапуска. В чём причина?",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-03",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-03",
+      "label": "timing_split",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-3-03: чередующиеся белые и красные вспышки после перезапуска.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-04",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-04",
+      "label": "timing_split",
+      "prompt": "Кратко определите причину для Neri-RU-3-04: чередующиеся белые и красные вспышки после перезапуска.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-05",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-05",
+      "label": "timing_split",
+      "prompt": "Устройство Neri-RU-3-05 показывает чередующиеся белые и красные вспышки после перезапуска. Назовите только причину.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-06",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-06",
+      "label": "timing_split",
+      "prompt": "Техник увидел у Neri-RU-3-06 чередующиеся белые и красные вспышки после перезапуска. В чём причина?",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-07",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-07",
+      "label": "timing_split",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-3-07: чередующиеся белые и красные вспышки после перезапуска.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-08",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-08",
+      "label": "timing_split",
+      "prompt": "Кратко определите причину для Neri-RU-3-08: чередующиеся белые и красные вспышки после перезапуска.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-09",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-09",
+      "label": "timing_split",
+      "prompt": "Устройство Neri-RU-3-09 показывает чередующиеся белые и красные вспышки после перезапуска. Назовите только причину.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-10",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-10",
+      "label": "timing_split",
+      "prompt": "Техник увидел у Neri-RU-3-10 чередующиеся белые и красные вспышки после перезапуска. В чём причина?",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-11",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-11",
+      "label": "timing_split",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-3-11: чередующиеся белые и красные вспышки после перезапуска.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-12",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-12",
+      "label": "timing_split",
+      "prompt": "Кратко определите причину для Neri-RU-3-12: чередующиеся белые и красные вспышки после перезапуска.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-13",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-13",
+      "label": "timing_split",
+      "prompt": "Устройство Neri-RU-3-13 показывает чередующиеся белые и красные вспышки после перезапуска. Назовите только причину.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-14",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-14",
+      "label": "timing_split",
+      "prompt": "Техник увидел у Neri-RU-3-14 чередующиеся белые и красные вспышки после перезапуска. В чём причина?",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-15",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-15",
+      "label": "timing_split",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-3-15: чередующиеся белые и красные вспышки после перезапуска.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-3-16",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-3-16",
+      "label": "timing_split",
+      "prompt": "Кратко определите причину для Neri-RU-3-16: чередующиеся белые и красные вспышки после перезапуска.",
+      "target": "Причина — рассинхронизация времени."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-01",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-01",
+      "label": "coolant_echo",
+      "prompt": "Устройство Neri-RU-4-01 показывает два фиолетовых кольца перед остановкой. Назовите только причину.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-02",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-02",
+      "label": "coolant_echo",
+      "prompt": "Техник увидел у Neri-RU-4-02 два фиолетовых кольца перед остановкой. В чём причина?",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-03",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-03",
+      "label": "coolant_echo",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-4-03: два фиолетовых кольца перед остановкой.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-04",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-04",
+      "label": "coolant_echo",
+      "prompt": "Кратко определите причину для Neri-RU-4-04: два фиолетовых кольца перед остановкой.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-05",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-05",
+      "label": "coolant_echo",
+      "prompt": "Устройство Neri-RU-4-05 показывает два фиолетовых кольца перед остановкой. Назовите только причину.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-06",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-06",
+      "label": "coolant_echo",
+      "prompt": "Техник увидел у Neri-RU-4-06 два фиолетовых кольца перед остановкой. В чём причина?",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-07",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-07",
+      "label": "coolant_echo",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-4-07: два фиолетовых кольца перед остановкой.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-08",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-08",
+      "label": "coolant_echo",
+      "prompt": "Кратко определите причину для Neri-RU-4-08: два фиолетовых кольца перед остановкой.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-09",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-09",
+      "label": "coolant_echo",
+      "prompt": "Устройство Neri-RU-4-09 показывает два фиолетовых кольца перед остановкой. Назовите только причину.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-10",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-10",
+      "label": "coolant_echo",
+      "prompt": "Техник увидел у Neri-RU-4-10 два фиолетовых кольца перед остановкой. В чём причина?",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-11",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-11",
+      "label": "coolant_echo",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-4-11: два фиолетовых кольца перед остановкой.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-12",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-12",
+      "label": "coolant_echo",
+      "prompt": "Кратко определите причину для Neri-RU-4-12: два фиолетовых кольца перед остановкой.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-13",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-13",
+      "label": "coolant_echo",
+      "prompt": "Устройство Neri-RU-4-13 показывает два фиолетовых кольца перед остановкой. Назовите только причину.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-14",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-14",
+      "label": "coolant_echo",
+      "prompt": "Техник увидел у Neri-RU-4-14 два фиолетовых кольца перед остановкой. В чём причина?",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-15",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-15",
+      "label": "coolant_echo",
+      "prompt": "Назовите неисправность по сигналу Neri-RU-4-15: два фиолетовых кольца перед остановкой.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-CAUSE-RU-4-16",
+      "split": "track_train",
+      "role": "cause",
+      "language": "ru",
+      "device": "Neri-RU-4-16",
+      "label": "coolant_echo",
+      "prompt": "Кратко определите причину для Neri-RU-4-16: два фиолетовых кольца перед остановкой.",
+      "target": "Причина — эхо охлаждения."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-01",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-01",
+      "label": "keep_aux_vent_closed",
+      "prompt": "В зоне рядом с Tavi-RU-1-01 видна двойная медная метка при растущем давлении. Назовите только безопасное действие.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-02",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-02",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Работник видит рядом с Tavi-RU-1-02 двойная медная метка при растущем давлении. Что нужно сделать?",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-03",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-03",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-1-03, если видна двойная медная метка при растущем давлении.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-04",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-04",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Для Tavi-RU-1-04 превратите сигнал «двойная медная метка при растущем давлении» в короткую инструкцию.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-05",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-05",
+      "label": "keep_aux_vent_closed",
+      "prompt": "В зоне рядом с Tavi-RU-1-05 видна двойная медная метка при растущем давлении. Назовите только безопасное действие.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-06",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-06",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Работник видит рядом с Tavi-RU-1-06 двойная медная метка при растущем давлении. Что нужно сделать?",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-07",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-07",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-1-07, если видна двойная медная метка при растущем давлении.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-08",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-08",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Для Tavi-RU-1-08 превратите сигнал «двойная медная метка при растущем давлении» в короткую инструкцию.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-09",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-09",
+      "label": "keep_aux_vent_closed",
+      "prompt": "В зоне рядом с Tavi-RU-1-09 видна двойная медная метка при растущем давлении. Назовите только безопасное действие.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-10",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-10",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Работник видит рядом с Tavi-RU-1-10 двойная медная метка при растущем давлении. Что нужно сделать?",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-11",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-11",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-1-11, если видна двойная медная метка при растущем давлении.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-12",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-12",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Для Tavi-RU-1-12 превратите сигнал «двойная медная метка при растущем давлении» в короткую инструкцию.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-13",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-13",
+      "label": "keep_aux_vent_closed",
+      "prompt": "В зоне рядом с Tavi-RU-1-13 видна двойная медная метка при растущем давлении. Назовите только безопасное действие.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-14",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-14",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Работник видит рядом с Tavi-RU-1-14 двойная медная метка при растущем давлении. Что нужно сделать?",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-15",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-15",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-1-15, если видна двойная медная метка при растущем давлении.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-1-16",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-1-16",
+      "label": "keep_aux_vent_closed",
+      "prompt": "Для Tavi-RU-1-16 превратите сигнал «двойная медная метка при растущем давлении» в короткую инструкцию.",
+      "target": "Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-01",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-01",
+      "label": "remote_only",
+      "prompt": "В зоне рядом с Tavi-RU-2-01 видна чёрное кольцо при стабильном давлении. Назовите только безопасное действие.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-02",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-02",
+      "label": "remote_only",
+      "prompt": "Работник видит рядом с Tavi-RU-2-02 чёрное кольцо при стабильном давлении. Что нужно сделать?",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-03",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-03",
+      "label": "remote_only",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-2-03, если видна чёрное кольцо при стабильном давлении.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-04",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-04",
+      "label": "remote_only",
+      "prompt": "Для Tavi-RU-2-04 превратите сигнал «чёрное кольцо при стабильном давлении» в короткую инструкцию.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-05",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-05",
+      "label": "remote_only",
+      "prompt": "В зоне рядом с Tavi-RU-2-05 видна чёрное кольцо при стабильном давлении. Назовите только безопасное действие.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-06",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-06",
+      "label": "remote_only",
+      "prompt": "Работник видит рядом с Tavi-RU-2-06 чёрное кольцо при стабильном давлении. Что нужно сделать?",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-07",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-07",
+      "label": "remote_only",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-2-07, если видна чёрное кольцо при стабильном давлении.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-08",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-08",
+      "label": "remote_only",
+      "prompt": "Для Tavi-RU-2-08 превратите сигнал «чёрное кольцо при стабильном давлении» в короткую инструкцию.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-09",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-09",
+      "label": "remote_only",
+      "prompt": "В зоне рядом с Tavi-RU-2-09 видна чёрное кольцо при стабильном давлении. Назовите только безопасное действие.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-10",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-10",
+      "label": "remote_only",
+      "prompt": "Работник видит рядом с Tavi-RU-2-10 чёрное кольцо при стабильном давлении. Что нужно сделать?",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-11",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-11",
+      "label": "remote_only",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-2-11, если видна чёрное кольцо при стабильном давлении.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-12",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-12",
+      "label": "remote_only",
+      "prompt": "Для Tavi-RU-2-12 превратите сигнал «чёрное кольцо при стабильном давлении» в короткую инструкцию.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-13",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-13",
+      "label": "remote_only",
+      "prompt": "В зоне рядом с Tavi-RU-2-13 видна чёрное кольцо при стабильном давлении. Назовите только безопасное действие.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-14",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-14",
+      "label": "remote_only",
+      "prompt": "Работник видит рядом с Tavi-RU-2-14 чёрное кольцо при стабильном давлении. Что нужно сделать?",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-15",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-15",
+      "label": "remote_only",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-2-15, если видна чёрное кольцо при стабильном давлении.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-2-16",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-2-16",
+      "label": "remote_only",
+      "prompt": "Для Tavi-RU-2-16 превратите сигнал «чёрное кольцо при стабильном давлении» в короткую инструкцию.",
+      "target": "Работайте только удалённо."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-01",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-01",
+      "label": "isolate_power_first",
+      "prompt": "В зоне рядом с Tavi-RU-3-01 видна серебряный треугольник при падающем давлении. Назовите только безопасное действие.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-02",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-02",
+      "label": "isolate_power_first",
+      "prompt": "Работник видит рядом с Tavi-RU-3-02 серебряный треугольник при падающем давлении. Что нужно сделать?",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-03",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-03",
+      "label": "isolate_power_first",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-3-03, если видна серебряный треугольник при падающем давлении.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-04",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-04",
+      "label": "isolate_power_first",
+      "prompt": "Для Tavi-RU-3-04 превратите сигнал «серебряный треугольник при падающем давлении» в короткую инструкцию.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-05",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-05",
+      "label": "isolate_power_first",
+      "prompt": "В зоне рядом с Tavi-RU-3-05 видна серебряный треугольник при падающем давлении. Назовите только безопасное действие.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-06",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-06",
+      "label": "isolate_power_first",
+      "prompt": "Работник видит рядом с Tavi-RU-3-06 серебряный треугольник при падающем давлении. Что нужно сделать?",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-07",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-07",
+      "label": "isolate_power_first",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-3-07, если видна серебряный треугольник при падающем давлении.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-08",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-08",
+      "label": "isolate_power_first",
+      "prompt": "Для Tavi-RU-3-08 превратите сигнал «серебряный треугольник при падающем давлении» в короткую инструкцию.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-09",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-09",
+      "label": "isolate_power_first",
+      "prompt": "В зоне рядом с Tavi-RU-3-09 видна серебряный треугольник при падающем давлении. Назовите только безопасное действие.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-10",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-10",
+      "label": "isolate_power_first",
+      "prompt": "Работник видит рядом с Tavi-RU-3-10 серебряный треугольник при падающем давлении. Что нужно сделать?",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-11",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-11",
+      "label": "isolate_power_first",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-3-11, если видна серебряный треугольник при падающем давлении.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-12",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-12",
+      "label": "isolate_power_first",
+      "prompt": "Для Tavi-RU-3-12 превратите сигнал «серебряный треугольник при падающем давлении» в короткую инструкцию.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-13",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-13",
+      "label": "isolate_power_first",
+      "prompt": "В зоне рядом с Tavi-RU-3-13 видна серебряный треугольник при падающем давлении. Назовите только безопасное действие.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-14",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-14",
+      "label": "isolate_power_first",
+      "prompt": "Работник видит рядом с Tavi-RU-3-14 серебряный треугольник при падающем давлении. Что нужно сделать?",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-15",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-15",
+      "label": "isolate_power_first",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-3-15, если видна серебряный треугольник при падающем давлении.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-3-16",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-3-16",
+      "label": "isolate_power_first",
+      "prompt": "Для Tavi-RU-3-16 превратите сигнал «серебряный треугольник при падающем давлении» в короткую инструкцию.",
+      "target": "Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-01",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-01",
+      "label": "stop_and_measure",
+      "prompt": "В зоне рядом с Tavi-RU-4-01 видна янтарный крест при неизвестном давлении. Назовите только безопасное действие.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-02",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-02",
+      "label": "stop_and_measure",
+      "prompt": "Работник видит рядом с Tavi-RU-4-02 янтарный крест при неизвестном давлении. Что нужно сделать?",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-03",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-03",
+      "label": "stop_and_measure",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-4-03, если видна янтарный крест при неизвестном давлении.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-04",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-04",
+      "label": "stop_and_measure",
+      "prompt": "Для Tavi-RU-4-04 превратите сигнал «янтарный крест при неизвестном давлении» в короткую инструкцию.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-05",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-05",
+      "label": "stop_and_measure",
+      "prompt": "В зоне рядом с Tavi-RU-4-05 видна янтарный крест при неизвестном давлении. Назовите только безопасное действие.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-06",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-06",
+      "label": "stop_and_measure",
+      "prompt": "Работник видит рядом с Tavi-RU-4-06 янтарный крест при неизвестном давлении. Что нужно сделать?",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-07",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-07",
+      "label": "stop_and_measure",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-4-07, если видна янтарный крест при неизвестном давлении.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-08",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-08",
+      "label": "stop_and_measure",
+      "prompt": "Для Tavi-RU-4-08 превратите сигнал «янтарный крест при неизвестном давлении» в короткую инструкцию.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-09",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-09",
+      "label": "stop_and_measure",
+      "prompt": "В зоне рядом с Tavi-RU-4-09 видна янтарный крест при неизвестном давлении. Назовите только безопасное действие.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-10",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-10",
+      "label": "stop_and_measure",
+      "prompt": "Работник видит рядом с Tavi-RU-4-10 янтарный крест при неизвестном давлении. Что нужно сделать?",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-11",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-11",
+      "label": "stop_and_measure",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-4-11, если видна янтарный крест при неизвестном давлении.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-12",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-12",
+      "label": "stop_and_measure",
+      "prompt": "Для Tavi-RU-4-12 превратите сигнал «янтарный крест при неизвестном давлении» в короткую инструкцию.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-13",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-13",
+      "label": "stop_and_measure",
+      "prompt": "В зоне рядом с Tavi-RU-4-13 видна янтарный крест при неизвестном давлении. Назовите только безопасное действие.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-14",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-14",
+      "label": "stop_and_measure",
+      "prompt": "Работник видит рядом с Tavi-RU-4-14 янтарный крест при неизвестном давлении. Что нужно сделать?",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-15",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-15",
+      "label": "stop_and_measure",
+      "prompt": "Назовите безопасный следующий шаг для Tavi-RU-4-15, если видна янтарный крест при неизвестном давлении.",
+      "target": "Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-SAFETY-RU-4-16",
+      "split": "track_train",
+      "role": "safety",
+      "language": "ru",
+      "device": "Tavi-RU-4-16",
+      "label": "stop_and_measure",
+      "prompt": "Для Tavi-RU-4-16 превратите сигнал «янтарный крест при неизвестном давлении» в короткую инструкцию.",
+      "target": "Остановитесь и сначала измерьте давление."
+    }
+  ],
+  "merger_lessons": [
+    {
+      "id": "G5B-MERGE-EN-1-01",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Mero-EN-1-01 shows a steady amber glow after load transfer. Its work zone separately shows a double copper mark while room pressure rises. Give the cause and safe action.",
+      "target": "The cause is thermal rebound. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-02",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Mero-EN-1-02 shows a steady amber glow after load transfer. Its work zone separately shows a black ring while room pressure is stable. Give the cause and safe action.",
+      "target": "The cause is thermal rebound. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-03",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Mero-EN-1-03 shows a steady amber glow after load transfer. Its work zone separately shows a silver triangle while room pressure falls. Give the cause and safe action.",
+      "target": "The cause is thermal rebound. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-04",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Mero-EN-1-04 shows a steady amber glow after load transfer. Its work zone separately shows an amber cross while pressure is unknown. Give the cause and safe action.",
+      "target": "The cause is thermal rebound. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-05",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Mero-EN-1-05 shows three blue pulses after startup. Its work zone separately shows a double copper mark while room pressure rises. Give the cause and safe action.",
+      "target": "The cause is phase drift. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-06",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Mero-EN-1-06 shows three blue pulses after startup. Its work zone separately shows a black ring while room pressure is stable. Give the cause and safe action.",
+      "target": "The cause is phase drift. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-07",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Mero-EN-1-07 shows three blue pulses after startup. Its work zone separately shows a silver triangle while room pressure falls. Give the cause and safe action.",
+      "target": "The cause is phase drift. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-08",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Mero-EN-1-08 shows three blue pulses after startup. Its work zone separately shows an amber cross while pressure is unknown. Give the cause and safe action.",
+      "target": "The cause is phase drift. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-09",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Mero-EN-1-09 shows alternating white and red flashes after restart. Its work zone separately shows a double copper mark while room pressure rises. Give the cause and safe action.",
+      "target": "The cause is timing split. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-10",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Mero-EN-1-10 shows alternating white and red flashes after restart. Its work zone separately shows a black ring while room pressure is stable. Give the cause and safe action.",
+      "target": "The cause is timing split. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-11",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Mero-EN-1-11 shows alternating white and red flashes after restart. Its work zone separately shows a silver triangle while room pressure falls. Give the cause and safe action.",
+      "target": "The cause is timing split. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-12",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Mero-EN-1-12 shows alternating white and red flashes after restart. Its work zone separately shows an amber cross while pressure is unknown. Give the cause and safe action.",
+      "target": "The cause is timing split. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-13",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Mero-EN-1-13 shows two violet rings before shutdown. Its work zone separately shows a double copper mark while room pressure rises. Give the cause and safe action.",
+      "target": "The cause is coolant echo. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-14",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Mero-EN-1-14 shows two violet rings before shutdown. Its work zone separately shows a black ring while room pressure is stable. Give the cause and safe action.",
+      "target": "The cause is coolant echo. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-15",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Mero-EN-1-15 shows two violet rings before shutdown. Its work zone separately shows a silver triangle while room pressure falls. Give the cause and safe action.",
+      "target": "The cause is coolant echo. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-1-16",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-1-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Mero-EN-1-16 shows two violet rings before shutdown. Its work zone separately shows an amber cross while pressure is unknown. Give the cause and safe action.",
+      "target": "The cause is coolant echo. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-01",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Help the operator with Mero-EN-2-01: device report — a steady amber glow after load transfer; zone report — a double copper mark while room pressure rises. What happened and what now?",
+      "target": "The cause is thermal rebound. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-02",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Help the operator with Mero-EN-2-02: device report — a steady amber glow after load transfer; zone report — a black ring while room pressure is stable. What happened and what now?",
+      "target": "The cause is thermal rebound. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-03",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Help the operator with Mero-EN-2-03: device report — a steady amber glow after load transfer; zone report — a silver triangle while room pressure falls. What happened and what now?",
+      "target": "The cause is thermal rebound. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-04",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Help the operator with Mero-EN-2-04: device report — a steady amber glow after load transfer; zone report — an amber cross while pressure is unknown. What happened and what now?",
+      "target": "The cause is thermal rebound. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-05",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Help the operator with Mero-EN-2-05: device report — three blue pulses after startup; zone report — a double copper mark while room pressure rises. What happened and what now?",
+      "target": "The cause is phase drift. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-06",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Help the operator with Mero-EN-2-06: device report — three blue pulses after startup; zone report — a black ring while room pressure is stable. What happened and what now?",
+      "target": "The cause is phase drift. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-07",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Help the operator with Mero-EN-2-07: device report — three blue pulses after startup; zone report — a silver triangle while room pressure falls. What happened and what now?",
+      "target": "The cause is phase drift. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-08",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Help the operator with Mero-EN-2-08: device report — three blue pulses after startup; zone report — an amber cross while pressure is unknown. What happened and what now?",
+      "target": "The cause is phase drift. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-09",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Help the operator with Mero-EN-2-09: device report — alternating white and red flashes after restart; zone report — a double copper mark while room pressure rises. What happened and what now?",
+      "target": "The cause is timing split. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-10",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Help the operator with Mero-EN-2-10: device report — alternating white and red flashes after restart; zone report — a black ring while room pressure is stable. What happened and what now?",
+      "target": "The cause is timing split. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-11",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Help the operator with Mero-EN-2-11: device report — alternating white and red flashes after restart; zone report — a silver triangle while room pressure falls. What happened and what now?",
+      "target": "The cause is timing split. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-12",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Help the operator with Mero-EN-2-12: device report — alternating white and red flashes after restart; zone report — an amber cross while pressure is unknown. What happened and what now?",
+      "target": "The cause is timing split. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-13",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Help the operator with Mero-EN-2-13: device report — two violet rings before shutdown; zone report — a double copper mark while room pressure rises. What happened and what now?",
+      "target": "The cause is coolant echo. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-14",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Help the operator with Mero-EN-2-14: device report — two violet rings before shutdown; zone report — a black ring while room pressure is stable. What happened and what now?",
+      "target": "The cause is coolant echo. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-15",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Help the operator with Mero-EN-2-15: device report — two violet rings before shutdown; zone report — a silver triangle while room pressure falls. What happened and what now?",
+      "target": "The cause is coolant echo. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-2-16",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-2-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Help the operator with Mero-EN-2-16: device report — two violet rings before shutdown; zone report — an amber cross while pressure is unknown. What happened and what now?",
+      "target": "The cause is coolant echo. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-01",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Combine two independent observations about Mero-EN-3-01: a steady amber glow after load transfer; a double copper mark while room pressure rises. Answer plainly.",
+      "target": "The cause is thermal rebound. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-02",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Combine two independent observations about Mero-EN-3-02: a steady amber glow after load transfer; a black ring while room pressure is stable. Answer plainly.",
+      "target": "The cause is thermal rebound. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-03",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Combine two independent observations about Mero-EN-3-03: a steady amber glow after load transfer; a silver triangle while room pressure falls. Answer plainly.",
+      "target": "The cause is thermal rebound. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-04",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Combine two independent observations about Mero-EN-3-04: a steady amber glow after load transfer; an amber cross while pressure is unknown. Answer plainly.",
+      "target": "The cause is thermal rebound. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-05",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Combine two independent observations about Mero-EN-3-05: three blue pulses after startup; a double copper mark while room pressure rises. Answer plainly.",
+      "target": "The cause is phase drift. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-06",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Combine two independent observations about Mero-EN-3-06: three blue pulses after startup; a black ring while room pressure is stable. Answer plainly.",
+      "target": "The cause is phase drift. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-07",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Combine two independent observations about Mero-EN-3-07: three blue pulses after startup; a silver triangle while room pressure falls. Answer plainly.",
+      "target": "The cause is phase drift. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-08",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Combine two independent observations about Mero-EN-3-08: three blue pulses after startup; an amber cross while pressure is unknown. Answer plainly.",
+      "target": "The cause is phase drift. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-09",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Combine two independent observations about Mero-EN-3-09: alternating white and red flashes after restart; a double copper mark while room pressure rises. Answer plainly.",
+      "target": "The cause is timing split. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-10",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Combine two independent observations about Mero-EN-3-10: alternating white and red flashes after restart; a black ring while room pressure is stable. Answer plainly.",
+      "target": "The cause is timing split. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-11",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Combine two independent observations about Mero-EN-3-11: alternating white and red flashes after restart; a silver triangle while room pressure falls. Answer plainly.",
+      "target": "The cause is timing split. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-12",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Combine two independent observations about Mero-EN-3-12: alternating white and red flashes after restart; an amber cross while pressure is unknown. Answer plainly.",
+      "target": "The cause is timing split. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-13",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Combine two independent observations about Mero-EN-3-13: two violet rings before shutdown; a double copper mark while room pressure rises. Answer plainly.",
+      "target": "The cause is coolant echo. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-14",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Combine two independent observations about Mero-EN-3-14: two violet rings before shutdown; a black ring while room pressure is stable. Answer plainly.",
+      "target": "The cause is coolant echo. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-15",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Combine two independent observations about Mero-EN-3-15: two violet rings before shutdown; a silver triangle while room pressure falls. Answer plainly.",
+      "target": "The cause is coolant echo. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-3-16",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-3-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Combine two independent observations about Mero-EN-3-16: two violet rings before shutdown; an amber cross while pressure is unknown. Answer plainly.",
+      "target": "The cause is coolant echo. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-01",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Mero-EN-4-01 shows a steady amber glow after load transfer. Its work zone separately shows a double copper mark while room pressure rises. Give the cause and safe action.",
+      "target": "The cause is thermal rebound. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-02",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Mero-EN-4-02 shows a steady amber glow after load transfer. Its work zone separately shows a black ring while room pressure is stable. Give the cause and safe action.",
+      "target": "The cause is thermal rebound. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-03",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Mero-EN-4-03 shows a steady amber glow after load transfer. Its work zone separately shows a silver triangle while room pressure falls. Give the cause and safe action.",
+      "target": "The cause is thermal rebound. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-04",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Mero-EN-4-04 shows a steady amber glow after load transfer. Its work zone separately shows an amber cross while pressure is unknown. Give the cause and safe action.",
+      "target": "The cause is thermal rebound. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-05",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Mero-EN-4-05 shows three blue pulses after startup. Its work zone separately shows a double copper mark while room pressure rises. Give the cause and safe action.",
+      "target": "The cause is phase drift. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-06",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Mero-EN-4-06 shows three blue pulses after startup. Its work zone separately shows a black ring while room pressure is stable. Give the cause and safe action.",
+      "target": "The cause is phase drift. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-07",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Mero-EN-4-07 shows three blue pulses after startup. Its work zone separately shows a silver triangle while room pressure falls. Give the cause and safe action.",
+      "target": "The cause is phase drift. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-08",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Mero-EN-4-08 shows three blue pulses after startup. Its work zone separately shows an amber cross while pressure is unknown. Give the cause and safe action.",
+      "target": "The cause is phase drift. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-09",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Mero-EN-4-09 shows alternating white and red flashes after restart. Its work zone separately shows a double copper mark while room pressure rises. Give the cause and safe action.",
+      "target": "The cause is timing split. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-10",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Mero-EN-4-10 shows alternating white and red flashes after restart. Its work zone separately shows a black ring while room pressure is stable. Give the cause and safe action.",
+      "target": "The cause is timing split. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-11",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Mero-EN-4-11 shows alternating white and red flashes after restart. Its work zone separately shows a silver triangle while room pressure falls. Give the cause and safe action.",
+      "target": "The cause is timing split. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-12",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Mero-EN-4-12 shows alternating white and red flashes after restart. Its work zone separately shows an amber cross while pressure is unknown. Give the cause and safe action.",
+      "target": "The cause is timing split. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-13",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Mero-EN-4-13 shows two violet rings before shutdown. Its work zone separately shows a double copper mark while room pressure rises. Give the cause and safe action.",
+      "target": "The cause is coolant echo. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-14",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Mero-EN-4-14 shows two violet rings before shutdown. Its work zone separately shows a black ring while room pressure is stable. Give the cause and safe action.",
+      "target": "The cause is coolant echo. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-15",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Mero-EN-4-15 shows two violet rings before shutdown. Its work zone separately shows a silver triangle while room pressure falls. Give the cause and safe action.",
+      "target": "The cause is coolant echo. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-4-16",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-4-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Mero-EN-4-16 shows two violet rings before shutdown. Its work zone separately shows an amber cross while pressure is unknown. Give the cause and safe action.",
+      "target": "The cause is coolant echo. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-01",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Help the operator with Mero-EN-5-01: device report — a steady amber glow after load transfer; zone report — a double copper mark while room pressure rises. What happened and what now?",
+      "target": "The cause is thermal rebound. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-02",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Help the operator with Mero-EN-5-02: device report — a steady amber glow after load transfer; zone report — a black ring while room pressure is stable. What happened and what now?",
+      "target": "The cause is thermal rebound. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-03",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Help the operator with Mero-EN-5-03: device report — a steady amber glow after load transfer; zone report — a silver triangle while room pressure falls. What happened and what now?",
+      "target": "The cause is thermal rebound. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-04",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Help the operator with Mero-EN-5-04: device report — a steady amber glow after load transfer; zone report — an amber cross while pressure is unknown. What happened and what now?",
+      "target": "The cause is thermal rebound. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-05",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Help the operator with Mero-EN-5-05: device report — three blue pulses after startup; zone report — a double copper mark while room pressure rises. What happened and what now?",
+      "target": "The cause is phase drift. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-06",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Help the operator with Mero-EN-5-06: device report — three blue pulses after startup; zone report — a black ring while room pressure is stable. What happened and what now?",
+      "target": "The cause is phase drift. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-07",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Help the operator with Mero-EN-5-07: device report — three blue pulses after startup; zone report — a silver triangle while room pressure falls. What happened and what now?",
+      "target": "The cause is phase drift. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-08",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Help the operator with Mero-EN-5-08: device report — three blue pulses after startup; zone report — an amber cross while pressure is unknown. What happened and what now?",
+      "target": "The cause is phase drift. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-09",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Help the operator with Mero-EN-5-09: device report — alternating white and red flashes after restart; zone report — a double copper mark while room pressure rises. What happened and what now?",
+      "target": "The cause is timing split. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-10",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Help the operator with Mero-EN-5-10: device report — alternating white and red flashes after restart; zone report — a black ring while room pressure is stable. What happened and what now?",
+      "target": "The cause is timing split. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-11",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Help the operator with Mero-EN-5-11: device report — alternating white and red flashes after restart; zone report — a silver triangle while room pressure falls. What happened and what now?",
+      "target": "The cause is timing split. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-12",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Help the operator with Mero-EN-5-12: device report — alternating white and red flashes after restart; zone report — an amber cross while pressure is unknown. What happened and what now?",
+      "target": "The cause is timing split. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-13",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Help the operator with Mero-EN-5-13: device report — two violet rings before shutdown; zone report — a double copper mark while room pressure rises. What happened and what now?",
+      "target": "The cause is coolant echo. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-14",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Help the operator with Mero-EN-5-14: device report — two violet rings before shutdown; zone report — a black ring while room pressure is stable. What happened and what now?",
+      "target": "The cause is coolant echo. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-15",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Help the operator with Mero-EN-5-15: device report — two violet rings before shutdown; zone report — a silver triangle while room pressure falls. What happened and what now?",
+      "target": "The cause is coolant echo. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-5-16",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-5-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Help the operator with Mero-EN-5-16: device report — two violet rings before shutdown; zone report — an amber cross while pressure is unknown. What happened and what now?",
+      "target": "The cause is coolant echo. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-01",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Combine two independent observations about Mero-EN-6-01: a steady amber glow after load transfer; a double copper mark while room pressure rises. Answer plainly.",
+      "target": "The cause is thermal rebound. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-02",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Combine two independent observations about Mero-EN-6-02: a steady amber glow after load transfer; a black ring while room pressure is stable. Answer plainly.",
+      "target": "The cause is thermal rebound. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-03",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Combine two independent observations about Mero-EN-6-03: a steady amber glow after load transfer; a silver triangle while room pressure falls. Answer plainly.",
+      "target": "The cause is thermal rebound. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-04",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Combine two independent observations about Mero-EN-6-04: a steady amber glow after load transfer; an amber cross while pressure is unknown. Answer plainly.",
+      "target": "The cause is thermal rebound. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-05",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Combine two independent observations about Mero-EN-6-05: three blue pulses after startup; a double copper mark while room pressure rises. Answer plainly.",
+      "target": "The cause is phase drift. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-06",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Combine two independent observations about Mero-EN-6-06: three blue pulses after startup; a black ring while room pressure is stable. Answer plainly.",
+      "target": "The cause is phase drift. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-07",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Combine two independent observations about Mero-EN-6-07: three blue pulses after startup; a silver triangle while room pressure falls. Answer plainly.",
+      "target": "The cause is phase drift. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-08",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Combine two independent observations about Mero-EN-6-08: three blue pulses after startup; an amber cross while pressure is unknown. Answer plainly.",
+      "target": "The cause is phase drift. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-09",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Combine two independent observations about Mero-EN-6-09: alternating white and red flashes after restart; a double copper mark while room pressure rises. Answer plainly.",
+      "target": "The cause is timing split. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-10",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Combine two independent observations about Mero-EN-6-10: alternating white and red flashes after restart; a black ring while room pressure is stable. Answer plainly.",
+      "target": "The cause is timing split. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-11",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Combine two independent observations about Mero-EN-6-11: alternating white and red flashes after restart; a silver triangle while room pressure falls. Answer plainly.",
+      "target": "The cause is timing split. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-12",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Combine two independent observations about Mero-EN-6-12: alternating white and red flashes after restart; an amber cross while pressure is unknown. Answer plainly.",
+      "target": "The cause is timing split. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-13",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Combine two independent observations about Mero-EN-6-13: two violet rings before shutdown; a double copper mark while room pressure rises. Answer plainly.",
+      "target": "The cause is coolant echo. Keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-14",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Combine two independent observations about Mero-EN-6-14: two violet rings before shutdown; a black ring while room pressure is stable. Answer plainly.",
+      "target": "The cause is coolant echo. Use remote controls only."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-15",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Combine two independent observations about Mero-EN-6-15: two violet rings before shutdown; a silver triangle while room pressure falls. Answer plainly.",
+      "target": "The cause is coolant echo. Isolate power before adjustment."
+    },
+    {
+      "id": "G5B-MERGE-EN-6-16",
+      "split": "merger_train",
+      "language": "en",
+      "device": "Mero-EN-6-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Combine two independent observations about Mero-EN-6-16: two violet rings before shutdown; an amber cross while pressure is unknown. Answer plainly.",
+      "target": "The cause is coolant echo. Stop and measure pressure first."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-01",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Устройство Mero-RU-1-01 показывает постоянное янтарное свечение после переноса нагрузки. Отдельно в рабочей зоне видна двойная медная метка при растущем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — тепловой отскок. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-02",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Устройство Mero-RU-1-02 показывает постоянное янтарное свечение после переноса нагрузки. Отдельно в рабочей зоне видна чёрное кольцо при стабильном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — тепловой отскок. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-03",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Устройство Mero-RU-1-03 показывает постоянное янтарное свечение после переноса нагрузки. Отдельно в рабочей зоне видна серебряный треугольник при падающем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — тепловой отскок. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-04",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Устройство Mero-RU-1-04 показывает постоянное янтарное свечение после переноса нагрузки. Отдельно в рабочей зоне видна янтарный крест при неизвестном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — тепловой отскок. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-05",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Устройство Mero-RU-1-05 показывает три синих импульса после запуска. Отдельно в рабочей зоне видна двойная медная метка при растущем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — сдвиг фазы. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-06",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Устройство Mero-RU-1-06 показывает три синих импульса после запуска. Отдельно в рабочей зоне видна чёрное кольцо при стабильном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — сдвиг фазы. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-07",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Устройство Mero-RU-1-07 показывает три синих импульса после запуска. Отдельно в рабочей зоне видна серебряный треугольник при падающем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — сдвиг фазы. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-08",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Устройство Mero-RU-1-08 показывает три синих импульса после запуска. Отдельно в рабочей зоне видна янтарный крест при неизвестном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — сдвиг фазы. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-09",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Устройство Mero-RU-1-09 показывает чередующиеся белые и красные вспышки после перезапуска. Отдельно в рабочей зоне видна двойная медная метка при растущем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — рассинхронизация времени. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-10",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Устройство Mero-RU-1-10 показывает чередующиеся белые и красные вспышки после перезапуска. Отдельно в рабочей зоне видна чёрное кольцо при стабильном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — рассинхронизация времени. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-11",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Устройство Mero-RU-1-11 показывает чередующиеся белые и красные вспышки после перезапуска. Отдельно в рабочей зоне видна серебряный треугольник при падающем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — рассинхронизация времени. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-12",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Устройство Mero-RU-1-12 показывает чередующиеся белые и красные вспышки после перезапуска. Отдельно в рабочей зоне видна янтарный крест при неизвестном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — рассинхронизация времени. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-13",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Устройство Mero-RU-1-13 показывает два фиолетовых кольца перед остановкой. Отдельно в рабочей зоне видна двойная медная метка при растущем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — эхо охлаждения. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-14",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Устройство Mero-RU-1-14 показывает два фиолетовых кольца перед остановкой. Отдельно в рабочей зоне видна чёрное кольцо при стабильном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — эхо охлаждения. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-15",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Устройство Mero-RU-1-15 показывает два фиолетовых кольца перед остановкой. Отдельно в рабочей зоне видна серебряный треугольник при падающем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — эхо охлаждения. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-1-16",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-1-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Устройство Mero-RU-1-16 показывает два фиолетовых кольца перед остановкой. Отдельно в рабочей зоне видна янтарный крест при неизвестном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — эхо охлаждения. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-01",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Помогите оператору Mero-RU-2-01: сигнал устройства — постоянное янтарное свечение после переноса нагрузки; сигнал зоны — двойная медная метка при растущем давлении. Что случилось и что делать?",
+      "target": "Причина — тепловой отскок. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-02",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Помогите оператору Mero-RU-2-02: сигнал устройства — постоянное янтарное свечение после переноса нагрузки; сигнал зоны — чёрное кольцо при стабильном давлении. Что случилось и что делать?",
+      "target": "Причина — тепловой отскок. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-03",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Помогите оператору Mero-RU-2-03: сигнал устройства — постоянное янтарное свечение после переноса нагрузки; сигнал зоны — серебряный треугольник при падающем давлении. Что случилось и что делать?",
+      "target": "Причина — тепловой отскок. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-04",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Помогите оператору Mero-RU-2-04: сигнал устройства — постоянное янтарное свечение после переноса нагрузки; сигнал зоны — янтарный крест при неизвестном давлении. Что случилось и что делать?",
+      "target": "Причина — тепловой отскок. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-05",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Помогите оператору Mero-RU-2-05: сигнал устройства — три синих импульса после запуска; сигнал зоны — двойная медная метка при растущем давлении. Что случилось и что делать?",
+      "target": "Причина — сдвиг фазы. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-06",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Помогите оператору Mero-RU-2-06: сигнал устройства — три синих импульса после запуска; сигнал зоны — чёрное кольцо при стабильном давлении. Что случилось и что делать?",
+      "target": "Причина — сдвиг фазы. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-07",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Помогите оператору Mero-RU-2-07: сигнал устройства — три синих импульса после запуска; сигнал зоны — серебряный треугольник при падающем давлении. Что случилось и что делать?",
+      "target": "Причина — сдвиг фазы. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-08",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Помогите оператору Mero-RU-2-08: сигнал устройства — три синих импульса после запуска; сигнал зоны — янтарный крест при неизвестном давлении. Что случилось и что делать?",
+      "target": "Причина — сдвиг фазы. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-09",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Помогите оператору Mero-RU-2-09: сигнал устройства — чередующиеся белые и красные вспышки после перезапуска; сигнал зоны — двойная медная метка при растущем давлении. Что случилось и что делать?",
+      "target": "Причина — рассинхронизация времени. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-10",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Помогите оператору Mero-RU-2-10: сигнал устройства — чередующиеся белые и красные вспышки после перезапуска; сигнал зоны — чёрное кольцо при стабильном давлении. Что случилось и что делать?",
+      "target": "Причина — рассинхронизация времени. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-11",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Помогите оператору Mero-RU-2-11: сигнал устройства — чередующиеся белые и красные вспышки после перезапуска; сигнал зоны — серебряный треугольник при падающем давлении. Что случилось и что делать?",
+      "target": "Причина — рассинхронизация времени. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-12",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Помогите оператору Mero-RU-2-12: сигнал устройства — чередующиеся белые и красные вспышки после перезапуска; сигнал зоны — янтарный крест при неизвестном давлении. Что случилось и что делать?",
+      "target": "Причина — рассинхронизация времени. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-13",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Помогите оператору Mero-RU-2-13: сигнал устройства — два фиолетовых кольца перед остановкой; сигнал зоны — двойная медная метка при растущем давлении. Что случилось и что делать?",
+      "target": "Причина — эхо охлаждения. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-14",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Помогите оператору Mero-RU-2-14: сигнал устройства — два фиолетовых кольца перед остановкой; сигнал зоны — чёрное кольцо при стабильном давлении. Что случилось и что делать?",
+      "target": "Причина — эхо охлаждения. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-15",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Помогите оператору Mero-RU-2-15: сигнал устройства — два фиолетовых кольца перед остановкой; сигнал зоны — серебряный треугольник при падающем давлении. Что случилось и что делать?",
+      "target": "Причина — эхо охлаждения. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-2-16",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-2-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Помогите оператору Mero-RU-2-16: сигнал устройства — два фиолетовых кольца перед остановкой; сигнал зоны — янтарный крест при неизвестном давлении. Что случилось и что делать?",
+      "target": "Причина — эхо охлаждения. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-01",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-01: постоянное янтарное свечение после переноса нагрузки; двойная медная метка при растущем давлении. Ответьте просто.",
+      "target": "Причина — тепловой отскок. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-02",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-02: постоянное янтарное свечение после переноса нагрузки; чёрное кольцо при стабильном давлении. Ответьте просто.",
+      "target": "Причина — тепловой отскок. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-03",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-03: постоянное янтарное свечение после переноса нагрузки; серебряный треугольник при падающем давлении. Ответьте просто.",
+      "target": "Причина — тепловой отскок. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-04",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-04: постоянное янтарное свечение после переноса нагрузки; янтарный крест при неизвестном давлении. Ответьте просто.",
+      "target": "Причина — тепловой отскок. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-05",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-05: три синих импульса после запуска; двойная медная метка при растущем давлении. Ответьте просто.",
+      "target": "Причина — сдвиг фазы. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-06",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-06: три синих импульса после запуска; чёрное кольцо при стабильном давлении. Ответьте просто.",
+      "target": "Причина — сдвиг фазы. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-07",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-07: три синих импульса после запуска; серебряный треугольник при падающем давлении. Ответьте просто.",
+      "target": "Причина — сдвиг фазы. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-08",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-08: три синих импульса после запуска; янтарный крест при неизвестном давлении. Ответьте просто.",
+      "target": "Причина — сдвиг фазы. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-09",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-09: чередующиеся белые и красные вспышки после перезапуска; двойная медная метка при растущем давлении. Ответьте просто.",
+      "target": "Причина — рассинхронизация времени. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-10",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-10: чередующиеся белые и красные вспышки после перезапуска; чёрное кольцо при стабильном давлении. Ответьте просто.",
+      "target": "Причина — рассинхронизация времени. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-11",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-11: чередующиеся белые и красные вспышки после перезапуска; серебряный треугольник при падающем давлении. Ответьте просто.",
+      "target": "Причина — рассинхронизация времени. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-12",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-12: чередующиеся белые и красные вспышки после перезапуска; янтарный крест при неизвестном давлении. Ответьте просто.",
+      "target": "Причина — рассинхронизация времени. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-13",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-13: два фиолетовых кольца перед остановкой; двойная медная метка при растущем давлении. Ответьте просто.",
+      "target": "Причина — эхо охлаждения. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-14",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-14: два фиолетовых кольца перед остановкой; чёрное кольцо при стабильном давлении. Ответьте просто.",
+      "target": "Причина — эхо охлаждения. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-15",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-15: два фиолетовых кольца перед остановкой; серебряный треугольник при падающем давлении. Ответьте просто.",
+      "target": "Причина — эхо охлаждения. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-3-16",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-3-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-3-16: два фиолетовых кольца перед остановкой; янтарный крест при неизвестном давлении. Ответьте просто.",
+      "target": "Причина — эхо охлаждения. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-01",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Устройство Mero-RU-4-01 показывает постоянное янтарное свечение после переноса нагрузки. Отдельно в рабочей зоне видна двойная медная метка при растущем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — тепловой отскок. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-02",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Устройство Mero-RU-4-02 показывает постоянное янтарное свечение после переноса нагрузки. Отдельно в рабочей зоне видна чёрное кольцо при стабильном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — тепловой отскок. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-03",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Устройство Mero-RU-4-03 показывает постоянное янтарное свечение после переноса нагрузки. Отдельно в рабочей зоне видна серебряный треугольник при падающем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — тепловой отскок. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-04",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Устройство Mero-RU-4-04 показывает постоянное янтарное свечение после переноса нагрузки. Отдельно в рабочей зоне видна янтарный крест при неизвестном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — тепловой отскок. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-05",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Устройство Mero-RU-4-05 показывает три синих импульса после запуска. Отдельно в рабочей зоне видна двойная медная метка при растущем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — сдвиг фазы. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-06",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Устройство Mero-RU-4-06 показывает три синих импульса после запуска. Отдельно в рабочей зоне видна чёрное кольцо при стабильном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — сдвиг фазы. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-07",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Устройство Mero-RU-4-07 показывает три синих импульса после запуска. Отдельно в рабочей зоне видна серебряный треугольник при падающем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — сдвиг фазы. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-08",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Устройство Mero-RU-4-08 показывает три синих импульса после запуска. Отдельно в рабочей зоне видна янтарный крест при неизвестном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — сдвиг фазы. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-09",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Устройство Mero-RU-4-09 показывает чередующиеся белые и красные вспышки после перезапуска. Отдельно в рабочей зоне видна двойная медная метка при растущем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — рассинхронизация времени. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-10",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Устройство Mero-RU-4-10 показывает чередующиеся белые и красные вспышки после перезапуска. Отдельно в рабочей зоне видна чёрное кольцо при стабильном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — рассинхронизация времени. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-11",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Устройство Mero-RU-4-11 показывает чередующиеся белые и красные вспышки после перезапуска. Отдельно в рабочей зоне видна серебряный треугольник при падающем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — рассинхронизация времени. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-12",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Устройство Mero-RU-4-12 показывает чередующиеся белые и красные вспышки после перезапуска. Отдельно в рабочей зоне видна янтарный крест при неизвестном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — рассинхронизация времени. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-13",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Устройство Mero-RU-4-13 показывает два фиолетовых кольца перед остановкой. Отдельно в рабочей зоне видна двойная медная метка при растущем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — эхо охлаждения. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-14",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Устройство Mero-RU-4-14 показывает два фиолетовых кольца перед остановкой. Отдельно в рабочей зоне видна чёрное кольцо при стабильном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — эхо охлаждения. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-15",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Устройство Mero-RU-4-15 показывает два фиолетовых кольца перед остановкой. Отдельно в рабочей зоне видна серебряный треугольник при падающем давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — эхо охлаждения. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-4-16",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-4-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Устройство Mero-RU-4-16 показывает два фиолетовых кольца перед остановкой. Отдельно в рабочей зоне видна янтарный крест при неизвестном давлении. Назовите причину и безопасное действие.",
+      "target": "Причина — эхо охлаждения. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-01",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Помогите оператору Mero-RU-5-01: сигнал устройства — постоянное янтарное свечение после переноса нагрузки; сигнал зоны — двойная медная метка при растущем давлении. Что случилось и что делать?",
+      "target": "Причина — тепловой отскок. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-02",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Помогите оператору Mero-RU-5-02: сигнал устройства — постоянное янтарное свечение после переноса нагрузки; сигнал зоны — чёрное кольцо при стабильном давлении. Что случилось и что делать?",
+      "target": "Причина — тепловой отскок. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-03",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Помогите оператору Mero-RU-5-03: сигнал устройства — постоянное янтарное свечение после переноса нагрузки; сигнал зоны — серебряный треугольник при падающем давлении. Что случилось и что делать?",
+      "target": "Причина — тепловой отскок. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-04",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Помогите оператору Mero-RU-5-04: сигнал устройства — постоянное янтарное свечение после переноса нагрузки; сигнал зоны — янтарный крест при неизвестном давлении. Что случилось и что делать?",
+      "target": "Причина — тепловой отскок. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-05",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Помогите оператору Mero-RU-5-05: сигнал устройства — три синих импульса после запуска; сигнал зоны — двойная медная метка при растущем давлении. Что случилось и что делать?",
+      "target": "Причина — сдвиг фазы. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-06",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Помогите оператору Mero-RU-5-06: сигнал устройства — три синих импульса после запуска; сигнал зоны — чёрное кольцо при стабильном давлении. Что случилось и что делать?",
+      "target": "Причина — сдвиг фазы. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-07",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Помогите оператору Mero-RU-5-07: сигнал устройства — три синих импульса после запуска; сигнал зоны — серебряный треугольник при падающем давлении. Что случилось и что делать?",
+      "target": "Причина — сдвиг фазы. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-08",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Помогите оператору Mero-RU-5-08: сигнал устройства — три синих импульса после запуска; сигнал зоны — янтарный крест при неизвестном давлении. Что случилось и что делать?",
+      "target": "Причина — сдвиг фазы. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-09",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Помогите оператору Mero-RU-5-09: сигнал устройства — чередующиеся белые и красные вспышки после перезапуска; сигнал зоны — двойная медная метка при растущем давлении. Что случилось и что делать?",
+      "target": "Причина — рассинхронизация времени. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-10",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Помогите оператору Mero-RU-5-10: сигнал устройства — чередующиеся белые и красные вспышки после перезапуска; сигнал зоны — чёрное кольцо при стабильном давлении. Что случилось и что делать?",
+      "target": "Причина — рассинхронизация времени. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-11",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Помогите оператору Mero-RU-5-11: сигнал устройства — чередующиеся белые и красные вспышки после перезапуска; сигнал зоны — серебряный треугольник при падающем давлении. Что случилось и что делать?",
+      "target": "Причина — рассинхронизация времени. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-12",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Помогите оператору Mero-RU-5-12: сигнал устройства — чередующиеся белые и красные вспышки после перезапуска; сигнал зоны — янтарный крест при неизвестном давлении. Что случилось и что делать?",
+      "target": "Причина — рассинхронизация времени. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-13",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Помогите оператору Mero-RU-5-13: сигнал устройства — два фиолетовых кольца перед остановкой; сигнал зоны — двойная медная метка при растущем давлении. Что случилось и что делать?",
+      "target": "Причина — эхо охлаждения. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-14",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Помогите оператору Mero-RU-5-14: сигнал устройства — два фиолетовых кольца перед остановкой; сигнал зоны — чёрное кольцо при стабильном давлении. Что случилось и что делать?",
+      "target": "Причина — эхо охлаждения. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-15",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Помогите оператору Mero-RU-5-15: сигнал устройства — два фиолетовых кольца перед остановкой; сигнал зоны — серебряный треугольник при падающем давлении. Что случилось и что делать?",
+      "target": "Причина — эхо охлаждения. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-5-16",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-5-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Помогите оператору Mero-RU-5-16: сигнал устройства — два фиолетовых кольца перед остановкой; сигнал зоны — янтарный крест при неизвестном давлении. Что случилось и что делать?",
+      "target": "Причина — эхо охлаждения. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-01",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-01",
+      "cause_label": "thermal_rebound",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-01: постоянное янтарное свечение после переноса нагрузки; двойная медная метка при растущем давлении. Ответьте просто.",
+      "target": "Причина — тепловой отскок. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-02",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-02",
+      "cause_label": "thermal_rebound",
+      "safety_label": "remote_only",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-02: постоянное янтарное свечение после переноса нагрузки; чёрное кольцо при стабильном давлении. Ответьте просто.",
+      "target": "Причина — тепловой отскок. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-03",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-03",
+      "cause_label": "thermal_rebound",
+      "safety_label": "isolate_power_first",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-03: постоянное янтарное свечение после переноса нагрузки; серебряный треугольник при падающем давлении. Ответьте просто.",
+      "target": "Причина — тепловой отскок. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-04",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-04",
+      "cause_label": "thermal_rebound",
+      "safety_label": "stop_and_measure",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-04: постоянное янтарное свечение после переноса нагрузки; янтарный крест при неизвестном давлении. Ответьте просто.",
+      "target": "Причина — тепловой отскок. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-05",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-05",
+      "cause_label": "phase_drift",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-05: три синих импульса после запуска; двойная медная метка при растущем давлении. Ответьте просто.",
+      "target": "Причина — сдвиг фазы. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-06",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-06",
+      "cause_label": "phase_drift",
+      "safety_label": "remote_only",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-06: три синих импульса после запуска; чёрное кольцо при стабильном давлении. Ответьте просто.",
+      "target": "Причина — сдвиг фазы. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-07",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-07",
+      "cause_label": "phase_drift",
+      "safety_label": "isolate_power_first",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-07: три синих импульса после запуска; серебряный треугольник при падающем давлении. Ответьте просто.",
+      "target": "Причина — сдвиг фазы. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-08",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-08",
+      "cause_label": "phase_drift",
+      "safety_label": "stop_and_measure",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-08: три синих импульса после запуска; янтарный крест при неизвестном давлении. Ответьте просто.",
+      "target": "Причина — сдвиг фазы. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-09",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-09",
+      "cause_label": "timing_split",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-09: чередующиеся белые и красные вспышки после перезапуска; двойная медная метка при растущем давлении. Ответьте просто.",
+      "target": "Причина — рассинхронизация времени. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-10",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-10",
+      "cause_label": "timing_split",
+      "safety_label": "remote_only",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-10: чередующиеся белые и красные вспышки после перезапуска; чёрное кольцо при стабильном давлении. Ответьте просто.",
+      "target": "Причина — рассинхронизация времени. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-11",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-11",
+      "cause_label": "timing_split",
+      "safety_label": "isolate_power_first",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-11: чередующиеся белые и красные вспышки после перезапуска; серебряный треугольник при падающем давлении. Ответьте просто.",
+      "target": "Причина — рассинхронизация времени. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-12",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-12",
+      "cause_label": "timing_split",
+      "safety_label": "stop_and_measure",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-12: чередующиеся белые и красные вспышки после перезапуска; янтарный крест при неизвестном давлении. Ответьте просто.",
+      "target": "Причина — рассинхронизация времени. Остановитесь и сначала измерьте давление."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-13",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-13",
+      "cause_label": "coolant_echo",
+      "safety_label": "keep_aux_vent_closed",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-13: два фиолетовых кольца перед остановкой; двойная медная метка при растущем давлении. Ответьте просто.",
+      "target": "Причина — эхо охлаждения. Не открывайте вспомогательный клапан."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-14",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-14",
+      "cause_label": "coolant_echo",
+      "safety_label": "remote_only",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-14: два фиолетовых кольца перед остановкой; чёрное кольцо при стабильном давлении. Ответьте просто.",
+      "target": "Причина — эхо охлаждения. Работайте только удалённо."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-15",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-15",
+      "cause_label": "coolant_echo",
+      "safety_label": "isolate_power_first",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-15: два фиолетовых кольца перед остановкой; серебряный треугольник при падающем давлении. Ответьте просто.",
+      "target": "Причина — эхо охлаждения. Отключите питание до настройки."
+    },
+    {
+      "id": "G5B-MERGE-RU-6-16",
+      "split": "merger_train",
+      "language": "ru",
+      "device": "Mero-RU-6-16",
+      "cause_label": "coolant_echo",
+      "safety_label": "stop_and_measure",
+      "prompt": "Объедините два независимых наблюдения о Mero-RU-6-16: два фиолетовых кольца перед остановкой; янтарный крест при неизвестном давлении. Ответьте просто.",
+      "target": "Причина — эхо охлаждения. Остановитесь и сначала измерьте давление."
+    }
+  ],
+  "content_sha256": "49fccef34c99a51a5d96ac5985e7aea1c4c4c9d9a9ec7a505a4f0a8fb919086d"
+}

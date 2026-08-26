@@ -1,0 +1,49 @@
+{
+  "kind": "two_pocket_dora_development_smoke",
+  "attempt": 2,
+  "status": "passed",
+  "recorded_at": "2026-08-23T20:30:00Z",
+  "model_id": "Qwen/Qwen3-0.6B-Base",
+  "method": "DoRA r=4 on q/k/v/o projections",
+  "elapsed_seconds": 166.011,
+  "steps_per_pocket": 96,
+  "trainable_parameters_per_pocket": 1290240,
+  "base": {
+    "accuracy": "0/6",
+    "outputs": ["0000000", "0000000", "0000000", "0x00000", "0000000", "0000000"]
+  },
+  "pockets": [
+    {
+      "id": "I01",
+      "knowledge": {"Orin": "GPIO", "Pavo": "DWORD", "Selen": "UART"},
+      "own_accuracy": "3/3",
+      "other_accuracy": "0/3",
+      "first_loss": 9.36554,
+      "last_loss": 0.000004,
+      "adapter_sha256_before": "0248799df28a6a3550828989f0021c8aa5e813c9b36048b8642b29b3a82f9014",
+      "adapter_sha256_after": "b6e620006f25d26cca8985f31f8b9cfeae71ee52c17535527c8da19036ee4458"
+    },
+    {
+      "id": "I02",
+      "knowledge": {"Flint": "UUID", "Gale": "TORT", "Harbor": "COVID"},
+      "own_accuracy": "3/3",
+      "other_accuracy": "0/3",
+      "first_loss": 11.071072,
+      "last_loss": 0.000001,
+      "adapter_sha256_before": "426951fbbb3ae07faa48e081974beaccfc9243825ed7be9257a2c6023a272a0d",
+      "adapter_sha256_after": "42fc912f30f2d9c87191e757a63dcce9d44521bac04790e094300bc8be871080"
+    }
+  ],
+  "combined": {
+    "query": "Return I01/Orin and I02/Gale in that order.",
+    "expected": "GPIO | TORT",
+    "actual": "GPIO | TORT",
+    "correct": true,
+    "logical_round_trips": 1,
+    "execution_note": "The two branches are independent. This development smoke executed them sequentially only because both were simulated on one CPU host."
+  },
+  "claim_boundary": {
+    "en": "This proves a local DoRA learning and two-answer assembly pipeline on six public synthetic memories. It does not prove generalization, private-data safety, a neural merger, physical networking, or the E004 swarm hypothesis.",
+    "ru": "Это проверка трубопровода локального обучения DoRA и сборки двух ответов на шести открытых синтетических знаниях. Она не доказывает обобщение, безопасность приватных данных, neural merger, физическую сеть или главную гипотезу E004."
+  }
+}

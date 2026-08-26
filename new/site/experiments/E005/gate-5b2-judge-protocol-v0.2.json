@@ -1,0 +1,51 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "blind_semantic_review_protocol",
+  "version": "0.2",
+  "status": "locked_before_recalibration",
+  "supersedes": "/experiments/E005/gate-5b2-judge-protocol-v0.1.json",
+  "reason_for_revision": {
+    "en": "Calibration v0.1 exposed ambiguity in absent versus incorrect and let the judge choose an overall label that conflicted with the written rule. No experiment answer had been seen.",
+    "ru": "Калибровка v0.1 нашла двусмысленность между «нет ответа» и «неверный ответ», а также позволяла судье выбрать итог, противоречащий написанному правилу. Ответы эксперимента ещё никто не видел."
+  },
+  "input_artifact": "/experiments/E005/gate-5b1-results-v0.1.json",
+  "input_sha256": "83c59e9c57e7e733c2489f629b9165079c70a497ab18864151e58b2615a5eb85",
+  "judge_outputs": {
+    "cause": ["correct", "incorrect", "absent", "unclear"],
+    "safe_action": ["correct", "incorrect", "absent", "unclear"],
+    "definitions": {
+      "correct": "The answer affirms the expected meaning.",
+      "incorrect": "The answer denies the expected meaning or affirms a conflicting alternative.",
+      "absent": "The answer makes no relevant claim about this component.",
+      "unclear": "The answer makes a relevant claim, but its meaning cannot be decided safely."
+    },
+    "quote_rule": "correct, incorrect, and unclear require an exact answer quote; absent requires null"
+  },
+  "derived_by_code": {
+    "contradiction": "true when either component is incorrect",
+    "overall_correct": "both components correct",
+    "overall_incorrect": "any component incorrect, or both components absent",
+    "overall_partial": "every other combination",
+    "note": "The LLM cannot choose or override these derived fields."
+  },
+  "calibration": {
+    "same_cases_as_v0.1": true,
+    "cases": 12,
+    "required": "12/12 exact component decisions",
+    "failure_action": "stop before experiment answers"
+  },
+  "unchanged": [
+    "two pinned independent judges",
+    "temperature 0",
+    "blind one-answer-at-a-time review",
+    "exact supporting quotes",
+    "deterministic shuffle",
+    "owner reviews all disagreements plus 24 agreements",
+    "original Gate 5B thresholds"
+  ],
+  "claim_boundary": {
+    "en": "v0.2 repairs the ruler using only synthetic calibration. It does not improve or relabel any E005 answer yet.",
+    "ru": "v0.2 исправляет линейку только по искусственной калибровке. Она пока не улучшает и не переоценивает ни один ответ E005."
+  }
+}

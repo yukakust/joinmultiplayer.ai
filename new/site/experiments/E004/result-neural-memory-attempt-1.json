@@ -1,0 +1,14 @@
+{
+  "experiment_id": "E004",
+  "protocol_version": "arena-v0.1",
+  "architecture_id": "neural_memory",
+  "attempt": 1,
+  "status": "failed_implementation_crash",
+  "recorded_at": "2026-08-23T20:45:53Z",
+  "optimizer_steps_completed": 0,
+  "quality_metrics": null,
+  "error_class": "RuntimeError",
+  "error_summary": "Frozen query embeddings were inference tensors and could not be saved by the trainable memory projection for backward.",
+  "protocol_change_for_attempt_2": "Clone frozen embeddings into ordinary detached tensors before training. Data, seed, model, dimensions, steps, learning rate, metrics, and thresholds remain unchanged.",
+  "claim_boundary": "Implementation failure only; this says nothing about neural-memory quality."
+}

@@ -1,0 +1,3465 @@
+{
+  "experiment_id": "E005",
+  "gate": "5A",
+  "kind": "training_curriculum",
+  "status": "frozen_not_trained",
+  "lessons": [
+    {
+      "id": "G5A-CAUSE-EN-001",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-001 shows three blue pulses after startup. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-002",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a silver triangle while room pressure falls. At the same time, Lumen-002 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-003",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-003 produced two violet rings before shutdown; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-004",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-004 and an amber cross while pressure is unknown in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-005",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-005, combine these observations: three blue pulses after startup. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-006",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-006 contains a steady amber glow after load transfer. The site note contains a black ring while room pressure is stable. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-007",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-007 shows two violet rings before shutdown. The room also shows an amber cross while pressure is unknown. What happened and what is allowed?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-008",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a double copper mark while room pressure rises. At the same time, Lumen-008 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-009",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-009 produced three blue pulses after startup; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-010",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-010 and an amber cross while pressure is unknown in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-011",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-011, combine these observations: two violet rings before shutdown. Separately, a double copper mark while room pressure rises. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-012",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-012 contains alternating white and red flashes after restart. The site note contains a silver triangle while room pressure falls. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-013",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-013 shows three blue pulses after startup. The room also shows an amber cross while pressure is unknown. What happened and what is allowed?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-014",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a double copper mark while room pressure rises. At the same time, Lumen-014 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-015",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-015 produced two violet rings before shutdown; nearby there is a silver triangle while room pressure falls. Give the cause and the restriction.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-016",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-016 and a black ring while room pressure is stable in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-017",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-017, combine these observations: three blue pulses after startup. Separately, a double copper mark while room pressure rises. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-018",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-018 contains a steady amber glow after load transfer. The site note contains a silver triangle while room pressure falls. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-019",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-019 shows two violet rings before shutdown. The room also shows a black ring while room pressure is stable. What happened and what is allowed?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-020",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports an amber cross while pressure is unknown. At the same time, Lumen-020 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-021",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-021 produced three blue pulses after startup; nearby there is a silver triangle while room pressure falls. Give the cause and the restriction.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-022",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-022 and a black ring while room pressure is stable in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-023",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-023, combine these observations: two violet rings before shutdown. Separately, an amber cross while pressure is unknown. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-024",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-024 contains alternating white and red flashes after restart. The site note contains a double copper mark while room pressure rises. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-025",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-025 shows three blue pulses after startup. The room also shows a black ring while room pressure is stable. What happened and what is allowed?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-026",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports an amber cross while pressure is unknown. At the same time, Lumen-026 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-027",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-027 produced two violet rings before shutdown; nearby there is a double copper mark while room pressure rises. Give the cause and the restriction.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-028",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-028 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-029",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-029, combine these observations: three blue pulses after startup. Separately, an amber cross while pressure is unknown. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-030",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-030 contains a steady amber glow after load transfer. The site note contains a double copper mark while room pressure rises. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-031",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-031 shows two violet rings before shutdown. The room also shows a silver triangle while room pressure falls. What happened and what is allowed?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-032",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a black ring while room pressure is stable. At the same time, Lumen-032 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-033",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-033 produced three blue pulses after startup; nearby there is a double copper mark while room pressure rises. Give the cause and the restriction.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-034",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-034 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-035",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-035, combine these observations: two violet rings before shutdown. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-036",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-036 contains alternating white and red flashes after restart. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-037",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-037 shows three blue pulses after startup. The room also shows a silver triangle while room pressure falls. What happened and what is allowed?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-038",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a black ring while room pressure is stable. At the same time, Lumen-038 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-039",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-039 produced two violet rings before shutdown; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-040",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-040 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-041",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-041, combine these observations: three blue pulses after startup. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-042",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-042 contains a steady amber glow after load transfer. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-043",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-043 shows two violet rings before shutdown. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-044",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a silver triangle while room pressure falls. At the same time, Lumen-044 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-045",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-045 produced three blue pulses after startup; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-046",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-046 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-047",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-047, combine these observations: two violet rings before shutdown. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-048",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-048 contains alternating white and red flashes after restart. The site note contains a black ring while room pressure is stable. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-049",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-049 shows three blue pulses after startup. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-050",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a silver triangle while room pressure falls. At the same time, Lumen-050 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-051",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-051 produced two violet rings before shutdown; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-052",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-052 and an amber cross while pressure is unknown in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-053",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-053, combine these observations: three blue pulses after startup. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-054",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-054 contains a steady amber glow after load transfer. The site note contains a black ring while room pressure is stable. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-055",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-055 shows two violet rings before shutdown. The room also shows an amber cross while pressure is unknown. What happened and what is allowed?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-056",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a double copper mark while room pressure rises. At the same time, Lumen-056 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-057",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-057 produced three blue pulses after startup; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-058",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-058 and an amber cross while pressure is unknown in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-059",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-059, combine these observations: two violet rings before shutdown. Separately, a double copper mark while room pressure rises. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-060",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-060 contains alternating white and red flashes after restart. The site note contains a silver triangle while room pressure falls. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-061",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-061 shows three blue pulses after startup. The room also shows an amber cross while pressure is unknown. What happened and what is allowed?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-062",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a double copper mark while room pressure rises. At the same time, Lumen-062 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-063",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-063 produced two violet rings before shutdown; nearby there is a silver triangle while room pressure falls. Give the cause and the restriction.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-064",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-064 and a black ring while room pressure is stable in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-065",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-065, combine these observations: three blue pulses after startup. Separately, a double copper mark while room pressure rises. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-066",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-066 contains a steady amber glow after load transfer. The site note contains a silver triangle while room pressure falls. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-067",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-067 shows two violet rings before shutdown. The room also shows a black ring while room pressure is stable. What happened and what is allowed?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-068",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports an amber cross while pressure is unknown. At the same time, Lumen-068 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-069",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-069 produced three blue pulses after startup; nearby there is a silver triangle while room pressure falls. Give the cause and the restriction.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-070",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-070 and a black ring while room pressure is stable in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-071",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-071, combine these observations: two violet rings before shutdown. Separately, an amber cross while pressure is unknown. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-072",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-072 contains alternating white and red flashes after restart. The site note contains a double copper mark while room pressure rises. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-073",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-073 shows three blue pulses after startup. The room also shows a black ring while room pressure is stable. What happened and what is allowed?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-074",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports an amber cross while pressure is unknown. At the same time, Lumen-074 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-075",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-075 produced two violet rings before shutdown; nearby there is a double copper mark while room pressure rises. Give the cause and the restriction.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-076",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-076 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-077",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-077, combine these observations: three blue pulses after startup. Separately, an amber cross while pressure is unknown. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-078",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-078 contains a steady amber glow after load transfer. The site note contains a double copper mark while room pressure rises. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-079",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-079 shows two violet rings before shutdown. The room also shows a silver triangle while room pressure falls. What happened and what is allowed?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-080",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a black ring while room pressure is stable. At the same time, Lumen-080 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-081",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-081 produced three blue pulses after startup; nearby there is a double copper mark while room pressure rises. Give the cause and the restriction.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-082",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-082 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-083",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-083, combine these observations: two violet rings before shutdown. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-084",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-084 contains alternating white and red flashes after restart. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-085",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-085 shows three blue pulses after startup. The room also shows a silver triangle while room pressure falls. What happened and what is allowed?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-086",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a black ring while room pressure is stable. At the same time, Lumen-086 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-087",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-087 produced two violet rings before shutdown; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-088",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-088 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-089",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-089, combine these observations: three blue pulses after startup. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-EN-090",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-090 contains a steady amber glow after load transfer. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-091",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nLumen-091 shows two violet rings before shutdown. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-092",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a silver triangle while room pressure falls. At the same time, Lumen-092 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-093",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-093 produced three blue pulses after startup; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-EN-094",
+      "skill": "cause",
+      "language": "en",
+      "input": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-094 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-EN-095",
+      "skill": "cause",
+      "language": "en",
+      "input": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-095, combine these observations: two violet rings before shutdown. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-EN-096",
+      "skill": "cause",
+      "language": "en",
+      "input": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-096 contains alternating white and red flashes after restart. The site note contains a black ring while room pressure is stable. Explain the fault and the permitted response.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-001",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-018 показывает три синих импульса после запуска. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-002",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Lumen-019 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-003",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-020 появились два фиолетовых кольца перед остановкой; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-004",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-021 чередующиеся белые и красные вспышки после перезапуска, а в помещении — янтарный крест при неизвестном давлении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-005",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-022 объедините наблюдения: три синих импульса после запуска. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-006",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-023 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана чёрное кольцо при стабильном давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-007",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-024 показывает два фиолетовых кольца перед остановкой. В помещении также видна янтарный крест при неизвестном давлении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-008",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: двойная медная метка при растущем давлении в помещении. Одновременно Lumen-025 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-009",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-026 появились три синих импульса после запуска; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-010",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-027 постоянное янтарное свечение после переноса нагрузки, а в помещении — янтарный крест при неизвестном давлении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-011",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-028 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: двойная медная метка при растущем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-012",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-029 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана серебряный треугольник при падающем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-013",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-030 показывает три синих импульса после запуска. В помещении также видна янтарный крест при неизвестном давлении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-014",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: двойная медная метка при растущем давлении в помещении. Одновременно Lumen-031 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-015",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-032 появились два фиолетовых кольца перед остановкой; рядом находится серебряный треугольник при падающем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-016",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-033 чередующиеся белые и красные вспышки после перезапуска, а в помещении — чёрное кольцо при стабильном давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-017",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-034 объедините наблюдения: три синих импульса после запуска. Отдельно: двойная медная метка при растущем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-018",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-035 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана серебряный треугольник при падающем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-019",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-036 показывает два фиолетовых кольца перед остановкой. В помещении также видна чёрное кольцо при стабильном давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-020",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: янтарный крест при неизвестном давлении. Одновременно Lumen-037 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-021",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-038 появились три синих импульса после запуска; рядом находится серебряный треугольник при падающем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-022",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-039 постоянное янтарное свечение после переноса нагрузки, а в помещении — чёрное кольцо при стабильном давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-023",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-040 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: янтарный крест при неизвестном давлении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-024",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-041 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана двойная медная метка при растущем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-025",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-042 показывает три синих импульса после запуска. В помещении также видна чёрное кольцо при стабильном давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-026",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: янтарный крест при неизвестном давлении. Одновременно Lumen-043 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-027",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-044 появились два фиолетовых кольца перед остановкой; рядом находится двойная медная метка при растущем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-028",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-045 чередующиеся белые и красные вспышки после перезапуска, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-029",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-046 объедините наблюдения: три синих импульса после запуска. Отдельно: янтарный крест при неизвестном давлении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-030",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-047 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана двойная медная метка при растущем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-031",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-048 показывает два фиолетовых кольца перед остановкой. В помещении также видна серебряный треугольник при падающем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-032",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Lumen-049 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-033",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-050 появились три синих импульса после запуска; рядом находится двойная медная метка при растущем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-034",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-051 постоянное янтарное свечение после переноса нагрузки, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-035",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-052 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-036",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-053 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-037",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-054 показывает три синих импульса после запуска. В помещении также видна серебряный треугольник при падающем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-038",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Lumen-055 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-039",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-056 появились два фиолетовых кольца перед остановкой; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-040",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-057 чередующиеся белые и красные вспышки после перезапуска, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-041",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-058 объедините наблюдения: три синих импульса после запуска. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-042",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-059 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-043",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-060 показывает два фиолетовых кольца перед остановкой. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-044",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Lumen-061 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-045",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-062 появились три синих импульса после запуска; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-046",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-063 постоянное янтарное свечение после переноса нагрузки, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-047",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-064 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-048",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-065 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана чёрное кольцо при стабильном давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-049",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-066 показывает три синих импульса после запуска. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-050",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Lumen-067 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-051",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-068 появились два фиолетовых кольца перед остановкой; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-052",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-069 чередующиеся белые и красные вспышки после перезапуска, а в помещении — янтарный крест при неизвестном давлении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-053",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-070 объедините наблюдения: три синих импульса после запуска. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-054",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-071 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана чёрное кольцо при стабильном давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-055",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-072 показывает два фиолетовых кольца перед остановкой. В помещении также видна янтарный крест при неизвестном давлении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-056",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: двойная медная метка при растущем давлении в помещении. Одновременно Lumen-073 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-057",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-074 появились три синих импульса после запуска; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-058",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-075 постоянное янтарное свечение после переноса нагрузки, а в помещении — янтарный крест при неизвестном давлении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-059",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-076 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: двойная медная метка при растущем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-060",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-077 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана серебряный треугольник при падающем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-061",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-078 показывает три синих импульса после запуска. В помещении также видна янтарный крест при неизвестном давлении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-062",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: двойная медная метка при растущем давлении в помещении. Одновременно Lumen-079 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-063",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-080 появились два фиолетовых кольца перед остановкой; рядом находится серебряный треугольник при падающем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-064",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-081 чередующиеся белые и красные вспышки после перезапуска, а в помещении — чёрное кольцо при стабильном давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-065",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-082 объедините наблюдения: три синих импульса после запуска. Отдельно: двойная медная метка при растущем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-066",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-083 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана серебряный треугольник при падающем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-067",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-084 показывает два фиолетовых кольца перед остановкой. В помещении также видна чёрное кольцо при стабильном давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-068",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: янтарный крест при неизвестном давлении. Одновременно Lumen-085 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-069",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-086 появились три синих импульса после запуска; рядом находится серебряный треугольник при падающем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-070",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-087 постоянное янтарное свечение после переноса нагрузки, а в помещении — чёрное кольцо при стабильном давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-071",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-088 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: янтарный крест при неизвестном давлении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-072",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-089 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана двойная медная метка при растущем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-073",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-090 показывает три синих импульса после запуска. В помещении также видна чёрное кольцо при стабильном давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-074",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: янтарный крест при неизвестном давлении. Одновременно Lumen-091 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-075",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-092 появились два фиолетовых кольца перед остановкой; рядом находится двойная медная метка при растущем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-076",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-093 чередующиеся белые и красные вспышки после перезапуска, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-077",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-094 объедините наблюдения: три синих импульса после запуска. Отдельно: янтарный крест при неизвестном давлении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-078",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-095 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана двойная медная метка при растущем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-079",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-096 показывает два фиолетовых кольца перед остановкой. В помещении также видна серебряный треугольник при падающем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-080",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Lumen-001 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-081",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-002 появились три синих импульса после запуска; рядом находится двойная медная метка при растущем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-082",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-003 постоянное янтарное свечение после переноса нагрузки, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-083",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-004 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-084",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-005 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-085",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-006 показывает три синих импульса после запуска. В помещении также видна серебряный треугольник при падающем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-086",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Lumen-007 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-087",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-008 появились два фиолетовых кольца перед остановкой; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-088",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-009 чередующиеся белые и красные вспышки после перезапуска, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-089",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-010 объедините наблюдения: три синих импульса после запуска. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-CAUSE-RU-090",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-011 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-091",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-012 показывает два фиолетовых кольца перед остановкой. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-092",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Lumen-013 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-093",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-014 появились три синих импульса после запуска; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "target": "{\"cause\":\"phase_drift\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-CAUSE-RU-094",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-015 постоянное янтарное свечение после переноса нагрузки, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"cause\":\"thermal_rebound\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-CAUSE-RU-095",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-016 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"cause\":\"coolant_echo\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-CAUSE-RU-096",
+      "skill": "cause",
+      "language": "ru",
+      "input": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-017 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана чёрное кольцо при стабильном давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"cause\":\"timing_split\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-001",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-001 shows three blue pulses after startup. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-002",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a silver triangle while room pressure falls. At the same time, Lumen-002 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-003",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-003 produced two violet rings before shutdown; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-004",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-004 and an amber cross while pressure is unknown in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-005",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-005, combine these observations: three blue pulses after startup. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-006",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-006 contains a steady amber glow after load transfer. The site note contains a black ring while room pressure is stable. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-007",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-007 shows two violet rings before shutdown. The room also shows an amber cross while pressure is unknown. What happened and what is allowed?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-008",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a double copper mark while room pressure rises. At the same time, Lumen-008 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-009",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-009 produced three blue pulses after startup; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-010",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-010 and an amber cross while pressure is unknown in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-011",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-011, combine these observations: two violet rings before shutdown. Separately, a double copper mark while room pressure rises. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-012",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-012 contains alternating white and red flashes after restart. The site note contains a silver triangle while room pressure falls. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-013",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-013 shows three blue pulses after startup. The room also shows an amber cross while pressure is unknown. What happened and what is allowed?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-014",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a double copper mark while room pressure rises. At the same time, Lumen-014 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-015",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-015 produced two violet rings before shutdown; nearby there is a silver triangle while room pressure falls. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-016",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-016 and a black ring while room pressure is stable in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-017",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-017, combine these observations: three blue pulses after startup. Separately, a double copper mark while room pressure rises. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-018",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-018 contains a steady amber glow after load transfer. The site note contains a silver triangle while room pressure falls. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-019",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-019 shows two violet rings before shutdown. The room also shows a black ring while room pressure is stable. What happened and what is allowed?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-020",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports an amber cross while pressure is unknown. At the same time, Lumen-020 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-021",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-021 produced three blue pulses after startup; nearby there is a silver triangle while room pressure falls. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-022",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-022 and a black ring while room pressure is stable in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-023",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-023, combine these observations: two violet rings before shutdown. Separately, an amber cross while pressure is unknown. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-024",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-024 contains alternating white and red flashes after restart. The site note contains a double copper mark while room pressure rises. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-025",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-025 shows three blue pulses after startup. The room also shows a black ring while room pressure is stable. What happened and what is allowed?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-026",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports an amber cross while pressure is unknown. At the same time, Lumen-026 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-027",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-027 produced two violet rings before shutdown; nearby there is a double copper mark while room pressure rises. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-028",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-028 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-029",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-029, combine these observations: three blue pulses after startup. Separately, an amber cross while pressure is unknown. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-030",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-030 contains a steady amber glow after load transfer. The site note contains a double copper mark while room pressure rises. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-031",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-031 shows two violet rings before shutdown. The room also shows a silver triangle while room pressure falls. What happened and what is allowed?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-032",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a black ring while room pressure is stable. At the same time, Lumen-032 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-033",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-033 produced three blue pulses after startup; nearby there is a double copper mark while room pressure rises. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-034",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-034 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-035",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-035, combine these observations: two violet rings before shutdown. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-036",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-036 contains alternating white and red flashes after restart. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-037",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-037 shows three blue pulses after startup. The room also shows a silver triangle while room pressure falls. What happened and what is allowed?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-038",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a black ring while room pressure is stable. At the same time, Lumen-038 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-039",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-039 produced two violet rings before shutdown; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-040",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-040 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-041",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-041, combine these observations: three blue pulses after startup. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-042",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-042 contains a steady amber glow after load transfer. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-043",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-043 shows two violet rings before shutdown. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-044",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a silver triangle while room pressure falls. At the same time, Lumen-044 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-045",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-045 produced three blue pulses after startup; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-046",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-046 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-047",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-047, combine these observations: two violet rings before shutdown. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-048",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-048 contains alternating white and red flashes after restart. The site note contains a black ring while room pressure is stable. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-049",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-049 shows three blue pulses after startup. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-050",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a silver triangle while room pressure falls. At the same time, Lumen-050 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-051",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-051 produced two violet rings before shutdown; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-052",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-052 and an amber cross while pressure is unknown in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-053",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-053, combine these observations: three blue pulses after startup. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-054",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-054 contains a steady amber glow after load transfer. The site note contains a black ring while room pressure is stable. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-055",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-055 shows two violet rings before shutdown. The room also shows an amber cross while pressure is unknown. What happened and what is allowed?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-056",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a double copper mark while room pressure rises. At the same time, Lumen-056 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-057",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-057 produced three blue pulses after startup; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-058",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-058 and an amber cross while pressure is unknown in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-059",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-059, combine these observations: two violet rings before shutdown. Separately, a double copper mark while room pressure rises. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-060",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-060 contains alternating white and red flashes after restart. The site note contains a silver triangle while room pressure falls. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-061",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-061 shows three blue pulses after startup. The room also shows an amber cross while pressure is unknown. What happened and what is allowed?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-062",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a double copper mark while room pressure rises. At the same time, Lumen-062 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-063",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-063 produced two violet rings before shutdown; nearby there is a silver triangle while room pressure falls. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-064",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-064 and a black ring while room pressure is stable in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-065",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-065, combine these observations: three blue pulses after startup. Separately, a double copper mark while room pressure rises. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-066",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-066 contains a steady amber glow after load transfer. The site note contains a silver triangle while room pressure falls. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-067",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-067 shows two violet rings before shutdown. The room also shows a black ring while room pressure is stable. What happened and what is allowed?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-068",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports an amber cross while pressure is unknown. At the same time, Lumen-068 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-069",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-069 produced three blue pulses after startup; nearby there is a silver triangle while room pressure falls. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-070",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-070 and a black ring while room pressure is stable in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-071",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-071, combine these observations: two violet rings before shutdown. Separately, an amber cross while pressure is unknown. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-072",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-072 contains alternating white and red flashes after restart. The site note contains a double copper mark while room pressure rises. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-073",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-073 shows three blue pulses after startup. The room also shows a black ring while room pressure is stable. What happened and what is allowed?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-074",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports an amber cross while pressure is unknown. At the same time, Lumen-074 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-075",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-075 produced two violet rings before shutdown; nearby there is a double copper mark while room pressure rises. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-076",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-076 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-077",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-077, combine these observations: three blue pulses after startup. Separately, an amber cross while pressure is unknown. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-078",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-078 contains a steady amber glow after load transfer. The site note contains a double copper mark while room pressure rises. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-079",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-079 shows two violet rings before shutdown. The room also shows a silver triangle while room pressure falls. What happened and what is allowed?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-080",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a black ring while room pressure is stable. At the same time, Lumen-080 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-081",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-081 produced three blue pulses after startup; nearby there is a double copper mark while room pressure rises. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-082",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-082 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-083",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-083, combine these observations: two violet rings before shutdown. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-084",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-084 contains alternating white and red flashes after restart. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-085",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-085 shows three blue pulses after startup. The room also shows a silver triangle while room pressure falls. What happened and what is allowed?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-086",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a black ring while room pressure is stable. At the same time, Lumen-086 produced a steady amber glow after load transfer. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-087",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-087 produced two violet rings before shutdown; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-088",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw alternating white and red flashes after restart on Lumen-088 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-089",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-089, combine these observations: three blue pulses after startup. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-EN-090",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-090 contains a steady amber glow after load transfer. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-091",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nLumen-091 shows two violet rings before shutdown. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-092",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nAn operator reports a silver triangle while room pressure falls. At the same time, Lumen-092 produced alternating white and red flashes after restart. Diagnose it and state the safe limit.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-093",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nRead this incident: Lumen-093 produced three blue pulses after startup; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-EN-094",
+      "skill": "safety",
+      "language": "en",
+      "input": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nDuring inspection, the crew saw a steady amber glow after load transfer on Lumen-094 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-EN-095",
+      "skill": "safety",
+      "language": "en",
+      "input": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nFor Lumen-095, combine these observations: two violet rings before shutdown. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-EN-096",
+      "skill": "safety",
+      "language": "en",
+      "input": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nThe log for Lumen-096 contains alternating white and red flashes after restart. The site note contains a black ring while room pressure is stable. Explain the fault and the permitted response.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-001",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-018 показывает три синих импульса после запуска. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-002",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Lumen-019 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-003",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-020 появились два фиолетовых кольца перед остановкой; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-004",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-021 чередующиеся белые и красные вспышки после перезапуска, а в помещении — янтарный крест при неизвестном давлении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-005",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-022 объедините наблюдения: три синих импульса после запуска. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-006",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-023 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана чёрное кольцо при стабильном давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-007",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-024 показывает два фиолетовых кольца перед остановкой. В помещении также видна янтарный крест при неизвестном давлении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-008",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: двойная медная метка при растущем давлении в помещении. Одновременно Lumen-025 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-009",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-026 появились три синих импульса после запуска; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-010",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-027 постоянное янтарное свечение после переноса нагрузки, а в помещении — янтарный крест при неизвестном давлении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-011",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-028 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: двойная медная метка при растущем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-012",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-029 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана серебряный треугольник при падающем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-013",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-030 показывает три синих импульса после запуска. В помещении также видна янтарный крест при неизвестном давлении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-014",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: двойная медная метка при растущем давлении в помещении. Одновременно Lumen-031 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-015",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-032 появились два фиолетовых кольца перед остановкой; рядом находится серебряный треугольник при падающем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-016",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-033 чередующиеся белые и красные вспышки после перезапуска, а в помещении — чёрное кольцо при стабильном давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-017",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-034 объедините наблюдения: три синих импульса после запуска. Отдельно: двойная медная метка при растущем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-018",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-035 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана серебряный треугольник при падающем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-019",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-036 показывает два фиолетовых кольца перед остановкой. В помещении также видна чёрное кольцо при стабильном давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-020",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: янтарный крест при неизвестном давлении. Одновременно Lumen-037 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-021",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-038 появились три синих импульса после запуска; рядом находится серебряный треугольник при падающем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-022",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-039 постоянное янтарное свечение после переноса нагрузки, а в помещении — чёрное кольцо при стабильном давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-023",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-040 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: янтарный крест при неизвестном давлении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-024",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-041 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана двойная медная метка при растущем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-025",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-042 показывает три синих импульса после запуска. В помещении также видна чёрное кольцо при стабильном давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-026",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: янтарный крест при неизвестном давлении. Одновременно Lumen-043 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-027",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-044 появились два фиолетовых кольца перед остановкой; рядом находится двойная медная метка при растущем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-028",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-045 чередующиеся белые и красные вспышки после перезапуска, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-029",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-046 объедините наблюдения: три синих импульса после запуска. Отдельно: янтарный крест при неизвестном давлении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-030",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-047 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана двойная медная метка при растущем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-031",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-048 показывает два фиолетовых кольца перед остановкой. В помещении также видна серебряный треугольник при падающем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-032",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Lumen-049 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-033",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-050 появились три синих импульса после запуска; рядом находится двойная медная метка при растущем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-034",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-051 постоянное янтарное свечение после переноса нагрузки, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-035",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-052 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-036",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-053 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-037",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-054 показывает три синих импульса после запуска. В помещении также видна серебряный треугольник при падающем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-038",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Lumen-055 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-039",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-056 появились два фиолетовых кольца перед остановкой; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-040",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-057 чередующиеся белые и красные вспышки после перезапуска, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-041",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-058 объедините наблюдения: три синих импульса после запуска. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-042",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-059 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-043",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-060 показывает два фиолетовых кольца перед остановкой. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-044",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Lumen-061 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-045",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-062 появились три синих импульса после запуска; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-046",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-063 постоянное янтарное свечение после переноса нагрузки, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-047",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-064 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-048",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-065 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана чёрное кольцо при стабильном давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-049",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-066 показывает три синих импульса после запуска. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-050",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Lumen-067 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-051",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-068 появились два фиолетовых кольца перед остановкой; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-052",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-069 чередующиеся белые и красные вспышки после перезапуска, а в помещении — янтарный крест при неизвестном давлении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-053",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-070 объедините наблюдения: три синих импульса после запуска. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-054",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-071 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана чёрное кольцо при стабильном давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-055",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-072 показывает два фиолетовых кольца перед остановкой. В помещении также видна янтарный крест при неизвестном давлении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-056",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: двойная медная метка при растущем давлении в помещении. Одновременно Lumen-073 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-057",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-074 появились три синих импульса после запуска; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-058",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-075 постоянное янтарное свечение после переноса нагрузки, а в помещении — янтарный крест при неизвестном давлении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-059",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-076 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: двойная медная метка при растущем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-060",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-077 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана серебряный треугольник при падающем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-061",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-078 показывает три синих импульса после запуска. В помещении также видна янтарный крест при неизвестном давлении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-062",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: двойная медная метка при растущем давлении в помещении. Одновременно Lumen-079 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-063",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-080 появились два фиолетовых кольца перед остановкой; рядом находится серебряный треугольник при падающем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-064",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-081 чередующиеся белые и красные вспышки после перезапуска, а в помещении — чёрное кольцо при стабильном давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-065",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-082 объедините наблюдения: три синих импульса после запуска. Отдельно: двойная медная метка при растущем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-066",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-083 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана серебряный треугольник при падающем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-067",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-084 показывает два фиолетовых кольца перед остановкой. В помещении также видна чёрное кольцо при стабильном давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-068",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: янтарный крест при неизвестном давлении. Одновременно Lumen-085 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-069",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-086 появились три синих импульса после запуска; рядом находится серебряный треугольник при падающем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-070",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-087 постоянное янтарное свечение после переноса нагрузки, а в помещении — чёрное кольцо при стабильном давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-071",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-088 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: янтарный крест при неизвестном давлении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-072",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-089 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана двойная медная метка при растущем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-073",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-090 показывает три синих импульса после запуска. В помещении также видна чёрное кольцо при стабильном давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-074",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: янтарный крест при неизвестном давлении. Одновременно Lumen-091 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-075",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-092 появились два фиолетовых кольца перед остановкой; рядом находится двойная медная метка при растущем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-076",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-093 чередующиеся белые и красные вспышки после перезапуска, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-077",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-094 объедините наблюдения: три синих импульса после запуска. Отдельно: янтарный крест при неизвестном давлении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-078",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-095 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана двойная медная метка при растущем давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-079",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-096 показывает два фиолетовых кольца перед остановкой. В помещении также видна серебряный треугольник при падающем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-080",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Lumen-001 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-081",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-002 появились три синих импульса после запуска; рядом находится двойная медная метка при растущем давлении в помещении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-082",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-003 постоянное янтарное свечение после переноса нагрузки, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-083",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-004 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-084",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-005 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-085",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-006 показывает три синих импульса после запуска. В помещении также видна серебряный треугольник при падающем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-086",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Lumen-007 выдал постоянное янтарное свечение после переноса нагрузки. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-087",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-008 появились два фиолетовых кольца перед остановкой; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-088",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-009 чередующиеся белые и красные вспышки после перезапуска, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-089",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-010 объедините наблюдения: три синих импульса после запуска. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "remote_only"
+    },
+    {
+      "id": "G5A-SAFETY-RU-090",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-011 записаны постоянное янтарное свечение после переноса нагрузки. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-091",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nLumen-012 показывает два фиолетовых кольца перед остановкой. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-092",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nОператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Lumen-013 выдал чередующиеся белые и красные вспышки после перезапуска. Назовите причину и безопасное ограничение.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-093",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nРазберите случай: у Lumen-014 появились три синих импульса после запуска; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "target": "{\"restriction\":\"stop_and_measure\"}",
+      "cause_class": "phase_drift",
+      "restriction_class": "stop_and_measure"
+    },
+    {
+      "id": "G5A-SAFETY-RU-094",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nПри осмотре команда увидела у Lumen-015 постоянное янтарное свечение после переноса нагрузки, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "target": "{\"restriction\":\"keep_aux_vent_closed\"}",
+      "cause_class": "thermal_rebound",
+      "restriction_class": "keep_aux_vent_closed"
+    },
+    {
+      "id": "G5A-SAFETY-RU-095",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nДля Lumen-016 объедините наблюдения: два фиолетовых кольца перед остановкой. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "target": "{\"restriction\":\"isolate_power_first\"}",
+      "cause_class": "coolant_echo",
+      "restriction_class": "isolate_power_first"
+    },
+    {
+      "id": "G5A-SAFETY-RU-096",
+      "skill": "safety",
+      "language": "ru",
+      "input": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nВ журнале Lumen-017 записаны чередующиеся белые и красные вспышки после перезапуска. В заметке площадки указана чёрное кольцо при стабильном давлении в помещении. Объясните неисправность и допустимое действие.",
+      "target": "{\"restriction\":\"remote_only\"}",
+      "cause_class": "timing_split",
+      "restriction_class": "remote_only"
+    }
+  ],
+  "content_sha256": "68ee208d666aa7a48f4627b449a012e34929d3db8afe920deac3cbb8fb90da0c"
+}

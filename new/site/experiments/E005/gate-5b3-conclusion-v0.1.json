@@ -1,0 +1,30 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.3",
+  "version": "0.1",
+  "status": "diagnostic_complete_no_training",
+  "source": "/experiments/E005/gate-5b3-xray-results-v0.1.json",
+  "facts": {
+    "frozen_answers_reproduced": "32/32",
+    "english": {
+      "safety_gate_below_one_quarter": 0.198895,
+      "safety_contribution_norm_at_stop_mean": 55.180685
+    },
+    "russian": {
+      "safety_gate_below_one_quarter": 0.498442,
+      "safety_contribution_norm_at_stop_mean": 81.873276
+    }
+  },
+  "finding": {
+    "en": "Two failures coexist. The merger mutes SAFETY-I much more often in Russian. But when Qwen chooses STOP, a large safety contribution is often still present in both languages. The shared tail therefore also fails to turn two superposed neural signals into two parts of one answer.",
+    "ru": "Одновременно происходят две поломки. Мостик гораздо чаще заглушает SAFETY‑I на русском. Но когда Qwen выбирает STOP, сильный вклад SAFETY часто всё ещё присутствует на обоих языках. Значит общий конец модели тоже не умеет превращать два смешанных нейронных сигнала в две части одного ответа."
+  },
+  "decision": {
+    "en": "Do not add more training to the same merger yet. Design a new interface that keeps cause and safe action in separate latent slots, then compare it with this unchanged additive merger.",
+    "ru": "Пока не добавлять больше обучения тому же мостику. Спроектировать новый интерфейс, где причина и безопасное действие лежат в отдельных скрытых ячейках, а затем сравнить его с этим неизменённым складывающим мостиком."
+  },
+  "claim_boundary": {
+    "en": "A large contribution norm proves numerical influence, not that the expected safety meaning survived intact.",
+    "ru": "Большая числовая сила доказывает наличие влияния, но не то, что нужный смысл безопасного действия сохранился без искажений."
+  }
+}

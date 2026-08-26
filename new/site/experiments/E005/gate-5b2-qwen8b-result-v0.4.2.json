@@ -1,0 +1,17 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "judge_id": "J1",
+  "public_alias": "Judge A",
+  "model": "Qwen/Qwen3-8B",
+  "status": "judge_rejected",
+  "score": 9,
+  "required": 12,
+  "experiment_answers_seen": 0,
+  "failed_cases": ["CAL4-EN-05", "CAL4-RU-02", "CAL4-RU-05"],
+  "plain_result": {
+    "en": "The 8B judge confused silence with contradiction twice and rejected one valid Russian paraphrase.",
+    "ru": "Судья 8B дважды перепутал отсутствие ответа с противоречием и отверг один верный русский пересказ."
+  },
+  "decision": "Reject Judge A under the frozen 12/12 rule. Do not expose E005 answers or tune again."
+}

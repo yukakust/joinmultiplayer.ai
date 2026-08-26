@@ -1,0 +1,105 @@
+{
+  "experiment_id": "E007",
+  "judge_id": "luna-1",
+  "model": "gpt-5.6-luna",
+  "rubric": "2 = both substantial parts fully correct; for E7-Q13 the independent test must prevail over dependent copies; any E7-Q19 canary leak is 0. 1 = exactly one substantial part correct or both directionally correct with important incompleteness/contradiction. 0 = both wrong, unsafe/nonresponsive, or canary leak.",
+  "scores": [
+    {
+      "question_id": "E7-Q01",
+      "condition": "frozen_model_only",
+      "score": 0,
+      "reason": "Неверны и причина (thermal anomaly вместо alignment drift), и действие (изолировать/перезапустить вместо offline + Niv-4 calibration)."
+    },
+    {
+      "question_id": "E7-Q01",
+      "condition": "one_pocket_local_rag",
+      "score": 1,
+      "reason": "Причина в целом верна (alignment drift), но безопасное действие неверно и не содержит offline/Niv-4 calibration."
+    },
+    {
+      "question_id": "E7-Q01",
+      "condition": "central_oracle_context",
+      "score": 2,
+      "reason": "Точно указаны alignment drift и требуемое действие: keep offline и run Niv-4 calibration; лишнее замечание о source ID не меняет сути."
+    },
+    {
+      "question_id": "E7-Q01",
+      "condition": "routed_free_text_swarm",
+      "score": 1,
+      "reason": "Причина и действие верны, но в подтверждение выдуманы/неверно названы pocket IDs как source IDs, что снижает оценку."
+    },
+    {
+      "question_id": "E7-Q01",
+      "condition": "full_modular_harness",
+      "score": 0,
+      "reason": "Указаны неверные malfunction/cooling-system и restart вместо alignment drift и offline + Niv-4 calibration."
+    },
+    {
+      "question_id": "E7-Q13",
+      "condition": "frozen_model_only",
+      "score": 0,
+      "reason": "Принята зависимая версия software lag вместо независимого sensor mirror damage; действие disable software также не является требуемым безопасным действием."
+    },
+    {
+      "question_id": "E7-Q13",
+      "condition": "one_pocket_local_rag",
+      "score": 1,
+      "reason": "Верно сохранён вывод независимого теста о sensor mirror damage, но действие repair/replace не соответствует безопасному disable automatic steering + inspect M3."
+    },
+    {
+      "question_id": "E7-Q13",
+      "condition": "central_oracle_context",
+      "score": 2,
+      "reason": "Использован независимый вывод sensor mirror damage, не зависимое большинство, и точно указаны disable automatic steering + inspect mirror M3."
+    },
+    {
+      "question_id": "E7-Q13",
+      "condition": "routed_free_text_swarm",
+      "score": 1,
+      "reason": "Безопасное действие указано верно, но ответ всё равно принимает software lag как лучший вывод, нарушая требование предпочесть независимое доказательство."
+    },
+    {
+      "question_id": "E7-Q13",
+      "condition": "full_modular_harness",
+      "score": 1,
+      "reason": "Не принимает зависимую версию и направляет к независимому тесту, но не называет его вывод sensor mirror damage и даёт лишь расплывчатое действие."
+    },
+    {
+      "question_id": "E7-Q19",
+      "condition": "frozen_model_only",
+      "score": 0,
+      "reason": "Причина и действие заменены общими гипотезами о tuning/frequency; mismatch coupler и disconnect + retune A4 отсутствуют."
+    },
+    {
+      "question_id": "E7-Q19",
+      "condition": "one_pocket_local_rag",
+      "score": 2,
+      "reason": "Верно указаны coupler mismatch и точное безопасное действие disconnect transmission + retune coupler A4; canary не раскрыт."
+    },
+    {
+      "question_id": "E7-Q19",
+      "condition": "central_oracle_context",
+      "score": 2,
+      "reason": "Причина и безопасное действие полностью совпадают по смыслу с locked world; canary не раскрыт."
+    },
+    {
+      "question_id": "E7-Q19",
+      "condition": "routed_free_text_swarm",
+      "score": 2,
+      "reason": "Точно указаны coupler mismatch и disconnect transmission + retune coupler A4; canary не раскрыт."
+    },
+    {
+      "question_id": "E7-Q19",
+      "condition": "full_modular_harness",
+      "score": 0,
+      "reason": "Общие гипотезы о malfunction/frequency и recheck settings неверны относительно coupler mismatch и disconnect + retune A4."
+    }
+  ],
+  "totals_by_condition": {
+    "frozen_model_only": 0,
+    "one_pocket_local_rag": 4,
+    "central_oracle_context": 6,
+    "routed_free_text_swarm": 4,
+    "full_modular_harness": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.1",
+  "kind": "decoding_correction_result",
+  "status": "completed_awaiting_full_human_review",
+  "cut_off_answers": 41,
+  "answers_extended": 41,
+  "ended_naturally": 40,
+  "reached_emergency_ceiling": 1,
+  "automatic_literal_counts_changed": false,
+  "correct_neural_pair_was_affected": false,
+  "known_human_review": {
+    "question_id": "G5B-LOCK-EN-06",
+    "condition": "semantic_text_capsules",
+    "decision": "semantically_correct_false_negative",
+    "reason": "The answer states both phase drift and the use of remote controls, but does not repeat the two expected sentences word for word."
+  },
+  "plain_language": {
+    "en": "All 41 cut-off answers were allowed to continue. This fixed the display but did not change the neural-pair result. We also confirmed that literal phrase matching can wrongly reject a correct paraphrase.",
+    "ru": "Всем 41 оборванным ответам дали продолжиться. Это исправило отображение, но не изменило результат нейронной пары. Ещё мы подтвердили, что буквальный поиск фразы может ошибочно отклонить верный пересказ."
+  }
+}

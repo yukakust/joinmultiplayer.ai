@@ -1,0 +1,21 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "hidden_state_merger_training",
+  "status": "merger_trained_exam_not_run",
+  "lessons": 192,
+  "epochs": 2,
+  "steps": 96,
+  "trainable_parameters": 395650,
+  "loss_mean_first": 1.1380682438611984,
+  "loss_mean_last": 0.6416708081960678,
+  "cause_unchanged": true,
+  "safety_unchanged": true,
+  "merger_changed": true,
+  "merger_sha256": "44ab7cf6447a65d70bf33a7baf02f14fe7e333b8d5e2059c427dcd56a8335697",
+  "exam_run": false,
+  "plain_language": {
+    "en": "The bridge finished all 192 lessons. Its average error fell from 1.14 to 0.64. This is a modest learning curve; only the locked exam can tell whether the two skills really combine.",
+    "ru": "Мостик закончил все 192 урока. Его средняя ошибка снизилась с 1,14 до 0,64. Это скромный результат обучения; только закрытый экзамен покажет, объединились ли два умения на самом деле."
+  }
+}

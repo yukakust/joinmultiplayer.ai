@@ -1,0 +1,20 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.1",
+  "kind": "decoding_correction_protocol",
+  "status": "locked_before_correction",
+  "source_result": "gate-5b-results-v0.1.json",
+  "change": "Regenerate only records whose first run reached all 40 allowed tokens.",
+  "natural_stop": "Qwen EOS token",
+  "emergency_ceiling": 256,
+  "batch_size": 2,
+  "training_performed": false,
+  "weights_changed": false,
+  "questions_changed": false,
+  "pass_rule_changed": false,
+  "human_review_required": true,
+  "plain_language": {
+    "en": "Keep the original exam. Let only the 41 cut-off answers finish naturally. A 256-token ceiling only stops a broken endless loop.",
+    "ru": "Сохраняем исходный экзамен. Даём только 41 оборванному ответу закончиться естественно. Потолок 256 токенов нужен лишь против бесконечного зацикливания."
+  }
+}

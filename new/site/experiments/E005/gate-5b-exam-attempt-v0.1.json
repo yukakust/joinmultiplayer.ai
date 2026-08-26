@@ -1,0 +1,14 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "locked_exam_execution_attempt",
+  "status": "stopped_for_runtime_only",
+  "answers_generated": 3,
+  "weights_changed": false,
+  "scores_used_for_tuning": false,
+  "exam_or_pass_rule_changed": false,
+  "reason": {
+    "en": "The sequential executor was stopped because it was too slow. The replacement batches independent questions but keeps the same model, greedy decoding, 40-token limit, questions, and pass rule.",
+    "ru": "Последовательный запуск остановлен, потому что был слишком медленным. Замена подаёт независимые вопросы пакетами, но не меняет модель, жадную генерацию, лимит 40 токенов, вопросы и правило победы."
+  }
+}

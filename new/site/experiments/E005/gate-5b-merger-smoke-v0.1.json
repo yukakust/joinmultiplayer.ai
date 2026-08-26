@@ -1,0 +1,18 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "hidden_state_merger_training_smoke",
+  "status": "passed_development_smoke",
+  "lessons": 4,
+  "steps": 2,
+  "trainable_parameters": 395650,
+  "losses": [2.865472, 1.279571],
+  "cause_unchanged": true,
+  "safety_unchanged": true,
+  "merger_changed": true,
+  "exam_run": false,
+  "plain_language": {
+    "en": "The tiny bridge made two learning steps. Only the bridge changed; both personal tracks stayed exactly the same. This is a technical smoke, not the result.",
+    "ru": "Маленький мостик сделал два учебных шага. Изменился только мостик; оба личных трека остались точно прежними. Это техническая проба, а не результат."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "experiment_id": "E005",
+  "gate": "4C",
+  "kind": "scientific_conclusion",
+  "status": "partially_supported",
+  "question": {
+    "en": "Can a small personal adapter learn a skill rather than only memorize answers and familiar wording?",
+    "ru": "Может ли маленький личный адаптер выучить умение, а не только запомнить ответы и знакомую форму вопроса?"
+  },
+  "answer": {
+    "en": "Partly. One of two skills transferred to new wording: safe action scored 23/24. Source work scored 6/24 and failed. This is one working example, not a general proof.",
+    "ru": "Частично. Одно из двух умений перенеслось на новые формулировки: безопасное действие получило 23/24. Работа с источниками получила 6/24 и провалилась. Это один работающий пример, а не общий закон."
+  },
+  "does_not_test": [
+    "routing",
+    "two-pocket composition",
+    "swarm scaling",
+    "real-world safety"
+  ],
+  "next": "Gate 5A: complementary two-pocket composition"
+}

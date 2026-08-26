@@ -1,0 +1,41 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "judge_machine_preflight",
+  "status": "passed_before_model_download",
+  "recorded_at": "2026-08-25T08:20:00Z",
+  "machine": {
+    "provider": "Vast.ai",
+    "gpu": "2x NVIDIA GeForce RTX 3090",
+    "gpu_memory_total_mib": 49152,
+    "system_ram_gib": 119.36,
+    "disk_total_gib": 60,
+    "disk_free_after_environment_gib": 54,
+    "persistent_volume": false
+  },
+  "software": {
+    "python": "3.12.13",
+    "torch": "2.8.0+cu128",
+    "cuda_runtime": "12.8",
+    "transformers": "4.55.4",
+    "accelerate": "1.10.1",
+    "bitsandbytes": "0.47.0",
+    "mistral_common": "1.8.5"
+  },
+  "checks": {
+    "cuda_available": true,
+    "visible_gpus": 2,
+    "cuda_tensor_smoke": "passed",
+    "judge_models_downloaded": false,
+    "experiment_answers_seen_by_judges": false
+  },
+  "storage_plan": {
+    "judges_run_sequentially": true,
+    "copy_results_off_instance_after_each_judge": true,
+    "reason": "The temporary disk can hold the large judge and its environment, but not two full model repositories safely at once."
+  },
+  "plain_language": {
+    "en": "The rented machine is ready. Both GPUs work. No judge model has been downloaded and no experiment answer has been judged yet.",
+    "ru": "Арендованная машина готова. Обе видеокарты работают. Ни одна модель-судья ещё не скачана и ни один ответ эксперимента ещё не оценивался."
+  }
+}

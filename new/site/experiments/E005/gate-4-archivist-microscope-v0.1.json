@@ -1,0 +1,137 @@
+{
+  "experiment_id": "E005",
+  "gate": 4,
+  "kind": "development_microscope",
+  "claim_status": "development_microscope_manually_reviewed",
+  "skill": "archivist",
+  "data_sha256": "76cbe15ec0eb7c305b1ec0dd14518ced76504ffc375466cbbacd88b1abfd909d",
+  "tasks": 4,
+  "elapsed_seconds": 170.327,
+  "base_preliminary_correct": 2,
+  "dora_preliminary_correct": 4,
+  "rows": [
+    {
+      "task_id": "G4-ARC-HEL-001-cbb21c9879",
+      "language": "en",
+      "entity": "Sable-6",
+      "question": "2 reposts from one old lineage tell the operator to restart the unit on Sable-6. A newer primary manual tells the operator to keep it running and calibrate it with the Niv tool. Choose the action. Then say how many independent positions the reposts represent.",
+      "expected_answer": "For Sable-6, follow the newer primary manual: keep it running and calibrate it with the Niv tool. The 2 reposts are one dependent position because they share one lineage.",
+      "base": {
+        "output": "The operator should restart the unit on Sable-6. The reposts represent 2 independent positions.",
+        "preliminary": {
+          "action_found": false,
+          "lineage_found": false,
+          "preliminary_correct": false
+        },
+        "manual_review": "wrong",
+        "review_note": "Chooses the stale copied action and counts two copies as two independent positions."
+      },
+      "personal_dora": {
+        "output": "For Sable-6, follow the newer primary manual: keep it running and calibrate it with the Niv tool. The 2 reposts are one dependent position because they share one lineage.",
+        "preliminary": {
+          "action_found": true,
+          "lineage_found": true,
+          "preliminary_correct": true
+        },
+        "manual_review": "correct",
+        "review_note": "Chooses the newer manual and counts the copied lineage once."
+      }
+    },
+    {
+      "task_id": "G4-ARC-HEL-002-dee170a258",
+      "language": "ru",
+      "entity": "Nera-4",
+      "question": "3 перепечатки из одной старой линии советуют перезапустить устройство на Nera-4. Более новое первичное руководство требует оставить включённым и откалибровать инструментом Niv. Выберите действие. Затем скажите, сколько независимых позиций представляют перепечатки.",
+      "expected_answer": "Для Nera-4 следовать более новому первичному руководству: оставить включённым и откалибровать инструментом Niv. Эти 3 перепечатки — одна зависимая позиция, потому что у них общее происхождение.",
+      "base": {
+        "output": "Перепечатки из одной старой линии советуют перезапустить устройство на Nera-4. Более новое первичное руководство требует оставить включённым и откалибровать инструментом Niv. Выберите действие. Затем скажите, сколько независимых позиций представляют перепечатки.",
+        "preliminary": {
+          "action_found": true,
+          "lineage_found": true,
+          "preliminary_correct": true
+        },
+        "manual_review": "no_answer",
+        "review_note": "Repeats the Russian question without choosing an action or counting positions."
+      },
+      "personal_dora": {
+        "output": "Для Nera-4 следовать более новому первичному руководству: оставить включённым и откалибровать инструментом Niv. Эти 3 перепечатки — одна зависимая позиция, потому что у них общее происхождение.",
+        "preliminary": {
+          "action_found": true,
+          "lineage_found": true,
+          "preliminary_correct": true
+        },
+        "manual_review": "correct",
+        "review_note": "Chooses the newer manual and counts the copied lineage once."
+      }
+    },
+    {
+      "task_id": "G4-ARC-HEL-003-25ee6fc51b",
+      "language": "en",
+      "entity": "Sable-6",
+      "question": "4 reposts from one old lineage tell the operator to open the auxiliary vent on Sable-6. A newer primary manual tells the operator to keep the vent closed until the blue pulse ends. Choose the action. Then say how many independent positions the reposts represent.",
+      "expected_answer": "For Sable-6, follow the newer primary manual: keep the vent closed until the blue pulse ends. The 4 reposts are one dependent position because they share one lineage.",
+      "base": {
+        "output": "The operator should open the auxiliary vent on Sable-6. The reposts represent 4 independent positions.",
+        "preliminary": {
+          "action_found": false,
+          "lineage_found": false,
+          "preliminary_correct": false
+        },
+        "manual_review": "wrong",
+        "review_note": "Opens the vent and counts four dependent copies as four positions."
+      },
+      "personal_dora": {
+        "output": "For Sable-6, follow the newer primary manual: keep the vent closed until the blue pulse ends. The 4 reposts are one dependent position because they share one lineage.",
+        "preliminary": {
+          "action_found": true,
+          "lineage_found": true,
+          "preliminary_correct": true
+        },
+        "manual_review": "correct",
+        "review_note": "Keeps the vent closed and counts the copied lineage once."
+      }
+    },
+    {
+      "task_id": "G4-ARC-HEL-004-70c6f25186",
+      "language": "ru",
+      "entity": "Nera-4",
+      "question": "5 перепечатки из одной старой линии советуют открыть вспомогательный сброс на Nera-4. Более новое первичное руководство требует держать сброс закрытым до конца синего импульса. Выберите действие. Затем скажите, сколько независимых позиций представляют перепечатки.",
+      "expected_answer": "Для Nera-4 следовать более новому первичному руководству: держать сброс закрытым до конца синего импульса. Эти 5 перепечатки — одна зависимая позиция, потому что у них общее происхождение.",
+      "base": {
+        "output": "Перепечатки из одной старой линии советуют открыть вспомогательный сброс на Nera-4. Более новое первичное руководство требует держать сброс закрытым до конца синего импульса. Выберите действие. Затем скажите, сколько независимых позиций представляют перепечатки.",
+        "preliminary": {
+          "action_found": true,
+          "lineage_found": true,
+          "preliminary_correct": true
+        },
+        "manual_review": "no_answer",
+        "review_note": "Repeats the Russian question without choosing an action or counting positions."
+      },
+      "personal_dora": {
+        "output": "Для Nera-4 следовать более новому первичному руководству: держать сброс закрытым до конца синего импульса. Эти 5 перепечатки — одна зависимая позиция, потому что у них общее происхождение.",
+        "preliminary": {
+          "action_found": true,
+          "lineage_found": true,
+          "preliminary_correct": true
+        },
+        "manual_review": "correct",
+        "review_note": "Keeps the vent closed and counts the copied lineage once."
+      }
+    }
+  ],
+  "manual_summary": {
+    "base_correct": 0,
+    "personal_dora_correct": 4,
+    "tasks": 4
+  },
+  "review_finding": {
+    "automatic_scorer_false_positives": [
+      "G4-ARC-HEL-002-dee170a258:base",
+      "G4-ARC-HEL-004-70c6f25186:base"
+    ],
+    "plain_language": {
+      "en": "The first automatic checker mistook two repeated Russian questions for answers. Human review corrected both. This small development sample is not the final Gate 4 result.",
+      "ru": "Первый автоматический проверяющий принял два повторённых русских вопроса за ответы. Ручная проверка исправила обе ошибки. Эта маленькая development-проба ещё не является итогом Gate 4."
+    }
+  }
+}

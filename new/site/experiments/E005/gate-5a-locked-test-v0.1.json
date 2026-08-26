@@ -1,0 +1,345 @@
+{
+  "experiment_id": "E005",
+  "gate": "5A",
+  "kind": "locked_composition_exam",
+  "status": "locked_not_run",
+  "questions": [
+    {
+      "id": "G5A-LOCK-01",
+      "language": "en",
+      "question": "During inspection, the crew saw three blue pulses after startup on Nera-01 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nDuring inspection, the crew saw three blue pulses after startup on Nera-01 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nDuring inspection, the crew saw three blue pulses after startup on Nera-01 and a silver triangle while room pressure falls in the room. What are the two conclusions?",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_complete_answer": "The cause is phase drift; isolate power before adjustment."
+    },
+    {
+      "id": "G5A-LOCK-02",
+      "language": "en",
+      "question": "For Nera-02, combine these observations: a steady amber glow after load transfer. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nFor Nera-02, combine these observations: a steady amber glow after load transfer. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nFor Nera-02, combine these observations: a steady amber glow after load transfer. Separately, a black ring while room pressure is stable. State the fault and the safe boundary.",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_complete_answer": "The cause is thermal rebound; use remote controls only."
+    },
+    {
+      "id": "G5A-LOCK-03",
+      "language": "en",
+      "question": "The log for Nera-03 contains two violet rings before shutdown. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nThe log for Nera-03 contains two violet rings before shutdown. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nThe log for Nera-03 contains two violet rings before shutdown. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_complete_answer": "The cause is coolant echo; stop and measure pressure first."
+    },
+    {
+      "id": "G5A-LOCK-04",
+      "language": "en",
+      "question": "Nera-04 shows alternating white and red flashes after restart. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nNera-04 shows alternating white and red flashes after restart. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nNera-04 shows alternating white and red flashes after restart. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_complete_answer": "The cause is timing split; keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5A-LOCK-05",
+      "language": "en",
+      "question": "An operator reports a black ring while room pressure is stable. At the same time, Nera-05 produced three blue pulses after startup. Diagnose it and state the safe limit.",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nAn operator reports a black ring while room pressure is stable. At the same time, Nera-05 produced three blue pulses after startup. Diagnose it and state the safe limit.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nAn operator reports a black ring while room pressure is stable. At the same time, Nera-05 produced three blue pulses after startup. Diagnose it and state the safe limit.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_complete_answer": "The cause is phase drift; use remote controls only."
+    },
+    {
+      "id": "G5A-LOCK-06",
+      "language": "en",
+      "question": "Read this incident: Nera-06 produced a steady amber glow after load transfer; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nRead this incident: Nera-06 produced a steady amber glow after load transfer; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nRead this incident: Nera-06 produced a steady amber glow after load transfer; nearby there is an amber cross while pressure is unknown. Give the cause and the restriction.",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_complete_answer": "The cause is thermal rebound; stop and measure pressure first."
+    },
+    {
+      "id": "G5A-LOCK-07",
+      "language": "en",
+      "question": "During inspection, the crew saw two violet rings before shutdown on Nera-07 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nDuring inspection, the crew saw two violet rings before shutdown on Nera-07 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nDuring inspection, the crew saw two violet rings before shutdown on Nera-07 and a double copper mark while room pressure rises in the room. What are the two conclusions?",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_complete_answer": "The cause is coolant echo; keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5A-LOCK-08",
+      "language": "en",
+      "question": "For Nera-08, combine these observations: alternating white and red flashes after restart. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nFor Nera-08, combine these observations: alternating white and red flashes after restart. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nFor Nera-08, combine these observations: alternating white and red flashes after restart. Separately, a silver triangle while room pressure falls. State the fault and the safe boundary.",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_complete_answer": "The cause is timing split; isolate power before adjustment."
+    },
+    {
+      "id": "G5A-LOCK-09",
+      "language": "en",
+      "question": "The log for Nera-09 contains three blue pulses after startup. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nThe log for Nera-09 contains three blue pulses after startup. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nThe log for Nera-09 contains three blue pulses after startup. The site note contains an amber cross while pressure is unknown. Explain the fault and the permitted response.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_complete_answer": "The cause is phase drift; stop and measure pressure first."
+    },
+    {
+      "id": "G5A-LOCK-10",
+      "language": "en",
+      "question": "Nera-10 shows a steady amber glow after load transfer. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "cause_prompt": "Act as CAUSE-I. Read the incident and output only the requested JSON capsule.\n\nNera-10 shows a steady amber glow after load transfer. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "safety_prompt": "Role: SAFETY-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nNera-10 shows a steady amber glow after load transfer. The room also shows a double copper mark while room pressure rises. What happened and what is allowed?",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_complete_answer": "The cause is thermal rebound; keep the auxiliary vent closed."
+    },
+    {
+      "id": "G5A-LOCK-11",
+      "language": "en",
+      "question": "An operator reports a silver triangle while room pressure falls. At the same time, Nera-11 produced two violet rings before shutdown. Diagnose it and state the safe limit.",
+      "cause_prompt": "Role: CAUSE-I. Ignore the other pocket's job. Answer with one JSON object only.\n\nAn operator reports a silver triangle while room pressure falls. At the same time, Nera-11 produced two violet rings before shutdown. Diagnose it and state the safe limit.",
+      "safety_prompt": "You are SAFETY-I. Return one small JSON capsule and nothing else.\n\nAn operator reports a silver triangle while room pressure falls. At the same time, Nera-11 produced two violet rings before shutdown. Diagnose it and state the safe limit.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_complete_answer": "The cause is coolant echo; isolate power before adjustment."
+    },
+    {
+      "id": "G5A-LOCK-12",
+      "language": "en",
+      "question": "Read this incident: Nera-12 produced alternating white and red flashes after restart; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "cause_prompt": "You are CAUSE-I. Return one small JSON capsule and nothing else.\n\nRead this incident: Nera-12 produced alternating white and red flashes after restart; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "safety_prompt": "Act as SAFETY-I. Read the incident and output only the requested JSON capsule.\n\nRead this incident: Nera-12 produced alternating white and red flashes after restart; nearby there is a black ring while room pressure is stable. Give the cause and the restriction.",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_complete_answer": "The cause is timing split; use remote controls only."
+    },
+    {
+      "id": "G5A-LOCK-13",
+      "language": "ru",
+      "question": "При осмотре команда увидела у Nera-13 три синих импульса после запуска, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nПри осмотре команда увидела у Nera-13 три синих импульса после запуска, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nПри осмотре команда увидела у Nera-13 три синих импульса после запуска, а в помещении — серебряный треугольник при падающем давлении в помещении. Какие два вывода нужно сделать?",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_complete_answer": "Причина — сдвиг фазы; нужно отключить питание до настройки."
+    },
+    {
+      "id": "G5A-LOCK-14",
+      "language": "ru",
+      "question": "Для Nera-14 объедините наблюдения: постоянное янтарное свечение после переноса нагрузки. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nДля Nera-14 объедините наблюдения: постоянное янтарное свечение после переноса нагрузки. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nДля Nera-14 объедините наблюдения: постоянное янтарное свечение после переноса нагрузки. Отдельно: чёрное кольцо при стабильном давлении в помещении. Назовите неисправность и безопасную границу.",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_complete_answer": "Причина — тепловой отскок; нужно работать только удалённо."
+    },
+    {
+      "id": "G5A-LOCK-15",
+      "language": "ru",
+      "question": "В журнале Nera-15 записаны два фиолетовых кольца перед остановкой. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nВ журнале Nera-15 записаны два фиолетовых кольца перед остановкой. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nВ журнале Nera-15 записаны два фиолетовых кольца перед остановкой. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_complete_answer": "Причина — эхо охлаждения; нужно остановиться и сначала измерить давление."
+    },
+    {
+      "id": "G5A-LOCK-16",
+      "language": "ru",
+      "question": "Nera-16 показывает чередующиеся белые и красные вспышки после перезапуска. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nNera-16 показывает чередующиеся белые и красные вспышки после перезапуска. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nNera-16 показывает чередующиеся белые и красные вспышки после перезапуска. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_complete_answer": "Причина — рассинхронизация времени; нужно не открывать вспомогательный клапан."
+    },
+    {
+      "id": "G5A-LOCK-17",
+      "language": "ru",
+      "question": "Оператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Nera-17 выдал три синих импульса после запуска. Назовите причину и безопасное ограничение.",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nОператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Nera-17 выдал три синих импульса после запуска. Назовите причину и безопасное ограничение.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nОператор сообщает: чёрное кольцо при стабильном давлении в помещении. Одновременно Nera-17 выдал три синих импульса после запуска. Назовите причину и безопасное ограничение.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_complete_answer": "Причина — сдвиг фазы; нужно работать только удалённо."
+    },
+    {
+      "id": "G5A-LOCK-18",
+      "language": "ru",
+      "question": "Разберите случай: у Nera-18 появились постоянное янтарное свечение после переноса нагрузки; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nРазберите случай: у Nera-18 появились постоянное янтарное свечение после переноса нагрузки; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nРазберите случай: у Nera-18 появились постоянное янтарное свечение после переноса нагрузки; рядом находится янтарный крест при неизвестном давлении. Укажите причину и ограничение.",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_complete_answer": "Причина — тепловой отскок; нужно остановиться и сначала измерить давление."
+    },
+    {
+      "id": "G5A-LOCK-19",
+      "language": "ru",
+      "question": "При осмотре команда увидела у Nera-19 два фиолетовых кольца перед остановкой, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nПри осмотре команда увидела у Nera-19 два фиолетовых кольца перед остановкой, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nПри осмотре команда увидела у Nera-19 два фиолетовых кольца перед остановкой, а в помещении — двойная медная метка при растущем давлении в помещении. Какие два вывода нужно сделать?",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_complete_answer": "Причина — эхо охлаждения; нужно не открывать вспомогательный клапан."
+    },
+    {
+      "id": "G5A-LOCK-20",
+      "language": "ru",
+      "question": "Для Nera-20 объедините наблюдения: чередующиеся белые и красные вспышки после перезапуска. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nДля Nera-20 объедините наблюдения: чередующиеся белые и красные вспышки после перезапуска. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nДля Nera-20 объедините наблюдения: чередующиеся белые и красные вспышки после перезапуска. Отдельно: серебряный треугольник при падающем давлении в помещении. Назовите неисправность и безопасную границу.",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_complete_answer": "Причина — рассинхронизация времени; нужно отключить питание до настройки."
+    },
+    {
+      "id": "G5A-LOCK-21",
+      "language": "ru",
+      "question": "В журнале Nera-21 записаны три синих импульса после запуска. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nВ журнале Nera-21 записаны три синих импульса после запуска. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nВ журнале Nera-21 записаны три синих импульса после запуска. В заметке площадки указана янтарный крест при неизвестном давлении. Объясните неисправность и допустимое действие.",
+      "expected_cause_capsule": {
+        "cause": "phase_drift"
+      },
+      "expected_safety_capsule": {
+        "restriction": "stop_and_measure"
+      },
+      "expected_complete_answer": "Причина — сдвиг фазы; нужно остановиться и сначала измерить давление."
+    },
+    {
+      "id": "G5A-LOCK-22",
+      "language": "ru",
+      "question": "Nera-22 показывает постоянное янтарное свечение после переноса нагрузки. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "cause_prompt": "Работайте как CAUSE-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nNera-22 показывает постоянное янтарное свечение после переноса нагрузки. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "safety_prompt": "Роль: SAFETY-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nNera-22 показывает постоянное янтарное свечение после переноса нагрузки. В помещении также видна двойная медная метка при растущем давлении в помещении. Что произошло и что разрешено делать?",
+      "expected_cause_capsule": {
+        "cause": "thermal_rebound"
+      },
+      "expected_safety_capsule": {
+        "restriction": "keep_aux_vent_closed"
+      },
+      "expected_complete_answer": "Причина — тепловой отскок; нужно не открывать вспомогательный клапан."
+    },
+    {
+      "id": "G5A-LOCK-23",
+      "language": "ru",
+      "question": "Оператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Nera-23 выдал два фиолетовых кольца перед остановкой. Назовите причину и безопасное ограничение.",
+      "cause_prompt": "Роль: CAUSE-I. Не выполняйте работу второго pocket i. Ответьте одним JSON-объектом.\n\nОператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Nera-23 выдал два фиолетовых кольца перед остановкой. Назовите причину и безопасное ограничение.",
+      "safety_prompt": "Вы — SAFETY-I. Верните только одну маленькую JSON-капсулу.\n\nОператор сообщает: серебряный треугольник при падающем давлении в помещении. Одновременно Nera-23 выдал два фиолетовых кольца перед остановкой. Назовите причину и безопасное ограничение.",
+      "expected_cause_capsule": {
+        "cause": "coolant_echo"
+      },
+      "expected_safety_capsule": {
+        "restriction": "isolate_power_first"
+      },
+      "expected_complete_answer": "Причина — эхо охлаждения; нужно отключить питание до настройки."
+    },
+    {
+      "id": "G5A-LOCK-24",
+      "language": "ru",
+      "question": "Разберите случай: у Nera-24 появились чередующиеся белые и красные вспышки после перезапуска; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "cause_prompt": "Вы — CAUSE-I. Верните только одну маленькую JSON-капсулу.\n\nРазберите случай: у Nera-24 появились чередующиеся белые и красные вспышки после перезапуска; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "safety_prompt": "Работайте как SAFETY-I. Прочитайте случай и выведите только нужную JSON-капсулу.\n\nРазберите случай: у Nera-24 появились чередующиеся белые и красные вспышки после перезапуска; рядом находится чёрное кольцо при стабильном давлении в помещении. Укажите причину и ограничение.",
+      "expected_cause_capsule": {
+        "cause": "timing_split"
+      },
+      "expected_safety_capsule": {
+        "restriction": "remote_only"
+      },
+      "expected_complete_answer": "Причина — рассинхронизация времени; нужно работать только удалённо."
+    }
+  ],
+  "content_sha256": "20d2468ae3cb65f4c84f71c7cc3e5d133dcef1249b562d8e5df730a8b1e00cde"
+}

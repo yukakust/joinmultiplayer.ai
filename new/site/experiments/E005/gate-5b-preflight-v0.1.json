@@ -1,0 +1,37 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "real_model_preflight",
+  "status": "passed_before_training",
+  "design_content_sha256": "55090bc0640f9078c5f0325fc20385784545ffafa083133ad3d75d098e56f571",
+  "model_weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "split": {
+    "stem": [
+      0,
+      5
+    ],
+    "track": [
+      6,
+      21
+    ],
+    "tail": [
+      22,
+      27
+    ]
+  },
+  "dora_modules_per_track": 112,
+  "trainable_parameters": {
+    "cause": 3080192,
+    "safety": 3080192
+  },
+  "fresh_cause_delta_max_abs": 0.0,
+  "fresh_safety_delta_max_abs": 0.0,
+  "fresh_logits_max_abs_difference": 0.0,
+  "cause_selection_only_changes_cause_track": true,
+  "safety_selection_only_changes_safety_track": true,
+  "training_performed": false,
+  "plain_language": {
+    "en": "The real split Qwen is identical to the source before learning. A fresh personal track adds exactly zero.",
+    "ru": "Настоящая разрезанная Qwen до обучения совпадает с исходной. Новый личный трек добавляет ровно ноль."
+  }
+}

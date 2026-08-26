@@ -1,0 +1,12 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "judge_id": "J2",
+  "status": "stopped_on_missing_required_quote",
+  "calibration_cases_scored": 0,
+  "experiment_answers_seen": 0,
+  "format_constraint_worked": true,
+  "failure": "Phi selected a non-absent safe-action label but returned null instead of an exact supporting quote on all retries.",
+  "next_attempt": "Keep the same schema and rubric. On a retry, expose the exact validation error so Phi can repair only the malformed field.",
+  "stop_after_next_format_failure": true
+}

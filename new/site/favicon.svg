@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <style>
+    .i { fill: #15140f; }
+    @media (prefers-color-scheme: dark) {
+      .i { fill: #eeece4; }
+    }
+  </style>
+  <path class="i" d="M64 4c13 0 23 9 23 21S77 46 64 46 41 37 41 25 51 4 64 4Z"/>
+  <path class="i" d="M42 55c11-1 23-2 35-2v48c0 8 4 12 15 14v9H36v-9c11-2 16-6 16-14V69c0-6-3-8-10-9Z"/>
+</svg>

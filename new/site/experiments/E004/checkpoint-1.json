@@ -1,0 +1,85 @@
+{
+  "$schema": "/experiments/E004/artifact-schema-v0.1.json",
+  "schema_version": "0.1",
+  "experiment_id": "E004",
+  "checkpoint": 1,
+  "status": "needs_review",
+  "claim_status": "not_a_result",
+  "created_at": "2026-08-21T19:20:00Z",
+  "source_revision": "04138deb59ceb66f408f2b3bc0e9146c1419e31c",
+  "summary": "Read-only hardware audit, one pinned base-model recommendation, a candidate DoRA recipe, and twelve deterministic illustrative tasks. No weights or ML dependencies were downloaded and no training occurred.",
+  "hardware": {
+    "cpu": "AMD Ryzen AI 9 HX 470",
+    "threads": 24,
+    "ram_gib": 59,
+    "available_ram_gib": 50,
+    "free_disk_gib": 1740,
+    "accelerator": "AMD Radeon 890M present; ML runtime not configured",
+    "runtime_status": "PyTorch, Transformers, PEFT, Accelerate, and ROCm were not installed during the audit. GPU training is not assumed."
+  },
+  "model_candidate": {
+    "id": "Qwen/Qwen3-0.6B-Base",
+    "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+    "license": "Apache-2.0",
+    "layers": 28,
+    "weight_bytes": 1192135096,
+    "hidden_size": 1024,
+    "recommended": true
+  },
+  "task_world": {
+    "status": "illustrative_not_locked",
+    "sample_count": 12,
+    "answer_space": 32768,
+    "blind_guess_probability": 0.000030517578125,
+    "pair_missing_segment_guess_probability": 0.03125,
+    "examples": [
+      {
+        "id": "SAMPLE-01",
+        "prompt": "Encode Kite(15, 3), Tide(16, 16, 25), and Ember(23, 26). Kite first, Tide second, and Ember last. Return only the three segments.",
+        "answer": "K-0D / T-06 / E-12"
+      },
+      {
+        "id": "SAMPLE-02",
+        "prompt": "Encode Kite(12, 4), Tide(26, 28, 19), and Ember(2, 27). Tide first, then Ember, and finish with Kite. Return only the three segments.",
+        "answer": "T-16 / E-02 / K-03"
+      },
+      {
+        "id": "SAMPLE-03",
+        "prompt": "Encode Kite(4, 23), Tide(7, 25, 18), and Ember(10, 19). Begin with Ember, follow with Kite, and end with Tide. Return only the three segments.",
+        "answer": "E-02 / K-1C / T-0F"
+      }
+    ]
+  },
+  "dora_recipe": {
+    "rank": 8,
+    "planned_depths": [6, 12, 24],
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "trainable": ["m", "A", "B"]
+  },
+  "pockets": [
+    {"id": "E004-I1", "status": "not_created", "depth": 6, "dora_rank": 8},
+    {"id": "E004-I2", "status": "not_created", "depth": 12, "dora_rank": 8},
+    {"id": "E004-I3", "status": "not_created", "depth": 24, "dora_rank": 8}
+  ],
+  "decision_requested": "Approve a pinned environment, a model download capped at 2 GiB, locked task generation, and compatibility plus DoRA development smokes capped at two hours. Stop again at Checkpoint 2 before merger evaluation.",
+  "files": [
+    {
+      "label": "Twelve illustrative tasks",
+      "path": "/experiments/E004/sample-tasks.json",
+      "sha256": "5a2b8a6c56b3b1699dcf6b888f56bdff8dadb43b4f44444e019ff1d778f91bad"
+    },
+    {
+      "label": "Deterministic sample generator",
+      "path": "/experiments/E004/task_world.py",
+      "sha256": "daf8692980d09025da78e2beb28642ed2d77440a6c23b00bd25ae20b801cadf6"
+    }
+  ]
+}

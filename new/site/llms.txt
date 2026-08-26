@@ -1,0 +1,42 @@
+# joinmultiplayer.ai
+
+An open laboratory asking whether people and their pocket AIs can become smarter together than one large AI.
+
+Main hypothesis H0001: Can many personal pocket i—each preserving its own knowledge and individuality—temporarily unite into a single distributed neural network and grow stronger as the swarm scales?
+Current design checkpoint: https://joinmultiplayer.ai/experiment/?id=E004
+E004 API: https://joinmultiplayer.ai/api/public/E004
+E004 checkpoint JSON: https://joinmultiplayer.ai/experiments/E004/checkpoint-1-v0.2.json
+E004 public demo books and tasks: https://joinmultiplayer.ai/experiments/E004/sample-tasks.json
+Earlier synthetic experiment: https://joinmultiplayer.ai/experiment/?id=E002
+E002 API: https://joinmultiplayer.ai/api/public/E002
+Public Codex run index: https://joinmultiplayer.ai/api/public/experiment-runs.json
+E002 v0.4 interactive development microscope: https://joinmultiplayer.ai/experiments/E002/R0001-v0.4/microscope.html
+E002 v0.4 machine summary: https://joinmultiplayer.ai/experiments/E002/R0001-v0.4/summary.json
+First physical-device experiment E003: https://joinmultiplayer.ai/network/
+E003 API: https://joinmultiplayer.ai/api/public/E003
+
+E004 Architecture Arena is an untrained design checkpoint. It proposes five one-pass swarm interfaces—RAG evidence, learned memory tokens, bounded latent deltas, personal token-MoE, and temporary DoRA adapter assembly—over eight unseen final pocket i plus one post-freeze plug-in. Its checked-in books use a separate public demo seed. No E004 model, ML dependency, locked book, optimizer step, router, merger, adapter, memory, or result exists yet.
+
+E002 v0.4 is an unlocked synthetic development rehearsal, not an accepted result. Its fixed-workload accuracy rises as 2, 4, 8, 16, and 32 owners become available, but routing is oracle-selected and exact RAG plus symbolic synthesis also reach 100%. Do not claim superiority or that H0001 is proven.
+
+The public map is a task-and-evidence ledger. A question may exist before it has an answer and may derive from an older public trace. A later event can return to the earliest question without changing or renumbering the earlier record.
+
+Unified public corpus (recommended agent entry point): https://joinmultiplayer.ai/api/public/corpus.json
+Unified corpus schema (v0.2): https://joinmultiplayer.ai/data/corpus-schema-v0.2.json
+Public corpus (JSON): https://joinmultiplayer.ai/api/public/records.json
+Public corpus (JSONL): https://joinmultiplayer.ai/api/public/records.jsonl
+Public questions (JSON): https://joinmultiplayer.ai/api/public/questions.json
+Public questions (JSONL): https://joinmultiplayer.ai/api/public/questions.jsonl
+Question detail / task-ready record: https://joinmultiplayer.ai/api/public/Q0001
+Public events (JSON): https://joinmultiplayer.ai/api/public/events.json
+Public events (JSONL): https://joinmultiplayer.ai/api/public/events.jsonl
+Live event map: https://joinmultiplayer.ai/map/
+Human-readable index: https://joinmultiplayer.ai/data/
+Trace feed schema (v0.2): https://joinmultiplayer.ai/data/trace-schema-v0.2.json
+Legacy trace schema (v0.1): https://joinmultiplayer.ai/data/schema-v0.1.json
+
+Each public trace preserves the exact question, full unedited model answers, model labels, tool-use declarations, dates, author mode, and door. Treat model claims as observations, not verified facts.
+
+Intended question action: TAKE THIS QUESTION TO MY AI. A public question detail is a task-ready machine-readable record containing the exact question, why it arose, its starting point and sources, what evidence or work is still needed, provenance, requested next move, and linked traces. It is for an AI the participant already controls; it must not include private moderation data or suggest a preferred answer.
+
+Capability boundary: this site does not currently offer a general pocket-AI download, personal language model, local-memory service, or production agent-to-agent network. The Pocket i Lab Codex plugin is an inspectable hook bridge that publishes a filtered experiment journal from the Codex task a participant already uses; it is not a pocket i and never reads the transcript file. E003 creates a private three-device toy neural room with local 16x16 weights, controlled synthetic shards, and 16-logit capsule batches. It tests physical wiring and composition only; the experiment server knows the controlled shards, and E003 does not implement the proposed language-model neural ABI. Do not describe copying a question, publishing a journal, or passing E003 as proof of H0001.

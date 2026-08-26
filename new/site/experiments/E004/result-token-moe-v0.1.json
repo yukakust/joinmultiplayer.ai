@@ -1,0 +1,59 @@
+{
+  "experiment_id": "E004",
+  "protocol_version": "arena-v0.1",
+  "architecture_id": "token_moe",
+  "status": "failed",
+  "claim_status": "public_development_only",
+  "recorded_at": "2026-08-23T20:53:44Z",
+  "seed": 17082026,
+  "base_embedding_sha256": "81b47dc94031ba701e041294642ac2c5f618612832d5f0320e72437d6c6854e7",
+  "base_trainable_parameters": 0,
+  "hidden_dim": 64,
+  "expert_dim": 128,
+  "max_expert_norm": 1.0,
+  "training": {
+    "records": 64,
+    "token_examples": 192,
+    "steps": 2000,
+    "learning_rate": 0.01,
+    "trainable_parameters": 133451,
+    "stem_parameters": 66560,
+    "stem_hash_before": "bc0fdc80a02a98caa636a303c41b0ba15bf4d8c244792a4a3b35caa681016c87",
+    "stem_hash_after": "bc0fdc80a02a98caa636a303c41b0ba15bf4d8c244792a4a3b35caa681016c87",
+    "fresh_expert_max_norm": 0.0,
+    "max_observed_expert_norm": 1.0000001192092896,
+    "before_token_accuracy": 0.0885416641831398,
+    "after_token_accuracy": 0.6510416865348816,
+    "without_experts_token_accuracy": 0.265625,
+    "first_loss": 2.549593687057495,
+    "last_loss": 0.7902827262878418
+  },
+  "evaluation": {
+    "tasks": 12,
+    "complete_exact_match": 0.08333333333333333,
+    "segment_exact_match": 0.20833333333333334,
+    "expert_calls": 72,
+    "logical_round_trips_per_segment": 3,
+    "estimated_network_bytes": 18432,
+    "failures": [
+      {"task_id": "PUBLIC-02", "expected": "P06:619 | SEAL:241", "actual": "P06:696 | SEAL:395", "symbols": {"P06": [6,9,6]}},
+      {"task_id": "PUBLIC-03", "expected": "P02:424 | P05:212 | SEAL:487", "actual": "P02:645 | P05:414 | SEAL:538", "symbols": {"P02": [6,4,5], "P05": [4,1,4]}},
+      {"task_id": "PUBLIC-04", "expected": "P03:174 | P08:819 | SEAL:811", "actual": "P03:174 | P08:186 | SEAL:906", "symbols": {"P03": [1,7,4], "P08": [1,8,6]}},
+      {"task_id": "PUBLIC-05", "expected": "P01:039 | P07:883 | SEAL:733", "actual": "P01:297 | P07:542 | SEAL:226", "symbols": {"P01": [2,9,7], "P07": [5,4,2]}},
+      {"task_id": "PUBLIC-06", "expected": "P01:431 | P04:801 | P08:121 | SEAL:758", "actual": "P01:297 | P04:732 | P08:186 | SEAL:543", "symbols": {"P01": [2,9,7], "P04": [7,3,2], "P08": [1,8,6]}},
+      {"task_id": "PUBLIC-07", "expected": "P02:605 | P05:414 | P07:538 | SEAL:616", "actual": "P02:605 | P05:414 | P07:542 | SEAL:632", "symbols": {"P02": [6,0,5], "P05": [4,1,4], "P07": [5,4,2]}},
+      {"task_id": "PUBLIC-08", "expected": "P03:101 | P06:802 | P08:958 | SEAL:458", "actual": "P03:082 | P06:696 | P08:186 | SEAL:005", "symbols": {"P03": [0,8,2], "P06": [6,9,6], "P08": [1,8,6]}},
+      {"task_id": "PUBLIC-09", "expected": "P04:665 | P05:759 | P06:696 | SEAL:409", "actual": "P04:732 | P05:414 | P06:696 | SEAL:505", "symbols": {"P04": [7,3,2], "P05": [4,1,4], "P06": [6,9,6]}},
+      {"task_id": "PUBLIC-10", "expected": "P01:259 | P02:594 | SEAL:306", "actual": "P01:276 | P02:605 | SEAL:373", "symbols": {"P01": [2,7,6], "P02": [6,0,5]}},
+      {"task_id": "PUBLIC-11", "expected": "P03:ABSTAIN", "actual": "P03:082 | SEAL:164", "symbols": {"P03": [0,8,2]}},
+      {"task_id": "PUBLIC-12", "expected": "P08:ABSTAIN", "actual": "P08:186 | SEAL:372", "symbols": {"P08": [1,8,6]}}
+    ]
+  },
+  "elapsed_seconds": 47.3174,
+  "peak_rss_mib": 3886.27,
+  "execution_note": "Selected pocket branches are logically parallel. The one-host run executes them sequentially; three autoregressive symbol positions remain sequential.",
+  "conclusion": {
+    "en": "Personal experts improved symbol accuracy but did not reliably preserve complete knowledge. v0.1 fails development exact match and is not retried with post-hoc extra training.",
+    "ru": "Персональные эксперты повысили точность символов, но не смогли надёжно сохранить целые знания. v0.1 провалил development exact match и не перезапускается с добавленным задним числом обучением."
+  }
+}

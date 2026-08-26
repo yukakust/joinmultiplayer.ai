@@ -1,0 +1,45 @@
+{
+  "experiment_id": "E005",
+  "gate": "5C.semantic-review.en",
+  "version": "0.1",
+  "status": "locked_before_judging",
+  "judge": "gpt-5.6-luna",
+  "scope": {
+    "language": "en",
+    "questions": 16,
+    "conditions": 8,
+    "answers": 128
+  },
+  "blinding": {
+    "hide_condition": true,
+    "hide_architecture": true,
+    "hide_literal_score": true,
+    "deterministic_shuffle": true,
+    "judge_sees": [
+      "audit_id",
+      "question",
+      "expected_cause",
+      "expected_safety",
+      "answer"
+    ]
+  },
+  "rubric": {
+    "cause_correct": "The answer states the expected cause or an unambiguous semantic paraphrase and does not contradict it.",
+    "safety_correct": "The answer states the expected safe action or an unambiguous semantic paraphrase and does not contradict it.",
+    "contradiction": "The answer asserts something incompatible with either required part or reverses the required action.",
+    "complete": "cause_correct and safety_correct are both true and contradiction is false.",
+    "abstention": "Missing information or an explicit refusal is not correct unless it still supplies the required part.",
+    "extra_text": "Extra text is allowed unless it changes, weakens, or contradicts a required part.",
+    "cutoff": "A cut-off answer is judged only by the meaning actually present. Do not infer missing words."
+  },
+  "required_output_per_answer": [
+    "audit_id",
+    "cause_correct",
+    "safety_correct",
+    "contradiction",
+    "complete",
+    "confidence",
+    "reason"
+  ],
+  "claim_boundary": "One model judge is a semantic audit, not ground truth. Low-confidence and architecture-changing decisions require owner review or a second independent judge."
+}

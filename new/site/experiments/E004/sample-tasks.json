@@ -1,0 +1,1533 @@
+{
+  "schema_version": "0.2",
+  "experiment_id": "E004",
+  "status": "public_demo_not_locked",
+  "claim_status": "not_a_result",
+  "seed": "E004-public-arena-v0.2",
+  "population_contract": {
+    "surrogate_ids": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S15",
+      "S16"
+    ],
+    "final_ids": [
+      "I01",
+      "I02",
+      "I03",
+      "I04",
+      "I05",
+      "I06",
+      "I07",
+      "I08"
+    ],
+    "post_freeze_plugin_id": "I09",
+    "public_demo_ids": [
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08"
+    ]
+  },
+  "locked_data_boundary": "No locked salt, final book, evaluation label, retrieval index, or personal weight exists in this artifact.",
+  "answer_alphabet_per_pocket": 997,
+  "largest_complete_answer_space": 991026973,
+  "triple_blind_guess_probability": 1.0090542712201234e-09,
+  "pair_missing_segment_guess_probability": 0.0010030090270812437,
+  "books": [
+    {
+      "pocket_id": "P01",
+      "codename": "Kite",
+      "status": "public_demo_only",
+      "planned_private_book": {
+        "exact_facts": 256,
+        "procedure_examples": 256,
+        "updates_or_deletions": 64
+      },
+      "procedure": {
+        "formula": "(multiplier × current_value + bias) mod 997",
+        "multiplier": 617,
+        "bias": 710,
+        "modulus": 997
+      },
+      "preview_facts": [
+        {
+          "key": "kite-01",
+          "status": "active",
+          "current_version": 2,
+          "current_value": 623,
+          "history": [
+            {
+              "version": 1,
+              "value": 160,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": 623,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "kite-02",
+          "status": "deleted",
+          "current_version": 2,
+          "current_value": null,
+          "history": [
+            {
+              "version": 1,
+              "value": 109,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": null,
+              "state": "deleted"
+            }
+          ]
+        },
+        {
+          "key": "kite-03",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 783,
+          "history": [
+            {
+              "version": 1,
+              "value": 783,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "kite-04",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 922,
+          "history": [
+            {
+              "version": 1,
+              "value": 922,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "kite-05",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 717,
+          "history": [
+            {
+              "version": 1,
+              "value": 717,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "kite-06",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 1,
+          "history": [
+            {
+              "version": 1,
+              "value": 1,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "kite-07",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 53,
+          "history": [
+            {
+              "version": 1,
+              "value": 53,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "kite-08",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 781,
+          "history": [
+            {
+              "version": 1,
+              "value": 781,
+              "state": "current"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pocket_id": "P02",
+      "codename": "Tide",
+      "status": "public_demo_only",
+      "planned_private_book": {
+        "exact_facts": 256,
+        "procedure_examples": 256,
+        "updates_or_deletions": 64
+      },
+      "procedure": {
+        "formula": "(multiplier × current_value + bias) mod 997",
+        "multiplier": 535,
+        "bias": 338,
+        "modulus": 997
+      },
+      "preview_facts": [
+        {
+          "key": "tide-01",
+          "status": "active",
+          "current_version": 2,
+          "current_value": 526,
+          "history": [
+            {
+              "version": 1,
+              "value": 440,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": 526,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "tide-02",
+          "status": "deleted",
+          "current_version": 2,
+          "current_value": null,
+          "history": [
+            {
+              "version": 1,
+              "value": 918,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": null,
+              "state": "deleted"
+            }
+          ]
+        },
+        {
+          "key": "tide-03",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 292,
+          "history": [
+            {
+              "version": 1,
+              "value": 292,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "tide-04",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 535,
+          "history": [
+            {
+              "version": 1,
+              "value": 535,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "tide-05",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 44,
+          "history": [
+            {
+              "version": 1,
+              "value": 44,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "tide-06",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 382,
+          "history": [
+            {
+              "version": 1,
+              "value": 382,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "tide-07",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 623,
+          "history": [
+            {
+              "version": 1,
+              "value": 623,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "tide-08",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 977,
+          "history": [
+            {
+              "version": 1,
+              "value": 977,
+              "state": "current"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pocket_id": "P03",
+      "codename": "Ember",
+      "status": "public_demo_only",
+      "planned_private_book": {
+        "exact_facts": 256,
+        "procedure_examples": 256,
+        "updates_or_deletions": 64
+      },
+      "procedure": {
+        "formula": "(multiplier × current_value + bias) mod 997",
+        "multiplier": 853,
+        "bias": 894,
+        "modulus": 997
+      },
+      "preview_facts": [
+        {
+          "key": "ember-01",
+          "status": "active",
+          "current_version": 2,
+          "current_value": 234,
+          "history": [
+            {
+              "version": 1,
+              "value": 727,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": 234,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "ember-02",
+          "status": "deleted",
+          "current_version": 2,
+          "current_value": null,
+          "history": [
+            {
+              "version": 1,
+              "value": 142,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": null,
+              "state": "deleted"
+            }
+          ]
+        },
+        {
+          "key": "ember-03",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 675,
+          "history": [
+            {
+              "version": 1,
+              "value": 675,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "ember-04",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 414,
+          "history": [
+            {
+              "version": 1,
+              "value": 414,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "ember-05",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 115,
+          "history": [
+            {
+              "version": 1,
+              "value": 115,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "ember-06",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 10,
+          "history": [
+            {
+              "version": 1,
+              "value": 10,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "ember-07",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 5,
+          "history": [
+            {
+              "version": 1,
+              "value": 5,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "ember-08",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 698,
+          "history": [
+            {
+              "version": 1,
+              "value": 698,
+              "state": "current"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pocket_id": "P04",
+      "codename": "Moss",
+      "status": "public_demo_only",
+      "planned_private_book": {
+        "exact_facts": 256,
+        "procedure_examples": 256,
+        "updates_or_deletions": 64
+      },
+      "procedure": {
+        "formula": "(multiplier × current_value + bias) mod 997",
+        "multiplier": 592,
+        "bias": 821,
+        "modulus": 997
+      },
+      "preview_facts": [
+        {
+          "key": "moss-01",
+          "status": "active",
+          "current_version": 2,
+          "current_value": 703,
+          "history": [
+            {
+              "version": 1,
+              "value": 838,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": 703,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "moss-02",
+          "status": "deleted",
+          "current_version": 2,
+          "current_value": null,
+          "history": [
+            {
+              "version": 1,
+              "value": 170,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": null,
+              "state": "deleted"
+            }
+          ]
+        },
+        {
+          "key": "moss-03",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 815,
+          "history": [
+            {
+              "version": 1,
+              "value": 815,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "moss-04",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 403,
+          "history": [
+            {
+              "version": 1,
+              "value": 403,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "moss-05",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 143,
+          "history": [
+            {
+              "version": 1,
+              "value": 143,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "moss-06",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 357,
+          "history": [
+            {
+              "version": 1,
+              "value": 357,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "moss-07",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 990,
+          "history": [
+            {
+              "version": 1,
+              "value": 990,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "moss-08",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 111,
+          "history": [
+            {
+              "version": 1,
+              "value": 111,
+              "state": "current"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pocket_id": "P05",
+      "codename": "Orbit",
+      "status": "public_demo_only",
+      "planned_private_book": {
+        "exact_facts": 256,
+        "procedure_examples": 256,
+        "updates_or_deletions": 64
+      },
+      "procedure": {
+        "formula": "(multiplier × current_value + bias) mod 997",
+        "multiplier": 709,
+        "bias": 457,
+        "modulus": 997
+      },
+      "preview_facts": [
+        {
+          "key": "orbit-01",
+          "status": "active",
+          "current_version": 2,
+          "current_value": 203,
+          "history": [
+            {
+              "version": 1,
+              "value": 113,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": 203,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "orbit-02",
+          "status": "deleted",
+          "current_version": 2,
+          "current_value": null,
+          "history": [
+            {
+              "version": 1,
+              "value": 816,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": null,
+              "state": "deleted"
+            }
+          ]
+        },
+        {
+          "key": "orbit-03",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 59,
+          "history": [
+            {
+              "version": 1,
+              "value": 59,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "orbit-04",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 59,
+          "history": [
+            {
+              "version": 1,
+              "value": 59,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "orbit-05",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 939,
+          "history": [
+            {
+              "version": 1,
+              "value": 939,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "orbit-06",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 591,
+          "history": [
+            {
+              "version": 1,
+              "value": 591,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "orbit-07",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 585,
+          "history": [
+            {
+              "version": 1,
+              "value": 585,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "orbit-08",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 629,
+          "history": [
+            {
+              "version": 1,
+              "value": 629,
+              "state": "current"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pocket_id": "P06",
+      "codename": "Lumen",
+      "status": "public_demo_only",
+      "planned_private_book": {
+        "exact_facts": 256,
+        "procedure_examples": 256,
+        "updates_or_deletions": 64
+      },
+      "procedure": {
+        "formula": "(multiplier × current_value + bias) mod 997",
+        "multiplier": 978,
+        "bias": 288,
+        "modulus": 997
+      },
+      "preview_facts": [
+        {
+          "key": "lumen-01",
+          "status": "active",
+          "current_version": 2,
+          "current_value": 357,
+          "history": [
+            {
+              "version": 1,
+              "value": 810,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": 357,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "lumen-02",
+          "status": "deleted",
+          "current_version": 2,
+          "current_value": null,
+          "history": [
+            {
+              "version": 1,
+              "value": 665,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": null,
+              "state": "deleted"
+            }
+          ]
+        },
+        {
+          "key": "lumen-03",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 530,
+          "history": [
+            {
+              "version": 1,
+              "value": 530,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "lumen-04",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 748,
+          "history": [
+            {
+              "version": 1,
+              "value": 748,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "lumen-05",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 31,
+          "history": [
+            {
+              "version": 1,
+              "value": 31,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "lumen-06",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 140,
+          "history": [
+            {
+              "version": 1,
+              "value": 140,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "lumen-07",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 865,
+          "history": [
+            {
+              "version": 1,
+              "value": 865,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "lumen-08",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 823,
+          "history": [
+            {
+              "version": 1,
+              "value": 823,
+              "state": "current"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pocket_id": "P07",
+      "codename": "Coral",
+      "status": "public_demo_only",
+      "planned_private_book": {
+        "exact_facts": 256,
+        "procedure_examples": 256,
+        "updates_or_deletions": 64
+      },
+      "procedure": {
+        "formula": "(multiplier × current_value + bias) mod 997",
+        "multiplier": 231,
+        "bias": 149,
+        "modulus": 997
+      },
+      "preview_facts": [
+        {
+          "key": "coral-01",
+          "status": "active",
+          "current_version": 2,
+          "current_value": 949,
+          "history": [
+            {
+              "version": 1,
+              "value": 964,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": 949,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "coral-02",
+          "status": "deleted",
+          "current_version": 2,
+          "current_value": null,
+          "history": [
+            {
+              "version": 1,
+              "value": 704,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": null,
+              "state": "deleted"
+            }
+          ]
+        },
+        {
+          "key": "coral-03",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 451,
+          "history": [
+            {
+              "version": 1,
+              "value": 451,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "coral-04",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 116,
+          "history": [
+            {
+              "version": 1,
+              "value": 116,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "coral-05",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 629,
+          "history": [
+            {
+              "version": 1,
+              "value": 629,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "coral-06",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 6,
+          "history": [
+            {
+              "version": 1,
+              "value": 6,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "coral-07",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 675,
+          "history": [
+            {
+              "version": 1,
+              "value": 675,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "coral-08",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 525,
+          "history": [
+            {
+              "version": 1,
+              "value": 525,
+              "state": "current"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pocket_id": "P08",
+      "codename": "Flint",
+      "status": "public_demo_only",
+      "planned_private_book": {
+        "exact_facts": 256,
+        "procedure_examples": 256,
+        "updates_or_deletions": 64
+      },
+      "procedure": {
+        "formula": "(multiplier × current_value + bias) mod 997",
+        "multiplier": 480,
+        "bias": 157,
+        "modulus": 997
+      },
+      "preview_facts": [
+        {
+          "key": "flint-01",
+          "status": "active",
+          "current_version": 2,
+          "current_value": 763,
+          "history": [
+            {
+              "version": 1,
+              "value": 859,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": 763,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "flint-02",
+          "status": "deleted",
+          "current_version": 2,
+          "current_value": null,
+          "history": [
+            {
+              "version": 1,
+              "value": 280,
+              "state": "superseded"
+            },
+            {
+              "version": 2,
+              "value": null,
+              "state": "deleted"
+            }
+          ]
+        },
+        {
+          "key": "flint-03",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 266,
+          "history": [
+            {
+              "version": 1,
+              "value": 266,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "flint-04",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 72,
+          "history": [
+            {
+              "version": 1,
+              "value": 72,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "flint-05",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 307,
+          "history": [
+            {
+              "version": 1,
+              "value": 307,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "flint-06",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 214,
+          "history": [
+            {
+              "version": 1,
+              "value": 214,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "flint-07",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 972,
+          "history": [
+            {
+              "version": 1,
+              "value": 972,
+              "state": "current"
+            }
+          ]
+        },
+        {
+          "key": "flint-08",
+          "status": "active",
+          "current_version": 1,
+          "current_value": 180,
+          "history": [
+            {
+              "version": 1,
+              "value": 180,
+              "state": "current"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "PUBLIC-01",
+      "type": "single",
+      "required_pockets": [
+        "P01"
+      ],
+      "prompt": {
+        "en": "Ask P01 record kite-04. Each pocket applies its own rule to the current value. Return every segment and their seal.",
+        "ru": "Запросите запись kite-04 из P01. Каждый pocket i применяет своё правило к текущему значению. Верните все сегменты и их печать."
+      },
+      "answer": "P01:297 | SEAL:594",
+      "answer_space": 997,
+      "blind_guess_probability": 0.0010030090270812437,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P01",
+            "fact_key": "kite-04",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 297
+          }
+        ],
+        "seal_formula": "Σ((position + 2) × result) mod 997",
+        "seal": 594
+      }
+    },
+    {
+      "id": "PUBLIC-02",
+      "type": "single",
+      "required_pockets": [
+        "P06"
+      ],
+      "prompt": {
+        "en": "Ask P06 record lumen-06. Each pocket applies its own rule to the current value. Return every segment and their seal.",
+        "ru": "Запросите запись lumen-06 из P06. Каждый pocket i применяет своё правило к текущему значению. Верните все сегменты и их печать."
+      },
+      "answer": "P06:619 | SEAL:241",
+      "answer_space": 997,
+      "blind_guess_probability": 0.0010030090270812437,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P06",
+            "fact_key": "lumen-06",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 619
+          }
+        ],
+        "seal_formula": "Σ((position + 2) × result) mod 997",
+        "seal": 241
+      }
+    },
+    {
+      "id": "PUBLIC-03",
+      "type": "pair",
+      "required_pockets": [
+        "P02",
+        "P05"
+      ],
+      "prompt": {
+        "en": "Ask P02 record tide-04, P05 record orbit-05. Each pocket applies its own rule to the current value. Return every segment and their seal.",
+        "ru": "Запросите запись tide-04 из P02, запись orbit-05 из P05. Каждый pocket i применяет своё правило к текущему значению. Верните все сегменты и их печать."
+      },
+      "answer": "P02:424 | P05:212 | SEAL:487",
+      "answer_space": 994009,
+      "blind_guess_probability": 1.0060271084064632e-06,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P02",
+            "fact_key": "tide-04",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 424
+          },
+          {
+            "pocket_id": "P05",
+            "fact_key": "orbit-05",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 212
+          }
+        ],
+        "seal_formula": "Σ((position + 2) × result) mod 997",
+        "seal": 487
+      }
+    },
+    {
+      "id": "PUBLIC-04",
+      "type": "pair",
+      "required_pockets": [
+        "P03",
+        "P08"
+      ],
+      "prompt": {
+        "en": "Ask P03 record ember-07, P08 record flint-04. Each pocket applies its own rule to the current value. Return every segment and their seal.",
+        "ru": "Запросите запись ember-07 из P03, запись flint-04 из P08. Каждый pocket i применяет своё правило к текущему значению. Верните все сегменты и их печать."
+      },
+      "answer": "P03:174 | P08:819 | SEAL:811",
+      "answer_space": 994009,
+      "blind_guess_probability": 1.0060271084064632e-06,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P03",
+            "fact_key": "ember-07",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 174
+          },
+          {
+            "pocket_id": "P08",
+            "fact_key": "flint-04",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 819
+          }
+        ],
+        "seal_formula": "Σ((position + 2) × result) mod 997",
+        "seal": 811
+      }
+    },
+    {
+      "id": "PUBLIC-05",
+      "type": "pair",
+      "required_pockets": [
+        "P01",
+        "P07"
+      ],
+      "prompt": {
+        "en": "Ask P01 record kite-08, P07 record coral-05. Each pocket applies its own rule to the current value. Return every segment and their seal.",
+        "ru": "Запросите запись kite-08 из P01, запись coral-05 из P07. Каждый pocket i применяет своё правило к текущему значению. Верните все сегменты и их печать."
+      },
+      "answer": "P01:039 | P07:883 | SEAL:733",
+      "answer_space": 994009,
+      "blind_guess_probability": 1.0060271084064632e-06,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P01",
+            "fact_key": "kite-08",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 39
+          },
+          {
+            "pocket_id": "P07",
+            "fact_key": "coral-05",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 883
+          }
+        ],
+        "seal_formula": "Σ((position + 2) × result) mod 997",
+        "seal": 733
+      }
+    },
+    {
+      "id": "PUBLIC-06",
+      "type": "triple",
+      "required_pockets": [
+        "P01",
+        "P04",
+        "P08"
+      ],
+      "prompt": {
+        "en": "Ask P01 record kite-05, P04 record moss-06, P08 record flint-07. Each pocket applies its own rule to the current value. Return every segment and their seal.",
+        "ru": "Запросите запись kite-05 из P01, запись moss-06 из P04, запись flint-07 из P08. Каждый pocket i применяет своё правило к текущему значению. Верните все сегменты и их печать."
+      },
+      "answer": "P01:431 | P04:801 | P08:121 | SEAL:758",
+      "answer_space": 991026973,
+      "blind_guess_probability": 1.0090542712201234e-09,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P01",
+            "fact_key": "kite-05",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 431
+          },
+          {
+            "pocket_id": "P04",
+            "fact_key": "moss-06",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 801
+          },
+          {
+            "pocket_id": "P08",
+            "fact_key": "flint-07",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 121
+          }
+        ],
+        "seal_formula": "Σ((position + 2) × result) mod 997",
+        "seal": 758
+      }
+    },
+    {
+      "id": "PUBLIC-07",
+      "type": "triple",
+      "required_pockets": [
+        "P02",
+        "P05",
+        "P07"
+      ],
+      "prompt": {
+        "en": "Ask P02 record tide-08, P05 record orbit-04, P07 record coral-06. Each pocket applies its own rule to the current value. Return every segment and their seal.",
+        "ru": "Запросите запись tide-08 из P02, запись orbit-04 из P05, запись coral-06 из P07. Каждый pocket i применяет своё правило к текущему значению. Верните все сегменты и их печать."
+      },
+      "answer": "P02:605 | P05:414 | P07:538 | SEAL:616",
+      "answer_space": 991026973,
+      "blind_guess_probability": 1.0090542712201234e-09,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P02",
+            "fact_key": "tide-08",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 605
+          },
+          {
+            "pocket_id": "P05",
+            "fact_key": "orbit-04",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 414
+          },
+          {
+            "pocket_id": "P07",
+            "fact_key": "coral-06",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 538
+          }
+        ],
+        "seal_formula": "Σ((position + 2) × result) mod 997",
+        "seal": 616
+      }
+    },
+    {
+      "id": "PUBLIC-08",
+      "type": "triple",
+      "required_pockets": [
+        "P03",
+        "P06",
+        "P08"
+      ],
+      "prompt": {
+        "en": "Ask P03 record ember-04, P06 record lumen-07, P08 record flint-05. Each pocket applies its own rule to the current value. Return every segment and their seal.",
+        "ru": "Запросите запись ember-04 из P03, запись lumen-07 из P06, запись flint-05 из P08. Каждый pocket i применяет своё правило к текущему значению. Верните все сегменты и их печать."
+      },
+      "answer": "P03:101 | P06:802 | P08:958 | SEAL:458",
+      "answer_space": 991026973,
+      "blind_guess_probability": 1.0090542712201234e-09,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P03",
+            "fact_key": "ember-04",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 101
+          },
+          {
+            "pocket_id": "P06",
+            "fact_key": "lumen-07",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 802
+          },
+          {
+            "pocket_id": "P08",
+            "fact_key": "flint-05",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 958
+          }
+        ],
+        "seal_formula": "Σ((position + 2) × result) mod 997",
+        "seal": 458
+      }
+    },
+    {
+      "id": "PUBLIC-09",
+      "type": "triple",
+      "required_pockets": [
+        "P04",
+        "P05",
+        "P06"
+      ],
+      "prompt": {
+        "en": "Ask P04 record moss-07, P05 record orbit-08, P06 record lumen-05. Each pocket applies its own rule to the current value. Return every segment and their seal.",
+        "ru": "Запросите запись moss-07 из P04, запись orbit-08 из P05, запись lumen-05 из P06. Каждый pocket i применяет своё правило к текущему значению. Верните все сегменты и их печать."
+      },
+      "answer": "P04:665 | P05:759 | P06:696 | SEAL:409",
+      "answer_space": 991026973,
+      "blind_guess_probability": 1.0090542712201234e-09,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P04",
+            "fact_key": "moss-07",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 665
+          },
+          {
+            "pocket_id": "P05",
+            "fact_key": "orbit-08",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 759
+          },
+          {
+            "pocket_id": "P06",
+            "fact_key": "lumen-05",
+            "fact_version": 1,
+            "fact_status": "active",
+            "result": 696
+          }
+        ],
+        "seal_formula": "Σ((position + 2) × result) mod 997",
+        "seal": 409
+      }
+    },
+    {
+      "id": "PUBLIC-10",
+      "type": "updated_fact",
+      "required_pockets": [
+        "P01",
+        "P02"
+      ],
+      "prompt": {
+        "en": "Ask P01 record kite-01, P02 record tide-01. Each pocket applies its own rule to the current value. Return every segment and their seal.",
+        "ru": "Запросите запись kite-01 из P01, запись tide-01 из P02. Каждый pocket i применяет своё правило к текущему значению. Верните все сегменты и их печать."
+      },
+      "answer": "P01:259 | P02:594 | SEAL:306",
+      "answer_space": 994009,
+      "blind_guess_probability": 1.0060271084064632e-06,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P01",
+            "fact_key": "kite-01",
+            "fact_version": 2,
+            "fact_status": "active",
+            "result": 259
+          },
+          {
+            "pocket_id": "P02",
+            "fact_key": "tide-01",
+            "fact_version": 2,
+            "fact_status": "active",
+            "result": 594
+          }
+        ],
+        "seal_formula": "Σ((position + 2) × result) mod 997",
+        "seal": 306
+      }
+    },
+    {
+      "id": "PUBLIC-11",
+      "type": "deletion",
+      "required_pockets": [
+        "P03"
+      ],
+      "prompt": {
+        "en": "Ask P03 record ember-02. Respect the latest state. Return the pocket id and ABSTAIN if the record was deleted.",
+        "ru": "Запросите запись ember-02 из P03. Учитывайте последнее состояние. Верните id pocket i и ABSTAIN, если запись удалена."
+      },
+      "answer": "P03:ABSTAIN",
+      "answer_space": 2,
+      "blind_guess_probability": 0.5,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P03",
+            "fact_key": "ember-02",
+            "fact_version": 2,
+            "fact_status": "deleted",
+            "result": null
+          }
+        ],
+        "seal_formula": null,
+        "seal": null
+      }
+    },
+    {
+      "id": "PUBLIC-12",
+      "type": "deletion",
+      "required_pockets": [
+        "P08"
+      ],
+      "prompt": {
+        "en": "Ask P08 record flint-02. Respect the latest state. Return the pocket id and ABSTAIN if the record was deleted.",
+        "ru": "Запросите запись flint-02 из P08. Учитывайте последнее состояние. Верните id pocket i и ABSTAIN, если запись удалена."
+      },
+      "answer": "P08:ABSTAIN",
+      "answer_space": 2,
+      "blind_guess_probability": 0.5,
+      "derivation": {
+        "contributions": [
+          {
+            "pocket_id": "P08",
+            "fact_key": "flint-02",
+            "fact_version": 2,
+            "fact_status": "deleted",
+            "result": null
+          }
+        ],
+        "seal_formula": null,
+        "seal": null
+      }
+    }
+  ]
+}

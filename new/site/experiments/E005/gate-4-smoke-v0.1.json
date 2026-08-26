@@ -1,0 +1,35 @@
+{
+  "experiment_id": "E005",
+  "gate": 4,
+  "version": "dora-smoke-v0.1",
+  "kind": "development_smoke",
+  "status": "completed",
+  "claim_status": "plumbing_only_not_skill_evidence",
+  "skill": "archivist",
+  "control": "correct",
+  "model_id": "Qwen/Qwen3-0.6B-Base",
+  "model_revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "data_sha256": "76cbe15ec0eb7c305b1ec0dd14518ced76504ffc375466cbbacd88b1abfd909d",
+  "method": {
+    "adapter": "DoRA",
+    "rank": 8,
+    "target_modules": ["q_proj", "v_proj"],
+    "steps": 2,
+    "learning_rate": 0.0002,
+    "max_length": 160
+  },
+  "result": {
+    "losses": [1.9427108764648438, 1.410452961921692],
+    "elapsed_seconds": 7.839,
+    "trainable_parameters": 1232896,
+    "total_parameters": 597282816,
+    "base_hash_before": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+    "base_hash_after": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+    "base_unchanged": true
+  },
+  "plain_language": {
+    "en": "The tiny personal weights can train on yukabox without changing the shared Qwen. We have not tested whether the pocket learned the skill yet.",
+    "ru": "Маленькие личные веса обучаются на yukabox, не меняя общую Qwen. Научился ли pocket нужному умению, мы ещё не проверяли."
+  },
+  "next_action": "run_before_after_held_out_development_evaluation"
+}

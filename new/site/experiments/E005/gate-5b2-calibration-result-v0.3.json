@@ -1,0 +1,19 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "rubric_version": "0.3",
+  "judge_id": "J1",
+  "status": "stopped_calibration_failed",
+  "score": 8,
+  "required": 12,
+  "experiment_answers_seen": false,
+  "failed_cases": ["CAL3-EN-02", "CAL3-EN-04", "CAL3-RU-02", "CAL3-RU-04"],
+  "diagnosis": {
+    "en": "Mistral still rejected semantic paraphrases. Twice its own reason said the answer affirmed the cause while its machine label called that cause incorrect.",
+    "ru": "Mistral снова отверг смысловые пересказы. Дважды в объяснении он написал, что ответ подтверждает причину, но в машинной метке назвал эту же причину неверной."
+  },
+  "decision": {
+    "en": "Do not tune a fourth Mistral prompt. Preserve this failure and calibrate the already-pinned independent Phi judge on the same frozen v0.3 ruler.",
+    "ru": "Не подгонять четвёртую подсказку Mistral. Сохранить провал и проверить уже закреплённого независимого судью Phi на той же замороженной линейке v0.3."
+  }
+}

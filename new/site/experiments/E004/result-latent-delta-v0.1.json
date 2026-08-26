@@ -1,0 +1,43 @@
+{
+  "experiment_id": "E004",
+  "protocol_version": "arena-v0.1",
+  "architecture_id": "latent_delta",
+  "status": "passed_plumbing_only",
+  "claim_status": "public_development_only",
+  "recorded_at": "2026-08-23T20:50:15Z",
+  "seed": 17082026,
+  "base_embedding_sha256": "81b47dc94031ba701e041294642ac2c5f618612832d5f0320e72437d6c6854e7",
+  "base_trainable_parameters": 0,
+  "latent_dim": 64,
+  "max_delta_norm": 1.0,
+  "training": {
+    "examples": 64,
+    "steps": 2000,
+    "learning_rate": 0.01,
+    "trainable_parameters": 623078,
+    "common_tower_parameters": 69760,
+    "common_hash_before": "bb77293233038679f70635f83c8baac3e0cf943b1dda5a059b03337ce1090699",
+    "common_hash_after": "bb77293233038679f70635f83c8baac3e0cf943b1dda5a059b03337ce1090699",
+    "fresh_delta_max_norm": 0.0,
+    "max_observed_delta_norm": 1.0000001192092896,
+    "before_accuracy": 0.0,
+    "after_accuracy": 1.0,
+    "without_z0_accuracy": 0.0,
+    "first_loss": 7.0591583251953125,
+    "last_loss": 0.00004941843872074969
+  },
+  "evaluation": {
+    "tasks": 12,
+    "complete_exact_match": 1.0,
+    "segment_exact_match": 1.0,
+    "estimated_network_bytes": 6144,
+    "failures": [],
+    "all_task_rows": "/experiments/E004/harness-smoke-v0.1.json"
+  },
+  "elapsed_seconds": 27.8369,
+  "peak_rss_mib": 3886.21,
+  "claim_boundary": {
+    "en": "Training and evaluation reuse the same public records. This validates zero-at-birth bounded deltas and the z0 + delta equation, not held-out generalization.",
+    "ru": "Обучение и проверка используют те же открытые записи. Это проверяет ограниченные дельты, равные нулю при рождении, и уравнение z0 + delta, а не обобщение."
+  }
+}

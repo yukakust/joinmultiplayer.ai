@@ -1,0 +1,64 @@
+{
+  "experiment_id": "E005",
+  "checkpoint": "Gate 4B",
+  "version": "0.1",
+  "status": "frozen_development_failure",
+  "frozen_on": "2026-08-24",
+  "source_commit": "0855bde72d879baa05f5f6fa6db827b0555c9e68",
+  "claim": {
+    "en": "The matching DoRA adapters beat the clean base in both skill sets, but neither met the predeclared transfer threshold.",
+    "ru": "Подходящие DoRA-адаптеры обошли чистую базу в обоих наборах навыков, но ни один не достиг заранее заданного порога переноса."
+  },
+  "scores": {
+    "source_work": {
+      "clean_qwen": "1/8",
+      "matching_dora": "4/8",
+      "wrong_skill_dora": "0/8",
+      "shuffled_lessons_dora": "0/8"
+    },
+    "safe_action": {
+      "clean_qwen": "4/8",
+      "matching_dora": "5/8",
+      "wrong_skill_dora": "2/8",
+      "shuffled_lessons_dora": "0/8"
+    }
+  },
+  "files": {
+    "template_results": {
+      "path": "/experiments/E005/gate-4-results-v0.1.json",
+      "sha256": "9a4d4085f5308730f165a723d7e12c7d24a4d7cf3b34904c290c2f3a711f131e"
+    },
+    "transfer_questions": {
+      "path": "/experiments/E005/gate-4-transfer-data-v0.1.json",
+      "sha256": "53fa2d540f77d8c8a90987c9811cc1c7fd382475308913782f3308f2ccc0d2c2"
+    },
+    "transfer_results": {
+      "path": "/experiments/E005/gate-4-transfer-results-v0.1.json",
+      "sha256": "fee581c6730457075756791ae97c0b84e4c784a74accbb5190bbe0ae8090d6e3"
+    }
+  },
+  "weights": {
+    "base": {
+      "model": "Qwen/Qwen3-0.6B-Base",
+      "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+      "sha256": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba"
+    },
+    "source_work_matching_dora": {
+      "sha256": "cd6bc61fc94cbf8019077180de69a588fb10f7e544f9c8e7f195e06d3a6229bc"
+    },
+    "safe_action_matching_dora": {
+      "sha256": "85ae2409a52f9c0c7374f8cd0ca0b395c9a8872fd9937dc2ca8e84e74b6ac1e7"
+    },
+    "source_work_shuffled_dora": {
+      "sha256": "ccd6b6d275aefe34f31338f53fe61c70d1d1e3d70a0371c4944b18d7f4cf82d2"
+    },
+    "safe_action_shuffled_dora": {
+      "sha256": "42b9791cdd7a18627b539d3ff063b59eef2c65ab791bae9281912779b4910bf9"
+    }
+  },
+  "next_step": {
+    "en": "Train fresh adapters on varied lessons, then test them on a new locked set before any two-pocket composition.",
+    "ru": "Обучить новые адаптеры на разнообразных уроках, затем проверить их на новом закрытом наборе до объединения двух pocket i."
+  },
+  "immutable": true
+}

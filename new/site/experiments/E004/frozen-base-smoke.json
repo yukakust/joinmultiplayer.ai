@@ -1,0 +1,25 @@
+{
+  "kind": "frozen_base_smoke",
+  "status": "passed",
+  "recorded_at": "2026-08-23T20:23:00Z",
+  "model_id": "Qwen/Qwen3-0.6B-Base",
+  "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+  "device": "cpu",
+  "dtype": "torch.float32",
+  "threads": 22,
+  "parameters": 596049920,
+  "trainable_parameters": 0,
+  "load_seconds": 0.3944,
+  "generation_seconds": 1.7307,
+  "new_tokens": 12,
+  "tokens_per_second": 6.9338,
+  "peak_rss_mib": 3883.51,
+  "logits_shape": [1, 4, 151936],
+  "logits_finite": true,
+  "prompt": "A pocket intelligence is",
+  "completion": "A pocket intelligence is a type of intelligence that is not directly related to the intelligence",
+  "claim_boundary": {
+    "en": "This proves only that the exact frozen base loads and runs locally on yukabox. It is not evidence of learning or swarm intelligence.",
+    "ru": "Это доказывает только то, что точная замороженная база загружается и локально работает на yukabox. Это не доказательство обучения или интеллекта swarm."
+  }
+}

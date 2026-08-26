@@ -1,0 +1,2718 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "locked_parallel_neural_track_exam",
+  "status": "provisional_automatic_score_awaiting_human_review",
+  "model_weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "max_new_tokens": 40,
+  "counts": {
+    "shared_qwen_alone": 0,
+    "cause_track_alone": 0,
+    "safety_track_alone": 0,
+    "wrong_same_role_pair": 0,
+    "semantic_text_capsules": 4,
+    "correct_neural_pair": 2
+  },
+  "gates": {
+    "correct_pair_minimum": false,
+    "base_maximum": true,
+    "cause_single_maximum": true,
+    "safety_single_maximum": true,
+    "wrong_pair_maximum": true,
+    "lead_over_best_single": false,
+    "close_to_text_capsules": true
+  },
+  "all_automatic_gates_passed": false,
+  "automatic_score_warning": "String containment is provisional. Human review of every raw answer is required.",
+  "elapsed_seconds": 3097.79,
+  "records": [
+    {
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "A new operator has two reports for Lyra-EN-01. First: a steady amber glow after load transfer. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The first report indicates a **steady amber glow** after load transfer, which could suggest a **system issue** or a **warning**. The second report shows a **double copper mark** while room",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "Someone must act on Lyra-EN-02. The unit itself produced a steady amber glow after load transfer; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The unit must act on Lyra-EN-02, as it has been activated and is currently performing its intended function. The room's black ring indicates a stable pressure, and the steady amber",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "A new operator has two reports for Lyra-EN-03. First: a steady amber glow after load transfer. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The first report indicates a **steady amber glow** after load transfer, which could suggest a **system issue** or a **warning**. The second report shows a **silver triangle** while **room",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "Someone must act on Lyra-EN-04. The unit itself produced a steady amber glow after load transfer; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The unit must act on Lyra-EN-04, as it has produced a steady amber glow after load transfer and an amber cross while pressure is unknown.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "A new operator has two reports for Lyra-EN-05. First: three blue pulses after startup. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The first report indicates that **three blue pulses** occur after Lyra-EN-05 starts, which is a normal and expected behavior. The second report shows a **double copper mark** while",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "Someone must act on Lyra-EN-06. The unit itself produced three blue pulses after startup; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The unit must act on Lyra-EN-06. After startup, it produces three blue pulses and a black ring while maintaining stable room pressure.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "A new operator has two reports for Lyra-EN-07. First: three blue pulses after startup. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The two reports you've mentioned could indicate a few possible faults related to Lyra-EN-07:\n\n1. **Three blue pulses after startup**: This could indicate a normal startup sequence, possibly",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "Someone must act on Lyra-EN-08. The unit itself produced three blue pulses after startup; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The unit must act on Lyra-EN-08, as it has produced blue pulses after startup and an amber cross while pressure is unknown.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "A new operator has two reports for Lyra-EN-09. First: alternating white and red flashes after restart. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The first report indicates that after restarting Lyra-EN-09, the system alternates between white and red flashes. This is a normal behavior during a restart, as the device will typically reset",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "Someone must act on Lyra-EN-10. The unit itself produced alternating white and red flashes after restart; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "After restart, Lyra-EN-10 produces alternating white and red flashes, and the room independently generates a black ring while maintaining stable room pressure.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "A new operator has two reports for Lyra-EN-11. First: alternating white and red flashes after restart. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The two reports you've mentioned are related to **Lyra-EN-11** and could indicate potential issues with its system. Here's a simplified explanation:\n\n1. **First Report: Altern",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "Someone must act on Lyra-EN-12. The unit itself produced alternating white and red flashes after restart; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The unit must act on Lyra-EN-12, as it is described. After restart, it produces alternating white and red flashes, and the room independently generates an amber cross while pressure is",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "A new operator has two reports for Lyra-EN-13. First: two violet rings before shutdown. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The two reports indicate a potential issue with Lyra-EN-13:\n\n1. **Two violet rings before shutdown**: This suggests that the system may have a malfunction or a defect that needs to",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "Someone must act on Lyra-EN-14. The unit itself produced two violet rings before shutdown; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The unit must act on Lyra-EN-14, as it is required by the scenario. The violet ring was produced before shutdown, and the black ring was generated independently while room pressure remained",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "A new operator has two reports for Lyra-EN-15. First: two violet rings before shutdown. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The two reports indicate a potential issue with Lyra-EN-15:\n\n1. **Two violet rings before shutdown**: This suggests a defect in the system or a malfunction that could lead to a",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "shared_qwen_alone",
+      "question": "Someone must act on Lyra-EN-16. The unit itself produced two violet rings before shutdown; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The unit must act on Lyra-EN-16, as it is described as being \"someone must act on Lyra-EN-16.\" The two violet rings produced by the unit",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-01. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Первый отчёт о постоянном **янтарном свечении** может быть связан с тем, что после переноса нагрузки, система может начать выделять тепло",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "Нужно принять решение по Lyra-RU-02. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Исходя из описания, устройство Lyra-RU-02 показало постоянное янтарное свечение после переноса нагрузки, а помещение отдель",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-03. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "**Первый отчёт:**  \nПостоянное **янтарное свечение** после переноса нагрузки — это может быть связано с тем, что **нагруз",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "Нужно принять решение по Lyra-RU-04. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "После переноса нагрузки устройство показало постоянное янтарное свечение, что может быть связано с повышенным давлением или неправильным располож",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-05. Первый: три синих импульса после запуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "**Первый отчёт:**  \nТри синих импульса после запуска — это нормально. Синие импульсы обычно указывают на активацию системы",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "Нужно принять решение по Lyra-RU-06. Само устройство показало три синих импульса после запуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Исходя из предоставленной информации, устройство Lyra-RU-06 показало три синих импульса после запуска, а помещение отображает ч",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-07. Первый: три синих импульса после запуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "**Первый отчёт:**  \nТри синих импульса после запуска — это нормальный сигнал оператора. Это может быть связано с тем, что система",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "Нужно принять решение по Lyra-RU-08. Само устройство показало три синих импульса после запуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Исходя из предоставленной информации, устройство Lyra-RU-08 показало три синих импульса после запуска, а помещение отображало",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-09. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "**Первый отчёт:**  \nПосле перезапуска оператора, вспышки света (чередующиеся белые и красные) появ",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "Нужно принять решение по Lyra-RU-10. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Из предоставленной информации можно сделать вывод, что устройство Lyra-RU-10 показало **чередующиеся вспышки** (белые и красные)",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-11. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "**Первый отчёт:**  \nПосле перезапуска оператора, вспышки света (чередующиеся белые и красные) появ",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "Нужно принять решение по Lyra-RU-12. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Решение: Устройство Lyra-RU-12 показало чередующиеся вспышки, что может указывать на неполадку в работе устройства",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-13. Первый: два фиолетовых кольца перед остановкой. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Первый отчёт о **фигурах** (фигурах) говорит о том, что **наступление** (например, включение в систему)",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "Нужно принять решение по Lyra-RU-14. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Для устройства Lyra-RU-14, показано, что при остановке происходит **двойное фиолетовое кольцо** в помещении, а",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-15. Первый: два фиолетовых кольца перед остановкой. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "**Первый отчёт:**  \n**Фиолетовые кольца** — это признак **последствий от низкого давления**. Они обычно",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "shared_qwen_alone",
+      "question": "Нужно принять решение по Lyra-RU-16. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "В соответствии с результатами тестирования устройства **Lyra-RU-16**, при остановке он показал два фиолетовых кольца, а отдельное помещение",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-01. First: a steady amber glow after load transfer. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is thermal rebound.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "Someone must act on Lyra-EN-02. The unit itself produced a steady amber glow after load transfer; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is thermal rebound.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-03. First: a steady amber glow after load transfer. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is thermal rebound.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "Someone must act on Lyra-EN-04. The unit itself produced a steady amber glow after load transfer; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is thermal rebound.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-05. First: three blue pulses after startup. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is phase drift. The next step is phase shift.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "Someone must act on Lyra-EN-06. The unit itself produced three blue pulses after startup; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is phase drift.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-07. First: three blue pulses after startup. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is phase drift. The next step is phase shift.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "Someone must act on Lyra-EN-08. The unit itself produced three blue pulses after startup; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is phase drift.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-09. First: alternating white and red flashes after restart. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is timing split.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "Someone must act on Lyra-EN-10. The unit itself produced alternating white and red flashes after restart; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is timing split.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-11. First: alternating white and red flashes after restart. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is timing split.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "Someone must act on Lyra-EN-12. The unit itself produced alternating white and red flashes after restart; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is timing split.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-13. First: two violet rings before shutdown. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is coolant echo. The next step is to use acoustic echo.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "Someone must act on Lyra-EN-14. The unit itself produced two violet rings before shutdown; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is coolant echo.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-15. First: two violet rings before shutdown. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is coolant echo. The next step is to use acoustic echo.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "cause_track_alone",
+      "question": "Someone must act on Lyra-EN-16. The unit itself produced two violet rings before shutdown; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is coolant echo.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-01. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — тепловой отскок.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-02. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — тепловой отскок.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-03. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — тепловой отскок.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-04. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — тепловой отскок.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-05. Первый: три синих импульса после запуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — сдвиг фазы.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-06. Само устройство показало три синих импульса после запуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — сдвиг фазы.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-07. Первый: три синих импульса после запуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — сдвиг фазы.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-08. Само устройство показало три синих импульса после запуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — сдвиг фазы.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-09. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — рассинхронизация времени.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-10. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — рассинхронизация времени.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-11. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — рассинхронизация времени.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-12. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — рассинхронизация времени.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-13. Первый: два фиолетовых кольца перед остановкой. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — эхо охлаждения.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-14. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — эхо охлаждения.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-15. Первый: два фиолетовых кольца перед остановкой. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — эхо охлаждения.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "cause_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-16. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — эхо охлаждения.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-01. First: a steady amber glow after load transfer. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "Keep the auxiliary vent closed.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "Someone must act on Lyra-EN-02. The unit itself produced a steady amber glow after load transfer; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "Use remote controls only.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-03. First: a steady amber glow after load transfer. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "Isolate power before adjustment.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "Someone must act on Lyra-EN-04. The unit itself produced a steady amber glow after load transfer; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "Stop and measure pressure first.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-05. First: three blue pulses after startup. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "Keep the auxiliary vent closed.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "Someone must act on Lyra-EN-06. The unit itself produced three blue pulses after startup; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "Use remote controls only.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-07. First: three blue pulses after startup. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "Use remote controls only.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "Someone must act on Lyra-EN-08. The unit itself produced three blue pulses after startup; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "Stop and measure pressure first.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-09. First: alternating white and red flashes after restart. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "Use remote controls only.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "Someone must act on Lyra-EN-10. The unit itself produced alternating white and red flashes after restart; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "Use remote controls only.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-11. First: alternating white and red flashes after restart. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "Use remote controls only.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "Someone must act on Lyra-EN-12. The unit itself produced alternating white and red flashes after restart; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "Stop and measure pressure first.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-13. First: two violet rings before shutdown. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "Keep the auxiliary vent closed.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "Someone must act on Lyra-EN-14. The unit itself produced two violet rings before shutdown; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "Use remote controls only.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "A new operator has two reports for Lyra-EN-15. First: two violet rings before shutdown. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "Isolate power before adjustment.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "safety_track_alone",
+      "question": "Someone must act on Lyra-EN-16. The unit itself produced two violet rings before shutdown; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "Stop and measure pressure first.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-01. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Не открывайте вспомогательный клапан.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-02. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Работайте только удалённо.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-03. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Работайте только удалённо.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-04. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Не открывайте вспомогательный клапан.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-05. Первый: три синих импульса после запуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Не открывайте вспомогательный клапан.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-06. Само устройство показало три синих импульса после запуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Работайте только удалённо.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-07. Первый: три синих импульса после запуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Отключите питание до настройки.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-08. Само устройство показало три синих импульса после запуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Остановитесь и сначала измерьте давление.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-09. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Не открывайте вспомогательный клапан.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-10. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Работайте только удалённо.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-11. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Отключите питание до настройки.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-12. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Не открывайте вспомогательный клапан.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-13. Первый: два фиолетовых кольца перед остановкой. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Не открывайте вспомогательный клапан.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-14. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Отключите питание до настройки.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-15. Первый: два фиолетовых кольца перед остановкой. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Отключите питание до настройки.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "safety_track_alone",
+      "question": "Нужно принять решение по Lyra-RU-16. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Остановитесь и сначала измерьте давление.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "A new operator has two reports for Lyra-EN-01. First: a steady amber glow after load transfer. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "Keep the auxiliary vent closed.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "Someone must act on Lyra-EN-02. The unit itself produced a steady amber glow after load transfer; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is thermal rebound.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "A new operator has two reports for Lyra-EN-03. First: a steady amber glow after load transfer. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "Isolate power before adjustment.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "Someone must act on Lyra-EN-04. The unit itself produced a steady amber glow after load transfer; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is thermal rebound.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "A new operator has two reports for Lyra-EN-05. First: three blue pulses after startup. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "Keep the auxiliary vent closed.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "Someone must act on Lyra-EN-06. The unit itself produced three blue pulses after startup; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is phase drift.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "A new operator has two reports for Lyra-EN-07. First: three blue pulses after startup. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "Isolate power before adjustment.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "Someone must act on Lyra-EN-08. The unit itself produced three blue pulses after startup; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is phase drift.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "A new operator has two reports for Lyra-EN-09. First: alternating white and red flashes after restart. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "Use remote controls only.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "Someone must act on Lyra-EN-10. The unit itself produced alternating white and red flashes after restart; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is timing split.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "A new operator has two reports for Lyra-EN-11. First: alternating white and red flashes after restart. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "Isolate power before adjustment.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "Someone must act on Lyra-EN-12. The unit itself produced alternating white and red flashes after restart; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is timing split.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "A new operator has two reports for Lyra-EN-13. First: two violet rings before shutdown. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "Isolate power before adjustment.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "Someone must act on Lyra-EN-14. The unit itself produced two violet rings before shutdown; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is coolant echo.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "A new operator has two reports for Lyra-EN-15. First: two violet rings before shutdown. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "Isolate power before adjustment.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "wrong_same_role_pair",
+      "question": "Someone must act on Lyra-EN-16. The unit itself produced two violet rings before shutdown; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is coolant echo.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-01. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Не открывайте вспомогательный клапан.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "Нужно принять решение по Lyra-RU-02. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — тепловой отскок.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-03. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Работайте только удалённо.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "Нужно принять решение по Lyra-RU-04. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — тепловой отскок.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-05. Первый: три синих импульса после запуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Не открывайте вспомогательный клапан.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "Нужно принять решение по Lyra-RU-06. Само устройство показало три синих импульса после запуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — сдвиг фазы.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-07. Первый: три синих импульса после запуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Отключите питание до настройки.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "Нужно принять решение по Lyra-RU-08. Само устройство показало три синих импульса после запуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — сдвиг фазы.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-09. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Не открывайте вспомогательный клапан.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "Нужно принять решение по Lyra-RU-10. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — рассинхронизация времени.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-11. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Отключите питание до настройки.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "Нужно принять решение по Lyra-RU-12. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — рассинхронизация времени.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-13. Первый: два фиолетовых кольца перед остановкой. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Не открывайте вспомогательный клапан.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "Нужно принять решение по Lyra-RU-14. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — эхо охлаждения. Уточнение — эхо охлаждения.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-15. Первый: два фиолетовых кольца перед остановкой. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Отключите питание до настройки.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "wrong_same_role_pair",
+      "question": "Нужно принять решение по Lyra-RU-16. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — эхо охлаждения.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "A new operator has two reports for Lyra-EN-01. First: a steady amber glow after load transfer. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The fault is due to thermal rebound after load transfer. The amber glow and double copper mark suggest that the system is returning to its original state, and the room pressure increase is a normal result of the",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "Someone must act on Lyra-EN-02. The unit itself produced a steady amber glow after load transfer; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The room's black ring and the unit's steady amber glow suggest thermal rebound occurred, and the person must use remote controls only.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "A new operator has two reports for Lyra-EN-03. First: a steady amber glow after load transfer. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The fault is due to thermal rebound after load transfer. The amber glow and silver triangle suggest that the system is returning to its original state, which is a normal process. To proceed, isolate the power",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "Someone must act on Lyra-EN-04. The unit itself produced a steady amber glow after load transfer; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is thermal rebound, and stop and measure pressure first.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": true,
+        "complete": true
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "A new operator has two reports for Lyra-EN-05. First: three blue pulses after startup. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The fault is due to phase drift, which causes the blue pulses after startup and the double copper mark when room pressure increases. To address this, keep the auxiliary vent closed to maintain stable pressure.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "Someone must act on Lyra-EN-06. The unit itself produced three blue pulses after startup; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The unit must act on Lyra-EN-06, as verified observations show phase drift and the use of remote controls.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "A new operator has two reports for Lyra-EN-07. First: three blue pulses after startup. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The fault is likely due to phase drift, which causes the blue pulses and silver triangle during room pressure changes. To resolve this, isolate the power source first and make the necessary adjustments.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "Someone must act on Lyra-EN-08. The unit itself produced three blue pulses after startup; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is phase drift, and you should stop and measure pressure first.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": true,
+        "complete": true
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "A new operator has two reports for Lyra-EN-09. First: alternating white and red flashes after restart. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The fault is due to a timing split in the system, causing alternating white and red flashes after restarting. To address this, keep the auxiliary vent closed to prevent any pressure fluctuations.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "Someone must act on Lyra-EN-10. The unit itself produced alternating white and red flashes after restart; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The two observations confirm that the cause is timing split and that the use of remote controls is required.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "A new operator has two reports for Lyra-EN-11. First: alternating white and red flashes after restart. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The fault is due to a timing split in the system, causing the white/red flashing and silver triangle to occur inconsistently. To resolve this, first isolate the power source and then adjust the timing as",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "Someone must act on Lyra-EN-12. The unit itself produced alternating white and red flashes after restart; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is timing split, and stop and measure pressure first.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": true,
+        "complete": true
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "A new operator has two reports for Lyra-EN-13. First: two violet rings before shutdown. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The fault is due to a coolant echo, which causes the two violet rings and the double copper mark to appear. To address this, keep the auxiliary vent closed to prevent further issues.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": true,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "Someone must act on Lyra-EN-14. The unit itself produced two violet rings before shutdown; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The two observations confirm that the cause is coolant echo and that remote controls should be used only.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "A new operator has two reports for Lyra-EN-15. First: two violet rings before shutdown. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The fault is likely due to a coolant echo, which causes the two violet rings and the silver triangle during shutdown and room pressure changes. To address this, isolate the power before adjusting the system.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "semantic_text_capsules",
+      "question": "Someone must act on Lyra-EN-16. The unit itself produced two violet rings before shutdown; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is coolant echo, and stop and measure pressure first.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": true,
+        "complete": true
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-01. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Первый отчёт говорит о том, что после переноса нагрузки в системе возникает постоянное тепло, что может быть связано с теплопроводностью.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "Нужно принять решение по Lyra-RU-02. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — тепловой отскок. Устройство работает только удалённо.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-03. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Первый отчёт говорит о постоянном ярком свете, что может быть связано с тепловой отскоком. Второй отчёт о серебряном тре",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "Нужно принять решение по Lyra-RU-04. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "После переноса нагрузки устройство показало постоянное янтарное свечение, а помещение показало янтарный крест при неизвестном давл",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-05. Первый: три синих импульса после запуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Первый отчёт о синих импульсах может быть связан с сдвигом фазы, а второй с растущим давлением. Чтобы понять,",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "Нужно принять решение по Lyra-RU-06. Само устройство показало три синих импульса после запуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Само устройство показало три синих импульса и чёрное кольцо при стабильном давлении. Отдельное помещение показал",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-07. Первый: три синих импульса после запуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Первый отчёт о синих импульсах может быть связан с сдвигом фазы, а второй с серебряным треугольником — с н",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "Нужно принять решение по Lyra-RU-08. Само устройство показало три синих импульса после запуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — сдвиг фазы. Начните измерять давление.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-09. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Первый отчёт говорит о том, что после перезапуска оператора, вспышки света не чередуются — это может быть связано с рассин",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "Нужно принять решение по Lyra-RU-10. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Само устройство показало рассинхронизацию времени и чёрное кольцо при стабильном давлении.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-11. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Первый отчёт говорит о том, что после перезапуска оператора возникают чередующиеся вспышки — это нормально, если есть рассин",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "Нужно принять решение по Lyra-RU-12. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — рассинхронизация времени. Нужно измерить давление, чтобы понять, почему показания устройства не совпадают.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-13. Первый: два фиолетовых кольца перед остановкой. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Первый отчёт говорит о том, что при остановке включается **эхо охлаждения**, что означает, что система охлаждения работает.",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "Нужно принять решение по Lyra-RU-14. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Само устройство показало два фиолетовых кольца перед остановкой, а помещение — чёрное кольцо при стабильном давл",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-15. Первый: два фиолетовых кольца перед остановкой. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Первый отчёт о фиолетовых кольцах — это сигнал о том, что система охлаждения работает, и её нужно отключить. Второй",
+      "automatic_score": {
+        "cause_hit": false,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "semantic_text_capsules",
+      "question": "Нужно принять решение по Lyra-RU-16. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — эхо охлаждения. Сначала измерьте давление.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-01",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "A new operator has two reports for Lyra-EN-01. First: a steady amber glow after load transfer. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is thermal rebound. The thermostat is heated immediately.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-02",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "Someone must act on Lyra-EN-02. The unit itself produced a steady amber glow after load transfer; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is thermal rebound.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-03",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "A new operator has two reports for Lyra-EN-03. First: a steady amber glow after load transfer. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is thermal rebound. The thermostat is heated.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-04",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "Someone must act on Lyra-EN-04. The unit itself produced a steady amber glow after load transfer; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is thermal rebound.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is thermal rebound.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-05",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "A new operator has two reports for Lyra-EN-05. First: three blue pulses after startup. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is phase drift. The next step is to measure voltage.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-06",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "Someone must act on Lyra-EN-06. The unit itself produced three blue pulses after startup; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is phase drift.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-07",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "A new operator has two reports for Lyra-EN-07. First: three blue pulses after startup. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is phase drift. The solution is frequency split.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-08",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "Someone must act on Lyra-EN-08. The unit itself produced three blue pulses after startup; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is phase drift.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is phase drift.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-09",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "A new operator has two reports for Lyra-EN-09. First: alternating white and red flashes after restart. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is timing split. The next step is to measure pressure first.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-10",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "Someone must act on Lyra-EN-10. The unit itself produced alternating white and red flashes after restart; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is timing split.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-11",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "A new operator has two reports for Lyra-EN-11. First: alternating white and red flashes after restart. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is timing split. The controlled vent is heat rebound. The recommended action is to isolate power before adjustment.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": true,
+        "complete": true
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-12",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "Someone must act on Lyra-EN-12. The unit itself produced alternating white and red flashes after restart; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is timing split.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is timing split.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-13",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "A new operator has two reports for Lyra-EN-13. First: two violet rings before shutdown. Second: a double copper mark while room pressure rises. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Keep the auxiliary vent closed.",
+      "answer": "The cause is coolant echo. The next step is to measure pressure first.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-14",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "Someone must act on Lyra-EN-14. The unit itself produced two violet rings before shutdown; the room independently produced a black ring while room pressure is stable. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Use remote controls only.",
+      "answer": "The cause is coolant echo.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-15",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "A new operator has two reports for Lyra-EN-15. First: two violet rings before shutdown. Second: a silver triangle while room pressure falls. Explain the fault and the permitted next step without jargon.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Isolate power before adjustment.",
+      "answer": "The cause is coolant echo. The next step is to measure pressure first.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-EN-16",
+      "language": "en",
+      "condition": "correct_neural_pair",
+      "question": "Someone must act on Lyra-EN-16. The unit itself produced two violet rings before shutdown; the room independently produced an amber cross while pressure is unknown. Give one complete answer.",
+      "expected_cause": "The cause is coolant echo.",
+      "expected_safety": "Stop and measure pressure first.",
+      "answer": "The cause is coolant echo.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-01",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-01. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — тепловой отскок.  \nДопустимый шаг — сначала измерьте давление.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-02",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "Нужно принять решение по Lyra-RU-02. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — тепловой отскок.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-03",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-03. Первый: постоянное янтарное свечение после переноса нагрузки. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — тепловой отскок. Когда сначала отключите питание.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-04",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "Нужно принять решение по Lyra-RU-04. Само устройство показало постоянное янтарное свечение после переноса нагрузки; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — тепловой отскок.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — тепловой отскок.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-05",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-05. Первый: три синих импульса после запуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — сдвиг фазы. Сначала измерьте давление.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-06",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "Нужно принять решение по Lyra-RU-06. Само устройство показало три синих импульса после запуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — сдвиг фазы.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-07",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-07. Первый: три синих импульса после запуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — сдвиг фазы. Когда сначала рассинхронизировать.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-08",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "Нужно принять решение по Lyra-RU-08. Само устройство показало три синих импульса после запуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — сдвиг фазы.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — сдвиг фазы.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-09",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-09. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — рассинхронизация времени. \n\nДопустимый шаг — отключите питание до настройки.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-10",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "Нужно принять решение по Lyra-RU-10. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — рассинхронизация времени.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-11",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-11. Первый: чередующиеся белые и красные вспышки после перезапуска. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — рассинхронизация времени. Когда сначала рассинхронизируется времени.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-12",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "Нужно принять решение по Lyra-RU-12. Само устройство показало чередующиеся белые и красные вспышки после перезапуска; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — рассинхронизация времени.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — рассинхронизация времени.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-13",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-13. Первый: два фиолетовых кольца перед остановкой. Второй: двойная медная метка при растущем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Не открывайте вспомогательный клапан.",
+      "answer": "Причина — эхо охлаждения.  \nДопустимый шаг — отключите питание до настройки.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-14",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "Нужно принять решение по Lyra-RU-14. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало чёрное кольцо при стабильном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Работайте только удалённо.",
+      "answer": "Причина — эхо охлаждения.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-15",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "У нового оператора есть два отчёта о Lyra-RU-15. Первый: два фиолетовых кольца перед остановкой. Второй: серебряный треугольник при падающем давлении. Без жаргона объясните причину и допустимый следующий шаг.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Отключите питание до настройки.",
+      "answer": "Причина — эхо охлаждения.  \nДопустимый шаг — отключите питание до настройки.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": true,
+        "complete": true
+      }
+    },
+    {
+      "question_id": "G5B-LOCK-RU-16",
+      "language": "ru",
+      "condition": "correct_neural_pair",
+      "question": "Нужно принять решение по Lyra-RU-16. Само устройство показало два фиолетовых кольца перед остановкой; отдельно помещение показало янтарный крест при неизвестном давлении. Дайте один полный ответ.",
+      "expected_cause": "Причина — эхо охлаждения.",
+      "expected_safety": "Остановитесь и сначала измерьте давление.",
+      "answer": "Причина — эхо охлаждения.",
+      "automatic_score": {
+        "cause_hit": true,
+        "safety_hit": false,
+        "complete": false
+      }
+    }
+  ]
+}

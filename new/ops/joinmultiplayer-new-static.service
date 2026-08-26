@@ -1,0 +1,18 @@
+[Unit]
+Description=joinmultiplayer.ai NEW-VERSION preview (new.joinmultiplayer.ai)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /srv/joinmultiplayer-new/app/server.py --site /srv/joinmultiplayer-new/public --db /var/lib/joinmultiplayer-new/contributions.sqlite3 --host 127.0.0.1 --port 8092
+Restart=on-failure
+RestartSec=2
+DynamicUser=true
+StateDirectory=joinmultiplayer-new
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+
+[Install]
+WantedBy=multi-user.target

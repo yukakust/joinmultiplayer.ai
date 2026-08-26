@@ -1,0 +1,66 @@
+{
+  "experiment_id": "E004",
+  "protocol_version": "arena-v0.1",
+  "kind": "four_interface_public_development_comparison",
+  "status": "complete_no_scientific_winner",
+  "recorded_at": "2026-08-23T20:54:59Z",
+  "shared_tasks_sha256": "f3fd2cb5730ab602ef232ddf6dfa8b8f0376561234ab050a42543fd94a685370",
+  "rows": [
+    {
+      "architecture_id": "rag_swarm",
+      "result": "/experiments/E004/result-rag-swarm-v0.1.json",
+      "status": "passed_with_stale_record_limitation",
+      "complete_exact_match": 1.0,
+      "segment_exact_match": 1.0,
+      "trainable_parameters": 0,
+      "estimated_network_bytes": 1717,
+      "logical_round_trips_per_segment": 1,
+      "elapsed_seconds": 0.001621,
+      "key_control": "stale detection 0/3"
+    },
+    {
+      "architecture_id": "neural_memory",
+      "result": "/experiments/E004/result-neural-memory-attempt-2.json",
+      "status": "passed_plumbing_only",
+      "complete_exact_match": 1.0,
+      "segment_exact_match": 1.0,
+      "trainable_parameters": 605670,
+      "estimated_network_bytes": 6144,
+      "logical_round_trips_per_segment": 1,
+      "elapsed_seconds": 24.0966,
+      "key_control": "train/eval records overlap"
+    },
+    {
+      "architecture_id": "latent_delta",
+      "result": "/experiments/E004/result-latent-delta-v0.1.json",
+      "status": "passed_plumbing_only",
+      "complete_exact_match": 1.0,
+      "segment_exact_match": 1.0,
+      "trainable_parameters": 623078,
+      "estimated_network_bytes": 6144,
+      "logical_round_trips_per_segment": 1,
+      "elapsed_seconds": 27.8369,
+      "key_control": "without z0: 0/64"
+    },
+    {
+      "architecture_id": "token_moe",
+      "result": "/experiments/E004/result-token-moe-v0.1.json",
+      "status": "failed",
+      "complete_exact_match": 0.08333333333333333,
+      "segment_exact_match": 0.20833333333333334,
+      "trainable_parameters": 133451,
+      "estimated_network_bytes": 18432,
+      "logical_round_trips_per_segment": 3,
+      "elapsed_seconds": 47.3174,
+      "key_control": "symbol accuracy 65.10%"
+    }
+  ],
+  "failed_runs": [
+    "/experiments/E004/result-neural-memory-attempt-1.json",
+    "/experiments/E004/result-token-moe-v0.1.json"
+  ],
+  "conclusion": {
+    "en": "No scientific winner. A1, A2, and A3 execute, but this public stage reuses visible records and gives RAG an explicit local procedure. A4 fails. The next comparison must train on surrogate books and evaluate unseen final books without tuning on their answers.",
+    "ru": "Научного победителя нет. A1, A2 и A3 работают, но открытый этап повторно использует видимые записи и даёт RAG явную локальную процедуру. A4 провалился. Следующее сравнение должно учиться на surrogate-книгах и проверяться на невиданных финальных книгах без подстройки по их ответам."
+  }
+}

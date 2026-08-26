@@ -1,0 +1,12 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "judge_id": "J2",
+  "model": "microsoft/Phi-4-mini-instruct",
+  "status": "judge_rejected",
+  "calibration_cases_scored": 0,
+  "experiment_answers_seen": 0,
+  "reason": "After schema-constrained decoding and an exact field-level retry message, Phi still returned null for a required supporting quote.",
+  "precommitted_stop_applied": true,
+  "decision": "Do not use Phi to score the 192 E005 answers. Do not tune it again on this calibration set."
+}

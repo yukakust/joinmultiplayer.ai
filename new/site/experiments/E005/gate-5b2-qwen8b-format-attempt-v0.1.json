@@ -1,0 +1,15 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "protocol_version": "0.4",
+  "judge_id": "J1",
+  "public_alias": "Judge A",
+  "model": "Qwen/Qwen3-8B",
+  "status": "stopped_on_schema_validator_mismatch",
+  "calibration_score": null,
+  "experiment_answers_seen": 0,
+  "failure": "The JSON grammar allowed null quotes while the validator required a quote for every non-absent component.",
+  "fix": "The grammar now requires a non-empty string. Absent components use the reserved __ABSENT__ sentinel, which code normalizes to null after generation.",
+  "semantic_rubric_changed": false,
+  "calibration_answers_changed": false
+}

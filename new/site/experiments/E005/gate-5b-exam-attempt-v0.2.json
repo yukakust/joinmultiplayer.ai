@@ -1,0 +1,15 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B",
+  "kind": "locked_exam_execution_attempt",
+  "status": "stopped_for_memory_pressure_only",
+  "batch_size": 8,
+  "answers_published": 0,
+  "weights_changed": false,
+  "scores_used_for_tuning": false,
+  "exam_or_pass_rule_changed": false,
+  "reason": {
+    "en": "Eight independent questions at once filled swap and was slower than the smaller executor. The final completed run used batches of two without changing any answer rule.",
+    "ru": "Восемь независимых вопросов одновременно заполнили swap и считались медленнее маленького пакета. Финальный завершённый запуск использовал пакеты по два, не меняя правил ответа."
+  }
+}

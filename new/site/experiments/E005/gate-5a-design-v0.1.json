@@ -1,0 +1,88 @@
+{
+  "experiment_id": "E005",
+  "gate": "5A",
+  "kind": "composition_design",
+  "status": "frozen_before_data_and_training",
+  "question": {
+    "en": "Can two pocket i with different useful skills solve a new task that neither can solve alone?",
+    "ru": "Могут ли два pocket i с разными полезными умениями решить новую задачу, которую ни один не решает в одиночку?"
+  },
+  "plain_plan": {
+    "en": [
+      "The first pocket i reads the machine symptoms and names the cause.",
+      "The second pocket i reads the safety conditions and names the restriction.",
+      "They answer once and in parallel.",
+      "The source i receives two small capsules and builds one complete answer.",
+      "If either capsule is missing, the answer is incomplete."
+    ],
+    "ru": [
+      "Первый pocket i читает симптомы машины и называет причину.",
+      "Второй pocket i читает условия безопасности и называет ограничение.",
+      "Они отвечают один раз и одновременно.",
+      "Исходный i получает две маленькие капсулы и собирает один полный ответ.",
+      "Если хотя бы одной капсулы нет, ответ неполный."
+    ]
+  },
+  "pockets": [
+    {
+      "id": "CAUSE-I",
+      "name": {"en": "Cause reader", "ru": "Читатель причины"},
+      "learns": {"en": "symptoms → cause", "ru": "симптомы → причина"},
+      "cannot_know": {"en": "which action is safe here", "ru": "какое действие здесь безопасно"},
+      "capsule_example": {"cause": "phase_drift", "confidence": 0.91}
+    },
+    {
+      "id": "SAFETY-I",
+      "name": {"en": "Safety reader", "ru": "Читатель безопасности"},
+      "learns": {"en": "conditions → restriction", "ru": "условия → ограничение"},
+      "cannot_know": {"en": "what caused the failure", "ru": "что вызвало неисправность"},
+      "capsule_example": {"restriction": "keep_aux_vent_closed", "confidence": 0.94}
+    }
+  ],
+  "example": {
+    "question": {
+      "en": "Nera-8 gave three blue pulses after startup. The room has a double copper safety mark. What happened, and what may the operator do?",
+      "ru": "Nera-8 дал три синих импульса после запуска. На помещении двойная медная метка безопасности. Что произошло и что можно сделать оператору?"
+    },
+    "cause_i_only": {
+      "en": "The cause is phase drift. I do not know the room restriction.",
+      "ru": "Причина — сдвиг фазы. Я не знаю ограничения этого помещения."
+    },
+    "safety_i_only": {
+      "en": "The auxiliary vent must stay closed. I do not know the failure cause.",
+      "ru": "Вспомогательный клапан должен остаться закрытым. Я не знаю причину неисправности."
+    },
+    "together": {
+      "en": "This is phase drift. Recalibrate Nera-8 without opening the auxiliary vent.",
+      "ru": "Это сдвиг фазы. Откалибруйте Nera-8, не открывая вспомогательный клапан."
+    }
+  },
+  "systems": [
+    "frozen Qwen alone",
+    "CAUSE-I alone",
+    "SAFETY-I alone",
+    "wrong pair",
+    "correct pair",
+    "oracle capsules"
+  ],
+  "locked_test_plan": {
+    "tasks": 24,
+    "languages": ["en", "ru"],
+    "new_entities": true,
+    "new_wording": true,
+    "training_overlap_forbidden": true
+  },
+  "pass_rule": {
+    "correct_pair_complete_answers_at_least": 20,
+    "each_single_complete_answers_at_most": 8,
+    "wrong_pair_complete_answers_at_most": 8,
+    "lead_over_best_non_oracle_at_least": 10,
+    "removing_either_capsule_must_reduce_correct_by_at_least": 10
+  },
+  "boundaries": [
+    "No weights have changed.",
+    "No training data or locked questions exist yet.",
+    "This tests two-pocket composition, not routing or swarm scaling.",
+    "Only synthetic public data will be used."
+  ]
+}

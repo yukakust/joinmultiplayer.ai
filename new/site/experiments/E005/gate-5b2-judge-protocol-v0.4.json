@@ -1,0 +1,29 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "blind_semantic_review_protocol",
+  "version": "0.4",
+  "status": "locked_before_calibration",
+  "supersedes": "/experiments/E005/gate-5b2-judge-protocol-v0.3.json",
+  "input_artifact": "/experiments/E005/gate-5b1-results-v0.1.json",
+  "input_sha256": "83c59e9c57e7e733c2489f629b9165079c70a497ab18864151e58b2615a5eb85",
+  "judges": [
+    {"public_alias": "Judge A", "judge_id": "J1", "model": "Qwen/Qwen3-8B", "revision": "b968826d9c46dd6066d109eabc6255188de91218", "precision": "bf16"},
+    {"public_alias": "Judge B", "judge_id": "J2", "model": "Qwen/Qwen3-14B", "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18", "precision": "bf16"}
+  ],
+  "blindness": "Neither judge sees the producing model, condition, adapter, literal score, or the other answers.",
+  "calibration": {
+    "fresh_unseen_cases": true,
+    "cases": 12,
+    "languages": ["en", "ru"],
+    "synthetic_fact": "seal fatigue + disconnect auxiliary battery",
+    "required": "12/12 for each judge",
+    "failure_action": "reject that judge before experiment answers"
+  },
+  "output": "Schema-constrained component labels plus exact supporting quotes",
+  "unchanged": ["temperature 0", "decision tree", "derived score in code", "owner audit", "original Gate 5B thresholds"],
+  "limitation": {
+    "en": "Both judges are from the Qwen3 family, so their agreement is useful redundancy but not independent lineage evidence.",
+    "ru": "Оба судьи относятся к семье Qwen3, поэтому их согласие — полезная перепроверка, но не доказательство независимого происхождения."
+  }
+}

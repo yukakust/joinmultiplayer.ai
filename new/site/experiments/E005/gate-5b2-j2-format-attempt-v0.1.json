@@ -1,0 +1,18 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "judge_id": "J2",
+  "status": "stopped_on_invalid_structured_output",
+  "calibration_cases_scored": 0,
+  "experiment_answers_seen": 0,
+  "first_raw_output": {
+    "cause": "The cause is thermal rebound.",
+    "cause_quote": "Retained heat bounced back after the load changed.",
+    "safe_action": "Keep the auxiliary vent closed.",
+    "safe_action_quote": "Leave the auxiliary vent shut.",
+    "reason": "The answer affirms the expected meanings.",
+    "confidence": 1.0
+  },
+  "diagnosis": "The semantic explanation was right, but the model repeated the expected meanings where the protocol required closed labels.",
+  "next_attempt": "Constrain JSON syntax and enum values during decoding. The rubric, model weights, calibration cases, and 12/12 threshold stay unchanged."
+}

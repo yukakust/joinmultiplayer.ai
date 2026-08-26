@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://joinmultiplayer.ai/experiments/E004/artifact-schema-v0.1.json",
+  "title": "E004 public checkpoint artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "checkpoint",
+    "status",
+    "claim_status",
+    "created_at",
+    "source_revision",
+    "summary"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": "0.1"},
+    "experiment_id": {"const": "E004"},
+    "checkpoint": {"type": "integer", "minimum": 1, "maximum": 3},
+    "status": {
+      "enum": ["preparing", "needs_review", "accepted", "rejected", "failed"]
+    },
+    "claim_status": {
+      "enum": ["not_a_result", "supported_in_task_world", "not_supported", "inconclusive"]
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "source_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "hardware": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cpu": {"type": "string", "maxLength": 200},
+        "threads": {"type": "integer", "minimum": 1},
+        "ram_gib": {"type": "number", "minimum": 1},
+        "available_ram_gib": {"type": "number", "minimum": 0},
+        "free_disk_gib": {"type": "number", "minimum": 0},
+        "accelerator": {"type": "string", "maxLength": 200},
+        "runtime_status": {"type": "string", "maxLength": 500}
+      }
+    },
+    "model_candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "revision", "license", "layers", "weight_bytes"],
+      "properties": {
+        "id": {"type": "string", "maxLength": 200},
+        "revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "license": {"type": "string", "maxLength": 100},
+        "layers": {"type": "integer", "minimum": 1},
+        "weight_bytes": {"type": "integer", "minimum": 1},
+        "hidden_size": {"type": "integer", "minimum": 1},
+        "recommended": {"type": "boolean"}
+      }
+    },
+    "task_world": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "sample_count", "answer_space", "blind_guess_probability"],
+      "properties": {
+        "status": {"enum": ["illustrative_not_locked", "locked"]},
+        "sample_count": {"type": "integer", "minimum": 1},
+        "answer_space": {"type": "integer", "minimum": 2},
+        "blind_guess_probability": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "pair_missing_segment_guess_probability": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "examples": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "prompt", "answer"],
+            "properties": {
+              "id": {"type": "string", "maxLength": 80},
+              "prompt": {"type": "string", "maxLength": 2000},
+              "answer": {"type": "string", "maxLength": 200}
+            }
+          }
+        }
+      }
+    },
+    "dora_recipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rank": {"type": "integer", "minimum": 1},
+        "planned_depths": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"type": "integer", "minimum": 1}
+        },
+        "target_modules": {
+          "type": "array",
+          "items": {"type": "string", "maxLength": 100}
+        },
+        "trainable": {"type": "array", "items": {"enum": ["m", "A", "B"]}}
+      }
+    },
+    "decision_requested": {"type": "string", "maxLength": 2000},
+    "pockets": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status"],
+        "properties": {
+          "id": {"enum": ["E004-I1", "E004-I2", "E004-I3"]},
+          "status": {"enum": ["not_created", "fresh", "trained", "failed"]},
+          "depth": {"type": "integer", "minimum": 1},
+          "dora_rank": {"type": "integer", "minimum": 1},
+          "held_out_score": {"type": "number", "minimum": 0, "maximum": 1},
+          "magnitude_delta_norm": {"type": "number", "minimum": 0},
+          "direction_delta_norm": {"type": "number", "minimum": 0},
+          "bounded_delta_norm": {"type": "number", "minimum": 0},
+          "checkpoint_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "path", "sha256"],
+        "properties": {
+          "label": {"type": "string", "minLength": 1, "maxLength": 120},
+          "path": {"type": "string", "pattern": "^/experiments/E004/"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}

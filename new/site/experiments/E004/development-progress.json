@@ -1,0 +1,45 @@
+{
+  "experiment_id": "E004",
+  "kind": "development_progress",
+  "updated_at": "2026-08-23T20:32:00Z",
+  "claim_status": "development_smoke_only",
+  "current_gate": 5,
+  "gates": [
+    {
+      "number": 1,
+      "status": "passed",
+      "title": {"en": "Pinned environment", "ru": "Закреплённое окружение"},
+      "evidence": {"en": "CPU-only imports verified; exact package and model revisions recorded.", "ru": "CPU-only окружение проверено; точные версии пакетов и модели записаны."}
+    },
+    {
+      "number": 2,
+      "status": "passed",
+      "title": {"en": "Pinned base download", "ru": "Загрузка закреплённой базы"},
+      "evidence": {"en": "Pinned revision downloaded: 9 files, 1,203,640,286 bytes; every SHA-256 recomputed.", "ru": "Закреплённая ревизия скачана: 9 файлов, 1 203 640 286 байт; каждый SHA-256 пересчитан."}
+    },
+    {
+      "number": 3,
+      "status": "passed",
+      "title": {"en": "Frozen-base launch", "ru": "Запуск замороженной базы"},
+      "evidence": {"en": "Frozen 596,049,920-parameter base ran on CPU: 0 trainable parameters, finite logits, 6.93 generated tokens/s, 3,883.51 MiB peak RSS.", "ru": "Замороженная база на 596 049 920 параметров запустилась на CPU: 0 обучаемых параметров, конечные logits, 6,93 токена/с, пик RAM 3 883,51 МиБ."},
+      "artifact": "/experiments/E004/frozen-base-smoke.json"
+    },
+    {
+      "number": 4,
+      "status": "passed",
+      "title": {"en": "Two-pocket smoke", "ru": "Smoke двух pocket i"},
+      "evidence": {"en": "Attempt 2 passed: base 0/6; I01 own/other 3/3 and 0/3; I02 own/other 3/3 and 0/3; one-round assembled answer correct. Attempt 1 remains public.", "ru": "Вторая попытка прошла: база 0/6; I01 свои/чужие 3/3 и 0/3; I02 свои/чужие 3/3 и 0/3; собранный за один раунд ответ верен. Первая попытка остаётся открытой."},
+      "artifact": "/experiments/E004/two-pocket-smoke-attempt-2.json"
+    },
+    {
+      "number": 5,
+      "status": "passed",
+      "title": {"en": "Checkpoint 2", "ru": "Контрольная точка 2"},
+      "evidence": {"en": "Checkpoint 2 published. Work is stopped before the full architecture arena and locked evaluation.", "ru": "Контрольная точка 2 опубликована. Работа остановлена до полной арены архитектур и locked-оценки."},
+      "artifact": "/experiments/E004/checkpoint-2.json"
+    }
+  ],
+  "failed_artifact": "/experiments/E004/two-pocket-smoke-attempt-1.json",
+  "result_artifact": "/experiments/E004/two-pocket-smoke-attempt-2.json",
+  "checkpoint_artifact": "/experiments/E004/checkpoint-2.json"
+}

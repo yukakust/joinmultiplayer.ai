@@ -1,0 +1,34 @@
+{
+  "experiment_id": "E005",
+  "gate": "5B.2",
+  "kind": "blind_semantic_review_protocol",
+  "version": "0.5",
+  "status": "replacement_judge_locked_before_calibration",
+  "supersedes": "/experiments/E005/gate-5b2-judge-protocol-v0.4.json",
+  "reason": "Judge A Qwen3 8B was rejected at 9/12. Judge B Qwen3 14B passed 12/12 and completed its blind run.",
+  "replacement": {
+    "public_alias": "Judge A2",
+    "judge_id": "J1",
+    "model": "Qwen/Qwen2.5-14B-Instruct",
+    "revision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+    "precision": "bf16",
+    "parameters": "14.7B",
+    "layers": 48
+  },
+  "existing_judge": {
+    "public_alias": "Judge B",
+    "model": "Qwen/Qwen3-14B",
+    "calibration": "12/12",
+    "blind_records": 192
+  },
+  "calibration": {
+    "same_frozen_cases": 12,
+    "required": "12/12",
+    "failure_action": "reject before E005 answers"
+  },
+  "unchanged": ["semantic decision tree", "S1/S2 evidence transport", "temperature 0", "owner audit", "input hash", "Gate 5B thresholds"],
+  "limitation": {
+    "en": "Qwen2.5 and Qwen3 are different generations and depths but still share an organizational lineage. Agreement is not fully independent evidence.",
+    "ru": "Qwen2.5 и Qwen3 — разные поколения и глубины, но у них всё ещё общее происхождение. Их согласие нельзя считать полностью независимым доказательством."
+  }
+}
