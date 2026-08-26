@@ -1,0 +1,70 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3A",
+  "status": "locked_before_first_question",
+  "title": {
+    "en": "Can one exact question reach four pocket i on two real devices?",
+    "ru": "Может ли один неизменённый вопрос дойти до четырёх pocket i на двух реальных устройствах?"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "en": "Keep the exact question after the person presses Ask the pocket i network.",
+      "ru": "Сохранить точный вопрос после нажатия «Спросить сеть pocket i»."
+    },
+    {
+      "id": 2,
+      "en": "Broadcast a cheap attention beacon and rank public capability cards.",
+      "ru": "Разослать лёгкий сигнал внимания и ранжировать публичные карточки способностей."
+    }
+  ],
+  "cards_are": "manual_and_owner_approved_for_this_smoke",
+  "cards": [
+    {
+      "id": "ATT-Y1",
+      "device": "yukabox",
+      "name": {"en": "Small-object vision", "ru": "Зрение: маленькие объекты"},
+      "description": "computer vision CV, small object detection, object tracking, high-resolution tiling, YOLO, image labels; компьютерное зрение, поиск маленьких объектов, трекинг, разбиение больших изображений, разметка"
+    },
+    {
+      "id": "ATT-Y2",
+      "device": "yukabox",
+      "name": {"en": "Distributed systems", "ru": "Распределённые системы"},
+      "description": "distributed systems, unreliable networks, retries, queues, replicas, network latency; распределённые системы, ненадёжная сеть, повторы, очереди, реплики, задержка"
+    },
+    {
+      "id": "ATT-M1",
+      "device": "owner-macbook",
+      "name": {"en": "Vision data diagnosis", "ru": "Диагностика данных CV"},
+      "description": "computer vision CV datasets, class imbalance, augmentation, train validation leakage, annotation quality, error analysis; датасеты компьютерного зрения, дисбаланс классов, аугментации, утечки, качество разметки, анализ ошибок"
+    },
+    {
+      "id": "ATT-M2",
+      "device": "owner-macbook",
+      "name": {"en": "Beekeeping", "ru": "Пчеловодство"},
+      "description": "beekeeping, hive inspections, queen health, honey harvest, swarm season; пчеловодство, осмотр улья, здоровье матки, сбор мёда, роение"
+    }
+  ],
+  "scoring": {
+    "whole_text_vector": "cosine of deterministic hashed character 3-5 gram vectors",
+    "exact_terms": "normalized word overlap",
+    "probability": false,
+    "learned_model": false
+  },
+  "success": [
+    "four_unique_process_receipts",
+    "exactly_two_physical_device_labels",
+    "one_identical_question_sha256",
+    "both_scores_and_latency_visible",
+    "two_cv_cards_rank_above_two_unrelated_cards_for_locked_example"
+  ],
+  "not_tested": [
+    "qwen",
+    "private_memory",
+    "rag",
+    "training",
+    "answer_generation",
+    "automatic_capability_cards"
+  ]
+}
