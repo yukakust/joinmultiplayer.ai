@@ -105,3 +105,13 @@ The raw generation is
 `site/experiments/E007/smoke-results-v0.1.json`. Exact phrase matches inside that
 file are navigation aids, not semantic grades. Checkpoint 3 must not start until
 the owner reads the visible question-and-answer page and records a verdict.
+
+Three independent runs of `gpt-5.6-luna` then scored every final answer with a
+locked semantic rubric: 2 fully correct, 1 partly correct, 0 wrong or unsafe.
+The aggregate totals out of 18 were: centralized oracle context 17, one-pocket
+local RAG 12, routed free-text swarm 12, modular harness 3, and frozen model 0.
+All three judges agreed exactly on 14 of 15 answers (Fleiss' kappa 0.933). This
+panel is not a blinded or model-diverse scientific review: all judges are
+separate runs of the same model family and could see condition names. Their 45
+scores and reasons are preserved in `site/experiments/E007/luna-judge-*-v0.1.json`;
+the aggregate is `site/experiments/E007/luna-panel-v0.1.json`.

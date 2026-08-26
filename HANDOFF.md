@@ -241,6 +241,13 @@ The earlier E006 model name was incorrect metadata, although its recorded weight
 hash is the same correct Base-model hash. Publish every raw smoke trace and do
 not begin the full 30-task run without another owner checkpoint.
 
+Three independent `gpt-5.6-luna` runs scored all 15 final answers. Aggregate
+totals out of 18: oracle context 17, one-pocket RAG 12, free swarm 12, harness 3,
+base 0. They agreed on 14/15 items. Full scores and reasons are public in
+`/experiments/E007/luna-judge-*-v0.1.json`; aggregate metadata and limitations
+are `/experiments/E007/luna-panel-v0.1.json`. The panel is same-model and
+method-visible, not a blinded or model-diverse scientific review.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:
