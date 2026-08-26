@@ -178,6 +178,11 @@ class SubmissionTests(unittest.TestCase):
                         "SELECT name FROM sqlite_master WHERE name = 'attention_rooms'"
                     ).fetchone()
                 )
+                self.assertIsNotNone(
+                    db.execute(
+                        "SELECT name FROM sqlite_master WHERE name = 'local_offer_rooms'"
+                    ).fetchone()
+                )
 
     def test_attention_room_four_node_private_then_public_round_trip(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -545,6 +550,146 @@ class SubmissionTests(unittest.TestCase):
                     "SELECT research_status FROM questions WHERE public_id = 'Q0001'"
                 ).fetchone()[0]
             self.assertEqual(research_status, "open")
+
+    def test_local_offer_four_node_private_then_public_round_trip(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.create_local_offer_room(
+                {"author_mode": "pseudonym", "pseudonym": "Morrow", "consent": True}
+            )
+            self.assertEqual(handler.sent[0], HTTPStatus.CREATED)
+            room_id = handler.sent[1]["room_id"]
+            owner_token = handler.sent[1]["owner_token"]
+            join_token = handler.sent[1]["join_token"]
+
+            cards = (
+                ("ATT-Y1", "yukabox"),
+                ("ATT-Y2", "yukabox"),
+                ("ATT-M1", "owner-macbook"),
+                ("ATT-M2", "owner-macbook"),
+            )
+            for card_id, device in cards:
+                handler.join_local_offer_room(
+                    {"join_token": join_token, "card_id": card_id, "device_label": device}
+                )
+                self.assertEqual(handler.sent[0], HTTPStatus.CREATED)
+                joined = handler.sent[1]
+                results = []
+                for question in joined["questions"]:
+                    for lane in ("exact_terms", "chargram_vector", "multilingual_neural"):
+                        item = {
+                            "question_id": question["id"],
+                            "question_hash": question["question_hash"],
+                            "lane": lane,
+                            "status": "empty",
+                            "score": 0.1,
+                            "source_id": f"{card_id}-NOISE",
+                            "capsule": None,
+                            "canary_hash": "",
+                        }
+                        if card_id == "ATT-Y1" and question["id"] == "K01" and lane == "exact_terms":
+                            item.update(
+                                {
+                                    "status": "found",
+                                    "score": 0.9,
+                                    "source_id": "Y1-CV-01",
+                                    "capsule": {
+                                        "claim": "Overlapping tiles can help.",
+                                        "evidence": "The exact local evidence text.",
+                                        "source": "local experiment",
+                                        "source_lineage": "cv-field-exp-017",
+                                        "conditions": "tiny objects",
+                                        "limitations": "one dataset",
+                                        "permission": "share_this_capsule",
+                                    },
+                                }
+                            )
+                        results.append(item)
+                handler.contribute_local_offer_node(
+                    {
+                        "node_token": joined["node_token"],
+                        "client_version": "test-v0.1",
+                        "runtime": "test-runtime",
+                        "memory_revision": "e007-local-memory-v0.1",
+                        "model": "test-search-model",
+                        "model_revision": "test-revision",
+                        "lane_config": {
+                            lane: {"threshold": 0.5, "calibration_f1": 1.0}
+                            for lane in ("exact_terms", "chargram_vector", "multilingual_neural")
+                        },
+                        "results": results,
+                    }
+                )
+                self.assertEqual(handler.sent[0], HTTPStatus.OK)
+
+            handler.local_offer_status({"owner_token": owner_token})
+            self.assertEqual(handler.sent[1]["status"], "complete")
+            self.assertEqual(len(handler.sent[1]["nodes"]), 4)
+            self.assertEqual(handler.public_local_offer_rooms(), [])
+
+            handler.publish_local_offer_room({"owner_token": owner_token, "consent": True})
+            self.assertEqual(handler.sent[0], HTTPStatus.OK)
+            public = handler.public_local_offer_rooms()
+            self.assertEqual(public[0]["room_id"], room_id)
+            self.assertNotIn("owner_token", public[0])
+            self.assertNotIn("join_token", public[0])
+            encoded = json.dumps(public[0], ensure_ascii=False)
+            self.assertNotIn(join_token, encoded)
+            self.assertNotIn(owner_token, encoded)
+
+    def test_local_offer_rejects_changed_question_and_capsule_on_empty(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.create_local_offer_room(
+                {"author_mode": "anonymous", "consent": True}
+            )
+            join_token = handler.sent[1]["join_token"]
+            handler.join_local_offer_room(
+                {"join_token": join_token, "card_id": "ATT-Y1", "device_label": "yukabox"}
+            )
+            questions = handler.sent[1]["questions"]
+            node_token = handler.sent[1]["node_token"]
+            results = []
+            for question in questions:
+                for lane in ("exact_terms", "chargram_vector", "multilingual_neural"):
+                    results.append(
+                        {
+                            "question_id": question["id"],
+                            "question_hash": question["question_hash"],
+                            "lane": lane,
+                            "status": "empty",
+                            "score": 0.0,
+                            "source_id": "Y1-CV-06",
+                            "capsule": None,
+                            "canary_hash": "",
+                        }
+                    )
+            base = {
+                "node_token": node_token,
+                "client_version": "test-v0.1",
+                "runtime": "test-runtime",
+                "memory_revision": "e007-local-memory-v0.1",
+                "model": "test-search-model",
+                "model_revision": "test-revision",
+                "lane_config": {
+                    lane: {"threshold": 0.5, "calibration_f1": 1.0}
+                    for lane in ("exact_terms", "chargram_vector", "multilingual_neural")
+                },
+                "results": results,
+            }
+            changed = json.loads(json.dumps(base))
+            changed["results"][0]["question_hash"] = "0" * 64
+            with self.assertRaisesRegex(ValueError, "changed in transit"):
+                handler.contribute_local_offer_node(changed)
+
+            leaked_capsule = json.loads(json.dumps(base))
+            leaked_capsule["results"][0]["capsule"] = {"claim": "must not travel"}
+            with self.assertRaisesRegex(ValueError, "only found"):
+                handler.contribute_local_offer_node(leaked_capsule)
 
     def test_trace_cannot_change_public_question_wording(self):
         with tempfile.TemporaryDirectory() as directory:

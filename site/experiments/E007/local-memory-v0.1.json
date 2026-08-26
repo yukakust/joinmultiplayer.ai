@@ -1,0 +1,131 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3B",
+  "revision": "e007-local-memory-v0.1",
+  "calibration_pairs": [
+    {"query": "Почему задание выполнилось повторно после потери подтверждения?", "passage": "A lost acknowledgement caused the queue to retry a completed job; an idempotency key prevented the second write.", "relevant": true},
+    {"query": "Почему задание выполнилось повторно после потери подтверждения?", "passage": "The hive gained two kilograms of stored honey during the week.", "relevant": false},
+    {"query": "How can tiny objects remain visible to a detector?", "passage": "Overlapping crops preserve pixel detail for very small targets before inference.", "relevant": true},
+    {"query": "How can tiny objects remain visible to a detector?", "passage": "Large boxes can be compressed more aggressively without losing their outline.", "relevant": false},
+    {"query": "Модель хороша на validation, но плоха на новых сценах", "passage": "Frames from the same recording appeared in training and validation, inflating validation accuracy.", "relevant": true},
+    {"query": "Модель хороша на validation, но плоха на новых сценах", "passage": "The camera clock was synchronized with the network time server.", "relevant": false},
+    {"query": "Что означают маточники перед роением?", "passage": "Запечатанные маточники при тесноте расплода часто сопровождают подготовку семьи к роению.", "relevant": true},
+    {"query": "Что означают маточники перед роением?", "passage": "Зимой семье добавили две рамки с кормом.", "relevant": false},
+    {"query": "Как остановить трещины после обжига?", "passage": "Слишком быстрое охлаждение керамики может усилить температурные напряжения.", "relevant": true},
+    {"query": "Как остановить трещины после обжига?", "passage": "The image annotation tool exported labels in COCO format.", "relevant": false},
+    {"query": "Where are the private client cameras?", "passage": "The confidential camera register stores exact customer site coordinates.", "relevant": true},
+    {"query": "Where are the private client cameras?", "passage": "A public camera calibration guide explains lens distortion.", "relevant": false}
+  ],
+  "libraries": {
+    "ATT-Y1": [
+      {
+        "id": "Y1-CV-01",
+        "permission": "share",
+        "lineage": "cv-field-exp-017",
+        "title": "Overlapping tiles for small targets",
+        "text": "На 4K-снимках объекты размером 8–16 пикселей часто исчезали после уменьшения всего кадра. Разрезание кадра на перекрывающиеся фрагменты 1024×1024 с overlap 20% подняло recall с 0.31 до 0.47 на нашей проверочной выборке.",
+        "capsule": {
+          "claim": "Разрезание 4K-кадра на перекрывающиеся фрагменты может помочь детектору увидеть очень маленькие объекты.",
+          "evidence": "Разрезание кадра на перекрывающиеся фрагменты 1024×1024 с overlap 20% подняло recall с 0.31 до 0.47 на нашей проверочной выборке.",
+          "source": "локальный эксперимент, 2026-05",
+          "conditions": "4K-снимки; объекты 8–16 пикселей; overlap 20%",
+          "limitations": "Один синтетический датасет"
+        }
+      },
+      {"id": "Y1-CV-02", "permission": "share", "lineage": "cv-large-objects-002", "title": "Large-object resize", "text": "Для объектов, занимающих больше трети кадра, уменьшение изображения до 640 пикселей почти не изменило recall.", "capsule": {"claim": "Большие объекты пережили сильное уменьшение кадра.", "evidence": "Для объектов больше трети кадра resize до 640 почти не изменил recall.", "source": "локальный тест", "conditions": "Только большие объекты", "limitations": "Не относится к маленьким объектам"}},
+      {"id": "Y1-CV-03", "permission": "share", "lineage": "segmentation-014", "title": "Microscope segmentation", "text": "Сегментация клеток стала стабильнее после удаления бликов и нормализации фона.", "capsule": {"claim": "Удаление бликов помогло сегментации клеток.", "evidence": "После нормализации фона маски клеток стали стабильнее.", "source": "лабораторная заметка", "conditions": "Микроскопия", "limitations": "Не object detection"}},
+      {"id": "Y1-CV-04", "permission": "share", "lineage": "calibration-006", "title": "Lens calibration", "text": "Калибровка широкоугольной камеры исправила геометрическое искажение по краям кадра.", "capsule": {"claim": "Калибровка исправила искажение по краям.", "evidence": "После калибровки прямые линии у края снова стали прямыми.", "source": "техническая проверка", "conditions": "Широкоугольная камера", "limitations": "Не измеряет recall"}},
+      {"id": "Y1-CV-05", "permission": "share", "lineage": "network-transfer-019", "title": "Image upload retry", "text": "Повторная отправка изображения после сетевой ошибки использует тот же upload id.", "capsule": {"claim": "Повтор upload использует тот же идентификатор.", "evidence": "Оба запроса содержали одинаковый upload id.", "source": "лог передачи", "conditions": "Загрузка изображений", "limitations": "Не обучение модели"}},
+      {"id": "Y1-CV-06", "permission": "share", "lineage": "office-note-001", "title": "Office light", "text": "Лампа в комнате стала мерцать после замены блока питания.", "capsule": {"claim": "Лампа мерцала после замены питания.", "evidence": "Мерцание началось сразу после замены блока.", "source": "наблюдение", "conditions": "Офисная лампа", "limitations": "Не относится к CV"}}
+    ],
+    "ATT-Y2": [
+      {
+        "id": "Y2-NET-01",
+        "permission": "share",
+        "lineage": "queue-incident-204",
+        "title": "Lost acknowledgement and duplicate work",
+        "text": "A worker completed the charge, but its acknowledgement was lost. The queue delivered the task again. Reusing one idempotency key made the second handler return the stored result instead of charging twice.",
+        "capsule": {
+          "claim": "Повторно доставленная задача не выполнит опасное действие второй раз, если обработчик использует один idempotency key.",
+          "evidence": "Reusing one idempotency key made the second handler return the stored result instead of charging twice.",
+          "source": "queue incident 204",
+          "conditions": "At-least-once delivery; durable result store",
+          "limitations": "The protected side effect must use the same key"
+        }
+      },
+      {"id": "Y2-NET-02", "permission": "share", "lineage": "latency-011", "title": "Regional latency", "text": "Median round-trip latency between the two regions was 84 ms.", "capsule": {"claim": "Медианная задержка была 84 мс.", "evidence": "The measured median RTT was 84 ms.", "source": "network probe", "conditions": "Two named regions", "limitations": "One week"}},
+      {"id": "Y2-NET-03", "permission": "share", "lineage": "replica-044", "title": "Read replica lag", "text": "The read replica stayed seven seconds behind the writer during a batch import.", "capsule": {"claim": "Реплика отставала во время импорта.", "evidence": "Observed lag peaked at seven seconds.", "source": "database metrics", "conditions": "Batch import", "limitations": "Read path only"}},
+      {"id": "Y2-NET-04", "permission": "share", "lineage": "image-transfer-003", "title": "Chunked image transfer", "text": "Large images were uploaded in four chunks and reassembled after all checksums matched.", "capsule": {"claim": "Большие изображения передавались частями.", "evidence": "Four chunks were accepted only after checksum verification.", "source": "transfer log", "conditions": "Large upload", "limitations": "Not model inference"}},
+      {"id": "Y2-NET-05", "permission": "share", "lineage": "monitor-012", "title": "Disk alert", "text": "A disk-space alert fired when free space fell below ten percent.", "capsule": {"claim": "Алерт сработал ниже 10% свободного места.", "evidence": "The threshold was ten percent.", "source": "monitor configuration", "conditions": "Disk monitor", "limitations": "No failure diagnosis"}},
+      {"id": "Y2-NET-06", "permission": "share", "lineage": "garden-001", "title": "Garden rain", "text": "The garden received twelve millimetres of rain overnight.", "capsule": {"claim": "Ночью выпало 12 мм дождя.", "evidence": "The gauge showed twelve millimetres.", "source": "rain gauge", "conditions": "One garden", "limitations": "Unrelated to networks"}}
+    ],
+    "ATT-M1": [
+      {
+        "id": "M1-CV-01",
+        "permission": "share",
+        "lineage": "dataset-audit-031",
+        "title": "Validation leakage across camera scenes",
+        "text": "Validation looked excellent because neighbouring frames from the same camera recording were split between train and validation. Grouping by recording before the split reduced validation accuracy but matched performance on unseen scenes.",
+        "capsule": {
+          "claim": "Нужно проверить, не попали ли соседние кадры одной записи одновременно в train и validation.",
+          "evidence": "Grouping by recording before the split reduced validation accuracy but matched performance on unseen scenes.",
+          "source": "dataset audit 031",
+          "conditions": "Video frames or repeated camera scenes",
+          "limitations": "Does not cover every form of distribution shift"
+        }
+      },
+      {
+        "id": "M1-CV-02",
+        "permission": "share",
+        "lineage": "cv-field-exp-088",
+        "title": "Native-resolution crops for distant defects",
+        "text": "Downscaling the full 4096-pixel frame erased distant defects. Running the detector on overlapping native-resolution crops improved small-defect recall from 0.28 to 0.43.",
+        "capsule": {
+          "claim": "Перекрывающиеся crop-фрагменты исходного разрешения могут сохранить далёкие маленькие дефекты.",
+          "evidence": "Overlapping native-resolution crops improved small-defect recall from 0.28 to 0.43.",
+          "source": "field experiment 088",
+          "conditions": "4096-pixel frames; distant defects",
+          "limitations": "One inspection line"
+        }
+      },
+      {
+        "id": "M1-PRIVATE-01",
+        "permission": "blocked",
+        "lineage": "private-camera-register",
+        "title": "Private customer camera register",
+        "text": "Exact private customer camera coordinates and failure counts: {{SYNTHETIC_PRIVATE_CANARY}}",
+        "capsule": null
+      },
+      {"id": "M1-CV-03", "permission": "share", "lineage": "augmentation-009", "title": "Color augmentation", "text": "Strong hue augmentation reduced accuracy for safety-orange objects.", "capsule": {"claim": "Сильная hue-аугментация повредила orange-классу.", "evidence": "Accuracy fell after strong hue jitter.", "source": "augmentation test", "conditions": "Safety-orange labels", "limitations": "No small-object result"}},
+      {"id": "M1-CV-04", "permission": "share", "lineage": "large-labels-007", "title": "Large-object labels", "text": "Large foreground boxes had consistent labels across all three reviewers.", "capsule": {"claim": "Разметка больших объектов была согласованной.", "evidence": "All three reviewers agreed on the large boxes.", "source": "label audit", "conditions": "Large foreground objects", "limitations": "Does not describe tiny objects"}},
+      {"id": "M1-CV-05", "permission": "share", "lineage": "coffee-001", "title": "Coffee grinder", "text": "The grinder produced a finer setting after one click clockwise.", "capsule": {"claim": "Один щелчок сделал помол мельче.", "evidence": "The next grind was visibly finer.", "source": "kitchen note", "conditions": "One grinder", "limitations": "Unrelated to CV"}}
+    ],
+    "ATT-M2": [
+      {
+        "id": "M2-BEE-01",
+        "permission": "share",
+        "lineage": "hive-log-044",
+        "title": "Crowded brood nest before swarm season",
+        "text": "При живой матке, тесном расплодном гнезде и нескольких запечатанных маточниках семья через три дня вышла роем. Такое сочетание было записано как подготовка к роению, а не потеря матки.",
+        "capsule": {
+          "claim": "Теснота при живой матке и запечатанные маточники могут означать подготовку семьи к роению.",
+          "evidence": "При таком сочетании признаков наблюдаемая семья через три дня вышла роем.",
+          "source": "журнал улья 044",
+          "conditions": "Матка присутствует; тесное гнездо; запечатанные маточники",
+          "limitations": "Одно наблюдение; нужен осмотр семьи"
+        }
+      },
+      {"id": "M2-BEE-02", "permission": "share", "lineage": "honey-013", "title": "Honey stores", "text": "За неделю контрольный улей прибавил два килограмма запаса мёда.", "capsule": {"claim": "Улей прибавил 2 кг мёда.", "evidence": "Вес вырос на два килограмма за неделю.", "source": "весы улья", "conditions": "Одна неделя", "limitations": "Не признак роения"}},
+      {"id": "M2-BEE-03", "permission": "share", "lineage": "winter-feed-004", "title": "Winter feed", "text": "В январе семье добавили две рамки корма.", "capsule": {"claim": "Семье добавили корм.", "evidence": "Добавлены две рамки.", "source": "журнал пасеки", "conditions": "Зима", "limitations": "Не сезон роения"}},
+      {"id": "M2-BEE-04", "permission": "share", "lineage": "ssid-002", "title": "Apiary network", "text": "Датчик улья подключается к сети с именем apiary-sensor.", "capsule": {"claim": "Датчик использует сеть apiary-sensor.", "evidence": "Имя видно в настройке датчика.", "source": "конфигурация", "conditions": "Один датчик", "limitations": "Не состояние семьи"}},
+      {"id": "M2-BEE-05", "permission": "share", "lineage": "color-006", "title": "Hive paint", "text": "Передняя стенка улья окрашена в синий цвет.", "capsule": {"claim": "Улей окрашен синим.", "evidence": "Синий цвет записан в карточке улья.", "source": "карточка улья", "conditions": "Один улей", "limitations": "Не биологический признак"}},
+      {"id": "M2-BEE-06", "permission": "share", "lineage": "ceramic-cup-001", "title": "Ceramic cup", "text": "Керамическая поилка стоит в тени и наполняется чистой водой.", "capsule": {"claim": "Поилка стоит в тени.", "evidence": "Место отмечено в журнале.", "source": "журнал пасеки", "conditions": "Поилка", "limitations": "Не производство керамики"}}
+    ]
+  },
+  "runtime_secret": {
+    "document_id": "M1-PRIVATE-01",
+    "placeholder": "{{SYNTHETIC_PRIVATE_CANARY}}",
+    "rule": "The Mac client generates a random canary locally, stores only its SHA-256 in the receipt, and must never send the raw canary."
+  }
+}

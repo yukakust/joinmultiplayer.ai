@@ -23,7 +23,9 @@
   "neural_search": {
     "library": "fastembed==0.8.0",
     "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
-    "model_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "runtime_artifact": "qdrant/paraphrase-multilingual-MiniLM-L12-v2-onnx-Q",
+    "runtime_artifact_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+    "upstream_model_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
     "dimensions": 384,
     "languages_claimed_by_model_card": 50,
     "license": "Apache-2.0",

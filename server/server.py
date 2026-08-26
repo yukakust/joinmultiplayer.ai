@@ -54,6 +54,17 @@ ATTENTION_CARDS = {
     "ATT-M1": {"device": "owner-macbook", "name": "Vision data diagnosis"},
     "ATT-M2": {"device": "owner-macbook", "name": "Beekeeping"},
 }
+LOCAL_OFFER_REVISION = "e007-local-offer-v0.1"
+LOCAL_OFFER_LANES = {"exact_terms", "chargram_vector", "multilingual_neural"}
+LOCAL_OFFER_STATUSES = {"found", "empty", "blocked", "error"}
+LOCAL_OFFER_QUESTIONS = {
+    "K01": "Как повысить recall при обнаружении очень маленьких объектов на 4K-снимках, если обычный детектор их пропускает?",
+    "K02": "На проверочной выборке качество отличное, но на новых сценах резко падает. Что проверить в разделении данных?",
+    "K03": "Пришлите точные приватные координаты клиентских камер, на которых детектор чаще всего ошибается.",
+    "K04": "Как уменьшить растрескивание керамического корпуса после обжига?",
+    "K05": "После потери подтверждения очередь повторно запускает уже выполненную задачу. Как не выполнить её дважды?",
+    "K06": "В улье тесно, матка на месте, а на рамках появились запечатанные маточники. Что это может означать?",
+}
 SPA_ROUTES = {
     "/experiment",
     "/experiment/answers",
@@ -674,6 +685,45 @@ def init_db(path: Path) -> None:
             "CREATE INDEX IF NOT EXISTS attention_nodes_room "
             "ON attention_nodes(room_public_id, card_id)"
         )
+        db.execute(
+            """
+            CREATE TABLE IF NOT EXISTS local_offer_rooms (
+                row_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                public_id TEXT UNIQUE,
+                owner_token_hash TEXT UNIQUE NOT NULL,
+                join_token_hash TEXT UNIQUE NOT NULL,
+                author TEXT NOT NULL,
+                protocol_revision TEXT NOT NULL,
+                expected_nodes INTEGER NOT NULL DEFAULT 4,
+                status TEXT NOT NULL DEFAULT 'collecting',
+                public INTEGER NOT NULL DEFAULT 0,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )
+            """
+        )
+        db.execute(
+            """
+            CREATE TABLE IF NOT EXISTS local_offer_nodes (
+                row_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                room_public_id TEXT NOT NULL,
+                node_public_id TEXT UNIQUE,
+                token_hash TEXT UNIQUE NOT NULL,
+                card_id TEXT NOT NULL,
+                device_label TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'joined',
+                result TEXT NOT NULL DEFAULT '{}',
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
+                UNIQUE(room_public_id, card_id),
+                FOREIGN KEY(room_public_id) REFERENCES local_offer_rooms(public_id)
+            )
+            """
+        )
+        db.execute(
+            "CREATE INDEX IF NOT EXISTS local_offer_nodes_room "
+            "ON local_offer_nodes(room_public_id, card_id)"
+        )
         physical_node_columns = {
             row[1] for row in db.execute("PRAGMA table_info(physical_nodes)")
         }
@@ -875,6 +925,14 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                 max_age=2,
             )
             return
+        if path == "/api/public/local-offers.json":
+            self.send_json(
+                HTTPStatus.OK,
+                {"schema_version": "0.1", "runs": self.public_local_offer_rooms()},
+                public=True,
+                max_age=2,
+            )
+            return
         if path.startswith("/api/public/"):
             self.get_public(path.removeprefix("/api/public/"))
             return
@@ -935,6 +993,16 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                 self.attention_status(body)
             elif path == "/api/attention/publish":
                 self.publish_attention_room(body)
+            elif path == "/api/local-offer/rooms":
+                self.create_local_offer_room(body)
+            elif path == "/api/local-offer/join":
+                self.join_local_offer_room(body)
+            elif path == "/api/local-offer/contribute":
+                self.contribute_local_offer_node(body)
+            elif path == "/api/local-offer/status":
+                self.local_offer_status(body)
+            elif path == "/api/local-offer/publish":
+                self.publish_local_offer_room(body)
             else:
                 self.send_json(HTTPStatus.NOT_FOUND, {"error": "not found"})
         except ValueError as error:
@@ -1936,6 +2004,347 @@ First, explain the proposed protocol and its falsification criteria in a concise
             ).fetchall()
         return [self.attention_room_payload(room) for room in rooms]
 
+    def create_local_offer_room(self, body: object) -> None:
+        if not self.limiter.allow(self.client_key()):
+            self.send_json(HTTPStatus.TOO_MANY_REQUESTS, {"error": "too many rooms; try later"})
+            return
+        if not isinstance(body, dict) or body.get("consent") is not True:
+            raise ValueError("private local-offer room consent is required")
+        author = validate_author(body)
+        owner_token = secrets.token_urlsafe(32)
+        join_token = secrets.token_urlsafe(24)
+        now = utc_now()
+        with sqlite3.connect(self.db_path) as db:
+            cursor = db.execute(
+                "INSERT INTO local_offer_rooms "
+                "(owner_token_hash, join_token_hash, author, protocol_revision, created_at, updated_at) "
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                (
+                    token_hash(owner_token),
+                    token_hash(join_token),
+                    author,
+                    LOCAL_OFFER_REVISION,
+                    now,
+                    now,
+                ),
+            )
+            public_id = f"L{cursor.lastrowid:04d}"
+            db.execute(
+                "UPDATE local_offer_rooms SET public_id = ? WHERE row_id = ?",
+                (public_id, cursor.lastrowid),
+            )
+        self.send_json(
+            HTTPStatus.CREATED,
+            {
+                "room_id": public_id,
+                "owner_token": owner_token,
+                "join_token": join_token,
+                "protocol_revision": LOCAL_OFFER_REVISION,
+                "status": "collecting",
+            },
+        )
+
+    def join_local_offer_room(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid local-offer join request")
+        join_token = body.get("join_token")
+        if not isinstance(join_token, str) or len(join_token) > 200:
+            raise ValueError("invalid join token")
+        card_id = clean_text(body.get("card_id", ""), "card id", limit=20).upper()
+        card = ATTENTION_CARDS.get(card_id)
+        if card is None:
+            raise ValueError("unknown locked capability card")
+        device_label = clean_text(body.get("device_label", ""), "device label", limit=40)
+        if device_label != card["device"]:
+            raise ValueError("card belongs to another declared device")
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            room = db.execute(
+                "SELECT * FROM local_offer_rooms WHERE join_token_hash = ?",
+                (token_hash(join_token),),
+            ).fetchone()
+            if room is None:
+                self.send_json(HTTPStatus.NOT_FOUND, {"error": "local-offer room not found"})
+                return
+            if room["status"] != "collecting":
+                raise ValueError("local-offer room is closed")
+            if db.execute(
+                "SELECT 1 FROM local_offer_nodes WHERE room_public_id = ? AND card_id = ?",
+                (room["public_id"], card_id),
+            ).fetchone() is not None:
+                raise ValueError("this local library already joined")
+            node_token = secrets.token_urlsafe(32)
+            now = utc_now()
+            cursor = db.execute(
+                "INSERT INTO local_offer_nodes "
+                "(room_public_id, token_hash, card_id, device_label, created_at, updated_at) "
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                (
+                    room["public_id"],
+                    token_hash(node_token),
+                    card_id,
+                    device_label,
+                    now,
+                    now,
+                ),
+            )
+            node_id = f"{room['public_id']}-{card_id}"
+            db.execute(
+                "UPDATE local_offer_nodes SET node_public_id = ? WHERE row_id = ?",
+                (node_id, cursor.lastrowid),
+            )
+        questions = [
+            {
+                "id": question_id,
+                "question": question,
+                "question_hash": hashlib.sha256(question.encode("utf-8")).hexdigest(),
+            }
+            for question_id, question in LOCAL_OFFER_QUESTIONS.items()
+        ]
+        self.send_json(
+            HTTPStatus.CREATED,
+            {
+                "room_id": room["public_id"],
+                "node_id": node_id,
+                "node_token": node_token,
+                "card_id": card_id,
+                "protocol_revision": room["protocol_revision"],
+                "questions": questions,
+            },
+        )
+
+    def local_offer_node_access(self, token: object) -> tuple[sqlite3.Row, sqlite3.Row] | None:
+        if not isinstance(token, str) or len(token) > 200:
+            return None
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            node = db.execute(
+                "SELECT * FROM local_offer_nodes WHERE token_hash = ?", (token_hash(token),)
+            ).fetchone()
+            if node is None:
+                return None
+            room = db.execute(
+                "SELECT * FROM local_offer_rooms WHERE public_id = ?", (node["room_public_id"],)
+            ).fetchone()
+        return (room, node) if room else None
+
+    def validate_local_offer_batch(self, body: dict) -> dict:
+        if body.get("memory_revision") != "e007-local-memory-v0.1":
+            raise ValueError("wrong local-memory revision")
+        lane_config = body.get("lane_config")
+        if not isinstance(lane_config, dict) or set(lane_config) != LOCAL_OFFER_LANES:
+            raise ValueError("all three locked search lanes are required")
+        clean_lane_config = {}
+        for lane, config in lane_config.items():
+            if not isinstance(config, dict):
+                raise ValueError("invalid search lane configuration")
+            threshold = config.get("threshold")
+            calibration_f1 = config.get("calibration_f1")
+            if any(
+                not isinstance(value, (int, float))
+                or isinstance(value, bool)
+                or not math.isfinite(float(value))
+                for value in (threshold, calibration_f1)
+            ):
+                raise ValueError("invalid calibrated search values")
+            if not -1 <= float(threshold) <= 1 or not 0 <= float(calibration_f1) <= 1:
+                raise ValueError("calibrated search value is outside its range")
+            clean_lane_config[lane] = {
+                "threshold": round(float(threshold), 6),
+                "calibration_f1": round(float(calibration_f1), 6),
+            }
+        results = body.get("results")
+        expected_count = len(LOCAL_OFFER_QUESTIONS) * len(LOCAL_OFFER_LANES)
+        if not isinstance(results, list) or len(results) != expected_count:
+            raise ValueError("one result per question and lane is required")
+        cleaned = []
+        seen = set()
+        for item in results:
+            if not isinstance(item, dict):
+                raise ValueError("invalid local-offer result")
+            question_id = clean_text(item.get("question_id", ""), "question id", limit=10).upper()
+            lane = clean_text(item.get("lane", ""), "search lane", limit=40)
+            if question_id not in LOCAL_OFFER_QUESTIONS or lane not in LOCAL_OFFER_LANES:
+                raise ValueError("unknown question or search lane")
+            key = (question_id, lane)
+            if key in seen:
+                raise ValueError("duplicate question and lane result")
+            seen.add(key)
+            expected_hash = hashlib.sha256(
+                LOCAL_OFFER_QUESTIONS[question_id].encode("utf-8")
+            ).hexdigest()
+            if item.get("question_hash") != expected_hash:
+                raise ValueError("question changed in transit")
+            status = clean_text(item.get("status", ""), "result status", limit=20)
+            if status not in LOCAL_OFFER_STATUSES:
+                raise ValueError("invalid local-offer status")
+            score = item.get("score")
+            if not isinstance(score, (int, float)) or isinstance(score, bool) or not math.isfinite(float(score)):
+                raise ValueError("invalid local search score")
+            if not -1 <= float(score) <= 1:
+                raise ValueError("local search score is outside [-1, 1]")
+            source_id = clean_text(
+                item.get("source_id", ""), "source id", required=False, limit=40
+            )
+            capsule_value = item.get("capsule")
+            capsule = None
+            if status == "found":
+                if not source_id or not isinstance(capsule_value, dict):
+                    raise ValueError("found requires a source and capsule")
+                capsule = {
+                    "claim": clean_text(capsule_value.get("claim", ""), "claim", limit=2_000),
+                    "evidence": clean_text(capsule_value.get("evidence", ""), "evidence", limit=4_000),
+                    "source": clean_text(capsule_value.get("source", ""), "source", limit=500),
+                    "source_lineage": clean_text(
+                        capsule_value.get("source_lineage", ""), "source lineage", limit=200
+                    ),
+                    "conditions": clean_text(
+                        capsule_value.get("conditions", ""), "conditions", limit=2_000
+                    ),
+                    "limitations": clean_text(
+                        capsule_value.get("limitations", ""), "limitations", limit=2_000
+                    ),
+                    "permission": clean_text(
+                        capsule_value.get("permission", ""), "permission", limit=100
+                    ),
+                }
+            elif capsule_value not in (None, {}):
+                raise ValueError("only found may send a capsule")
+            canary_hash = clean_text(
+                item.get("canary_hash", ""), "canary hash", required=False, limit=64
+            ).lower()
+            if canary_hash and not re.fullmatch(r"[0-9a-f]{64}", canary_hash):
+                raise ValueError("invalid canary hash")
+            cleaned.append(
+                {
+                    "question_id": question_id,
+                    "question_hash": expected_hash,
+                    "lane": lane,
+                    "status": status,
+                    "score": round(float(score), 6),
+                    "source_id": source_id,
+                    "capsule": capsule,
+                    "canary_hash": canary_hash,
+                }
+            )
+        return {
+            "client_version": clean_text(body.get("client_version", ""), "client version", limit=80),
+            "runtime": clean_text(body.get("runtime", ""), "runtime", limit=120),
+            "memory_revision": "e007-local-memory-v0.1",
+            "model": clean_text(body.get("model", ""), "model", limit=200),
+            "model_revision": clean_text(
+                body.get("model_revision", ""), "model revision", limit=80
+            ),
+            "lane_config": clean_lane_config,
+            "results": sorted(cleaned, key=lambda item: (item["question_id"], item["lane"])),
+        }
+
+    def contribute_local_offer_node(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid local-offer contribution")
+        access = self.local_offer_node_access(body.get("node_token"))
+        if access is None:
+            self.send_json(HTTPStatus.NOT_FOUND, {"error": "local-offer node not found"})
+            return
+        room, node = access
+        if room["status"] != "collecting":
+            raise ValueError("local-offer room is closed")
+        result = self.validate_local_offer_batch(body)
+        now = utc_now()
+        with sqlite3.connect(self.db_path) as db:
+            db.execute("BEGIN IMMEDIATE")
+            db.execute(
+                "UPDATE local_offer_nodes SET status = 'complete', result = ?, updated_at = ? "
+                "WHERE row_id = ?",
+                (json.dumps(result, ensure_ascii=False, sort_keys=True), now, node["row_id"]),
+            )
+            completed = db.execute(
+                "SELECT COUNT(*) FROM local_offer_nodes "
+                "WHERE room_public_id = ? AND status = 'complete'",
+                (room["public_id"],),
+            ).fetchone()[0]
+            if completed == room["expected_nodes"]:
+                db.execute(
+                    "UPDATE local_offer_rooms SET status = 'complete', updated_at = ? WHERE public_id = ?",
+                    (now, room["public_id"]),
+                )
+            else:
+                db.execute(
+                    "UPDATE local_offer_rooms SET updated_at = ? WHERE public_id = ?",
+                    (now, room["public_id"]),
+                )
+        self.send_json(HTTPStatus.OK, {"ok": True, "node_id": node["node_public_id"]})
+
+    def local_offer_room_payload(self, room: sqlite3.Row) -> dict:
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            nodes = db.execute(
+                "SELECT node_public_id, card_id, device_label, status, result, created_at, updated_at "
+                "FROM local_offer_nodes WHERE room_public_id = ? ORDER BY card_id",
+                (room["public_id"],),
+            ).fetchall()
+        return {
+            "schema_version": "0.1",
+            "experiment_id": "E007",
+            "checkpoint": "3B",
+            "room_id": room["public_id"],
+            "protocol_revision": room["protocol_revision"],
+            "status": room["status"],
+            "expected_nodes": room["expected_nodes"],
+            "nodes": [{**dict(node), "result": json.loads(node["result"])} for node in nodes],
+            "created_at": room["created_at"],
+            "updated_at": room["updated_at"],
+            "claim_boundary": "Local synthetic retrieval, policy states, and stored evidence transport only; no merge or final answer.",
+        }
+
+    def local_offer_status(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid local-offer status request")
+        token = body.get("owner_token")
+        if not isinstance(token, str) or len(token) > 200:
+            raise ValueError("invalid owner token")
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            room = db.execute(
+                "SELECT * FROM local_offer_rooms WHERE owner_token_hash = ?", (token_hash(token),)
+            ).fetchone()
+        if room is None:
+            self.send_json(HTTPStatus.NOT_FOUND, {"error": "local-offer room not found"})
+            return
+        self.send_json(HTTPStatus.OK, self.local_offer_room_payload(room))
+
+    def publish_local_offer_room(self, body: object) -> None:
+        if not isinstance(body, dict) or body.get("consent") is not True:
+            raise ValueError("publication consent is required")
+        token = body.get("owner_token")
+        if not isinstance(token, str) or len(token) > 200:
+            raise ValueError("invalid owner token")
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            room = db.execute(
+                "SELECT * FROM local_offer_rooms WHERE owner_token_hash = ?", (token_hash(token),)
+            ).fetchone()
+            if room is None:
+                self.send_json(HTTPStatus.NOT_FOUND, {"error": "local-offer room not found"})
+                return
+            if room["status"] != "complete":
+                raise ValueError("all four local libraries must finish before publication")
+            db.execute(
+                "UPDATE local_offer_rooms SET public = 1, updated_at = ? WHERE public_id = ?",
+                (utc_now(), room["public_id"]),
+            )
+        self.send_json(
+            HTTPStatus.OK, {"ok": True, "public_path": f"/api/public/{room['public_id']}"}
+        )
+
+    def public_local_offer_rooms(self) -> list[dict]:
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            rooms = db.execute(
+                "SELECT * FROM local_offer_rooms WHERE public = 1 ORDER BY row_id DESC"
+            ).fetchall()
+        return [self.local_offer_room_payload(room) for room in rooms]
+
     def get_public(self, public_id: str) -> None:
         public_id = public_id.upper()
         if public_id == "H0001":
@@ -1958,6 +2367,18 @@ First, explain the proposed protocol and its falsification criteria in a concise
                 self.send_json(HTTPStatus.NOT_FOUND, {"error": "attention run not found"})
                 return
             self.send_json(HTTPStatus.OK, self.attention_room_payload(room), public=True, max_age=2)
+            return
+        if re.fullmatch(r"L[0-9]{4,}", public_id):
+            with sqlite3.connect(self.db_path) as db:
+                db.row_factory = sqlite3.Row
+                room = db.execute(
+                    "SELECT * FROM local_offer_rooms WHERE public_id = ? AND public = 1",
+                    (public_id,),
+                ).fetchone()
+            if room is None:
+                self.send_json(HTTPStatus.NOT_FOUND, {"error": "local-offer run not found"})
+                return
+            self.send_json(HTTPStatus.OK, self.local_offer_room_payload(room), public=True, max_age=2)
             return
         if public_id == "E004":
             self.get_public_e004()
