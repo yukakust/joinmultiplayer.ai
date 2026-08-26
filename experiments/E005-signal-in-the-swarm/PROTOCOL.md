@@ -48,6 +48,16 @@ be reviewed for meaning before Gate 5C receives a scientific conclusion. Four
 empty-shelf, four swapped-shelf, one two-cause, and one two-safety answer reached
 the 256-token emergency ceiling; no correct-pair answer did.
 
+A first blind semantic audit of all 128 English answers was then performed by
+one GPT-5.6 Luna judge under the separately committed v0.1 protocol. The old
+additive merger preserved the expected cause in 16/16 answers and produced the
+only complete answer (1/16). The correct separate shelves preserved the expected
+cause in 0/16, produced 0/16 complete answers, and contained an incompatible
+claim in 16/16. Across all eight conditions, the judge marked 28/128 decisions
+low-confidence. This strongly rejects the present shelf reader on English, but
+it remains a single-model audit rather than ground truth; owner or independent
+second-judge review is required before an architecture-changing conclusion.
+
 Parent: E004  
 Claim class: synthetic development until a separately committed locked run
 
