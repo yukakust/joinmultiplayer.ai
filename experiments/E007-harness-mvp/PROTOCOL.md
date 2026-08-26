@@ -1,7 +1,8 @@
 # E007 — model-agnostic harness MVP
 
 Status: Checkpoints 0 and 1 approved. Checkpoint 2 three-task yukabox smoke
-is locked before inference. No model has run and no result exists.
+finished generation on 2026-08-26. All 15 raw answers are public; owner semantic
+review is still pending.
 
 ## Question
 
@@ -81,7 +82,26 @@ only after owner review.
 
 0. Public design and topology — approved.
 1. Public fictional world, 64 capability cards, 30 tasks, and expected evidence — approved.
-2. Three-question single-device smoke on yukabox — locked before inference.
+2. Three-question single-device smoke on yukabox — generation complete; owner review pending.
 3. The same smoke split between yukabox and MacBook.
 4. Locked 30-task run.
 5. Owner audit and public result.
+
+## Checkpoint 2 observed result
+
+The frozen Qwen3-0.6B Base produced 15 final answers in 433.445 seconds on
+yukabox: three locked questions under five conditions. No training or retry was
+performed. No answer hit its token ceiling and no planted canary appeared in a
+final answer.
+
+This run found a real failure in the first modular harness. Its Qwen-based
+support checker rejected all 24 capsules. Several raw checker outputs begin with
+`UNSUPPORTED` and then explain that the claim *is* supported. The deterministic
+contract correctly obeyed the first token, so the final harness received an
+empty evidence board and answered worse than the centralized context and free
+swarm. This is preserved as a result, not repaired after seeing the answers.
+
+The raw generation is
+`site/experiments/E007/smoke-results-v0.1.json`. Exact phrase matches inside that
+file are navigation aids, not semantic grades. Checkpoint 3 must not start until
+the owner reads the visible question-and-answer page and records a verdict.

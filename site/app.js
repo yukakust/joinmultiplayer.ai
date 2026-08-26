@@ -2857,7 +2857,7 @@ function e006Shell() {
 }
 
 function e007Shell() {
-  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 1 · ${localized({ en: "WORLD LOCKED · NO INFERENCE", ru: "МИР ЗАФИКСИРОВАН · БЕЗ INFERENCE" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "Review all 64 pocket i and 30 questions before any model runs.", ru: "Проверьте все 64 pocket i и 30 вопросов до запуска моделей." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 2 · ${localized({ en: "15 RAW ANSWERS READY", ru: "15 СЫРЫХ ОТВЕТОВ ГОТОВЫ" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "The first three-question model run is complete. Read every answer and every harness decision.", ru: "Первый запуск на трёх вопросах закончен. Можно прочитать каждый ответ и каждое решение harness." })}</p><div class="actions"><a class="primary-link" href="#e007-smoke-results">${localized({ en: "SEE ALL QUESTIONS AND ANSWERS", ru: "СМОТРЕТЬ ВСЕ ВОПРОСЫ И ОТВЕТЫ" })} ↓</a></div><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
 function e005MethodName(method) {
@@ -4119,15 +4119,17 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/smoke-results-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
     const world = await worldResponse.json();
     const smoke = await smokeResponse.json();
+    const smokeResults = smokeResultsResponse.ok ? await smokeResultsResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4153,7 +4155,39 @@ async function loadE007() {
       }).join("");
       return `<details class="e005-task" ${index === 0 ? "open" : ""}><summary><b>${escapeHTML(task.id)}</b><span>${escapeHTML(task.question)}</span></summary><div class="e005-task-body"><div class="e007-answer-grid"><article><span>${localized({ en: "EXPECTED CAUSE", ru: "ОЖИДАЕМАЯ ПРИЧИНА" })}</span><strong>${escapeHTML(task.expected.cause)}</strong></article><article><span>${localized({ en: "EXPECTED ACTION", ru: "ОЖИДАЕМОЕ ДЕЙСТВИЕ" })}</span><strong>${escapeHTML(task.expected.action)}</strong></article></div><p class="e007-task-meta">${escapeHTML(task.family)} · ${localized({ en: "needs", ru: "нужны" })} ${escapeHTML(task.required_pockets.join(" + "))}</p><div class="e007-source-grid">${sourceCards}</div></div></details>`;
     }).join("");
+    const conditionNames = {
+      frozen_model_only: localized({ en: "1 · Frozen Qwen alone", ru: "1 · Только замороженная Qwen" }),
+      one_pocket_local_rag: localized({ en: "2 · One pocket i", ru: "2 · Один pocket i" }),
+      central_oracle_context: localized({ en: "3 · All needed books together", ru: "3 · Все нужные книги вместе" }),
+      routed_free_text_swarm: localized({ en: "4 · Free swarm", ru: "4 · Свободный swarm" }),
+      full_modular_harness: localized({ en: "5 · Modular harness", ru: "5 · Модульный harness" }),
+    };
+    let smokeResultsMarkup = "";
+    if (smokeResults?.records?.length) {
+      const groups = smokeResults.records.reduce((map, record) => {
+        const values = map.get(record.question_id) || [];
+        values.push(record);
+        map.set(record.question_id, values);
+        return map;
+      }, new Map());
+      const accepted = smokeResults.records.flatMap((record) => record.capsules || []).filter((capsule) => capsule.validation?.accepted).length;
+      const rejected = smokeResults.records.flatMap((record) => record.capsules || []).filter((capsule) => !capsule.validation?.accepted).length;
+      const leaked = smokeResults.records.reduce((total, record) => total + (record.navigation?.forbidden_canary_leaks?.length || 0), 0);
+      const questionRows = [...groups.entries()].map(([questionId, records], index) => {
+        const first = records[0];
+        const answers = records.map((record) => `<article><span>${escapeHTML(conditionNames[record.condition] || record.condition)}</span><p>${escapeHTML(record.final?.text || "—")}</p><small>${record.final?.generated_tokens || 0} tokens · ${record.final?.reached_ceiling ? localized({ en: "hit length limit", ru: "достигнут лимит длины" }) : localized({ en: "finished", ru: "закончен" })}</small></article>`).join("");
+        const routed = (first.route || []).map((item) => `<li><b>${escapeHTML(item.pocket_id)}</b><span>${escapeHTML((item.matched_public_terms || []).join(" · ") || "—")}</span><small>${item.score}</small></li>`).join("");
+        const free = records.find((record) => record.condition === "routed_free_text_swarm");
+        const harness = records.find((record) => record.condition === "full_modular_harness");
+        const freeMessages = (free?.local_outputs || []).map((item) => `<article><span>${escapeHTML(item.pocket_id)} · ${escapeHTML(item.document_id)}</span><p>${escapeHTML(item.message?.text || "—")}</p></article>`).join("");
+        const capsules = (harness?.capsules || []).map((capsule) => `<article class="${capsule.validation?.accepted ? "is-accepted" : "is-rejected"}"><span>${escapeHTML(capsule.owner)} · ${escapeHTML(capsule.source)} · ${capsule.validation?.accepted ? localized({ en: "ACCEPTED", ru: "ПРИНЯТО" }) : localized({ en: "REJECTED", ru: "ОТКЛОНЕНО" })}</span><p>${escapeHTML(capsule.claim)}</p><small>${escapeHTML(capsule.validation?.support_check?.decision || "—")} · lineage ${escapeHTML(capsule.lineage)}</small></article>`).join("");
+        return `<details class="e007-smoke-question" ${index === 0 ? "open" : ""}><summary><b>${escapeHTML(questionId)}</b><span>${escapeHTML(first.question)}</span></summary><div class="e007-smoke-body"><div class="e007-answer-grid"><article><span>${localized({ en: "EXPECTED CAUSE", ru: "ОЖИДАЕМАЯ ПРИЧИНА" })}</span><strong>${escapeHTML(first.expected?.cause || "—")}</strong></article><article><span>${localized({ en: "EXPECTED ACTION", ru: "ОЖИДАЕМОЕ ДЕЙСТВИЕ" })}</span><strong>${escapeHTML(first.expected?.action || "—")}</strong></article></div><h3>${localized({ en: "All five unedited answers", ru: "Все пять ответов без редактуры" })}</h3><div class="e007-smoke-answers">${answers}</div><details><summary>${localized({ en: "How the router chose pocket i", ru: "Как router выбрал pocket i" })}</summary><ol class="e007-route-list">${routed}</ol></details><details><summary>${localized({ en: "What the free swarm sent", ru: "Что прислал свободный swarm" })}</summary><div class="e007-smoke-messages">${freeMessages || "—"}</div></details><details><summary>${localized({ en: "What the harness accepted and rejected", ru: "Что harness принял и отклонил" })}</summary><div class="e007-smoke-messages">${capsules || "—"}</div></details></div></details>`;
+      }).join("");
+      const complete = smokeResults.status === "generation_complete_owner_semantic_review_pending";
+      smokeResultsMarkup = `<section id="e007-smoke-results" class="e007-smoke-results"><div class="flow-step">CHECKPOINT 2 · ${complete ? localized({ en: "MODEL RUN COMPLETE", ru: "МОДЕЛИ ЗАКОНЧИЛИ" }) : localized({ en: "MODELS ARE RUNNING", ru: "МОДЕЛИ ЕЩЁ СЧИТАЮТ" })}</div><h2>${localized({ en: "Three questions. Every answer. The whole path.", ru: "Три вопроса. Каждый ответ. Весь путь." })}</h2><p class="control-warning">${localized({ en: "No winner is colored yet. Read the meaning first; exact phrase checks are navigation only.", ru: "Победитель пока не раскрашен. Сначала проверяем смысл; совпадение точных фраз — только навигация." })}</p><div class="e005-metrics"><article><span>${localized({ en: "FINAL ANSWERS", ru: "ИТОГОВЫХ ОТВЕТОВ" })}</span><strong>${smokeResults.records.length} / 15</strong></article><article><span>${localized({ en: "CAPSULES", ru: "КАПСУЛЫ" })}</span><strong>${accepted} + / ${rejected} −</strong></article><article><span>${localized({ en: "SECRET LEAKS", ru: "УТЕЧКИ СЕКРЕТА" })}</span><strong>${leaked}</strong></article></div><div class="e007-smoke-questions">${questionRows}</div><div class="actions"><a class="quiet-link" href="/experiments/E007/smoke-results-v0.1.json">ALL RAW JSON ↗</a></div></section>`;
+    }
     target.querySelector(".experiment-loading").outerHTML = `
+      ${smokeResultsMarkup}
       <section class="e007-boundary"><strong>${localized({ en: "HONEST BOUNDARY", ru: "ЧЕСТНАЯ ГРАНИЦА" })}</strong><p>${localized(design.claim_boundary)}</p></section>
       <section><div class="flow-step">${localized({ en: "64 LOGICAL · 2 PHYSICAL", ru: "64 ЛОГИЧЕСКИХ · 2 ФИЗИЧЕСКИХ" })}</div><div class="e007-device-grid">${deviceCards}</div><p class="control-warning">${localized({ en: "They are 64 isolated owners of knowledge, not 64 separately trained neural models. Only the routed few execute Qwen for each question.", ru: "Это 64 изолированных владельца знаний, а не 64 отдельно обученные нейросети. Для каждого вопроса Qwen запускают только несколько выбранных router-ом i." })}</p></section>
       <section><div class="flow-step">${localized({ en: "THE MVP PATH", ru: "ПУТЬ MVP" })}</div><div class="e007-module-grid">${modules}</div></section>

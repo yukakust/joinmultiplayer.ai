@@ -228,9 +228,14 @@ The public design is `/experiments/E007/design-v0.1.json`; the deterministic
 fictional dataset is `/experiments/E007/world-v0.1.json`; the detailed operator
 protocol is `experiments/E007-harness-mvp/PROTOCOL.md`. Checkpoint 0 is approved.
 Checkpoint 1 contains 64 capability cards, 422 separate local documents, and 30
-questions across five task families and is owner-approved. Checkpoint 2 is
+questions across five task families and is owner-approved. Checkpoint 2 was
 locked at `/experiments/E007/smoke-protocol-v0.1.json` for E7-Q01, E7-Q13, and
-E7-Q19 on yukabox. The correct frozen checkpoint is `Qwen/Qwen3-0.6B` Base at
+E7-Q19 on yukabox, then completed without training or retry. Its 15 raw answers
+are `/experiments/E007/smoke-results-v0.1.json`; owner semantic review is still
+pending. The first modular harness rejected all 24 capsules because the 0.6B
+support checker often said `UNSUPPORTED` before explaining that the claim was
+supported. Preserve this failure. The correct frozen checkpoint is
+`Qwen/Qwen3-0.6B` Base at
 revision `c1899de289a04d12100db370d81485cdf75e47ca`; no training is permitted.
 The earlier E006 model name was incorrect metadata, although its recorded weight
 hash is the same correct Base-model hash. Publish every raw smoke trace and do
