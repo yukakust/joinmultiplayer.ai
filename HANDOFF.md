@@ -228,8 +228,13 @@ The public design is `/experiments/E007/design-v0.1.json`; the deterministic
 fictional dataset is `/experiments/E007/world-v0.1.json`; the detailed operator
 protocol is `experiments/E007-harness-mvp/PROTOCOL.md`. Checkpoint 0 is approved.
 Checkpoint 1 contains 64 capability cards, 422 separate local documents, and 30
-questions across five task families. No inference or result exists. Do not run
-the three-question smoke until the owner reviews Checkpoint 1.
+questions across five task families and is owner-approved. Checkpoint 2 is
+locked at `/experiments/E007/smoke-protocol-v0.1.json` for E7-Q01, E7-Q13, and
+E7-Q19 on yukabox. The correct frozen checkpoint is `Qwen/Qwen3-0.6B` Base at
+revision `c1899de289a04d12100db370d81485cdf75e47ca`; no training is permitted.
+The earlier E006 model name was incorrect metadata, although its recorded weight
+hash is the same correct Base-model hash. Publish every raw smoke trace and do
+not begin the full 30-task run without another owner checkpoint.
 
 ## Immediate next work
 

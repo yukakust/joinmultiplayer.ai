@@ -4119,13 +4119,15 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
     ]);
-    if (!designResponse.ok || !worldResponse.ok) throw new Error("E007 checkpoint unavailable");
+    if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
     const world = await worldResponse.json();
+    const smoke = await smokeResponse.json();
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4156,11 +4158,12 @@ async function loadE007() {
       <section><div class="flow-step">${localized({ en: "64 LOGICAL · 2 PHYSICAL", ru: "64 ЛОГИЧЕСКИХ · 2 ФИЗИЧЕСКИХ" })}</div><div class="e007-device-grid">${deviceCards}</div><p class="control-warning">${localized({ en: "They are 64 isolated owners of knowledge, not 64 separately trained neural models. Only the routed few execute Qwen for each question.", ru: "Это 64 изолированных владельца знаний, а не 64 отдельно обученные нейросети. Для каждого вопроса Qwen запускают только несколько выбранных router-ом i." })}</p></section>
       <section><div class="flow-step">${localized({ en: "THE MVP PATH", ru: "ПУТЬ MVP" })}</div><div class="e007-module-grid">${modules}</div></section>
       <section><div class="flow-step">30 ${localized({ en: "LOCKED QUESTIONS · 5 FAMILIES", ru: "ЗАФИКСИРОВАННЫХ ВОПРОСОВ · 5 ТИПОВ" })}</div><div class="e007-family-grid">${families}</div></section>
+      <section class="e007-smoke-lock"><div class="flow-step">CHECKPOINT 2 · ${localized({ en: "LOCKED BEFORE INFERENCE", ru: "ЗАФИКСИРОВАНО ДО INFERENCE" })}</div><h2>${localized({ en: "Three questions. Five conditions. One frozen Base model.", ru: "Три вопроса. Пять условий. Одна замороженная Base-модель." })}</h2><p>${escapeHTML(smoke.selected_tasks.join(" · "))}</p><div class="e007-answer-grid"><article><span>MODEL</span><strong>${escapeHTML(smoke.model.repository)}</strong><small>${escapeHTML(smoke.model.revision)}</small></article><article><span>${localized({ en: "NO TRAINING", ru: "БЕЗ ОБУЧЕНИЯ" })}</span><strong>${localized({ en: "Routing · minority · secret", ru: "Routing · меньшинство · секрет" })}</strong><small>${escapeHTML(smoke.status)}</small></article></div><p class="control-warning">${escapeHTML(smoke.model.note)}</p></section>
       <section class="e007-world-review"><div class="flow-step">${localized({ en: "CHECKPOINT 1 · LOOK BEFORE MODELS RUN", ru: "CHECKPOINT 1 · ПОСМОТРИТЕ ДО ЗАПУСКА МОДЕЛЕЙ" })}</div><div class="e005-metrics"><article><span>LOGICAL POCKET I</span><strong>${world.pockets.length}</strong></article><article><span>LOCAL DOCUMENTS</span><strong>${world.documents.length}</strong></article><article><span>LOCKED QUESTIONS</span><strong>${world.tasks.length}</strong></article></div><h2>${localized({ en: "Every pocket i", ru: "Каждый pocket i" })}</h2><div class="e007-pocket-grid">${pocketCards}</div><h2>${localized({ en: "Every question, answer, and source", ru: "Каждый вопрос, ответ и источник" })}</h2><div class="e005-tasks">${taskCards}</div></section>
       <section class="e007-gates"><div class="flow-step">${localized({ en: "PROPOSED SUCCESS GATES", ru: "ПРЕДЛОЖЕННЫЕ ВОРОТА УСПЕХА" })}</div><ul>${gates}</ul></section>
       <section class="e007-checkpoints"><div class="flow-step">${localized({ en: "CHECKPOINTS", ru: "КОНТРОЛЬНЫЕ ТОЧКИ" })}</div><ol>${checkpoints}</ol></section>
       <section class="e005-gate4-result-verdict"><span>${localized({ en: "CURRENT DECISION", ru: "ТЕКУЩЕЕ РЕШЕНИЕ" })}</span><h2>${localized({ en: "Review the world before the three-question smoke.", ru: "Проверить мир до smoke-теста на трёх вопросах." })}</h2><p>${localized(design.hypothesis)}</p></section>
-      <div class="actions"><a class="quiet-link" href="/experiments/E007/world-v0.1.json">LOCKED WORLD JSON ↗</a><a class="quiet-link" href="/experiments/E007/design-v0.1.json">DESIGN JSON ↗</a><a class="quiet-link" href="/experiment/e006/">E006 ↗</a></div>`;
+      <div class="actions"><a class="quiet-link" href="/experiments/E007/smoke-protocol-v0.1.json">LOCKED SMOKE JSON ↗</a><a class="quiet-link" href="/experiments/E007/world-v0.1.json">LOCKED WORLD JSON ↗</a><a class="quiet-link" href="/experiments/E007/design-v0.1.json">DESIGN JSON ↗</a><a class="quiet-link" href="/experiment/e006/">E006 ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").textContent = localized({ en: "E007 design could not be loaded.", ru: "Не удалось загрузить чертёж E007." });
   }
