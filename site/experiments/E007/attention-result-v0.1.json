@@ -1,0 +1,63 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3A",
+  "room_id": "A0002",
+  "status": "complete_and_owner_published",
+  "question": "Не могу решить CV-задачу с маленькими объектами. Claude и Codex не помогли.",
+  "question_hash": "c698e2bbedf6e166eb18b433db5e7cb7a00f38684e5c220a89c3dadf73bea711",
+  "result": {
+    "unique_processes": 4,
+    "physical_devices": 2,
+    "unique_question_hashes": 1,
+    "relevant_cards_above_unrelated_cards": true,
+    "all_locked_gates_passed": true
+  },
+  "ranking": [
+    {
+      "rank": 1,
+      "node_id": "A0002-ATT-Y1",
+      "card_id": "ATT-Y1",
+      "device": "yukabox",
+      "whole_text_vector": 0.22451,
+      "exact_terms": 0.069505,
+      "matched_terms": ["cv"],
+      "latency_ms": 64.951
+    },
+    {
+      "rank": 2,
+      "node_id": "A0002-ATT-M1",
+      "card_id": "ATT-M1",
+      "device": "owner-macbook",
+      "whole_text_vector": 0.144365,
+      "exact_terms": 0.066667,
+      "matched_terms": ["cv"],
+      "latency_ms": 305.11
+    },
+    {
+      "rank": 3,
+      "node_id": "A0002-ATT-Y2",
+      "card_id": "ATT-Y2",
+      "device": "yukabox",
+      "whole_text_vector": 0.13564,
+      "exact_terms": 0.0,
+      "matched_terms": [],
+      "latency_ms": 64.86
+    },
+    {
+      "rank": 4,
+      "node_id": "A0002-ATT-M2",
+      "card_id": "ATT-M2",
+      "device": "owner-macbook",
+      "whole_text_vector": 0.125182,
+      "exact_terms": 0.0,
+      "matched_terms": [],
+      "latency_ms": 108.115
+    }
+  ],
+  "claim_boundary": "This development smoke demonstrates exact-question delivery, four physical receipts, and useful ranking for one preselected question and four manually authored cards. It does not test semantic understanding, automatic cards, Qwen, private memory, RAG, training, answers, or scale.",
+  "live_record": "https://joinmultiplayer.ai/api/public/A0002",
+  "created_at": "2026-08-26T19:48:49+00:00",
+  "completed_at": "2026-08-26T19:57:20+00:00",
+  "published_at": "2026-08-26T19:57:58+00:00"
+}

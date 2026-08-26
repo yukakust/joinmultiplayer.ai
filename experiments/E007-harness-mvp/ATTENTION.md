@@ -1,6 +1,7 @@
 # E007 Checkpoint 3A — physical attention smoke
 
-Status: protocol locked before the first question.
+Status: completed and owner-published on 2026-08-26. All locked development
+gates passed for one question and four manually authored cards.
 
 ## What we test
 
@@ -55,3 +56,20 @@ UI must not append `%`.
 Failure is also a result and stays in the public experiment history after owner
 publication.
 
+## Observed result
+
+The exact Russian question reached four processes on two physical devices with
+one identical SHA-256 hash. The whole-text vector ranked both CV cards above
+both unrelated cards:
+
+1. `ATT-Y1` small-object vision on yukabox — `0.224510`;
+2. `ATT-M1` vision-data diagnosis on MacBook — `0.144365`;
+3. `ATT-Y2` distributed systems on yukabox — `0.135640`;
+4. `ATT-M2` beekeeping on MacBook — `0.125182`.
+
+Both CV cards also found the exact term `cv`; the unrelated cards found no exact
+term. This is a successful development smoke for delivery and ranking only. It
+does not show semantic understanding and cannot yet tell whether a pocket i has
+useful private knowledge. The frozen snapshot is
+`site/experiments/E007/attention-result-v0.1.json`; the live public record is
+`https://joinmultiplayer.ai/api/public/A0002`.

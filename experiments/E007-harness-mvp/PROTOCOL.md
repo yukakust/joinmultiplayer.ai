@@ -1,9 +1,10 @@
 # E007 — model-agnostic harness MVP
 
 Status: Checkpoints 0 and 1 approved. Checkpoint 2 three-task yukabox smoke and
-its three-judge semantic review are public. Checkpoint 3A is locked before its
-first question: it isolates the first two harness steps on four processes across
-yukabox and the owner's MacBook. See `ATTENTION.md`.
+its three-judge semantic review are public. Checkpoint 3A finished on two real
+devices: it isolated the first two harness steps on four processes across
+yukabox and the owner's MacBook. All locked development gates passed for the one
+preselected question and four manual cards. See `ATTENTION.md`.
 
 ## Question
 
@@ -85,7 +86,8 @@ only after owner review.
 1. Public fictional world, 64 capability cards, 30 tasks, and expected evidence — approved.
 2. Three-question single-device smoke on yukabox — generation complete; owner review pending.
 3A. Exact-question delivery and public-card attention on four processes across
-    yukabox and MacBook. No Qwen, memory, RAG, training, or answers.
+    yukabox and MacBook — complete and owner-published. No Qwen, memory, RAG,
+    training, or answers.
 3B. The same three-question model smoke split between yukabox and MacBook.
 4. Locked 30-task run.
 5. Owner audit and public result.

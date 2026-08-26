@@ -2,7 +2,7 @@
   "schema_version": "0.1",
   "experiment_id": "E007",
   "kind": "public_design_checkpoint",
-  "status": "checkpoint_2_generation_complete_owner_review_pending",
+  "status": "checkpoint_3a_physical_attention_complete",
   "title": {
     "en": "A model-agnostic harness for 64 logical pocket i",
     "ru": "Независимый от модели harness для 64 логических pocket i"
@@ -12,8 +12,8 @@
     "ru": "Модульный harness может помочь разным pocket i найти распределённые знания, передать только разрешённые доказательства, сохранить разногласия и собрать ответ лучше одного pocket i."
   },
   "claim_boundary": {
-    "en": "No model has run. No world data, question, answer, or result has been generated. Sixty-four logical pocket i are not sixty-four independently trained models.",
-    "ru": "Модели ещё не запускались. Мир, вопросы, ответы и результаты ещё не созданы. 64 логических pocket i — это не 64 независимо обученные модели."
+    "en": "E007 has completed development smokes, not a locked 64-pocket experiment. Checkpoint 3A tests delivery and public-card ranking only. Sixty-four logical pocket i are not sixty-four independently trained models.",
+    "ru": "E007 завершил development-smoke, а не зафиксированный эксперимент с 64 pocket i. Checkpoint 3A проверяет только доставку и ранжирование публичных карточек. 64 логических pocket i — это не 64 независимо обученные модели."
   },
   "topology": {
     "logical_pocket_i": 64,
@@ -60,7 +60,8 @@
     {"id": 0, "name": "public_design_and_topology", "status": "approved"},
     {"id": 1, "name": "locked_world_capabilities_tasks_and_expected_evidence", "status": "approved"},
     {"id": 2, "name": "three_task_yukabox_smoke", "status": "generation_complete_owner_review_pending"},
-    {"id": 3, "name": "same_smoke_split_across_two_devices", "status": "not_started"},
+    {"id": "3A", "name": "physical_exact_question_and_attention_smoke", "status": "complete"},
+    {"id": "3B", "name": "same_model_smoke_split_across_two_devices", "status": "not_started"},
     {"id": 4, "name": "locked_thirty_task_run", "status": "not_started"},
     {"id": 5, "name": "owner_audit_and_public_result", "status": "not_started"}
   ]
