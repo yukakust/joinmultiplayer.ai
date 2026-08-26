@@ -49,6 +49,9 @@ consume indefinitely. Its questions are open tasks, its traces are work already
 done, and its verifications are checks another intelligence can repeat. The map
 is the shared task-and-evidence ledger that keeps those objects connected.
 
+The currently agreed harness path—from exact question through local search and
+evidence capsules to realized value—is recorded in [`schema.md`](schema.md).
+
 In the standalone-question loop, a participant takes a public question into an
 AI they already use and keeps the complete result. The deployed v0.1 form opens
 answer-type tasks only, so every offered task can return that result as a linked
