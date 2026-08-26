@@ -88,7 +88,11 @@ only after owner review.
 3A. Exact-question delivery and public-card attention on four processes across
     yukabox and MacBook — complete and owner-published. No Qwen, memory, RAG,
     training, or answers.
-3B. The same three-question model smoke split between yukabox and MacBook.
+3B. Local Knowledge Offer: six locked questions, four small permitted local
+    libraries on the same two devices, three search lanes, mandatory terminal
+    receipts, and evidence capsules — locked before installation or search.
+    No merging or final answers.
+3C. The same three-question model smoke split between yukabox and MacBook.
 4. Locked 30-task run.
 5. Owner audit and public result.
 

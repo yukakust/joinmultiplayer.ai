@@ -4119,7 +4119,7 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
@@ -4130,6 +4130,7 @@ async function loadE007() {
       fetch("/experiments/E007/luna-judge-3-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/attention-protocol-v0.1.json", { cache: "no-store" }),
       fetch("/api/public/attention.json", { cache: "no-store" }),
+      fetch("/experiments/E007/local-offer-protocol-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
@@ -4140,6 +4141,7 @@ async function loadE007() {
     const lunaJudges = await Promise.all([judge1Response, judge2Response, judge3Response].map((response) => response.ok ? response.json() : null));
     const attention = attentionResponse.ok ? await attentionResponse.json() : null;
     const attentionRuns = attentionRunsResponse.ok ? await attentionRunsResponse.json() : null;
+    const localOffer = localOfferResponse.ok ? await localOfferResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4208,7 +4210,9 @@ async function loadE007() {
       const rows = ranked.map((node, index) => `<article><span>${index + 1} · ${escapeHTML(node.card_id)} · ${escapeHTML(node.device_label)}</span><h2>${Number(node.response.whole_text_vector).toFixed(3)}</h2><p>${localized({ en: "whole-text vector", ru: "вектор всего текста" })} · ${Number(node.response.exact_terms).toFixed(3)} ${localized({ en: "exact terms", ru: "точные слова" })}</p><small>${escapeHTML((node.response.matched_terms || []).join(" · ") || localized({ en: "no exact words", ru: "нет точных слов" }))}</small></article>`).join("");
       return `<section class="e007-luna-panel"><div class="flow-step">${escapeHTML(run.room_id)} · ${localized({ en: "FOUR PHYSICAL RECEIPTS", ru: "ЧЕТЫРЕ ФИЗИЧЕСКИХ ОТВЕТА" })}</div><h2>${escapeHTML(run.question)}</h2><div class="e007-device-grid">${rows}</div><p class="control-warning">${escapeHTML(run.claim_boundary)}</p><div class="actions"><a class="quiet-link" href="/api/public/${escapeHTML(run.room_id)}">RAW RESULT JSON ↗</a></div></section>`;
     }).join("") : "";
+    const localOfferMarkup = localOffer ? `<section id="e007-local-offer" class="e007-world-review"><div class="flow-step">CHECKPOINT 3B · ${localized({ en: "LOCKED BEFORE LOCAL SEARCH", ru: "ЗАФИКСИРОВАНО ДО ЛОКАЛЬНОГО ПОИСКА" })}</div><h2>${escapeHTML(localized(localOffer.title))}</h2><p>${escapeHTML(localized(localOffer.plain_language))}</p><div class="e007-device-grid">${localOffer.search_lanes.map((lane) => `<article><span>${escapeHTML(lane.id)}</span><h2>${escapeHTML(localized(lane.name))}</h2><p>${lane.learned ? localized({ en: "small search model", ru: "маленькая поисковая модель" }) : localized({ en: "transparent baseline", ru: "прозрачный baseline" })}</p></article>`).join("")}</div><h2>${localized({ en: "Six questions and the sealed answer key", ru: "Шесть вопросов и заранее записанные правильные состояния" })}</h2><div class="e005-tasks">${localOffer.questions.map((question, index) => `<details class="e005-task" ${index === 0 ? "open" : ""}><summary><b>${escapeHTML(question.id)}</b><span>${escapeHTML(question.question)}</span></summary><div class="e005-task-body"><p>${escapeHTML(question.purpose)}</p><div class="e007-answer-grid">${Object.entries(question.expected).map(([card, state]) => `<article><span>${escapeHTML(card)}</span><strong>${escapeHTML(state)}</strong></article>`).join("")}</div><small>${localized({ en: "Required sources", ru: "Нужные источники" })}: ${escapeHTML(question.required_sources.join(" · ") || localized({ en: "none", ru: "нет" }))}</small></div></details>`).join("")}</div><p class="control-warning">${localized({ en: "No merge and no final answer. Stored synthetic capsules make this a retrieval, policy, receipt, and evidence-transport test—not automatic extraction from messy personal memory.", ru: "Без merge и итогового ответа. Синтетические капсулы уже лежат рядом с источниками: это тест поиска, политики, квитанций и передачи доказательств, а не автоматического извлечения из беспорядочной личной памяти." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/local-offer-protocol-v0.1.json">LOCKED PROTOCOL JSON ↗</a></div></section>` : "";
     target.querySelector(".experiment-loading").outerHTML = `
+      ${localOfferMarkup}
       ${attentionMarkup}
       ${attentionResultsMarkup}
       ${smokeResultsMarkup}
@@ -4220,7 +4224,7 @@ async function loadE007() {
       <section class="e007-world-review"><div class="flow-step">${localized({ en: "CHECKPOINT 1 · LOOK BEFORE MODELS RUN", ru: "CHECKPOINT 1 · ПОСМОТРИТЕ ДО ЗАПУСКА МОДЕЛЕЙ" })}</div><div class="e005-metrics"><article><span>LOGICAL POCKET I</span><strong>${world.pockets.length}</strong></article><article><span>LOCAL DOCUMENTS</span><strong>${world.documents.length}</strong></article><article><span>LOCKED QUESTIONS</span><strong>${world.tasks.length}</strong></article></div><h2>${localized({ en: "Every pocket i", ru: "Каждый pocket i" })}</h2><div class="e007-pocket-grid">${pocketCards}</div><h2>${localized({ en: "Every question, answer, and source", ru: "Каждый вопрос, ответ и источник" })}</h2><div class="e005-tasks">${taskCards}</div></section>
       <section class="e007-gates"><div class="flow-step">${localized({ en: "PROPOSED SUCCESS GATES", ru: "ПРЕДЛОЖЕННЫЕ ВОРОТА УСПЕХА" })}</div><ul>${gates}</ul></section>
       <section class="e007-checkpoints"><div class="flow-step">${localized({ en: "CHECKPOINTS", ru: "КОНТРОЛЬНЫЕ ТОЧКИ" })}</div><ol>${checkpoints}</ol></section>
-      <section class="e005-gate4-result-verdict"><span>${localized({ en: "CURRENT DECISION", ru: "ТЕКУЩЕЕ РЕШЕНИЕ" })}</span><h2>${localized({ en: "Delivery works. Next we must learn whether useful knowledge answers.", ru: "Доставка работает. Дальше проверяем, ответит ли полезное знание." })}</h2><p>${localized(design.hypothesis)}</p></section>
+      <section class="e005-gate4-result-verdict"><span>${localized({ en: "CURRENT DECISION", ru: "ТЕКУЩЕЕ РЕШЕНИЕ" })}</span><h2>${localized({ en: "Checkpoint 3B is locked. Install local libraries, then search.", ru: "Checkpoint 3B зафиксирован. Теперь ставим локальные библиотеки и запускаем поиск." })}</h2><p>${localized(design.hypothesis)}</p></section>
       <div class="actions"><a class="quiet-link" href="/experiments/E007/smoke-protocol-v0.1.json">LOCKED SMOKE JSON ↗</a><a class="quiet-link" href="/experiments/E007/world-v0.1.json">LOCKED WORLD JSON ↗</a><a class="quiet-link" href="/experiments/E007/design-v0.1.json">DESIGN JSON ↗</a><a class="quiet-link" href="/experiment/e006/">E006 ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").textContent = localized({ en: "E007 design could not be loaded.", ru: "Не удалось загрузить чертёж E007." });

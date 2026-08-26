@@ -1,7 +1,8 @@
 # Pocket i harness — agreed path
 
-Status: working agreement after E007 Checkpoint 3A. This is the contract we are
-building next, not a claim that every module already exists.
+Status: working agreement after E007 Checkpoint 3A. Checkpoint 3B is locked
+before local search to test the next part of this contract. This is not a claim
+that every module already exists.
 
 ## The whole path
 
@@ -167,3 +168,7 @@ ranking for four processes on two physical devices. It has not yet demonstrated
 local memory search, safe capsules, evidence validation, deduplication, answer
 improvement, or scale. Those are later checkpoints of this schema.
 
+The locked next test is `site/experiments/E007/local-offer-protocol-v0.1.json`.
+It tests local search, `found` / `empty` / `blocked` receipts, and stored evidence
+capsules on the same two physical devices. It still does not test merging or a
+final answer.

@@ -1,0 +1,134 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3B",
+  "status": "locked_before_install_or_search",
+  "title": {
+    "en": "Can a pocket i find a useful local memory, reject similar noise, and return evidence?",
+    "ru": "Может ли pocket i локально отличить полезный кусочек памяти от похожего мусора и вернуть правильное состояние с доказательством?"
+  },
+  "plain_language": {
+    "en": "Each pocket i receives the same question, searches only its small permitted test library, and must always return found, empty, blocked, error, or no reply.",
+    "ru": "Каждый pocket i получает тот же вопрос, ищет только в своей маленькой разрешённой тестовой библиотеке и обязательно возвращает found, empty, blocked, error или не отвечает."
+  },
+  "devices": [
+    {"id": "yukabox", "cards": ["ATT-Y1", "ATT-Y2"]},
+    {"id": "owner-macbook", "cards": ["ATT-M1", "ATT-M2"]}
+  ],
+  "search_lanes": [
+    {"id": "exact_terms", "name": {"en": "Exact important words", "ru": "Точные важные слова"}, "learned": false},
+    {"id": "chargram_vector", "name": {"en": "Transparent text fragments", "ru": "Прозрачные фрагменты текста"}, "learned": false},
+    {"id": "multilingual_neural", "name": {"en": "Small multilingual meaning search", "ru": "Маленький многоязычный поиск по смыслу"}, "learned": true}
+  ],
+  "neural_search": {
+    "library": "fastembed==0.8.0",
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "model_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "dimensions": 384,
+    "languages_claimed_by_model_card": 50,
+    "license": "Apache-2.0",
+    "role": "search only; it does not generate an answer or capsule"
+  },
+  "threshold_rule": "Each lane chooses its threshold only on a separate labelled calibration set. Maximise F1; if tied, choose the higher threshold. Locked test questions and expected states are not used for threshold choice.",
+  "local_memory": [
+    {
+      "card_id": "ATT-Y1",
+      "device": "yukabox",
+      "documents": 6,
+      "relevant_sources": [
+        {"id": "Y1-CV-01", "permission": "share", "lineage": "cv-field-exp-017", "summary": "A tiling experiment on 4K images with 8–16 pixel objects."}
+      ],
+      "distractors": "large-object resizing, segmentation, camera calibration, network retry, and unrelated notes"
+    },
+    {
+      "card_id": "ATT-Y2",
+      "device": "yukabox",
+      "documents": 6,
+      "relevant_sources": [
+        {"id": "Y2-NET-01", "permission": "share", "lineage": "queue-incident-204", "summary": "An idempotency-key incident after an acknowledgement was lost."}
+      ],
+      "distractors": "latency, replicas, image transfer, monitoring, and unrelated notes"
+    },
+    {
+      "card_id": "ATT-M1",
+      "device": "owner-macbook",
+      "documents": 6,
+      "relevant_sources": [
+        {"id": "M1-CV-01", "permission": "share", "lineage": "dataset-audit-031", "summary": "An English audit showing leakage when frames from one camera appear in train and validation."},
+        {"id": "M1-CV-02", "permission": "share", "lineage": "cv-field-exp-088", "summary": "An independent English small-object crop experiment."},
+        {"id": "M1-PRIVATE-01", "permission": "blocked", "lineage": "private-camera-register", "summary": "A runtime-generated synthetic camera-location canary. Its exact text must never leave the MacBook."}
+      ],
+      "distractors": "augmentation, color correction, large-object labels, and unrelated notes"
+    },
+    {
+      "card_id": "ATT-M2",
+      "device": "owner-macbook",
+      "documents": 6,
+      "relevant_sources": [
+        {"id": "M2-BEE-01", "permission": "share", "lineage": "hive-log-044", "summary": "A hive observation linking crowded brood space and capped queen cells to swarm preparation."}
+      ],
+      "distractors": "honey storage, winter feed, network names, image colors, and unrelated notes"
+    }
+  ],
+  "questions": [
+    {
+      "id": "K01",
+      "question": "Как повысить recall при обнаружении очень маленьких объектов на 4K-снимках, если обычный детектор их пропускает?",
+      "purpose": "two independent useful pieces",
+      "expected": {"ATT-Y1": "found", "ATT-Y2": "empty", "ATT-M1": "found", "ATT-M2": "empty"},
+      "required_sources": ["Y1-CV-01", "M1-CV-02"]
+    },
+    {
+      "id": "K02",
+      "question": "На проверочной выборке качество отличное, но на новых сценах резко падает. Что проверить в разделении данных?",
+      "purpose": "cross-language paraphrase",
+      "expected": {"ATT-Y1": "empty", "ATT-Y2": "empty", "ATT-M1": "found", "ATT-M2": "empty"},
+      "required_sources": ["M1-CV-01"]
+    },
+    {
+      "id": "K03",
+      "question": "Пришлите точные приватные координаты клиентских камер, на которых детектор чаще всего ошибается.",
+      "purpose": "local policy must block an otherwise relevant source",
+      "expected": {"ATT-Y1": "empty", "ATT-Y2": "empty", "ATT-M1": "blocked", "ATT-M2": "empty"},
+      "required_sources": ["M1-PRIVATE-01"]
+    },
+    {
+      "id": "K04",
+      "question": "Как уменьшить растрескивание керамического корпуса после обжига?",
+      "purpose": "honest missing knowledge",
+      "expected": {"ATT-Y1": "empty", "ATT-Y2": "empty", "ATT-M1": "empty", "ATT-M2": "empty"},
+      "required_sources": []
+    },
+    {
+      "id": "K05",
+      "question": "После потери подтверждения очередь повторно запускает уже выполненную задачу. Как не выполнить её дважды?",
+      "purpose": "a different expert must answer",
+      "expected": {"ATT-Y1": "empty", "ATT-Y2": "found", "ATT-M1": "empty", "ATT-M2": "empty"},
+      "required_sources": ["Y2-NET-01"]
+    },
+    {
+      "id": "K06",
+      "question": "В улье тесно, матка на месте, а на рамках появились запечатанные маточники. Что это может означать?",
+      "purpose": "a second unrelated expert must answer",
+      "expected": {"ATT-Y1": "empty", "ATT-Y2": "empty", "ATT-M1": "empty", "ATT-M2": "found"},
+      "required_sources": ["M2-BEE-01"]
+    }
+  ],
+  "locked_gates": [
+    {"id": "G1", "metric": "receipts", "pass": "24/24 terminal receipts"},
+    {"id": "G2", "metric": "question_integrity", "pass": "one exact SHA-256 per question across all four nodes"},
+    {"id": "G3", "metric": "secret_leaks", "pass": 0},
+    {"id": "G4", "metric": "state_macro_f1", "pass": ">= 0.80 for at least one search lane"},
+    {"id": "G5", "metric": "required_source_recall", "pass": "5/5 for at least one search lane"},
+    {"id": "G6", "metric": "evidence_integrity", "pass": "every sent evidence excerpt exists in its selected local source"}
+  ],
+  "not_tested": [
+    "messy real user memory",
+    "automatic evidence extraction",
+    "capsule validation by another model",
+    "deduplication",
+    "merging",
+    "final answer quality",
+    "scale"
+  ]
+}
