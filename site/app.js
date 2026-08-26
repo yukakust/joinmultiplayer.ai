@@ -2852,6 +2852,10 @@ function e005Gate5CShell() {
   return `<section class="flow-shell e005-gate5c-page"><div class="flow-step">E005 · GATE 5C · ${localized({ en: "LOCKED DESIGN", ru: "ЗАМОРОЖЕННЫЙ ЧЕРТЁЖ" })}</div><h1>${localized({ en: "Two thoughts. Two separate shelves.", ru: "Две мысли. Две отдельные полки." })}</h1><p class="contribution-intro">${localized({ en: "The personal tracks stay the same. We only change how the shared Qwen receives their hidden additions.", ru: "Личные треки остаются прежними. Мы меняем только способ, которым общая Qwen получает их скрытые добавки." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e006Shell() {
+  return `<section class="flow-shell e006-page"><div class="flow-step">E006 · ${localized({ en: "LOCKED BEFORE RUN", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h1>${localized({ en: "Can small messages join scattered knowledge?", ru: "Могут ли короткие сообщения соединить разбросанные знания?" })}</h1><p class="contribution-intro">${localized({ en: "Ten English questions. Eight pocket i. No model has run yet.", ru: "Десять вопросов на английском. Восемь pocket i. Модели ещё не запускались." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -4053,6 +4057,35 @@ async function loadE005Gate5CResults() {
   }
 }
 
+async function loadE006() {
+  const target = document.querySelector(".e006-page");
+  if (!target) return;
+  try {
+    const [worldResponse, protocolResponse] = await Promise.all([
+      fetch("/experiments/E006/world-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E006/protocol-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!worldResponse.ok || !protocolResponse.ok) throw new Error("E006 locked design unavailable");
+    const world = await worldResponse.json();
+    const protocol = await protocolResponse.json();
+    const documents = new Map(world.documents.map(document => [document.id, document]));
+    const pockets = new Map(world.pockets.map(pocket => [pocket.id, pocket]));
+    const questionCards = world.questions.map((question, index) => {
+      const sourceCards = question.documents.map(documentId => {
+        const document = documents.get(documentId);
+        const pocket = pockets.get(document.owner);
+        const required = question.required_sources.includes(documentId);
+        return `<article class="${required ? "is-correct" : "is-wrong"}"><span>${required ? localized({ en: "NEEDED", ru: "НУЖНО" }) : localized({ en: "DISTRACTOR", ru: "ПОХОЖЕ, НО НЕ ТО" })} · ${escapeHTML(pocket.name)} (${escapeHTML(pocket.id)})</span><strong>${escapeHTML(document.id)}</strong><p>${escapeHTML(document.text)}</p></article>`;
+      }).join("");
+      return `<details class="e005-task" ${index === 0 ? "open" : ""}><summary><b>${escapeHTML(question.id)}</b><span>${escapeHTML(question.question)}</span></summary><div class="e005-task-body"><div class="e005-claim-grid"><article><span>${localized({ en: "EXPECTED CAUSE", ru: "НУЖНАЯ ПРИЧИНА" })}</span><strong>${escapeHTML(question.expected_cause)}</strong></article><article><span>${localized({ en: "EXPECTED ACTION", ru: "НУЖНОЕ ДЕЙСТВИЕ" })}</span><strong>${escapeHTML(question.expected_action)}</strong></article></div><div class="e005-gate4-result-answers">${sourceCards}</div></div></details>`;
+    }).join("");
+    const pocketCards = world.pockets.map(pocket => `<article><span>${escapeHTML(pocket.id)}</span><h2>${escapeHTML(pocket.name)}</h2><p>${escapeHTML(pocket.role)}</p></article>`).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-lessons-status"><strong>${localized({ en: "FROZEN BEFORE THE FIRST ANSWER", ru: "ЗАМОРОЖЕНО ДО ПЕРВОГО ОТВЕТА" })}</strong><p>${localized({ en: protocol.hypothesis, ru: "Если ни один pocket i не знает полного ответа, минимальный понятный harness должен соединить распределённые доказательства не хуже центрального RAG и лучше свободных сообщений." })}</p></section><section class="e005-gate4-result-verdict"><span>${localized({ en: "WHAT CHANGES", ru: "ЧТО МЕНЯЕТСЯ" })}</span><h2>${localized({ en: "Only the way knowledge travels.", ru: "Только способ передачи знаний." })}</h2><p>${localized({ en: "The same frozen Qwen, the same three selected pocket i, and the same three documents are used in every condition.", ru: "Во всех вариантах используются одна и та же замороженная Qwen, те же три выбранных pocket i и те же три документа." })}</p></section><div class="e005-gate4-training-cards"><article><span>1 · CENTRAL RAG</span><h2>${localized({ en: "One shared library", ru: "Одна общая библиотека" })}</h2><p>${localized({ en: "Qwen receives the three raw documents together.", ru: "Qwen получает три исходных документа вместе." })}</p></article><article><span>2 · FREE SWARM</span><h2>${localized({ en: "Three free-form messages", ru: "Три свободных сообщения" })}</h2><p>${localized({ en: "Each pocket reads only its own document and writes whatever it wants.", ru: "Каждый pocket читает только свой документ и пишет как хочет." })}</p></article><article><span>3 · MINIMAL HARNESS</span><h2>${localized({ en: "Claim + quote + source", ru: "Утверждение + цитата + источник" })}</h2><p>${localized({ en: "Unsupported claims are rejected before the final answer.", ru: "Утверждения без доказательства отбрасываются до итогового ответа." })}</p></article></div><section class="e005-gate4-current-question"><h2>${localized({ en: "THE SMALLEST MESSAGE", ru: "САМОЕ МАЛЕНЬКОЕ СООБЩЕНИЕ" })}</h2><div><span>FOUND</span><p>claim · source · exact quote</p></div><div><span>NOT FOUND</span><p>what is still missing</p></div></section><section class="e005-task-section"><div class="flow-step">8 POCKET I</div><div class="e005-gate4-training-cards">${pocketCards}</div></section><section class="e005-task-section"><div class="flow-step">10 ENGLISH QUESTIONS · ${localized({ en: "OPEN BEFORE RUN", ru: "ОТКРЫТЫ ДО ЗАПУСКА" })}</div><div class="e005-tasks">${questionCards}</div></section><section class="e005-gate4-result-verdict"><span>${localized({ en: "DEVELOPMENT SIGNAL", ru: "СИГНАЛ УСПЕХА" })}</span><h2>${localized({ en: "Harness: at least 7/10 complete answers.", ru: "Harness: минимум 7/10 полных ответов." })}</h2><p>${localized({ en: "It must beat free text by at least two answers, stay within one of central RAG, and ground at least eight answers in the required sources.", ru: "Он должен обогнать свободные сообщения минимум на два ответа, отстать от центрального RAG не больше чем на один и подтвердить источниками минимум восемь ответов." })}</p></section><p class="control-warning">${escapeHTML(protocol.claim_boundary)}</p><div class="actions"><a class="quiet-link" href="/experiments/E006/world-v0.1.json">WORLD JSON ↗</a><a class="quiet-link" href="/experiments/E006/protocol-v0.1.json">LOCKED PROTOCOL JSON ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
+  }
+}
+
 async function loadE005() {
   const target = document.querySelector(".e005-page");
   if (!target) return;
@@ -4998,6 +5031,10 @@ function render() {
     document.title = `${localized({ en: "Two-shelf answers", ru: "Ответы двух полок" })} — i`;
     app.innerHTML = withLanguage(e005Gate5CResultsShell());
     loadE005Gate5CResults();
+  } else if (path === "experiment/e006") {
+    document.title = `E006 — pocket i`;
+    app.innerHTML = withLanguage(e006Shell());
+    loadE006();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

@@ -1,0 +1,72 @@
+{
+  "experiment_id": "E006",
+  "version": "0.1",
+  "status": "locked_before_run",
+  "language": "en",
+  "world": "The Luma Field Network",
+  "fictional": true,
+  "created_after_base_model_selection": true,
+  "pockets": [
+    {"id": "P01", "name": "Kite", "role": "field maintenance"},
+    {"id": "P02", "name": "Tide", "role": "document version analysis"},
+    {"id": "P03", "name": "Ember", "role": "relay diagnostics"},
+    {"id": "P04", "name": "Moss", "role": "community maintenance reports"},
+    {"id": "P05", "name": "Orbit", "role": "archived operating notes"},
+    {"id": "P06", "name": "Lumen", "role": "pressure and sensor analysis"},
+    {"id": "P07", "name": "Coral", "role": "safety procedures"},
+    {"id": "P08", "name": "Flint", "role": "evidence and provenance audit"}
+  ],
+  "documents": [
+    {"id": "E6-K7-DIAG", "owner": "P03", "text": "Kest-7 diagnostic card: an amber pulse that begins after a thermal descent identifies alignment drift."},
+    {"id": "E6-K7-SAFE", "owner": "P07", "text": "Kest-7 safety rule: when alignment drift is confirmed, do not restart the unit; run Niv-3 calibration."},
+    {"id": "E6-K7-NOISE", "owner": "P04", "text": "Community note: one amber blink immediately after power-on can sometimes be cleared by restarting once."},
+
+    {"id": "E6-O4-DIAG", "owner": "P06", "text": "Orin-4 sensor guide: a violet ring after a pressure surge, followed by pressure loss, identifies an outer seal breach."},
+    {"id": "E6-O4-SAFE", "owner": "P07", "text": "Orin-4 safety rule: for an outer seal breach, isolate the line before any inspection."},
+    {"id": "E6-O4-NOISE", "owner": "P01", "text": "Field note: a violet dot with stable pressure can be logged and watched without isolating the line."},
+
+    {"id": "E6-V2-DIAG", "owner": "P06", "text": "Vela-2 diagnostic guide: a copper-grey mesh while intake remains active identifies filter F9 saturation."},
+    {"id": "E6-V2-SAFE", "owner": "P07", "text": "Vela-2 safety rule: for F9 saturation, never bypass the filter; stop the intake and replace F9."},
+    {"id": "E6-V2-NOISE", "owner": "P04", "text": "Unsigned tip: a blue-grey Vela-2 mesh after shutdown may clear after ten minutes of bypass."},
+
+    {"id": "E6-A9-DIAG", "owner": "P02", "text": "Aster-9 diagnostic card: a pale crystalline film appearing after a cold start identifies auxiliary-vent icing."},
+    {"id": "E6-A9-SAFE", "owner": "P07", "text": "Aster-9 safety rule: for auxiliary-vent icing, keep the vent closed and run thaw cycle T4."},
+    {"id": "E6-A9-NOISE", "owner": "P05", "text": "Archive note: silver dust on Aster-9 after a warm restart calls for opening the auxiliary vent."},
+
+    {"id": "E6-M3-DIAG", "owner": "P03", "text": "Mira-3 diagnostic guide: three brief blue flashes immediately after load transfer identify phase inversion."},
+    {"id": "E6-M3-SAFE", "owner": "P07", "text": "Mira-3 safety rule: for phase inversion, isolate the north sector first, then apply correction vector six."},
+    {"id": "E6-M3-NOISE", "owner": "P06", "text": "Mira-3 sensor note: one long blue glow before load transfer indicates a harmless readiness check."},
+
+    {"id": "E6-R5-DIAG", "owner": "P05", "text": "Rill-5 diagnostic overview: a steady white tone without a spectrum trace is ambiguous between coolant resonance and clock drift."},
+    {"id": "E6-R5-SAFE", "owner": "P08", "text": "Rill-5 evidence rule: when those two causes remain unresolved, do not intervene; obtain a spectrum trace first."},
+    {"id": "E6-R5-NOISE", "owner": "P04", "text": "Forum comment: a pulsing white tone with a confirmed coolant spike usually clears after one reset."},
+
+    {"id": "E6-S6-DIAG", "owner": "P06", "text": "Sable-6 diagnostic card: alternating green and red bands immediately after a coolant refill identify trapped air in loop B2."},
+    {"id": "E6-S6-SAFE", "owner": "P01", "text": "Sable-6 maintenance rule: for trapped air in loop B2, stop the pump and bleed loop B2 before restarting."},
+    {"id": "E6-S6-NOISE", "owner": "P04", "text": "Community note: a steady green band during a normal refill means the pump should remain running."},
+
+    {"id": "E6-N8-DIAG", "owner": "P03", "text": "Noma-8 diagnostic card: a double amber arc immediately after firmware synchronisation identifies clock desynchronisation."},
+    {"id": "E6-N8-SAFE", "owner": "P02", "text": "Noma-8 recovery rule: for clock desynchronisation, return to offline mode and then run Q4 synchronisation."},
+    {"id": "E6-N8-NOISE", "owner": "P05", "text": "Old Noma-8 note: a single amber arc before firmware synchronisation can be ignored."},
+
+    {"id": "E6-T2-DIAG", "owner": "P06", "text": "Tern-2 diagnostic card: a low silver hum beginning after a dust storm identifies abrasion in intake sleeve S3."},
+    {"id": "E6-T2-SAFE", "owner": "P01", "text": "Tern-2 maintenance rule: for S3 intake abrasion, shut the intake and replace sleeve S3 before operation."},
+    {"id": "E6-T2-NOISE", "owner": "P04", "text": "Field rumour: a high silver whistle on a clean day may disappear if intake speed is increased."},
+
+    {"id": "E6-L5-DIAG", "owner": "P03", "text": "Lyra-5 diagnostic guide: a black ring followed by two teal pulses after remote wake identifies relay inversion."},
+    {"id": "E6-L5-SAFE", "owner": "P07", "text": "Lyra-5 safety rule: for relay inversion, disconnect the remote link and reset relay R8 locally."},
+    {"id": "E6-L5-NOISE", "owner": "P05", "text": "Archive note: two teal pulses without a black ring during local wake are a normal link test."}
+  ],
+  "questions": [
+    {"id": "E6-Q01", "question": "After Kest-7 cooled, it began giving a repeating amber pulse. What happened, and what should the operator do?", "selected_pockets": ["P03", "P07", "P04"], "documents": ["E6-K7-DIAG", "E6-K7-SAFE", "E6-K7-NOISE"], "expected_cause": "The unit has alignment drift.", "expected_action": "Do not restart it; run Niv-3 calibration.", "required_sources": ["E6-K7-DIAG", "E6-K7-SAFE"]},
+    {"id": "E6-Q02", "question": "Orin-4 showed a violet ring just after a pressure surge and is now losing pressure. Diagnose it and name the first safe step.", "selected_pockets": ["P06", "P07", "P01"], "documents": ["E6-O4-DIAG", "E6-O4-SAFE", "E6-O4-NOISE"], "expected_cause": "The outer seal is breached.", "expected_action": "Isolate the line before inspection.", "required_sources": ["E6-O4-DIAG", "E6-O4-SAFE"]},
+    {"id": "E6-Q03", "question": "While Vela-2 was drawing air, its mesh slowly turned copper-grey. What does that mean, and what is the safe response?", "selected_pockets": ["P06", "P07", "P04"], "documents": ["E6-V2-DIAG", "E6-V2-SAFE", "E6-V2-NOISE"], "expected_cause": "Filter F9 is saturated.", "expected_action": "Do not bypass it; stop the intake and replace F9.", "required_sources": ["E6-V2-DIAG", "E6-V2-SAFE"]},
+    {"id": "E6-Q04", "question": "A pale crystal-like coating formed on Aster-9 during a cold start. What is the fault, and how should it be handled?", "selected_pockets": ["P02", "P07", "P05"], "documents": ["E6-A9-DIAG", "E6-A9-SAFE", "E6-A9-NOISE"], "expected_cause": "The auxiliary vent is iced.", "expected_action": "Keep the vent closed and run thaw cycle T4.", "required_sources": ["E6-A9-DIAG", "E6-A9-SAFE"]},
+    {"id": "E6-Q05", "question": "Immediately after a load transfer, Mira-3 flashed blue three times. Identify the event and give the safe correction sequence.", "selected_pockets": ["P03", "P07", "P06"], "documents": ["E6-M3-DIAG", "E6-M3-SAFE", "E6-M3-NOISE"], "expected_cause": "The event is phase inversion.", "expected_action": "Isolate the north sector, then apply correction vector six.", "required_sources": ["E6-M3-DIAG", "E6-M3-SAFE"]},
+    {"id": "E6-Q06", "question": "Rill-5 produces a continuous white tone, but no spectrum trace was captured. What can be concluded, and what should happen next?", "selected_pockets": ["P05", "P08", "P04"], "documents": ["E6-R5-DIAG", "E6-R5-SAFE", "E6-R5-NOISE"], "expected_cause": "The cause is unresolved between coolant resonance and clock drift.", "expected_action": "Do not intervene yet; obtain a spectrum trace first.", "required_sources": ["E6-R5-DIAG", "E6-R5-SAFE"]},
+    {"id": "E6-Q07", "question": "Right after Sable-6 was refilled with coolant, green and red bands began alternating. Diagnose the condition and state the safe procedure.", "selected_pockets": ["P06", "P01", "P04"], "documents": ["E6-S6-DIAG", "E6-S6-SAFE", "E6-S6-NOISE"], "expected_cause": "Air is trapped in loop B2.", "expected_action": "Stop the pump and bleed loop B2 before restarting.", "required_sources": ["E6-S6-DIAG", "E6-S6-SAFE"]},
+    {"id": "E6-Q08", "question": "Noma-8 drew two amber arcs as soon as its firmware sync completed. What fault does this show, and how should it be recovered?", "selected_pockets": ["P03", "P02", "P05"], "documents": ["E6-N8-DIAG", "E6-N8-SAFE", "E6-N8-NOISE"], "expected_cause": "The clocks are desynchronised.", "expected_action": "Return to offline mode, then run Q4 synchronisation.", "required_sources": ["E6-N8-DIAG", "E6-N8-SAFE"]},
+    {"id": "E6-Q09", "question": "After a dust storm, Tern-2 developed a low metallic-silver hum. What is damaged, and what must be done before it runs again?", "selected_pockets": ["P06", "P01", "P04"], "documents": ["E6-T2-DIAG", "E6-T2-SAFE", "E6-T2-NOISE"], "expected_cause": "Intake sleeve S3 is abraded.", "expected_action": "Shut the intake and replace sleeve S3 before operation.", "required_sources": ["E6-T2-DIAG", "E6-T2-SAFE"]},
+    {"id": "E6-Q10", "question": "Lyra-5 woke remotely, showed a black ring, and then emitted two teal pulses. Diagnose the event and give the safe recovery steps.", "selected_pockets": ["P03", "P07", "P05"], "documents": ["E6-L5-DIAG", "E6-L5-SAFE", "E6-L5-NOISE"], "expected_cause": "The event is relay inversion.", "expected_action": "Disconnect the remote link and reset relay R8 locally.", "required_sources": ["E6-L5-DIAG", "E6-L5-SAFE"]}
+  ]
+}
