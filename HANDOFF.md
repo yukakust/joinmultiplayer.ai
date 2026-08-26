@@ -215,6 +215,21 @@ switch translates the whole review but must not change matrix correctness. Gate
 3 method labels must continue to state that all five use the same frozen base
 and that no DoRA or fine-tuning has occurred.
 
+## E007 harness MVP
+
+E007 is the current design checkpoint at `/experiment/e007/`. It proposes 64
+logical pocket i split across yukabox and the owner's MacBook. Each physical
+device will use one shared model runtime while every logical i keeps a separate
+identity, policy, document store, source lineage, and audit trail. This is a
+distributed-knowledge harness test, not a claim that 64 independently trained
+models exist.
+
+The public source of truth is `/experiments/E007/design-v0.1.json`; the detailed
+operator protocol is `experiments/E007-harness-mvp/PROTOCOL.md`. Checkpoint 0
+contains design only: no fictional world, question, answer, inference, or result
+exists. Do not generate the world or run a model until the owner approves this
+checkpoint.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

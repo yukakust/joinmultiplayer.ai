@@ -2856,6 +2856,10 @@ function e006Shell() {
   return `<section class="flow-shell e006-page"><div class="flow-step">E006 · ${localized({ en: "LOCKED BEFORE RUN", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h1>${localized({ en: "Can small messages join scattered knowledge?", ru: "Могут ли короткие сообщения соединить разбросанные знания?" })}</h1><p class="contribution-intro">${localized({ en: "Ten English questions. Eight pocket i. No model has run yet.", ru: "Десять вопросов на английском. Восемь pocket i. Модели ещё не запускались." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e007Shell() {
+  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 0 · ${localized({ en: "DESIGN ONLY", ru: "ТОЛЬКО ЧЕРТЁЖ" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "First we lock what the harness must do. No model has run.", ru: "Сначала фиксируем, что обязан делать harness. Модели ещё не запускались." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -4111,6 +4115,39 @@ async function loadE006() {
   }
 }
 
+async function loadE007() {
+  const target = document.querySelector(".e007-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("E007 design unavailable");
+    const design = await response.json();
+    const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
+    const modules = design.modules.map((module) => `<article><span>${escapeHTML(module.id)}</span><h2>${escapeHTML(module.name)}</h2><p>${escapeHTML(localized(module.purpose))}</p></article>`).join("");
+    const familyLabels = [
+      localized({ en: "Join scattered parts", ru: "Собрать разбросанные части" }),
+      localized({ en: "Reject a similar mismatch", ru: "Отбросить похожее, но неподходящее" }),
+      localized({ en: "Keep a supported minority", ru: "Сохранить обоснованное меньшинство" }),
+      localized({ en: "Do not leak a secret", ru: "Не раскрыть секрет" }),
+      localized({ en: "Admit missing knowledge", ru: "Признать нехватку знаний" }),
+    ];
+    const families = design.task_plan.families.map((family, index) => `<article><span>${index + 1}</span><h2>${familyLabels[index]}</h2><p>6 × ${escapeHTML(family)}</p></article>`).join("");
+    const gates = design.proposed_gates.map((gate) => `<li><strong>${escapeHTML(gate.id)}</strong><span>${escapeHTML(gate.metric)}</span><b>${escapeHTML(String(gate.pass))}</b></li>`).join("");
+    const checkpoints = design.checkpoints.map((checkpoint) => `<li><span>${checkpoint.id}</span><p>${escapeHTML(checkpoint.name.replaceAll("_", " "))}</p><b>${escapeHTML(checkpoint.status.replaceAll("_", " "))}</b></li>`).join("");
+    target.querySelector(".experiment-loading").outerHTML = `
+      <section class="e007-boundary"><strong>${localized({ en: "HONEST BOUNDARY", ru: "ЧЕСТНАЯ ГРАНИЦА" })}</strong><p>${localized(design.claim_boundary)}</p></section>
+      <section><div class="flow-step">${localized({ en: "64 LOGICAL · 2 PHYSICAL", ru: "64 ЛОГИЧЕСКИХ · 2 ФИЗИЧЕСКИХ" })}</div><div class="e007-device-grid">${deviceCards}</div><p class="control-warning">${localized({ en: "They are 64 isolated owners of knowledge, not 64 separately trained neural models. Only the routed few execute Qwen for each question.", ru: "Это 64 изолированных владельца знаний, а не 64 отдельно обученные нейросети. Для каждого вопроса Qwen запускают только несколько выбранных router-ом i." })}</p></section>
+      <section><div class="flow-step">${localized({ en: "THE MVP PATH", ru: "ПУТЬ MVP" })}</div><div class="e007-module-grid">${modules}</div></section>
+      <section><div class="flow-step">30 ${localized({ en: "QUESTIONS AFTER YOUR REVIEW", ru: "ВОПРОСОВ ПОСЛЕ ВАШЕЙ ПРОВЕРКИ" })}</div><div class="e007-family-grid">${families}</div></section>
+      <section class="e007-gates"><div class="flow-step">${localized({ en: "PROPOSED SUCCESS GATES", ru: "ПРЕДЛОЖЕННЫЕ ВОРОТА УСПЕХА" })}</div><ul>${gates}</ul></section>
+      <section class="e007-checkpoints"><div class="flow-step">${localized({ en: "CHECKPOINTS", ru: "КОНТРОЛЬНЫЕ ТОЧКИ" })}</div><ol>${checkpoints}</ol></section>
+      <section class="e005-gate4-result-verdict"><span>${localized({ en: "CURRENT DECISION", ru: "ТЕКУЩЕЕ РЕШЕНИЕ" })}</span><h2>${localized({ en: "Approve the design before we create the world.", ru: "Сначала утвердить чертёж. Потом создавать мир." })}</h2><p>${localized(design.hypothesis)}</p></section>
+      <div class="actions"><a class="quiet-link" href="/experiments/E007/design-v0.1.json">DESIGN JSON ↗</a><a class="quiet-link" href="/experiment/e006/">E006 ↗</a></div>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "E007 design could not be loaded.", ru: "Не удалось загрузить чертёж E007." });
+  }
+}
+
 async function loadE005() {
   const target = document.querySelector(".e005-page");
   if (!target) return;
@@ -5060,6 +5097,10 @@ function render() {
     document.title = `E006 — pocket i`;
     app.innerHTML = withLanguage(e006Shell());
     loadE006();
+  } else if (path === "experiment/e007") {
+    document.title = `E007 — pocket i`;
+    app.innerHTML = withLanguage(e007Shell());
+    loadE007();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

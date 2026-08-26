@@ -75,6 +75,7 @@ SPA_ROUTES = {
     "/experiment/e005/gate-5c",
     "/experiment/e005/gate-5c/results",
     "/experiment/e006",
+    "/experiment/e007",
     "/experiment/connector",
     "/experiment/run",
     "/network",

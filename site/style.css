@@ -4866,3 +4866,103 @@ blockquote {
     grid-template-columns: 1fr;
   }
 }
+
+.e007-page {
+  max-width: 1500px;
+}
+
+.e007-boundary {
+  border-left: 4px solid var(--ember);
+  margin: 48px 0 64px;
+  padding: 8px 24px;
+}
+
+.e007-boundary strong,
+.e007-device-grid span,
+.e007-module-grid span,
+.e007-family-grid span {
+  font: 700 13px/1.2 var(--mono);
+  letter-spacing: .08em;
+}
+
+.e007-device-grid,
+.e007-module-grid,
+.e007-family-grid {
+  background: var(--line);
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 1px;
+  margin: 24px 0 48px;
+}
+
+.e007-device-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.e007-module-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.e007-family-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+.e007-device-grid article,
+.e007-module-grid article,
+.e007-family-grid article {
+  background: var(--paper);
+  min-height: 190px;
+  padding: 24px;
+}
+
+.e007-device-grid h2,
+.e007-module-grid h2,
+.e007-family-grid h2 {
+  font-size: clamp(20px, 2vw, 32px);
+  margin: 24px 0 12px;
+}
+
+.e007-device-grid p,
+.e007-module-grid p,
+.e007-family-grid p,
+.e007-device-grid small {
+  color: var(--muted);
+}
+
+.e007-gates ul,
+.e007-checkpoints ol {
+  border-top: 1px solid var(--line);
+  list-style: none;
+  margin: 24px 0 64px;
+  padding: 0;
+}
+
+.e007-gates li,
+.e007-checkpoints li {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 64px 1fr auto;
+  min-height: 64px;
+}
+
+.e007-gates li strong,
+.e007-checkpoints li > span {
+  color: var(--ember);
+}
+
+.e007-gates li b,
+.e007-checkpoints li b {
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1000px) {
+  .e007-module-grid,
+  .e007-family-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
+  .e007-device-grid,
+  .e007-module-grid,
+  .e007-family-grid { grid-template-columns: 1fr; }
+  .e007-gates li,
+  .e007-checkpoints li { grid-template-columns: 40px 1fr; padding: 12px 0; }
+  .e007-gates li b,
+  .e007-checkpoints li b { grid-column: 2; text-align: left; }
+}
