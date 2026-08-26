@@ -72,6 +72,7 @@ def request_json(server: str, path: str, body: dict | None = None) -> dict:
     data = None if body is None else json.dumps(body, ensure_ascii=False).encode("utf-8")
     request = urllib.request.Request(url, data=data)
     request.add_header("Accept", "application/json")
+    request.add_header("User-Agent", "joinmultiplayer-pocket-i-attention/0.1")
     if data is not None:
         request.add_header("Content-Type", "application/json")
     try:
