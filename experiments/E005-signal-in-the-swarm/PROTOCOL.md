@@ -29,7 +29,7 @@ their exact hashes. Missing, duplicated, swapped, and empty shelf controls are
 required. The public frozen design is
 `/experiments/E005/gate-5c-design-v0.1.json`.
 
-Status: **READER TRAINED; LOCKED EXAM NOT RUN**
+Status: **LOCKED EXAM COMPLETE; SEMANTIC AND OWNER REVIEW PENDING**
 
 The first full reader training used all 192 frozen merger lessons and 3,576
 next-token examples. On an identical fixed measurement before and after
@@ -37,6 +37,16 @@ training, next-token accuracy moved 30.4%→86.9% overall, 27.4%→87.3% for the
 cause shelf, and 33.3%→86.5% for the safety shelf. The two personal tracks and
 the shared Qwen stayed unchanged; only 526,336 shelf-reader parameters trained.
 This is a training result, not evidence of transfer to the 32 locked questions.
+
+The locked exam completed all 256 records: 32 questions for each of eight
+conditions. The provisional exact-sentence search found both expected sentences
+in 1/32 answers from the correct separate shelves, 2/32 from the unchanged old
+additive merger, and 0/32 from every missing, duplicated, swapped, or empty
+control. The preregistered literal gates therefore did not pass. This is not yet
+a semantic result: paraphrases can be false negatives, so the raw answers must
+be reviewed for meaning before Gate 5C receives a scientific conclusion. Four
+empty-shelf, four swapped-shelf, one two-cause, and one two-safety answer reached
+the 256-token emergency ceiling; no correct-pair answer did.
 
 Parent: E004  
 Claim class: synthetic development until a separately committed locked run
