@@ -188,6 +188,17 @@ def join_and_search(
         document["text"] = document["text"].replace("{{SYNTHETIC_PRIVATE_CANARY}}", local_canary)
 
     started = time.monotonic()
+    local_questions = [
+        {
+            "id": item["id"],
+            "question": item["question"],
+            "question_hash": hashlib.sha256(item["question"].encode("utf-8")).hexdigest(),
+        }
+        for item in protocol["questions"]
+    ]
+    # Finish every fallible local preparation step before occupying a room slot.
+    # A failed model download must not leave a joined node that can never reply.
+    score_functions, lane_config = build_lane_scores(memory, local_questions, documents, cache_dir)
     joined = request_json(
         server,
         "/api/local-offer/join",
@@ -200,7 +211,6 @@ def join_and_search(
         if expected != question["question"] or digest != question["question_hash"]:
             raise SystemExit("Question changed in transit; no local result was sent")
 
-    score_functions, lane_config = build_lane_scores(memory, joined["questions"], documents, cache_dir)
     results = []
     for question in joined["questions"]:
         for lane in LANES:
@@ -325,4 +335,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

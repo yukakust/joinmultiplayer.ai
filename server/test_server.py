@@ -691,6 +691,25 @@ class SubmissionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "only found"):
                 handler.contribute_local_offer_node(leaked_capsule)
 
+    def test_local_offer_can_rejoin_an_incomplete_slot_after_local_failure(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.create_local_offer_room({"author_mode": "anonymous", "consent": True})
+            join_token = handler.sent[1]["join_token"]
+            request = {"join_token": join_token, "card_id": "ATT-Y1", "device_label": "yukabox"}
+            handler.join_local_offer_room(request)
+            first = handler.sent[1]
+            handler.join_local_offer_room(request)
+            second = handler.sent[1]
+            self.assertEqual(first["node_id"], second["node_id"])
+            self.assertNotEqual(first["node_token"], second["node_token"])
+            with sqlite3.connect(path) as db:
+                self.assertEqual(
+                    db.execute("SELECT COUNT(*) FROM local_offer_nodes").fetchone()[0], 1
+                )
+
     def test_trace_cannot_change_public_question_wording(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "test.sqlite3"

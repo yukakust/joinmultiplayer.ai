@@ -2068,31 +2068,39 @@ First, explain the proposed protocol and its falsification criteria in a concise
                 return
             if room["status"] != "collecting":
                 raise ValueError("local-offer room is closed")
-            if db.execute(
-                "SELECT 1 FROM local_offer_nodes WHERE room_public_id = ? AND card_id = ?",
+            existing = db.execute(
+                "SELECT * FROM local_offer_nodes WHERE room_public_id = ? AND card_id = ?",
                 (room["public_id"], card_id),
-            ).fetchone() is not None:
-                raise ValueError("this local library already joined")
+            ).fetchone()
+            if existing is not None and existing["status"] == "complete":
+                raise ValueError("this local library already completed")
             node_token = secrets.token_urlsafe(32)
             now = utc_now()
-            cursor = db.execute(
-                "INSERT INTO local_offer_nodes "
-                "(room_public_id, token_hash, card_id, device_label, created_at, updated_at) "
-                "VALUES (?, ?, ?, ?, ?, ?)",
-                (
-                    room["public_id"],
-                    token_hash(node_token),
-                    card_id,
-                    device_label,
-                    now,
-                    now,
-                ),
-            )
-            node_id = f"{room['public_id']}-{card_id}"
-            db.execute(
-                "UPDATE local_offer_nodes SET node_public_id = ? WHERE row_id = ?",
-                (node_id, cursor.lastrowid),
-            )
+            if existing is None:
+                cursor = db.execute(
+                    "INSERT INTO local_offer_nodes "
+                    "(room_public_id, token_hash, card_id, device_label, created_at, updated_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    (
+                        room["public_id"],
+                        token_hash(node_token),
+                        card_id,
+                        device_label,
+                        now,
+                        now,
+                    ),
+                )
+                node_id = f"{room['public_id']}-{card_id}"
+                db.execute(
+                    "UPDATE local_offer_nodes SET node_public_id = ? WHERE row_id = ?",
+                    (node_id, cursor.lastrowid),
+                )
+            else:
+                node_id = existing["node_public_id"]
+                db.execute(
+                    "UPDATE local_offer_nodes SET token_hash = ?, updated_at = ? WHERE row_id = ?",
+                    (token_hash(node_token), now, existing["row_id"]),
+                )
         questions = [
             {
                 "id": question_id,
