@@ -47,6 +47,13 @@ EXPERIMENT_EVENT_TYPES = {
     "run_completed",
 }
 RUN_STATUSES = {"created", "running", "completed", "failed", "stopped"}
+ATTENTION_CARD_REVISION = "e007-attention-v0.1"
+ATTENTION_CARDS = {
+    "ATT-Y1": {"device": "yukabox", "name": "Small-object vision"},
+    "ATT-Y2": {"device": "yukabox", "name": "Distributed systems"},
+    "ATT-M1": {"device": "owner-macbook", "name": "Vision data diagnosis"},
+    "ATT-M2": {"device": "owner-macbook", "name": "Beekeeping"},
+}
 SPA_ROUTES = {
     "/experiment",
     "/experiment/answers",
@@ -626,6 +633,47 @@ def init_db(path: Path) -> None:
         db.execute(
             "CREATE INDEX IF NOT EXISTS physical_nodes_room ON physical_nodes(room_public_id, role)"
         )
+        db.execute(
+            """
+            CREATE TABLE IF NOT EXISTS attention_rooms (
+                row_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                public_id TEXT UNIQUE,
+                owner_token_hash TEXT UNIQUE NOT NULL,
+                join_token_hash TEXT UNIQUE NOT NULL,
+                author TEXT NOT NULL,
+                question TEXT NOT NULL,
+                question_hash TEXT NOT NULL,
+                expected_nodes INTEGER NOT NULL DEFAULT 4,
+                status TEXT NOT NULL DEFAULT 'collecting',
+                public INTEGER NOT NULL DEFAULT 0,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )
+            """
+        )
+        db.execute(
+            """
+            CREATE TABLE IF NOT EXISTS attention_nodes (
+                row_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                room_public_id TEXT NOT NULL,
+                node_public_id TEXT UNIQUE,
+                token_hash TEXT UNIQUE NOT NULL,
+                card_id TEXT NOT NULL,
+                device_label TEXT NOT NULL,
+                card_revision TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'joined',
+                response TEXT NOT NULL DEFAULT '{}',
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
+                UNIQUE(room_public_id, card_id),
+                FOREIGN KEY(room_public_id) REFERENCES attention_rooms(public_id)
+            )
+            """
+        )
+        db.execute(
+            "CREATE INDEX IF NOT EXISTS attention_nodes_room "
+            "ON attention_nodes(room_public_id, card_id)"
+        )
         physical_node_columns = {
             row[1] for row in db.execute("PRAGMA table_info(physical_nodes)")
         }
@@ -819,6 +867,14 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                 max_age=2,
             )
             return
+        if path == "/api/public/attention.json":
+            self.send_json(
+                HTTPStatus.OK,
+                {"schema_version": "0.1", "runs": self.public_attention_rooms()},
+                public=True,
+                max_age=2,
+            )
+            return
         if path.startswith("/api/public/"):
             self.get_public(path.removeprefix("/api/public/"))
             return
@@ -869,6 +925,16 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                 self.contribute_physical_node(body)
             elif path == "/api/pocket-network/publish":
                 self.publish_physical_room(body)
+            elif path == "/api/attention/rooms":
+                self.create_attention_room(body)
+            elif path == "/api/attention/join":
+                self.join_attention_room(body)
+            elif path == "/api/attention/respond":
+                self.respond_attention_node(body)
+            elif path == "/api/attention/status":
+                self.attention_status(body)
+            elif path == "/api/attention/publish":
+                self.publish_attention_room(body)
             else:
                 self.send_json(HTTPStatus.NOT_FOUND, {"error": "not found"})
         except ValueError as error:
@@ -1613,6 +1679,263 @@ First, explain the proposed protocol and its falsification criteria in a concise
         response["runs"] = self.public_experiment_runs("E004")
         self.send_json(HTTPStatus.OK, response, public=True, max_age=2)
 
+    def create_attention_room(self, body: object) -> None:
+        if not self.limiter.allow(self.client_key()):
+            self.send_json(HTTPStatus.TOO_MANY_REQUESTS, {"error": "too many rooms; try later"})
+            return
+        if not isinstance(body, dict) or body.get("consent") is not True:
+            raise ValueError("private attention room consent is required")
+        question = clean_text(body.get("question", ""), "question", limit=4_000)
+        author = validate_author(body)
+        owner_token = secrets.token_urlsafe(32)
+        join_token = secrets.token_urlsafe(24)
+        question_hash = hashlib.sha256(question.encode("utf-8")).hexdigest()
+        now = utc_now()
+        with sqlite3.connect(self.db_path) as db:
+            cursor = db.execute(
+                "INSERT INTO attention_rooms "
+                "(owner_token_hash, join_token_hash, author, question, question_hash, "
+                "created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (
+                    token_hash(owner_token),
+                    token_hash(join_token),
+                    author,
+                    question,
+                    question_hash,
+                    now,
+                    now,
+                ),
+            )
+            public_id = f"A{cursor.lastrowid:04d}"
+            db.execute(
+                "UPDATE attention_rooms SET public_id = ? WHERE row_id = ?",
+                (public_id, cursor.lastrowid),
+            )
+        self.send_json(
+            HTTPStatus.CREATED,
+            {
+                "room_id": public_id,
+                "owner_token": owner_token,
+                "join_token": join_token,
+                "question_hash": question_hash,
+                "status": "collecting",
+            },
+        )
+
+    def join_attention_room(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid attention join request")
+        join_token = body.get("join_token")
+        if not isinstance(join_token, str) or len(join_token) > 200:
+            raise ValueError("invalid join token")
+        card_id = clean_text(body.get("card_id", ""), "card id", limit=20).upper()
+        card = ATTENTION_CARDS.get(card_id)
+        if card is None:
+            raise ValueError("unknown locked capability card")
+        device_label = clean_text(body.get("device_label", ""), "device label", limit=40)
+        if device_label != card["device"]:
+            raise ValueError("card belongs to another declared device")
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            room = db.execute(
+                "SELECT * FROM attention_rooms WHERE join_token_hash = ?",
+                (token_hash(join_token),),
+            ).fetchone()
+            if room is None:
+                self.send_json(HTTPStatus.NOT_FOUND, {"error": "attention room not found"})
+                return
+            if room["status"] != "collecting":
+                raise ValueError("attention room is closed")
+            existing = db.execute(
+                "SELECT node_public_id FROM attention_nodes "
+                "WHERE room_public_id = ? AND card_id = ?",
+                (room["public_id"], card_id),
+            ).fetchone()
+            if existing is not None:
+                raise ValueError("this capability card already joined")
+            node_token = secrets.token_urlsafe(32)
+            now = utc_now()
+            cursor = db.execute(
+                "INSERT INTO attention_nodes "
+                "(room_public_id, token_hash, card_id, device_label, card_revision, "
+                "created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (
+                    room["public_id"],
+                    token_hash(node_token),
+                    card_id,
+                    device_label,
+                    ATTENTION_CARD_REVISION,
+                    now,
+                    now,
+                ),
+            )
+            node_id = f"{room['public_id']}-{card_id}"
+            db.execute(
+                "UPDATE attention_nodes SET node_public_id = ? WHERE row_id = ?",
+                (node_id, cursor.lastrowid),
+            )
+        self.send_json(
+            HTTPStatus.CREATED,
+            {
+                "room_id": room["public_id"],
+                "node_id": node_id,
+                "node_token": node_token,
+                "card_id": card_id,
+                "card_revision": ATTENTION_CARD_REVISION,
+                "question": room["question"],
+                "question_hash": room["question_hash"],
+            },
+        )
+
+    def attention_node_access(self, token: object) -> tuple[sqlite3.Row, sqlite3.Row] | None:
+        if not isinstance(token, str) or len(token) > 200:
+            return None
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            node = db.execute(
+                "SELECT * FROM attention_nodes WHERE token_hash = ?", (token_hash(token),)
+            ).fetchone()
+            if node is None:
+                return None
+            room = db.execute(
+                "SELECT * FROM attention_rooms WHERE public_id = ?", (node["room_public_id"],)
+            ).fetchone()
+        return (room, node) if room else None
+
+    def respond_attention_node(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid attention response")
+        access = self.attention_node_access(body.get("node_token"))
+        if access is None:
+            self.send_json(HTTPStatus.NOT_FOUND, {"error": "attention node not found"})
+            return
+        room, node = access
+        if room["status"] != "collecting":
+            raise ValueError("attention room is closed")
+        if body.get("question_hash") != room["question_hash"]:
+            raise ValueError("question changed in transit")
+        vector_score = body.get("whole_text_vector")
+        exact_score = body.get("exact_terms")
+        latency_ms = body.get("latency_ms")
+        if any(
+            not isinstance(value, (int, float)) or isinstance(value, bool) or not math.isfinite(value)
+            for value in (vector_score, exact_score, latency_ms)
+        ):
+            raise ValueError("attention scores and latency must be finite numbers")
+        if not 0 <= float(vector_score) <= 1 or not 0 <= float(exact_score) <= 1:
+            raise ValueError("attention score is outside [0, 1]")
+        if not 0 <= float(latency_ms) <= 600_000:
+            raise ValueError("invalid attention latency")
+        matched_terms = body.get("matched_terms", [])
+        if not isinstance(matched_terms, list) or len(matched_terms) > 40:
+            raise ValueError("invalid matched terms")
+        response = {
+            "question_hash": room["question_hash"],
+            "whole_text_vector": round(float(vector_score), 6),
+            "exact_terms": round(float(exact_score), 6),
+            "matched_terms": [clean_text(item, "matched term", limit=80) for item in matched_terms],
+            "latency_ms": round(float(latency_ms), 3),
+            "client_version": clean_text(body.get("client_version", ""), "client version", limit=40),
+        }
+        now = utc_now()
+        with sqlite3.connect(self.db_path) as db:
+            db.execute("BEGIN IMMEDIATE")
+            db.execute(
+                "UPDATE attention_nodes SET status = 'complete', response = ?, updated_at = ? "
+                "WHERE row_id = ?",
+                (json.dumps(response, ensure_ascii=False, sort_keys=True), now, node["row_id"]),
+            )
+            completed = db.execute(
+                "SELECT COUNT(*) FROM attention_nodes "
+                "WHERE room_public_id = ? AND status = 'complete'",
+                (room["public_id"],),
+            ).fetchone()[0]
+            if completed == room["expected_nodes"]:
+                db.execute(
+                    "UPDATE attention_rooms SET status = 'complete', updated_at = ? WHERE public_id = ?",
+                    (now, room["public_id"]),
+                )
+            else:
+                db.execute(
+                    "UPDATE attention_rooms SET updated_at = ? WHERE public_id = ?",
+                    (now, room["public_id"]),
+                )
+        self.send_json(HTTPStatus.OK, {"ok": True, "node_id": node["node_public_id"]})
+
+    def attention_room_payload(self, room: sqlite3.Row) -> dict:
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            nodes = db.execute(
+                "SELECT node_public_id, card_id, device_label, card_revision, status, response, "
+                "created_at, updated_at FROM attention_nodes WHERE room_public_id = ? ORDER BY card_id",
+                (room["public_id"],),
+            ).fetchall()
+        return {
+            "schema_version": "0.1",
+            "experiment_id": "E007",
+            "checkpoint": "3A",
+            "room_id": room["public_id"],
+            "status": room["status"],
+            "question": room["question"],
+            "question_hash": room["question_hash"],
+            "expected_nodes": room["expected_nodes"],
+            "nodes": [
+                {**dict(node), "response": json.loads(node["response"])} for node in nodes
+            ],
+            "created_at": room["created_at"],
+            "updated_at": room["updated_at"],
+            "claim_boundary": "Attention delivery and card ranking only; no Qwen, memory, RAG, training, or answers.",
+        }
+
+    def attention_status(self, body: object) -> None:
+        if not isinstance(body, dict):
+            raise ValueError("invalid attention status request")
+        token = body.get("owner_token")
+        if not isinstance(token, str) or len(token) > 200:
+            raise ValueError("invalid owner token")
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            room = db.execute(
+                "SELECT * FROM attention_rooms WHERE owner_token_hash = ?", (token_hash(token),)
+            ).fetchone()
+        if room is None:
+            self.send_json(HTTPStatus.NOT_FOUND, {"error": "attention room not found"})
+            return
+        self.send_json(HTTPStatus.OK, self.attention_room_payload(room))
+
+    def publish_attention_room(self, body: object) -> None:
+        if not isinstance(body, dict) or body.get("consent") is not True:
+            raise ValueError("publication consent is required")
+        token = body.get("owner_token")
+        if not isinstance(token, str) or len(token) > 200:
+            raise ValueError("invalid owner token")
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            room = db.execute(
+                "SELECT * FROM attention_rooms WHERE owner_token_hash = ?", (token_hash(token),)
+            ).fetchone()
+            if room is None:
+                self.send_json(HTTPStatus.NOT_FOUND, {"error": "attention room not found"})
+                return
+            if room["status"] != "complete":
+                raise ValueError("all four attention receipts are required before publication")
+            db.execute(
+                "UPDATE attention_rooms SET public = 1, updated_at = ? WHERE public_id = ?",
+                (utc_now(), room["public_id"]),
+            )
+        self.send_json(
+            HTTPStatus.OK,
+            {"ok": True, "public_path": f"/api/public/{room['public_id']}"},
+        )
+
+    def public_attention_rooms(self) -> list[dict]:
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            rooms = db.execute(
+                "SELECT * FROM attention_rooms WHERE public = 1 ORDER BY row_id DESC"
+            ).fetchall()
+        return [self.attention_room_payload(room) for room in rooms]
+
     def get_public(self, public_id: str) -> None:
         public_id = public_id.upper()
         if public_id == "H0001":
@@ -1623,6 +1946,18 @@ First, explain the proposed protocol and its falsification criteria in a concise
             return
         if public_id == "E003":
             self.get_public_e003()
+            return
+        if re.fullmatch(r"A[0-9]{4,}", public_id):
+            with sqlite3.connect(self.db_path) as db:
+                db.row_factory = sqlite3.Row
+                room = db.execute(
+                    "SELECT * FROM attention_rooms WHERE public_id = ? AND public = 1",
+                    (public_id,),
+                ).fetchone()
+            if room is None:
+                self.send_json(HTTPStatus.NOT_FOUND, {"error": "attention run not found"})
+                return
+            self.send_json(HTTPStatus.OK, self.attention_room_payload(room), public=True, max_age=2)
             return
         if public_id == "E004":
             self.get_public_e004()

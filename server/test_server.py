@@ -173,6 +173,96 @@ class SubmissionTests(unittest.TestCase):
                         "SELECT name FROM sqlite_master WHERE name = 'physical_rooms'"
                     ).fetchone()
                 )
+                self.assertIsNotNone(
+                    db.execute(
+                        "SELECT name FROM sqlite_master WHERE name = 'attention_rooms'"
+                    ).fetchone()
+                )
+
+    def test_attention_room_four_node_private_then_public_round_trip(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            question = "Не могу решить CV-задачу с маленькими объектами."
+            handler.create_attention_room(
+                {"question": question, "author_mode": "pseudonym", "pseudonym": "Morrow", "consent": True}
+            )
+            self.assertEqual(handler.sent[0], HTTPStatus.CREATED)
+            room_id = handler.sent[1]["room_id"]
+            owner_token = handler.sent[1]["owner_token"]
+            join_token = handler.sent[1]["join_token"]
+            question_hash = hashlib.sha256(question.encode()).hexdigest()
+            self.assertEqual(handler.sent[1]["question_hash"], question_hash)
+
+            cards = (
+                ("ATT-Y1", "yukabox", 0.8, 0.3),
+                ("ATT-Y2", "yukabox", 0.1, 0.0),
+                ("ATT-M1", "owner-macbook", 0.7, 0.2),
+                ("ATT-M2", "owner-macbook", 0.05, 0.0),
+            )
+            for card_id, device, vector, exact in cards:
+                handler.join_attention_room(
+                    {"join_token": join_token, "card_id": card_id, "device_label": device}
+                )
+                self.assertEqual(handler.sent[0], HTTPStatus.CREATED)
+                node_token = handler.sent[1]["node_token"]
+                self.assertEqual(handler.sent[1]["question"], question)
+                handler.respond_attention_node(
+                    {
+                        "node_token": node_token,
+                        "question_hash": question_hash,
+                        "whole_text_vector": vector,
+                        "exact_terms": exact,
+                        "matched_terms": ["cv"] if exact else [],
+                        "latency_ms": 4.2,
+                        "client_version": "test-v0.1",
+                    }
+                )
+                self.assertEqual(handler.sent[0], HTTPStatus.OK)
+
+            handler.attention_status({"owner_token": owner_token})
+            self.assertEqual(handler.sent[1]["status"], "complete")
+            self.assertEqual(len(handler.sent[1]["nodes"]), 4)
+            self.assertEqual({node["device_label"] for node in handler.sent[1]["nodes"]}, {"yukabox", "owner-macbook"})
+
+            self.assertEqual(handler.public_attention_rooms(), [])
+            handler.publish_attention_room({"owner_token": owner_token, "consent": True})
+            self.assertEqual(handler.sent[0], HTTPStatus.OK)
+            public = handler.public_attention_rooms()
+            self.assertEqual(public[0]["room_id"], room_id)
+            self.assertNotIn("owner_token", public[0])
+            self.assertNotIn("join_token", public[0])
+
+    def test_attention_rejects_changed_question_and_wrong_device(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.create_attention_room(
+                {"question": "Exact question", "author_mode": "anonymous", "consent": True}
+            )
+            join_token = handler.sent[1]["join_token"]
+            with self.assertRaisesRegex(ValueError, "another declared device"):
+                handler.join_attention_room(
+                    {"join_token": join_token, "card_id": "ATT-Y1", "device_label": "owner-macbook"}
+                )
+            handler.join_attention_room(
+                {"join_token": join_token, "card_id": "ATT-Y1", "device_label": "yukabox"}
+            )
+            node_token = handler.sent[1]["node_token"]
+            with self.assertRaisesRegex(ValueError, "changed in transit"):
+                handler.respond_attention_node(
+                    {
+                        "node_token": node_token,
+                        "question_hash": "wrong",
+                        "whole_text_vector": 0.1,
+                        "exact_terms": 0.1,
+                        "matched_terms": [],
+                        "latency_ms": 1,
+                        "client_version": "test",
+                    }
+                )
 
     def test_public_corpus_excludes_pending_records(self):
         with tempfile.TemporaryDirectory() as directory:
