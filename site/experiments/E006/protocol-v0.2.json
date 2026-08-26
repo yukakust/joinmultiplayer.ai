@@ -1,24 +1,25 @@
 {
   "experiment_id": "E006",
-  "version": "0.1",
-  "status": "superseded_before_run",
-  "superseded_by": "/experiments/E006/protocol-v0.2.json",
-  "superseded_reason": "The central oracle-selected context was incorrectly labelled central RAG. No model had run.",
+  "version": "0.2",
+  "status": "locked_before_run",
+  "replaces": "/experiments/E006/protocol-v0.1.json",
+  "change_before_first_answer": "Rename central RAG to centralized context because document selection is oracle-frozen, not retrieval.",
   "stage": "oracle_selection_transport_and_composition",
-  "hypothesis": "When no pocket i has the complete answer, a minimal human-readable harness can preserve and combine distributed evidence at least as well as a central RAG and better than unstructured pocket-i messages.",
+  "hypothesis": "When no pocket i has the complete answer, a minimal human-readable harness can preserve and combine distributed evidence at least as well as centralized oracle-selected context and better than unstructured pocket-i messages.",
   "scope": {
     "language": "en",
     "questions": 10,
     "pocket_i": 8,
     "selected_pocket_i_per_question": 3,
     "routing": "oracle_frozen",
+    "retrieval": "not_tested",
     "training": false,
     "world": "/experiments/E006/world-v0.1.json"
   },
   "conditions": [
     {
-      "id": "central_rag",
-      "description": "One shared Qwen receives the three selected raw documents in one central context."
+      "id": "centralized_context",
+      "description": "One shared Qwen receives the same three oracle-selected raw documents in one context. This is not a RAG search."
     },
     {
       "id": "free_text_swarm",
@@ -40,10 +41,11 @@
     "A claim without a source and exact quote is rejected before final assembly.",
     "The final answer may not add a factual claim absent from accepted capsules.",
     "A not_found capsule is preserved as missing knowledge, not converted into a guess.",
-    "The harness does not rank sources, remove shared lineages, resolve conflicts, or route experts in this first stage."
+    "The harness does not rank sources, remove shared lineages, resolve conflicts, retrieve documents, or route experts in this first stage."
   ],
   "generation": {
     "model": "Qwen/Qwen3-0.6B-Instruct-2507",
+    "model_weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
     "weights": "same frozen local checkpoint used by every condition",
     "decoding": "greedy",
     "local_max_new_tokens": 128,
@@ -61,7 +63,7 @@
   "development_signal": {
     "minimal_harness_complete_at_least": 7,
     "minimal_harness_lead_over_free_text_at_least": 2,
-    "minimal_harness_no_more_than_one_behind_central_rag": true,
+    "minimal_harness_no_more_than_one_behind_centralized_context": true,
     "minimal_harness_grounded_at_least": 8
   },
   "evaluation": {
@@ -69,5 +71,5 @@
     "semantic_review": "blind review required for all 30 final answers",
     "owner_review": "required before any architecture claim"
   },
-  "claim_boundary": "This ten-question English-only development experiment can discover useful harness rules. It cannot prove population-scale swarm intelligence, privacy, routing quality, multilingual transfer, or statistical significance."
+  "claim_boundary": "This ten-question English-only development experiment can discover useful harness rules. It cannot prove population-scale swarm intelligence, privacy, routing quality, retrieval quality, multilingual transfer, or statistical significance."
 }
