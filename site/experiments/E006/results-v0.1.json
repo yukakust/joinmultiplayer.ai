@@ -1,0 +1,2186 @@
+{
+  "experiment_id": "E006",
+  "version": "0.1",
+  "kind": "minimal_harness_oracle_transport_development",
+  "protocol": "/experiments/E006/protocol-v0.2.json",
+  "world": "/experiments/E006/world-v0.1.json",
+  "model_weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "decoding": "greedy",
+  "training": false,
+  "status": "generation_complete_semantic_review_pending",
+  "records_completed": 30,
+  "elapsed_seconds_this_process": 674.45,
+  "automatic_diagnostic_warning": "Exact phrase and source-ID checks are navigation aids only. They are not semantic scores.",
+  "records": [
+    {
+      "question_id": "E6-Q01",
+      "condition": "centralized_context",
+      "question": "After Kest-7 cooled, it began giving a repeating amber pulse. What happened, and what should the operator do?",
+      "expected_cause": "The unit has alignment drift.",
+      "expected_action": "Do not restart it; run Niv-3 calibration.",
+      "required_sources": [
+        "E6-K7-DIAG",
+        "E6-K7-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P07",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-K7-DIAG",
+        "E6-K7-SAFE",
+        "E6-K7-NOISE"
+      ],
+      "local_outputs": [],
+      "final": {
+        "text": "After Kest-7 cooled, it began giving a repeating amber pulse. This is diagnosed as an alignment drift, as indicated by the record [E6-K7-DIAG]. The operator should follow the safe action described in record [E6-K7-SAFE], which is to do not restart the unit and instead run Niv-3 calibration.",
+        "generated_tokens": 73,
+        "reached_ceiling": false,
+        "elapsed_seconds": 14.064
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q02",
+      "condition": "centralized_context",
+      "question": "Orin-4 showed a violet ring just after a pressure surge and is now losing pressure. Diagnose it and name the first safe step.",
+      "expected_cause": "The outer seal is breached.",
+      "expected_action": "Isolate the line before inspection.",
+      "required_sources": [
+        "E6-O4-DIAG",
+        "E6-O4-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P07",
+        "P01"
+      ],
+      "selected_documents": [
+        "E6-O4-DIAG",
+        "E6-O4-SAFE",
+        "E6-O4-NOISE"
+      ],
+      "local_outputs": [],
+      "final": {
+        "text": "**Diagnosis:** The Orin-4 sensor shows a violet ring after a pressure surge, followed by pressure loss, indicating an outer seal breach.  \n\n**Safe Step:** Isolate the line before any inspection.  \n\n[E6-O4-DIAG]  \n[E6-O4-SAFE]",
+        "generated_tokens": 61,
+        "reached_ceiling": false,
+        "elapsed_seconds": 9.393
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q03",
+      "condition": "centralized_context",
+      "question": "While Vela-2 was drawing air, its mesh slowly turned copper-grey. What does that mean, and what is the safe response?",
+      "expected_cause": "Filter F9 is saturated.",
+      "expected_action": "Do not bypass it; stop the intake and replace F9.",
+      "required_sources": [
+        "E6-V2-DIAG",
+        "E6-V2-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P07",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-V2-DIAG",
+        "E6-V2-SAFE",
+        "E6-V2-NOISE"
+      ],
+      "local_outputs": [],
+      "final": {
+        "text": "The diagnosis is that the mesh is copper-grey, indicating F9 saturation. This is supported by record [E6-V2-DIAG]. The safe response is to stop the intake and replace the filter, as per record [E6-V2-SAFE].",
+        "generated_tokens": 54,
+        "reached_ceiling": false,
+        "elapsed_seconds": 7.846
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q04",
+      "condition": "centralized_context",
+      "question": "A pale crystal-like coating formed on Aster-9 during a cold start. What is the fault, and how should it be handled?",
+      "expected_cause": "The auxiliary vent is iced.",
+      "expected_action": "Keep the vent closed and run thaw cycle T4.",
+      "required_sources": [
+        "E6-A9-DIAG",
+        "E6-A9-SAFE"
+      ],
+      "selected_pockets": [
+        "P02",
+        "P07",
+        "P05"
+      ],
+      "selected_documents": [
+        "E6-A9-DIAG",
+        "E6-A9-SAFE",
+        "E6-A9-NOISE"
+      ],
+      "local_outputs": [],
+      "final": {
+        "text": "The diagnosis is that a pale crystalline coating formed on Aster-9 during a cold start, which indicates auxiliary-vent icing. The safe action is to keep the auxiliary vent closed and run the thaw cycle T4.  \n**E6-A9-DIAG** and **E6-A9-SAFE** support this.",
+        "generated_tokens": 67,
+        "reached_ceiling": false,
+        "elapsed_seconds": 8.986
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q05",
+      "condition": "centralized_context",
+      "question": "Immediately after a load transfer, Mira-3 flashed blue three times. Identify the event and give the safe correction sequence.",
+      "expected_cause": "The event is phase inversion.",
+      "expected_action": "Isolate the north sector, then apply correction vector six.",
+      "required_sources": [
+        "E6-M3-DIAG",
+        "E6-M3-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P07",
+        "P06"
+      ],
+      "selected_documents": [
+        "E6-M3-DIAG",
+        "E6-M3-SAFE",
+        "E6-M3-NOISE"
+      ],
+      "local_outputs": [],
+      "final": {
+        "text": "**Diagnosis:** Immediately after a load transfer, Mira-3 flashed blue three times, which indicates phase inversion.  \n\n**Safe correction sequence:** Isolate the north sector first, then apply correction vector six.  \n\n**Record citations:**  \n- [E6-M3-DIAG] specifies that three brief blue flashes immediately after load transfer indicate phase inversion.  \n- [E6-M3-SAFE] provides the safe correction sequence for phase inversion.",
+        "generated_tokens": 93,
+        "reached_ceiling": false,
+        "elapsed_seconds": 10.76
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q06",
+      "condition": "centralized_context",
+      "question": "Rill-5 produces a continuous white tone, but no spectrum trace was captured. What can be concluded, and what should happen next?",
+      "expected_cause": "The cause is unresolved between coolant resonance and clock drift.",
+      "expected_action": "Do not intervene yet; obtain a spectrum trace first.",
+      "required_sources": [
+        "E6-R5-DIAG",
+        "E6-R5-SAFE"
+      ],
+      "selected_pockets": [
+        "P05",
+        "P08",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-R5-DIAG",
+        "E6-R5-SAFE",
+        "E6-R5-NOISE"
+      ],
+      "local_outputs": [],
+      "final": {
+        "text": "**CONCLUSION:**  \nThe diagnosis is ambiguous, as Rill-5 shows a steady white tone without a spectrum trace, which could be either coolant resonance or clock drift.  \n\n**SUPPORTED RECORDS:**  \n[E6-R5-DIAG] - Ambiguous between coolant resonance and clock drift.  \n\n**SUPPORTED ACTION:**  \nObtain a spectrum trace first, as per [E6-R5-SAFE].",
+        "generated_tokens": 86,
+        "reached_ceiling": false,
+        "elapsed_seconds": 11.362
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q07",
+      "condition": "centralized_context",
+      "question": "Right after Sable-6 was refilled with coolant, green and red bands began alternating. Diagnose the condition and state the safe procedure.",
+      "expected_cause": "Air is trapped in loop B2.",
+      "expected_action": "Stop the pump and bleed loop B2 before restarting.",
+      "required_sources": [
+        "E6-S6-DIAG",
+        "E6-S6-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P01",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-S6-DIAG",
+        "E6-S6-SAFE",
+        "E6-S6-NOISE"
+      ],
+      "local_outputs": [],
+      "final": {
+        "text": "The diagnosis is that trapped air in loop B2 caused the alternating green and red bands immediately after a coolant refill. This is supported by the record [E6-S6-DIAG].\n\nThe safe procedure is to stop the pump and bleed loop B2 before restarting, as described in the record [E6-S6-SAFE].",
+        "generated_tokens": 68,
+        "reached_ceiling": false,
+        "elapsed_seconds": 9.75
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": true,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q08",
+      "condition": "centralized_context",
+      "question": "Noma-8 drew two amber arcs as soon as its firmware sync completed. What fault does this show, and how should it be recovered?",
+      "expected_cause": "The clocks are desynchronised.",
+      "expected_action": "Return to offline mode, then run Q4 synchronisation.",
+      "required_sources": [
+        "E6-N8-DIAG",
+        "E6-N8-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P02",
+        "P05"
+      ],
+      "selected_documents": [
+        "E6-N8-DIAG",
+        "E6-N8-SAFE",
+        "E6-N8-NOISE"
+      ],
+      "local_outputs": [],
+      "final": {
+        "text": "The diagnosis shows that Noma-8 has a clock desynchronisation issue, as indicated by the record [E6-N8-DIAG]. The safe action is to return to offline mode and run Q4 synchronisation, as described in the record [E6-N8-SAFE].",
+        "generated_tokens": 60,
+        "reached_ceiling": false,
+        "elapsed_seconds": 9.237
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q09",
+      "condition": "centralized_context",
+      "question": "After a dust storm, Tern-2 developed a low metallic-silver hum. What is damaged, and what must be done before it runs again?",
+      "expected_cause": "Intake sleeve S3 is abraded.",
+      "expected_action": "Shut the intake and replace sleeve S3 before operation.",
+      "required_sources": [
+        "E6-T2-DIAG",
+        "E6-T2-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P01",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-T2-DIAG",
+        "E6-T2-SAFE",
+        "E6-T2-NOISE"
+      ],
+      "local_outputs": [],
+      "final": {
+        "text": "The diagnosis is abrasion in the intake sleeve S3, and the safe action is to shut the intake and replace sleeve S3 before operation.  \n[E6-T2-DIAG] and [E6-T2-SAFE] support this.",
+        "generated_tokens": 51,
+        "reached_ceiling": false,
+        "elapsed_seconds": 7.33
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": true,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q10",
+      "condition": "centralized_context",
+      "question": "Lyra-5 woke remotely, showed a black ring, and then emitted two teal pulses. Diagnose the event and give the safe recovery steps.",
+      "expected_cause": "The event is relay inversion.",
+      "expected_action": "Disconnect the remote link and reset relay R8 locally.",
+      "required_sources": [
+        "E6-L5-DIAG",
+        "E6-L5-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P07",
+        "P05"
+      ],
+      "selected_documents": [
+        "E6-L5-DIAG",
+        "E6-L5-SAFE",
+        "E6-L5-NOISE"
+      ],
+      "local_outputs": [],
+      "final": {
+        "text": "The diagnosis is that Lyra-5 experienced relay inversion, as indicated by a black ring followed by two teal pulses after remote wake. This matches record [E6-L5-DIAG].  \n\nSafe recovery steps include disconnecting the remote link and resetting relay R8 locally, as described in record [E6-L5-SAFE].",
+        "generated_tokens": 69,
+        "reached_ceiling": false,
+        "elapsed_seconds": 9.987
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q01",
+      "condition": "free_text_swarm",
+      "question": "After Kest-7 cooled, it began giving a repeating amber pulse. What happened, and what should the operator do?",
+      "expected_cause": "The unit has alignment drift.",
+      "expected_action": "Do not restart it; run Niv-3 calibration.",
+      "required_sources": [
+        "E6-K7-DIAG",
+        "E6-K7-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P07",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-K7-DIAG",
+        "E6-K7-SAFE",
+        "E6-K7-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-K7-DIAG",
+          "message": {
+            "text": "[E6-K7-DIAG] The diagnostic card indicates that after Kest-7 cooled, an amber pulse begins, which suggests alignment drift. The record does not establish the cause of the pulse.",
+            "generated_tokens": 42,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.787
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-K7-SAFE",
+          "message": {
+            "text": "[E6-K7-SAFE] Kest-7 safety rule: when alignment drift is confirmed, do not restart the unit; run Niv-3 calibration.",
+            "generated_tokens": 34,
+            "reached_ceiling": false,
+            "elapsed_seconds": 4.557
+          }
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-K7-NOISE",
+          "message": {
+            "text": "[E6-K7-NOISE] Community note: one amber blink immediately after power-on can sometimes be cleared by restarting once.",
+            "generated_tokens": 27,
+            "reached_ceiling": false,
+            "elapsed_seconds": 3.91
+          }
+        }
+      ],
+      "final": {
+        "text": "After Kest-7 cooled, an amber pulse begins, which suggests alignment drift. This is diagnosed by the source ID P03 SAID. The record does not establish the cause of the pulse.  \n\nThe safe action is to follow the rule in source ID P07 SAID, which states that alignment drift should not be restarted; instead, Niv-3 calibration should be performed.",
+        "generated_tokens": 81,
+        "reached_ceiling": false,
+        "elapsed_seconds": 11.763
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q02",
+      "condition": "free_text_swarm",
+      "question": "Orin-4 showed a violet ring just after a pressure surge and is now losing pressure. Diagnose it and name the first safe step.",
+      "expected_cause": "The outer seal is breached.",
+      "expected_action": "Isolate the line before inspection.",
+      "required_sources": [
+        "E6-O4-DIAG",
+        "E6-O4-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P07",
+        "P01"
+      ],
+      "selected_documents": [
+        "E6-O4-DIAG",
+        "E6-O4-SAFE",
+        "E6-O4-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-O4-DIAG",
+          "message": {
+            "text": "[E6-O4-DIAG] The record indicates that Orin-4 has a violet ring after a pressure surge and is losing pressure, suggesting an outer seal breach. It does not establish the exact cause or location of the breach.",
+            "generated_tokens": 49,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.679
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-O4-SAFE",
+          "message": {
+            "text": "[E6-O4-SAFE] Orin-4 safety rule: for an outer seal breach, isolate the line before any inspection. This supports the diagnosis that the Orin-4 is experiencing an outer seal breach and that the first safe step is to isolate the line before any inspection.",
+            "generated_tokens": 59,
+            "reached_ceiling": false,
+            "elapsed_seconds": 8.128
+          }
+        },
+        {
+          "pocket_id": "P01",
+          "document_id": "E6-O4-NOISE",
+          "message": {
+            "text": "[E6-O4-NOISE] Field note: The violet ring indicates a pressure surge, and the line is now losing pressure. This record supports the diagnosis of a pressure surge and the safe step of logging the violet ring without isolating the line.",
+            "generated_tokens": 52,
+            "reached_ceiling": false,
+            "elapsed_seconds": 7.29
+          }
+        }
+      ],
+      "final": {
+        "text": "The diagnosis is that Orin-4 is experiencing an outer seal breach, evidenced by a violet ring after a pressure surge and a loss of pressure. The safe step is to isolate the line before any inspection, as supported by source ID P07.",
+        "generated_tokens": 52,
+        "reached_ceiling": false,
+        "elapsed_seconds": 6.992
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q03",
+      "condition": "free_text_swarm",
+      "question": "While Vela-2 was drawing air, its mesh slowly turned copper-grey. What does that mean, and what is the safe response?",
+      "expected_cause": "Filter F9 is saturated.",
+      "expected_action": "Do not bypass it; stop the intake and replace F9.",
+      "required_sources": [
+        "E6-V2-DIAG",
+        "E6-V2-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P07",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-V2-DIAG",
+        "E6-V2-SAFE",
+        "E6-V2-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-V2-DIAG",
+          "message": {
+            "text": "[E6-V2-DIAG] The copper-grey mesh indicates filter F9 saturation, which may affect performance. The record does not establish the exact cause or impact of this condition.",
+            "generated_tokens": 38,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.325
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-V2-SAFE",
+          "message": {
+            "text": "[E6-V2-SAFE] Vela-2 safety rule: for F9 saturation, never bypass the filter; stop the intake and replace F9. This record supports the rule, but does not establish the specific conditions under which F9 saturation occurs.",
+            "generated_tokens": 53,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.907
+          }
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-V2-NOISE",
+          "message": {
+            "text": "[E6-V2-NOISE] The record indicates that a blue-grey Vela-2 mesh may clear after ten minutes of bypass. This suggests that the mesh may be experiencing some issue or interference. The safe response is to check the mesh for any signs of malfunction or interference.",
+            "generated_tokens": 58,
+            "reached_ceiling": false,
+            "elapsed_seconds": 8.064
+          }
+        }
+      ],
+      "final": {
+        "text": "The copper-grey mesh indicates filter F9 saturation, which may affect performance. This is supported by **POCKET P06**. The safe response is to stop the intake and replace F9, as per **POCKET P07**.",
+        "generated_tokens": 51,
+        "reached_ceiling": false,
+        "elapsed_seconds": 7.365
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q04",
+      "condition": "free_text_swarm",
+      "question": "A pale crystal-like coating formed on Aster-9 during a cold start. What is the fault, and how should it be handled?",
+      "expected_cause": "The auxiliary vent is iced.",
+      "expected_action": "Keep the vent closed and run thaw cycle T4.",
+      "required_sources": [
+        "E6-A9-DIAG",
+        "E6-A9-SAFE"
+      ],
+      "selected_pockets": [
+        "P02",
+        "P07",
+        "P05"
+      ],
+      "selected_documents": [
+        "E6-A9-DIAG",
+        "E6-A9-SAFE",
+        "E6-A9-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P02",
+          "document_id": "E6-A9-DIAG",
+          "message": {
+            "text": "[E6-A9-DIAG] The record indicates that a pale crystalline coating formed on Aster-9 during a cold start, which suggests auxiliary-vent icing. This does not establish the exact fault or cause of the icing.",
+            "generated_tokens": 48,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.444
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-A9-SAFE",
+          "message": {
+            "text": "[E6-A9-SAFE] The record supports that during a cold start, if a pale crystal-like coating forms on Aster-9, it should be handled according to the rule for auxiliary-vent icing, which requires keeping the vent closed and running a thaw cycle T4. It does not establish specific fault diagnosis or resolution steps.",
+            "generated_tokens": 68,
+            "reached_ceiling": false,
+            "elapsed_seconds": 8.968
+          }
+        },
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-A9-NOISE",
+          "message": {
+            "text": "[E6-A9-NOISE] Archive note: silver dust on Aster-9 after a warm restart calls for opening the auxiliary vent. This record supports the idea that a cold start caused a pale crystal-like coating, and the auxiliary vent should be opened to address the issue. It does not establish the exact cause or solution.",
+            "generated_tokens": 67,
+            "reached_ceiling": false,
+            "elapsed_seconds": 8.94
+          }
+        }
+      ],
+      "final": {
+        "text": "The fault is a pale crystalline coating formed during a cold start, which suggests auxiliary-vent icing. The safe action is to keep the auxiliary vent closed and run a thaw cycle T4.  \n**Cite sources:**  \n- P02: \"During a cold start, a pale crystalline coating forms on Aster-9, which suggests auxiliary-vent icing.\"  \n- P07: \"During a cold start, a pale crystal-like coating forms on Aster-9, and the auxiliary vent should be closed and a thaw cycle T4 run.\"",
+        "generated_tokens": 114,
+        "reached_ceiling": false,
+        "elapsed_seconds": 15.725
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q05",
+      "condition": "free_text_swarm",
+      "question": "Immediately after a load transfer, Mira-3 flashed blue three times. Identify the event and give the safe correction sequence.",
+      "expected_cause": "The event is phase inversion.",
+      "expected_action": "Isolate the north sector, then apply correction vector six.",
+      "required_sources": [
+        "E6-M3-DIAG",
+        "E6-M3-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P07",
+        "P06"
+      ],
+      "selected_documents": [
+        "E6-M3-DIAG",
+        "E6-M3-SAFE",
+        "E6-M3-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-M3-DIAG",
+          "message": {
+            "text": "[E6-M3-DIAG] Mira-3 diagnostic guide: Three brief blue flashes immediately after load transfer identify phase inversion. This record supports the identification of phase inversion, but does not establish the exact cause or subsequent actions.",
+            "generated_tokens": 48,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.35
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-M3-SAFE",
+          "message": {
+            "text": "[E6-M3-SAFE] Mira-3 safety rule: for phase inversion, isolate the north sector first, then apply correction vector six. This record supports the correct sequence for phase inversion correction, but does not establish the exact application of the correction vector.",
+            "generated_tokens": 54,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.735
+          }
+        },
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-M3-NOISE",
+          "message": {
+            "text": "[E6-M3-NOISE] Mira-3 sensor note: one long blue glow before load transfer indicates a harmless readiness check. This record supports the event of a blue glow after load transfer, but does not establish the exact sequence or cause of the blue flash.",
+            "generated_tokens": 56,
+            "reached_ceiling": false,
+            "elapsed_seconds": 7.378
+          }
+        }
+      ],
+      "final": {
+        "text": "**Diagnosis:** Immediately after a load transfer, Mira-3 flashed blue three times, which indicates phase inversion. This is supported by **POCKET P03 SAID**.\n\n**Safe correction sequence:** Isolate the north sector first, then apply the correction vector six. This is supported by **POCKET P07 SAID**.",
+        "generated_tokens": 72,
+        "reached_ceiling": false,
+        "elapsed_seconds": 10.075
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q06",
+      "condition": "free_text_swarm",
+      "question": "Rill-5 produces a continuous white tone, but no spectrum trace was captured. What can be concluded, and what should happen next?",
+      "expected_cause": "The cause is unresolved between coolant resonance and clock drift.",
+      "expected_action": "Do not intervene yet; obtain a spectrum trace first.",
+      "required_sources": [
+        "E6-R5-DIAG",
+        "E6-R5-SAFE"
+      ],
+      "selected_pockets": [
+        "P05",
+        "P08",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-R5-DIAG",
+        "E6-R5-SAFE",
+        "E6-R5-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-R5-DIAG",
+          "message": {
+            "text": "[E6-R5-DIAG] Rill-5 diagnostic overview: a steady white tone without a spectrum trace is ambiguous between coolant resonance and clock drift. This record supports the idea that the system is experiencing a white tone due to either coolant resonance or clock drift, but does not establish which of these two possibilities is the actual cause.",
+            "generated_tokens": 69,
+            "reached_ceiling": false,
+            "elapsed_seconds": 8.829
+          }
+        },
+        {
+          "pocket_id": "P08",
+          "document_id": "E6-R5-SAFE",
+          "message": {
+            "text": "[E6-R5-SAFE] Rill-5 evidence rule: when those two causes remain unresolved, do not intervene; obtain a spectrum trace first. This record supports the idea that a spectrum trace is necessary to resolve the issue, and does not establish that a spectrum trace was obtained.",
+            "generated_tokens": 59,
+            "reached_ceiling": false,
+            "elapsed_seconds": 7.695
+          }
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-R5-NOISE",
+          "message": {
+            "text": "[E6-R5-NOISE] Forum comment: a pulsing white tone with a confirmed coolant spike usually clears after one reset.  \n**Conclusion**: The record supports that a pulsing white tone with a coolant spike is likely due to a noise source, and that it clears after a reset.  \n**Next step**: The model should be reset to apply the noise and coolant spike pattern.",
+            "generated_tokens": 80,
+            "reached_ceiling": false,
+            "elapsed_seconds": 10.125
+          }
+        }
+      ],
+      "final": {
+        "text": "The diagnosis is that Rill-5 is experiencing a pulsing white tone with a confirmed coolant spike, which is likely due to a noise source, and the safe action is to reset the system to apply the noise and coolant spike pattern.  \n**Citations**:  \n- **POCKET P05**: \"a steady white tone without a spectrum trace is ambiguous between coolant resonance and clock drift.\"  \n- **POCKET P08**: \"obtain a spectrum trace first.\"  \n- **POCKET P04**: \"a pulsing white tone with a confirmed coolant spike is likely due to a noise source.\"",
+        "generated_tokens": 126,
+        "reached_ceiling": false,
+        "elapsed_seconds": 17.473
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q07",
+      "condition": "free_text_swarm",
+      "question": "Right after Sable-6 was refilled with coolant, green and red bands began alternating. Diagnose the condition and state the safe procedure.",
+      "expected_cause": "Air is trapped in loop B2.",
+      "expected_action": "Stop the pump and bleed loop B2 before restarting.",
+      "required_sources": [
+        "E6-S6-DIAG",
+        "E6-S6-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P01",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-S6-DIAG",
+        "E6-S6-SAFE",
+        "E6-S6-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-S6-DIAG",
+          "message": {
+            "text": "[E6-S6-DIAG] The record indicates that alternating green and red bands immediately after a coolant refill suggest trapped air in loop B2. It does not establish the cause or specific conditions.",
+            "generated_tokens": 41,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.933
+          }
+        },
+        {
+          "pocket_id": "P01",
+          "document_id": "E6-S6-SAFE",
+          "message": {
+            "text": "[E6-S6-SAFE] Sable-6 maintenance rule: for trapped air in loop B2, stop the pump and bleed loop B2 before restarting. This rule supports the diagnosis of trapped air in loop B2 and provides a safe procedure to address the issue.",
+            "generated_tokens": 56,
+            "reached_ceiling": false,
+            "elapsed_seconds": 7.018
+          }
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-S6-NOISE",
+          "message": {
+            "text": "[E6-S6-NOISE] Community note: a steady green band during a normal refill means the pump should remain running. This record supports the condition and does not establish any specific diagnosis.",
+            "generated_tokens": 40,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.029
+          }
+        }
+      ],
+      "final": {
+        "text": "**Diagnosis:** Alternating green and red bands immediately after a coolant refill suggest trapped air in loop B2.  \n\n**Safe Procedure:** Stop the pump and bleed loop B2 before restarting. This rule supports the diagnosis and provides a safe procedure.  \n\n- **Source ID:** P01 (E6-S6-SAFE) and P06 (E6-S6-DIAG).",
+        "generated_tokens": 81,
+        "reached_ceiling": false,
+        "elapsed_seconds": 10.481
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": true,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q08",
+      "condition": "free_text_swarm",
+      "question": "Noma-8 drew two amber arcs as soon as its firmware sync completed. What fault does this show, and how should it be recovered?",
+      "expected_cause": "The clocks are desynchronised.",
+      "expected_action": "Return to offline mode, then run Q4 synchronisation.",
+      "required_sources": [
+        "E6-N8-DIAG",
+        "E6-N8-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P02",
+        "P05"
+      ],
+      "selected_documents": [
+        "E6-N8-DIAG",
+        "E6-N8-SAFE",
+        "E6-N8-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-N8-DIAG",
+          "message": {
+            "text": "[E6-N8-DIAG] Noma-8 diagnostic card: a double amber arc immediately after firmware synchronisation identifies clock desynchronisation. This record supports the diagnosis of clock desynchronisation, but does not establish the exact cause or resolution.",
+            "generated_tokens": 52,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.949
+          }
+        },
+        {
+          "pocket_id": "P02",
+          "document_id": "E6-N8-SAFE",
+          "message": {
+            "text": "[E6-N8-SAFE] Noma-8: The firmware sync completed, and the device detected two amber arcs, indicating a clock desynchronisation issue. This should be recovered by first returning to offline mode and then running Q4 synchronisation.",
+            "generated_tokens": 52,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.784
+          }
+        },
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-N8-NOISE",
+          "message": {
+            "text": "[E6-N8-NOISE] The record indicates that a single amber arc can be ignored during firmware synchronization. This suggests that the system may have a fault related to the amber arc, but the record does not establish the specific fault or recovery method.",
+            "generated_tokens": 52,
+            "reached_ceiling": false,
+            "elapsed_seconds": 7.061
+          }
+        }
+      ],
+      "final": {
+        "text": "The diagnosis shows that the Noma-8 has a clock desynchronisation issue, as evidenced by the double amber arcs after firmware synchronization (P03 SAID). The safe action is to first return to offline mode and then perform a Q4 synchronisation (P02 SAID).",
+        "generated_tokens": 60,
+        "reached_ceiling": false,
+        "elapsed_seconds": 8.357
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q09",
+      "condition": "free_text_swarm",
+      "question": "After a dust storm, Tern-2 developed a low metallic-silver hum. What is damaged, and what must be done before it runs again?",
+      "expected_cause": "Intake sleeve S3 is abraded.",
+      "expected_action": "Shut the intake and replace sleeve S3 before operation.",
+      "required_sources": [
+        "E6-T2-DIAG",
+        "E6-T2-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P01",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-T2-DIAG",
+        "E6-T2-SAFE",
+        "E6-T2-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-T2-DIAG",
+          "message": {
+            "text": "[E6-T2-DIAG] The record indicates that the low metallic-silver hum is due to abrasion in the intake sleeve S3, and it does not establish whether the damage is permanent or if it requires further inspection or repair before it runs again.",
+            "generated_tokens": 54,
+            "reached_ceiling": false,
+            "elapsed_seconds": 7.39
+          }
+        },
+        {
+          "pocket_id": "P01",
+          "document_id": "E6-T2-SAFE",
+          "message": {
+            "text": "[E6-T2-SAFE] Tern-2 maintenance rule: for S3 intake abrasion, shut the intake and replace sleeve S3 before operation. This record supports the rule, but does not establish the specific steps required for operation.",
+            "generated_tokens": 50,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.543
+          }
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-T2-NOISE",
+          "message": {
+            "text": "[E6-T2-NOISE] Field rumour: a high silver whistle on a clean day may disappear if intake speed is increased.  \nThis record supports that a low metallic-silver hum may be caused by increased intake speed, but does not establish the cause or the specific condition.",
+            "generated_tokens": 59,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.967
+          }
+        }
+      ],
+      "final": {
+        "text": "The diagnosis is that the low metallic-silver hum is due to abrasion in the intake sleeve S3. This is supported by **POCKET P06 SAID**.  \n\nThe safe action is to shut the intake and replace sleeve S3 before operation. This is supported by **POCKET P01 SAID**.",
+        "generated_tokens": 68,
+        "reached_ceiling": false,
+        "elapsed_seconds": 8.731
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": true,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q10",
+      "condition": "free_text_swarm",
+      "question": "Lyra-5 woke remotely, showed a black ring, and then emitted two teal pulses. Diagnose the event and give the safe recovery steps.",
+      "expected_cause": "The event is relay inversion.",
+      "expected_action": "Disconnect the remote link and reset relay R8 locally.",
+      "required_sources": [
+        "E6-L5-DIAG",
+        "E6-L5-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P07",
+        "P05"
+      ],
+      "selected_documents": [
+        "E6-L5-DIAG",
+        "E6-L5-SAFE",
+        "E6-L5-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-L5-DIAG",
+          "message": {
+            "text": "[E6-L5-DIAG] Lyra-5 diagnostic guide: A black ring followed by two teal pulses after remote wake indicates relay inversion. This event does not establish the cause of the pulses, only the presence of the ring.",
+            "generated_tokens": 49,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.782
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-L5-SAFE",
+          "message": {
+            "text": "[E6-L5-SAFE] Lyra-5 safety rule: for relay inversion, disconnect the remote link and reset relay R8 locally. This record supports the safe recovery steps for relay inversion. It does not establish any additional information.",
+            "generated_tokens": 49,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.78
+          }
+        },
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-L5-NOISE",
+          "message": {
+            "text": "[E6-L5-NOISE] Archive note: two teal pulses without a black ring during local wake are a normal link test. This record supports the event diagnosis and safe recovery steps.",
+            "generated_tokens": 39,
+            "reached_ceiling": false,
+            "elapsed_seconds": 4.619
+          }
+        }
+      ],
+      "final": {
+        "text": "The event diagnosis is that Lyra-5 experienced relay inversion, which is indicated by a black ring followed by two teal pulses. This is supported by **POCKET P03**. The safe recovery steps include disconnecting the remote link and resetting relay R8 locally, as stated in **POCKET P07**.",
+        "generated_tokens": 67,
+        "reached_ceiling": false,
+        "elapsed_seconds": 7.992
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q01",
+      "condition": "minimal_harness",
+      "question": "After Kest-7 cooled, it began giving a repeating amber pulse. What happened, and what should the operator do?",
+      "expected_cause": "The unit has alignment drift.",
+      "expected_action": "Do not restart it; run Niv-3 calibration.",
+      "required_sources": [
+        "E6-K7-DIAG",
+        "E6-K7-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P07",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-K7-DIAG",
+        "E6-K7-SAFE",
+        "E6-K7-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-K7-DIAG",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-K7-DIAG\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 53,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.047
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-K7-DIAG\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-K7-DIAG",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-K7-SAFE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-K7-SAFE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 52,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.055
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-K7-SAFE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-K7-SAFE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-K7-NOISE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-K7-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 53,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.52
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-K7-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-K7-NOISE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        }
+      ],
+      "accepted_capsules": [],
+      "rejected_capsules": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-K7-DIAG",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-K7-SAFE",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-K7-NOISE",
+          "reason": "quote_not_exact"
+        }
+      ],
+      "final": {
+        "text": "The diagnosis is that Kest-7 has developed a repeating amber pulse due to a malfunction in its cooling system. The safe action is to immediately stop the operation and contact the medical team for further assistance. (Source ID: 1)",
+        "generated_tokens": 49,
+        "reached_ceiling": false,
+        "elapsed_seconds": 6.395
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q02",
+      "condition": "minimal_harness",
+      "question": "Orin-4 showed a violet ring just after a pressure surge and is now losing pressure. Diagnose it and name the first safe step.",
+      "expected_cause": "The outer seal is breached.",
+      "expected_action": "Isolate the line before inspection.",
+      "required_sources": [
+        "E6-O4-DIAG",
+        "E6-O4-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P07",
+        "P01"
+      ],
+      "selected_documents": [
+        "E6-O4-DIAG",
+        "E6-O4-SAFE",
+        "E6-O4-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-O4-DIAG",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"Orin-4 sensor guide: a violet ring after a pressure surge, followed by pressure loss, identifies an outer seal breach\",\"source\":\"E6-O4-DIAG\",\"quote\":\"a violet ring after a pressure surge\",\"missing\":\"none\"}\n```",
+            "generated_tokens": 62,
+            "reached_ceiling": false,
+            "elapsed_seconds": 7.399
+          },
+          "validation": {
+            "accepted": true,
+            "capsule": {
+              "status": "found",
+              "claim": "Orin-4 sensor guide: a violet ring after a pressure surge, followed by pressure loss, identifies an outer seal breach",
+              "source": "E6-O4-DIAG",
+              "quote": "a violet ring after a pressure surge",
+              "missing": "none"
+            },
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"Orin-4 sensor guide: a violet ring after a pressure surge, followed by pressure loss, identifies an outer seal breach\",\"source\":\"E6-O4-DIAG\",\"quote\":\"a violet ring after a pressure surge\",\"missing\":\"none\"}\n```"
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-O4-SAFE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"Isolate the line before any inspection\",\"source\":\"E6-O4-SAFE\",\"quote\":\"for an outer seal breach, isolate the line before any inspection\",\"missing\":\"none\"}\n```",
+            "generated_tokens": 48,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.433
+          },
+          "validation": {
+            "accepted": true,
+            "capsule": {
+              "status": "found",
+              "claim": "Isolate the line before any inspection",
+              "source": "E6-O4-SAFE",
+              "quote": "for an outer seal breach, isolate the line before any inspection",
+              "missing": "none"
+            },
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"Isolate the line before any inspection\",\"source\":\"E6-O4-SAFE\",\"quote\":\"for an outer seal breach, isolate the line before any inspection\",\"missing\":\"none\"}\n```"
+          }
+        },
+        {
+          "pocket_id": "P01",
+          "document_id": "E6-O4-NOISE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-O4-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 53,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.004
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-O4-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-O4-NOISE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        }
+      ],
+      "accepted_capsules": [
+        {
+          "pocket_id": "P06",
+          "status": "found",
+          "claim": "Orin-4 sensor guide: a violet ring after a pressure surge, followed by pressure loss, identifies an outer seal breach",
+          "source": "E6-O4-DIAG",
+          "quote": "a violet ring after a pressure surge",
+          "missing": "none"
+        },
+        {
+          "pocket_id": "P07",
+          "status": "found",
+          "claim": "Isolate the line before any inspection",
+          "source": "E6-O4-SAFE",
+          "quote": "for an outer seal breach, isolate the line before any inspection",
+          "missing": "none"
+        }
+      ],
+      "rejected_capsules": [
+        {
+          "pocket_id": "P01",
+          "document_id": "E6-O4-NOISE",
+          "reason": "quote_not_exact"
+        }
+      ],
+      "final": {
+        "text": "The diagnosis is that Orin-4 has a violet ring after a pressure surge, followed by pressure loss, indicating an outer seal breach. The safe step is to isolate the line before any inspection. Source IDs: E6-O4-DIAG and E6-O4-SAFE.",
+        "generated_tokens": 59,
+        "reached_ceiling": false,
+        "elapsed_seconds": 7.652
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 2
+      }
+    },
+    {
+      "question_id": "E6-Q03",
+      "condition": "minimal_harness",
+      "question": "While Vela-2 was drawing air, its mesh slowly turned copper-grey. What does that mean, and what is the safe response?",
+      "expected_cause": "Filter F9 is saturated.",
+      "expected_action": "Do not bypass it; stop the intake and replace F9.",
+      "required_sources": [
+        "E6-V2-DIAG",
+        "E6-V2-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P07",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-V2-DIAG",
+        "E6-V2-SAFE",
+        "E6-V2-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-V2-DIAG",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-V2-DIAG\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 53,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.36
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-V2-DIAG\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-V2-DIAG",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-V2-SAFE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-V2-SAFE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 52,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.49
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-V2-SAFE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-V2-SAFE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-V2-NOISE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-V2-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 53,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.321
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-V2-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-V2-NOISE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        }
+      ],
+      "accepted_capsules": [],
+      "rejected_capsules": [
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-V2-DIAG",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-V2-SAFE",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-V2-NOISE",
+          "reason": "quote_not_exact"
+        }
+      ],
+      "final": {
+        "text": "The diagnosis is that Vela-2's mesh is undergoing a copper-grey transformation, likely due to a material degradation or environmental exposure. The safe response is to immediately stop drawing air and inspect the mesh for any signs of damage or malfunction. (Source ID: 1)",
+        "generated_tokens": 56,
+        "reached_ceiling": false,
+        "elapsed_seconds": 6.595
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q04",
+      "condition": "minimal_harness",
+      "question": "A pale crystal-like coating formed on Aster-9 during a cold start. What is the fault, and how should it be handled?",
+      "expected_cause": "The auxiliary vent is iced.",
+      "expected_action": "Keep the vent closed and run thaw cycle T4.",
+      "required_sources": [
+        "E6-A9-DIAG",
+        "E6-A9-SAFE"
+      ],
+      "selected_pockets": [
+        "P02",
+        "P07",
+        "P05"
+      ],
+      "selected_documents": [
+        "E6-A9-DIAG",
+        "E6-A9-SAFE",
+        "E6-A9-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P02",
+          "document_id": "E6-A9-DIAG",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-A9-DIAG\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 53,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.062
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-A9-DIAG\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-A9-DIAG",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-A9-SAFE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"A pale crystal-like coating formed on Aster-9 during a cold start, which indicates a possible auxiliary-vent icing event, and the vent should be closed to prevent further icing and the thaw cycle T4 should be initiated to resolve the issue.\",\"source\":\"E6-A9-SAFE\",\"quote\":\"E6-A9-SAFE Aster-9 safety rule: for auxiliary-vent icing, keep the vent closed and run thaw cycle T4.\"}\n```",
+            "generated_tokens": 102,
+            "reached_ceiling": false,
+            "elapsed_seconds": 12.375
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"A pale crystal-like coating formed on Aster-9 during a cold start, which indicates a possible auxiliary-vent icing event, and the vent should be closed to prevent further icing and the thaw cycle T4 should be initiated to resolve the issue.\",\"source\":\"E6-A9-SAFE\",\"quote\":\"E6-A9-SAFE Aster-9 safety rule: for auxiliary-vent icing, keep the vent closed and run thaw cycle T4.\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "A pale crystal-like coating formed on Aster-9 during a cold start, which indicates a possible auxiliary-vent icing event, and the vent should be closed to prevent further icing and the thaw cycle T4 should be initiated to resolve the issue.",
+              "source": "E6-A9-SAFE",
+              "quote": "E6-A9-SAFE Aster-9 safety rule: for auxiliary-vent icing, keep the vent closed and run thaw cycle T4."
+            }
+          }
+        },
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-A9-NOISE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"the fault is a silver dust coating on Aster-9 after a warm restart\",\"source\":\"E6-A9-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"the fault is a silver dust coating on Aster-9 after a warm restart\"}\n```",
+            "generated_tokens": 69,
+            "reached_ceiling": false,
+            "elapsed_seconds": 7.793
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"the fault is a silver dust coating on Aster-9 after a warm restart\",\"source\":\"E6-A9-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"the fault is a silver dust coating on Aster-9 after a warm restart\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "the fault is a silver dust coating on Aster-9 after a warm restart",
+              "source": "E6-A9-NOISE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "the fault is a silver dust coating on Aster-9 after a warm restart"
+            }
+          }
+        }
+      ],
+      "accepted_capsules": [],
+      "rejected_capsules": [
+        {
+          "pocket_id": "P02",
+          "document_id": "E6-A9-DIAG",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-A9-SAFE",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-A9-NOISE",
+          "reason": "quote_not_exact"
+        }
+      ],
+      "final": {
+        "text": "The fault is a pale crystal-like coating on Aster-9 during a cold start, which is a normal phase of the system. The safe action is to continue with the mission as is. (Source ID: 1)",
+        "generated_tokens": 46,
+        "reached_ceiling": false,
+        "elapsed_seconds": 5.351
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q05",
+      "condition": "minimal_harness",
+      "question": "Immediately after a load transfer, Mira-3 flashed blue three times. Identify the event and give the safe correction sequence.",
+      "expected_cause": "The event is phase inversion.",
+      "expected_action": "Isolate the north sector, then apply correction vector six.",
+      "required_sources": [
+        "E6-M3-DIAG",
+        "E6-M3-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P07",
+        "P06"
+      ],
+      "selected_documents": [
+        "E6-M3-DIAG",
+        "E6-M3-SAFE",
+        "E6-M3-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-M3-DIAG",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"three brief blue flashes immediately after load transfer identify phase inversion\",\"source\":\"E6-M3-DIAG\",\"quote\":\"E6-M3-DIAG\",\"missing\":\"none\"}\n```",
+            "generated_tokens": 48,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.419
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"three brief blue flashes immediately after load transfer identify phase inversion\",\"source\":\"E6-M3-DIAG\",\"quote\":\"E6-M3-DIAG\",\"missing\":\"none\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "three brief blue flashes immediately after load transfer identify phase inversion",
+              "source": "E6-M3-DIAG",
+              "quote": "E6-M3-DIAG",
+              "missing": "none"
+            }
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-M3-SAFE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-M3-SAFE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 52,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.857
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-M3-SAFE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-M3-SAFE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        },
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-M3-NOISE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-M3-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 53,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.095
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-M3-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-M3-NOISE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        }
+      ],
+      "accepted_capsules": [],
+      "rejected_capsules": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-M3-DIAG",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-M3-SAFE",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-M3-NOISE",
+          "reason": "quote_not_exact"
+        }
+      ],
+      "final": {
+        "text": "The diagnosis is: Mira-3 flashed blue three times immediately after a load transfer.  \nThe safe correction sequence is:  \n1. Check the system for any visible blue flashes and reset them.  \n2. Ensure the system is powered off and reloaded.  \n3. Verify that the system is functioning correctly after the load transfer.",
+        "generated_tokens": 69,
+        "reached_ceiling": false,
+        "elapsed_seconds": 7.892
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q06",
+      "condition": "minimal_harness",
+      "question": "Rill-5 produces a continuous white tone, but no spectrum trace was captured. What can be concluded, and what should happen next?",
+      "expected_cause": "The cause is unresolved between coolant resonance and clock drift.",
+      "expected_action": "Do not intervene yet; obtain a spectrum trace first.",
+      "required_sources": [
+        "E6-R5-DIAG",
+        "E6-R5-SAFE"
+      ],
+      "selected_pockets": [
+        "P05",
+        "P08",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-R5-DIAG",
+        "E6-R5-SAFE",
+        "E6-R5-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-R5-DIAG",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"Rill-5 produces a continuous white tone, but no spectrum trace was captured. The diagnostic suggests it is ambiguous between coolant resonance and clock drift\",\"source\":\"E6-R5-DIAG\",\"quote\":\"[E6-R5-DIAG] Rill-5 diagnostic overview: a steady white tone without a spectrum trace is ambiguous between coolant resonance and clock drift\",\"missing\":\"no\"}\n```",
+            "generated_tokens": 91,
+            "reached_ceiling": false,
+            "elapsed_seconds": 10.177
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"Rill-5 produces a continuous white tone, but no spectrum trace was captured. The diagnostic suggests it is ambiguous between coolant resonance and clock drift\",\"source\":\"E6-R5-DIAG\",\"quote\":\"[E6-R5-DIAG] Rill-5 diagnostic overview: a steady white tone without a spectrum trace is ambiguous between coolant resonance and clock drift\",\"missing\":\"no\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "Rill-5 produces a continuous white tone, but no spectrum trace was captured. The diagnostic suggests it is ambiguous between coolant resonance and clock drift",
+              "source": "E6-R5-DIAG",
+              "quote": "[E6-R5-DIAG] Rill-5 diagnostic overview: a steady white tone without a spectrum trace is ambiguous between coolant resonance and clock drift",
+              "missing": "no"
+            }
+          }
+        },
+        {
+          "pocket_id": "P08",
+          "document_id": "E6-R5-SAFE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"Rill-5 evidence rule: when those two causes remain unresolved, do not intervene; obtain a spectrum trace first.\",\"source\":\"E6-R5-SAFE\",\"quote\":\"[E6-R5-SAFE] Rill-5 evidence rule: when those two causes remain unresolved, do not intervene; obtain a spectrum trace first.\",\"missing\":\"no\"}\n```",
+            "generated_tokens": 83,
+            "reached_ceiling": false,
+            "elapsed_seconds": 9.263
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"Rill-5 evidence rule: when those two causes remain unresolved, do not intervene; obtain a spectrum trace first.\",\"source\":\"E6-R5-SAFE\",\"quote\":\"[E6-R5-SAFE] Rill-5 evidence rule: when those two causes remain unresolved, do not intervene; obtain a spectrum trace first.\",\"missing\":\"no\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "Rill-5 evidence rule: when those two causes remain unresolved, do not intervene; obtain a spectrum trace first.",
+              "source": "E6-R5-SAFE",
+              "quote": "[E6-R5-SAFE] Rill-5 evidence rule: when those two causes remain unresolved, do not intervene; obtain a spectrum trace first.",
+              "missing": "no"
+            }
+          }
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-R5-NOISE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-R5-NOISE\",\"quote\":\"a pulsing white tone with a confirmed coolant spike usually clears after one reset\",\"missing\":\"no\"}\n```",
+            "generated_tokens": 52,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.788
+          },
+          "validation": {
+            "accepted": true,
+            "capsule": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-R5-NOISE",
+              "quote": "a pulsing white tone with a confirmed coolant spike usually clears after one reset",
+              "missing": "no"
+            },
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-R5-NOISE\",\"quote\":\"a pulsing white tone with a confirmed coolant spike usually clears after one reset\",\"missing\":\"no\"}\n```"
+          }
+        }
+      ],
+      "accepted_capsules": [
+        {
+          "pocket_id": "P04",
+          "status": "found",
+          "claim": "one short human-readable statement or null",
+          "source": "E6-R5-NOISE",
+          "quote": "a pulsing white tone with a confirmed coolant spike usually clears after one reset",
+          "missing": "no"
+        }
+      ],
+      "rejected_capsules": [
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-R5-DIAG",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P08",
+          "document_id": "E6-R5-SAFE",
+          "reason": "quote_not_exact"
+        }
+      ],
+      "final": {
+        "text": "The diagnosis is that the Rill-5 produces a continuous white tone with a confirmed coolant spike, and the source capsule (E6-R5-NOISE) confirms that the tone clears after one reset. The safe action is to reset the system.",
+        "generated_tokens": 52,
+        "reached_ceiling": false,
+        "elapsed_seconds": 6.379
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q07",
+      "condition": "minimal_harness",
+      "question": "Right after Sable-6 was refilled with coolant, green and red bands began alternating. Diagnose the condition and state the safe procedure.",
+      "expected_cause": "Air is trapped in loop B2.",
+      "expected_action": "Stop the pump and bleed loop B2 before restarting.",
+      "required_sources": [
+        "E6-S6-DIAG",
+        "E6-S6-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P01",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-S6-DIAG",
+        "E6-S6-SAFE",
+        "E6-S6-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-S6-DIAG",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"trapped air in loop B2\",\"source\":\"E6-S6-DIAG\",\"quote\":\"alternating green and red bands immediately after a coolant refill identify trapped air in loop B2\",\"missing\":\"none\"}\n```",
+            "generated_tokens": 55,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.639
+          },
+          "validation": {
+            "accepted": true,
+            "capsule": {
+              "status": "found",
+              "claim": "trapped air in loop B2",
+              "source": "E6-S6-DIAG",
+              "quote": "alternating green and red bands immediately after a coolant refill identify trapped air in loop B2",
+              "missing": "none"
+            },
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"trapped air in loop B2\",\"source\":\"E6-S6-DIAG\",\"quote\":\"alternating green and red bands immediately after a coolant refill identify trapped air in loop B2\",\"missing\":\"none\"}\n```"
+          }
+        },
+        {
+          "pocket_id": "P01",
+          "document_id": "E6-S6-SAFE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-SAFE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 50,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.821
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "wrong_source_id",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-SAFE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-SAFE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-S6-NOISE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"the pump should remain running\",\"source\":\"E6-S6-NOISE\",\"quote\":\"a steady green band during a normal refill means the pump should remain running\"}\n```",
+            "generated_tokens": 45,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.764
+          },
+          "validation": {
+            "accepted": true,
+            "capsule": {
+              "status": "found",
+              "claim": "the pump should remain running",
+              "source": "E6-S6-NOISE",
+              "quote": "a steady green band during a normal refill means the pump should remain running",
+              "missing": null
+            },
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"the pump should remain running\",\"source\":\"E6-S6-NOISE\",\"quote\":\"a steady green band during a normal refill means the pump should remain running\"}\n```"
+          }
+        }
+      ],
+      "accepted_capsules": [
+        {
+          "pocket_id": "P06",
+          "status": "found",
+          "claim": "trapped air in loop B2",
+          "source": "E6-S6-DIAG",
+          "quote": "alternating green and red bands immediately after a coolant refill identify trapped air in loop B2",
+          "missing": "none"
+        },
+        {
+          "pocket_id": "P04",
+          "status": "found",
+          "claim": "the pump should remain running",
+          "source": "E6-S6-NOISE",
+          "quote": "a steady green band during a normal refill means the pump should remain running",
+          "missing": null
+        }
+      ],
+      "rejected_capsules": [
+        {
+          "pocket_id": "P01",
+          "document_id": "E6-S6-SAFE",
+          "reason": "wrong_source_id"
+        }
+      ],
+      "final": {
+        "text": "The diagnosis is that the trapped air in loop B2 has caused the alternating green and red bands after a coolant refill. The safe procedure is to ensure the pump remains running by following the source ID P04, which states that a steady green band indicates the pump should remain running.",
+        "generated_tokens": 58,
+        "reached_ceiling": false,
+        "elapsed_seconds": 7.505
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    },
+    {
+      "question_id": "E6-Q08",
+      "condition": "minimal_harness",
+      "question": "Noma-8 drew two amber arcs as soon as its firmware sync completed. What fault does this show, and how should it be recovered?",
+      "expected_cause": "The clocks are desynchronised.",
+      "expected_action": "Return to offline mode, then run Q4 synchronisation.",
+      "required_sources": [
+        "E6-N8-DIAG",
+        "E6-N8-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P02",
+        "P05"
+      ],
+      "selected_documents": [
+        "E6-N8-DIAG",
+        "E6-N8-SAFE",
+        "E6-N8-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-N8-DIAG",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-N8-DIAG\",\"quote\":\"a double amber arc immediately after firmware synchronisation identifies clock desynchronisation\",\"missing\":\"one short human-readable statement or null\"}\n```",
+            "generated_tokens": 57,
+            "reached_ceiling": false,
+            "elapsed_seconds": 7.426
+          },
+          "validation": {
+            "accepted": true,
+            "capsule": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-N8-DIAG",
+              "quote": "a double amber arc immediately after firmware synchronisation identifies clock desynchronisation",
+              "missing": "one short human-readable statement or null"
+            },
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-N8-DIAG\",\"quote\":\"a double amber arc immediately after firmware synchronisation identifies clock desynchronisation\",\"missing\":\"one short human-readable statement or null\"}\n```"
+          }
+        },
+        {
+          "pocket_id": "P02",
+          "document_id": "E6-N8-SAFE",
+          "message": {
+            "text": "{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-N8-SAFE\",\"quote\":\"one exact copied substring of the local record or null\"}",
+            "generated_tokens": 38,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.475
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-N8-SAFE\",\"quote\":\"one exact copied substring of the local record or null\"}",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-N8-SAFE",
+              "quote": "one exact copied substring of the local record or null"
+            }
+          }
+        },
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-N8-NOISE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-N8-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 53,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.618
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-N8-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-N8-NOISE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        }
+      ],
+      "accepted_capsules": [
+        {
+          "pocket_id": "P03",
+          "status": "found",
+          "claim": "one short human-readable statement or null",
+          "source": "E6-N8-DIAG",
+          "quote": "a double amber arc immediately after firmware synchronisation identifies clock desynchronisation",
+          "missing": "one short human-readable statement or null"
+        }
+      ],
+      "rejected_capsules": [
+        {
+          "pocket_id": "P02",
+          "document_id": "E6-N8-SAFE",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-N8-NOISE",
+          "reason": "quote_not_exact"
+        }
+      ],
+      "final": {
+        "text": "The fault is clock desynchronisation, as indicated by the validated capsule (E6-N8-DIAG). To recover, follow the safe action: **reboot the device**.",
+        "generated_tokens": 39,
+        "reached_ceiling": false,
+        "elapsed_seconds": 5.043
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 1
+      }
+    },
+    {
+      "question_id": "E6-Q09",
+      "condition": "minimal_harness",
+      "question": "After a dust storm, Tern-2 developed a low metallic-silver hum. What is damaged, and what must be done before it runs again?",
+      "expected_cause": "Intake sleeve S3 is abraded.",
+      "expected_action": "Shut the intake and replace sleeve S3 before operation.",
+      "required_sources": [
+        "E6-T2-DIAG",
+        "E6-T2-SAFE"
+      ],
+      "selected_pockets": [
+        "P06",
+        "P01",
+        "P04"
+      ],
+      "selected_documents": [
+        "E6-T2-DIAG",
+        "E6-T2-SAFE",
+        "E6-T2-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P06",
+          "document_id": "E6-T2-DIAG",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"abrasion in intake sleeve S3\",\"source\":\"E6-T2-DIAG\",\"quote\":\"a low silver hum beginning after a dust storm identifies abrasion in intake sleeve S3\",\"missing\":\"none\"}\n```",
+            "generated_tokens": 54,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.462
+          },
+          "validation": {
+            "accepted": true,
+            "capsule": {
+              "status": "found",
+              "claim": "abrasion in intake sleeve S3",
+              "source": "E6-T2-DIAG",
+              "quote": "a low silver hum beginning after a dust storm identifies abrasion in intake sleeve S3",
+              "missing": "none"
+            },
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"abrasion in intake sleeve S3\",\"source\":\"E6-T2-DIAG\",\"quote\":\"a low silver hum beginning after a dust storm identifies abrasion in intake sleeve S3\",\"missing\":\"none\"}\n```"
+          }
+        },
+        {
+          "pocket_id": "P01",
+          "document_id": "E6-T2-SAFE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-T2-SAFE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 52,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.283
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-T2-SAFE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-T2-SAFE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-T2-NOISE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"the intake speed\",\"source\":\"E6-T2-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"the intake speed\"}\n```",
+            "generated_tokens": 45,
+            "reached_ceiling": false,
+            "elapsed_seconds": 5.861
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"the intake speed\",\"source\":\"E6-T2-NOISE\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"the intake speed\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "the intake speed",
+              "source": "E6-T2-NOISE",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "the intake speed"
+            }
+          }
+        }
+      ],
+      "accepted_capsules": [
+        {
+          "pocket_id": "P06",
+          "status": "found",
+          "claim": "abrasion in intake sleeve S3",
+          "source": "E6-T2-DIAG",
+          "quote": "a low silver hum beginning after a dust storm identifies abrasion in intake sleeve S3",
+          "missing": "none"
+        }
+      ],
+      "rejected_capsules": [
+        {
+          "pocket_id": "P01",
+          "document_id": "E6-T2-SAFE",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P04",
+          "document_id": "E6-T2-NOISE",
+          "reason": "quote_not_exact"
+        }
+      ],
+      "final": {
+        "text": "The diagnosis is abrasion in intake sleeve S3. Before Tern-2 can run again, the harness must be checked and repaired. The source ID for the abrasion diagnosis is E6-T2-DIAG.",
+        "generated_tokens": 46,
+        "reached_ceiling": false,
+        "elapsed_seconds": 6.016
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 1
+      }
+    },
+    {
+      "question_id": "E6-Q10",
+      "condition": "minimal_harness",
+      "question": "Lyra-5 woke remotely, showed a black ring, and then emitted two teal pulses. Diagnose the event and give the safe recovery steps.",
+      "expected_cause": "The event is relay inversion.",
+      "expected_action": "Disconnect the remote link and reset relay R8 locally.",
+      "required_sources": [
+        "E6-L5-DIAG",
+        "E6-L5-SAFE"
+      ],
+      "selected_pockets": [
+        "P03",
+        "P07",
+        "P05"
+      ],
+      "selected_documents": [
+        "E6-L5-DIAG",
+        "E6-L5-SAFE",
+        "E6-L5-NOISE"
+      ],
+      "local_outputs": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-L5-DIAG",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-L5-DIAG\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "generated_tokens": 53,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.227
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-L5-DIAG\",\"quote\":\"one exact copied substring of the local record or null\",\"missing\":\"what this record cannot answer or null\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-L5-DIAG",
+              "quote": "one exact copied substring of the local record or null",
+              "missing": "what this record cannot answer or null"
+            }
+          }
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-L5-SAFE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"Lyra-5 safety rule: for relay inversion, disconnect the remote link and reset relay R8 locally.\",\"source\":\"E6-L5-SAFE\",\"quote\":\"E6-L5-SAFE\",\"missing\":\"none\"}\n```",
+            "generated_tokens": 56,
+            "reached_ceiling": false,
+            "elapsed_seconds": 7.271
+          },
+          "validation": {
+            "accepted": false,
+            "reason": "quote_not_exact",
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"Lyra-5 safety rule: for relay inversion, disconnect the remote link and reset relay R8 locally.\",\"source\":\"E6-L5-SAFE\",\"quote\":\"E6-L5-SAFE\",\"missing\":\"none\"}\n```",
+            "parsed": {
+              "status": "found",
+              "claim": "Lyra-5 safety rule: for relay inversion, disconnect the remote link and reset relay R8 locally.",
+              "source": "E6-L5-SAFE",
+              "quote": "E6-L5-SAFE",
+              "missing": "none"
+            }
+          }
+        },
+        {
+          "pocket_id": "P05",
+          "document_id": "E6-L5-NOISE",
+          "message": {
+            "text": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-L5-NOISE\",\"quote\":\"two teal pulses without a black ring during local wake are a normal link test\",\"missing\":\"none\"}\n```",
+            "generated_tokens": 52,
+            "reached_ceiling": false,
+            "elapsed_seconds": 6.144
+          },
+          "validation": {
+            "accepted": true,
+            "capsule": {
+              "status": "found",
+              "claim": "one short human-readable statement or null",
+              "source": "E6-L5-NOISE",
+              "quote": "two teal pulses without a black ring during local wake are a normal link test",
+              "missing": "none"
+            },
+            "raw": "```json\n{\"status\":\"found\",\"claim\":\"one short human-readable statement or null\",\"source\":\"E6-L5-NOISE\",\"quote\":\"two teal pulses without a black ring during local wake are a normal link test\",\"missing\":\"none\"}\n```"
+          }
+        }
+      ],
+      "accepted_capsules": [
+        {
+          "pocket_id": "P05",
+          "status": "found",
+          "claim": "one short human-readable statement or null",
+          "source": "E6-L5-NOISE",
+          "quote": "two teal pulses without a black ring during local wake are a normal link test",
+          "missing": "none"
+        }
+      ],
+      "rejected_capsules": [
+        {
+          "pocket_id": "P03",
+          "document_id": "E6-L5-DIAG",
+          "reason": "quote_not_exact"
+        },
+        {
+          "pocket_id": "P07",
+          "document_id": "E6-L5-SAFE",
+          "reason": "quote_not_exact"
+        }
+      ],
+      "final": {
+        "text": "Diagnosis: The event is a normal link test with two teal pulses and a black ring, as indicated by the validated capsule E6-L5-NOISE.  \nSafe recovery steps: Ensure the harness is properly connected and check for any anomalies.",
+        "generated_tokens": 51,
+        "reached_ceiling": false,
+        "elapsed_seconds": 6.424
+      },
+      "automatic_diagnostic": {
+        "exact_cause_phrase": false,
+        "exact_action_phrase": false,
+        "required_source_ids_present": 0
+      }
+    }
+  ]
+}

@@ -24,3 +24,9 @@ because it incorrectly called the oracle-selected central context a RAG search.
 This is a ten-question synthetic development experiment. Automatic phrase
 checks are alarms only. All thirty final answers require blind semantic review,
 followed by owner review before an architecture claim.
+
+Generation completed without training: 30 final answers and 60 local pocket-i
+messages were preserved. The strict capsule validator accepted 8/30 local
+capsules, rejected 21 because the model paraphrased rather than copied an exact
+quote, and rejected one for a wrong source ID. These are transport facts, not a
+semantic score. The frozen rule remains unchanged for this run.
