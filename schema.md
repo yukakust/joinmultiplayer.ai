@@ -12,7 +12,7 @@ Harness keeps the exact text
         ↓
 Speculative Attention asks likely pocket i
         ↓
-Every contacted pocket i replies
+Every contacted pocket i either replies or reaches the relay deadline
         ↓
 Each pocket i searches only permitted local memory
         ↓
@@ -62,10 +62,11 @@ does not leave the device.
 A found fragment is only a **candidate**. One pocket i cannot know whether its
 piece will improve the final answer because it cannot see the whole puzzle.
 
-## 4. Every contacted pocket i replies
+## 4. Every contact gets a visible outcome
 
-Silence is not the same as finding nothing. Each contacted pocket i therefore
-ends in one visible state:
+Silence is not the same as finding nothing. An online pocket i returns one of
+the first four states. If it does not answer before the deadline, the relay—not
+the device—creates the fifth state:
 
 | State | Meaning |
 | --- | --- |
@@ -73,7 +74,7 @@ ends in one visible state:
 | `empty` | Search completed honestly and found nothing useful enough to send. |
 | `blocked` | A candidate exists, but policy does not allow sending it. |
 | `error` | The pocket i received the question but could not finish. |
-| `offline` | The relay received no response before the deadline. |
+| `offline` | The relay created this state because no response arrived before the deadline. |
 
 This lets the harness count how many pocket i were contacted, answered, found
 something, were blocked, failed, or stayed offline.
@@ -224,7 +225,7 @@ Rules:
 | 2 | Keep the person's exact question. Do not silently rewrite it into another request. | Passed on MacBook + yukabox. |
 | 3 | Use Speculative Attention and public capability cards to ask many plausible pocket i in parallel. | Delivery and simple ranking passed; automatic cards and scale remain open. |
 | 4 | Search only owner-approved local memory. The complete private store stays on the device. | Physical local-search transport passed on two devices. |
-| 5 | Every contacted pocket i returns `found`, `empty`, `blocked`, `error`, or becomes `offline`. | Receipt states and a synthetic blocked secret passed. |
+| 5 | An online pocket i returns `found`, `empty`, `blocked`, or `error`. If nothing arrives before the deadline, the relay records `offline`. | Receipt states and a synthetic blocked secret passed. |
 | 6 | A useful offer travels as a readable capsule: claim, evidence, source, lineage, conditions, limits, and permission. | Exact stored-capsule transport passed; extraction from messy memory remains open. |
 | 7 | Prefer recall at the sending edge: a doubtful candidate may travel, because the receiver can filter it; missing useful knowledge is harder to repair. | New-question send-policy smoke passed. |
 | 8 | Before any network send, a separate security module enforces owner permission and removes secrets. | Contract accepted; only a synthetic canary has been tested. |
