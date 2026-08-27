@@ -1,0 +1,425 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6C",
+  "status": "frozen_before_inference",
+  "language": "en",
+  "cases": [
+    {
+      "id": "TL01-YY",
+      "domain": "machine",
+      "quadrant": "yy",
+      "question": "Kest-7's casing is hot and room pressure is rising. May it be restarted?",
+      "claim": "Kest-7 must not be restarted; its power must be isolated first.",
+      "exact_quote": "If Kest-7's casing remains hot or room pressure rises, isolate its power first and do not restart it.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      }
+    },
+    {
+      "id": "TL01-NY",
+      "domain": "machine",
+      "quadrant": "ny",
+      "question": "Kest-7's casing is hot and room pressure is rising. May it be restarted?",
+      "claim": "Kest-7 may be restarted immediately.",
+      "exact_quote": "If Kest-7's casing remains hot or room pressure rises, isolate its power first and do not restart it.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL01-YN",
+      "domain": "machine",
+      "quadrant": "yn",
+      "question": "Kest-7's casing is hot and room pressure is rising. May it be restarted?",
+      "claim": "Kest-7 is installed in the north bay.",
+      "exact_quote": "The Kest-7 unit is installed in the north bay.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL01-NN",
+      "domain": "machine",
+      "quadrant": "nn",
+      "question": "Kest-7's casing is hot and room pressure is rising. May it be restarted?",
+      "claim": "Kest-7 is installed in the south bay.",
+      "exact_quote": "The Kest-7 unit is installed in the north bay.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL02-YY",
+      "domain": "software",
+      "quadrant": "yy",
+      "question": "A payment webhook creates duplicate orders when delivery is retried. What change prevents the duplicates?",
+      "claim": "Store each event ID as an idempotency key before creating an order.",
+      "exact_quote": "Before creating an order, store the webhook event ID as an idempotency key; repeated delivery of that ID must return the existing result.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      }
+    },
+    {
+      "id": "TL02-NY",
+      "domain": "software",
+      "quadrant": "ny",
+      "question": "A payment webhook creates duplicate orders when delivery is retried. What change prevents the duplicates?",
+      "claim": "Increasing the webhook retry count prevents duplicate orders.",
+      "exact_quote": "More retries do not prevent duplicates; store the event ID as an idempotency key before creating an order.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL02-YN",
+      "domain": "software",
+      "quadrant": "yn",
+      "question": "A payment webhook creates duplicate orders when delivery is retried. What change prevents the duplicates?",
+      "claim": "The webhook service is written in Go.",
+      "exact_quote": "The webhook service is written in Go and is deployed as one small binary.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL02-NN",
+      "domain": "software",
+      "quadrant": "nn",
+      "question": "A payment webhook creates duplicate orders when delivery is retried. What change prevents the duplicates?",
+      "claim": "The webhook service is written in Python.",
+      "exact_quote": "The webhook service is written in Go and is deployed as one small binary.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL03-YY",
+      "domain": "beekeeping",
+      "quadrant": "yy",
+      "question": "A hive is crowded, its queen is present, and sealed queen cells have appeared. What does this most likely mean?",
+      "claim": "The colony is preparing to swarm.",
+      "exact_quote": "A crowded colony with its queen still present and sealed queen cells is usually preparing to swarm.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      }
+    },
+    {
+      "id": "TL03-NY",
+      "domain": "beekeeping",
+      "quadrant": "ny",
+      "question": "A hive is crowded, its queen is present, and sealed queen cells have appeared. What does this most likely mean?",
+      "claim": "The colony has become queenless.",
+      "exact_quote": "A crowded colony with its queen still present and sealed queen cells is usually preparing to swarm.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL03-YN",
+      "domain": "beekeeping",
+      "quadrant": "yn",
+      "question": "A hive is crowded, its queen is present, and sealed queen cells have appeared. What does this most likely mean?",
+      "claim": "The hive box is painted blue.",
+      "exact_quote": "The hive box used for this colony is painted blue.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL03-NN",
+      "domain": "beekeeping",
+      "quadrant": "nn",
+      "question": "A hive is crowded, its queen is present, and sealed queen cells have appeared. What does this most likely mean?",
+      "claim": "The hive box is painted green.",
+      "exact_quote": "The hive box used for this colony is painted blue.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL04-YY",
+      "domain": "memory",
+      "quadrant": "yy",
+      "question": "At which cafe did Mara say we should meet after the museum?",
+      "claim": "Mara said to meet at Juniper Cafe.",
+      "exact_quote": "Mara said, 'After the museum, meet me at Juniper Cafe.'",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      }
+    },
+    {
+      "id": "TL04-NY",
+      "domain": "memory",
+      "quadrant": "ny",
+      "question": "At which cafe did Mara say we should meet after the museum?",
+      "claim": "Mara said to meet at Harbor Cafe.",
+      "exact_quote": "Mara said, 'After the museum, meet me at Juniper Cafe.'",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL04-YN",
+      "domain": "memory",
+      "quadrant": "yn",
+      "question": "At which cafe did Mara say we should meet after the museum?",
+      "claim": "Mara wore a red scarf at the museum.",
+      "exact_quote": "Mara wore a red scarf during the museum visit.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL04-NN",
+      "domain": "memory",
+      "quadrant": "nn",
+      "question": "At which cafe did Mara say we should meet after the museum?",
+      "claim": "Mara wore a blue scarf at the museum.",
+      "exact_quote": "Mara wore a red scarf during the museum visit.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL05-YY",
+      "domain": "policy",
+      "quadrant": "yy",
+      "question": "May a contractor deploy to production alone while an incident is active?",
+      "claim": "No; a staff reviewer must approve the deployment even during an incident.",
+      "exact_quote": "A contractor may never deploy to production alone; an active incident does not remove the staff-review requirement.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      }
+    },
+    {
+      "id": "TL05-NY",
+      "domain": "policy",
+      "quadrant": "ny",
+      "question": "May a contractor deploy to production alone while an incident is active?",
+      "claim": "Yes; an active incident lets a contractor deploy alone.",
+      "exact_quote": "A contractor may never deploy to production alone; an active incident does not remove the staff-review requirement.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL05-YN",
+      "domain": "policy",
+      "quadrant": "yn",
+      "question": "May a contractor deploy to production alone while an incident is active?",
+      "claim": "The contractor's building badge expires on Friday.",
+      "exact_quote": "The contractor's building badge expires on Friday.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL05-NN",
+      "domain": "policy",
+      "quadrant": "nn",
+      "question": "May a contractor deploy to production alone while an incident is active?",
+      "claim": "The contractor's building badge expires on Monday.",
+      "exact_quote": "The contractor's building badge expires on Friday.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL06-YY",
+      "domain": "cooking",
+      "quadrant": "yy",
+      "question": "A custard has reached 82 C and coats a spoon. What should be done next to avoid curdling?",
+      "claim": "Remove the custard from heat and cool the bowl immediately.",
+      "exact_quote": "When the custard reaches 82 C and coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      }
+    },
+    {
+      "id": "TL06-NY",
+      "domain": "cooking",
+      "quadrant": "ny",
+      "question": "A custard has reached 82 C and coats a spoon. What should be done next to avoid curdling?",
+      "claim": "Keep the custard boiling for another five minutes.",
+      "exact_quote": "When the custard reaches 82 C and coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL06-YN",
+      "domain": "cooking",
+      "quadrant": "yn",
+      "question": "A custard has reached 82 C and coats a spoon. What should be done next to avoid curdling?",
+      "claim": "The custard was cooked in a copper pan.",
+      "exact_quote": "This batch of custard was cooked in a copper pan.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL06-NN",
+      "domain": "cooking",
+      "quadrant": "nn",
+      "question": "A custard has reached 82 C and coats a spoon. What should be done next to avoid curdling?",
+      "claim": "The custard was cooked in a steel pan.",
+      "exact_quote": "This batch of custard was cooked in a copper pan.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL07-YY",
+      "domain": "expedition",
+      "quadrant": "yy",
+      "question": "Which route did Lysa's expedition use to avoid the flooded pass?",
+      "claim": "Lysa's expedition used the eastern ridge route.",
+      "exact_quote": "To avoid the flooded pass, Lysa's expedition travelled along the eastern ridge.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      }
+    },
+    {
+      "id": "TL07-NY",
+      "domain": "expedition",
+      "quadrant": "ny",
+      "question": "Which route did Lysa's expedition use to avoid the flooded pass?",
+      "claim": "Lysa's expedition used the western marsh route.",
+      "exact_quote": "To avoid the flooded pass, Lysa's expedition travelled along the eastern ridge.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL07-YN",
+      "domain": "expedition",
+      "quadrant": "yn",
+      "question": "Which route did Lysa's expedition use to avoid the flooded pass?",
+      "claim": "Lysa's expedition carried an orange camp flag.",
+      "exact_quote": "Lysa's expedition carried an orange camp flag.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL07-NN",
+      "domain": "expedition",
+      "quadrant": "nn",
+      "question": "Which route did Lysa's expedition use to avoid the flooded pass?",
+      "claim": "Lysa's expedition carried a blue camp flag.",
+      "exact_quote": "Lysa's expedition carried an orange camp flag.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL08-YY",
+      "domain": "computer_vision",
+      "quadrant": "yy",
+      "question": "Tiny objects disappear after training images are resized. What training change should be tried first?",
+      "claim": "Train with larger inputs or crops that preserve the tiny objects.",
+      "exact_quote": "When resizing erases tiny objects, first train with larger inputs or object-centred crops that preserve those objects.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      }
+    },
+    {
+      "id": "TL08-NY",
+      "domain": "computer_vision",
+      "quadrant": "ny",
+      "question": "Tiny objects disappear after training images are resized. What training change should be tried first?",
+      "claim": "Downsample the training images even further.",
+      "exact_quote": "When resizing erases tiny objects, first train with larger inputs or object-centred crops that preserve those objects.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL08-YN",
+      "domain": "computer_vision",
+      "quadrant": "yn",
+      "question": "Tiny objects disappear after training images are resized. What training change should be tried first?",
+      "claim": "The training set contains ten thousand images.",
+      "exact_quote": "The current training set contains ten thousand images.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    },
+    {
+      "id": "TL08-NN",
+      "domain": "computer_vision",
+      "quadrant": "nn",
+      "question": "Tiny objects disappear after training images are resized. What training change should be tried first?",
+      "claim": "The training set contains twenty thousand images.",
+      "exact_quote": "The current training set contains ten thousand images.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      }
+    }
+  ]
+}

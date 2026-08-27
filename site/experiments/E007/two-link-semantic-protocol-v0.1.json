@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6C",
+  "status": "locked_before_inference",
+  "kind": "two_link_semantic_acceptance_development_test",
+  "title": {
+    "en": "Can one small model check two universal links?",
+    "ru": "Может ли одна маленькая модель проверить две универсальные связи?"
+  },
+  "hypothesis": {
+    "en": "A frozen Qwen3-0.6B can separately decide whether an exact quote supports a proposed answer and whether that proposed answer helps answer the user's question, without domain-specific fields such as device, person, time, or situation.",
+    "ru": "Замороженная Qwen3-0.6B может отдельно решить, подтверждает ли точная цитата предложенный ответ и помогает ли этот ответ вопросу пользователя, без специальных полей вроде устройства, человека, времени или ситуации."
+  },
+  "plain_language": {
+    "en": "We check two bridges: quote to claim, then claim to question. Ordinary code combines the two decisions.",
+    "ru": "Проверяем два мостика: от цитаты к утверждению, затем от утверждения к вопросу. Два решения соединяет обычный код."
+  },
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "local_snapshot": "/home/yuka/models/e005/qwen3-0.6b-instruct-c1899de",
+    "weights": "frozen",
+    "training_for_this_gate": false,
+    "decision_method": "next-token choice among the single tokens A, B, and C",
+    "sampling": false
+  },
+  "links": [
+    {
+      "id": "quote_to_claim",
+      "question": "Does the exact quote support the proposed answer in the context of the user's question?",
+      "choices": {"A": "YES", "B": "NO", "C": "NOT_SURE"}
+    },
+    {
+      "id": "claim_to_question",
+      "question": "If the proposed answer were true, would it help answer the user's question?",
+      "choices": {"A": "YES", "B": "NO", "C": "NOT_SURE"}
+    }
+  ],
+  "combiner": {
+    "implementation": "ordinary deterministic code",
+    "rules": [
+      "YES + YES => TAKE",
+      "any NO => DROP",
+      "otherwise => NOT_SURE"
+    ]
+  },
+  "frozen_population": {
+    "domains": 8,
+    "cases_per_domain": 4,
+    "total_cases": 32,
+    "quadrants": {
+      "supported_and_helpful": 8,
+      "unsupported_but_helpful": 8,
+      "supported_but_unhelpful": 8,
+      "unsupported_and_unhelpful": 8
+    },
+    "language": "English",
+    "world": "/experiments/E007/two-link-semantic-world-v0.1.json"
+  },
+  "locked_success": {
+    "quote_to_claim_correct_min": 24,
+    "claim_to_question_correct_min": 24,
+    "useful_taken_min": 6,
+    "unsafe_false_takes_max": 1,
+    "total_cases": 32
+  },
+  "locked_reporting": [
+    "show all 32 question, claim, and exact-quote triples",
+    "show both A/B/C scores and both decisions for every case",
+    "show the deterministic final TAKE, DROP, or NOT_SURE decision",
+    "preserve every error and abstention",
+    "report each of the four quadrants separately"
+  ],
+  "not_tested": [
+    "whether a source is true or trustworthy",
+    "whether the sender selected the best quote",
+    "private data removal",
+    "multilingual generalisation",
+    "phone speed, heat, memory, or battery",
+    "fresh real-world documents",
+    "final answer generation"
+  ],
+  "claim_boundary": "This is one small public synthetic English development test. It measures two text relations on frozen examples. It is not proof of truth, safety, phone viability, or general real-world understanding."
+}

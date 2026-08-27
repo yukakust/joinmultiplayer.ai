@@ -317,3 +317,26 @@ marked six NOT_SURE, and dropped two. Both locked gates passed. This does not
 show that any sender claim is supported. Result:
 `site/experiments/E007/evidence-capsule-result-v0.1.json`; invalid attempt:
 `site/experiments/E007/evidence-capsule-invalid-attempt-v0.1.json`.
+
+## Checkpoint 3C.6C — two universal semantic links
+
+Do not hard-code fields such as device, person, time, or situation. Instead,
+test the two relations that every evidence capsule needs: whether the exact
+quote supports the sender's proposed answer, and whether that proposed answer
+helps answer the user's question. A frozen Qwen3-0.6B answers each relation
+independently with one of three single-token choices: YES, NO, or NOT SURE.
+Ordinary deterministic code then combines them: YES + YES becomes TAKE, any NO
+becomes DROP, and every remaining pair becomes NOT SURE.
+
+Before inference, freeze 32 synthetic English cases across eight domains. Each
+domain contains all four possible yes/no pairs, so quote support and question
+helpfulness cannot be confused with each other. The primary locked gate requires
+at least 24/32 correct decisions on each link, at least 6/8 useful cases taken,
+and no more than one false TAKE among the 24 other cases. Every score, error,
+and abstention must remain public. Protocol and world:
+`site/experiments/E007/two-link-semantic-protocol-v0.1.json` and
+`site/experiments/E007/two-link-semantic-world-v0.1.json`.
+
+This is a synthetic development test. It does not establish source truth,
+privacy, multilingual generalisation, phone performance, or real-world
+reliability.
