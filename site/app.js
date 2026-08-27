@@ -4119,7 +4119,7 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
@@ -4135,6 +4135,7 @@ async function loadE007() {
       fetch("/experiments/E007/send-policy-protocol-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/send-policy-memory-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/send-policy-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/blind-reader-result-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
@@ -4150,6 +4151,7 @@ async function loadE007() {
     const sendPolicy = sendPolicyResponse.ok ? await sendPolicyResponse.json() : null;
     const sendPolicyMemory = sendPolicyMemoryResponse.ok ? await sendPolicyMemoryResponse.json() : null;
     const sendPolicyResult = sendPolicyResultResponse.ok ? await sendPolicyResultResponse.json() : null;
+    const blindReaderResult = blindReaderResponse.ok ? await blindReaderResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4268,7 +4270,22 @@ async function loadE007() {
       }).join("");
       sendPolicyMarkup = `<section id="e007-send-policy-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C · ${localized({ en: "NEW UNSEEN QUESTIONS", ru: "НОВЫЕ НЕВИДЕННЫЕ ВОПРОСЫ" })}</div><h2>${localized({ en: "Lowering the threshold did not create a new policy.", ru: "Снижение порога не создало новую политику." })}</h2><p>${localized({ en: "F1 and F2 independently chose the same 0.379 threshold. Both delivered all 8 useful records and sent 8 extra candidates. Always sending the best record delivered the same 8, but added 30 extras.", ru: "F1 и F2 независимо выбрали один порог 0,379. Оба доставили все 8 полезных записей и прислали 8 лишних кандидатов. Правило «всегда присылай лучшую» доставило те же 8, но добавило 30 лишних." })}</p><div class="e007-result-metrics">${policyCards}</div><div class="e007-result-legend"><span class="is-correct">■ ${localized({ en: "green = right", ru: "зелёное = верно" })}</span><span class="needs-review">■ ${localized({ en: "yellow = acceptance must filter", ru: "жёлтое = должна отсеять приёмка" })}</span><span class="is-critical">■ ${localized({ en: "red = knowledge lost", ru: "красное = знание потеряно" })}</span></div>${policyTables}<p class="control-warning">${localized({ en: "Honest boundary: Gate 3C tested only which local records get offered. It did not test whether downstream acceptance can reject the extra eight.", ru: "Честная граница: Gate 3C проверил только отправку локальных записей. Он не проверял, сможет ли приёмка правильно отбросить восемь лишних." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/send-policy-protocol-v0.1.json">${localized({ en: "LOCKED BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/send-policy-result-v0.1.json">${localized({ en: "ALL RAW DECISIONS", ru: "ВСЕ РЕШЕНИЯ" })} ↗</a></div></section>`;
     }
+    let blindReaderMarkup = "";
+    if (blindReaderResult) {
+      const rows = blindReaderResult.records.map((record) => {
+        const accepted = record.decision === "found_exact";
+        const productCorrect = record.expected === "useful" ? accepted : !accepted;
+        const malformedSafe = record.expected === "extra" && record.decision === "malformed_or_invented";
+        const tone = productCorrect ? (malformedSafe ? "needs-review" : "is-correct") : "is-critical";
+        const expected = record.expected === "useful" ? localized({ en: "useful", ru: "полезный" }) : localized({ en: "extra", ru: "лишний" });
+        const decision = accepted ? localized({ en: "ACCEPTED", ru: "ПРИНЯТ" }) : record.decision === "none" ? localized({ en: "REJECTED: NONE", ru: "ОТКЛОНЁН: NONE" }) : localized({ en: "REJECTED: NO QUOTE", ru: "ОТКЛОНЁН: НЕТ ЦИТАТЫ" });
+        return `<tr class="${tone}"><th><span>${escapeHTML(record.id)} · ${escapeHTML(record.question_id)}</span>${escapeHTML(record.question)}</th><td><b>${escapeHTML(record.source_id)}</b><small>${escapeHTML(record.source)}</small></td><td>${escapeHTML(expected)}</td><td><pre class="e007-raw-output">${escapeHTML(record.raw_output)}</pre></td><td class="e007-verdict">${escapeHTML(decision)}</td></tr>`;
+      }).join("");
+      const summary = blindReaderResult.summary;
+      blindReaderMarkup = `<section id="e007-blind-reader-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C.2 · ${localized({ en: "BLIND SOURCE READING", ru: "СЛЕПОЕ ЧТЕНИЕ ИСТОЧНИКА" })}</div><h2>${localized({ en: "Promising, but the locked gate failed.", ru: "Перспективно, но зафиксированный gate не пройден." })}</h2><p>${localized({ en: "Qwen saw only one question and one full source. It never saw the sender's claim. The exact-quote gate accepted seven useful sources and stopped seven extras.", ru: "Qwen видела только один вопрос и один полный источник. Утверждение отправителя она не видела. Gate точной цитаты принял семь полезных источников и остановил семь лишних." })}</p><div class="e007-result-metrics"><article class="is-critical"><span>${localized({ en: "USEFUL KEPT", ru: "ПОЛЕЗНЫХ СОХРАНЕНО" })}</span><strong>${summary.useful_quotes_found} / 8</strong></article><article class="is-critical"><span>${localized({ en: "EXTRAS STOPPED", ru: "ЛИШНИХ ОСТАНОВЛЕНО" })}</span><strong>${summary.extra_sources_not_accepted_by_exact_quote_gate} / 8</strong></article><article class="needs-review"><span>${localized({ en: "BAD FORMAT", ru: "НАРУШИЛИ ФОРМАТ" })}</span><strong>${summary.invented_or_malformed}</strong></article></div><div class="e007-result-legend"><span class="is-correct">■ ${localized({ en: "green = right", ru: "зелёное = верно" })}</span><span class="needs-review">■ ${localized({ en: "yellow = safely rejected, bad format", ru: "жёлтое = безопасно отклонено, плохой формат" })}</span><span class="is-critical">■ ${localized({ en: "red = useful lost or extra accepted", ru: "красное = полезное потеряно или лишнее принято" })}</span></div><div class="e007-result-table-wrap"><table class="e007-result-table e007-blind-reader-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "FULL SOURCE", ru: "ПОЛНЫЙ ИСТОЧНИК" })}</th><th>${localized({ en: "HIDDEN LABEL", ru: "СКРЫТАЯ МЕТКА" })}</th><th>${localized({ en: "RAW QWEN OUTPUT", ru: "СЫРОЙ ОТВЕТ QWEN" })}</th><th>${localized({ en: "HARNESS DECISION", ru: "РЕШЕНИЕ HARNESS" })}</th></tr></thead><tbody>${rows}</tbody></table></div><p class="control-warning">${localized({ en: "Main failures: Qwen answered NONE for one useful payment-webhook source, and accepted one irrelevant violin source for a sewing question. The run was not retried.", ru: "Главные ошибки: Qwen ответила NONE на полезный источник про платёжный webhook и приняла нерелевантный источник про скрипку для вопроса о шитье. Запуск не повторялся." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/blind-reader-protocol-v0.1.json">${localized({ en: "LOCKED PLAN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/blind-reader-result-v0.1.json">${localized({ en: "ALL RAW ANSWERS", ru: "ВСЕ СЫРЫЕ ОТВЕТЫ" })} ↗</a></div></section>`;
+    }
     target.querySelector(".experiment-loading").outerHTML = `
+      ${blindReaderMarkup}
       ${sendPolicyMarkup}
       ${localOfferResultsMarkup}
       ${localOfferResult ? `<details class="e007-history"><summary>${localized({ en: "Earlier E007 checkpoints", ru: "Предыдущие этапы E007" })}</summary><div>` : ""}

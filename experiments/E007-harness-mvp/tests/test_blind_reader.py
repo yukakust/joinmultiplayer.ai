@@ -30,6 +30,16 @@ class BlindReaderTests(unittest.TestCase):
         self.assertEqual(MODULE.classify("NONE", "A source sentence.")[0], "none")
         self.assertEqual(MODULE.classify("FOUND\nAn invented sentence that is not present.", "A source sentence.")[0], "malformed_or_invented")
 
+    def test_published_result_preserves_failed_gate(self):
+        result_path = ROOT / "site/experiments/E007/blind-reader-result-v0.1.json"
+        if not result_path.exists():
+            self.skipTest("locked run has not completed")
+        result = json.loads(result_path.read_text())
+        self.assertFalse(result["passed_locked_gate"])
+        self.assertEqual(result["summary"]["useful_quotes_found"], 7)
+        self.assertEqual(result["summary"]["extra_sources_not_accepted_by_exact_quote_gate"], 7)
+        self.assertEqual(result["summary"]["invented_or_malformed"], 3)
+
 
 if __name__ == "__main__":
     unittest.main()

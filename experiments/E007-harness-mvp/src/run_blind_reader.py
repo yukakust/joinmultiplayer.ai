@@ -135,6 +135,7 @@ def main(model_path: Path, threads: int, batch_size: int) -> None:
         "useful_quotes_found": sum(record["decision"] == "found_exact" for record in useful),
         "useful_total": len(useful),
         "extra_sources_rejected": sum(record["decision"] == "none" for record in extras),
+        "extra_sources_not_accepted_by_exact_quote_gate": sum(record["decision"] != "found_exact" for record in extras),
         "extra_total": len(extras),
         "invented_or_malformed": sum(record["decision"] == "malformed_or_invented" for record in records),
         "hit_token_limit": sum(record["hit_token_limit"] for record in records),

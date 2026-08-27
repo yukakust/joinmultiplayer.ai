@@ -285,6 +285,14 @@ or output `NONE`. The locked gate is at least 7/8 useful quotes, at least 7/8
 extras rejected, and zero invented quotes. Do not add the proposed second-chance
 claim reveal until this first blind condition is preserved and reviewed.
 
+Gate 3C.2 ran once without training or retry. Raw results are
+`/experiments/E007/blind-reader-result-v0.1.json`. Qwen copied exact useful
+quotes for 7/8 useful candidates. It returned exact `NONE` for 4/8 extras; the
+strict quote gate ultimately stopped 7/8 extras because three additional
+outputs had no valid quote (`NONE.` twice and bare `FOUND` once). One irrelevant
+violin source was accepted for a sewing question. The locked gate failed: one
+useful webhook source was lost and three outputs violated the response format.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:
