@@ -4371,6 +4371,8 @@ async function loadE007() {
       <section class="e005-gate4-result-verdict"><span>${localized({ en: "CURRENT DECISION", ru: "ТЕКУЩЕЕ РЕШЕНИЕ" })}</span><h2>${localOfferResult ? localized({ en: "One method must find the useful piece and reject the noise at the same time.", ru: "Один метод должен одновременно находить полезное и отбрасывать мусор." }) : localized({ en: "Checkpoint 3B is locked. Install local libraries, then search.", ru: "Checkpoint 3B зафиксирован. Теперь ставим локальные библиотеки и запускаем поиск." })}</h2><p>${localOfferResult ? escapeHTML(localized(localOfferResult.protocol_design_finding)) : localized(design.hypothesis)}</p></section>
       <div class="actions"><a class="quiet-link" href="/experiments/E007/smoke-protocol-v0.1.json">LOCKED SMOKE JSON ↗</a><a class="quiet-link" href="/experiments/E007/world-v0.1.json">LOCKED WORLD JSON ↗</a><a class="quiet-link" href="/experiments/E007/design-v0.1.json">DESIGN JSON ↗</a><a class="quiet-link" href="/experiment/e006/">E006 ↗</a></div>
       ${localOfferResult ? "</div></details>" : ""}`;
+    const requestedSection = location.hash.slice(1);
+    if (requestedSection) requestAnimationFrame(() => document.getElementById(requestedSection)?.scrollIntoView({ block: "start" }));
   } catch (error) {
     target.querySelector(".experiment-loading").textContent = localized({ en: "E007 design could not be loaded.", ru: "Не удалось загрузить чертёж E007." });
   }
