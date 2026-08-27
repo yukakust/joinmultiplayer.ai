@@ -67,7 +67,7 @@
     {"id": "3C.3", "name": "span_id_selector_plus_blind_question_span_bridge", "status": "development_run_complete_locked_gate_failed"},
     {"id": "3C.4", "name": "specialized_relevance_judges", "status": "development_run_complete_locked_gate_failed"},
     {"id": "3C.5", "name": "qwen3_reranker_4b_phone_candidate_quantization", "status": "architecture_step_accepted_phone_measurement_pending"},
-    {"id": "3C.6A", "name": "deterministic_source_anchor_integrity", "status": "locked_before_run"},
+    {"id": "3C.6A", "name": "deterministic_source_anchor_integrity", "status": "development_run_complete_locked_gate_passed_owner_review_pending"},
     {"id": "3D", "name": "same_model_smoke_split_across_two_devices", "status": "not_started"},
     {"id": 4, "name": "locked_thirty_task_run", "status": "not_started"},
     {"id": 5, "name": "owner_audit_and_public_result", "status": "not_started"}

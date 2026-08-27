@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6A",
+  "run_kind": "development",
+  "locked_code_commit": "8482c5fc8db6a5af4e83f35e0aa25ac07838fea6",
+  "python": "3.14.4",
+  "first_result_sha256": "cfe09e6f1b8dcdd235cd8453d3d70add5d6180732980f6b663badb47c725c04b",
+  "second_result_sha256": "cfe09e6f1b8dcdd235cd8453d3d70add5d6180732980f6b663badb47c725c04b",
+  "second_run_identical": true,
+  "uncaught_exceptions": 0
+}

@@ -361,6 +361,12 @@ byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict
 20/20 gate. Run `experiments/E007-harness-mvp/src/verify_source_anchor.py` only
 after the lock commit is public, then preserve success or failure unchanged.
 
+Gate 3C.6A subsequently ran twice from locked commit `8482c5f`; both outputs
+had SHA-256 `cfe09e6f...c04b`. Result: 20/20 correct, 4/4 intact verified, 0/16
+broken verified, locked development gate passed. Public result:
+`/experiments/E007/source-anchor-result-v0.1.json`; deterministic receipt:
+`/experiments/E007/source-anchor-run-receipt-v0.1.json`. Owner review pending.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

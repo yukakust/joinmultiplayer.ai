@@ -1,0 +1,355 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6A",
+  "status": "development_run_complete",
+  "protocol": "/experiments/E007/source-anchor-protocol-v0.1.json",
+  "summary": {
+    "correct": 20,
+    "total": 20,
+    "intact_verified": 4,
+    "broken_verified": 0
+  },
+  "passed_locked_gate": true,
+  "records": [
+    {
+      "id": "SA01",
+      "scenario": "exact ASCII anchor",
+      "expected": "verified",
+      "decision": "verified",
+      "selected_excerpt": "The auxiliary vent remained closed.",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 13,
+        "byte_end": 48,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxiliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA02",
+      "scenario": "exact Cyrillic UTF-8 anchor",
+      "expected": "verified",
+      "decision": "verified",
+      "selected_excerpt": "температура снизилась на двенадцать градусов",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-RU",
+        "source_version": "v1",
+        "source_sha256": "e1288ed881ebcadf0b7ea6a9d64b487e96bb8fb0d348f3e7b6ae669ab699fcf1",
+        "byte_start": 35,
+        "byte_end": 119,
+        "fragment_sha256": "98afdc83cc15005b8374fcc9a53f14df5f0beb5feb2684f35472c521381e959c",
+        "display_excerpt": "температура снизилась на двенадцать градусов"
+      }
+    },
+    {
+      "id": "SA03",
+      "scenario": "duplicate phrase with correct byte offsets",
+      "expected": "verified",
+      "decision": "verified",
+      "selected_excerpt": "Status stable.",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-DUP",
+        "source_version": "v1",
+        "source_sha256": "e5e252aecd2e013876100dcc3b46cc40b62e6675f1b9f566eb7c7aee93b03ca6",
+        "byte_start": 28,
+        "byte_end": 42,
+        "fragment_sha256": "9ccdc7806dcd834f9fe318e41cd3b1fe95a95f0802c472bf19d7f7f257ac7578",
+        "display_excerpt": "Status stable."
+      }
+    },
+    {
+      "id": "SA04",
+      "scenario": "exact CRLF anchor",
+      "expected": "verified",
+      "decision": "verified",
+      "selected_excerpt": "Valve opened\r\nPressure fell",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-CRLF",
+        "source_version": "v1",
+        "source_sha256": "ff41eeccbffaa5818e12e0d6cf1ea62fddbc0e04aaaeaf90548c31824c93f493",
+        "byte_start": 8,
+        "byte_end": 35,
+        "fragment_sha256": "624f09cf3ef4680ba69bd4b0fed39602682b6c19bdb7422c33f4ab002df234dd",
+        "display_excerpt": "Valve opened\r\nPressure fell"
+      }
+    },
+    {
+      "id": "SA05",
+      "scenario": "start shifted by one byte",
+      "expected": "fragment_mismatch",
+      "decision": "fragment_mismatch",
+      "selected_excerpt": "he auxiliary vent remained closed.",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 14,
+        "byte_end": 48,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxiliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA06",
+      "scenario": "end shortened by one byte",
+      "expected": "fragment_mismatch",
+      "decision": "fragment_mismatch",
+      "selected_excerpt": "The auxiliary vent remained closed",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 13,
+        "byte_end": 47,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxiliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA07",
+      "scenario": "human-readable excerpt paraphrased",
+      "expected": "display_mismatch",
+      "decision": "display_mismatch",
+      "selected_excerpt": "The auxiliary vent remained closed.",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 13,
+        "byte_end": 48,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxiliary vent was closed."
+      }
+    },
+    {
+      "id": "SA08",
+      "scenario": "fragment hash altered",
+      "expected": "fragment_mismatch",
+      "decision": "fragment_mismatch",
+      "selected_excerpt": "The auxiliary vent remained closed.",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 13,
+        "byte_end": 48,
+        "fragment_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "display_excerpt": "The auxiliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA09",
+      "scenario": "source content changed after capsule",
+      "expected": "source_changed",
+      "decision": "source_changed",
+      "selected_excerpt": null,
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "byte_start": 13,
+        "byte_end": 48,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxiliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA10",
+      "scenario": "source id missing",
+      "expected": "source_missing",
+      "decision": "source_missing",
+      "selected_excerpt": null,
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-MISSING",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 13,
+        "byte_end": 48,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxiliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA11",
+      "scenario": "source version missing",
+      "expected": "source_missing",
+      "decision": "source_missing",
+      "selected_excerpt": null,
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v0",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 13,
+        "byte_end": 48,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxiliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA12",
+      "scenario": "range ends beyond source",
+      "expected": "invalid_range",
+      "decision": "invalid_range",
+      "selected_excerpt": null,
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 13,
+        "byte_end": 73,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxiliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA13",
+      "scenario": "negative range start",
+      "expected": "invalid_range",
+      "decision": "invalid_range",
+      "selected_excerpt": null,
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": -1,
+        "byte_end": 48,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxiliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA14",
+      "scenario": "character offsets mistakenly sent as byte offsets",
+      "expected": "fragment_mismatch",
+      "decision": "fragment_mismatch",
+      "selected_excerpt": "людения: температура сн�",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-RU",
+        "source_version": "v1",
+        "source_sha256": "e1288ed881ebcadf0b7ea6a9d64b487e96bb8fb0d348f3e7b6ae669ab699fcf1",
+        "byte_start": 19,
+        "byte_end": 63,
+        "fragment_sha256": "98afdc83cc15005b8374fcc9a53f14df5f0beb5feb2684f35472c521381e959c",
+        "display_excerpt": "температура снизилась на двенадцать градусов"
+      }
+    },
+    {
+      "id": "SA15",
+      "scenario": "legacy quote occurs twice and has no offsets",
+      "expected": "ambiguous_reference",
+      "decision": "ambiguous_reference",
+      "selected_excerpt": null,
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-DUP",
+        "source_version": "v1",
+        "source_sha256": "e5e252aecd2e013876100dcc3b46cc40b62e6675f1b9f566eb7c7aee93b03ca6",
+        "fragment_sha256": "9ccdc7806dcd834f9fe318e41cd3b1fe95a95f0802c472bf19d7f7f257ac7578",
+        "display_excerpt": "Status stable."
+      }
+    },
+    {
+      "id": "SA16",
+      "scenario": "look-alike Unicode character in display excerpt",
+      "expected": "display_mismatch",
+      "decision": "display_mismatch",
+      "selected_excerpt": "The auxiliary vent remained closed.",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 13,
+        "byte_end": 48,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxіliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA17",
+      "scenario": "line endings changed from LF to CRLF",
+      "expected": "source_changed",
+      "decision": "source_changed",
+      "selected_excerpt": null,
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-LINE",
+        "source_version": "v1",
+        "source_sha256": "0a9991ed73eb520b9a5a00abdf36db0728b80e6ce2efffed9815994e9c350aaf",
+        "byte_start": 7,
+        "byte_end": 33,
+        "fragment_sha256": "fea34f042ca876e8346b2f9c8f620855ef45d5cb798b5afd9e6ea135b3b7cae3",
+        "display_excerpt": "Valve opened\nPressure fell"
+      }
+    },
+    {
+      "id": "SA18",
+      "scenario": "empty byte range",
+      "expected": "invalid_range",
+      "decision": "invalid_range",
+      "selected_excerpt": null,
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 13,
+        "byte_end": 13,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "The auxiliary vent remained closed."
+      }
+    },
+    {
+      "id": "SA19",
+      "scenario": "correct fragment hash but wrong display excerpt",
+      "expected": "display_mismatch",
+      "decision": "display_mismatch",
+      "selected_excerpt": "The auxiliary vent remained closed.",
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-A",
+        "source_version": "v1",
+        "source_sha256": "bcd8cd0bdfc53d36ce9fdf6e8653c26ff2cce2d5c895c99073c2143ef35f9c29",
+        "byte_start": 13,
+        "byte_end": 48,
+        "fragment_sha256": "4e9fc600852878a2adbc9e5a495169c0d577f141ee3d1493ff9258ae9d266312",
+        "display_excerpt": "Pressure stayed stable."
+      }
+    },
+    {
+      "id": "SA20",
+      "scenario": "source exists but cannot be read",
+      "expected": "source_unreadable",
+      "decision": "source_unreadable",
+      "selected_excerpt": null,
+      "correct": true,
+      "capsule": {
+        "source_id": "SRC-LOCKED",
+        "source_version": "v1",
+        "source_sha256": "624d26c9edd8b0191512ef668001d607642f7f28c0d886c29f93c840112ab13a",
+        "byte_start": 0,
+        "byte_end": 17,
+        "fragment_sha256": "624d26c9edd8b0191512ef668001d607642f7f28c0d886c29f93c840112ab13a",
+        "display_excerpt": "Owner-only record"
+      }
+    }
+  ],
+  "boundary": "This proves byte equality to one locally available source snapshot. It does not prove meaning, truth, trustworthiness, remote private-source existence, or extraction from PDFs/OCR/web pages."
+}

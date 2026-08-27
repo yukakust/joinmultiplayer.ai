@@ -251,3 +251,11 @@ The locked gate is 20/20 correct, 4/4 intact anchors verified, 0/16 broken
 anchors verified, no exception, and an identical second run. No model, network,
 or meaning judgement participates. Protocol:
 `site/experiments/E007/source-anchor-protocol-v0.1.json`.
+
+Gate 3C.6A ran twice from locked commit `8482c5f`. Both result files had the
+same SHA-256. The code classified 20/20 cases correctly, accepted 4/4 intact
+anchors, and accepted 0/16 broken anchors; the locked development gate passed.
+Result: `site/experiments/E007/source-anchor-result-v0.1.json`. Run receipt:
+`site/experiments/E007/source-anchor-run-receipt-v0.1.json`. Owner review is
+pending; PDF/OCR/web extraction, signatures, source truth, and source meaning
+remain outside this result.
