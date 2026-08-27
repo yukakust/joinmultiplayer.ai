@@ -384,6 +384,15 @@ mistakenly states 4/4 linked groups although five are defined; preserve that
 bookkeeping error rather than rewriting history. Public result:
 `/experiments/E007/chunking-result-v0.1.json`.
 
+Checkpoint 3C.6B is locked before inference at
+`/experiments/E007/evidence-capsule-protocol-v0.1.json`; its 24 frozen packets
+are `/experiments/E007/evidence-capsules-v0.1.json`. It tests the owner-approved
+four-part incoming capsule: claim, exact ≤500-token source window, exact
+sender-highlighted subrange, and versioned source locator/coordinates. Run the
+deterministic mechanical gate first. Only valid packets may reach the frozen
+Qwen3-Reranker-4B Q4 relevance gate, which must see only question + window.
+Do not add claim-support or condition-applicability conclusions to this gate.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

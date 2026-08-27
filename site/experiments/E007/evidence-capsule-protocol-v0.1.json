@@ -1,0 +1,73 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6B",
+  "status": "locked_before_inference",
+  "kind": "incoming_evidence_capsule_development_test",
+  "title": {
+    "en": "Can one small evidence capsule survive independent acceptance?",
+    "ru": "Может ли маленькая капсула доказательства пройти независимую приёмку?"
+  },
+  "hypothesis": {
+    "en": "A claim, an exact source window of at most 500 tokens, one sender-highlighted exact span, and versioned source coordinates are enough for ordinary code to reject broken packets and for a frozen reranker to keep useful windows without trusting the sender's claim.",
+    "ru": "Утверждения, точного окна источника до 500 токенов, выделенного отправителем точного места и координат версии источника достаточно, чтобы обычный код отсеял сломанные пакеты, а замороженный reranker сохранил полезные окна, не доверяя утверждению отправителя."
+  },
+  "packet_contract": [
+    "claim: a short sender-written statement; not trusted by this gate",
+    "evidence_window: exact UTF-8 source bytes, at most 500 Qwen tokens",
+    "candidate_evidence: an exact subrange inside evidence_window selected by the sender",
+    "source: source_id, source_version, source hash, and exact evidence-window byte coordinates"
+  ],
+  "frozen_population": {
+    "total": 24,
+    "useful_intact": 8,
+    "misleading_intact": 8,
+    "mechanically_broken": 8,
+    "window_token_targets": [100, 250, 500],
+    "useful_positions": ["start", "middle", "end"]
+  },
+  "mechanical_gate": {
+    "implementation": "ordinary deterministic code; no model",
+    "checks": [
+      "source id and version exist",
+      "source SHA-256 matches the frozen source bytes",
+      "evidence-window byte range is valid and matches both text and SHA-256",
+      "candidate-evidence byte range is inside the window and matches both text and SHA-256",
+      "evidence_window is at most 500 Qwen tokens"
+    ],
+    "success": "24/24 expected decisions; 16/16 intact accepted; 0/8 broken accepted"
+  },
+  "relevance_gate": {
+    "model": "Qwen/Qwen3-Reranker-4B",
+    "quantization": "Q4_K_M",
+    "input": "question + evidence_window only; claim and candidate_evidence are hidden from the model",
+    "instruction": "Given a user question and one evidence window, decide whether the window contains information that helps answer the question.",
+    "thresholds": {
+      "drop_at_or_below": 0.00292693,
+      "take_at_or_above": 0.92222771,
+      "between": "NOT_SURE",
+      "source": "frozen E007 Gate 3C.5 Q4 thresholds"
+    },
+    "success": {
+      "useful_dropped_max": 0,
+      "useful_taken_min": 7,
+      "misleading_taken_max": 2
+    }
+  },
+  "locked_reporting": [
+    "show all 24 packets",
+    "show every mechanical decision and reason",
+    "show every reranker score and TAKE / NOT_SURE / DROP decision",
+    "separate results by 100, 250, and 500 token target and by evidence position",
+    "preserve failures and protocol mistakes"
+  ],
+  "not_tested": [
+    "whether the claim is supported by candidate_evidence",
+    "whether sender-highlighted evidence is the best evidence",
+    "truth or trustworthiness of the source",
+    "privacy or secret removal",
+    "how the sender found the evidence window in its memory",
+    "final answer generation"
+  ],
+  "claim_boundary": "One public synthetic English development set. This test checks packet integrity and whole-window relevance only. It must not be described as proof that claims are true or supported."
+}

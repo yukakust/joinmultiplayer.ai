@@ -286,3 +286,22 @@ also contained a protocol bookkeeping error: it said 4/4 linked groups while
 the frozen questions define five. The protocol is not rewritten after the run;
 the failed gate and error remain public. Result:
 `site/experiments/E007/chunking-result-v0.1.json`.
+
+## Checkpoint 3C.6B — incoming evidence capsule
+
+The owner accepted a minimal incoming packet with exactly four meaningful
+parts: a free-form claim, an exact source window of at most 500 Qwen tokens, an
+exact sender-highlighted subrange, and a versioned source locator with byte
+coordinates. Conditions are not a required sender-authored JSON field; they
+must remain visible in the exact source window for a later receiver-side test.
+
+Before inference, freeze 24 public synthetic English packets: 8 useful intact,
+8 misleading intact, and 8 mechanically broken. Useful information appears at
+the start, middle, and end of windows targeting 100, 250, and 500 tokens.
+Ordinary code first validates every byte range and hash. Only mechanically
+valid packets reach the unchanged Qwen3-Reranker-4B Q4_K_M relevance gate; it
+sees question + evidence window only, never the sender claim or highlighted
+answer. Protocol and frozen packets:
+`site/experiments/E007/evidence-capsule-protocol-v0.1.json` and
+`site/experiments/E007/evidence-capsules-v0.1.json`. Claim support, source truth,
+privacy, sender retrieval, and final answer generation remain out of scope.
