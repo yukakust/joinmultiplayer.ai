@@ -267,6 +267,15 @@ expected states, and policy priority are frozen in
 `/experiments/E007/send-policy-memory-v0.1.json`. Downstream acceptance is not
 part of 3C and must not be claimed from this run.
 
+The development run is complete at
+`/experiments/E007/send-policy-result-v0.1.json`. F1-balanced and F2-recall-first
+both selected threshold 0.378882 from calibration and therefore produced the
+same result: 8/8 useful sources delivered, 8 extra candidates, zero knowledge
+misses, and zero privacy failures. Always offering top-1 also delivered 8/8 but
+created 30 extra candidates. This does not validate acceptance; it establishes
+that the next module must filter the eight recoverable extras without losing a
+useful source.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

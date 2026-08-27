@@ -62,7 +62,7 @@
     {"id": 2, "name": "three_task_yukabox_smoke", "status": "generation_complete_owner_review_pending"},
     {"id": "3A", "name": "physical_exact_question_and_attention_smoke", "status": "complete"},
     {"id": "3B", "name": "physical_local_knowledge_offer", "status": "locked_before_search"},
-    {"id": "3C", "name": "recall_first_send_policy_on_unseen_questions", "status": "locked_before_run"},
+    {"id": "3C", "name": "recall_first_send_policy_on_unseen_questions", "status": "development_run_complete"},
     {"id": "3D", "name": "same_model_smoke_split_across_two_devices", "status": "not_started"},
     {"id": 4, "name": "locked_thirty_task_run", "status": "not_started"},
     {"id": 5, "name": "owner_audit_and_public_result", "status": "not_started"}

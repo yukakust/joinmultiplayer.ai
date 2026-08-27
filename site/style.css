@@ -5011,6 +5011,39 @@ blockquote {
   margin-bottom: 10px;
 }
 
+.e007-result-table td small {
+  color: var(--muted);
+  display: block;
+  font-size: 11px;
+  line-height: 1.35;
+  margin-top: 8px;
+}
+
+.e007-policy-table {
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+}
+
+.e007-policy-table > summary {
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 800;
+  padding: 20px 0;
+}
+
+.e007-policy-result-table {
+  min-width: 1500px;
+}
+
+.e007-policy-result-table thead th:first-child { width: 27%; }
+.e007-policy-result-table thead th:nth-child(2) { width: 7%; }
+.e007-policy-result-table thead th:nth-child(3),
+.e007-policy-result-table thead th:nth-child(4) { width: 11%; }
+.e007-policy-result-table thead th:nth-child(5) { width: 28%; }
+.e007-policy-result-table thead th:nth-child(6) { width: 7%; }
+.e007-policy-result-table thead th:last-child { width: 9%; }
+
 .e007-result-table .e007-verdict {
   font-weight: 800;
 }

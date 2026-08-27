@@ -4119,7 +4119,7 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
@@ -4132,6 +4132,9 @@ async function loadE007() {
       fetch("/api/public/attention.json", { cache: "no-store" }),
       fetch("/experiments/E007/local-offer-protocol-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/local-offer-result-L0001.json", { cache: "no-store" }),
+      fetch("/experiments/E007/send-policy-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/send-policy-memory-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/send-policy-result-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
@@ -4144,6 +4147,9 @@ async function loadE007() {
     const attentionRuns = attentionRunsResponse.ok ? await attentionRunsResponse.json() : null;
     const localOffer = localOfferResponse.ok ? await localOfferResponse.json() : null;
     const localOfferResult = localOfferResultResponse.ok ? await localOfferResultResponse.json() : null;
+    const sendPolicy = sendPolicyResponse.ok ? await sendPolicyResponse.json() : null;
+    const sendPolicyMemory = sendPolicyMemoryResponse.ok ? await sendPolicyMemoryResponse.json() : null;
+    const sendPolicyResult = sendPolicyResultResponse.ok ? await sendPolicyResultResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4237,7 +4243,33 @@ async function loadE007() {
       const severity = localOfferResult.product_severity || { filterable_extra_candidates: 3, critical_missed_knowledge: 1, critical_privacy_failures: 0 };
       localOfferResultsMarkup = `<section id="e007-local-offer-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3B · ${localized({ en: "RESULT", ru: "РЕЗУЛЬТАТ" })}</div><h2>${localized({ en: "One critical mistake: one useful record was not sent.", ru: "Критическая ошибка одна: одна полезная запись не была отправлена." })}</h2><div class="e007-result-metrics"><article class="is-critical"><span>${localized({ en: "USEFUL RECORDS DELIVERED", ru: "ПОЛЕЗНЫХ ЗАПИСЕЙ ДОСТАВЛЕНО" })}</span><strong>${neural.required_source_recall.found} / 5</strong></article><article class="needs-review"><span>${localized({ en: "EXTRA CANDIDATES", ru: "ЛИШНИХ КАНДИДАТОВ" })}</span><strong>${severity.filterable_extra_candidates}</strong></article><article class="is-correct"><span>${localized({ en: "SECRET LEAKS", ru: "УТЕЧКИ СЕКРЕТА" })}</span><strong>${severity.critical_privacy_failures}</strong></article></div><p class="e007-baseline-note">${localized({ en: `${neural.correct_states}/24 decisions were right. Extra candidates can be filtered at acceptance; missing knowledge cannot be recovered there.`, ru: `${neural.correct_states}/24 решений были верными. Лишних кандидатов можно отфильтровать на приёмке; потерянное знание там уже не вернуть.` })}</p><div class="e007-result-legend"><span class="is-correct">■ ${localized({ en: "green = right", ru: "зелёное = верно" })}</span><span class="needs-review">■ ${localized({ en: "yellow = filter at acceptance", ru: "жёлтое = отфильтровать на приёмке" })}</span><span class="is-critical">■ ${localized({ en: "red = knowledge lost", ru: "красное = знание потеряно" })}</span></div><div class="e007-result-table-wrap"><table class="e007-result-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>POCKET I</th><th>${localized({ en: "SHOULD DO", ru: "ДОЛЖНА БЫЛА" })}</th><th>${localized({ en: "DID", ru: "СДЕЛАЛА" })}</th><th>${localized({ en: "SELECTED RECORD", ru: "ВЫБРАННАЯ ЗАПИСЬ" })}</th><th>${localized({ en: "RESULT", ru: "ИТОГ" })}</th></tr></thead>${tableGroups}</table></div><p class="control-warning">${localized({ en: "Why the hive record was lost: it ranked first inside ATT-M2, but its meaning score was 0.379—below the global send threshold of 0.415. The search found the right place; the send gate was too strict.", ru: "Почему потерялась запись про улей: внутри ATT-M2 она заняла первое место, но получила 0,379 — ниже общего порога отправки 0,415. Поиск нашёл правильное место; порог отправки оказался слишком строгим." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/local-offer-result-L0001.json">${localized({ en: "TECHNICAL DATA", ru: "ТЕХНИЧЕСКИЕ ДАННЫЕ" })} ↗</a></div></section>`;
     }
+    let sendPolicyMarkup = "";
+    if (sendPolicy && sendPolicyMemory && sendPolicyResult) {
+      const questionById = new Map(sendPolicyMemory.questions.map((question) => [question.id, question.question]));
+      const sourceById = new Map(Object.values(sendPolicyMemory.libraries).flat().map((source) => [source.id, source.text]));
+      const policyNames = Object.fromEntries(sendPolicy.policies.map((policy) => [policy.id, localized(policy.plain_name)]));
+      const stateName = (state) => ({ found: localized({ en: "sent", ru: "отправила" }), candidate: localized({ en: "sent with doubt", ru: "отправила с сомнением" }), empty: localized({ en: "stayed silent", ru: "промолчала" }), blocked: localized({ en: "blocked private data", ru: "заблокировала приватное" }) }[state] || state);
+      const policyCards = sendPolicy.policies.map((policy) => {
+        const summary = sendPolicyResult.summaries[policy.id];
+        const tone = summary.critical_missed_knowledge || summary.critical_privacy_failures ? "is-critical" : summary.filterable_extra_candidates ? "needs-review" : "is-correct";
+        return `<article class="${tone}"><span>${escapeHTML(policyNames[policy.id])}</span><strong>${summary.useful_sources_delivered} / ${summary.useful_sources_total}</strong><small>${localized({ en: `${summary.filterable_extra_candidates} extra candidates`, ru: `${summary.filterable_extra_candidates} лишних кандидатов` })}</small></article>`;
+      }).join("");
+      const policyTables = sendPolicy.policies.map((policy, policyIndex) => {
+        const rows = sendPolicyResult.records.filter((record) => record.policy === policy.id).map((record) => {
+          const usefulDelivered = record.expected === "found" && record.offered && record.required_sources.includes(record.selected_source);
+          const correct = usefulDelivered || (record.expected === "empty" && !record.offered) || (record.expected === "blocked" && record.actual === "blocked");
+          const critical = (record.expected === "found" && !usefulDelivered) || (record.expected === "blocked" && record.actual !== "blocked");
+          const tone = correct ? "is-correct" : critical ? "is-critical" : "needs-review";
+          const verdict = correct ? localized({ en: "RIGHT", ru: "ВЕРНО" }) : critical ? localized({ en: "LOST", ru: "ПОТЕРЯНО" }) : localized({ en: "FILTER", ru: "ОТФИЛЬТРОВАТЬ" });
+          const expected = record.expected === "found" ? localized({ en: "send useful", ru: "прислать полезное" }) : record.expected === "blocked" ? localized({ en: "block private", ru: "закрыть приватное" }) : localized({ en: "stay silent", ru: "промолчать" });
+          return `<tr class="${tone}"><th><span>${escapeHTML(record.question_id)}</span>${escapeHTML(questionById.get(record.question_id))}</th><td><b>${escapeHTML(record.card_id)}</b></td><td>${escapeHTML(expected)}</td><td>${escapeHTML(stateName(record.actual))}</td><td><b>${escapeHTML(record.selected_source)}</b><small>${escapeHTML((sourceById.get(record.selected_source) || "").slice(0, 160))}</small></td><td>${Number(record.score).toFixed(3)}</td><td class="e007-verdict">${escapeHTML(verdict)}</td></tr>`;
+        }).join("");
+        return `<details class="e007-policy-table" ${policyIndex === 0 ? "open" : ""}><summary>${escapeHTML(policyNames[policy.id])} · ${sendPolicyResult.summaries[policy.id].useful_sources_delivered}/8 ${localized({ en: "useful", ru: "полезных" })} · ${sendPolicyResult.summaries[policy.id].filterable_extra_candidates} ${localized({ en: "extra", ru: "лишних" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-policy-result-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>POCKET I</th><th>${localized({ en: "SHOULD", ru: "НАДО" })}</th><th>${localized({ en: "DID", ru: "СДЕЛАЛА" })}</th><th>${localized({ en: "BEST LOCAL RECORD", ru: "ЛУЧШАЯ ЛОКАЛЬНАЯ ЗАПИСЬ" })}</th><th>SCORE</th><th>${localized({ en: "RESULT", ru: "ИТОГ" })}</th></tr></thead><tbody>${rows}</tbody></table></div></details>`;
+      }).join("");
+      sendPolicyMarkup = `<section id="e007-send-policy-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C · ${localized({ en: "NEW UNSEEN QUESTIONS", ru: "НОВЫЕ НЕВИДЕННЫЕ ВОПРОСЫ" })}</div><h2>${localized({ en: "Lowering the threshold did not create a new policy.", ru: "Снижение порога не создало новую политику." })}</h2><p>${localized({ en: "F1 and F2 independently chose the same 0.379 threshold. Both delivered all 8 useful records and sent 8 extra candidates. Always sending the best record delivered the same 8, but added 30 extras.", ru: "F1 и F2 независимо выбрали один порог 0,379. Оба доставили все 8 полезных записей и прислали 8 лишних кандидатов. Правило «всегда присылай лучшую» доставило те же 8, но добавило 30 лишних." })}</p><div class="e007-result-metrics">${policyCards}</div><div class="e007-result-legend"><span class="is-correct">■ ${localized({ en: "green = right", ru: "зелёное = верно" })}</span><span class="needs-review">■ ${localized({ en: "yellow = acceptance must filter", ru: "жёлтое = должна отсеять приёмка" })}</span><span class="is-critical">■ ${localized({ en: "red = knowledge lost", ru: "красное = знание потеряно" })}</span></div>${policyTables}<p class="control-warning">${localized({ en: "Honest boundary: Gate 3C tested only which local records get offered. It did not test whether downstream acceptance can reject the extra eight.", ru: "Честная граница: Gate 3C проверил только отправку локальных записей. Он не проверял, сможет ли приёмка правильно отбросить восемь лишних." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/send-policy-protocol-v0.1.json">${localized({ en: "LOCKED BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/send-policy-result-v0.1.json">${localized({ en: "ALL RAW DECISIONS", ru: "ВСЕ РЕШЕНИЯ" })} ↗</a></div></section>`;
+    }
     target.querySelector(".experiment-loading").outerHTML = `
+      ${sendPolicyMarkup}
       ${localOfferResultsMarkup}
       ${localOfferResult ? `<details class="e007-history"><summary>${localized({ en: "Earlier E007 checkpoints", ru: "Предыдущие этапы E007" })}</summary><div>` : ""}
       ${localOfferMarkup}

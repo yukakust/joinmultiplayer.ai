@@ -37,6 +37,17 @@ class SendPolicyTests(unittest.TestCase):
         self.assertIsNone(private["capsule"])
         self.assertIn("{{SYNTHETIC_PRIVATE_CANARY}}", private["text"])
 
+    def test_published_result_preserves_equal_threshold_finding(self):
+        result_path = ROOT / "site/experiments/E007/send-policy-result-v0.1.json"
+        if not result_path.exists():
+            self.skipTest("locked protocol has not run yet")
+        result = json.loads(result_path.read_text())
+        self.assertEqual(result["thresholds"]["balanced_f1"], result["thresholds"]["recall_first_f2"])
+        self.assertEqual(result["summaries"]["balanced"]["useful_sources_delivered"], 8)
+        self.assertEqual(result["summaries"]["balanced"]["critical_missed_knowledge"], 0)
+        self.assertEqual(result["summaries"]["balanced"]["filterable_extra_candidates"], 8)
+        self.assertEqual(result["summaries"]["top1_candidate"]["filterable_extra_candidates"], 30)
+
 
 if __name__ == "__main__":
     unittest.main()

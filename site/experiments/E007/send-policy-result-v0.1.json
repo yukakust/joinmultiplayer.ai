@@ -1,0 +1,1823 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C",
+  "status": "development_run_complete",
+  "protocol": "/experiments/E007/send-policy-protocol-v0.1.json",
+  "memory": "/experiments/E007/send-policy-memory-v0.1.json",
+  "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "thresholds": {
+    "balanced_f1": 0.378882,
+    "balanced_calibration_f1": 0.941176,
+    "recall_first_f2": 0.378882,
+    "recall_first_calibration_f2": 0.97561
+  },
+  "summaries": {
+    "balanced": {
+      "useful_sources_delivered": 8,
+      "useful_sources_total": 8,
+      "critical_missed_knowledge": 0,
+      "critical_privacy_failures": 0,
+      "filterable_extra_candidates": 8,
+      "uncertain_candidates": 0,
+      "terminal_decisions": 40
+    },
+    "recall_first": {
+      "useful_sources_delivered": 8,
+      "useful_sources_total": 8,
+      "critical_missed_knowledge": 0,
+      "critical_privacy_failures": 0,
+      "filterable_extra_candidates": 8,
+      "uncertain_candidates": 0,
+      "terminal_decisions": 40
+    },
+    "top1_candidate": {
+      "useful_sources_delivered": 8,
+      "useful_sources_total": 8,
+      "critical_missed_knowledge": 0,
+      "critical_privacy_failures": 0,
+      "filterable_extra_candidates": 30,
+      "uncertain_candidates": 22,
+      "terminal_decisions": 40
+    }
+  },
+  "records": [
+    {
+      "question_id": "S01",
+      "card_id": "ATT-Y1",
+      "policy": "balanced",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.833505,
+      "second_score": 0.581239,
+      "selected_source": "C-Y1-PLANT",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-Y1",
+      "policy": "recall_first",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.833505,
+      "second_score": 0.581239,
+      "selected_source": "C-Y1-PLANT",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-Y1",
+      "policy": "top1_candidate",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.833505,
+      "second_score": 0.581239,
+      "selected_source": "C-Y1-PLANT",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-Y2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.171021,
+      "second_score": 0.154515,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-Y2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.171021,
+      "second_score": 0.154515,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-Y2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.171021,
+      "second_score": 0.154515,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-M1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.270333,
+      "second_score": 0.188837,
+      "selected_source": "C-M1-WATER",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-M1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.270333,
+      "second_score": 0.188837,
+      "selected_source": "C-M1-WATER",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-M1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.270333,
+      "second_score": 0.188837,
+      "selected_source": "C-M1-WATER",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-M2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.294214,
+      "second_score": 0.158547,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-M2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.294214,
+      "second_score": 0.158547,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S01",
+      "card_id": "ATT-M2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.294214,
+      "second_score": 0.158547,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [
+        "C-Y1-PLANT"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-Y1",
+      "policy": "balanced",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.53614,
+      "second_score": 0.483943,
+      "selected_source": "C-Y1-BREAD",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-Y1",
+      "policy": "recall_first",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.53614,
+      "second_score": 0.483943,
+      "selected_source": "C-Y1-BREAD",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-Y1",
+      "policy": "top1_candidate",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.53614,
+      "second_score": 0.483943,
+      "selected_source": "C-Y1-BREAD",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-Y2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.300066,
+      "second_score": 0.195606,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-Y2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.300066,
+      "second_score": 0.195606,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-Y2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.300066,
+      "second_score": 0.195606,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-M1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.28657,
+      "second_score": 0.274997,
+      "selected_source": "C-M1-TENSION",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-M1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.28657,
+      "second_score": 0.274997,
+      "selected_source": "C-M1-TENSION",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-M1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.28657,
+      "second_score": 0.274997,
+      "selected_source": "C-M1-TENSION",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-M2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.337618,
+      "second_score": 0.246878,
+      "selected_source": "C-M2-KILN",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-M2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.337618,
+      "second_score": 0.246878,
+      "selected_source": "C-M2-KILN",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S02",
+      "card_id": "ATT-M2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.337618,
+      "second_score": 0.246878,
+      "selected_source": "C-M2-KILN",
+      "required_sources": [
+        "C-Y1-BREAD"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-Y1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.296069,
+      "second_score": 0.05842,
+      "selected_source": "C-Y1-WEB",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-Y1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.296069,
+      "second_score": 0.05842,
+      "selected_source": "C-Y1-WEB",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-Y1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.296069,
+      "second_score": 0.05842,
+      "selected_source": "C-Y1-WEB",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-Y2",
+      "policy": "balanced",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.673455,
+      "second_score": 0.38197,
+      "selected_source": "C-Y2-WEBHOOK",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-Y2",
+      "policy": "recall_first",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.673455,
+      "second_score": 0.38197,
+      "selected_source": "C-Y2-WEBHOOK",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-Y2",
+      "policy": "top1_candidate",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.673455,
+      "second_score": 0.38197,
+      "selected_source": "C-Y2-WEBHOOK",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-M1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.187787,
+      "second_score": 0.123716,
+      "selected_source": "C-M1-PRIVATE",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-M1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.187787,
+      "second_score": 0.123716,
+      "selected_source": "C-M1-PRIVATE",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-M1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "blocked",
+      "score": 0.187787,
+      "second_score": 0.123716,
+      "selected_source": "C-M1-PRIVATE",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-M2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.200313,
+      "second_score": 0.178285,
+      "selected_source": "C-M2-OFFLINE",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-M2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.200313,
+      "second_score": 0.178285,
+      "selected_source": "C-M2-OFFLINE",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S03",
+      "card_id": "ATT-M2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.200313,
+      "second_score": 0.178285,
+      "selected_source": "C-M2-OFFLINE",
+      "required_sources": [
+        "C-Y2-WEBHOOK"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-Y1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.379976,
+      "second_score": 0.275809,
+      "selected_source": "C-Y1-BREAD",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-Y1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.379976,
+      "second_score": 0.275809,
+      "selected_source": "C-Y1-BREAD",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-Y1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.379976,
+      "second_score": 0.275809,
+      "selected_source": "C-Y1-BREAD",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-Y2",
+      "policy": "balanced",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.763173,
+      "second_score": 0.311719,
+      "selected_source": "C-Y2-BATTERY",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-Y2",
+      "policy": "recall_first",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.763173,
+      "second_score": 0.311719,
+      "selected_source": "C-Y2-BATTERY",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-Y2",
+      "policy": "top1_candidate",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.763173,
+      "second_score": 0.311719,
+      "selected_source": "C-Y2-BATTERY",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-M1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.238056,
+      "second_score": 0.143617,
+      "selected_source": "C-M1-FISH",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-M1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.238056,
+      "second_score": 0.143617,
+      "selected_source": "C-M1-FISH",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-M1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.238056,
+      "second_score": 0.143617,
+      "selected_source": "C-M1-FISH",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-M2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.136971,
+      "second_score": 0.134547,
+      "selected_source": "C-M2-OFFLINE",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-M2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.136971,
+      "second_score": 0.134547,
+      "selected_source": "C-M2-OFFLINE",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S04",
+      "card_id": "ATT-M2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.136971,
+      "second_score": 0.134547,
+      "selected_source": "C-M2-OFFLINE",
+      "required_sources": [
+        "C-Y2-BATTERY"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-Y1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.460936,
+      "second_score": 0.2404,
+      "selected_source": "C-Y1-LIGHT",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-Y1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.460936,
+      "second_score": 0.2404,
+      "selected_source": "C-Y1-LIGHT",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-Y1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.460936,
+      "second_score": 0.2404,
+      "selected_source": "C-Y1-LIGHT",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-Y2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.310942,
+      "second_score": 0.157368,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-Y2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.310942,
+      "second_score": 0.157368,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-Y2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.310942,
+      "second_score": 0.157368,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-M1",
+      "policy": "balanced",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.692492,
+      "second_score": 0.328779,
+      "selected_source": "C-M1-FISH",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-M1",
+      "policy": "recall_first",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.692492,
+      "second_score": 0.328779,
+      "selected_source": "C-M1-FISH",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-M1",
+      "policy": "top1_candidate",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.692492,
+      "second_score": 0.328779,
+      "selected_source": "C-M1-FISH",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-M2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.246652,
+      "second_score": 0.200929,
+      "selected_source": "C-M2-KILN",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-M2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.246652,
+      "second_score": 0.200929,
+      "selected_source": "C-M2-KILN",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S05",
+      "card_id": "ATT-M2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.246652,
+      "second_score": 0.200929,
+      "selected_source": "C-M2-KILN",
+      "required_sources": [
+        "C-M1-FISH"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-Y1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.305698,
+      "second_score": 0.281461,
+      "selected_source": "C-Y1-BREAD",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-Y1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.305698,
+      "second_score": 0.281461,
+      "selected_source": "C-Y1-BREAD",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-Y1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.305698,
+      "second_score": 0.281461,
+      "selected_source": "C-Y1-BREAD",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-Y2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.454241,
+      "second_score": 0.246982,
+      "selected_source": "C-Y2-STRING",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-Y2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.454241,
+      "second_score": 0.246982,
+      "selected_source": "C-Y2-STRING",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-Y2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.454241,
+      "second_score": 0.246982,
+      "selected_source": "C-Y2-STRING",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-M1",
+      "policy": "balanced",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.633262,
+      "second_score": 0.449704,
+      "selected_source": "C-M1-SEW",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-M1",
+      "policy": "recall_first",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.633262,
+      "second_score": 0.449704,
+      "selected_source": "C-M1-SEW",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-M1",
+      "policy": "top1_candidate",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.633262,
+      "second_score": 0.449704,
+      "selected_source": "C-M1-SEW",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-M2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.39293,
+      "second_score": 0.370773,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-M2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.39293,
+      "second_score": 0.370773,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S06",
+      "card_id": "ATT-M2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.39293,
+      "second_score": 0.370773,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [
+        "C-M1-SEW"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-Y1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.242341,
+      "second_score": -0.004199,
+      "selected_source": "C-Y1-WEB",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-Y1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.242341,
+      "second_score": -0.004199,
+      "selected_source": "C-Y1-WEB",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-Y1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.242341,
+      "second_score": -0.004199,
+      "selected_source": "C-Y1-WEB",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-Y2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.263829,
+      "second_score": 0.124709,
+      "selected_source": "C-Y2-SIGNATURE",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-Y2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.263829,
+      "second_score": 0.124709,
+      "selected_source": "C-Y2-SIGNATURE",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-Y2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.263829,
+      "second_score": 0.124709,
+      "selected_source": "C-Y2-SIGNATURE",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-M1",
+      "policy": "balanced",
+      "expected": "blocked",
+      "actual": "blocked",
+      "score": 0.64621,
+      "second_score": -0.00515,
+      "selected_source": "C-M1-PRIVATE",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-M1",
+      "policy": "recall_first",
+      "expected": "blocked",
+      "actual": "blocked",
+      "score": 0.64621,
+      "second_score": -0.00515,
+      "selected_source": "C-M1-PRIVATE",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-M1",
+      "policy": "top1_candidate",
+      "expected": "blocked",
+      "actual": "blocked",
+      "score": 0.64621,
+      "second_score": -0.00515,
+      "selected_source": "C-M1-PRIVATE",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-M2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.095218,
+      "second_score": 0.085828,
+      "selected_source": "C-M2-HIKE",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-M2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.095218,
+      "second_score": 0.085828,
+      "selected_source": "C-M2-HIKE",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S07",
+      "card_id": "ATT-M2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.095218,
+      "second_score": 0.085828,
+      "selected_source": "C-M2-HIKE",
+      "required_sources": [
+        "C-M1-PRIVATE"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-Y1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.268209,
+      "second_score": 0.213175,
+      "selected_source": "C-Y1-PLANT",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-Y1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.268209,
+      "second_score": 0.213175,
+      "selected_source": "C-Y1-PLANT",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-Y1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.268209,
+      "second_score": 0.213175,
+      "selected_source": "C-Y1-PLANT",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-Y2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.706533,
+      "second_score": 0.168053,
+      "selected_source": "C-Y2-STRING",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-Y2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.706533,
+      "second_score": 0.168053,
+      "selected_source": "C-Y2-STRING",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-Y2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.706533,
+      "second_score": 0.168053,
+      "selected_source": "C-Y2-STRING",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-M1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.266157,
+      "second_score": 0.154876,
+      "selected_source": "C-M1-SEW",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-M1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.266157,
+      "second_score": 0.154876,
+      "selected_source": "C-M1-SEW",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-M1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.266157,
+      "second_score": 0.154876,
+      "selected_source": "C-M1-SEW",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-M2",
+      "policy": "balanced",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.627542,
+      "second_score": 0.227612,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-M2",
+      "policy": "recall_first",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.627542,
+      "second_score": 0.227612,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S08",
+      "card_id": "ATT-M2",
+      "policy": "top1_candidate",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.627542,
+      "second_score": 0.227612,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [
+        "C-M2-VIOLIN"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-Y1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.27834,
+      "second_score": 0.103794,
+      "selected_source": "C-Y1-LIGHT",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-Y1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.27834,
+      "second_score": 0.103794,
+      "selected_source": "C-Y1-LIGHT",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-Y1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.27834,
+      "second_score": 0.103794,
+      "selected_source": "C-Y1-LIGHT",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-Y2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.186758,
+      "second_score": 0.169629,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-Y2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.186758,
+      "second_score": 0.169629,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-Y2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.186758,
+      "second_score": 0.169629,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-M1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.209922,
+      "second_score": 0.153719,
+      "selected_source": "C-M1-FISH",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-M1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.209922,
+      "second_score": 0.153719,
+      "selected_source": "C-M1-FISH",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-M1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.209922,
+      "second_score": 0.153719,
+      "selected_source": "C-M1-FISH",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-M2",
+      "policy": "balanced",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.713372,
+      "second_score": 0.369947,
+      "selected_source": "C-M2-HIKE",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-M2",
+      "policy": "recall_first",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.713372,
+      "second_score": 0.369947,
+      "selected_source": "C-M2-HIKE",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S09",
+      "card_id": "ATT-M2",
+      "policy": "top1_candidate",
+      "expected": "found",
+      "actual": "found",
+      "score": 0.713372,
+      "second_score": 0.369947,
+      "selected_source": "C-M2-HIKE",
+      "required_sources": [
+        "C-M2-HIKE"
+      ],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-Y1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.436878,
+      "second_score": 0.326189,
+      "selected_source": "C-Y1-PLANT",
+      "required_sources": [],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-Y1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.436878,
+      "second_score": 0.326189,
+      "selected_source": "C-Y1-PLANT",
+      "required_sources": [],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-Y1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.436878,
+      "second_score": 0.326189,
+      "selected_source": "C-Y1-PLANT",
+      "required_sources": [],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-Y2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.312382,
+      "second_score": 0.187173,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-Y2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "empty",
+      "score": 0.312382,
+      "second_score": 0.187173,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [],
+      "offered": false,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-Y2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "candidate",
+      "score": 0.312382,
+      "second_score": 0.187173,
+      "selected_source": "C-Y2-SHADE",
+      "required_sources": [],
+      "offered": true,
+      "uncertain": true
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-M1",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.386637,
+      "second_score": 0.355984,
+      "selected_source": "C-M1-WATER",
+      "required_sources": [],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-M1",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.386637,
+      "second_score": 0.355984,
+      "selected_source": "C-M1-WATER",
+      "required_sources": [],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-M1",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.386637,
+      "second_score": 0.355984,
+      "selected_source": "C-M1-WATER",
+      "required_sources": [],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-M2",
+      "policy": "balanced",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.391024,
+      "second_score": 0.166497,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-M2",
+      "policy": "recall_first",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.391024,
+      "second_score": 0.166497,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [],
+      "offered": true,
+      "uncertain": false
+    },
+    {
+      "question_id": "S10",
+      "card_id": "ATT-M2",
+      "policy": "top1_candidate",
+      "expected": "empty",
+      "actual": "found",
+      "score": 0.391024,
+      "second_score": 0.166497,
+      "selected_source": "C-M2-VIOLIN",
+      "required_sources": [],
+      "offered": true,
+      "uncertain": false
+    }
+  ],
+  "boundary": "This tests local send policy only. No downstream acceptance or final answer was run."
+}
