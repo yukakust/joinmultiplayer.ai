@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6B",
+  "status": "invalid_technical_attempt_preserved",
+  "attempt": 1,
+  "frozen_inputs_changed": false,
+  "model": "Qwen3-Reranker-4B Q4_K_M",
+  "server_configuration": {
+    "context_tokens": 1024,
+    "physical_batch_tokens": 512,
+    "microbatch_tokens": 512
+  },
+  "failure": {
+    "after_completed_relevance_packets": 6,
+    "next_prompt_tokens": 587,
+    "reason": "The 587-token prompt exceeded the 512-token physical batch. llama-server returned HTTP 500 before a result file was created."
+  },
+  "decision": "Invalid as evidence about the hypothesis. Preserve the failure, increase physical batch and microbatch to 1024, and rerun the unchanged frozen packets."
+}
