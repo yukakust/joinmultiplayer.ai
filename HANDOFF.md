@@ -276,6 +276,15 @@ created 30 extra candidates. This does not validate acceptance; it establishes
 that the next module must filter the eight recoverable extras without losing a
 useful source.
 
+Checkpoint 3C.2 is locked before inference at
+`/experiments/E007/blind-reader-protocol-v0.1.json`. Frozen post-trained
+`Qwen/Qwen3-0.6B` receives the 16 balanced-policy candidates from 3C: eight
+useful and eight extra. It sees only the original question and one complete
+source, never the sender claim/capsule/score/label, and must copy an exact quote
+or output `NONE`. The locked gate is at least 7/8 useful quotes, at least 7/8
+extras rejected, and zero invented quotes. Do not add the proposed second-chance
+claim reveal until this first blind condition is preserved and reviewed.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

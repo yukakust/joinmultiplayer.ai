@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.2",
+  "status": "locked_before_inference",
+  "title": {
+    "en": "Can a small receiving model read one source blindly?",
+    "ru": "Может ли маленькая принимающая модель вслепую прочитать один источник?"
+  },
+  "hypothesis": {
+    "en": "Without seeing the sender's claim, Qwen 0.6B can copy a useful passage from a supplied source or answer NONE when that source does not help.",
+    "ru": "Не видя утверждения отправителя, Qwen 0.6B сможет скопировать полезный фрагмент из переданного источника или ответить NONE, если источник не помогает."
+  },
+  "input_source": "/experiments/E007/send-policy-result-v0.1.json",
+  "candidate_rule": "Use every record offered by the balanced policy in Gate 3C. Do not add, remove, or replace candidates after inference starts.",
+  "model": {
+    "repository": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+    "weights_frozen": true,
+    "training": false,
+    "decoding": "greedy",
+    "max_new_tokens": 192,
+    "thinking": false
+  },
+  "blindness": [
+    "The model sees the original question and one complete candidate source.",
+    "The model does not see the sender claim, capsule, expected label, search score, or another model answer.",
+    "The model may use only the supplied source and must copy an exact continuous quote or answer NONE."
+  ],
+  "candidates": [
+    {"id": "BR01", "question_id": "S01", "card_id": "ATT-Y1", "source_id": "C-Y1-PLANT", "expected": "useful"},
+    {"id": "BR02", "question_id": "S02", "card_id": "ATT-Y1", "source_id": "C-Y1-BREAD", "expected": "useful"},
+    {"id": "BR03", "question_id": "S03", "card_id": "ATT-Y2", "source_id": "C-Y2-WEBHOOK", "expected": "useful"},
+    {"id": "BR04", "question_id": "S04", "card_id": "ATT-Y1", "source_id": "C-Y1-BREAD", "expected": "extra"},
+    {"id": "BR05", "question_id": "S04", "card_id": "ATT-Y2", "source_id": "C-Y2-BATTERY", "expected": "useful"},
+    {"id": "BR06", "question_id": "S05", "card_id": "ATT-Y1", "source_id": "C-Y1-LIGHT", "expected": "extra"},
+    {"id": "BR07", "question_id": "S05", "card_id": "ATT-M1", "source_id": "C-M1-FISH", "expected": "useful"},
+    {"id": "BR08", "question_id": "S06", "card_id": "ATT-Y2", "source_id": "C-Y2-STRING", "expected": "extra"},
+    {"id": "BR09", "question_id": "S06", "card_id": "ATT-M1", "source_id": "C-M1-SEW", "expected": "useful"},
+    {"id": "BR10", "question_id": "S06", "card_id": "ATT-M2", "source_id": "C-M2-VIOLIN", "expected": "extra"},
+    {"id": "BR11", "question_id": "S08", "card_id": "ATT-Y2", "source_id": "C-Y2-STRING", "expected": "extra"},
+    {"id": "BR12", "question_id": "S08", "card_id": "ATT-M2", "source_id": "C-M2-VIOLIN", "expected": "useful"},
+    {"id": "BR13", "question_id": "S09", "card_id": "ATT-M2", "source_id": "C-M2-HIKE", "expected": "useful"},
+    {"id": "BR14", "question_id": "S10", "card_id": "ATT-Y1", "source_id": "C-Y1-PLANT", "expected": "extra"},
+    {"id": "BR15", "question_id": "S10", "card_id": "ATT-M1", "source_id": "C-M1-WATER", "expected": "extra"},
+    {"id": "BR16", "question_id": "S10", "card_id": "ATT-M2", "source_id": "C-M2-VIOLIN", "expected": "extra"}
+  ],
+  "locked_metrics": {
+    "primary": "useful_quotes_found out of 8",
+    "secondary": "extra_sources_rejected out of 8",
+    "format": "exact quote integrity and malformed outputs",
+    "success": "at least 7/8 useful found, at least 7/8 extras rejected, zero invented quotes"
+  },
+  "not_tested": [
+    "showing the sender claim after a miss",
+    "truth outside the supplied source",
+    "long documents",
+    "private sources",
+    "final answer generation"
+  ]
+}

@@ -97,6 +97,11 @@ only after owner review.
 new questions and twenty-four new local records. Lock the world and policy rules
 before inference; do not use the Gate 3B miss to choose a numeric threshold.
 
+3C.2. Give frozen Qwen 0.6B each of the sixteen candidates emitted by the
+balanced 3C policy. Hide the sender's claim, capsule, score, and expected label.
+The receiving model sees only the question and one complete source and must copy
+an exact useful quote or return `NONE`.
+
 3D. The same three-question model smoke split between yukabox and MacBook.
 4. Locked 30-task run.
 5. Owner audit and public result.
