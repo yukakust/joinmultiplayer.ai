@@ -340,3 +340,17 @@ and abstention must remain public. Protocol and world:
 This is a synthetic development test. It does not establish source truth,
 privacy, multilingual generalisation, phone performance, or real-world
 reliability.
+
+The locked development run failed. Qwen3-0.6B chose YES for both links in all
+32 cases. It therefore kept 8/8 truly useful packets but also falsely took all
+24/24 other packets. Both relation accuracies were 16/32 and the deterministic
+final decision was correct only 8/32 times. The frozen gate was not met.
+
+The raw choice scores contain a limited post-run observation, not a repaired
+result. For quote support, the mean YES score was about 74% when support was
+present and 64% when absent. For claim helpfulness it was about 52% in both
+groups, so that branch showed no useful separation. A separately frozen
+calibration experiment may test the first signal later; this result must remain
+failed. Result and preserved invalid serialization attempt:
+`site/experiments/E007/two-link-semantic-result-v0.1.json` and
+`site/experiments/E007/two-link-semantic-invalid-attempt-v0.1.json`.

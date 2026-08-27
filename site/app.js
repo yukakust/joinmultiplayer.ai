@@ -4119,7 +4119,7 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse, sourceAnchorProtocolResponse, sourceAnchorResultResponse, chunkingProtocolResponse, chunkingResultResponse, capsuleProtocolResponse, capsuleWorldResponse, capsuleResultResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse, sourceAnchorProtocolResponse, sourceAnchorResultResponse, chunkingProtocolResponse, chunkingResultResponse, capsuleProtocolResponse, capsuleWorldResponse, capsuleResultResponse, semanticProtocolResponse, semanticWorldResponse, semanticResultResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
@@ -4146,6 +4146,9 @@ async function loadE007() {
       fetch("/experiments/E007/evidence-capsule-protocol-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/evidence-capsules-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/evidence-capsule-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/two-link-semantic-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/two-link-semantic-world-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/two-link-semantic-result-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
@@ -4172,6 +4175,9 @@ async function loadE007() {
     const capsuleProtocol = capsuleProtocolResponse.ok ? await capsuleProtocolResponse.json() : null;
     const capsuleWorld = capsuleWorldResponse.ok ? await capsuleWorldResponse.json() : null;
     const capsuleResult = capsuleResultResponse.ok ? await capsuleResultResponse.json() : null;
+    const semanticProtocol = semanticProtocolResponse.ok ? await semanticProtocolResponse.json() : null;
+    const semanticWorld = semanticWorldResponse.ok ? await semanticWorldResponse.json() : null;
+    const semanticResult = semanticResultResponse.ok ? await semanticResultResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4362,6 +4368,46 @@ async function loadE007() {
       const ramNote = preflightRam ? localized({ en: `Phone-shaped Yukabox run: ${(preflightRam / 1e9).toFixed(2)} GB peak RAM with one question at a time.`, ru: `Телефонный режим на yukabox: ${(preflightRam / 1e9).toFixed(2).replace(".", ",")} ГБ памяти на пике при одном вопросе за раз.` }) : "";
       mobileRerankerMarkup = `<section id="e007-mobile-reranker-results" class="e007-local-result-wide e007-mobile-reranker"><div class="flow-step">CHECKPOINT 3C.5 · ${localized({ en: "ACCEPTED ARCHITECTURE STEP", ru: "ПРИНЯТЫЙ ШАГ АРХИТЕКТУРЫ" })}</div><h2>${localized({ en: "Incoming relevance gate: Qwen3-Reranker-4B Q4.", ru: "Приёмка по полезности: Qwen3-Reranker-4B Q4." })}</h2><p>${localized({ en: "The 4B judge kept every useful piece. Its 2.50 GB Q4 copy made exactly the same 24 decisions as the original. It now becomes the modular TAKE / NOT SURE / DROP step. A later experiment may replace it without changing the rest of the harness.", ru: "Судья 4B сохранил все полезные кусочки. Его Q4-копия размером 2,50 ГБ приняла те же 24 решения, что и оригинал. Теперь это отдельный модуль ВЗЯТЬ / НЕ УВЕРЕН / ОТБРОСИТЬ. Позже мы сможем заменить его, не меняя остальной harness." })}</p><p><strong>${escapeHTML(ramNote)}</strong></p><div class="e007-result-metrics">${cards}</div><div class="e007-mobile-simple"><article class="is-correct"><strong>8 / 8</strong><span>${localized({ en: "useful pieces taken", ru: "полезных кусочков взято" })}</span></article><article class="is-correct"><strong>0 / 8</strong><span>${localized({ en: "obvious noise taken", ru: "явного мусора взято" })}</span></article><article class="needs-review"><strong>6 / 24</strong><span>${localized({ en: "left for a later check", ru: "оставлено на следующую проверку" })}</span></article></div><details class="e007-policy-table"><summary>${localized({ en: "SEE ALL 24 Q4 DECISIONS", ru: "ПОСМОТРЕТЬ ВСЕ 24 РЕШЕНИЯ Q4" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-mobile-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "MEMORY PIECE", ru: "КУСОЧЕК ПАМЯТИ" })}</th><th>${localized({ en: "TRUTH", ru: "ПРАВДА" })}</th><th>${localized({ en: "Q4 DECISION", ru: "РЕШЕНИЕ Q4" })}</th></tr></thead><tbody>${rows}</tbody></table></div></details><p class="control-warning">${localized({ en: "Not proven yet: that the 2.50 GB file loads on your phone without too much RAM, waiting, heat, or battery drain. This module judges relevance only. It does not judge truth, privacy, source support, or independence.", ru: "Пока не доказано: что файл 2,50 ГБ загрузится на вашем телефоне без лишней памяти, ожидания, нагрева и расхода батареи. Этот модуль проверяет только полезность для вопроса. Он не проверяет правду, приватность, источник и независимость." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/mobile-reranker-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/mobile-reranker-result-v0.1.json">${localized({ en: "ALL SCORES", ru: "ВСЕ ОЦЕНКИ" })} ↗</a></div></section>`;
     }
+    let semanticMarkup = "";
+    if (semanticResult?.records?.length) {
+      const relationLabel = value => ({
+        yes: localized({ en: "YES", ru: "ДА" }),
+        no: localized({ en: "NO", ru: "НЕТ" }),
+        not_sure: localized({ en: "NOT SURE", ru: "НЕ УВЕРЕН" }),
+      }[value] || value);
+      const finalLabel = value => ({
+        take: localized({ en: "TAKE", ru: "ВЗЯТЬ" }),
+        drop: localized({ en: "DROP", ru: "ОТБРОСИТЬ" }),
+        not_sure: localized({ en: "NOT SURE", ru: "НЕ УВЕРЕН" }),
+      }[value] || value);
+      const domainLabel = value => ({
+        machine: localized({ en: "machine", ru: "оборудование" }),
+        software: localized({ en: "software", ru: "программа" }),
+        beekeeping: localized({ en: "beekeeping", ru: "пчеловодство" }),
+        memory: localized({ en: "memory", ru: "воспоминание" }),
+        policy: localized({ en: "policy", ru: "правило" }),
+        cooking: localized({ en: "cooking", ru: "готовка" }),
+        expedition: localized({ en: "expedition", ru: "экспедиция" }),
+        computer_vision: localized({ en: "computer vision", ru: "компьютерное зрение" }),
+      }[value] || value);
+      const score = actual => `${Math.round(Number(actual.scores_among_choices[actual.letter]) * 100)}%`;
+      const relationCell = (actual, expected, correct) => `<td class="${correct ? "is-correct" : "is-critical"}"><strong>${escapeHTML(relationLabel(actual.decision))} · ${score(actual)}</strong><small>${localized({ en: "needed", ru: "ожидали" })}: ${escapeHTML(relationLabel(expected))}</small></td>`;
+      const rows = semanticResult.records.map(record => {
+        const tone = record.correct.final ? "is-correct" : "is-critical";
+        return `<tr class="${tone}"><th><span>${escapeHTML(record.id)} · ${escapeHTML(domainLabel(record.domain))}</span>${escapeHTML(record.question)}</th><td>${escapeHTML(record.claim)}</td><td>${escapeHTML(record.exact_quote)}</td>${relationCell(record.actual.quote_to_claim, record.expected.quote_supports_claim, record.correct.quote_to_claim)}${relationCell(record.actual.claim_to_question, record.expected.claim_helps_question, record.correct.claim_to_question)}<td class="e007-verdict ${tone}"><strong>${escapeHTML(finalLabel(record.actual.final))}</strong><small>${localized({ en: "needed", ru: "ожидали" })}: ${escapeHTML(finalLabel(record.expected.expected_final))}</small></td></tr>`;
+      }).join("");
+      const meanChoice = (expectedKey, expectedValue, relation) => {
+        const selected = semanticResult.records.filter(record => record.expected[expectedKey] === expectedValue);
+        return selected.reduce((sum, record) => sum + Number(record.actual[relation].scores_among_choices.A), 0) / selected.length;
+      };
+      const supportYes = meanChoice("quote_supports_claim", "yes", "quote_to_claim");
+      const supportNo = meanChoice("quote_supports_claim", "no", "quote_to_claim");
+      const helpfulYes = meanChoice("claim_helps_question", "yes", "claim_to_question");
+      const helpfulNo = meanChoice("claim_helps_question", "no", "claim_to_question");
+      semanticMarkup = `<section id="e007-two-link-results" class="e007-local-result-wide e007-two-link"><div class="flow-step">CHECKPOINT 3C.6C · ${localized({ en: "TWO UNIVERSAL LINKS", ru: "ДВЕ УНИВЕРСАЛЬНЫЕ СВЯЗИ" })}</div><h2>${localized({ en: "The small judge said YES to everything. This gate failed.", ru: "Маленький судья сказал «ДА» всему. Gate провален." })}</h2><p>${localized({ en: "We removed device, person, time, and situation fields. Qwen3-0.6B checked quote → claim and claim → question separately. Ordinary code only joined its two decisions.", ru: "Мы убрали поля «устройство», «человек», «время» и «ситуация». Qwen3‑0.6B отдельно проверила «цитата → утверждение» и «утверждение → вопрос». Обычный код лишь соединил два решения." })}</p><div class="e007-result-metrics"><article class="is-critical"><span>${localized({ en: "FALSE PACKETS TAKEN", ru: "ЛОЖНЫХ ПАКЕТОВ ВЗЯТО" })}</span><strong>${semanticResult.summary.unsafe_false_takes} / ${semanticResult.summary.non_useful_total}</strong><small>${localized({ en: "all traps passed", ru: "прошли все ловушки" })}</small></article><article class="is-critical"><span>${localized({ en: "QUOTE → CLAIM", ru: "ЦИТАТА → УТВЕРЖДЕНИЕ" })}</span><strong>${semanticResult.summary.quote_to_claim_correct} / ${semanticResult.summary.total}</strong><small>${localized({ en: "decisions right", ru: "решений верно" })}</small></article><article class="is-critical"><span>${localized({ en: "CLAIM → QUESTION", ru: "УТВЕРЖДЕНИЕ → ВОПРОС" })}</span><strong>${semanticResult.summary.claim_to_question_correct} / ${semanticResult.summary.total}</strong><small>${localized({ en: "decisions right", ru: "решений верно" })}</small></article><article class="is-correct"><span>${localized({ en: "REAL PACKETS KEPT", ru: "ПОЛЕЗНЫХ ПАКЕТОВ СОХРАНЕНО" })}</span><strong>${semanticResult.summary.useful_taken} / ${semanticResult.summary.useful_total}</strong><small>${localized({ en: "but without filtering", ru: "но без фильтрации" })}</small></article></div><section class="e005-gate4-result-verdict"><span>${localized({ en: "WHAT THE SCORES WHISPER", ru: "ЧТО ВИДНО В СЫРЫХ ОЦЕНКАХ" })}</span><h2>${localized({ en: `Quote support has a weak signal: ${Math.round(supportYes * 100)}% vs ${Math.round(supportNo * 100)}%. Helpfulness has none: ${Math.round(helpfulYes * 100)}% vs ${Math.round(helpfulNo * 100)}%.`, ru: `В проверке цитаты есть слабый сигнал: ${Math.round(supportYes * 100)}% против ${Math.round(supportNo * 100)}%. В полезности сигнала нет: ${Math.round(helpfulYes * 100)}% против ${Math.round(helpfulNo * 100)}%.` })}</h2><p>${localized({ en: "These are observations after the run, not new thresholds. We cannot repair this result after seeing it. A separate calibration set would be a new experiment.", ru: "Это наблюдение после запуска, а не новые пороги. Нельзя чинить результат после того, как мы его увидели. Отдельная калибровка будет новым экспериментом." })}</p></section><details class="e007-policy-table" open><summary>${localized({ en: "SEE ALL 32 CASES", ru: "ПОСМОТРЕТЬ ВСЕ 32 СЛУЧАЯ" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-semantic-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "PROPOSED ANSWER", ru: "ПРЕДЛОЖЕННЫЙ ОТВЕТ" })}</th><th>${localized({ en: "EXACT QUOTE", ru: "ТОЧНАЯ ЦИТАТА" })}</th><th>${localized({ en: "QUOTE SUPPORTS?", ru: "ЦИТАТА ПОДТВЕРЖДАЕТ?" })}</th><th>${localized({ en: "HELPS QUESTION?", ru: "ПОМОГАЕТ ВОПРОСУ?" })}</th><th>${localized({ en: "FINAL", ru: "ИТОГ" })}</th></tr></thead><tbody>${rows}</tbody></table></div></details><p class="control-warning">${localized({ en: "The failed conclusion is narrow: this frozen A/B/C interface with Qwen3-0.6B is not an acceptance judge. It does not prove that the model contains no useful ranking signal. The invalid first serialization attempt is preserved too.", ru: "Узкий честный вывод: этот интерфейс A/B/C с Qwen3‑0.6B нельзя использовать как судью приёмки. Это не доказывает, что в оценках модели совсем нет полезного сигнала. Первый невалидный запуск с ошибкой записи тоже сохранён." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/two-link-semantic-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/two-link-semantic-world-v0.1.json">${localized({ en: "ALL 32 CASES", ru: "ВСЕ 32 СЛУЧАЯ" })} ↗</a><a class="quiet-link" href="/experiments/E007/two-link-semantic-result-v0.1.json">${localized({ en: "ALL SCORES", ru: "ВСЕ ОЦЕНКИ" })} ↗</a><a class="quiet-link" href="/experiments/E007/two-link-semantic-invalid-attempt-v0.1.json">${localized({ en: "INVALID ATTEMPT", ru: "НЕВАЛИДНЫЙ ЗАПУСК" })} ↗</a></div></section>`;
+    } else if (semanticProtocol && semanticWorld) {
+      semanticMarkup = `<section id="e007-two-link-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C.6C · ${localized({ en: "LOCKED BEFORE RUN", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h2>${escapeHTML(localized(semanticProtocol.title))}</h2><p>${escapeHTML(localized(semanticProtocol.plain_language))}</p></section>`;
+    }
     let capsuleMarkup = "";
     if (capsuleResult && capsuleWorld) {
       const packets = new Map(capsuleWorld.packets.map(packet => [packet.id, packet]));
@@ -4460,6 +4506,7 @@ async function loadE007() {
       }
     }
     target.querySelector(".experiment-loading").outerHTML = `
+      ${semanticMarkup}
       ${capsuleMarkup}
       ${chunkingMarkup}
       ${sourceAnchorMarkup}

@@ -1,0 +1,1438 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6C",
+  "status": "locked_development_run_complete",
+  "protocol": "/experiments/E007/two-link-semantic-protocol-v0.1.json",
+  "world": "/experiments/E007/two-link-semantic-world-v0.1.json",
+  "protocol_sha256": "845d9f806d210bee4b81ca7a6bb2d89dc2c8421452994016a53bffbdf255cd68",
+  "world_sha256": "5764fbf64fb80f3fd897de90eebeb2475b768c2fc166ab94439251fb314f47b8",
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+    "weights_changed": false
+  },
+  "runtime_seconds": 29.671,
+  "summary": {
+    "quote_to_claim_correct": 16,
+    "claim_to_question_correct": 16,
+    "final_correct": 8,
+    "useful_taken": 8,
+    "useful_total": 8,
+    "unsafe_false_takes": 24,
+    "non_useful_total": 24,
+    "not_sure_final": 0,
+    "total": 32
+  },
+  "quadrants": {
+    "yy": {
+      "final_correct": 8,
+      "taken": 8,
+      "not_sure": 0,
+      "dropped": 0,
+      "total": 8
+    },
+    "ny": {
+      "final_correct": 0,
+      "taken": 8,
+      "not_sure": 0,
+      "dropped": 0,
+      "total": 8
+    },
+    "yn": {
+      "final_correct": 0,
+      "taken": 8,
+      "not_sure": 0,
+      "dropped": 0,
+      "total": 8
+    },
+    "nn": {
+      "final_correct": 0,
+      "taken": 8,
+      "not_sure": 0,
+      "dropped": 0,
+      "total": 8
+    }
+  },
+  "passed_locked_gate": false,
+  "records": [
+    {
+      "id": "TL01-YY",
+      "domain": "machine",
+      "quadrant": "yy",
+      "question": "Kest-7's casing is hot and room pressure is rising. May it be restarted?",
+      "claim": "Kest-7 must not be restarted; its power must be isolated first.",
+      "exact_quote": "If Kest-7's casing remains hot or room pressure rises, isolate its power first and do not restart it.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.63005114,
+            "B": 0.22748019,
+            "C": 0.14246865
+          },
+          "choice_mass_in_full_vocabulary": 0.99997613,
+          "top_two_logit_margin": 1.01873779
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.37261656,
+            "B": 0.32223541,
+            "C": 0.30514804
+          },
+          "choice_mass_in_full_vocabulary": 0.99996451,
+          "top_two_logit_margin": 0.14526749
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": true,
+        "final": true
+      }
+    },
+    {
+      "id": "TL01-NY",
+      "domain": "machine",
+      "quadrant": "ny",
+      "question": "Kest-7's casing is hot and room pressure is rising. May it be restarted?",
+      "claim": "Kest-7 may be restarted immediately.",
+      "exact_quote": "If Kest-7's casing remains hot or room pressure rises, isolate its power first and do not restart it.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.65133345,
+            "B": 0.19895944,
+            "C": 0.14970714
+          },
+          "choice_mass_in_full_vocabulary": 0.99997753,
+          "top_two_logit_margin": 1.18592072
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.4301697,
+            "B": 0.3289932,
+            "C": 0.24083708
+          },
+          "choice_mass_in_full_vocabulary": 0.99996722,
+          "top_two_logit_margin": 0.2681427
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": true,
+        "final": false
+      }
+    },
+    {
+      "id": "TL01-YN",
+      "domain": "machine",
+      "quadrant": "yn",
+      "question": "Kest-7's casing is hot and room pressure is rising. May it be restarted?",
+      "claim": "Kest-7 is installed in the north bay.",
+      "exact_quote": "The Kest-7 unit is installed in the north bay.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.59735256,
+            "B": 0.20046394,
+            "C": 0.20218346
+          },
+          "choice_mass_in_full_vocabulary": 0.99997859,
+          "top_two_logit_margin": 1.08333206
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.43211353,
+            "B": 0.30387679,
+            "C": 0.26400968
+          },
+          "choice_mass_in_full_vocabulary": 0.99995822,
+          "top_two_logit_margin": 0.35206604
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL01-NN",
+      "domain": "machine",
+      "quadrant": "nn",
+      "question": "Kest-7's casing is hot and room pressure is rising. May it be restarted?",
+      "claim": "Kest-7 is installed in the south bay.",
+      "exact_quote": "The Kest-7 unit is installed in the north bay.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.43677559,
+            "B": 0.28159827,
+            "C": 0.28162619
+          },
+          "choice_mass_in_full_vocabulary": 0.99997711,
+          "top_two_logit_margin": 0.43883896
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.43122315,
+            "B": 0.30703017,
+            "C": 0.2617467
+          },
+          "choice_mass_in_full_vocabulary": 0.99995807,
+          "top_two_logit_margin": 0.33967972
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL02-YY",
+      "domain": "software",
+      "quadrant": "yy",
+      "question": "A payment webhook creates duplicate orders when delivery is retried. What change prevents the duplicates?",
+      "claim": "Store each event ID as an idempotency key before creating an order.",
+      "exact_quote": "Before creating an order, store the webhook event ID as an idempotency key; repeated delivery of that ID must return the existing result.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.82245535,
+            "B": 0.09771179,
+            "C": 0.07983284
+          },
+          "choice_mass_in_full_vocabulary": 0.99998824,
+          "top_two_logit_margin": 2.13027191
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.52757531,
+            "B": 0.22217925,
+            "C": 0.25024539
+          },
+          "choice_mass_in_full_vocabulary": 0.99997693,
+          "top_two_logit_margin": 0.74584961
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": true,
+        "final": true
+      }
+    },
+    {
+      "id": "TL02-NY",
+      "domain": "software",
+      "quadrant": "ny",
+      "question": "A payment webhook creates duplicate orders when delivery is retried. What change prevents the duplicates?",
+      "claim": "Increasing the webhook retry count prevents duplicate orders.",
+      "exact_quote": "More retries do not prevent duplicates; store the event ID as an idempotency key before creating an order.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.78069717,
+            "B": 0.11814043,
+            "C": 0.10116234
+          },
+          "choice_mass_in_full_vocabulary": 0.99998681,
+          "top_two_logit_margin": 1.88831329
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.51344573,
+            "B": 0.22877903,
+            "C": 0.25777522
+          },
+          "choice_mass_in_full_vocabulary": 0.99997872,
+          "top_two_logit_margin": 0.6890564
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": true,
+        "final": false
+      }
+    },
+    {
+      "id": "TL02-YN",
+      "domain": "software",
+      "quadrant": "yn",
+      "question": "A payment webhook creates duplicate orders when delivery is retried. What change prevents the duplicates?",
+      "claim": "The webhook service is written in Go.",
+      "exact_quote": "The webhook service is written in Go and is deployed as one small binary.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.77847958,
+            "B": 0.10341854,
+            "C": 0.11810183
+          },
+          "choice_mass_in_full_vocabulary": 0.99998678,
+          "top_two_logit_margin": 1.88579559
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.47175863,
+            "B": 0.24025135,
+            "C": 0.28799
+          },
+          "choice_mass_in_full_vocabulary": 0.99997339,
+          "top_two_logit_margin": 0.49354172
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL02-NN",
+      "domain": "software",
+      "quadrant": "nn",
+      "question": "A payment webhook creates duplicate orders when delivery is retried. What change prevents the duplicates?",
+      "claim": "The webhook service is written in Python.",
+      "exact_quote": "The webhook service is written in Go and is deployed as one small binary.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.69714743,
+            "B": 0.14085068,
+            "C": 0.16200192
+          },
+          "choice_mass_in_full_vocabulary": 0.99998644,
+          "top_two_logit_margin": 1.45938873
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.46741062,
+            "B": 0.24291068,
+            "C": 0.28967878
+          },
+          "choice_mass_in_full_vocabulary": 0.99997631,
+          "top_two_logit_margin": 0.47843552
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL03-YY",
+      "domain": "beekeeping",
+      "quadrant": "yy",
+      "question": "A hive is crowded, its queen is present, and sealed queen cells have appeared. What does this most likely mean?",
+      "claim": "The colony is preparing to swarm.",
+      "exact_quote": "A crowded colony with its queen still present and sealed queen cells is usually preparing to swarm.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.81949085,
+            "B": 0.09585164,
+            "C": 0.08465753
+          },
+          "choice_mass_in_full_vocabulary": 0.99997966,
+          "top_two_logit_margin": 2.14588165
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.49213919,
+            "B": 0.26486909,
+            "C": 0.2429917
+          },
+          "choice_mass_in_full_vocabulary": 0.99994716,
+          "top_two_logit_margin": 0.61952591
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": true,
+        "final": true
+      }
+    },
+    {
+      "id": "TL03-NY",
+      "domain": "beekeeping",
+      "quadrant": "ny",
+      "question": "A hive is crowded, its queen is present, and sealed queen cells have appeared. What does this most likely mean?",
+      "claim": "The colony has become queenless.",
+      "exact_quote": "A crowded colony with its queen still present and sealed queen cells is usually preparing to swarm.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.8216033,
+            "B": 0.09469008,
+            "C": 0.08370664
+          },
+          "choice_mass_in_full_vocabulary": 0.99997848,
+          "top_two_logit_margin": 2.16064835
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.50415611,
+            "B": 0.2554695,
+            "C": 0.24037439
+          },
+          "choice_mass_in_full_vocabulary": 0.99994029,
+          "top_two_logit_margin": 0.67978287
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": true,
+        "final": false
+      }
+    },
+    {
+      "id": "TL03-YN",
+      "domain": "beekeeping",
+      "quadrant": "yn",
+      "question": "A hive is crowded, its queen is present, and sealed queen cells have appeared. What does this most likely mean?",
+      "claim": "The hive box is painted blue.",
+      "exact_quote": "The hive box used for this colony is painted blue.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.67314649,
+            "B": 0.16804013,
+            "C": 0.15881342
+          },
+          "choice_mass_in_full_vocabulary": 0.99997585,
+          "top_two_logit_margin": 1.38776016
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.47131586,
+            "B": 0.2859984,
+            "C": 0.24268575
+          },
+          "choice_mass_in_full_vocabulary": 0.99994992,
+          "top_two_logit_margin": 0.49954224
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL03-NN",
+      "domain": "beekeeping",
+      "quadrant": "nn",
+      "question": "A hive is crowded, its queen is present, and sealed queen cells have appeared. What does this most likely mean?",
+      "claim": "The hive box is painted green.",
+      "exact_quote": "The hive box used for this colony is painted blue.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.54174966,
+            "B": 0.21648102,
+            "C": 0.24176933
+          },
+          "choice_mass_in_full_vocabulary": 0.9999726,
+          "top_two_logit_margin": 0.80681992
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.47652128,
+            "B": 0.27219811,
+            "C": 0.25128058
+          },
+          "choice_mass_in_full_vocabulary": 0.99995074,
+          "top_two_logit_margin": 0.5599823
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL04-YY",
+      "domain": "memory",
+      "quadrant": "yy",
+      "question": "At which cafe did Mara say we should meet after the museum?",
+      "claim": "Mara said to meet at Juniper Cafe.",
+      "exact_quote": "Mara said, 'After the museum, meet me at Juniper Cafe.'",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.75588214,
+            "B": 0.13185918,
+            "C": 0.11225868
+          },
+          "choice_mass_in_full_vocabulary": 0.99997295,
+          "top_two_logit_margin": 1.74615097
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.68884695,
+            "B": 0.19207926,
+            "C": 0.11907379
+          },
+          "choice_mass_in_full_vocabulary": 0.99996028,
+          "top_two_logit_margin": 1.27711105
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": true,
+        "final": true
+      }
+    },
+    {
+      "id": "TL04-NY",
+      "domain": "memory",
+      "quadrant": "ny",
+      "question": "At which cafe did Mara say we should meet after the museum?",
+      "claim": "Mara said to meet at Harbor Cafe.",
+      "exact_quote": "Mara said, 'After the museum, meet me at Juniper Cafe.'",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.65446103,
+            "B": 0.16635087,
+            "C": 0.17918812
+          },
+          "choice_mass_in_full_vocabulary": 0.99996778,
+          "top_two_logit_margin": 1.29537582
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.66776776,
+            "B": 0.20187169,
+            "C": 0.13036054
+          },
+          "choice_mass_in_full_vocabulary": 0.99995805,
+          "top_two_logit_margin": 1.19630814
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": true,
+        "final": false
+      }
+    },
+    {
+      "id": "TL04-YN",
+      "domain": "memory",
+      "quadrant": "yn",
+      "question": "At which cafe did Mara say we should meet after the museum?",
+      "claim": "Mara wore a red scarf at the museum.",
+      "exact_quote": "Mara wore a red scarf during the museum visit.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.69068861,
+            "B": 0.18665309,
+            "C": 0.12265829
+          },
+          "choice_mass_in_full_vocabulary": 0.99997254,
+          "top_two_logit_margin": 1.30843735
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.57914346,
+            "B": 0.23406295,
+            "C": 0.1867936
+          },
+          "choice_mass_in_full_vocabulary": 0.99995422,
+          "top_two_logit_margin": 0.90596008
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL04-NN",
+      "domain": "memory",
+      "quadrant": "nn",
+      "question": "At which cafe did Mara say we should meet after the museum?",
+      "claim": "Mara wore a blue scarf at the museum.",
+      "exact_quote": "Mara wore a red scarf during the museum visit.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.54289263,
+            "B": 0.26331505,
+            "C": 0.19379228
+          },
+          "choice_mass_in_full_vocabulary": 0.99997021,
+          "top_two_logit_margin": 0.72356033
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.57980549,
+            "B": 0.23549367,
+            "C": 0.18470083
+          },
+          "choice_mass_in_full_vocabulary": 0.99995519,
+          "top_two_logit_margin": 0.90100861
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL05-YY",
+      "domain": "policy",
+      "quadrant": "yy",
+      "question": "May a contractor deploy to production alone while an incident is active?",
+      "claim": "No; a staff reviewer must approve the deployment even during an incident.",
+      "exact_quote": "A contractor may never deploy to production alone; an active incident does not remove the staff-review requirement.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.78999436,
+            "B": 0.12866476,
+            "C": 0.08134093
+          },
+          "choice_mass_in_full_vocabulary": 0.99997704,
+          "top_two_logit_margin": 1.81481552
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.46337175,
+            "B": 0.31228086,
+            "C": 0.22434734
+          },
+          "choice_mass_in_full_vocabulary": 0.99995758,
+          "top_two_logit_margin": 0.39462662
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": true,
+        "final": true
+      }
+    },
+    {
+      "id": "TL05-NY",
+      "domain": "policy",
+      "quadrant": "ny",
+      "question": "May a contractor deploy to production alone while an incident is active?",
+      "claim": "Yes; an active incident lets a contractor deploy alone.",
+      "exact_quote": "A contractor may never deploy to production alone; an active incident does not remove the staff-review requirement.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.76172394,
+            "B": 0.12271708,
+            "C": 0.11555897
+          },
+          "choice_mass_in_full_vocabulary": 0.99997816,
+          "top_two_logit_margin": 1.82570267
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.60941947,
+            "B": 0.22340405,
+            "C": 0.16717644
+          },
+          "choice_mass_in_full_vocabulary": 0.99995476,
+          "top_two_logit_margin": 1.00352478
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": true,
+        "final": false
+      }
+    },
+    {
+      "id": "TL05-YN",
+      "domain": "policy",
+      "quadrant": "yn",
+      "question": "May a contractor deploy to production alone while an incident is active?",
+      "claim": "The contractor's building badge expires on Friday.",
+      "exact_quote": "The contractor's building badge expires on Friday.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.76039094,
+            "B": 0.11252815,
+            "C": 0.12708087
+          },
+          "choice_mass_in_full_vocabulary": 0.99997816,
+          "top_two_logit_margin": 1.78900909
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.55527085,
+            "B": 0.22400336,
+            "C": 0.22072577
+          },
+          "choice_mass_in_full_vocabulary": 0.99995266,
+          "top_two_logit_margin": 0.90779495
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL05-NN",
+      "domain": "policy",
+      "quadrant": "nn",
+      "question": "May a contractor deploy to production alone while an incident is active?",
+      "claim": "The contractor's building badge expires on Monday.",
+      "exact_quote": "The contractor's building badge expires on Friday.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.51263219,
+            "B": 0.23123601,
+            "C": 0.25613174
+          },
+          "choice_mass_in_full_vocabulary": 0.9999696,
+          "top_two_logit_margin": 0.69386673
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.55764204,
+            "B": 0.22815847,
+            "C": 0.21419938
+          },
+          "choice_mass_in_full_vocabulary": 0.99995179,
+          "top_two_logit_margin": 0.89367676
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL06-YY",
+      "domain": "cooking",
+      "quadrant": "yy",
+      "question": "A custard has reached 82 C and coats a spoon. What should be done next to avoid curdling?",
+      "claim": "Remove the custard from heat and cool the bowl immediately.",
+      "exact_quote": "When the custard reaches 82 C and coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.91594458,
+            "B": 0.06002922,
+            "C": 0.02402622
+          },
+          "choice_mass_in_full_vocabulary": 0.99998824,
+          "top_two_logit_margin": 2.72512436
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.55583352,
+            "B": 0.20900646,
+            "C": 0.23515998
+          },
+          "choice_mass_in_full_vocabulary": 0.99995856,
+          "top_two_logit_margin": 0.86020279
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": true,
+        "final": true
+      }
+    },
+    {
+      "id": "TL06-NY",
+      "domain": "cooking",
+      "quadrant": "ny",
+      "question": "A custard has reached 82 C and coats a spoon. What should be done next to avoid curdling?",
+      "claim": "Keep the custard boiling for another five minutes.",
+      "exact_quote": "When the custard reaches 82 C and coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.81427276,
+            "B": 0.10144303,
+            "C": 0.08428422
+          },
+          "choice_mass_in_full_vocabulary": 0.99998325,
+          "top_two_logit_margin": 2.082798
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.42443615,
+            "B": 0.19608732,
+            "C": 0.37947649
+          },
+          "choice_mass_in_full_vocabulary": 0.99995881,
+          "top_two_logit_margin": 0.11196899
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": true,
+        "final": false
+      }
+    },
+    {
+      "id": "TL06-YN",
+      "domain": "cooking",
+      "quadrant": "yn",
+      "question": "A custard has reached 82 C and coats a spoon. What should be done next to avoid curdling?",
+      "claim": "The custard was cooked in a copper pan.",
+      "exact_quote": "This batch of custard was cooked in a copper pan.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.75490773,
+            "B": 0.11985224,
+            "C": 0.12523997
+          },
+          "choice_mass_in_full_vocabulary": 0.99997784,
+          "top_two_logit_margin": 1.79636383
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.52006167,
+            "B": 0.21232846,
+            "C": 0.26760983
+          },
+          "choice_mass_in_full_vocabulary": 0.99996319,
+          "top_two_logit_margin": 0.66441727
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL06-NN",
+      "domain": "cooking",
+      "quadrant": "nn",
+      "question": "A custard has reached 82 C and coats a spoon. What should be done next to avoid curdling?",
+      "claim": "The custard was cooked in a steel pan.",
+      "exact_quote": "This batch of custard was cooked in a copper pan.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.66641974,
+            "B": 0.15399256,
+            "C": 0.17958765
+          },
+          "choice_mass_in_full_vocabulary": 0.99997517,
+          "top_two_logit_margin": 1.31125641
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.52005839,
+            "B": 0.21687201,
+            "C": 0.26306963
+          },
+          "choice_mass_in_full_vocabulary": 0.99996197,
+          "top_two_logit_margin": 0.68152237
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL07-YY",
+      "domain": "expedition",
+      "quadrant": "yy",
+      "question": "Which route did Lysa's expedition use to avoid the flooded pass?",
+      "claim": "Lysa's expedition used the eastern ridge route.",
+      "exact_quote": "To avoid the flooded pass, Lysa's expedition travelled along the eastern ridge.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.61471254,
+            "B": 0.18942271,
+            "C": 0.19586478
+          },
+          "choice_mass_in_full_vocabulary": 0.99997753,
+          "top_two_logit_margin": 1.14373016
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.54329908,
+            "B": 0.26208764,
+            "C": 0.19461326
+          },
+          "choice_mass_in_full_vocabulary": 0.99995258,
+          "top_two_logit_margin": 0.72898102
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": true,
+        "final": true
+      }
+    },
+    {
+      "id": "TL07-NY",
+      "domain": "expedition",
+      "quadrant": "ny",
+      "question": "Which route did Lysa's expedition use to avoid the flooded pass?",
+      "claim": "Lysa's expedition used the western marsh route.",
+      "exact_quote": "To avoid the flooded pass, Lysa's expedition travelled along the eastern ridge.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.5325408,
+            "B": 0.21757273,
+            "C": 0.24988647
+          },
+          "choice_mass_in_full_vocabulary": 0.99997559,
+          "top_two_logit_margin": 0.75665283
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.54026437,
+            "B": 0.2551775,
+            "C": 0.20455806
+          },
+          "choice_mass_in_full_vocabulary": 0.99995415,
+          "top_two_logit_margin": 0.75009918
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": true,
+        "final": false
+      }
+    },
+    {
+      "id": "TL07-YN",
+      "domain": "expedition",
+      "quadrant": "yn",
+      "question": "Which route did Lysa's expedition use to avoid the flooded pass?",
+      "claim": "Lysa's expedition carried an orange camp flag.",
+      "exact_quote": "Lysa's expedition carried an orange camp flag.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.67573673,
+            "B": 0.16094728,
+            "C": 0.16331603
+          },
+          "choice_mass_in_full_vocabulary": 0.99997267,
+          "top_two_logit_margin": 1.42011642
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.51534605,
+            "B": 0.25952795,
+            "C": 0.225126
+          },
+          "choice_mass_in_full_vocabulary": 0.99995618,
+          "top_two_logit_margin": 0.68597412
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL07-NN",
+      "domain": "expedition",
+      "quadrant": "nn",
+      "question": "Which route did Lysa's expedition use to avoid the flooded pass?",
+      "claim": "Lysa's expedition carried a blue camp flag.",
+      "exact_quote": "Lysa's expedition carried an orange camp flag.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.46411806,
+            "B": 0.23560229,
+            "C": 0.30027965
+          },
+          "choice_mass_in_full_vocabulary": 0.99996866,
+          "top_two_logit_margin": 0.4354248
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.52428645,
+            "B": 0.25573817,
+            "C": 0.21997537
+          },
+          "choice_mass_in_full_vocabulary": 0.99995475,
+          "top_two_logit_margin": 0.71788406
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL08-YY",
+      "domain": "computer_vision",
+      "quadrant": "yy",
+      "question": "Tiny objects disappear after training images are resized. What training change should be tried first?",
+      "claim": "Train with larger inputs or crops that preserve the tiny objects.",
+      "exact_quote": "When resizing erases tiny objects, first train with larger inputs or object-centred crops that preserve those objects.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "yes",
+        "expected_final": "take"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.82388324,
+            "B": 0.12224135,
+            "C": 0.05387534
+          },
+          "choice_mass_in_full_vocabulary": 0.99998632,
+          "top_two_logit_margin": 1.90803146
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.4996078,
+            "B": 0.29821795,
+            "C": 0.20217422
+          },
+          "choice_mass_in_full_vocabulary": 0.99997424,
+          "top_two_logit_margin": 0.51599884
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": true,
+        "final": true
+      }
+    },
+    {
+      "id": "TL08-NY",
+      "domain": "computer_vision",
+      "quadrant": "ny",
+      "question": "Tiny objects disappear after training images are resized. What training change should be tried first?",
+      "claim": "Downsample the training images even further.",
+      "exact_quote": "When resizing erases tiny objects, first train with larger inputs or object-centred crops that preserve those objects.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "yes",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.77246428,
+            "B": 0.14499785,
+            "C": 0.0825379
+          },
+          "choice_mass_in_full_vocabulary": 0.9999816,
+          "top_two_logit_margin": 1.67286682
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.44843692,
+            "B": 0.26910615,
+            "C": 0.28245687
+          },
+          "choice_mass_in_full_vocabulary": 0.99997216,
+          "top_two_logit_margin": 0.46224213
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": true,
+        "final": false
+      }
+    },
+    {
+      "id": "TL08-YN",
+      "domain": "computer_vision",
+      "quadrant": "yn",
+      "question": "Tiny objects disappear after training images are resized. What training change should be tried first?",
+      "claim": "The training set contains ten thousand images.",
+      "exact_quote": "The current training set contains ten thousand images.",
+      "expected": {
+        "quote_supports_claim": "yes",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.75696343,
+            "B": 0.15116906,
+            "C": 0.09186757
+          },
+          "choice_mass_in_full_vocabulary": 0.99997739,
+          "top_two_logit_margin": 1.61091614
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.54374015,
+            "B": 0.21109097,
+            "C": 0.24516891
+          },
+          "choice_mass_in_full_vocabulary": 0.99997242,
+          "top_two_logit_margin": 0.79652405
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": true,
+        "claim_to_question": false,
+        "final": false
+      }
+    },
+    {
+      "id": "TL08-NN",
+      "domain": "computer_vision",
+      "quadrant": "nn",
+      "question": "Tiny objects disappear after training images are resized. What training change should be tried first?",
+      "claim": "The training set contains twenty thousand images.",
+      "exact_quote": "The current training set contains ten thousand images.",
+      "expected": {
+        "quote_supports_claim": "no",
+        "claim_helps_question": "no",
+        "expected_final": "drop"
+      },
+      "actual": {
+        "quote_to_claim": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.62053424,
+            "B": 0.22651306,
+            "C": 0.15295276
+          },
+          "choice_mass_in_full_vocabulary": 0.9999747,
+          "top_two_logit_margin": 1.00777817
+        },
+        "claim_to_question": {
+          "letter": "A",
+          "decision": "yes",
+          "scores_among_choices": {
+            "A": 0.56164593,
+            "B": 0.20525187,
+            "C": 0.23310222
+          },
+          "choice_mass_in_full_vocabulary": 0.9999736,
+          "top_two_logit_margin": 0.87939453
+        },
+        "final": "take"
+      },
+      "correct": {
+        "quote_to_claim": false,
+        "claim_to_question": false,
+        "final": false
+      }
+    }
+  ],
+  "boundary": "This is one small public synthetic English development test. It measures two text relations on frozen examples. It is not proof of truth, safety, phone viability, or general real-world understanding."
+}

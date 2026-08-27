@@ -5145,6 +5145,16 @@ blockquote {
 }
 
 .e007-capsule-table { min-width: 1850px; }
+.e007-semantic-table { min-width: 1750px; }
+.e007-semantic-table thead th:first-child { width: 21%; }
+.e007-semantic-table thead th:nth-child(2) { width: 18%; }
+.e007-semantic-table thead th:nth-child(3) { width: 22%; }
+.e007-semantic-table thead th:nth-child(4),
+.e007-semantic-table thead th:nth-child(5) { width: 14%; }
+.e007-semantic-table thead th:last-child { width: 11%; }
+.e007-semantic-table td > strong,
+.e007-semantic-table td > small { display: block; }
+.e007-semantic-table td > small { margin-top: .65rem; }
 .e007-capsule-table thead th:first-child { width: 21%; }
 .e007-capsule-table thead th:nth-child(2) { width: 18%; }
 .e007-capsule-table thead th:nth-child(3) { width: 22%; }
