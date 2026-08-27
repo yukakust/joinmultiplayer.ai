@@ -159,3 +159,28 @@ The next protocol must require one locked method to pass both quality gates.
 
 Public result: `site/experiments/E007/local-offer-result-L0001.json`. Raw owner-
 published receipts: `/api/public/L0001`.
+
+## Checkpoint 3C.4 — one question versus one source
+
+Gate 3C.3 showed that free-form Qwen 0.6B is not a reliable meaning judge. It
+often rewrote a source as if the source already contained facts from the
+question. Gate 3C.4 therefore removes free writing from this step.
+
+Three frozen scorers receive only `question + passage` and return one number:
+
+1. the old multilingual embedding similarity;
+2. a 0.1B multilingual MiniLM cross-encoder trained for passage ranking;
+3. a 0.6B Qwen3 reranker trained for query-passage relevance.
+
+The 16 old calibration pairs set an ACCEPT and REJECT cut for each method. The
+new exam contains 24 English pairs: eight useful sources, eight same-field
+traps, and eight obvious distractions. Exam labels never set a threshold.
+Scores between the two cuts are `UNCLEAR` and must go to a later module.
+
+The protocol and exam are frozen before model download or inference at:
+
+- `site/experiments/E007/relevance-reranker-protocol-v0.1.json`;
+- `site/experiments/E007/relevance-reranker-heldout-v0.1.json`.
+
+This tests relevance only. It does not test whether a passage is true, safe to
+share, or sufficient for a final answer.

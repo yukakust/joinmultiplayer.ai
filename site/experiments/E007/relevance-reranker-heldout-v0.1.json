@@ -1,0 +1,45 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.4",
+  "status": "locked_before_inference",
+  "language": "en",
+  "groups": {
+    "useful": "The passage directly helps answer the question.",
+    "hard_extra": "The passage is from the same field and sounds plausible, but answers a different problem.",
+    "obvious_extra": "The passage is clearly about another field."
+  },
+  "pairs": [
+    {"id":"RR01-U","family":"database","kind":"useful","question":"A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?","passage":"A leading wildcard prevents a normal B-tree index from seeking to the beginning of a value, so the database may scan many rows instead."},
+    {"id":"RR01-H","family":"database","kind":"hard_extra","question":"A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?","passage":"A missing composite index on tenant_id and created_at can make an ordered tenant history query slow."},
+    {"id":"RR01-O","family":"database","kind":"obvious_extra","question":"A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?","passage":"A worn violin nut slot can make an open string buzz against the first fret."},
+
+    {"id":"RR02-U","family":"web_layout","kind":"useful","question":"Cards on a web page jump downward while their images load. What should be fixed first?","passage":"Give each image an intrinsic width and height or an aspect-ratio box so the browser reserves its space before the file arrives."},
+    {"id":"RR02-H","family":"web_layout","kind":"hard_extra","question":"Cards on a web page jump downward while their images load. What should be fixed first?","passage":"A late webfont swap can change line widths and move nearby text; preload the font or use compatible fallback metrics."},
+    {"id":"RR02-O","family":"web_layout","kind":"obvious_extra","question":"Cards on a web page jump downward while their images load. What should be fixed first?","passage":"A lithium battery controller may block charging when cell temperature is below zero."},
+
+    {"id":"RR03-U","family":"navigation","kind":"useful","question":"A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?","passage":"Large nearby steel structures distort the local magnetic field and can make a magnetometer report a false heading."},
+    {"id":"RR03-H","family":"navigation","kind":"hard_extra","question":"A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?","passage":"GNSS signals reflected by canyon walls can shift a receiver's calculated position even when its compass remains healthy."},
+    {"id":"RR03-O","family":"navigation","kind":"obvious_extra","question":"A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?","passage":"A ballpoint needle passes between knit loops and can prevent skipped stitches on jersey fabric."},
+
+    {"id":"RR04-U","family":"audio","kind":"useful","question":"A microphone starts to squeal when the nearby speaker volume is raised. Why?","passage":"Sound from the speaker re-enters the microphone, is amplified again, and forms an acoustic feedback loop."},
+    {"id":"RR04-H","family":"audio","kind":"hard_extra","question":"A microphone starts to squeal when the nearby speaker volume is raised. Why?","passage":"A ground loop between two powered audio devices often produces a steady mains-frequency hum."},
+    {"id":"RR04-O","family":"audio","kind":"obvious_extra","question":"A microphone starts to squeal when the nearby speaker volume is raised. Why?","passage":"Young leaves that turn pale between green veins can indicate unavailable iron in the soil."},
+
+    {"id":"RR05-U","family":"bicycle","kind":"useful","question":"A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?","passage":"The axle or wheel was not seated squarely in the dropouts; reseating it restores the rotor's position in the caliper."},
+    {"id":"RR05-H","family":"bicycle","kind":"hard_extra","question":"A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?","passage":"A bent brake rotor usually rubs at the same point on every revolution even when the wheel is seated correctly."},
+    {"id":"RR05-O","family":"bicycle","kind":"obvious_extra","question":"A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?","passage":"Store a webhook event id so that a retry returns the first payment result instead of charging again."},
+
+    {"id":"RR06-U","family":"video","kind":"useful","question":"An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?","passage":"The camera shutter samples the lamp's PWM flicker at an unlucky rate, producing bright and dark bands by temporal aliasing."},
+    {"id":"RR06-H","family":"video","kind":"hard_extra","question":"An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?","passage":"A rolling shutter reads image rows at different times and can make a fast propeller appear bent."},
+    {"id":"RR06-O","family":"video","kind":"obvious_extra","question":"An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?","passage":"Dough ferments more slowly in a cold kitchen even when the starter is active."},
+
+    {"id":"RR07-U","family":"distributed_systems","kind":"useful","question":"A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?","passage":"Make the handler idempotent and store a deduplication key so a retried delivery returns the already recorded result."},
+    {"id":"RR07-H","family":"distributed_systems","kind":"hard_extra","question":"A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?","passage":"A lagging read replica can briefly return old data after the primary has accepted a write."},
+    {"id":"RR07-O","family":"distributed_systems","kind":"obvious_extra","question":"A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?","passage":"Fish gathering at the surface after aeration stops may be reacting to low dissolved oxygen."},
+
+    {"id":"RR08-U","family":"computer_vision","kind":"useful","question":"A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?","passage":"Nearly identical neighboring frames leaked across the train and validation sets; split by recording or camera so the validation groups are independent."},
+    {"id":"RR08-H","family":"computer_vision","kind":"hard_extra","question":"A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?","passage":"Aggressive hue augmentation can damage a classifier when label meaning depends on the object's true color."},
+    {"id":"RR08-O","family":"computer_vision","kind":"obvious_extra","question":"A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?","passage":"A crowded hive with sealed queen cells may be preparing to swarm."}
+  ]
+}

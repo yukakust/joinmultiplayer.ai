@@ -311,6 +311,15 @@ restated the span as if it contained facts from the question. The locked gate
 failed. Do not describe free-form Qwen 0.6B self-judging as a viable acceptance
 module from this evidence.
 
+Checkpoint 3C.4 is locked before model download or inference at
+`/experiments/E007/relevance-reranker-protocol-v0.1.json`. It compares the old
+embedding similarity, a frozen 0.1B multilingual MiniLM reranker, and a frozen
+0.6B Qwen3 reranker. The old 16 pairs calibrate each method. A separate frozen
+English exam has 24 pairs: 8 useful, 8 same-field traps, and 8 obvious extras.
+The three-way output is ACCEPT / UNCLEAR / REJECT. Held-out labels cannot set
+thresholds. This is a relevance test only, not a truth, privacy, or final-answer
+test.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

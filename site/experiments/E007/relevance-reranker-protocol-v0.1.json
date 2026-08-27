@@ -1,0 +1,78 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.4",
+  "status": "locked_before_download_or_inference",
+  "kind": "heldout_specialized_relevance_comparison",
+  "runtime": {
+    "python": "3.13",
+    "torch": "2.13.0+cpu",
+    "transformers": "5.15.1",
+    "fastembed": "0.8.0"
+  },
+  "title": {
+    "en": "Can a small scoring model judge whether one source helps answer one question?",
+    "ru": "Может ли маленькая модель-оценщик понять, помогает ли один источник ответить на один вопрос?"
+  },
+  "hypothesis": {
+    "en": "A model trained specifically to score query-passage relevance will reject same-topic traps more reliably than a free-form 0.6B chat model, without losing useful sources.",
+    "ru": "Модель, специально обученная сравнивать вопрос и фрагмент, будет лучше отбрасывать похожие ловушки, чем свободно отвечающая 0,6B-модель, и не потеряет полезные источники."
+  },
+  "calibration": {
+    "source": "/experiments/E007/send-policy-memory-v0.1.json#calibration_pairs",
+    "pairs": 16,
+    "useful": 8,
+    "extra": 8,
+    "rule": "accept_cut is the 25th percentile of useful calibration scores; reject_cut is the 75th percentile of extra calibration scores. score >= accept_cut means ACCEPT; score <= reject_cut means REJECT; the gap means UNCLEAR. If the cuts overlap, collapse both to the calibration midpoint that maximizes binary accuracy, breaking ties toward fewer useful rejections.",
+    "test_labels_never_used_for_thresholds": true
+  },
+  "heldout": {
+    "source": "/experiments/E007/relevance-reranker-heldout-v0.1.json",
+    "pairs": 24,
+    "useful": 8,
+    "hard_extra": 8,
+    "obvious_extra": 8,
+    "labels_hidden_during_scoring": true
+  },
+  "methods": [
+    {
+      "id": "embedding_baseline",
+      "name": {"en":"Old meaning similarity","ru":"Старый поиск по похожести смысла"},
+      "model": "qdrant/paraphrase-multilingual-MiniLM-L12-v2-onnx-Q",
+      "runtime": "fastembed 0.8.0",
+      "training_in_this_test": false
+    },
+    {
+      "id": "minilm_reranker",
+      "name": {"en":"MiniLM relevance judge · 0.1B","ru":"MiniLM-судья релевантности · 0,1B"},
+      "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+      "revision": "1427fd652930e4ba29e8149678df786c240d8825",
+      "license": "apache-2.0",
+      "training_in_this_test": false
+    },
+    {
+      "id": "qwen_reranker",
+      "name": {"en":"Qwen relevance judge · 0.6B","ru":"Qwen-судья релевантности · 0,6B"},
+      "repository": "Qwen/Qwen3-Reranker-0.6B",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "license": "apache-2.0",
+      "instruction": "Given a question, decide whether the passage contains information that directly helps answer that question.",
+      "training_in_this_test": false
+    }
+  ],
+  "locked_success": {
+    "useful_rejected": 0,
+    "useful_accepted": ">= 7/8",
+    "hard_extras_accepted": "<= 1/8",
+    "obvious_extras_accepted": 0,
+    "unclear_total": "<= 6/24"
+  },
+  "decision_priority": "A lost useful source is worse than an extra source, but an extra source is still work and risk for the next module. UNCLEAR must be routed onward, not silently accepted or rejected.",
+  "not_tested": [
+    "truth of a passage",
+    "privacy or secret removal",
+    "long documents",
+    "final answer generation",
+    "generalization beyond these English question-passage pairs"
+  ]
+}
