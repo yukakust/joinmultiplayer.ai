@@ -90,8 +90,9 @@ only after owner review.
     training, or answers.
 3B. Local Knowledge Offer: six locked questions, four small permitted local
     libraries on the same two devices, three search lanes, mandatory terminal
-    receipts, and evidence capsules — locked before installation or search.
-    No merging or final answers.
+    receipts, and evidence capsules — complete and owner-published as L0001.
+    The protocol gates passed, but no single lane both exceeded macro-F1 0.80
+    and found all five required shareable sources. No merging or final answers.
 3C. The same three-question model smoke split between yukabox and MacBook.
 4. Locked 30-task run.
 5. Owner audit and public result.
@@ -124,3 +125,22 @@ panel is not a blinded or model-diverse scientific review: all judges are
 separate runs of the same model family and could see condition names. Their 45
 scores and reasons are preserved in `site/experiments/E007/luna-judge-*-v0.1.json`;
 the aggregate is `site/experiments/E007/luna-panel-v0.1.json`.
+
+## Checkpoint 3B observed result
+
+Four pocket i on yukabox and MacBook returned all 24 logical receipts (72 search
+lane outputs). Exact words found all five required sources but produced 19 false
+`found` states. The small multilingual meaning model classified 20/24 states
+correctly with macro-F1 0.849673, blocked the synthetic private record, and
+found 4/5 required sources. It missed the hive source and produced three false
+finds. Every one of the 55 transported evidence fields exactly matched the
+selected local record.
+
+The locked gates technically passed because G4 and G5 each allowed “at least
+one lane”: the neural lane passed G4 while exact words passed G5. This exposes a
+protocol flaw. The result is therefore
+`complete_protocol_pass_hypothesis_inconclusive`, not a confirmed hypothesis.
+The next protocol must require one locked method to pass both quality gates.
+
+Public result: `site/experiments/E007/local-offer-result-L0001.json`. Raw owner-
+published receipts: `/api/public/L0001`.

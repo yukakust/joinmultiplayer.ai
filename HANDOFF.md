@@ -248,6 +248,17 @@ base 0. They agreed on 14/15 items. Full scores and reasons are public in
 are `/experiments/E007/luna-panel-v0.1.json`. The panel is same-model and
 method-visible, not a blinded or model-diverse scientific review.
 
+Checkpoint 3B is complete on two physical devices and public at
+`/experiment/e007/#e007-local-offer-results`. Four local libraries returned all
+24 logical receipts. Exact words found 5/5 required sources but emitted 19 false
+finds; multilingual meaning search classified 20/24 states correctly (macro-F1
+0.849673), respected the blocked private record, and found 4/5 required sources.
+The pre-registered gates passed only because G4 and G5 could be satisfied by
+different lanes. Preserve the result as protocol-pass / hypothesis-inconclusive.
+Scored data is `/experiments/E007/local-offer-result-L0001.json`; raw receipts
+are `/api/public/L0001`. A follow-up must require one locked method to pass both
+noise rejection and source recall.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

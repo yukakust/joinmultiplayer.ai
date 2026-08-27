@@ -163,12 +163,13 @@ contacted
 
 ## Honest boundary
 
-E007 Checkpoint 3A has demonstrated exact-question delivery and public-card
-ranking for four processes on two physical devices. It has not yet demonstrated
-local memory search, safe capsules, evidence validation, deduplication, answer
-improvement, or scale. Those are later checkpoints of this schema.
+E007 Checkpoint 3A demonstrated exact-question delivery and public-card ranking
+for four processes on two physical devices. Checkpoint 3B then demonstrated
+physical local search, terminal receipts, a blocked synthetic private record,
+and exact transport of stored evidence capsules. It did not find one method
+that both rejects noise well and retrieves every needed source.
 
-The locked next test is `site/experiments/E007/local-offer-protocol-v0.1.json`.
-It tests local search, `found` / `empty` / `blocked` receipts, and stored evidence
-capsules on the same two physical devices. It still does not test merging or a
-final answer.
+The locked protocol is `site/experiments/E007/local-offer-protocol-v0.1.json`;
+the scored result is `site/experiments/E007/local-offer-result-L0001.json`.
+Checkpoint 3B still does not test extraction from messy personal memory,
+validation, deduplication, merging, a final answer, or scale.
