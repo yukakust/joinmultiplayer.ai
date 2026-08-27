@@ -162,6 +162,13 @@
   },
   "all_gates_passed": true,
   "one_lane_passes_both_quality_gates": false,
+  "product_severity": {
+    "correct": 20,
+    "filterable_extra_candidates": 3,
+    "critical_missed_knowledge": 1,
+    "critical_privacy_failures": 0,
+    "note": "Extra candidates can be rejected downstream; missing knowledge cannot be recovered downstream."
+  },
   "protocol_design_finding": {
     "en": "G4 and G5 could be passed by different lanes. The next protocol must require one locked method to pass both.",
     "ru": "G4 и G5 могли пройти разные методы. В следующем протоколе один заранее выбранный метод должен пройти оба условия."

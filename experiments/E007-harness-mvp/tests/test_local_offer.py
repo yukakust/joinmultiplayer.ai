@@ -84,6 +84,16 @@ class LocalOfferTests(unittest.TestCase):
             5,
         )
         self.assertEqual(result["lane_summaries"]["exact_terms"]["false_found"], 19)
+        self.assertEqual(
+            result["product_severity"],
+            {
+                "correct": 20,
+                "filterable_extra_candidates": 3,
+                "critical_missed_knowledge": 1,
+                "critical_privacy_failures": 0,
+                "note": "Extra candidates can be rejected downstream; missing knowledge cannot be recovered downstream.",
+            },
+        )
 
 
 if __name__ == "__main__":

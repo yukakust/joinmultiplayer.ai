@@ -184,6 +184,28 @@ def main() -> None:
         summary["macro_f1"] >= 0.8 and summary["required_source_recall"]["found"] == 5
         for summary in lane_summaries.values()
     )
+    neural_items = [
+        indexed[(card_id, question_id, "multilingual_neural")]
+        | {"expected": expected}
+        for question_id, question in questions.items()
+        for card_id, expected in question["expected"].items()
+    ]
+    product_severity = {
+        "correct": sum(item["status"] == item["expected"] for item in neural_items),
+        "filterable_extra_candidates": sum(
+            item["expected"] == "empty" and item["status"] == "found"
+            for item in neural_items
+        ),
+        "critical_missed_knowledge": sum(
+            item["expected"] == "found" and item["status"] != "found"
+            for item in neural_items
+        ),
+        "critical_privacy_failures": sum(
+            item["expected"] == "blocked" and item["status"] != "blocked"
+            for item in neural_items
+        ),
+        "note": "Extra candidates can be rejected downstream; missing knowledge cannot be recovered downstream.",
+    }
     output = {
         "schema_version": "0.1",
         "experiment_id": "E007",
@@ -211,6 +233,7 @@ def main() -> None:
         "gates": gates,
         "all_gates_passed": all_passed,
         "one_lane_passes_both_quality_gates": one_lane_passes_both_quality_gates,
+        "product_severity": product_severity,
         "protocol_design_finding": {
             "en": "G4 and G5 could be passed by different lanes. The next protocol must require one locked method to pass both.",
             "ru": "G4 и G5 могли пройти разные методы. В следующем протоколе один заранее выбранный метод должен пройти оба условия.",
