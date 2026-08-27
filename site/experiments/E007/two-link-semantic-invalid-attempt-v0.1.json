@@ -1,0 +1,16 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6C",
+  "status": "invalid_attempt_preserved",
+  "attempt": 1,
+  "started_at": "2026-08-27T20:28:00Z",
+  "locked_git_revision": "a11bde596a14839f51ded4ce9d5ad4855603980d",
+  "protocol_sha256": "845d9f806d210bee4b81ca7a6bb2d89dc2c8421452994016a53bffbdf255cd68",
+  "world_sha256": "5764fbf64fb80f3fd897de90eebeb2475b768c2fc166ab94439251fb314f47b8",
+  "weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+  "what_happened": "The frozen model completed all 64 forward classifications, but the runner raised NameError while constructing the result object because Python False was misspelled as JSON false.",
+  "why_invalid": "No per-case decisions were serialized, so this attempt cannot be scored or used as evidence.",
+  "allowed_fix": "Change only the Python literal false to False, preserve the protocol, world, model weights, prompts, scoring, thresholds, and all other runner behavior, then rerun once.",
+  "error": "NameError: name 'false' is not defined"
+}

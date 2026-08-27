@@ -204,7 +204,7 @@ def run(batch_size: int, threads: int) -> dict:
             "id": "Qwen/Qwen3-0.6B",
             "snapshot": "c1899de",
             "weights_sha256": sha256_file(MODEL_FILE),
-            "weights_changed": false,
+            "weights_changed": False,
         },
         "runtime_seconds": round(time.monotonic() - started, 3),
         "summary": summary,
