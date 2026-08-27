@@ -1,0 +1,45 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6A.2",
+  "status": "frozen_before_implementation_or_inference",
+  "source": {
+    "source_id": "ASTER_FIELD_MANUAL",
+    "source_version": "v1",
+    "title": "Aster Field Manual",
+    "blocks": [
+      {"id":"A01","kind":"heading","text":"# Kest-7 cooling unit"},
+      {"id":"A02","kind":"paragraph","text":"Kest-7 is installed in the north service bay. Its grey shell and amber status lamp are normal identifying marks."},
+      {"id":"A03","kind":"paragraph","text":"A fast amber pulse immediately after a load transfer means thermal rebound. Record the transfer time before changing any setting."},
+      {"id":"A04","kind":"heading","text":"## Restart rule"},
+      {"id":"A05","kind":"paragraph","text":"A Kest-7 may normally be restarted after its amber pulse slows and the casing is cool enough to touch."},
+      {"id":"A06","kind":"paragraph","text":"Exception: if the casing remains hot or room pressure rises, isolate power first and do not restart the unit."},
+      {"id":"A07","kind":"heading","text":"## Vela-2 mesh"},
+      {"id":"A08","kind":"paragraph","text":"The Vela-2 intake mesh can turn copper-grey while its intake fan continues running. This colour alone does not mean the fan failed."},
+      {"id":"A09","kind":"paragraph","text":"It may be bypassed for no more than ninety seconds, but only while the intake fan remains active."},
+      {"id":"A10","kind":"heading","text":"## Orin-4 pressure ring"},
+      {"id":"A11","kind":"paragraph","text":"Before touching an Orin-4 that shows a violet ring, complete both checks:"},
+      {"id":"A12","kind":"list","text":"- Confirm that pressure is falling.\n- Confirm that the auxiliary vent is open.\nIf either check fails, keep the unit isolated."},
+      {"id":"A13","kind":"heading","text":"## Signal table"},
+      {"id":"A14","kind":"table","text":"| Device | Signal | Required action |\n| --- | --- | --- |\n| Mira-3 | three brief blue flashes | use remote controls only |\n| Rill-5 | steady white tone with no spectrum trace | inspect the sensor cable |"},
+      {"id":"A15","kind":"paragraph","text":"Table note: the Mira-3 remote-control rule applies only when room pressure is stable. If pressure is rising, isolate power instead."},
+      {"id":"A16","kind":"paragraph","text":"For Aster-9, silver frost after a cold start means the auxiliary vent must remain closed until the frost clears."},
+      {"id":"A17","kind":"heading","text":"## Similar but different equipment"},
+      {"id":"A18","kind":"paragraph","text":"For Aster-8, silver frost after a cold start requires opening the auxiliary vent immediately. This rule never applies to Aster-9."},
+      {"id":"A19","kind":"heading","text":"## Lumen-6 polarity warning"},
+      {"id":"A20","kind":"paragraph","text":"Do not connect the backup cell when the Lumen-6 polarity mark is red. Wait until the mark is green, then connect it."}
+    ]
+  },
+  "questions": [
+    {"id":"CH01","text":"Kest-7 started flashing amber quickly just after we moved its workload. What is the likely cause?","required_atoms":["A03"]},
+    {"id":"CH02","text":"Kest-7's pulse slowed, but its casing is still hot and room pressure is climbing. May I restart it?","required_atoms":["A05","A06"],"must_share_context":["A05","A06"]},
+    {"id":"CH03","text":"The Vela-2 mesh changed colour while the intake fan still runs. Can I briefly bypass it, and for how long?","required_atoms":["A08","A09"],"must_share_context":["A08","A09"]},
+    {"id":"CH04","text":"An Orin-4 shows a violet ring. Which checks must both pass before anyone touches it?","required_atoms":["A11","A12"],"must_share_context":["A11","A12"]},
+    {"id":"CH05","text":"Mira-3 gave three short blue flashes. Which action does the signal table prescribe?","required_atoms":["A14"],"must_share_context":["A13","A14"]},
+    {"id":"CH06","text":"Aster-9 has silver frost after a cold start. Should its auxiliary vent be opened?","required_atoms":["A16"],"forbidden_atoms":["A18"]},
+    {"id":"CH07","text":"Name the likely cause of Kest-7's fast amber pulse and the correct vent position for a frosted Aster-9.","required_atoms":["A03","A16"]},
+    {"id":"CH08","text":"What battery voltage should be used for a Nova-2 beacon?","required_atoms":[]},
+    {"id":"CH09","text":"The Lumen-6 polarity mark is red. Should I connect the backup cell now?","required_atoms":["A20"]},
+    {"id":"CH10","text":"Mira-3 flashed blue three times, but room pressure is rising. Should we use remote controls or isolate power?","required_atoms":["A14","A15"],"must_share_context":["A14","A15"]}
+  ]
+}

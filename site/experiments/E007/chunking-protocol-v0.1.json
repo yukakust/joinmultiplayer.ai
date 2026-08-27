@@ -1,0 +1,71 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6A.2",
+  "status": "locked_before_implementation_or_inference",
+  "kind": "chunking_and_exact_span_retrieval_development_test",
+  "title": {
+    "en": "Does cutting a document destroy the evidence?",
+    "ru": "Не разрушает ли резка документа доказательство?"
+  },
+  "hypothesis": {
+    "en": "Structure-aware overlapping windows will preserve complete evidence more often than equal-size non-overlapping word chunks when the same frozen reranker searches both.",
+    "ru": "Окна по структуре документа с перекрытием будут чаще сохранять доказательство целиком, чем равные куски слов без перекрытия, если оба варианта ищет один и тот же замороженный reranker."
+  },
+  "plain_language": {
+    "en": "We give two paper cutters the same manual. One cuts every 45 words. The other keeps headings, paragraphs, lists, tables, and one neighbouring block. Then the same Qwen3-Reranker-4B Q4 looks for evidence.",
+    "ru": "Даём один справочник двум ножам. Первый режет каждые 45 слов. Второй сохраняет заголовки, абзацы, списки, таблицы и один соседний блок. Затем доказательства ищет одна и та же Qwen3-Reranker-4B Q4."
+  },
+  "frozen_model": {
+    "repository": "Qwen/Qwen3-Reranker-4B",
+    "quantization": "Q4_K_M",
+    "local_file_sha256": "reuse_exact_file_recorded_by_gate_3C.5",
+    "instruction": "Given a question and one passage from a technical manual, decide whether the passage contains information that helps answer the question."
+  },
+  "methods": [
+    {
+      "id": "fixed_45",
+      "name": {"en": "45-word scissors", "ru": "Ножницы по 45 слов"},
+      "rule": "Concatenate the exact source, then create consecutive non-overlapping chunks of 45 Unicode whitespace-delimited words. Do not move a boundary to respect document structure."
+    },
+    {
+      "id": "structure_overlap",
+      "name": {"en": "Structure + neighbour", "ru": "Структура + сосед"},
+      "rule": "Parse headings, paragraphs, complete lists, complete Markdown tables, and code blocks as atomic blocks. Each search window contains one focal block plus its immediate previous and next blocks. Preserve exact byte ranges for every block."
+    }
+  ],
+  "selection_policy": {
+    "reject_at_or_below": 0.00292693,
+    "accept_at_or_above": 0.92222771,
+    "source": "Frozen Q4 thresholds from E007 Gate 3C.5",
+    "keep": "Keep TAKE and NOT SURE, sort by score, and retain at most the best three windows per question."
+  },
+  "frozen_questions": [
+    {"id":"CH01","stress":"ordinary answer inside one paragraph","required_atoms":["A03"]},
+    {"id":"CH02","stress":"general rule followed by a safety exception","required_atoms":["A05","A06"],"must_share_context":["A05","A06"]},
+    {"id":"CH03","stress":"pronoun needs its antecedent","required_atoms":["A08","A09"],"must_share_context":["A08","A09"]},
+    {"id":"CH04","stress":"list items need their lead-in","required_atoms":["A11","A12"],"must_share_context":["A11","A12"]},
+    {"id":"CH05","stress":"table cell needs row and column labels","required_atoms":["A14"],"must_share_context":["A13","A14"]},
+    {"id":"CH06","stress":"similar rule belongs to the wrong device","required_atoms":["A16"],"forbidden_atoms":["A18"]},
+    {"id":"CH07","stress":"two useful facts live in separate sections","required_atoms":["A03","A16"]},
+    {"id":"CH08","stress":"answer is absent","required_atoms":[]},
+    {"id":"CH09","stress":"negation changes the action","required_atoms":["A20"]},
+    {"id":"CH10","stress":"note after a table limits the table rule","required_atoms":["A14","A15"],"must_share_context":["A14","A15"]}
+  ],
+  "locked_metrics": [
+    "required atom recall among the three retained windows",
+    "number of questions with every required atom found",
+    "number of must-share-context groups preserved inside one retained window",
+    "number of forbidden wrong-device atoms retained",
+    "whether the absent-answer case incorrectly produces TAKE",
+    "all scores, windows, decisions, and failures remain public"
+  ],
+  "success_gate": {
+    "structure_complete_questions_min": 8,
+    "structure_must_share_groups_preserved": "4/4",
+    "structure_forbidden_atoms_retained_max": 0,
+    "structure_false_take_on_absent_answer_max": 0,
+    "comparison": "Structure-aware must preserve at least two more complete questions than fixed_45."
+  },
+  "claim_boundary": "This is a small synthetic English development test on one local manual. It tests cutting plus reranking, not source truth, final answer generation, private data, PDFs/OCR, or phone performance. A failure may come from the cutter, the reranker, or their interaction; every failure must be shown."
+}

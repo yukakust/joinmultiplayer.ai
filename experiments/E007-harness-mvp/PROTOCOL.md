@@ -259,3 +259,20 @@ Result: `site/experiments/E007/source-anchor-result-v0.1.json`. Run receipt:
 `site/experiments/E007/source-anchor-run-receipt-v0.1.json`. Owner review is
 pending; PDF/OCR/web extraction, signatures, source truth, and source meaning
 remain outside this result.
+
+## Checkpoint 3C.6A.2 — does cutting destroy the evidence?
+
+Before implementing or running retrieval, compare two cutters on one frozen
+synthetic English manual and ten frozen questions. `fixed_45` creates
+non-overlapping 45-word chunks. `structure_overlap` keeps headings, paragraphs,
+complete lists and tables, then includes the immediate neighbour on each side.
+The same frozen Qwen3-Reranker-4B Q4_K_M and the already opened Gate 3C.5
+thresholds score both methods. At most three TAKE/NOT SURE windows survive.
+
+The test records required-atom recall, complete questions, whether linked facts
+survive in one window, wrong-device evidence, and a false TAKE when the answer
+is absent. Protocol and world:
+`site/experiments/E007/chunking-protocol-v0.1.json` and
+`site/experiments/E007/chunking-world-v0.1.json`. This is locked before
+implementation or inference. It is a small synthetic development test, not
+evidence about PDFs/OCR, private memory, final answers, or phone performance.

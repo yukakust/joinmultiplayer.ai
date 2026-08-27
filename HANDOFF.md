@@ -367,6 +367,14 @@ broken verified, locked development gate passed. Public result:
 `/experiments/E007/source-anchor-result-v0.1.json`; deterministic receipt:
 `/experiments/E007/source-anchor-run-receipt-v0.1.json`. Owner review pending.
 
+Checkpoint 3C.6A.2 is locked before implementation or inference at
+`/experiments/E007/chunking-protocol-v0.1.json`; its frozen one-manual world is
+`/experiments/E007/chunking-world-v0.1.json`. It compares non-overlapping
+45-word chunks with structure-aware overlapping windows using the exact same
+Qwen3-Reranker-4B Q4_K_M and the frozen Gate 3C.5 thresholds. Preserve every
+window, score, and failure. Do not claim that a reranking failure proves the
+cutter failed: the result measures their interaction and reports both.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:
