@@ -4119,7 +4119,7 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse, sourceAnchorProtocolResponse, sourceAnchorResultResponse, chunkingProtocolResponse, chunkingResultResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse, sourceAnchorProtocolResponse, sourceAnchorResultResponse, chunkingProtocolResponse, chunkingResultResponse, capsuleProtocolResponse, capsuleWorldResponse, capsuleResultResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
@@ -4143,6 +4143,9 @@ async function loadE007() {
       fetch("/experiments/E007/source-anchor-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/chunking-protocol-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/chunking-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/evidence-capsule-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/evidence-capsules-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/evidence-capsule-result-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
@@ -4166,6 +4169,9 @@ async function loadE007() {
     const sourceAnchorResult = sourceAnchorResultResponse.ok ? await sourceAnchorResultResponse.json() : null;
     const chunkingProtocol = chunkingProtocolResponse.ok ? await chunkingProtocolResponse.json() : null;
     const chunkingResult = chunkingResultResponse.ok ? await chunkingResultResponse.json() : null;
+    const capsuleProtocol = capsuleProtocolResponse.ok ? await capsuleProtocolResponse.json() : null;
+    const capsuleWorld = capsuleWorldResponse.ok ? await capsuleWorldResponse.json() : null;
+    const capsuleResult = capsuleResultResponse.ok ? await capsuleResultResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4356,6 +4362,43 @@ async function loadE007() {
       const ramNote = preflightRam ? localized({ en: `Phone-shaped Yukabox run: ${(preflightRam / 1e9).toFixed(2)} GB peak RAM with one question at a time.`, ru: `Телефонный режим на yukabox: ${(preflightRam / 1e9).toFixed(2).replace(".", ",")} ГБ памяти на пике при одном вопросе за раз.` }) : "";
       mobileRerankerMarkup = `<section id="e007-mobile-reranker-results" class="e007-local-result-wide e007-mobile-reranker"><div class="flow-step">CHECKPOINT 3C.5 · ${localized({ en: "ACCEPTED ARCHITECTURE STEP", ru: "ПРИНЯТЫЙ ШАГ АРХИТЕКТУРЫ" })}</div><h2>${localized({ en: "Incoming relevance gate: Qwen3-Reranker-4B Q4.", ru: "Приёмка по полезности: Qwen3-Reranker-4B Q4." })}</h2><p>${localized({ en: "The 4B judge kept every useful piece. Its 2.50 GB Q4 copy made exactly the same 24 decisions as the original. It now becomes the modular TAKE / NOT SURE / DROP step. A later experiment may replace it without changing the rest of the harness.", ru: "Судья 4B сохранил все полезные кусочки. Его Q4-копия размером 2,50 ГБ приняла те же 24 решения, что и оригинал. Теперь это отдельный модуль ВЗЯТЬ / НЕ УВЕРЕН / ОТБРОСИТЬ. Позже мы сможем заменить его, не меняя остальной harness." })}</p><p><strong>${escapeHTML(ramNote)}</strong></p><div class="e007-result-metrics">${cards}</div><div class="e007-mobile-simple"><article class="is-correct"><strong>8 / 8</strong><span>${localized({ en: "useful pieces taken", ru: "полезных кусочков взято" })}</span></article><article class="is-correct"><strong>0 / 8</strong><span>${localized({ en: "obvious noise taken", ru: "явного мусора взято" })}</span></article><article class="needs-review"><strong>6 / 24</strong><span>${localized({ en: "left for a later check", ru: "оставлено на следующую проверку" })}</span></article></div><details class="e007-policy-table"><summary>${localized({ en: "SEE ALL 24 Q4 DECISIONS", ru: "ПОСМОТРЕТЬ ВСЕ 24 РЕШЕНИЯ Q4" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-mobile-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "MEMORY PIECE", ru: "КУСОЧЕК ПАМЯТИ" })}</th><th>${localized({ en: "TRUTH", ru: "ПРАВДА" })}</th><th>${localized({ en: "Q4 DECISION", ru: "РЕШЕНИЕ Q4" })}</th></tr></thead><tbody>${rows}</tbody></table></div></details><p class="control-warning">${localized({ en: "Not proven yet: that the 2.50 GB file loads on your phone without too much RAM, waiting, heat, or battery drain. This module judges relevance only. It does not judge truth, privacy, source support, or independence.", ru: "Пока не доказано: что файл 2,50 ГБ загрузится на вашем телефоне без лишней памяти, ожидания, нагрева и расхода батареи. Этот модуль проверяет только полезность для вопроса. Он не проверяет правду, приватность, источник и независимость." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/mobile-reranker-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/mobile-reranker-result-v0.1.json">${localized({ en: "ALL SCORES", ru: "ВСЕ ОЦЕНКИ" })} ↗</a></div></section>`;
     }
+    let capsuleMarkup = "";
+    if (capsuleResult && capsuleWorld) {
+      const packets = new Map(capsuleWorld.packets.map(packet => [packet.id, packet]));
+      const positionLabel = value => ({
+        start: localized({ en: "START", ru: "НАЧАЛО" }),
+        middle: localized({ en: "MIDDLE", ru: "СЕРЕДИНА" }),
+        end: localized({ en: "END", ru: "КОНЕЦ" }),
+      }[value] || value);
+      const relevanceLabel = value => ({
+        take: localized({ en: "TAKE", ru: "ВЗЯТЬ" }),
+        not_sure: localized({ en: "NOT SURE", ru: "НЕ УВЕРЕН" }),
+        drop: localized({ en: "DROP", ru: "ОТБРОСИТЬ" }),
+      }[value] || value);
+      const relevanceRows = group => capsuleResult.relevance.records.filter(record => record.group === group).map(record => {
+        const tone = group === "useful" ? (record.decision === "take" ? "is-correct" : "is-critical") : (record.decision === "take" ? "is-critical" : record.decision === "not_sure" ? "needs-review" : "is-correct");
+        return `<tr class="${tone}"><th><span>${escapeHTML(record.id)}</span>${escapeHTML(record.question)}</th><td>${escapeHTML(record.claim_hidden_from_model)}<small>${localized({ en: "Hidden from reranker", ru: "Reranker этого не видел" })}</small></td><td>${escapeHTML(record.candidate_evidence_hidden_from_model)}<small>${localized({ en: "Hidden from reranker", ru: "Reranker этого не видел" })}</small></td><td><strong>${record.token_count}</strong><small>${escapeHTML(positionLabel(record.evidence_position))}</small></td><td class="e007-verdict">${escapeHTML(relevanceLabel(record.decision))}<small>${Number(record.score).toFixed(4)}</small></td><td><details class="e007-capsule-window"><summary>${localized({ en: "OPEN WINDOW", ru: "ОТКРЫТЬ ОКНО" })}</summary><p>${escapeHTML(record.window)}</p></details></td></tr>`;
+      }).join("");
+      const mechanicalLabel = value => ({
+        source_missing: localized({ en: "SOURCE MISSING", ru: "НЕТ ИСТОЧНИКА" }),
+        version_missing: localized({ en: "VERSION MISSING", ru: "НЕТ ВЕРСИИ" }),
+        source_hash_mismatch: localized({ en: "SOURCE HASH CHANGED", ru: "HASH ИСТОЧНИКА НЕ СОВПАЛ" }),
+        window_range_mismatch: localized({ en: "WINDOW COORDINATES BROKEN", ru: "КООРДИНАТЫ ОКНА СЛОМАНЫ" }),
+        window_hash_mismatch: localized({ en: "WINDOW HASH CHANGED", ru: "HASH ОКНА НЕ СОВПАЛ" }),
+        candidate_text_mismatch: localized({ en: "HIGHLIGHT TEXT CHANGED", ru: "ВЫДЕЛЕННЫЙ ТЕКСТ ИЗМЕНЁН" }),
+        candidate_range_mismatch: localized({ en: "HIGHLIGHT COORDINATES BROKEN", ru: "КООРДИНАТЫ ВЫДЕЛЕНИЯ СЛОМАНЫ" }),
+        window_too_large: localized({ en: "OVER 500 TOKENS", ru: "БОЛЬШЕ 500 ТОКЕНОВ" }),
+      }[value] || value);
+      const brokenRows = capsuleResult.mechanical.records.filter(record => record.group === "broken").map(record => {
+        const packet = packets.get(record.id);
+        return `<tr class="${record.correct ? "is-correct" : "is-critical"}"><th><span>${escapeHTML(record.id)}</span>${escapeHTML(packet.question)}</th><td>${escapeHTML(packet.claim)}</td><td>${packet.evidence_window.token_count}</td><td>${escapeHTML(mechanicalLabel(record.expected))}</td><td class="e007-verdict">${record.correct ? localized({ en: "STOPPED BEFORE MODEL", ru: "ОСТАНОВЛЕН ДО МОДЕЛИ" }) : localized({ en: "WRONG DECISION", ru: "ОШИБКА" })}</td></tr>`;
+      }).join("");
+      const useful = capsuleResult.relevance.summary;
+      const mechanical = capsuleResult.mechanical.summary;
+      capsuleMarkup = `<section id="e007-capsule-results" class="e007-local-result-wide e007-capsules"><div class="flow-step">CHECKPOINT 3C.6B · ${localized({ en: "INCOMING CAPSULE", ru: "ВХОДЯЩАЯ КАПСУЛА" })}</div><h2>${localized({ en: "The four-part packet passed this small test.", ru: "Пакет из четырёх частей прошёл этот маленький тест." })}</h2><p>${localized({ en: "Ordinary code checked exact bytes first. Qwen then saw only the question and complete source window. It never saw the sender's claim or highlighted sentence.", ru: "Сначала обычный код проверил точные байты. Затем Qwen увидела только вопрос и полное окно источника. Утверждение и выделенную отправителем фразу она не видела." })}</p><div class="e007-result-metrics"><article class="is-correct"><span>${localized({ en: "USEFUL WINDOWS TAKEN", ru: "ПОЛЕЗНЫХ ОКОН ВЗЯТО" })}</span><strong>${useful.useful_taken} / ${useful.useful_total}</strong><small>${localized({ en: "none lost", ru: "ничего не потеряно" })}</small></article><article class="is-correct"><span>${localized({ en: "MISLEADING WINDOWS TAKEN", ru: "ЛОВУШЕК УВЕРЕННО ВЗЯТО" })}</span><strong>${useful.misleading_taken} / ${useful.misleading_total}</strong><small>${useful.misleading_not_sure} ${localized({ en: "sent to NOT SURE", ru: "ушло в НЕ УВЕРЕН" })}</small></article><article class="is-correct"><span>${localized({ en: "BROKEN PACKETS PASSED", ru: "СЛОМАННЫХ ПАКЕТОВ ПРОШЛО" })}</span><strong>${mechanical.broken_accepted} / ${mechanical.broken_total}</strong><small>${mechanical.correct} / ${mechanical.total} ${localized({ en: "mechanical decisions right", ru: "механических решений верно" })}</small></article></div><details class="e007-policy-table" open><summary>${localized({ en: "8 USEFUL WINDOWS — ALL TAKEN", ru: "8 ПОЛЕЗНЫХ ОКОН — ВСЕ ВЗЯТЫ" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-capsule-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "SENDER CLAIM", ru: "УТВЕРЖДЕНИЕ ОТПРАВИТЕЛЯ" })}</th><th>${localized({ en: "SENDER HIGHLIGHT", ru: "ВЫДЕЛЕНИЕ ОТПРАВИТЕЛЯ" })}</th><th>${localized({ en: "TOKENS", ru: "ТОКЕНЫ" })}</th><th>${localized({ en: "QWEN", ru: "QWEN" })}</th><th>${localized({ en: "FULL WINDOW", ru: "ВСЁ ОКНО" })}</th></tr></thead><tbody>${relevanceRows("useful")}</tbody></table></div></details><details class="e007-policy-table"><summary>${localized({ en: "8 MISLEADING WINDOWS — SEE EVERY DECISION", ru: "8 ПОХОЖИХ ЛОВУШЕК — ВСЕ РЕШЕНИЯ" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-capsule-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "SENDER CLAIM", ru: "УТВЕРЖДЕНИЕ ОТПРАВИТЕЛЯ" })}</th><th>${localized({ en: "SENDER HIGHLIGHT", ru: "ВЫДЕЛЕНИЕ ОТПРАВИТЕЛЯ" })}</th><th>${localized({ en: "TOKENS", ru: "ТОКЕНЫ" })}</th><th>QWEN</th><th>${localized({ en: "FULL WINDOW", ru: "ВСЁ ОКНО" })}</th></tr></thead><tbody>${relevanceRows("misleading")}</tbody></table></div></details><details class="e007-policy-table"><summary>${localized({ en: "8 BROKEN PACKETS — ALL STOPPED BEFORE QWEN", ru: "8 СЛОМАННЫХ ПАКЕТОВ — ВСЕ ОСТАНОВЛЕНЫ ДО QWEN" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-broken-capsule-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "CLAIM", ru: "УТВЕРЖДЕНИЕ" })}</th><th>${localized({ en: "TOKENS", ru: "ТОКЕНЫ" })}</th><th>${localized({ en: "WHAT WAS BROKEN", ru: "ЧТО СЛОМАНО" })}</th><th>${localized({ en: "RESULT", ru: "ИТОГ" })}</th></tr></thead><tbody>${brokenRows}</tbody></table></div></details><p class="control-warning">${localized({ en: "This does not prove the sender's claim. Six misleading windows remain NOT SURE and must continue to the next module. We tested packet integrity and whole-window relevance only. The first invalid 512-batch launch is preserved separately.", ru: "Это не доказывает утверждение отправителя. Шесть похожих окон остались в состоянии НЕ УВЕРЕН и должны перейти в следующий модуль. Мы проверили только целостность пакета и полезность всего окна. Первый невалидный запуск с batch 512 сохранён отдельно." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/evidence-capsule-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/evidence-capsules-v0.1.json">${localized({ en: "ALL 24 PACKETS", ru: "ВСЕ 24 ПАКЕТА" })} ↗</a><a class="quiet-link" href="/experiments/E007/evidence-capsule-result-v0.1.json">${localized({ en: "ALL RESULTS", ru: "ВСЕ РЕЗУЛЬТАТЫ" })} ↗</a><a class="quiet-link" href="/experiments/E007/evidence-capsule-invalid-attempt-v0.1.json">${localized({ en: "INVALID ATTEMPT", ru: "НЕВАЛИДНЫЙ ЗАПУСК" })} ↗</a></div></section>`;
+    } else if (capsuleProtocol) {
+      capsuleMarkup = `<section id="e007-capsule-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C.6B · ${localized({ en: "LOCKED BEFORE RUN", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h2>${escapeHTML(localized(capsuleProtocol.title))}</h2><p>${escapeHTML(localized(capsuleProtocol.hypothesis))}</p></section>`;
+    }
     let chunkingMarkup = "";
     if (chunkingResult?.methods?.length) {
       const byMethod = new Map(chunkingResult.methods.map(method => [method.method, method]));
@@ -4417,6 +4460,7 @@ async function loadE007() {
       }
     }
     target.querySelector(".experiment-loading").outerHTML = `
+      ${capsuleMarkup}
       ${chunkingMarkup}
       ${sourceAnchorMarkup}
       ${mobileRerankerMarkup}
