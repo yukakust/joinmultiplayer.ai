@@ -116,6 +116,7 @@ def main() -> None:
                     "expected": expected,
                     "actual": indexed[(card_id, question_id, lane)]["status"],
                     "source_id": indexed[(card_id, question_id, lane)]["source_id"],
+                    "source_title": documents[indexed[(card_id, question_id, lane)]["source_id"]]["title"],
                     "score": indexed[(card_id, question_id, lane)]["score"],
                     "correct": expected == indexed[(card_id, question_id, lane)]["status"],
                 }

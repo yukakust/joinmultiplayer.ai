@@ -177,6 +177,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.160357,
             "correct": true
           },
@@ -184,6 +185,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.0,
             "correct": false
           },
@@ -191,6 +193,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "M1-CV-02",
+            "source_title": "Native-resolution crops for distant defects",
             "score": 0.059761,
             "correct": true
           },
@@ -198,6 +201,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.055728,
             "correct": false
           }
@@ -207,6 +211,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.323253,
             "correct": true
           },
@@ -214,6 +219,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.149953,
             "correct": false
           },
@@ -221,6 +227,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.168461,
             "correct": true
           },
@@ -228,6 +235,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.181353,
             "correct": false
           }
@@ -237,6 +245,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.723253,
             "correct": true
           },
@@ -244,6 +253,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "Y2-NET-04",
+            "source_title": "Chunked image transfer",
             "score": 0.410756,
             "correct": true
           },
@@ -251,6 +261,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "M1-CV-02",
+            "source_title": "Native-resolution crops for distant defects",
             "score": 0.695019,
             "correct": true
           },
@@ -258,6 +269,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "M2-BEE-04",
+            "source_title": "Apiary network",
             "score": 0.343441,
             "correct": true
           }
@@ -274,6 +286,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.120605,
             "correct": false
           },
@@ -281,6 +294,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.0,
             "correct": false
           },
@@ -288,6 +302,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.0,
             "correct": true
           },
@@ -295,6 +310,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.0,
             "correct": false
           }
@@ -304,6 +320,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.314791,
             "correct": false
           },
@@ -311,6 +328,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y2-NET-02",
+            "source_title": "Regional latency",
             "score": 0.147171,
             "correct": false
           },
@@ -318,6 +336,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.178207,
             "correct": true
           },
@@ -325,6 +344,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.168266,
             "correct": false
           }
@@ -334,6 +354,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.408874,
             "correct": true
           },
@@ -341,6 +362,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "Y2-NET-04",
+            "source_title": "Chunked image transfer",
             "score": 0.296689,
             "correct": true
           },
@@ -348,6 +370,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.547055,
             "correct": true
           },
@@ -355,6 +378,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "M2-BEE-04",
+            "source_title": "Apiary network",
             "score": 0.172505,
             "correct": true
           }
@@ -371,6 +395,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.060302,
             "correct": false
           },
@@ -378,6 +403,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.0,
             "correct": false
           },
@@ -385,6 +411,7 @@
             "expected": "blocked",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.0,
             "correct": false
           },
@@ -392,6 +419,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.0,
             "correct": false
           }
@@ -401,6 +429,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.193064,
             "correct": false
           },
@@ -408,6 +437,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y2-NET-04",
+            "source_title": "Chunked image transfer",
             "score": 0.146183,
             "correct": false
           },
@@ -415,6 +445,7 @@
             "expected": "blocked",
             "actual": "found",
             "source_id": "M1-CV-02",
+            "source_title": "Native-resolution crops for distant defects",
             "score": 0.150898,
             "correct": false
           },
@@ -422,6 +453,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-02",
+            "source_title": "Honey stores",
             "score": 0.190408,
             "correct": false
           }
@@ -431,6 +463,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-04",
+            "source_title": "Lens calibration",
             "score": 0.531778,
             "correct": false
           },
@@ -438,6 +471,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.222807,
             "correct": true
           },
@@ -445,6 +479,7 @@
             "expected": "blocked",
             "actual": "blocked",
             "source_id": "M1-PRIVATE-01",
+            "source_title": "Private customer camera register",
             "score": 0.742884,
             "correct": true
           },
@@ -452,6 +487,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-04",
+            "source_title": "Apiary network",
             "score": 0.434834,
             "correct": false
           }
@@ -468,6 +504,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-06",
+            "source_title": "Office light",
             "score": 0.144338,
             "correct": false
           },
@@ -475,6 +512,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.0,
             "correct": false
           },
@@ -482,6 +520,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.0,
             "correct": false
           },
@@ -489,6 +528,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.0,
             "correct": false
           }
@@ -498,6 +538,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.215141,
             "correct": false
           },
@@ -505,6 +546,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.111719,
             "correct": false
           },
@@ -512,6 +554,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.116021,
             "correct": false
           },
@@ -519,6 +562,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-06",
+            "source_title": "Ceramic cup",
             "score": 0.195007,
             "correct": false
           }
@@ -528,6 +572,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-06",
+            "source_title": "Office light",
             "score": 0.563555,
             "correct": false
           },
@@ -535,6 +580,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "Y2-NET-04",
+            "source_title": "Chunked image transfer",
             "score": 0.129338,
             "correct": true
           },
@@ -542,6 +588,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "M1-CV-03",
+            "source_title": "Color augmentation",
             "score": 0.367458,
             "correct": true
           },
@@ -549,6 +596,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "M2-BEE-06",
+            "source_title": "Ceramic cup",
             "score": 0.305487,
             "correct": true
           }
@@ -565,6 +613,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-06",
+            "source_title": "Office light",
             "score": 0.102062,
             "correct": false
           },
@@ -572,6 +621,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.0,
             "correct": true
           },
@@ -579,6 +629,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.0,
             "correct": false
           },
@@ -586,6 +637,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.0,
             "correct": false
           }
@@ -595,6 +647,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-05",
+            "source_title": "Image upload retry",
             "score": 0.236134,
             "correct": false
           },
@@ -602,6 +655,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.129017,
             "correct": true
           },
@@ -609,6 +663,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.170496,
             "correct": false
           },
@@ -616,6 +671,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.253353,
             "correct": false
           }
@@ -625,6 +681,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "Y1-CV-05",
+            "source_title": "Image upload retry",
             "score": 0.267313,
             "correct": true
           },
@@ -632,6 +689,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.634596,
             "correct": true
           },
@@ -639,6 +697,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "M1-CV-02",
+            "source_title": "Native-resolution crops for distant defects",
             "score": 0.387783,
             "correct": true
           },
@@ -646,6 +705,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "M2-BEE-02",
+            "source_title": "Honey stores",
             "score": 0.27348,
             "correct": true
           }
@@ -662,6 +722,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.0,
             "correct": false
           },
@@ -669,6 +730,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.0,
             "correct": false
           },
@@ -676,6 +738,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.0,
             "correct": false
           },
@@ -683,6 +746,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.0,
             "correct": true
           }
@@ -692,6 +756,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y1-CV-01",
+            "source_title": "Overlapping tiles for small targets",
             "score": 0.213448,
             "correct": false
           },
@@ -699,6 +764,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "Y2-NET-01",
+            "source_title": "Lost acknowledgement and duplicate work",
             "score": 0.175009,
             "correct": false
           },
@@ -706,6 +772,7 @@
             "expected": "empty",
             "actual": "found",
             "source_id": "M1-CV-01",
+            "source_title": "Validation leakage across camera scenes",
             "score": 0.186371,
             "correct": false
           },
@@ -713,6 +780,7 @@
             "expected": "found",
             "actual": "found",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.337147,
             "correct": true
           }
@@ -722,6 +790,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "Y1-CV-06",
+            "source_title": "Office light",
             "score": 0.276047,
             "correct": true
           },
@@ -729,6 +798,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "Y2-NET-03",
+            "source_title": "Read replica lag",
             "score": 0.206891,
             "correct": true
           },
@@ -736,6 +806,7 @@
             "expected": "empty",
             "actual": "empty",
             "source_id": "M1-CV-02",
+            "source_title": "Native-resolution crops for distant defects",
             "score": 0.232411,
             "correct": true
           },
@@ -743,6 +814,7 @@
             "expected": "found",
             "actual": "empty",
             "source_id": "M2-BEE-01",
+            "source_title": "Crowded brood nest before swarm season",
             "score": 0.379205,
             "correct": false
           }
