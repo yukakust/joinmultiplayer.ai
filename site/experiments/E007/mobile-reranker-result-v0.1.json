@@ -4,6 +4,18 @@
   "checkpoint": "3C.5",
   "status": "complete",
   "protocol": "/experiments/E007/mobile-reranker-protocol-v0.1.json",
+  "architecture_decision": {
+    "status": "accepted_by_owner",
+    "accepted_at": "2026-08-27",
+    "module": "incoming_relevance_gate",
+    "candidate": "Qwen3-Reranker-4B GGUF Q4_K_M",
+    "outputs": [
+      "take",
+      "not_sure",
+      "drop"
+    ],
+    "boundary": "Relevance only; not truth, privacy, source support, independence, or sufficiency."
+  },
   "methods": [
     {
       "method": "bf16",

@@ -1,8 +1,7 @@
 # Pocket i harness — agreed path
 
-Status: working agreement after E007 Checkpoint 3A. Checkpoint 3B is locked
-before local search to test the next part of this contract. This is not a claim
-that every module already exists.
+Status: working architecture agreement after E007 Gate 3C.5. This is not a
+claim that every module already exists or has passed a physical-device test.
 
 ## The whole path
 
@@ -194,3 +193,43 @@ question + one offered memory piece
 This scorer judges relevance only. It does not prove that a claim is true, safe
 to disclose, independent, or sufficient for the final answer. Real-phone RAM,
 load time, heat, and battery are still untested.
+
+## Accepted architecture decision: relevance gate
+
+Accepted on 2026-08-27 after owner review of Gate 3C.5:
+
+```text
+question + one offered memory piece
+→ Qwen3-Reranker-4B Q4
+→ TAKE / NOT SURE / DROP
+```
+
+Rules:
+
+- `TAKE` moves the piece to later evidence checks; it does not call it true.
+- `NOT SURE` is preserved and sent to a later module; it is never silently
+  deleted.
+- `DROP` removes the piece only from this answer attempt; it does not erase the
+  owner's memory.
+- This module may be replaced later without changing the capsule or relay
+  contract.
+- Q4 is the accepted build because it preserved all 24 BF16 decisions at 2.50
+  GB. Actual-phone runtime remains a required deployment check.
+
+## Accepted steps and their evidence
+
+| Step | Accepted design | Current evidence |
+| --- | --- | --- |
+| 1 | Install one modular app and choose a model preset. Start with Qwen 0.6B; stronger devices may choose a larger model. | Agreed, not built. |
+| 2 | Keep the person's exact question. Do not silently rewrite it into another request. | Passed on MacBook + yukabox. |
+| 3 | Use Speculative Attention and public capability cards to ask many plausible pocket i in parallel. | Delivery and simple ranking passed; automatic cards and scale remain open. |
+| 4 | Search only owner-approved local memory. The complete private store stays on the device. | Physical local-search transport passed on two devices. |
+| 5 | Every contacted pocket i returns `found`, `empty`, `blocked`, `error`, or becomes `offline`. | Receipt states and a synthetic blocked secret passed. |
+| 6 | A useful offer travels as a readable capsule: claim, evidence, source, lineage, conditions, limits, and permission. | Exact stored-capsule transport passed; extraction from messy memory remains open. |
+| 7 | Prefer recall at the sending edge: a doubtful candidate may travel, because the receiver can filter it; missing useful knowledge is harder to repair. | New-question send-policy smoke passed. |
+| 8 | Before any network send, a separate security module enforces owner permission and removes secrets. | Contract accepted; only a synthetic canary has been tested. |
+| 9 | The receiver checks `question ↔ one memory piece` with Qwen3-Reranker-4B Q4 and returns TAKE / NOT SURE / DROP. | Accepted after Gate 3C.5; Q4 matched BF16 24/24. Phone test pending. |
+| 10 | Later validators check source support, truth, matching conditions, provenance, and independence. | Accepted design, not yet solved. |
+| 11 | Similar claims collapse, but evidence and lineage remain. A supported minority stays visible. | Accepted design, not yet tested at scale. |
+| 12 | A model writes the final human answer only from accepted evidence; a final checker shows gaps instead of guessing. | Accepted design, not yet tested. |
+| 13 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |

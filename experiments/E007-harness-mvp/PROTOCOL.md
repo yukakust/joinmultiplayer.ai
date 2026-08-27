@@ -232,3 +232,8 @@ not a phone measurement.
 This does not yet prove phone viability or fresh generalisation. The examples
 were opened in 3C.4, and no phone has measured load time, peak RAM, heat, or
 battery. Result: `site/experiments/E007/mobile-reranker-result-v0.1.json`.
+
+Owner decision on 2026-08-27: accept Qwen3-Reranker-4B Q4_K_M as the modular
+incoming relevance gate with three outputs: TAKE / NOT SURE / DROP. NOT SURE
+must continue to a later module. This decision does not promote the scorer into
+a truth, privacy, provenance, independence, or sufficiency judge.

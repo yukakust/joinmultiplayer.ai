@@ -63,6 +63,14 @@ def main(score_files: list[Path]) -> None:
     result = {
         "schema_version":"0.1", "experiment_id":"E007", "checkpoint":"3C.5",
         "status":"complete", "protocol":"/experiments/E007/mobile-reranker-protocol-v0.1.json",
+        "architecture_decision": {
+            "status": "accepted_by_owner",
+            "accepted_at": "2026-08-27",
+            "module": "incoming_relevance_gate",
+            "candidate": "Qwen3-Reranker-4B GGUF Q4_K_M",
+            "outputs": ["take", "not_sure", "drop"],
+            "boundary": "Relevance only; not truth, privacy, source support, independence, or sufficiency.",
+        },
         "methods":methods,
         "build_artifacts": {
             "bf16_gguf_sha256": "280e898808a907c00705285c66c0bf1b6995d32121990a70b8bd91c96c889244",

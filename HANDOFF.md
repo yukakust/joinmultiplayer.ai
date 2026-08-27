@@ -350,6 +350,10 @@ until a real phone measures RAM, cold load, heat, battery, and wall time; do not
 call this fresh task evidence because the 24 pairs were opened in 3C.4.
 The one-slot, 512-token Q4 preflight peaked at 4.57 GB resident memory on
 yukabox and preserved identical scores; this is only a phone-shaped CPU run.
+The owner accepted this as the current modular incoming relevance gate on
+2026-08-27: question + one offered memory piece → Qwen3-Reranker-4B Q4_K_M →
+TAKE / NOT SURE / DROP. NOT SURE is preserved for a later module. The decision
+and the complete accepted path are recorded in `schema.md`.
 
 ## Immediate next work
 
