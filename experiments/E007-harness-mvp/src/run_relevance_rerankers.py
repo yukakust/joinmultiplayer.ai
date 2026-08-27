@@ -74,6 +74,14 @@ def decide(score: float, calibration: dict) -> str:
     return "unclear"
 
 
+def cosine_rows(left, right):
+    import numpy as np
+
+    numerator = np.sum(left * right, axis=1)
+    denominator = np.linalg.norm(left, axis=1) * np.linalg.norm(right, axis=1)
+    return np.divide(numerator, denominator, out=np.zeros_like(numerator), where=denominator != 0)
+
+
 def embedding_scorer(cache_dir: Path) -> Callable[[list[tuple[str, str]]], list[float]]:
     import numpy as np
     from fastembed import TextEmbedding
@@ -87,7 +95,7 @@ def embedding_scorer(cache_dir: Path) -> Callable[[list[tuple[str, str]]], list[
     def score(pairs: list[tuple[str, str]]) -> list[float]:
         questions = np.asarray(list(model.embed([pair[0] for pair in pairs])))
         passages = np.asarray(list(model.embed([pair[1] for pair in pairs])))
-        return np.sum(questions * passages, axis=1).tolist()
+        return cosine_rows(questions, passages).tolist()
 
     return score
 
@@ -141,7 +149,10 @@ def qwen_reranker_scorer(model_path: Path, instruction: str, batch_size: int) ->
         for start in range(0, len(pairs), batch_size):
             batch = pairs[start:start + batch_size]
             texts = [f"<Instruct>: {instruction}\n<Query>: {query}\n<Document>: {passage}" for query, passage in batch]
-            encoded = tokenizer(texts, padding=False, truncation=True, max_length=2048 - len(prefix_tokens) - len(suffix_tokens))
+            encoded = tokenizer(
+                texts, padding=False, truncation=True, return_attention_mask=False,
+                max_length=2048 - len(prefix_tokens) - len(suffix_tokens),
+            )
             encoded["input_ids"] = [prefix_tokens + ids + suffix_tokens for ids in encoded["input_ids"]]
             inputs = tokenizer.pad(encoded, padding=True, return_tensors="pt")
             with torch.inference_mode():

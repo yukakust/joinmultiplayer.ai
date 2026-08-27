@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.4",
+  "status": "invalid_technical_preflight_not_scientific_result",
+  "published_to_result_page": false,
+  "reason": [
+    "The embedding baseline used an unnormalised dot product instead of the locked old cosine-similarity method.",
+    "The Qwen reranker input kept a stale attention mask after prefix and suffix tokens were inserted."
+  ],
+  "observed_before_fix": {
+    "embedding_baseline_correct": "16/24",
+    "minilm_reranker_correct": "15/24",
+    "qwen_reranker_correct": "12/24"
+  },
+  "integrity_note": "No question, passage, model revision, calibration label, threshold rule, or success gate changed. Only the two implementation errors named above were fixed before the valid one-shot run."
+}

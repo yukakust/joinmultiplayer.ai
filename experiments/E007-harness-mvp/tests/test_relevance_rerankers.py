@@ -10,6 +10,15 @@ SPEC.loader.exec_module(MODULE)
 
 
 class RelevanceRerankerTests(unittest.TestCase):
+    def test_cosine_rows_ignores_vector_magnitude(self):
+        import numpy as np
+
+        left = np.asarray([[1.0, 0.0], [1.0, 1.0]])
+        right = np.asarray([[12.0, 0.0], [-2.0, 2.0]])
+        result = MODULE.cosine_rows(left, right)
+        self.assertAlmostEqual(float(result[0]), 1.0)
+        self.assertAlmostEqual(float(result[1]), 0.0)
+
     def test_percentile_interpolates(self):
         self.assertEqual(MODULE.percentile([0, 10, 20, 30], 0.25), 7.5)
 
