@@ -393,6 +393,16 @@ deterministic mechanical gate first. Only valid packets may reach the frozen
 Qwen3-Reranker-4B Q4 relevance gate, which must see only question + window.
 Do not add claim-support or condition-applicability conclusions to this gate.
 
+Gate 3C.6B passed after one preserved invalid technical attempt. Attempt 1 used
+a 512-token physical batch and stopped when a full prompt reached 587 tokens;
+inputs were unchanged for the valid rerun with 1024 context/batch/microbatch.
+Mechanical result: 24/24 correct, 16/16 intact accepted, 0/8 broken accepted.
+Q4 relevance result: 8/8 useful TAKE, 0 useful DROP, 0/8 misleading TAKE,
+6 misleading NOT_SURE, 2 misleading DROP. Result:
+`/experiments/E007/evidence-capsule-result-v0.1.json`; invalid attempt:
+`/experiments/E007/evidence-capsule-invalid-attempt-v0.1.json`. Claim support
+and applicability are still untested.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

@@ -52,6 +52,18 @@ class EvidenceCapsuleWorldTest(unittest.TestCase):
         self.assertEqual(MODULE.relevance_decision(0.50, thresholds), "not_sure")
         self.assertEqual(MODULE.relevance_decision(0.001, thresholds), "drop")
 
+    def test_published_result_preserves_locked_outcome(self):
+        path = ROOT / "site/experiments/E007/evidence-capsule-result-v0.1.json"
+        if not path.exists():
+            self.skipTest("result not published yet")
+        result = json.loads(path.read_text())
+        self.assertTrue(result["passed_locked_gate"])
+        self.assertEqual(result["mechanical"]["summary"]["correct"], 24)
+        self.assertEqual(result["mechanical"]["summary"]["broken_accepted"], 0)
+        self.assertEqual(result["relevance"]["summary"]["useful_taken"], 8)
+        self.assertEqual(result["relevance"]["summary"]["useful_dropped"], 0)
+        self.assertEqual(result["relevance"]["summary"]["misleading_taken"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

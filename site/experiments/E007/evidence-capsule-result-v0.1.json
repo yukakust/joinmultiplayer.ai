@@ -1,0 +1,439 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6B",
+  "status": "locked_development_run_complete",
+  "protocol": "/experiments/E007/evidence-capsule-protocol-v0.1.json",
+  "world": "/experiments/E007/evidence-capsules-v0.1.json",
+  "protocol_sha256": "4590ddfb7a3b40f47a196bcb1833c199c468319ae3f3d032494a23defaea8889",
+  "world_sha256": "694bcbd735fa806a546652d259cb3848f18a8793216935e792355c91b6d76f43",
+  "model": {
+    "id": "Qwen/Qwen3-Reranker-4B",
+    "quantization": "Q4_K_M",
+    "file_sha256": "09341112a9147bf0dc96f6ec98b006f544b76bc18ab68c9f7f6a94e9890b613e"
+  },
+  "runtime_seconds": 38.301,
+  "mechanical": {
+    "summary": {
+      "correct": 24,
+      "total": 24,
+      "intact_accepted": 16,
+      "intact_total": 16,
+      "broken_accepted": 0,
+      "broken_total": 8
+    },
+    "passed_locked_gate": true,
+    "records": [
+      {
+        "id": "U01",
+        "group": "useful",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 97,
+        "correct": true
+      },
+      {
+        "id": "U02",
+        "group": "useful",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 97,
+        "correct": true
+      },
+      {
+        "id": "U03",
+        "group": "useful",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 97,
+        "correct": true
+      },
+      {
+        "id": "U04",
+        "group": "useful",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 248,
+        "correct": true
+      },
+      {
+        "id": "U05",
+        "group": "useful",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 243,
+        "correct": true
+      },
+      {
+        "id": "U06",
+        "group": "useful",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 243,
+        "correct": true
+      },
+      {
+        "id": "U07",
+        "group": "useful",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 493,
+        "correct": true
+      },
+      {
+        "id": "U08",
+        "group": "useful",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 495,
+        "correct": true
+      },
+      {
+        "id": "T01",
+        "group": "misleading",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 89,
+        "correct": true
+      },
+      {
+        "id": "T02",
+        "group": "misleading",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 91,
+        "correct": true
+      },
+      {
+        "id": "T03",
+        "group": "misleading",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 238,
+        "correct": true
+      },
+      {
+        "id": "T04",
+        "group": "misleading",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 241,
+        "correct": true
+      },
+      {
+        "id": "T05",
+        "group": "misleading",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 240,
+        "correct": true
+      },
+      {
+        "id": "T06",
+        "group": "misleading",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 489,
+        "correct": true
+      },
+      {
+        "id": "T07",
+        "group": "misleading",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 487,
+        "correct": true
+      },
+      {
+        "id": "T08",
+        "group": "misleading",
+        "expected": "valid",
+        "decision": "valid",
+        "actual_token_count": 489,
+        "correct": true
+      },
+      {
+        "id": "B01",
+        "group": "broken",
+        "expected": "source_missing",
+        "decision": "source_missing",
+        "correct": true
+      },
+      {
+        "id": "B02",
+        "group": "broken",
+        "expected": "version_missing",
+        "decision": "version_missing",
+        "correct": true
+      },
+      {
+        "id": "B03",
+        "group": "broken",
+        "expected": "source_hash_mismatch",
+        "decision": "source_hash_mismatch",
+        "correct": true
+      },
+      {
+        "id": "B04",
+        "group": "broken",
+        "expected": "window_range_mismatch",
+        "decision": "window_range_mismatch",
+        "correct": true
+      },
+      {
+        "id": "B05",
+        "group": "broken",
+        "expected": "window_hash_mismatch",
+        "decision": "window_hash_mismatch",
+        "correct": true
+      },
+      {
+        "id": "B06",
+        "group": "broken",
+        "expected": "candidate_text_mismatch",
+        "decision": "candidate_text_mismatch",
+        "correct": true
+      },
+      {
+        "id": "B07",
+        "group": "broken",
+        "expected": "candidate_range_mismatch",
+        "decision": "candidate_range_mismatch",
+        "correct": true
+      },
+      {
+        "id": "B08",
+        "group": "broken",
+        "expected": "window_too_large",
+        "decision": "window_too_large",
+        "actual_token_count": 532,
+        "correct": true
+      }
+    ]
+  },
+  "relevance": {
+    "summary": {
+      "useful_taken": 8,
+      "useful_not_sure": 0,
+      "useful_dropped": 0,
+      "useful_total": 8,
+      "misleading_taken": 0,
+      "misleading_not_sure": 6,
+      "misleading_dropped": 2,
+      "misleading_total": 8
+    },
+    "passed_locked_gate": true,
+    "records": [
+      {
+        "id": "U01",
+        "group": "useful",
+        "question": "Kest-7's pulse slowed, but its casing is hot and room pressure is rising. May it be restarted?",
+        "claim_hidden_from_model": "Kest-7 must not be restarted; isolate power first.",
+        "window": "Exception: if the Kest-7 casing remains hot or room pressure rises, isolate power first and do not restart the unit. The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4.",
+        "candidate_evidence_hidden_from_model": "Exception: if the Kest-7 casing remains hot or room pressure rises, isolate power first and do not restart the unit.",
+        "token_count": 97,
+        "evidence_position": "start",
+        "score": 0.97529698,
+        "decision": "take",
+        "expected": "keep"
+      },
+      {
+        "id": "U02",
+        "group": "useful",
+        "question": "The Vela-2 mesh changed colour while its intake fan still runs. Can it be bypassed briefly?",
+        "claim_hidden_from_model": "It may be bypassed for no more than ninety seconds while the fan remains active.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The Vela-2 mesh may be bypassed for no more than ninety seconds, but only while its intake fan remains active. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4.",
+        "candidate_evidence_hidden_from_model": "The Vela-2 mesh may be bypassed for no more than ninety seconds, but only while its intake fan remains active.",
+        "token_count": 97,
+        "evidence_position": "middle",
+        "score": 0.99913519,
+        "decision": "take",
+        "expected": "keep"
+      },
+      {
+        "id": "U03",
+        "group": "useful",
+        "question": "An Orin-4 shows a violet ring. Which two checks must pass before anyone touches it?",
+        "claim_hidden_from_model": "Pressure must be falling and the auxiliary vent must be open.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. Before touching an Orin-4 with a violet ring, confirm both that pressure is falling and that the auxiliary vent is open.",
+        "candidate_evidence_hidden_from_model": "Before touching an Orin-4 with a violet ring, confirm both that pressure is falling and that the auxiliary vent is open.",
+        "token_count": 97,
+        "evidence_position": "end",
+        "score": 0.99971118,
+        "decision": "take",
+        "expected": "keep"
+      },
+      {
+        "id": "U04",
+        "group": "useful",
+        "question": "Mira-3 flashed blue three times while room pressure is rising. Should remote controls be used?",
+        "claim_hidden_from_model": "No; isolate power instead.",
+        "window": "For Mira-3, three blue flashes normally mean use remote controls only; however, if room pressure is rising, isolate power instead. The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12.",
+        "candidate_evidence_hidden_from_model": "For Mira-3, three blue flashes normally mean use remote controls only; however, if room pressure is rising, isolate power instead.",
+        "token_count": 248,
+        "evidence_position": "start",
+        "score": 0.99745963,
+        "decision": "take",
+        "expected": "keep"
+      },
+      {
+        "id": "U05",
+        "group": "useful",
+        "question": "Aster-9 has silver frost after a cold start. Should its auxiliary vent be opened?",
+        "claim_hidden_from_model": "No; keep the auxiliary vent closed until the frost clears.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. For Aster-9, silver frost after a cold start means the auxiliary vent must remain closed until the frost clears. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12.",
+        "candidate_evidence_hidden_from_model": "For Aster-9, silver frost after a cold start means the auxiliary vent must remain closed until the frost clears.",
+        "token_count": 243,
+        "evidence_position": "middle",
+        "score": 0.97219953,
+        "decision": "take",
+        "expected": "keep"
+      },
+      {
+        "id": "U06",
+        "group": "useful",
+        "question": "The Lumen-6 polarity mark is red. Should the backup cell be connected now?",
+        "claim_hidden_from_model": "No; wait until the mark turns green.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12. Do not connect the backup cell while the Lumen-6 polarity mark is red; wait until it turns green.",
+        "candidate_evidence_hidden_from_model": "Do not connect the backup cell while the Lumen-6 polarity mark is red; wait until it turns green.",
+        "token_count": 243,
+        "evidence_position": "end",
+        "score": 0.99700472,
+        "decision": "take",
+        "expected": "keep"
+      },
+      {
+        "id": "U07",
+        "group": "useful",
+        "question": "Nadir-4 coolant fell below twelve units. What immediate action is required?",
+        "claim_hidden_from_model": "Close the secondary intake and notify the operator.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12. When Nadir-4 coolant falls below twelve units, close the secondary intake and notify the operator immediately. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 13. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 14. The training console displayed its normal welcome screen for the afternoon class. Reference note 15. No unusual sound was recorded near the unused south service hatch. Reference note 16. The routine inspection ledger records stable temperature and no required operator action. Reference note 17. A grey identification plate was cleaned during the previous maintenance round. Reference note 18. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 19. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 20. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 21. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 22. The training console displayed its normal welcome screen for the afternoon class. Reference note 23. No unusual sound was recorded near the unused south service hatch. Reference note 24. The routine inspection ledger records stable temperature and no required operator action. Reference note 25.",
+        "candidate_evidence_hidden_from_model": "When Nadir-4 coolant falls below twelve units, close the secondary intake and notify the operator immediately.",
+        "token_count": 493,
+        "evidence_position": "middle",
+        "score": 0.99684941,
+        "decision": "take",
+        "expected": "keep"
+      },
+      {
+        "id": "U08",
+        "group": "useful",
+        "question": "Solace-3 emitted two amber arcs after its cover was replaced. What should be inspected first?",
+        "claim_hidden_from_model": "Inspect the cover grounding strap first.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 13. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 14. The training console displayed its normal welcome screen for the afternoon class. Reference note 15. No unusual sound was recorded near the unused south service hatch. Reference note 16. The routine inspection ledger records stable temperature and no required operator action. Reference note 17. A grey identification plate was cleaned during the previous maintenance round. Reference note 18. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 19. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 20. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 21. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 22. The training console displayed its normal welcome screen for the afternoon class. Reference note 23. No unusual sound was recorded near the unused south service hatch. Reference note 24. The routine inspection ledger records stable temperature and no required operator action. Reference note 25. If Solace-3 emits two amber arcs after cover replacement, inspect the cover grounding strap before any other component.",
+        "candidate_evidence_hidden_from_model": "If Solace-3 emits two amber arcs after cover replacement, inspect the cover grounding strap before any other component.",
+        "token_count": 495,
+        "evidence_position": "end",
+        "score": 0.99856285,
+        "decision": "take",
+        "expected": "keep"
+      },
+      {
+        "id": "T01",
+        "group": "misleading",
+        "question": "Aster-9 has silver frost after a cold start. Should its auxiliary vent be opened?",
+        "claim_hidden_from_model": "Yes; open it immediately.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. For Aster-8, silver frost after a cold start requires opening the auxiliary vent immediately. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4.",
+        "candidate_evidence_hidden_from_model": "For Aster-8, silver frost after a cold start requires opening the auxiliary vent immediately.",
+        "token_count": 89,
+        "evidence_position": "middle",
+        "score": 0.91794087,
+        "decision": "not_sure",
+        "expected": "do_not_take"
+      },
+      {
+        "id": "T02",
+        "group": "misleading",
+        "question": "Mira-3 flashed blue three times. What action is required?",
+        "claim_hidden_from_model": "Inspect the sensor cable.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. For Rill-5, a steady white tone with no spectrum trace means inspect the sensor cable.",
+        "candidate_evidence_hidden_from_model": "For Rill-5, a steady white tone with no spectrum trace means inspect the sensor cable.",
+        "token_count": 91,
+        "evidence_position": "end",
+        "score": 0.09136088,
+        "decision": "not_sure",
+        "expected": "do_not_take"
+      },
+      {
+        "id": "T03",
+        "group": "misleading",
+        "question": "Can Vela-2 be bypassed while its intake fan is stopped?",
+        "claim_hidden_from_model": "Yes, for ninety seconds.",
+        "window": "Vela-1 may be bypassed for ninety seconds during its scheduled fan-stop test. The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12.",
+        "candidate_evidence_hidden_from_model": "Vela-1 may be bypassed for ninety seconds during its scheduled fan-stop test.",
+        "token_count": 238,
+        "evidence_position": "start",
+        "score": 0.73334966,
+        "decision": "not_sure",
+        "expected": "do_not_take"
+      },
+      {
+        "id": "T04",
+        "group": "misleading",
+        "question": "Kest-7 flashed amber after load transfer. What caused it?",
+        "claim_hidden_from_model": "Its grey shell caused the signal.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. Kest-7 is installed in the north bay and has a grey shell with an amber identification lamp. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12.",
+        "candidate_evidence_hidden_from_model": "Kest-7 is installed in the north bay and has a grey shell with an amber identification lamp.",
+        "token_count": 241,
+        "evidence_position": "middle",
+        "score": 0.00121543,
+        "decision": "drop",
+        "expected": "do_not_take"
+      },
+      {
+        "id": "T05",
+        "group": "misleading",
+        "question": "Which two checks are required for an Orin-4 violet ring?",
+        "claim_hidden_from_model": "Check the mesh colour and fan speed.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12. For Orin-3, a copper mesh means its intake fan speed should be recorded during inspection.",
+        "candidate_evidence_hidden_from_model": "For Orin-3, a copper mesh means its intake fan speed should be recorded during inspection.",
+        "token_count": 240,
+        "evidence_position": "end",
+        "score": 0.00203499,
+        "decision": "drop",
+        "expected": "do_not_take"
+      },
+      {
+        "id": "T06",
+        "group": "misleading",
+        "question": "The Lumen-6 polarity mark is red. Should the backup cell be connected?",
+        "claim_hidden_from_model": "Yes; connect it now.",
+        "window": "For Lumen-5, a red service sticker marks the approved backup-cell connector. The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 13. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 14. The training console displayed its normal welcome screen for the afternoon class. Reference note 15. No unusual sound was recorded near the unused south service hatch. Reference note 16. The routine inspection ledger records stable temperature and no required operator action. Reference note 17. A grey identification plate was cleaned during the previous maintenance round. Reference note 18. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 19. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 20. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 21. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 22. The training console displayed its normal welcome screen for the afternoon class. Reference note 23. No unusual sound was recorded near the unused south service hatch. Reference note 24. The routine inspection ledger records stable temperature and no required operator action. Reference note 25.",
+        "candidate_evidence_hidden_from_model": "For Lumen-5, a red service sticker marks the approved backup-cell connector.",
+        "token_count": 489,
+        "evidence_position": "start",
+        "score": 0.00973575,
+        "decision": "not_sure",
+        "expected": "do_not_take"
+      },
+      {
+        "id": "T07",
+        "group": "misleading",
+        "question": "Nadir-4 coolant fell below twelve units. What action is required?",
+        "claim_hidden_from_model": "Read its identification label.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12. Nadir-4 carries a blue identification label beside the coolant inspection port. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 13. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 14. The training console displayed its normal welcome screen for the afternoon class. Reference note 15. No unusual sound was recorded near the unused south service hatch. Reference note 16. The routine inspection ledger records stable temperature and no required operator action. Reference note 17. A grey identification plate was cleaned during the previous maintenance round. Reference note 18. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 19. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 20. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 21. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 22. The training console displayed its normal welcome screen for the afternoon class. Reference note 23. No unusual sound was recorded near the unused south service hatch. Reference note 24. The routine inspection ledger records stable temperature and no required operator action. Reference note 25.",
+        "candidate_evidence_hidden_from_model": "Nadir-4 carries a blue identification label beside the coolant inspection port.",
+        "token_count": 487,
+        "evidence_position": "middle",
+        "score": 0.19599261,
+        "decision": "not_sure",
+        "expected": "do_not_take"
+      },
+      {
+        "id": "T08",
+        "group": "misleading",
+        "question": "What battery voltage should be used for a Nova-2 beacon?",
+        "claim_hidden_from_model": "Use the voltage printed on the red casing.",
+        "window": "The routine inspection ledger records stable temperature and no required operator action. Reference note 1. A grey identification plate was cleaned during the previous maintenance round. Reference note 2. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 3. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 4. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 5. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 6. The training console displayed its normal welcome screen for the afternoon class. Reference note 7. No unusual sound was recorded near the unused south service hatch. Reference note 8. The routine inspection ledger records stable temperature and no required operator action. Reference note 9. A grey identification plate was cleaned during the previous maintenance round. Reference note 10. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 11. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 12. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 13. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 14. The training console displayed its normal welcome screen for the afternoon class. Reference note 15. No unusual sound was recorded near the unused south service hatch. Reference note 16. The routine inspection ledger records stable temperature and no required operator action. Reference note 17. A grey identification plate was cleaned during the previous maintenance round. Reference note 18. The west corridor lamp completed its scheduled self-test without an alarm. Reference note 19. Technicians counted the sealed tool cases before ending the ordinary shift. Reference note 20. The storage cabinet remained dry while the ventilation fan ran at normal speed. Reference note 21. A calendar note lists the next visual inspection for the first Monday of the month. Reference note 22. The training console displayed its normal welcome screen for the afternoon class. Reference note 23. No unusual sound was recorded near the unused south service hatch. Reference note 24. The routine inspection ledger records stable temperature and no required operator action. Reference note 25. The Nova-2 beacon battery has a red protective casing and a silver carrying handle.",
+        "candidate_evidence_hidden_from_model": "The Nova-2 beacon battery has a red protective casing and a silver carrying handle.",
+        "token_count": 489,
+        "evidence_position": "end",
+        "score": 0.01331434,
+        "decision": "not_sure",
+        "expected": "do_not_take"
+      }
+    ]
+  },
+  "passed_locked_gate": true,
+  "boundary": "One public synthetic English development set. This test checks packet integrity and whole-window relevance only. It must not be described as proof that claims are true or supported."
+}

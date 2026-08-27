@@ -305,3 +305,15 @@ answer. Protocol and frozen packets:
 `site/experiments/E007/evidence-capsule-protocol-v0.1.json` and
 `site/experiments/E007/evidence-capsules-v0.1.json`. Claim support, source truth,
 privacy, sender retrieval, and final answer generation remain out of scope.
+
+The first inference attempt is preserved as invalid: six packets completed,
+then a 587-token full prompt exceeded an incorrectly configured 512-token
+physical batch. Frozen inputs did not change; the rerun used a 1024-token
+context, physical batch, and microbatch. Locked development result: the
+mechanical gate classified 24/24 packets correctly, accepted 16/16 intact, and
+accepted 0/8 broken. The reranker took 8/8 useful windows, including 493–495
+token windows with evidence in the middle/end; it took 0/8 misleading windows,
+marked six NOT_SURE, and dropped two. Both locked gates passed. This does not
+show that any sender claim is supported. Result:
+`site/experiments/E007/evidence-capsule-result-v0.1.json`; invalid attempt:
+`site/experiments/E007/evidence-capsule-invalid-attempt-v0.1.json`.

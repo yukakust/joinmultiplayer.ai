@@ -11,6 +11,16 @@ from 9/14 to 14/14 in one synthetic English manual. It is not accepted as a
 finished cutter: one neighbouring opposite rule for Aster-8 also survived an
 Aster-9 query, so a later condition/entity check is still required.
 
+E007 Gate 3C.6B accepts the four-part incoming capsule as a development-level
+message contract: sender claim, exact source window up to 500 Qwen tokens,
+exact sender-highlighted subrange, and versioned source locator with byte
+coordinates. Ordinary code validates bytes before inference. The Q4 relevance
+module sees only question + complete source window; sender claim and highlight
+remain hidden. In one frozen synthetic English set it kept 8/8 useful windows,
+took 0/8 misleading windows, and the mechanical gate rejected all 8 broken
+packets. Claim support, source truth, privacy, and applicability are not yet
+accepted steps.
+
 ## The whole path
 
 ```text
