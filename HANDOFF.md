@@ -348,6 +348,8 @@ small opened exam. Result:
 `/experiments/E007/mobile-reranker-result-v0.1.json`. Do not call it mobile-ready
 until a real phone measures RAM, cold load, heat, battery, and wall time; do not
 call this fresh task evidence because the 24 pairs were opened in 3C.4.
+The one-slot, 512-token Q4 preflight peaked at 4.57 GB resident memory on
+yukabox and preserved identical scores; this is only a phone-shaped CPU run.
 
 ## Immediate next work
 

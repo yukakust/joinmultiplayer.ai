@@ -179,6 +179,8 @@ meaning judge for accepting incoming capsules. Gate 3C.4 then compared special
 relevance scorers. Qwen3-Reranker-0.6B lost no useful source but was too often
 unsure. Gate 3C.5 tested one stronger scorer: Qwen3-Reranker-4B and its Q4/Q5
 copies made the same 24 decisions; Q4 kept 8/8 useful pieces and is 2.50 GB.
+The Q4 process peaked at 4.57 GB RAM on yukabox with one question at a time and
+a 512-token context. That is not yet a phone result.
 
 So the current candidate acceptance step is modular and simple:
 

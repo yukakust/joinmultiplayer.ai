@@ -225,6 +225,9 @@ model and both self-built copies produced the same three-way decision on all
 traps, accepted 0/8 obvious extras, rejected no useful piece, and left 6/24
 unclear. Q4_K_M is 2.50 GB and Q5_K_M is 2.89 GB; both pass the locked quality
 and quantization gates. Q4_K_M is therefore the smaller phone candidate.
+With one slot and a 512-token context, Q4 peaked at 4.57 GB resident memory on
+yukabox and reproduced the same scores. This is a phone-shaped server setting,
+not a phone measurement.
 
 This does not yet prove phone viability or fresh generalisation. The examples
 were opened in 3C.4, and no phone has measured load time, peak RAM, heat, or

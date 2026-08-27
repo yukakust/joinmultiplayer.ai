@@ -69,6 +69,14 @@ def main(score_files: list[Path]) -> None:
             "q4_k_m_sha256": "09341112a9147bf0dc96f6ec98b006f544b76bc18ab68c9f7f6a94e9890b613e",
             "q5_k_m_sha256": "0ff66fec359e01a59be1a93077accc57c93c9e84300107258ba1e16242b6346c",
         },
+        "q4_phone_shaped_yukabox_preflight": {
+            "parallel_slots": 1,
+            "context_tokens": 512,
+            "physical_batch_tokens": 256,
+            "max_resident_set_bytes": 4568465408,
+            "all_scores_identical_to_four_slot_run": True,
+            "note": "This is a yukabox CPU measurement, not a phone measurement. Native phone runtimes and operating-system pressure may differ.",
+        },
         "boundary":"The 24 pairs were already opened in Gate 3C.4. This is a model-size and quantization comparison, not new held-out evidence. Phone RAM, load time, heat, and battery remain untested."
     }
     RESULT_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
