@@ -218,3 +218,14 @@ The protocol is frozen before model download, conversion, or inference at
 `site/experiments/E007/mobile-reranker-protocol-v0.1.json`. Yukabox measures
 quality and file size first. A real phone must still measure RAM, cold load,
 heat, battery, and wall time before the word “mobile” is earned.
+
+Gate 3C.5 completed once on the already opened 24-pair exam. The original BF16
+model and both self-built copies produced the same three-way decision on all
+24 pairs. Every version accepted 8/8 useful pieces, accepted 1/8 same-domain
+traps, accepted 0/8 obvious extras, rejected no useful piece, and left 6/24
+unclear. Q4_K_M is 2.50 GB and Q5_K_M is 2.89 GB; both pass the locked quality
+and quantization gates. Q4_K_M is therefore the smaller phone candidate.
+
+This does not yet prove phone viability or fresh generalisation. The examples
+were opened in 3C.4, and no phone has measured load time, peak RAM, heat, or
+battery. Result: `site/experiments/E007/mobile-reranker-result-v0.1.json`.

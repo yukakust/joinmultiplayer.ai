@@ -5072,6 +5072,41 @@ blockquote {
 .e007-relevance-table thead th:nth-child(4) { width: 8%; }
 .e007-relevance-table thead th:last-child { width: 13%; }
 
+.e007-mobile-simple {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 28px 0;
+}
+
+.e007-mobile-simple article {
+  border: 1px solid var(--line);
+  min-height: 150px;
+  padding: 22px;
+}
+
+.e007-mobile-simple strong {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.9;
+  margin-bottom: 18px;
+}
+
+.e007-mobile-simple span {
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+.e007-mobile-table { min-width: 1400px; }
+.e007-mobile-table thead th:first-child { width: 29%; }
+.e007-mobile-table thead th:nth-child(2) { width: 48%; }
+.e007-mobile-table thead th:nth-child(3) { width: 10%; }
+.e007-mobile-table thead th:last-child { width: 13%; }
+
+@media (max-width: 800px) {
+  .e007-mobile-simple { grid-template-columns: 1fr; }
+}
+
 .e007-result-table .e007-verdict {
   font-weight: 800;
 }

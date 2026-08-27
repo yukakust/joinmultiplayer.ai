@@ -35,6 +35,18 @@ class MobileRerankerTests(unittest.TestCase):
         self.assertEqual([item["decision"] for item in result["records"]], ["accept", "unclear", "reject"])
         self.assertEqual(result["summary"]["useful_rejected"], 0)
 
+    def test_published_candidates_preserve_all_bf16_decisions(self):
+        result_path = Path(__file__).parents[3] / "site/experiments/E007/mobile-reranker-result-v0.1.json"
+        result = json.loads(result_path.read_text(encoding="utf-8"))
+        methods = {item["method"]: item for item in result["methods"]}
+        self.assertEqual(set(methods), {"bf16", "q4_k_m", "q5_k_m"})
+        for name in ("q4_k_m", "q5_k_m"):
+            method = methods[name]
+            self.assertTrue(method["candidate_passed"])
+            self.assertEqual(method["bf16_decision_agreement"], 24)
+            self.assertEqual(method["summary"]["useful_accepted"], 8)
+            self.assertEqual(method["summary"]["useful_rejected"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

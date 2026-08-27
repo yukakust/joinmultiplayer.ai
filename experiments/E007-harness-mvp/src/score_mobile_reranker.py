@@ -65,24 +65,26 @@ def llama_scores(server: str, items: list[tuple[str, str]], instruction: str) ->
     values = []
     for query, passage in items:
         body = json.dumps({
-            "prompt": prompt(instruction, query, passage),
-            "n_predict": 1,
-            "temperature": 0,
-            "grammar": 'root ::= "yes" | "no"',
-            "n_probs": 2,
-            "post_sampling_probs": True,
-            "return_tokens": True
+            # The GGUF converter builds the rerank classifier directly from
+            # the causal LM's `yes` and `no` rows.  Sending the frozen prompt
+            # to the rank-pooling endpoint therefore preserves the exact
+            # instruction instead of using llama-server's default web-search
+            # rerank template.
+            "content": prompt(instruction, query, passage),
+            "embd_normalize": -1,
         }).encode("utf-8")
-        request = urllib.request.Request(server.rstrip("/") + "/completion", data=body, headers={"Content-Type":"application/json"})
+        request = urllib.request.Request(server.rstrip("/") + "/embedding", data=body, headers={"Content-Type":"application/json"})
         with urllib.request.urlopen(request, timeout=300) as response:
             payload = json.loads(response.read())
-        probability_rows = payload.get("completion_probabilities") or payload.get("probs") or []
-        top = probability_rows[0].get("top_probs", []) if probability_rows else []
-        scored = {item.get("token", "").strip().lower(): item.get("prob", 0.0) for item in top}
-        yes, no = float(scored.get("yes", 0.0)), float(scored.get("no", 0.0))
-        if yes + no == 0:
-            generated = payload.get("content", "").strip().lower()
-            yes, no = (1.0, 0.0) if generated == "yes" else (0.0, 1.0) if generated == "no" else (math.nan, math.nan)
+        rank = payload[0].get("embedding", []) if payload else []
+        # Current llama-server wraps rank outputs once more than ordinary
+        # embeddings: [[p_yes, p_no, ...]].  Only the two classifier values
+        # are meaningful for this converted reranker.
+        if rank and isinstance(rank[0], list):
+            rank = rank[0]
+        if len(rank) < 2 or not all(math.isfinite(float(value)) for value in rank[:2]):
+            raise RuntimeError("llama-server did not return the reranker yes/no scores")
+        yes, no = float(rank[0]), float(rank[1])
         values.append(yes / (yes + no))
     return values
 

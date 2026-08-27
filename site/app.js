@@ -4119,7 +4119,7 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
@@ -4138,6 +4138,7 @@ async function loadE007() {
       fetch("/experiments/E007/blind-reader-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/span-bridge-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/relevance-reranker-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/mobile-reranker-result-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
@@ -4156,6 +4157,7 @@ async function loadE007() {
     const blindReaderResult = blindReaderResponse.ok ? await blindReaderResponse.json() : null;
     const spanBridgeResult = spanBridgeResponse.ok ? await spanBridgeResponse.json() : null;
     const relevanceResult = relevanceResponse.ok ? await relevanceResponse.json() : null;
+    const mobileRerankerResult = mobileRerankerResponse.ok ? await mobileRerankerResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4323,7 +4325,29 @@ async function loadE007() {
       }).join("");
       relevanceMarkup = `<section id="e007-relevance-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C.4 · ${localized({ en: "SPECIALIZED RELEVANCE JUDGES", ru: "СПЕЦИАЛЬНЫЕ СУДЬИ РЕЛЕВАНТНОСТИ" })}</div><h2>${localized({ en: "No judge passed the strict gate.", ru: "Строгий gate не прошёл ни один судья." })}</h2><p>${localized({ en: "The Qwen reranker was the safest start: it rejected none of the 8 useful sources. But it was unsure 9 times and accepted one similar trap. So it can be a first filter, not the final judge.", ru: "Qwen-reranker оказался самым осторожным началом: он не отклонил ни один из 8 полезных источников. Но 9 раз ответил «неясно» и принял одну похожую ловушку. Значит, это может быть первый фильтр, но не последний судья." })}</p><div class="e007-result-metrics">${cards}</div><div class="e007-result-legend"><span class="is-correct">■ ${localized({ en: "green = right", ru: "зелёное = верно" })}</span><span class="needs-review">■ ${localized({ en: "yellow = unsure; pass onward", ru: "жёлтое = не уверен; передать дальше" })}</span><span class="is-critical">■ ${localized({ en: "red = wrong", ru: "красное = ошибка" })}</span></div>${tables}<p class="control-warning">${localized({ en: "What this means: a special scorer is better than asking a tiny chat model to explain freely, but relevance alone is not solved. This test says nothing about truth or privacy.", ru: "Что это значит: специальный оценщик лучше свободного объяснения маленькой чат-модели, но релевантность ещё не решена. Этот тест ничего не говорит об истинности и приватности." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/relevance-reranker-protocol-v0.1.json">${localized({ en: "LOCKED PLAN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/relevance-reranker-heldout-v0.1.json">${localized({ en: "24 QUESTIONS + SOURCES", ru: "24 ВОПРОСА + ИСТОЧНИКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/relevance-reranker-result-v0.1.json">${localized({ en: "ALL SCORES", ru: "ВСЕ ОЦЕНКИ" })} ↗</a></div></section>`;
     }
+    let mobileRerankerMarkup = "";
+    if (mobileRerankerResult?.methods?.length) {
+      const names = {
+        bf16: localized({ en: "Original 4B", ru: "Исходная 4B" }),
+        q4_k_m: localized({ en: "Small Q4 copy", ru: "Маленькая копия Q4" }),
+        q5_k_m: localized({ en: "More precise Q5 copy", ru: "Более точная копия Q5" }),
+      };
+      const cards = mobileRerankerResult.methods.map((method) => {
+        const size = method.model_file_bytes ? `${(method.model_file_bytes / 1e9).toFixed(2)} GB` : "8.04 GB";
+        const tone = method.candidate_passed ? "is-correct" : "is-critical";
+        return `<article class="${tone}"><span>${escapeHTML(names[method.method] || method.method)}</span><strong>${size}</strong><small>${method.summary.useful_accepted}/8 ${localized({ en: "useful kept", ru: "полезных сохранено" })} · ${method.bf16_decision_agreement}/24 ${localized({ en: "same decisions", ru: "совпавших решений" })}</small></article>`;
+      }).join("");
+      const compact = mobileRerankerResult.methods.find((method) => method.method === "q4_k_m") || mobileRerankerResult.methods[0];
+      const rows = compact.records.map((record) => {
+        const truth = record.kind === "useful" ? localized({ en: "USEFUL", ru: "ПОЛЕЗНО" }) : record.kind === "hard_extra" ? localized({ en: "SIMILAR TRAP", ru: "ПОХОЖАЯ ЛОВУШКА" }) : localized({ en: "OBVIOUS NOISE", ru: "ЯВНЫЙ МУСОР" });
+        const decision = record.decision === "accept" ? localized({ en: "TAKE IT", ru: "ВЗЯТЬ" }) : record.decision === "reject" ? localized({ en: "DROP IT", ru: "ОТБРОСИТЬ" }) : localized({ en: "NOT SURE", ru: "НЕ УВЕРЕН" });
+        const tone = record.decision === "unclear" ? "needs-review" : record.correct ? "is-correct" : "is-critical";
+        return `<tr class="${tone}"><th><span>${escapeHTML(record.id)}</span>${escapeHTML(record.question)}</th><td>${escapeHTML(record.passage)}</td><td>${escapeHTML(truth)}</td><td class="e007-verdict">${escapeHTML(decision)}</td></tr>`;
+      }).join("");
+      mobileRerankerMarkup = `<section id="e007-mobile-reranker-results" class="e007-local-result-wide e007-mobile-reranker"><div class="flow-step">CHECKPOINT 3C.5 · ${localized({ en: "CAN THE STRONGER JUDGE STAY SMALL?", ru: "МОЖЕТ ЛИ СИЛЬНЫЙ СУДЬЯ ОСТАТЬСЯ МАЛЕНЬКИМ?" })}</div><h2>${localized({ en: "Yes on Yukabox. The phone is the next check.", ru: "На yukabox — да. Следующая проверка — настоящий телефон." })}</h2><p>${localized({ en: "The 4B judge kept every useful piece. Its 2.50 GB Q4 copy made exactly the same 24 decisions as the original. So we do not need a cascade for this small exam yet.", ru: "Судья 4B сохранил все полезные кусочки. Его Q4-копия размером 2,50 ГБ приняла те же 24 решения, что и оригинал. На этом маленьком экзамене каскад пока не нужен." })}</p><div class="e007-result-metrics">${cards}</div><div class="e007-mobile-simple"><article class="is-correct"><strong>8 / 8</strong><span>${localized({ en: "useful pieces taken", ru: "полезных кусочков взято" })}</span></article><article class="is-correct"><strong>0 / 8</strong><span>${localized({ en: "obvious noise taken", ru: "явного мусора взято" })}</span></article><article class="needs-review"><strong>6 / 24</strong><span>${localized({ en: "left for a later check", ru: "оставлено на следующую проверку" })}</span></article></div><details class="e007-policy-table"><summary>${localized({ en: "SEE ALL 24 Q4 DECISIONS", ru: "ПОСМОТРЕТЬ ВСЕ 24 РЕШЕНИЯ Q4" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-mobile-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "MEMORY PIECE", ru: "КУСОЧЕК ПАМЯТИ" })}</th><th>${localized({ en: "TRUTH", ru: "ПРАВДА" })}</th><th>${localized({ en: "Q4 DECISION", ru: "РЕШЕНИЕ Q4" })}</th></tr></thead><tbody>${rows}</tbody></table></div></details><p class="control-warning">${localized({ en: "Not proven yet: that the 2.50 GB file loads on your phone without too much RAM, waiting, heat, or battery drain. These 24 examples were already opened in the previous test, so this proves compression fidelity, not fresh generalisation.", ru: "Пока не доказано: что файл 2,50 ГБ загрузится на вашем телефоне без лишней памяти, ожидания, нагрева и расхода батареи. Эти 24 примера уже открывались в прошлом тесте: здесь мы проверили сохранность после сжатия, а не перенос на новые задачи." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/mobile-reranker-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/mobile-reranker-result-v0.1.json">${localized({ en: "ALL SCORES", ru: "ВСЕ ОЦЕНКИ" })} ↗</a></div></section>`;
+    }
     target.querySelector(".experiment-loading").outerHTML = `
+      ${mobileRerankerMarkup}
       ${relevanceMarkup}
       ${spanBridgeMarkup}
       ${blindReaderMarkup}

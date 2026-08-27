@@ -1,0 +1,25 @@
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 20937.85it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 18402.15it/s]
+	Command being timed: ".venv/bin/python experiments/E007-harness-mvp/src/score_mobile_reranker.py --method bf16 --mode transformers --model /home/yuka/models/e007/qwen3-reranker-4b-22e6836 --output experiments/E007-harness-mvp/artifacts/gate-3c5/bf16-scores.json --batch-size 2 --threads 20"
+	User time (seconds): 493.60
+	System time (seconds): 1.84
+	Percent of CPU this job got: 1795%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:27.60
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8632920
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 128
+	Minor (reclaiming a frame) page faults: 516928
+	Voluntary context switches: 18745
+	Involuntary context switches: 32373
+	Swaps: 0
+	File system inputs: 5632
+	File system outputs: 16
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

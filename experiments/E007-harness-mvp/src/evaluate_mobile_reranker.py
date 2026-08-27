@@ -64,6 +64,11 @@ def main(score_files: list[Path]) -> None:
         "schema_version":"0.1", "experiment_id":"E007", "checkpoint":"3C.5",
         "status":"complete", "protocol":"/experiments/E007/mobile-reranker-protocol-v0.1.json",
         "methods":methods,
+        "build_artifacts": {
+            "bf16_gguf_sha256": "280e898808a907c00705285c66c0bf1b6995d32121990a70b8bd91c96c889244",
+            "q4_k_m_sha256": "09341112a9147bf0dc96f6ec98b006f544b76bc18ab68c9f7f6a94e9890b613e",
+            "q5_k_m_sha256": "0ff66fec359e01a59be1a93077accc57c93c9e84300107258ba1e16242b6346c",
+        },
         "boundary":"The 24 pairs were already opened in Gate 3C.4. This is a model-size and quantization comparison, not new held-out evidence. Phone RAM, load time, heat, and battery remain untested."
     }
     RESULT_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

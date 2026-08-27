@@ -339,6 +339,16 @@ opened 3C.4 exam for a size/quantization comparison; it is not new held-out
 task evidence. Do not claim phone viability until an actual phone measures RAM,
 cold load, time, heat, and battery.
 
+Gate 3C.5 completed on yukabox. BF16, Q4_K_M, and Q5_K_M made the same 24/24
+three-way decisions: useful accepted 8/8, useful rejected 0/8, hard traps
+accepted 1/8, obvious extras accepted 0/8, and six UNCLEAR. Q4_K_M is 2.50 GB;
+Q5_K_M is 2.89 GB. Both pass the locked gates, so Q4_K_M is the smaller current
+phone candidate and the proposed 0.6B→MiniLM cascade is not needed for this
+small opened exam. Result:
+`/experiments/E007/mobile-reranker-result-v0.1.json`. Do not call it mobile-ready
+until a real phone measures RAM, cold load, heat, battery, and wall time; do not
+call this fresh task evidence because the 24 pairs were opened in 3C.4.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

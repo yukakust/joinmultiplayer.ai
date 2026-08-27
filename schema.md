@@ -173,3 +173,22 @@ The locked protocol is `site/experiments/E007/local-offer-protocol-v0.1.json`;
 the scored result is `site/experiments/E007/local-offer-result-L0001.json`.
 Checkpoint 3B still does not test extraction from messy personal memory,
 validation, deduplication, merging, a final answer, or scale.
+
+Checkpoints 3C.2 and 3C.3 showed that free-form Qwen3-0.6B is not a reliable
+meaning judge for accepting incoming capsules. Gate 3C.4 then compared special
+relevance scorers. Qwen3-Reranker-0.6B lost no useful source but was too often
+unsure. Gate 3C.5 tested one stronger scorer: Qwen3-Reranker-4B and its Q4/Q5
+copies made the same 24 decisions; Q4 kept 8/8 useful pieces and is 2.50 GB.
+
+So the current candidate acceptance step is modular and simple:
+
+```text
+question + one offered memory piece
+→ Qwen3-Reranker-4B Q4
+→ TAKE / NOT SURE / DROP
+```
+
+`NOT SURE` is not silently discarded. It remains available for a later module.
+This scorer judges relevance only. It does not prove that a claim is true, safe
+to disclose, independent, or sufficient for the final answer. Real-phone RAM,
+load time, heat, and battery are still untested.
