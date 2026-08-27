@@ -276,3 +276,13 @@ is absent. Protocol and world:
 `site/experiments/E007/chunking-world-v0.1.json`. This is locked before
 implementation or inference. It is a small synthetic development test, not
 evidence about PDFs/OCR, private memory, final answers, or phone performance.
+
+Development result: the locked gate failed. `fixed_45` completed 6/10
+questions, found 9/14 required atoms, and preserved 1/5 linked evidence groups.
+`structure_overlap` completed 9/10, found 14/14 required atoms, and preserved
+5/5 linked groups, but retained one explicitly forbidden wrong-device atom for
+CH06. The absent-answer case produced no false TAKE. The frozen success gate
+also contained a protocol bookkeeping error: it said 4/4 linked groups while
+the frozen questions define five. The protocol is not rewritten after the run;
+the failed gate and error remain public. Result:
+`site/experiments/E007/chunking-result-v0.1.json`.

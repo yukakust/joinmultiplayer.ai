@@ -375,6 +375,15 @@ Qwen3-Reranker-4B Q4_K_M and the frozen Gate 3C.5 thresholds. Preserve every
 window, score, and failure. Do not claim that a reranking failure proves the
 cutter failed: the result measures their interaction and reports both.
 
+Gate 3C.6A.2 ran as a synthetic development test and failed its strict locked
+gate. `fixed_45`: 6/10 complete, 9/14 required atoms, 1/5 linked groups.
+`structure_overlap`: 9/10 complete, 14/14 required atoms, 5/5 linked groups,
+but one forbidden Aster-8 atom was retained for the Aster-9 question. No false
+TAKE occurred on the absent-answer question. The locked protocol itself also
+mistakenly states 4/4 linked groups although five are defined; preserve that
+bookkeeping error rather than rewriting history. Public result:
+`/experiments/E007/chunking-result-v0.1.json`.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

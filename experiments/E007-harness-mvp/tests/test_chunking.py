@@ -48,6 +48,18 @@ class ChunkingTest(unittest.TestCase):
         self.assertEqual(result["summary"]["complete_questions"], 0)
         self.assertEqual(result["records"][0]["missing_atoms"], ["A1"])
 
+    def test_published_result_preserves_failed_gate(self):
+        path = ROOT / "site/experiments/E007/chunking-result-v0.1.json"
+        if not path.exists():
+            self.skipTest("result not published yet")
+        result = json.loads(path.read_text())
+        methods = {item["method"]: item for item in result["methods"]}
+        self.assertFalse(result["passed_locked_gate"])
+        self.assertEqual(methods["fixed_45"]["summary"]["complete_questions"], 6)
+        self.assertEqual(methods["structure_overlap"]["summary"]["complete_questions"], 9)
+        self.assertEqual(methods["structure_overlap"]["summary"]["required_atoms_found"], 14)
+        self.assertEqual(methods["structure_overlap"]["summary"]["forbidden_atoms_retained"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
