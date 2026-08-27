@@ -93,7 +93,11 @@ only after owner review.
     receipts, and evidence capsules — complete and owner-published as L0001.
     The protocol gates passed, but no single lane both exceeded macro-F1 0.80
     and found all five required shareable sources. No merging or final answers.
-3C. The same three-question model smoke split between yukabox and MacBook.
+3C. Compare balanced, recall-first, and marked-candidate send policies on ten
+new questions and twenty-four new local records. Lock the world and policy rules
+before inference; do not use the Gate 3B miss to choose a numeric threshold.
+
+3D. The same three-question model smoke split between yukabox and MacBook.
 4. Locked 30-task run.
 5. Owner audit and public result.
 

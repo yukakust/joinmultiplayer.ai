@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C",
+  "status": "locked_before_run",
+  "locked_at": "2026-08-27T00:00:00Z",
+  "title": {
+    "en": "Should a pocket i stay silent or send an uncertain candidate?",
+    "ru": "Должен ли pocket i молчать или отправить сомнительного кандидата?"
+  },
+  "hypothesis": {
+    "en": "A recall-first or marked-candidate policy loses fewer useful records than the balanced threshold, while making its extra traffic visible for downstream acceptance.",
+    "ru": "Порог с приоритетом полноты или помеченный кандидат теряет меньше полезных записей, чем сбалансированный порог, а лишний трафик остаётся видимым для будущей приёмки."
+  },
+  "model": {
+    "name": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "runtime_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+    "role": "local semantic ranking only"
+  },
+  "policies": [
+    {
+      "id": "balanced",
+      "plain_name": {"en": "Balanced threshold", "ru": "Сбалансированный порог"},
+      "rule": "Choose the threshold that maximises F1 on calibration pairs."
+    },
+    {
+      "id": "recall_first",
+      "plain_name": {"en": "Recall-first threshold", "ru": "Порог: лучше прислать лишнее"},
+      "rule": "Choose the threshold that maximises F2 on calibration pairs; recall weighs four times as much as precision."
+    },
+    {
+      "id": "top1_candidate",
+      "plain_name": {"en": "Best candidate with doubt", "ru": "Лучший кандидат с пометкой сомнения"},
+      "rule": "Always offer the top-ranked permitted record. Mark it uncertain when its score is below the balanced threshold."
+    }
+  ],
+  "locked_test": {
+    "questions": 10,
+    "pocket_i": 4,
+    "decisions_per_policy": 40,
+    "shareable_required_sources": 8,
+    "blocked_required_sources": 1,
+    "languages": ["ru", "en"],
+    "reuse_from_gate_3b": false
+  },
+  "metrics_in_priority_order": [
+    "critical_privacy_failures",
+    "critical_missed_knowledge",
+    "useful_sources_delivered",
+    "filterable_extra_candidates",
+    "bytes_offered"
+  ],
+  "decision_rule": "Prefer zero privacy failures, then the fewest missed useful sources. Extra candidates are recoverable but must be reported, never hidden.",
+  "not_tested": [
+    "downstream acceptance quality",
+    "automatic evidence extraction from messy memory",
+    "network scale",
+    "final answer generation"
+  ]
+}

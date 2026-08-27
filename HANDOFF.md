@@ -259,6 +259,14 @@ Scored data is `/experiments/E007/local-offer-result-L0001.json`; raw receipts
 are `/api/public/L0001`. A follow-up must require one locked method to pass both
 noise rejection and source recall.
 
+Checkpoint 3C is locked before inference at
+`/experiments/E007/send-policy-protocol-v0.1.json`. It compares the old balanced
+threshold, an F2 recall-first threshold, and an always-visible top-1 candidate
+on ten new questions and twenty-four new records. Its private-data canary,
+expected states, and policy priority are frozen in
+`/experiments/E007/send-policy-memory-v0.1.json`. Downstream acceptance is not
+part of 3C and must not be claimed from this run.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:
