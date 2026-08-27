@@ -4119,7 +4119,7 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse, sourceAnchorProtocolResponse, sourceAnchorResultResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse, sourceAnchorProtocolResponse, sourceAnchorResultResponse, chunkingProtocolResponse, chunkingResultResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
@@ -4141,6 +4141,8 @@ async function loadE007() {
       fetch("/experiments/E007/mobile-reranker-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/source-anchor-protocol-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/source-anchor-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/chunking-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/chunking-result-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
@@ -4162,6 +4164,8 @@ async function loadE007() {
     const mobileRerankerResult = mobileRerankerResponse.ok ? await mobileRerankerResponse.json() : null;
     const sourceAnchorProtocol = sourceAnchorProtocolResponse.ok ? await sourceAnchorProtocolResponse.json() : null;
     const sourceAnchorResult = sourceAnchorResultResponse.ok ? await sourceAnchorResultResponse.json() : null;
+    const chunkingProtocol = chunkingProtocolResponse.ok ? await chunkingProtocolResponse.json() : null;
+    const chunkingResult = chunkingResultResponse.ok ? await chunkingResultResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4352,6 +4356,33 @@ async function loadE007() {
       const ramNote = preflightRam ? localized({ en: `Phone-shaped Yukabox run: ${(preflightRam / 1e9).toFixed(2)} GB peak RAM with one question at a time.`, ru: `Телефонный режим на yukabox: ${(preflightRam / 1e9).toFixed(2).replace(".", ",")} ГБ памяти на пике при одном вопросе за раз.` }) : "";
       mobileRerankerMarkup = `<section id="e007-mobile-reranker-results" class="e007-local-result-wide e007-mobile-reranker"><div class="flow-step">CHECKPOINT 3C.5 · ${localized({ en: "ACCEPTED ARCHITECTURE STEP", ru: "ПРИНЯТЫЙ ШАГ АРХИТЕКТУРЫ" })}</div><h2>${localized({ en: "Incoming relevance gate: Qwen3-Reranker-4B Q4.", ru: "Приёмка по полезности: Qwen3-Reranker-4B Q4." })}</h2><p>${localized({ en: "The 4B judge kept every useful piece. Its 2.50 GB Q4 copy made exactly the same 24 decisions as the original. It now becomes the modular TAKE / NOT SURE / DROP step. A later experiment may replace it without changing the rest of the harness.", ru: "Судья 4B сохранил все полезные кусочки. Его Q4-копия размером 2,50 ГБ приняла те же 24 решения, что и оригинал. Теперь это отдельный модуль ВЗЯТЬ / НЕ УВЕРЕН / ОТБРОСИТЬ. Позже мы сможем заменить его, не меняя остальной harness." })}</p><p><strong>${escapeHTML(ramNote)}</strong></p><div class="e007-result-metrics">${cards}</div><div class="e007-mobile-simple"><article class="is-correct"><strong>8 / 8</strong><span>${localized({ en: "useful pieces taken", ru: "полезных кусочков взято" })}</span></article><article class="is-correct"><strong>0 / 8</strong><span>${localized({ en: "obvious noise taken", ru: "явного мусора взято" })}</span></article><article class="needs-review"><strong>6 / 24</strong><span>${localized({ en: "left for a later check", ru: "оставлено на следующую проверку" })}</span></article></div><details class="e007-policy-table"><summary>${localized({ en: "SEE ALL 24 Q4 DECISIONS", ru: "ПОСМОТРЕТЬ ВСЕ 24 РЕШЕНИЯ Q4" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-mobile-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "MEMORY PIECE", ru: "КУСОЧЕК ПАМЯТИ" })}</th><th>${localized({ en: "TRUTH", ru: "ПРАВДА" })}</th><th>${localized({ en: "Q4 DECISION", ru: "РЕШЕНИЕ Q4" })}</th></tr></thead><tbody>${rows}</tbody></table></div></details><p class="control-warning">${localized({ en: "Not proven yet: that the 2.50 GB file loads on your phone without too much RAM, waiting, heat, or battery drain. This module judges relevance only. It does not judge truth, privacy, source support, or independence.", ru: "Пока не доказано: что файл 2,50 ГБ загрузится на вашем телефоне без лишней памяти, ожидания, нагрева и расхода батареи. Этот модуль проверяет только полезность для вопроса. Он не проверяет правду, приватность, источник и независимость." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/mobile-reranker-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/mobile-reranker-result-v0.1.json">${localized({ en: "ALL SCORES", ru: "ВСЕ ОЦЕНКИ" })} ↗</a></div></section>`;
     }
+    let chunkingMarkup = "";
+    if (chunkingResult?.methods?.length) {
+      const byMethod = new Map(chunkingResult.methods.map(method => [method.method, method]));
+      const fixed = byMethod.get("fixed_45");
+      const structured = byMethod.get("structure_overlap");
+      const recordMap = method => new Map((method?.records || []).map(record => [record.question_id, record]));
+      const fixedRecords = recordMap(fixed);
+      const structuredRecords = recordMap(structured);
+      const questionIds = structured?.records?.map(record => record.question_id) || [];
+      const compactResult = record => {
+        if (!record) return "—";
+        if (record.false_take) return localized({ en: "Invented an answer", ru: "Нашёл ответ там, где его нет" });
+        if (record.forbidden_atoms_retained?.length) return localized({ en: `Also kept the wrong rule ${record.forbidden_atoms_retained.join(", ")}`, ru: `Также пропустил чужое правило ${record.forbidden_atoms_retained.join(", ")}` });
+        if (record.missing_atoms?.length) return localized({ en: `Lost ${record.missing_atoms.join(", ")}`, ru: `Потерял ${record.missing_atoms.join(", ")}` });
+        if (record.share_preserved === false) return localized({ en: "Found both parts, but split their meaning", ru: "Нашёл обе части, но разрезал общий смысл" });
+        return record.required_atoms.length ? localized({ en: "Kept the whole answer", ru: "Сохранил весь ответ" }) : localized({ en: "Correctly found no answer", ru: "Правильно не нашёл ответа" });
+      };
+      const windowDetails = record => `<details class="e007-chunk-details"><summary>${localized({ en: "SHOW THE PIECES", ru: "ПОКАЗАТЬ КУСКИ" })}</summary>${record.retained.length ? record.retained.map(item => `<article><b>${escapeHTML(item.chunk_id)} · ${Number(item.score).toFixed(3)} · ${escapeHTML(item.decision.toUpperCase())}</b><p>${escapeHTML(item.text)}</p><small>${localized({ en: "Whole atoms inside", ru: "Целые блоки внутри" })}: ${escapeHTML(item.atoms.join(" · ") || "—")}</small></article>`).join("") : `<p>${localized({ en: "Nothing survived the DROP filter.", ru: "После фильтра DROP ничего не осталось." })}</p>`}</details>`;
+      const rows = questionIds.map(id => {
+        const left = fixedRecords.get(id);
+        const right = structuredRecords.get(id);
+        return `<tr><th><span>${escapeHTML(id)}</span>${escapeHTML(right.question)}</th><td class="${left.complete ? "is-correct" : "is-critical"}"><strong>${left.complete ? "✓" : "×"} ${escapeHTML(compactResult(left))}</strong>${windowDetails(left)}</td><td class="${right.complete ? "is-correct" : "is-critical"}"><strong>${right.complete ? "✓" : "×"} ${escapeHTML(compactResult(right))}</strong>${windowDetails(right)}</td></tr>`;
+      }).join("");
+      chunkingMarkup = `<section id="e007-chunking-results" class="e007-local-result-wide e007-chunking"><div class="flow-step">CHECKPOINT 3C.6A.2 · ${localized({ en: "CUTTING THE SOURCE", ru: "РЕЗКА ИСТОЧНИКА" })}</div><h2>${localized({ en: "Structure saved more meaning, but the strict gate failed.", ru: "Структура сохранила больше смысла, но строгий gate не пройден." })}</h2><p>${localized({ en: "The same Qwen reranker searched both versions. Green means every needed piece stayed available together. Red means something important was lost or a wrong-device rule slipped through.", ru: "Одна и та же Qwen искала в обоих вариантах. Зелёное означает: все нужные части сохранились вместе. Красное: важная часть потерялась или прошло правило от другого устройства." })}</p><div class="e007-result-metrics"><article class="${fixed.summary.complete_questions === 10 ? "is-correct" : "is-critical"}"><span>${localized({ en: "45-WORD SCISSORS", ru: "НОЖНИЦЫ ПО 45 СЛОВ" })}</span><strong>${fixed.summary.complete_questions} / 10</strong><small>${fixed.summary.required_atoms_found} / ${fixed.summary.required_atoms_total} ${localized({ en: "needed pieces found", ru: "нужных частей найдено" })}</small></article><article class="${structured.summary.complete_questions === 10 ? "is-correct" : "needs-review"}"><span>${localized({ en: "STRUCTURE + NEIGHBOUR", ru: "СТРУКТУРА + СОСЕД" })}</span><strong>${structured.summary.complete_questions} / 10</strong><small>${structured.summary.required_atoms_found} / ${structured.summary.required_atoms_total} ${localized({ en: "needed pieces found", ru: "нужных частей найдено" })}</small></article><article class="is-critical"><span>${localized({ en: "WRONG RULE ALSO KEPT", ru: "ЧУЖОЕ ПРАВИЛО ТОЖЕ ПРОШЛО" })}</span><strong>${structured.summary.forbidden_atoms_retained}</strong><small>Aster-8 ≠ Aster-9</small></article></div><div class="e007-result-table-wrap"><table class="e007-result-table e007-chunking-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "45-WORD SCISSORS", ru: "НОЖНИЦЫ ПО 45 СЛОВ" })}</th><th>${localized({ en: "STRUCTURE + NEIGHBOUR", ru: "СТРУКТУРА + СОСЕД" })}</th></tr></thead><tbody>${rows}</tbody></table></div><p class="control-warning">${localized({ en: "Why the locked gate failed: CH06 kept the correct Aster-9 rule and also a neighbouring opposite Aster-8 rule. The frozen plan also mistakenly says four linked groups although its questions define five. Both faults stay public. This small synthetic run tests cutter + reranker together; it does not prove either part alone.", ru: "Почему gate не пройден: в CH06 сохранилось правильное правило Aster-9, но рядом прошло противоположное правило Aster-8. Ещё в замороженном плане мы ошибочно написали четыре связанные пары, хотя вопросов с такими парами пять. Обе ошибки остаются публичными. Этот маленький синтетический тест проверяет нож и reranker вместе, а не каждый модуль отдельно." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/chunking-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/chunking-world-v0.1.json">${localized({ en: "MANUAL + QUESTIONS", ru: "СПРАВОЧНИК + ВОПРОСЫ" })} ↗</a><a class="quiet-link" href="/experiments/E007/chunking-result-v0.1.json">${localized({ en: "ALL WINDOWS + SCORES", ru: "ВСЕ КУСКИ + ОЦЕНКИ" })} ↗</a></div></section>`;
+    } else if (chunkingProtocol) {
+      chunkingMarkup = `<section id="e007-chunking-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C.6A.2 · ${localized({ en: "LOCKED BEFORE RUN", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h2>${escapeHTML(localized(chunkingProtocol.title))}</h2><p>${escapeHTML(localized(chunkingProtocol.plain_language))}</p></section>`;
+    }
     let sourceAnchorMarkup = "";
     if (sourceAnchorProtocol) {
       const scenarioRu = {
@@ -4386,6 +4417,7 @@ async function loadE007() {
       }
     }
     target.querySelector(".experiment-loading").outerHTML = `
+      ${chunkingMarkup}
       ${sourceAnchorMarkup}
       ${mobileRerankerMarkup}
       ${relevanceMarkup}

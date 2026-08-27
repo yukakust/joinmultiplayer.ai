@@ -5097,6 +5097,53 @@ blockquote {
   font-weight: 700;
 }
 
+.e007-chunking-table {
+  min-width: 1280px;
+  table-layout: fixed;
+}
+
+.e007-chunking-table thead th:first-child { width: 32%; }
+.e007-chunking-table thead th:nth-child(2),
+.e007-chunking-table thead th:nth-child(3) { width: 34%; }
+
+.e007-chunking-table td { vertical-align: top; }
+
+.e007-chunking-table td > strong {
+  display: block;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.e007-chunk-details summary {
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.e007-chunk-details article {
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+.e007-chunk-details article b,
+.e007-chunk-details article small {
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.e007-chunk-details article p {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 8px 0;
+  white-space: pre-wrap;
+}
+
 .e007-mobile-table { min-width: 1400px; }
 .e007-mobile-table thead th:first-child { width: 29%; }
 .e007-mobile-table thead th:nth-child(2) { width: 48%; }

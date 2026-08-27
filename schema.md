@@ -3,6 +3,14 @@
 Status: working architecture agreement after E007 Gate 3C.5. This is not a
 claim that every module already exists or has passed a physical-device test.
 
+E007 Gate 3C.6A.2 adds one development finding about local source retrieval:
+do not cut memory into isolated equal-size word blocks. Preserve document
+structure and overlapping neighbour context, then keep exact source ranges.
+This improved complete retrieval from 6/10 to 9/10 and required-atom recall
+from 9/14 to 14/14 in one synthetic English manual. It is not accepted as a
+finished cutter: one neighbouring opposite rule for Aster-8 also survived an
+Aster-9 query, so a later condition/entity check is still required.
+
 ## The whole path
 
 ```text
