@@ -5103,6 +5103,12 @@ blockquote {
 .e007-mobile-table thead th:nth-child(3) { width: 10%; }
 .e007-mobile-table thead th:last-child { width: 13%; }
 
+.e007-anchor-table { min-width: 1100px; }
+.e007-anchor-table thead th:first-child { width: 50%; }
+.e007-anchor-table thead th:nth-child(2),
+.e007-anchor-table thead th:nth-child(3) { width: 21%; }
+.e007-anchor-table thead th:last-child { width: 8%; }
+
 @media (max-width: 800px) {
   .e007-mobile-simple { grid-template-columns: 1fr; }
 }

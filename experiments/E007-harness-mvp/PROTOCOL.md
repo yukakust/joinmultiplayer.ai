@@ -237,3 +237,17 @@ Owner decision on 2026-08-27: accept Qwen3-Reranker-4B Q4_K_M as the modular
 incoming relevance gate with three outputs: TAKE / NOT SURE / DROP. NOT SURE
 must continue to a later module. This decision does not promote the scorer into
 a truth, privacy, provenance, independence, or sufficiency judge.
+
+## Checkpoint 3C.6A — did this fragment come from this source snapshot?
+
+Before any NLI or meaning check, test the byte-level source anchor by itself.
+The frozen contract checks source id + version, source SHA-256, a half-open byte
+range, fragment SHA-256, and the exact UTF-8 display excerpt. It also freezes
+failures for changed sources, bad ranges, character/byte offset confusion,
+duplicate legacy quotes, Unicode look-alikes, changed line endings, missing
+versions, and unreadable sources.
+
+The locked gate is 20/20 correct, 4/4 intact anchors verified, 0/16 broken
+anchors verified, no exception, and an identical second run. No model, network,
+or meaning judgement participates. Protocol:
+`site/experiments/E007/source-anchor-protocol-v0.1.json`.

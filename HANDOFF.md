@@ -355,6 +355,12 @@ The owner accepted this as the current modular incoming relevance gate on
 TAKE / NOT SURE / DROP. NOT SURE is preserved for a later module. The decision
 and the complete accepted path are recorded in `schema.md`.
 
+Checkpoint 3C.6A is locked before its first run at
+`/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
+byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict
+20/20 gate. Run `experiments/E007-harness-mvp/src/verify_source_anchor.py` only
+after the lock commit is public, then preserve success or failure unchanged.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

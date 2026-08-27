@@ -4119,7 +4119,7 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse, sourceAnchorProtocolResponse, sourceAnchorResultResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
@@ -4139,6 +4139,8 @@ async function loadE007() {
       fetch("/experiments/E007/span-bridge-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/relevance-reranker-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/mobile-reranker-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/source-anchor-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/source-anchor-result-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
@@ -4158,6 +4160,8 @@ async function loadE007() {
     const spanBridgeResult = spanBridgeResponse.ok ? await spanBridgeResponse.json() : null;
     const relevanceResult = relevanceResponse.ok ? await relevanceResponse.json() : null;
     const mobileRerankerResult = mobileRerankerResponse.ok ? await mobileRerankerResponse.json() : null;
+    const sourceAnchorProtocol = sourceAnchorProtocolResponse.ok ? await sourceAnchorProtocolResponse.json() : null;
+    const sourceAnchorResult = sourceAnchorResultResponse.ok ? await sourceAnchorResultResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4348,7 +4352,28 @@ async function loadE007() {
       const ramNote = preflightRam ? localized({ en: `Phone-shaped Yukabox run: ${(preflightRam / 1e9).toFixed(2)} GB peak RAM with one question at a time.`, ru: `Телефонный режим на yukabox: ${(preflightRam / 1e9).toFixed(2).replace(".", ",")} ГБ памяти на пике при одном вопросе за раз.` }) : "";
       mobileRerankerMarkup = `<section id="e007-mobile-reranker-results" class="e007-local-result-wide e007-mobile-reranker"><div class="flow-step">CHECKPOINT 3C.5 · ${localized({ en: "ACCEPTED ARCHITECTURE STEP", ru: "ПРИНЯТЫЙ ШАГ АРХИТЕКТУРЫ" })}</div><h2>${localized({ en: "Incoming relevance gate: Qwen3-Reranker-4B Q4.", ru: "Приёмка по полезности: Qwen3-Reranker-4B Q4." })}</h2><p>${localized({ en: "The 4B judge kept every useful piece. Its 2.50 GB Q4 copy made exactly the same 24 decisions as the original. It now becomes the modular TAKE / NOT SURE / DROP step. A later experiment may replace it without changing the rest of the harness.", ru: "Судья 4B сохранил все полезные кусочки. Его Q4-копия размером 2,50 ГБ приняла те же 24 решения, что и оригинал. Теперь это отдельный модуль ВЗЯТЬ / НЕ УВЕРЕН / ОТБРОСИТЬ. Позже мы сможем заменить его, не меняя остальной harness." })}</p><p><strong>${escapeHTML(ramNote)}</strong></p><div class="e007-result-metrics">${cards}</div><div class="e007-mobile-simple"><article class="is-correct"><strong>8 / 8</strong><span>${localized({ en: "useful pieces taken", ru: "полезных кусочков взято" })}</span></article><article class="is-correct"><strong>0 / 8</strong><span>${localized({ en: "obvious noise taken", ru: "явного мусора взято" })}</span></article><article class="needs-review"><strong>6 / 24</strong><span>${localized({ en: "left for a later check", ru: "оставлено на следующую проверку" })}</span></article></div><details class="e007-policy-table"><summary>${localized({ en: "SEE ALL 24 Q4 DECISIONS", ru: "ПОСМОТРЕТЬ ВСЕ 24 РЕШЕНИЯ Q4" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-mobile-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "MEMORY PIECE", ru: "КУСОЧЕК ПАМЯТИ" })}</th><th>${localized({ en: "TRUTH", ru: "ПРАВДА" })}</th><th>${localized({ en: "Q4 DECISION", ru: "РЕШЕНИЕ Q4" })}</th></tr></thead><tbody>${rows}</tbody></table></div></details><p class="control-warning">${localized({ en: "Not proven yet: that the 2.50 GB file loads on your phone without too much RAM, waiting, heat, or battery drain. This module judges relevance only. It does not judge truth, privacy, source support, or independence.", ru: "Пока не доказано: что файл 2,50 ГБ загрузится на вашем телефоне без лишней памяти, ожидания, нагрева и расхода батареи. Этот модуль проверяет только полезность для вопроса. Он не проверяет правду, приватность, источник и независимость." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/mobile-reranker-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/mobile-reranker-result-v0.1.json">${localized({ en: "ALL SCORES", ru: "ВСЕ ОЦЕНКИ" })} ↗</a></div></section>`;
     }
+    let sourceAnchorMarkup = "";
+    if (sourceAnchorProtocol) {
+      const label = value => ({
+        verified: localized({ en: "SOURCE MATCHED", ru: "ИСТОЧНИК СОВПАЛ" }),
+        source_changed: localized({ en: "SOURCE CHANGED", ru: "ИСТОЧНИК ИЗМЕНИЛСЯ" }),
+        source_missing: localized({ en: "SOURCE MISSING", ru: "ИСТОЧНИК НЕ НАЙДЕН" }),
+        source_unreadable: localized({ en: "READ ERROR", ru: "ОШИБКА ЧТЕНИЯ" }),
+        fragment_mismatch: localized({ en: "FRAGMENT MISMATCH", ru: "ФРАГМЕНТ НЕ СОВПАЛ" }),
+        display_mismatch: localized({ en: "DISPLAY TEXT CHANGED", ru: "ПОКАЗЫВАЕМЫЙ ТЕКСТ ИЗМЕНЁН" }),
+        invalid_range: localized({ en: "BAD RANGE", ru: "НЕВЕРНЫЙ ДИАПАЗОН" }),
+        ambiguous_reference: localized({ en: "AMBIGUOUS", ru: "НЕОДНОЗНАЧНО" }),
+      }[value] || value);
+      if (sourceAnchorResult?.records?.length) {
+        const rows = sourceAnchorResult.records.map(record => `<tr class="${record.correct ? "is-correct" : "is-critical"}"><th><span>${escapeHTML(record.id)}</span>${escapeHTML(record.scenario)}</th><td>${escapeHTML(label(record.expected))}</td><td class="e007-verdict">${escapeHTML(label(record.decision))}</td><td>${record.correct ? "✓" : "×"}</td></tr>`).join("");
+        sourceAnchorMarkup = `<section id="e007-source-anchor-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C.6A · ${localized({ en: "SOURCE ANCHOR", ru: "ПРИВЯЗКА К ИСТОЧНИКУ" })}</div><h2>${sourceAnchorResult.passed_locked_gate ? localized({ en: "Ordinary code passed all frozen cases.", ru: "Обычный код прошёл все замороженные случаи." }) : localized({ en: "The mechanical anchor failed its locked gate.", ru: "Механическая привязка не прошла gate." })}</h2><div class="e007-mobile-simple"><article class="${sourceAnchorResult.summary.correct === 20 ? "is-correct" : "is-critical"}"><strong>${sourceAnchorResult.summary.correct} / 20</strong><span>${localized({ en: "decisions right", ru: "решений верно" })}</span></article><article class="${sourceAnchorResult.summary.intact_verified === 4 ? "is-correct" : "is-critical"}"><strong>${sourceAnchorResult.summary.intact_verified} / 4</strong><span>${localized({ en: "intact anchors accepted", ru: "целых ссылок принято" })}</span></article><article class="${sourceAnchorResult.summary.broken_verified === 0 ? "is-correct" : "is-critical"}"><strong>${sourceAnchorResult.summary.broken_verified} / 16</strong><span>${localized({ en: "broken anchors accepted", ru: "сломанных ссылок принято" })}</span></article></div><div class="e007-result-table-wrap"><table class="e007-result-table e007-anchor-table"><thead><tr><th>${localized({ en: "FROZEN CASE", ru: "ЗАМОРОЖЕННЫЙ СЛУЧАЙ" })}</th><th>${localized({ en: "EXPECTED", ru: "ОЖИДАЛИ" })}</th><th>${localized({ en: "CODE SAID", ru: "КОД РЕШИЛ" })}</th><th>${localized({ en: "RIGHT?", ru: "ВЕРНО?" })}</th></tr></thead><tbody>${rows}</tbody></table></div><p class="control-warning">${localized({ en: "This checks exact bytes in one available source snapshot. It does not understand meaning and does not prove that the source is true.", ru: "Это проверка точных байтов в доступной версии источника. Код не понимает смысл и не доказывает, что источник говорит правду." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/source-anchor-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/source-anchor-result-v0.1.json">${localized({ en: "ALL CASES", ru: "ВСЕ СЛУЧАИ" })} ↗</a></div></section>`;
+      } else {
+        const cases = sourceAnchorProtocol.frozen_cases.map(item => `<li><strong>${escapeHTML(item.id)}</strong><span>${escapeHTML(item.scenario)}</span><b>${escapeHTML(label(item.expected))}</b></li>`).join("");
+        sourceAnchorMarkup = `<section id="e007-source-anchor-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C.6A · ${localized({ en: "LOCKED BEFORE RUN", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h2>${localized(sourceAnchorProtocol.title)}</h2><p>${localized(sourceAnchorProtocol.hypothesis)}</p><div class="e007-gates"><ul>${cases}</ul></div><p class="control-warning">${localized({ en: "No model and no meaning check. Only source bytes, hashes, and ranges.", ru: "Без модели и без проверки смысла. Только байты источника, hashes и диапазоны." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/source-anchor-protocol-v0.1.json">${localized({ en: "FROZEN PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })} ↗</a></div></section>`;
+      }
+    }
     target.querySelector(".experiment-loading").outerHTML = `
+      ${sourceAnchorMarkup}
       ${mobileRerankerMarkup}
       ${relevanceMarkup}
       ${spanBridgeMarkup}

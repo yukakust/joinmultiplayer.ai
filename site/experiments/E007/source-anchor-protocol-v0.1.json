@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6A",
+  "status": "locked_before_run",
+  "kind": "deterministic_source_anchor_integrity_test",
+  "title": {
+    "en": "Can ordinary code prove that a fragment came from one exact source version?",
+    "ru": "Может ли обычный код доказать, что фрагмент взят из точной версии источника?"
+  },
+  "hypothesis": {
+    "en": "A byte-level source hash, byte range, fragment hash, and display excerpt can accept every intact anchor and reject every altered, missing, ambiguous, or unreadable anchor without an LLM.",
+    "ru": "Hash источника, диапазон байтов, hash фрагмента и показываемая выдержка позволят принять все целые ссылки и отклонить все изменённые, потерянные, неоднозначные или нечитаемые ссылки без LLM."
+  },
+  "implementation_contract": [
+    "Look up the exact source_id + source_version.",
+    "Reject an unreadable source.",
+    "Compare SHA-256 of the exact source bytes.",
+    "Require a valid half-open byte range [start, end).",
+    "Compare SHA-256 of the selected bytes.",
+    "Decode the selected bytes as UTF-8 and compare them with display_excerpt exactly.",
+    "If a legacy capsule has no byte range, accept no automatic guess; report not found or ambiguous."
+  ],
+  "frozen_cases": [
+    {"id":"SA01","scenario":"exact ASCII anchor","expected":"verified"},
+    {"id":"SA02","scenario":"exact Cyrillic UTF-8 anchor","expected":"verified"},
+    {"id":"SA03","scenario":"duplicate phrase with correct byte offsets","expected":"verified"},
+    {"id":"SA04","scenario":"exact CRLF anchor","expected":"verified"},
+    {"id":"SA05","scenario":"start shifted by one byte","expected":"fragment_mismatch"},
+    {"id":"SA06","scenario":"end shortened by one byte","expected":"fragment_mismatch"},
+    {"id":"SA07","scenario":"human-readable excerpt paraphrased","expected":"display_mismatch"},
+    {"id":"SA08","scenario":"fragment hash altered","expected":"fragment_mismatch"},
+    {"id":"SA09","scenario":"source content changed after capsule","expected":"source_changed"},
+    {"id":"SA10","scenario":"source id missing","expected":"source_missing"},
+    {"id":"SA11","scenario":"source version missing","expected":"source_missing"},
+    {"id":"SA12","scenario":"range ends beyond source","expected":"invalid_range"},
+    {"id":"SA13","scenario":"negative range start","expected":"invalid_range"},
+    {"id":"SA14","scenario":"character offsets mistakenly sent as byte offsets","expected":"fragment_mismatch"},
+    {"id":"SA15","scenario":"legacy quote occurs twice and has no offsets","expected":"ambiguous_reference"},
+    {"id":"SA16","scenario":"look-alike Unicode character in display excerpt","expected":"display_mismatch"},
+    {"id":"SA17","scenario":"line endings changed from LF to CRLF","expected":"source_changed"},
+    {"id":"SA18","scenario":"empty byte range","expected":"invalid_range"},
+    {"id":"SA19","scenario":"correct fragment hash but wrong display excerpt","expected":"display_mismatch"},
+    {"id":"SA20","scenario":"source exists but cannot be read","expected":"source_unreadable"}
+  ],
+  "locked_success": {
+    "correct_cases": "20/20",
+    "intact_anchors_verified": "4/4",
+    "broken_anchors_verified": "0/16",
+    "uncaught_exception": 0,
+    "second_run_identical_to_first": true
+  },
+  "not_tested": [
+    "whether the fragment supports a claim",
+    "whether the source itself is true or trustworthy",
+    "whether a remote private source actually exists",
+    "PDF, OCR, web-page, or database extraction",
+    "digital signatures or device identity"
+  ]
+}
