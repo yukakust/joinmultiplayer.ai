@@ -64,7 +64,7 @@
     {"id": "3B", "name": "physical_local_knowledge_offer", "status": "locked_before_search"},
     {"id": "3C", "name": "recall_first_send_policy_on_unseen_questions", "status": "development_run_complete"},
     {"id": "3C.2", "name": "blind_receiving_model_reads_one_source", "status": "development_run_complete_locked_gate_failed"},
-    {"id": "3C.3", "name": "span_id_selector_plus_blind_question_span_bridge", "status": "locked_before_inference"},
+    {"id": "3C.3", "name": "span_id_selector_plus_blind_question_span_bridge", "status": "development_run_complete_locked_gate_failed"},
     {"id": "3D", "name": "same_model_smoke_split_across_two_devices", "status": "not_started"},
     {"id": 4, "name": "locked_thirty_task_run", "status": "not_started"},
     {"id": 5, "name": "owner_audit_and_public_result", "status": "not_started"}

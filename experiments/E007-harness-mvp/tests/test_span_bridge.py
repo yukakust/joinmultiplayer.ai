@@ -27,6 +27,17 @@ class SpanBridgeTests(unittest.TestCase):
         self.assertEqual(MODULE.parse_bridge(raw), "NOT_HELPFUL")
         self.assertEqual(MODULE.parse_bridge("I cannot decide"), "MALFORMED")
 
+    def test_published_failure_is_preserved(self):
+        result_path = ROOT / "site/experiments/E007/span-bridge-result-v0.1.json"
+        if not result_path.exists():
+            self.skipTest("locked run has not completed")
+        result = json.loads(result_path.read_text())
+        self.assertFalse(result["passed_locked_gate"])
+        self.assertEqual(result["selector_only"]["correct"], 8)
+        self.assertEqual(result["selector_plus_bridge"]["correct"], 6)
+        self.assertEqual(result["selector_plus_bridge"]["extras_rejected"], 0)
+        self.assertFalse(result["br10_rejected"])
+
 
 if __name__ == "__main__":
     unittest.main()

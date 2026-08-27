@@ -5059,6 +5059,13 @@ blockquote {
   white-space: pre-wrap;
 }
 
+.e007-span-bridge-table { min-width: 1500px; }
+.e007-span-bridge-table thead th:first-child { width: 24%; }
+.e007-span-bridge-table thead th:nth-child(2) { width: 25%; }
+.e007-span-bridge-table thead th:nth-child(3) { width: 9%; }
+.e007-span-bridge-table thead th:nth-child(4) { width: 31%; }
+.e007-span-bridge-table thead th:last-child { width: 11%; }
+
 .e007-result-table .e007-verdict {
   font-weight: 800;
 }

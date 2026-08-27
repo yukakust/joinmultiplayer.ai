@@ -301,6 +301,16 @@ controlled development A/B on the same 16 inspected pairs, not held-out
 evidence. The bridge must preserve at least 7/8 useful sources, reject at least
 7/8 extras including BR10, and produce no format failures.
 
+Gate 3C.3 ran once without training or retry. Result:
+`/experiments/E007/span-bridge-result-v0.1.json`. Span-ID selection removed
+copying failures (16/16 valid IDs) but selected a span for every pair, including
+all eight extras. Selector-only correctness was 8/16. The independent bridge
+accepted all eight extras, rejected two useful pairs, and fell to 6/16; BR10
+still passed. Raw explanations reveal question-to-span contamination: Qwen often
+restated the span as if it contained facts from the question. The locked gate
+failed. Do not describe free-form Qwen 0.6B self-judging as a viable acceptance
+module from this evidence.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:
