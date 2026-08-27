@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[3]
 CLIENT_PATH = ROOT / "site" / "experiments" / "E007" / "local-offer-node-v0.1.py"
 MEMORY_PATH = ROOT / "site" / "experiments" / "E007" / "local-memory-v0.1.json"
 PROTOCOL_PATH = ROOT / "site" / "experiments" / "E007" / "local-offer-protocol-v0.1.json"
+RESULT_PATH = ROOT / "site" / "experiments" / "E007" / "local-offer-result-L0001.json"
 SPEC = importlib.util.spec_from_file_location("e007_local_offer", CLIENT_PATH)
 CLIENT = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CLIENT)
@@ -67,6 +68,22 @@ class LocalOfferTests(unittest.TestCase):
         noise = "Улей прибавил два килограмма мёда."
         self.assertGreater(CLIENT.exact_term_score(query, relevant), CLIENT.exact_term_score(query, noise))
         self.assertGreater(CLIENT.chargram_score(query, relevant), CLIENT.chargram_score(query, noise))
+
+    def test_published_result_preserves_the_protocol_flaw_and_failed_hypothesis(self):
+        result = json.loads(RESULT_PATH.read_text(encoding="utf-8"))
+        self.assertTrue(result["all_gates_passed"])
+        self.assertFalse(result["one_lane_passes_both_quality_gates"])
+        self.assertEqual(result["status"], "complete_protocol_pass_hypothesis_inconclusive")
+        self.assertEqual(result["lane_summaries"]["multilingual_neural"]["correct_states"], 20)
+        self.assertEqual(
+            result["lane_summaries"]["multilingual_neural"]["required_source_recall"]["found"],
+            4,
+        )
+        self.assertEqual(
+            result["lane_summaries"]["exact_terms"]["required_source_recall"]["found"],
+            5,
+        )
+        self.assertEqual(result["lane_summaries"]["exact_terms"]["false_found"], 19)
 
 
 if __name__ == "__main__":

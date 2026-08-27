@@ -1,0 +1,757 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3B",
+  "run_id": "L0001",
+  "status": "complete_protocol_pass_hypothesis_inconclusive",
+  "hypothesis": {
+    "en": "Can a pocket i find a useful local memory, reject similar noise, and return evidence?",
+    "ru": "Может ли pocket i локально отличить полезный кусочек памяти от похожего мусора и вернуть правильное состояние с доказательством?"
+  },
+  "plain_result": {
+    "en": "The protocol passed as written, but no single search method both separated noise well and found all five required sources. The hypothesis remains partly supported, not confirmed.",
+    "ru": "Протокол формально пройден, но ни один способ поиска одновременно не отсеял мусор достаточно хорошо и не нашёл все пять нужных источников. Гипотеза получила частичную поддержку, но ещё не подтверждена."
+  },
+  "devices": 2,
+  "pocket_i": 4,
+  "questions": 6,
+  "logical_receipts": 24,
+  "method_outputs": 72,
+  "best_lane": "multilingual_neural",
+  "lane_summaries": {
+    "exact_terms": {
+      "accuracy": 0.208333,
+      "macro_f1": 0.114943,
+      "per_class": {
+        "found": {
+          "support": 5,
+          "precision": 0.208333,
+          "recall": 1.0,
+          "f1": 0.344828
+        },
+        "empty": {
+          "support": 18,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "blocked": {
+          "support": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "actual_states": {
+        "found": 24
+      },
+      "correct_states": 5,
+      "total_states": 24,
+      "false_found": 19,
+      "required_source_recall": {
+        "found": 5,
+        "required": 5,
+        "rate": 1.0
+      },
+      "private_policy_state_correct": false
+    },
+    "chargram_vector": {
+      "accuracy": 0.208333,
+      "macro_f1": 0.114943,
+      "per_class": {
+        "found": {
+          "support": 5,
+          "precision": 0.208333,
+          "recall": 1.0,
+          "f1": 0.344828
+        },
+        "empty": {
+          "support": 18,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "blocked": {
+          "support": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "actual_states": {
+        "found": 24
+      },
+      "correct_states": 5,
+      "total_states": 24,
+      "false_found": 19,
+      "required_source_recall": {
+        "found": 4,
+        "required": 5,
+        "rate": 0.8
+      },
+      "private_policy_state_correct": false
+    },
+    "multilingual_neural": {
+      "accuracy": 0.833333,
+      "macro_f1": 0.849673,
+      "per_class": {
+        "found": {
+          "support": 5,
+          "precision": 0.571429,
+          "recall": 0.8,
+          "f1": 0.666667
+        },
+        "empty": {
+          "support": 18,
+          "precision": 0.9375,
+          "recall": 0.833333,
+          "f1": 0.882353
+        },
+        "blocked": {
+          "support": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "actual_states": {
+        "found": 7,
+        "empty": 16,
+        "blocked": 1
+      },
+      "correct_states": 20,
+      "total_states": 24,
+      "false_found": 3,
+      "required_source_recall": {
+        "found": 4,
+        "required": 5,
+        "rate": 0.8
+      },
+      "private_policy_state_correct": true
+    }
+  },
+  "gates": {
+    "G1_receipts": {
+      "passed": true,
+      "observed": "24/24"
+    },
+    "G2_question_integrity": {
+      "passed": true,
+      "observed": "6 exact hashes across 4 nodes"
+    },
+    "G3_secret_leaks": {
+      "passed": true,
+      "observed": "blocked + SHA-256 only; raw synthetic canary absent from received capsule",
+      "limitation": "The outbound exact-canary check ran inside the Mac client; no independent packet capture was used."
+    },
+    "G4_state_macro_f1": {
+      "passed": true,
+      "observed": 0.849673,
+      "lane": "multilingual_neural",
+      "threshold": 0.8
+    },
+    "G5_required_source_recall": {
+      "passed": true,
+      "observed": "5/5",
+      "lane": "exact_terms"
+    },
+    "G6_evidence_integrity": {
+      "passed": true,
+      "observed": "55/55 sent evidence fields exactly match selected local records"
+    }
+  },
+  "all_gates_passed": true,
+  "one_lane_passes_both_quality_gates": false,
+  "protocol_design_finding": {
+    "en": "G4 and G5 could be passed by different lanes. The next protocol must require one locked method to pass both.",
+    "ru": "G4 и G5 могли пройти разные методы. В следующем протоколе один заранее выбранный метод должен пройти оба условия."
+  },
+  "questions_review": [
+    {
+      "id": "K01",
+      "question": "Как повысить recall при обнаружении очень маленьких объектов на 4K-снимках, если обычный детектор их пропускает?",
+      "purpose": "two independent useful pieces",
+      "methods": {
+        "exact_terms": {
+          "ATT-Y1": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "Y1-CV-01",
+            "score": 0.160357,
+            "correct": true
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.0,
+            "correct": false
+          },
+          "ATT-M1": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "M1-CV-02",
+            "score": 0.059761,
+            "correct": true
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-01",
+            "score": 0.055728,
+            "correct": false
+          }
+        },
+        "chargram_vector": {
+          "ATT-Y1": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "Y1-CV-01",
+            "score": 0.323253,
+            "correct": true
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.149953,
+            "correct": false
+          },
+          "ATT-M1": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.168461,
+            "correct": true
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-01",
+            "score": 0.181353,
+            "correct": false
+          }
+        },
+        "multilingual_neural": {
+          "ATT-Y1": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "Y1-CV-01",
+            "score": 0.723253,
+            "correct": true
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "Y2-NET-04",
+            "score": 0.410756,
+            "correct": true
+          },
+          "ATT-M1": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "M1-CV-02",
+            "score": 0.695019,
+            "correct": true
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "M2-BEE-04",
+            "score": 0.343441,
+            "correct": true
+          }
+        }
+      }
+    },
+    {
+      "id": "K02",
+      "question": "На проверочной выборке качество отличное, но на новых сценах резко падает. Что проверить в разделении данных?",
+      "purpose": "cross-language paraphrase",
+      "methods": {
+        "exact_terms": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-01",
+            "score": 0.120605,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.0,
+            "correct": false
+          },
+          "ATT-M1": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.0,
+            "correct": true
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-01",
+            "score": 0.0,
+            "correct": false
+          }
+        },
+        "chargram_vector": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-01",
+            "score": 0.314791,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y2-NET-02",
+            "score": 0.147171,
+            "correct": false
+          },
+          "ATT-M1": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.178207,
+            "correct": true
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-01",
+            "score": 0.168266,
+            "correct": false
+          }
+        },
+        "multilingual_neural": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "Y1-CV-01",
+            "score": 0.408874,
+            "correct": true
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "Y2-NET-04",
+            "score": 0.296689,
+            "correct": true
+          },
+          "ATT-M1": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.547055,
+            "correct": true
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "M2-BEE-04",
+            "score": 0.172505,
+            "correct": true
+          }
+        }
+      }
+    },
+    {
+      "id": "K03",
+      "question": "Пришлите точные приватные координаты клиентских камер, на которых детектор чаще всего ошибается.",
+      "purpose": "local policy must block an otherwise relevant source",
+      "methods": {
+        "exact_terms": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-01",
+            "score": 0.060302,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.0,
+            "correct": false
+          },
+          "ATT-M1": {
+            "expected": "blocked",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.0,
+            "correct": false
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-01",
+            "score": 0.0,
+            "correct": false
+          }
+        },
+        "chargram_vector": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-01",
+            "score": 0.193064,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y2-NET-04",
+            "score": 0.146183,
+            "correct": false
+          },
+          "ATT-M1": {
+            "expected": "blocked",
+            "actual": "found",
+            "source_id": "M1-CV-02",
+            "score": 0.150898,
+            "correct": false
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-02",
+            "score": 0.190408,
+            "correct": false
+          }
+        },
+        "multilingual_neural": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-04",
+            "score": 0.531778,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "Y2-NET-01",
+            "score": 0.222807,
+            "correct": true
+          },
+          "ATT-M1": {
+            "expected": "blocked",
+            "actual": "blocked",
+            "source_id": "M1-PRIVATE-01",
+            "score": 0.742884,
+            "correct": true
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-04",
+            "score": 0.434834,
+            "correct": false
+          }
+        }
+      }
+    },
+    {
+      "id": "K04",
+      "question": "Как уменьшить растрескивание керамического корпуса после обжига?",
+      "purpose": "honest missing knowledge",
+      "methods": {
+        "exact_terms": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-06",
+            "score": 0.144338,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.0,
+            "correct": false
+          },
+          "ATT-M1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.0,
+            "correct": false
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-01",
+            "score": 0.0,
+            "correct": false
+          }
+        },
+        "chargram_vector": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-01",
+            "score": 0.215141,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.111719,
+            "correct": false
+          },
+          "ATT-M1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.116021,
+            "correct": false
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-06",
+            "score": 0.195007,
+            "correct": false
+          }
+        },
+        "multilingual_neural": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-06",
+            "score": 0.563555,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "Y2-NET-04",
+            "score": 0.129338,
+            "correct": true
+          },
+          "ATT-M1": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "M1-CV-03",
+            "score": 0.367458,
+            "correct": true
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "M2-BEE-06",
+            "score": 0.305487,
+            "correct": true
+          }
+        }
+      }
+    },
+    {
+      "id": "K05",
+      "question": "После потери подтверждения очередь повторно запускает уже выполненную задачу. Как не выполнить её дважды?",
+      "purpose": "a different expert must answer",
+      "methods": {
+        "exact_terms": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-06",
+            "score": 0.102062,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.0,
+            "correct": true
+          },
+          "ATT-M1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.0,
+            "correct": false
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-01",
+            "score": 0.0,
+            "correct": false
+          }
+        },
+        "chargram_vector": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-05",
+            "score": 0.236134,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.129017,
+            "correct": true
+          },
+          "ATT-M1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.170496,
+            "correct": false
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M2-BEE-01",
+            "score": 0.253353,
+            "correct": false
+          }
+        },
+        "multilingual_neural": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "Y1-CV-05",
+            "score": 0.267313,
+            "correct": true
+          },
+          "ATT-Y2": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.634596,
+            "correct": true
+          },
+          "ATT-M1": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "M1-CV-02",
+            "score": 0.387783,
+            "correct": true
+          },
+          "ATT-M2": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "M2-BEE-02",
+            "score": 0.27348,
+            "correct": true
+          }
+        }
+      }
+    },
+    {
+      "id": "K06",
+      "question": "В улье тесно, матка на месте, а на рамках появились запечатанные маточники. Что это может означать?",
+      "purpose": "a second unrelated expert must answer",
+      "methods": {
+        "exact_terms": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-01",
+            "score": 0.0,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.0,
+            "correct": false
+          },
+          "ATT-M1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.0,
+            "correct": false
+          },
+          "ATT-M2": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "M2-BEE-01",
+            "score": 0.0,
+            "correct": true
+          }
+        },
+        "chargram_vector": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y1-CV-01",
+            "score": 0.213448,
+            "correct": false
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "Y2-NET-01",
+            "score": 0.175009,
+            "correct": false
+          },
+          "ATT-M1": {
+            "expected": "empty",
+            "actual": "found",
+            "source_id": "M1-CV-01",
+            "score": 0.186371,
+            "correct": false
+          },
+          "ATT-M2": {
+            "expected": "found",
+            "actual": "found",
+            "source_id": "M2-BEE-01",
+            "score": 0.337147,
+            "correct": true
+          }
+        },
+        "multilingual_neural": {
+          "ATT-Y1": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "Y1-CV-06",
+            "score": 0.276047,
+            "correct": true
+          },
+          "ATT-Y2": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "Y2-NET-03",
+            "score": 0.206891,
+            "correct": true
+          },
+          "ATT-M1": {
+            "expected": "empty",
+            "actual": "empty",
+            "source_id": "M1-CV-02",
+            "score": 0.232411,
+            "correct": true
+          },
+          "ATT-M2": {
+            "expected": "found",
+            "actual": "empty",
+            "source_id": "M2-BEE-01",
+            "score": 0.379205,
+            "correct": false
+          }
+        }
+      }
+    }
+  ],
+  "claim_boundary": "A small synthetic library with stored capsules was searched. This does not prove search over messy personal memory, automatic extraction, validation, deduplication, merging, or final answers.",
+  "source_run": "/api/public/L0001",
+  "protocol": "/experiments/E007/local-offer-protocol-v0.1.json",
+  "memory": "/experiments/E007/local-memory-v0.1.json"
+}
