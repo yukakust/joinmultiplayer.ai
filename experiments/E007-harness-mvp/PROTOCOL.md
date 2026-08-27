@@ -201,3 +201,20 @@ is not a complete acceptance judge. The result is
 technical run with two implementation errors is preserved separately as
 `site/experiments/E007/relevance-reranker-invalid-preflight-v0.1.json` and is
 not treated as scientific evidence.
+
+## Checkpoint 3C.5 — can 4B fit the phone role?
+
+Before designing a multi-model cascade, test the simpler possibility: one
+stronger reranker may be enough. The already opened Gate 3C.4 exam is reused
+only to compare model size and quantization. This is not fresh evidence about
+generalisation.
+
+Compare the exact pinned Qwen3-Reranker-4B BF16 model with self-built GGUF
+Q4_K_M and Q5_K_M copies. All three use the unchanged calibration rule and
+quality gate. A phone candidate must also agree with BF16 on at least 23/24
+three-way decisions, add no useful rejection, and remain at or below 3.5 GiB.
+
+The protocol is frozen before model download, conversion, or inference at
+`site/experiments/E007/mobile-reranker-protocol-v0.1.json`. Yukabox measures
+quality and file size first. A real phone must still measure RAM, cold load,
+heat, battery, and wall time before the word “mobile” is earned.

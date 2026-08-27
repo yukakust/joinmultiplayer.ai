@@ -331,6 +331,14 @@ preflight is preserved at
 `/experiments/E007/relevance-reranker-invalid-preflight-v0.1.json` with its two
 implementation faults named explicitly.
 
+Checkpoint 3C.5 is locked before download/conversion/inference at
+`/experiments/E007/mobile-reranker-protocol-v0.1.json`. It asks whether a single
+Qwen3-Reranker-4B can remove the need for a cascade and whether self-built
+Q4_K_M/Q5_K_M GGUF copies preserve BF16 decisions. It deliberately reuses the
+opened 3C.4 exam for a size/quantization comparison; it is not new held-out
+task evidence. Do not claim phone viability until an actual phone measures RAM,
+cold load, time, heat, and battery.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

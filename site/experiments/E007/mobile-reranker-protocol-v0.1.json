@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.5",
+  "status": "locked_before_download_conversion_or_inference",
+  "kind": "phone_candidate_quantization_test",
+  "title": {
+    "en": "Can one 4B reranker replace the unfinished cascade and still fit a phone?",
+    "ru": "Может ли один reranker 4B заменить незаконченный каскад и поместиться в телефон?"
+  },
+  "hypothesis": {
+    "en": "Qwen3-Reranker-4B will pass the same relevance gate that 0.6B failed, and a phone-sized Q4 or Q5 copy will preserve its decisions without adding a lost useful source.",
+    "ru": "Qwen3-Reranker-4B пройдёт тот же gate релевантности, который не прошла 0,6B, а телефонная копия Q4 или Q5 сохранит решения и не потеряет дополнительный полезный источник."
+  },
+  "exam": {
+    "calibration": "/experiments/E007/send-policy-memory-v0.1.json#calibration_pairs",
+    "heldout": "/experiments/E007/relevance-reranker-heldout-v0.1.json",
+    "threshold_rule": "Exactly the unchanged Gate 3C.4 calibration rule.",
+    "note": "This reuses the already opened 24-pair exam to compare model size and quantization only. It is not new held-out evidence about the task family."
+  },
+  "source_model": {
+    "repository": "Qwen/Qwen3-Reranker-4B",
+    "revision": "22e683669bc0f0bd69640a1354a6d0aebcfeede5",
+    "parameters": "4B",
+    "layers": 36,
+    "source_dtype": "BF16",
+    "license": "apache-2.0",
+    "instruction": "Given a question, decide whether the passage contains information that directly helps answer that question."
+  },
+  "mobile_candidates": [
+    {"id":"q4_k_m","format":"GGUF","quantization":"Q4_K_M"},
+    {"id":"q5_k_m","format":"GGUF","quantization":"Q5_K_M"}
+  ],
+  "runtime": {
+    "llama_cpp_revision": "2bb9bddafad44ecbb50889644ca47537ec11841b",
+    "backend": "CPU on yukabox for the quality test",
+    "phone_runtime_target": "llama.cpp-compatible native runtime",
+    "phone_not_yet_measured": true
+  },
+  "locked_quality_gate_each_candidate": {
+    "useful_rejected": 0,
+    "useful_accepted": ">= 7/8",
+    "hard_extras_accepted": "<= 1/8",
+    "obvious_extras_accepted": 0,
+    "unclear_total": "<= 6/24"
+  },
+  "locked_quantization_gate": {
+    "additional_useful_rejections_vs_bf16": 0,
+    "decision_agreement_with_bf16": ">= 23/24",
+    "model_file_size": "<= 3.5 GiB"
+  },
+  "decision": "If either Q4 or Q5 passes both gates, it becomes the single phone acceptance candidate. Otherwise keep the 0.6B-first cascade hypothesis alive.",
+  "not_tested": [
+    "actual phone RAM limit",
+    "phone cold-load time",
+    "phone battery and heat",
+    "new unseen relevance questions",
+    "truth, privacy, and final answer quality"
+  ]
+}
