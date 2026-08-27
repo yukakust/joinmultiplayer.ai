@@ -5065,6 +5065,12 @@ blockquote {
 .e007-span-bridge-table thead th:nth-child(3) { width: 9%; }
 .e007-span-bridge-table thead th:nth-child(4) { width: 31%; }
 .e007-span-bridge-table thead th:last-child { width: 11%; }
+.e007-relevance-table { min-width: 1500px; }
+.e007-relevance-table thead th:first-child { width: 25%; }
+.e007-relevance-table thead th:nth-child(2) { width: 42%; }
+.e007-relevance-table thead th:nth-child(3) { width: 12%; }
+.e007-relevance-table thead th:nth-child(4) { width: 8%; }
+.e007-relevance-table thead th:last-child { width: 13%; }
 
 .e007-result-table .e007-verdict {
   font-weight: 800;

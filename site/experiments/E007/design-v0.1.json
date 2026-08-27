@@ -2,7 +2,7 @@
   "schema_version": "0.1",
   "experiment_id": "E007",
   "kind": "public_design_checkpoint",
-  "status": "checkpoint_3c4_locked_before_inference",
+  "status": "checkpoint_3c4_complete_all_locked_gates_failed",
   "title": {
     "en": "A model-agnostic harness for 64 logical pocket i",
     "ru": "Независимый от модели harness для 64 логических pocket i"

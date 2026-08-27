@@ -320,6 +320,17 @@ The three-way output is ACCEPT / UNCLEAR / REJECT. Held-out labels cannot set
 thresholds. This is a relevance test only, not a truth, privacy, or final-answer
 test.
 
+Gate 3C.4 completed once on the frozen held-out set. No method passed all locked
+gates. Old cosine similarity scored 14/24 and rejected one useful source;
+MiniLM 0.1B scored 15/24 and rejected two; Qwen3 reranker 0.6B scored 14/24,
+rejected zero useful sources, returned UNCLEAR nine times, and accepted one
+same-field trap. Treat Qwen3 reranker as the best recall-first first filter from
+this small test, not as a final acceptance judge. Result:
+`/experiments/E007/relevance-reranker-result-v0.1.json`. The invalid technical
+preflight is preserved at
+`/experiments/E007/relevance-reranker-invalid-preflight-v0.1.json` with its two
+implementation faults named explicitly.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

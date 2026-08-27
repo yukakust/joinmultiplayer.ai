@@ -1,0 +1,1033 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.4",
+  "status": "heldout_complete",
+  "protocol": "/experiments/E007/relevance-reranker-protocol-v0.1.json",
+  "protocol_sha256": "6dcfa93403435ff63de2ed49b2492a483b4a79dae5b3ff5e12d220ec99479940",
+  "heldout_sha256": "36ba5e3cd87ee988ebe4cc890780a6bef837c30825fb93a123ba528527c85c82",
+  "methods": [
+    {
+      "method": "embedding_baseline",
+      "runtime_seconds": 2.917,
+      "thresholds": {
+        "mode": "quantile_band",
+        "reject_at_or_below": 0.30230765,
+        "accept_at_or_above": 0.45985469
+      },
+      "calibration": {
+        "scores": [
+          0.41976614,
+          0.06782424,
+          0.53292972,
+          0.36144815,
+          0.50684997,
+          0.45897404,
+          0.83564547,
+          0.27510785,
+          0.62961235,
+          0.20329205,
+          0.61251152,
+          0.27595757,
+          0.37888248,
+          0.20633978,
+          0.47321754,
+          0.28259415
+        ],
+        "labels": [
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "summary": {
+        "correct": 14,
+        "total": 24,
+        "useful_rejected": 1,
+        "useful_accepted": 5,
+        "hard_extras_accepted": 2,
+        "obvious_extras_accepted": 0,
+        "unclear_total": 7,
+        "by_kind": {
+          "useful": {
+            "accept": 5,
+            "unclear": 2,
+            "reject": 1
+          },
+          "hard_extra": {
+            "accept": 2,
+            "unclear": 5,
+            "reject": 1
+          },
+          "obvious_extra": {
+            "accept": 0,
+            "unclear": 0,
+            "reject": 8
+          }
+        }
+      },
+      "passed_locked_gate": false,
+      "records": [
+        {
+          "id": "RR01-U",
+          "family": "database",
+          "kind": "useful",
+          "question": "A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?",
+          "passage": "A leading wildcard prevents a normal B-tree index from seeking to the beginning of a value, so the database may scan many rows instead.",
+          "score": 0.54293503,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR01-H",
+          "family": "database",
+          "kind": "hard_extra",
+          "question": "A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?",
+          "passage": "A missing composite index on tenant_id and created_at can make an ordered tenant history query slow.",
+          "score": 0.40209053,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR01-O",
+          "family": "database",
+          "kind": "obvious_extra",
+          "question": "A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?",
+          "passage": "A worn violin nut slot can make an open string buzz against the first fret.",
+          "score": 0.02346313,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR02-U",
+          "family": "web_layout",
+          "kind": "useful",
+          "question": "Cards on a web page jump downward while their images load. What should be fixed first?",
+          "passage": "Give each image an intrinsic width and height or an aspect-ratio box so the browser reserves its space before the file arrives.",
+          "score": 0.37059089,
+          "decision": "unclear",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR02-H",
+          "family": "web_layout",
+          "kind": "hard_extra",
+          "question": "Cards on a web page jump downward while their images load. What should be fixed first?",
+          "passage": "A late webfont swap can change line widths and move nearby text; preload the font or use compatible fallback metrics.",
+          "score": 0.35106773,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR02-O",
+          "family": "web_layout",
+          "kind": "obvious_extra",
+          "question": "Cards on a web page jump downward while their images load. What should be fixed first?",
+          "passage": "A lithium battery controller may block charging when cell temperature is below zero.",
+          "score": 0.14788518,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR03-U",
+          "family": "navigation",
+          "kind": "useful",
+          "question": "A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?",
+          "passage": "Large nearby steel structures distort the local magnetic field and can make a magnetometer report a false heading.",
+          "score": 0.43339958,
+          "decision": "unclear",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR03-H",
+          "family": "navigation",
+          "kind": "hard_extra",
+          "question": "A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?",
+          "passage": "GNSS signals reflected by canyon walls can shift a receiver's calculated position even when its compass remains healthy.",
+          "score": 0.39462977,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR03-O",
+          "family": "navigation",
+          "kind": "obvious_extra",
+          "question": "A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?",
+          "passage": "A ballpoint needle passes between knit loops and can prevent skipped stitches on jersey fabric.",
+          "score": 0.18618971,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR04-U",
+          "family": "audio",
+          "kind": "useful",
+          "question": "A microphone starts to squeal when the nearby speaker volume is raised. Why?",
+          "passage": "Sound from the speaker re-enters the microphone, is amplified again, and forms an acoustic feedback loop.",
+          "score": 0.78671231,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR04-H",
+          "family": "audio",
+          "kind": "hard_extra",
+          "question": "A microphone starts to squeal when the nearby speaker volume is raised. Why?",
+          "passage": "A ground loop between two powered audio devices often produces a steady mains-frequency hum.",
+          "score": 0.55821463,
+          "decision": "accept",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR04-O",
+          "family": "audio",
+          "kind": "obvious_extra",
+          "question": "A microphone starts to squeal when the nearby speaker volume is raised. Why?",
+          "passage": "Young leaves that turn pale between green veins can indicate unavailable iron in the soil.",
+          "score": 0.06718921,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR05-U",
+          "family": "bicycle",
+          "kind": "useful",
+          "question": "A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?",
+          "passage": "The axle or wheel was not seated squarely in the dropouts; reseating it restores the rotor's position in the caliper.",
+          "score": 0.46359871,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR05-H",
+          "family": "bicycle",
+          "kind": "hard_extra",
+          "question": "A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?",
+          "passage": "A bent brake rotor usually rubs at the same point on every revolution even when the wheel is seated correctly.",
+          "score": 0.56105755,
+          "decision": "accept",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR05-O",
+          "family": "bicycle",
+          "kind": "obvious_extra",
+          "question": "A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?",
+          "passage": "Store a webhook event id so that a retry returns the first payment result instead of charging again.",
+          "score": -0.05999523,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR06-U",
+          "family": "video",
+          "kind": "useful",
+          "question": "An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?",
+          "passage": "The camera shutter samples the lamp's PWM flicker at an unlucky rate, producing bright and dark bands by temporal aliasing.",
+          "score": 0.72754673,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR06-H",
+          "family": "video",
+          "kind": "hard_extra",
+          "question": "An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?",
+          "passage": "A rolling shutter reads image rows at different times and can make a fast propeller appear bent.",
+          "score": 0.39539722,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR06-O",
+          "family": "video",
+          "kind": "obvious_extra",
+          "question": "An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?",
+          "passage": "Dough ferments more slowly in a cold kitchen even when the starter is active.",
+          "score": 0.22572584,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR07-U",
+          "family": "distributed_systems",
+          "kind": "useful",
+          "question": "A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?",
+          "passage": "Make the handler idempotent and store a deduplication key so a retried delivery returns the already recorded result.",
+          "score": 0.2613496,
+          "decision": "reject",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR07-H",
+          "family": "distributed_systems",
+          "kind": "hard_extra",
+          "question": "A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?",
+          "passage": "A lagging read replica can briefly return old data after the primary has accepted a write.",
+          "score": 0.32064894,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR07-O",
+          "family": "distributed_systems",
+          "kind": "obvious_extra",
+          "question": "A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?",
+          "passage": "Fish gathering at the surface after aeration stops may be reacting to low dissolved oxygen.",
+          "score": 0.10062457,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR08-U",
+          "family": "computer_vision",
+          "kind": "useful",
+          "question": "A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?",
+          "passage": "Nearly identical neighboring frames leaked across the train and validation sets; split by recording or camera so the validation groups are independent.",
+          "score": 0.60621181,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR08-H",
+          "family": "computer_vision",
+          "kind": "hard_extra",
+          "question": "A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?",
+          "passage": "Aggressive hue augmentation can damage a classifier when label meaning depends on the object's true color.",
+          "score": 0.21501724,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR08-O",
+          "family": "computer_vision",
+          "kind": "obvious_extra",
+          "question": "A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?",
+          "passage": "A crowded hive with sealed queen cells may be preparing to swarm.",
+          "score": -0.01746962,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "method": "minilm_reranker",
+      "runtime_seconds": 0.375,
+      "thresholds": {
+        "mode": "quantile_band",
+        "reject_at_or_below": -5.7766614,
+        "accept_at_or_above": -3.09284729
+      },
+      "calibration": {
+        "scores": [
+          -3.11028433,
+          -8.45474529,
+          3.31877255,
+          -7.89821291,
+          -1.42674637,
+          -2.34581208,
+          3.72679901,
+          -6.35515165,
+          -3.08703494,
+          -7.78509474,
+          0.76009566,
+          -6.07933474,
+          -1.19728446,
+          -4.86864138,
+          -3.86434221,
+          -6.98531103
+        ],
+        "labels": [
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "summary": {
+        "correct": 15,
+        "total": 24,
+        "useful_rejected": 2,
+        "useful_accepted": 2,
+        "hard_extras_accepted": 1,
+        "obvious_extras_accepted": 0,
+        "unclear_total": 6,
+        "by_kind": {
+          "useful": {
+            "accept": 2,
+            "unclear": 4,
+            "reject": 2
+          },
+          "hard_extra": {
+            "accept": 1,
+            "unclear": 1,
+            "reject": 6
+          },
+          "obvious_extra": {
+            "accept": 0,
+            "unclear": 1,
+            "reject": 7
+          }
+        }
+      },
+      "passed_locked_gate": false,
+      "records": [
+        {
+          "id": "RR01-U",
+          "family": "database",
+          "kind": "useful",
+          "question": "A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?",
+          "passage": "A leading wildcard prevents a normal B-tree index from seeking to the beginning of a value, so the database may scan many rows instead.",
+          "score": -4.47342253,
+          "decision": "unclear",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR01-H",
+          "family": "database",
+          "kind": "hard_extra",
+          "question": "A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?",
+          "passage": "A missing composite index on tenant_id and created_at can make an ordered tenant history query slow.",
+          "score": -6.82644367,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR01-O",
+          "family": "database",
+          "kind": "obvious_extra",
+          "question": "A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?",
+          "passage": "A worn violin nut slot can make an open string buzz against the first fret.",
+          "score": -8.83058071,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR02-U",
+          "family": "web_layout",
+          "kind": "useful",
+          "question": "Cards on a web page jump downward while their images load. What should be fixed first?",
+          "passage": "Give each image an intrinsic width and height or an aspect-ratio box so the browser reserves its space before the file arrives.",
+          "score": -5.21176958,
+          "decision": "unclear",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR02-H",
+          "family": "web_layout",
+          "kind": "hard_extra",
+          "question": "Cards on a web page jump downward while their images load. What should be fixed first?",
+          "passage": "A late webfont swap can change line widths and move nearby text; preload the font or use compatible fallback metrics.",
+          "score": -7.56968307,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR02-O",
+          "family": "web_layout",
+          "kind": "obvious_extra",
+          "question": "Cards on a web page jump downward while their images load. What should be fixed first?",
+          "passage": "A lithium battery controller may block charging when cell temperature is below zero.",
+          "score": -9.04557037,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR03-U",
+          "family": "navigation",
+          "kind": "useful",
+          "question": "A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?",
+          "passage": "Large nearby steel structures distort the local magnetic field and can make a magnetometer report a false heading.",
+          "score": -7.65127993,
+          "decision": "reject",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR03-H",
+          "family": "navigation",
+          "kind": "hard_extra",
+          "question": "A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?",
+          "passage": "GNSS signals reflected by canyon walls can shift a receiver's calculated position even when its compass remains healthy.",
+          "score": -8.07532024,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR03-O",
+          "family": "navigation",
+          "kind": "obvious_extra",
+          "question": "A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?",
+          "passage": "A ballpoint needle passes between knit loops and can prevent skipped stitches on jersey fabric.",
+          "score": -9.53840542,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR04-U",
+          "family": "audio",
+          "kind": "useful",
+          "question": "A microphone starts to squeal when the nearby speaker volume is raised. Why?",
+          "passage": "Sound from the speaker re-enters the microphone, is amplified again, and forms an acoustic feedback loop.",
+          "score": -3.25248766,
+          "decision": "unclear",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR04-H",
+          "family": "audio",
+          "kind": "hard_extra",
+          "question": "A microphone starts to squeal when the nearby speaker volume is raised. Why?",
+          "passage": "A ground loop between two powered audio devices often produces a steady mains-frequency hum.",
+          "score": -6.54068327,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR04-O",
+          "family": "audio",
+          "kind": "obvious_extra",
+          "question": "A microphone starts to squeal when the nearby speaker volume is raised. Why?",
+          "passage": "Young leaves that turn pale between green veins can indicate unavailable iron in the soil.",
+          "score": -8.90066147,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR05-U",
+          "family": "bicycle",
+          "kind": "useful",
+          "question": "A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?",
+          "passage": "The axle or wheel was not seated squarely in the dropouts; reseating it restores the rotor's position in the caliper.",
+          "score": -2.22667599,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR05-H",
+          "family": "bicycle",
+          "kind": "hard_extra",
+          "question": "A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?",
+          "passage": "A bent brake rotor usually rubs at the same point on every revolution even when the wheel is seated correctly.",
+          "score": 0.63279903,
+          "decision": "accept",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR05-O",
+          "family": "bicycle",
+          "kind": "obvious_extra",
+          "question": "A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?",
+          "passage": "Store a webhook event id so that a retry returns the first payment result instead of charging again.",
+          "score": -3.71949029,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR06-U",
+          "family": "video",
+          "kind": "useful",
+          "question": "An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?",
+          "passage": "The camera shutter samples the lamp's PWM flicker at an unlucky rate, producing bright and dark bands by temporal aliasing.",
+          "score": -0.53874862,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR06-H",
+          "family": "video",
+          "kind": "hard_extra",
+          "question": "An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?",
+          "passage": "A rolling shutter reads image rows at different times and can make a fast propeller appear bent.",
+          "score": -5.11896372,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR06-O",
+          "family": "video",
+          "kind": "obvious_extra",
+          "question": "An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?",
+          "passage": "Dough ferments more slowly in a cold kitchen even when the starter is active.",
+          "score": -8.52209568,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR07-U",
+          "family": "distributed_systems",
+          "kind": "useful",
+          "question": "A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?",
+          "passage": "Make the handler idempotent and store a deduplication key so a retried delivery returns the already recorded result.",
+          "score": -7.86664152,
+          "decision": "reject",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR07-H",
+          "family": "distributed_systems",
+          "kind": "hard_extra",
+          "question": "A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?",
+          "passage": "A lagging read replica can briefly return old data after the primary has accepted a write.",
+          "score": -7.01568079,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR07-O",
+          "family": "distributed_systems",
+          "kind": "obvious_extra",
+          "question": "A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?",
+          "passage": "Fish gathering at the surface after aeration stops may be reacting to low dissolved oxygen.",
+          "score": -9.08169842,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR08-U",
+          "family": "computer_vision",
+          "kind": "useful",
+          "question": "A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?",
+          "passage": "Nearly identical neighboring frames leaked across the train and validation sets; split by recording or camera so the validation groups are independent.",
+          "score": -5.3918891,
+          "decision": "unclear",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR08-H",
+          "family": "computer_vision",
+          "kind": "hard_extra",
+          "question": "A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?",
+          "passage": "Aggressive hue augmentation can damage a classifier when label meaning depends on the object's true color.",
+          "score": -8.4206686,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR08-O",
+          "family": "computer_vision",
+          "kind": "obvious_extra",
+          "question": "A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?",
+          "passage": "A crowded hive with sealed queen cells may be preparing to swarm.",
+          "score": -7.68813992,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "method": "qwen_reranker",
+      "runtime_seconds": 11.07,
+      "thresholds": {
+        "mode": "quantile_band",
+        "reject_at_or_below": 0.00073006,
+        "accept_at_or_above": 0.88704477
+      },
+      "calibration": {
+        "scores": [
+          0.86982852,
+          0.00107706,
+          0.89278352,
+          5.045e-05,
+          0.95672154,
+          0.02957941,
+          0.99272305,
+          0.00034974,
+          0.98151392,
+          0.00019236,
+          0.99743491,
+          0.00061439,
+          0.96398324,
+          0.00051619,
+          0.79463005,
+          0.00022092
+        ],
+        "labels": [
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "summary": {
+        "correct": 14,
+        "total": 24,
+        "useful_rejected": 0,
+        "useful_accepted": 6,
+        "hard_extras_accepted": 1,
+        "obvious_extras_accepted": 0,
+        "unclear_total": 9,
+        "by_kind": {
+          "useful": {
+            "accept": 6,
+            "unclear": 2,
+            "reject": 0
+          },
+          "hard_extra": {
+            "accept": 1,
+            "unclear": 7,
+            "reject": 0
+          },
+          "obvious_extra": {
+            "accept": 0,
+            "unclear": 0,
+            "reject": 8
+          }
+        }
+      },
+      "passed_locked_gate": false,
+      "records": [
+        {
+          "id": "RR01-U",
+          "family": "database",
+          "kind": "useful",
+          "question": "A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?",
+          "passage": "A leading wildcard prevents a normal B-tree index from seeking to the beginning of a value, so the database may scan many rows instead.",
+          "score": 0.95590365,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR01-H",
+          "family": "database",
+          "kind": "hard_extra",
+          "question": "A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?",
+          "passage": "A missing composite index on tenant_id and created_at can make an ordered tenant history query slow.",
+          "score": 0.00185705,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR01-O",
+          "family": "database",
+          "kind": "obvious_extra",
+          "question": "A database search is fast for 'term%' but becomes very slow for '%term'. What is the likely reason?",
+          "passage": "A worn violin nut slot can make an open string buzz against the first fret.",
+          "score": 1.036e-05,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR02-U",
+          "family": "web_layout",
+          "kind": "useful",
+          "question": "Cards on a web page jump downward while their images load. What should be fixed first?",
+          "passage": "Give each image an intrinsic width and height or an aspect-ratio box so the browser reserves its space before the file arrives.",
+          "score": 0.81254882,
+          "decision": "unclear",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR02-H",
+          "family": "web_layout",
+          "kind": "hard_extra",
+          "question": "Cards on a web page jump downward while their images load. What should be fixed first?",
+          "passage": "A late webfont swap can change line widths and move nearby text; preload the font or use compatible fallback metrics.",
+          "score": 0.00765143,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR02-O",
+          "family": "web_layout",
+          "kind": "obvious_extra",
+          "question": "Cards on a web page jump downward while their images load. What should be fixed first?",
+          "passage": "A lithium battery controller may block charging when cell temperature is below zero.",
+          "score": 1.179e-05,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR03-U",
+          "family": "navigation",
+          "kind": "useful",
+          "question": "A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?",
+          "passage": "Large nearby steel structures distort the local magnetic field and can make a magnetometer report a false heading.",
+          "score": 0.99871433,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR03-H",
+          "family": "navigation",
+          "kind": "hard_extra",
+          "question": "A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?",
+          "passage": "GNSS signals reflected by canyon walls can shift a receiver's calculated position even when its compass remains healthy.",
+          "score": 0.6663518,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR03-O",
+          "family": "navigation",
+          "kind": "obvious_extra",
+          "question": "A drone reports a compass warning only when it flies close to a steel bridge. What could cause it?",
+          "passage": "A ballpoint needle passes between knit loops and can prevent skipped stitches on jersey fabric.",
+          "score": 2.69e-06,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR04-U",
+          "family": "audio",
+          "kind": "useful",
+          "question": "A microphone starts to squeal when the nearby speaker volume is raised. Why?",
+          "passage": "Sound from the speaker re-enters the microphone, is amplified again, and forms an acoustic feedback loop.",
+          "score": 0.99498653,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR04-H",
+          "family": "audio",
+          "kind": "hard_extra",
+          "question": "A microphone starts to squeal when the nearby speaker volume is raised. Why?",
+          "passage": "A ground loop between two powered audio devices often produces a steady mains-frequency hum.",
+          "score": 0.02644072,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR04-O",
+          "family": "audio",
+          "kind": "obvious_extra",
+          "question": "A microphone starts to squeal when the nearby speaker volume is raised. Why?",
+          "passage": "Young leaves that turn pale between green veins can indicate unavailable iron in the soil.",
+          "score": 2.25e-05,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR05-U",
+          "family": "bicycle",
+          "kind": "useful",
+          "question": "A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?",
+          "passage": "The axle or wheel was not seated squarely in the dropouts; reseating it restores the rotor's position in the caliper.",
+          "score": 0.99517834,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR05-H",
+          "family": "bicycle",
+          "kind": "hard_extra",
+          "question": "A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?",
+          "passage": "A bent brake rotor usually rubs at the same point on every revolution even when the wheel is seated correctly.",
+          "score": 0.96602029,
+          "decision": "accept",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR05-O",
+          "family": "bicycle",
+          "kind": "obvious_extra",
+          "question": "A bicycle disc brake rubs only after the wheel is reinstalled, and the rubbing disappears after reseating the wheel. What is most likely wrong?",
+          "passage": "Store a webhook event id so that a retry returns the first payment result instead of charging again.",
+          "score": 6.29e-06,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR06-U",
+          "family": "video",
+          "kind": "useful",
+          "question": "An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?",
+          "passage": "The camera shutter samples the lamp's PWM flicker at an unlucky rate, producing bright and dark bands by temporal aliasing.",
+          "score": 0.9997831,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR06-H",
+          "family": "video",
+          "kind": "hard_extra",
+          "question": "An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?",
+          "passage": "A rolling shutter reads image rows at different times and can make a fast propeller appear bent.",
+          "score": 0.04642074,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR06-O",
+          "family": "video",
+          "kind": "obvious_extra",
+          "question": "An LED lamp looks steady to the eye but dark bands appear in video only at certain shutter speeds. What explains this?",
+          "passage": "Dough ferments more slowly in a cold kitchen even when the starter is active.",
+          "score": 1.821e-05,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR07-U",
+          "family": "distributed_systems",
+          "kind": "useful",
+          "question": "A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?",
+          "passage": "Make the handler idempotent and store a deduplication key so a retried delivery returns the already recorded result.",
+          "score": 0.39175016,
+          "decision": "unclear",
+          "expected": "accept",
+          "correct": false
+        },
+        {
+          "id": "RR07-H",
+          "family": "distributed_systems",
+          "kind": "hard_extra",
+          "question": "A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?",
+          "passage": "A lagging read replica can briefly return old data after the primary has accepted a write.",
+          "score": 0.0055486,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR07-O",
+          "family": "distributed_systems",
+          "kind": "obvious_extra",
+          "question": "A background job sometimes runs twice after its acknowledgement is lost. What design prevents duplicate effects?",
+          "passage": "Fish gathering at the surface after aeration stops may be reacting to low dissolved oxygen.",
+          "score": 0.00011159,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        },
+        {
+          "id": "RR08-U",
+          "family": "computer_vision",
+          "kind": "useful",
+          "question": "A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?",
+          "passage": "Nearly identical neighboring frames leaked across the train and validation sets; split by recording or camera so the validation groups are independent.",
+          "score": 0.99827075,
+          "decision": "accept",
+          "expected": "accept",
+          "correct": true
+        },
+        {
+          "id": "RR08-H",
+          "family": "computer_vision",
+          "kind": "hard_extra",
+          "question": "A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?",
+          "passage": "Aggressive hue augmentation can damage a classifier when label meaning depends on the object's true color.",
+          "score": 0.00160489,
+          "decision": "unclear",
+          "expected": "reject",
+          "correct": false
+        },
+        {
+          "id": "RR08-O",
+          "family": "computer_vision",
+          "kind": "obvious_extra",
+          "question": "A vision model scores very well on validation frames but fails on scenes from a new camera. Neighboring frames from each recording were split randomly. What is the likely evaluation mistake?",
+          "passage": "A crowded hive with sealed queen cells may be preparing to swarm.",
+          "score": 7.05e-06,
+          "decision": "reject",
+          "expected": "reject",
+          "correct": true
+        }
+      ]
+    }
+  ],
+  "winner_rule": "Prefer methods that pass every locked gate; among those, prefer fewer hard-extra accepts, then fewer unclear results, then the smaller model.",
+  "boundary": "One English synthetic held-out set. This tests relevance scoring, not truth, privacy, or final answer quality. No method was trained or tuned on the held-out labels."
+}

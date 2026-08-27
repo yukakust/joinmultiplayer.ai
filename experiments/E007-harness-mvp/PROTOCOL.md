@@ -184,3 +184,20 @@ The protocol and exam are frozen before model download or inference at:
 
 This tests relevance only. It does not test whether a passage is true, safe to
 share, or sufficient for a final answer.
+
+### Observed result
+
+The one-shot held-out run is complete. None of the three methods passed every
+locked gate:
+
+- old cosine similarity: 14/24 strict decisions, one useful source rejected;
+- MiniLM 0.1B reranker: 15/24, two useful sources rejected;
+- Qwen3 0.6B reranker: 14/24, zero useful sources rejected, nine UNCLEAR, one
+  same-field trap accepted.
+
+Qwen3 reranker is the best recall-first first filter in this small test, but it
+is not a complete acceptance judge. The result is
+`site/experiments/E007/relevance-reranker-result-v0.1.json`. A pre-publication
+technical run with two implementation errors is preserved separately as
+`site/experiments/E007/relevance-reranker-invalid-preflight-v0.1.json` and is
+not treated as scientific evidence.

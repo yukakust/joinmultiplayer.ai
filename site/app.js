@@ -4119,7 +4119,7 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
@@ -4137,6 +4137,7 @@ async function loadE007() {
       fetch("/experiments/E007/send-policy-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/blind-reader-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/span-bridge-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/relevance-reranker-result-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
@@ -4154,6 +4155,7 @@ async function loadE007() {
     const sendPolicyResult = sendPolicyResultResponse.ok ? await sendPolicyResultResponse.json() : null;
     const blindReaderResult = blindReaderResponse.ok ? await blindReaderResponse.json() : null;
     const spanBridgeResult = spanBridgeResponse.ok ? await spanBridgeResponse.json() : null;
+    const relevanceResult = relevanceResponse.ok ? await relevanceResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4296,7 +4298,33 @@ async function loadE007() {
       }).join("");
       spanBridgeMarkup = `<section id="e007-span-bridge-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C.3 · ${localized({ en: "SPAN ID + BLIND BRIDGE", ru: "ID ФРАГМЕНТА + СЛЕПОЙ МОСТ" })}</div><h2>${localized({ en: "The second pass made the result worse.", ru: "Второй проход сделал результат хуже." })}</h2><p>${localized({ en: "Choosing a span ID removed copying errors, but Qwen selected a span from every source—even all eight extras. The bridge then called every extra HELPFUL.", ru: "Выбор ID убрал ошибки копирования, но Qwen выбрала фрагмент из каждого источника — даже из всех восьми лишних. Затем второй проход назвал HELPFUL все лишние фрагменты." })}</p><div class="e007-result-metrics"><article class="needs-review"><span>${localized({ en: "SELECTOR ALONE", ru: "ТОЛЬКО ВЫБОР ФРАГМЕНТА" })}</span><strong>${spanBridgeResult.selector_only.correct} / 16</strong></article><article class="is-critical"><span>${localized({ en: "WITH BRIDGE", ru: "СО ВТОРЫМ ПРОХОДОМ" })}</span><strong>${spanBridgeResult.selector_plus_bridge.correct} / 16</strong></article><article class="is-critical"><span>${localized({ en: "EXTRAS REJECTED", ru: "ЛИШНИХ ОТКЛОНЕНО" })}</span><strong>${spanBridgeResult.selector_plus_bridge.extras_rejected} / 8</strong></article></div><div class="e007-result-legend"><span class="is-correct">■ ${localized({ en: "green = final decision right", ru: "зелёное = итог верный" })}</span><span class="is-critical">■ ${localized({ en: "red = final decision wrong", ru: "красное = итог неверный" })}</span></div><div class="e007-result-table-wrap"><table class="e007-result-table e007-span-bridge-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "SPAN CHOSEN BY QWEN", ru: "ФРАГМЕНТ, ВЫБРАННЫЙ QWEN" })}</th><th>${localized({ en: "HIDDEN LABEL", ru: "СКРЫТАЯ МЕТКА" })}</th><th>${localized({ en: "RAW BRIDGE EXPLANATION", ru: "СЫРОЕ ОБЪЯСНЕНИЕ МОСТА" })}</th><th>${localized({ en: "FINAL", ru: "ИТОГ" })}</th></tr></thead><tbody>${rows}</tbody></table></div><p class="control-warning">${localized({ en: "Important failure: the small model often rewrote the span as if it contained words from the question. It did not perform a reliable comparison. This run was not retried or tuned.", ru: "Важный провал: маленькая модель часто пересказывала фрагмент так, будто в нём были слова из вопроса. Надёжного сравнения не получилось. Запуск не повторяли и не подгоняли." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/span-bridge-protocol-v0.1.json">${localized({ en: "LOCKED PLAN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/span-bridge-result-v0.1.json">${localized({ en: "ALL RAW PASSES", ru: "ВСЕ СЫРЫЕ ПРОХОДЫ" })} ↗</a></div></section>`;
     }
+    let relevanceMarkup = "";
+    if (relevanceResult) {
+      const methodNames = {
+        embedding_baseline: localized({ en: "Old meaning similarity", ru: "Старый поиск по похожести" }),
+        minilm_reranker: localized({ en: "MiniLM relevance judge · 0.1B", ru: "MiniLM-судья · 0,1B" }),
+        qwen_reranker: localized({ en: "Qwen relevance judge · 0.6B", ru: "Qwen-судья · 0,6B" }),
+      };
+      const ordered = [...relevanceResult.methods].sort((left, right) => ({ qwen_reranker: 0, embedding_baseline: 1, minilm_reranker: 2 }[left.method] - ({ qwen_reranker: 0, embedding_baseline: 1, minilm_reranker: 2 }[right.method])));
+      const cards = ordered.map((method) => {
+        const summary = method.summary;
+        const tone = method.method === "qwen_reranker" ? "needs-review" : "is-critical";
+        return `<article class="${tone}"><span>${escapeHTML(methodNames[method.method])}</span><strong>${summary.correct} / ${summary.total}</strong><small>${localized({ en: `${summary.useful_rejected} useful lost · ${summary.unclear_total} unclear`, ru: `${summary.useful_rejected} полезных потеряно · ${summary.unclear_total} неясно` })}</small></article>`;
+      }).join("");
+      const tables = ordered.map((method, index) => {
+        const rows = method.records.map((record) => {
+          const expectedUseful = record.kind === "useful";
+          const tone = record.decision === "unclear" ? "needs-review" : record.correct ? "is-correct" : "is-critical";
+          const kind = expectedUseful ? localized({ en: "USEFUL", ru: "ПОЛЕЗНЫЙ" }) : record.kind === "hard_extra" ? localized({ en: "SIMILAR TRAP", ru: "ПОХОЖАЯ ЛОВУШКА" }) : localized({ en: "OBVIOUS EXTRA", ru: "ЯВНО ЛИШНИЙ" });
+          const decision = record.decision === "accept" ? localized({ en: "ACCEPT", ru: "ПРИНЯТЬ" }) : record.decision === "reject" ? localized({ en: "REJECT", ru: "ОТКЛОНИТЬ" }) : localized({ en: "UNCLEAR → ASK NEXT MODULE", ru: "НЕЯСНО → СПРОСИТЬ СЛЕДУЮЩИЙ МОДУЛЬ" });
+          return `<tr class="${tone}"><th><span>${escapeHTML(record.id)} · ${escapeHTML(record.family)}</span>${escapeHTML(record.question)}</th><td>${escapeHTML(record.passage)}</td><td>${escapeHTML(kind)}</td><td>${Number(record.score).toFixed(4)}</td><td class="e007-verdict">${escapeHTML(decision)}</td></tr>`;
+        }).join("");
+        return `<details class="e007-policy-table" ${index === 0 ? "open" : ""}><summary>${escapeHTML(methodNames[method.method])} · ${method.summary.correct}/24 · ${method.passed_locked_gate ? localized({ en: "GATE PASSED", ru: "GATE ПРОЙДЕН" }) : localized({ en: "GATE FAILED", ru: "GATE НЕ ПРОЙДЕН" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-relevance-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "ONE SOURCE", ru: "ОДИН ИСТОЧНИК" })}</th><th>${localized({ en: "HIDDEN TRUTH", ru: "СКРЫТАЯ ПРАВДА" })}</th><th>SCORE</th><th>${localized({ en: "DECISION", ru: "РЕШЕНИЕ" })}</th></tr></thead><tbody>${rows}</tbody></table></div></details>`;
+      }).join("");
+      relevanceMarkup = `<section id="e007-relevance-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C.4 · ${localized({ en: "SPECIALIZED RELEVANCE JUDGES", ru: "СПЕЦИАЛЬНЫЕ СУДЬИ РЕЛЕВАНТНОСТИ" })}</div><h2>${localized({ en: "No judge passed the strict gate.", ru: "Строгий gate не прошёл ни один судья." })}</h2><p>${localized({ en: "The Qwen reranker was the safest start: it rejected none of the 8 useful sources. But it was unsure 9 times and accepted one similar trap. So it can be a first filter, not the final judge.", ru: "Qwen-reranker оказался самым осторожным началом: он не отклонил ни один из 8 полезных источников. Но 9 раз ответил «неясно» и принял одну похожую ловушку. Значит, это может быть первый фильтр, но не последний судья." })}</p><div class="e007-result-metrics">${cards}</div><div class="e007-result-legend"><span class="is-correct">■ ${localized({ en: "green = right", ru: "зелёное = верно" })}</span><span class="needs-review">■ ${localized({ en: "yellow = unsure; pass onward", ru: "жёлтое = не уверен; передать дальше" })}</span><span class="is-critical">■ ${localized({ en: "red = wrong", ru: "красное = ошибка" })}</span></div>${tables}<p class="control-warning">${localized({ en: "What this means: a special scorer is better than asking a tiny chat model to explain freely, but relevance alone is not solved. This test says nothing about truth or privacy.", ru: "Что это значит: специальный оценщик лучше свободного объяснения маленькой чат-модели, но релевантность ещё не решена. Этот тест ничего не говорит об истинности и приватности." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/relevance-reranker-protocol-v0.1.json">${localized({ en: "LOCKED PLAN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/relevance-reranker-heldout-v0.1.json">${localized({ en: "24 QUESTIONS + SOURCES", ru: "24 ВОПРОСА + ИСТОЧНИКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/relevance-reranker-result-v0.1.json">${localized({ en: "ALL SCORES", ru: "ВСЕ ОЦЕНКИ" })} ↗</a></div></section>`;
+    }
     target.querySelector(".experiment-loading").outerHTML = `
+      ${relevanceMarkup}
       ${spanBridgeMarkup}
       ${blindReaderMarkup}
       ${sendPolicyMarkup}
