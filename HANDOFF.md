@@ -293,6 +293,14 @@ outputs had no valid quote (`NONE.` twice and bare `FOUND` once). One irrelevant
 violin source was accepted for a sewing question. The locked gate failed: one
 useful webhook source was lost and three outputs violated the response format.
 
+Checkpoint 3C.3 is locked at
+`/experiments/E007/span-bridge-protocol-v0.1.json`. It removes free-form quote
+copying: Qwen selects a deterministic sentence ID, code retrieves that exact
+sentence, and a separate clean Qwen pass checks `question ↔ span`. This is a
+controlled development A/B on the same 16 inspected pairs, not held-out
+evidence. The bridge must preserve at least 7/8 useful sources, reject at least
+7/8 extras including BR10, and produce no format failures.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

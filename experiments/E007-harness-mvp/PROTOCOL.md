@@ -102,6 +102,12 @@ balanced 3C policy. Hide the sender's claim, capsule, score, and expected label.
 The receiving model sees only the question and one complete source and must copy
 an exact useful quote or return `NONE`.
 
+3C.3. Replace free-form quote copying with deterministic numbered source spans.
+The first clean Qwen pass selects one span ID or `NONE`; code retrieves the
+exact text. A separate clean pass sees only the question and selected span,
+states what each contains, and returns `HELPFUL`, `NOT_HELPFUL`, or `UNCLEAR`.
+Run a controlled A/B on the same sixteen 3C.2 pairs before any held-out repeat.
+
 3D. The same three-question model smoke split between yukabox and MacBook.
 4. Locked 30-task run.
 5. Owner audit and public result.
