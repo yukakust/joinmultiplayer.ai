@@ -72,3 +72,15 @@ topic even when they made different or opposing claims.
 
 Therefore embeddings may find candidates, but they may not make the final
 merge decision. This failed result is part of the public experiment history.
+
+## What Gate 13B taught us
+
+DeBERTa compared the 14 already opened English answers in both directions. Two
+answers entered one pile only if each entailed the other. It recovered 4/6
+paraphrase piles, made zero forbidden merges, lost no answers, and reached
+pairwise F1 0.8. Two valid paraphrase pairs stayed separate.
+
+This is safer than the embedding baseline, but it did not pass. DeBERTa also
+called 19 unrelated pairs contradictions. Because this set had no separately
+labelled true-conflict exam, the harness must not display those edges as real
+disputes. Gate 13 remains open.

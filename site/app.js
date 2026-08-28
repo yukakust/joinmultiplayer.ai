@@ -2857,7 +2857,7 @@ function e006Shell() {
 }
 
 function e007Shell() {
-  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 3A · ${localized({ en: "TWO REAL DEVICES CONNECTED", ru: "ДВА РЕАЛЬНЫХ УСТРОЙСТВА СОЕДИНЕНЫ" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "Four processes received one unchanged question. See where their attention went, then inspect the earlier model answers.", ru: "Четыре процесса получили один неизменённый вопрос. Посмотрите, куда направилось их внимание, а затем изучите предыдущие ответы моделей." })}</p><div class="actions"><a class="primary-link" href="/experiment/e007/gate-13a/">${localized({ en: "NEW · SIMILAR ANSWERS", ru: "НОВОЕ · ПОХОЖИЕ ОТВЕТЫ" })} →</a><a class="quiet-link" href="/experiment/e007/gate-12a/">${localized({ en: "KNOWLEDGE HISTORY", ru: "ИСТОРИЯ ЗНАНИЯ" })} ↗</a><a class="quiet-link" href="/experiment/e007/ten-buttons/">${localized({ en: "EARLIER ACCEPTANCE TESTS", ru: "ПРЕДЫДУЩИЕ ТЕСТЫ ПРИЁМКИ" })} ↗</a><a class="quiet-link" href="#e007-attention">${localized({ en: "SEE THE PHYSICAL TEST", ru: "СМОТРЕТЬ ФИЗИЧЕСКИЙ ТЕСТ" })} ↓</a><a class="quiet-link" href="#e007-smoke-results">${localized({ en: "EARLIER MODEL ANSWERS", ru: "ПРЕДЫДУЩИЕ ОТВЕТЫ МОДЕЛЕЙ" })} ↓</a></div><div class="experiment-loading">${c("loading")}</div></section>`;
+  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 3A · ${localized({ en: "TWO REAL DEVICES CONNECTED", ru: "ДВА РЕАЛЬНЫХ УСТРОЙСТВА СОЕДИНЕНЫ" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "Four processes received one unchanged question. See where their attention went, then inspect the earlier model answers.", ru: "Четыре процесса получили один неизменённый вопрос. Посмотрите, куда направилось их внимание, а затем изучите предыдущие ответы моделей." })}</p><div class="actions"><a class="primary-link" href="/experiment/e007/gate-13b/">${localized({ en: "NEW · DEBERTA PILES", ru: "НОВОЕ · СТОПКИ DEBERTA" })} →</a><a class="quiet-link" href="/experiment/e007/gate-13a/">${localized({ en: "FAILED EMBEDDING BASELINE", ru: "НЕУДАЧНЫЙ EMBEDDING-BASELINE" })} ↗</a><a class="quiet-link" href="/experiment/e007/gate-12a/">${localized({ en: "KNOWLEDGE HISTORY", ru: "ИСТОРИЯ ЗНАНИЯ" })} ↗</a><a class="quiet-link" href="/experiment/e007/ten-buttons/">${localized({ en: "EARLIER ACCEPTANCE TESTS", ru: "ПРЕДЫДУЩИЕ ТЕСТЫ ПРИЁМКИ" })} ↗</a><a class="quiet-link" href="#e007-attention">${localized({ en: "SEE THE PHYSICAL TEST", ru: "СМОТРЕТЬ ФИЗИЧЕСКИЙ ТЕСТ" })} ↓</a><a class="quiet-link" href="#e007-smoke-results">${localized({ en: "EARLIER MODEL ANSWERS", ru: "ПРЕДЫДУЩИЕ ОТВЕТЫ МОДЕЛЕЙ" })} ↓</a></div><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
 function e007TenButtonsShell() {
@@ -2870,6 +2870,10 @@ function e007KnowledgeChainShell() {
 
 function e007AnswerClusteringShell() {
   return `<section class="flow-shell e007-cluster-page"><div class="flow-step">E007 · GATE 13A · ${localized({ en: "MERGE SIMILAR ANSWERS", ru: "ОБЪЕДИНИТЬ ПОХОЖИЕ ОТВЕТЫ" })}</div><h1>${localized({ en: "Did similar meaning become one group?", ru: "Одинаковый смысл стал одной группой?" })}</h1><p class="contribution-intro">${localized({ en: "Twenty-one answers went in. Read the five groups the harness made.", ru: "На входе 21 ответ. Посмотрите пять групп, которые собрал harness." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+function e007AnswerPilesShell() {
+  return `<section class="flow-shell e007-cluster-page e007-pile-page"><div class="flow-step">E007 · GATE 13B · ${localized({ en: "DEBERTA MEANING PILES", ru: "СМЫСЛОВЫЕ СТОПКИ DEBERTA" })}</div><h1>${localized({ en: "Did the same thoughts land together?", ru: "Одинаковые мысли попали в одну стопку?" })}</h1><p class="contribution-intro">${localized({ en: "DeBERTa compared every English answer with every other answer in both directions.", ru: "DeBERTa сравнила каждый английский ответ с каждым другим — в обе стороны." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
 function e005MethodName(method) {
@@ -4855,6 +4859,48 @@ async function loadE007AnswerClustering() {
   }
 }
 
+async function loadE007AnswerPiles() {
+  const target = document.querySelector(".e007-pile-page");
+  if (!target) return;
+  try {
+    const [resultResponse, worldResponse] = await Promise.all([
+      fetch("/experiments/E007/answer-piles-nli-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/answer-piles-nli-world-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!resultResponse.ok || !worldResponse.ok) throw new Error("Gate 13B data missing");
+    const result = await resultResponse.json();
+    const world = await worldResponse.json();
+    const expectedSizes = new Map(world.gold_piles.map(pile => [pile.id, pile.answer_ids.length]));
+    const relationName = value => ({
+      entailment: localized({ en: "CONFIRMS", ru: "ПОДТВЕРЖДАЕТ" }),
+      neutral: localized({ en: "DOES NOT PROVE", ru: "НЕ ДОКАЗЫВАЕТ" }),
+      contradiction: localized({ en: "CALLS IT A CONFLICT", ru: "НАЗЫВАЕТ ПРОТИВОРЕЧИЕМ" }),
+    }[value] || value);
+    const piles = result.piles.map(pile => {
+      const expected = expectedSizes.get(pile.gold_piles[0]) || 1;
+      const complete = pile.gold_piles.length === 1 && pile.answers.length === expected;
+      const split = pile.gold_piles.length === 1 && pile.answers.length < expected;
+      const status = complete
+        ? localized({ en: "CORRECT PILE", ru: "ПРАВИЛЬНАЯ СТОПКА" })
+        : split
+          ? localized({ en: "SHOULD HAVE A PARTNER", ru: "НЕ ХВАТАЕТ ПАРЫ" })
+          : localized({ en: "WRONG MERGE", ru: "ОШИБОЧНАЯ СКЛЕЙКА" });
+      const answers = pile.answers.map(answer => `<li><b>${escapeHTML(answer.id)} · ${escapeHTML(answer.pocket_id)}</b><span>${escapeHTML(answer.text)}</span></li>`).join("");
+      return `<article class="e007-cluster-card ${complete ? "is-correct" : split ? "is-warning" : "is-critical"}"><header><span>${escapeHTML(pile.pile_id)}</span><strong>${escapeHTML(status)}</strong><small>${pile.answers.length} ${localized({ en: "answers", ru: "ответа" })} · ${localized({ en: "expected meaning", ru: "ожидаемый смысл" })} ${escapeHTML(pile.gold_piles.join(" + "))}</small></header><ul>${answers}</ul></article>`;
+    }).join("");
+    const missed = world.gold_piles.filter(pile => pile.answer_ids.length > 1).map(pile => {
+      const pair = result.pair_records.find(record => pile.answer_ids.includes(record.left_id) && pile.answer_ids.includes(record.right_id));
+      if (!pair || pair.relation === "same_version") return "";
+      const leftScore = Math.round(pair.left_to_right.probabilities[pair.left_to_right.decision] * 100);
+      const rightScore = Math.round(pair.right_to_left.probabilities[pair.right_to_left.decision] * 100);
+      return `<article class="e007-missed-pair"><strong>${escapeHTML(pair.left_id)} → ${escapeHTML(pair.right_id)}</strong><span>${escapeHTML(relationName(pair.left_to_right.decision))} · ${leftScore}%</span><strong>${escapeHTML(pair.right_id)} → ${escapeHTML(pair.left_id)}</strong><span>${escapeHTML(relationName(pair.right_to_left.decision))} · ${rightScore}%</span><p>${localized({ en: "Because both arrows did not say CONFIRMS, the harness kept these paraphrases apart.", ru: "Обе стрелки должны сказать «ПОДТВЕРЖДАЕТ». Поэтому эти пересказы остались в разных стопках." })}</p></article>`;
+    }).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict is-failed"><span>${localized({ en: "LOCKED PAIRED DEVELOPMENT RESULT", ru: "ЗАМОРОЖЕННЫЙ ПАРНЫЙ DEVELOPMENT-РЕЗУЛЬТАТ" })}</span><h2>${localized({ en: "Safer, but too cautious.", ru: "Безопаснее, но слишком осторожно." })}</h2><p>${localized({ en: "No different meanings were merged. Two real paraphrase pairs were split.", ru: "Ни одной склейки разных смыслов. Две настоящие пары пересказов ошибочно разделены." })}</p></div><div class="e007-result-metrics"><article class="is-correct"><span>${localized({ en: "CORRECT PARAPHRASE PILES", ru: "ПРАВИЛЬНЫХ СТОПОК" })}</span><strong>${result.summary.exact_paraphrase_piles} / ${result.summary.paraphrase_piles_total}</strong></article><article class="is-correct"><span>${localized({ en: "DANGEROUS MERGES", ru: "ОПАСНЫХ СКЛЕЕК" })}</span><strong>${result.summary.forbidden_merges}</strong></article><article class="is-critical"><span>PAIRWISE F1</span><strong>${Math.round(result.summary.pairwise.f1 * 100)}%</strong></article></div><p class="control-warning">${localized({ en: "Important: DeBERTa also called 19 unrelated pairs contradictions. Gate 13B did not contain a labelled conflict exam, so those links must not be shown to users as real disputes yet.", ru: "Важно: DeBERTa также назвала противоречиями 19 несвязанных пар. В Gate 13B не было размеченного теста настоящих споров, поэтому такие связи пока нельзя показывать пользователю как реальные противоречия." })}</p><h2>${localized({ en: "The two missed pairs", ru: "Две пропущенные пары" })}</h2><div class="e007-missed-list">${missed}</div><h2>${localized({ en: "All ten piles", ru: "Все десять стопок" })}</h2><div class="e007-cluster-list">${piles}</div><div class="actions"><a class="quiet-link" href="/experiments/E007/answer-piles-nli-result-v0.1.json">${localized({ en: "ALL 91 PAIRS", ru: "ВСЕ 91 ПАРА" })} ↗</a><a class="quiet-link" href="/experiments/E007/answer-piles-nli-world-v0.1.json">${localized({ en: "FROZEN ANSWERS", ru: "ЗАМОРОЖЕННЫЕ ОТВЕТЫ" })} ↗</a><a class="quiet-link" href="/experiments/E007/answer-piles-nli-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiment/e007/gate-13a/">${localized({ en: "OLD EMBEDDING BASELINE", ru: "СТАРЫЙ EMBEDDING-BASELINE" })} ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 13B could not be loaded.", ru: "Не удалось загрузить Gate 13B." });
+  }
+}
+
 async function loadE005() {
   const target = document.querySelector(".e005-page");
   if (!target) return;
@@ -5820,6 +5866,10 @@ function render() {
     document.title = `${localized({ en: "Similar answers", ru: "Похожие ответы" })} — i`;
     app.innerHTML = withLanguage(e007AnswerClusteringShell());
     loadE007AnswerClustering();
+  } else if (path === "experiment/e007/gate-13b") {
+    document.title = `${localized({ en: "DeBERTa piles", ru: "Стопки DeBERTa" })} — i`;
+    app.innerHTML = withLanguage(e007AnswerPilesShell());
+    loadE007AnswerPiles();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

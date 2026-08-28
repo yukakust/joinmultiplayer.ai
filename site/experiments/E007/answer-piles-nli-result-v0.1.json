@@ -1,0 +1,2348 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13B",
+  "status": "paired_synthetic_development_complete",
+  "protocol": "/experiments/E007/answer-piles-nli-protocol-v0.1.json",
+  "world": "/experiments/E007/answer-piles-nli-world-v0.1.json",
+  "protocol_sha256": "5a5363fd54ff0f014b20926611b512c5bff2e7892314015b3709acf1a34af060",
+  "world_sha256": "241fd1304a48f90d5ccc9e0ae66d719c468f6a452e2ff3cb30bedec152b91386",
+  "model": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "classes": [
+      "entailment",
+      "neutral",
+      "contradiction"
+    ],
+    "decision": "largest_logit"
+  },
+  "runtime": {
+    "seconds_including_model_load": 4.243,
+    "peak_rss_mib": 1568.4,
+    "device": "cpu",
+    "dtype": "torch.float32"
+  },
+  "summary": {
+    "answers": 14,
+    "pairs": 91,
+    "model_calls": 182,
+    "predicted_piles": 10,
+    "gold_piles": 8,
+    "exact_paraphrase_piles": 4,
+    "paraphrase_piles_total": 6,
+    "forbidden_merges": 0,
+    "lost_answers": 0,
+    "same_version_pairs": 4,
+    "opposing_version_pairs": 19,
+    "different_or_related_pairs": 68,
+    "pairwise": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.666667,
+      "f1": 0.8
+    },
+    "passed_locked_development_gate": false
+  },
+  "piles": [
+    {
+      "pile_id": "P01",
+      "answer_ids": [
+        "A01",
+        "A02"
+      ],
+      "gold_piles": [
+        "G1"
+      ],
+      "answers": [
+        {
+          "id": "A01",
+          "pocket_id": "I01",
+          "gold_pile": "G1",
+          "text": "Image tiling improved recall for objects between 8 and 16 pixels."
+        },
+        {
+          "id": "A02",
+          "pocket_id": "I02",
+          "gold_pile": "G1",
+          "text": "Tiny 8–16 pixel targets were found more often when the image was split into tiles."
+        }
+      ]
+    },
+    {
+      "pile_id": "P02",
+      "answer_ids": [
+        "A04",
+        "A05"
+      ],
+      "gold_piles": [
+        "G2"
+      ],
+      "answers": [
+        {
+          "id": "A04",
+          "pocket_id": "I04",
+          "gold_pile": "G2",
+          "text": "Using 20% overlap between tiles reduced misses near tile borders."
+        },
+        {
+          "id": "A05",
+          "pocket_id": "I05",
+          "gold_pile": "G2",
+          "text": "Fewer edge objects were lost when neighbouring tiles overlapped by one fifth."
+        }
+      ]
+    },
+    {
+      "pile_id": "P03",
+      "answer_ids": [
+        "A07"
+      ],
+      "gold_piles": [
+        "G3"
+      ],
+      "answers": [
+        {
+          "id": "A07",
+          "pocket_id": "I07",
+          "gold_pile": "G3",
+          "text": "No benefit from tiling has been measured for large objects."
+        }
+      ]
+    },
+    {
+      "pile_id": "P04",
+      "answer_ids": [
+        "A08"
+      ],
+      "gold_piles": [
+        "G3"
+      ],
+      "answers": [
+        {
+          "id": "A08",
+          "pocket_id": "I08",
+          "gold_pile": "G3",
+          "text": "The experiment did not show that image tiles help with large targets."
+        }
+      ]
+    },
+    {
+      "pile_id": "P05",
+      "answer_ids": [
+        "A10",
+        "A11"
+      ],
+      "gold_piles": [
+        "G4"
+      ],
+      "answers": [
+        {
+          "id": "A10",
+          "pocket_id": "I10",
+          "gold_pile": "G4",
+          "text": "Isolate power before restarting the unit."
+        },
+        {
+          "id": "A11",
+          "pocket_id": "I11",
+          "gold_pile": "G4",
+          "text": "Disconnect the power supply first, and only then restart."
+        }
+      ]
+    },
+    {
+      "pile_id": "P06",
+      "answer_ids": [
+        "A13"
+      ],
+      "gold_piles": [
+        "G5"
+      ],
+      "answers": [
+        {
+          "id": "A13",
+          "pocket_id": "I13",
+          "gold_pile": "G5",
+          "text": "Use remote controls only while phase drift is present."
+        }
+      ]
+    },
+    {
+      "pile_id": "P07",
+      "answer_ids": [
+        "A14"
+      ],
+      "gold_piles": [
+        "G5"
+      ],
+      "answers": [
+        {
+          "id": "A14",
+          "pocket_id": "I14",
+          "gold_pile": "G5",
+          "text": "When phase drift occurs, operate the unit exclusively from a distance."
+        }
+      ]
+    },
+    {
+      "pile_id": "P08",
+      "answer_ids": [
+        "A16",
+        "A17"
+      ],
+      "gold_piles": [
+        "G6"
+      ],
+      "answers": [
+        {
+          "id": "A16",
+          "pocket_id": "I16",
+          "gold_pile": "G6",
+          "text": "Sealed queen cells can indicate that the colony is preparing to swarm."
+        },
+        {
+          "id": "A17",
+          "pocket_id": "I17",
+          "gold_pile": "G6",
+          "text": "The hive may be getting ready to swarm when capped queen cells appear."
+        }
+      ]
+    },
+    {
+      "pile_id": "P09",
+      "answer_ids": [
+        "A19"
+      ],
+      "gold_piles": [
+        "G7"
+      ],
+      "answers": [
+        {
+          "id": "A19",
+          "pocket_id": "I19",
+          "gold_pile": "G7",
+          "text": "Sealed queen cells may instead be part of supersedure when the old queen is failing."
+        }
+      ]
+    },
+    {
+      "pile_id": "P10",
+      "answer_ids": [
+        "A20"
+      ],
+      "gold_piles": [
+        "G8"
+      ],
+      "answers": [
+        {
+          "id": "A20",
+          "pocket_id": "I20",
+          "gold_pile": "G8",
+          "text": "Image tiling increased peak GPU memory use by 35%."
+        }
+      ]
+    }
+  ],
+  "pair_records": [
+    {
+      "left_id": "A01",
+      "right_id": "A02",
+      "left_to_right": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.99358845,
+          "neutral": 0.00614568,
+          "contradiction": 0.00026592
+        },
+        "input_tokens": 33
+      },
+      "right_to_left": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.99115402,
+          "neutral": 0.0085507,
+          "contradiction": 0.00029522
+        },
+        "input_tokens": 33
+      },
+      "relation": "same_version"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A04",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00049754,
+          "neutral": 0.99891889,
+          "contradiction": 0.00058359
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00833451,
+          "neutral": 0.98794508,
+          "contradiction": 0.00372045
+        },
+        "input_tokens": 27
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A05",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00430465,
+          "neutral": 0.9920637,
+          "contradiction": 0.00363165
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00612217,
+          "neutral": 0.99130613,
+          "contradiction": 0.00257169
+        },
+        "input_tokens": 28
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A07",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00256829,
+          "neutral": 0.98995942,
+          "contradiction": 0.00747227
+        },
+        "input_tokens": 26
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00136642,
+          "neutral": 0.99629104,
+          "contradiction": 0.00234253
+        },
+        "input_tokens": 26
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A08",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.05767906,
+          "neutral": 0.93753183,
+          "contradiction": 0.00478908
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00134212,
+          "neutral": 0.99733621,
+          "contradiction": 0.00132159
+        },
+        "input_tokens": 28
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A10",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0386319,
+          "neutral": 0.87228084,
+          "contradiction": 0.08908726
+        },
+        "input_tokens": 22
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01777956,
+          "neutral": 0.94416386,
+          "contradiction": 0.03805659
+        },
+        "input_tokens": 22
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A11",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01123507,
+          "neutral": 0.90165496,
+          "contradiction": 0.08711002
+        },
+        "input_tokens": 26
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00884644,
+          "neutral": 0.96375006,
+          "contradiction": 0.02740337
+        },
+        "input_tokens": 26
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A13",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00213329,
+          "neutral": 0.0709697,
+          "contradiction": 0.92689699
+        },
+        "input_tokens": 25
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01811793,
+          "neutral": 0.88452822,
+          "contradiction": 0.09735394
+        },
+        "input_tokens": 25
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A14",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00603682,
+          "neutral": 0.43416551,
+          "contradiction": 0.5597977
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01574535,
+          "neutral": 0.93262339,
+          "contradiction": 0.05163117
+        },
+        "input_tokens": 28
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A16",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.04381462,
+          "neutral": 0.95080894,
+          "contradiction": 0.00537642
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.03330731,
+          "neutral": 0.95833093,
+          "contradiction": 0.00836169
+        },
+        "input_tokens": 28
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.05058422,
+          "neutral": 0.94297528,
+          "contradiction": 0.00644054
+        },
+        "input_tokens": 29
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.08363896,
+          "neutral": 0.90283722,
+          "contradiction": 0.01352385
+        },
+        "input_tokens": 29
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0032913,
+          "neutral": 0.99450159,
+          "contradiction": 0.00220709
+        },
+        "input_tokens": 34
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.06343663,
+          "neutral": 0.88582999,
+          "contradiction": 0.05073339
+        },
+        "input_tokens": 34
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A01",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00036183,
+          "neutral": 0.94720203,
+          "contradiction": 0.05243615
+        },
+        "input_tokens": 26
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00142896,
+          "neutral": 0.99591559,
+          "contradiction": 0.00265543
+        },
+        "input_tokens": 26
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A04",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00106048,
+          "neutral": 0.99657613,
+          "contradiction": 0.00236325
+        },
+        "input_tokens": 33
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00797768,
+          "neutral": 0.98700851,
+          "contradiction": 0.00501386
+        },
+        "input_tokens": 33
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A05",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.02173759,
+          "neutral": 0.94321221,
+          "contradiction": 0.03505013
+        },
+        "input_tokens": 34
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00251774,
+          "neutral": 0.99486107,
+          "contradiction": 0.00262122
+        },
+        "input_tokens": 34
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A07",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00086679,
+          "neutral": 0.75962883,
+          "contradiction": 0.23950437
+        },
+        "input_tokens": 32
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00108077,
+          "neutral": 0.9855597,
+          "contradiction": 0.01335954
+        },
+        "input_tokens": 32
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A08",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.02848638,
+          "neutral": 0.86542588,
+          "contradiction": 0.10608768
+        },
+        "input_tokens": 34
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00090874,
+          "neutral": 0.9913606,
+          "contradiction": 0.00773059
+        },
+        "input_tokens": 34
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A10",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00908481,
+          "neutral": 0.98677003,
+          "contradiction": 0.00414509
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00403505,
+          "neutral": 0.98782861,
+          "contradiction": 0.00813634
+        },
+        "input_tokens": 28
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A11",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00546958,
+          "neutral": 0.97737807,
+          "contradiction": 0.0171524
+        },
+        "input_tokens": 32
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00373176,
+          "neutral": 0.98932296,
+          "contradiction": 0.00694531
+        },
+        "input_tokens": 32
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A13",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00981638,
+          "neutral": 0.87872994,
+          "contradiction": 0.11145374
+        },
+        "input_tokens": 31
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00637085,
+          "neutral": 0.98295754,
+          "contradiction": 0.01067159
+        },
+        "input_tokens": 31
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A14",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00988346,
+          "neutral": 0.84945244,
+          "contradiction": 0.14066412
+        },
+        "input_tokens": 34
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01376996,
+          "neutral": 0.96972322,
+          "contradiction": 0.01650691
+        },
+        "input_tokens": 34
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A16",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00580704,
+          "neutral": 0.99216789,
+          "contradiction": 0.00202495
+        },
+        "input_tokens": 34
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00796571,
+          "neutral": 0.98528397,
+          "contradiction": 0.00675033
+        },
+        "input_tokens": 34
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00428366,
+          "neutral": 0.9948191,
+          "contradiction": 0.0008973
+        },
+        "input_tokens": 35
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0052025,
+          "neutral": 0.99201995,
+          "contradiction": 0.00277757
+        },
+        "input_tokens": 35
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00333772,
+          "neutral": 0.99511057,
+          "contradiction": 0.00155172
+        },
+        "input_tokens": 40
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01179031,
+          "neutral": 0.97803545,
+          "contradiction": 0.01017425
+        },
+        "input_tokens": 40
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A02",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00026928,
+          "neutral": 0.99842548,
+          "contradiction": 0.00130532
+        },
+        "input_tokens": 32
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00126085,
+          "neutral": 0.99837226,
+          "contradiction": 0.00036692
+        },
+        "input_tokens": 32
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A05",
+      "left_to_right": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.99094427,
+          "neutral": 0.00830663,
+          "contradiction": 0.00074902
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.97491306,
+          "neutral": 0.02454453,
+          "contradiction": 0.00054234
+        },
+        "input_tokens": 28
+      },
+      "relation": "same_version"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A07",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00022757,
+          "neutral": 0.20683213,
+          "contradiction": 0.79294038
+        },
+        "input_tokens": 26
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00041638,
+          "neutral": 0.60214257,
+          "contradiction": 0.39744109
+        },
+        "input_tokens": 26
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A08",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00141724,
+          "neutral": 0.59899753,
+          "contradiction": 0.39958528
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00026279,
+          "neutral": 0.99321377,
+          "contradiction": 0.00652352
+        },
+        "input_tokens": 28
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A10",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.03459658,
+          "neutral": 0.94161129,
+          "contradiction": 0.02379216
+        },
+        "input_tokens": 22
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01274164,
+          "neutral": 0.97539026,
+          "contradiction": 0.0118681
+        },
+        "input_tokens": 22
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A11",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00521669,
+          "neutral": 0.90237576,
+          "contradiction": 0.09240758
+        },
+        "input_tokens": 26
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00873505,
+          "neutral": 0.97858334,
+          "contradiction": 0.01268155
+        },
+        "input_tokens": 26
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A13",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.0023631,
+          "neutral": 0.10880646,
+          "contradiction": 0.88883048
+        },
+        "input_tokens": 25
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00551768,
+          "neutral": 0.98411351,
+          "contradiction": 0.01036878
+        },
+        "input_tokens": 25
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A14",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00280474,
+          "neutral": 0.56421053,
+          "contradiction": 0.43298474
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00156128,
+          "neutral": 0.98470414,
+          "contradiction": 0.0137346
+        },
+        "input_tokens": 28
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A16",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00899814,
+          "neutral": 0.98716301,
+          "contradiction": 0.00383893
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.02011571,
+          "neutral": 0.97609371,
+          "contradiction": 0.00379053
+        },
+        "input_tokens": 28
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0084765,
+          "neutral": 0.98968911,
+          "contradiction": 0.00183434
+        },
+        "input_tokens": 29
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0900628,
+          "neutral": 0.90058082,
+          "contradiction": 0.00935628
+        },
+        "input_tokens": 29
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00079785,
+          "neutral": 0.99832374,
+          "contradiction": 0.00087836
+        },
+        "input_tokens": 34
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.03380524,
+          "neutral": 0.92481416,
+          "contradiction": 0.04138061
+        },
+        "input_tokens": 34
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A04",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00094323,
+          "neutral": 0.48050165,
+          "contradiction": 0.51855516
+        },
+        "input_tokens": 26
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00204816,
+          "neutral": 0.98285377,
+          "contradiction": 0.01509804
+        },
+        "input_tokens": 26
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A05",
+      "right_id": "A07",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00028359,
+          "neutral": 0.07396302,
+          "contradiction": 0.92575341
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00149237,
+          "neutral": 0.74998546,
+          "contradiction": 0.24852219
+        },
+        "input_tokens": 27
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A05",
+      "right_id": "A08",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00638198,
+          "neutral": 0.34721601,
+          "contradiction": 0.646402
+        },
+        "input_tokens": 29
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00186623,
+          "neutral": 0.98289859,
+          "contradiction": 0.01523526
+        },
+        "input_tokens": 29
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A05",
+      "right_id": "A10",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.02568773,
+          "neutral": 0.90313345,
+          "contradiction": 0.07117888
+        },
+        "input_tokens": 23
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.05821255,
+          "neutral": 0.90357852,
+          "contradiction": 0.03820902
+        },
+        "input_tokens": 23
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A05",
+      "right_id": "A11",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01468596,
+          "neutral": 0.91083437,
+          "contradiction": 0.07447965
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.02195585,
+          "neutral": 0.95885748,
+          "contradiction": 0.01918657
+        },
+        "input_tokens": 27
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A05",
+      "right_id": "A13",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00828795,
+          "neutral": 0.64419401,
+          "contradiction": 0.34751803
+        },
+        "input_tokens": 26
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01752423,
+          "neutral": 0.92189425,
+          "contradiction": 0.06058156
+        },
+        "input_tokens": 26
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A05",
+      "right_id": "A14",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.0075897,
+          "neutral": 0.17386729,
+          "contradiction": 0.81854302
+        },
+        "input_tokens": 29
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01152359,
+          "neutral": 0.84640539,
+          "contradiction": 0.14207096
+        },
+        "input_tokens": 29
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A05",
+      "right_id": "A16",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01764105,
+          "neutral": 0.97232777,
+          "contradiction": 0.0100312
+        },
+        "input_tokens": 29
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.07116517,
+          "neutral": 0.918464,
+          "contradiction": 0.01037082
+        },
+        "input_tokens": 29
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A05",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00824914,
+          "neutral": 0.9888581,
+          "contradiction": 0.00289276
+        },
+        "input_tokens": 30
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.16044177,
+          "neutral": 0.8011778,
+          "contradiction": 0.0383804
+        },
+        "input_tokens": 30
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A05",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00287866,
+          "neutral": 0.99510914,
+          "contradiction": 0.00201218
+        },
+        "input_tokens": 35
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.09902317,
+          "neutral": 0.77953804,
+          "contradiction": 0.12143879
+        },
+        "input_tokens": 35
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A05",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00038637,
+          "neutral": 0.15749049,
+          "contradiction": 0.84212309
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01156405,
+          "neutral": 0.94316262,
+          "contradiction": 0.0452734
+        },
+        "input_tokens": 27
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A07",
+      "right_id": "A08",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.46732539,
+          "neutral": 0.53185427,
+          "contradiction": 0.00082029
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.99013406,
+          "neutral": 0.00920051,
+          "contradiction": 0.00066534
+        },
+        "input_tokens": 27
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A07",
+      "right_id": "A10",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01986579,
+          "neutral": 0.95920134,
+          "contradiction": 0.02093292
+        },
+        "input_tokens": 21
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00905333,
+          "neutral": 0.9207871,
+          "contradiction": 0.07015957
+        },
+        "input_tokens": 21
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A07",
+      "right_id": "A11",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00430061,
+          "neutral": 0.95501876,
+          "contradiction": 0.04068062
+        },
+        "input_tokens": 25
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00439682,
+          "neutral": 0.97978914,
+          "contradiction": 0.01581402
+        },
+        "input_tokens": 25
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A07",
+      "right_id": "A13",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01379482,
+          "neutral": 0.87931973,
+          "contradiction": 0.10688547
+        },
+        "input_tokens": 24
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00660797,
+          "neutral": 0.97502977,
+          "contradiction": 0.01836236
+        },
+        "input_tokens": 24
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A07",
+      "right_id": "A14",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01685369,
+          "neutral": 0.86761075,
+          "contradiction": 0.11553559
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0034972,
+          "neutral": 0.82063156,
+          "contradiction": 0.1758713
+        },
+        "input_tokens": 27
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A07",
+      "right_id": "A16",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01643142,
+          "neutral": 0.87630892,
+          "contradiction": 0.10725974
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00272339,
+          "neutral": 0.16583005,
+          "contradiction": 0.83144665
+        },
+        "input_tokens": 27
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A07",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0086773,
+          "neutral": 0.97894019,
+          "contradiction": 0.01238253
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00328723,
+          "neutral": 0.07287757,
+          "contradiction": 0.92383516
+        },
+        "input_tokens": 28
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A07",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00190042,
+          "neutral": 0.99578613,
+          "contradiction": 0.00231344
+        },
+        "input_tokens": 33
+      },
+      "right_to_left": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 8.273e-05,
+          "neutral": 0.00243804,
+          "contradiction": 0.99747926
+        },
+        "input_tokens": 33
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A07",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 4.442e-05,
+          "neutral": 0.00895794,
+          "contradiction": 0.99099767
+        },
+        "input_tokens": 25
+      },
+      "right_to_left": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 4.997e-05,
+          "neutral": 0.00447867,
+          "contradiction": 0.99547136
+        },
+        "input_tokens": 25
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A08",
+      "right_id": "A10",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.02289609,
+          "neutral": 0.97036529,
+          "contradiction": 0.00673862
+        },
+        "input_tokens": 23
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0023088,
+          "neutral": 0.99498332,
+          "contradiction": 0.00270785
+        },
+        "input_tokens": 23
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A08",
+      "right_id": "A11",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00552025,
+          "neutral": 0.96890789,
+          "contradiction": 0.02557181
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00290581,
+          "neutral": 0.99266464,
+          "contradiction": 0.00442949
+        },
+        "input_tokens": 27
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A08",
+      "right_id": "A13",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0253696,
+          "neutral": 0.68389523,
+          "contradiction": 0.29073519
+        },
+        "input_tokens": 26
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00766972,
+          "neutral": 0.98094785,
+          "contradiction": 0.01138243
+        },
+        "input_tokens": 26
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A08",
+      "right_id": "A14",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0100814,
+          "neutral": 0.93792331,
+          "contradiction": 0.05199527
+        },
+        "input_tokens": 29
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00786285,
+          "neutral": 0.97690183,
+          "contradiction": 0.0152353
+        },
+        "input_tokens": 29
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A08",
+      "right_id": "A16",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01236288,
+          "neutral": 0.97267431,
+          "contradiction": 0.01496272
+        },
+        "input_tokens": 29
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0030309,
+          "neutral": 0.88649547,
+          "contradiction": 0.11047367
+        },
+        "input_tokens": 29
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A08",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00565578,
+          "neutral": 0.9912622,
+          "contradiction": 0.00308208
+        },
+        "input_tokens": 30
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00891434,
+          "neutral": 0.8031854,
+          "contradiction": 0.18790023
+        },
+        "input_tokens": 30
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A08",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00273681,
+          "neutral": 0.99594879,
+          "contradiction": 0.00131438
+        },
+        "input_tokens": 35
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00659305,
+          "neutral": 0.72973627,
+          "contradiction": 0.26367068
+        },
+        "input_tokens": 35
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A08",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00013731,
+          "neutral": 0.12674636,
+          "contradiction": 0.87311631
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00010137,
+          "neutral": 0.0138391,
+          "contradiction": 0.98605961
+        },
+        "input_tokens": 27
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A10",
+      "right_id": "A11",
+      "left_to_right": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.67698526,
+          "neutral": 0.3220664,
+          "contradiction": 0.00094834
+        },
+        "input_tokens": 21
+      },
+      "right_to_left": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.99173182,
+          "neutral": 0.00776192,
+          "contradiction": 0.00050623
+        },
+        "input_tokens": 21
+      },
+      "relation": "same_version"
+    },
+    {
+      "left_id": "A10",
+      "right_id": "A13",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00297856,
+          "neutral": 0.98780024,
+          "contradiction": 0.00922117
+        },
+        "input_tokens": 20
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.03783717,
+          "neutral": 0.51431495,
+          "contradiction": 0.44784787
+        },
+        "input_tokens": 20
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A10",
+      "right_id": "A14",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01626584,
+          "neutral": 0.97718483,
+          "contradiction": 0.00654922
+        },
+        "input_tokens": 23
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.03382604,
+          "neutral": 0.90099478,
+          "contradiction": 0.06517928
+        },
+        "input_tokens": 23
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A10",
+      "right_id": "A16",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.004999,
+          "neutral": 0.99009937,
+          "contradiction": 0.00490162
+        },
+        "input_tokens": 23
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.03974186,
+          "neutral": 0.93302077,
+          "contradiction": 0.02723742
+        },
+        "input_tokens": 23
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A10",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00888632,
+          "neutral": 0.98839569,
+          "contradiction": 0.00271797
+        },
+        "input_tokens": 24
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.07497159,
+          "neutral": 0.90138054,
+          "contradiction": 0.02364786
+        },
+        "input_tokens": 24
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A10",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00190045,
+          "neutral": 0.99628204,
+          "contradiction": 0.00181751
+        },
+        "input_tokens": 29
+      },
+      "right_to_left": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00187672,
+          "neutral": 0.01209397,
+          "contradiction": 0.98602933
+        },
+        "input_tokens": 29
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A10",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00054402,
+          "neutral": 0.99815327,
+          "contradiction": 0.00130266
+        },
+        "input_tokens": 21
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0034474,
+          "neutral": 0.98749626,
+          "contradiction": 0.00905633
+        },
+        "input_tokens": 21
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A11",
+      "right_id": "A13",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00571303,
+          "neutral": 0.9396522,
+          "contradiction": 0.05463474
+        },
+        "input_tokens": 24
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00294535,
+          "neutral": 0.8504135,
+          "contradiction": 0.14664122
+        },
+        "input_tokens": 24
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A11",
+      "right_id": "A14",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00501815,
+          "neutral": 0.9717561,
+          "contradiction": 0.02322568
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00085019,
+          "neutral": 0.99371642,
+          "contradiction": 0.00543337
+        },
+        "input_tokens": 27
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A11",
+      "right_id": "A16",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.007489,
+          "neutral": 0.99059486,
+          "contradiction": 0.00191614
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01021662,
+          "neutral": 0.98741686,
+          "contradiction": 0.0023665
+        },
+        "input_tokens": 27
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A11",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00611059,
+          "neutral": 0.99206841,
+          "contradiction": 0.00182099
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00691217,
+          "neutral": 0.98054367,
+          "contradiction": 0.0125442
+        },
+        "input_tokens": 28
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A11",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00156508,
+          "neutral": 0.99759549,
+          "contradiction": 0.0008393
+        },
+        "input_tokens": 33
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00891156,
+          "neutral": 0.96298629,
+          "contradiction": 0.02810221
+        },
+        "input_tokens": 33
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A11",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00048006,
+          "neutral": 0.99856877,
+          "contradiction": 0.00095111
+        },
+        "input_tokens": 25
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00213925,
+          "neutral": 0.97703904,
+          "contradiction": 0.02082167
+        },
+        "input_tokens": 25
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A13",
+      "right_id": "A14",
+      "left_to_right": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.88003147,
+          "neutral": 0.10465792,
+          "contradiction": 0.01531058
+        },
+        "input_tokens": 26
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00554867,
+          "neutral": 0.99334985,
+          "contradiction": 0.00110153
+        },
+        "input_tokens": 26
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A13",
+      "right_id": "A16",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01558514,
+          "neutral": 0.97575164,
+          "contradiction": 0.00866322
+        },
+        "input_tokens": 26
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01123004,
+          "neutral": 0.72659492,
+          "contradiction": 0.26217505
+        },
+        "input_tokens": 26
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A13",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01438522,
+          "neutral": 0.98068309,
+          "contradiction": 0.00493171
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01154933,
+          "neutral": 0.93522769,
+          "contradiction": 0.05322295
+        },
+        "input_tokens": 27
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A13",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0090119,
+          "neutral": 0.98825347,
+          "contradiction": 0.00273455
+        },
+        "input_tokens": 32
+      },
+      "right_to_left": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.0012236,
+          "neutral": 0.01112669,
+          "contradiction": 0.98764974
+        },
+        "input_tokens": 32
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A13",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0049905,
+          "neutral": 0.98965806,
+          "contradiction": 0.00535142
+        },
+        "input_tokens": 24
+      },
+      "right_to_left": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00848403,
+          "neutral": 0.171876,
+          "contradiction": 0.81963992
+        },
+        "input_tokens": 24
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A14",
+      "right_id": "A16",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00711723,
+          "neutral": 0.98750114,
+          "contradiction": 0.00538169
+        },
+        "input_tokens": 29
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00385746,
+          "neutral": 0.56376016,
+          "contradiction": 0.4323824
+        },
+        "input_tokens": 29
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A14",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01128842,
+          "neutral": 0.98558563,
+          "contradiction": 0.00312593
+        },
+        "input_tokens": 30
+      },
+      "right_to_left": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00290638,
+          "neutral": 0.19519004,
+          "contradiction": 0.80190361
+        },
+        "input_tokens": 30
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A14",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00310525,
+          "neutral": 0.99528617,
+          "contradiction": 0.00160866
+        },
+        "input_tokens": 35
+      },
+      "right_to_left": {
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00178966,
+          "neutral": 0.04341533,
+          "contradiction": 0.95479494
+        },
+        "input_tokens": 35
+      },
+      "relation": "opposing_versions"
+    },
+    {
+      "left_id": "A14",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01452436,
+          "neutral": 0.97709972,
+          "contradiction": 0.00837588
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01699513,
+          "neutral": 0.88806862,
+          "contradiction": 0.09493631
+        },
+        "input_tokens": 27
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A16",
+      "right_id": "A17",
+      "left_to_right": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.99589705,
+          "neutral": 0.00389403,
+          "contradiction": 0.000209
+        },
+        "input_tokens": 30
+      },
+      "right_to_left": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.99618524,
+          "neutral": 0.00354405,
+          "contradiction": 0.00027061
+        },
+        "input_tokens": 30
+      },
+      "relation": "same_version"
+    },
+    {
+      "left_id": "A16",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00052224,
+          "neutral": 0.99744761,
+          "contradiction": 0.00203013
+        },
+        "input_tokens": 35
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00887794,
+          "neutral": 0.80216795,
+          "contradiction": 0.18895414
+        },
+        "input_tokens": 35
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A16",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.02894637,
+          "neutral": 0.96798754,
+          "contradiction": 0.00306616
+        },
+        "input_tokens": 27
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.03975973,
+          "neutral": 0.95673394,
+          "contradiction": 0.00350629
+        },
+        "input_tokens": 27
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A17",
+      "right_id": "A19",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00242718,
+          "neutral": 0.99137151,
+          "contradiction": 0.00620125
+        },
+        "input_tokens": 36
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.06162688,
+          "neutral": 0.92816091,
+          "contradiction": 0.01021219
+        },
+        "input_tokens": 36
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A17",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.08371866,
+          "neutral": 0.90746558,
+          "contradiction": 0.00881575
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01280158,
+          "neutral": 0.98552692,
+          "contradiction": 0.00167148
+        },
+        "input_tokens": 28
+      },
+      "relation": "different_or_related"
+    },
+    {
+      "left_id": "A19",
+      "right_id": "A20",
+      "left_to_right": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01548613,
+          "neutral": 0.97539777,
+          "contradiction": 0.00911611
+        },
+        "input_tokens": 33
+      },
+      "right_to_left": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00306661,
+          "neutral": 0.99565589,
+          "contradiction": 0.00127752
+        },
+        "input_tokens": 33
+      },
+      "relation": "different_or_related"
+    }
+  ],
+  "boundary": {
+    "en": "This reuses the already opened English subset of Gate 13A for a paired method comparison. It is synthetic development evidence, not a fresh held-out benchmark or proof of general clustering reliability.",
+    "ru": "Тест повторно использует уже открытые английские ответы Gate 13A для прямого сравнения методов. Это синтетический development-тест, а не новый закрытый benchmark и не доказательство общей надёжности группировки."
+  }
+}

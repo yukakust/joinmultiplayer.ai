@@ -42,6 +42,15 @@ class AnswerPilesNliTests(unittest.TestCase):
         self.assertEqual(len(world["answers"]) * (len(world["answers"]) - 1) // 2, protocol["frozen_method"]["unordered_pairs"])
         self.assertEqual(sum(len(pile["answer_ids"]) > 1 for pile in world["gold_piles"]), 6)
 
+    def test_published_result_preserves_locked_failure(self):
+        result = json.loads((ROOT / "site/experiments/E007/answer-piles-nli-result-v0.1.json").read_text())
+        self.assertFalse(result["summary"]["passed_locked_development_gate"])
+        self.assertEqual(result["summary"]["exact_paraphrase_piles"], 4)
+        self.assertEqual(result["summary"]["paraphrase_piles_total"], 6)
+        self.assertEqual(result["summary"]["forbidden_merges"], 0)
+        self.assertEqual(result["summary"]["pairwise"]["f1"], 0.8)
+        self.assertEqual(result["summary"]["lost_answers"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

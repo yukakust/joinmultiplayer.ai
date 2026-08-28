@@ -5994,6 +5994,10 @@ blockquote {
   border-top-color: #7cad72;
 }
 
+.e007-cluster-card.is-warning {
+  border-top-color: #dfa749;
+}
+
 .e007-cluster-card header {
   display: grid;
   gap: 8px;
@@ -6024,8 +6028,32 @@ blockquote {
   grid-column: 2;
 }
 
+.e007-missed-list {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 24px 0 48px;
+}
+
+.e007-missed-pair {
+  border: 1px solid var(--line);
+  border-top: 6px solid #dfa749;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(120px, .5fr) 1fr;
+  padding: 20px;
+}
+
+.e007-missed-pair p {
+  border-top: 1px solid var(--line);
+  grid-column: 1 / -1;
+  margin: 8px 0 0;
+  padding-top: 14px;
+}
+
 @media (max-width: 900px) {
   .e007-cluster-list { grid-template-columns: 1fr; }
+  .e007-missed-list { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 700px) {

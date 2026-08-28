@@ -370,6 +370,15 @@ the final answer-merging authority. Public result:
 `/experiments/E007/answer-clustering-result-v0.1.json`; UI:
 `/experiment/e007/gate-13a/`.
 
+Gate 13B is the preserved paired DeBERTa follow-up. It reused the opened 14
+English answers and required bidirectional entailment with every pile member.
+Result: 4/6 exact paraphrase piles, pairwise precision 1.0, recall 0.666667,
+F1 0.8, zero forbidden merges, and zero lost answers. It failed the locked
+gate. DeBERTa also labelled 19 unrelated pairs as opposing, but the frozen set
+had no gold conflict exam; do not expose those edges as real disputes. Result:
+`/experiments/E007/answer-piles-nli-result-v0.1.json`; UI:
+`/experiment/e007/gate-13b/`. Gate 13 remains open.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

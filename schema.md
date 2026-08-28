@@ -309,6 +309,25 @@ Decision: embedding similarity may propose answers for comparison, but it may
 not perform the final merge. The next merge module must compare the actual
 claims and preserve opposing or merely related meanings.
 
+## Failed Gate 13B: conservative DeBERTa piles
+
+Gate 13B reused the already opened 14-answer English subset so DeBERTa could be
+compared directly with Gate 13A. Every pair was classified in both directions.
+Two answers entered the same pile only when each entailed the other, and each
+new answer had to match every existing pile member.
+
+This was much safer but missed the locked gate: 4/6 paraphrase piles were exact,
+pairwise precision was 1.0, recall 0.666667, F1 0.8, and there were 0 forbidden
+merges or lost answers. Two real paraphrase pairs split because one direction
+was classified neutral.
+
+The run also produced 19 `opposing_versions` edges, including obviously
+unrelated claims. This dataset did not contain a separately labelled conflict
+exam, so those edges are not evidence that DeBERTa can map disputes. Decision:
+mutual entailment is a promising conservative merge check, but Gate 13 still
+remains open. A fresh test must separately measure same, different, and truly
+contradictory versions before conflict links reach users.
+
 ## Accepted steps and their evidence
 
 | Step | Accepted design | Current evidence |
@@ -325,6 +344,6 @@ claims and preserve opposing or merely related meanings.
 | 10 | Ordinary code proves that the exact passage came from the named, versioned source snapshot and byte range. | Gate 3C.6A passed 20/20 twice with identical output. |
 | 11 | Check `exact source passage ↔ one atomic claim` with DeBERTa-v3-base NLI. Keep the person's question outside this call. Return SUPPORTED / CONTRADICTED / NOT PROVEN. | Accepted after Gate 3C.6P–Q: short pairs 20/20; the mixed question-and-context package fell to 15/20. Synthetic English development evidence only. |
 | 12 | A pocket i's knowledge history is an append-only chain: current head plus preserved history. No semantic relation label is required. Truth, applicability, and independence are checked later after collection. | Accepted after 10/10 synthetic mechanics and one yukabox → miracle-prod transfer with matching SHA-256 and correct head/history. |
-| 13 | Merge answers that make the same claim while preserving evidence, lineage, and supported minority views. | First attempt failed: embedding threshold recovered 0/6 exact groups and made 4/5 forbidden merges. Embeddings are candidate search only; the safe merge decision remains open. |
+| 13 | Merge answers that make the same claim while preserving evidence, lineage, and supported minority views. | Embeddings failed dangerously (0/6 exact; 4/5 forbidden merges). Bidirectional DeBERTa was conservative (4/6 exact; 0 forbidden; F1 0.8) but overcalled unrelated pairs as contradictions. Safe piles and conflict links remain open. |
 | 14 | A model writes the final human answer only from accepted evidence; a final checker shows gaps instead of guessing. | Accepted design, not yet tested. |
 | 15 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |
