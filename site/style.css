@@ -5197,6 +5197,40 @@ blockquote {
   width: min(1500px, calc(100% - 32px));
 }
 .e007-ten-viewer { margin-top: 48px; }
+.e007-button-sanity { margin: 32px 0 72px; }
+.e007-button-sanity > h2 {
+  font-size: clamp(34px, 5vw, 72px);
+  margin-bottom: 18px;
+  max-width: 20ch;
+}
+.e007-sanity-cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 32px 0;
+}
+.e007-sanity-cards article {
+  border: 3px solid;
+  padding: clamp(22px, 4vw, 46px);
+}
+.e007-sanity-cards article.is-correct { border-color: #4d8d49; background: rgba(77, 141, 73, .09); }
+.e007-sanity-cards article.is-critical { border-color: #bd412f; background: rgba(189, 65, 47, .08); }
+.e007-sanity-cards article > span,
+.e007-sanity-cards article > small { font-family: var(--mono); }
+.e007-sanity-cards article > div {
+  align-items: center;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr auto 1fr;
+  margin: 28px 0;
+}
+.e007-sanity-cards article > div p {
+  border: 1px solid var(--line);
+  font-size: clamp(20px, 2vw, 30px);
+  margin: 0;
+  padding: 20px;
+}
+.e007-sanity-cards h2 { font-size: clamp(28px, 3vw, 48px); }
 .e007-ten-index {
   display: grid;
   gap: 6px;
@@ -5278,6 +5312,7 @@ blockquote {
 }
 .e007-ten-arrows button:disabled { cursor: default; opacity: .3; }
 @media (max-width: 760px) {
+  .e007-sanity-cards { grid-template-columns: 1fr; }
   .e007-ten-index { grid-template-columns: repeat(5, 1fr); }
   .e007-ten-compare { grid-template-columns: 1fr; }
 }

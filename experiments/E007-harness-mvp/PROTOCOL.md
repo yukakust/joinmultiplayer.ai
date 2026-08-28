@@ -451,3 +451,11 @@ rule is 2/2. Protocol and world:
 
 This sanity check can reveal a broken or biased interface. Passing it cannot
 establish that the model can judge real evidence.
+
+The sanity check passed 2/2. On "red" → "red," Qwen selected `accept` with
+99.98% of the probability mass between the two action tokens. On "blue" →
+"red," it selected `reject` with 91.96%. The frozen interface can therefore
+express both actions on an extremely easy semantic comparison. This narrows the
+later all-accept failure: it appears when the comparison contains richer rules,
+facts, and consequences, not at the physical button layer. Result:
+`site/experiments/E007/button-sanity-result-v0.1.json`.

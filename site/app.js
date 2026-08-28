@@ -4596,13 +4596,17 @@ async function loadE007TenButtons() {
   const target = document.querySelector(".e007-ten-page");
   if (!target) return;
   try {
-    const [protocolResponse, resultResponse] = await Promise.all([
+    const [protocolResponse, resultResponse, sanityProtocolResponse, sanityResultResponse] = await Promise.all([
       fetch("/experiments/E007/atomic-button-protocol-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/atomic-button-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/button-sanity-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/button-sanity-result-v0.1.json", { cache: "no-store" }),
     ]);
-    if (!protocolResponse.ok || !resultResponse.ok) throw new Error("compact result unavailable");
+    if (!protocolResponse.ok || !resultResponse.ok || !sanityProtocolResponse.ok || !sanityResultResponse.ok) throw new Error("compact result unavailable");
     const protocol = await protocolResponse.json();
     const result = await resultResponse.json();
+    const sanityProtocol = await sanityProtocolResponse.json();
+    const sanityResult = await sanityResultResponse.json();
     let index = 0;
     const links = [
       {
@@ -4658,7 +4662,12 @@ async function loadE007TenButtons() {
       target.querySelector("[data-e007-ten-prev]")?.addEventListener("click", () => { index -= 1; renderCase(); });
       target.querySelector("[data-e007-ten-next]")?.addEventListener("click", () => { index += 1; renderCase(); });
     };
-    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-result-verdict is-failed"><span>${localized({ en: "RESULT", ru: "РЕЗУЛЬТАТ" })}</span><h2>${localized({ en: "Qwen pressed ACCEPT thirty times out of thirty.", ru: "Qwen нажала «ПРИНЯТЬ» тридцать раз из тридцати." })}</h2><p>${localized({ en: "It kept all three useful packets, but also let all seven traps through. The JSON problem is gone; the meaning problem remains.", ru: "Она сохранила все три полезных пакета, но также пропустила все семь ловушек. Проблемы JSON больше нет; проблема понимания осталась." })}</p></section><div class="e007-result-metrics"><article class="is-correct"><span>${localized({ en: "USEFUL KEPT", ru: "ПОЛЕЗНЫХ СОХРАНЕНО" })}</span><strong>3 / 3</strong></article><article class="is-critical"><span>${localized({ en: "TRAPS ACCEPTED", ru: "ЛОВУШЕК ПРИНЯТО" })}</span><strong>7 / 7</strong></article><article class="is-critical"><span>${localized({ en: "FINAL DECISIONS RIGHT", ru: "ИТОГОВ ВЕРНО" })}</span><strong>3 / 10</strong></article></div><div class="e007-ten-viewer"></div><p class="control-warning">${escapeHTML(localized(protocol.claim_boundary))}</p><div class="actions"><a class="button secondary" href="/experiment/e007/">${localized({ en: "BACK TO E007", ru: "НАЗАД В E007" })}</a><a class="quiet-link" href="/experiments/E007/atomic-button-result-v0.1.json">${localized({ en: "ALL RAW SCORES", ru: "ВСЕ СЫРЫЕ ОЦЕНКИ" })} ↗</a><a class="quiet-link" href="/experiments/E007/atomic-button-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a></div>`;
+    const sanityCards = sanityResult.records.map(record => {
+      const chosen = record.actual.decision;
+      const percent = Math.round(record.actual.scores[chosen] * 100);
+      return `<article class="${record.correct ? "is-correct" : "is-critical"}"><span>${escapeHTML(record.id)} · ${escapeHTML(record.expected.toUpperCase())}</span><div><p>${escapeHTML(record.first_text)}</p><b>→</b><p>${escapeHTML(record.second_text)}</p></div><h2>${record.correct ? "●" : "×"} QWEN: ${escapeHTML(chosen.toUpperCase())} · ${percent}%</h2><small>${escapeHTML(localized(record.why))}</small></article>`;
+    }).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section id="button-sanity" class="e007-button-sanity"><div class="flow-step">CHECKPOINT 3C.6F · ${localized({ en: "CAN IT PRESS BOTH BUTTONS?", ru: "УМЕЕТ ЛИ ОНА НАЖИМАТЬ ОБЕ КНОПКИ?" })}</div><h2>${localized({ en: "Yes. On the easiest possible comparison: 2/2.", ru: "Да. На самом простом сравнении: 2/2." })}</h2><p>${localized({ en: "The first case needs ACCEPT. The second differs by one colour word and needs REJECT. Everything else stayed identical.", ru: "В первом случае нужен ACCEPT. Во втором изменилось одно слово цвета и нужен REJECT. Всё остальное осталось одинаковым." })}</p><div class="e007-sanity-cards">${sanityCards}</div><p class="control-warning">${escapeHTML(localized(sanityProtocol.claim_boundary))}</p></section><section class="e005-gate4-result-verdict is-failed"><span>CHECKPOINT 3C.6E · ${localized({ en: "TEN RICHER CASES", ru: "ДЕСЯТЬ БОЛЕЕ СЛОЖНЫХ СЛУЧАЕВ" })}</span><h2>${localized({ en: "Qwen pressed ACCEPT thirty times out of thirty.", ru: "Qwen нажала «ПРИНЯТЬ» тридцать раз из тридцати." })}</h2><p>${localized({ en: "It kept all three useful packets, but also let all seven traps through. The buttons work; richer meaning is where it fails.", ru: "Она сохранила все три полезных пакета, но также пропустила все семь ловушек. Кнопки работают; сбой начинается на более сложном смысле." })}</p></section><div class="e007-result-metrics"><article class="is-correct"><span>${localized({ en: "USEFUL KEPT", ru: "ПОЛЕЗНЫХ СОХРАНЕНО" })}</span><strong>3 / 3</strong></article><article class="is-critical"><span>${localized({ en: "TRAPS ACCEPTED", ru: "ЛОВУШЕК ПРИНЯТО" })}</span><strong>7 / 7</strong></article><article class="is-critical"><span>${localized({ en: "FINAL DECISIONS RIGHT", ru: "ИТОГОВ ВЕРНО" })}</span><strong>3 / 10</strong></article></div><div class="e007-ten-viewer"></div><p class="control-warning">${escapeHTML(localized(protocol.claim_boundary))}</p><div class="actions"><a class="button secondary" href="/experiment/e007/">${localized({ en: "BACK TO E007", ru: "НАЗАД В E007" })}</a><a class="quiet-link" href="/experiments/E007/button-sanity-result-v0.1.json">${localized({ en: "TWO RAW SCORES", ru: "ДВЕ СЫРЫЕ ОЦЕНКИ" })} ↗</a><a class="quiet-link" href="/experiments/E007/atomic-button-result-v0.1.json">${localized({ en: "ALL TEN RAW SCORES", ru: "ВСЕ ДЕСЯТЬ СЫРЫХ ОЦЕНОК" })} ↗</a></div>`;
     renderCase();
   } catch (error) {
     target.querySelector(".experiment-loading").textContent = localized({ en: "The ten-case result could not be loaded.", ru: "Не удалось загрузить результат десяти случаев." });
