@@ -20,6 +20,7 @@ class NinetyWordRunnerTest(unittest.TestCase):
         world = json.loads(RUNNER.WORLD_PATH.read_text())
         self.assertEqual(protocol["status"], "locked_before_inference")
         self.assertEqual(world["status"], "frozen_before_inference")
+        self.assertEqual(protocol["locked_success"]["total_correct_min"], 10)
 
 
 if __name__ == "__main__":

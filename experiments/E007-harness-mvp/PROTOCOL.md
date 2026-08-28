@@ -507,3 +507,9 @@ Qwen3-0.6B. The locked gate requires 5/5 approve cases, 5/5 reject cases, and
 
 This is a synthetic development test of a short source-to-answer gate. It does
 not establish source truth, rule applicability, or real-world safety.
+
+The first execution scored all ten cases but failed before writing a result:
+the runner looked for `locked_success_rule`, while the frozen protocol field is
+named `locked_success`. No model decisions from that process were retained or
+reported. The frozen prompts and success rule were not changed; only the result
+collector was corrected before the recorded rerun.

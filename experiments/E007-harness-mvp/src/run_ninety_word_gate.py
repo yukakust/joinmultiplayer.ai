@@ -122,11 +122,11 @@ def run(batch_size: int, threads: int) -> dict:
         "min_prompt_tokens_with_system": min(record["prompt_tokens_with_system"] for record in records),
         "max_prompt_tokens_with_system": max(record["prompt_tokens_with_system"] for record in records),
     }
-    gate = protocol["locked_success_rule"]
+    gate = protocol["locked_success"]
     passed = (
-        summary["approve_correct"] == gate["approve_correct"]
-        and summary["reject_correct"] == gate["reject_correct"]
-        and summary["total_correct"] == gate["total_correct"]
+        summary["approve_correct"] >= gate["approve_correct_min"]
+        and summary["reject_correct"] >= gate["reject_correct_min"]
+        and summary["total_correct"] >= gate["total_correct_min"]
     )
     return {
         "schema_version": "0.1",
