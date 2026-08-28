@@ -1,0 +1,209 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6O",
+  "status": "comparative_development_complete",
+  "protocol": "/experiments/E007/nli-deberta-protocol-v0.1.json",
+  "world": "/experiments/E007/nli-minilm-world-v0.1.json",
+  "protocol_sha256": "c1d9738fbf0fe786524b7cd18a5fec1320fafc31ed625bd382dfd3db2dbc7b8d",
+  "world_sha256": "cea5e836e69c0b98ce56755d85559e36b94e4a8cce73a0d82426f6c1c96dcf19",
+  "model": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "approximate_parameters": 184000000,
+    "language": "en",
+    "classes": [
+      "entailment",
+      "neutral",
+      "contradiction"
+    ]
+  },
+  "runtime": {
+    "seconds_including_model_load": 12.452,
+    "peak_rss_mib": 1733.7,
+    "device": "cpu",
+    "dtype": "torch.float32"
+  },
+  "summary": {
+    "correct": 8,
+    "total": 10,
+    "minilm_correct": 7,
+    "class_correct": {
+      "entailment": 3,
+      "neutral": 2,
+      "contradiction": 3
+    },
+    "class_total": {
+      "entailment": 4,
+      "neutral": 3,
+      "contradiction": 3
+    },
+    "passed_locked_development_gate": false
+  },
+  "records": [
+    {
+      "id": "NLI01",
+      "expected": "entailment",
+      "premise": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "hypothesis": "Box R-17 is red.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.72622764,
+        "neutral": 0.24930216,
+        "contradiction": 0.02447022
+      },
+      "input_tokens": 28,
+      "minilm_decision": "entailment",
+      "minilm_correct": true
+    },
+    {
+      "id": "NLI02",
+      "expected": "entailment",
+      "premise": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "hypothesis": "The event ID should be used as an idempotency key before order creation.",
+      "decision": "neutral",
+      "correct": false,
+      "probabilities": {
+        "entailment": 0.06239488,
+        "neutral": 0.87528145,
+        "contradiction": 0.06232365
+      },
+      "input_tokens": 44,
+      "minilm_decision": "neutral",
+      "minilm_correct": false
+    },
+    {
+      "id": "NLI03",
+      "expected": "entailment",
+      "premise": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "hypothesis": "The colony is probably preparing to swarm.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.98703647,
+        "neutral": 0.01171032,
+        "contradiction": 0.00125329
+      },
+      "input_tokens": 29,
+      "minilm_decision": "entailment",
+      "minilm_correct": true
+    },
+    {
+      "id": "NLI04",
+      "expected": "entailment",
+      "premise": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "hypothesis": "Mara said to meet at Juniper Cafe.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.99609971,
+        "neutral": 0.00285782,
+        "contradiction": 0.00104248
+      },
+      "input_tokens": 32,
+      "minilm_decision": "entailment",
+      "minilm_correct": true
+    },
+    {
+      "id": "NLI05",
+      "expected": "contradiction",
+      "premise": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "hypothesis": "Restart Kest-7 immediately and leave its power connected.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "entailment": 7.447e-05,
+        "neutral": 0.00029134,
+        "contradiction": 0.99963415
+      },
+      "input_tokens": 39,
+      "minilm_decision": "contradiction",
+      "minilm_correct": true
+    },
+    {
+      "id": "NLI06",
+      "expected": "contradiction",
+      "premise": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "hypothesis": "Use the western marsh route.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00028182,
+        "neutral": 0.00084937,
+        "contradiction": 0.99886876
+      },
+      "input_tokens": 34,
+      "minilm_decision": "contradiction",
+      "minilm_correct": true
+    },
+    {
+      "id": "NLI07",
+      "expected": "contradiction",
+      "premise": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "hypothesis": "Downsample the images even further.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00078163,
+        "neutral": 0.00324012,
+        "contradiction": 0.99597824
+      },
+      "input_tokens": 33,
+      "minilm_decision": "neutral",
+      "minilm_correct": false
+    },
+    {
+      "id": "NLI08",
+      "expected": "neutral",
+      "premise": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "hypothesis": "An incident allows a contractor to deploy to production alone without staff review.",
+      "decision": "contradiction",
+      "correct": false,
+      "probabilities": {
+        "entailment": 0.00190802,
+        "neutral": 0.19203791,
+        "contradiction": 0.80605406
+      },
+      "input_tokens": 35,
+      "minilm_decision": "neutral",
+      "minilm_correct": true
+    },
+    {
+      "id": "NLI09",
+      "expected": "neutral",
+      "premise": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "hypothesis": "Pause the grow lamps until mist flow returns.",
+      "decision": "neutral",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00606904,
+        "neutral": 0.99028289,
+        "contradiction": 0.00364809
+      },
+      "input_tokens": 34,
+      "minilm_decision": "contradiction",
+      "minilm_correct": false
+    },
+    {
+      "id": "NLI10",
+      "expected": "neutral",
+      "premise": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "hypothesis": "The custard contains vanilla.",
+      "decision": "neutral",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00041924,
+        "neutral": 0.99928325,
+        "contradiction": 0.00029753
+      },
+      "input_tokens": 32,
+      "minilm_decision": "neutral",
+      "minilm_correct": true
+    }
+  ],
+  "boundary": {
+    "en": "This reuses ten synthetic English cases whose labels and MiniLM outputs are already public. It is a comparative development check, not fresh generalisation evidence or a phone benchmark.",
+    "ru": "Здесь повторно используются десять синтетических английских случаев, чьи ответы и результаты MiniLM уже опубликованы. Это сравнительная development-проверка, а не новый тест обобщения или benchmark телефона."
+  }
+}

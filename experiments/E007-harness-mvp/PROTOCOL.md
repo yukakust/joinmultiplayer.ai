@@ -652,3 +652,20 @@ button wording, but it is not reliable enough to accept or reject incoming
 evidence by itself. It is a tiny synthetic English development test, not a
 phone, multilingual, or general evidence benchmark. Result:
 `site/experiments/E007/nli-minilm-result-v0.1.json`.
+
+## Checkpoint 3C.6O — stronger DeBERTa NLI comparison
+
+Run the already opened ten English source-claim pairs through the pinned
+184M-parameter `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli`, without examples,
+fine-tuning, or calibration. This model was trained on MNLI, FEVER-NLI, and
+ANLI. It must beat MiniLM's 7/10 and satisfy the unchanged 9/10 class-aware
+gate. Because the cases and baseline answers are already public, this is a
+comparative development check rather than fresh generalisation evidence.
+
+DeBERTa scored 8/10 and failed the locked gate. It fixed MiniLM's missed
+indirect contradiction and its false contradiction on the grow-lamp example,
+but changed a correct neutral badge-policy example into contradiction. Both
+models classified the technical idempotency paraphrase as neutral rather than
+entailed. A larger off-the-shelf NLI classifier helped by one point, but did
+not make this gate safe enough for automatic evidence acceptance. Result:
+`site/experiments/E007/nli-deberta-result-v0.1.json`.
