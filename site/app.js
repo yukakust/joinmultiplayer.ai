@@ -2857,7 +2857,11 @@ function e006Shell() {
 }
 
 function e007Shell() {
-  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 3A · ${localized({ en: "TWO REAL DEVICES CONNECTED", ru: "ДВА РЕАЛЬНЫХ УСТРОЙСТВА СОЕДИНЕНЫ" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "Four processes received one unchanged question. See where their attention went, then inspect the earlier model answers.", ru: "Четыре процесса получили один неизменённый вопрос. Посмотрите, куда направилось их внимание, а затем изучите предыдущие ответы моделей." })}</p><div class="actions"><a class="primary-link" href="#e007-attention">${localized({ en: "SEE THE PHYSICAL TEST", ru: "СМОТРЕТЬ ФИЗИЧЕСКИЙ ТЕСТ" })} ↓</a><a class="quiet-link" href="#e007-smoke-results">${localized({ en: "EARLIER MODEL ANSWERS", ru: "ПРЕДЫДУЩИЕ ОТВЕТЫ МОДЕЛЕЙ" })} ↓</a></div><div class="experiment-loading">${c("loading")}</div></section>`;
+  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 3A · ${localized({ en: "TWO REAL DEVICES CONNECTED", ru: "ДВА РЕАЛЬНЫХ УСТРОЙСТВА СОЕДИНЕНЫ" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "Four processes received one unchanged question. See where their attention went, then inspect the earlier model answers.", ru: "Четыре процесса получили один неизменённый вопрос. Посмотрите, куда направилось их внимание, а затем изучите предыдущие ответы моделей." })}</p><div class="actions"><a class="primary-link" href="/experiment/e007/ten-buttons/">${localized({ en: "NEW · SEE 10 QUESTIONS", ru: "НОВОЕ · СМОТРЕТЬ 10 ВОПРОСОВ" })} →</a><a class="quiet-link" href="#e007-attention">${localized({ en: "SEE THE PHYSICAL TEST", ru: "СМОТРЕТЬ ФИЗИЧЕСКИЙ ТЕСТ" })} ↓</a><a class="quiet-link" href="#e007-smoke-results">${localized({ en: "EARLIER MODEL ANSWERS", ru: "ПРЕДЫДУЩИЕ ОТВЕТЫ МОДЕЛЕЙ" })} ↓</a></div><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+function e007TenButtonsShell() {
+  return `<section class="flow-shell e007-ten-page"><div class="flow-step">E007 · CHECKPOINT 3C.6E · ${localized({ en: "TEN QUESTIONS", ru: "ДЕСЯТЬ ВОПРОСОВ" })}</div><h1>${localized({ en: "What did Qwen accept?", ru: "Что приняла Qwen?" })}</h1><p class="contribution-intro">${localized({ en: "One question at a time. Three small decisions. Then one final result.", ru: "По одному вопросу. Три маленьких решения. Затем один итог." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
 function e005MethodName(method) {
@@ -4588,6 +4592,79 @@ async function loadE007() {
   }
 }
 
+async function loadE007TenButtons() {
+  const target = document.querySelector(".e007-ten-page");
+  if (!target) return;
+  try {
+    const [protocolResponse, resultResponse] = await Promise.all([
+      fetch("/experiments/E007/atomic-button-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/atomic-button-result-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!protocolResponse.ok || !resultResponse.ok) throw new Error("compact result unavailable");
+    const protocol = await protocolResponse.json();
+    const result = await resultResponse.json();
+    let index = 0;
+    const links = [
+      {
+        id: "source_supports_rule",
+        title: localized({ en: "1 · SOURCE → RULE", ru: "1 · ИСТОЧНИК → ПРАВИЛО" }),
+        question: localized({ en: "Does the source really state this rule?", ru: "Источник правда говорит это правило?" }),
+        leftLabel: localized({ en: "SOURCE", ru: "ИСТОЧНИК" }),
+        rightLabel: localized({ en: "RULE", ru: "ПРАВИЛО" }),
+        left: record => `${record.source.title} · v${record.source.version}\n${record.source_window}`,
+        right: record => record.proposed_rule,
+      },
+      {
+        id: "facts_support_condition",
+        title: localized({ en: "2 · FACTS → CONDITION", ru: "2 · ФАКТЫ → УСЛОВИЕ" }),
+        question: localized({ en: "Do today's facts meet the rule condition?", ru: "Нынешние факты подходят под условие?" }),
+        leftLabel: localized({ en: "CURRENT FACTS", ru: "ТЕКУЩИЕ ФАКТЫ" }),
+        rightLabel: localized({ en: "CONDITION", ru: "УСЛОВИЕ" }),
+        left: record => record.current_facts,
+        right: record => record.rule_condition,
+      },
+      {
+        id: "answer_follows_consequence",
+        title: localized({ en: "3 · ANSWER → CONSEQUENCE", ru: "3 · ОТВЕТ → СЛЕДСТВИЕ" }),
+        question: localized({ en: "Does the proposed answer follow the rule?", ru: "Предложенный ответ следует из правила?" }),
+        leftLabel: localized({ en: "PROPOSED ANSWER", ru: "ПРЕДЛОЖЕННЫЙ ОТВЕТ" }),
+        rightLabel: localized({ en: "WHAT THE RULE REQUIRES", ru: "ЧТО ТРЕБУЕТ ПРАВИЛО" }),
+        left: record => record.proposed_answer,
+        right: record => record.rule_consequence,
+      },
+    ];
+    const decision = value => value === "accept" ? localized({ en: "ACCEPT", ru: "ПРИНЯТЬ" }) : localized({ en: "REJECT", ru: "ОТКЛОНИТЬ" });
+    const finalName = value => value === "use" ? localized({ en: "USE THE PACKET", ru: "ВЗЯТЬ ПАКЕТ" }) : localized({ en: "DO NOT USE", ru: "НЕ БРАТЬ" });
+    const reason = record => {
+      const failures = [];
+      if (record.expected.source_supports_rule === "reject") failures.push(localized({ en: "the source does not support the rule", ru: "источник не подтверждает правило" }));
+      if (record.expected.facts_support_condition === "reject") failures.push(localized({ en: "the current facts do not meet the condition", ru: "текущие факты не подходят под условие" }));
+      if (record.expected.answer_follows_consequence === "reject") failures.push(localized({ en: "the proposed answer does not follow the rule", ru: "предложенный ответ не следует из правила" }));
+      return failures.length ? failures.join(" · ") : localized({ en: "all three links are supported", ru: "все три связи подтверждены" });
+    };
+    const renderCase = () => {
+      const record = result.records[index];
+      const linkCards = links.map(link => {
+        const actual = record.actual.links[link.id];
+        const expected = record.expected[link.id];
+        const correct = actual.decision === expected;
+        const confidence = Math.round(actual.scores[actual.decision] * 100);
+        return `<article class="e007-ten-link ${correct ? "is-correct" : "is-critical"}"><header><span>${escapeHTML(link.title)}</span><strong>${correct ? "●" : "×"} QWEN: ${escapeHTML(decision(actual.decision))} · ${confidence}%</strong></header><h3>${escapeHTML(link.question)}</h3><div class="e007-ten-compare"><div><b>${escapeHTML(link.leftLabel)}</b><p>${escapeHTML(link.left(record))}</p></div><div><b>${escapeHTML(link.rightLabel)}</b><p>${escapeHTML(link.right(record))}</p></div></div><footer>${localized({ en: "RIGHT BUTTON", ru: "ПРАВИЛЬНАЯ КНОПКА" })}: <b>${escapeHTML(decision(expected))}</b></footer></article>`;
+      }).join("");
+      const finalCorrect = record.actual.final === record.expected.final;
+      const dots = result.records.map((item, itemIndex) => `<button class="${itemIndex === index ? "is-active" : ""}" data-e007-ten-jump="${itemIndex}">${itemIndex + 1}</button>`).join("");
+      target.querySelector(".e007-ten-viewer").innerHTML = `<nav class="e007-ten-index">${dots}</nav><div class="e007-ten-question"><span>${index + 1} / ${result.records.length} · ${escapeHTML(record.id)} · ${escapeHTML(record.domain.toUpperCase())}</span><h2>${escapeHTML(record.question)}</h2><p><b>${localized({ en: "KNOWN ANSWER", ru: "ИЗВЕСТНЫЙ ИТОГ" })}:</b> ${escapeHTML(finalName(record.expected.final))} — ${escapeHTML(reason(record))}.</p></div><div class="e007-ten-links">${linkCards}</div><section class="e007-ten-final ${finalCorrect ? "is-correct" : "is-critical"}"><span>HARNESS</span><h2>${finalCorrect ? "●" : "×"} ${escapeHTML(finalName(record.actual.final))}</h2><p>${localized({ en: "It should have said", ru: "Должен был сказать" })}: <b>${escapeHTML(finalName(record.expected.final))}</b></p></section><nav class="e007-ten-arrows"><button data-e007-ten-prev ${index === 0 ? "disabled" : ""}>← ${localized({ en: "PREVIOUS", ru: "НАЗАД" })}</button><button data-e007-ten-next ${index === result.records.length - 1 ? "disabled" : ""}>${localized({ en: "NEXT", ru: "ДАЛЬШЕ" })} →</button></nav>`;
+      target.querySelectorAll("[data-e007-ten-jump]").forEach(button => button.addEventListener("click", () => { index = Number(button.dataset.e007TenJump); renderCase(); }));
+      target.querySelector("[data-e007-ten-prev]")?.addEventListener("click", () => { index -= 1; renderCase(); });
+      target.querySelector("[data-e007-ten-next]")?.addEventListener("click", () => { index += 1; renderCase(); });
+    };
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e005-gate4-result-verdict is-failed"><span>${localized({ en: "RESULT", ru: "РЕЗУЛЬТАТ" })}</span><h2>${localized({ en: "Qwen pressed ACCEPT thirty times out of thirty.", ru: "Qwen нажала «ПРИНЯТЬ» тридцать раз из тридцати." })}</h2><p>${localized({ en: "It kept all three useful packets, but also let all seven traps through. The JSON problem is gone; the meaning problem remains.", ru: "Она сохранила все три полезных пакета, но также пропустила все семь ловушек. Проблемы JSON больше нет; проблема понимания осталась." })}</p></section><div class="e007-result-metrics"><article class="is-correct"><span>${localized({ en: "USEFUL KEPT", ru: "ПОЛЕЗНЫХ СОХРАНЕНО" })}</span><strong>3 / 3</strong></article><article class="is-critical"><span>${localized({ en: "TRAPS ACCEPTED", ru: "ЛОВУШЕК ПРИНЯТО" })}</span><strong>7 / 7</strong></article><article class="is-critical"><span>${localized({ en: "FINAL DECISIONS RIGHT", ru: "ИТОГОВ ВЕРНО" })}</span><strong>3 / 10</strong></article></div><div class="e007-ten-viewer"></div><p class="control-warning">${escapeHTML(localized(protocol.claim_boundary))}</p><div class="actions"><a class="button secondary" href="/experiment/e007/">${localized({ en: "BACK TO E007", ru: "НАЗАД В E007" })}</a><a class="quiet-link" href="/experiments/E007/atomic-button-result-v0.1.json">${localized({ en: "ALL RAW SCORES", ru: "ВСЕ СЫРЫЕ ОЦЕНКИ" })} ↗</a><a class="quiet-link" href="/experiments/E007/atomic-button-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a></div>`;
+    renderCase();
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "The ten-case result could not be loaded.", ru: "Не удалось загрузить результат десяти случаев." });
+  }
+}
+
 async function loadE005() {
   const target = document.querySelector(".e005-page");
   if (!target) return;
@@ -5541,6 +5618,10 @@ function render() {
     document.title = `E007 — pocket i`;
     app.innerHTML = withLanguage(e007Shell());
     loadE007();
+  } else if (path === "experiment/e007/ten-buttons") {
+    document.title = `${localized({ en: "Ten Qwen decisions", ru: "Десять решений Qwen" })} — i`;
+    app.innerHTML = withLanguage(e007TenButtonsShell());
+    loadE007TenButtons();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

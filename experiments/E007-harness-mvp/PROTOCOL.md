@@ -428,3 +428,11 @@ Protocol and world:
 
 This is a small synthetic English development test for diagnosing behaviour by
 eye. It cannot establish statistical reliability or real-world safety.
+
+The compact development run failed in the simplest possible way. Qwen assigned
+the higher next-token score to `accept` on all 30 atomic comparisons. It
+therefore used all 3/3 useful packets and also all 7/7 traps. Every relation was
+correct on 6/10 cases only, and only 3/10 final packet decisions were correct.
+The JSON/tool-call formatting problem is absent here; the remaining failure is
+the model's all-accept semantic behaviour under this frozen prompt. Result:
+`site/experiments/E007/atomic-button-result-v0.1.json`.
