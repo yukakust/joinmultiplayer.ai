@@ -459,3 +459,24 @@ express both actions on an extremely easy semantic comparison. This narrows the
 later all-accept failure: it appears when the comparison contains richer rules,
 facts, and consequences, not at the physical button layer. Result:
 `site/experiments/E007/button-sanity-result-v0.1.json`.
+
+## Checkpoint 3C.6G — context ladder
+
+Keep the underlying decision trivial and change only its wrapper. Freeze five
+levels, each with an `accept` and a `reject` prompt. Every accept source says
+Box R-17 is red and every reject source says it is blue; the proposed answer is
+always red. Level 0 contains two plain sentences. Level 1 adds the requested
+SOURCE, PROPOSED ANSWER, CHOOSE ONE TOOL shape. Level 2 adds a question,
+metadata, and a short source window. Level 3 adds a long distractor window with
+the colour at the end. Level 4 adds a longer full packet with the colour in the
+middle and current facts.
+
+Within each level, the two prompts differ only by the source colour word. Use
+the same frozen Qwen3-0.6B and next-token `accept`/`reject` scorer. The locked
+success rule is 2/2 at every level and 10/10 overall. Publish each complete
+prompt and both button scores. Protocol and world:
+`site/experiments/E007/context-ladder-protocol-v0.1.json` and
+`site/experiments/E007/context-ladder-world-v0.1.json`.
+
+This synthetic diagnostic can locate a context-tolerance boundary for one
+trivial fact. It cannot establish evidence reasoning or real-world safety.

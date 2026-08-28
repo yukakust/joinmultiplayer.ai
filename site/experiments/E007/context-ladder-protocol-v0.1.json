@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6G",
+  "status": "locked_before_inference",
+  "title": {
+    "en": "How much context can the two buttons survive?",
+    "ru": "Сколько контекста выдерживают две кнопки?"
+  },
+  "hypothesis": {
+    "en": "Qwen3-0.6B will keep choosing accept for red→red and reject for blue→red as the same comparison is wrapped in increasingly long source, answer, metadata, and current-facts context.",
+    "ru": "Qwen3‑0.6B продолжит выбирать accept для «красный → красный» и reject для «синий → красный», когда то же сравнение получит всё более длинную упаковку из источника, ответа, метаданных и текущих фактов."
+  },
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_changed": false,
+    "internet": false,
+    "rag": false
+  },
+  "controlled_change": "Only the context wrapper and length change. Within every level, the accept and reject prompts differ only by the source colour word red versus blue.",
+  "levels": 5,
+  "cases": 10,
+  "locked_success": {
+    "each_level_correct": 2,
+    "total_correct": 10
+  },
+  "claim_boundary": {
+    "en": "This synthetic ladder tests context tolerance for one trivial colour fact. It does not test rule application, evidence truth, or real-world reliability.",
+    "ru": "Эта синтетическая лестница проверяет устойчивость к контексту для одного простейшего факта о цвете. Она не проверяет применение правил, истинность доказательств или надёжность в реальном мире."
+  }
+}
