@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6I",
+  "status": "locked_before_inference",
+  "title": {
+    "en": "Did Qwen choose APPROVE because it was first?",
+    "ru": "Qwen выбирала APPROVE потому, что он стоял первым?"
+  },
+  "hypothesis": {
+    "en": "Repeat the same ten frozen cases with the same approve and reject labels, but list reject first everywhere. A large switch to reject indicates an order effect; continued approve indicates a label bias; balanced correct choices indicate that order had blocked meaning.",
+    "ru": "Повторяем те же десять замороженных случаев с теми же названиями approve и reject, но везде ставим reject первым. Массовый переход к reject укажет на влияние порядка; сохранение approve — на смещение к названию; верное разделение случаев — что порядок мешал понимать смысл."
+  },
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_changed": false,
+    "internet": false,
+    "rag": false
+  },
+  "frozen_comparison": {
+    "same_cases": 10,
+    "same_question_source_answer": true,
+    "same_labels": ["approve", "reject"],
+    "previous_order": ["approve", "reject"],
+    "new_order": ["reject", "approve"]
+  },
+  "locked_interpretation": {
+    "semantic_success": "at least 9/10 correct, with at least 4/5 correct in each class",
+    "strong_order_effect": "at least 8/10 choices switch from approve to reject",
+    "strong_approve_label_bias": "at least 8/10 choices remain approve",
+    "otherwise": "mixed or unresolved"
+  },
+  "claim_boundary": {
+    "en": "This paired synthetic development control can distinguish a strong order effect from a strong approve-label bias. It does not prove why the model has that bias or that the result generalises to other labels, prompts, or models.",
+    "ru": "Этот парный синтетический development-контроль может отличить сильное влияние порядка от сильного смещения к слову approve. Он не доказывает причину смещения и не переносит результат автоматически на другие названия, prompt или модели."
+  }
+}

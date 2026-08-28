@@ -523,3 +523,15 @@ remove this first-action bias. This does not show that short evidence packets
 are impossible; it shows that this frozen Qwen3-0.6B next-token gate and prompt
 are not a usable balanced semantic judge. Result:
 `site/experiments/E007/ninety-word-result-v0.1.json`.
+
+## Checkpoint 3C.6I — reverse the same two buttons
+
+Repeat the exact same ten cases from 3C.6H with the same model and the same
+labels. Change only their order: the user instruction, definitions, system
+message, and scored action list now put `reject` before `approve`.
+
+Interpret the result before inference. At least 9/10 correct with at least 4/5
+in each class is semantic success. At least 8/10 switches from the previous
+all-approve result to `reject` is a strong order effect. At least 8/10 remaining
+`approve` is a strong approve-label bias. Anything else is mixed or unresolved.
+This is a paired synthetic development control, not a general model claim.
