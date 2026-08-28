@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6F",
+  "status": "locked_before_inference",
+  "title": {
+    "en": "Can Qwen press both buttons?",
+    "ru": "Может ли Qwen нажимать обе кнопки?"
+  },
+  "hypothesis": {
+    "en": "With the same frozen two-button harness, Qwen3-0.6B can choose accept for two identical sentences and reject for two plainly conflicting sentences.",
+    "ru": "С тем же замороженным двухкнопочным harness Qwen3‑0.6B сможет выбрать accept для двух одинаковых предложений и reject для двух явно противоречащих предложений."
+  },
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_changed": false,
+    "internet": false,
+    "rag": false
+  },
+  "method": "Read the next-token logits for the one-token actions accept and reject using the same frozen system instruction as Checkpoint 3C.6E.",
+  "locked_success": {
+    "correct": 2,
+    "total": 2
+  },
+  "claim_boundary": {
+    "en": "This two-case synthetic sanity check tests only whether the frozen interface can express both actions on an extremely easy comparison.",
+    "ru": "Эта синтетическая проверка из двух случаев проверяет только то, может ли замороженный интерфейс выбирать обе кнопки на предельно простом сравнении."
+  }
+}

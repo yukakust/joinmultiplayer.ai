@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6F",
+  "status": "frozen_before_inference",
+  "language": "en",
+  "cases": [
+    {
+      "id": "BS01",
+      "question": "Does the first sentence support the second sentence?",
+      "first_text": "The box is red.",
+      "second_text": "The box is red.",
+      "expected": "accept",
+      "why": {
+        "en": "The two sentences say exactly the same thing.",
+        "ru": "Два предложения говорят ровно одно и то же."
+      }
+    },
+    {
+      "id": "BS02",
+      "question": "Does the first sentence support the second sentence?",
+      "first_text": "The box is blue.",
+      "second_text": "The box is red.",
+      "expected": "reject",
+      "why": {
+        "en": "Blue does not support red; the sentences conflict.",
+        "ru": "Синий не подтверждает красный; предложения противоречат друг другу."
+      }
+    }
+  ]
+}

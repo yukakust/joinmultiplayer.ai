@@ -436,3 +436,18 @@ correct on 6/10 cases only, and only 3/10 final packet decisions were correct.
 The JSON/tool-call formatting problem is absent here; the remaining failure is
 the model's all-accept semantic behaviour under this frozen prompt. Result:
 `site/experiments/E007/atomic-button-result-v0.1.json`.
+
+## Checkpoint 3C.6F — two-button sanity check
+
+Before changing the semantic architecture again, test whether the exact frozen
+button interface can express both decisions at all. Freeze only two English
+comparisons. In the first, both sentences say "The box is red," so the correct
+action is `accept`. In the second, one says blue and the other says red, so the
+correct action is `reject`. Use the same Qwen3-0.6B snapshot, system instruction,
+and next-token `accept`/`reject` scorer as Checkpoint 3C.6E. The locked success
+rule is 2/2. Protocol and world:
+`site/experiments/E007/button-sanity-protocol-v0.1.json` and
+`site/experiments/E007/button-sanity-world-v0.1.json`.
+
+This sanity check can reveal a broken or biased interface. Passing it cannot
+establish that the model can judge real evidence.
