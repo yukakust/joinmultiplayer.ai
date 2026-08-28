@@ -490,3 +490,20 @@ works; under this repetitive distractor construction, the reject signal was
 lost somewhere between 145 and 513 tokens. This is a located diagnostic band,
 not a universal context limit. Result:
 `site/experiments/E007/context-ladder-result-v0.1.json`.
+
+## Checkpoint 3C.6H — complete prompts under 90 words
+
+Test a practical short packet rather than another length ladder. Freeze ten
+unique English cases across ten domains. Every complete prompt contains only
+QUESTION, SOURCE, PROPOSED ANSWER, and the short instruction `Choose: approve
+or reject`; every prompt must be at most 90 words. Five sources support their
+answers and five conflict with, fail to support, or leave them unclear.
+
+Score the one-token actions `approve` and `reject` with the same frozen
+Qwen3-0.6B. The locked gate requires 5/5 approve cases, 5/5 reject cases, and
+10/10 overall. Publish every prompt and both action scores. Protocol and world:
+`site/experiments/E007/ninety-word-protocol-v0.1.json` and
+`site/experiments/E007/ninety-word-world-v0.1.json`.
+
+This is a synthetic development test of a short source-to-answer gate. It does
+not establish source truth, rule applicability, or real-world safety.

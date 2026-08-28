@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6H",
+  "status": "locked_before_inference",
+  "title": {
+    "en": "Can a complete evidence choice fit under 90 words?",
+    "ru": "Может ли цельный выбор доказательства уместиться в 90 слов?"
+  },
+  "hypothesis": {
+    "en": "With QUESTION, SOURCE, PROPOSED ANSWER, and the short instruction Choose: approve or reject, Qwen3-0.6B can correctly decide five supported and five unsupported cases while every complete prompt stays under 90 English words.",
+    "ru": "С блоками QUESTION, SOURCE, PROPOSED ANSWER и короткой инструкцией Choose: approve or reject Qwen3‑0.6B сможет правильно решить пять подтверждённых и пять неподтверждённых случаев, пока каждый полный prompt остаётся короче 90 английских слов."
+  },
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_changed": false,
+    "internet": false,
+    "rag": false
+  },
+  "actions": {
+    "approve": "The source clearly supports the proposed answer.",
+    "reject": "The source conflicts, does not support, or leaves the answer unclear."
+  },
+  "cases": 10,
+  "approve_cases": 5,
+  "reject_cases": 5,
+  "locked_success": {
+    "approve_correct_min": 5,
+    "reject_correct_min": 5,
+    "total_correct_min": 10
+  },
+  "claim_boundary": {
+    "en": "This is a ten-case synthetic English development test. It tests a short source-to-answer gate, not source truth, rule applicability, phone speed, or real-world safety.",
+    "ru": "Это синтетический англоязычный development-тест из десяти случаев. Он проверяет короткий gate «источник → ответ», а не истинность источника, применимость правил, скорость на телефоне или безопасность в реальном мире."
+  }
+}
