@@ -1,0 +1,74 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6C",
+  "status": "posthoc_interface_diagnostic_not_part_of_locked_gate",
+  "trigger": "The owner asked whether Qwen3-0.6B can ever say NO and whether the frozen prompt itself caused the all-YES result.",
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+    "weights_changed": false
+  },
+  "frozen_system_prompt": "You are one small verification module. Use only the text supplied. Choose exactly one letter: A, B, or C. A means YES. B means NO. C means NOT SURE. Do not answer the user's question and do not add outside knowledge.",
+  "frozen_negative_example": {
+    "question": "Kest-7's casing is hot and room pressure is rising. May it be restarted?",
+    "proposed_answer": "Kest-7 may be restarted immediately.",
+    "exact_quote": "If Kest-7's casing remains hot or room pressure rises, isolate its power first and do not restart it.",
+    "expected": "NO",
+    "frozen_output": "A",
+    "frozen_meaning": "YES"
+  },
+  "diagnostics": [
+    {
+      "id": "D01",
+      "prompt_change": "Replace the frozen system prompt with a neutral instruction; keep A=YES, B=NO, C=NOT_SURE in the user prompt.",
+      "output": "B",
+      "meaning": "NO",
+      "correct": true
+    },
+    {
+      "id": "D02",
+      "prompt_change": "Use the same neutral system prompt but swap the user mapping to A=NO, B=YES, C=NOT_SURE.",
+      "output": "B",
+      "meaning": "YES",
+      "correct": false,
+      "observation": "The letter stayed B when its meaning changed. This is letter/interface bias, not stable semantic classification."
+    },
+    {
+      "id": "D03",
+      "prompt": "Is 2 + 2 equal to 5? Answer YES or NO only.",
+      "output": "YES",
+      "correct": false
+    },
+    {
+      "id": "D04",
+      "prompt": "Is 2 + 2 equal to 4? Answer YES or NO only.",
+      "output": "YES",
+      "correct": true
+    },
+    {
+      "id": "D05",
+      "prompt": "Copy the word inside brackets exactly and output nothing else: [NO]",
+      "output": "[NO]",
+      "correct": true
+    },
+    {
+      "id": "D06",
+      "prompt": "The two words are YES NO. Output only the second word.",
+      "output": "NO",
+      "correct": true
+    },
+    {
+      "id": "D07",
+      "prompt": "Explain in one short sentence whether the Kest-7 quote supports the immediate-restart answer.",
+      "output": "The exact quote supports the proposed answer by highlighting that restarting Kest-7 is not recommended if the casing remains hot or room pressure rises.",
+      "correct": false,
+      "observation": "The explanation repeated the quote's negative meaning but still called it support for the opposite proposed answer."
+    }
+  ],
+  "conclusion": {
+    "en": "Qwen3-0.6B can emit the token NO when copying or selecting it. The frozen all-YES result is partly caused by the A/B/C interface and prompt wording, but the natural-language diagnostic also shows a real failure to compare a proposed answer with an opposite quote. Gate 3C.6C remains failed and must not be re-scored from this posthoc audit.",
+    "ru": "Qwen3-0.6B умеет напечатать NO, когда его нужно скопировать или выбрать. Результат «везде YES» частично вызван интерфейсом A/B/C и формулировкой prompt, но свободное объяснение также показало настоящую ошибку сравнения ответа с противоположной цитатой. Gate 3C.6C остаётся проваленным и не пересчитывается по этому posthoc-аудиту."
+  }
+}

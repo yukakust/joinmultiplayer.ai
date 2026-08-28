@@ -354,3 +354,13 @@ calibration experiment may test the first signal later; this result must remain
 failed. Result and preserved invalid serialization attempt:
 `site/experiments/E007/two-link-semantic-result-v0.1.json` and
 `site/experiments/E007/two-link-semantic-invalid-attempt-v0.1.json`.
+
+Post-run interface diagnostic, requested by the owner, is preserved separately
+and does not alter the locked result. Qwen3-0.6B can physically output NO: it
+copied `[NO]` and selected the second word from `YES NO`. But it answered YES to
+`2 + 2 = 5`, and its free explanation repeated that Kest-7 must not be restarted
+while still claiming that the quote supported the opposite restart-now answer.
+Changing the A/B mapping changed the semantic meaning without reliably changing
+the chosen letter. The frozen all-YES result therefore combines a prompt/label
+bias with a real failure to compare the claim and quote. Diagnostic:
+`site/experiments/E007/two-link-semantic-interface-audit-v0.1.json`.
