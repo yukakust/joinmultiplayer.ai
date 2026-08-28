@@ -621,3 +621,13 @@ A family passes only with at least 18/20 semantic decisions correct, at least
 9/10 case decisions stable when order changes. Select the shortest balanced
 family that passes. The USER pair cannot be selected because its lengths are
 unequal and its wording changes the task toward literal presence.
+
+The locked development run found no usable balanced family. One-, two-, and
+four-word pairs each scored 10/20; the three-word pair scored 11/20. These
+families almost always selected the positive phrase, so added words did not
+create semantic judgment. The unequal `include / not presented` diagnostic
+scored 15/20, but fell from 9/10 with the positive phrase first to 6/10 after
+the order changed and preserved its semantic decision on only 7/10 paired
+cases. It is therefore not selected. This is a negative synthetic development
+result, not evidence that every prompt or larger model will fail. Result:
+`site/experiments/E007/phrase-length-result-v0.1.json`.
