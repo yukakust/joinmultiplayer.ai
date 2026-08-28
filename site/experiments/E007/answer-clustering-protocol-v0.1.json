@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13A",
+  "title": "Can the harness merge similar pocket i answers?",
+  "status": "locked_before_run",
+  "locked_at": "2026-08-28T00:00:00Z",
+  "hypothesis": "A small multilingual embedding model plus one threshold chosen on separate calibration pairs can group paraphrases while keeping related, different, and opposing answers apart.",
+  "model": {
+    "repository": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "runtime": "transformers mean pooling with attention mask, then L2 normalization"
+  },
+  "method": [
+    "Choose one cosine threshold that maximises pairwise F1 on the frozen calibration pairs; break ties toward the higher threshold.",
+    "Embed every held-out answer independently.",
+    "Connect two answers when cosine similarity is at least the frozen calibration threshold.",
+    "Predicted groups are connected components of that graph.",
+    "Do not use source, evidence, pocket id, gold group, or an LLM judge during clustering."
+  ],
+  "locked_input": {
+    "answers": 21,
+    "gold_groups": 9,
+    "languages": ["en", "ru"],
+    "multi_answer_groups": 6,
+    "single_answer_groups": 3
+  },
+  "locked_gate": {
+    "pairwise_f1_minimum": 0.9,
+    "all_six_paraphrase_groups_complete": true,
+    "forbidden_related_or_opposing_merges": 0,
+    "lost_answers": 0
+  },
+  "claim_boundary": "Synthetic multilingual development test. It tests text grouping only. It does not test evidence quality, source independence, applicability, final-answer writing, scale, hostile inputs, or a phone build."
+}

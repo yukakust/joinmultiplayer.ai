@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13A",
+  "status": "frozen_before_run",
+  "calibration_pairs": [
+    {"id":"CP01","left":"The backup valve should remain closed.","right":"Do not open the secondary valve.","same_meaning":true},
+    {"id":"CP02","left":"The backup valve should remain closed.","right":"The backup valve must be opened.","same_meaning":false},
+    {"id":"CP03","left":"Small objects became easier to detect after cropping the image into tiles.","right":"Tiling improved detection of tiny targets.","same_meaning":true},
+    {"id":"CP04","left":"Small objects became easier to detect after cropping the image into tiles.","right":"Tiling reduced GPU memory use.","same_meaning":false},
+    {"id":"CP05","left":"Перезапуск разрешён только после охлаждения.","right":"Restart only after the unit has cooled.","same_meaning":true},
+    {"id":"CP06","left":"Перезапуск разрешён только после охлаждения.","right":"Restart immediately while the unit is hot.","same_meaning":false},
+    {"id":"CP07","left":"The source does not establish a benefit for large objects.","right":"No improvement was measured for large targets.","same_meaning":true},
+    {"id":"CP08","left":"The source does not establish a benefit for large objects.","right":"Large objects improved substantially.","same_meaning":false},
+    {"id":"CP09","left":"Запечатанные маточники могут означать подготовку к роению.","right":"Sealed queen cells may indicate swarm preparation.","same_meaning":true},
+    {"id":"CP10","left":"Запечатанные маточники могут означать подготовку к роению.","right":"The hive has definitely lost its queen.","same_meaning":false},
+    {"id":"CP11","left":"Use the remote controls only.","right":"Operate the unit exclusively from a distance.","same_meaning":true},
+    {"id":"CP12","left":"Use the remote controls only.","right":"Use the controls mounted on the unit.","same_meaning":false}
+  ],
+  "answers": [
+    {"id":"A01","pocket_id":"I01","language":"en","gold_group":"G1","text":"Image tiling improved recall for objects between 8 and 16 pixels."},
+    {"id":"A02","pocket_id":"I02","language":"en","gold_group":"G1","text":"Tiny 8–16 pixel targets were found more often when the image was split into tiles."},
+    {"id":"A03","pocket_id":"I03","language":"ru","gold_group":"G1","text":"Разбиение изображения на тайлы повысило полноту обнаружения объектов размером 8–16 пикселей."},
+
+    {"id":"A04","pocket_id":"I04","language":"en","gold_group":"G2","text":"Using 20% overlap between tiles reduced misses near tile borders."},
+    {"id":"A05","pocket_id":"I05","language":"en","gold_group":"G2","text":"Fewer edge objects were lost when neighbouring tiles overlapped by one fifth."},
+    {"id":"A06","pocket_id":"I06","language":"ru","gold_group":"G2","text":"Перекрытие соседних тайлов на 20% уменьшило число пропусков у границ."},
+
+    {"id":"A07","pocket_id":"I07","language":"en","gold_group":"G3","text":"No benefit from tiling has been measured for large objects."},
+    {"id":"A08","pocket_id":"I08","language":"en","gold_group":"G3","text":"The experiment did not show that image tiles help with large targets."},
+    {"id":"A09","pocket_id":"I09","language":"ru","gold_group":"G3","text":"Для крупных объектов польза разбиения на тайлы не была обнаружена."},
+
+    {"id":"A10","pocket_id":"I10","language":"en","gold_group":"G4","text":"Isolate power before restarting the unit."},
+    {"id":"A11","pocket_id":"I11","language":"en","gold_group":"G4","text":"Disconnect the power supply first, and only then restart."},
+    {"id":"A12","pocket_id":"I12","language":"ru","gold_group":"G4","text":"Перед перезапуском сначала отключите питание устройства."},
+
+    {"id":"A13","pocket_id":"I13","language":"en","gold_group":"G5","text":"Use remote controls only while phase drift is present."},
+    {"id":"A14","pocket_id":"I14","language":"en","gold_group":"G5","text":"When phase drift occurs, operate the unit exclusively from a distance."},
+    {"id":"A15","pocket_id":"I15","language":"ru","gold_group":"G5","text":"При фазовом дрейфе управляйте установкой только дистанционно."},
+
+    {"id":"A16","pocket_id":"I16","language":"en","gold_group":"G6","text":"Sealed queen cells can indicate that the colony is preparing to swarm."},
+    {"id":"A17","pocket_id":"I17","language":"en","gold_group":"G6","text":"The hive may be getting ready to swarm when capped queen cells appear."},
+    {"id":"A18","pocket_id":"I18","language":"ru","gold_group":"G6","text":"Запечатанные маточники могут быть признаком подготовки семьи к роению."},
+
+    {"id":"A19","pocket_id":"I19","language":"en","gold_group":"G7","text":"Sealed queen cells may instead be part of supersedure when the old queen is failing."},
+    {"id":"A20","pocket_id":"I20","language":"en","gold_group":"G8","text":"Image tiling increased peak GPU memory use by 35%."},
+    {"id":"A21","pocket_id":"I21","language":"ru","gold_group":"G9","text":"Перезапуск допустим только после снижения температуры ниже 40 градусов."}
+  ],
+  "forbidden_merges": [
+    {"left_group":"G1","right_group":"G2","reason":"same topic, different claim"},
+    {"left_group":"G1","right_group":"G3","reason":"same topic, different condition and polarity"},
+    {"left_group":"G1","right_group":"G8","reason":"same topic, different metric"},
+    {"left_group":"G4","right_group":"G9","reason":"related restart actions, different requirement"},
+    {"left_group":"G6","right_group":"G7","reason":"related hive sign, different explanation"}
+  ]
+}
