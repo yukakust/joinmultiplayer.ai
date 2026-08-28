@@ -1,0 +1,45 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13B",
+  "status": "frozen_before_inference",
+  "title": {
+    "en": "Can DeBERTa separate answers into meaning piles?",
+    "ru": "Может ли DeBERTa разложить ответы по смысловым стопкам?"
+  },
+  "hypothesis": {
+    "en": "Bidirectional NLI can place mutually supporting answers in one pile while keeping different or opposing versions separate.",
+    "ru": "Двусторонняя NLI-проверка сможет сложить взаимно подтверждающие ответы в одну стопку, а разные или противоположные версии оставить раздельно."
+  },
+  "model": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "classes": ["entailment", "neutral", "contradiction"],
+    "decision": "largest_logit"
+  },
+  "frozen_method": {
+    "language": "en",
+    "answers": 14,
+    "unordered_pairs": 91,
+    "model_calls": 182,
+    "compare_every_pair": true,
+    "same_version": "A entails B and B entails A",
+    "opposing_versions": "at least one direction is contradiction and the pair is not same_version",
+    "different_or_related": "every remaining pair",
+    "pile_rule": "Process answers by frozen ID. Add an answer to the first pile only when it is same_version with every member; otherwise create a new pile.",
+    "training": "none",
+    "examples": "none",
+    "threshold_calibration": "none"
+  },
+  "locked_development_gate": {
+    "exact_paraphrase_piles": 6,
+    "paraphrase_piles_total": 6,
+    "forbidden_merges": 0,
+    "lost_answers": 0,
+    "pairwise_f1_at_least": 0.9
+  },
+  "comparison_boundary": {
+    "en": "This reuses the already opened English subset of Gate 13A for a paired method comparison. It is synthetic development evidence, not a fresh held-out benchmark or proof of general clustering reliability.",
+    "ru": "Тест повторно использует уже открытые английские ответы Gate 13A для прямого сравнения методов. Это синтетический development-тест, а не новый закрытый benchmark и не доказательство общей надёжности группировки."
+  }
+}

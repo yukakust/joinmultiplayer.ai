@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13B",
+  "status": "frozen_before_inference",
+  "source_world": "/experiments/E007/answer-clustering-world-v0.1.json",
+  "answers": [
+    {"id":"A01","pocket_id":"I01","gold_pile":"G1","text":"Image tiling improved recall for objects between 8 and 16 pixels."},
+    {"id":"A02","pocket_id":"I02","gold_pile":"G1","text":"Tiny 8–16 pixel targets were found more often when the image was split into tiles."},
+    {"id":"A04","pocket_id":"I04","gold_pile":"G2","text":"Using 20% overlap between tiles reduced misses near tile borders."},
+    {"id":"A05","pocket_id":"I05","gold_pile":"G2","text":"Fewer edge objects were lost when neighbouring tiles overlapped by one fifth."},
+    {"id":"A07","pocket_id":"I07","gold_pile":"G3","text":"No benefit from tiling has been measured for large objects."},
+    {"id":"A08","pocket_id":"I08","gold_pile":"G3","text":"The experiment did not show that image tiles help with large targets."},
+    {"id":"A10","pocket_id":"I10","gold_pile":"G4","text":"Isolate power before restarting the unit."},
+    {"id":"A11","pocket_id":"I11","gold_pile":"G4","text":"Disconnect the power supply first, and only then restart."},
+    {"id":"A13","pocket_id":"I13","gold_pile":"G5","text":"Use remote controls only while phase drift is present."},
+    {"id":"A14","pocket_id":"I14","gold_pile":"G5","text":"When phase drift occurs, operate the unit exclusively from a distance."},
+    {"id":"A16","pocket_id":"I16","gold_pile":"G6","text":"Sealed queen cells can indicate that the colony is preparing to swarm."},
+    {"id":"A17","pocket_id":"I17","gold_pile":"G6","text":"The hive may be getting ready to swarm when capped queen cells appear."},
+    {"id":"A19","pocket_id":"I19","gold_pile":"G7","text":"Sealed queen cells may instead be part of supersedure when the old queen is failing."},
+    {"id":"A20","pocket_id":"I20","gold_pile":"G8","text":"Image tiling increased peak GPU memory use by 35%."}
+  ],
+  "gold_piles": [
+    {"id":"G1","meaning":"tiling improved recall for 8–16 pixel objects","answer_ids":["A01","A02"]},
+    {"id":"G2","meaning":"20% tile overlap reduced border misses","answer_ids":["A04","A05"]},
+    {"id":"G3","meaning":"no measured tiling benefit for large objects","answer_ids":["A07","A08"]},
+    {"id":"G4","meaning":"isolate power before restart","answer_ids":["A10","A11"]},
+    {"id":"G5","meaning":"use remote controls during phase drift","answer_ids":["A13","A14"]},
+    {"id":"G6","meaning":"sealed queen cells may indicate swarm preparation","answer_ids":["A16","A17"]},
+    {"id":"G7","meaning":"sealed queen cells may indicate supersedure","answer_ids":["A19"]},
+    {"id":"G8","meaning":"tiling increased peak GPU memory","answer_ids":["A20"]}
+  ],
+  "forbidden_merges": [
+    {"left_pile":"G1","right_pile":"G2","reason":"same topic, different claim"},
+    {"left_pile":"G1","right_pile":"G3","reason":"different object size and polarity"},
+    {"left_pile":"G1","right_pile":"G8","reason":"same topic, different metric"},
+    {"left_pile":"G6","right_pile":"G7","reason":"same observation, different explanation"}
+  ]
+}
