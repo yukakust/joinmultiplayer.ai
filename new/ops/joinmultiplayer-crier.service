@@ -1,0 +1,11 @@
+[Unit]
+Description=joinmultiplayer town crier — announces new open questions
+After=network.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/joinmultiplayer-crier.env
+ExecStart=/usr/bin/python3 /srv/joinmultiplayer-new/checkout/new/tools/crier.py
+DynamicUser=true
+StateDirectory=joinmultiplayer-crier
+Environment=CRIER_STATE=/var/lib/joinmultiplayer-crier/state.json

@@ -71,3 +71,21 @@ python3 new/server/server.py --site new/site --db /tmp/new-preview.sqlite3 --por
 The preview's moderation queue is its own sqlite DB (`--db`); anything
 submitted through the preview forms stays there and can be reviewed with
 `new/server/moderate.py --db <that file>`.
+
+## The town crier (the game calls, automatically)
+
+`tools/crier.py` watches the public corpus and announces every new open
+question that has no answers yet — "the game calls: the move is nobody's".
+Without credentials it prints drafts (dry run). To make it post to
+Telegram:
+
+1. Create a bot via @BotFather, add it as admin to your channels/groups.
+2. `echo 'TELEGRAM_BOT_TOKEN=...' > /etc/joinmultiplayer-crier.env` and add
+   `TELEGRAM_CHAT_IDS=@your_channel,-100123456789`.
+3. Install `ops/joinmultiplayer-crier.{service,timer}` and
+   `systemctl enable --now joinmultiplayer-crier.timer`.
+
+It never invents content — every post is verbatim from the corpus record.
+Personalized invitations (AI drafting who to call and why, for you to send)
+are the designed next step; see the doors' "For:" audiences as the target
+map.

@@ -1088,6 +1088,7 @@ function home() {
         <a class="quiet-link" href="${repository}">${t("openLab")}</a>
       </div>
     </section>
+    ${gameCall()}
     ${howItWorks()}
     <section class="hand-section" id="hand">
       <div class="equation-stage" id="equation-stage" aria-live="polite"></div>
@@ -5435,6 +5436,7 @@ function journeyShell() {
       <div class="flow-step">${j("step")}</div>
       <h1>${j("title")}</h1>
       <p class="contribution-intro">${j("intro")}</p>
+      ${gameCall()}
       <div class="journey-legend">
         <span><i class="jl jl-passed"></i>${j("legendPassed")}</span>
         <span><i class="jl jl-caveat"></i>${j("legendCaveat")}</span>
@@ -5655,7 +5657,15 @@ const playCopy = {
     selfFound: "found the way alone",
     partyLabel: "we are here",
     playCta: "Enter the game",
-    consentMatch: "Light my piece on the public map when the trace becomes public."
+    consentMatch: "Light my piece on the public map when the trace becomes public.",
+    callLabel: "THE GAME CALLS",
+    callToday: "the question opened today — the move is still nobody's",
+    callDays: "the question has been open for {n} {d} — the move is still nobody's",
+    dayOne: "day", dayMany: "days",
+    boxHear: "Do you hear it?",
+    boxFound: "The game has found you.",
+    boxFoundLit: "{id} is calling you. The game has found you.",
+    boxOpen: "Open the box"
   },
   ru: {
     step: "ВОЙТИ В ИГРУ",
@@ -5683,7 +5693,14 @@ const playCopy = {
     selfFound: "сам нашёл дорогу",
     partyLabel: "мы здесь",
     playCta: "Войти в игру",
-    consentMatch: "Зажечь мою фигурку на открытой карте, когда след станет публичным."
+    consentMatch: "Зажечь мою фигурку на открытой карте, когда след станет публичным.",
+    callLabel: "ИГРА ЗОВЁТ",
+    callToday: "вопрос открыт сегодня — ход ещё ничей",
+    callDays: "вопрос открыт уже {n} {d} — ход ещё ничей",
+    boxHear: "Слышишь?",
+    boxFound: "Игра нашла тебя.",
+    boxFoundLit: "Тебя зовёт {id}. Игра нашла тебя.",
+    boxOpen: "Открыть коробку"
   }
 };
 
@@ -5693,6 +5710,7 @@ function playShell() {
   const selected = chosenPiece();
   const litBy = storedLitBy();
   return withLanguage(`
+    ${jumanjiBox()}
     <section class="flow-shell form-page contribution-page play-page">
       <div class="flow-step">${p("step")}</div>
       <h1>${p("title")}</h1>
@@ -5711,6 +5729,8 @@ function playShell() {
             </button>`).join("")}
         </div>
       </section>
+
+      ${gameCall()}
 
       <section class="start-block">
         <div class="flow-step">${p("movesTitle")}</div>
@@ -5784,6 +5804,73 @@ async function fetchMatches() {
   return matchesCache;
 }
 
+function dayWord(n) {
+  if (language !== "ru") return n === 1 ? p("dayOne") : p("dayMany");
+  const mod10 = n % 10, mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return "день";
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return "дня";
+  return "дней";
+}
+
+function gameCall() {
+  return '<div class="game-call-slot" data-call></div>';
+}
+
+let corpusCache = null;
+
+async function fetchCorpus() {
+  if (corpusCache !== null) return corpusCache;
+  try {
+    const response = await fetch(`${PUBLIC_API_BASE}/api/public/corpus.json`, { cache: "no-store" });
+    if (!response.ok) throw new Error("unavailable");
+    corpusCache = await response.json();
+  } catch {
+    corpusCache = {};
+  }
+  return corpusCache;
+}
+
+async function loadGameCall() {
+  const slots = document.querySelectorAll("[data-call]");
+  if (!slots.length) return;
+  const corpus = await fetchCorpus();
+  const open = (corpus.questions || []).filter(q => q.status === "open" && !(q.traces || []).length);
+  if (!open.length) return;
+  const q = open[open.length - 1];
+  const days = Math.max(0, Math.floor((Date.now() - Date.parse(q.created_at)) / 86400000));
+  const line = days === 0 ? p("callToday") : p("callDays").replace("{n}", days).replace("{d}", dayWord(days));
+  const markup = `
+    <a class="game-call" href="/question/?id=${encodeURIComponent(q.public_id)}">
+      <i class="call-pulse" aria-hidden="true"></i>
+      <b>${p("callLabel")}</b>
+      <span>${escapeHTML(q.public_id)} · ${line}</span>
+      <em aria-hidden="true">→</em>
+    </a>`;
+  slots.forEach(slot => { slot.innerHTML = markup; });
+}
+
+function jumanjiBox() {
+  if (sessionStorage.getItem("multiplayer-box-v1")) return "";
+  const litBy = storedLitBy();
+  const found = litBy ? p("boxFoundLit").replace("{id}", escapeHTML(litBy)) : p("boxFound");
+  return `
+    <div class="game-box" data-box>
+      <div class="box-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+      <svg class="box-svg" viewBox="0 0 120 92" aria-hidden="true">
+        <path d="M18 38 L60 24 L102 38 L102 74 L60 88 L18 74 Z"/>
+        <path d="M18 38 L60 52 L102 38"/>
+        <line x1="60" y1="52" x2="60" y2="88"/>
+        <path d="M18 38 L14 28 L56 15 L60 24"/>
+        <path d="M102 38 L106 28 L64 15 L60 24"/>
+        <text x="60" y="45" class="box-i">i</text>
+        <circle class="box-clasp" cx="60" cy="55" r="2.4"/>
+      </svg>
+      <p class="box-hear">${p("boxHear")}</p>
+      <p class="box-found">${found}</p>
+      <button class="button box-open-button" data-action="open-box">${p("boxOpen")}</button>
+    </div>`;
+}
+
 function matchChip(m) {
   const name = m.name && m.name !== "anonymous" ? m.name : "";
   const litFrom = m.lit_by === "origin" ? "" : m.lit_by === "self-found" ? p("selfFound") : `${p("litFrom")} ${m.lit_by}`;
@@ -5842,12 +5929,14 @@ function render() {
     renderHand();
     renderAllDoors();
     if (location.hash === "#doors") scrollToDoors();
+    loadGameCall();
   } else if (path === "start") {
     document.title = `${s("title")} — i`;
     app.innerHTML = startShell();
   } else if (path === "play") {
     document.title = `${p("title")} — i`;
     app.innerHTML = playShell();
+    loadGameCall();
   } else if (path === "journey") {
     document.title = `${j("title")} — i`;
     journeySelected = journeyNode(location.hash.slice(1)) ? location.hash.slice(1) : journeySelected;
@@ -5855,6 +5944,7 @@ function render() {
     renderJourneyTrail();
     renderJourneyInspector();
     loadJourneyParty();
+    loadGameCall();
   } else if (path === "d04" || path === "d06") {
     document.title = `${path.toUpperCase()} — i`;
     app.innerHTML = contributionFlow(path);
@@ -6047,6 +6137,13 @@ app.addEventListener("click", async (event) => {
   }
 
   const action = event.target.closest("[data-action]")?.dataset.action;
+  if (action === "open-box") {
+    sessionStorage.setItem("multiplayer-box-v1", "1");
+    const box = document.querySelector("[data-box]");
+    box?.classList.add("is-open");
+    setTimeout(() => box?.remove(), 750);
+    return;
+  }
   if (action === "choose-piece") {
     const pieceId = event.target.closest("[data-piece]").dataset.piece;
     localStorage.setItem(pieceStorageKey, pieceId);

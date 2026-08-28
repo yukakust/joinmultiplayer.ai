@@ -6082,3 +6082,128 @@ a.move-card:hover { border-color: var(--ink); }
   .ignition.is-lit .piece-ritual .piece-flame { animation: none; }
   .ignition.is-lit .piece-ritual { animation: none; }
 }
+
+/* ── the game calls + the Jumanji box ── */
+
+.game-call-slot { margin: 0 auto; width: min(100%, 68rem); }
+.contribution-page .game-call-slot,
+.journey-page .game-call-slot { width: 100%; }
+.game-call-slot:not(:empty) { padding: 0 clamp(1.5rem, 5vw, 4rem) 1.4rem; }
+.contribution-page .game-call-slot:not(:empty),
+.journey-page .game-call-slot:not(:empty) { padding: 0 0 1.4rem; margin-top: 1.4rem; }
+.game-call {
+  align-items: center;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ember);
+  color: inherit;
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.65rem 0.95rem;
+  text-decoration: none;
+}
+.game-call:hover span { text-decoration: underline; }
+.call-pulse {
+  background: var(--ember);
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  height: 9px;
+  position: relative;
+  width: 9px;
+}
+.call-pulse::after {
+  animation: callpulse 1.8s ease-out infinite;
+  border: 1px solid var(--ember);
+  border-radius: 50%;
+  content: "";
+  inset: -1px;
+  position: absolute;
+}
+@keyframes callpulse {
+  0% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(3.2); }
+}
+.game-call b {
+  color: var(--ember);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+.game-call span { font-size: 0.76rem; line-height: 1.5; }
+.game-call em { color: var(--muted); font-style: normal; margin-left: auto; }
+
+.game-box {
+  align-items: center;
+  background: radial-gradient(ellipse at center, #201812 0%, #120f0c 70%);
+  color: #ece9df;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  inset: 0;
+  justify-content: center;
+  padding: 2rem;
+  position: fixed;
+  text-align: center;
+  transition: opacity 0.7s ease, visibility 0.7s;
+  z-index: 60;
+}
+.game-box.is-open { opacity: 0; visibility: hidden; }
+.box-rings {
+  height: 0;
+  position: relative;
+  width: 0;
+}
+.box-rings i {
+  animation: boxdrum 2.6s ease-out infinite;
+  border: 1px solid color-mix(in srgb, #ed7942 55%, transparent);
+  border-radius: 50%;
+  height: 340px;
+  left: -170px;
+  position: absolute;
+  top: -110px;
+  width: 340px;
+}
+.box-rings i:nth-child(2) { animation-delay: 0.85s; }
+.box-rings i:nth-child(3) { animation-delay: 1.7s; }
+@keyframes boxdrum {
+  0% { opacity: 0; transform: scale(0.35); }
+  18% { opacity: 0.7; }
+  100% { opacity: 0; transform: scale(1.15); }
+}
+.box-svg {
+  height: 130px;
+  position: relative;
+  width: 170px;
+}
+.box-svg path, .box-svg line {
+  fill: none;
+  stroke: #ece9df;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+.box-svg .box-i {
+  fill: #ed7942;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-style: italic;
+  text-anchor: middle;
+}
+.box-svg .box-clasp { fill: #ed7942; stroke: none; }
+.box-hear {
+  color: #99968d;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  margin: 1.2rem 0 0;
+  text-transform: uppercase;
+}
+.box-found {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  margin: 0.2rem 0 1.2rem;
+}
+.box-open-button { background: #ed7942; border-color: #ed7942; color: #17150f; }
+@media (prefers-reduced-motion: reduce) {
+  .call-pulse::after { animation: none; opacity: 0; }
+  .box-rings i { animation: none; opacity: 0.25; transform: scale(0.8); }
+}
