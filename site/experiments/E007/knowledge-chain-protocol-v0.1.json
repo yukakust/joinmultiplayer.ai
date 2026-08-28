@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "12A",
+  "title": "Can the harness carry one pocket i's changing knowledge without losing its current belief or its history?",
+  "status": "locked_before_run",
+  "locked_at": "2026-08-28T00:00:00Z",
+  "hypothesis": "A deterministic verifier can reconstruct append-only knowledge chains, select the current head, preserve older revisions as history, and stop on missing parents, mixed lineages, forks, or retractions.",
+  "input_contract": {
+    "revision_id": "stable id inside one lineage",
+    "lineage_id": "one pocket i's history for one topic",
+    "author_id": "the logical pocket i",
+    "topic_id": "the subject being discussed",
+    "previous_revision_id": "null for the first revision; otherwise the direct parent",
+    "relation": ["learned", "confirms", "refines", "replaces", "retracts"],
+    "claim": "one human-readable current belief; empty only for retracts",
+    "evidence_id": "pointer to a separately verified evidence capsule",
+    "learned_at": "when this pocket i recorded the revision",
+    "permission": "share_chain"
+  },
+  "decisions": ["ready", "ready_multi", "retracted", "incomplete", "invalid_lineage", "forked"],
+  "frozen_case_ids": ["KC01", "KC02", "KC03", "KC04", "KC05", "KC06", "KC07", "KC08", "KC09", "KC10"],
+  "locked_gate": {
+    "case_decisions_correct": "10/10",
+    "transport_roundtrips_exact": "10/10",
+    "wrong_current_heads_selected": 0,
+    "history_revisions_lost": 0
+  },
+  "rules": [
+    "Parent links, not timestamps, define revision order.",
+    "Only the head of a valid unbranched lineage is current.",
+    "Older revisions remain history and are never silently erased.",
+    "A retraction has no active claim but keeps the earlier history.",
+    "Two heads in one lineage are a fork, not two independent opinions.",
+    "Two different lineages on one topic stay separate.",
+    "A newer revision is the pocket i's latest belief, not automatic truth.",
+    "Every revision must still pass evidence, privacy, applicability, and independence checks elsewhere."
+  ],
+  "claim_boundary": "Synthetic deterministic development test. It tests chain transport and reconstruction, not signatures, hostile peers, source truth, semantic evidence quality, privacy, physical-device networking, or scale."
+}
