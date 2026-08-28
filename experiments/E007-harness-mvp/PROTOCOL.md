@@ -584,3 +584,16 @@ wrong. Logit subtraction returned semantic `approve` on all ten cases and
 therefore scored 5/10. The symbol preference was not a simple constant offset
 that these mirrored rules could remove. Result:
 `site/experiments/E007/mirrored-calibration-result-v0.1.json`.
+
+## Checkpoint 3C.6L — invented labels `KSEL` and `PTHY`
+
+Hide the familiar action words behind two invented labels. In the main deck,
+`KSEL = approve` and `PTHY = reject`. In the mirror deck, the meanings swap.
+Their order stays fixed. Both labels tokenize to exactly two tokens, so score
+the summed conditional log probability of each complete label.
+
+Use the same ten frozen questions. Semantic success requires at least 18/20,
+at least 9/10 per deck, and at least 4/5 for each semantic class within each
+deck. At least 16/20 choices of one label is a strong label bias. At least 8/10
+pairwise label flips without semantic success means the mapping was followed
+but the evidence judgment failed.

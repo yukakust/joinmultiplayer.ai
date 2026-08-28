@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6L",
+  "status": "locked_before_inference",
+  "title": {
+    "en": "Will invented action words force Qwen to read the rule?",
+    "ru": "Заставят ли выдуманные кнопки Qwen прочитать правило?"
+  },
+  "hypothesis": {
+    "en": "Hide approve and reject behind the unfamiliar labels KSEL and PTHY. If familiar-label priors caused the failure, Qwen should follow the written mapping and separate supported from unsupported answers. A mirrored deck tests whether it follows meaning or merely adopts a new favourite label.",
+    "ru": "Прячем approve и reject за незнакомыми ярлыками KSEL и PTHY. Если сбой вызывали привычные слова, Qwen должна следовать написанной расшифровке и разделить подтверждённые и неподтверждённые ответы. Зеркальная колода проверяет, следует ли она смыслу или просто выбирает новый любимый ярлык."
+  },
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_changed": false,
+    "internet": false,
+    "rag": false
+  },
+  "frozen_design": {
+    "cases": 10,
+    "prompts": 20,
+    "main": {"KSEL": "approve", "PTHY": "reject"},
+    "mirror": {"KSEL": "reject", "PTHY": "approve"},
+    "label_order_changes": false,
+    "question_source_answer_changes": false,
+    "KSEL_tokens": 2,
+    "PTHY_tokens": 2,
+    "scoring": "sum the conditional log probabilities of both tokens in each complete label"
+  },
+  "locked_interpretation": {
+    "semantic_success": "at least 18/20 correct, at least 9/10 per deck, and at least 4/5 per semantic class within each deck",
+    "strong_KSEL_bias": "at least 16/20 choices are KSEL",
+    "strong_PTHY_bias": "at least 16/20 choices are PTHY",
+    "mapping_followed_but_semantics_failed": "at least 8/10 paired labels flip, but semantic success is not reached",
+    "otherwise": "mixed or unresolved"
+  },
+  "claim_boundary": {
+    "en": "This is a paired synthetic development test on ten short English cases. It tests two invented two-token labels and one prompt family, not general reasoning or safety.",
+    "ru": "Это парный синтетический development-тест на десяти коротких английских случаях. Он проверяет два выдуманных двухтокенных ярлыка и одно семейство prompt, а не общее мышление или безопасность."
+  }
+}
