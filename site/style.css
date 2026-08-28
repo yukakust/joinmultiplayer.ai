@@ -5238,6 +5238,13 @@ blockquote {
 .e007-order-table tr.is-critical td:last-child { color: #bd412f; }
 .e007-order-table tbody td:nth-child(2),
 .e007-order-table tbody td:nth-child(3) { font-size: 22px; }
+.e007-deck-key {
+  border-left: 6px solid var(--ink);
+  font-family: var(--mono);
+  line-height: 1.8;
+  margin: 30px 0;
+  padding: 12px 20px;
+}
 @media (max-width: 900px) {
   .e007-ninety-grid { grid-template-columns: 1fr; }
   .e007-ninety-card header { display: grid; }

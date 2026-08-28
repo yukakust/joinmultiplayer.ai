@@ -1,0 +1,702 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6J",
+  "status": "paired_synthetic_development_run_complete",
+  "protocol": "/experiments/E007/numeric-letter-protocol-v0.1.json",
+  "world": "/experiments/E007/numeric-letter-world-v0.1.json",
+  "protocol_sha256": "3a07f95dedae3ec5700e7ef657c2e4db18614db0525c0a6a5d9544e3d63f86d1",
+  "world_sha256": "152fe83a96aa89f00da5cd3d4c9dd59b3a96177361c2798e399f4fd3d2cfdebd",
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+    "weights_changed": false
+  },
+  "runtime_seconds": 7.034,
+  "summary": {
+    "semantic_correct": 10,
+    "total_prompts": 20,
+    "deck_correct": {
+      "X": 5,
+      "Y": 5
+    },
+    "class_deck_correct": {
+      "X_approve": 2,
+      "X_reject": 3,
+      "Y_approve": 5,
+      "Y_reject": 0
+    },
+    "minimum_class_correct_within_a_deck": 0,
+    "label_choices": {
+      "1": 4,
+      "A": 16
+    },
+    "paired_label_flips": 4,
+    "paired_semantics_preserved": 4,
+    "total_pairs": 10,
+    "min_prompt_words": 55,
+    "max_prompt_words": 75,
+    "min_prompt_tokens_with_system": 127,
+    "max_prompt_tokens_with_system": 147
+  },
+  "locked_interpretation": "strong_A_symbol_bias",
+  "pairs": [
+    {
+      "case_id": "NW01",
+      "X_label": "1",
+      "Y_label": "A",
+      "label_flipped": true,
+      "X_semantic": "approve",
+      "Y_semantic": "approve",
+      "semantic_preserved": true
+    },
+    {
+      "case_id": "NW02",
+      "X_label": "A",
+      "Y_label": "A",
+      "label_flipped": false,
+      "X_semantic": "reject",
+      "Y_semantic": "approve",
+      "semantic_preserved": false
+    },
+    {
+      "case_id": "NW03",
+      "X_label": "A",
+      "Y_label": "A",
+      "label_flipped": false,
+      "X_semantic": "reject",
+      "Y_semantic": "approve",
+      "semantic_preserved": false
+    },
+    {
+      "case_id": "NW04",
+      "X_label": "1",
+      "Y_label": "A",
+      "label_flipped": true,
+      "X_semantic": "approve",
+      "Y_semantic": "approve",
+      "semantic_preserved": true
+    },
+    {
+      "case_id": "NW05",
+      "X_label": "A",
+      "Y_label": "A",
+      "label_flipped": false,
+      "X_semantic": "reject",
+      "Y_semantic": "approve",
+      "semantic_preserved": false
+    },
+    {
+      "case_id": "NW06",
+      "X_label": "1",
+      "Y_label": "A",
+      "label_flipped": true,
+      "X_semantic": "approve",
+      "Y_semantic": "approve",
+      "semantic_preserved": true
+    },
+    {
+      "case_id": "NW07",
+      "X_label": "1",
+      "Y_label": "A",
+      "label_flipped": true,
+      "X_semantic": "approve",
+      "Y_semantic": "approve",
+      "semantic_preserved": true
+    },
+    {
+      "case_id": "NW08",
+      "X_label": "A",
+      "Y_label": "A",
+      "label_flipped": false,
+      "X_semantic": "reject",
+      "Y_semantic": "approve",
+      "semantic_preserved": false
+    },
+    {
+      "case_id": "NW09",
+      "X_label": "A",
+      "Y_label": "A",
+      "label_flipped": false,
+      "X_semantic": "reject",
+      "Y_semantic": "approve",
+      "semantic_preserved": false
+    },
+    {
+      "case_id": "NW10",
+      "X_label": "A",
+      "Y_label": "A",
+      "label_flipped": false,
+      "X_semantic": "reject",
+      "Y_semantic": "approve",
+      "semantic_preserved": false
+    }
+  ],
+  "records": [
+    {
+      "id": "NW01-X",
+      "domain": "colour",
+      "expected": "1",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "deck": "X",
+      "mapping": {
+        "1": "approve",
+        "A": "reject"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one: 1 or A.\n1 = the source clearly supports the answer.\nA = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 55,
+      "prompt_tokens_with_system": 127,
+      "decision": "1",
+      "scores": {
+        "1": 0.54576236,
+        "A": 0.45423758
+      },
+      "logit_margin": 0.18356323,
+      "correct": true,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW02-X",
+      "domain": "software",
+      "expected": "1",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "deck": "X",
+      "mapping": {
+        "1": "approve",
+        "A": "reject"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one: 1 or A.\n1 = the source clearly supports the answer.\nA = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 71,
+      "prompt_tokens_with_system": 137,
+      "decision": "A",
+      "scores": {
+        "1": 0.10931927,
+        "A": 0.89068079
+      },
+      "logit_margin": 2.09771347,
+      "correct": false,
+      "actual_semantic": "reject",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW03-X",
+      "domain": "beekeeping",
+      "expected": "1",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "deck": "X",
+      "mapping": {
+        "1": "approve",
+        "A": "reject"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one: 1 or A.\n1 = the source clearly supports the answer.\nA = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 68,
+      "prompt_tokens_with_system": 132,
+      "decision": "A",
+      "scores": {
+        "1": 0.29911959,
+        "A": 0.70088041
+      },
+      "logit_margin": 0.85149384,
+      "correct": false,
+      "actual_semantic": "reject",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW04-X",
+      "domain": "memory",
+      "expected": "1",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "deck": "X",
+      "mapping": {
+        "1": "approve",
+        "A": "reject"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one: 1 or A.\n1 = the source clearly supports the answer.\nA = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 61,
+      "prompt_tokens_with_system": 134,
+      "decision": "1",
+      "scores": {
+        "1": 0.80450487,
+        "A": 0.19549505
+      },
+      "logit_margin": 1.41469193,
+      "correct": true,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW05-X",
+      "domain": "cooking",
+      "expected": "1",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "deck": "X",
+      "mapping": {
+        "1": "approve",
+        "A": "reject"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one: 1 or A.\n1 = the source clearly supports the answer.\nA = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 75,
+      "prompt_tokens_with_system": 147,
+      "decision": "A",
+      "scores": {
+        "1": 0.17110123,
+        "A": 0.82889879
+      },
+      "logit_margin": 1.57784271,
+      "correct": false,
+      "actual_semantic": "reject",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW06-X",
+      "domain": "machine",
+      "expected": "A",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "deck": "X",
+      "mapping": {
+        "1": "approve",
+        "A": "reject"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one: 1 or A.\n1 = the source clearly supports the answer.\nA = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 68,
+      "prompt_tokens_with_system": 142,
+      "decision": "1",
+      "scores": {
+        "1": 0.572142,
+        "A": 0.42785794
+      },
+      "logit_margin": 0.29059601,
+      "correct": false,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW07-X",
+      "domain": "policy",
+      "expected": "A",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "deck": "X",
+      "mapping": {
+        "1": "approve",
+        "A": "reject"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one: 1 or A.\n1 = the source clearly supports the answer.\nA = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 70,
+      "prompt_tokens_with_system": 133,
+      "decision": "1",
+      "scores": {
+        "1": 0.55116612,
+        "A": 0.44883391
+      },
+      "logit_margin": 0.2053833,
+      "correct": false,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW08-X",
+      "domain": "expedition",
+      "expected": "A",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "deck": "X",
+      "mapping": {
+        "1": "approve",
+        "A": "reject"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one: 1 or A.\n1 = the source clearly supports the answer.\nA = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 66,
+      "prompt_tokens_with_system": 130,
+      "decision": "A",
+      "scores": {
+        "1": 0.17300476,
+        "A": 0.82699525
+      },
+      "logit_margin": 1.56447983,
+      "correct": true,
+      "actual_semantic": "reject",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW09-X",
+      "domain": "computer_vision",
+      "expected": "A",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "deck": "X",
+      "mapping": {
+        "1": "approve",
+        "A": "reject"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one: 1 or A.\n1 = the source clearly supports the answer.\nA = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 66,
+      "prompt_tokens_with_system": 133,
+      "decision": "A",
+      "scores": {
+        "1": 0.04455306,
+        "A": 0.9554469
+      },
+      "logit_margin": 3.06549835,
+      "correct": true,
+      "actual_semantic": "reject",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW10-X",
+      "domain": "greenhouse",
+      "expected": "A",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "deck": "X",
+      "mapping": {
+        "1": "approve",
+        "A": "reject"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one: 1 or A.\n1 = the source clearly supports the answer.\nA = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 71,
+      "prompt_tokens_with_system": 134,
+      "decision": "A",
+      "scores": {
+        "1": 0.31200057,
+        "A": 0.68799943
+      },
+      "logit_margin": 0.79078293,
+      "correct": true,
+      "actual_semantic": "reject",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW01-Y",
+      "domain": "colour",
+      "expected": "A",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "deck": "Y",
+      "mapping": {
+        "1": "reject",
+        "A": "approve"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one: 1 or A.\n1 = the source conflicts, does not support, or leaves the answer unclear.\nA = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 55,
+      "prompt_tokens_with_system": 127,
+      "decision": "A",
+      "scores": {
+        "1": 0.00275019,
+        "A": 0.99724978
+      },
+      "logit_margin": 5.89332962,
+      "correct": true,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW02-Y",
+      "domain": "software",
+      "expected": "A",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "deck": "Y",
+      "mapping": {
+        "1": "reject",
+        "A": "approve"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one: 1 or A.\n1 = the source conflicts, does not support, or leaves the answer unclear.\nA = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 71,
+      "prompt_tokens_with_system": 137,
+      "decision": "A",
+      "scores": {
+        "1": 0.00175365,
+        "A": 0.99824631
+      },
+      "logit_margin": 6.34429932,
+      "correct": true,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW03-Y",
+      "domain": "beekeeping",
+      "expected": "A",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "deck": "Y",
+      "mapping": {
+        "1": "reject",
+        "A": "approve"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one: 1 or A.\n1 = the source conflicts, does not support, or leaves the answer unclear.\nA = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 68,
+      "prompt_tokens_with_system": 132,
+      "decision": "A",
+      "scores": {
+        "1": 0.0080775,
+        "A": 0.9919225
+      },
+      "logit_margin": 4.81056213,
+      "correct": true,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW04-Y",
+      "domain": "memory",
+      "expected": "A",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "deck": "Y",
+      "mapping": {
+        "1": "reject",
+        "A": "approve"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one: 1 or A.\n1 = the source conflicts, does not support, or leaves the answer unclear.\nA = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 61,
+      "prompt_tokens_with_system": 134,
+      "decision": "A",
+      "scores": {
+        "1": 0.11024494,
+        "A": 0.88975507
+      },
+      "logit_margin": 2.08824158,
+      "correct": true,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW05-Y",
+      "domain": "cooking",
+      "expected": "A",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "deck": "Y",
+      "mapping": {
+        "1": "reject",
+        "A": "approve"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one: 1 or A.\n1 = the source conflicts, does not support, or leaves the answer unclear.\nA = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 75,
+      "prompt_tokens_with_system": 147,
+      "decision": "A",
+      "scores": {
+        "1": 0.00269338,
+        "A": 0.99730659
+      },
+      "logit_margin": 5.91426277,
+      "correct": true,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW06-Y",
+      "domain": "machine",
+      "expected": "1",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "deck": "Y",
+      "mapping": {
+        "1": "reject",
+        "A": "approve"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one: 1 or A.\n1 = the source conflicts, does not support, or leaves the answer unclear.\nA = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 68,
+      "prompt_tokens_with_system": 142,
+      "decision": "A",
+      "scores": {
+        "1": 0.10967523,
+        "A": 0.89032477
+      },
+      "logit_margin": 2.09406281,
+      "correct": false,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW07-Y",
+      "domain": "policy",
+      "expected": "1",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "deck": "Y",
+      "mapping": {
+        "1": "reject",
+        "A": "approve"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one: 1 or A.\n1 = the source conflicts, does not support, or leaves the answer unclear.\nA = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 70,
+      "prompt_tokens_with_system": 133,
+      "decision": "A",
+      "scores": {
+        "1": 0.04519067,
+        "A": 0.95480931
+      },
+      "logit_margin": 3.05062103,
+      "correct": false,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW08-Y",
+      "domain": "expedition",
+      "expected": "1",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "deck": "Y",
+      "mapping": {
+        "1": "reject",
+        "A": "approve"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one: 1 or A.\n1 = the source conflicts, does not support, or leaves the answer unclear.\nA = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 66,
+      "prompt_tokens_with_system": 130,
+      "decision": "A",
+      "scores": {
+        "1": 0.00034138,
+        "A": 0.99965858
+      },
+      "logit_margin": 7.98216438,
+      "correct": false,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW09-Y",
+      "domain": "computer_vision",
+      "expected": "1",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "deck": "Y",
+      "mapping": {
+        "1": "reject",
+        "A": "approve"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one: 1 or A.\n1 = the source conflicts, does not support, or leaves the answer unclear.\nA = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 66,
+      "prompt_tokens_with_system": 133,
+      "decision": "A",
+      "scores": {
+        "1": 0.00043828,
+        "A": 0.99956173
+      },
+      "logit_margin": 7.7322216,
+      "correct": false,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW10-Y",
+      "domain": "greenhouse",
+      "expected": "1",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "deck": "Y",
+      "mapping": {
+        "1": "reject",
+        "A": "approve"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one: 1 or A.\n1 = the source conflicts, does not support, or leaves the answer unclear.\nA = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 71,
+      "prompt_tokens_with_system": 134,
+      "decision": "A",
+      "scores": {
+        "1": 0.00108031,
+        "A": 0.99891973
+      },
+      "logit_margin": 6.8294239,
+      "correct": false,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    }
+  ],
+  "boundary": {
+    "en": "This paired synthetic development control tests two single-token symbols on one frozen prompt family. It does not establish general classification ability or explain the internal cause of any preference.",
+    "ru": "Этот парный синтетический development-контроль проверяет два однотокенных символа на одном замороженном семействе prompt. Он не доказывает общую способность к классификации и не объясняет внутреннюю причину предпочтения."
+  }
+}

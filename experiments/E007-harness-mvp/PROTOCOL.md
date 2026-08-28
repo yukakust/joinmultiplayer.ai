@@ -557,3 +557,11 @@ Before inference, define semantic success as at least 18/20, at least 9/10 per
 deck, and at least 4/5 for each semantic class. At least 16/20 identical symbol
 choices is a strong symbol bias. At least 8/10 pairwise symbol flips without
 semantic success means the mapping was followed but evidence judgment failed.
+
+The paired run found a strong `A`-symbol bias. Qwen chose `A` on 16/20 prompts,
+changed its symbol in only 4/10 mirrored pairs, and reached 10/20 semantic
+accuracy. Deck X scored 5/10 and deck Y scored 5/10. Thus replacing semantic
+labels with neutral symbols did not produce a reliable evidence judge; it
+moved the preference from `approve` to `A`. This does not distinguish a token
+prior from other prompt-format effects. Result:
+`site/experiments/E007/numeric-letter-result-v0.1.json`.
