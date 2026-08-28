@@ -37,6 +37,8 @@ QUESTION_NEXT_MOVES = {"answer"}
 QUESTION_LANGUAGES = {"en", "ru", "und"}
 PUBLIC_ID_RE = re.compile(r"^[QT][0-9]{4,}$")
 RUN_ID_RE = re.compile(r"^R[0-9]{4,}$")
+MATCH_ID_RE = re.compile(r"^M[0-9]{4,}$")
+MATCH_PIECES = {"match", "matchbox", "lighter", "flint", "candle", "lantern", "lens", "sparkler"}
 EXPERIMENT_EVENT_TYPES = {
     "run_started",
     "user_message",
@@ -504,6 +506,26 @@ def init_db(path: Path) -> None:
             db.execute("ALTER TABLE contributions ADD COLUMN relation TEXT NOT NULL DEFAULT ''")
         db.execute(
             """
+            CREATE TABLE IF NOT EXISTS matches (
+                row_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                public_id TEXT UNIQUE,
+                piece TEXT NOT NULL,
+                pseudonym TEXT NOT NULL DEFAULT '',
+                lit_by TEXT NOT NULL DEFAULT '',
+                map_consent INTEGER NOT NULL DEFAULT 0,
+                trace_id TEXT NOT NULL DEFAULT '',
+                created_at TEXT NOT NULL
+            )
+            """
+        )
+        if db.execute("SELECT 1 FROM matches WHERE public_id = 'M0001'").fetchone() is None:
+            db.execute(
+                "INSERT INTO matches (public_id, piece, pseudonym, lit_by, map_consent, trace_id, created_at) "
+                "VALUES ('M0001', 'match', 'Yuka Kust', 'origin', 1, '', ?)",
+                (datetime.now(timezone.utc).isoformat(timespec="seconds"),),
+            )
+        db.execute(
+            """
             CREATE TABLE IF NOT EXISTS events (
                 row_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 event_id TEXT UNIQUE,
@@ -822,6 +844,9 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                 max_age=2,
             )
             return
+        if path == "/api/public/matches.json":
+            self.get_public_matches()
+            return
         if path.startswith("/api/public/"):
             self.get_public(path.removeprefix("/api/public/"))
             return
@@ -918,6 +943,11 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
             self.send_json(HTTPStatus.TOO_MANY_REQUESTS, {"error": "too many submissions; try later"})
             return
         door, payload, author = validate_submission(body)
+        piece = clean_text(body.get("piece", ""), "piece", required=False, limit=20).lower()
+        if piece and piece not in MATCH_PIECES:
+            raise ValueError("unknown piece")
+        match_consent = 1 if body.get("match_consent") else 0
+        lit_by = clean_text(body.get("lit_by", ""), "lit by", required=False, limit=12).upper()
         parent_public_id = clean_text(
             body.get("parent_id", ""), "parent record", required=False, limit=40
         ).upper()
@@ -979,10 +1009,32 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
             )
             public_id = f"T{cursor.lastrowid:04d}"
             db.execute("UPDATE contributions SET public_id = ? WHERE row_id = ?", (public_id, cursor.lastrowid))
-        self.send_json(
-            HTTPStatus.CREATED,
-            {"id": public_id, "token": token, "status": "pending", "status_path": f"/contribution/#{token}"},
-        )
+            match_info = None
+            if piece:
+                if lit_by and not (
+                    MATCH_ID_RE.fullmatch(lit_by)
+                    and db.execute("SELECT 1 FROM matches WHERE public_id = ?", (lit_by,)).fetchone()
+                ):
+                    lit_by = ""
+                match_cursor = db.execute(
+                    "INSERT INTO matches (piece, pseudonym, lit_by, map_consent, trace_id, created_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    (
+                        piece,
+                        author if author != "anonymous" else "",
+                        lit_by,
+                        match_consent,
+                        public_id,
+                        now,
+                    ),
+                )
+                match_id = f"M{match_cursor.lastrowid:04d}"
+                db.execute("UPDATE matches SET public_id = ? WHERE row_id = ?", (match_id, match_cursor.lastrowid))
+                match_info = {"public_id": match_id, "piece": piece, "lit": False, "lit_by": lit_by or "self-found"}
+        response = {"id": public_id, "token": token, "status": "pending", "status_path": f"/contribution/#{token}"}
+        if match_info:
+            response["match"] = match_info
+        self.send_json(HTTPStatus.CREATED, response)
 
     def create_question(self, body: object) -> None:
         if not self.limiter.allow(self.client_key()):
@@ -1075,7 +1127,43 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         response["payload"] = json.loads(response["payload"])
         if response["status"] == "public":
             response["public_path"] = f"/record/?id={response['public_id']}"
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            match = db.execute(
+                "SELECT public_id, piece, lit_by, map_consent FROM matches WHERE trace_id = ?",
+                (response.get("public_id") or "",),
+            ).fetchone()
+        if match is not None:
+            response["match"] = {
+                "public_id": match["public_id"],
+                "piece": match["piece"],
+                "lit": response["status"] == "public",
+                "lit_by": match["lit_by"] or "self-found",
+                "map_consent": bool(match["map_consent"]),
+            }
         self.send_json(HTTPStatus.OK, response)
+
+    def get_public_matches(self) -> None:
+        with sqlite3.connect(self.db_path) as db:
+            db.row_factory = sqlite3.Row
+            rows = db.execute(
+                "SELECT m.public_id, m.piece, m.pseudonym, m.lit_by, m.trace_id, m.created_at "
+                "FROM matches m LEFT JOIN contributions c ON c.public_id = m.trace_id "
+                "WHERE m.public_id = 'M0001' OR (m.map_consent = 1 AND c.status = 'public') "
+                "ORDER BY m.row_id"
+            ).fetchall()
+        matches = [
+            {
+                "public_id": row["public_id"],
+                "piece": row["piece"],
+                "name": row["pseudonym"] or "anonymous",
+                "lit_by": row["lit_by"] or "self-found",
+                "first_move": row["trace_id"] or None,
+                "created_at": row["created_at"],
+            }
+            for row in rows
+        ]
+        self.send_json(HTTPStatus.OK, {"schema_version": "0.1", "matches": matches}, public=True, max_age=5)
 
     def append_response(self, body: object) -> None:
         if not isinstance(body, dict):

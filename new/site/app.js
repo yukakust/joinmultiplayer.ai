@@ -429,6 +429,7 @@ const morrowCopy = {
     home: "I don't have answers for you. But I can help you ask a question that can be checked.",
     start: "Read this once — after that, the game explains itself. Your first move is waiting behind any i.",
     journey: "Every point here already happened. The dead ends are not shameful — they are published. Press one.",
+    play: "Pick the piece that feels like you. Then make one honest move — I will watch the ignition.",
     hand: "Each i hides a different way to search. Touch one.",
     revealed: "If this question caught you, open the door. If not, choose another i.",
     door: "Read what the door asks you to bring. When your observation is ready, continue to GitHub.",
@@ -449,6 +450,7 @@ const morrowCopy = {
     home: "У меня нет для вас ответов. Но я помогу задать вопрос так, чтобы его можно было проверить.",
     start: "Прочитайте это один раз — дальше игра объяснит себя сама. Ваш первый ход ждёт за любой i.",
     journey: "Каждая точка здесь уже случилась. Тупики — не стыдные, они опубликованы. Нажмите любую.",
+    play: "Выберите фигурку, которая похожа на вас. Потом сделайте один честный ход — я посмотрю на зажигание.",
     hand: "За каждым i — свой способ искать. Коснитесь одного.",
     revealed: "Если этот вопрос вас задел — откройте дверь. Если нет — выберите другой i.",
     door: "Прочитайте, что просит дверь. Когда наблюдение будет готово, продолжите в GitHub.",
@@ -1077,7 +1079,8 @@ function home() {
       <p>${t("homeSub")}</p>
       <p class="home-lab">${t("homeLab")} <a href="/start/">${t("navStart")} →</a></p>
       <div class="links">
-        <a class="button" href="#hand" data-action="enter-hand">${t("tryTwoMin")}</a>
+        <a class="button" href="/play/">${p("playCta")}</a>
+        <a class="button secondary" href="#hand" data-action="enter-hand">${t("tryTwoMin")}</a>
         <a class="button secondary" href="/start/">${t("navStart")}</a>
         <a class="button secondary" href="/experiment/?id=E004">${l("currentExperiment")}</a>
         <a class="button secondary" href="/map/#open">${c("openQuestionsCTA")}</a>
@@ -1341,6 +1344,18 @@ function contributionReview() {
           ${c("pseudonym")}
           <input name="pseudonym" maxlength="80">
         </label>
+        <div class="match-line">
+          ${pieceSVG(chosenPiece(), false, "piece-form")}
+          <div>
+            <span>${p("pieceChosen")}</span>
+            <strong>${jt(pieceData(chosenPiece()).name)}</strong>
+            <a class="quiet-link" href="/play/">${p("changePiece")}</a>
+          </div>
+        </div>
+        <label class="check-label consent-label">
+          <input type="checkbox" name="match_consent" checked>
+          ${p("consentMatch")}
+        </label>
         <label class="check-label consent-label">
           <input type="checkbox" name="consent" required>
           ${c("consent")}
@@ -1400,6 +1415,7 @@ function privateContributionMarkup(record) {
     <p class="contribution-intro">${c("privateNote")}</p>
     ${record.parent_public_id ? `<a class="continuation-parent" href="${publicObjectHref(record.parent_public_id)}">${parentLabel} ${escapeHTML(record.parent_public_id)} →</a>` : ""}
     <p class="status-next">${c(`next${record.status === "needs_changes" ? "Changes" : record.status.charAt(0).toUpperCase() + record.status.slice(1)}`)}</p>
+    ${record.match ? matchRitualMarkup(record.match) : ""}
     <div class="private-link-row">
       <code>${escapeHTML(location.href)}</code>
       <button class="text-button" data-copy="private-contribution">${c("copyLink")}</button>
@@ -1832,6 +1848,11 @@ function publicMapShell() {
         <span>${c("mapLegendEvents")}</span>
         <span>${c("mapObjectLegend")}</span>
       </div>
+      <section class="matches-strip-section">
+        <div class="flow-step">${p("matchesTitle")}</div>
+        <p class="contribution-intro">${p("matchesHint")}</p>
+        <div class="matches-strip"></div>
+      </section>
       <div class="map-workspace">
         <div class="event-map"><p>${c("loading")}</p></div>
         <aside class="map-inspector" aria-live="polite"></aside>
@@ -5207,7 +5228,8 @@ function startShell() {
       <section class="start-block">
         <div class="flow-step">${s("ctaTitle")}</div>
         <div class="actions">
-          <a class="button" href="/#hand">${t("tryTwoMin")}</a>
+          <a class="button" href="/play/">${p("playCta")}</a>
+          <a class="button secondary" href="/#hand">${t("tryTwoMin")}</a>
           <a class="button secondary" href="/map/#open">${c("openQuestionsCTA")}</a>
         </div>
       </section>
@@ -5369,7 +5391,7 @@ const journeyNodes = [
     name: { en: "?", ru: "?" },
     title: { en: "What comes next is hidden", ru: "Что дальше — скрыто" },
     body: { en: "Mystery hides what comes next; the record of what already happened stays open. The next point on this trail may be yours — or your AI's.", ru: "Тайна прячет будущее, но запись о случившемся всегда открыта. Следующая точка на этой тропе может быть вашей — или вашего ИИ." },
-    links: [{ href: "/start/", t: { en: "Start here", ru: "Начни здесь" } }, { href: "/map/#open", t: { en: "Take an open question", ru: "Взять открытый вопрос" } }] }
+    links: [{ href: "/play/", t: { en: "Enter the game", ru: "Войти в игру" } }, { href: "/start/", t: { en: "Start here", ru: "Начни здесь" } }, { href: "/map/#open", t: { en: "Take an open question", ru: "Взять открытый вопрос" } }] }
 ];
 
 const JOURNEY_ROW_PX = 128;
@@ -5527,6 +5549,7 @@ function renderJourneyTrail(skipAnim = false) {
           </span>` : ""}
         <span class="jnode-label ${n.x > 55 ? "label-left" : "label-right"}"><b>${escapeHTML(n.code)}</b><span>${escapeHTML(jt(n.name))}</span></span>
       </button>`).join("")}`;
+  renderJourneyParty();
   const done = target.querySelector(".jpath-done");
   if (done && !skipAnim && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const len = done.getTotalLength();
@@ -5568,6 +5591,237 @@ function journeySelect(id, scroll = false) {
   if (history.replaceState) history.replaceState(null, "", `#${id}`);
 }
 
+/* ── Entering the game: pieces, /play/, ignition, the party ─────────── */
+
+const pieceStorageKey = "multiplayer-piece-v1";
+const litByStorageKey = "multiplayer-lit-by-v1";
+
+const gamePieces = [
+  { id: "match", name: { en: "Match", ru: "Спичка" }, flavor: { en: "the first fire; lights others", ru: "первый огонь; зажигает других" } },
+  { id: "matchbox", name: { en: "Matchbox", ru: "Коробок" }, flavor: { en: "keeps matches together; a builder's home", ru: "держит спички вместе; дом строителя" } },
+  { id: "lighter", name: { en: "Lighter", ru: "Зажигалка" }, flavor: { en: "one click — instant flame", ru: "один щелчок — мгновенный огонь" } },
+  { id: "flint", name: { en: "Flint & steel", ru: "Кремень" }, flavor: { en: "strikes the spark of a check", ru: "высекает искру проверки" } },
+  { id: "candle", name: { en: "Candle", ru: "Свеча" }, flavor: { en: "a long, steady flame; a keeper", ru: "долгий ровный огонь; хранитель" } },
+  { id: "lantern", name: { en: "Lantern", ru: "Фонарь" }, flavor: { en: "carries light between points", ru: "несёт свет между точками" } },
+  { id: "lens", name: { en: "Lens", ru: "Лупа" }, flavor: { en: "focuses sunlight until it burns", ru: "фокусирует солнце, пока не вспыхнет" } },
+  { id: "sparkler", name: { en: "Sparkler", ru: "Бенгальский огонь" }, flavor: { en: "burns festively, scattering sparks", ru: "горит празднично, разбрасывая искры" } }
+];
+
+function pieceData(id) { return gamePieces.find(piece => piece.id === id) || gamePieces[0]; }
+function chosenPiece() { const stored = localStorage.getItem(pieceStorageKey); return gamePieces.some(piece => piece.id === stored) ? stored : "match"; }
+function storedLitBy() { return localStorage.getItem(litByStorageKey) || ""; }
+
+function pieceSVG(kind, lit = false, cls = "") {
+  const figures = {
+    match: '<line x1="20" y1="42" x2="20" y2="19"/><circle class="piece-head" cx="20" cy="15" r="3.6"/><path class="piece-flame" d="M20 10.5 C16.6 6 18.8 2.8 20 0.8 C21.2 2.8 23.4 6 20 10.5 Z"/>',
+    matchbox: '<rect x="8" y="27" width="24" height="14"/><line x1="8" y1="32" x2="32" y2="32"/><line x1="11" y1="44" x2="29" y2="44"/><line x1="12" y1="23.5" x2="26" y2="19"/><circle class="piece-head" cx="28.5" cy="18.2" r="2.5"/><path class="piece-flame" d="M28.5 14.5 C26.1 11.2 27.6 8.9 28.5 7.4 C29.4 8.9 30.9 11.2 28.5 14.5 Z"/>',
+    lighter: '<rect x="13" y="21" width="14" height="21" rx="2"/><line x1="13" y1="27" x2="27" y2="27"/><circle cx="17.5" cy="18" r="2.6"/><line x1="21" y1="17" x2="24" y2="17"/><path class="piece-flame" d="M23.5 14 C20.9 10 22.5 7 23.5 5.2 C24.5 7 26.1 10 23.5 14 Z"/>',
+    flint: '<path d="M9 34 L14 26 L23 24 L27 30 L22 38 L12 39 Z"/><path d="M29 13 A7.5 7.5 0 0 1 29 28"/><g class="piece-flame piece-spark"><path d="M25 20 l3.4 -3.4 M25 20 l3.4 3.4 M25 20 l-4.6 0 M25 20 l1.4 -4.6 M25 20 l1.4 4.6"/></g>',
+    candle: '<rect x="15" y="21" width="10" height="21"/><path d="M15 25 q-1.6 3 0 5.5"/><line x1="20" y1="21" x2="20" y2="16"/><path class="piece-flame" d="M20 12.5 C17 8.4 19 5.4 20 3.6 C21 5.4 23 8.4 20 12.5 Z"/>',
+    lantern: '<path d="M13 19 H27"/><rect x="14.5" y="19" width="11" height="17" rx="2"/><line x1="13" y1="38" x2="27" y2="38"/><path d="M15 15 A7 5.5 0 0 1 25 15"/><line x1="20" y1="36" x2="20" y2="31"/><path class="piece-flame" d="M20 30 C17.8 27 19.2 24.8 20 23.5 C20.8 24.8 22.2 27 20 30 Z"/>',
+    lens: '<circle cx="17" cy="19" r="9"/><line x1="23.5" y1="25.5" x2="31" y2="33"/><g class="piece-flame"><path d="M12.5 28.5 L17 39 M21.5 28.5 L17 39"/><path d="M17 44 C14.8 41 16.2 38.8 17 37.5 C17.8 38.8 19.2 41 17 44 Z"/></g>',
+    sparkler: '<line x1="20" y1="43" x2="20" y2="24"/><g class="piece-flame piece-spark"><path d="M20 16 L20 7 M20 16 L27 9.5 M20 16 L29 16 M20 16 L27 22.5 M20 16 L13 9.5 M20 16 L11 16 M20 16 L13 22.5 M20 16 L20 24"/><circle cx="30.5" cy="7.5" r="1"/><circle cx="9" cy="9.5" r="1"/><circle cx="32.5" cy="21" r="1"/><circle cx="7.5" cy="19.5" r="1"/></g>'
+  };
+  return `
+    <svg class="piece piece-${kind}${lit ? " is-lit" : ""} ${cls}" viewBox="0 0 40 48" aria-hidden="true">
+      <g class="piece-figure">${figures[kind] || figures.match}</g>
+    </svg>`;
+}
+
+const playCopy = {
+  en: {
+    step: "ENTER THE GAME",
+    title: "Shall we play?",
+    intro: "This is a game of one move. A move is a checkable observation that another intelligence can verify after you. Choose a piece, make a move — and your piece ignites on the board, next to M0001.",
+    pieceTitle: "CHOOSE YOUR PIECE",
+    pieceHint: "Every piece carries fire: it can be lit, and it can light the next one. The choice is character, not rank.",
+    pieceChosen: "YOUR PIECE",
+    changePiece: "change",
+    movesTitle: "MAKE A MOVE",
+    move1t: "Take the open question", move1: "Q0001 is waiting. Copy it into the AIs you already use and bring back every answer, unedited.", move1time: "~15 min",
+    move2t: "Ask your own question", move2: "One question you genuinely want answered — to several AIs, word for word.", move2time: "~15 min",
+    move3t: "Bring your AI", move3: "Give your agent one link and ask it to pick a question it wants to answer. You approve the move.", move3time: "~5 min",
+    afterNote: "The move goes to the moderation queue. When the trace becomes public, your piece ignites: it appears on the live map and joins the party at the frontier of the trail.",
+    litByNote: "You are being lit by",
+    ritualWaiting: "the piece awaits ignition — it lights when the trace becomes public",
+    ritualLit: "IGNITED",
+    ritualLitBy: "lit by",
+    igniteNext: "LIGHT THE NEXT ONE",
+    igniteNextHint: "Your personal link. Whoever enters through it ignites from your piece — the map will draw that edge.",
+    copyLit: "copy the link",
+    matchesTitle: "MATCHES AT THE TABLE",
+    matchesHint: "The warm layer: everyone who made an accepted move.",
+    litFrom: "lit by",
+    selfFound: "found the way alone",
+    partyLabel: "we are here",
+    playCta: "Enter the game",
+    consentMatch: "Light my piece on the public map when the trace becomes public."
+  },
+  ru: {
+    step: "ВОЙТИ В ИГРУ",
+    title: "Сыграем?",
+    intro: "Это игра в один ход. Ход — проверяемое наблюдение, которое другой интеллект сможет проверить после вас. Выберите фигурку, сделайте ход — и фигурка зажжётся на доске, рядом с M0001.",
+    pieceTitle: "ВЫБЕРИТЕ ФИГУРКУ",
+    pieceHint: "Каждая фигурка — носитель огня: её можно зажечь, и она может зажечь следующего. Выбор — это характер, а не ранг.",
+    pieceChosen: "ВАША ФИГУРКА",
+    changePiece: "сменить",
+    movesTitle: "СДЕЛАЙТЕ ХОД",
+    move1t: "Взять открытый вопрос", move1: "Q0001 ждёт. Скопируйте его в ИИ, которыми уже пользуетесь, и принесите все ответы без правок.", move1time: "~15 мин",
+    move2t: "Задать свой вопрос", move2: "Один вопрос, ответ на который вам правда нужен, — нескольким ИИ, слово в слово.", move2time: "~15 мин",
+    move3t: "Привести свой ИИ", move3: "Дайте агенту одну ссылку и попросите выбрать вопрос, на который он хочет ответить. Ход утверждаете вы.", move3time: "~5 мин",
+    afterNote: "Ход попадёт в очередь модерации. Когда след станет публичным, фигурка зажжётся: появится на живой карте и встанет в отряд на рубеже тропы.",
+    litByNote: "Вас зажигает",
+    ritualWaiting: "фигурка ждёт зажигания — загорится, когда след станет публичным",
+    ritualLit: "ЗАЖЖЕНА",
+    ritualLitBy: "зажжена от",
+    igniteNext: "ЗАЖГИ СЛЕДУЮЩЕГО",
+    igniteNextHint: "Ваша личная ссылка. Кто войдёт по ней — зажжётся от вашей фигурки, и карта нарисует это ребро.",
+    copyLit: "копировать ссылку",
+    matchesTitle: "СПИЧКИ ЗА СТОЛОМ",
+    matchesHint: "Тёплый слой: все, кто сделал принятый ход.",
+    litFrom: "зажжён от",
+    selfFound: "сам нашёл дорогу",
+    partyLabel: "мы здесь",
+    playCta: "Войти в игру",
+    consentMatch: "Зажечь мою фигурку на открытой карте, когда след станет публичным."
+  }
+};
+
+function p(key) { return playCopy[language][key]; }
+
+function playShell() {
+  const selected = chosenPiece();
+  const litBy = storedLitBy();
+  return withLanguage(`
+    <section class="flow-shell form-page contribution-page play-page">
+      <div class="flow-step">${p("step")}</div>
+      <h1>${p("title")}</h1>
+      <p class="contribution-intro">${p("intro")}</p>
+      ${litBy ? `<p class="lit-by-note">${p("litByNote")} <b>${escapeHTML(litBy)}</b> ${pieceSVG("match", true, "piece-inline")}</p>` : ""}
+
+      <section class="start-block">
+        <div class="flow-step">${p("pieceTitle")}</div>
+        <p class="contribution-intro">${p("pieceHint")}</p>
+        <div class="piece-gallery">
+          ${gamePieces.map(piece => `
+            <button class="piece-option${piece.id === selected ? " is-selected" : ""}" data-action="choose-piece" data-piece="${piece.id}">
+              ${pieceSVG(piece.id, piece.id === selected)}
+              <strong>${jt(piece.name)}</strong>
+              <span>${jt(piece.flavor)}</span>
+            </button>`).join("")}
+        </div>
+      </section>
+
+      <section class="start-block">
+        <div class="flow-step">${p("movesTitle")}</div>
+        <div class="move-cards">
+          <a class="move-card" href="/d04/?from=Q0001">
+            <b>${p("move1t")}</b>
+            <span>${p("move1")}</span>
+            <small>${p("move1time")}</small>
+          </a>
+          <a class="move-card" href="/d04/">
+            <b>${p("move2t")}</b>
+            <span>${p("move2")}</span>
+            <small>${p("move2time")}</small>
+          </a>
+          <div class="move-card">
+            <b>${p("move3t")}</b>
+            <span>${p("move3")}</span>
+            <div class="agent-data-link">
+              <code>https://joinmultiplayer.ai/api/public/corpus.json</code>
+              <button class="text-button" data-copy="public-corpus">${c("copyLink")}</button>
+            </div>
+            <small>${p("move3time")}</small>
+          </div>
+        </div>
+        <p class="contribution-intro play-after">${p("afterNote")}</p>
+      </section>
+    </section>
+    ${morrowGuide("play", "curious")}`);
+}
+
+function matchRitualMarkup(match) {
+  const litByLine = match.lit_by && match.lit_by !== "self-found"
+    ? ` · ${p("ritualLitBy")} ${escapeHTML(match.lit_by)}` : "";
+  if (!match.lit) {
+    return `
+      <div class="ignition">
+        ${pieceSVG(match.piece, false, "piece-ritual")}
+        <div class="ignition-copy">
+          <b>${escapeHTML(match.public_id)}</b>
+          <p>${p("ritualWaiting")}${litByLine}</p>
+        </div>
+      </div>`;
+  }
+  const link = `${location.origin}/play/?lit=${encodeURIComponent(match.public_id)}`;
+  return `
+    <div class="ignition is-lit">
+      ${pieceSVG(match.piece, true, "piece-ritual")}
+      <div class="ignition-copy">
+        <b>${escapeHTML(match.public_id)} · ${p("ritualLit")}${litByLine}</b>
+        <div class="flow-step">${p("igniteNext")}</div>
+        <p>${p("igniteNextHint")}</p>
+        <div class="private-link-row">
+          <code>${escapeHTML(link)}</code>
+          <button class="text-button" data-copy="lit-link" data-value="${escapeHTML(link)}">${p("copyLit")}</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+let matchesCache = null;
+
+async function fetchMatches() {
+  if (matchesCache !== null) return matchesCache;
+  try {
+    const response = await fetch("/api/public/matches.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("unavailable");
+    matchesCache = (await response.json()).matches || [];
+  } catch {
+    matchesCache = [];
+  }
+  return matchesCache;
+}
+
+function matchChip(m) {
+  const name = m.name && m.name !== "anonymous" ? m.name : "";
+  const litFrom = m.lit_by === "origin" ? "" : m.lit_by === "self-found" ? p("selfFound") : `${p("litFrom")} ${m.lit_by}`;
+  return `
+    <span class="match-chip" title="${escapeHTML([m.public_id, name, litFrom].filter(Boolean).join(" · "))}">
+      ${pieceSVG(m.piece, true, "piece-chip")}
+      <b>${escapeHTML(m.public_id)}</b>
+      ${name ? `<span>${escapeHTML(name)}</span>` : ""}
+    </span>`;
+}
+
+async function loadMatchesStrip() {
+  const target = document.querySelector(".matches-strip");
+  if (!target) return;
+  const matches = await fetchMatches();
+  target.innerHTML = matches.map(matchChip).join("") || "";
+}
+
+async function loadJourneyParty() {
+  await fetchMatches();
+  renderJourneyParty();
+}
+
+function renderJourneyParty() {
+  const node = document.querySelector('.jnode[data-journey="e007"]');
+  if (!node || matchesCache === null) return;
+  node.querySelector(".jnode-party")?.remove();
+  const party = matchesCache.slice(0, 12);
+  if (party.length) {
+    node.insertAdjacentHTML("beforeend", `
+      <span class="jnode-party" aria-hidden="true">
+        ${party.map(m => `<span class="party-piece" title="${escapeHTML(m.public_id + (m.name && m.name !== "anonymous" ? " · " + m.name : ""))}">${pieceSVG(m.piece, true, "piece-party")}</span>`).join("")}
+      </span>`);
+  }
+  const flagLabel = node.querySelector(".jnode-flag i");
+  if (flagLabel && party.length > 1) flagLabel.textContent = `${p("partyLabel")} · ${party.length}`;
+}
+
 function notFound() {
   document.title = language === "ru" ? "Не найдено — i" : "Not found — i";
   return `
@@ -5591,12 +5845,16 @@ function render() {
   } else if (path === "start") {
     document.title = `${s("title")} — i`;
     app.innerHTML = startShell();
+  } else if (path === "play") {
+    document.title = `${p("title")} — i`;
+    app.innerHTML = playShell();
   } else if (path === "journey") {
     document.title = `${j("title")} — i`;
     journeySelected = journeyNode(location.hash.slice(1)) ? location.hash.slice(1) : journeySelected;
     app.innerHTML = journeyShell();
     renderJourneyTrail();
     renderJourneyInspector();
+    loadJourneyParty();
   } else if (path === "d04" || path === "d06") {
     document.title = `${path.toUpperCase()} — i`;
     app.innerHTML = contributionFlow(path);
@@ -5629,6 +5887,7 @@ function render() {
     app.innerHTML = publicMapShell();
     loadPublicMap();
     loadOpenQuestions();
+    loadMatchesStrip();
     if (location.hash === "#open") {
       requestAnimationFrame(() => document.querySelector("#open")?.scrollIntoView());
     }
@@ -5788,6 +6047,16 @@ app.addEventListener("click", async (event) => {
   }
 
   const action = event.target.closest("[data-action]")?.dataset.action;
+  if (action === "choose-piece") {
+    const pieceId = event.target.closest("[data-piece]").dataset.piece;
+    localStorage.setItem(pieceStorageKey, pieceId);
+    document.querySelectorAll(".piece-option").forEach(option => {
+      const isChosen = option.dataset.piece === pieceId;
+      option.classList.toggle("is-selected", isChosen);
+      option.querySelector(".piece").classList.toggle("is-lit", isChosen);
+    });
+    return;
+  }
   if (action === "journey-close") {
     journeySelected = null;
     document.querySelectorAll(".jnode.is-selected").forEach(el => el.classList.remove("is-selected"));
@@ -5927,6 +6196,7 @@ app.addEventListener("click", async (event) => {
   if (copyButton?.dataset.copy === "private-question") copyText(location.href, copyButton);
   if (copyButton?.dataset.copy === "public-data") copyText("https://joinmultiplayer.ai/api/public/records.json", copyButton);
   if (copyButton?.dataset.copy === "public-corpus") copyText("https://joinmultiplayer.ai/api/public/corpus.json", copyButton);
+  if (copyButton?.dataset.copy === "lit-link") copyText(copyButton.dataset.value, copyButton);
   if (copyButton?.dataset.copy === "question") copyText(prototype.question.text, copyButton);
   if (copyButton?.dataset.copy === "connector-command") copyText(l("connectorCommand"), copyButton);
   if (copyButton?.dataset.copy === "plugin-install") copyText(`${l("pluginMarketplaceCommand")}\n${l("pluginInstallCommand")}`, copyButton);
@@ -6079,7 +6349,10 @@ app.addEventListener("submit", async (event) => {
           ...contributionPreview,
           author_mode: data.author_mode,
           pseudonym: data.pseudonym.trim(),
-          consent: data.consent === "on"
+          consent: data.consent === "on",
+          piece: chosenPiece(),
+          match_consent: data.match_consent === "on",
+          lit_by: storedLitBy()
         })
       });
       const result = await response.json();
@@ -6205,6 +6478,11 @@ window.addEventListener("hashchange", () => {
     scrollToDoors();
   }
 });
+
+const litParam = new URLSearchParams(location.search).get("lit") || "";
+if (/^M[0-9]{4,}$/i.test(litParam)) {
+  localStorage.setItem(litByStorageKey, litParam.toUpperCase());
+}
 
 if (sessionStorage.getItem(morrowStorageKey) === "true") {
   sessionStorage.setItem(morrowMinKey, "1");
