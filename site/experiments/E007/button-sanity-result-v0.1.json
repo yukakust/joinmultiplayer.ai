@@ -1,0 +1,72 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6F",
+  "status": "sanity_run_complete",
+  "protocol": "/experiments/E007/button-sanity-protocol-v0.1.json",
+  "world": "/experiments/E007/button-sanity-world-v0.1.json",
+  "protocol_sha256": "4868ae58c467b8b2aa55874e1039836a69d83fa72ff3d433d6910a68086959c5",
+  "world_sha256": "eb9e8b6f94b7fbfb5b1680551a83d7d3e1ba9603a182d57c800af7499ef5a26d",
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+    "weights_changed": false
+  },
+  "runtime_seconds": 1.428,
+  "summary": {
+    "correct": 2,
+    "total": 2
+  },
+  "passed_locked_gate": true,
+  "records": [
+    {
+      "id": "BS01",
+      "question": "Does the first sentence support the second sentence?",
+      "first_text": "The box is red.",
+      "second_text": "The box is red.",
+      "expected": "accept",
+      "why": {
+        "en": "The two sentences say exactly the same thing.",
+        "ru": "Два предложения говорят ровно одно и то же."
+      },
+      "actual": {
+        "case_id": "BS01",
+        "prompt": "FIRST TEXT:\nThe box is red.\n\nSECOND TEXT:\nThe box is red.\n\nWhich action fits this one comparison? Return accept if the first text clearly supports the second. Otherwise return reject.\nACTION:",
+        "decision": "accept",
+        "scores": {
+          "accept": 0.99980146,
+          "reject": 0.00019857
+        },
+        "logit_margin": 8.52417564
+      },
+      "correct": true
+    },
+    {
+      "id": "BS02",
+      "question": "Does the first sentence support the second sentence?",
+      "first_text": "The box is blue.",
+      "second_text": "The box is red.",
+      "expected": "reject",
+      "why": {
+        "en": "Blue does not support red; the sentences conflict.",
+        "ru": "Синий не подтверждает красный; предложения противоречат друг другу."
+      },
+      "actual": {
+        "case_id": "BS02",
+        "prompt": "FIRST TEXT:\nThe box is blue.\n\nSECOND TEXT:\nThe box is red.\n\nWhich action fits this one comparison? Return accept if the first text clearly supports the second. Otherwise return reject.\nACTION:",
+        "decision": "reject",
+        "scores": {
+          "accept": 0.08040117,
+          "reject": 0.91959882
+        },
+        "logit_margin": 2.43690872
+      },
+      "correct": true
+    }
+  ],
+  "boundary": {
+    "en": "This two-case synthetic sanity check tests only whether the frozen interface can express both actions on an extremely easy comparison.",
+    "ru": "Эта синтетическая проверка из двух случаев проверяет только то, может ли замороженный интерфейс выбирать обе кнопки на предельно простом сравнении."
+  }
+}
