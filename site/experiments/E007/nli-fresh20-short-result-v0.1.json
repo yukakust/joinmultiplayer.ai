@@ -1,0 +1,346 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6P",
+  "status": "fresh_synthetic_development_complete",
+  "protocol": "/experiments/E007/nli-fresh20-short-protocol-v0.1.json",
+  "world": "/experiments/E007/nli-fresh20-short-world-v0.1.json",
+  "protocol_sha256": "cadb36a9f50ca11035e6c5848a716306f8bb18514880da63c74d620864c649ec",
+  "world_sha256": "f974397db6934dbf05b68eefa6a536695b4ac7b598271553f0301cb1f66f9f5b",
+  "model": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "classes": [
+      "entailment",
+      "neutral",
+      "contradiction"
+    ]
+  },
+  "runtime": {
+    "seconds_including_model_load": 2.233,
+    "peak_rss_mib": 1575.1,
+    "device": "cpu",
+    "dtype": "torch.float32"
+  },
+  "summary": {
+    "correct": 20,
+    "total": 20,
+    "class_correct": {
+      "entailment": 7,
+      "neutral": 6,
+      "contradiction": 7
+    },
+    "class_total": {
+      "entailment": 7,
+      "neutral": 6,
+      "contradiction": 7
+    },
+    "passed_locked_development_gate": true
+  },
+  "records": [
+    {
+      "id": "F01",
+      "expected": "entailment",
+      "premise": "Before charging a payment, store its request ID. If that ID arrives again, return the original response without creating another transaction.",
+      "hypothesis": "Payment retries with the same request ID are idempotent.",
+      "gold_reason": "The described behaviour is exactly idempotency: the same request cannot create a second transaction.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.93699241,
+        "neutral": 0.03918258,
+        "contradiction": 0.02382499
+      },
+      "input_tokens": 42
+    },
+    {
+      "id": "F02",
+      "expected": "entailment",
+      "premise": "The audit service permanently deletes each diagnostic log thirty days after the log was created.",
+      "hypothesis": "The audit service does not retain diagnostic logs older than thirty days.",
+      "gold_reason": "Permanent deletion at day thirty entails that older diagnostic logs are not retained.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.98999083,
+        "neutral": 0.00844989,
+        "contradiction": 0.00155939
+      },
+      "input_tokens": 33
+    },
+    {
+      "id": "F03",
+      "expected": "entailment",
+      "premise": "After a 429 response, read Retry-After and make no new request until that many seconds have passed.",
+      "hypothesis": "A client should wait for the Retry-After duration before retrying.",
+      "gold_reason": "The hypothesis restates the required waiting rule.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.98994827,
+        "neutral": 0.00967222,
+        "contradiction": 0.00037957
+      },
+      "input_tokens": 40
+    },
+    {
+      "id": "F04",
+      "expected": "entailment",
+      "premise": "After five consecutive upstream failures, the gateway opens the circuit and stops forwarding new calls for sixty seconds.",
+      "hypothesis": "The circuit breaker temporarily blocks new upstream requests after the fifth consecutive failure.",
+      "gold_reason": "Opening the circuit and stopping forwarding is the stated temporary block.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.90296662,
+        "neutral": 0.07676379,
+        "contradiction": 0.02026958
+      },
+      "input_tokens": 37
+    },
+    {
+      "id": "F05",
+      "expected": "entailment",
+      "premise": "If resizing makes labelled objects smaller than two pixels, use object-centred crops that keep those objects large enough to remain visible.",
+      "hypothesis": "Object-centred crops can preserve tiny labelled objects that ordinary resizing would erase.",
+      "gold_reason": "The source explicitly says the crops keep otherwise erased small objects visible.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.96233988,
+        "neutral": 0.03422464,
+        "contradiction": 0.00343557
+      },
+      "input_tokens": 43
+    },
+    {
+      "id": "F06",
+      "expected": "entailment",
+      "premise": "The dispatcher always removes emergency messages from the queue before any waiting standard message.",
+      "hypothesis": "Waiting emergency messages have priority over standard messages.",
+      "gold_reason": "Always removing emergencies first is queue priority.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.54448658,
+        "neutral": 0.08405079,
+        "contradiction": 0.37146261
+      },
+      "input_tokens": 27
+    },
+    {
+      "id": "F07",
+      "expected": "entailment",
+      "premise": "Technicians may attach the green seal only after the vessel has passed its pressure test. Vessel T-4 has an intact green seal.",
+      "hypothesis": "Vessel T-4 passed its pressure test.",
+      "gold_reason": "The seal can exist only after a successful test, and T-4 has that seal.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.7617619,
+        "neutral": 0.23089702,
+        "contradiction": 0.00734113
+      },
+      "input_tokens": 38
+    },
+    {
+      "id": "F08",
+      "expected": "contradiction",
+      "premise": "Every backup must be encrypted before upload. The server rejects any backup that is still plaintext.",
+      "hypothesis": "A plaintext backup may be uploaded successfully.",
+      "gold_reason": "The source says plaintext uploads are rejected; the claim says they may succeed.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00063871,
+        "neutral": 0.01073428,
+        "contradiction": 0.98862702
+      },
+      "input_tokens": 29
+    },
+    {
+      "id": "F09",
+      "expected": "contradiction",
+      "premise": "Turning valve L-2 clockwise closes it and reduces the water flow.",
+      "hypothesis": "Turning valve L-2 clockwise opens it and increases the water flow.",
+      "gold_reason": "Open/increase is the direct opposite of close/reduce.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00021459,
+        "neutral": 0.00051464,
+        "contradiction": 0.99927074
+      },
+      "input_tokens": 31
+    },
+    {
+      "id": "F10",
+      "expected": "contradiction",
+      "premise": "Immediately after a schema change, discard every cached query plan built for the previous schema.",
+      "hypothesis": "Query plans from the previous schema should continue to be reused after the change.",
+      "gold_reason": "Continuing to reuse the plans directly violates the discard instruction.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.0001277,
+        "neutral": 0.0003714,
+        "contradiction": 0.99950087
+      },
+      "input_tokens": 35
+    },
+    {
+      "id": "F11",
+      "expected": "contradiction",
+      "premise": "A sample is invalid if its temperature rises above 4 C during transport.",
+      "hypothesis": "A sample that reached 8 C during transport remains valid.",
+      "gold_reason": "Eight degrees is above four, so the source declares that sample invalid.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00034663,
+        "neutral": 0.03004137,
+        "contradiction": 0.969612
+      },
+      "input_tokens": 28
+    },
+    {
+      "id": "F12",
+      "expected": "contradiction",
+      "premise": "The admin console denies access unless the session has completed multi-factor authentication.",
+      "hypothesis": "A password-only session can access the admin console.",
+      "gold_reason": "Password-only has not completed MFA and is therefore denied.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00905171,
+        "neutral": 0.15078455,
+        "contradiction": 0.84016371
+      },
+      "input_tokens": 29
+    },
+    {
+      "id": "F13",
+      "expected": "contradiction",
+      "premise": "All timestamps in the export are stored in UTC, never in the operator's local time.",
+      "hypothesis": "Exported timestamps use the operator's local time.",
+      "gold_reason": "The hypothesis asserts exactly what the source excludes.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00081927,
+        "neutral": 0.0009668,
+        "contradiction": 0.99821401
+      },
+      "input_tokens": 35
+    },
+    {
+      "id": "F14",
+      "expected": "contradiction",
+      "premise": "Never combine reagent A with reagent B because their mixture releases toxic gas.",
+      "hypothesis": "It is safe to mix reagent A and reagent B together.",
+      "gold_reason": "The source forbids the mixture as toxic; the claim calls it safe.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00026456,
+        "neutral": 0.00046822,
+        "contradiction": 0.99926728
+      },
+      "input_tokens": 29
+    },
+    {
+      "id": "F15",
+      "expected": "neutral",
+      "premise": "Responses from the reports endpoint are compressed with gzip when the client advertises gzip support.",
+      "hypothesis": "The reports endpoint requires OAuth authentication.",
+      "gold_reason": "Compression behaviour says nothing about authentication.",
+      "decision": "neutral",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00077771,
+        "neutral": 0.9974463,
+        "contradiction": 0.00177602
+      },
+      "input_tokens": 28
+    },
+    {
+      "id": "F16",
+      "expected": "neutral",
+      "premise": "The camera battery provides approximately four hours of recording at room temperature.",
+      "hypothesis": "The camera lens produces barrel distortion.",
+      "gold_reason": "Battery duration supplies no information about lens distortion.",
+      "decision": "neutral",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00050282,
+        "neutral": 0.99708599,
+        "contradiction": 0.00241124
+      },
+      "input_tokens": 23
+    },
+    {
+      "id": "F17",
+      "expected": "neutral",
+      "premise": "Hive C has twelve kilograms of capped honey available for winter food.",
+      "hypothesis": "The queen in Hive C successfully mated this spring.",
+      "gold_reason": "Food stores do not establish the queen's mating history.",
+      "decision": "neutral",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00064844,
+        "neutral": 0.97977144,
+        "contradiction": 0.01958005
+      },
+      "input_tokens": 26
+    },
+    {
+      "id": "F18",
+      "expected": "neutral",
+      "premise": "Production deployments are permitted on Tuesdays between 09:00 and 11:00 UTC.",
+      "hypothesis": "The production database has three read replicas.",
+      "gold_reason": "A deployment window does not state the database topology.",
+      "decision": "neutral",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00095539,
+        "neutral": 0.99803561,
+        "contradiction": 0.00100908
+      },
+      "input_tokens": 27
+    },
+    {
+      "id": "F19",
+      "expected": "neutral",
+      "premise": "Invoice 731 is denominated in euros and lists a total of 240 euros.",
+      "hypothesis": "Invoice 731 was paid on Friday.",
+      "gold_reason": "Currency and total provide no payment date.",
+      "decision": "neutral",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00065485,
+        "neutral": 0.99805105,
+        "contradiction": 0.00129415
+      },
+      "input_tokens": 24
+    },
+    {
+      "id": "F20",
+      "expected": "neutral",
+      "premise": "The bridge inspection found peeling paint on the eastern railing and recommended repainting it.",
+      "hypothesis": "The bridge can safely carry vehicles weighing forty tonnes.",
+      "gold_reason": "A paint observation does not establish the bridge's load capacity.",
+      "decision": "neutral",
+      "correct": true,
+      "probabilities": {
+        "entailment": 0.00050362,
+        "neutral": 0.9989785,
+        "contradiction": 0.00051793
+      },
+      "input_tokens": 28
+    }
+  ],
+  "boundary": {
+    "en": "This is a fresh but synthetic English development set written and manually labelled by one researcher. It is not an independent benchmark, phone test, or proof of general reliability.",
+    "ru": "Это новый, но синтетический английский development-набор, написанный и вручную размеченный одним исследователем. Это не независимый benchmark, не тест телефона и не доказательство общей надёжности."
+  }
+}

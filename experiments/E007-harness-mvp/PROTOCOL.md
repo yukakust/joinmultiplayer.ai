@@ -669,3 +669,21 @@ models classified the technical idempotency paraphrase as neutral rather than
 entailed. A larger off-the-shelf NLI classifier helped by one point, but did
 not make this gate safe enough for automatic evidence acceptance. Result:
 `site/experiments/E007/nli-deberta-result-v0.1.json`.
+
+## Checkpoint 3C.6P — twenty fresh short NLI pairs
+
+Before inference, write twenty new synthetic English source-claim pairs with a
+human reason for every gold label: seven entailments, seven contradictions,
+and six neutral pairs. Include both direct statements and professional
+paraphrases such as a repeated payment request ID being an idempotency key.
+Run the same pinned DeBERTa once with no examples, training, or calibration.
+The locked gate is at least 18/20 overall, at least 6/7 entailments, all seven
+contradictions, and at least 5/6 neutral cases.
+
+DeBERTa classified all 20/20 pairs correctly and passed every class gate. A
+manual post-run audit agreed with every frozen label and every model decision.
+Confidence ranged from 54.4% on emergency-message queue priority to 100.0% on
+discarding stale query plans. The fresh idempotency paraphrase was correctly
+entailed at 93.7%. This is encouraging synthetic development evidence, not an
+independent benchmark or general reliability proof. Result:
+`site/experiments/E007/nli-fresh20-short-result-v0.1.json`.
