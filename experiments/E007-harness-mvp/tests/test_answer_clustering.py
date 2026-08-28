@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import unittest
 from pathlib import Path
 
@@ -26,6 +27,16 @@ class AnswerClusteringTests(unittest.TestCase):
     def test_components_keep_low_score_pairs_apart(self):
         groups = MODULE.components(["A", "B"], {("A", "B"): 0.4}, 0.8)
         self.assertEqual(groups, [["A"], ["B"]])
+
+    def test_published_result_preserves_locked_failure(self):
+        result_path = Path(__file__).parents[3] / "site/experiments/E007/answer-clustering-result-v0.1.json"
+        result = json.loads(result_path.read_text())
+        self.assertFalse(result["passed_locked_gate"])
+        self.assertEqual(result["summary"]["exact_paraphrase_groups"], 0)
+        self.assertEqual(result["summary"]["paraphrase_groups_total"], 6)
+        self.assertEqual(result["summary"]["forbidden_merges"], 4)
+        self.assertEqual(result["summary"]["pairwise_f1"], 0.395062)
+        self.assertEqual(result["summary"]["lost_answers"], 0)
 
 
 if __name__ == "__main__":

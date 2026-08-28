@@ -269,9 +269,9 @@ Evidence boundary: this is a synthetic English development result checked by
 one researcher. It does not yet establish multilingual quality, independent
 labelling, phone performance, long-document behaviour, or production safety.
 
-## Gate 12A candidate: knowledge revision chains
+## Accepted Gate 12A: knowledge revision chains
 
-Gate 12A passed its locked synthetic development gates and awaits owner review.
+The owner accepted Gate 12A as the narrow chain mechanism.
 Each pocket i can send an append-only chain whose parent links identify its
 current head and preserve older claims as history. The verifier correctly
 handled ten frozen cases, including replacement, retraction, missing history,
@@ -288,6 +288,27 @@ from yukabox to miracle-prod. The receiver independently selected `PHY-R3`,
 kept `PHY-R1` and `PHY-R2` as history, and returned the same payload SHA-256.
 This is one physical SSH-carried development transfer, not the final relay.
 
+Gate 12 does not decide whether the latest claim is true, applicable, or
+independent. Those questions are intentionally deferred until the harness has
+collected all candidate answers.
+
+## Failed Gate 13A: merging similar answers
+
+Gate 13A froze 21 English and Russian answers before the run: six groups of
+three paraphrases, three single answers, and five pairs that must never be
+merged. A frozen multilingual MiniLM embedding model selected candidate pairs;
+a threshold calibrated on separate examples turned those pairs into connected
+groups.
+
+The locked gate failed: 0/6 paraphrase groups were recovered exactly, pairwise
+F1 was 0.395062, and 4/5 forbidden merges occurred. No answer was lost. The
+largest wrong group joined four different claims merely because all discussed
+image tiling.
+
+Decision: embedding similarity may propose answers for comparison, but it may
+not perform the final merge. The next merge module must compare the actual
+claims and preserve opposing or merely related meanings.
+
 ## Accepted steps and their evidence
 
 | Step | Accepted design | Current evidence |
@@ -303,7 +324,7 @@ This is one physical SSH-carried development transfer, not the final relay.
 | 9 | The receiver checks `question ↔ one memory piece` with Qwen3-Reranker-4B Q4 and returns TAKE / NOT SURE / DROP. | Accepted after Gate 3C.5; Q4 matched BF16 24/24. Phone test pending. |
 | 10 | Ordinary code proves that the exact passage came from the named, versioned source snapshot and byte range. | Gate 3C.6A passed 20/20 twice with identical output. |
 | 11 | Check `exact source passage ↔ one atomic claim` with DeBERTa-v3-base NLI. Keep the person's question outside this call. Return SUPPORTED / CONTRADICTED / NOT PROVEN. | Accepted after Gate 3C.6P–Q: short pairs 20/20; the mixed question-and-context package fell to 15/20. Synthetic English development evidence only. |
-| 12 | Later validators check source truth/currentness, matching conditions, provenance, and independence. A pocket i's own freshness is represented as an append-only chain: current head plus preserved history. No semantic relation label is required. | Gate 12A mechanics passed 10/10 synthetically. Gate 12A.2 passed one yukabox → miracle-prod transfer with matching SHA-256 and the correct head/history. Owner review remains pending; other validators are not yet accepted. |
-| 13 | Similar claims collapse, but evidence and lineage remain. A supported minority stays visible. | Accepted design, not yet tested at scale. |
+| 12 | A pocket i's knowledge history is an append-only chain: current head plus preserved history. No semantic relation label is required. Truth, applicability, and independence are checked later after collection. | Accepted after 10/10 synthetic mechanics and one yukabox → miracle-prod transfer with matching SHA-256 and correct head/history. |
+| 13 | Merge answers that make the same claim while preserving evidence, lineage, and supported minority views. | First attempt failed: embedding threshold recovered 0/6 exact groups and made 4/5 forbidden merges. Embeddings are candidate search only; the safe merge decision remains open. |
 | 14 | A model writes the final human answer only from accepted evidence; a final checker shows gaps instead of guessing. | Accepted design, not yet tested. |
 | 15 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |

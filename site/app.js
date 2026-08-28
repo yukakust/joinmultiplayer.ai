@@ -2857,7 +2857,7 @@ function e006Shell() {
 }
 
 function e007Shell() {
-  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 3A · ${localized({ en: "TWO REAL DEVICES CONNECTED", ru: "ДВА РЕАЛЬНЫХ УСТРОЙСТВА СОЕДИНЕНЫ" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "Four processes received one unchanged question. See where their attention went, then inspect the earlier model answers.", ru: "Четыре процесса получили один неизменённый вопрос. Посмотрите, куда направилось их внимание, а затем изучите предыдущие ответы моделей." })}</p><div class="actions"><a class="primary-link" href="/experiment/e007/gate-12a/">${localized({ en: "NEW · SEE KNOWLEDGE HISTORY", ru: "НОВОЕ · ИСТОРИЯ ЗНАНИЯ" })} →</a><a class="quiet-link" href="/experiment/e007/ten-buttons/">${localized({ en: "EARLIER ACCEPTANCE TESTS", ru: "ПРЕДЫДУЩИЕ ТЕСТЫ ПРИЁМКИ" })} ↗</a><a class="quiet-link" href="#e007-attention">${localized({ en: "SEE THE PHYSICAL TEST", ru: "СМОТРЕТЬ ФИЗИЧЕСКИЙ ТЕСТ" })} ↓</a><a class="quiet-link" href="#e007-smoke-results">${localized({ en: "EARLIER MODEL ANSWERS", ru: "ПРЕДЫДУЩИЕ ОТВЕТЫ МОДЕЛЕЙ" })} ↓</a></div><div class="experiment-loading">${c("loading")}</div></section>`;
+  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 3A · ${localized({ en: "TWO REAL DEVICES CONNECTED", ru: "ДВА РЕАЛЬНЫХ УСТРОЙСТВА СОЕДИНЕНЫ" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "Four processes received one unchanged question. See where their attention went, then inspect the earlier model answers.", ru: "Четыре процесса получили один неизменённый вопрос. Посмотрите, куда направилось их внимание, а затем изучите предыдущие ответы моделей." })}</p><div class="actions"><a class="primary-link" href="/experiment/e007/gate-13a/">${localized({ en: "NEW · SIMILAR ANSWERS", ru: "НОВОЕ · ПОХОЖИЕ ОТВЕТЫ" })} →</a><a class="quiet-link" href="/experiment/e007/gate-12a/">${localized({ en: "KNOWLEDGE HISTORY", ru: "ИСТОРИЯ ЗНАНИЯ" })} ↗</a><a class="quiet-link" href="/experiment/e007/ten-buttons/">${localized({ en: "EARLIER ACCEPTANCE TESTS", ru: "ПРЕДЫДУЩИЕ ТЕСТЫ ПРИЁМКИ" })} ↗</a><a class="quiet-link" href="#e007-attention">${localized({ en: "SEE THE PHYSICAL TEST", ru: "СМОТРЕТЬ ФИЗИЧЕСКИЙ ТЕСТ" })} ↓</a><a class="quiet-link" href="#e007-smoke-results">${localized({ en: "EARLIER MODEL ANSWERS", ru: "ПРЕДЫДУЩИЕ ОТВЕТЫ МОДЕЛЕЙ" })} ↓</a></div><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
 function e007TenButtonsShell() {
@@ -2866,6 +2866,10 @@ function e007TenButtonsShell() {
 
 function e007KnowledgeChainShell() {
   return `<section class="flow-shell e007-chain-page"><div class="flow-step">E007 · GATE 12A · ${localized({ en: "KNOWLEDGE HISTORY", ru: "ИСТОРИЯ ЗНАНИЯ" })}</div><h1>${localized({ en: "What does this pocket i believe now?", ru: "Что этот pocket i думает сейчас?" })}</h1><p class="contribution-intro">${localized({ en: "The latest belief stays on top. Older beliefs remain visible underneath.", ru: "Последняя мысль остаётся наверху. Старые мысли сохраняются под ней." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+function e007AnswerClusteringShell() {
+  return `<section class="flow-shell e007-cluster-page"><div class="flow-step">E007 · GATE 13A · ${localized({ en: "MERGE SIMILAR ANSWERS", ru: "ОБЪЕДИНИТЬ ПОХОЖИЕ ОТВЕТЫ" })}</div><h1>${localized({ en: "Did similar meaning become one group?", ru: "Одинаковый смысл стал одной группой?" })}</h1><p class="contribution-intro">${localized({ en: "Twenty-one answers went in. Read the five groups the harness made.", ru: "На входе 21 ответ. Посмотрите пять групп, которые собрал harness." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
 function e005MethodName(method) {
@@ -4833,6 +4837,24 @@ async function loadE007KnowledgeChain() {
   }
 }
 
+async function loadE007AnswerClustering() {
+  const target = document.querySelector(".e007-cluster-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E007/answer-clustering-result-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Gate 13A result missing");
+    const result = await response.json();
+    const clusters = result.clusters.map(cluster => {
+      const correctShape = cluster.gold_groups.length === 1 && cluster.answers.length === (cluster.gold_groups[0].startsWith("G") && Number(cluster.gold_groups[0].slice(1)) <= 6 ? 3 : 1);
+      const answers = cluster.answers.map(answer => `<li><b>${escapeHTML(answer.id)} · ${escapeHTML(answer.language.toUpperCase())}</b><span>${escapeHTML(answer.text)}</span><small>${localized({ en: "should be", ru: "правильная группа" })}: ${escapeHTML(answer.gold_group)}</small></li>`).join("");
+      return `<article class="e007-cluster-card ${correctShape ? "is-correct" : "is-critical"}"><header><span>${escapeHTML(cluster.cluster_id)}</span><strong>${cluster.answers.length} ${localized({ en: "answers", ru: "ответов" })}</strong><small>${localized({ en: "MEANINGS INSIDE", ru: "РАЗНЫХ СМЫСЛОВ ВНУТРИ" })}: ${escapeHTML(cluster.gold_groups.join(" + "))}</small></header><ul>${answers}</ul></article>`;
+    }).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict is-failed"><span>${localized({ en: "LOCKED DEVELOPMENT RESULT", ru: "ЗАМОРОЖЕННЫЙ DEVELOPMENT-РЕЗУЛЬТАТ" })}</span><h2>${localized({ en: "Failed: it grouped topics, not meanings.", ru: "Не прошло: модель склеила темы, а не одинаковые мысли." })}</h2><p>${localized({ en: "All tiling answers landed together—even help for small objects, no help for large objects, border overlap, and higher GPU memory.", ru: "Все ответы про тайлинг попали вместе: польза для маленьких объектов, отсутствие пользы для больших, перекрытие границ и рост памяти GPU." })}</p></div><div class="e007-result-metrics"><article class="is-critical"><span>${localized({ en: "CORRECT PARAPHRASE GROUPS", ru: "ПРАВИЛЬНЫХ ГРУПП ПЕРЕСКАЗОВ" })}</span><strong>${result.summary.exact_paraphrase_groups} / ${result.summary.paraphrase_groups_total}</strong></article><article class="is-critical"><span>${localized({ en: "DANGEROUS MERGES", ru: "ОПАСНЫХ СКЛЕЕК" })}</span><strong>${result.summary.forbidden_merges} / 5</strong></article><article class="is-critical"><span>PAIRWISE F1</span><strong>${Math.round(result.summary.pairwise_f1 * 100)}%</strong></article></div><p class="control-warning">${localized({ en: "Embedding distance is useful for finding candidates, but it is not enough to merge answers. Similar vocabulary can hide opposite or merely related claims.", ru: "Расстояние между embedding полезно для поиска кандидатов, но его недостаточно для склейки ответов. Похожие слова могут скрывать противоположные или просто соседние мысли." })}</p><div class="e007-cluster-list">${clusters}</div><div class="actions"><a class="quiet-link" href="/experiments/E007/answer-clustering-result-v0.1.json">${localized({ en: "ALL SCORES", ru: "ВСЕ РАСЧЁТЫ" })} ↗</a><a class="quiet-link" href="/experiments/E007/answer-clustering-world-v0.1.json">${localized({ en: "FROZEN 21 ANSWERS", ru: "21 ЗАМОРОЖЕННЫЙ ОТВЕТ" })} ↗</a><a class="quiet-link" href="/experiments/E007/answer-clustering-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 13A could not be loaded.", ru: "Не удалось загрузить Gate 13A." });
+  }
+}
+
 async function loadE005() {
   const target = document.querySelector(".e005-page");
   if (!target) return;
@@ -5794,6 +5816,10 @@ function render() {
     document.title = `${localized({ en: "Knowledge history", ru: "История знания" })} — i`;
     app.innerHTML = withLanguage(e007KnowledgeChainShell());
     loadE007KnowledgeChain();
+  } else if (path === "experiment/e007/gate-13a") {
+    document.title = `${localized({ en: "Similar answers", ru: "Похожие ответы" })} — i`;
+    app.innerHTML = withLanguage(e007AnswerClusteringShell());
+    loadE007AnswerClustering();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

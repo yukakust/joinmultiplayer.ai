@@ -22,10 +22,11 @@ as tested parts. This is not yet a downloadable end-to-end product.
     snapshot and byte range.
 11. DeBERTa NLI checks only `exact passage + one atomic claim`:
     `SUPPORTED / CONTRADICTED / NOT PROVEN`. The user question stays outside.
-12. Separate future modules must still check source truth, currentness,
-    conditions, provenance, and independence.
-13. Similar claims collapse, but their evidence and lineages remain visible.
-    A supported minority is preserved.
+12. Keep each pocket i's knowledge as a chain: one current head plus preserved
+    history. Check truth, applicability, and independence later, after all
+    candidate answers arrive.
+13. Merge only answers that make the same claim. Evidence, lineage, and a
+    supported minority must remain visible.
 14. A model writes the final answer only from accepted evidence and clearly
     names missing pieces.
 15. The harness records `contacted → found → accepted → used → improved` so it
@@ -54,3 +55,20 @@ or safe to share. Those are different jobs for different modules.
 This is synthetic English development evidence reviewed by one researcher.
 It still needs an independent held-out set, other languages, quantized-device
 tests, and an end-to-end run on real pocket i devices.
+
+## What Gate 12A taught us
+
+The narrow chain mechanism is accepted. It found the current head and kept the
+old records in 10/10 frozen synthetic cases. One three-record chain also moved
+from yukabox to miracle-prod with the same SHA-256. This proves transport and
+history mechanics only; it does not prove truth or applicability.
+
+## What failed in Gate 13A
+
+A frozen multilingual MiniLM embedding model tried to merge 21 English and
+Russian answers. It recovered 0/6 paraphrase groups exactly, reached pairwise
+F1 0.395062, and made 4/5 forbidden merges. It grouped answers about the same
+topic even when they made different or opposing claims.
+
+Therefore embeddings may find candidates, but they may not make the final
+merge decision. This failed result is part of the public experiment history.

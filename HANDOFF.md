@@ -355,6 +355,21 @@ The owner accepted this as the current modular incoming relevance gate on
 TAKE / NOT SURE / DROP. NOT SURE is preserved for a later module. The decision
 and the complete accepted path are recorded in `schema.md`.
 
+Gate 12A is owner-accepted only as a narrow revision-chain mechanism: select
+the latest record in one lineage and keep every older record as history. The
+synthetic run passed 10/10, and Gate 12A.2 moved one three-record chain from
+yukabox to miracle-prod with a matching SHA-256. Do not claim that it checks
+truth, applicability, independence, or the final network relay.
+
+Gate 13A is a preserved failed synthetic development experiment. The frozen
+multilingual MiniLM embedding baseline clustered 21 EN/RU answers with a
+calibrated cosine threshold. It recovered 0/6 exact paraphrase groups, scored
+pairwise F1 0.395062, and made 4/5 forbidden merges while losing no answers.
+The failure shows that embeddings may retrieve candidate pairs but must not be
+the final answer-merging authority. Public result:
+`/experiments/E007/answer-clustering-result-v0.1.json`; UI:
+`/experiment/e007/gate-13a/`.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

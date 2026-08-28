@@ -1,0 +1,2072 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13A",
+  "status": "synthetic_development_run_complete",
+  "protocol": "/experiments/E007/answer-clustering-protocol-v0.1.json",
+  "world": "/experiments/E007/answer-clustering-world-v0.1.json",
+  "model": {
+    "repository": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "runtime": "transformers mean pooling with attention mask, then L2 normalization"
+  },
+  "threshold": 0.476168,
+  "calibration": {
+    "f1": 0.833333,
+    "tp": 5,
+    "fp": 1,
+    "fn": 1,
+    "records": [
+      {
+        "id": "CP01",
+        "left": "The backup valve should remain closed.",
+        "right": "Do not open the secondary valve.",
+        "same_meaning": true,
+        "score": 0.532091,
+        "predicted_same": true
+      },
+      {
+        "id": "CP02",
+        "left": "The backup valve should remain closed.",
+        "right": "The backup valve must be opened.",
+        "same_meaning": false,
+        "score": 0.662837,
+        "predicted_same": true
+      },
+      {
+        "id": "CP03",
+        "left": "Small objects became easier to detect after cropping the image into tiles.",
+        "right": "Tiling improved detection of tiny targets.",
+        "same_meaning": true,
+        "score": 0.57823,
+        "predicted_same": true
+      },
+      {
+        "id": "CP04",
+        "left": "Small objects became easier to detect after cropping the image into tiles.",
+        "right": "Tiling reduced GPU memory use.",
+        "same_meaning": false,
+        "score": 0.191163,
+        "predicted_same": false
+      },
+      {
+        "id": "CP05",
+        "left": "Перезапуск разрешён только после охлаждения.",
+        "right": "Restart only after the unit has cooled.",
+        "same_meaning": true,
+        "score": 0.644874,
+        "predicted_same": true
+      },
+      {
+        "id": "CP06",
+        "left": "Перезапуск разрешён только после охлаждения.",
+        "right": "Restart immediately while the unit is hot.",
+        "same_meaning": false,
+        "score": 0.316378,
+        "predicted_same": false
+      },
+      {
+        "id": "CP07",
+        "left": "The source does not establish a benefit for large objects.",
+        "right": "No improvement was measured for large targets.",
+        "same_meaning": true,
+        "score": 0.487345,
+        "predicted_same": true
+      },
+      {
+        "id": "CP08",
+        "left": "The source does not establish a benefit for large objects.",
+        "right": "Large objects improved substantially.",
+        "same_meaning": false,
+        "score": 0.267197,
+        "predicted_same": false
+      },
+      {
+        "id": "CP09",
+        "left": "Запечатанные маточники могут означать подготовку к роению.",
+        "right": "Sealed queen cells may indicate swarm preparation.",
+        "same_meaning": true,
+        "score": 0.476168,
+        "predicted_same": true
+      },
+      {
+        "id": "CP10",
+        "left": "Запечатанные маточники могут означать подготовку к роению.",
+        "right": "The hive has definitely lost its queen.",
+        "same_meaning": false,
+        "score": -0.044114,
+        "predicted_same": false
+      },
+      {
+        "id": "CP11",
+        "left": "Use the remote controls only.",
+        "right": "Operate the unit exclusively from a distance.",
+        "same_meaning": true,
+        "score": 0.291682,
+        "predicted_same": false
+      },
+      {
+        "id": "CP12",
+        "left": "Use the remote controls only.",
+        "right": "Use the controls mounted on the unit.",
+        "same_meaning": false,
+        "score": 0.377039,
+        "predicted_same": false
+      }
+    ]
+  },
+  "summary": {
+    "answers": 21,
+    "predicted_groups": 5,
+    "gold_groups": 9,
+    "pairwise_f1": 0.395062,
+    "pairwise_tp": 16,
+    "pairwise_fp": 47,
+    "pairwise_fn": 2,
+    "exact_paraphrase_groups": 0,
+    "paraphrase_groups_total": 6,
+    "forbidden_merges": 4,
+    "lost_answers": 0
+  },
+  "passed_locked_gate": false,
+  "clusters": [
+    {
+      "cluster_id": "C01",
+      "answer_ids": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A20"
+      ],
+      "gold_groups": [
+        "G1",
+        "G2",
+        "G3",
+        "G8"
+      ],
+      "answers": [
+        {
+          "id": "A01",
+          "pocket_id": "I01",
+          "language": "en",
+          "gold_group": "G1",
+          "text": "Image tiling improved recall for objects between 8 and 16 pixels."
+        },
+        {
+          "id": "A02",
+          "pocket_id": "I02",
+          "language": "en",
+          "gold_group": "G1",
+          "text": "Tiny 8–16 pixel targets were found more often when the image was split into tiles."
+        },
+        {
+          "id": "A03",
+          "pocket_id": "I03",
+          "language": "ru",
+          "gold_group": "G1",
+          "text": "Разбиение изображения на тайлы повысило полноту обнаружения объектов размером 8–16 пикселей."
+        },
+        {
+          "id": "A04",
+          "pocket_id": "I04",
+          "language": "en",
+          "gold_group": "G2",
+          "text": "Using 20% overlap between tiles reduced misses near tile borders."
+        },
+        {
+          "id": "A05",
+          "pocket_id": "I05",
+          "language": "en",
+          "gold_group": "G2",
+          "text": "Fewer edge objects were lost when neighbouring tiles overlapped by one fifth."
+        },
+        {
+          "id": "A06",
+          "pocket_id": "I06",
+          "language": "ru",
+          "gold_group": "G2",
+          "text": "Перекрытие соседних тайлов на 20% уменьшило число пропусков у границ."
+        },
+        {
+          "id": "A07",
+          "pocket_id": "I07",
+          "language": "en",
+          "gold_group": "G3",
+          "text": "No benefit from tiling has been measured for large objects."
+        },
+        {
+          "id": "A08",
+          "pocket_id": "I08",
+          "language": "en",
+          "gold_group": "G3",
+          "text": "The experiment did not show that image tiles help with large targets."
+        },
+        {
+          "id": "A09",
+          "pocket_id": "I09",
+          "language": "ru",
+          "gold_group": "G3",
+          "text": "Для крупных объектов польза разбиения на тайлы не была обнаружена."
+        },
+        {
+          "id": "A20",
+          "pocket_id": "I20",
+          "language": "en",
+          "gold_group": "G8",
+          "text": "Image tiling increased peak GPU memory use by 35%."
+        }
+      ]
+    },
+    {
+      "cluster_id": "C02",
+      "answer_ids": [
+        "A10",
+        "A11",
+        "A12",
+        "A13",
+        "A14",
+        "A15"
+      ],
+      "gold_groups": [
+        "G4",
+        "G5"
+      ],
+      "answers": [
+        {
+          "id": "A10",
+          "pocket_id": "I10",
+          "language": "en",
+          "gold_group": "G4",
+          "text": "Isolate power before restarting the unit."
+        },
+        {
+          "id": "A11",
+          "pocket_id": "I11",
+          "language": "en",
+          "gold_group": "G4",
+          "text": "Disconnect the power supply first, and only then restart."
+        },
+        {
+          "id": "A12",
+          "pocket_id": "I12",
+          "language": "ru",
+          "gold_group": "G4",
+          "text": "Перед перезапуском сначала отключите питание устройства."
+        },
+        {
+          "id": "A13",
+          "pocket_id": "I13",
+          "language": "en",
+          "gold_group": "G5",
+          "text": "Use remote controls only while phase drift is present."
+        },
+        {
+          "id": "A14",
+          "pocket_id": "I14",
+          "language": "en",
+          "gold_group": "G5",
+          "text": "When phase drift occurs, operate the unit exclusively from a distance."
+        },
+        {
+          "id": "A15",
+          "pocket_id": "I15",
+          "language": "ru",
+          "gold_group": "G5",
+          "text": "При фазовом дрейфе управляйте установкой только дистанционно."
+        }
+      ]
+    },
+    {
+      "cluster_id": "C03",
+      "answer_ids": [
+        "A16",
+        "A17",
+        "A19"
+      ],
+      "gold_groups": [
+        "G6",
+        "G7"
+      ],
+      "answers": [
+        {
+          "id": "A16",
+          "pocket_id": "I16",
+          "language": "en",
+          "gold_group": "G6",
+          "text": "Sealed queen cells can indicate that the colony is preparing to swarm."
+        },
+        {
+          "id": "A17",
+          "pocket_id": "I17",
+          "language": "en",
+          "gold_group": "G6",
+          "text": "The hive may be getting ready to swarm when capped queen cells appear."
+        },
+        {
+          "id": "A19",
+          "pocket_id": "I19",
+          "language": "en",
+          "gold_group": "G7",
+          "text": "Sealed queen cells may instead be part of supersedure when the old queen is failing."
+        }
+      ]
+    },
+    {
+      "cluster_id": "C04",
+      "answer_ids": [
+        "A18"
+      ],
+      "gold_groups": [
+        "G6"
+      ],
+      "answers": [
+        {
+          "id": "A18",
+          "pocket_id": "I18",
+          "language": "ru",
+          "gold_group": "G6",
+          "text": "Запечатанные маточники могут быть признаком подготовки семьи к роению."
+        }
+      ]
+    },
+    {
+      "cluster_id": "C05",
+      "answer_ids": [
+        "A21"
+      ],
+      "gold_groups": [
+        "G9"
+      ],
+      "answers": [
+        {
+          "id": "A21",
+          "pocket_id": "I21",
+          "language": "ru",
+          "gold_group": "G9",
+          "text": "Перезапуск допустим только после снижения температуры ниже 40 градусов."
+        }
+      ]
+    }
+  ],
+  "forbidden_merge_checks": [
+    {
+      "left_group": "G1",
+      "right_group": "G2",
+      "reason": "same topic, different claim",
+      "merged": true
+    },
+    {
+      "left_group": "G1",
+      "right_group": "G3",
+      "reason": "same topic, different condition and polarity",
+      "merged": true
+    },
+    {
+      "left_group": "G1",
+      "right_group": "G8",
+      "reason": "same topic, different metric",
+      "merged": true
+    },
+    {
+      "left_group": "G4",
+      "right_group": "G9",
+      "reason": "related restart actions, different requirement",
+      "merged": false
+    },
+    {
+      "left_group": "G6",
+      "right_group": "G7",
+      "reason": "related hive sign, different explanation",
+      "merged": true
+    }
+  ],
+  "pair_records": [
+    {
+      "left": "A01",
+      "right": "A02",
+      "score": 0.59755,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A03",
+      "score": 0.73563,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A04",
+      "score": 0.312911,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A01",
+      "right": "A05",
+      "score": 0.305414,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A01",
+      "right": "A06",
+      "score": 0.108014,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A01",
+      "right": "A07",
+      "score": 0.279769,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A01",
+      "right": "A08",
+      "score": 0.3417,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A01",
+      "right": "A09",
+      "score": 0.13909,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A01",
+      "right": "A10",
+      "score": 0.089441,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A11",
+      "score": -0.090153,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A12",
+      "score": 0.117563,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A13",
+      "score": 0.153363,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A14",
+      "score": 0.105385,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A15",
+      "score": 0.089713,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A16",
+      "score": 0.079825,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A17",
+      "score": 0.02101,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A18",
+      "score": 0.189134,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A19",
+      "score": 0.004051,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A01",
+      "right": "A20",
+      "score": 0.697009,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A01",
+      "right": "A21",
+      "score": 0.001849,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A03",
+      "score": 0.718263,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A04",
+      "score": 0.547816,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A02",
+      "right": "A05",
+      "score": 0.541531,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A02",
+      "right": "A06",
+      "score": 0.297729,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A02",
+      "right": "A07",
+      "score": 0.235009,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A02",
+      "right": "A08",
+      "score": 0.64192,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A02",
+      "right": "A09",
+      "score": 0.295601,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A02",
+      "right": "A10",
+      "score": 0.027711,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A11",
+      "score": -0.095657,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A12",
+      "score": 0.028163,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A13",
+      "score": 0.06302,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A14",
+      "score": 0.125174,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A15",
+      "score": 0.001241,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A16",
+      "score": 0.167423,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A17",
+      "score": 0.120991,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A18",
+      "score": 0.169323,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A19",
+      "score": 0.089256,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A02",
+      "right": "A20",
+      "score": 0.45543,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A02",
+      "right": "A21",
+      "score": 0.071206,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A04",
+      "score": 0.245977,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A03",
+      "right": "A05",
+      "score": 0.308859,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A03",
+      "right": "A06",
+      "score": 0.142653,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A03",
+      "right": "A07",
+      "score": 0.27828,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A03",
+      "right": "A08",
+      "score": 0.435002,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A03",
+      "right": "A09",
+      "score": 0.284308,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A03",
+      "right": "A10",
+      "score": 0.033247,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A11",
+      "score": -0.103618,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A12",
+      "score": 0.016947,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A13",
+      "score": 0.052059,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A14",
+      "score": 0.082501,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A15",
+      "score": 0.016135,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A16",
+      "score": 0.146935,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A17",
+      "score": 0.117072,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A18",
+      "score": 0.14945,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A19",
+      "score": 0.032319,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A03",
+      "right": "A20",
+      "score": 0.579801,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A03",
+      "right": "A21",
+      "score": -0.072314,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A05",
+      "score": 0.710689,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A06",
+      "score": 0.68293,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A07",
+      "score": 0.145467,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A04",
+      "right": "A08",
+      "score": 0.453087,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A04",
+      "right": "A09",
+      "score": 0.265209,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A04",
+      "right": "A10",
+      "score": 0.010353,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A11",
+      "score": -0.013059,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A12",
+      "score": 0.104779,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A13",
+      "score": 0.106078,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A14",
+      "score": 0.202619,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A15",
+      "score": 0.00759,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A16",
+      "score": 0.11304,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A17",
+      "score": 0.022726,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A18",
+      "score": 0.136399,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A19",
+      "score": 0.177343,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A04",
+      "right": "A20",
+      "score": 0.257351,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A04",
+      "right": "A21",
+      "score": 0.283472,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A06",
+      "score": 0.511982,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A07",
+      "score": 0.276576,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A05",
+      "right": "A08",
+      "score": 0.484135,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A05",
+      "right": "A09",
+      "score": 0.481383,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A05",
+      "right": "A10",
+      "score": 0.05904,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A11",
+      "score": 0.068065,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A12",
+      "score": 0.130265,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A13",
+      "score": 0.081042,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A14",
+      "score": 0.155666,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A15",
+      "score": 0.035636,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A16",
+      "score": 0.127569,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A17",
+      "score": 0.053386,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A18",
+      "score": 0.11978,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A19",
+      "score": 0.187985,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A05",
+      "right": "A20",
+      "score": 0.178305,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A05",
+      "right": "A21",
+      "score": 0.177691,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A07",
+      "score": 0.088787,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A06",
+      "right": "A08",
+      "score": 0.238878,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A06",
+      "right": "A09",
+      "score": 0.268669,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A06",
+      "right": "A10",
+      "score": 0.084833,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A11",
+      "score": 0.161217,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A12",
+      "score": 0.20702,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A13",
+      "score": 0.137587,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A14",
+      "score": 0.232947,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A15",
+      "score": 0.059242,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A16",
+      "score": 0.076995,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A17",
+      "score": -0.002774,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A18",
+      "score": 0.097975,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A19",
+      "score": 0.125957,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A06",
+      "right": "A20",
+      "score": 0.128427,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A06",
+      "right": "A21",
+      "score": 0.429967,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A08",
+      "score": 0.491061,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A09",
+      "score": 0.583657,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A10",
+      "score": 0.053981,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A11",
+      "score": -0.016707,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A12",
+      "score": -0.031054,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A13",
+      "score": 0.047374,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A14",
+      "score": 0.102367,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A15",
+      "score": -0.008648,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A16",
+      "score": -0.180335,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A17",
+      "score": -0.171316,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A18",
+      "score": -0.089487,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A19",
+      "score": 0.017696,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A07",
+      "right": "A20",
+      "score": 0.242049,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A07",
+      "right": "A21",
+      "score": -0.000451,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A09",
+      "score": 0.591603,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A10",
+      "score": 0.045926,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A11",
+      "score": -0.011379,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A12",
+      "score": 0.008533,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A13",
+      "score": 0.107714,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A14",
+      "score": 0.145279,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A15",
+      "score": 0.041463,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A16",
+      "score": 0.097321,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A17",
+      "score": 0.082189,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A18",
+      "score": -0.023451,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A19",
+      "score": 0.146976,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A08",
+      "right": "A20",
+      "score": 0.252842,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A08",
+      "right": "A21",
+      "score": 0.07004,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A10",
+      "score": 0.147354,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A11",
+      "score": 0.117326,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A12",
+      "score": 0.083185,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A13",
+      "score": 0.071867,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A14",
+      "score": 0.14717,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A15",
+      "score": 0.037569,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A16",
+      "score": -0.007422,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A17",
+      "score": 0.038323,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A18",
+      "score": 0.028076,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A19",
+      "score": 0.214131,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A09",
+      "right": "A20",
+      "score": 0.03393,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A09",
+      "right": "A21",
+      "score": 0.135643,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A10",
+      "right": "A11",
+      "score": 0.766872,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A10",
+      "right": "A12",
+      "score": 0.53622,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A10",
+      "right": "A13",
+      "score": 0.302888,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A10",
+      "right": "A14",
+      "score": 0.32228,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A10",
+      "right": "A15",
+      "score": 0.49224,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A10",
+      "right": "A16",
+      "score": 0.192341,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A10",
+      "right": "A17",
+      "score": 0.12076,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A10",
+      "right": "A18",
+      "score": -0.030673,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A10",
+      "right": "A19",
+      "score": 0.146603,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A10",
+      "right": "A20",
+      "score": 0.063537,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A10",
+      "right": "A21",
+      "score": 0.207657,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A11",
+      "right": "A12",
+      "score": 0.616608,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A11",
+      "right": "A13",
+      "score": 0.311896,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A11",
+      "right": "A14",
+      "score": 0.216415,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A11",
+      "right": "A15",
+      "score": 0.490549,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A11",
+      "right": "A16",
+      "score": 0.057967,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A11",
+      "right": "A17",
+      "score": 0.060915,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A11",
+      "right": "A18",
+      "score": -0.11754,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A11",
+      "right": "A19",
+      "score": 0.081861,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A11",
+      "right": "A20",
+      "score": -0.107556,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A11",
+      "right": "A21",
+      "score": 0.209403,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A12",
+      "right": "A13",
+      "score": 0.325025,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A12",
+      "right": "A14",
+      "score": 0.142636,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A12",
+      "right": "A15",
+      "score": 0.512237,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A12",
+      "right": "A16",
+      "score": 0.09674,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A12",
+      "right": "A17",
+      "score": 0.130108,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A12",
+      "right": "A18",
+      "score": 0.111661,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A12",
+      "right": "A19",
+      "score": 0.136327,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A12",
+      "right": "A20",
+      "score": 0.030876,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A12",
+      "right": "A21",
+      "score": 0.381422,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A13",
+      "right": "A14",
+      "score": 0.619714,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A13",
+      "right": "A15",
+      "score": 0.696192,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A13",
+      "right": "A16",
+      "score": 0.052246,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A13",
+      "right": "A17",
+      "score": 0.097693,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A13",
+      "right": "A18",
+      "score": 0.066291,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A13",
+      "right": "A19",
+      "score": 0.038926,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A13",
+      "right": "A20",
+      "score": 0.125033,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A13",
+      "right": "A21",
+      "score": 0.189331,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A14",
+      "right": "A15",
+      "score": 0.308119,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A14",
+      "right": "A16",
+      "score": 0.066227,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A14",
+      "right": "A17",
+      "score": 0.089138,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A14",
+      "right": "A18",
+      "score": -0.022008,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A14",
+      "right": "A19",
+      "score": 0.036101,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A14",
+      "right": "A20",
+      "score": 0.107538,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A14",
+      "right": "A21",
+      "score": 0.164263,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A15",
+      "right": "A16",
+      "score": 0.096409,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A15",
+      "right": "A17",
+      "score": 0.047867,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A15",
+      "right": "A18",
+      "score": 0.065002,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A15",
+      "right": "A19",
+      "score": -0.005509,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A15",
+      "right": "A20",
+      "score": 0.047472,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A15",
+      "right": "A21",
+      "score": 0.198195,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A16",
+      "right": "A17",
+      "score": 0.734416,
+      "expected_same": true,
+      "actual_same": true,
+      "correct": true
+    },
+    {
+      "left": "A16",
+      "right": "A18",
+      "score": 0.293568,
+      "expected_same": true,
+      "actual_same": false,
+      "correct": false
+    },
+    {
+      "left": "A16",
+      "right": "A19",
+      "score": 0.639732,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A16",
+      "right": "A20",
+      "score": 0.034661,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A16",
+      "right": "A21",
+      "score": -0.034911,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A17",
+      "right": "A18",
+      "score": 0.181722,
+      "expected_same": true,
+      "actual_same": false,
+      "correct": false
+    },
+    {
+      "left": "A17",
+      "right": "A19",
+      "score": 0.489174,
+      "expected_same": false,
+      "actual_same": true,
+      "correct": false
+    },
+    {
+      "left": "A17",
+      "right": "A20",
+      "score": -0.011182,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A17",
+      "right": "A21",
+      "score": -0.006214,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A18",
+      "right": "A19",
+      "score": 0.193568,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A18",
+      "right": "A20",
+      "score": 0.092709,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A18",
+      "right": "A21",
+      "score": 0.071623,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A19",
+      "right": "A20",
+      "score": 0.019615,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A19",
+      "right": "A21",
+      "score": 0.064293,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    },
+    {
+      "left": "A20",
+      "right": "A21",
+      "score": 0.012357,
+      "expected_same": false,
+      "actual_same": false,
+      "correct": true
+    }
+  ],
+  "boundary": "Synthetic multilingual development test. It tests text grouping only. It does not test evidence quality, source independence, applicability, final-answer writing, scale, hostile inputs, or a phone build."
+}
