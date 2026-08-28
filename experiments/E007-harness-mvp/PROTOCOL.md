@@ -544,3 +544,16 @@ first-option preference. In this frozen scorer, the model strongly prefers the
 `approve` token or the meaning attached to it. This control does not yet
 separate token prior from semantic framing. Result:
 `site/experiments/E007/ninety-word-reversed-result-v0.1.json`.
+
+## Checkpoint 3C.6J — mirrored `1` and `A`
+
+Keep the same ten cases and replace the semantic action words with two
+single-token symbols. Deck X defines `1 = approve` and `A = reject`. Deck Y
+defines `1 = reject` and `A = approve`. The label order stays `1` then `A` in
+both decks. Thus a model following meaning must flip its symbol for every
+paired case while preserving its semantic decision.
+
+Before inference, define semantic success as at least 18/20, at least 9/10 per
+deck, and at least 4/5 for each semantic class. At least 16/20 identical symbol
+choices is a strong symbol bias. At least 8/10 pairwise symbol flips without
+semantic success means the mapping was followed but evidence judgment failed.

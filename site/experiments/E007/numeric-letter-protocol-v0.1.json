@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6J",
+  "status": "locked_before_inference",
+  "title": {
+    "en": "Does Qwen follow meaning or favour the symbol?",
+    "ru": "Qwen следует смыслу или предпочитает символ?"
+  },
+  "hypothesis": {
+    "en": "Give the same ten cases two mirrored 1/A mappings. If Qwen understands the rule, it must switch symbols between decks while preserving the same semantic decision. If it repeats one symbol, that is a symbol prior rather than evidence judgment.",
+    "ru": "Даём тем же десяти случаям две зеркальные расшифровки 1/A. Если Qwen понимает правило, она должна поменять символ между колодами, сохранив то же смысловое решение. Если она повторяет один символ, это предпочтение символа, а не оценка доказательства."
+  },
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_changed": false,
+    "internet": false,
+    "rag": false
+  },
+  "frozen_design": {
+    "cases": 10,
+    "prompts": 20,
+    "labels": ["1", "A"],
+    "deck_X": {"1": "approve", "A": "reject"},
+    "deck_Y": {"1": "reject", "A": "approve"},
+    "label_order_changes": false,
+    "question_source_answer_changes": false
+  },
+  "locked_interpretation": {
+    "semantic_success": "at least 18/20 correct, at least 9/10 per deck, and at least 4/5 per semantic class",
+    "strong_1_symbol_bias": "at least 16/20 choices are 1",
+    "strong_A_symbol_bias": "at least 16/20 choices are A",
+    "mapping_followed_but_semantics_failed": "at least 8/10 paired symbols flip, but semantic success is not reached",
+    "otherwise": "mixed or unresolved"
+  },
+  "claim_boundary": {
+    "en": "This paired synthetic development control tests two single-token symbols on one frozen prompt family. It does not establish general classification ability or explain the internal cause of any preference.",
+    "ru": "Этот парный синтетический development-контроль проверяет два однотокенных символа на одном замороженном семействе prompt. Он не доказывает общую способность к классификации и не объясняет внутреннюю причину предпочтения."
+  }
+}
