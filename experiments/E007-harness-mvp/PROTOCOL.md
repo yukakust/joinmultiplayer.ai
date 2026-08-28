@@ -687,3 +687,26 @@ discarding stale query plans. The fresh idempotency paraphrase was correctly
 entailed at 93.7%. This is encouraging synthetic development evidence, not an
 independent benchmark or general reliability proof. Result:
 `site/experiments/E007/nli-fresh20-short-result-v0.1.json`.
+
+## Checkpoint 3C.6Q — the same twenty with a context package
+
+After the short 20/20 result is known, keep every evidence sentence, claim,
+and gold label unchanged. Add a user question plus several surrounding source
+sentences. Manually audit each addition before inference so it neither proves
+nor reverses the frozen claim. This deliberately tests the combined input
+shape currently tempting for the harness; it does not isolate the user question
+from surrounding source text. The locked gate permits at most a two-point drop
+and keeps the same class requirements as the short test.
+
+The combined context package scored 15/20 and failed the gate, dropping five
+points. All five decisions changed from correct to incorrect: three
+entailments, one contradiction, and one neutral pair. A manual post-run audit
+confirmed that the original evidence and all gold labels remained valid. The
+bridge example is especially revealing: the user question repeated the phrase
+about forty-tonne vehicles, and the model incorrectly treated that lexical
+overlap as source support even though the evidence discussed paint only.
+
+The result does not show that all context is harmful because two variables
+changed together. It does show that placing the user question and surrounding
+text together inside the NLI premise is unsafe. Result:
+`site/experiments/E007/nli-fresh20-context-result-v0.1.json`.
