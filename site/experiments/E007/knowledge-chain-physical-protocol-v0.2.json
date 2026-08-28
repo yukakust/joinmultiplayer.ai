@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.2",
+  "experiment_id": "E007",
+  "checkpoint": "12A.2",
+  "title": "Can two physical devices transfer and reconstruct the smallest useful knowledge chain?",
+  "status": "locked_before_run",
+  "locked_at": "2026-08-28T00:00:00Z",
+  "hypothesis": "A receiver on a second physical machine can reconstruct the same current claim and history from a relation-free append-only chain sent by yukabox.",
+  "contract": {
+    "author_id": "logical pocket i that owns this history",
+    "chain_id": "one history owned by that pocket i",
+    "revision_id": "unique record inside the chain",
+    "previous_revision_id": "null for the first record; otherwise its direct parent",
+    "claim": "what the pocket i believed at this revision",
+    "evidence_id": "pointer to the separately checked evidence capsule",
+    "active": "false only when the latest record withdraws the claim",
+    "permission": "must be share_chain"
+  },
+  "removed_fields": ["confirms", "refines", "replaces", "retracts"],
+  "ordering_rule": "Parent links define order. Timestamps do not choose the current revision.",
+  "same_chain_rule": "All records must have the same author_id and chain_id, and every non-root parent must exist in the received payload.",
+  "current_rule": "The only record that is not named as another record's parent is current. Two such records mean forked; none means invalid.",
+  "locked_gate": {
+    "sender_label": "yukabox",
+    "receiver_label": "production-node",
+    "records_received": 3,
+    "payload_sha256_matches": true,
+    "decision": "ready",
+    "current_revision_id": "PHY-R3",
+    "history_revision_ids": ["PHY-R1", "PHY-R2"]
+  },
+  "transport": "SSH carries the frozen JSON in this development test. SSH is not proposed as the final Pocket i relay protocol.",
+  "claim_boundary": "Locked physical development test. It can prove exact transport and reconstruction across two machines. It cannot prove cryptographic identity, hostile-peer resistance, internet-scale routing, source truth, privacy, or the final relay design."
+}

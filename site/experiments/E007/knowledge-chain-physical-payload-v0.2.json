@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.2",
+  "experiment_id": "E007",
+  "checkpoint": "12A.2",
+  "sender_label": "yukabox",
+  "records": [
+    {
+      "author_id": "I-CIRRUS",
+      "chain_id": "CHAIN-IMAGE-TILING",
+      "revision_id": "PHY-R1",
+      "previous_revision_id": null,
+      "claim": "Image tiling can help detect small objects.",
+      "evidence_id": "E-PHY-1",
+      "active": true,
+      "permission": "share_chain"
+    },
+    {
+      "author_id": "I-CIRRUS",
+      "chain_id": "CHAIN-IMAGE-TILING",
+      "revision_id": "PHY-R2",
+      "previous_revision_id": "PHY-R1",
+      "claim": "Image tiling improved recall for objects between 8 and 16 pixels.",
+      "evidence_id": "E-PHY-2",
+      "active": true,
+      "permission": "share_chain"
+    },
+    {
+      "author_id": "I-CIRRUS",
+      "chain_id": "CHAIN-IMAGE-TILING",
+      "revision_id": "PHY-R3",
+      "previous_revision_id": "PHY-R2",
+      "claim": "For 8–16 pixel objects, use image tiles with 20% overlap; no benefit has been measured for large objects.",
+      "evidence_id": "E-PHY-3",
+      "active": true,
+      "permission": "share_chain"
+    }
+  ]
+}
