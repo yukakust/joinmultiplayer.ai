@@ -400,8 +400,33 @@ Mechanical result: 24/24 correct, 16/16 intact accepted, 0/8 broken accepted.
 Q4 relevance result: 8/8 useful TAKE, 0 useful DROP, 0/8 misleading TAKE,
 6 misleading NOT_SURE, 2 misleading DROP. Result:
 `/experiments/E007/evidence-capsule-result-v0.1.json`; invalid attempt:
-`/experiments/E007/evidence-capsule-invalid-attempt-v0.1.json`. Claim support
-and applicability are still untested.
+`/experiments/E007/evidence-capsule-invalid-attempt-v0.1.json`. Applicability
+remains untested; claim support was isolated in later checkpoints.
+
+Checkpoints 3C.6N–O compared specialised NLI models on ten opened examples.
+MiniLM scored 7/10 and DeBERTa-v3-base scored 8/10. These were diagnostics,
+not sufficient evidence for adoption.
+
+Checkpoint 3C.6P then froze twenty fresh synthetic English pairs containing
+one exact source passage and one atomic claim. DeBERTa-v3-base scored 20/20;
+the gold labels and reasons were manually reviewed. Checkpoint 3C.6Q kept the
+same passages, claims, and labels but added the user's question and surrounding
+source text. Accuracy fell to 15/20. Manual review confirmed all five changed
+decisions were wrong.
+
+The owner accepted the narrow claim-support module on 2026-08-28:
+
+```text
+exact verified source passage + one atomic claim
+→ DeBERTa-v3-base NLI
+→ SUPPORTED / CONTRADICTED / NOT PROVEN
+```
+
+Keep the user's question outside this call. Mechanical source anchoring must
+run first. This development result does not prove source truth, currentness,
+applicability, independence, privacy, multilingual quality, or phone runtime.
+The durable path is recorded in `schema.md` and the public snapshot is
+`/experiments/E007/harness-v0.2.md`.
 
 ## Immediate next work
 

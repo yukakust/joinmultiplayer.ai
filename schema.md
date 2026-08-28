@@ -1,6 +1,6 @@
 # Pocket i harness — agreed path
 
-Status: working architecture agreement after E007 Gate 3C.5. This is not a
+Status: working architecture agreement after E007 Gate 3C.6Q. This is not a
 claim that every module already exists or has passed a physical-device test.
 
 E007 Gate 3C.6A.2 adds one development finding about local source retrieval:
@@ -18,8 +18,8 @@ coordinates. Ordinary code validates bytes before inference. The Q4 relevance
 module sees only question + complete source window; sender claim and highlight
 remain hidden. In one frozen synthetic English set it kept 8/8 useful windows,
 took 0/8 misleading windows, and the mechanical gate rejected all 8 broken
-packets. Claim support, source truth, privacy, and applicability are not yet
-accepted steps.
+packets. Claim support now has one accepted development-level module. Source
+truth, privacy, applicability, and independence are not yet accepted modules.
 
 ## The whole path
 
@@ -235,6 +235,40 @@ Rules:
 - Q4 is the accepted build because it preserved all 24 BF16 decisions at 2.50
   GB. Actual-phone runtime remains a required deployment check.
 
+## Accepted architecture decision: claim-support gate
+
+Accepted on 2026-08-28 after owner review of Gate 3C.6P–Q:
+
+```text
+exact verified source passage + one atomic pocket i claim
+→ DeBERTa-v3-base NLI
+→ SUPPORTED / CONTRADICTED / NOT PROVEN
+```
+
+Rules:
+
+- Ordinary code first proves that the passage really came from the named
+  source snapshot. The NLI model never replaces this byte check.
+- The premise contains only the exact source passage. The person's question
+  stays outside this model call.
+- The hypothesis is one short, human-readable claim. It must not contain two
+  conclusions joined together.
+- `SUPPORTED` means only that the passage supports the claim. It does not prove
+  that the source is true, current, independent, applicable, or safe to share.
+- `CONTRADICTED` is preserved as evidence of disagreement. It is not silently
+  deleted.
+- `NOT PROVEN` means the passage does not settle the claim. It does not mean
+  that the claim is false.
+- This module is replaceable. Its input and three output states are the stable
+  harness contract.
+- Do not concatenate the person's question and surrounding document into this
+  NLI call. On the same 20 frozen cases, the short pair scored 20/20; the mixed
+  package scored 15/20, and a human confirmed all five new errors.
+
+Evidence boundary: this is a synthetic English development result checked by
+one researcher. It does not yet establish multilingual quality, independent
+labelling, phone performance, long-document behaviour, or production safety.
+
 ## Accepted steps and their evidence
 
 | Step | Accepted design | Current evidence |
@@ -248,7 +282,9 @@ Rules:
 | 7 | Prefer recall at the sending edge: a doubtful candidate may travel, because the receiver can filter it; missing useful knowledge is harder to repair. | New-question send-policy smoke passed. |
 | 8 | Before any network send, a separate security module enforces owner permission and removes secrets. | Contract accepted; only a synthetic canary has been tested. |
 | 9 | The receiver checks `question ↔ one memory piece` with Qwen3-Reranker-4B Q4 and returns TAKE / NOT SURE / DROP. | Accepted after Gate 3C.5; Q4 matched BF16 24/24. Phone test pending. |
-| 10 | Later validators check source support, truth, matching conditions, provenance, and independence. Start by proving that a fragment came from one exact source snapshot. | Gate 3C.6A passed 20/20 twice with identical output; owner review pending. |
-| 11 | Similar claims collapse, but evidence and lineage remain. A supported minority stays visible. | Accepted design, not yet tested at scale. |
-| 12 | A model writes the final human answer only from accepted evidence; a final checker shows gaps instead of guessing. | Accepted design, not yet tested. |
-| 13 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |
+| 10 | Ordinary code proves that the exact passage came from the named, versioned source snapshot and byte range. | Gate 3C.6A passed 20/20 twice with identical output. |
+| 11 | Check `exact source passage ↔ one atomic claim` with DeBERTa-v3-base NLI. Keep the person's question outside this call. Return SUPPORTED / CONTRADICTED / NOT PROVEN. | Accepted after Gate 3C.6P–Q: short pairs 20/20; the mixed question-and-context package fell to 15/20. Synthetic English development evidence only. |
+| 12 | Later validators check source truth/currentness, matching conditions, provenance, and independence. | Required design, not yet accepted through experiment. |
+| 13 | Similar claims collapse, but evidence and lineage remain. A supported minority stays visible. | Accepted design, not yet tested at scale. |
+| 14 | A model writes the final human answer only from accepted evidence; a final checker shows gaps instead of guessing. | Accepted design, not yet tested. |
+| 15 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |
