@@ -10,6 +10,11 @@ SPEC = importlib.util.spec_from_file_location("build_context_ladder", BUILDER_PA
 BUILDER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(BUILDER)
 
+RUNNER_PATH = ROOT / "experiments/E007-harness-mvp/src/run_context_ladder.py"
+RUNNER_SPEC = importlib.util.spec_from_file_location("run_context_ladder", RUNNER_PATH)
+RUNNER = importlib.util.module_from_spec(RUNNER_SPEC)
+RUNNER_SPEC.loader.exec_module(RUNNER)
+
 
 class ContextLadderWorldTest(unittest.TestCase):
     @classmethod
@@ -41,6 +46,15 @@ class ContextLadderWorldTest(unittest.TestCase):
 
     def test_builder_reproduces_world(self):
         self.assertEqual(BUILDER.build(), self.world)
+
+    def test_result_has_five_pairs_if_published(self):
+        path = ROOT / "site/experiments/E007/context-ladder-result-v0.1.json"
+        if not path.exists():
+            self.skipTest("result not published yet")
+        result = json.loads(path.read_text())
+        self.assertEqual(len(result["records"]), 10)
+        self.assertEqual(len(result["levels"]), 5)
+        self.assertEqual(result["summary"]["total"], 10)
 
 
 if __name__ == "__main__":
