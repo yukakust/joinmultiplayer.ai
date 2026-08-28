@@ -1,0 +1,298 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6G",
+  "status": "context_ladder_run_complete",
+  "protocol": "/experiments/E007/context-ladder-protocol-v0.1.json",
+  "world": "/experiments/E007/context-ladder-world-v0.1.json",
+  "protocol_sha256": "9c86fb61dd4ac9810b31f282c670cc9a7fdc2298ecd680f447127bd830914522",
+  "world_sha256": "c28379bfc431281c7178eced4b015f60827ec7df4fd3824cd0a727232e84da51",
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+    "weights_changed": false
+  },
+  "runtime_seconds": 11.575,
+  "summary": {
+    "correct": 8,
+    "total": 10,
+    "levels_passed": 3,
+    "levels_total": 5,
+    "first_failed_level": 3
+  },
+  "levels": [
+    {
+      "level": 0,
+      "name": "two_plain_sentences",
+      "correct": 2,
+      "total": 2,
+      "prompt_words": 31,
+      "prompt_tokens": 39,
+      "passed": true
+    },
+    {
+      "level": 1,
+      "name": "source_answer_tools",
+      "correct": 2,
+      "total": 2,
+      "prompt_words": 47,
+      "prompt_tokens": 68,
+      "passed": true
+    },
+    {
+      "level": 2,
+      "name": "question_metadata_short_window",
+      "correct": 2,
+      "total": 2,
+      "prompt_words": 90,
+      "prompt_tokens": 145,
+      "passed": true
+    },
+    {
+      "level": 3,
+      "name": "long_window_relevant_at_end",
+      "correct": 1,
+      "total": 2,
+      "prompt_words": 352,
+      "prompt_tokens": 513,
+      "passed": false
+    },
+    {
+      "level": 4,
+      "name": "longer_full_packet_relevant_in_middle",
+      "correct": 1,
+      "total": 2,
+      "prompt_words": 639,
+      "prompt_tokens": 929,
+      "passed": false
+    }
+  ],
+  "passed_locked_gate": false,
+  "records": [
+    {
+      "id": "CL1-ACCEPT",
+      "level": 0,
+      "name": "two_plain_sentences",
+      "relevant_position": "only_content",
+      "source_colour": "red",
+      "expected": "accept",
+      "prompt": "FIRST TEXT:\nThe box is red.\n\nSECOND TEXT:\nThe box is red.\n\nWhich action fits this comparison? Return accept if the first text clearly supports the second. Otherwise return reject.\nACTION:",
+      "prompt_words": 31,
+      "prompt_tokens": 39,
+      "actual": {
+        "case_id": "CL1-ACCEPT",
+        "prompt": "FIRST TEXT:\nThe box is red.\n\nSECOND TEXT:\nThe box is red.\n\nWhich action fits this comparison? Return accept if the first text clearly supports the second. Otherwise return reject.\nACTION:",
+        "decision": "accept",
+        "scores": {
+          "accept": 0.99982953,
+          "reject": 0.00017049
+        },
+        "logit_margin": 8.67663574
+      },
+      "correct": true
+    },
+    {
+      "id": "CL1-REJECT",
+      "level": 0,
+      "name": "two_plain_sentences",
+      "relevant_position": "only_content",
+      "source_colour": "blue",
+      "expected": "reject",
+      "prompt": "FIRST TEXT:\nThe box is blue.\n\nSECOND TEXT:\nThe box is red.\n\nWhich action fits this comparison? Return accept if the first text clearly supports the second. Otherwise return reject.\nACTION:",
+      "prompt_words": 31,
+      "prompt_tokens": 39,
+      "actual": {
+        "case_id": "CL1-REJECT",
+        "prompt": "FIRST TEXT:\nThe box is blue.\n\nSECOND TEXT:\nThe box is red.\n\nWhich action fits this comparison? Return accept if the first text clearly supports the second. Otherwise return reject.\nACTION:",
+        "decision": "reject",
+        "scores": {
+          "accept": 0.07582141,
+          "reject": 0.92417854
+        },
+        "logit_margin": 2.50052452
+      },
+      "correct": true
+    },
+    {
+      "id": "CL2-ACCEPT",
+      "level": 1,
+      "name": "source_answer_tools",
+      "relevant_position": "only_source_sentence",
+      "source_colour": "red",
+      "expected": "accept",
+      "prompt": "SOURCE:\nThe current inspection card states that Box R-17 is red.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+      "prompt_words": 47,
+      "prompt_tokens": 68,
+      "actual": {
+        "case_id": "CL2-ACCEPT",
+        "prompt": "SOURCE:\nThe current inspection card states that Box R-17 is red.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+        "decision": "accept",
+        "scores": {
+          "accept": 0.99999726,
+          "reject": 2.78e-06
+        },
+        "logit_margin": 12.79351616
+      },
+      "correct": true
+    },
+    {
+      "id": "CL2-REJECT",
+      "level": 1,
+      "name": "source_answer_tools",
+      "relevant_position": "only_source_sentence",
+      "source_colour": "blue",
+      "expected": "reject",
+      "prompt": "SOURCE:\nThe current inspection card states that Box R-17 is blue.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+      "prompt_words": 47,
+      "prompt_tokens": 68,
+      "actual": {
+        "case_id": "CL2-REJECT",
+        "prompt": "SOURCE:\nThe current inspection card states that Box R-17 is blue.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+        "decision": "reject",
+        "scores": {
+          "accept": 0.26627415,
+          "reject": 0.73372579
+        },
+        "logit_margin": 1.01360893
+      },
+      "correct": true
+    },
+    {
+      "id": "CL3-ACCEPT",
+      "level": 2,
+      "name": "question_metadata_short_window",
+      "relevant_position": "middle",
+      "source_colour": "red",
+      "expected": "accept",
+      "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nThe inspection happened at 09:30. The seal was intact. The current inspection card states that Box R-17 is red. No later inspection card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+      "prompt_words": 90,
+      "prompt_tokens": 145,
+      "actual": {
+        "case_id": "CL3-ACCEPT",
+        "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nThe inspection happened at 09:30. The seal was intact. The current inspection card states that Box R-17 is red. No later inspection card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+        "decision": "accept",
+        "scores": {
+          "accept": 0.99999428,
+          "reject": 5.75e-06
+        },
+        "logit_margin": 12.06688499
+      },
+      "correct": true
+    },
+    {
+      "id": "CL3-REJECT",
+      "level": 2,
+      "name": "question_metadata_short_window",
+      "relevant_position": "middle",
+      "source_colour": "blue",
+      "expected": "reject",
+      "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nThe inspection happened at 09:30. The seal was intact. The current inspection card states that Box R-17 is blue. No later inspection card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+      "prompt_words": 90,
+      "prompt_tokens": 145,
+      "actual": {
+        "case_id": "CL3-REJECT",
+        "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nThe inspection happened at 09:30. The seal was intact. The current inspection card states that Box R-17 is blue. No later inspection card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+        "decision": "reject",
+        "scores": {
+          "accept": 0.29284921,
+          "reject": 0.70715076
+        },
+        "logit_margin": 0.88158607
+      },
+      "correct": true
+    },
+    {
+      "id": "CL4-ACCEPT",
+      "level": 3,
+      "name": "long_window_relevant_at_end",
+      "relevant_position": "end",
+      "source_colour": "red",
+      "expected": "accept",
+      "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nArchive note 1 records routine handling, shelf position, seal condition, and inspection timing. Archive note 2 records routine handling, shelf position, seal condition, and inspection timing. Archive note 3 records routine handling, shelf position, seal condition, and inspection timing. Archive note 4 records routine handling, shelf position, seal condition, and inspection timing. Archive note 5 records routine handling, shelf position, seal condition, and inspection timing. Archive note 6 records routine handling, shelf position, seal condition, and inspection timing. Archive note 7 records routine handling, shelf position, seal condition, and inspection timing. Archive note 8 records routine handling, shelf position, seal condition, and inspection timing. Archive note 9 records routine handling, shelf position, seal condition, and inspection timing. Archive note 10 records routine handling, shelf position, seal condition, and inspection timing. Archive note 11 records routine handling, shelf position, seal condition, and inspection timing. Archive note 12 records routine handling, shelf position, seal condition, and inspection timing. Archive note 13 records routine handling, shelf position, seal condition, and inspection timing. Archive note 14 records routine handling, shelf position, seal condition, and inspection timing. Archive note 15 records routine handling, shelf position, seal condition, and inspection timing. Archive note 16 records routine handling, shelf position, seal condition, and inspection timing. Archive note 17 records routine handling, shelf position, seal condition, and inspection timing. Archive note 18 records routine handling, shelf position, seal condition, and inspection timing. Archive note 19 records routine handling, shelf position, seal condition, and inspection timing. Archive note 20 records routine handling, shelf position, seal condition, and inspection timing. The current inspection card states that Box R-17 is red.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nSENDER NOTE:\nThe answer is based only on the final sentence of the supplied source window.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+      "prompt_words": 352,
+      "prompt_tokens": 513,
+      "actual": {
+        "case_id": "CL4-ACCEPT",
+        "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nArchive note 1 records routine handling, shelf position, seal condition, and inspection timing. Archive note 2 records routine handling, shelf position, seal condition, and inspection timing. Archive note 3 records routine handling, shelf position, seal condition, and inspection timing. Archive note 4 records routine handling, shelf position, seal condition, and inspection timing. Archive note 5 records routine handling, shelf position, seal condition, and inspection timing. Archive note 6 records routine handling, shelf position, seal condition, and inspection timing. Archive note 7 records routine handling, shelf position, seal condition, and inspection timing. Archive note 8 records routine handling, shelf position, seal condition, and inspection timing. Archive note 9 records routine handling, shelf position, seal condition, and inspection timing. Archive note 10 records routine handling, shelf position, seal condition, and inspection timing. Archive note 11 records routine handling, shelf position, seal condition, and inspection timing. Archive note 12 records routine handling, shelf position, seal condition, and inspection timing. Archive note 13 records routine handling, shelf position, seal condition, and inspection timing. Archive note 14 records routine handling, shelf position, seal condition, and inspection timing. Archive note 15 records routine handling, shelf position, seal condition, and inspection timing. Archive note 16 records routine handling, shelf position, seal condition, and inspection timing. Archive note 17 records routine handling, shelf position, seal condition, and inspection timing. Archive note 18 records routine handling, shelf position, seal condition, and inspection timing. Archive note 19 records routine handling, shelf position, seal condition, and inspection timing. Archive note 20 records routine handling, shelf position, seal condition, and inspection timing. The current inspection card states that Box R-17 is red.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nSENDER NOTE:\nThe answer is based only on the final sentence of the supplied source window.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+        "decision": "accept",
+        "scores": {
+          "accept": 0.9999975,
+          "reject": 2.54e-06
+        },
+        "logit_margin": 12.88275528
+      },
+      "correct": true
+    },
+    {
+      "id": "CL4-REJECT",
+      "level": 3,
+      "name": "long_window_relevant_at_end",
+      "relevant_position": "end",
+      "source_colour": "blue",
+      "expected": "reject",
+      "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nArchive note 1 records routine handling, shelf position, seal condition, and inspection timing. Archive note 2 records routine handling, shelf position, seal condition, and inspection timing. Archive note 3 records routine handling, shelf position, seal condition, and inspection timing. Archive note 4 records routine handling, shelf position, seal condition, and inspection timing. Archive note 5 records routine handling, shelf position, seal condition, and inspection timing. Archive note 6 records routine handling, shelf position, seal condition, and inspection timing. Archive note 7 records routine handling, shelf position, seal condition, and inspection timing. Archive note 8 records routine handling, shelf position, seal condition, and inspection timing. Archive note 9 records routine handling, shelf position, seal condition, and inspection timing. Archive note 10 records routine handling, shelf position, seal condition, and inspection timing. Archive note 11 records routine handling, shelf position, seal condition, and inspection timing. Archive note 12 records routine handling, shelf position, seal condition, and inspection timing. Archive note 13 records routine handling, shelf position, seal condition, and inspection timing. Archive note 14 records routine handling, shelf position, seal condition, and inspection timing. Archive note 15 records routine handling, shelf position, seal condition, and inspection timing. Archive note 16 records routine handling, shelf position, seal condition, and inspection timing. Archive note 17 records routine handling, shelf position, seal condition, and inspection timing. Archive note 18 records routine handling, shelf position, seal condition, and inspection timing. Archive note 19 records routine handling, shelf position, seal condition, and inspection timing. Archive note 20 records routine handling, shelf position, seal condition, and inspection timing. The current inspection card states that Box R-17 is blue.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nSENDER NOTE:\nThe answer is based only on the final sentence of the supplied source window.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+      "prompt_words": 352,
+      "prompt_tokens": 513,
+      "actual": {
+        "case_id": "CL4-REJECT",
+        "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nArchive note 1 records routine handling, shelf position, seal condition, and inspection timing. Archive note 2 records routine handling, shelf position, seal condition, and inspection timing. Archive note 3 records routine handling, shelf position, seal condition, and inspection timing. Archive note 4 records routine handling, shelf position, seal condition, and inspection timing. Archive note 5 records routine handling, shelf position, seal condition, and inspection timing. Archive note 6 records routine handling, shelf position, seal condition, and inspection timing. Archive note 7 records routine handling, shelf position, seal condition, and inspection timing. Archive note 8 records routine handling, shelf position, seal condition, and inspection timing. Archive note 9 records routine handling, shelf position, seal condition, and inspection timing. Archive note 10 records routine handling, shelf position, seal condition, and inspection timing. Archive note 11 records routine handling, shelf position, seal condition, and inspection timing. Archive note 12 records routine handling, shelf position, seal condition, and inspection timing. Archive note 13 records routine handling, shelf position, seal condition, and inspection timing. Archive note 14 records routine handling, shelf position, seal condition, and inspection timing. Archive note 15 records routine handling, shelf position, seal condition, and inspection timing. Archive note 16 records routine handling, shelf position, seal condition, and inspection timing. Archive note 17 records routine handling, shelf position, seal condition, and inspection timing. Archive note 18 records routine handling, shelf position, seal condition, and inspection timing. Archive note 19 records routine handling, shelf position, seal condition, and inspection timing. Archive note 20 records routine handling, shelf position, seal condition, and inspection timing. The current inspection card states that Box R-17 is blue.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nSENDER NOTE:\nThe answer is based only on the final sentence of the supplied source window.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+        "decision": "accept",
+        "scores": {
+          "accept": 0.7612325,
+          "reject": 0.23876747
+        },
+        "logit_margin": 1.15944862
+      },
+      "correct": false
+    },
+    {
+      "id": "CL5-ACCEPT",
+      "level": 4,
+      "name": "longer_full_packet_relevant_in_middle",
+      "relevant_position": "middle",
+      "source_colour": "red",
+      "expected": "accept",
+      "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nArchive note 1 records routine handling, shelf position, seal condition, and inspection timing. Archive note 2 records routine handling, shelf position, seal condition, and inspection timing. Archive note 3 records routine handling, shelf position, seal condition, and inspection timing. Archive note 4 records routine handling, shelf position, seal condition, and inspection timing. Archive note 5 records routine handling, shelf position, seal condition, and inspection timing. Archive note 6 records routine handling, shelf position, seal condition, and inspection timing. Archive note 7 records routine handling, shelf position, seal condition, and inspection timing. Archive note 8 records routine handling, shelf position, seal condition, and inspection timing. Archive note 9 records routine handling, shelf position, seal condition, and inspection timing. Archive note 10 records routine handling, shelf position, seal condition, and inspection timing. Archive note 11 records routine handling, shelf position, seal condition, and inspection timing. Archive note 12 records routine handling, shelf position, seal condition, and inspection timing. Archive note 13 records routine handling, shelf position, seal condition, and inspection timing. Archive note 14 records routine handling, shelf position, seal condition, and inspection timing. Archive note 15 records routine handling, shelf position, seal condition, and inspection timing. Archive note 16 records routine handling, shelf position, seal condition, and inspection timing. Archive note 17 records routine handling, shelf position, seal condition, and inspection timing. Archive note 18 records routine handling, shelf position, seal condition, and inspection timing. Archive note 19 records routine handling, shelf position, seal condition, and inspection timing. Archive note 20 records routine handling, shelf position, seal condition, and inspection timing. The current inspection card states that Box R-17 is red. Archive note 21 records routine handling, shelf position, seal condition, and inspection timing. Archive note 22 records routine handling, shelf position, seal condition, and inspection timing. Archive note 23 records routine handling, shelf position, seal condition, and inspection timing. Archive note 24 records routine handling, shelf position, seal condition, and inspection timing. Archive note 25 records routine handling, shelf position, seal condition, and inspection timing. Archive note 26 records routine handling, shelf position, seal condition, and inspection timing. Archive note 27 records routine handling, shelf position, seal condition, and inspection timing. Archive note 28 records routine handling, shelf position, seal condition, and inspection timing. Archive note 29 records routine handling, shelf position, seal condition, and inspection timing. Archive note 30 records routine handling, shelf position, seal condition, and inspection timing. Archive note 31 records routine handling, shelf position, seal condition, and inspection timing. Archive note 32 records routine handling, shelf position, seal condition, and inspection timing. Archive note 33 records routine handling, shelf position, seal condition, and inspection timing. Archive note 34 records routine handling, shelf position, seal condition, and inspection timing. Archive note 35 records routine handling, shelf position, seal condition, and inspection timing. Archive note 36 records routine handling, shelf position, seal condition, and inspection timing. Archive note 37 records routine handling, shelf position, seal condition, and inspection timing. Archive note 38 records routine handling, shelf position, seal condition, and inspection timing. Archive note 39 records routine handling, shelf position, seal condition, and inspection timing. Archive note 40 records routine handling, shelf position, seal condition, and inspection timing.\n\nCURRENT FACTS:\nBox R-17 is the object named in the question. Card 7 is the latest available card. No later correction is present in the archive.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nSENDER NOTE:\nThe answer is based only on the explicit colour sentence inside the supplied source window.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+      "prompt_words": 639,
+      "prompt_tokens": 929,
+      "actual": {
+        "case_id": "CL5-ACCEPT",
+        "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nArchive note 1 records routine handling, shelf position, seal condition, and inspection timing. Archive note 2 records routine handling, shelf position, seal condition, and inspection timing. Archive note 3 records routine handling, shelf position, seal condition, and inspection timing. Archive note 4 records routine handling, shelf position, seal condition, and inspection timing. Archive note 5 records routine handling, shelf position, seal condition, and inspection timing. Archive note 6 records routine handling, shelf position, seal condition, and inspection timing. Archive note 7 records routine handling, shelf position, seal condition, and inspection timing. Archive note 8 records routine handling, shelf position, seal condition, and inspection timing. Archive note 9 records routine handling, shelf position, seal condition, and inspection timing. Archive note 10 records routine handling, shelf position, seal condition, and inspection timing. Archive note 11 records routine handling, shelf position, seal condition, and inspection timing. Archive note 12 records routine handling, shelf position, seal condition, and inspection timing. Archive note 13 records routine handling, shelf position, seal condition, and inspection timing. Archive note 14 records routine handling, shelf position, seal condition, and inspection timing. Archive note 15 records routine handling, shelf position, seal condition, and inspection timing. Archive note 16 records routine handling, shelf position, seal condition, and inspection timing. Archive note 17 records routine handling, shelf position, seal condition, and inspection timing. Archive note 18 records routine handling, shelf position, seal condition, and inspection timing. Archive note 19 records routine handling, shelf position, seal condition, and inspection timing. Archive note 20 records routine handling, shelf position, seal condition, and inspection timing. The current inspection card states that Box R-17 is red. Archive note 21 records routine handling, shelf position, seal condition, and inspection timing. Archive note 22 records routine handling, shelf position, seal condition, and inspection timing. Archive note 23 records routine handling, shelf position, seal condition, and inspection timing. Archive note 24 records routine handling, shelf position, seal condition, and inspection timing. Archive note 25 records routine handling, shelf position, seal condition, and inspection timing. Archive note 26 records routine handling, shelf position, seal condition, and inspection timing. Archive note 27 records routine handling, shelf position, seal condition, and inspection timing. Archive note 28 records routine handling, shelf position, seal condition, and inspection timing. Archive note 29 records routine handling, shelf position, seal condition, and inspection timing. Archive note 30 records routine handling, shelf position, seal condition, and inspection timing. Archive note 31 records routine handling, shelf position, seal condition, and inspection timing. Archive note 32 records routine handling, shelf position, seal condition, and inspection timing. Archive note 33 records routine handling, shelf position, seal condition, and inspection timing. Archive note 34 records routine handling, shelf position, seal condition, and inspection timing. Archive note 35 records routine handling, shelf position, seal condition, and inspection timing. Archive note 36 records routine handling, shelf position, seal condition, and inspection timing. Archive note 37 records routine handling, shelf position, seal condition, and inspection timing. Archive note 38 records routine handling, shelf position, seal condition, and inspection timing. Archive note 39 records routine handling, shelf position, seal condition, and inspection timing. Archive note 40 records routine handling, shelf position, seal condition, and inspection timing.\n\nCURRENT FACTS:\nBox R-17 is the object named in the question. Card 7 is the latest available card. No later correction is present in the archive.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nSENDER NOTE:\nThe answer is based only on the explicit colour sentence inside the supplied source window.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+        "decision": "accept",
+        "scores": {
+          "accept": 0.99998617,
+          "reject": 1.386e-05
+        },
+        "logit_margin": 11.18629837
+      },
+      "correct": true
+    },
+    {
+      "id": "CL5-REJECT",
+      "level": 4,
+      "name": "longer_full_packet_relevant_in_middle",
+      "relevant_position": "middle",
+      "source_colour": "blue",
+      "expected": "reject",
+      "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nArchive note 1 records routine handling, shelf position, seal condition, and inspection timing. Archive note 2 records routine handling, shelf position, seal condition, and inspection timing. Archive note 3 records routine handling, shelf position, seal condition, and inspection timing. Archive note 4 records routine handling, shelf position, seal condition, and inspection timing. Archive note 5 records routine handling, shelf position, seal condition, and inspection timing. Archive note 6 records routine handling, shelf position, seal condition, and inspection timing. Archive note 7 records routine handling, shelf position, seal condition, and inspection timing. Archive note 8 records routine handling, shelf position, seal condition, and inspection timing. Archive note 9 records routine handling, shelf position, seal condition, and inspection timing. Archive note 10 records routine handling, shelf position, seal condition, and inspection timing. Archive note 11 records routine handling, shelf position, seal condition, and inspection timing. Archive note 12 records routine handling, shelf position, seal condition, and inspection timing. Archive note 13 records routine handling, shelf position, seal condition, and inspection timing. Archive note 14 records routine handling, shelf position, seal condition, and inspection timing. Archive note 15 records routine handling, shelf position, seal condition, and inspection timing. Archive note 16 records routine handling, shelf position, seal condition, and inspection timing. Archive note 17 records routine handling, shelf position, seal condition, and inspection timing. Archive note 18 records routine handling, shelf position, seal condition, and inspection timing. Archive note 19 records routine handling, shelf position, seal condition, and inspection timing. Archive note 20 records routine handling, shelf position, seal condition, and inspection timing. The current inspection card states that Box R-17 is blue. Archive note 21 records routine handling, shelf position, seal condition, and inspection timing. Archive note 22 records routine handling, shelf position, seal condition, and inspection timing. Archive note 23 records routine handling, shelf position, seal condition, and inspection timing. Archive note 24 records routine handling, shelf position, seal condition, and inspection timing. Archive note 25 records routine handling, shelf position, seal condition, and inspection timing. Archive note 26 records routine handling, shelf position, seal condition, and inspection timing. Archive note 27 records routine handling, shelf position, seal condition, and inspection timing. Archive note 28 records routine handling, shelf position, seal condition, and inspection timing. Archive note 29 records routine handling, shelf position, seal condition, and inspection timing. Archive note 30 records routine handling, shelf position, seal condition, and inspection timing. Archive note 31 records routine handling, shelf position, seal condition, and inspection timing. Archive note 32 records routine handling, shelf position, seal condition, and inspection timing. Archive note 33 records routine handling, shelf position, seal condition, and inspection timing. Archive note 34 records routine handling, shelf position, seal condition, and inspection timing. Archive note 35 records routine handling, shelf position, seal condition, and inspection timing. Archive note 36 records routine handling, shelf position, seal condition, and inspection timing. Archive note 37 records routine handling, shelf position, seal condition, and inspection timing. Archive note 38 records routine handling, shelf position, seal condition, and inspection timing. Archive note 39 records routine handling, shelf position, seal condition, and inspection timing. Archive note 40 records routine handling, shelf position, seal condition, and inspection timing.\n\nCURRENT FACTS:\nBox R-17 is the object named in the question. Card 7 is the latest available card. No later correction is present in the archive.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nSENDER NOTE:\nThe answer is based only on the explicit colour sentence inside the supplied source window.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+      "prompt_words": 639,
+      "prompt_tokens": 929,
+      "actual": {
+        "case_id": "CL5-REJECT",
+        "prompt": "USER QUESTION:\nWhat colour is Box R-17 according to its current inspection card?\n\nSOURCE RECORD:\nR-17 inspection archive · version 4.2 · 2041-08-26 · card 7, line 3\n\nSOURCE WINDOW:\nArchive note 1 records routine handling, shelf position, seal condition, and inspection timing. Archive note 2 records routine handling, shelf position, seal condition, and inspection timing. Archive note 3 records routine handling, shelf position, seal condition, and inspection timing. Archive note 4 records routine handling, shelf position, seal condition, and inspection timing. Archive note 5 records routine handling, shelf position, seal condition, and inspection timing. Archive note 6 records routine handling, shelf position, seal condition, and inspection timing. Archive note 7 records routine handling, shelf position, seal condition, and inspection timing. Archive note 8 records routine handling, shelf position, seal condition, and inspection timing. Archive note 9 records routine handling, shelf position, seal condition, and inspection timing. Archive note 10 records routine handling, shelf position, seal condition, and inspection timing. Archive note 11 records routine handling, shelf position, seal condition, and inspection timing. Archive note 12 records routine handling, shelf position, seal condition, and inspection timing. Archive note 13 records routine handling, shelf position, seal condition, and inspection timing. Archive note 14 records routine handling, shelf position, seal condition, and inspection timing. Archive note 15 records routine handling, shelf position, seal condition, and inspection timing. Archive note 16 records routine handling, shelf position, seal condition, and inspection timing. Archive note 17 records routine handling, shelf position, seal condition, and inspection timing. Archive note 18 records routine handling, shelf position, seal condition, and inspection timing. Archive note 19 records routine handling, shelf position, seal condition, and inspection timing. Archive note 20 records routine handling, shelf position, seal condition, and inspection timing. The current inspection card states that Box R-17 is blue. Archive note 21 records routine handling, shelf position, seal condition, and inspection timing. Archive note 22 records routine handling, shelf position, seal condition, and inspection timing. Archive note 23 records routine handling, shelf position, seal condition, and inspection timing. Archive note 24 records routine handling, shelf position, seal condition, and inspection timing. Archive note 25 records routine handling, shelf position, seal condition, and inspection timing. Archive note 26 records routine handling, shelf position, seal condition, and inspection timing. Archive note 27 records routine handling, shelf position, seal condition, and inspection timing. Archive note 28 records routine handling, shelf position, seal condition, and inspection timing. Archive note 29 records routine handling, shelf position, seal condition, and inspection timing. Archive note 30 records routine handling, shelf position, seal condition, and inspection timing. Archive note 31 records routine handling, shelf position, seal condition, and inspection timing. Archive note 32 records routine handling, shelf position, seal condition, and inspection timing. Archive note 33 records routine handling, shelf position, seal condition, and inspection timing. Archive note 34 records routine handling, shelf position, seal condition, and inspection timing. Archive note 35 records routine handling, shelf position, seal condition, and inspection timing. Archive note 36 records routine handling, shelf position, seal condition, and inspection timing. Archive note 37 records routine handling, shelf position, seal condition, and inspection timing. Archive note 38 records routine handling, shelf position, seal condition, and inspection timing. Archive note 39 records routine handling, shelf position, seal condition, and inspection timing. Archive note 40 records routine handling, shelf position, seal condition, and inspection timing.\n\nCURRENT FACTS:\nBox R-17 is the object named in the question. Card 7 is the latest available card. No later correction is present in the archive.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nSENDER NOTE:\nThe answer is based only on the explicit colour sentence inside the supplied source window.\n\nCHOOSE ONE TOOL:\naccept — the source clearly supports the proposed answer.\nreject — the source does not clearly support the proposed answer, conflicts with it, or remains uncertain.\nTOOL:",
+        "decision": "accept",
+        "scores": {
+          "accept": 0.57550275,
+          "reject": 0.42449728
+        },
+        "logit_margin": 0.30433846
+      },
+      "correct": false
+    }
+  ],
+  "boundary": {
+    "en": "This synthetic ladder tests context tolerance for one trivial colour fact. It does not test rule application, evidence truth, or real-world reliability.",
+    "ru": "Эта синтетическая лестница проверяет устойчивость к контексту для одного простейшего факта о цвете. Она не проверяет применение правил, истинность доказательств или надёжность в реальном мире."
+  }
+}
