@@ -631,3 +631,24 @@ the order changed and preserved its semantic decision on only 7/10 paired
 cases. It is therefore not selected. This is a negative synthetic development
 result, not evidence that every prompt or larger model will fail. Result:
 `site/experiments/E007/phrase-length-result-v0.1.json`.
+
+## Checkpoint 3C.6N — specialised MiniLM NLI
+
+Replace generative button-following with a model trained specifically to
+classify a premise and hypothesis as entailment, contradiction, or neutral.
+Freeze ten English pairs before loading the model: four entailments, three
+contradictions, and three neutral examples. Use the pinned 82.1M-parameter
+`cross-encoder/nli-MiniLM2-L6-H768` with no examples, fine-tuning, threshold
+calibration, or generated text. The largest of its three logits is the answer.
+
+The development gate requires at least 9/10 overall, at least 3/4 entailments,
+and all three contradictions and all three neutral cases. The run scored 7/10:
+3/4 entailments, 2/3 contradictions, and 2/3 neutral cases. It missed a
+technical paraphrase, treated one indirectly opposing action as neutral, and
+treated one unrelated recommendation as contradiction. The gate failed.
+
+This result says the specialised classifier is more informative than prompt
+button wording, but it is not reliable enough to accept or reject incoming
+evidence by itself. It is a tiny synthetic English development test, not a
+phone, multilingual, or general evidence benchmark. Result:
+`site/experiments/E007/nli-minilm-result-v0.1.json`.

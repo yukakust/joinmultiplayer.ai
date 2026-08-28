@@ -1,0 +1,188 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6N",
+  "status": "development_complete",
+  "protocol": "/experiments/E007/nli-minilm-protocol-v0.1.json",
+  "world": "/experiments/E007/nli-minilm-world-v0.1.json",
+  "protocol_sha256": "c5447d415c62c91b49407408162fb07e76eab9c10ea19936b2e476228a8a5a65",
+  "world_sha256": "cea5e836e69c0b98ce56755d85559e36b94e4a8cce73a0d82426f6c1c96dcf19",
+  "model": {
+    "repository": "cross-encoder/nli-MiniLM2-L6-H768",
+    "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+    "parameters": 82100000,
+    "language": "en",
+    "classes": [
+      "contradiction",
+      "entailment",
+      "neutral"
+    ]
+  },
+  "runtime": {
+    "seconds_including_model_load": 10.59,
+    "peak_rss_mib": 757.6,
+    "device": "cpu",
+    "dtype": "torch.float32"
+  },
+  "summary": {
+    "correct": 7,
+    "total": 10,
+    "class_correct": {
+      "contradiction": 2,
+      "entailment": 3,
+      "neutral": 2
+    },
+    "class_total": {
+      "contradiction": 3,
+      "entailment": 4,
+      "neutral": 3
+    },
+    "passed_locked_development_gate": false
+  },
+  "records": [
+    {
+      "id": "NLI01",
+      "expected": "entailment",
+      "premise": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "hypothesis": "Box R-17 is red.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "contradiction": 0.00194486,
+        "entailment": 0.98487812,
+        "neutral": 0.01317706
+      },
+      "input_tokens": 29
+    },
+    {
+      "id": "NLI02",
+      "expected": "entailment",
+      "premise": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "hypothesis": "The event ID should be used as an idempotency key before order creation.",
+      "decision": "neutral",
+      "correct": false,
+      "probabilities": {
+        "contradiction": 0.11052905,
+        "entailment": 0.12410785,
+        "neutral": 0.76536304
+      },
+      "input_tokens": 45
+    },
+    {
+      "id": "NLI03",
+      "expected": "entailment",
+      "premise": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "hypothesis": "The colony is probably preparing to swarm.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "contradiction": 0.00391352,
+        "entailment": 0.90356994,
+        "neutral": 0.09251642
+      },
+      "input_tokens": 30
+    },
+    {
+      "id": "NLI04",
+      "expected": "entailment",
+      "premise": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "hypothesis": "Mara said to meet at Juniper Cafe.",
+      "decision": "entailment",
+      "correct": true,
+      "probabilities": {
+        "contradiction": 0.0544511,
+        "entailment": 0.89988083,
+        "neutral": 0.04566815
+      },
+      "input_tokens": 37
+    },
+    {
+      "id": "NLI05",
+      "expected": "contradiction",
+      "premise": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "hypothesis": "Restart Kest-7 immediately and leave its power connected.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "contradiction": 0.99617237,
+        "entailment": 0.00147351,
+        "neutral": 0.00235415
+      },
+      "input_tokens": 41
+    },
+    {
+      "id": "NLI06",
+      "expected": "contradiction",
+      "premise": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "hypothesis": "Use the western marsh route.",
+      "decision": "contradiction",
+      "correct": true,
+      "probabilities": {
+        "contradiction": 0.92382181,
+        "entailment": 0.05457671,
+        "neutral": 0.02160141
+      },
+      "input_tokens": 35
+    },
+    {
+      "id": "NLI07",
+      "expected": "contradiction",
+      "premise": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "hypothesis": "Downsample the images even further.",
+      "decision": "neutral",
+      "correct": false,
+      "probabilities": {
+        "contradiction": 0.19796425,
+        "entailment": 0.03300006,
+        "neutral": 0.7690357
+      },
+      "input_tokens": 35
+    },
+    {
+      "id": "NLI08",
+      "expected": "neutral",
+      "premise": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "hypothesis": "An incident allows a contractor to deploy to production alone without staff review.",
+      "decision": "neutral",
+      "correct": true,
+      "probabilities": {
+        "contradiction": 0.25454676,
+        "entailment": 0.02150308,
+        "neutral": 0.72395015
+      },
+      "input_tokens": 37
+    },
+    {
+      "id": "NLI09",
+      "expected": "neutral",
+      "premise": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "hypothesis": "Pause the grow lamps until mist flow returns.",
+      "decision": "contradiction",
+      "correct": false,
+      "probabilities": {
+        "contradiction": 0.98192227,
+        "entailment": 0.00060386,
+        "neutral": 0.01747386
+      },
+      "input_tokens": 35
+    },
+    {
+      "id": "NLI10",
+      "expected": "neutral",
+      "premise": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "hypothesis": "The custard contains vanilla.",
+      "decision": "neutral",
+      "correct": true,
+      "probabilities": {
+        "contradiction": 0.00542531,
+        "entailment": 0.0016432,
+        "neutral": 0.99293149
+      },
+      "input_tokens": 36
+    }
+  ],
+  "boundary": {
+    "en": "This is a ten-case synthetic English development test. It does not prove phone performance, multilingual quality, source truth, or general evidence judgment.",
+    "ru": "Это синтетический англоязычный development-тест на десяти случаях. Он не доказывает работу на телефоне, качество на разных языках, истинность источника или общее умение проверять доказательства."
+  }
+}
