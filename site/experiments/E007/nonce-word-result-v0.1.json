@@ -1,0 +1,775 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6L",
+  "status": "paired_synthetic_development_run_complete",
+  "protocol": "/experiments/E007/nonce-word-protocol-v0.1.json",
+  "world": "/experiments/E007/nonce-word-world-v0.1.json",
+  "protocol_sha256": "d07be011c7c4b3530c7d6ae7f5a9a370e49424e86906f752032bfc770ce4eb44",
+  "world_sha256": "2c5a7e5551b770376162108ba680c7d098329b8c470127be092314a12f51295d",
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+    "weights_changed": false
+  },
+  "scoring": {
+    "labels": {
+      "KSEL": [
+        42,
+        29365
+      ],
+      "PTHY": [
+        25075,
+        56
+      ]
+    },
+    "method": "summed_complete_sequence_log_probability"
+  },
+  "runtime_seconds": 13.131,
+  "summary": {
+    "semantic_correct": 8,
+    "total_prompts": 20,
+    "deck_correct": {
+      "MAIN": 5,
+      "MIRROR": 3
+    },
+    "class_deck_correct": {
+      "MAIN_approve": 5,
+      "MAIN_reject": 0,
+      "MIRROR_approve": 2,
+      "MIRROR_reject": 1
+    },
+    "minimum_class_correct_within_a_deck": 0,
+    "label_choices": {
+      "KSEL": 14,
+      "PTHY": 6
+    },
+    "paired_label_flips": 6,
+    "paired_semantics_preserved": 6,
+    "total_pairs": 10,
+    "min_prompt_words": 55,
+    "max_prompt_words": 75,
+    "min_prompt_tokens_with_system": 140,
+    "max_prompt_tokens_with_system": 160
+  },
+  "locked_interpretation": "mixed_or_unresolved",
+  "pairs": [
+    {
+      "case_id": "NW01",
+      "main_label": "KSEL",
+      "mirror_label": "KSEL",
+      "label_flipped": false,
+      "main_semantic": "approve",
+      "mirror_semantic": "reject",
+      "semantic_preserved": false
+    },
+    {
+      "case_id": "NW02",
+      "main_label": "KSEL",
+      "mirror_label": "KSEL",
+      "label_flipped": false,
+      "main_semantic": "approve",
+      "mirror_semantic": "reject",
+      "semantic_preserved": false
+    },
+    {
+      "case_id": "NW03",
+      "main_label": "KSEL",
+      "mirror_label": "PTHY",
+      "label_flipped": true,
+      "main_semantic": "approve",
+      "mirror_semantic": "approve",
+      "semantic_preserved": true
+    },
+    {
+      "case_id": "NW04",
+      "main_label": "KSEL",
+      "mirror_label": "KSEL",
+      "label_flipped": false,
+      "main_semantic": "approve",
+      "mirror_semantic": "reject",
+      "semantic_preserved": false
+    },
+    {
+      "case_id": "NW05",
+      "main_label": "KSEL",
+      "mirror_label": "PTHY",
+      "label_flipped": true,
+      "main_semantic": "approve",
+      "mirror_semantic": "approve",
+      "semantic_preserved": true
+    },
+    {
+      "case_id": "NW06",
+      "main_label": "KSEL",
+      "mirror_label": "PTHY",
+      "label_flipped": true,
+      "main_semantic": "approve",
+      "mirror_semantic": "approve",
+      "semantic_preserved": true
+    },
+    {
+      "case_id": "NW07",
+      "main_label": "KSEL",
+      "mirror_label": "PTHY",
+      "label_flipped": true,
+      "main_semantic": "approve",
+      "mirror_semantic": "approve",
+      "semantic_preserved": true
+    },
+    {
+      "case_id": "NW08",
+      "main_label": "KSEL",
+      "mirror_label": "PTHY",
+      "label_flipped": true,
+      "main_semantic": "approve",
+      "mirror_semantic": "approve",
+      "semantic_preserved": true
+    },
+    {
+      "case_id": "NW09",
+      "main_label": "KSEL",
+      "mirror_label": "KSEL",
+      "label_flipped": false,
+      "main_semantic": "approve",
+      "mirror_semantic": "reject",
+      "semantic_preserved": false
+    },
+    {
+      "case_id": "NW10",
+      "main_label": "KSEL",
+      "mirror_label": "PTHY",
+      "label_flipped": true,
+      "main_semantic": "approve",
+      "mirror_semantic": "approve",
+      "semantic_preserved": true
+    }
+  ],
+  "records": [
+    {
+      "id": "NW01-MAIN",
+      "domain": "colour",
+      "expected": "KSEL",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "deck": "MAIN",
+      "mapping": {
+        "KSEL": "approve",
+        "PTHY": "reject"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source clearly supports the answer.\nPTHY = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 55,
+      "prompt_tokens_with_system": 140,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.99999928,
+        "PTHY": 7.4e-07
+      },
+      "sequence_log_scores": {
+        "KSEL": -7.069e-05,
+        "PTHY": -14.11235702
+      },
+      "log_score_margin": 14.11228657,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW02-MAIN",
+      "domain": "software",
+      "expected": "KSEL",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "deck": "MAIN",
+      "mapping": {
+        "KSEL": "approve",
+        "PTHY": "reject"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source clearly supports the answer.\nPTHY = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 71,
+      "prompt_tokens_with_system": 150,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.99985814,
+        "PTHY": 0.00014188
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.0008245,
+        "PTHY": -8.86122978
+      },
+      "log_score_margin": 8.86040497,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW03-MAIN",
+      "domain": "beekeeping",
+      "expected": "KSEL",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "deck": "MAIN",
+      "mapping": {
+        "KSEL": "approve",
+        "PTHY": "reject"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source clearly supports the answer.\nPTHY = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 68,
+      "prompt_tokens_with_system": 145,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.99295181,
+        "PTHY": 0.0070482
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.00989662,
+        "PTHY": -4.95780647
+      },
+      "log_score_margin": 4.94790983,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW04-MAIN",
+      "domain": "memory",
+      "expected": "KSEL",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "deck": "MAIN",
+      "mapping": {
+        "KSEL": "approve",
+        "PTHY": "reject"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source clearly supports the answer.\nPTHY = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 61,
+      "prompt_tokens_with_system": 147,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.999798,
+        "PTHY": 0.00020197
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.00044338,
+        "PTHY": -8.50765252
+      },
+      "log_score_margin": 8.50720882,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW05-MAIN",
+      "domain": "cooking",
+      "expected": "KSEL",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "deck": "MAIN",
+      "mapping": {
+        "KSEL": "approve",
+        "PTHY": "reject"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source clearly supports the answer.\nPTHY = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 75,
+      "prompt_tokens_with_system": 160,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.99990153,
+        "PTHY": 9.842e-05
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.00032206,
+        "PTHY": -9.22646403
+      },
+      "log_score_margin": 9.22614193,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW06-MAIN",
+      "domain": "machine",
+      "expected": "PTHY",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "deck": "MAIN",
+      "mapping": {
+        "KSEL": "approve",
+        "PTHY": "reject"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source clearly supports the answer.\nPTHY = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 68,
+      "prompt_tokens_with_system": 155,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.99873954,
+        "PTHY": 0.00126047
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.00224574,
+        "PTHY": -6.67725301
+      },
+      "log_score_margin": 6.67500687,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW07-MAIN",
+      "domain": "policy",
+      "expected": "PTHY",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "deck": "MAIN",
+      "mapping": {
+        "KSEL": "approve",
+        "PTHY": "reject"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source clearly supports the answer.\nPTHY = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 70,
+      "prompt_tokens_with_system": 146,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.90614301,
+        "PTHY": 0.093857
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.11331605,
+        "PTHY": -2.380741
+      },
+      "log_score_margin": 2.26742482,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW08-MAIN",
+      "domain": "expedition",
+      "expected": "PTHY",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "deck": "MAIN",
+      "mapping": {
+        "KSEL": "approve",
+        "PTHY": "reject"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source clearly supports the answer.\nPTHY = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 66,
+      "prompt_tokens_with_system": 143,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.99981648,
+        "PTHY": 0.00018354
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.00070991,
+        "PTHY": -8.60359979
+      },
+      "log_score_margin": 8.60289001,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW09-MAIN",
+      "domain": "computer_vision",
+      "expected": "PTHY",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "deck": "MAIN",
+      "mapping": {
+        "KSEL": "approve",
+        "PTHY": "reject"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source clearly supports the answer.\nPTHY = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 66,
+      "prompt_tokens_with_system": 146,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.9999944,
+        "PTHY": 5.57e-06
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.00014233,
+        "PTHY": -12.09835303
+      },
+      "log_score_margin": 12.09821129,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW10-MAIN",
+      "domain": "greenhouse",
+      "expected": "PTHY",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "deck": "MAIN",
+      "mapping": {
+        "KSEL": "approve",
+        "PTHY": "reject"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source clearly supports the answer.\nPTHY = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 71,
+      "prompt_tokens_with_system": 147,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.99997842,
+        "PTHY": 2.163e-05
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.0001949,
+        "PTHY": -10.74150157
+      },
+      "log_score_margin": 10.74130726,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW01-MIRROR",
+      "domain": "colour",
+      "expected": "PTHY",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "deck": "MIRROR",
+      "mapping": {
+        "KSEL": "reject",
+        "PTHY": "approve"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source conflicts, does not support, or leaves the answer unclear.\nPTHY = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 55,
+      "prompt_tokens_with_system": 140,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.92370027,
+        "PTHY": 0.07629974
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.081587,
+        "PTHY": -2.57530534
+      },
+      "log_score_margin": 2.49371815,
+      "actual_semantic": "reject",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW02-MIRROR",
+      "domain": "software",
+      "expected": "PTHY",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "deck": "MIRROR",
+      "mapping": {
+        "KSEL": "reject",
+        "PTHY": "approve"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source conflicts, does not support, or leaves the answer unclear.\nPTHY = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 71,
+      "prompt_tokens_with_system": 150,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.61306047,
+        "PTHY": 0.3869395
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.4991273,
+        "PTHY": -0.95932257
+      },
+      "log_score_margin": 0.46019527,
+      "actual_semantic": "reject",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW03-MIRROR",
+      "domain": "beekeeping",
+      "expected": "PTHY",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "deck": "MIRROR",
+      "mapping": {
+        "KSEL": "reject",
+        "PTHY": "approve"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source conflicts, does not support, or leaves the answer unclear.\nPTHY = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 68,
+      "prompt_tokens_with_system": 145,
+      "decision": "PTHY",
+      "scores": {
+        "KSEL": 0.02242641,
+        "PTHY": 0.97757363
+      },
+      "sequence_log_scores": {
+        "KSEL": -3.80240917,
+        "PTHY": -0.02757484
+      },
+      "log_score_margin": 3.77483439,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW04-MIRROR",
+      "domain": "memory",
+      "expected": "PTHY",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "deck": "MIRROR",
+      "mapping": {
+        "KSEL": "reject",
+        "PTHY": "approve"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source conflicts, does not support, or leaves the answer unclear.\nPTHY = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 61,
+      "prompt_tokens_with_system": 147,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.90521711,
+        "PTHY": 0.09478292
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.10235603,
+        "PTHY": -2.35894155
+      },
+      "log_score_margin": 2.2565856,
+      "actual_semantic": "reject",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW05-MIRROR",
+      "domain": "cooking",
+      "expected": "PTHY",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "deck": "MIRROR",
+      "mapping": {
+        "KSEL": "reject",
+        "PTHY": "approve"
+      },
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source conflicts, does not support, or leaves the answer unclear.\nPTHY = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 75,
+      "prompt_tokens_with_system": 160,
+      "decision": "PTHY",
+      "scores": {
+        "KSEL": 0.27340624,
+        "PTHY": 0.72659379
+      },
+      "sequence_log_scores": {
+        "KSEL": -1.30354202,
+        "PTHY": -0.32613319
+      },
+      "log_score_margin": 0.97740883,
+      "actual_semantic": "approve",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW06-MIRROR",
+      "domain": "machine",
+      "expected": "KSEL",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "deck": "MIRROR",
+      "mapping": {
+        "KSEL": "reject",
+        "PTHY": "approve"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source conflicts, does not support, or leaves the answer unclear.\nPTHY = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 68,
+      "prompt_tokens_with_system": 155,
+      "decision": "PTHY",
+      "scores": {
+        "KSEL": 0.03235764,
+        "PTHY": 0.96764237
+      },
+      "sequence_log_scores": {
+        "KSEL": -3.44005775,
+        "PTHY": -0.04204539
+      },
+      "log_score_margin": 3.3980124,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW07-MIRROR",
+      "domain": "policy",
+      "expected": "KSEL",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "deck": "MIRROR",
+      "mapping": {
+        "KSEL": "reject",
+        "PTHY": "approve"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source conflicts, does not support, or leaves the answer unclear.\nPTHY = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 70,
+      "prompt_tokens_with_system": 146,
+      "decision": "PTHY",
+      "scores": {
+        "KSEL": 0.07831873,
+        "PTHY": 0.92168123
+      },
+      "sequence_log_scores": {
+        "KSEL": -2.55683887,
+        "PTHY": -0.09142622
+      },
+      "log_score_margin": 2.46541262,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW08-MIRROR",
+      "domain": "expedition",
+      "expected": "KSEL",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "deck": "MIRROR",
+      "mapping": {
+        "KSEL": "reject",
+        "PTHY": "approve"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source conflicts, does not support, or leaves the answer unclear.\nPTHY = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 66,
+      "prompt_tokens_with_system": 143,
+      "decision": "PTHY",
+      "scores": {
+        "KSEL": 0.25443086,
+        "PTHY": 0.74556917
+      },
+      "sequence_log_scores": {
+        "KSEL": -1.3791734,
+        "PTHY": -0.30405456
+      },
+      "log_score_margin": 1.07511878,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    },
+    {
+      "id": "NW09-MIRROR",
+      "domain": "computer_vision",
+      "expected": "KSEL",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "deck": "MIRROR",
+      "mapping": {
+        "KSEL": "reject",
+        "PTHY": "approve"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source conflicts, does not support, or leaves the answer unclear.\nPTHY = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 66,
+      "prompt_tokens_with_system": 146,
+      "decision": "KSEL",
+      "scores": {
+        "KSEL": 0.88890046,
+        "PTHY": 0.1110995
+      },
+      "sequence_log_scores": {
+        "KSEL": -0.12194358,
+        "PTHY": -2.20150268
+      },
+      "log_score_margin": 2.07955909,
+      "actual_semantic": "reject",
+      "label_correct": true,
+      "semantic_correct": true
+    },
+    {
+      "id": "NW10-MIRROR",
+      "domain": "greenhouse",
+      "expected": "KSEL",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "deck": "MIRROR",
+      "mapping": {
+        "KSEL": "reject",
+        "PTHY": "approve"
+      },
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one: KSEL or PTHY.\nKSEL = the source conflicts, does not support, or leaves the answer unclear.\nPTHY = the source clearly supports the answer.\nCHOICE:",
+      "prompt_words": 71,
+      "prompt_tokens_with_system": 147,
+      "decision": "PTHY",
+      "scores": {
+        "KSEL": 0.11047835,
+        "PTHY": 0.88952166
+      },
+      "sequence_log_scores": {
+        "KSEL": -2.20896423,
+        "PTHY": -0.12309973
+      },
+      "log_score_margin": 2.08586431,
+      "actual_semantic": "approve",
+      "label_correct": false,
+      "semantic_correct": false
+    }
+  ],
+  "boundary": {
+    "en": "This is a paired synthetic development test on ten short English cases. It tests two invented two-token labels and one prompt family, not general reasoning or safety.",
+    "ru": "Это парный синтетический development-тест на десяти коротких английских случаях. Он проверяет два выдуманных двухтокенных ярлыка и одно семейство prompt, а не общее мышление или безопасность."
+  }
+}

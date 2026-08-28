@@ -597,3 +597,10 @@ at least 9/10 per deck, and at least 4/5 for each semantic class within each
 deck. At least 16/20 choices of one label is a strong label bias. At least 8/10
 pairwise label flips without semantic success means the mapping was followed
 but the evidence judgment failed.
+
+The result was mixed and unsuccessful. In the main deck Qwen chose `KSEL` on
+all ten prompts, producing 5/10. The mirrored deck scored 3/10. Across both
+decks semantic accuracy was 8/20; `KSEL` was chosen 14/20 and labels flipped in
+6/10 pairs. Hiding familiar actions behind invented equal-length labels did not
+force reliable use of the mapping. Result:
+`site/experiments/E007/nonce-word-result-v0.1.json`.
