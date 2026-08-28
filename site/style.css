@@ -5231,6 +5231,13 @@ blockquote {
 .e007-ninety-card.is-critical header strong { color: #bd412f; }
 .e007-ninety-card p { font-size: clamp(18px, 1.4vw, 24px); margin: 6px 0 0; }
 .e007-ninety-card footer { border-top: 1px solid var(--line); padding-top: 18px; }
+.e007-order-table { min-width: 900px; }
+.e007-order-table th small,
+.e007-order-table td small { display: block; margin-top: 6px; }
+.e007-order-table tr.is-correct td:last-child { color: #4d8d49; }
+.e007-order-table tr.is-critical td:last-child { color: #bd412f; }
+.e007-order-table tbody td:nth-child(2),
+.e007-order-table tbody td:nth-child(3) { font-size: 22px; }
 @media (max-width: 900px) {
   .e007-ninety-grid { grid-template-columns: 1fr; }
   .e007-ninety-card header { display: grid; }

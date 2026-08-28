@@ -535,3 +535,12 @@ in each class is semantic success. At least 8/10 switches from the previous
 all-approve result to `reject` is a strong order effect. At least 8/10 remaining
 `approve` is a strong approve-label bias. Anything else is mixed or unresolved.
 This is a paired synthetic development control, not a general model claim.
+
+The paired run produced a strong approve-label signal. All ten earlier choices
+were `approve`; after placing `reject` first everywhere, all ten choices were
+still `approve`. No decision changed. Accuracy remained 5/10: 5/5 supported
+cases and 0/5 reject cases. Therefore the failure is not explained by a simple
+first-option preference. In this frozen scorer, the model strongly prefers the
+`approve` token or the meaning attached to it. This control does not yet
+separate token prior from semantic framing. Result:
+`site/experiments/E007/ninety-word-reversed-result-v0.1.json`.
