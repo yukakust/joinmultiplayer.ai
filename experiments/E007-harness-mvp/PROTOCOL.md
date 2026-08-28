@@ -407,3 +407,24 @@ tool-order invariance fell to 6/8. Formatting was therefore not the only
 problem: the model still over-selected `supported`. This diagnostic does not
 repair the locked result. Audit:
 `site/experiments/E007/atomic-tool-interface-audit-v0.1.json`.
+
+## Checkpoint 3C.6E — ten visible button cases
+
+Repeat the same three-link hypothesis at a scale the owner can inspect by eye.
+Freeze exactly ten unique English questions: three complete useful packets and
+seven traps covering every single-link failure and several combined failures.
+Do not test JSON generation again. For each of the thirty atomic comparisons,
+the harness reads the frozen model's next-token scores for the one-token actions
+`accept` and `reject`. This turns the choice into a deterministic two-button
+interface and removes the formatting failure from Checkpoint 3C.6D.
+
+Ordinary code uses a packet only after three `accept` decisions. The small
+development signal is at least 8/10 correct on every link, all 3 useful packets
+used, and 0/7 traps used. Regardless of aggregate scores, publish all ten full
+packets, all thirty button scores, and all ten final decisions for human review.
+Protocol and world:
+`site/experiments/E007/atomic-button-protocol-v0.1.json` and
+`site/experiments/E007/atomic-button-world-v0.1.json`.
+
+This is a small synthetic English development test for diagnosing behaviour by
+eye. It cannot establish statistical reliability or real-world safety.

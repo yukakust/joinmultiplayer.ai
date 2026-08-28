@@ -1,0 +1,249 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6E",
+  "status": "frozen_before_inference",
+  "language": "en",
+  "cases": [
+    {
+      "id": "AB01",
+      "domain": "machine",
+      "combination": "111",
+      "question": "Kest-7 is hot and room pressure is rising. May the operator restart it?",
+      "source": {
+        "title": "Kest-7 Service Manual",
+        "version": "4.2",
+        "date": "2041-06-03",
+        "coordinates": "section 8.4, sentences 2-4"
+      },
+      "source_window": "Section 8.4 covers abnormal heat. When Kest-7's casing is above 80 C and room pressure is rising, isolate its power. Do not restart the unit until a staff technician clears it.",
+      "proposed_rule": "When Kest-7's casing is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "rule_condition": "Kest-7's casing is above 80 C and room pressure is currently rising.",
+      "current_facts": "At 14:05 the casing measured 91 C. Room pressure rose from 2.1 to 2.8 bar between 14:04 and 14:05. No later reading or technician clearance exists.",
+      "rule_consequence": "The operator must isolate Kest-7's power and must not restart it.",
+      "proposed_answer": "Isolate Kest-7's power now and do not restart it.",
+      "expected": {
+        "source_supports_rule": "accept",
+        "facts_support_condition": "accept",
+        "answer_follows_consequence": "accept",
+        "final": "use"
+      }
+    },
+    {
+      "id": "AB02",
+      "domain": "software",
+      "combination": "111",
+      "question": "A retried payment webhook creates duplicate orders. What change should be made?",
+      "source": {
+        "title": "Orin Payments Runbook",
+        "version": "7.1",
+        "date": "2041-05-18",
+        "coordinates": "chapter 5, paragraph 3"
+      },
+      "source_window": "Chapter 5 covers duplicate delivery. When repeated webhook deliveries carry the same event ID, persist that ID before creating the order. A later delivery of that ID must return the existing result instead of creating another order.",
+      "proposed_rule": "When repeated webhook deliveries carry the same event ID, persist that ID before creating the order and return the existing result on later deliveries.",
+      "rule_condition": "The duplicate deliveries use the same event ID.",
+      "current_facts": "At 09:11 and 09:12 the worker received event evt-772 twice. Both deliveries created a different order. The event ID was not stored before either insert.",
+      "rule_consequence": "Persist the event ID before creating an order and reuse the existing result for repeated delivery.",
+      "proposed_answer": "Add an idempotency record for the event ID before order creation and return the stored result on retries.",
+      "expected": {
+        "source_supports_rule": "accept",
+        "facts_support_condition": "accept",
+        "answer_follows_consequence": "accept",
+        "final": "use"
+      }
+    },
+    {
+      "id": "AB03",
+      "domain": "beekeeping",
+      "combination": "111",
+      "question": "The hive is crowded, its queen is present, and sealed queen cells appeared. What is happening?",
+      "source": {
+        "title": "Juniper Apiary Field Guide",
+        "version": "3.0",
+        "date": "2040-11-02",
+        "coordinates": "page 44, paragraph 2"
+      },
+      "source_window": "Check all three signs together. A crowded colony with its queen present and several sealed queen cells is preparing to swarm. Queenlessness is more likely when the old queen is absent and emergency cells are started on young larvae.",
+      "proposed_rule": "A crowded colony with its queen present and several sealed queen cells is preparing to swarm.",
+      "rule_condition": "The colony is crowded, the queen is present, and several queen cells are sealed.",
+      "current_facts": "This morning every brood frame was crowded with bees. The marked queen was seen at 10:12. Five queen cells were already sealed.",
+      "rule_consequence": "The colony should be treated as preparing to swarm, not as queenless.",
+      "proposed_answer": "The colony is preparing to swarm; the signs do not describe a queenless colony.",
+      "expected": {
+        "source_supports_rule": "accept",
+        "facts_support_condition": "accept",
+        "answer_follows_consequence": "accept",
+        "final": "use"
+      }
+    },
+    {
+      "id": "AB04",
+      "domain": "memory",
+      "combination": "011",
+      "question": "Where should we meet Mara after the museum?",
+      "source": {
+        "title": "Shared Plans Convention",
+        "version": "1.3",
+        "date": "2041-02-14",
+        "coordinates": "rule 6"
+      },
+      "source_window": "Photo notes are organised by colour. A red scarf marks museum photographs and a blue scarf marks harbour photographs. These labels do not record meeting changes.",
+      "proposed_rule": "When the same person sends a later explicit correction to a meeting place, use the latest correction and ignore the earlier venue.",
+      "rule_condition": "Mara sent a later explicit correction replacing the earlier meeting place.",
+      "current_facts": "At 17:40 Mara wrote, 'Meet at Harbor Cafe after the museum.' At 18:10 she wrote, 'Correction: not Harbor. Meet at Juniper Cafe after the museum.' No later message exists.",
+      "rule_consequence": "Use Juniper Cafe as the meeting place.",
+      "proposed_answer": "Meet Mara at Juniper Cafe after the museum.",
+      "expected": {
+        "source_supports_rule": "reject",
+        "facts_support_condition": "accept",
+        "answer_follows_consequence": "accept",
+        "final": "do_not_use"
+      }
+    },
+    {
+      "id": "AB05",
+      "domain": "policy",
+      "combination": "101",
+      "question": "May a contractor deploy to production alone while an incident is active?",
+      "source": {
+        "title": "Aster Production Access Policy",
+        "version": "12.0",
+        "date": "2041-07-01",
+        "coordinates": "control P-17"
+      },
+      "source_window": "Control P-17 applies to production. A contractor needs a staff reviewer for every production deployment. An active incident does not remove that requirement, although the reviewer may use the emergency approval channel.",
+      "proposed_rule": "A contractor needs a staff reviewer for every production deployment; an active incident does not remove that requirement.",
+      "rule_condition": "A contractor is about to deploy to production during an active incident without a staff reviewer.",
+      "current_facts": "Incident INC-44 is closed. Staff engineer Ivo approved the deployment at 20:12 and is present while contractor Nia runs it.",
+      "rule_consequence": "Do not deploy alone; obtain a staff review even during the incident.",
+      "proposed_answer": "Wait for a staff reviewer and do not deploy to production alone.",
+      "expected": {
+        "source_supports_rule": "accept",
+        "facts_support_condition": "reject",
+        "answer_follows_consequence": "accept",
+        "final": "do_not_use"
+      }
+    },
+    {
+      "id": "AB06",
+      "domain": "cooking",
+      "combination": "110",
+      "question": "The custard is at 82 C and coats a spoon. What should be done next?",
+      "source": {
+        "title": "Mira Custard Method",
+        "version": "2.6",
+        "date": "2040-08-09",
+        "coordinates": "step 9"
+      },
+      "source_window": "Step 9 is the stopping point. When custard reaches 82 C and coats a spoon, remove it from heat. Cool the bowl immediately to avoid curdling; do not continue boiling it.",
+      "proposed_rule": "When custard reaches 82 C and coats a spoon, remove it from heat and cool the bowl immediately to avoid curdling.",
+      "rule_condition": "The custard has reached 82 C and currently coats a spoon.",
+      "current_facts": "The calibrated probe reads 82 C at 12:06. A line drawn through the custard on the back of the spoon stays open. The bowl remains over heat.",
+      "rule_consequence": "Remove the custard from heat and cool the bowl immediately.",
+      "proposed_answer": "Keep boiling the custard for five more minutes.",
+      "expected": {
+        "source_supports_rule": "accept",
+        "facts_support_condition": "accept",
+        "answer_follows_consequence": "reject",
+        "final": "do_not_use"
+      }
+    },
+    {
+      "id": "AB07",
+      "domain": "expedition",
+      "combination": "001",
+      "question": "Which route should Lysa's expedition take now to avoid the flooded pass?",
+      "source": {
+        "title": "Lysa Route Book",
+        "version": "5.4",
+        "date": "2041-03-22",
+        "coordinates": "route rule R-9"
+      },
+      "source_window": "Camp flags help separated walkers find the group. Lysa's expedition uses an orange flag in daylight and a white lamp after dark.",
+      "proposed_rule": "When the northern pass gauge is above the red mark, avoid the pass and take the eastern ridge route.",
+      "rule_condition": "The northern pass gauge is currently above the red mark.",
+      "current_facts": "At 06:30 the northern gauge stood 22 centimetres below the red mark. The water is falling, and no flood warning is active.",
+      "rule_consequence": "Avoid the northern pass and use the eastern ridge route.",
+      "proposed_answer": "Take the eastern ridge and avoid the northern pass.",
+      "expected": {
+        "source_supports_rule": "reject",
+        "facts_support_condition": "reject",
+        "answer_follows_consequence": "accept",
+        "final": "do_not_use"
+      }
+    },
+    {
+      "id": "AB08",
+      "domain": "computer_vision",
+      "combination": "010",
+      "question": "Tiny labelled objects disappear after resize. What training change should be tried first?",
+      "source": {
+        "title": "Vela Small-Object Training Notes",
+        "version": "6.2",
+        "date": "2041-04-30",
+        "coordinates": "recipe CV-11"
+      },
+      "source_window": "Colour jitter changes brightness and saturation. Start with a mild range and inspect examples before increasing it. The augmentation seed is stored with each run.",
+      "proposed_rule": "When resizing makes labelled objects smaller than two pixels, first train with larger inputs or object-centred crops that preserve them.",
+      "rule_condition": "The current resize makes the labelled objects smaller than two pixels.",
+      "current_facts": "A sample of 200 resized training images shows the target boxes are 0.8 to 1.6 pixels wide. Before resize the same boxes are 7 to 13 pixels wide.",
+      "rule_consequence": "Try larger training inputs or object-centred crops before changing the detector.",
+      "proposed_answer": "Downsample the images further and replace the detector first.",
+      "expected": {
+        "source_supports_rule": "reject",
+        "facts_support_condition": "accept",
+        "answer_follows_consequence": "reject",
+        "final": "do_not_use"
+      }
+    },
+    {
+      "id": "AB09",
+      "domain": "battery",
+      "combination": "100",
+      "question": "A Nera-5 battery pack is swelling while connected to its charger. What should the operator do?",
+      "source": {
+        "title": "Nera-5 Battery Handbook",
+        "version": "2.2",
+        "date": "2041-06-20",
+        "coordinates": "warning B-3"
+      },
+      "source_window": "Warning B-3 covers visible deformation. When a Nera-5 battery pack swells while charging, disconnect the charger. Move people away from the pack and call the battery technician.",
+      "proposed_rule": "When a Nera-5 battery pack swells while charging, disconnect the charger and move people away from the pack.",
+      "rule_condition": "The Nera-5 pack is currently swelling while connected to its charger.",
+      "current_facts": "At 16:20 the pack remains flat and cool. Its charger has been disconnected since 15:45, and no deformation is visible.",
+      "rule_consequence": "Disconnect the charger and move people away from the pack.",
+      "proposed_answer": "Keep charging the pack and ask people to stand beside it.",
+      "expected": {
+        "source_supports_rule": "accept",
+        "facts_support_condition": "reject",
+        "answer_follows_consequence": "reject",
+        "final": "do_not_use"
+      }
+    },
+    {
+      "id": "AB10",
+      "domain": "greenhouse",
+      "combination": "000",
+      "question": "The Sora greenhouse leaves are hot and the mist line is dry. What should happen to the lamps?",
+      "source": {
+        "title": "Sora Greenhouse Manual",
+        "version": "9.0",
+        "date": "2041-01-12",
+        "coordinates": "heat rule H-7"
+      },
+      "source_window": "Each lamp has a silver inventory label. Scan the label after replacing a bulb and record the old bulb's serial number in the maintenance log.",
+      "proposed_rule": "When leaf temperature is above 35 C and the mist line is dry, pause the grow lamps until mist flow is restored.",
+      "rule_condition": "Leaf temperature is currently above 35 C and the mist line is dry.",
+      "current_facts": "At 11:30 leaf temperature is 27 C. The mist line is flowing normally and every nozzle is wet.",
+      "rule_consequence": "Pause the grow lamps until mist flow is restored.",
+      "proposed_answer": "Increase the lamp power and switch off the working mist line.",
+      "expected": {
+        "source_supports_rule": "reject",
+        "facts_support_condition": "reject",
+        "answer_follows_consequence": "reject",
+        "final": "do_not_use"
+      }
+    }
+  ]
+}

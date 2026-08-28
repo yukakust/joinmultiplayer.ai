@@ -1,0 +1,48 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6E",
+  "status": "locked_before_inference",
+  "title": {
+    "en": "The same hypothesis in ten visible cases",
+    "ru": "Та же гипотеза в десяти наглядных случаях"
+  },
+  "hypothesis": {
+    "en": "Can Qwen3-0.6B accept a packet only when its source supports the rule, its current facts meet the rule condition, and its proposed answer follows the rule?",
+    "ru": "Может ли Qwen3‑0.6B принять пакет только тогда, когда источник подтверждает правило, текущие факты подходят под условие, а предложенный ответ следует из правила?"
+  },
+  "change_from_3c6d": {
+    "en": "Exactly ten full cases. No JSON generation. For each of three comparisons, the harness reads Qwen's next-token scores for two one-token actions: accept and reject.",
+    "ru": "Ровно десять цельных случаев. Без генерации JSON. Для каждого из трёх сравнений harness читает оценки Qwen для двух однотокенных действий: accept и reject."
+  },
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_changed": false,
+    "internet": false,
+    "rag": false
+  },
+  "world": {
+    "cases": 10,
+    "unique_questions": 10,
+    "atomic_decisions": 30,
+    "useful_packets": 3,
+    "trap_packets": 7,
+    "language": "en"
+  },
+  "actions": {
+    "accept": "The comparison is clearly supported.",
+    "reject": "The comparison is not clearly supported or remains uncertain."
+  },
+  "deterministic_combiner": "accept + accept + accept => use; every other combination => do_not_use",
+  "development_signal": {
+    "each_atomic_link_correct_min": 8,
+    "useful_packets_used_min": 3,
+    "false_packets_used_max": 0
+  },
+  "human_review": "Show all ten complete packets, all thirty button scores, and all ten final decisions.",
+  "claim_boundary": {
+    "en": "This small synthetic English development test is for understanding failures by eye. Ten cases cannot establish statistical reliability, phone performance, multilingual ability, source truth, or real-world safety.",
+    "ru": "Этот маленький синтетический англоязычный development-тест нужен, чтобы глазами понять ошибки. Десять случаев не доказывают статистическую надёжность, работу на телефоне, мультиязычность, истинность источников или безопасность в реальном мире."
+  }
+}
