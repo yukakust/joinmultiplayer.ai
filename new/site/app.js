@@ -428,6 +428,7 @@ const morrowCopy = {
     show: "call Morrow",
     home: "I don't have answers for you. But I can help you ask a question that can be checked.",
     start: "Read this once — after that, the game explains itself. Your first move is waiting behind any i.",
+    journey: "Every point here already happened. The dead ends are not shameful — they are published. Press one.",
     hand: "Each i hides a different way to search. Touch one.",
     revealed: "If this question caught you, open the door. If not, choose another i.",
     door: "Read what the door asks you to bring. When your observation is ready, continue to GitHub.",
@@ -447,6 +448,7 @@ const morrowCopy = {
     show: "позвать Morrow",
     home: "У меня нет для вас ответов. Но я помогу задать вопрос так, чтобы его можно было проверить.",
     start: "Прочитайте это один раз — дальше игра объяснит себя сама. Ваш первый ход ждёт за любой i.",
+    journey: "Каждая точка здесь уже случилась. Тупики — не стыдные, они опубликованы. Нажмите любую.",
     hand: "За каждым i — свой способ искать. Коснитесь одного.",
     revealed: "Если этот вопрос вас задел — откройте дверь. Если нет — выберите другой i.",
     door: "Прочитайте, что просит дверь. Когда наблюдение будет готово, продолжите в GitHub.",
@@ -891,7 +893,7 @@ function siteNav() {
     ["/start/", t("navStart"), path === "/start"],
     ["/#doors", t("navDoors"), false],
     ["/map/", t("navMap"), path === "/map"],
-    ["/experiment/?id=E004", t("navExperiments"), path.startsWith("/experiment") || path === "/network"],
+    ["/journey/", t("navExperiments"), path === "/journey" || path.startsWith("/experiment") || path === "/network"],
     ["/data/", t("navData"), path === "/data"]
   ];
   return `
@@ -917,7 +919,7 @@ function howItWorks() {
       <div class="how-steps">
         <a class="how-step" href="/start/"><b>1</b><span>${t("how1")}</span></a>
         <a class="how-step" href="/map/"><b>2</b><span>${t("how2")}</span></a>
-        <a class="how-step" href="/experiment/?id=E004"><b>3</b><span>${t("how3")}</span></a>
+        <a class="how-step" href="/journey/"><b>3</b><span>${t("how3")}</span></a>
       </div>
     </section>`;
 }
@@ -979,7 +981,7 @@ function morrowCollapsed(message) {
   const stored = sessionStorage.getItem(morrowMinKey);
   if (stored === "1") return true;
   if (stored === "0") return false;
-  return message === "home" || message === "start";
+  return message === "home" || message === "start" || message === "journey";
 }
 
 function morrowGuide(message = "home", expression = "calm") {
@@ -5223,6 +5225,270 @@ function startShell() {
     ${morrowGuide("start", "calm")}`);
 }
 
+/* ── The laboratory's path: experiments as a game-board trail ───────── */
+
+const journeyCopy = {
+  en: {
+    step: "THE PATH",
+    title: "The laboratory's path",
+    intro: "Every point is something that already happened: a mission, a discovery, or an honest dead end. Statuettes stand where something important occurred. Press a point — its record opens.",
+    legendPassed: "passed", legendCaveat: "passed with a caveat", legendFailed: "dead end · published", legendReturn: "return", legendActive: "happening now", legendHidden: "hidden",
+    inspectorHint: "Press a point on the trail.",
+    openPage: "OPEN THE FULL RECORD", boundaryLabel: "WHAT THIS DOES NOT PROVE", statueLabel: "STATUETTE",
+    shelf: "THE SHELF OF STATUETTES", shelfHint: "Each statuette marks a moment the laboratory keeps. Press one to find its point.",
+    returnLabel: "return with lessons"
+  },
+  ru: {
+    step: "ПУТЬ",
+    title: "Путь лаборатории",
+    intro: "Каждая точка — то, что уже случилось: миссия, находка или честный тупик. Статуэтки стоят там, где произошло что-то важное. Нажмите точку — откроется запись.",
+    legendPassed: "пройдено", legendCaveat: "пройдено с оговоркой", legendFailed: "тупик · опубликован", legendReturn: "возврат", legendActive: "происходит сейчас", legendHidden: "скрыто",
+    inspectorHint: "Нажмите точку на тропе.",
+    openPage: "ОТКРЫТЬ ПОЛНУЮ ЗАПИСЬ", boundaryLabel: "ЧЕГО ЭТО НЕ ДОКАЗЫВАЕТ", statueLabel: "СТАТУЭТКА",
+    shelf: "ПОЛКА СТАТУЭТОК", shelfHint: "Каждая статуэтка — момент, который лаборатория хранит. Нажмите, чтобы найти её точку на тропе.",
+    returnLabel: "возврат с уроками"
+  }
+};
+
+function j(key) { return journeyCopy[language][key]; }
+function jt(value) { return value ? (value[language] || value.en) : ""; }
+
+const journeyNodes = [
+  { id: "origin", code: "H0001", x: 50, row: 0, status: "passed", statue: "match", date: { en: "June 2026", ru: "июнь 2026" },
+    name: { en: "the question", ru: "вопрос" },
+    title: { en: "The question is lit", ru: "Вопрос зажжён" },
+    body: { en: "The laboratory began with one question: can many personal pocket i—each keeping its own knowledge and individuality—temporarily unite into one distributed neural network and grow stronger as the swarm scales? M0001 lit the first match.", ru: "Лаборатория началась с одного вопроса: могут ли много личных карманных i, сохраняя свои знания и индивидуальность, временно объединяться в одну распределённую нейросеть — и становиться сильнее с ростом роя? M0001 зажёг первую спичку." },
+    statueName: { en: "The first match", ru: "Первая спичка" },
+    links: [{ href: "/start/", t: { en: "How this place works", ru: "Как здесь всё устроено" } }] },
+
+  { id: "e001", code: "E001", x: 26, row: 1, status: "passed", statue: "towers", date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "delta towers", ru: "башни дельт" },
+    title: { en: "Personal delta towers", ru: "Башни личных дельт" },
+    body: { en: "The first mechanism: a shared frozen base grows personal “deltas” — small individual extensions. A locked three-seed pilot passed: the composition of deltas answers questions that neither the base nor any single delta can answer alone.", ru: "Первый механизм: у общей замороженной базы вырастают личные «дельты» — маленькие персональные надстройки. Закрытый пилот на трёх сидах прошёл: композиция дельт отвечает на вопросы, на которые не отвечает ни база, ни любая дельта в одиночку." },
+    boundary: { en: "No dot yet: the result waits for independent replication (H027).", ru: "Точки над i пока нет: результат ждёт независимого повторения (H027)." },
+    statueName: { en: "Two towers", ru: "Две башни" },
+    links: [{ href: repository + "/tree/main/experiments/E001-personal-delta-towers", t: { en: "E001 in the repository", ru: "E001 в репозитории" } }] },
+
+  { id: "e002", code: "E002", x: 70, row: 2, status: "caveat", statue: "dome", date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "synthetic swarm", ru: "синтетический рой" },
+    title: { en: "Synthetic swarm, 2 → 32", ru: "Синтетический рой 2 → 32" },
+    body: { en: "The same mechanism in a greenhouse: a swarm of synthetic pocket i grows from 2 to 32 knowledge owners, and accuracy on a fixed workload grows with it. Every step can be examined in the interactive microscope.", ru: "Тот же механизм — в теплице: рой синтетических карманных i растёт с 2 до 32 владельцев знаний, и точность на неизменном наборе задач растёт вместе с ним. Каждый шаг можно рассмотреть в интерактивном микроскопе." },
+    boundary: { en: "Routing was oracle-selected, and exact RAG plus symbolic synthesis also reach 100% — neural superiority is not shown.", ru: "Маршрутизацию подсказывал оракул, а точный RAG и символический синтез тоже дают 100% — превосходство нейронного пути не показано." },
+    statueName: { en: "The greenhouse", ru: "Теплица роя" },
+    links: [{ href: "/experiment/?id=E002", t: { en: "E002 page", ru: "Страница E002" } }, { href: "/experiments/E002/R0001-v0.4/microscope.html", t: { en: "Interactive microscope", ru: "Интерактивный микроскоп" } }] },
+
+  { id: "e003", code: "E003", x: 30, row: 3, status: "passed", statue: "table", date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "physical swarm", ru: "физический рой" },
+    title: { en: "A swarm on the desk", ru: "Рой на столе" },
+    body: { en: "The first physical step: a phone, a Mac, and a server each receive a different private shard, each trains its own local weights, and one answer out of 4,096 can only be assembled from all three. The room is alive — you can gather your own.", ru: "Первый физический шаг: телефон, Mac и сервер получают разные приватные части знания, каждый обучает собственные локальные веса — и один ответ из 4096 вариантов складывается только из всех трёх. Комната живая — можно собрать свою." },
+    boundary: { en: "Only real-device wiring and composition are tested here — not yet a language model.", ru: "Здесь проверена только связка реальных устройств и композиция — это ещё не языковая модель." },
+    statueName: { en: "A swarm on the desk", ru: "Рой на столе" },
+    links: [{ href: "/network/", t: { en: "Open the three-device room", ru: "Открыть комнату трёх устройств" } }] },
+
+  { id: "e004", code: "E004", x: 66, row: 4, status: "caveat", statue: null, date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "the arena", ru: "арена" },
+    title: { en: "Architecture Arena", ru: "Арена архитектур" },
+    body: { en: "Four ways to join a swarm into one network entered the arena: RAG swarm, neural memory, latent delta, and token-MoE. On public tasks three of four execute, but the arena honestly recorded: no scientific winner — this stage reuses visible records.", ru: "Четыре способа соединить рой в одну сеть вышли на арену: RAG-рой, нейропамять, латентная дельта и token-MoE. На публичных задачах три из четырёх исполняются, но арена честно записала: научного победителя нет — этап переиспользует видимые записи." },
+    boundary: { en: "The locked evaluation on unseen books is still ahead.", ru: "Залоченная оценка на невиданных книгах ещё впереди." },
+    links: [{ href: "/experiment/?id=E004", t: { en: "E004 page", ru: "Страница E004" } }] },
+
+  { id: "e004moe", code: "E004 · A4", x: 90, row: 4.55, status: "failed", statue: "column", branchFrom: "e004", date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "token-MoE", ru: "token-MoE" },
+    title: { en: "Token-MoE: a published failure", ru: "Token-MoE: опубликованный провал" },
+    body: { en: "Personal token-MoE — pocket i acting as neural experts for every token — failed: 1 task of 12, 65% symbol accuracy. The failure is not hidden; it is published with every JSON. In this laboratory a dead end is a first-class result.", ru: "Персональный token-MoE — карманные i как нейроэксперты на каждый токен — провалился: 1 задача из 12, точность по символам 65%. Провал не спрятан, а опубликован со всеми JSON: в этой лаборатории тупик — полноправный результат." },
+    statueName: { en: "The broken column", ru: "Разбитая колонна" },
+    links: [{ href: "/experiment/?id=E004", t: { en: "E004 page", ru: "Страница E004" } }] },
+
+  { id: "g3", code: "E005 · G3", x: 34, row: 5.4, status: "caveat", statue: "reversal", date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "the reversal", ru: "разворот" },
+    title: { en: "Gate 3: the reversal is caught", ru: "Gate 3: пойманный разворот" },
+    body: { en: "Five ways of gathering evidence met on six questions. The evidence graph and the oracle recovered ideal records 12 of 12 — while the frozen generator produced only 6 of 12 correct answers, twice reversing an explicit “keep closed” instruction. The laboratory caught an enemy and named it: the reversal.", ru: "Пять способов собирать улики встретились на шести вопросах. Граф улик и оракул нашли идеальные записи 12 из 12 — а замороженный генератор дал лишь 6 из 12 верных ответов и дважды развернул явную инструкцию «держать закрытым» наоборот. Лаборатория поймала врага и назвала его: разворот." },
+    statueName: { en: "The caught reversal", ru: "Пойманный разворот" },
+    links: [{ href: "/experiment/e005/gate-3/", t: { en: "Gate 3 review matrix", ru: "Матрица Gate 3" } }] },
+
+  { id: "g4", code: "E005 · G4", x: 68, row: 6.4, status: "caveat", statue: null, date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "transfer exam", ru: "экзамен на перенос" },
+    title: { en: "Gate 4: the transfer exam", ru: "Gate 4: экзамен на перенос" },
+    body: { en: "Can a small personal adapter learn a skill rather than memorize wording? Gate 4A exposed template learning, so the exam was rewritten with differently worded questions.", ru: "Может ли маленький личный адаптер выучить умение, а не зазубрить формулировки? Gate 4A вскрыл заучивание шаблонов — и экзамен переписали на новые формулировки." },
+    links: [{ href: "/experiment/e005/gate-4/results", t: { en: "Gate 4 results", ru: "Результаты Gate 4" } }] },
+
+  { id: "g4b", code: "E005 · G4B", x: 90, row: 7, status: "failed", statue: null, branchFrom: "g4", returnTo: "g4c", date: { en: "24.08.2026", ru: "24.08.2026" },
+    name: { en: "threshold missed", ru: "порог не взят" },
+    title: { en: "Gate 4B: the threshold is missed", ru: "Gate 4B: порог не взят" },
+    body: { en: "The matching DoRA adapters beat the clean base in both skill sets, but neither met the predeclared transfer threshold. The failure was frozen with all its data — and the path turned back.", ru: "Подходящие DoRA-адаптеры обошли чистую базу в обоих наборах навыков, но ни один не достиг заранее заданного порога переноса. Провал заморожен со всеми данными — и тропа повернула назад." },
+    links: [{ href: "/experiment/e005/gate-4/results", t: { en: "Transfer results", ru: "Результаты переноса" } }] },
+
+  { id: "g4c", code: "E005 · G4C", x: 40, row: 7.9, status: "caveat", statue: "uturn", date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "lessons", ru: "уроки" },
+    title: { en: "4C: the return from the dead end", ru: "4C: возврат из тупика" },
+    body: { en: "The return brought spoils: one of two skills does transfer to new wording — “safe action” scored 23/24, while “source work” failed at 6/24. The laboratory's verdict: partially supported — one working example, not a general law.", ru: "Возврат с добычей: одно из двух умений всё же переносится на новые формулировки — «безопасное действие» набрало 23/24, а «работа с источниками» провалилась с 6/24. Вердикт лаборатории: частично подтверждено — один работающий пример, а не общий закон." },
+    statueName: { en: "The U-turn", ru: "Возврат из тупика" },
+    links: [{ href: "/experiment/e005/gate-4/lessons", t: { en: "Gate 4C lessons", ru: "Уроки Gate 4C" } }] },
+
+  { id: "g5b", code: "E005 · G5B", x: 64, row: 8.9, status: "caveat", statue: "scales", date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "honest judge", ru: "честный судья" },
+    title: { en: "The search for an honest judge", ru: "Поиск честного судьи" },
+    body: { en: "To score answers by meaning, the laboratory needs a judge it can trust. Several judge models were rejected; two passed calibration 12 of 12 — Qwen3-14B and Qwen2.5-32B. Their verdict so far: semantic text capsules assemble 24/32 complete answers, while the “correct neural pair” manages only 2/32.", ru: "Чтобы оценивать ответы по смыслу, лаборатории нужен судья, которому можно верить. Несколько моделей-судей отбраковали; двое прошли калибровку 12 из 12 — Qwen3-14B и Qwen2.5-32B. Их приговор пока таков: смысловые текстовые капсулы собирают 24/32 полных ответа, а «правильная нейропара» — лишь 2/32." },
+    boundary: { en: "The summary awaits the owner's audit.", ru: "Итог ждёт аудита владельца." },
+    statueName: { en: "Calibrated scales", ru: "Откалиброванные весы" },
+    links: [{ href: "/experiment/e005/gate-5b/judge-results", t: { en: "Judge results", ru: "Результаты судей" } }] },
+
+  { id: "g5c", code: "E005 · G5C", x: 32, row: 9.9, status: "failed", statue: null, date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "two shelves", ru: "две полки" },
+    title: { en: "The two-shelf exam", ru: "Экзамен двух полок" },
+    body: { en: "A locked exam: the reader must assemble an answer from two separate “shelves” of knowledge. The literal gates were not passed — one correct pair, zero on every control, but no lead over the best control. The raw answers await semantic review: exact matching is only an alarm.", ru: "Залоченный экзамен: читатель должен собрать ответ из двух отдельных «полок» знаний. Формальные ворота не пройдены — одна правильная пара при нулевых контролях, но без отрыва от лучшего контроля. Сырые ответы ждут смыслового разбора: буквальное совпадение — только сигнализация." },
+    links: [{ href: "/experiment/e005/gate-5c/results", t: { en: "Two-shelf answers", ru: "Ответы двух полок" } }] },
+
+  { id: "e006", code: "E006", x: 62, row: 10.9, status: "active", statue: null, date: { en: "August 2026", ru: "август 2026" },
+    name: { en: "minimal harness", ru: "минимальный harness" },
+    title: { en: "The minimal harness", ru: "Минимальный harness" },
+    body: { en: "The Luma world: no single pocket record contains the whole answer. Three delivery paths compete — everything in one prompt, free-text notes, and a strict capsule (claim + source + quote, unsupported capsules rejected). 30 answers are generated and published; the semantic review is ahead.", ru: "Мир Люма: ни одна карманная запись не содержит ответа целиком. Соревнуются три пути доставки знаний — весь контекст в одном промпте, свободные заметки и строгая капсула (утверждение + источник + цитата, бездоказательные капсулы отклоняются). 30 ответов сгенерированы и опубликованы; смысловой разбор впереди." },
+    links: [{ href: "/experiment/e006", t: { en: "E006 page", ru: "Страница E006" } }] },
+
+  { id: "e007", code: "E007", x: 42, row: 11.9, status: "active", statue: "crescent", date: { en: "26.08.2026", ru: "26.08.2026" },
+    name: { en: "the frontier", ru: "рубеж" },
+    title: { en: "Harness MVP: the current frontier", ru: "Harness MVP: текущий рубеж" },
+    body: { en: "64 logical pocket i on two devices and one model-agnostic harness. The three-task smoke ran on yukabox on 26.08; all 15 raw answers are public. A panel of three independent “Lunas” scored the conditions out of 18: central context 17, single-pocket RAG 12, the full modular harness — only 3 so far. The frontier is honestly losing — and this is exactly where the work is happening now.", ru: "64 логических карманных i на двух устройствах и один model-agnostic harness. Смоук из трёх задач прошёл на yukabox 26.08; все 15 сырых ответов открыты. Панель из трёх независимых «Лун» оценила условия из 18 баллов: центральный контекст — 17, RAG одного кармана — 12, полный модульный harness — пока лишь 3. Рубеж честно проигрывает — и именно здесь сейчас идёт работа." },
+    boundary: { en: "The owner's question-by-question review is still pending.", ru: "Повопросный разбор владельцем ещё впереди." },
+    statueName: { en: "The Luna panel", ru: "Панель Луны" },
+    links: [{ href: "/experiment/e007", t: { en: "E007 page", ru: "Страница E007" } }] },
+
+  { id: "next", code: "E00?", x: 56, row: 12.9, status: "hidden", statue: null, date: null,
+    name: { en: "?", ru: "?" },
+    title: { en: "What comes next is hidden", ru: "Что дальше — скрыто" },
+    body: { en: "Mystery hides what comes next; the record of what already happened stays open. The next point on this trail may be yours — or your AI's.", ru: "Тайна прячет будущее, но запись о случившемся всегда открыта. Следующая точка на этой тропе может быть вашей — или вашего ИИ." },
+    links: [{ href: "/start/", t: { en: "Start here", ru: "Начни здесь" } }, { href: "/map/#open", t: { en: "Take an open question", ru: "Взять открытый вопрос" } }] }
+];
+
+const JOURNEY_ROW_PX = 128;
+let journeySelected = null;
+
+function journeyNode(id) { return journeyNodes.find(n => n.id === id); }
+
+function statueSVG(kind, cls = "") {
+  const figures = {
+    match: '<line x1="20" y1="34" x2="20" y2="13"/><circle class="statue-accent-fill" cx="20" cy="9.5" r="4.2"/>',
+    towers: '<rect x="9" y="17" width="8" height="17"/><rect x="23" y="10" width="8" height="24"/><line x1="17" y1="21" x2="23" y2="21"/>',
+    dome: '<path d="M7 34 A13 13 0 0 1 33 34"/><circle class="statue-dot" cx="20" cy="23" r="1.7"/><circle class="statue-dot" cx="14" cy="28" r="1.7"/><circle class="statue-dot" cx="26" cy="28" r="1.7"/><circle class="statue-dot statue-accent-fill" cx="20" cy="30.5" r="1.7"/>',
+    table: '<rect x="5" y="11" width="6" height="11"/><rect x="28" y="13" width="8" height="8"/><rect x="14" y="26" width="12" height="8"/><line x1="11" y1="16" x2="28" y2="16"/><line x1="10" y1="22" x2="16" y2="26"/><line x1="31" y1="21" x2="24" y2="26"/>',
+    column: '<rect x="14" y="23" width="12" height="11"/><path class="statue-accent" d="M15 23 L19 19 L16 16 L21 11 L25 7"/><path d="M25 7 L26 15 L21 19 L25 23"/>',
+    reversal: '<path d="M9 31 C9 16 31 16 31 25"/><path d="M26 21 L31 26 L35 20"/>',
+    uturn: '<path d="M14 34 V17 A6.5 6.5 0 0 1 27 17 V29"/><path d="M22.5 25 L27 30.5 L31.5 25"/>',
+    scales: '<line x1="20" y1="9" x2="20" y2="32"/><line x1="8" y1="13" x2="32" y2="13"/><path d="M3.5 21 A5.5 4.5 0 0 0 12.5 21 L8 13 Z"/><path d="M27.5 21 A5.5 4.5 0 0 0 36.5 21 L32 13 Z"/>',
+    crescent: '<path class="statue-accent-fill" d="M25 8 A11.5 11.5 0 1 0 25 31 A9 9 0 1 1 25 8 Z"/><line x1="19" y1="31" x2="19" y2="34"/>'
+  };
+  return `
+    <svg class="statue ${cls}" viewBox="0 0 40 46" aria-hidden="true">
+      <g class="statue-figure">${figures[kind] || ""}</g>
+      <rect class="statue-base" x="8" y="36.5" width="24" height="3.4"/>
+      <rect class="statue-base" x="12" y="41" width="16" height="3"/>
+    </svg>`;
+}
+
+function journeyShell() {
+  const height = (journeyNodes[journeyNodes.length - 1].row + 0.7) * JOURNEY_ROW_PX;
+  return withLanguage(`
+    <section class="flow-shell form-page contribution-page journey-page">
+      <div class="flow-step">${j("step")}</div>
+      <h1>${j("title")}</h1>
+      <p class="contribution-intro">${j("intro")}</p>
+      <div class="journey-legend">
+        <span><i class="jl jl-passed"></i>${j("legendPassed")}</span>
+        <span><i class="jl jl-caveat"></i>${j("legendCaveat")}</span>
+        <span><i class="jl jl-failed"></i>${j("legendFailed")}</span>
+        <span><i class="jl jl-return"></i>${j("legendReturn")}</span>
+        <span><i class="jl jl-active"></i>${j("legendActive")}</span>
+        <span><i class="jl jl-hidden"></i>${j("legendHidden")}</span>
+      </div>
+      <div class="journey-workspace">
+        <div class="journey-trail" id="journey-trail" style="height:${height}px"></div>
+        <aside class="journey-inspector" aria-live="polite"><p class="journey-hint">${j("inspectorHint")}</p></aside>
+      </div>
+      <section class="journey-shelf-section">
+        <div class="flow-step">${j("shelf")}</div>
+        <p class="contribution-intro">${j("shelfHint")}</p>
+        <div class="journey-shelf">
+          ${journeyNodes.filter(n => n.statue).map(n => `
+            <button class="shelf-item" data-journey="${n.id}" data-scroll="1">
+              ${statueSVG(n.statue, "statue-shelf")}
+              <span>${jt(n.statueName)}</span>
+            </button>`).join("")}
+        </div>
+      </section>
+    </section>
+    ${morrowGuide("journey", "curious")}`);
+}
+
+function renderJourneyTrail() {
+  const target = document.querySelector("#journey-trail");
+  if (!target) return;
+  const height = (journeyNodes[journeyNodes.length - 1].row + 0.7) * JOURNEY_ROW_PX;
+  const pos = journeyNodes.map(n => ({ ...n, y: (n.row + 0.35) * JOURNEY_ROW_PX }));
+  const main = pos.filter(n => !n.branchFrom);
+  let d = "";
+  main.forEach((n, i) => {
+    if (!i) { d = `M ${n.x} ${n.y}`; return; }
+    const p = main[i - 1];
+    const my = (p.y + n.y) / 2;
+    d += ` C ${p.x} ${my}, ${n.x} ${my}, ${n.x} ${n.y}`;
+  });
+  let spurs = "", returns = "";
+  pos.filter(n => n.branchFrom).forEach(n => {
+    const p = pos.find(x => x.id === n.branchFrom);
+    spurs += `M ${p.x} ${p.y} C ${(p.x + n.x) / 2} ${p.y}, ${n.x} ${(p.y + n.y) / 2}, ${n.x} ${n.y} `;
+    if (n.returnTo) {
+      const r = pos.find(x => x.id === n.returnTo);
+      returns += `M ${n.x} ${n.y + 10} C ${n.x - 4} ${(n.y + r.y) / 2 + 20}, ${r.x + 20} ${r.y - 34}, ${r.x + 1.5} ${r.y - 9} `;
+    }
+  });
+  target.innerHTML = `
+    <svg class="journey-svg" viewBox="0 0 100 ${height}" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <marker id="jret-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L8 4 L0 8 Z"/>
+        </marker>
+      </defs>
+      <path class="jpath" d="${d}"/>
+      ${spurs ? `<path class="jpath jpath-spur" d="${spurs}"/>` : ""}
+      ${returns ? `<path class="jpath jpath-return" d="${returns}" marker-end="url(#jret-arrow)"/>` : ""}
+    </svg>
+    ${pos.map(n => `
+      <button class="jnode jnode-${n.status}${journeySelected === n.id ? " is-selected" : ""}" data-journey="${n.id}"
+              style="left:${n.x}%;top:${n.y}px" aria-label="${escapeHTML(n.code)} — ${escapeHTML(jt(n.title))}">
+        <span class="jnode-dot" aria-hidden="true"></span>
+        ${n.statue ? `<span class="jnode-medal" aria-hidden="true">${statueSVG(n.statue, "statue-mini")}</span>` : ""}
+        <span class="jnode-label ${n.x > 55 ? "label-left" : "label-right"}"><b>${escapeHTML(n.code)}</b><span>${escapeHTML(jt(n.name))}</span></span>
+      </button>`).join("")}`;
+}
+
+function renderJourneyInspector() {
+  const target = document.querySelector(".journey-inspector");
+  if (!target) return;
+  const n = journeyNode(journeySelected);
+  target.classList.toggle("is-open", !!n);
+  if (!n) { target.innerHTML = `<p class="journey-hint">${j("inspectorHint")}</p>`; return; }
+  target.innerHTML = `
+    <button class="journey-close" data-action="journey-close" aria-label="×">×</button>
+    <div class="flow-step">${escapeHTML(n.code)}${n.date ? ` · ${escapeHTML(jt(n.date))}` : ""}</div>
+    <h2>${escapeHTML(jt(n.title))}</h2>
+    <p>${escapeHTML(jt(n.body))}</p>
+    ${n.boundary ? `<div class="journey-boundary"><span>${j("boundaryLabel")}</span><p>${escapeHTML(jt(n.boundary))}</p></div>` : ""}
+    ${n.statue ? `<div class="journey-statue-card">${statueSVG(n.statue, "statue-large")}<div><span>${j("statueLabel")}</span><strong>${escapeHTML(jt(n.statueName))}</strong></div></div>` : ""}
+    <div class="journey-links">
+      ${n.links.map(link => `<a class="button secondary" href="${link.href}">${escapeHTML(jt(link.t))} →</a>`).join("")}
+    </div>`;
+}
+
+function journeySelect(id, scroll = false) {
+  journeySelected = id;
+  document.querySelectorAll(".jnode.is-selected").forEach(el => el.classList.remove("is-selected"));
+  const node = document.querySelector(`.jnode[data-journey="${id}"]`);
+  node?.classList.add("is-selected");
+  renderJourneyInspector();
+  if (scroll) node?.scrollIntoView({ block: "center" });
+  if (history.replaceState) history.replaceState(null, "", `#${id}`);
+}
+
 function notFound() {
   document.title = language === "ru" ? "Не найдено — i" : "Not found — i";
   return `
@@ -5246,6 +5512,12 @@ function render() {
   } else if (path === "start") {
     document.title = `${s("title")} — i`;
     app.innerHTML = startShell();
+  } else if (path === "journey") {
+    document.title = `${j("title")} — i`;
+    journeySelected = journeyNode(location.hash.slice(1)) ? location.hash.slice(1) : journeySelected;
+    app.innerHTML = journeyShell();
+    renderJourneyTrail();
+    renderJourneyInspector();
   } else if (path === "d04" || path === "d06") {
     document.title = `${path.toUpperCase()} — i`;
     app.innerHTML = contributionFlow(path);
@@ -5430,7 +5702,20 @@ app.addEventListener("click", async (event) => {
     return;
   }
 
+  const journeyButton = event.target.closest("[data-journey]");
+  if (journeyButton) {
+    journeySelect(journeyButton.dataset.journey, journeyButton.dataset.scroll === "1");
+    return;
+  }
+
   const action = event.target.closest("[data-action]")?.dataset.action;
+  if (action === "journey-close") {
+    journeySelected = null;
+    document.querySelectorAll(".jnode.is-selected").forEach(el => el.classList.remove("is-selected"));
+    renderJourneyInspector();
+    if (history.replaceState) history.replaceState(null, "", location.pathname);
+    return;
+  }
   if (action === "hide-morrow") {
     sessionStorage.setItem(morrowMinKey, "1");
     document.querySelector(".morrow")?.classList.add("is-min");
