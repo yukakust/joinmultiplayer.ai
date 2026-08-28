@@ -4119,7 +4119,7 @@ async function loadE007() {
   const target = document.querySelector(".e007-page");
   if (!target) return;
   try {
-    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse, sourceAnchorProtocolResponse, sourceAnchorResultResponse, chunkingProtocolResponse, chunkingResultResponse, capsuleProtocolResponse, capsuleWorldResponse, capsuleResultResponse, semanticProtocolResponse, semanticWorldResponse, semanticResultResponse, semanticAuditResponse] = await Promise.all([
+    const [designResponse, worldResponse, smokeResponse, smokeResultsResponse, panelResponse, judge1Response, judge2Response, judge3Response, attentionResponse, attentionRunsResponse, localOfferResponse, localOfferResultResponse, sendPolicyResponse, sendPolicyMemoryResponse, sendPolicyResultResponse, blindReaderResponse, spanBridgeResponse, relevanceResponse, mobileRerankerResponse, sourceAnchorProtocolResponse, sourceAnchorResultResponse, chunkingProtocolResponse, chunkingResultResponse, capsuleProtocolResponse, capsuleWorldResponse, capsuleResultResponse, semanticProtocolResponse, semanticWorldResponse, semanticResultResponse, semanticAuditResponse, atomicProtocolResponse, atomicWorldResponse, atomicResultResponse, atomicAuditResponse] = await Promise.all([
       fetch("/experiments/E007/design-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/smoke-protocol-v0.1.json", { cache: "no-store" }),
@@ -4150,6 +4150,10 @@ async function loadE007() {
       fetch("/experiments/E007/two-link-semantic-world-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/two-link-semantic-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/two-link-semantic-interface-audit-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/atomic-tool-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/atomic-tool-world-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/atomic-tool-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/atomic-tool-interface-audit-v0.1.json", { cache: "no-store" }),
     ]);
     if (!designResponse.ok || !worldResponse.ok || !smokeResponse.ok) throw new Error("E007 checkpoint unavailable");
     const design = await designResponse.json();
@@ -4180,6 +4184,10 @@ async function loadE007() {
     const semanticWorld = semanticWorldResponse.ok ? await semanticWorldResponse.json() : null;
     const semanticResult = semanticResultResponse.ok ? await semanticResultResponse.json() : null;
     const semanticAudit = semanticAuditResponse.ok ? await semanticAuditResponse.json() : null;
+    const atomicProtocol = atomicProtocolResponse.ok ? await atomicProtocolResponse.json() : null;
+    const atomicWorld = atomicWorldResponse.ok ? await atomicWorldResponse.json() : null;
+    const atomicResult = atomicResultResponse.ok ? await atomicResultResponse.json() : null;
+    const atomicAudit = atomicAuditResponse.ok ? await atomicAuditResponse.json() : null;
     const documents = new Map(world.documents.map((document) => [document.id, document]));
     const documentCounts = world.documents.reduce((counts, document) => counts.set(document.owner, (counts.get(document.owner) || 0) + 1), new Map());
     const deviceCards = design.topology.devices.map((device) => `<article><span>${escapeHTML(device.id.toUpperCase())}</span><h2>${device.logical_count} pocket i</h2><p>${escapeHTML(device.logical_ids)}</p><small>${localized({ en: "One shared local model runtime. Memories stay separate.", ru: "Один общий локальный runtime модели. Память каждого остаётся отдельной." })}</small></article>`).join("");
@@ -4370,6 +4378,41 @@ async function loadE007() {
       const ramNote = preflightRam ? localized({ en: `Phone-shaped Yukabox run: ${(preflightRam / 1e9).toFixed(2)} GB peak RAM with one question at a time.`, ru: `Телефонный режим на yukabox: ${(preflightRam / 1e9).toFixed(2).replace(".", ",")} ГБ памяти на пике при одном вопросе за раз.` }) : "";
       mobileRerankerMarkup = `<section id="e007-mobile-reranker-results" class="e007-local-result-wide e007-mobile-reranker"><div class="flow-step">CHECKPOINT 3C.5 · ${localized({ en: "ACCEPTED ARCHITECTURE STEP", ru: "ПРИНЯТЫЙ ШАГ АРХИТЕКТУРЫ" })}</div><h2>${localized({ en: "Incoming relevance gate: Qwen3-Reranker-4B Q4.", ru: "Приёмка по полезности: Qwen3-Reranker-4B Q4." })}</h2><p>${localized({ en: "The 4B judge kept every useful piece. Its 2.50 GB Q4 copy made exactly the same 24 decisions as the original. It now becomes the modular TAKE / NOT SURE / DROP step. A later experiment may replace it without changing the rest of the harness.", ru: "Судья 4B сохранил все полезные кусочки. Его Q4-копия размером 2,50 ГБ приняла те же 24 решения, что и оригинал. Теперь это отдельный модуль ВЗЯТЬ / НЕ УВЕРЕН / ОТБРОСИТЬ. Позже мы сможем заменить его, не меняя остальной harness." })}</p><p><strong>${escapeHTML(ramNote)}</strong></p><div class="e007-result-metrics">${cards}</div><div class="e007-mobile-simple"><article class="is-correct"><strong>8 / 8</strong><span>${localized({ en: "useful pieces taken", ru: "полезных кусочков взято" })}</span></article><article class="is-correct"><strong>0 / 8</strong><span>${localized({ en: "obvious noise taken", ru: "явного мусора взято" })}</span></article><article class="needs-review"><strong>6 / 24</strong><span>${localized({ en: "left for a later check", ru: "оставлено на следующую проверку" })}</span></article></div><details class="e007-policy-table"><summary>${localized({ en: "SEE ALL 24 Q4 DECISIONS", ru: "ПОСМОТРЕТЬ ВСЕ 24 РЕШЕНИЯ Q4" })}</summary><div class="e007-result-table-wrap"><table class="e007-result-table e007-mobile-table"><thead><tr><th>${localized({ en: "QUESTION", ru: "ВОПРОС" })}</th><th>${localized({ en: "MEMORY PIECE", ru: "КУСОЧЕК ПАМЯТИ" })}</th><th>${localized({ en: "TRUTH", ru: "ПРАВДА" })}</th><th>${localized({ en: "Q4 DECISION", ru: "РЕШЕНИЕ Q4" })}</th></tr></thead><tbody>${rows}</tbody></table></div></details><p class="control-warning">${localized({ en: "Not proven yet: that the 2.50 GB file loads on your phone without too much RAM, waiting, heat, or battery drain. This module judges relevance only. It does not judge truth, privacy, source support, or independence.", ru: "Пока не доказано: что файл 2,50 ГБ загрузится на вашем телефоне без лишней памяти, ожидания, нагрева и расхода батареи. Этот модуль проверяет только полезность для вопроса. Он не проверяет правду, приватность, источник и независимость." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/mobile-reranker-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/mobile-reranker-result-v0.1.json">${localized({ en: "ALL SCORES", ru: "ВСЕ ОЦЕНКИ" })} ↗</a></div></section>`;
     }
+    let atomicMarkup = "";
+    if (atomicResult?.records?.length && atomicAudit) {
+      const linkNames = {
+        source_supports_rule: localized({ en: "1 · SOURCE → RULE", ru: "1 · ИСТОЧНИК → ПРАВИЛО" }),
+        facts_support_condition: localized({ en: "2 · FACTS → CONDITION", ru: "2 · ФАКТЫ → УСЛОВИЕ" }),
+        answer_follows_consequence: localized({ en: "3 · ANSWER → CONSEQUENCE", ru: "3 · ОТВЕТ → СЛЕДСТВИЕ" }),
+      };
+      const decisionName = value => value === "supported"
+        ? localized({ en: "SUPPORTED", ru: "ПОДТВЕРЖДЕНО" })
+        : value === "not_enough"
+          ? localized({ en: "NOT ENOUGH", ru: "НЕДОСТАТОЧНО" })
+          : localized({ en: "BROKEN FORMAT", ru: "СЛОМАННЫЙ ФОРМАТ" });
+      const relaxedDecision = item => {
+        if (item.valid) return item.decision;
+        const plain = String(item.raw_output || "").replaceAll("<|endoftext|>", "").trim();
+        return ["supported", "not_enough"].includes(plain) ? plain : "invalid";
+      };
+      const cell = (record, link) => {
+        const actual = relaxedDecision(record.actual.links[link]);
+        const expected = record.expected[link];
+        const correct = actual === expected;
+        return `<td class="${correct ? "is-correct" : "is-critical"}"><strong>${correct ? "●" : "×"} ${escapeHTML(decisionName(actual))}</strong><small>${localized({ en: "needed", ru: "нужно" })}: ${escapeHTML(decisionName(expected))}</small></td>`;
+      };
+      const rows = atomicResult.records.map(record => {
+        const relaxed = Object.fromEntries(Object.keys(linkNames).map(link => [link, relaxedDecision(record.actual.links[link])]));
+        const actualFinal = Object.values(relaxed).every(value => value === "supported") ? "use" : "do_not_use";
+        const finalCorrect = actualFinal === record.expected.final;
+        const expectedFinal = record.expected.final === "use" ? localized({ en: "USE", ru: "ВЗЯТЬ" }) : localized({ en: "DO NOT USE", ru: "НЕ БРАТЬ" });
+        const actualFinalText = actualFinal === "use" ? localized({ en: "USE", ru: "ВЗЯТЬ" }) : localized({ en: "DO NOT USE", ru: "НЕ БРАТЬ" });
+        return `<tr><th><span>${escapeHTML(record.id)} · ${escapeHTML(record.combination)}</span><strong>${escapeHTML(record.question)}</strong><details><summary>${localized({ en: "SEE ALL INPUTS", ru: "ПОКАЗАТЬ ВСЕ ДАННЫЕ" })}</summary><p><b>${localized({ en: "SOURCE WINDOW", ru: "ФРАГМЕНТ ИСТОЧНИКА" })}</b><br>${escapeHTML(record.source_window)}</p><p><b>${localized({ en: "PROPOSED RULE", ru: "ПРЕДЛОЖЕННОЕ ПРАВИЛО" })}</b><br>${escapeHTML(record.proposed_rule)}</p><p><b>${localized({ en: "CURRENT FACTS", ru: "ТЕКУЩИЕ ФАКТЫ" })}</b><br>${escapeHTML(record.current_facts)}</p><p><b>${localized({ en: "PROPOSED ANSWER", ru: "ПРЕДЛОЖЕННЫЙ ОТВЕТ" })}</b><br>${escapeHTML(record.proposed_answer)}</p></details></th>${Object.keys(linkNames).map(link => cell(record, link)).join("")}<td class="${finalCorrect ? "is-correct" : "is-critical"}"><strong>${finalCorrect ? "●" : "×"} ${escapeHTML(actualFinalText)}</strong><small>${localized({ en: "needed", ru: "нужно" })}: ${escapeHTML(expectedFinal)}</small></td></tr>`;
+      }).join("");
+      atomicMarkup = `<section id="e007-atomic-tool-results" class="e007-local-result-wide e007-atomic-tool"><div class="flow-step">CHECKPOINT 3C.6D · ${localized({ en: "THREE SMALL BUTTONS", ru: "ТРИ МАЛЕНЬКИЕ КНОПКИ" })}</div><h2>${localized({ en: "The tiny judge still lets too many traps through.", ru: "Маленький судья всё ещё пропускает слишком много ловушек." })}</h2><p>${localized({ en: "For every packet Qwen checked three tiny comparisons separately. It was allowed to choose only SUPPORTED or NOT ENOUGH. Plain code used the packet only after three SUPPORTED decisions.", ru: "Для каждого пакета Qwen отдельно проверяла три маленьких сравнения. Можно было выбрать только «ПОДТВЕРЖДЕНО» или «НЕДОСТАТОЧНО». Обычный код брал пакет только после трёх «ПОДТВЕРЖДЕНО»." })}</p><div class="e007-atomic-flow"><article><b>1</b><span>${localized({ en: "Does the source state the rule?", ru: "Источник говорит это правило?" })}</span></article><article><b>2</b><span>${localized({ en: "Do today's facts fit its condition?", ru: "Нынешние факты подходят под условие?" })}</span></article><article><b>3</b><span>${localized({ en: "Does the answer follow the rule?", ru: "Ответ следует из правила?" })}</span></article></div><div class="e007-result-metrics"><article class="is-critical"><span>${localized({ en: "OFFICIAL TOOL FORMAT", ru: "ОФИЦИАЛЬНЫЙ TOOL-ФОРМАТ" })}</span><strong>${208 - atomicResult.summary.malformed_tool_calls} / 208</strong><small>${localized({ en: "calls readable", ru: "вызовов удалось прочитать" })}</small></article><article class="is-critical"><span>${localized({ en: "IF WE FORGIVE THE FORMAT", ru: "ЕСЛИ ПРОСТИТЬ ФОРМАТ" })}</span><strong>${atomicAudit.summary.false_packets_used} / ${atomicAudit.summary.trap_packets_total}</strong><small>${localized({ en: "traps still accepted", ru: "ловушек всё равно принято" })}</small></article><article class="needs-review"><span>${localized({ en: "USEFUL PACKETS", ru: "ПОЛЕЗНЫЕ ПАКЕТЫ" })}</span><strong>${atomicAudit.summary.useful_packets_used} / ${atomicAudit.summary.useful_packets_total}</strong><small>${localized({ en: "kept by the lenient diagnostic", ru: "сохранено мягкой диагностикой" })}</small></article></div><section class="e005-gate4-result-verdict is-failed"><span>${localized({ en: "SIMPLE VERDICT", ru: "ПРОСТОЙ ВЫВОД" })}</span><h2>${localized({ en: "Changing letters into buttons did not solve the meaning problem.", ru: "Замена букв на кнопки не решила проблему понимания." })}</h2><p>${escapeHTML(localized(atomicAudit.conclusion))}</p></section><details class="e007-policy-table" open><summary>${localized({ en: "SEE ALL 64 CASES", ru: "ПОСМОТРЕТЬ ВСЕ 64 СЛУЧАЯ" })}</summary><p>${localized({ en: "Green means the button matched the known answer. Red means it did not. This table uses the lenient diagnostic so we can inspect what Qwen tried to press; the official locked result stays failed above.", ru: "Зелёный означает: кнопка совпала с известным ответом. Красный — не совпала. В таблице показана мягкая диагностика, чтобы было видно, что Qwen пыталась нажать; официальный замороженный результат выше остаётся проваленным." })}</p><div class="e007-result-table-wrap"><table class="e007-result-table e007-atomic-table"><thead><tr><th>${localized({ en: "CASE", ru: "СЛУЧАЙ" })}</th>${Object.values(linkNames).map(name => `<th>${escapeHTML(name)}</th>`).join("")}<th>${localized({ en: "FINAL", ru: "ИТОГ" })}</th></tr></thead><tbody>${rows}</tbody></table></div></details><p class="control-warning">${escapeHTML(localized(atomicProtocol.claim_boundary))}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/atomic-tool-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/atomic-tool-world-v0.1.json">${localized({ en: "ALL 64 CASES", ru: "ВСЕ 64 СЛУЧАЯ" })} ↗</a><a class="quiet-link" href="/experiments/E007/atomic-tool-result-v0.1.json">${localized({ en: "ALL RAW OUTPUTS", ru: "ВСЕ СЫРЫЕ ОТВЕТЫ" })} ↗</a><a class="quiet-link" href="/experiments/E007/atomic-tool-interface-audit-v0.1.json">${localized({ en: "LENIENT FORMAT AUDIT", ru: "МЯГКАЯ ПРОВЕРКА ФОРМАТА" })} ↗</a></div></section>`;
+    } else if (atomicProtocol && atomicWorld) {
+      atomicMarkup = `<section id="e007-atomic-tool-results" class="e007-local-result-wide"><div class="flow-step">CHECKPOINT 3C.6D · ${localized({ en: "LOCKED BEFORE RUN", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h2>${escapeHTML(localized(atomicProtocol.title))}</h2><p>${escapeHTML(localized(atomicProtocol.hypothesis))}</p></section>`;
+    }
     let semanticMarkup = "";
     if (semanticResult?.records?.length) {
       const relationLabel = value => ({
@@ -4511,6 +4554,7 @@ async function loadE007() {
       }
     }
     target.querySelector(".experiment-loading").outerHTML = `
+      ${atomicMarkup}
       ${semanticMarkup}
       ${capsuleMarkup}
       ${chunkingMarkup}

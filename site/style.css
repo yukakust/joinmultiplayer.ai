@@ -5155,6 +5155,43 @@ blockquote {
 .e007-semantic-table td > strong,
 .e007-semantic-table td > small { display: block; }
 .e007-semantic-table td > small { margin-top: .65rem; }
+.e007-atomic-flow {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 32px 0;
+}
+.e007-atomic-flow article {
+  align-items: center;
+  border: 1px solid var(--line);
+  display: flex;
+  gap: 18px;
+  min-height: 92px;
+  padding: 20px;
+}
+.e007-atomic-flow b { font-size: 36px; }
+.e007-atomic-flow span { font-family: var(--mono); }
+.e007-atomic-table { min-width: 1500px; }
+.e007-atomic-table thead th:first-child { width: 34%; }
+.e007-atomic-table thead th:not(:first-child) { width: 16.5%; }
+.e007-atomic-table td.is-correct {
+  background: rgba(77, 141, 73, .1);
+  color: #4d8d49;
+}
+.e007-atomic-table td.is-critical {
+  background: rgba(189, 65, 47, .09);
+  color: #bd412f;
+}
+.e007-atomic-table td strong,
+.e007-atomic-table td small { display: block; }
+.e007-atomic-table td small { color: var(--muted); margin-top: 8px; }
+.e007-atomic-table th > strong { display: block; margin-bottom: 10px; }
+.e007-atomic-table details { font-weight: 400; margin-top: 12px; }
+.e007-atomic-table details summary { cursor: pointer; color: var(--muted); }
+.e007-atomic-table details p { font-size: 12px; line-height: 1.5; }
+@media (max-width: 760px) {
+  .e007-atomic-flow { grid-template-columns: 1fr; }
+}
 .e007-capsule-table thead th:first-child { width: 21%; }
 .e007-capsule-table thead th:nth-child(2) { width: 18%; }
 .e007-capsule-table thead th:nth-child(3) { width: 22%; }

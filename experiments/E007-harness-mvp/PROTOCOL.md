@@ -392,3 +392,18 @@ decisions. Preserve every raw tool call and every failure. Protocol and world:
 This is a synthetic English development test. It does not establish source
 truth, privacy, multilingual generalisation, phone performance, or real-world
 safety.
+
+The locked development run failed. Only 2 of 208 outputs used the requested
+tool-call envelope and 206 were malformed under the frozen parser. The
+conservative fallback therefore used 0/8 useful packets and 0/56 traps. Atomic
+scores were 31/64 for source → rule, 32/64 for facts → condition, and 32/64 for
+answer → consequence. The order audit was invariant on 7/8 comparisons. Raw
+result: `site/experiments/E007/atomic-tool-result-v0.1.json`.
+
+A posthoc diagnostic did not rerun inference. It treated a bare exact tool name
+followed only by padding as a button press. This recovered 7/8 useful packets,
+but also accepted 25/56 traps. Atomic accuracies became 37/64, 34/64, and 44/64;
+tool-order invariance fell to 6/8. Formatting was therefore not the only
+problem: the model still over-selected `supported`. This diagnostic does not
+repair the locked result. Audit:
+`site/experiments/E007/atomic-tool-interface-audit-v0.1.json`.

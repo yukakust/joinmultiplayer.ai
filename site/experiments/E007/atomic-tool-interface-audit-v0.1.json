@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6D-posthoc",
+  "status": "posthoc_interface_audit_complete",
+  "source_result": "/experiments/E007/atomic-tool-result-v0.1.json",
+  "question": {
+    "en": "Was the locked failure only caused by strict tool-call formatting?",
+    "ru": "Замороженный тест провалился только из-за строгого формата tool-call?"
+  },
+  "method": {
+    "en": "No inference was rerun. We re-read the preserved raw outputs and also treated a bare exact tool name, followed only by padding tokens, as if the button had been pressed.",
+    "ru": "Модель не запускали снова. Мы перечитали сохранённые сырые ответы и дополнительно посчитали точное имя кнопки без JSON, после которого были только пустые pad-токены, как нажатие кнопки."
+  },
+  "summary": {
+    "source_supports_rule": {
+      "supported_outputs": 59,
+      "not_enough_outputs": 5,
+      "correct": 37,
+      "total": 64
+    },
+    "facts_support_condition": {
+      "supported_outputs": 56,
+      "not_enough_outputs": 8,
+      "correct": 34,
+      "total": 64
+    },
+    "answer_follows_consequence": {
+      "supported_outputs": 42,
+      "not_enough_outputs": 21,
+      "invalid_outputs": 1,
+      "correct": 44,
+      "total": 64
+    },
+    "useful_packets_used": 7,
+    "useful_packets_total": 8,
+    "false_packets_used": 25,
+    "trap_packets_total": 56,
+    "final_correct": 38,
+    "total_cases": 64,
+    "order_invariant": 6,
+    "order_audit_total": 8
+  },
+  "conclusion": {
+    "en": "No. Relaxing the parser would recover 7 of 8 useful packets, but it would also accept 25 of 56 traps. Qwen still overuses SUPPORTED, and two of eight decisions changed when the tool order changed.",
+    "ru": "Нет. Мягкий parser вернул бы 7 из 8 полезных пакетов, но одновременно пропустил бы 25 из 56 ловушек. Qwen всё ещё слишком часто выбирает «ПОДТВЕРЖДЕНО», а два из восьми решений изменились при перестановке кнопок."
+  },
+  "boundary": {
+    "en": "This is a posthoc parser diagnostic over frozen raw outputs, not a repaired locked result.",
+    "ru": "Это posthoc-диагностика parser на замороженных сырых ответах, а не исправленный результат теста."
+  }
+}
