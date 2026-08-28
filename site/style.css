@@ -5197,6 +5197,60 @@ blockquote {
   width: min(1500px, calc(100% - 32px));
 }
 .e007-ten-viewer { margin-top: 48px; }
+.e007-context-ladder { margin: 32px 0 80px; }
+.e007-context-ladder > h2 {
+  font-size: clamp(36px, 5vw, 76px);
+  margin-bottom: 18px;
+  max-width: 19ch;
+}
+.e007-ladder-list { display: grid; gap: 12px; margin: 36px 0; }
+.e007-ladder-step {
+  border-left: 8px solid;
+  padding: clamp(20px, 3vw, 38px);
+}
+.e007-ladder-step.is-correct { border-color: #4d8d49; background: rgba(77, 141, 73, .07); }
+.e007-ladder-step.is-critical { border-color: #bd412f; background: rgba(189, 65, 47, .07); }
+.e007-ladder-step > header {
+  align-items: baseline;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: auto 1fr auto;
+}
+.e007-ladder-step > header span,
+.e007-ladder-step > header b,
+.e007-ladder-step summary { font-family: var(--mono); }
+.e007-ladder-step > header h3 { font-size: clamp(22px, 2.5vw, 38px); margin: 0; }
+.e007-ladder-decisions {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 24px 0;
+}
+.e007-ladder-decisions article {
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr auto;
+  padding: 18px;
+}
+.e007-ladder-decisions article > span { grid-column: 1 / -1; font-family: var(--mono); }
+.e007-ladder-decisions article > strong { font-size: clamp(19px, 2vw, 28px); }
+.e007-ladder-decisions article > b { font-size: 24px; }
+.e007-ladder-decisions article.is-correct strong { color: #4d8d49; }
+.e007-ladder-decisions article.is-critical strong { color: #bd412f; }
+.e007-ladder-step details summary { cursor: pointer; }
+.e007-ladder-step details > div { margin-top: 18px; }
+.e007-ladder-step pre {
+  background: rgba(0, 0, 0, .04);
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.55;
+  max-height: 360px;
+  overflow: auto;
+  padding: 18px;
+  white-space: pre-wrap;
+}
 .e007-button-sanity { margin: 32px 0 72px; }
 .e007-button-sanity > h2 {
   font-size: clamp(34px, 5vw, 72px);
@@ -5312,6 +5366,8 @@ blockquote {
 }
 .e007-ten-arrows button:disabled { cursor: default; opacity: .3; }
 @media (max-width: 760px) {
+  .e007-ladder-step > header { grid-template-columns: 1fr; }
+  .e007-ladder-decisions { grid-template-columns: 1fr; }
   .e007-sanity-cards { grid-template-columns: 1fr; }
   .e007-ten-index { grid-template-columns: repeat(5, 1fr); }
   .e007-ten-compare { grid-template-columns: 1fr; }

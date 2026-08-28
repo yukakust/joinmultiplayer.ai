@@ -480,3 +480,13 @@ prompt and both button scores. Protocol and world:
 
 This synthetic diagnostic can locate a context-tolerance boundary for one
 trivial fact. It cannot establish evidence reasoning or real-world safety.
+
+The context ladder passed 8/10 overall and located a first failure. Levels with
+39, 68, and 145 prompt tokens passed 2/2. At 513 tokens, the negative case
+flipped from `reject` to `accept` (76.12% accept). At 929 tokens it again chose
+`accept` for the negative case (57.55%). Every positive case remained `accept`.
+Thus the requested SOURCE → PROPOSED ANSWER → CHOOSE ONE TOOL wrapper itself
+works; under this repetitive distractor construction, the reject signal was
+lost somewhere between 145 and 513 tokens. This is a located diagnostic band,
+not a universal context limit. Result:
+`site/experiments/E007/context-ladder-result-v0.1.json`.
