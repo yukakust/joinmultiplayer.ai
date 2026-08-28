@@ -1,0 +1,940 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "12A",
+  "status": "synthetic_development_run_complete",
+  "protocol": "/experiments/E007/knowledge-chain-protocol-v0.1.json",
+  "world": "/experiments/E007/knowledge-chain-world-v0.1.json",
+  "summary": {
+    "case_decisions_correct": 10,
+    "total_cases": 10,
+    "transport_roundtrips_exact": 10,
+    "wrong_current_heads_selected": 0,
+    "history_revisions_lost": 0
+  },
+  "passed_locked_gate": true,
+  "records": [
+    {
+      "id": "KC01",
+      "name": "one first belief",
+      "expected": {
+        "decision": "ready",
+        "current_revision_ids": [
+          "K01-1"
+        ],
+        "history_revision_ids": []
+      },
+      "actual": {
+        "decision": "ready",
+        "current_revision_ids": [
+          "K01-1"
+        ],
+        "history_revision_ids": []
+      },
+      "correct": true,
+      "transport_exact": true,
+      "payload_sha256": "fc114ec097aef920582d9c214c7bb1b560dca9a4f448c233d474dd84fa6c2b29",
+      "current_claims": [
+        {
+          "revision_id": "K01-1",
+          "claim": "Keep the auxiliary vent closed during a stable restart.",
+          "evidence_id": "E01"
+        }
+      ],
+      "revisions": [
+        {
+          "author_id": "I-ALBA",
+          "claim": "Keep the auxiliary vent closed during a stable restart.",
+          "evidence_id": "E01",
+          "learned_at": "2026-05-01T08:00:00Z",
+          "lineage_id": "L01",
+          "permission": "share_chain",
+          "previous_revision_id": null,
+          "relation": "learned",
+          "revision_id": "K01-1",
+          "topic_id": "aster-valve"
+        }
+      ],
+      "display_chains": [
+        {
+          "lineage_id": "L01",
+          "author_id": "I-ALBA",
+          "revisions": [
+            {
+              "author_id": "I-ALBA",
+              "claim": "Keep the auxiliary vent closed during a stable restart.",
+              "evidence_id": "E01",
+              "learned_at": "2026-05-01T08:00:00Z",
+              "lineage_id": "L01",
+              "permission": "share_chain",
+              "previous_revision_id": null,
+              "relation": "learned",
+              "revision_id": "K01-1",
+              "topic_id": "aster-valve"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KC02",
+      "name": "confirmed twice",
+      "expected": {
+        "decision": "ready",
+        "current_revision_ids": [
+          "K02-3"
+        ],
+        "history_revision_ids": [
+          "K02-1",
+          "K02-2"
+        ]
+      },
+      "actual": {
+        "decision": "ready",
+        "current_revision_ids": [
+          "K02-3"
+        ],
+        "history_revision_ids": [
+          "K02-1",
+          "K02-2"
+        ]
+      },
+      "correct": true,
+      "transport_exact": true,
+      "payload_sha256": "ec3599671e8aba46455a907b1b330f7b05671e0683ac6447231d432340edd0f3",
+      "current_claims": [
+        {
+          "revision_id": "K02-3",
+          "claim": "Sealed queen cells can signal preparation to swarm.",
+          "evidence_id": "E02-C"
+        }
+      ],
+      "revisions": [
+        {
+          "author_id": "I-BORA",
+          "claim": "Sealed queen cells can signal preparation to swarm.",
+          "evidence_id": "E02-A",
+          "learned_at": "2026-04-01T09:00:00Z",
+          "lineage_id": "L02",
+          "permission": "share_chain",
+          "previous_revision_id": null,
+          "relation": "learned",
+          "revision_id": "K02-1",
+          "topic_id": "hive-cells"
+        },
+        {
+          "author_id": "I-BORA",
+          "claim": "Sealed queen cells can signal preparation to swarm.",
+          "evidence_id": "E02-B",
+          "learned_at": "2026-05-12T09:00:00Z",
+          "lineage_id": "L02",
+          "permission": "share_chain",
+          "previous_revision_id": "K02-1",
+          "relation": "confirms",
+          "revision_id": "K02-2",
+          "topic_id": "hive-cells"
+        },
+        {
+          "author_id": "I-BORA",
+          "claim": "Sealed queen cells can signal preparation to swarm.",
+          "evidence_id": "E02-C",
+          "learned_at": "2026-06-20T09:00:00Z",
+          "lineage_id": "L02",
+          "permission": "share_chain",
+          "previous_revision_id": "K02-2",
+          "relation": "confirms",
+          "revision_id": "K02-3",
+          "topic_id": "hive-cells"
+        }
+      ],
+      "display_chains": [
+        {
+          "lineage_id": "L02",
+          "author_id": "I-BORA",
+          "revisions": [
+            {
+              "author_id": "I-BORA",
+              "claim": "Sealed queen cells can signal preparation to swarm.",
+              "evidence_id": "E02-A",
+              "learned_at": "2026-04-01T09:00:00Z",
+              "lineage_id": "L02",
+              "permission": "share_chain",
+              "previous_revision_id": null,
+              "relation": "learned",
+              "revision_id": "K02-1",
+              "topic_id": "hive-cells"
+            },
+            {
+              "author_id": "I-BORA",
+              "claim": "Sealed queen cells can signal preparation to swarm.",
+              "evidence_id": "E02-B",
+              "learned_at": "2026-05-12T09:00:00Z",
+              "lineage_id": "L02",
+              "permission": "share_chain",
+              "previous_revision_id": "K02-1",
+              "relation": "confirms",
+              "revision_id": "K02-2",
+              "topic_id": "hive-cells"
+            },
+            {
+              "author_id": "I-BORA",
+              "claim": "Sealed queen cells can signal preparation to swarm.",
+              "evidence_id": "E02-C",
+              "learned_at": "2026-06-20T09:00:00Z",
+              "lineage_id": "L02",
+              "permission": "share_chain",
+              "previous_revision_id": "K02-2",
+              "relation": "confirms",
+              "revision_id": "K02-3",
+              "topic_id": "hive-cells"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KC03",
+      "name": "old belief refined",
+      "expected": {
+        "decision": "ready",
+        "current_revision_ids": [
+          "K03-2"
+        ],
+        "history_revision_ids": [
+          "K03-1"
+        ]
+      },
+      "actual": {
+        "decision": "ready",
+        "current_revision_ids": [
+          "K03-2"
+        ],
+        "history_revision_ids": [
+          "K03-1"
+        ]
+      },
+      "correct": true,
+      "transport_exact": true,
+      "payload_sha256": "7c24f6ff3a0f3738a351edaa07a8ba602855e40c9d68a5c076768676bedd9539",
+      "current_claims": [
+        {
+          "revision_id": "K03-2",
+          "claim": "Image tiling improved recall for 8–16 pixel objects when tiles overlapped by 20%.",
+          "evidence_id": "E03-B"
+        }
+      ],
+      "revisions": [
+        {
+          "author_id": "I-CIRRUS",
+          "claim": "Image tiling improves small-object recall.",
+          "evidence_id": "E03-A",
+          "learned_at": "2026-02-10T10:00:00Z",
+          "lineage_id": "L03",
+          "permission": "share_chain",
+          "previous_revision_id": null,
+          "relation": "learned",
+          "revision_id": "K03-1",
+          "topic_id": "image-tiling"
+        },
+        {
+          "author_id": "I-CIRRUS",
+          "claim": "Image tiling improved recall for 8–16 pixel objects when tiles overlapped by 20%.",
+          "evidence_id": "E03-B",
+          "learned_at": "2026-07-02T10:00:00Z",
+          "lineage_id": "L03",
+          "permission": "share_chain",
+          "previous_revision_id": "K03-1",
+          "relation": "refines",
+          "revision_id": "K03-2",
+          "topic_id": "image-tiling"
+        }
+      ],
+      "display_chains": [
+        {
+          "lineage_id": "L03",
+          "author_id": "I-CIRRUS",
+          "revisions": [
+            {
+              "author_id": "I-CIRRUS",
+              "claim": "Image tiling improves small-object recall.",
+              "evidence_id": "E03-A",
+              "learned_at": "2026-02-10T10:00:00Z",
+              "lineage_id": "L03",
+              "permission": "share_chain",
+              "previous_revision_id": null,
+              "relation": "learned",
+              "revision_id": "K03-1",
+              "topic_id": "image-tiling"
+            },
+            {
+              "author_id": "I-CIRRUS",
+              "claim": "Image tiling improved recall for 8–16 pixel objects when tiles overlapped by 20%.",
+              "evidence_id": "E03-B",
+              "learned_at": "2026-07-02T10:00:00Z",
+              "lineage_id": "L03",
+              "permission": "share_chain",
+              "previous_revision_id": "K03-1",
+              "relation": "refines",
+              "revision_id": "K03-2",
+              "topic_id": "image-tiling"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KC04",
+      "name": "belief replaced",
+      "expected": {
+        "decision": "ready",
+        "current_revision_ids": [
+          "K04-2"
+        ],
+        "history_revision_ids": [
+          "K04-1"
+        ]
+      },
+      "actual": {
+        "decision": "ready",
+        "current_revision_ids": [
+          "K04-2"
+        ],
+        "history_revision_ids": [
+          "K04-1"
+        ]
+      },
+      "correct": true,
+      "transport_exact": true,
+      "payload_sha256": "0e7d7508204d7721935187a27a4ac9fd55cfe80c53eea1bcf5c56b785c539b79",
+      "current_claims": [
+        {
+          "revision_id": "K04-2",
+          "claim": "A violet ring together with falling pressure means the seal is leaking.",
+          "evidence_id": "E04-B"
+        }
+      ],
+      "revisions": [
+        {
+          "author_id": "I-DUNE",
+          "claim": "A violet ring means pressure is stable.",
+          "evidence_id": "E04-A",
+          "learned_at": "2026-01-03T11:00:00Z",
+          "lineage_id": "L04",
+          "permission": "share_chain",
+          "previous_revision_id": null,
+          "relation": "learned",
+          "revision_id": "K04-1",
+          "topic_id": "orin-ring"
+        },
+        {
+          "author_id": "I-DUNE",
+          "claim": "A violet ring together with falling pressure means the seal is leaking.",
+          "evidence_id": "E04-B",
+          "learned_at": "2026-07-18T11:00:00Z",
+          "lineage_id": "L04",
+          "permission": "share_chain",
+          "previous_revision_id": "K04-1",
+          "relation": "replaces",
+          "revision_id": "K04-2",
+          "topic_id": "orin-ring"
+        }
+      ],
+      "display_chains": [
+        {
+          "lineage_id": "L04",
+          "author_id": "I-DUNE",
+          "revisions": [
+            {
+              "author_id": "I-DUNE",
+              "claim": "A violet ring means pressure is stable.",
+              "evidence_id": "E04-A",
+              "learned_at": "2026-01-03T11:00:00Z",
+              "lineage_id": "L04",
+              "permission": "share_chain",
+              "previous_revision_id": null,
+              "relation": "learned",
+              "revision_id": "K04-1",
+              "topic_id": "orin-ring"
+            },
+            {
+              "author_id": "I-DUNE",
+              "claim": "A violet ring together with falling pressure means the seal is leaking.",
+              "evidence_id": "E04-B",
+              "learned_at": "2026-07-18T11:00:00Z",
+              "lineage_id": "L04",
+              "permission": "share_chain",
+              "previous_revision_id": "K04-1",
+              "relation": "replaces",
+              "revision_id": "K04-2",
+              "topic_id": "orin-ring"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KC05",
+      "name": "belief retracted",
+      "expected": {
+        "decision": "retracted",
+        "current_revision_ids": [],
+        "history_revision_ids": [
+          "K05-1",
+          "K05-2"
+        ]
+      },
+      "actual": {
+        "decision": "retracted",
+        "current_revision_ids": [],
+        "history_revision_ids": [
+          "K05-1",
+          "K05-2"
+        ]
+      },
+      "correct": true,
+      "transport_exact": true,
+      "payload_sha256": "51be4e3ac891b5b823bbc1adac507c5d70256a762993c00b5441cbf1f459a4de",
+      "current_claims": [],
+      "revisions": [
+        {
+          "author_id": "I-EMBER",
+          "claim": "Three blue pulses always mean a power fault.",
+          "evidence_id": "E05-A",
+          "learned_at": "2026-03-08T12:00:00Z",
+          "lineage_id": "L05",
+          "permission": "share_chain",
+          "previous_revision_id": null,
+          "relation": "learned",
+          "revision_id": "K05-1",
+          "topic_id": "mira-pulses"
+        },
+        {
+          "author_id": "I-EMBER",
+          "claim": "",
+          "evidence_id": "E05-B",
+          "learned_at": "2026-08-01T12:00:00Z",
+          "lineage_id": "L05",
+          "permission": "share_chain",
+          "previous_revision_id": "K05-1",
+          "relation": "retracts",
+          "revision_id": "K05-2",
+          "topic_id": "mira-pulses"
+        }
+      ],
+      "display_chains": [
+        {
+          "lineage_id": "L05",
+          "author_id": "I-EMBER",
+          "revisions": [
+            {
+              "author_id": "I-EMBER",
+              "claim": "Three blue pulses always mean a power fault.",
+              "evidence_id": "E05-A",
+              "learned_at": "2026-03-08T12:00:00Z",
+              "lineage_id": "L05",
+              "permission": "share_chain",
+              "previous_revision_id": null,
+              "relation": "learned",
+              "revision_id": "K05-1",
+              "topic_id": "mira-pulses"
+            },
+            {
+              "author_id": "I-EMBER",
+              "claim": "",
+              "evidence_id": "E05-B",
+              "learned_at": "2026-08-01T12:00:00Z",
+              "lineage_id": "L05",
+              "permission": "share_chain",
+              "previous_revision_id": "K05-1",
+              "relation": "retracts",
+              "revision_id": "K05-2",
+              "topic_id": "mira-pulses"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KC06",
+      "name": "arrives out of order",
+      "expected": {
+        "decision": "ready",
+        "current_revision_ids": [
+          "K06-3"
+        ],
+        "history_revision_ids": [
+          "K06-1",
+          "K06-2"
+        ]
+      },
+      "actual": {
+        "decision": "ready",
+        "current_revision_ids": [
+          "K06-3"
+        ],
+        "history_revision_ids": [
+          "K06-1",
+          "K06-2"
+        ]
+      },
+      "correct": true,
+      "transport_exact": true,
+      "payload_sha256": "7e932733d44475b8f9f4df837bf7e263efdea10785ac28fd72a402371ade3c7d",
+      "current_claims": [
+        {
+          "revision_id": "K06-3",
+          "claim": "Bypass the copper-grey mesh only while intake remains active and pressure is stable.",
+          "evidence_id": "E06-C"
+        }
+      ],
+      "revisions": [
+        {
+          "author_id": "I-FERN",
+          "claim": "Bypass the copper-grey mesh only while intake remains active and pressure is stable.",
+          "evidence_id": "E06-C",
+          "learned_at": "2026-07-22T13:00:00Z",
+          "lineage_id": "L06",
+          "permission": "share_chain",
+          "previous_revision_id": "K06-2",
+          "relation": "refines",
+          "revision_id": "K06-3",
+          "topic_id": "vela-mesh"
+        },
+        {
+          "author_id": "I-FERN",
+          "claim": "A copper-grey mesh may be bypassed.",
+          "evidence_id": "E06-A",
+          "learned_at": "2026-02-02T13:00:00Z",
+          "lineage_id": "L06",
+          "permission": "share_chain",
+          "previous_revision_id": null,
+          "relation": "learned",
+          "revision_id": "K06-1",
+          "topic_id": "vela-mesh"
+        },
+        {
+          "author_id": "I-FERN",
+          "claim": "A copper-grey mesh may be bypassed while intake remains active.",
+          "evidence_id": "E06-B",
+          "learned_at": "2026-05-14T13:00:00Z",
+          "lineage_id": "L06",
+          "permission": "share_chain",
+          "previous_revision_id": "K06-1",
+          "relation": "refines",
+          "revision_id": "K06-2",
+          "topic_id": "vela-mesh"
+        }
+      ],
+      "display_chains": [
+        {
+          "lineage_id": "L06",
+          "author_id": "I-FERN",
+          "revisions": [
+            {
+              "author_id": "I-FERN",
+              "claim": "A copper-grey mesh may be bypassed.",
+              "evidence_id": "E06-A",
+              "learned_at": "2026-02-02T13:00:00Z",
+              "lineage_id": "L06",
+              "permission": "share_chain",
+              "previous_revision_id": null,
+              "relation": "learned",
+              "revision_id": "K06-1",
+              "topic_id": "vela-mesh"
+            },
+            {
+              "author_id": "I-FERN",
+              "claim": "A copper-grey mesh may be bypassed while intake remains active.",
+              "evidence_id": "E06-B",
+              "learned_at": "2026-05-14T13:00:00Z",
+              "lineage_id": "L06",
+              "permission": "share_chain",
+              "previous_revision_id": "K06-1",
+              "relation": "refines",
+              "revision_id": "K06-2",
+              "topic_id": "vela-mesh"
+            },
+            {
+              "author_id": "I-FERN",
+              "claim": "Bypass the copper-grey mesh only while intake remains active and pressure is stable.",
+              "evidence_id": "E06-C",
+              "learned_at": "2026-07-22T13:00:00Z",
+              "lineage_id": "L06",
+              "permission": "share_chain",
+              "previous_revision_id": "K06-2",
+              "relation": "refines",
+              "revision_id": "K06-3",
+              "topic_id": "vela-mesh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KC07",
+      "name": "missing parent",
+      "expected": {
+        "decision": "incomplete",
+        "current_revision_ids": [],
+        "history_revision_ids": [
+          "K07-2"
+        ]
+      },
+      "actual": {
+        "decision": "incomplete",
+        "current_revision_ids": [],
+        "history_revision_ids": [
+          "K07-2"
+        ]
+      },
+      "correct": true,
+      "transport_exact": true,
+      "payload_sha256": "a8fbc8a2efb1138e99e021778af1ef074b560df6422ea8b12cb5c161ff23d786",
+      "current_claims": [],
+      "revisions": [
+        {
+          "author_id": "I-GALE",
+          "claim": "A steady white tone without a spectrum trace needs a sensor check before reset.",
+          "evidence_id": "E07-B",
+          "learned_at": "2026-06-06T14:00:00Z",
+          "lineage_id": "L07",
+          "permission": "share_chain",
+          "previous_revision_id": "K07-1",
+          "relation": "refines",
+          "revision_id": "K07-2",
+          "topic_id": "rill-tone"
+        }
+      ],
+      "display_chains": [
+        {
+          "lineage_id": "L07",
+          "author_id": "I-GALE",
+          "revisions": [
+            {
+              "author_id": "I-GALE",
+              "claim": "A steady white tone without a spectrum trace needs a sensor check before reset.",
+              "evidence_id": "E07-B",
+              "learned_at": "2026-06-06T14:00:00Z",
+              "lineage_id": "L07",
+              "permission": "share_chain",
+              "previous_revision_id": "K07-1",
+              "relation": "refines",
+              "revision_id": "K07-2",
+              "topic_id": "rill-tone"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KC08",
+      "name": "parent belongs to another pocket i",
+      "expected": {
+        "decision": "invalid_lineage",
+        "current_revision_ids": [],
+        "history_revision_ids": [
+          "K08-1",
+          "K08-2"
+        ]
+      },
+      "actual": {
+        "decision": "invalid_lineage",
+        "current_revision_ids": [],
+        "history_revision_ids": [
+          "K08-1",
+          "K08-2"
+        ]
+      },
+      "correct": true,
+      "transport_exact": true,
+      "payload_sha256": "c6eee5fe324d71ffe17fa0c05279a6f1dce6e944fd7bbbbee45887912c24fc1f",
+      "current_claims": [],
+      "revisions": [
+        {
+          "author_id": "I-HARBOR",
+          "claim": "Keep the remote control available.",
+          "evidence_id": "E08-A",
+          "learned_at": "2026-04-09T15:00:00Z",
+          "lineage_id": "L08-A",
+          "permission": "share_chain",
+          "previous_revision_id": null,
+          "relation": "learned",
+          "revision_id": "K08-1",
+          "topic_id": "lyra-pressure"
+        },
+        {
+          "author_id": "I-IRIS",
+          "claim": "Use the remote control immediately.",
+          "evidence_id": "E08-B",
+          "learned_at": "2026-07-09T15:00:00Z",
+          "lineage_id": "L08-B",
+          "permission": "share_chain",
+          "previous_revision_id": "K08-1",
+          "relation": "replaces",
+          "revision_id": "K08-2",
+          "topic_id": "lyra-pressure"
+        }
+      ],
+      "display_chains": [
+        {
+          "lineage_id": "L08-A",
+          "author_id": "I-HARBOR",
+          "revisions": [
+            {
+              "author_id": "I-HARBOR",
+              "claim": "Keep the remote control available.",
+              "evidence_id": "E08-A",
+              "learned_at": "2026-04-09T15:00:00Z",
+              "lineage_id": "L08-A",
+              "permission": "share_chain",
+              "previous_revision_id": null,
+              "relation": "learned",
+              "revision_id": "K08-1",
+              "topic_id": "lyra-pressure"
+            }
+          ]
+        },
+        {
+          "lineage_id": "L08-B",
+          "author_id": "I-IRIS",
+          "revisions": [
+            {
+              "author_id": "I-IRIS",
+              "claim": "Use the remote control immediately.",
+              "evidence_id": "E08-B",
+              "learned_at": "2026-07-09T15:00:00Z",
+              "lineage_id": "L08-B",
+              "permission": "share_chain",
+              "previous_revision_id": "K08-1",
+              "relation": "replaces",
+              "revision_id": "K08-2",
+              "topic_id": "lyra-pressure"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KC09",
+      "name": "one pocket i has two heads",
+      "expected": {
+        "decision": "forked",
+        "current_revision_ids": [
+          "K09-2A",
+          "K09-2B"
+        ],
+        "history_revision_ids": [
+          "K09-1"
+        ]
+      },
+      "actual": {
+        "decision": "forked",
+        "current_revision_ids": [
+          "K09-2A",
+          "K09-2B"
+        ],
+        "history_revision_ids": [
+          "K09-1"
+        ]
+      },
+      "correct": true,
+      "transport_exact": true,
+      "payload_sha256": "d47057b2c7864e4b27fce219b4a4730f55ad918aadb40ad3d8e87499ad901184",
+      "current_claims": [
+        {
+          "revision_id": "K09-2A",
+          "claim": "Open the auxiliary vent after silver frost appears.",
+          "evidence_id": "E09-B"
+        },
+        {
+          "revision_id": "K09-2B",
+          "claim": "Keep the auxiliary vent closed after silver frost appears.",
+          "evidence_id": "E09-C"
+        }
+      ],
+      "revisions": [
+        {
+          "author_id": "I-JUNO",
+          "claim": "Inspect the auxiliary vent after cold start.",
+          "evidence_id": "E09-A",
+          "learned_at": "2026-01-12T16:00:00Z",
+          "lineage_id": "L09",
+          "permission": "share_chain",
+          "previous_revision_id": null,
+          "relation": "learned",
+          "revision_id": "K09-1",
+          "topic_id": "cold-start"
+        },
+        {
+          "author_id": "I-JUNO",
+          "claim": "Open the auxiliary vent after silver frost appears.",
+          "evidence_id": "E09-B",
+          "learned_at": "2026-06-12T16:00:00Z",
+          "lineage_id": "L09",
+          "permission": "share_chain",
+          "previous_revision_id": "K09-1",
+          "relation": "refines",
+          "revision_id": "K09-2A",
+          "topic_id": "cold-start"
+        },
+        {
+          "author_id": "I-JUNO",
+          "claim": "Keep the auxiliary vent closed after silver frost appears.",
+          "evidence_id": "E09-C",
+          "learned_at": "2026-06-13T16:00:00Z",
+          "lineage_id": "L09",
+          "permission": "share_chain",
+          "previous_revision_id": "K09-1",
+          "relation": "refines",
+          "revision_id": "K09-2B",
+          "topic_id": "cold-start"
+        }
+      ],
+      "display_chains": [
+        {
+          "lineage_id": "L09",
+          "author_id": "I-JUNO",
+          "revisions": [
+            {
+              "author_id": "I-JUNO",
+              "claim": "Inspect the auxiliary vent after cold start.",
+              "evidence_id": "E09-A",
+              "learned_at": "2026-01-12T16:00:00Z",
+              "lineage_id": "L09",
+              "permission": "share_chain",
+              "previous_revision_id": null,
+              "relation": "learned",
+              "revision_id": "K09-1",
+              "topic_id": "cold-start"
+            },
+            {
+              "author_id": "I-JUNO",
+              "claim": "Open the auxiliary vent after silver frost appears.",
+              "evidence_id": "E09-B",
+              "learned_at": "2026-06-12T16:00:00Z",
+              "lineage_id": "L09",
+              "permission": "share_chain",
+              "previous_revision_id": "K09-1",
+              "relation": "refines",
+              "revision_id": "K09-2A",
+              "topic_id": "cold-start"
+            },
+            {
+              "author_id": "I-JUNO",
+              "claim": "Keep the auxiliary vent closed after silver frost appears.",
+              "evidence_id": "E09-C",
+              "learned_at": "2026-06-13T16:00:00Z",
+              "lineage_id": "L09",
+              "permission": "share_chain",
+              "previous_revision_id": "K09-1",
+              "relation": "refines",
+              "revision_id": "K09-2B",
+              "topic_id": "cold-start"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KC10",
+      "name": "two independent pocket i disagree",
+      "expected": {
+        "decision": "ready_multi",
+        "current_revision_ids": [
+          "K10-A1",
+          "K10-B1"
+        ],
+        "history_revision_ids": []
+      },
+      "actual": {
+        "decision": "ready_multi",
+        "current_revision_ids": [
+          "K10-A1",
+          "K10-B1"
+        ],
+        "history_revision_ids": []
+      },
+      "correct": true,
+      "transport_exact": true,
+      "payload_sha256": "cebb4e27f8a370144003e47532a83565eac26595200ac674cfa942e9c22706fe",
+      "current_claims": [
+        {
+          "revision_id": "K10-A1",
+          "claim": "Thermal rebound requires isolating power first.",
+          "evidence_id": "E10-A"
+        },
+        {
+          "revision_id": "K10-B1",
+          "claim": "Thermal rebound can be handled without isolating power.",
+          "evidence_id": "E10-B"
+        }
+      ],
+      "revisions": [
+        {
+          "author_id": "I-KITE",
+          "claim": "Thermal rebound requires isolating power first.",
+          "evidence_id": "E10-A",
+          "learned_at": "2026-05-05T17:00:00Z",
+          "lineage_id": "L10-A",
+          "permission": "share_chain",
+          "previous_revision_id": null,
+          "relation": "learned",
+          "revision_id": "K10-A1",
+          "topic_id": "thermal-rebound"
+        },
+        {
+          "author_id": "I-LUMEN",
+          "claim": "Thermal rebound can be handled without isolating power.",
+          "evidence_id": "E10-B",
+          "learned_at": "2026-07-05T17:00:00Z",
+          "lineage_id": "L10-B",
+          "permission": "share_chain",
+          "previous_revision_id": null,
+          "relation": "learned",
+          "revision_id": "K10-B1",
+          "topic_id": "thermal-rebound"
+        }
+      ],
+      "display_chains": [
+        {
+          "lineage_id": "L10-A",
+          "author_id": "I-KITE",
+          "revisions": [
+            {
+              "author_id": "I-KITE",
+              "claim": "Thermal rebound requires isolating power first.",
+              "evidence_id": "E10-A",
+              "learned_at": "2026-05-05T17:00:00Z",
+              "lineage_id": "L10-A",
+              "permission": "share_chain",
+              "previous_revision_id": null,
+              "relation": "learned",
+              "revision_id": "K10-A1",
+              "topic_id": "thermal-rebound"
+            }
+          ]
+        },
+        {
+          "lineage_id": "L10-B",
+          "author_id": "I-LUMEN",
+          "revisions": [
+            {
+              "author_id": "I-LUMEN",
+              "claim": "Thermal rebound can be handled without isolating power.",
+              "evidence_id": "E10-B",
+              "learned_at": "2026-07-05T17:00:00Z",
+              "lineage_id": "L10-B",
+              "permission": "share_chain",
+              "previous_revision_id": null,
+              "relation": "learned",
+              "revision_id": "K10-B1",
+              "topic_id": "thermal-rebound"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "decision": "The append-only chain contract is accepted for the harness development path if the owner confirms the visible timelines.",
+  "boundary": "Synthetic deterministic development test. It tests chain transport and reconstruction, not signatures, hostile peers, source truth, semantic evidence quality, privacy, physical-device networking, or scale."
+}

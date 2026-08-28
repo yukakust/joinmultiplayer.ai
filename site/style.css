@@ -5873,3 +5873,91 @@ blockquote {
   .e007-smoke-messages { grid-template-columns: 1fr; }
   .e007-luna-ranking { grid-template-columns: 1fr; }
 }
+
+.e007-chain-page {
+  max-width: none;
+  width: min(1800px, calc(100vw - 48px));
+}
+
+.e007-chain-result {
+  margin-top: 56px;
+}
+
+.e007-chain-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.e007-chain-card {
+  border: 1px solid var(--line);
+  border-left: 5px solid #7cad72;
+  padding: 0 20px;
+}
+
+.e007-chain-card > summary {
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 64px 1fr auto;
+  padding: 20px 0;
+}
+
+.e007-chain-card > summary strong {
+  color: #46783e;
+  font-size: 13px;
+}
+
+.e007-chain-timeline {
+  align-items: stretch;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 8px 0 20px;
+}
+
+.e007-chain-lane > small {
+  color: var(--muted);
+  display: block;
+  padding-top: 8px;
+}
+
+.e007-chain-node {
+  border: 1px solid var(--line);
+  display: grid;
+  flex: 0 0 min(320px, 70vw);
+  gap: 12px;
+  min-height: 150px;
+  padding: 18px;
+}
+
+.e007-chain-node span,
+.e007-chain-node small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.e007-chain-node.is-current {
+  border-top: 6px solid #7cad72;
+}
+
+.e007-chain-node.is-history {
+  opacity: .62;
+}
+
+.e007-chain-node.is-retracted {
+  border-top: 6px solid var(--ember);
+}
+
+.e007-chain-arrow {
+  align-self: center;
+  color: var(--muted);
+  flex: 0 0 auto;
+}
+
+@media (max-width: 700px) {
+  .e007-chain-page { width: calc(100vw - 24px); }
+  .e007-chain-card > summary { grid-template-columns: 52px 1fr; }
+  .e007-chain-card > summary strong { grid-column: 2; }
+}

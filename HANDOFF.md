@@ -428,6 +428,20 @@ applicability, independence, privacy, multilingual quality, or phone runtime.
 The durable path is recorded in `schema.md` and the public snapshot is
 `/experiments/E007/harness-v0.2.md`.
 
+Gate 12A was then frozen at commit `58b5baa` before its verifier existed. It
+tests ten append-only knowledge histories: first belief, repeated confirmation,
+refinement, replacement, retraction, out-of-order arrival, missing parent,
+mixed lineage, one-lineage fork, and two independent conflicting lineages.
+The deterministic development run scored 10/10 case decisions and 10/10 exact
+JSON roundtrips, selected zero wrong current heads, and lost zero history
+revisions. Public UI: `/experiment/e007/gate-12a/`; raw result:
+`/experiments/E007/knowledge-chain-result-v0.1.json`.
+
+Do not overclaim this checkpoint. It establishes a message contract and local
+reconstruction only. Signatures, hostile peers, physical transfer of this new
+payload, source truth, privacy, and scale remain outside Gate 12A. Owner review
+is still required before moving the chain contract from candidate to accepted.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

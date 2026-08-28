@@ -269,6 +269,18 @@ Evidence boundary: this is a synthetic English development result checked by
 one researcher. It does not yet establish multilingual quality, independent
 labelling, phone performance, long-document behaviour, or production safety.
 
+## Gate 12A candidate: knowledge revision chains
+
+Gate 12A passed its locked synthetic development gates and awaits owner review.
+Each pocket i can send an append-only chain whose parent links identify its
+current head and preserve older claims as history. The verifier correctly
+handled ten frozen cases, including replacement, retraction, missing history,
+a fork, out-of-order delivery, and two independent conflicting lineages.
+
+Result: 10/10 case decisions, 10/10 exact JSON roundtrips, zero wrong heads,
+and zero lost history revisions. This does not yet test signatures, hostile
+peers, physical-device transfer of this new payload, truth, or scale.
+
 ## Accepted steps and their evidence
 
 | Step | Accepted design | Current evidence |
@@ -284,7 +296,7 @@ labelling, phone performance, long-document behaviour, or production safety.
 | 9 | The receiver checks `question ↔ one memory piece` with Qwen3-Reranker-4B Q4 and returns TAKE / NOT SURE / DROP. | Accepted after Gate 3C.5; Q4 matched BF16 24/24. Phone test pending. |
 | 10 | Ordinary code proves that the exact passage came from the named, versioned source snapshot and byte range. | Gate 3C.6A passed 20/20 twice with identical output. |
 | 11 | Check `exact source passage ↔ one atomic claim` with DeBERTa-v3-base NLI. Keep the person's question outside this call. Return SUPPORTED / CONTRADICTED / NOT PROVEN. | Accepted after Gate 3C.6P–Q: short pairs 20/20; the mixed question-and-context package fell to 15/20. Synthetic English development evidence only. |
-| 12 | Later validators check source truth/currentness, matching conditions, provenance, and independence. | Required design, not yet accepted through experiment. |
+| 12 | Later validators check source truth/currentness, matching conditions, provenance, and independence. A pocket i's own freshness is represented as an append-only chain: current head plus preserved history. | Gate 12A chain mechanics passed 10/10 as a synthetic development test; owner review and physical transfer remain pending. Other validators are not yet accepted. |
 | 13 | Similar claims collapse, but evidence and lineage remain. A supported minority stays visible. | Accepted design, not yet tested at scale. |
 | 14 | A model writes the final human answer only from accepted evidence; a final checker shows gaps instead of guessing. | Accepted design, not yet tested. |
 | 15 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |

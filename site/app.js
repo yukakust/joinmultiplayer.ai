@@ -2857,11 +2857,15 @@ function e006Shell() {
 }
 
 function e007Shell() {
-  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 3A · ${localized({ en: "TWO REAL DEVICES CONNECTED", ru: "ДВА РЕАЛЬНЫХ УСТРОЙСТВА СОЕДИНЕНЫ" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "Four processes received one unchanged question. See where their attention went, then inspect the earlier model answers.", ru: "Четыре процесса получили один неизменённый вопрос. Посмотрите, куда направилось их внимание, а затем изучите предыдущие ответы моделей." })}</p><div class="actions"><a class="primary-link" href="/experiment/e007/ten-buttons/">${localized({ en: "NEW · SEE 10 QUESTIONS", ru: "НОВОЕ · СМОТРЕТЬ 10 ВОПРОСОВ" })} →</a><a class="quiet-link" href="#e007-attention">${localized({ en: "SEE THE PHYSICAL TEST", ru: "СМОТРЕТЬ ФИЗИЧЕСКИЙ ТЕСТ" })} ↓</a><a class="quiet-link" href="#e007-smoke-results">${localized({ en: "EARLIER MODEL ANSWERS", ru: "ПРЕДЫДУЩИЕ ОТВЕТЫ МОДЕЛЕЙ" })} ↓</a></div><div class="experiment-loading">${c("loading")}</div></section>`;
+  return `<section class="flow-shell e007-page"><div class="flow-step">E007 · CHECKPOINT 3A · ${localized({ en: "TWO REAL DEVICES CONNECTED", ru: "ДВА РЕАЛЬНЫХ УСТРОЙСТВА СОЕДИНЕНЫ" })}</div><h1>${localized({ en: "One harness. Any pocket i.", ru: "Один harness. Любой pocket i." })}</h1><p class="contribution-intro">${localized({ en: "Four processes received one unchanged question. See where their attention went, then inspect the earlier model answers.", ru: "Четыре процесса получили один неизменённый вопрос. Посмотрите, куда направилось их внимание, а затем изучите предыдущие ответы моделей." })}</p><div class="actions"><a class="primary-link" href="/experiment/e007/gate-12a/">${localized({ en: "NEW · SEE KNOWLEDGE HISTORY", ru: "НОВОЕ · ИСТОРИЯ ЗНАНИЯ" })} →</a><a class="quiet-link" href="/experiment/e007/ten-buttons/">${localized({ en: "EARLIER ACCEPTANCE TESTS", ru: "ПРЕДЫДУЩИЕ ТЕСТЫ ПРИЁМКИ" })} ↗</a><a class="quiet-link" href="#e007-attention">${localized({ en: "SEE THE PHYSICAL TEST", ru: "СМОТРЕТЬ ФИЗИЧЕСКИЙ ТЕСТ" })} ↓</a><a class="quiet-link" href="#e007-smoke-results">${localized({ en: "EARLIER MODEL ANSWERS", ru: "ПРЕДЫДУЩИЕ ОТВЕТЫ МОДЕЛЕЙ" })} ↓</a></div><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
 function e007TenButtonsShell() {
   return `<section class="flow-shell e007-ten-page"><div class="flow-step">E007 · CHECKPOINT 3C.6E · ${localized({ en: "TEN QUESTIONS", ru: "ДЕСЯТЬ ВОПРОСОВ" })}</div><h1>${localized({ en: "What did Qwen accept?", ru: "Что приняла Qwen?" })}</h1><p class="contribution-intro">${localized({ en: "One question at a time. Three small decisions. Then one final result.", ru: "По одному вопросу. Три маленьких решения. Затем один итог." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+function e007KnowledgeChainShell() {
+  return `<section class="flow-shell e007-chain-page"><div class="flow-step">E007 · GATE 12A · ${localized({ en: "KNOWLEDGE HISTORY", ru: "ИСТОРИЯ ЗНАНИЯ" })}</div><h1>${localized({ en: "What does this pocket i believe now?", ru: "Что этот pocket i думает сейчас?" })}</h1><p class="contribution-intro">${localized({ en: "The latest belief stays on top. Older beliefs remain visible underneath.", ru: "Последняя мысль остаётся наверху. Старые мысли сохраняются под ней." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
 function e005MethodName(method) {
@@ -4770,6 +4774,63 @@ async function loadE007TenButtons() {
   }
 }
 
+async function loadE007KnowledgeChain() {
+  const target = document.querySelector(".e007-chain-page");
+  if (!target) return;
+  try {
+    const [protocolResponse, resultResponse] = await Promise.all([
+      fetch("/experiments/E007/knowledge-chain-protocol-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/knowledge-chain-result-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!protocolResponse.ok || !resultResponse.ok) throw new Error("Gate 12A data missing");
+    const protocol = await protocolResponse.json();
+    const result = await resultResponse.json();
+    const decisionNames = {
+      ready: localized({ en: "CURRENT BELIEF FOUND", ru: "ТЕКУЩАЯ МЫСЛЬ НАЙДЕНА" }),
+      ready_multi: localized({ en: "TWO INDEPENDENT BELIEFS", ru: "ДВА НЕЗАВИСИМЫХ МНЕНИЯ" }),
+      retracted: localized({ en: "BELIEF WITHDRAWN", ru: "МЫСЛЬ ОТОЗВАНА" }),
+      incomplete: localized({ en: "HISTORY IS INCOMPLETE", ru: "ИСТОРИЯ НЕПОЛНАЯ" }),
+      invalid_lineage: localized({ en: "DIFFERENT HISTORIES WERE MIXED", ru: "СМЕШАЛИ ЧУЖИЕ ИСТОРИИ" }),
+      forked: localized({ en: "ONE I HAS TWO HEADS", ru: "У ОДНОГО I ДВЕ ВЕРШИНЫ" }),
+    };
+    const caseNames = {
+      KC01: localized({ en: "One first belief", ru: "Одна первая мысль" }),
+      KC02: localized({ en: "Confirmed twice", ru: "Подтверждено дважды" }),
+      KC03: localized({ en: "Old belief refined", ru: "Старая мысль уточнена" }),
+      KC04: localized({ en: "Belief replaced", ru: "Мнение изменилось" }),
+      KC05: localized({ en: "Belief withdrawn", ru: "Мнение отозвано" }),
+      KC06: localized({ en: "Pieces arrived out of order", ru: "Части пришли не по порядку" }),
+      KC07: localized({ en: "A parent is missing", ru: "Не хватает прошлой записи" }),
+      KC08: localized({ en: "A foreign parent was attached", ru: "Прикрепили чужую историю" }),
+      KC09: localized({ en: "One i split into two heads", ru: "У одного i появились две вершины" }),
+      KC10: localized({ en: "Two independent i disagree", ru: "Два независимых i спорят" }),
+    };
+    const relationNames = {
+      learned: localized({ en: "learned", ru: "узнал" }),
+      confirms: localized({ en: "confirmed", ru: "подтвердил" }),
+      refines: localized({ en: "refined", ru: "уточнил" }),
+      replaces: localized({ en: "changed mind", ru: "изменил мнение" }),
+      retracts: localized({ en: "withdrew", ru: "отозвал" }),
+    };
+    const cards = result.records.map(record => {
+      const current = new Set(record.actual.current_revision_ids);
+      const timelines = record.display_chains.map(chain => {
+        const revisions = chain.revisions.map(revision => {
+          const isCurrent = current.has(revision.revision_id);
+          const isRetraction = revision.relation === "retracts";
+          const tone = isCurrent ? "is-current" : isRetraction ? "is-retracted" : "is-history";
+          return `<article class="e007-chain-node ${tone}"><span>${escapeHTML(revision.revision_id)} · ${escapeHTML(relationNames[revision.relation] || revision.relation)}</span><strong>${escapeHTML(revision.claim || localized({ en: "This belief was withdrawn.", ru: "Эта мысль была отозвана." }))}</strong><small>${escapeHTML(revision.evidence_id)} · ${escapeHTML(revision.author_id)}</small></article>`;
+        }).join(`<b class="e007-chain-arrow">→</b>`);
+        return `<div class="e007-chain-lane"><small>${escapeHTML(chain.lineage_id)} · ${escapeHTML(chain.author_id)}</small><div class="e007-chain-timeline">${revisions}</div></div>`;
+      }).join("");
+      return `<details class="e007-chain-card ${record.correct ? "is-correct" : "is-critical"}" ${record.id === "KC04" ? "open" : ""}><summary><b>${escapeHTML(record.id)}</b><span>${escapeHTML(caseNames[record.id] || record.name)}</span><strong>${record.correct ? "●" : "×"} ${escapeHTML(decisionNames[record.actual.decision] || record.actual.decision)}</strong></summary>${timelines}<p>${localized({ en: "Current", ru: "Сейчас" })}: <b>${record.actual.current_revision_ids.length ? escapeHTML(record.actual.current_revision_ids.join(" + ")) : "—"}</b> · ${localized({ en: "history kept", ru: "старых записей сохранено" })}: <b>${record.actual.history_revision_ids.length}</b></p></details>`;
+    }).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-chain-result"><div class="e007-result-metrics"><article class="is-correct"><span>${localized({ en: "CHAINS UNDERSTOOD", ru: "ЦЕПОЧЕК ПОНЯТО" })}</span><strong>${result.summary.case_decisions_correct} / ${result.summary.total_cases}</strong></article><article class="is-correct"><span>${localized({ en: "PACKETS UNCHANGED", ru: "ПАКЕТОВ БЕЗ ИЗМЕНЕНИЙ" })}</span><strong>${result.summary.transport_roundtrips_exact} / ${result.summary.total_cases}</strong></article><article class="is-correct"><span>${localized({ en: "OLD RECORDS LOST", ru: "СТАРЫХ ЗАПИСЕЙ ПОТЕРЯНО" })}</span><strong>${result.summary.history_revisions_lost}</strong></article></div><p class="control-warning">${localized({ en: "Passed as a synthetic development test. It proves the JSON contract and deterministic reconstruction only. Signatures, hostile peers, physical network transfer, truth, privacy, and scale are still outside this gate.", ru: "Пройдено как синтетический development-тест. Он проверяет только формат JSON и сборку цепочки обычным кодом. Подписи, злые узлы, физическая сеть, правдивость, приватность и масштаб здесь ещё не проверялись." })}</p><div class="e007-chain-list">${cards}</div><div class="actions"><a class="quiet-link" href="/experiments/E007/knowledge-chain-result-v0.1.json">${localized({ en: "ALL RAW RESULTS", ru: "ВСЕ СЫРЫЕ РЕЗУЛЬТАТЫ" })} ↗</a><a class="quiet-link" href="/experiments/E007/knowledge-chain-world-v0.1.json">${localized({ en: "FROZEN TEN CHAINS", ru: "10 ЗАМОРОЖЕННЫХ ЦЕПОЧЕК" })} ↗</a><a class="quiet-link" href="/experiments/E007/knowledge-chain-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 12A could not be loaded.", ru: "Не удалось загрузить Gate 12A." });
+  }
+}
+
 async function loadE005() {
   const target = document.querySelector(".e005-page");
   if (!target) return;
@@ -5727,6 +5788,10 @@ function render() {
     document.title = `${localized({ en: "Ten Qwen decisions", ru: "Десять решений Qwen" })} — i`;
     app.innerHTML = withLanguage(e007TenButtonsShell());
     loadE007TenButtons();
+  } else if (path === "experiment/e007/gate-12a") {
+    document.title = `${localized({ en: "Knowledge history", ru: "История знания" })} — i`;
+    app.innerHTML = withLanguage(e007KnowledgeChainShell());
+    loadE007KnowledgeChain();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
