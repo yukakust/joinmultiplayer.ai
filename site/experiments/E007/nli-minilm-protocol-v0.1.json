@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6N",
+  "status": "frozen_before_inference",
+  "title": {
+    "en": "Can a small NLI model check evidence without prompt buttons?",
+    "ru": "Может ли маленькая NLI-модель проверять доказательства без prompt-кнопок?"
+  },
+  "hypothesis": {
+    "en": "A model trained specifically for NLI can classify a source and claim as entailment, contradiction, or neutral more reliably than generative Qwen3-0.6B can follow semantic buttons.",
+    "ru": "Модель, специально обученная NLI, сможет надёжнее разделить источник и утверждение на подтверждение, противоречие и отсутствие доказательства, чем генеративная Qwen3-0.6B следует смысловым кнопкам."
+  },
+  "model": {
+    "repository": "cross-encoder/nli-MiniLM2-L6-H768",
+    "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+    "parameters": 82100000,
+    "language": "en",
+    "classes": ["contradiction", "entailment", "neutral"]
+  },
+  "frozen_design": {
+    "cases": 10,
+    "entailment": 4,
+    "contradiction": 3,
+    "neutral": 3,
+    "input": "exact source passage + one atomic claim",
+    "training_or_calibration": "none",
+    "decision": "largest of the model's three logits"
+  },
+  "locked_development_gate": {
+    "total_correct_at_least": 9,
+    "entailment_correct_at_least": 3,
+    "contradiction_correct": 3,
+    "neutral_correct": 3
+  },
+  "claim_boundary": {
+    "en": "This is a ten-case synthetic English development test. It does not prove phone performance, multilingual quality, source truth, or general evidence judgment.",
+    "ru": "Это синтетический англоязычный development-тест на десяти случаях. Он не доказывает работу на телефоне, качество на разных языках, истинность источника или общее умение проверять доказательства."
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6N",
+  "status": "frozen_before_inference",
+  "language": "en",
+  "items": [
+    {
+      "id": "NLI01",
+      "expected": "entailment",
+      "premise": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "hypothesis": "Box R-17 is red."
+    },
+    {
+      "id": "NLI02",
+      "expected": "entailment",
+      "premise": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "hypothesis": "The event ID should be used as an idempotency key before order creation."
+    },
+    {
+      "id": "NLI03",
+      "expected": "entailment",
+      "premise": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "hypothesis": "The colony is probably preparing to swarm."
+    },
+    {
+      "id": "NLI04",
+      "expected": "entailment",
+      "premise": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "hypothesis": "Mara said to meet at Juniper Cafe."
+    },
+    {
+      "id": "NLI05",
+      "expected": "contradiction",
+      "premise": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "hypothesis": "Restart Kest-7 immediately and leave its power connected."
+    },
+    {
+      "id": "NLI06",
+      "expected": "contradiction",
+      "premise": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "hypothesis": "Use the western marsh route."
+    },
+    {
+      "id": "NLI07",
+      "expected": "contradiction",
+      "premise": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "hypothesis": "Downsample the images even further."
+    },
+    {
+      "id": "NLI08",
+      "expected": "neutral",
+      "premise": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "hypothesis": "An incident allows a contractor to deploy to production alone without staff review."
+    },
+    {
+      "id": "NLI09",
+      "expected": "neutral",
+      "premise": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "hypothesis": "Pause the grow lamps until mist flow returns."
+    },
+    {
+      "id": "NLI10",
+      "expected": "neutral",
+      "premise": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "hypothesis": "The custard contains vanilla."
+    }
+  ]
+}
