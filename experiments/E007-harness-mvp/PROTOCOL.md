@@ -513,3 +513,13 @@ the runner looked for `locked_success_rule`, while the frozen protocol field is
 named `locked_success`. No model decisions from that process were retained or
 reported. The frozen prompts and success rule were not changed; only the result
 collector was corrected before the recorded rerun.
+
+The recorded rerun failed the gate: 5/10 overall. Qwen selected `approve` for
+all ten cases. It therefore passed all 5/5 supported answers and failed all 0/5
+unsupported, conflicting, or unclear answers. The complete user packets were
+53–73 English words; with the fixed system message and chat template, the model
+saw 141–161 tokens. Shortening the complete task to well below 90 words did not
+remove this first-action bias. This does not show that short evidence packets
+are impossible; it shows that this frozen Qwen3-0.6B next-token gate and prompt
+are not a usable balanced semantic judge. Result:
+`site/experiments/E007/ninety-word-result-v0.1.json`.

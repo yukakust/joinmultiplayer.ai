@@ -1,0 +1,216 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6H",
+  "status": "synthetic_development_run_complete",
+  "protocol": "/experiments/E007/ninety-word-protocol-v0.1.json",
+  "world": "/experiments/E007/ninety-word-world-v0.1.json",
+  "protocol_sha256": "9495027afde440b5218748f89b1e45307513014b910338699f8d5b603ddb9042",
+  "world_sha256": "4afc68fc2d931bf465599e80d7e51844ea6f5ae76d4da7b84a081b321d14731e",
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+    "weights_changed": false
+  },
+  "runtime_seconds": 4.244,
+  "summary": {
+    "approve_correct": 5,
+    "approve_total": 5,
+    "reject_correct": 0,
+    "reject_total": 5,
+    "total_correct": 5,
+    "total_cases": 10,
+    "min_prompt_words": 53,
+    "max_prompt_words": 73,
+    "min_prompt_tokens_with_system": 141,
+    "max_prompt_tokens_with_system": 161
+  },
+  "passed_locked_gate": false,
+  "records": [
+    {
+      "id": "NW01",
+      "domain": "colour",
+      "expected": "approve",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose: approve or reject.\napprove = the source clearly supports the answer.\nreject = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 53,
+      "prompt_tokens_with_system": 141,
+      "decision": "approve",
+      "scores": {
+        "approve": 0.99999821,
+        "reject": 1.84e-06
+      },
+      "logit_margin": 13.20387077,
+      "correct": true
+    },
+    {
+      "id": "NW02",
+      "domain": "software",
+      "expected": "approve",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose: approve or reject.\napprove = the source clearly supports the answer.\nreject = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 69,
+      "prompt_tokens_with_system": 151,
+      "decision": "approve",
+      "scores": {
+        "approve": 0.99999416,
+        "reject": 5.89e-06
+      },
+      "logit_margin": 12.04307556,
+      "correct": true
+    },
+    {
+      "id": "NW03",
+      "domain": "beekeeping",
+      "expected": "approve",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose: approve or reject.\napprove = the source clearly supports the answer.\nreject = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 66,
+      "prompt_tokens_with_system": 146,
+      "decision": "approve",
+      "scores": {
+        "approve": 0.99998975,
+        "reject": 1.028e-05
+      },
+      "logit_margin": 11.48532677,
+      "correct": true
+    },
+    {
+      "id": "NW04",
+      "domain": "memory",
+      "expected": "approve",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose: approve or reject.\napprove = the source clearly supports the answer.\nreject = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 59,
+      "prompt_tokens_with_system": 148,
+      "decision": "approve",
+      "scores": {
+        "approve": 0.99997604,
+        "reject": 2.391e-05
+      },
+      "logit_margin": 10.64126778,
+      "correct": true
+    },
+    {
+      "id": "NW05",
+      "domain": "cooking",
+      "expected": "approve",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose: approve or reject.\napprove = the source clearly supports the answer.\nreject = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 73,
+      "prompt_tokens_with_system": 161,
+      "decision": "approve",
+      "scores": {
+        "approve": 0.99979478,
+        "reject": 0.0002052
+      },
+      "logit_margin": 8.49132919,
+      "correct": true
+    },
+    {
+      "id": "NW06",
+      "domain": "machine",
+      "expected": "reject",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose: approve or reject.\napprove = the source clearly supports the answer.\nreject = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 66,
+      "prompt_tokens_with_system": 156,
+      "decision": "approve",
+      "scores": {
+        "approve": 0.62629652,
+        "reject": 0.37370348
+      },
+      "logit_margin": 0.51636124,
+      "correct": false
+    },
+    {
+      "id": "NW07",
+      "domain": "policy",
+      "expected": "reject",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose: approve or reject.\napprove = the source clearly supports the answer.\nreject = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 68,
+      "prompt_tokens_with_system": 147,
+      "decision": "approve",
+      "scores": {
+        "approve": 0.54239082,
+        "reject": 0.45760912
+      },
+      "logit_margin": 0.16997147,
+      "correct": false
+    },
+    {
+      "id": "NW08",
+      "domain": "expedition",
+      "expected": "reject",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose: approve or reject.\napprove = the source clearly supports the answer.\nreject = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 64,
+      "prompt_tokens_with_system": 144,
+      "decision": "approve",
+      "scores": {
+        "approve": 0.99978119,
+        "reject": 0.0002188
+      },
+      "logit_margin": 8.42715073,
+      "correct": false
+    },
+    {
+      "id": "NW09",
+      "domain": "computer_vision",
+      "expected": "reject",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose: approve or reject.\napprove = the source clearly supports the answer.\nreject = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 64,
+      "prompt_tokens_with_system": 147,
+      "decision": "approve",
+      "scores": {
+        "approve": 0.99991679,
+        "reject": 8.319e-05
+      },
+      "logit_margin": 9.39426041,
+      "correct": false
+    },
+    {
+      "id": "NW10",
+      "domain": "greenhouse",
+      "expected": "reject",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose: approve or reject.\napprove = the source clearly supports the answer.\nreject = the source conflicts, does not support, or leaves the answer unclear.\nCHOICE:",
+      "prompt_words": 69,
+      "prompt_tokens_with_system": 148,
+      "decision": "approve",
+      "scores": {
+        "approve": 0.99280459,
+        "reject": 0.00719539
+      },
+      "logit_margin": 4.92709351,
+      "correct": false
+    }
+  ],
+  "boundary": {
+    "en": "This is a ten-case synthetic English development test. It tests a short source-to-answer gate, not source truth, rule applicability, phone speed, or real-world safety.",
+    "ru": "Это синтетический англоязычный development-тест из десяти случаев. Он проверяет короткий gate «источник → ответ», а не истинность источника, применимость правил, скорость на телефоне или безопасность в реальном мире."
+  }
+}
