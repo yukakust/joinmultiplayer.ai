@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6O",
+  "status": "frozen_before_inference",
+  "title": {
+    "en": "Does a stronger NLI model fix MiniLM's misses?",
+    "ru": "Исправит ли более сильная NLI-модель ошибки MiniLM?"
+  },
+  "hypothesis": {
+    "en": "DeBERTa-v3-base trained on MNLI, FEVER-NLI, and ANLI will classify the same ten source-claim pairs more accurately than the 82M MiniLM baseline.",
+    "ru": "DeBERTa-v3-base, обученная на MNLI, FEVER-NLI и ANLI, точнее классифицирует те же десять пар «источник — утверждение», чем MiniLM на 82 млн параметров."
+  },
+  "model": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "approximate_parameters": 184000000,
+    "language": "en",
+    "classes": ["entailment", "neutral", "contradiction"]
+  },
+  "frozen_design": {
+    "world": "/experiments/E007/nli-minilm-world-v0.1.json",
+    "cases": 10,
+    "baseline_already_opened": true,
+    "training_or_calibration": "none",
+    "decision": "largest of the model's three logits"
+  },
+  "locked_development_gate": {
+    "beat_minilm_7_of_10": true,
+    "total_correct_at_least": 9,
+    "entailment_correct_at_least": 3,
+    "contradiction_correct": 3,
+    "neutral_correct": 3
+  },
+  "claim_boundary": {
+    "en": "This reuses ten synthetic English cases whose labels and MiniLM outputs are already public. It is a comparative development check, not fresh generalisation evidence or a phone benchmark.",
+    "ru": "Здесь повторно используются десять синтетических английских случаев, чьи ответы и результаты MiniLM уже опубликованы. Это сравнительная development-проверка, а не новый тест обобщения или benchmark телефона."
+  }
+}
