@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6P",
+  "status": "frozen_before_inference",
+  "language": "en",
+  "items": [
+    {
+      "id": "F01", "expected": "entailment",
+      "premise": "Before charging a payment, store its request ID. If that ID arrives again, return the original response without creating another transaction.",
+      "hypothesis": "Payment retries with the same request ID are idempotent.",
+      "gold_reason": "The described behaviour is exactly idempotency: the same request cannot create a second transaction."
+    },
+    {
+      "id": "F02", "expected": "entailment",
+      "premise": "The audit service permanently deletes each diagnostic log thirty days after the log was created.",
+      "hypothesis": "The audit service does not retain diagnostic logs older than thirty days.",
+      "gold_reason": "Permanent deletion at day thirty entails that older diagnostic logs are not retained."
+    },
+    {
+      "id": "F03", "expected": "entailment",
+      "premise": "After a 429 response, read Retry-After and make no new request until that many seconds have passed.",
+      "hypothesis": "A client should wait for the Retry-After duration before retrying.",
+      "gold_reason": "The hypothesis restates the required waiting rule."
+    },
+    {
+      "id": "F04", "expected": "entailment",
+      "premise": "After five consecutive upstream failures, the gateway opens the circuit and stops forwarding new calls for sixty seconds.",
+      "hypothesis": "The circuit breaker temporarily blocks new upstream requests after the fifth consecutive failure.",
+      "gold_reason": "Opening the circuit and stopping forwarding is the stated temporary block."
+    },
+    {
+      "id": "F05", "expected": "entailment",
+      "premise": "If resizing makes labelled objects smaller than two pixels, use object-centred crops that keep those objects large enough to remain visible.",
+      "hypothesis": "Object-centred crops can preserve tiny labelled objects that ordinary resizing would erase.",
+      "gold_reason": "The source explicitly says the crops keep otherwise erased small objects visible."
+    },
+    {
+      "id": "F06", "expected": "entailment",
+      "premise": "The dispatcher always removes emergency messages from the queue before any waiting standard message.",
+      "hypothesis": "Waiting emergency messages have priority over standard messages.",
+      "gold_reason": "Always removing emergencies first is queue priority."
+    },
+    {
+      "id": "F07", "expected": "entailment",
+      "premise": "Technicians may attach the green seal only after the vessel has passed its pressure test. Vessel T-4 has an intact green seal.",
+      "hypothesis": "Vessel T-4 passed its pressure test.",
+      "gold_reason": "The seal can exist only after a successful test, and T-4 has that seal."
+    },
+    {
+      "id": "F08", "expected": "contradiction",
+      "premise": "Every backup must be encrypted before upload. The server rejects any backup that is still plaintext.",
+      "hypothesis": "A plaintext backup may be uploaded successfully.",
+      "gold_reason": "The source says plaintext uploads are rejected; the claim says they may succeed."
+    },
+    {
+      "id": "F09", "expected": "contradiction",
+      "premise": "Turning valve L-2 clockwise closes it and reduces the water flow.",
+      "hypothesis": "Turning valve L-2 clockwise opens it and increases the water flow.",
+      "gold_reason": "Open/increase is the direct opposite of close/reduce."
+    },
+    {
+      "id": "F10", "expected": "contradiction",
+      "premise": "Immediately after a schema change, discard every cached query plan built for the previous schema.",
+      "hypothesis": "Query plans from the previous schema should continue to be reused after the change.",
+      "gold_reason": "Continuing to reuse the plans directly violates the discard instruction."
+    },
+    {
+      "id": "F11", "expected": "contradiction",
+      "premise": "A sample is invalid if its temperature rises above 4 C during transport.",
+      "hypothesis": "A sample that reached 8 C during transport remains valid.",
+      "gold_reason": "Eight degrees is above four, so the source declares that sample invalid."
+    },
+    {
+      "id": "F12", "expected": "contradiction",
+      "premise": "The admin console denies access unless the session has completed multi-factor authentication.",
+      "hypothesis": "A password-only session can access the admin console.",
+      "gold_reason": "Password-only has not completed MFA and is therefore denied."
+    },
+    {
+      "id": "F13", "expected": "contradiction",
+      "premise": "All timestamps in the export are stored in UTC, never in the operator's local time.",
+      "hypothesis": "Exported timestamps use the operator's local time.",
+      "gold_reason": "The hypothesis asserts exactly what the source excludes."
+    },
+    {
+      "id": "F14", "expected": "contradiction",
+      "premise": "Never combine reagent A with reagent B because their mixture releases toxic gas.",
+      "hypothesis": "It is safe to mix reagent A and reagent B together.",
+      "gold_reason": "The source forbids the mixture as toxic; the claim calls it safe."
+    },
+    {
+      "id": "F15", "expected": "neutral",
+      "premise": "Responses from the reports endpoint are compressed with gzip when the client advertises gzip support.",
+      "hypothesis": "The reports endpoint requires OAuth authentication.",
+      "gold_reason": "Compression behaviour says nothing about authentication."
+    },
+    {
+      "id": "F16", "expected": "neutral",
+      "premise": "The camera battery provides approximately four hours of recording at room temperature.",
+      "hypothesis": "The camera lens produces barrel distortion.",
+      "gold_reason": "Battery duration supplies no information about lens distortion."
+    },
+    {
+      "id": "F17", "expected": "neutral",
+      "premise": "Hive C has twelve kilograms of capped honey available for winter food.",
+      "hypothesis": "The queen in Hive C successfully mated this spring.",
+      "gold_reason": "Food stores do not establish the queen's mating history."
+    },
+    {
+      "id": "F18", "expected": "neutral",
+      "premise": "Production deployments are permitted on Tuesdays between 09:00 and 11:00 UTC.",
+      "hypothesis": "The production database has three read replicas.",
+      "gold_reason": "A deployment window does not state the database topology."
+    },
+    {
+      "id": "F19", "expected": "neutral",
+      "premise": "Invoice 731 is denominated in euros and lists a total of 240 euros.",
+      "hypothesis": "Invoice 731 was paid on Friday.",
+      "gold_reason": "Currency and total provide no payment date."
+    },
+    {
+      "id": "F20", "expected": "neutral",
+      "premise": "The bridge inspection found peeling paint on the eastern railing and recommended repainting it.",
+      "hypothesis": "The bridge can safely carry vehicles weighing forty tonnes.",
+      "gold_reason": "A paint observation does not establish the bridge's load capacity."
+    }
+  ]
+}
