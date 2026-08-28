@@ -5741,3 +5741,195 @@ blockquote {
   .journey-close { display: block; }
   .jnode-label span { display: none; }
 }
+
+/* ── journey upgrade: expedition-map craft layer ── */
+
+.journey-trail::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  content: "";
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  position: absolute;
+}
+.jpath-done { stroke: var(--ink); opacity: 0.75; }
+.jpath-future {
+  animation: jfade 0.8s ease 1.6s both;
+  stroke-dasharray: 5 7;
+  stroke: var(--muted);
+}
+.jpath-spur { animation: jfade 0.6s ease 1.2s both; }
+.jpath-return { animation: jfade 0.6s ease 1.6s both; }
+@keyframes jfade { from { opacity: 0; } }
+.jnode { z-index: 2; }
+.jnode-dot,
+.jnode-label,
+.jnode-medal { transition: transform 0.18s ease, color 0.18s ease; }
+.jnode:hover .jnode-dot,
+.jnode:focus-visible .jnode-dot { transform: scale(1.3); }
+.jnode:hover .jnode-medal { transform: translateX(-50%) translateY(-2px); }
+.jnode:hover .jnode-label span,
+.jnode:focus-visible .jnode-label span { color: var(--ink); }
+
+.journey-act {
+  border-top: 1px dashed color-mix(in srgb, var(--line) 75%, transparent);
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+.journey-act b {
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  left: 0;
+  padding-right: 0.6rem;
+  position: absolute;
+  top: -0.5rem;
+}
+
+.journey-cartouche {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  left: 0;
+  padding: 0.7rem 0.9rem;
+  position: absolute;
+  top: 6px;
+  z-index: 1;
+}
+.journey-cartouche b {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+.journey-cartouche span {
+  color: var(--muted);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.journey-compass {
+  color: var(--muted);
+  height: 58px;
+  position: absolute;
+  right: 2%;
+  top: 6px;
+  width: 54px;
+  z-index: 1;
+}
+.journey-compass circle,
+.journey-compass line { fill: none; stroke: currentColor; stroke-width: 1; }
+.compass-north { fill: var(--ember); stroke: none; }
+.compass-south { fill: none; stroke: currentColor; stroke-width: 1; }
+.compass-i {
+  fill: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11px;
+  font-style: italic;
+  text-anchor: middle;
+}
+
+.journey-serpent {
+  bottom: 26px;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  pointer-events: none;
+  position: absolute;
+  right: 4%;
+  width: 120px;
+  z-index: 1;
+}
+.journey-serpent svg { width: 100%; }
+.journey-serpent path { fill: none; stroke: currentColor; stroke-linecap: round; stroke-width: 1.4; }
+.journey-serpent .serpent-head { fill: none; stroke: currentColor; stroke-width: 1.4; }
+.journey-serpent .serpent-eye { fill: var(--ember); stroke: none; }
+.journey-serpent span {
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-align: right;
+}
+
+.journey-stipple {
+  background-image: radial-gradient(color-mix(in srgb, var(--muted) 55%, transparent) 1px, transparent 1px);
+  background-size: 11px 11px;
+  bottom: 0;
+  height: 230px;
+  left: 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 55%);
+  mask-image: linear-gradient(to bottom, transparent, #000 55%);
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+.jnode-flag {
+  bottom: calc(100% - 4px);
+  color: var(--ember);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  left: calc(50% + 12px);
+  position: absolute;
+  animation: flagfloat 2.2s ease-in-out infinite;
+}
+.jnode-flag svg { height: 26px; width: 20px; }
+.jnode-flag line { stroke: var(--ink); stroke-width: 1.6; }
+.flag-pennant { fill: var(--ember); stroke: none; }
+.jnode-flag i {
+  color: var(--ember);
+  font-size: 0.56rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+@keyframes flagfloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.journey-inspector .statue-large .statue-figure * {
+  animation: statue-draw 0.75s ease-out forwards;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.journey-inspector .statue-large .statue-figure .statue-accent-fill,
+.journey-inspector .statue-large .statue-figure .statue-dot {
+  animation: statue-fill 0.45s ease-in 0.55s both;
+  stroke-dashoffset: 0;
+}
+@keyframes statue-draw { to { stroke-dashoffset: 0; } }
+@keyframes statue-fill { from { fill-opacity: 0; } to { fill-opacity: 1; } }
+
+.shelf-item small {
+  color: color-mix(in srgb, var(--muted) 75%, transparent);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+}
+.shelf-empty { border-style: dashed; }
+.shelf-empty span { font-style: italic; }
+
+@media (prefers-reduced-motion: reduce) {
+  .jnode-flag { animation: none; }
+  .jpath-future, .jpath-spur, .jpath-return { animation: none; }
+  .journey-inspector .statue-large .statue-figure * { animation: none; stroke-dashoffset: 0; }
+  .journey-inspector .statue-large .statue-figure .statue-accent-fill { animation: none; fill-opacity: 1; }
+}
+@media (max-width: 700px) {
+  .journey-cartouche { display: none; }
+  .journey-compass { height: 44px; width: 40px; }
+  .journey-serpent { width: 92px; }
+}

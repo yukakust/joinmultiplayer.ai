@@ -5236,7 +5236,13 @@ const journeyCopy = {
     inspectorHint: "Press a point on the trail.",
     openPage: "OPEN THE FULL RECORD", boundaryLabel: "WHAT THIS DOES NOT PROVE", statueLabel: "STATUETTE",
     shelf: "THE SHELF OF STATUETTES", shelfHint: "Each statuette marks a moment the laboratory keeps. Press one to find its point.",
-    returnLabel: "return with lessons"
+    returnLabel: "return with lessons",
+    youAreHere: "you are here",
+    uncharted: "the map ends here",
+    cartoucheDates: "June — August 2026",
+    cartoucheBy: "lit by match M0001",
+    emptyShelf: "the next one has not happened yet",
+    actWord: "ACT"
   },
   ru: {
     step: "ПУТЬ",
@@ -5246,7 +5252,13 @@ const journeyCopy = {
     inspectorHint: "Нажмите точку на тропе.",
     openPage: "ОТКРЫТЬ ПОЛНУЮ ЗАПИСЬ", boundaryLabel: "ЧЕГО ЭТО НЕ ДОКАЗЫВАЕТ", statueLabel: "СТАТУЭТКА",
     shelf: "ПОЛКА СТАТУЭТОК", shelfHint: "Каждая статуэтка — момент, который лаборатория хранит. Нажмите, чтобы найти её точку на тропе.",
-    returnLabel: "возврат с уроками"
+    returnLabel: "возврат с уроками",
+    youAreHere: "вы здесь",
+    uncharted: "здесь карта кончается",
+    cartoucheDates: "июнь — август 2026",
+    cartoucheBy: "зажжено спичкой M0001",
+    emptyShelf: "следующая ещё не случилась",
+    actWord: "АКТ"
   }
 };
 
@@ -5363,6 +5375,14 @@ const journeyNodes = [
 const JOURNEY_ROW_PX = 128;
 let journeySelected = null;
 
+const journeyActs = [
+  { row: 0.62, num: "I", t: { en: "The mechanism", ru: "Механизм" } },
+  { row: 2.62, num: "II", t: { en: "The hardware", ru: "Железо" } },
+  { row: 3.62, num: "III", t: { en: "The arena", ru: "Арена" } },
+  { row: 5.05, num: "IV", t: { en: "Signal in the swarm", ru: "Сигнал в рое" } },
+  { row: 10.5, num: "V", t: { en: "The harness", ru: "Harness" } }
+];
+
 function journeyNode(id) { return journeyNodes.find(n => n.id === id); }
 
 function statueSVG(kind, cls = "") {
@@ -5375,7 +5395,8 @@ function statueSVG(kind, cls = "") {
     reversal: '<path d="M9 31 C9 16 31 16 31 25"/><path d="M26 21 L31 26 L35 20"/>',
     uturn: '<path d="M14 34 V17 A6.5 6.5 0 0 1 27 17 V29"/><path d="M22.5 25 L27 30.5 L31.5 25"/>',
     scales: '<line x1="20" y1="9" x2="20" y2="32"/><line x1="8" y1="13" x2="32" y2="13"/><path d="M3.5 21 A5.5 4.5 0 0 0 12.5 21 L8 13 Z"/><path d="M27.5 21 A5.5 4.5 0 0 0 36.5 21 L32 13 Z"/>',
-    crescent: '<path class="statue-accent-fill" d="M25 8 A11.5 11.5 0 1 0 25 31 A9 9 0 1 1 25 8 Z"/><line x1="19" y1="31" x2="19" y2="34"/>'
+    crescent: '<path class="statue-accent-fill" d="M25 8 A11.5 11.5 0 1 0 25 31 A9 9 0 1 1 25 8 Z"/><line x1="19" y1="31" x2="19" y2="34"/>',
+    empty: '<path stroke-dasharray="2.6 2.2" d="M15.5 34 L17.2 10.5 L22.8 10.5 L24.5 34"/>'
   };
   return `
     <svg class="statue ${cls}" viewBox="0 0 40 46" aria-hidden="true">
@@ -5412,53 +5433,110 @@ function journeyShell() {
             <button class="shelf-item" data-journey="${n.id}" data-scroll="1">
               ${statueSVG(n.statue, "statue-shelf")}
               <span>${jt(n.statueName)}</span>
+              <small>${jt(n.date)}</small>
             </button>`).join("")}
+          <button class="shelf-item shelf-empty" data-journey="next" data-scroll="1">
+            ${statueSVG("empty", "statue-shelf")}
+            <span>${j("emptyShelf")}</span>
+            <small>—</small>
+          </button>
         </div>
       </section>
     </section>
     ${morrowGuide("journey", "curious")}`);
 }
 
-function renderJourneyTrail() {
+function renderJourneyTrail(skipAnim = false) {
   const target = document.querySelector("#journey-trail");
   if (!target) return;
+  const W = Math.max(target.clientWidth || 720, 300);
   const height = (journeyNodes[journeyNodes.length - 1].row + 0.7) * JOURNEY_ROW_PX;
-  const pos = journeyNodes.map(n => ({ ...n, y: (n.row + 0.35) * JOURNEY_ROW_PX }));
+  const pos = journeyNodes.map(n => ({ ...n, X: (n.x / 100) * W, y: (n.row + 0.35) * JOURNEY_ROW_PX }));
+  const byId = id => pos.find(x => x.id === id);
   const main = pos.filter(n => !n.branchFrom);
-  let d = "";
-  main.forEach((n, i) => {
-    if (!i) { d = `M ${n.x} ${n.y}`; return; }
-    const p = main[i - 1];
+  const solid = main.filter(n => n.status !== "hidden");
+  const future = main.slice(main.indexOf(solid[solid.length - 1]));
+  const curveThrough = points => points.map((n, i) => {
+    if (!i) return `M ${n.X} ${n.y}`;
+    const p = points[i - 1];
     const my = (p.y + n.y) / 2;
-    d += ` C ${p.x} ${my}, ${n.x} ${my}, ${n.x} ${n.y}`;
-  });
+    return ` C ${p.X} ${my}, ${n.X} ${my}, ${n.X} ${n.y}`;
+  }).join("");
+  const dDone = curveThrough(solid);
+  const dFuture = future.length > 1 ? curveThrough(future) : "";
   let spurs = "", returns = "";
   pos.filter(n => n.branchFrom).forEach(n => {
-    const p = pos.find(x => x.id === n.branchFrom);
-    spurs += `M ${p.x} ${p.y} C ${(p.x + n.x) / 2} ${p.y}, ${n.x} ${(p.y + n.y) / 2}, ${n.x} ${n.y} `;
+    const p = byId(n.branchFrom);
+    spurs += `M ${p.X} ${p.y} C ${(p.X + n.X) / 2} ${p.y}, ${n.X} ${(p.y + n.y) / 2}, ${n.X} ${n.y} `;
     if (n.returnTo) {
-      const r = pos.find(x => x.id === n.returnTo);
-      returns += `M ${n.x} ${n.y + 10} C ${n.x - 4} ${(n.y + r.y) / 2 + 20}, ${r.x + 20} ${r.y - 34}, ${r.x + 1.5} ${r.y - 9} `;
+      const r = byId(n.returnTo);
+      returns += `M ${n.X} ${n.y + 12} C ${n.X - 0.05 * W} ${(n.y + r.y) / 2 + 20}, ${r.X + 0.16 * W} ${r.y - 40}, ${r.X + 12} ${r.y - 10} `;
     }
   });
   target.innerHTML = `
-    <svg class="journey-svg" viewBox="0 0 100 ${height}" preserveAspectRatio="none" aria-hidden="true">
+    <div class="journey-stipple" aria-hidden="true"></div>
+    ${journeyActs.map(a => `<div class="journey-act" aria-hidden="true" style="top:${a.row * JOURNEY_ROW_PX}px"><b>${j("actWord")} ${a.num} · ${escapeHTML(jt(a.t))}</b></div>`).join("")}
+    <div class="journey-cartouche" aria-hidden="true">
+      <b>${j("title")}</b>
+      <span>${j("cartoucheDates")}</span>
+      <span>${j("cartoucheBy")}</span>
+    </div>
+    <svg class="journey-compass" viewBox="0 0 48 52" aria-hidden="true">
+      <circle cx="24" cy="29" r="14"/>
+      <line x1="24" y1="17" x2="24" y2="41"/>
+      <line x1="12" y1="29" x2="36" y2="29"/>
+      <path class="compass-north" d="M24 18.5 L27 29 L21 29 Z"/>
+      <path class="compass-south" d="M24 39.5 L27 29 L21 29 Z"/>
+      <text x="24" y="11" class="compass-i">i</text>
+    </svg>
+    <div class="journey-serpent" aria-hidden="true">
+      <svg viewBox="0 0 120 44">
+        <path d="M4 30 C18 8 30 44 46 22 C58 6 66 34 82 20 C90 13 95 15 99 18"/>
+        <circle class="serpent-head" cx="103" cy="19" r="4.6"/>
+        <circle class="serpent-eye" cx="104.6" cy="17.6" r="1"/>
+        <path d="M107.6 19 L114 16.5 M107.6 19 L114 21.5"/>
+      </svg>
+      <span>${j("uncharted")}</span>
+    </div>
+    <svg class="journey-svg" viewBox="0 0 ${W} ${height}" aria-hidden="true">
       <defs>
         <marker id="jret-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0 0 L8 4 L0 8 Z"/>
         </marker>
+        <filter id="jrough" x="-4%" y="-2%" width="108%" height="104%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.011 0.019" numOctaves="2" seed="7" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
       </defs>
-      <path class="jpath" d="${d}"/>
-      ${spurs ? `<path class="jpath jpath-spur" d="${spurs}"/>` : ""}
-      ${returns ? `<path class="jpath jpath-return" d="${returns}" marker-end="url(#jret-arrow)"/>` : ""}
+      <g class="jpaths" filter="url(#jrough)">
+        <path class="jpath jpath-done" d="${dDone}"/>
+        ${dFuture ? `<path class="jpath jpath-future" d="${dFuture}"/>` : ""}
+        ${spurs ? `<path class="jpath jpath-spur" d="${spurs}"/>` : ""}
+        ${returns ? `<path class="jpath jpath-return" d="${returns}" marker-end="url(#jret-arrow)"/>` : ""}
+      </g>
     </svg>
     ${pos.map(n => `
-      <button class="jnode jnode-${n.status}${journeySelected === n.id ? " is-selected" : ""}" data-journey="${n.id}"
+      <button class="jnode jnode-${n.status}${journeySelected === n.id ? " is-selected" : ""}${n.id === "e007" ? " jnode-here" : ""}" data-journey="${n.id}"
               style="left:${n.x}%;top:${n.y}px" aria-label="${escapeHTML(n.code)} — ${escapeHTML(jt(n.title))}">
         <span class="jnode-dot" aria-hidden="true"></span>
         ${n.statue ? `<span class="jnode-medal" aria-hidden="true">${statueSVG(n.statue, "statue-mini")}</span>` : ""}
+        ${n.id === "e007" ? `
+          <span class="jnode-flag" aria-hidden="true">
+            <svg viewBox="0 0 22 30"><line x1="4" y1="29" x2="4" y2="2"/><path class="flag-pennant" d="M4 3 H19 L14.5 7.5 L19 12 H4 Z"/></svg>
+            <i>${j("youAreHere")}</i>
+          </span>` : ""}
         <span class="jnode-label ${n.x > 55 ? "label-left" : "label-right"}"><b>${escapeHTML(n.code)}</b><span>${escapeHTML(jt(n.name))}</span></span>
       </button>`).join("")}`;
+  const done = target.querySelector(".jpath-done");
+  if (done && !skipAnim && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const len = done.getTotalLength();
+    done.style.strokeDasharray = `${len}`;
+    done.style.strokeDashoffset = `${len}`;
+    requestAnimationFrame(() => {
+      done.style.transition = "stroke-dashoffset 2s ease-out 0.1s";
+      done.style.strokeDashoffset = "0";
+    });
+  }
 }
 
 function renderJourneyInspector() {
@@ -5477,6 +5555,7 @@ function renderJourneyInspector() {
     <div class="journey-links">
       ${n.links.map(link => `<a class="button secondary" href="${link.href}">${escapeHTML(jt(link.t))} →</a>`).join("")}
     </div>`;
+  target.querySelectorAll(".statue-large .statue-figure *").forEach(el => el.setAttribute("pathLength", "1"));
 }
 
 function journeySelect(id, scroll = false) {
@@ -6109,6 +6188,13 @@ function scrollToDoors() {
     root.style.scrollBehavior = previous;
   }, 60);
 }
+
+let journeyResizeTimer = null;
+window.addEventListener("resize", () => {
+  if (!document.querySelector("#journey-trail")) return;
+  clearTimeout(journeyResizeTimer);
+  journeyResizeTimer = setTimeout(() => renderJourneyTrail(true), 180);
+});
 
 window.addEventListener("hashchange", () => {
   const onHome = !location.pathname.replace(/^\/+|\/+$/g, "");
