@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.2",
+  "experiment_id": "E007",
+  "checkpoint": "12A.2",
+  "status": "physical_development_run_complete",
+  "executed_at": "2026-08-28T20:16:07Z",
+  "locked_commit": "8de2737",
+  "receiver_commit": "cb4936c",
+  "protocol": "/experiments/E007/knowledge-chain-physical-protocol-v0.2.json",
+  "payload": "/experiments/E007/knowledge-chain-physical-payload-v0.2.json",
+  "transport": {
+    "kind": "SSH file transfer",
+    "sender_label": "yukabox",
+    "sender_hostname": "yukabox",
+    "receiver_label": "production-node",
+    "receiver_hostname": "miracle-prod"
+  },
+  "sender_payload_sha256": "d6efbc8e8bc64a9a7effce651ff4e8be413d6aa803b6c0d1a62630f08cae8355",
+  "receiver_receipt": {
+    "receiver_label": "production-node",
+    "receiver_hostname": "miracle-prod",
+    "payload_sha256": "d6efbc8e8bc64a9a7effce651ff4e8be413d6aa803b6c0d1a62630f08cae8355",
+    "records_received": 3,
+    "decision": "ready",
+    "author_id": "I-CIRRUS",
+    "chain_id": "CHAIN-IMAGE-TILING",
+    "current_revision_id": "PHY-R3",
+    "current_claim": "For 8–16 pixel objects, use image tiles with 20% overlap; no benefit has been measured for large objects.",
+    "history_revision_ids": ["PHY-R1", "PHY-R2"]
+  },
+  "checks": {
+    "different_physical_hostnames": true,
+    "payload_sha256_matches": true,
+    "records_received": "3/3",
+    "decision_matches_locked_gate": true,
+    "current_revision_matches_locked_gate": true,
+    "history_matches_locked_gate": true
+  },
+  "passed_locked_gate": true,
+  "decision": "The relation-free chain contract passed one physical two-machine development transfer.",
+  "boundary": "This proves one exact SSH-carried transfer and deterministic reconstruction between yukabox and miracle-prod. SSH is not the proposed final Pocket i relay. This does not prove signatures, hostile-peer resistance, mobile transport, source truth, privacy, or scale."
+}

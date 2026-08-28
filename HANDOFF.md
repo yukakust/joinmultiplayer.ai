@@ -442,6 +442,19 @@ reconstruction only. Signatures, hostile peers, physical transfer of this new
 payload, source truth, privacy, and scale remain outside Gate 12A. Owner review
 is still required before moving the chain contract from candidate to accepted.
 
+Gate 12A.2 simplified the candidate contract by removing semantic relation
+labels entirely. Frozen commit `8de2737` contains the exact three-record payload
+and locked gate; receiver commit `cb4936c` contains the independent parser.
+The payload travelled from host `yukabox` to host `miracle-prod` over SSH. Both
+sides reported SHA-256 `d6efbc8e...e8355`; the receiver selected `PHY-R3` and
+kept `PHY-R1`, `PHY-R2` as history. Public receipt:
+`/experiments/E007/knowledge-chain-physical-result-v0.2.json`.
+
+SSH is only the carrier used in this physical development test. Do not describe
+it as the future Pocket i relay, and do not claim cryptographic identity or
+hostile-peer resistance. The temporary receiver and payload files were removed
+from the production host after the receipt was captured.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

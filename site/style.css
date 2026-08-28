@@ -5883,6 +5883,12 @@ blockquote {
   margin-top: 56px;
 }
 
+.e007-physical-chain {
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 64px;
+  padding-bottom: 56px;
+}
+
 .e007-chain-list {
   display: grid;
   gap: 14px;
