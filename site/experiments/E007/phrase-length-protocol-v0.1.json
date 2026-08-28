@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6M",
+  "status": "locked_before_inference",
+  "title": {
+    "en": "Do clearer, longer button phrases help Qwen judge support?",
+    "ru": "Помогают ли Qwen более ясные и длинные кнопки оценить поддержку?"
+  },
+  "task": {
+    "en": "Decide whether SOURCE semantically supports PROPOSED ANSWER. This is not literal substring search; exact text presence is checked by ordinary code elsewhere in the harness.",
+    "ru": "Решить, подтверждает ли SOURCE предложенный ANSWER по смыслу. Это не буквальный поиск подстроки; точное присутствие текста в другой части harness проверяет обычный код."
+  },
+  "hypothesis": {
+    "en": "Longer self-describing button phrases may reduce arbitrary label bias. Test one-, two-, three-, and four-word balanced pairs, plus the user's include/not presented pair, in both button orders on the same ten cases.",
+    "ru": "Более длинные и понятные кнопки могут уменьшить случайное предпочтение ярлыка. Проверяем сбалансированные пары из одного, двух, трёх и четырёх слов, а также пользовательскую пару include/not presented, в обоих порядках на тех же десяти случаях."
+  },
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_changed": false,
+    "internet": false,
+    "rag": false
+  },
+  "frozen_design": {
+    "cases": 10,
+    "families": 5,
+    "orders_per_family": 2,
+    "prompts": 100,
+    "balanced_families": {
+      "W1": ["supported", "unsupported"],
+      "W2": ["answer supported", "answer unsupported"],
+      "W3": ["source supports answer", "source lacks support"],
+      "W4": ["source supports this answer", "source does not support"]
+    },
+    "unequal_user_pair": ["include", "not presented"],
+    "scoring": "sum conditional log probability of every token in each complete button phrase"
+  },
+  "locked_success_per_family": {
+    "semantic_correct_min": 18,
+    "each_order_correct_min": 9,
+    "each_class_within_each_order_min": 4,
+    "order_stable_pairs_min": 9
+  },
+  "selection_rule": "A phrase family is usable only if it passes every locked condition. Choose the shortest passing balanced family; the unequal USER pair is diagnostic only.",
+  "claim_boundary": {
+    "en": "This is a synthetic English development comparison using one frozen model and ten cases. It can select a button interface for a fresh test; it cannot establish general semantic judgment or safety.",
+    "ru": "Это синтетическое англоязычное development-сравнение одной замороженной модели на десяти случаях. Оно может выбрать интерфейс кнопок для нового теста, но не доказывает общее смысловое суждение или безопасность."
+  }
+}

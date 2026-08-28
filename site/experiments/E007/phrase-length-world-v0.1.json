@@ -1,0 +1,2846 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6M",
+  "status": "frozen_before_inference",
+  "language": "en",
+  "source_world": "/experiments/E007/ninety-word-world-v0.1.json",
+  "families": [
+    {
+      "id": "USER",
+      "positive": "include",
+      "negative": "not presented",
+      "balanced": false
+    },
+    {
+      "id": "W1",
+      "positive": "supported",
+      "negative": "unsupported",
+      "balanced": true
+    },
+    {
+      "id": "W2",
+      "positive": "answer supported",
+      "negative": "answer unsupported",
+      "balanced": true
+    },
+    {
+      "id": "W3",
+      "positive": "source supports answer",
+      "negative": "source lacks support",
+      "balanced": true
+    },
+    {
+      "id": "W4",
+      "positive": "source supports this answer",
+      "negative": "source does not support",
+      "balanced": true
+    }
+  ],
+  "orders": [
+    "POSITIVE_FIRST",
+    "NEGATIVE_FIRST"
+  ],
+  "items": [
+    {
+      "id": "NW01-USER-POSITIVE_FIRST",
+      "domain": "colour",
+      "expected": "include",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one button: include or not presented.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 60
+    },
+    {
+      "id": "NW02-USER-POSITIVE_FIRST",
+      "domain": "software",
+      "expected": "include",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one button: include or not presented.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 76
+    },
+    {
+      "id": "NW03-USER-POSITIVE_FIRST",
+      "domain": "beekeeping",
+      "expected": "include",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one button: include or not presented.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 73
+    },
+    {
+      "id": "NW04-USER-POSITIVE_FIRST",
+      "domain": "memory",
+      "expected": "include",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one button: include or not presented.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 66
+    },
+    {
+      "id": "NW05-USER-POSITIVE_FIRST",
+      "domain": "cooking",
+      "expected": "include",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one button: include or not presented.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 80
+    },
+    {
+      "id": "NW06-USER-POSITIVE_FIRST",
+      "domain": "machine",
+      "expected": "not presented",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one button: include or not presented.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 73
+    },
+    {
+      "id": "NW07-USER-POSITIVE_FIRST",
+      "domain": "policy",
+      "expected": "not presented",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one button: include or not presented.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 75
+    },
+    {
+      "id": "NW08-USER-POSITIVE_FIRST",
+      "domain": "expedition",
+      "expected": "not presented",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one button: include or not presented.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 71
+    },
+    {
+      "id": "NW09-USER-POSITIVE_FIRST",
+      "domain": "computer_vision",
+      "expected": "not presented",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one button: include or not presented.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 71
+    },
+    {
+      "id": "NW10-USER-POSITIVE_FIRST",
+      "domain": "greenhouse",
+      "expected": "not presented",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one button: include or not presented.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 76
+    },
+    {
+      "id": "NW01-USER-NEGATIVE_FIRST",
+      "domain": "colour",
+      "expected": "include",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one button: not presented or include.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 60
+    },
+    {
+      "id": "NW02-USER-NEGATIVE_FIRST",
+      "domain": "software",
+      "expected": "include",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one button: not presented or include.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 76
+    },
+    {
+      "id": "NW03-USER-NEGATIVE_FIRST",
+      "domain": "beekeeping",
+      "expected": "include",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one button: not presented or include.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 73
+    },
+    {
+      "id": "NW04-USER-NEGATIVE_FIRST",
+      "domain": "memory",
+      "expected": "include",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one button: not presented or include.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 66
+    },
+    {
+      "id": "NW05-USER-NEGATIVE_FIRST",
+      "domain": "cooking",
+      "expected": "include",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one button: not presented or include.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 80
+    },
+    {
+      "id": "NW06-USER-NEGATIVE_FIRST",
+      "domain": "machine",
+      "expected": "not presented",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one button: not presented or include.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 73
+    },
+    {
+      "id": "NW07-USER-NEGATIVE_FIRST",
+      "domain": "policy",
+      "expected": "not presented",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one button: not presented or include.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 75
+    },
+    {
+      "id": "NW08-USER-NEGATIVE_FIRST",
+      "domain": "expedition",
+      "expected": "not presented",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one button: not presented or include.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 71
+    },
+    {
+      "id": "NW09-USER-NEGATIVE_FIRST",
+      "domain": "computer_vision",
+      "expected": "not presented",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one button: not presented or include.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 71
+    },
+    {
+      "id": "NW10-USER-NEGATIVE_FIRST",
+      "domain": "greenhouse",
+      "expected": "not presented",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "family_id": "USER",
+      "family": {
+        "id": "USER",
+        "positive": "include",
+        "negative": "not presented",
+        "balanced": false
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "include": "approve",
+        "not presented": "reject"
+      },
+      "labels": [
+        "include",
+        "not presented"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one button: not presented or include.\ninclude = the source clearly supports the proposed answer.\nnot presented = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 76
+    },
+    {
+      "id": "NW01-W1-POSITIVE_FIRST",
+      "domain": "colour",
+      "expected": "supported",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one button: supported or unsupported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 58
+    },
+    {
+      "id": "NW02-W1-POSITIVE_FIRST",
+      "domain": "software",
+      "expected": "supported",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one button: supported or unsupported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 74
+    },
+    {
+      "id": "NW03-W1-POSITIVE_FIRST",
+      "domain": "beekeeping",
+      "expected": "supported",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one button: supported or unsupported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 71
+    },
+    {
+      "id": "NW04-W1-POSITIVE_FIRST",
+      "domain": "memory",
+      "expected": "supported",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one button: supported or unsupported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 64
+    },
+    {
+      "id": "NW05-W1-POSITIVE_FIRST",
+      "domain": "cooking",
+      "expected": "supported",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one button: supported or unsupported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 78
+    },
+    {
+      "id": "NW06-W1-POSITIVE_FIRST",
+      "domain": "machine",
+      "expected": "unsupported",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one button: supported or unsupported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 71
+    },
+    {
+      "id": "NW07-W1-POSITIVE_FIRST",
+      "domain": "policy",
+      "expected": "unsupported",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one button: supported or unsupported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 73
+    },
+    {
+      "id": "NW08-W1-POSITIVE_FIRST",
+      "domain": "expedition",
+      "expected": "unsupported",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one button: supported or unsupported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 69
+    },
+    {
+      "id": "NW09-W1-POSITIVE_FIRST",
+      "domain": "computer_vision",
+      "expected": "unsupported",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one button: supported or unsupported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 69
+    },
+    {
+      "id": "NW10-W1-POSITIVE_FIRST",
+      "domain": "greenhouse",
+      "expected": "unsupported",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one button: supported or unsupported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 74
+    },
+    {
+      "id": "NW01-W1-NEGATIVE_FIRST",
+      "domain": "colour",
+      "expected": "supported",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one button: unsupported or supported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 58
+    },
+    {
+      "id": "NW02-W1-NEGATIVE_FIRST",
+      "domain": "software",
+      "expected": "supported",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one button: unsupported or supported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 74
+    },
+    {
+      "id": "NW03-W1-NEGATIVE_FIRST",
+      "domain": "beekeeping",
+      "expected": "supported",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one button: unsupported or supported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 71
+    },
+    {
+      "id": "NW04-W1-NEGATIVE_FIRST",
+      "domain": "memory",
+      "expected": "supported",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one button: unsupported or supported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 64
+    },
+    {
+      "id": "NW05-W1-NEGATIVE_FIRST",
+      "domain": "cooking",
+      "expected": "supported",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one button: unsupported or supported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 78
+    },
+    {
+      "id": "NW06-W1-NEGATIVE_FIRST",
+      "domain": "machine",
+      "expected": "unsupported",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one button: unsupported or supported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 71
+    },
+    {
+      "id": "NW07-W1-NEGATIVE_FIRST",
+      "domain": "policy",
+      "expected": "unsupported",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one button: unsupported or supported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 73
+    },
+    {
+      "id": "NW08-W1-NEGATIVE_FIRST",
+      "domain": "expedition",
+      "expected": "unsupported",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one button: unsupported or supported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 69
+    },
+    {
+      "id": "NW09-W1-NEGATIVE_FIRST",
+      "domain": "computer_vision",
+      "expected": "unsupported",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one button: unsupported or supported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 69
+    },
+    {
+      "id": "NW10-W1-NEGATIVE_FIRST",
+      "domain": "greenhouse",
+      "expected": "unsupported",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "family_id": "W1",
+      "family": {
+        "id": "W1",
+        "positive": "supported",
+        "negative": "unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "supported": "approve",
+        "unsupported": "reject"
+      },
+      "labels": [
+        "supported",
+        "unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one button: unsupported or supported.\nsupported = the source clearly supports the proposed answer.\nunsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 74
+    },
+    {
+      "id": "NW01-W2-POSITIVE_FIRST",
+      "domain": "colour",
+      "expected": "answer supported",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one button: answer supported or answer unsupported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 62
+    },
+    {
+      "id": "NW02-W2-POSITIVE_FIRST",
+      "domain": "software",
+      "expected": "answer supported",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one button: answer supported or answer unsupported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 78
+    },
+    {
+      "id": "NW03-W2-POSITIVE_FIRST",
+      "domain": "beekeeping",
+      "expected": "answer supported",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one button: answer supported or answer unsupported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 75
+    },
+    {
+      "id": "NW04-W2-POSITIVE_FIRST",
+      "domain": "memory",
+      "expected": "answer supported",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one button: answer supported or answer unsupported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 68
+    },
+    {
+      "id": "NW05-W2-POSITIVE_FIRST",
+      "domain": "cooking",
+      "expected": "answer supported",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one button: answer supported or answer unsupported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 82
+    },
+    {
+      "id": "NW06-W2-POSITIVE_FIRST",
+      "domain": "machine",
+      "expected": "answer unsupported",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one button: answer supported or answer unsupported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 75
+    },
+    {
+      "id": "NW07-W2-POSITIVE_FIRST",
+      "domain": "policy",
+      "expected": "answer unsupported",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one button: answer supported or answer unsupported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 77
+    },
+    {
+      "id": "NW08-W2-POSITIVE_FIRST",
+      "domain": "expedition",
+      "expected": "answer unsupported",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one button: answer supported or answer unsupported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 73
+    },
+    {
+      "id": "NW09-W2-POSITIVE_FIRST",
+      "domain": "computer_vision",
+      "expected": "answer unsupported",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one button: answer supported or answer unsupported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 73
+    },
+    {
+      "id": "NW10-W2-POSITIVE_FIRST",
+      "domain": "greenhouse",
+      "expected": "answer unsupported",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one button: answer supported or answer unsupported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 78
+    },
+    {
+      "id": "NW01-W2-NEGATIVE_FIRST",
+      "domain": "colour",
+      "expected": "answer supported",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one button: answer unsupported or answer supported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 62
+    },
+    {
+      "id": "NW02-W2-NEGATIVE_FIRST",
+      "domain": "software",
+      "expected": "answer supported",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one button: answer unsupported or answer supported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 78
+    },
+    {
+      "id": "NW03-W2-NEGATIVE_FIRST",
+      "domain": "beekeeping",
+      "expected": "answer supported",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one button: answer unsupported or answer supported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 75
+    },
+    {
+      "id": "NW04-W2-NEGATIVE_FIRST",
+      "domain": "memory",
+      "expected": "answer supported",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one button: answer unsupported or answer supported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 68
+    },
+    {
+      "id": "NW05-W2-NEGATIVE_FIRST",
+      "domain": "cooking",
+      "expected": "answer supported",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one button: answer unsupported or answer supported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 82
+    },
+    {
+      "id": "NW06-W2-NEGATIVE_FIRST",
+      "domain": "machine",
+      "expected": "answer unsupported",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one button: answer unsupported or answer supported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 75
+    },
+    {
+      "id": "NW07-W2-NEGATIVE_FIRST",
+      "domain": "policy",
+      "expected": "answer unsupported",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one button: answer unsupported or answer supported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 77
+    },
+    {
+      "id": "NW08-W2-NEGATIVE_FIRST",
+      "domain": "expedition",
+      "expected": "answer unsupported",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one button: answer unsupported or answer supported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 73
+    },
+    {
+      "id": "NW09-W2-NEGATIVE_FIRST",
+      "domain": "computer_vision",
+      "expected": "answer unsupported",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one button: answer unsupported or answer supported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 73
+    },
+    {
+      "id": "NW10-W2-NEGATIVE_FIRST",
+      "domain": "greenhouse",
+      "expected": "answer unsupported",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "family_id": "W2",
+      "family": {
+        "id": "W2",
+        "positive": "answer supported",
+        "negative": "answer unsupported",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "answer supported": "approve",
+        "answer unsupported": "reject"
+      },
+      "labels": [
+        "answer supported",
+        "answer unsupported"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one button: answer unsupported or answer supported.\nanswer supported = the source clearly supports the proposed answer.\nanswer unsupported = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 78
+    },
+    {
+      "id": "NW01-W3-POSITIVE_FIRST",
+      "domain": "colour",
+      "expected": "source supports answer",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one button: source supports answer or source lacks support.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 66
+    },
+    {
+      "id": "NW02-W3-POSITIVE_FIRST",
+      "domain": "software",
+      "expected": "source supports answer",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one button: source supports answer or source lacks support.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 82
+    },
+    {
+      "id": "NW03-W3-POSITIVE_FIRST",
+      "domain": "beekeeping",
+      "expected": "source supports answer",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one button: source supports answer or source lacks support.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 79
+    },
+    {
+      "id": "NW04-W3-POSITIVE_FIRST",
+      "domain": "memory",
+      "expected": "source supports answer",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one button: source supports answer or source lacks support.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 72
+    },
+    {
+      "id": "NW05-W3-POSITIVE_FIRST",
+      "domain": "cooking",
+      "expected": "source supports answer",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one button: source supports answer or source lacks support.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 86
+    },
+    {
+      "id": "NW06-W3-POSITIVE_FIRST",
+      "domain": "machine",
+      "expected": "source lacks support",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one button: source supports answer or source lacks support.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 79
+    },
+    {
+      "id": "NW07-W3-POSITIVE_FIRST",
+      "domain": "policy",
+      "expected": "source lacks support",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one button: source supports answer or source lacks support.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 81
+    },
+    {
+      "id": "NW08-W3-POSITIVE_FIRST",
+      "domain": "expedition",
+      "expected": "source lacks support",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one button: source supports answer or source lacks support.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 77
+    },
+    {
+      "id": "NW09-W3-POSITIVE_FIRST",
+      "domain": "computer_vision",
+      "expected": "source lacks support",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one button: source supports answer or source lacks support.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 77
+    },
+    {
+      "id": "NW10-W3-POSITIVE_FIRST",
+      "domain": "greenhouse",
+      "expected": "source lacks support",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one button: source supports answer or source lacks support.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 82
+    },
+    {
+      "id": "NW01-W3-NEGATIVE_FIRST",
+      "domain": "colour",
+      "expected": "source supports answer",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one button: source lacks support or source supports answer.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 66
+    },
+    {
+      "id": "NW02-W3-NEGATIVE_FIRST",
+      "domain": "software",
+      "expected": "source supports answer",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one button: source lacks support or source supports answer.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 82
+    },
+    {
+      "id": "NW03-W3-NEGATIVE_FIRST",
+      "domain": "beekeeping",
+      "expected": "source supports answer",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one button: source lacks support or source supports answer.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 79
+    },
+    {
+      "id": "NW04-W3-NEGATIVE_FIRST",
+      "domain": "memory",
+      "expected": "source supports answer",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one button: source lacks support or source supports answer.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 72
+    },
+    {
+      "id": "NW05-W3-NEGATIVE_FIRST",
+      "domain": "cooking",
+      "expected": "source supports answer",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one button: source lacks support or source supports answer.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 86
+    },
+    {
+      "id": "NW06-W3-NEGATIVE_FIRST",
+      "domain": "machine",
+      "expected": "source lacks support",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one button: source lacks support or source supports answer.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 79
+    },
+    {
+      "id": "NW07-W3-NEGATIVE_FIRST",
+      "domain": "policy",
+      "expected": "source lacks support",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one button: source lacks support or source supports answer.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 81
+    },
+    {
+      "id": "NW08-W3-NEGATIVE_FIRST",
+      "domain": "expedition",
+      "expected": "source lacks support",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one button: source lacks support or source supports answer.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 77
+    },
+    {
+      "id": "NW09-W3-NEGATIVE_FIRST",
+      "domain": "computer_vision",
+      "expected": "source lacks support",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one button: source lacks support or source supports answer.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 77
+    },
+    {
+      "id": "NW10-W3-NEGATIVE_FIRST",
+      "domain": "greenhouse",
+      "expected": "source lacks support",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "family_id": "W3",
+      "family": {
+        "id": "W3",
+        "positive": "source supports answer",
+        "negative": "source lacks support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports answer": "approve",
+        "source lacks support": "reject"
+      },
+      "labels": [
+        "source supports answer",
+        "source lacks support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one button: source lacks support or source supports answer.\nsource supports answer = the source clearly supports the proposed answer.\nsource lacks support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 82
+    },
+    {
+      "id": "NW01-W4-POSITIVE_FIRST",
+      "domain": "colour",
+      "expected": "source supports this answer",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one button: source supports this answer or source does not support.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 70
+    },
+    {
+      "id": "NW02-W4-POSITIVE_FIRST",
+      "domain": "software",
+      "expected": "source supports this answer",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one button: source supports this answer or source does not support.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 86
+    },
+    {
+      "id": "NW03-W4-POSITIVE_FIRST",
+      "domain": "beekeeping",
+      "expected": "source supports this answer",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one button: source supports this answer or source does not support.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 83
+    },
+    {
+      "id": "NW04-W4-POSITIVE_FIRST",
+      "domain": "memory",
+      "expected": "source supports this answer",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one button: source supports this answer or source does not support.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 76
+    },
+    {
+      "id": "NW05-W4-POSITIVE_FIRST",
+      "domain": "cooking",
+      "expected": "source supports this answer",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one button: source supports this answer or source does not support.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 90
+    },
+    {
+      "id": "NW06-W4-POSITIVE_FIRST",
+      "domain": "machine",
+      "expected": "source does not support",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one button: source supports this answer or source does not support.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 83
+    },
+    {
+      "id": "NW07-W4-POSITIVE_FIRST",
+      "domain": "policy",
+      "expected": "source does not support",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one button: source supports this answer or source does not support.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 85
+    },
+    {
+      "id": "NW08-W4-POSITIVE_FIRST",
+      "domain": "expedition",
+      "expected": "source does not support",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one button: source supports this answer or source does not support.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 81
+    },
+    {
+      "id": "NW09-W4-POSITIVE_FIRST",
+      "domain": "computer_vision",
+      "expected": "source does not support",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one button: source supports this answer or source does not support.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 81
+    },
+    {
+      "id": "NW10-W4-POSITIVE_FIRST",
+      "domain": "greenhouse",
+      "expected": "source does not support",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "POSITIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one button: source supports this answer or source does not support.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 86
+    },
+    {
+      "id": "NW01-W4-NEGATIVE_FIRST",
+      "domain": "colour",
+      "expected": "source supports this answer",
+      "question": "What colour is Box R-17?",
+      "source": "The current inspection card states that Box R-17 is red. No later card exists.",
+      "answer": "Box R-17 is red.",
+      "case_id": "NW01",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat colour is Box R-17?\n\nSOURCE:\nThe current inspection card states that Box R-17 is red. No later card exists.\n\nPROPOSED ANSWER:\nBox R-17 is red.\n\nChoose exactly one button: source does not support or source supports this answer.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 70
+    },
+    {
+      "id": "NW02-W4-NEGATIVE_FIRST",
+      "domain": "software",
+      "expected": "source supports this answer",
+      "question": "How should duplicate webhook deliveries be stopped?",
+      "source": "When deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.",
+      "answer": "Use the event ID as an idempotency key before order creation.",
+      "case_id": "NW02",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nHow should duplicate webhook deliveries be stopped?\n\nSOURCE:\nWhen deliveries repeat the same event ID, store that ID before creating the order and return the existing result on retries.\n\nPROPOSED ANSWER:\nUse the event ID as an idempotency key before order creation.\n\nChoose exactly one button: source does not support or source supports this answer.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 86
+    },
+    {
+      "id": "NW03-W4-NEGATIVE_FIRST",
+      "domain": "beekeeping",
+      "expected": "source supports this answer",
+      "question": "What do a crowded hive, present queen, and sealed queen cells suggest?",
+      "source": "A crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.",
+      "answer": "The colony is probably preparing to swarm.",
+      "case_id": "NW03",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat do a crowded hive, present queen, and sealed queen cells suggest?\n\nSOURCE:\nA crowded colony with its queen present and several sealed queen cells is usually preparing to swarm.\n\nPROPOSED ANSWER:\nThe colony is probably preparing to swarm.\n\nChoose exactly one button: source does not support or source supports this answer.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 83
+    },
+    {
+      "id": "NW04-W4-NEGATIVE_FIRST",
+      "domain": "memory",
+      "expected": "source supports this answer",
+      "question": "Where did Mara say to meet after the museum?",
+      "source": "Mara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.",
+      "answer": "Meet Mara at Juniper Cafe.",
+      "case_id": "NW04",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhere did Mara say to meet after the museum?\n\nSOURCE:\nMara wrote at 18:10: Correction, not Harbor Cafe. Meet at Juniper Cafe after the museum.\n\nPROPOSED ANSWER:\nMeet Mara at Juniper Cafe.\n\nChoose exactly one button: source does not support or source supports this answer.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 76
+    },
+    {
+      "id": "NW05-W4-NEGATIVE_FIRST",
+      "domain": "cooking",
+      "expected": "source supports this answer",
+      "question": "What should happen when custard reaches 82 C and coats a spoon?",
+      "source": "At 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.",
+      "answer": "Take the custard off the heat and cool the bowl now.",
+      "case_id": "NW05",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "approve",
+      "prompt": "QUESTION:\nWhat should happen when custard reaches 82 C and coats a spoon?\n\nSOURCE:\nAt 82 C, when custard coats a spoon, remove it from heat and cool the bowl immediately to prevent curdling.\n\nPROPOSED ANSWER:\nTake the custard off the heat and cool the bowl now.\n\nChoose exactly one button: source does not support or source supports this answer.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 90
+    },
+    {
+      "id": "NW06-W4-NEGATIVE_FIRST",
+      "domain": "machine",
+      "expected": "source does not support",
+      "question": "May hot Kest-7 be restarted while room pressure rises?",
+      "source": "If Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.",
+      "answer": "Restart Kest-7 immediately and leave its power connected.",
+      "case_id": "NW06",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay hot Kest-7 be restarted while room pressure rises?\n\nSOURCE:\nIf Kest-7 is above 80 C and room pressure is rising, isolate its power and do not restart it.\n\nPROPOSED ANSWER:\nRestart Kest-7 immediately and leave its power connected.\n\nChoose exactly one button: source does not support or source supports this answer.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 83
+    },
+    {
+      "id": "NW07-W4-NEGATIVE_FIRST",
+      "domain": "policy",
+      "expected": "source does not support",
+      "question": "May a contractor deploy to production alone during an incident?",
+      "source": "Contractor building badges expire at midnight on their printed date and must then be returned to reception.",
+      "answer": "An incident allows a contractor to deploy alone without staff review.",
+      "case_id": "NW07",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nMay a contractor deploy to production alone during an incident?\n\nSOURCE:\nContractor building badges expire at midnight on their printed date and must then be returned to reception.\n\nPROPOSED ANSWER:\nAn incident allows a contractor to deploy alone without staff review.\n\nChoose exactly one button: source does not support or source supports this answer.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 85
+    },
+    {
+      "id": "NW08-W4-NEGATIVE_FIRST",
+      "domain": "expedition",
+      "expected": "source does not support",
+      "question": "Which route avoids the flooded northern pass?",
+      "source": "When the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.",
+      "answer": "Use the western marsh route.",
+      "case_id": "NW08",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhich route avoids the flooded northern pass?\n\nSOURCE:\nWhen the northern gauge is above the red mark, avoid the pass and use the eastern ridge. The western marsh is unsafe.\n\nPROPOSED ANSWER:\nUse the western marsh route.\n\nChoose exactly one button: source does not support or source supports this answer.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 81
+    },
+    {
+      "id": "NW09-W4-NEGATIVE_FIRST",
+      "domain": "computer_vision",
+      "expected": "source does not support",
+      "question": "What should be tried when resize erases tiny labelled objects?",
+      "source": "When resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.",
+      "answer": "Downsample the images even further.",
+      "case_id": "NW09",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nWhat should be tried when resize erases tiny labelled objects?\n\nSOURCE:\nWhen resize makes labelled objects smaller than two pixels, first use larger inputs or object-centred crops that preserve them.\n\nPROPOSED ANSWER:\nDownsample the images even further.\n\nChoose exactly one button: source does not support or source supports this answer.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 81
+    },
+    {
+      "id": "NW10-W4-NEGATIVE_FIRST",
+      "domain": "greenhouse",
+      "expected": "source does not support",
+      "question": "Should the grow lamps pause when hot leaves have no mist?",
+      "source": "Each grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.",
+      "answer": "Pause the grow lamps until mist flow returns.",
+      "case_id": "NW10",
+      "family_id": "W4",
+      "family": {
+        "id": "W4",
+        "positive": "source supports this answer",
+        "negative": "source does not support",
+        "balanced": true
+      },
+      "order": "NEGATIVE_FIRST",
+      "mapping": {
+        "source supports this answer": "approve",
+        "source does not support": "reject"
+      },
+      "labels": [
+        "source supports this answer",
+        "source does not support"
+      ],
+      "expected_semantic": "reject",
+      "prompt": "QUESTION:\nShould the grow lamps pause when hot leaves have no mist?\n\nSOURCE:\nEach grow lamp has a silver inventory label. Scan that label after replacing a bulb and record the serial number.\n\nPROPOSED ANSWER:\nPause the grow lamps until mist flow returns.\n\nChoose exactly one button: source does not support or source supports this answer.\nsource supports this answer = the source clearly supports the proposed answer.\nsource does not support = the source conflicts, does not support, or leaves the proposed answer unclear.\nBUTTON:",
+      "prompt_words": 86
+    }
+  ]
+}

@@ -604,3 +604,20 @@ decks semantic accuracy was 8/20; `KSEL` was chosen 14/20 and labels flipped in
 6/10 pairs. Hiding familiar actions behind invented equal-length labels did not
 force reliable use of the mapping. Result:
 `site/experiments/E007/nonce-word-result-v0.1.json`.
+
+## Checkpoint 3C.6M — button phrases from one to four words
+
+Clarify the task: this gate asks whether a source semantically supports a
+proposed answer. Literal substring presence is a different mechanical check.
+
+Compare five phrase families on the same ten cases in both button orders. The
+four clean families contain balanced one-, two-, three-, and four-word labels,
+with matching token counts inside each pair. Also include the requested
+`include / not presented` pair as an unequal-length diagnostic. This creates
+100 prompts.
+
+A family passes only with at least 18/20 semantic decisions correct, at least
+9/10 in each order, at least 4/5 for each class within each order, and at least
+9/10 case decisions stable when order changes. Select the shortest balanced
+family that passes. The USER pair cannot be selected because its lengths are
+unequal and its wording changes the task toward literal presence.
