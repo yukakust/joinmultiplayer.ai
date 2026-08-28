@@ -1,0 +1,272 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6K",
+  "status": "post_hoc_exploratory_analysis_complete",
+  "protocol": "/experiments/E007/mirrored-calibration-protocol-v0.1.json",
+  "input": "/experiments/E007/numeric-letter-result-v0.1.json",
+  "summary": {
+    "agreement_method": {
+      "answered": 4,
+      "unsure": 6,
+      "correct_when_answered": 2,
+      "wrong_when_answered": 2
+    },
+    "logit_calibration": {
+      "correct": 5,
+      "total": 10,
+      "approve_decisions": 10,
+      "reject_decisions": 0
+    }
+  },
+  "conclusion": {
+    "en": "Neither simple calibration worked. Agreement covered only four cases and was right on two. Logit subtraction still returned approve for all ten cases.",
+    "ru": "Ни одна простая калибровка не сработала. Согласие ответило лишь на четыре случая и было верно в двух. Вычитание логитов всё равно вернуло approve для всех десяти случаев."
+  },
+  "records": [
+    {
+      "case_id": "NW01",
+      "expected": "approve",
+      "deck_X": {
+        "label": "1",
+        "meaning": "approve",
+        "log_odds_1_over_A": 0.18356328
+      },
+      "deck_Y": {
+        "label": "A",
+        "meaning": "approve",
+        "log_odds_1_over_A": -5.89333127
+      },
+      "agreement_method": {
+        "decision": "approve",
+        "correct": true,
+        "answered": true
+      },
+      "logit_calibration": {
+        "semantic_margin": 3.03844727,
+        "decision": "approve",
+        "correct": true
+      }
+    },
+    {
+      "case_id": "NW02",
+      "expected": "approve",
+      "deck_X": {
+        "label": "A",
+        "meaning": "reject",
+        "log_odds_1_over_A": -2.09771342
+      },
+      "deck_Y": {
+        "label": "A",
+        "meaning": "approve",
+        "log_odds_1_over_A": -6.34430072
+      },
+      "agreement_method": {
+        "decision": "unsure",
+        "correct": false,
+        "answered": false
+      },
+      "logit_calibration": {
+        "semantic_margin": 2.12329365,
+        "decision": "approve",
+        "correct": true
+      }
+    },
+    {
+      "case_id": "NW03",
+      "expected": "approve",
+      "deck_X": {
+        "label": "A",
+        "meaning": "reject",
+        "log_odds_1_over_A": -0.85149381
+      },
+      "deck_Y": {
+        "label": "A",
+        "meaning": "approve",
+        "log_odds_1_over_A": -4.81056256
+      },
+      "agreement_method": {
+        "decision": "unsure",
+        "correct": false,
+        "answered": false
+      },
+      "logit_calibration": {
+        "semantic_margin": 1.97953437,
+        "decision": "approve",
+        "correct": true
+      }
+    },
+    {
+      "case_id": "NW04",
+      "expected": "approve",
+      "deck_X": {
+        "label": "1",
+        "meaning": "approve",
+        "log_odds_1_over_A": 1.41469196
+      },
+      "deck_Y": {
+        "label": "A",
+        "meaning": "approve",
+        "log_odds_1_over_A": -2.08824161
+      },
+      "agreement_method": {
+        "decision": "approve",
+        "correct": true,
+        "answered": true
+      },
+      "logit_calibration": {
+        "semantic_margin": 1.75146678,
+        "decision": "approve",
+        "correct": true
+      }
+    },
+    {
+      "case_id": "NW05",
+      "expected": "approve",
+      "deck_X": {
+        "label": "A",
+        "meaning": "reject",
+        "log_odds_1_over_A": -1.57784269
+      },
+      "deck_Y": {
+        "label": "A",
+        "meaning": "approve",
+        "log_odds_1_over_A": -5.91426132
+      },
+      "agreement_method": {
+        "decision": "unsure",
+        "correct": false,
+        "answered": false
+      },
+      "logit_calibration": {
+        "semantic_margin": 2.16820932,
+        "decision": "approve",
+        "correct": true
+      }
+    },
+    {
+      "case_id": "NW06",
+      "expected": "reject",
+      "deck_X": {
+        "label": "1",
+        "meaning": "approve",
+        "log_odds_1_over_A": 0.29059599
+      },
+      "deck_Y": {
+        "label": "A",
+        "meaning": "approve",
+        "log_odds_1_over_A": -2.09406276
+      },
+      "agreement_method": {
+        "decision": "approve",
+        "correct": false,
+        "answered": true
+      },
+      "logit_calibration": {
+        "semantic_margin": 1.19232937,
+        "decision": "approve",
+        "correct": false
+      }
+    },
+    {
+      "case_id": "NW07",
+      "expected": "reject",
+      "deck_X": {
+        "label": "1",
+        "meaning": "approve",
+        "log_odds_1_over_A": 0.20538334
+      },
+      "deck_Y": {
+        "label": "A",
+        "meaning": "approve",
+        "log_odds_1_over_A": -3.050621
+      },
+      "agreement_method": {
+        "decision": "approve",
+        "correct": false,
+        "answered": true
+      },
+      "logit_calibration": {
+        "semantic_margin": 1.62800217,
+        "decision": "approve",
+        "correct": false
+      }
+    },
+    {
+      "case_id": "NW08",
+      "expected": "reject",
+      "deck_X": {
+        "label": "A",
+        "meaning": "reject",
+        "log_odds_1_over_A": -1.56447984
+      },
+      "deck_Y": {
+        "label": "A",
+        "meaning": "approve",
+        "log_odds_1_over_A": -7.98217285
+      },
+      "agreement_method": {
+        "decision": "unsure",
+        "correct": false,
+        "answered": false
+      },
+      "logit_calibration": {
+        "semantic_margin": 3.20884651,
+        "decision": "approve",
+        "correct": false
+      }
+    },
+    {
+      "case_id": "NW09",
+      "expected": "reject",
+      "deck_X": {
+        "label": "A",
+        "meaning": "reject",
+        "log_odds_1_over_A": -3.06549835
+      },
+      "deck_Y": {
+        "label": "A",
+        "meaning": "approve",
+        "log_odds_1_over_A": -7.73221422
+      },
+      "agreement_method": {
+        "decision": "unsure",
+        "correct": false,
+        "answered": false
+      },
+      "logit_calibration": {
+        "semantic_margin": 2.33335793,
+        "decision": "approve",
+        "correct": false
+      }
+    },
+    {
+      "case_id": "NW10",
+      "expected": "reject",
+      "deck_X": {
+        "label": "A",
+        "meaning": "reject",
+        "log_odds_1_over_A": -0.79078299
+      },
+      "deck_Y": {
+        "label": "A",
+        "meaning": "approve",
+        "log_odds_1_over_A": -6.82942639
+      },
+      "agreement_method": {
+        "decision": "unsure",
+        "correct": false,
+        "answered": false
+      },
+      "logit_calibration": {
+        "semantic_margin": 3.0193217,
+        "decision": "approve",
+        "correct": false
+      }
+    }
+  ],
+  "boundary": {
+    "en": "A useful result here would only justify testing the fixed method on unseen cases. A failure can reject these two simple calibration rules for this dataset.",
+    "ru": "Даже полезный результат здесь лишь позволил бы проверить зафиксированный метод на новых случаях. Неудача может отвергнуть эти два простых правила калибровки для этого набора."
+  }
+}

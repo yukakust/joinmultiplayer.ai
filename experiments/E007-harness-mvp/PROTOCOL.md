@@ -577,3 +577,10 @@ should cancel.
 These rules were proposed after the source outputs existed. This is explicitly
 post-hoc exploratory analysis, not a new locked test. Any useful result would
 still require a fresh validation set.
+
+Both exploratory rules failed on the existing ten pairs. Agreement answered
+4/10, returned `unsure` on 6/10, and split its answered cases 2 correct / 2
+wrong. Logit subtraction returned semantic `approve` on all ten cases and
+therefore scored 5/10. The symbol preference was not a simple constant offset
+that these mirrored rules could remove. Result:
+`site/experiments/E007/mirrored-calibration-result-v0.1.json`.
