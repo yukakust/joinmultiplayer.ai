@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6K",
+  "status": "post_hoc_exploratory_analysis",
+  "title": {
+    "en": "Can mirrored labels cancel a symbol preference?",
+    "ru": "Могут ли зеркальные ярлыки убрать любовь к символу?"
+  },
+  "input": "/experiments/E007/numeric-letter-result-v0.1.json",
+  "methods": {
+    "agreement": "Translate each deck's chosen symbol back to approve or reject. Decide only when both translated meanings agree; otherwise return unsure.",
+    "logit_calibration": "For each deck calculate log(P(1)/P(A)). Because the meanings are mirrored, semantic margin = (deck_X_margin - deck_Y_margin) / 2. Positive means approve; negative means reject."
+  },
+  "scientific_status": {
+    "en": "The methods were proposed after the 20 source decisions were available. This is an exploratory reuse of frozen outputs, not a new locked or independent test.",
+    "ru": "Методы предложены после того, как 20 исходных решений уже были получены. Это exploratory-анализ замороженных ответов, а не новый locked или независимый тест."
+  },
+  "claim_boundary": {
+    "en": "A useful result here would only justify testing the fixed method on unseen cases. A failure can reject these two simple calibration rules for this dataset.",
+    "ru": "Даже полезный результат здесь лишь позволил бы проверить зафиксированный метод на новых случаях. Неудача может отвергнуть эти два простых правила калибровки для этого набора."
+  }
+}

@@ -565,3 +565,15 @@ labels with neutral symbols did not produce a reliable evidence judge; it
 moved the preference from `approve` to `A`. This does not distinguish a token
 prior from other prompt-format effects. Result:
 `site/experiments/E007/numeric-letter-result-v0.1.json`.
+
+## Checkpoint 3C.6K — exploratory mirrored calibration
+
+Reuse the already produced X/Y probabilities in two deterministic ways. First,
+translate each chosen label back to its meaning and answer only when both decks
+agree; otherwise return `unsure`. Second, calculate each deck's log odds
+`log(P(1)/P(A))` and subtract the mirrored margins, so a stable symbol prior
+should cancel.
+
+These rules were proposed after the source outputs existed. This is explicitly
+post-hoc exploratory analysis, not a new locked test. Any useful result would
+still require a fresh validation set.
