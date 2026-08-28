@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "3C.6D",
+  "status": "locked_before_inference",
+  "title": {
+    "en": "Three small tool decisions",
+    "ru": "Три маленьких решения кнопками"
+  },
+  "hypothesis": {
+    "en": "Can Qwen3-0.6B, receiving one small comparison at a time, use evidence only when the source supports the rule, current facts show that the rule applies, and the proposed answer follows from it?",
+    "ru": "Может ли Qwen3‑0.6B, получая по одному маленькому сравнению, использовать доказательство только тогда, когда источник подтверждает правило, текущие факты подтверждают его применимость, а предложенный ответ действительно из них следует?"
+  },
+  "plain_language": {
+    "en": "Qwen does not write an essay or choose A/B/C. Three times it must press one named button: SUPPORTED or NOT ENOUGH. Plain code accepts the evidence only after three SUPPORTED decisions.",
+    "ru": "Qwen не пишет сочинение и не выбирает A/B/C. Три раза она должна нажать одну понятную кнопку: «ПОДТВЕРЖДЕНО» или «НЕДОСТАТОЧНО». Обычный код принимает доказательство только после трёх «ПОДТВЕРЖДЕНО»."
+  },
+  "model": {
+    "id": "Qwen/Qwen3-0.6B",
+    "snapshot": "c1899de",
+    "weights_changed": false,
+    "internet": false,
+    "rag": false
+  },
+  "world": {
+    "domains": 8,
+    "cases": 64,
+    "combinations_per_domain": 8,
+    "atomic_decisions": 192,
+    "useful_packets": 8,
+    "trap_packets": 56,
+    "language": "en"
+  },
+  "tools": [
+    "supported",
+    "not_enough"
+  ],
+  "deterministic_combiner": "supported + supported + supported => use; every other combination => do_not_use",
+  "order_audit": {
+    "comparisons": 8,
+    "method": "Run the same balanced atomic comparisons with the two tool definitions in both orders. The semantic decision must not change."
+  },
+  "locked_success": {
+    "source_supports_rule_correct_min": 48,
+    "facts_support_condition_correct_min": 48,
+    "answer_follows_consequence_correct_min": 48,
+    "useful_packets_used_min": 6,
+    "false_packets_used_max": 1,
+    "malformed_tool_calls_max": 0,
+    "order_invariant_min": 8
+  },
+  "claim_boundary": {
+    "en": "This is a synthetic English development test of one frozen tool interface. It does not prove source truth, privacy, phone speed, multilingual ability, or real-world safety.",
+    "ru": "Это синтетический англоязычный development-тест одного замороженного tool-интерфейса. Он не доказывает истинность источников, приватность, скорость на телефоне, мультиязычность или безопасность в реальном мире."
+  }
+}

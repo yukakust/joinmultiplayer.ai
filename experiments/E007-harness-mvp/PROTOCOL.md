@@ -364,3 +364,31 @@ Changing the A/B mapping changed the semantic meaning without reliably changing
 the chosen letter. The frozen all-YES result therefore combines a prompt/label
 bias with a real failure to compare the claim and quote. Diagnostic:
 `site/experiments/E007/two-link-semantic-interface-audit-v0.1.json`.
+
+## Checkpoint 3C.6D — three atomic tool decisions
+
+Replace the failed A/B/C semantic interface with three independent, named tool
+decisions. Qwen3-0.6B receives only one comparison at a time and must call
+exactly one tool: `supported` or `not_enough`. The three comparisons are source
+window → proposed rule, current facts → rule condition, and proposed answer →
+rule consequence. Ordinary deterministic code accepts the evidence only when
+all three calls are `supported`; malformed, missing, multiple, unknown, or
+uncertain calls become `not_enough`.
+
+Before inference, freeze 64 synthetic English cases across eight domains. Each
+domain contains all eight possible combinations of the three binary relations.
+Thus every atomic relation has 32 positive and 32 negative examples, while only
+8 complete packets should be used and 56 should not. An additional balanced
+eight-comparison audit repeats the same input with the two tool definitions in
+opposite orders.
+
+The locked development gate requires at least 48/64 correct decisions for each
+relation, at least 6/8 useful packets used, no more than one false use among the
+56 traps, zero malformed tool calls, and at least 8/8 order-invariant audit
+decisions. Preserve every raw tool call and every failure. Protocol and world:
+`site/experiments/E007/atomic-tool-protocol-v0.1.json` and
+`site/experiments/E007/atomic-tool-world-v0.1.json`.
+
+This is a synthetic English development test. It does not establish source
+truth, privacy, multilingual generalisation, phone performance, or real-world
+safety.
