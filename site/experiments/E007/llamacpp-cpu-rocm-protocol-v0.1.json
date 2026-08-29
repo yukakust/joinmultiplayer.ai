@@ -19,6 +19,7 @@
     "chat_template": "native checkpoint template",
     "reasoning": "off",
     "kv_cache": "Q8_0",
+    "flash_attention": true,
     "context_tokens": 16384,
     "parallel_slots": 1,
     "prompt": "exactly the Gate 16B.1 grouped prompt",
@@ -30,7 +31,7 @@
       "id": "llamacpp_cpu",
       "device": "CPU only",
       "gpu_layers": 0,
-      "flash_attention": false
+      "flash_attention": "enabled automatically because Q8 V cache requires it"
     },
     {
       "id": "llamacpp_rocm",
