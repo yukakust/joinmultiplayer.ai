@@ -1,0 +1,135 @@
+{
+  "schema_version": "0.2",
+  "experiment": "E007",
+  "gate": "16B.1",
+  "status": "development_passed",
+  "protocol": "/experiments/E007/whole-chat-reader-protocol-v0.2.json",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "training": false,
+    "thinking": false,
+    "decoding": "greedy",
+    "runtime": "yukabox CPU, bfloat16"
+  },
+  "summary": {
+    "conversations": 2,
+    "conversation_tokens": [10656, 12922],
+    "questions": 6,
+    "with_conversation_points": 11,
+    "with_conversation_points_possible": 12,
+    "without_conversation_points": 0,
+    "without_conversation_points_possible": 12,
+    "facts_correct": 6,
+    "supporting_message_correct": 5,
+    "full_context_seconds": 692.489,
+    "no_context_control_seconds": 48.202,
+    "passed_locked_development_gate": true
+  },
+  "scoring": {
+    "2": "The fact and supporting message are correct.",
+    "1": "The fact is correct but the support is wrong or missing, or the answer is only partly correct.",
+    "0": "Wrong, invented, or not found."
+  },
+  "conversations": [
+    {
+      "label": "CHAT-A",
+      "tokens": 10656,
+      "visible_messages": 9,
+      "full_context_seconds": 361.551,
+      "score": 6,
+      "score_possible": 6,
+      "questions": [
+        {
+          "id": "A1",
+          "position": "early",
+          "question": "Как в разговоре разделили обязанности между локальной памятью и LoRA при усвоении нового знания?",
+          "expected": "Память хранит редактируемые факты и источники; LoRA учит способу пользоваться подтверждённым знанием и навыкам поведения.",
+          "answer": "Локальная память используется для хранения точных, свежих или изменяемых фактов, а LoRA используется для обучения навыков, привычек и способов применения локальной памяти. Локальная память сохраняет знания, а LoRA учит, как применять эти знания в новых ситуациях.",
+          "reported_evidence": ["M0002"],
+          "manual_score": 2,
+          "manual_reason": "Факт и сообщение M0002 совпадают."
+        },
+        {
+          "id": "A2",
+          "position": "middle",
+          "question": "Какие два режима сетевого нейронного объединения предложили и какой из них считался массовым?",
+          "expected": "Streaming neural mode работает fan-out/fan-in на каждом токене; latent-once возвращает несколько токенов знания один раз. Массовым считался latent-once.",
+          "answer": "Предложены два режима: Streaming neural mode и Latent-once mode. Массовым считался Latent-once mode, где удалённые ветви обрабатывают вопрос один раз и возвращают результат, а исходный i генерирует ответ локально.",
+          "reported_evidence": ["M0006"],
+          "manual_score": 2,
+          "manual_reason": "Оба режима, массовый вариант и сообщение M0006 указаны правильно."
+        },
+        {
+          "id": "A3",
+          "position": "late",
+          "question": "Почему повтор исходного вопроса в конце текстового промпта не защищает систему от злонамеренной персональной дельты?",
+          "expected": "Дельта входит в скрытое состояние после текстовых инструкций, поэтому текстовая эвристика не ограничивает её влияние.",
+          "answer": "Повтор исходного вопроса в конце текстового промпта не защищает систему от злонамеренной персональной дельты, так как удалённый δ входит в вычисление после обработки вопроса. Это не влияет на внутренние активации, которые могут быть манипулированы.",
+          "reported_evidence": ["M0009"],
+          "manual_score": 2,
+          "manual_reason": "Главный механизм и сообщение M0009 указаны правильно."
+        }
+      ],
+      "without_conversation": "All three answers were NOT_FOUND."
+    },
+    {
+      "label": "CHAT-B",
+      "tokens": 12922,
+      "visible_messages": 15,
+      "full_context_seconds": 330.938,
+      "score": 5,
+      "score_possible": 6,
+      "questions": [
+        {
+          "id": "B1",
+          "position": "early",
+          "question": "Как называлась предложенная система из общей модели, множества суверенных i, маршрутизации и графа доказательств?",
+          "expected": "Mixture of Intelligences (MoI).",
+          "answer": "Mixture of Intelligences (MoI)",
+          "reported_evidence": ["M0001"],
+          "manual_score": 1,
+          "manual_reason": "Название правильное, но M0001 только задаёт вопрос. Само название находится в M0002."
+        },
+        {
+          "id": "B2",
+          "position": "middle",
+          "question": "Какой точный инвариант должен выполнять совершенно свежий персональный нейронный трек до того, как чему-либо научился?",
+          "expected": "Свежая персональная ветвь должна давать delta около или строго нуля и не менять общий результат.",
+          "answer": "Свежий персональный нейронный трек должен давать строго нулевой delta.",
+          "reported_evidence": ["M0011"],
+          "manual_score": 2,
+          "manual_reason": "Инвариант и сообщение M0011 указаны правильно."
+        },
+        {
+          "id": "B3",
+          "position": "late",
+          "question": "Как после исправления P0 два персональных сигнала, общий z0 и финальные слои соединялись в итоговые logits?",
+          "expected": "Две delta дают ограниченное обновление; оно прибавляется к z0; FinalLayers строят logits из z0 плюс bounded Merge.",
+          "answer": "Два персональных сигнала сначала дают ограниченное обновление в ABI-пространстве, оно прибавляется к локальному z0, и только затем финальные слои строят четыре logits.",
+          "reported_evidence": ["M0015"],
+          "manual_score": 2,
+          "manual_reason": "Порядок вычислений и сообщение M0015 указаны правильно."
+        }
+      ],
+      "without_conversation": "All three answers were NOT_FOUND."
+    }
+  ],
+  "invalid_attempt": {
+    "preserved_privately": true,
+    "included_in_score": false,
+    "reason": "After a size-preflight replacement, two CHAT-A questions accidentally referred to the previous conversation. The design error was found during manual evidence review and the test was rerun under protocol v0.2."
+  },
+  "privacy": {
+    "raw_conversation_text_public": false,
+    "session_ids_public": false,
+    "questions_and_model_answers_public": true
+  },
+  "limits": [
+    "Only two child-agent conversations and six manually selected questions were tested.",
+    "Both conversations concern the same broad Pocket i research project.",
+    "The result tests reading a whole conversation, not search across a library.",
+    "CPU latency was several minutes per full conversation."
+  ],
+  "decision": "Whole-chat reading is promising for conversations around 10k to 13k tokens. Continue to the proposed local-library architecture, but retain exact-message provenance and add retrieval for larger conversations."
+}

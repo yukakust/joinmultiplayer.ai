@@ -571,3 +571,18 @@ pieces and all twenty-four same-case alternatives, keep the 396 other fragments
 available for audit but hidden by default, and collapse dependent copies by
 lineage. Only after this ledger mechanics pass should a writer receive both
 shelves in Gate 15F.
+
+## Accepted local-library reading split
+
+Gate 16B.1 establishes a narrow first boundary for the local library. A cleaned
+conversation around 10k–13k Qwen tokens may be offered whole to the 8B preset.
+In the first two-conversation development test this recovered 6/6 selected facts
+and 5/6 exact supporting-message references; the no-context control recovered
+none. This is an optimization for short enough chats, not a replacement for
+message-level search.
+
+The source JSONL remains immutable. The searchable record is the exact visible
+message with conversation ID, message ID, role, phase, order, and source
+coordinates. Hidden reasoning, tools, logs, system/developer content, and
+automatically supplied UI catalogues are not library messages. Raw conversations
+stay local. Markdown is a derived human view, not the canonical store.

@@ -956,3 +956,31 @@ construction remain unsafe failure points. Result and manual audit:
 - `site/experiments/E007/physical-mvp-result-v0.1.json`
 - `site/experiments/E007/physical-mvp-human-audit-v0.1.json`
 - `site/experiments/E007/physical-mvp-answer-review-v0.1.json`
+
+## Gate 16B.1 — whole cleaned conversations before retrieval
+
+Before building message-level search, Gate 16B.1 asks whether Qwen3-8B can read
+two complete cleaned Codex child-agent conversations in its native context.
+The inputs contain visible user and assistant messages only. Reasoning, tool
+traffic, system/developer messages, and automatically supplied plugin catalogues
+are excluded. No RAG, chunking, summary, training, examples, or location hints
+are used. Each conversation is read once with three questions spanning its
+early, middle, and late messages; the same questions are also asked without the
+conversation as a control.
+
+The first development attempt is preserved but invalid: after a size-preflight
+replacement, two questions accidentally still referred to the prior CHAT-A.
+They are not scored. Protocol v0.2 corrected the fixture before its inference
+and reran both conversations unchanged.
+
+The valid development result passed its locked narrow gate. The conversations
+contained 10,656 and 12,922 Qwen tokens. Qwen recovered all six facts and cited
+the correct supporting message for five, for 11/12 points. Without either chat
+it returned `NOT_FOUND` for all six, for 0/12. The two full-context CPU calls
+took 692.489 seconds in total. This supports whole-chat reading around 10k–13k
+tokens; it does not validate library search, main user chats, unrelated domains,
+or conversations beyond the context window. Raw private conversations and
+session IDs are not published.
+
+- `site/experiments/E007/whole-chat-reader-protocol-v0.2.json`
+- `site/experiments/E007/whole-chat-reader-result-v0.2.json`
