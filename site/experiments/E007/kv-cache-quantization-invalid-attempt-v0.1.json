@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16B.3",
+  "status": "invalid_attempt_preserved",
+  "attempted_at": "2026-08-29T19:39:00Z",
+  "reason_invalid": "The output-format example contained the fake evidence ID M0123 and placeholder answers. Both lanes copied those placeholders instead of performing the requested evidence search, so the run cannot measure KV-cache quality.",
+  "lanes": {
+    "q8_kv": {
+      "result": "copied the example and repeated the questions",
+      "quality_score": "not_scored",
+      "generated_tokens_per_second": 8.89
+    },
+    "q4_kv": {
+      "result": "returned empty or incomplete answers with the fake example evidence ID",
+      "quality_score": "not_scored",
+      "generated_tokens_per_second": 9.85
+    }
+  },
+  "learning": "A long-context evidence test must not show the model any fake answer or fake message ID. The replacement protocol contains only a field specification and requires actual IDs from the transcript."
+}

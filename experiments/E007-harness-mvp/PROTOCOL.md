@@ -1024,3 +1024,10 @@ used only as a non-causal engineering reference for the whole optimized stack.
 Locked protocol:
 
 - `site/experiments/E007/kv-cache-quantization-protocol-v0.1.json`
+
+The first development run was invalid because its format example contained a
+fake answer and fake evidence ID that both lanes copied. It is preserved rather
+than scored. The corrected protocol removes all example values:
+
+- `site/experiments/E007/kv-cache-quantization-invalid-attempt-v0.1.json`
+- `site/experiments/E007/kv-cache-quantization-protocol-v0.2.json`

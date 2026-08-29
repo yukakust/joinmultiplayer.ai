@@ -24,7 +24,9 @@ class KvCacheQuantizationTest(unittest.TestCase):
         prompt = MODULE.build_prompt(MODULE.CASES[0], "[M0042] fact")
         self.assertIn("настоящий номер", prompt)
         self.assertNotIn('"M0001"', prompt)
-        self.assertIn('"M0123"', prompt)
+        self.assertNotIn('"M0123"', prompt)
+        self.assertNotIn('"answer":"краткий ответ"', prompt)
+        self.assertIn("ровно три поля", prompt)
 
 
 if __name__ == "__main__":

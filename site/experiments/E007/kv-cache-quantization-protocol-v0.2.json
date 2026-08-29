@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.2",
+  "experiment": "E007",
+  "gate": "16B.3",
+  "status": "locked_before_inference",
+  "hypothesis": "For Qwen3-8B with the same Q4_K_M weights, changing only the KV cache from Q8_0 to Q4_0 substantially reduces cache memory without materially reducing the model's ability to recover six facts from two 10k-to-16k-token conversations.",
+  "supersedes": {
+    "protocol": "/experiments/E007/kv-cache-quantization-protocol-v0.1.json",
+    "invalid_attempt": "/experiments/E007/kv-cache-quantization-invalid-attempt-v0.1.json",
+    "reason": "The first prompt showed a fake answer and evidence ID as an output example, which both lanes copied. The replacement gives field names but no example values."
+  },
+  "model": {
+    "name": "qwen3:8b",
+    "parameters": "8.2B",
+    "weight_quantization": "Q4_K_M",
+    "model_blob_sha256": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f",
+    "runtime": "Ollama 0.32.14 on yukabox",
+    "thinking": false,
+    "decoding": "greedy"
+  },
+  "lanes": [
+    {"id": "q8_kv", "kv_cache": "Q8_0"},
+    {"id": "q4_kv", "kv_cache": "Q4_0"}
+  ],
+  "input": {
+    "source": "The same two private cleaned Codex conversations and six questions used by Gate 16B.1",
+    "questions": 6,
+    "raw_conversations_public": false,
+    "retrieval": false,
+    "chunking": false,
+    "summaries": false
+  },
+  "prompt_fix": {
+    "fake_answers": false,
+    "fake_message_ids": false,
+    "output_contract": "A JSON array whose objects have id, answer, and evidence fields; values must be derived from the transcript."
+  },
+  "evaluation": {
+    "quality": "Each answer receives 1 point for the correct fact and 1 point for a correct supporting message ID; maximum 12 points per lane.",
+    "speed": "Record prompt tokens per second and generated tokens per second from Ollama's own counters.",
+    "cache_memory": "Record the KV buffer size reported by the runtime for the same configured context.",
+    "q4_quality_success": "Q4 KV loses no more than 1 point out of 12 versus Q8 KV and produces no degenerate or unreadable answer.",
+    "speed_decision": "Report measured speed; do not require Q4 KV to be faster because its primary purpose is smaller memory."
+  },
+  "comparison_boundary": "Q8 KV versus Q4 KV isolates cache precision because model weights, prompts, questions, context length, runtime version, device, and decoding are held fixed. Comparison with the older BF16 Transformers run is an engineering speed comparison, not a cache-only causal comparison."
+}
