@@ -1,0 +1,71 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "16B.1",
+  "device": "yukabox",
+  "status": "local_inventory_snapshot",
+  "definition": "One conversation is one unique Codex session ID. Main conversations have no parent thread. Child-agent conversations have a parent thread. Only user input_text and assistant output_text messages are counted.",
+  "tokenizer": "local Qwen3 tokenizer",
+  "session_files": 115,
+  "unique_conversations": 103,
+  "main_conversations": 64,
+  "child_agent_conversations": 39,
+  "duplicate_message_records_removed": 939,
+  "message_id_conflicts": 0,
+  "invalid_json_lines": 0,
+  "main_conversation_tokens": {
+    "count": 64,
+    "min": 117,
+    "median": 1927,
+    "mean": 9224,
+    "p90": 5250,
+    "max": 238528,
+    "total": 590328
+  },
+  "child_conversation_tokens": {
+    "count": 39,
+    "min": 2379,
+    "median": 3450,
+    "mean": 19743,
+    "p90": 14355,
+    "max": 419794,
+    "total": 769986
+  },
+  "main_conversation_messages": {
+    "count": 64,
+    "min": 2,
+    "median": 6,
+    "mean": 54,
+    "p90": 14,
+    "max": 1893,
+    "total": 3457
+  },
+  "visible_totals_after_dedup": {
+    "messages": 5678,
+    "tokens": 1360314,
+    "user_messages": 1117,
+    "user_tokens": 432587,
+    "assistant_messages": 4561,
+    "assistant_tokens": 927727,
+    "assistant_commentary_messages": 3567,
+    "assistant_commentary_tokens": 340204,
+    "assistant_final_answer_messages": 975,
+    "assistant_final_answer_tokens": 581735,
+    "assistant_none_messages": 19,
+    "assistant_none_tokens": 5788
+  },
+  "main_token_buckets": {
+    "<1k": 19,
+    "1k-10k": 41,
+    "10k-50k": 1,
+    "50k-100k": 1,
+    "100k-500k": 2
+  },
+  "largest_main_conversation_token_counts": [238528, 123524, 77281, 19881, 7179, 5514, 5250, 5143, 5028, 4936, 4027, 3631, 3623, 3609, 3579, 3548, 3423, 3391, 3385, 3277],
+  "privacy": {
+    "conversation_text_published": false,
+    "conversation_titles_published": false,
+    "source_files_modified": 0
+  },
+  "honest_boundary": "This is one changing-device snapshot. Visible messages can still contain user-pasted secrets. No secret scan, topic grouping, search, or segmentation ran."
+}

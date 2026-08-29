@@ -187,3 +187,10 @@ root also contained authentication, caches, logs, plugins, attachments, queues,
 and temporary state. Each source adapter must therefore use a strict allowlist;
 everything else is denied by default. Discovery never grants permission to
 parse, index, or share a file.
+
+Gate 16B.1 then counted only visible user and assistant messages. It found 115
+session files but only 103 unique session IDs: 64 main conversations and 39
+child-agent conversations. Deduplication removed 939 repeated message records
+with zero ID/content conflicts. Main conversations contain a median 1,927
+Qwen3 tokens; two exceed 100k. The exact private text and chat titles remain
+unpublished. No topic grouping, secret scan, or search ran.

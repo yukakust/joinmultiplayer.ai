@@ -578,6 +578,16 @@ source adapters use a strict allowlist of useful conversation locations and
 deny all other files by default. Discovery alone never grants parse, index, or
 share permission.
 
+Gate 16B.1 inventories visible Codex messages with the local Qwen3 tokenizer.
+The reproducible counter is
+`experiments/E007-harness-mvp/src/inventory_codex_visible.py`; the privacy-safe
+yukabox snapshot is `/experiments/E007/codex-visible-inventory-yukabox-v0.1.json`.
+It groups files by session ID, marks sessions with a parent as child-agent
+conversations, and deduplicates messages by message ID. The snapshot found 103
+unique conversations: 64 main and 39 child-agent. It removed 939 duplicate
+message records with zero ID/content conflicts. Main-chat median was 1,927
+Qwen3 tokens; two main chats exceeded 100k. No titles or text are public.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:
