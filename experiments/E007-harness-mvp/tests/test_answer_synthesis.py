@@ -71,6 +71,16 @@ class AnswerSynthesisProtocolTests(unittest.TestCase):
         self.assertEqual(paired["model"]["repository"], "Qwen/Qwen3-1.7B")
         self.assertEqual(paired["paired_baseline"]["protocol_sha256"], hashlib.sha256(PROTOCOL_PATH.read_bytes()).hexdigest())
 
+    def test_qwen17b_result_and_audit_preserve_paired_pass(self):
+        result_path = ROOT / "site/experiments/E007/answer-synthesis-qwen17b-result-v0.1.json"
+        audit_path = ROOT / "site/experiments/E007/answer-synthesis-qwen17b-human-audit-v0.1.json"
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        self.assertEqual(hashlib.sha256(result_path.read_bytes()).hexdigest(), audit["result_sha256"])
+        self.assertEqual(audit["summary"]["passed_cases"], 10)
+        self.assertEqual(audit["summary"]["new_factual_claims"], 0)
+        self.assertTrue(audit["summary"]["passed_locked_gate"])
+        self.assertTrue(audit["summary"]["beat_qwen06b_baseline"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -6187,6 +6187,23 @@ blockquote {
   padding: 22px;
 }
 
+.e007-synthesis-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.e007-synthesis-comparison .e007-synthesis-answer + .e007-synthesis-answer {
+  border-left: 1px solid var(--line);
+}
+
+.e007-synthesis-answer.is-correct {
+  box-shadow: inset 0 6px 0 #7cad72;
+}
+
+.e007-synthesis-answer.is-critical {
+  box-shadow: inset 0 6px 0 var(--ember);
+}
+
 .e007-synthesis-answer small {
   color: var(--muted);
   display: block;
@@ -6206,6 +6223,8 @@ blockquote {
 @media (max-width: 700px) {
   .e007-synthesis-case summary { grid-template-columns: 52px 1fr; }
   .e007-synthesis-case summary strong { grid-column: 2; }
+  .e007-synthesis-comparison { grid-template-columns: 1fr; }
+  .e007-synthesis-comparison .e007-synthesis-answer + .e007-synthesis-answer { border-left: 0; }
 }
 
 .e007-audit-card,

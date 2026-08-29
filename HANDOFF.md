@@ -431,6 +431,16 @@ reports 2,031,739,904 parameters). Protocol:
 `/experiments/E007/answer-synthesis-qwen17b-protocol-v0.1.json`. Do not alter the
 opened cases or rubric before preserving the first result.
 
+Gate 14A.2 subsequently passed 10/10 on the same manual rubric, versus 8/10 for
+0.6B. Qwen3-1.7B fixed both opened failures: it preserved explicit alternative
+version framing in S02 and retained the second pile in S08. It added zero new
+factual claims, returned 2/2 exact canned empty responses, and had no
+truncations. This is evidence for model-size presets on final synthesis only;
+the full E007 pipeline has not yet been replayed with 1.7B. Result:
+`/experiments/E007/answer-synthesis-qwen17b-result-v0.1.json`; audit:
+`/experiments/E007/answer-synthesis-qwen17b-human-audit-v0.1.json`; comparison
+UI: `/experiment/e007/gate-14a/`.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "14A.2",
+  "kind": "manual_audit_against_locked_paired_rubric",
+  "result_sha256": "4b5896f191f66a01fa87e0c932a044df92af1550130200f9033d9b38d1416177",
+  "summary": {
+    "passed_cases": 10,
+    "total_cases": 10,
+    "new_factual_claims": 0,
+    "omitted_required_meanings": 0,
+    "strengthened_or_decontextualized_meanings": 0,
+    "exact_empty_answers": "2/2",
+    "token_limit_hits": 0,
+    "passed_locked_gate": true,
+    "beat_qwen06b_baseline": true
+  },
+  "records": [
+    {"id": "S01", "verdict": "pass", "reason": "Both supplied claims were preserved and nothing factual was added."},
+    {"id": "S02", "verdict": "pass", "reason": "Both claims and their explicit framing as two separate supported versions were preserved."},
+    {"id": "S03", "verdict": "pass", "reason": "The uncertainty word may and the required inspection order were preserved."},
+    {"id": "S04", "verdict": "pass", "reason": "The negation and the closed-vent restriction were preserved."},
+    {"id": "S05", "verdict": "pass", "reason": "The 20 percent value, border condition, and lack of measured benefit for large objects were preserved."},
+    {"id": "S06", "verdict": "pass", "reason": "The word only and the phase-drift condition were preserved."},
+    {"id": "S07", "verdict": "pass", "reason": "All three piles survived, including the allowed remote action and forbidden local restart."},
+    {"id": "S08", "verdict": "pass", "reason": "Both reports survived, including the second pile that Qwen3-0.6B had dropped."},
+    {"id": "S09", "verdict": "pass", "reason": "The empty input bypassed Qwen and returned the exact fixed response."},
+    {"id": "S10", "verdict": "pass", "reason": "The empty input bypassed Qwen and returned the exact fixed response."}
+  ],
+  "decision": "Qwen3-1.7B passed this paired frozen synthetic development set 10/10 and beat Qwen3-0.6B at 8/10 without inventing more facts. This supports making model size a preset, but does not validate the entire harness pipeline."
+}

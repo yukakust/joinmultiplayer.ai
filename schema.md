@@ -426,3 +426,12 @@ manual rubric. The only intended change is Qwen3-0.6B → Qwen3-1.7B at pinned
 revision `70d244cc...1ad5e`. It passes at 10/10 and beats the 0.6B baseline only
 if it scores above 8/10 without more invented facts. Protocol:
 `/experiments/E007/answer-synthesis-qwen17b-protocol-v0.1.json`.
+
+The paired run passed 10/10 by the same manual rubric, versus 8/10 for 0.6B.
+Qwen3-1.7B restored the explicit two-version framing in S02 and retained the
+second pile in S08. It added no new factual claim, returned 2/2 exact canned
+empty responses, and hit no token limit. This supports offering model-size
+presets, but it validates only this synthetic final-synthesis set—not the full
+harness. Result:
+`/experiments/E007/answer-synthesis-qwen17b-result-v0.1.json`; audit:
+`/experiments/E007/answer-synthesis-qwen17b-human-audit-v0.1.json`.

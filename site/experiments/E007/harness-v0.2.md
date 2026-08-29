@@ -145,3 +145,12 @@ decoding, empty-input response, and manual rubric remain frozen; only model size
 changes. The paired test asks whether a larger allowed model can beat the 0.6B
 score of 8/10 without inventing more facts. Protocol:
 `/experiments/E007/answer-synthesis-qwen17b-protocol-v0.1.json`.
+
+Qwen3-1.7B passed all 10/10 cases under the same manual rubric. It restored the
+two-version framing in S02, kept the second pile in S08, and added no factual
+claim. There were no truncations and both empty responses were exact. This
+supports a larger model preset for final synthesis. It does not yet show that
+1.7B improves routing, local retrieval, NLI acceptance, history, or pile
+formation; those modules must be replayed separately. Result:
+`/experiments/E007/answer-synthesis-qwen17b-result-v0.1.json`; audit:
+`/experiments/E007/answer-synthesis-qwen17b-human-audit-v0.1.json`.
