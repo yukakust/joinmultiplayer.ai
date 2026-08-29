@@ -2949,6 +2949,25 @@ function e007PhysicalMvpShell() {
   return `<section class="flow-shell e007-physical-mvp-page"><div class="flow-step">E007 · GATE 16A · ${localized({ en: "LOCKED BEFORE ANY NODE SEARCH", ru: "ЗАМОРОЖЕНО ДО ПОИСКА НА УЗЛАХ" })}</div><h1>${localized({ en: "Can two real machines build the correct shelf together?", ru: "Соберут ли две настоящие машины правильную полку вместе?" })}</h1><p class="contribution-intro">${localized({ en: "Every answer is split: one useful piece lives on the MacBook, and another lives on yukabox. No pocket i owns the complete answer.", ru: "Каждый ответ разделён: одна нужная часть лежит на MacBook, другая — на yukabox. Ни у одного pocket i нет целого ответа." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e007LocalLibraryShell() {
+  return `<section class="flow-shell e007-physical-mvp-page e007-local-library-page"><div class="flow-step">E007 · GATE 16B.0 · ${localized({ en: "DISCOVERY ONLY", ru: "ТОЛЬКО ОБНАРУЖЕНИЕ" })}</div><h1>${localized({ en: "What already lives on this computer?", ru: "Что уже лежит на этом компьютере?" })}</h1><p class="contribution-intro">${localized({ en: "First we find the three app libraries. We do not read chats into the network, build search, or cut text into pieces.", ru: "Сначала найдём три библиотеки приложений. Не передаём чаты в сеть, не строим поиск и не режем текст на части." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+async function loadE007LocalLibrary() {
+  const target = document.querySelector(".e007-local-library-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E007/local-library-discovery-protocol-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Gate 16B.0 protocol missing");
+    const protocol = await response.json();
+    const sourceCards = protocol.scope.map((source, index) => `<article><span>${index + 1}</span><h2>${escapeHTML(source)}</h2><p>${localized({ en: "Path · formats · number of candidate files", ru: "Путь · форматы · количество файлов-кандидатов" })}</p></article>`).join("");
+    const command = `mkdir -p "$HOME/.local/bin"\ncurl -fsS https://joinmultiplayer.ai/experiments/E007/local-library-probe-v0.1.py -o "$HOME/.local/bin/pocket-i-library-probe"\nchmod 700 "$HOME/.local/bin/pocket-i-library-probe"\npython3 "$HOME/.local/bin/pocket-i-library-probe"`;
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-physical-plan"><div class="e005-gate4-result-verdict"><span>${localized({ en: "PREPARED · NOT RUN ON THE OWNER'S MACBOOK", ru: "ПОДГОТОВЛЕНО · НА MACBOOK ВЛАДЕЛЬЦА ЕЩЁ НЕ ЗАПУЩЕНО" })}</span><h2>${localized(protocol.title)}</h2><p>${localized({ en: "This step sees metadata only. Conversation text stays untouched and invisible.", ru: "Этот шаг видит только метаданные. Текст разговоров остаётся нетронутым и невидимым." })}</p></div><div class="e007-physical-devices e007-library-sources">${sourceCards}</div><div class="control-warning"><strong>${localized({ en: "Not decided yet", ru: "Пока не решено" })}</strong><p>${localized({ en: "How to parse, split, and index chats. We will choose that only after seeing the real files.", ru: "Как читать, делить и индексировать разговоры. Решим это только после того, как увидим реальные файлы." })}</p></div><h2>${localized({ en: "Run the read-only probe on the MacBook", ru: "Запустить безопасный детектор на MacBook" })}</h2><pre class="experiment-command"><code>${escapeHTML(command)}</code></pre><div class="actions"><a class="primary-link" href="/experiments/E007/local-library-probe-v0.1.py">${localized({ en: "VIEW THE PROBE", ru: "ПОСМОТРЕТЬ КОД ДЕТЕКТОРА" })} ↗</a><a class="quiet-link" href="/experiments/E007/local-library-discovery-protocol-v0.1.json">${localized({ en: "FROZEN RULES", ru: "ЗАФИКСИРОВАННЫЕ ПРАВИЛА" })} ↗</a><a class="quiet-link" href="/experiment/e007/gate-16a/">GATE 16A ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 16B.0 could not be loaded.", ru: "Не удалось загрузить Gate 16B.0." });
+  }
+}
+
 async function loadE007PhysicalMvp() {
   const target = document.querySelector(".e007-physical-mvp-page");
   if (!target) return;
@@ -6311,6 +6330,10 @@ function render() {
     document.title = `${localized({ en: "Physical MVP test", ru: "Физический MVP-тест" })} — i`;
     app.innerHTML = withLanguage(e007PhysicalMvpShell());
     loadE007PhysicalMvp();
+  } else if (path === "experiment/e007/gate-16b") {
+    document.title = `${localized({ en: "Local library discovery", ru: "Поиск локальной библиотеки" })} — i`;
+    app.innerHTML = withLanguage(e007LocalLibraryShell());
+    loadE007LocalLibrary();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

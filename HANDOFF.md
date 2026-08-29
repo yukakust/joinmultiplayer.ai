@@ -554,6 +554,17 @@ it as the future Pocket i relay, and do not claim cryptographic identity or
 hostile-peer resistance. The temporary receiver and payload files were removed
 from the production host after the receipt was captured.
 
+Gate 16B.0 begins the real local-library work without choosing a chunking
+strategy. The public read-only probe is
+`/experiments/E007/local-library-probe-v0.1.py`; the frozen discovery contract
+is `/experiments/E007/local-library-discovery-protocol-v0.1.json`. It searches
+only app-owned locations for Codex, Claude Code, and ChatGPT desktop and emits
+metadata only. It does not parse conversation text, create an index, contact
+the network, or modify source files. The checkpoint is prepared but has not
+run on the owner's MacBook; do not claim that all three histories are present
+or parseable until the owner reviews that inventory. Segmentation is explicitly
+unresolved.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

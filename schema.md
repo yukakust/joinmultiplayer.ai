@@ -69,10 +69,26 @@ signal, not a probability, proof, or measure of truth.
 For small experiments, a cheap beacon may be sent to every pocket i. This gives
 us ground truth about which cards the router would otherwise miss.
 
-## 3. Local search
+## 3. Local library discovery — current MVP checkpoint
 
-A pocket i never searches the whole device by default. Its owner explicitly
-chooses which collections may be indexed and which may be shared automatically.
+For the first MVP, pocket i does not ask the owner to export or manually import
+files. A read-only local detector looks only for the app-owned storage of:
+
+- Codex;
+- Claude Code;
+- ChatGPT desktop.
+
+The first checkpoint reports only roots, formats, candidate file counts, total
+bytes, and permission errors. It does not print conversation text, build an
+index, contact the network, or decide how to split conversations. ChatGPT's
+cloud-backed history may be only partly cached locally, so the detector must
+report what is actually present rather than promise a complete history.
+
+## 4. Local search
+
+A pocket i never searches the whole device. In the MVP it may inspect only the
+three app-owned collections above. More source adapters may be added later as
+separate modules.
 
 The exact question enters the device. Search happens locally. The full memory
 does not leave the device.
@@ -80,7 +96,7 @@ does not leave the device.
 A found fragment is only a **candidate**. One pocket i cannot know whether its
 piece will improve the final answer because it cannot see the whole puzzle.
 
-## 4. Every contact gets a visible outcome
+## 5. Every contact gets a visible outcome
 
 Silence is not the same as finding nothing. An online pocket i returns one of
 the first four states. If it does not answer before the deadline, the relay—not
@@ -97,7 +113,7 @@ the device—creates the fifth state:
 This lets the harness count how many pocket i were contacted, answered, found
 something, were blocked, failed, or stayed offline.
 
-## 5. Knowledge capsule
+## 6. Knowledge capsule
 
 A `found` response sends a small human-readable capsule immediately, but only
 from memory that is allowed to leave the device.
@@ -131,7 +147,7 @@ A capsule contains:
 If there is no evidence, the claim may still be sent, but it must be labelled as
 a `hypothesis` or `opinion`, never as a verified fact.
 
-## 6. Evidence before popularity
+## 7. Evidence before popularity
 
 Similar claims may collapse into one readable group. Their evidence must not be
 discarded.
@@ -158,7 +174,7 @@ Supported alternative: ...
 The harness must preserve a supported minority view even when most messages say
 something else.
 
-## 7. Two different measures of value
+## 8. Two different measures of value
 
 `candidate_match` means a pocket i believed its fragment was worth offering.
 

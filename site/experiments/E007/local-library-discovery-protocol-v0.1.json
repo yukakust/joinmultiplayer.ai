@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "16B.0",
+  "revision": "e007-local-library-discovery-v0.1",
+  "status": "prepared_not_run_on_owner_macbook",
+  "title": {
+    "en": "Can pocket i find its three local libraries without reading them into the network?",
+    "ru": "Сможет ли pocket i найти три локальные библиотеки, не передавая их в сеть?"
+  },
+  "scope": [
+    "Codex local task storage",
+    "Claude Code local conversation storage",
+    "ChatGPT desktop local app storage"
+  ],
+  "probe": "/experiments/E007/local-library-probe-v0.1.py",
+  "allowed_output": [
+    "source status",
+    "local app root paths",
+    "candidate file counts",
+    "file formats",
+    "total candidate bytes",
+    "permission error counts"
+  ],
+  "forbidden_actions": [
+    "network requests",
+    "printing conversation text",
+    "modifying source files",
+    "creating a search index",
+    "choosing a segmentation strategy",
+    "scanning unrelated home folders"
+  ],
+  "human_checkpoint": "The owner must inspect the MacBook inventory before any parser or index is built.",
+  "success_gate": {
+    "codex_storage_found": true,
+    "claude_code_storage_found_if_installed": true,
+    "chatgpt_storage_reported_honestly": true,
+    "conversation_text_emitted": false,
+    "network_calls": 0,
+    "source_files_modified": 0
+  },
+  "honest_boundary": "Finding candidate files does not prove that every conversation is present or that the file format can already be parsed. ChatGPT cloud-backed history may be only partially cached locally."
+}

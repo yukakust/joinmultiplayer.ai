@@ -170,3 +170,13 @@ evidence, not an end-to-end or phone result. Decision:
 4. One integrated run across all accepted modules rather than separate scripts.
 5. An authenticated MacBook + yukabox + phone room with complete receipts.
 6. A locked end-to-end test and one simple public inspection UI.
+
+## Gate 16B.0 — local library discovery
+
+The first real-memory step deliberately stops before parsing or segmentation.
+A read-only probe looks only in the app-owned storage of Codex, Claude Code,
+and ChatGPT desktop. It may report paths, formats, counts, sizes, and permission
+errors. It may not print conversation text, create an index, contact a server,
+or modify a source file. The owner must review the MacBook inventory before the
+next step. Finding a ChatGPT app database does not prove that every cloud chat
+is cached locally.
