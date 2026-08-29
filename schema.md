@@ -478,3 +478,15 @@ after Qwen rewrites were checked against their exact sources. Do not retest the
 whole chain yet: isolate relevance first, then claim extraction on clean required
 sources. Piling and final synthesis cannot be judged fairly until those inputs
 are repaired.
+
+## Rejected Gate 15B relevance replacement
+
+Qwen3-1.7B was tested once on the same 480 frozen question-fragment pairs as a
+two-word relevance gate. It cut extra passes from 345 to 47, but lost seven of
+sixty required fragments and missed both locked thresholds. Manual review also
+showed that `required` and ordinary-language `relevant` are not identical:
+eighteen mechanically extra fragments described copied reports from the exact
+same disputed case. Keep the locked failure and raw 480 decisions. Do not place
+this direct binary gate in the accepted harness. The next relevance contract
+must name the answer slot being filled and score truly unrelated, redundant,
+and condition-mismatch records separately.

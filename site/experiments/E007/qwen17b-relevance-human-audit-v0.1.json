@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "15B",
+  "status": "locked_development_gate_failed",
+  "audited_at": "2026-08-29",
+  "summary": {
+    "pairs": 480,
+    "mechanical_errors": 54,
+    "required_fragments_lost": 7,
+    "extra_fragments_passed": 47,
+    "clear_unrelated_passes": 29,
+    "same_case_copied_reports_passed": 18,
+    "unparseable": 0
+  },
+  "locked_score": {
+    "required_kept": 53,
+    "required_total": 60,
+    "required_gate": 57,
+    "unrelated_kept": 47,
+    "unrelated_total": 420,
+    "unrelated_gate": 42,
+    "passed": false
+  },
+  "comparison": {
+    "qwen3_reranker_4b_recall_first": {
+      "required_kept": 60,
+      "unrelated_kept": 345
+    },
+    "qwen3_1_7b_binary_gate": {
+      "required_kept": 53,
+      "unrelated_kept": 47
+    }
+  },
+  "manual_findings": [
+    "All seven lost required fragments were conditional safety rules for the correct device. Each becomes useful when combined with the separate cause fragment. The model treated 'directly helps' too narrowly and dropped them.",
+    "Twenty-nine extra passes were clearly unrelated: look-alike symptoms, generic background notes, or records about another device.",
+    "Eighteen extra passes were copied reports about the same device and symptom named in the question. They are redundant and not required for the answer, but they do describe the disputed view. The frozen required-versus-extra label is therefore narrower than ordinary-language relevance.",
+    "The locked score remains unchanged. The copied-report ambiguity was discovered only after the run and is recorded rather than used to repair the result."
+  ],
+  "lost_required_ids": [
+    "E7-Q01::E7-J01-SAFE",
+    "E7-Q02::E7-J02-SAFE",
+    "E7-Q03::E7-J03-SAFE",
+    "E7-Q05::E7-J05-SAFE",
+    "E7-Q06::E7-J06-SAFE",
+    "E7-Q16::E7-M04-SAFE",
+    "E7-Q18::E7-M06-SAFE"
+  ],
+  "clear_unrelated_pass_ids": [
+    "E7-Q04::E7-J04-NOISE",
+    "E7-Q07::E7-X01-LOOKALIKE",
+    "E7-Q08::E7-X02-LOOKALIKE",
+    "E7-Q08::E7-F-P010-03",
+    "E7-Q08::E7-F-P018-05",
+    "E7-Q08::E7-F-P050-03",
+    "E7-Q08::E7-F-P058-05",
+    "E7-Q08::E7-X01-SAFE",
+    "E7-Q09::E7-X03-LOOKALIKE",
+    "E7-Q10::E7-X04-LOOKALIKE",
+    "E7-Q11::E7-X05-LOOKALIKE",
+    "E7-Q11::E7-F-P002-04",
+    "E7-Q11::E7-F-P010-01",
+    "E7-Q11::E7-F-P018-03",
+    "E7-Q11::E7-F-P023-03",
+    "E7-Q11::E7-F-P026-02",
+    "E7-Q11::E7-F-P042-04",
+    "E7-Q11::E7-F-P050-01",
+    "E7-Q11::E7-F-P058-03",
+    "E7-Q11::E7-F-P063-03",
+    "E7-Q12::E7-X06-LOOKALIKE",
+    "E7-Q12::E7-F-P002-05",
+    "E7-Q12::E7-F-P026-01",
+    "E7-Q12::E7-F-P034-03",
+    "E7-Q12::E7-X01-SAFE",
+    "E7-Q13::E7-M04-INDEPENDENT",
+    "E7-Q18::E7-M02-INDEPENDENT",
+    "E7-Q23::E7-M04-SAFE",
+    "E7-Q30::E7-M04-COPY-3"
+  ],
+  "ambiguous_redundant_pass_ids": [
+    "E7-Q13::E7-M01-COPY-1",
+    "E7-Q13::E7-M01-COPY-2",
+    "E7-Q13::E7-M01-COPY-3",
+    "E7-Q14::E7-M02-COPY-1",
+    "E7-Q14::E7-M02-COPY-2",
+    "E7-Q14::E7-M02-COPY-3",
+    "E7-Q15::E7-M03-COPY-1",
+    "E7-Q15::E7-M03-COPY-2",
+    "E7-Q15::E7-M03-COPY-3",
+    "E7-Q16::E7-M04-COPY-1",
+    "E7-Q16::E7-M04-COPY-2",
+    "E7-Q16::E7-M04-COPY-3",
+    "E7-Q17::E7-M05-COPY-1",
+    "E7-Q17::E7-M05-COPY-2",
+    "E7-Q17::E7-M05-COPY-3",
+    "E7-Q18::E7-M06-COPY-1",
+    "E7-Q18::E7-M06-COPY-2",
+    "E7-Q18::E7-M06-COPY-3"
+  ],
+  "decision": "Do not accept Qwen3-1.7B as the relevance gate yet. It reduced the flood dramatically, but a one-fragment binary question loses compositional safety evidence and the frozen gold mixes necessity with broader relevance.",
+  "next_test": "Give the gate the user question plus a tiny description of the missing slot, such as CAUSE or SAFE ACTION, and test required fragments against truly unrelated, same-case redundant, and condition-mismatch fragments as separate classes."
+}

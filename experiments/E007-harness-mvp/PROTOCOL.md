@@ -744,3 +744,28 @@ break: only 34 of 60 required source claims survived because the claim writer
 expanded exact evidence and the source NLI checker rejected the expansion.
 Only 9 of 30 questions therefore reached piling with both required sources.
 Steps 7 and 8 received damaged input and are not isolated by this run.
+
+## Gate 15B — Qwen3-1.7B as a direct relevance gate
+
+Before inference, freeze the same 480 question-fragment pairs opened by Gate
+15A. Ask the pinned `Qwen/Qwen3-1.7B` once per pair to return exactly `USEFUL`
+or `NOT_USEFUL`. Do not add examples, train, tune a threshold, or run any later
+harness stage. Pass only if at least 57/60 required fragments survive, no more
+than 42/420 extra fragments survive, and every output is parseable.
+
+The locked run failed. Qwen3-1.7B retained 53/60 required fragments and passed
+47/420 extras. It reduced the earlier recall-first reranker's flood from 345 to
+47 extras, but lost seven conditional safety rules that become useful only
+when combined with a separate cause fragment. All 480 outputs were parseable.
+
+Manual review found a second problem in the test contract. Twenty-nine extra
+passes were clearly unrelated. The other eighteen were copied reports about
+the exact same case: redundant and not required, but reasonably related to the
+question's disputed view. The frozen score is not changed after seeing this.
+The result therefore rejects this binary gate while showing that the next test
+must distinguish a missing answer slot, truly unrelated evidence, same-case
+redundancy, and condition mismatch. Protocol, raw decisions, and audit:
+
+- `site/experiments/E007/qwen17b-relevance-protocol-v0.1.json`
+- `site/experiments/E007/qwen17b-relevance-result-v0.1.json`
+- `site/experiments/E007/qwen17b-relevance-human-audit-v0.1.json`
