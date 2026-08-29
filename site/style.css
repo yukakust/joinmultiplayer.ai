@@ -2001,6 +2001,23 @@ button:disabled {
   .e007-ledger-case > header, .e007-ledger-shelves { grid-template-columns: 1fr; }
 }
 
+.e007-writer-cases { display: grid; gap: 1.5rem; }
+.e007-writer-case { border-top: 3px solid var(--ink); padding: 1.5rem 0; }
+.e007-writer-case > header { display: flex; justify-content: space-between; }
+.e007-writer-case > header span { color: #5d9f58; font-weight: 700; }
+.e007-writer-case h2 { font-size: clamp(1.15rem, 2vw, 1.8rem); }
+.e007-writer-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 1rem; align-items: stretch; }
+.e007-writer-flow > section { border: 1px solid var(--line); padding: clamp(1rem, 2vw, 1.5rem); }
+.e007-writer-flow > section:last-child { border-top: 6px solid #5d9f58; }
+.e007-writer-flow small { color: var(--muted); font-weight: 700; }
+.e007-writer-flow article + article { border-top: 1px solid var(--line); margin-top: 1rem; padding-top: 1rem; }
+.e007-writer-arrow { align-self: center; font-size: 2rem; }
+
+@media (max-width: 800px) {
+  .e007-writer-flow { grid-template-columns: 1fr; }
+  .e007-writer-arrow { transform: rotate(90deg); justify-self: center; }
+}
+
 .e005-raw-records {
   margin: 3rem 0;
 }

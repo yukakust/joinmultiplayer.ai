@@ -904,3 +904,14 @@ answers, zero token-limit hits, 30/30 causes or uncertainties, 30/30 actions or
 next measurements, zero unsupported additions, and zero alternative leaks.
 Manual meaning review is required. Protocol:
 `site/experiments/E007/used-shelf-writer-protocol-v0.1.json`.
+
+Gate 15F passed its locked synthetic development gate. Qwen3-8B produced 30/30
+parseable answers with no token-limit hits. Manual review found the supported
+cause or explicit uncertainty in 30/30, the safe action or next measurement in
+30/30, both supplied source IDs cited in 30/30, and zero unsupported additions,
+alternative-shelf leaks, secret leaks, or truncations. This closes only the
+writer-from-correct-shelf joint. The next experiment must use unseen data and
+physical devices to test the full chain. Result and audit:
+
+- `site/experiments/E007/used-shelf-writer-result-v0.1.json`
+- `site/experiments/E007/used-shelf-writer-human-audit-v0.1.json`

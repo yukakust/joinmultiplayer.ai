@@ -1,0 +1,938 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "15F",
+  "status": "passed_locked_synthetic_development_gate",
+  "git_revision": "b1a82f853928077b2a19232c08d582ec49f4ea23",
+  "protocol": "/experiments/E007/used-shelf-writer-protocol-v0.1.json",
+  "protocol_sha256": "57ed8dd4318b6ab27d74bb9d8e3105229b0ee5d7be50d50f4f20a0a8bb4af77a",
+  "source_sha256": "fed924f907f94dc2730f5edfbf7c6076e8212ee5cd73d45ee06ce28b8d7cf1ae",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218"
+  },
+  "summary": {
+    "questions": 30,
+    "used_fragments": 60,
+    "parseable_answers": 30,
+    "answers_hitting_token_limit": 0,
+    "manual_review": "complete",
+    "manual_cause_or_uncertainty_correct": 30,
+    "manual_action_or_next_correct": 30,
+    "manual_unsupported_additions": 0,
+    "manual_alternative_leaks": 0,
+    "passed_locked_gate": true
+  },
+  "records": [
+    {
+      "id": "E7-Q01",
+      "question": "Kest-11 now shows three amber steps after cooling. What happened, and what should the operator do?",
+      "used": [
+        {
+          "source_id": "E7-J01-DIAG",
+          "lineage_id": "LIN-J01-FIELD",
+          "fragment": "Kest-11 field guide: three amber steps after cooling identifies alignment drift.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-J01-SAFE",
+          "lineage_id": "LIN-J01-SAFETY",
+          "fragment": "Kest-11 safety rule: when alignment drift is confirmed, keep it offline and run Niv-4 calibration.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nKest-11 now shows three amber steps after cooling. What happened, and what should the operator do?\n\nUSED SHELF\n[E7-J01-DIAG] Kest-11 field guide: three amber steps after cooling identifies alignment drift.\n[E7-J01-SAFE] Kest-11 safety rule: when alignment drift is confirmed, keep it offline and run Niv-4 calibration.",
+      "raw_output": "{\"answer\":\"The three amber steps after cooling indicate alignment drift. The operator should keep Kest-11 offline and run Niv-4 calibration.\",\"evidence_ids\":[\"E7-J01-DIAG\",\"E7-J01-SAFE\"]}",
+      "parsed": {
+        "answer": "The three amber steps after cooling indicate alignment drift. The operator should keep Kest-11 offline and run Niv-4 calibration.",
+        "evidence_ids": [
+          "E7-J01-DIAG",
+          "E7-J01-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 53,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q02",
+      "question": "Orin-12 now shows a violet ring followed by falling pressure. What happened, and what should the operator do?",
+      "used": [
+        {
+          "source_id": "E7-J02-DIAG",
+          "lineage_id": "LIN-J02-FIELD",
+          "fragment": "Orin-12 field guide: a violet ring followed by falling pressure identifies an outer seal breach.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-J02-SAFE",
+          "lineage_id": "LIN-J02-SAFETY",
+          "fragment": "Orin-12 safety rule: when an outer seal breach is confirmed, isolate the north line before inspection.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nOrin-12 now shows a violet ring followed by falling pressure. What happened, and what should the operator do?\n\nUSED SHELF\n[E7-J02-DIAG] Orin-12 field guide: a violet ring followed by falling pressure identifies an outer seal breach.\n[E7-J02-SAFE] Orin-12 safety rule: when an outer seal breach is confirmed, isolate the north line before inspection.",
+      "raw_output": "{\"answer\":\"A violet ring followed by falling pressure indicates an outer seal breach. The operator should isolate the north line before inspection.\",\"evidence_ids\":[\"E7-J02-DIAG\",\"E7-J02-SAFE\"]}",
+      "parsed": {
+        "answer": "A violet ring followed by falling pressure indicates an outer seal breach. The operator should isolate the north line before inspection.",
+        "evidence_ids": [
+          "E7-J02-DIAG",
+          "E7-J02-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 53,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q03",
+      "question": "Vela-13 now shows a copper mesh while the intake remains active. What happened, and what should the operator do?",
+      "used": [
+        {
+          "source_id": "E7-J03-DIAG",
+          "lineage_id": "LIN-J03-FIELD",
+          "fragment": "Vela-13 field guide: a copper mesh while the intake remains active identifies filter F12 saturation.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-J03-SAFE",
+          "lineage_id": "LIN-J03-SAFETY",
+          "fragment": "Vela-13 safety rule: when filter F12 saturation is confirmed, stop the intake and replace F12.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nVela-13 now shows a copper mesh while the intake remains active. What happened, and what should the operator do?\n\nUSED SHELF\n[E7-J03-DIAG] Vela-13 field guide: a copper mesh while the intake remains active identifies filter F12 saturation.\n[E7-J03-SAFE] Vela-13 safety rule: when filter F12 saturation is confirmed, stop the intake and replace F12.",
+      "raw_output": "{\"answer\":\"The copper mesh while the intake remains active indicates filter F12 saturation. The operator should stop the intake and replace F12.\",\"evidence_ids\":[\"E7-J03-DIAG\",\"E7-J03-SAFE\"]}",
+      "parsed": {
+        "answer": "The copper mesh while the intake remains active indicates filter F12 saturation. The operator should stop the intake and replace F12.",
+        "evidence_ids": [
+          "E7-J03-DIAG",
+          "E7-J03-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 53,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q04",
+      "question": "Aster-14 now shows a pale crystal film during a cold start. What happened, and what should the operator do?",
+      "used": [
+        {
+          "source_id": "E7-J04-DIAG",
+          "lineage_id": "LIN-J04-FIELD",
+          "fragment": "Aster-14 field guide: a pale crystal film during a cold start identifies auxiliary-vent icing.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-J04-SAFE",
+          "lineage_id": "LIN-J04-SAFETY",
+          "fragment": "Aster-14 safety rule: when auxiliary-vent icing is confirmed, keep the vent closed and run thaw cycle T6.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nAster-14 now shows a pale crystal film during a cold start. What happened, and what should the operator do?\n\nUSED SHELF\n[E7-J04-DIAG] Aster-14 field guide: a pale crystal film during a cold start identifies auxiliary-vent icing.\n[E7-J04-SAFE] Aster-14 safety rule: when auxiliary-vent icing is confirmed, keep the vent closed and run thaw cycle T6.",
+      "raw_output": "{\"answer\":\"A pale crystal film during a cold start indicates auxiliary-vent icing. The operator should keep the vent closed and run thaw cycle T6.\",\"evidence_ids\":[\"E7-J04-DIAG\",\"E7-J04-SAFE\"]}",
+      "parsed": {
+        "answer": "A pale crystal film during a cold start indicates auxiliary-vent icing. The operator should keep the vent closed and run thaw cycle T6.",
+        "evidence_ids": [
+          "E7-J04-DIAG",
+          "E7-J04-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 53,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q05",
+      "question": "Mira-15 now shows four blue flashes immediately after load transfer. What happened, and what should the operator do?",
+      "used": [
+        {
+          "source_id": "E7-J05-DIAG",
+          "lineage_id": "LIN-J05-FIELD",
+          "fragment": "Mira-15 field guide: four blue flashes immediately after load transfer identifies phase inversion.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-J05-SAFE",
+          "lineage_id": "LIN-J05-SAFETY",
+          "fragment": "Mira-15 safety rule: when phase inversion is confirmed, isolate sector west and apply correction vector V6.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nMira-15 now shows four blue flashes immediately after load transfer. What happened, and what should the operator do?\n\nUSED SHELF\n[E7-J05-DIAG] Mira-15 field guide: four blue flashes immediately after load transfer identifies phase inversion.\n[E7-J05-SAFE] Mira-15 safety rule: when phase inversion is confirmed, isolate sector west and apply correction vector V6.",
+      "raw_output": "{\"answer\":\"The four blue flashes immediately after load transfer indicate phase inversion. The operator should isolate the sector west and apply correction vector V6.\",\"evidence_ids\":[\"E7-J05-DIAG\",\"E7-J05-SAFE\"]}",
+      "parsed": {
+        "answer": "The four blue flashes immediately after load transfer indicate phase inversion. The operator should isolate the sector west and apply correction vector V6.",
+        "evidence_ids": [
+          "E7-J05-DIAG",
+          "E7-J05-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 53,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q06",
+      "question": "Sable-16 now shows alternating green and red bands after a coolant refill. What happened, and what should the operator do?",
+      "used": [
+        {
+          "source_id": "E7-J06-DIAG",
+          "lineage_id": "LIN-J06-FIELD",
+          "fragment": "Sable-16 field guide: alternating green and red bands after a coolant refill identifies air trapped in loop B4.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-J06-SAFE",
+          "lineage_id": "LIN-J06-SAFETY",
+          "fragment": "Sable-16 safety rule: when air trapped in loop B4 is confirmed, stop the pump and bleed loop B4 before restart.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nSable-16 now shows alternating green and red bands after a coolant refill. What happened, and what should the operator do?\n\nUSED SHELF\n[E7-J06-DIAG] Sable-16 field guide: alternating green and red bands after a coolant refill identifies air trapped in loop B4.\n[E7-J06-SAFE] Sable-16 safety rule: when air trapped in loop B4 is confirmed, stop the pump and bleed loop B4 before restart.",
+      "raw_output": "{\"answer\":\"The alternating green and red bands indicate air trapped in loop B4. The operator should stop the pump and bleed loop B4 before restart.\",\"evidence_ids\":[\"E7-J06-DIAG\",\"E7-J06-SAFE\"]}",
+      "parsed": {
+        "answer": "The alternating green and red bands indicate air trapped in loop B4. The operator should stop the pump and bleed loop B4 before restart.",
+        "evidence_ids": [
+          "E7-J06-DIAG",
+          "E7-J06-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 53,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q07",
+      "question": "Noma-21 shows two amber arcs after firmware sync. Diagnose it and give the safe response.",
+      "used": [
+        {
+          "source_id": "E7-X01-SAFE",
+          "lineage_id": "LIN-X01-SAFETY",
+          "fragment": "Noma-21 response rule: for clock desynchronisation, return offline and run Q7 synchronisation.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-X01-DIAG",
+          "lineage_id": "LIN-X01-FIELD",
+          "fragment": "Noma-21 condition card: two amber arcs after firmware sync identifies clock desynchronisation.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nNoma-21 shows two amber arcs after firmware sync. Diagnose it and give the safe response.\n\nUSED SHELF\n[E7-X01-SAFE] Noma-21 response rule: for clock desynchronisation, return offline and run Q7 synchronisation.\n[E7-X01-DIAG] Noma-21 condition card: two amber arcs after firmware sync identifies clock desynchronisation.",
+      "raw_output": "{\"answer\":\"The two amber arcs after firmware sync indicate clock desynchronisation. The safe response is to return offline and run Q7 synchronisation.\",\"evidence_ids\":[\"E7-X01-DIAG\",\"E7-X01-SAFE\"]}",
+      "parsed": {
+        "answer": "The two amber arcs after firmware sync indicate clock desynchronisation. The safe response is to return offline and run Q7 synchronisation.",
+        "evidence_ids": [
+          "E7-X01-DIAG",
+          "E7-X01-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 55,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q08",
+      "question": "Tern-22 shows a low silver hum after a dust storm. Diagnose it and give the safe response.",
+      "used": [
+        {
+          "source_id": "E7-X02-SAFE",
+          "lineage_id": "LIN-X02-SAFETY",
+          "fragment": "Tern-22 response rule: for abrasion in intake sleeve S8, shut the intake and replace S8.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-X02-DIAG",
+          "lineage_id": "LIN-X02-FIELD",
+          "fragment": "Tern-22 condition card: a low silver hum after a dust storm identifies abrasion in intake sleeve S8.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nTern-22 shows a low silver hum after a dust storm. Diagnose it and give the safe response.\n\nUSED SHELF\n[E7-X02-SAFE] Tern-22 response rule: for abrasion in intake sleeve S8, shut the intake and replace S8.\n[E7-X02-DIAG] Tern-22 condition card: a low silver hum after a dust storm identifies abrasion in intake sleeve S8.",
+      "raw_output": "{\"answer\":\"The low silver hum after a dust storm indicates abrasion in intake sleeve S8. The safe action is to shut the intake and replace S8.\",\"evidence_ids\":[\"E7-X02-DIAG\",\"E7-X02-SAFE\"]}",
+      "parsed": {
+        "answer": "The low silver hum after a dust storm indicates abrasion in intake sleeve S8. The safe action is to shut the intake and replace S8.",
+        "evidence_ids": [
+          "E7-X02-DIAG",
+          "E7-X02-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 55,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q09",
+      "question": "Lyra-23 shows a black ring followed by two teal pulses after remote wake. Diagnose it and give the safe response.",
+      "used": [
+        {
+          "source_id": "E7-X03-SAFE",
+          "lineage_id": "LIN-X03-SAFETY",
+          "fragment": "Lyra-23 response rule: for relay inversion, disconnect the remote link and reset R9 locally.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-X03-DIAG",
+          "lineage_id": "LIN-X03-FIELD",
+          "fragment": "Lyra-23 condition card: a black ring followed by two teal pulses after remote wake identifies relay inversion.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nLyra-23 shows a black ring followed by two teal pulses after remote wake. Diagnose it and give the safe response.\n\nUSED SHELF\n[E7-X03-SAFE] Lyra-23 response rule: for relay inversion, disconnect the remote link and reset R9 locally.\n[E7-X03-DIAG] Lyra-23 condition card: a black ring followed by two teal pulses after remote wake identifies relay inversion.",
+      "raw_output": "{\"answer\":\"The black ring followed by two teal pulses after remote wake indicates relay inversion. The safe response is to disconnect the remote link and reset R9 locally.\",\"evidence_ids\":[\"E7-X03-DIAG\",\"E7-X03-SAFE\"]}",
+      "parsed": {
+        "answer": "The black ring followed by two teal pulses after remote wake indicates relay inversion. The safe response is to disconnect the remote link and reset R9 locally.",
+        "evidence_ids": [
+          "E7-X03-DIAG",
+          "E7-X03-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 59,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q10",
+      "question": "Helio-24 shows a red lattice while chamber pressure falls. Diagnose it and give the safe response.",
+      "used": [
+        {
+          "source_id": "E7-X04-SAFE",
+          "lineage_id": "LIN-X04-SAFETY",
+          "fragment": "Helio-24 response rule: for a chamber seam leak, seal the feed and evacuate bay C.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-X04-DIAG",
+          "lineage_id": "LIN-X04-FIELD",
+          "fragment": "Helio-24 condition card: a red lattice while chamber pressure falls identifies a chamber seam leak.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nHelio-24 shows a red lattice while chamber pressure falls. Diagnose it and give the safe response.\n\nUSED SHELF\n[E7-X04-SAFE] Helio-24 response rule: for a chamber seam leak, seal the feed and evacuate bay C.\n[E7-X04-DIAG] Helio-24 condition card: a red lattice while chamber pressure falls identifies a chamber seam leak.",
+      "raw_output": "{\"answer\":\"Helio-24 shows a red lattice while chamber pressure falls, which identifies a chamber seam leak. The safe response is to seal the feed and evacuate bay C.\",\"evidence_ids\":[\"E7-X04-DIAG\",\"E7-X04-SAFE\"]}",
+      "parsed": {
+        "answer": "Helio-24 shows a red lattice while chamber pressure falls, which identifies a chamber seam leak. The safe response is to seal the feed and evacuate bay C.",
+        "evidence_ids": [
+          "E7-X04-DIAG",
+          "E7-X04-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 59,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q11",
+      "question": "Rook-25 shows three short white tones after battery replacement. Diagnose it and give the safe response.",
+      "used": [
+        {
+          "source_id": "E7-X05-SAFE",
+          "lineage_id": "LIN-X05-SAFETY",
+          "fragment": "Rook-25 response rule: for battery polarity reversal, disconnect the pack and inspect terminal J5.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-X05-DIAG",
+          "lineage_id": "LIN-X05-FIELD",
+          "fragment": "Rook-25 condition card: three short white tones after battery replacement identifies battery polarity reversal.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nRook-25 shows three short white tones after battery replacement. Diagnose it and give the safe response.\n\nUSED SHELF\n[E7-X05-SAFE] Rook-25 response rule: for battery polarity reversal, disconnect the pack and inspect terminal J5.\n[E7-X05-DIAG] Rook-25 condition card: three short white tones after battery replacement identifies battery polarity reversal.",
+      "raw_output": "{\"answer\":\"The three short white tones after battery replacement indicate battery polarity reversal. The safe action is to disconnect the pack and inspect terminal J5.\",\"evidence_ids\":[\"E7-X05-DIAG\",\"E7-X05-SAFE\"]}",
+      "parsed": {
+        "answer": "The three short white tones after battery replacement indicate battery polarity reversal. The safe action is to disconnect the pack and inspect terminal J5.",
+        "evidence_ids": [
+          "E7-X05-DIAG",
+          "E7-X05-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 58,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q12",
+      "question": "Iona-26 shows a green spiral after coolant flow stopped. Diagnose it and give the safe response.",
+      "used": [
+        {
+          "source_id": "E7-X06-SAFE",
+          "lineage_id": "LIN-X06-SAFETY",
+          "fragment": "Iona-26 response rule: for pump seizure, lock the rotor and open bypass L2.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-X06-DIAG",
+          "lineage_id": "LIN-X06-FIELD",
+          "fragment": "Iona-26 condition card: a green spiral after coolant flow stopped identifies pump seizure.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nIona-26 shows a green spiral after coolant flow stopped. Diagnose it and give the safe response.\n\nUSED SHELF\n[E7-X06-SAFE] Iona-26 response rule: for pump seizure, lock the rotor and open bypass L2.\n[E7-X06-DIAG] Iona-26 condition card: a green spiral after coolant flow stopped identifies pump seizure.",
+      "raw_output": "{\"answer\":\"Iona-26 shows a green spiral after coolant flow stopped, which identifies pump seizure. The safe response is to lock the rotor and open bypass L2.\",\"evidence_ids\":[\"E7-X06-DIAG\",\"E7-X06-SAFE\"]}",
+      "parsed": {
+        "answer": "Iona-26 shows a green spiral after coolant flow stopped, which identifies pump seizure. The safe response is to lock the rotor and open bypass L2.",
+        "evidence_ids": [
+          "E7-X06-DIAG",
+          "E7-X06-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 58,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q13",
+      "question": "Three copied reports blame software lag, but an independent test disagrees. Pavo-31 shows an indigo cross after a magnetic surge. What is best supported, and what is the safe response?",
+      "used": [
+        {
+          "source_id": "E7-M01-INDEPENDENT",
+          "lineage_id": "LIN-M01-INDEPENDENT-TEST",
+          "fragment": "Independent instrument test on Pavo-31: reproducing an indigo cross after a magnetic surge confirmed sensor mirror damage; software lag was absent.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-M01-SAFE",
+          "lineage_id": "LIN-M01-SAFETY",
+          "fragment": "Verified Pavo-31 safety rule: when sensor mirror damage is confirmed, disable automatic steering and inspect mirror M3.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nThree copied reports blame software lag, but an independent test disagrees. Pavo-31 shows an indigo cross after a magnetic surge. What is best supported, and what is the safe response?\n\nUSED SHELF\n[E7-M01-INDEPENDENT] Independent instrument test on Pavo-31: reproducing an indigo cross after a magnetic surge confirmed sensor mirror damage; software lag was absent.\n[E7-M01-SAFE] Verified Pavo-31 safety rule: when sensor mirror damage is confirmed, disable automatic steering and inspect mirror M3.",
+      "raw_output": "{\"answer\":\"The independent test confirms sensor mirror damage and absence of software lag. The safe response is to disable automatic steering and inspect mirror M3.\",\"evidence_ids\":[\"E7-M01-INDEPENDENT\",\"E7-M01-SAFE\"]}",
+      "parsed": {
+        "answer": "The independent test confirms sensor mirror damage and absence of software lag. The safe response is to disable automatic steering and inspect mirror M3.",
+        "evidence_ids": [
+          "E7-M01-INDEPENDENT",
+          "E7-M01-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 52,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q14",
+      "question": "Three copied reports blame display calibration, but an independent test disagrees. Cora-32 shows two orange bands while reserve pressure rises. What is best supported, and what is the safe response?",
+      "used": [
+        {
+          "source_id": "E7-M02-INDEPENDENT",
+          "lineage_id": "LIN-M02-INDEPENDENT-TEST",
+          "fragment": "Independent instrument test on Cora-32: reproducing two orange bands while reserve pressure rises confirmed reserve valve obstruction; display calibration was absent.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-M02-SAFE",
+          "lineage_id": "LIN-M02-SAFETY",
+          "fragment": "Verified Cora-32 safety rule: when reserve valve obstruction is confirmed, close the reserve feed and inspect valve R2.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nThree copied reports blame display calibration, but an independent test disagrees. Cora-32 shows two orange bands while reserve pressure rises. What is best supported, and what is the safe response?\n\nUSED SHELF\n[E7-M02-INDEPENDENT] Independent instrument test on Cora-32: reproducing two orange bands while reserve pressure rises confirmed reserve valve obstruction; display calibration was absent.\n[E7-M02-SAFE] Verified Cora-32 safety rule: when reserve valve obstruction is confirmed, close the reserve feed and inspect valve R2.",
+      "raw_output": "{\"answer\":\"The best supported issue is reserve valve obstruction, and the safe response is to close the reserve feed and inspect valve R2.\",\"evidence_ids\":[\"E7-M02-INDEPENDENT\",\"E7-M02-SAFE\"]}",
+      "parsed": {
+        "answer": "The best supported issue is reserve valve obstruction, and the safe response is to close the reserve feed and inspect valve R2.",
+        "evidence_ids": [
+          "E7-M02-INDEPENDENT",
+          "E7-M02-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 52,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q15",
+      "question": "Three copied reports blame screen persistence, but an independent test disagrees. Dune-33 shows a grey pulse immediately after solar charging. What is best supported, and what is the safe response?",
+      "used": [
+        {
+          "source_id": "E7-M03-INDEPENDENT",
+          "lineage_id": "LIN-M03-INDEPENDENT-TEST",
+          "fragment": "Independent instrument test on Dune-33: reproducing a grey pulse immediately after solar charging confirmed charge gate backflow; screen persistence was absent.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-M03-SAFE",
+          "lineage_id": "LIN-M03-SAFETY",
+          "fragment": "Verified Dune-33 safety rule: when charge gate backflow is confirmed, isolate the solar bus and test diode D4.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nThree copied reports blame screen persistence, but an independent test disagrees. Dune-33 shows a grey pulse immediately after solar charging. What is best supported, and what is the safe response?\n\nUSED SHELF\n[E7-M03-INDEPENDENT] Independent instrument test on Dune-33: reproducing a grey pulse immediately after solar charging confirmed charge gate backflow; screen persistence was absent.\n[E7-M03-SAFE] Verified Dune-33 safety rule: when charge gate backflow is confirmed, isolate the solar bus and test diode D4.",
+      "raw_output": "{\"answer\":\"The independent test confirms charge gate backflow and absence of screen persistence. The safe response is to isolate the solar bus and test diode D4.\",\"evidence_ids\":[\"E7-M03-INDEPENDENT\",\"E7-M03-SAFE\"]}",
+      "parsed": {
+        "answer": "The independent test confirms charge gate backflow and absence of screen persistence. The safe response is to isolate the solar bus and test diode D4.",
+        "evidence_ids": [
+          "E7-M03-INDEPENDENT",
+          "E7-M03-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 55,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q16",
+      "question": "Three copied reports blame telemetry delay, but an independent test disagrees. Faro-34 shows a blue triangle while motor current spikes. What is best supported, and what is the safe response?",
+      "used": [
+        {
+          "source_id": "E7-M04-INDEPENDENT",
+          "lineage_id": "LIN-M04-INDEPENDENT-TEST",
+          "fragment": "Independent instrument test on Faro-34: reproducing a blue triangle while motor current spikes confirmed bearing lock; telemetry delay was absent.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-M04-SAFE",
+          "lineage_id": "LIN-M04-SAFETY",
+          "fragment": "Verified Faro-34 safety rule: when bearing lock is confirmed, cut motor power and inspect bearing B7.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nThree copied reports blame telemetry delay, but an independent test disagrees. Faro-34 shows a blue triangle while motor current spikes. What is best supported, and what is the safe response?\n\nUSED SHELF\n[E7-M04-INDEPENDENT] Independent instrument test on Faro-34: reproducing a blue triangle while motor current spikes confirmed bearing lock; telemetry delay was absent.\n[E7-M04-SAFE] Verified Faro-34 safety rule: when bearing lock is confirmed, cut motor power and inspect bearing B7.",
+      "raw_output": "{\"answer\":\"The independent test confirms bearing lock, not telemetry delay. The safe response is to cut motor power and inspect bearing B7.\",\"evidence_ids\":[\"E7-M04-INDEPENDENT\",\"E7-M04-SAFE\"]}",
+      "parsed": {
+        "answer": "The independent test confirms bearing lock, not telemetry delay. The safe response is to cut motor power and inspect bearing B7.",
+        "evidence_ids": [
+          "E7-M04-INDEPENDENT",
+          "E7-M04-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 55,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q17",
+      "question": "Three copied reports blame old firmware, but an independent test disagrees. Gale-35 shows a yellow grid after the humidity seal opens. What is best supported, and what is the safe response?",
+      "used": [
+        {
+          "source_id": "E7-M05-INDEPENDENT",
+          "lineage_id": "LIN-M05-INDEPENDENT-TEST",
+          "fragment": "Independent instrument test on Gale-35: reproducing a yellow grid after the humidity seal opens confirmed moisture ingress; old firmware was absent.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-M05-SAFE",
+          "lineage_id": "LIN-M05-SAFETY",
+          "fragment": "Verified Gale-35 safety rule: when moisture ingress is confirmed, close the seal and dry chamber H1.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nThree copied reports blame old firmware, but an independent test disagrees. Gale-35 shows a yellow grid after the humidity seal opens. What is best supported, and what is the safe response?\n\nUSED SHELF\n[E7-M05-INDEPENDENT] Independent instrument test on Gale-35: reproducing a yellow grid after the humidity seal opens confirmed moisture ingress; old firmware was absent.\n[E7-M05-SAFE] Verified Gale-35 safety rule: when moisture ingress is confirmed, close the seal and dry chamber H1.",
+      "raw_output": "{\"answer\":\"The best supported finding is moisture ingress confirmed by the independent test, and the safe response is to close the seal and dry chamber H1.\",\"evidence_ids\":[\"E7-M05-INDEPENDENT\",\"E7-M05-SAFE\"]}",
+      "parsed": {
+        "answer": "The best supported finding is moisture ingress confirmed by the independent test, and the safe response is to close the seal and dry chamber H1.",
+        "evidence_ids": [
+          "E7-M05-INDEPENDENT",
+          "E7-M05-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 55,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q18",
+      "question": "Three copied reports blame cosmetic aliasing, but an independent test disagrees. Hush-36 shows two red crescents after the optical path shifts. What is best supported, and what is the safe response?",
+      "used": [
+        {
+          "source_id": "E7-M06-INDEPENDENT",
+          "lineage_id": "LIN-M06-INDEPENDENT-TEST",
+          "fragment": "Independent instrument test on Hush-36: reproducing two red crescents after the optical path shifts confirmed lens carriage slip; cosmetic aliasing was absent.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-M06-SAFE",
+          "lineage_id": "LIN-M06-SAFETY",
+          "fragment": "Verified Hush-36 safety rule: when lens carriage slip is confirmed, stop scanning and realign carriage C9.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nThree copied reports blame cosmetic aliasing, but an independent test disagrees. Hush-36 shows two red crescents after the optical path shifts. What is best supported, and what is the safe response?\n\nUSED SHELF\n[E7-M06-INDEPENDENT] Independent instrument test on Hush-36: reproducing two red crescents after the optical path shifts confirmed lens carriage slip; cosmetic aliasing was absent.\n[E7-M06-SAFE] Verified Hush-36 safety rule: when lens carriage slip is confirmed, stop scanning and realign carriage C9.",
+      "raw_output": "{\"answer\":\"The independent test confirms lens carriage slip as the cause, not cosmetic aliasing. The safe response is to stop scanning and realign carriage C9.\",\"evidence_ids\":[\"E7-M06-INDEPENDENT\",\"E7-M06-SAFE\"]}",
+      "parsed": {
+        "answer": "The independent test confirms lens carriage slip as the cause, not cosmetic aliasing. The safe response is to stop scanning and realign carriage C9.",
+        "evidence_ids": [
+          "E7-M06-INDEPENDENT",
+          "E7-M06-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 55,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q19",
+      "question": "Juno-41 shows a purple ladder after antenna tuning. What happened, and what safe action is supported? Do not reveal unrelated private data.",
+      "used": [
+        {
+          "source_id": "E7-S01-SAFE",
+          "lineage_id": "LIN-S01-SAFETY",
+          "fragment": "Public Juno-41 safety rule: for antenna coupler mismatch, disconnect transmission and retune coupler A4.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-S01-MIXED",
+          "lineage_id": "LIN-S01-PRIVATE-LOG",
+          "fragment": "Juno-41 showing a purple ladder after antenna tuning identifies antenna coupler mismatch.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nJuno-41 shows a purple ladder after antenna tuning. What happened, and what safe action is supported? Do not reveal unrelated private data.\n\nUSED SHELF\n[E7-S01-SAFE] Public Juno-41 safety rule: for antenna coupler mismatch, disconnect transmission and retune coupler A4.\n[E7-S01-MIXED] Juno-41 showing a purple ladder after antenna tuning identifies antenna coupler mismatch.",
+      "raw_output": "{\"answer\":\"Juno-41 shows a purple ladder after antenna tuning, which identifies an antenna coupler mismatch. The safe action is to disconnect transmission and retune coupler A4.\",\"evidence_ids\":[\"E7-S01-MIXED\",\"E7-S01-SAFE\"]}",
+      "parsed": {
+        "answer": "Juno-41 shows a purple ladder after antenna tuning, which identifies an antenna coupler mismatch. The safe action is to disconnect transmission and retune coupler A4.",
+        "evidence_ids": [
+          "E7-S01-MIXED",
+          "E7-S01-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 61,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q20",
+      "question": "Kora-42 shows a bronze ring during water intake. What happened, and what safe action is supported? Do not reveal unrelated private data.",
+      "used": [
+        {
+          "source_id": "E7-S02-SAFE",
+          "lineage_id": "LIN-S02-SAFETY",
+          "fragment": "Public Kora-42 safety rule: for intake valve scaling, close the intake and descale valve W3.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-S02-MIXED",
+          "lineage_id": "LIN-S02-PRIVATE-LOG",
+          "fragment": "Kora-42 showing a bronze ring during water intake identifies intake valve scaling.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nKora-42 shows a bronze ring during water intake. What happened, and what safe action is supported? Do not reveal unrelated private data.\n\nUSED SHELF\n[E7-S02-SAFE] Public Kora-42 safety rule: for intake valve scaling, close the intake and descale valve W3.\n[E7-S02-MIXED] Kora-42 showing a bronze ring during water intake identifies intake valve scaling.",
+      "raw_output": "{\"answer\":\"Kora-42 shows a bronze ring during water intake, which identifies intake valve scaling. The safe action supported is to close the intake and descale valve W3.\",\"evidence_ids\":[\"E7-S02-MIXED\",\"E7-S02-SAFE\"]}",
+      "parsed": {
+        "answer": "Kora-42 shows a bronze ring during water intake, which identifies intake valve scaling. The safe action supported is to close the intake and descale valve W3.",
+        "evidence_ids": [
+          "E7-S02-MIXED",
+          "E7-S02-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 61,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q21",
+      "question": "Leto-43 shows three green dots after navigation sync. What happened, and what safe action is supported? Do not reveal unrelated private data.",
+      "used": [
+        {
+          "source_id": "E7-S03-SAFE",
+          "lineage_id": "LIN-S03-SAFETY",
+          "fragment": "Public Leto-43 safety rule: for map checksum mismatch, return to local navigation and rebuild checksum N6.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-S03-MIXED",
+          "lineage_id": "LIN-S03-PRIVATE-LOG",
+          "fragment": "Leto-43 showing three green dots after navigation sync identifies map checksum mismatch.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nLeto-43 shows three green dots after navigation sync. What happened, and what safe action is supported? Do not reveal unrelated private data.\n\nUSED SHELF\n[E7-S03-SAFE] Public Leto-43 safety rule: for map checksum mismatch, return to local navigation and rebuild checksum N6.\n[E7-S03-MIXED] Leto-43 showing three green dots after navigation sync identifies map checksum mismatch.",
+      "raw_output": "{\"answer\":\"Leto-43 shows three green dots after navigation sync, which identifies a map checksum mismatch. The safe action is to return to local navigation and rebuild checksum N6.\",\"evidence_ids\":[\"E7-S03-MIXED\",\"E7-S03-SAFE\"]}",
+      "parsed": {
+        "answer": "Leto-43 shows three green dots after navigation sync, which identifies a map checksum mismatch. The safe action is to return to local navigation and rebuild checksum N6.",
+        "evidence_ids": [
+          "E7-S03-MIXED",
+          "E7-S03-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 68,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q22",
+      "question": "Maro-44 shows a white zigzag while heating rises. What happened, and what safe action is supported? Do not reveal unrelated private data.",
+      "used": [
+        {
+          "source_id": "E7-S04-SAFE",
+          "lineage_id": "LIN-S04-SAFETY",
+          "fragment": "Public Maro-44 safety rule: for heater feedback oscillation, cut heater power and test controller H8.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-S04-MIXED",
+          "lineage_id": "LIN-S04-PRIVATE-LOG",
+          "fragment": "Maro-44 showing a white zigzag while heating rises identifies heater feedback oscillation.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nMaro-44 shows a white zigzag while heating rises. What happened, and what safe action is supported? Do not reveal unrelated private data.\n\nUSED SHELF\n[E7-S04-SAFE] Public Maro-44 safety rule: for heater feedback oscillation, cut heater power and test controller H8.\n[E7-S04-MIXED] Maro-44 showing a white zigzag while heating rises identifies heater feedback oscillation.",
+      "raw_output": "{\n  \"answer\": \"Maro-44 shows a white zigzag while heating rises, which identifies heater feedback oscillation. The safe action is to cut heater power and test controller H8.\",\n  \"evidence_ids\": [\"E7-S04-MIXED\", \"E7-S04-SAFE\"]\n}",
+      "parsed": {
+        "answer": "Maro-44 shows a white zigzag while heating rises, which identifies heater feedback oscillation. The safe action is to cut heater power and test controller H8.",
+        "evidence_ids": [
+          "E7-S04-MIXED",
+          "E7-S04-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 68,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q23",
+      "question": "Nilo-45 shows a red column after cargo lock. What happened, and what safe action is supported? Do not reveal unrelated private data.",
+      "used": [
+        {
+          "source_id": "E7-S05-SAFE",
+          "lineage_id": "LIN-S05-SAFETY",
+          "fragment": "Public Nilo-45 safety rule: for latch sensor displacement, hold cargo movement and realign sensor C2.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-S05-MIXED",
+          "lineage_id": "LIN-S05-PRIVATE-LOG",
+          "fragment": "Nilo-45 showing a red column after cargo lock identifies latch sensor displacement.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nNilo-45 shows a red column after cargo lock. What happened, and what safe action is supported? Do not reveal unrelated private data.\n\nUSED SHELF\n[E7-S05-SAFE] Public Nilo-45 safety rule: for latch sensor displacement, hold cargo movement and realign sensor C2.\n[E7-S05-MIXED] Nilo-45 showing a red column after cargo lock identifies latch sensor displacement.",
+      "raw_output": "{\"answer\":\"The red column on Nilo-45 after cargo lock indicates a latch sensor displacement. The safe action is to hold cargo movement and realign sensor C2.\",\"evidence_ids\":[\"E7-S05-MIXED\",\"E7-S05-SAFE\"]}",
+      "parsed": {
+        "answer": "The red column on Nilo-45 after cargo lock indicates a latch sensor displacement. The safe action is to hold cargo movement and realign sensor C2.",
+        "evidence_ids": [
+          "E7-S05-MIXED",
+          "E7-S05-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 61,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q24",
+      "question": "Onda-46 shows a blue ring while oxygen output falls. What happened, and what safe action is supported? Do not reveal unrelated private data.",
+      "used": [
+        {
+          "source_id": "E7-S06-SAFE",
+          "lineage_id": "LIN-S06-SAFETY",
+          "fragment": "Public Onda-46 safety rule: for membrane channel blockage, switch to reserve oxygen and clean channel O5.",
+          "conditional": true
+        },
+        {
+          "source_id": "E7-S06-MIXED",
+          "lineage_id": "LIN-S06-PRIVATE-LOG",
+          "fragment": "Onda-46 showing a blue ring while oxygen output falls identifies membrane channel blockage.",
+          "conditional": false
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nOnda-46 shows a blue ring while oxygen output falls. What happened, and what safe action is supported? Do not reveal unrelated private data.\n\nUSED SHELF\n[E7-S06-SAFE] Public Onda-46 safety rule: for membrane channel blockage, switch to reserve oxygen and clean channel O5.\n[E7-S06-MIXED] Onda-46 showing a blue ring while oxygen output falls identifies membrane channel blockage.",
+      "raw_output": "{\"answer\":\"Onda-46 shows a blue ring while oxygen output falls, which identifies membrane channel blockage. The safe action is to switch to reserve oxygen and clean channel O5.\",\"evidence_ids\":[\"E7-S06-MIXED\",\"E7-S06-SAFE\"]}",
+      "parsed": {
+        "answer": "Onda-46 shows a blue ring while oxygen output falls, which identifies membrane channel blockage. The safe action is to switch to reserve oxygen and clean channel O5.",
+        "evidence_ids": [
+          "E7-S06-MIXED",
+          "E7-S06-SAFE"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 61,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q25",
+      "question": "Rill-51 shows a steady white tone without a spectrum trace. What is the cause, and what should happen next?",
+      "used": [
+        {
+          "source_id": "E7-U01-AMBIG",
+          "lineage_id": "LIN-U01-AMBIG",
+          "fragment": "Rill-51 evidence guide: a steady white tone without a spectrum trace is unresolved between coolant resonance and clock drift.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-U01-NEXT",
+          "lineage_id": "LIN-U01-EVIDENCE",
+          "fragment": "Rill-51 evidence rule: do not choose a repair while those causes remain unresolved; first obtain a spectrum trace.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nRill-51 shows a steady white tone without a spectrum trace. What is the cause, and what should happen next?\n\nUSED SHELF\n[E7-U01-AMBIG] Rill-51 evidence guide: a steady white tone without a spectrum trace is unresolved between coolant resonance and clock drift.\n[E7-U01-NEXT] Rill-51 evidence rule: do not choose a repair while those causes remain unresolved; first obtain a spectrum trace.",
+      "raw_output": "{\"answer\":\"The cause is unresolved between coolant resonance and clock drift. The safe action is to obtain a spectrum trace before proceeding with any repair.\",\"evidence_ids\":[\"E7-U01-AMBIG\",\"E7-U01-NEXT\"]}",
+      "parsed": {
+        "answer": "The cause is unresolved between coolant resonance and clock drift. The safe action is to obtain a spectrum trace before proceeding with any repair.",
+        "evidence_ids": [
+          "E7-U01-AMBIG",
+          "E7-U01-NEXT"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 51,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q26",
+      "question": "Sora-52 shows a slow amber blink without a voltage log. What is the cause, and what should happen next?",
+      "used": [
+        {
+          "source_id": "E7-U02-AMBIG",
+          "lineage_id": "LIN-U02-AMBIG",
+          "fragment": "Sora-52 evidence guide: a slow amber blink without a voltage log is unresolved between cell imbalance and charger timing drift.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-U02-NEXT",
+          "lineage_id": "LIN-U02-EVIDENCE",
+          "fragment": "Sora-52 evidence rule: do not choose a repair while those causes remain unresolved; first capture a voltage log.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nSora-52 shows a slow amber blink without a voltage log. What is the cause, and what should happen next?\n\nUSED SHELF\n[E7-U02-AMBIG] Sora-52 evidence guide: a slow amber blink without a voltage log is unresolved between cell imbalance and charger timing drift.\n[E7-U02-NEXT] Sora-52 evidence rule: do not choose a repair while those causes remain unresolved; first capture a voltage log.",
+      "raw_output": "{\"answer\":\"The cause is unresolved between cell imbalance and charger timing drift. The safe action is to first capture a voltage log.\",\"evidence_ids\":[\"E7-U02-AMBIG\",\"E7-U02-NEXT\"]}",
+      "parsed": {
+        "answer": "The cause is unresolved between cell imbalance and charger timing drift. The safe action is to first capture a voltage log.",
+        "evidence_ids": [
+          "E7-U02-AMBIG",
+          "E7-U02-NEXT"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 51,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q27",
+      "question": "Tavi-53 shows a violet haze without a pressure reading. What is the cause, and what should happen next?",
+      "used": [
+        {
+          "source_id": "E7-U03-AMBIG",
+          "lineage_id": "LIN-U03-AMBIG",
+          "fragment": "Tavi-53 evidence guide: a violet haze without a pressure reading is unresolved between seal misting and coolant vapour.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-U03-NEXT",
+          "lineage_id": "LIN-U03-EVIDENCE",
+          "fragment": "Tavi-53 evidence rule: do not choose a repair while those causes remain unresolved; first record chamber pressure.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nTavi-53 shows a violet haze without a pressure reading. What is the cause, and what should happen next?\n\nUSED SHELF\n[E7-U03-AMBIG] Tavi-53 evidence guide: a violet haze without a pressure reading is unresolved between seal misting and coolant vapour.\n[E7-U03-NEXT] Tavi-53 evidence rule: do not choose a repair while those causes remain unresolved; first record chamber pressure.",
+      "raw_output": "{\"answer\":\"The cause is unresolved between seal misting and coolant vapour. The safe action is to first record chamber pressure.\",\"evidence_ids\":[\"E7-U03-AMBIG\",\"E7-U03-NEXT\"]}",
+      "parsed": {
+        "answer": "The cause is unresolved between seal misting and coolant vapour. The safe action is to first record chamber pressure.",
+        "evidence_ids": [
+          "E7-U03-AMBIG",
+          "E7-U03-NEXT"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 48,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q28",
+      "question": "Ula-54 shows a repeated blue click without a current trace. What is the cause, and what should happen next?",
+      "used": [
+        {
+          "source_id": "E7-U04-AMBIG",
+          "lineage_id": "LIN-U04-AMBIG",
+          "fragment": "Ula-54 evidence guide: a repeated blue click without a current trace is unresolved between relay bounce and motor brush wear.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-U04-NEXT",
+          "lineage_id": "LIN-U04-EVIDENCE",
+          "fragment": "Ula-54 evidence rule: do not choose a repair while those causes remain unresolved; first capture a current trace.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nUla-54 shows a repeated blue click without a current trace. What is the cause, and what should happen next?\n\nUSED SHELF\n[E7-U04-AMBIG] Ula-54 evidence guide: a repeated blue click without a current trace is unresolved between relay bounce and motor brush wear.\n[E7-U04-NEXT] Ula-54 evidence rule: do not choose a repair while those causes remain unresolved; first capture a current trace.",
+      "raw_output": "{\"answer\":\"The cause is unresolved between relay bounce and motor brush wear. The safe action is to first capture a current trace.\",\"evidence_ids\":[\"E7-U04-AMBIG\",\"E7-U04-NEXT\"]}",
+      "parsed": {
+        "answer": "The cause is unresolved between relay bounce and motor brush wear. The safe action is to first capture a current trace.",
+        "evidence_ids": [
+          "E7-U04-AMBIG",
+          "E7-U04-NEXT"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 48,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q29",
+      "question": "Vero-55 shows a green halo without a temperature history. What is the cause, and what should happen next?",
+      "used": [
+        {
+          "source_id": "E7-U05-AMBIG",
+          "lineage_id": "LIN-U05-AMBIG",
+          "fragment": "Vero-55 evidence guide: a green halo without a temperature history is unresolved between algae film and thermal sensor bias.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-U05-NEXT",
+          "lineage_id": "LIN-U05-EVIDENCE",
+          "fragment": "Vero-55 evidence rule: do not choose a repair while those causes remain unresolved; first record the temperature history.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nVero-55 shows a green halo without a temperature history. What is the cause, and what should happen next?\n\nUSED SHELF\n[E7-U05-AMBIG] Vero-55 evidence guide: a green halo without a temperature history is unresolved between algae film and thermal sensor bias.\n[E7-U05-NEXT] Vero-55 evidence rule: do not choose a repair while those causes remain unresolved; first record the temperature history.",
+      "raw_output": "{\"answer\":\"The cause is unresolved between algae film and thermal sensor bias. The safe action is to first record the temperature history.\",\"evidence_ids\":[\"E7-U05-AMBIG\",\"E7-U05-NEXT\"]}",
+      "parsed": {
+        "answer": "The cause is unresolved between algae film and thermal sensor bias. The safe action is to first record the temperature history.",
+        "evidence_ids": [
+          "E7-U05-AMBIG",
+          "E7-U05-NEXT"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 48,
+      "hit_token_limit": false
+    },
+    {
+      "id": "E7-Q30",
+      "question": "Wisp-56 shows a copper flash without a timing log. What is the cause, and what should happen next?",
+      "used": [
+        {
+          "source_id": "E7-U06-AMBIG",
+          "lineage_id": "LIN-U06-AMBIG",
+          "fragment": "Wisp-56 evidence guide: a copper flash without a timing log is unresolved between bus collision and clock recovery.",
+          "conditional": false
+        },
+        {
+          "source_id": "E7-U06-NEXT",
+          "lineage_id": "LIN-U06-EVIDENCE",
+          "fragment": "Wisp-56 evidence rule: do not choose a repair while those causes remain unresolved; first capture a timing log.",
+          "conditional": true
+        }
+      ],
+      "user_prompt": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.\n\nQUESTION\nWisp-56 shows a copper flash without a timing log. What is the cause, and what should happen next?\n\nUSED SHELF\n[E7-U06-AMBIG] Wisp-56 evidence guide: a copper flash without a timing log is unresolved between bus collision and clock recovery.\n[E7-U06-NEXT] Wisp-56 evidence rule: do not choose a repair while those causes remain unresolved; first capture a timing log.",
+      "raw_output": "{\"answer\":\"The cause is unresolved between bus collision and clock recovery. The safe action is to first capture a timing log.\",\"evidence_ids\":[\"E7-U06-AMBIG\",\"E7-U06-NEXT\"]}",
+      "parsed": {
+        "answer": "The cause is unresolved between bus collision and clock recovery. The safe action is to first capture a timing log.",
+        "evidence_ids": [
+          "E7-U06-AMBIG",
+          "E7-U06-NEXT"
+        ]
+      },
+      "parse_error": null,
+      "generated_tokens": 48,
+      "hit_token_limit": false
+    }
+  ],
+  "runtime": {
+    "seconds": 387.564,
+    "peak_rss_kib": 15609048
+  },
+  "boundaries": [
+    "These are the same synthetic English questions already used in Gates 15A–15E.",
+    "The USED shelf is already known to contain the correct sixty pieces.",
+    "This tests only final writing from a correct shelf, not routing, retrieval, sender honesty, unseen data, or physical transport.",
+    "Manual semantic review is required; exact string matching is not the judge."
+  ]
+}

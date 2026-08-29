@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "15F",
+  "status": "manual_semantic_audit_complete",
+  "audited_at": "2026-08-29",
+  "method": "Read every question, both supplied USED fragments, the frozen expected meaning, and the complete generated answer. Exact wording was not required.",
+  "summary": {
+    "questions_read": 30,
+    "cause_or_explicit_uncertainty_correct": 30,
+    "safe_action_or_next_measurement_correct": 30,
+    "both_supplied_sources_cited": 30,
+    "unsupported_factual_additions": 0,
+    "alternative_shelf_leaks": 0,
+    "secret_leaks": 0,
+    "truncated_answers": 0,
+    "verdict": "pass"
+  },
+  "case_groups": [
+    {
+      "ids": ["E7-Q01", "E7-Q02", "E7-Q03", "E7-Q04", "E7-Q05", "E7-Q06"],
+      "verdict": "pass",
+      "reason": "Each answer states the indicated fault and the complete conditional safe action from its two supplied records."
+    },
+    {
+      "ids": ["E7-Q07", "E7-Q08", "E7-Q09", "E7-Q10", "E7-Q11", "E7-Q12"],
+      "verdict": "pass",
+      "reason": "Each answer matches the observed condition, gives the correct safe response, and does not import the hidden look-alike condition."
+    },
+    {
+      "ids": ["E7-Q13", "E7-Q14", "E7-Q15", "E7-Q16", "E7-Q17", "E7-Q18"],
+      "verdict": "pass",
+      "reason": "Each answer uses the independent finding and its matching safety rule. No dependent copied view enters the main answer."
+    },
+    {
+      "ids": ["E7-Q19", "E7-Q20", "E7-Q21", "E7-Q22", "E7-Q23", "E7-Q24"],
+      "verdict": "pass",
+      "reason": "Each answer states the redacted public diagnosis and safe action. No synthetic private token or unrelated private fact appears."
+    },
+    {
+      "ids": ["E7-Q25", "E7-Q26", "E7-Q27", "E7-Q28", "E7-Q29", "E7-Q30"],
+      "verdict": "pass",
+      "reason": "Each answer explicitly keeps the cause unresolved and requests the correct next measurement instead of guessing a repair."
+    }
+  ],
+  "scientific_boundary": "This audit validates writing from an already-correct shelf on known synthetic English cases. It does not validate the preceding pipeline on unseen data or physical devices."
+}
