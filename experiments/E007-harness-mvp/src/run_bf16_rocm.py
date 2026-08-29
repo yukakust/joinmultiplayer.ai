@@ -13,7 +13,7 @@ from pathlib import Path
 from run_whole_chat_reader import CASES, prompt, render_transcript, session_id, visible_messages
 
 ROOT = Path(__file__).resolve().parents[3]
-PROTOCOL = ROOT / "site/experiments/E007/bf16-rocm-protocol-v0.1.json"
+PROTOCOL = ROOT / "site/experiments/E007/bf16-rocm-protocol-v0.2.json"
 
 
 def post_json(url: str, payload: dict, timeout: int) -> dict:
@@ -60,7 +60,7 @@ def main() -> None:
                 "model": "qwen3-8b-bf16",
                 "messages": [
                     {"role": "system", "content": "Ты аккуратный читатель. Ответы должны опираться только на переданный разговор."},
-                    {"role": "user", "content": user_prompt + " /no_think"},
+                    {"role": "user", "content": user_prompt},
                 ],
                 "temperature": 0,
                 "max_tokens": 768,

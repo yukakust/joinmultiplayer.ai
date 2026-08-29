@@ -1,0 +1,51 @@
+{
+  "schema_version": "0.2",
+  "experiment": "E007",
+  "gate": "16B.4",
+  "status": "locked_before_inference",
+  "amends": "/experiments/E007/bf16-rocm-protocol-v0.1.json",
+  "amendment_reason": "The ready-made BF16 GGUF did not preserve the behavior of the previously tested Hugging Face checkpoint. To isolate CPU versus Radeon, v0.2 converts the exact cached checkpoint used by Gate 16B.1.",
+  "hypothesis": "The exact unquantized BF16 Qwen3-8B checkpoint from Gate 16B.1 can run fully on yukabox's integrated Radeon through ROCm, preserve its 11/12 quality, and generate faster than its approximately 1.4 tokens per second CPU result.",
+  "model": {
+    "source": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "source_weight_type": "BF16",
+    "conversion": "GGUF BF16 without weight quantization",
+    "converter": "ggml-org/llama.cpp convert_hf_to_gguf.py",
+    "converter_revision": "2bb9bddafad44ecbb50889644ca47537ec11841b",
+    "training": false,
+    "thinking": false,
+    "decoding": "greedy"
+  },
+  "runtime": {
+    "engine": "llama-server bundled with Ollama 0.32.14",
+    "device": "ROCm0 / integrated AMD Radeon 880M-890M",
+    "gpu_layers": "all",
+    "flash_attention": true,
+    "kv_cache": "Q8_0",
+    "context_tokens": 16384,
+    "parallel_slots": 1,
+    "chat_template": "native template embedded during conversion",
+    "reasoning": "off"
+  },
+  "input": {
+    "source": "The same two private cleaned Codex conversations and six questions used by Gate 16B.1",
+    "prompt": "Exactly the Gate 16B.1 three-question prompt",
+    "raw_conversations_public": false,
+    "retrieval": false,
+    "chunking": false,
+    "summaries": false
+  },
+  "comparison": {
+    "quality_reference": "/experiments/E007/whole-chat-reader-result-v0.2.json",
+    "quality_reference_score": "11/12",
+    "speed_reference": "/experiments/E007/kv-cache-reuse-result-v0.1.json",
+    "speed_reference_generated_tokens_per_second": 1.4
+  },
+  "success": {
+    "fit": "All transformer layers are offloaded to ROCm without out-of-memory or host fallback.",
+    "quality": "At least 11/12 manual points on the same six questions.",
+    "speed": "Generated-token throughput is greater than 1.4 tokens per second."
+  },
+  "boundary": "This is one development run on one integrated GPU. The two failed v0.1 launch attempts remain part of the public record and are not scored as the isolated CPU-versus-Radeon comparison."
+}

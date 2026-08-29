@@ -1061,3 +1061,10 @@ generated tokens per second. Success requires all layers on ROCm, at least
 11/12, and throughput above 1.4 tokens/s.
 
 - `site/experiments/E007/bf16-rocm-protocol-v0.1.json`
+
+The ready-made BF16 GGUF did not preserve the behavior of the checkpoint used
+by Gate 16B.1. Its two launch attempts are retained as diagnostic failures, not
+scored as a CPU-versus-Radeon comparison. Protocol v0.2 instead converts the
+exact cached Hugging Face revision from Gate 16B.1 without weight quantization:
+
+- `site/experiments/E007/bf16-rocm-protocol-v0.2.json`
