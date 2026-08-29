@@ -414,6 +414,16 @@ DeBERTa checks are diagnostic. Protocol:
 `/experiments/E007/answer-synthesis-world-v0.1.json`; UI:
 `/experiment/e007/gate-14a/`.
 
+Gate 14A ran from committed runner `731005f`. Mechanics passed: 8/8 non-empty
+answers, 2/2 exact canned empty answers, and zero truncations. Locked manual
+review passed only 8/10. Qwen added no new factual claim, but S02 removed the
+explicit separate-version framing and S08 dropped an entire supplied pile. The
+strict gate failed. Preserve the failure; do not use free-form multi-pile
+synthesis in the harness. Next candidate: Qwen renders one pile at a time while
+ordinary code preserves every pile and its version label. Raw result:
+`/experiments/E007/answer-synthesis-result-v0.1.json`; audit:
+`/experiments/E007/answer-synthesis-human-audit-v0.1.json`.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

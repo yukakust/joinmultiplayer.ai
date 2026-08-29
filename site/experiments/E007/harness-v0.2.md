@@ -130,3 +130,12 @@ DeBERTa is diagnostic. Protocol:
 `/experiments/E007/answer-synthesis-protocol-v0.1.json`; cases:
 `/experiments/E007/answer-synthesis-world-v0.1.json`; UI:
 `/experiment/e007/gate-14a/`.
+
+The run produced every requested output and no truncation, but manual review
+passed only 8/10. Qwen invented no new factual claim. It did, however, remove
+the explicit separate-version framing in one case and completely omit one
+supplied pile in another. Gate 14A failed. Free-form multi-pile synthesis is not
+accepted. The next candidate gives Qwen one pile at a time and lets ordinary
+code preserve pile order and version labels. Result:
+`/experiments/E007/answer-synthesis-result-v0.1.json`; audit:
+`/experiments/E007/answer-synthesis-human-audit-v0.1.json`.

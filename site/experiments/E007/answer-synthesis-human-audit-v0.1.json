@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "14A",
+  "kind": "manual_audit_against_locked_rubric",
+  "result_sha256": "8c91339f71796bd1cea5d58a6f29c50adac5b4c6e36c9e8eff4ac1062343a616",
+  "summary": {
+    "passed_cases": 8,
+    "total_cases": 10,
+    "new_factual_claims": 0,
+    "omitted_required_meanings": 1,
+    "strengthened_or_decontextualized_meanings": 1,
+    "exact_empty_answers": "2/2",
+    "token_limit_hits": 0,
+    "passed_locked_gate": false
+  },
+  "records": [
+    {"id": "S01", "verdict": "pass", "reason": "Both supplied claims were preserved and nothing factual was added."},
+    {"id": "S02", "verdict": "fail", "reason": "The two statements stayed separate as P1 and P2, but Qwen removed the explicit framing that they were two supported versions and presented both as direct facts."},
+    {"id": "S03", "verdict": "pass", "reason": "The word may and the required order of inspection were preserved."},
+    {"id": "S04", "verdict": "pass", "reason": "The negation and the closed-vent restriction were preserved."},
+    {"id": "S05", "verdict": "pass", "reason": "The 20 percent value, border condition, and lack of measured benefit for large objects were preserved."},
+    {"id": "S06", "verdict": "pass", "reason": "The word only and the phase-drift condition were preserved."},
+    {"id": "S07", "verdict": "pass", "reason": "All three piles survived, including the allowed remote action and forbidden local restart."},
+    {"id": "S08", "verdict": "fail", "reason": "Qwen returned P1 but omitted P2 completely, losing the separate report about the tone stopping below 18 pressure units."},
+    {"id": "S09", "verdict": "pass", "reason": "The empty input bypassed Qwen and returned the exact fixed response."},
+    {"id": "S10", "verdict": "pass", "reason": "The empty input bypassed Qwen and returned the exact fixed response."}
+  ],
+  "decision": "Gate 14A did not pass. Free-form multi-pile synthesis can silently drop a pile or remove version framing. Keep the raw result and test deterministic per-pile assembly next."
+}

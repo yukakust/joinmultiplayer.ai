@@ -4993,16 +4993,27 @@ async function loadE007AnswerSynthesis() {
   const target = document.querySelector(".e007-synthesis-page");
   if (!target) return;
   try {
-    const response = await fetch("/experiments/E007/answer-synthesis-world-v0.1.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("Gate 14A world missing");
-    const world = await response.json();
+    const [worldResponse, resultResponse, auditResponse] = await Promise.all([
+      fetch("/experiments/E007/answer-synthesis-world-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/answer-synthesis-result-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/answer-synthesis-human-audit-v0.1.json", { cache: "no-store" }),
+    ]);
+    if (!worldResponse.ok || !resultResponse.ok || !auditResponse.ok) throw new Error("Gate 14A data missing");
+    const world = await worldResponse.json();
+    const result = await resultResponse.json();
+    const audit = await auditResponse.json();
+    const resultById = new Map(result.records.map(item => [item.id, item]));
+    const auditById = new Map(audit.records.map(item => [item.id, item]));
     const cases = world.cases.map(item => {
+      const model = resultById.get(item.id);
+      const review = auditById.get(item.id);
       const piles = item.piles.length
         ? item.piles.map(pile => `<article><b>${escapeHTML(pile.pile_id)}</b>${pile.claims.map(claim => `<p>${escapeHTML(claim)}</p>`).join("")}</article>`).join("")
         : `<article class="is-empty"><b>${localized({ en: "NO ACCEPTED INFORMATION", ru: "НЕТ ПРИНЯТОЙ ИНФОРМАЦИИ" })}</b><p>${escapeHTML(world.canned_empty_response)}</p></article>`;
-      return `<details class="e007-synthesis-case" open><summary><b>${escapeHTML(item.id)}</b><span>${escapeHTML(item.question)}</span><strong>${item.piles.length ? `${item.piles.length} ${localized({ en: "piles", ru: "стопки" })}` : localized({ en: "empty", ru: "пусто" })}</strong></summary><div>${piles}</div></details>`;
+      const verdict = review.verdict === "pass" ? localized({ en: "CORRECT", ru: "ВЕРНО" }) : localized({ en: "FAILED", ru: "ОШИБКА" });
+      return `<details class="e007-synthesis-case ${review.verdict === "pass" ? "is-correct" : "is-critical"}" open><summary><b>${escapeHTML(item.id)}</b><span>${escapeHTML(item.question)}</span><strong>${escapeHTML(verdict)}</strong></summary><div class="e007-synthesis-input">${piles}</div><section class="e007-synthesis-answer"><small>${localized({ en: "FINAL ANSWER", ru: "ИТОГОВЫЙ ОТВЕТ" })}</small><p>${escapeHTML(model.answer)}</p><strong>${escapeHTML(review.reason)}</strong></section></details>`;
     }).join("");
-    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict needs-review"><span>${localized({ en: "FROZEN BEFORE MODEL RUN", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА МОДЕЛИ" })}</span><h2>${localized({ en: "Ten inputs are locked. No answer exists yet.", ru: "Десять входов зафиксированы. Ответов модели пока нет." })}</h2><p>${localized({ en: "Success means: keep every supplied meaning, add no new factual meaning, and use the fixed response when the network supplied nothing.", ru: "Успех: сохранить каждый переданный смысл, не добавить нового факта и использовать готовый ответ, когда сеть ничего не прислала." })}</p></div><div class="e007-synthesis-list">${cases}</div><div class="actions"><a class="primary-link" href="/experiments/E007/answer-synthesis-protocol-v0.1.json">${localized({ en: "LOCKED TEST PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })} ↗</a><a class="quiet-link" href="/experiments/E007/answer-synthesis-world-v0.1.json">${localized({ en: "ALL TEN INPUTS", ru: "ВСЕ ДЕСЯТЬ ВХОДОВ" })} ↗</a><a class="quiet-link" href="/experiment/e007/gate-13d/">${localized({ en: "ACCEPTED PILES", ru: "ПРИНЯТЫЕ СТОПКИ" })} ↗</a></div></section>`;
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict is-failed"><span>${localized({ en: "LOCKED SYNTHETIC DEVELOPMENT RESULT", ru: "ЗАМОРОЖЕННЫЙ SYNTHETIC DEVELOPMENT-РЕЗУЛЬТАТ" })}</span><h2>${localized({ en: "8 of 10 passed. One pile disappeared.", ru: "8 из 10 прошли. Одна стопка исчезла." })}</h2><p>${localized({ en: "Qwen invented no new fact, but removed version framing once and completely omitted one supplied pile once. The strict gate did not pass.", ru: "Qwen не придумала новых фактов, но один раз убрала пометку «это разные версии» и один раз полностью потеряла переданную стопку. Строгий gate не пройден." })}</p></div><div class="e007-result-metrics"><article class="is-correct"><span>${localized({ en: "CORRECT CASES", ru: "ВЕРНЫХ ПРИМЕРОВ" })}</span><strong>${audit.summary.passed_cases} / ${audit.summary.total_cases}</strong></article><article class="is-correct"><span>${localized({ en: "INVENTED FACTS", ru: "ПРИДУМАННЫХ ФАКТОВ" })}</span><strong>${audit.summary.new_factual_claims}</strong></article><article class="is-critical"><span>${localized({ en: "LOST PILES", ru: "ПОТЕРЯННЫХ СТОПОК" })}</span><strong>${audit.summary.omitted_required_meanings}</strong></article></div><div class="e007-synthesis-list">${cases}</div><div class="actions"><a class="primary-link" href="/experiments/E007/answer-synthesis-human-audit-v0.1.json">${localized({ en: "MANUAL AUDIT", ru: "РУЧНАЯ ПРОВЕРКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/answer-synthesis-result-v0.1.json">${localized({ en: "RAW RESULT", ru: "СЫРОЙ РЕЗУЛЬТАТ" })} ↗</a><a class="quiet-link" href="/experiments/E007/answer-synthesis-protocol-v0.1.json">${localized({ en: "LOCKED TEST PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })} ↗</a><a class="quiet-link" href="/experiments/E007/answer-synthesis-world-v0.1.json">${localized({ en: "ALL TEN INPUTS", ru: "ВСЕ ДЕСЯТЬ ВХОДОВ" })} ↗</a><a class="quiet-link" href="/experiment/e007/gate-13d/">${localized({ en: "ACCEPTED PILES", ru: "ПРИНЯТЫЕ СТОПКИ" })} ↗</a></div></section>`;
   } catch (error) {
     target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 14A could not be loaded.", ru: "Не удалось загрузить Gate 14A." });
   }

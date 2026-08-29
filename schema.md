@@ -391,7 +391,7 @@ an honest limitation, not proof across domains or scale. Decision record:
 | 11 | Check `exact source passage ↔ one atomic claim` with DeBERTa-v3-base NLI. Keep the person's question outside this call. Return SUPPORTED / CONTRADICTED / NOT PROVEN. | Accepted after Gate 3C.6P–Q: short pairs 20/20; the mixed question-and-context package fell to 15/20. Synthetic English development evidence only. |
 | 12 | A pocket i's knowledge history is an append-only chain: current head plus preserved history. No semantic relation label is required. Truth, applicability, and independence are checked later after collection. | Accepted after 10/10 synthetic mechanics and one yukabox → miracle-prod transfer with matching SHA-256 and correct head/history. |
 | 13 | Build cautious DeBERTa piles, let Qwen create one readable claim per pile, validate every rewrite against every original in both directions, then compare only validated claims to form final piles. Preserve originals, evidence, sources, lineage, and separate versions. | Accepted for harness v0.2 by the owner after Gate 13D: 5/6 exact paraphrase piles, 0 false merges, 9/10 rewrites validated. Synthetic development evidence only; scale and domain transfer remain unproven. |
-| 14 | A model writes the final human answer only from accepted evidence; a final checker shows gaps instead of guessing. | Accepted design, not yet tested. |
+| 14 | Produce a readable answer containing only claims supplied by accepted piles. Empty input returns a fixed response. | Gate 14A failed 8/10: no invented facts, but one alternative lost its version framing and one supplied pile disappeared. Free-form multi-pile synthesis is not accepted. |
 | 15 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |
 
 ## Locked Gate 14A: closed-world answer synthesis
@@ -409,3 +409,13 @@ are diagnostics only. Protocol:
 `/experiments/E007/answer-synthesis-protocol-v0.1.json`; frozen cases:
 `/experiments/E007/answer-synthesis-world-v0.1.json`; UI:
 `/experiment/e007/gate-14a/`.
+
+The locked run returned 8/8 non-empty answers, 2/2 exact canned empty answers,
+and no truncation. Manual review passed 8/10. Qwen invented no new factual
+claim, but S02 removed the explicit framing that two claims were separate
+supported versions, and S08 omitted the second pile completely. Therefore the
+strict gate failed. The next design should synthesize one pile at a time and
+let ordinary code preserve pile order and version labels, so a language model
+cannot silently delete a pile. Raw result:
+`/experiments/E007/answer-synthesis-result-v0.1.json`; audit:
+`/experiments/E007/answer-synthesis-human-audit-v0.1.json`.

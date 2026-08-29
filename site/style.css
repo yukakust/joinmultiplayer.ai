@@ -6140,6 +6140,11 @@ blockquote {
 
 .e007-synthesis-case {
   border: 1px solid var(--line);
+  border-top: 6px solid var(--ember);
+}
+
+.e007-synthesis-case.is-correct {
+  border-top-color: #7cad72;
 }
 
 .e007-synthesis-case summary {
@@ -6160,7 +6165,7 @@ blockquote {
   color: var(--muted);
 }
 
-.e007-synthesis-case > div {
+.e007-synthesis-input {
   border-top: 1px solid var(--line);
   display: grid;
   gap: 1px;
@@ -6175,6 +6180,27 @@ blockquote {
 
 .e007-synthesis-case article.is-empty {
   border-left: 6px solid var(--muted);
+}
+
+.e007-synthesis-answer {
+  border-top: 1px solid var(--line);
+  padding: 22px;
+}
+
+.e007-synthesis-answer small {
+  color: var(--muted);
+  display: block;
+}
+
+.e007-synthesis-answer p {
+  font-size: clamp(1.15rem, 2vw, 1.65rem);
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.e007-synthesis-answer strong {
+  color: var(--muted);
+  display: block;
 }
 
 @media (max-width: 700px) {

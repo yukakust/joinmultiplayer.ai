@@ -48,6 +48,17 @@ class AnswerSynthesisProtocolTests(unittest.TestCase):
         self.assertEqual(prompt.count("Second claim."), 1)
         self.assertIn("FINAL ANSWER:", prompt)
 
+    def test_published_result_preserves_failed_manual_gate(self):
+        result_path = ROOT / "site/experiments/E007/answer-synthesis-result-v0.1.json"
+        audit_path = ROOT / "site/experiments/E007/answer-synthesis-human-audit-v0.1.json"
+        result = json.loads(result_path.read_text(encoding="utf-8"))
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        self.assertEqual(hashlib.sha256(result_path.read_bytes()).hexdigest(), audit["result_sha256"])
+        self.assertEqual(result["mechanical_summary"]["exact_empty_answers"], 2)
+        self.assertEqual(result["mechanical_summary"]["token_limit_hits"], 0)
+        self.assertEqual(audit["summary"]["passed_cases"], 8)
+        self.assertFalse(audit["summary"]["passed_locked_gate"])
+
 
 if __name__ == "__main__":
     unittest.main()
