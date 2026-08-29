@@ -69,6 +69,42 @@
     "Qwen3-8B builds USED while SAME_CASE and OTHER remain preserved",
     "Qwen3-8B writes the main answer from USED only"
   ],
+  "central_pipeline_contract": {
+    "locked_after_physical_receipts_but_before_any_central_model_inference": true,
+    "reason_for_addendum": "The first public protocol named the accepted modules but omitted their already-established thresholds, revisions, and output shapes. This addendum copies those choices before central inference; physical search outputs are immutable.",
+    "reranker": {
+      "model": "Qwen/Qwen3-Reranker-4B",
+      "quantization": "Q4_K_M",
+      "instruction": "Given a user question and one evidence window, decide whether the window contains information that helps answer the question.",
+      "drop_at_or_below": 0.00292693,
+      "take_at_or_above": 0.92222771,
+      "between": "NOT_SURE",
+      "threshold_source": "frozen E007 Gate 3C.5 Q4 thresholds",
+      "forward_policy": "TAKE and NOT_SURE continue; DROP stops"
+    },
+    "nli": {
+      "model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+      "premise": "exact verified evidence bytes",
+      "hypothesis": "sender claim",
+      "forward_policy": "entailment must be the highest-probability label"
+    },
+    "shelf_builder": {
+      "model": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "decoding": "greedy; thinking disabled",
+      "output": {"used_ids": [], "same_case_ids": []},
+      "rule": "USED is the smallest supported set that jointly answers the question. SAME_CASE contains other supported views about the same case. Every remaining accepted record stays OTHER. No record is deleted."
+    },
+    "writer": {
+      "model": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "decoding": "greedy; thinking disabled",
+      "visible_input": "question plus USED records only",
+      "output": {"answer": "string", "evidence_ids": []},
+      "empty_answer": "The network supplied no shareable information."
+    }
+  },
   "locked_gates": {
     "physical_nodes_complete": "4/4 on exactly two declared device labels",
     "terminal_lane_receipts": "72/72",
