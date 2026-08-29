@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16B.1",
+  "status": "locked_before_inference",
+  "hypothesis": "Qwen3-8B can recover six conversation-specific facts from two complete cleaned Codex conversations of roughly 10,000 to 16,000 tokens without RAG, chunking, summaries, or a hint about where each fact appears.",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "training": false,
+    "thinking": false,
+    "decoding": "greedy",
+    "runtime": "yukabox CPU, bfloat16"
+  },
+  "input": {
+    "conversations": 2,
+    "questions_per_conversation": 3,
+    "visible_roles": ["user", "assistant"],
+    "assistant_phases": ["commentary", "final_answer", "none"],
+    "excluded": [
+      "reasoning",
+      "tool calls and outputs",
+      "system and developer messages",
+      "automatically supplied plugin catalogues"
+    ],
+    "chunking": false,
+    "retrieval": false,
+    "summaries": false
+  },
+  "test": {
+    "one_full_context_call_per_conversation": true,
+    "one_no_context_control_call_per_question_set": true,
+    "answer_language": "Russian",
+    "evidence": "The model must name the numbered transcript message supporting every answer.",
+    "unknown_policy": "Answer NOT_FOUND when the transcript does not contain the fact."
+  },
+  "evaluation": {
+    "per_question_scores": {
+      "2": "correct fact and supporting message",
+      "1": "partly correct or correct fact with wrong/missing support",
+      "0": "wrong, invented, or not found"
+    },
+    "primary_metric": "points_with_full_conversation_out_of_12",
+    "control_metric": "points_without_conversation_out_of_12",
+    "success_condition": "At least 10/12 with the conversations and at least 4 points more than the no-context control."
+  },
+  "privacy": {
+    "raw_conversations_public": false,
+    "session_ids_public": false,
+    "public_result": "Only redacted questions, model answers, scores, token counts, and opaque conversation labels."
+  }
+}
