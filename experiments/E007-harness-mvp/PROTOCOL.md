@@ -1075,3 +1075,13 @@ The optimized path is rejected for the MVP until the runtime quality gap is
 understood. All six questions and answers are published for visual review.
 
 - `site/experiments/E007/bf16-rocm-result-v0.2.json`
+
+## Gate 16B.5 — one llama.cpp file, CPU versus Radeon
+
+Gate 16B.5 holds the exact BF16 GGUF, llama.cpp build, native template, Q8 KV,
+reasoning-off setting, conversations, questions, and prompt constant. Only the
+execution device changes. If CPU and ROCm fail similarly, investigate the
+shared llama.cpp path. If CPU recovers the 11/12 reference while ROCm remains
+poor, investigate the ROCm device path.
+
+- `site/experiments/E007/llamacpp-cpu-rocm-protocol-v0.1.json`

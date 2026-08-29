@@ -1,0 +1,55 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16B.5",
+  "status": "locked_before_inference",
+  "hypothesis": "Running one exact BF16 GGUF through one llama.cpp build on CPU and Radeon will reveal whether the Gate 16B.4 quality loss belongs to the shared llama.cpp path or specifically to the ROCm device path.",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "gguf_weight_type": "BF16",
+    "gguf_bytes": 16388044128,
+    "gguf_sha256": "30720de07dc7e95721fead11cd40ddfad11d336927e9d02b36efb92eac138f69",
+    "training": false,
+    "thinking": false,
+    "decoding": "greedy"
+  },
+  "constant": {
+    "engine": "the same llama-server build 7e4c0a968",
+    "chat_template": "native checkpoint template",
+    "reasoning": "off",
+    "kv_cache": "Q8_0",
+    "context_tokens": 16384,
+    "parallel_slots": 1,
+    "prompt": "exactly the Gate 16B.1 grouped prompt",
+    "private_conversations": "the same two cleaned Codex conversations",
+    "questions": 6
+  },
+  "lanes": [
+    {
+      "id": "llamacpp_cpu",
+      "device": "CPU only",
+      "gpu_layers": 0,
+      "flash_attention": false
+    },
+    {
+      "id": "llamacpp_rocm",
+      "device": "integrated Radeon through ROCm",
+      "gpu_layers": "all",
+      "flash_attention": true
+    }
+  ],
+  "references": {
+    "transformers_cpu_score": "11/12",
+    "llamacpp_rocm_gate16b4_score": "3/12"
+  },
+  "decision_rule": {
+    "runtime_path": "If llama.cpp CPU and ROCm both score poorly in the same pattern, investigate llama.cpp conversion or inference behavior.",
+    "rocm_path": "If llama.cpp CPU stays near 11/12 while ROCm stays poor, investigate ROCm kernels or GPU numerical behavior.",
+    "mixed": "Any other result remains unresolved and must be reported without choosing a cause."
+  },
+  "privacy": {
+    "raw_conversations_public": false,
+    "questions_answers_scores_timings_public": true
+  }
+}
