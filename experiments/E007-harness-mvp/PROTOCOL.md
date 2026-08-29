@@ -879,3 +879,12 @@ choose shelves. This is a synthetic development mechanics test. It trusts the
 sender-declared tags and does not yet test an unseen sender, dishonest metadata,
 or a final writer. Locked machine-readable protocol:
 `site/experiments/E007/evidence-ledger-protocol-v0.1.json`.
+
+Gate 15E result: passed all frozen mechanics gates without a model call. The
+append-only ledger contains all 480/480 records. The `USED` view contains all
+60/60 required pieces. `SAME_CASE` contains all 24/24 frozen alternatives. The
+remaining 396 records are preserved and hidden by default. Eighteen copied
+records collapse into six dependent lineage views without deleting their
+originals. This validates the deterministic storage/view mechanism only; it
+does not validate sender tags, unseen questions, or the final writer. Result:
+`site/experiments/E007/evidence-ledger-result-v0.1.json`.

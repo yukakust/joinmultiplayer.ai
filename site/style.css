@@ -1970,6 +1970,37 @@ button:disabled {
   .e007-bundle-answer-pair { grid-template-columns: 1fr; }
 }
 
+.e007-ledger-page {
+  width: min(96vw, 1800px);
+  max-width: none;
+}
+
+.e007-ledger-cases { display: grid; gap: 1.5rem; }
+.e007-ledger-case { border-top: 3px solid var(--ink); padding: 1.5rem 0; }
+.e007-ledger-case > header { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; align-items: start; }
+.e007-ledger-case > header h2 { margin: 0; font-size: clamp(1.15rem, 2vw, 1.8rem); }
+.e007-ledger-shelves { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+.e007-ledger-shelves > section { border: 1px solid var(--line); padding: clamp(1rem, 2vw, 1.5rem); min-width: 0; }
+.e007-ledger-shelves .is-best { border-top: 6px solid #5d9f58; }
+.e007-ledger-shelves .is-versions { border-top: 6px solid #c98b28; }
+.e007-ledger-label { display: block; color: var(--muted); font-weight: 700; letter-spacing: 0.06em; }
+.e007-ledger-answer { font-size: 1.15rem; line-height: 1.5; }
+.e007-ledger-shelves ul, .e007-ledger-other { display: grid; gap: 0.8rem; padding-left: 1.2rem; }
+.e007-ledger-shelves li code, .e007-ledger-shelves li span, .e007-ledger-shelves li small,
+.e007-ledger-other li code, .e007-ledger-other li span { display: block; }
+.e007-ledger-shelves li small { color: #5d9f58; }
+.e007-ledger-shelves blockquote { border-left: 3px solid #c98b28; margin: 0.75rem 0; padding-left: 0.75rem; }
+.e007-ledger-shelves article + article { border-top: 1px solid var(--line); padding-top: 1rem; }
+.e007-ledger-shelves article header { display: flex; justify-content: space-between; gap: 1rem; }
+.e007-ledger-empty { color: var(--muted); }
+.e007-ledger-case details { border-top: 1px solid var(--line); padding-top: 0.8rem; }
+.e007-ledger-case summary { cursor: pointer; color: var(--muted); }
+.e007-ledger-other { max-height: 30rem; overflow: auto; }
+
+@media (max-width: 800px) {
+  .e007-ledger-case > header, .e007-ledger-shelves { grid-template-columns: 1fr; }
+}
+
 .e005-raw-records {
   margin: 3rem 0;
 }

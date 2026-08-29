@@ -2904,6 +2904,43 @@ function e007Qwen8BBundleShell() {
   return `<section class="flow-shell e007-cluster-page e007-relevance17-page e007-bundle8-page"><div class="flow-step">E007 · GATE 15D · ${localized({ en: "LOCKED BEFORE INFERENCE", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h1>${localized({ en: "Can Qwen solve the whole evidence puzzle?", ru: "Соберёт ли Qwen весь пазл доказательств?" })}</h1><p class="contribution-intro">${localized({ en: "Thirty questions. Sixteen fragments per question. The model sees all pieces together before it selects and answers.", ru: "Тридцать вопросов. По шестнадцать фрагментов на каждый. Модель видит все части вместе — и только потом выбирает и отвечает." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e007EvidenceLedgerShell() {
+  return `<section class="flow-shell e007-ledger-page"><div class="flow-step">E007 · GATE 15E · ${localized({ en: "TWO SHELVES", ru: "ДВЕ ПОЛКИ" })}</div><h1>${localized({ en: "Nothing is thrown away.", ru: "Ничего не выбрасываем." })}</h1><p class="contribution-intro">${localized({ en: "The best answer and every competing version now live on separate shelves of the same ledger.", ru: "Лучший ответ и все спорные версии теперь лежат на разных полках одного журнала." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+async function loadE007EvidenceLedger() {
+  const target = document.querySelector(".e007-ledger-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E007/evidence-ledger-result-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Gate 15E data missing");
+    const result = await response.json();
+    const byQuestion = new Map();
+    result.ledger.forEach(item => {
+      if (!byQuestion.has(item.question_id)) byQuestion.set(item.question_id, []);
+      byQuestion.get(item.question_id).push(item);
+    });
+    const cards = result.questions.map(question => {
+      const items = byQuestion.get(question.id) || [];
+      const used = items.filter(item => item.shelf === "USED");
+      const alternatives = items.filter(item => item.shelf === "SAME_CASE");
+      const other = items.filter(item => item.shelf === "OTHER");
+      const best = question.best_answer || {};
+      const bestText = [best.best_supported, best.action_or_next_step].filter(Boolean).join(" ");
+      const usedHTML = used.map(item => `<li><code>${escapeHTML(item.source_id)}</code><span>${escapeHTML(item.claim_evidence)}</span>${item.conditional ? `<small>${localized({ en: "conditional rule", ru: "условное правило" })}</small>` : ""}</li>`).join("");
+      const alternativeHTML = alternatives.length ? question.same_case_views.map(view => {
+        const members = alternatives.filter(item => item.lineage_id === view.lineage_id);
+        return `<article><header><code>${escapeHTML(view.lineage_id)}</code><strong>${members.length} ${localized({ en: members.length === 1 ? "record" : "copies → one view", ru: members.length === 1 ? "запись" : "копии → одна версия" })}</strong></header>${members.map(item => `<blockquote>${escapeHTML(item.claim_evidence)}</blockquote>`).join("")}</article>`;
+      }).join("") : `<p class="e007-ledger-empty">${localized({ en: "No competing version was received for this case.", ru: "Для этого случая спорных версий не пришло." })}</p>`;
+      const otherHTML = other.map(item => `<li><code>${escapeHTML(item.source_id)}</code><span>${escapeHTML(item.claim_evidence)}</span></li>`).join("");
+      return `<article class="e007-ledger-case"><header><code>${escapeHTML(question.id)}</code><h2>${escapeHTML(question.question)}</h2></header><div class="e007-ledger-shelves"><section class="is-best"><span class="e007-ledger-label">${localized({ en: "SHELF 1 · BEST ANSWER", ru: "ПОЛКА 1 · ЛУЧШИЙ ОТВЕТ" })}</span><p class="e007-ledger-answer">${escapeHTML(bestText)}</p><ul>${usedHTML}</ul></section><section class="is-versions"><span class="e007-ledger-label">${localized({ en: "SHELF 2 · ALL VERSIONS", ru: "ПОЛКА 2 · ВСЕ ВЕРСИИ" })}</span>${alternativeHTML}</section></div><details><summary>${localized({ en: `${other.length} other records are preserved · open audit`, ru: `${other.length} остальных записей сохранены · открыть проверку` })}</summary><ul class="e007-ledger-other">${otherHTML}</ul></details></article>`;
+    }).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict"><span>${localized({ en: "SYNTHETIC DEVELOPMENT MECHANICS · PASSED", ru: "SYNTHETIC DEVELOPMENT-МЕХАНИКА · ПРОШЛА" })}</span><h2>${localized({ en: "Two views. One complete memory.", ru: "Два взгляда. Одна полная память." })}</h2><p>${localized({ en: "No model was called. Ordinary code rebuilt the views from frozen traces and sender cards.", ru: "Модель не запускалась. Обычный код собрал полки из замороженных следов и карточек отправителей." })}</p></div><div class="e007-result-metrics"><article class="is-correct"><span>${localized({ en: "NEEDED PIECES", ru: "НУЖНЫЕ ЧАСТИ" })}</span><strong>${result.summary.required_pieces_in_used} / ${result.summary.required_pieces_total}</strong></article><article class="is-correct"><span>${localized({ en: "COMPETING VERSIONS", ru: "СПОРНЫЕ ВЕРСИИ" })}</span><strong>${result.summary.same_case_alternatives_preserved} / ${result.summary.same_case_alternatives_total}</strong></article><article class="is-correct"><span>${localized({ en: "ALL RECORDS KEPT", ru: "ВСЕ ЗАПИСИ СОХРАНЕНЫ" })}</span><strong>${result.summary.ledger_records_preserved} / 480</strong></article></div><div class="control-warning"><strong>${localized({ en: "What this proves—and what it does not", ru: "Что это показало — и чего ещё нет" })}</strong><p>${localized({ en: "The ledger can keep the best answer, competing views, and copied lineages without deleting anything. This test trusts frozen sender tags and reuses known synthetic questions. Gate 15F must still test whether a writer can explain both shelves without mixing or inventing evidence.", ru: "Журнал умеет хранить лучший ответ, спорные версии и происхождение копий, ничего не удаляя. Но тест доверяет замороженным меткам отправителей и использует уже знакомые синтетические вопросы. В Gate 15F ещё нужно проверить, сможет ли финальный автор понятно рассказать обе полки, не смешивая и не выдумывая доказательства." })}</p></div><h2>${localized({ en: "Look at both shelves yourself", ru: "Посмотрите обе полки глазами" })}</h2><div class="e007-ledger-cases">${cards}</div><div class="actions"><a class="primary-link" href="/experiments/E007/evidence-ledger-result-v0.1.json">${localized({ en: "FULL LEDGER · 480 RECORDS", ru: "ВЕСЬ ЖУРНАЛ · 480 ЗАПИСЕЙ" })} ↗</a><a class="quiet-link" href="/experiments/E007/evidence-ledger-protocol-v0.1.json">${localized({ en: "PLAN BEFORE BUILD", ru: "ПЛАН ДО СБОРКИ" })} ↗</a><a class="quiet-link" href="/experiments/E007/evidence-ledger-accepted-architecture-v0.1.json">${localized({ en: "ACCEPTED LAW", ru: "ПРИНЯТЫЙ ЗАКОН" })} ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 15E could not be loaded.", ru: "Не удалось загрузить Gate 15E." });
+  }
+}
+
 async function loadE007Qwen8BBundle() {
   const target = document.querySelector(".e007-bundle8-page");
   if (!target) return;
@@ -6188,6 +6225,10 @@ function render() {
     document.title = `${localized({ en: "Bundle evidence", ru: "Пазл доказательств" })} — i`;
     app.innerHTML = withLanguage(e007Qwen8BBundleShell());
     loadE007Qwen8BBundle();
+  } else if (path === "experiment/e007/gate-15e") {
+    document.title = `${localized({ en: "Two evidence shelves", ru: "Две полки доказательств" })} — i`;
+    app.innerHTML = withLanguage(e007EvidenceLedgerShell());
+    loadE007EvidenceLedger();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
