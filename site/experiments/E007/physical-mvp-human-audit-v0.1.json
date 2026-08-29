@@ -1,0 +1,70 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "16A",
+  "status": "manual_audit_complete_locked_gate_failed",
+  "result": "/experiments/E007/physical-mvp-result-v0.1.json",
+  "summary": {
+    "physical_transport_passed": true,
+    "physical_nodes_complete": "4/4",
+    "terminal_receipts": "72/72",
+    "raw_private_canary_leaks": 0,
+    "required_sources_reached_verified_candidates": "9/10",
+    "same_case_alternatives_reached_verified_candidates": "2/2",
+    "ordinary_main_answers_correct": "4/5",
+    "blocked_question_correct": "0/1",
+    "unsupported_main_answer_facts": 1,
+    "all_locked_gates_passed": false
+  },
+  "cases": [
+    {
+      "id": "P01",
+      "main_answer_correct": true,
+      "required_sources_present": ["M1-AVEN-DIAG", "Y1-AVEN-SAFE"],
+      "required_sources_missing": [],
+      "shelf_correct": false,
+      "reason": "The main answer correctly joins diagnosis from MacBook with the safe action from yukabox. Y2-NOISE-03 was wrongly labelled SAME_CASE, but it did not enter the answer."
+    },
+    {
+      "id": "P02",
+      "main_answer_correct": true,
+      "required_sources_present": ["Y2-BRIO-DIAG", "M2-BRIO-SAFE"],
+      "required_sources_missing": [],
+      "shelf_correct": false,
+      "reason": "The main answer is correct. The competing copied report M1-BRIO-ALT was wrongly placed in USED instead of SAME_CASE, but the writer did not cite or repeat it."
+    },
+    {
+      "id": "P03",
+      "main_answer_correct": true,
+      "required_sources_present": ["M1-CAIRN-DIAG", "Y1-CAIRN-SAFE"],
+      "required_sources_missing": [],
+      "shelf_correct": true,
+      "reason": "The correct diagnosis and safe action crossed the two devices, reached USED, and became one supported answer. Extra accepted records remained OTHER."
+    },
+    {
+      "id": "P04",
+      "main_answer_correct": false,
+      "required_sources_present": ["Y2-DARO-DIAG"],
+      "required_sources_missing": ["M2-DARO-SAFE"],
+      "shelf_correct": false,
+      "reason": "MacBook local search never sent M2-DARO-SAFE. The central harness cannot recover a missing source, so the final answer contains the cause but omits the safe response."
+    },
+    {
+      "id": "P05",
+      "main_answer_correct": true,
+      "required_sources_present": ["M1-ELIO-AMBIG", "Y1-ELIO-NEXT"],
+      "required_sources_missing": [],
+      "shelf_correct": false,
+      "reason": "The answer correctly preserves uncertainty and asks for the next measurement. An unrelated Brio rule was wrongly labelled SAME_CASE but stayed outside the answer."
+    },
+    {
+      "id": "P06",
+      "main_answer_correct": false,
+      "required_sources_present": [],
+      "required_sources_missing": [],
+      "shelf_correct": false,
+      "reason": "The private MacBook record was correctly blocked and its raw canary never travelled. The shelf builder nevertheless treated a public Cairn safety instruction as a private code, and the writer invented that C4 alignment was the requested code."
+    }
+  ],
+  "verdict": "The physical pipeline is real and can compose cross-device evidence, but the MVP gate fails. Local recall can lose a required half, and the shelf builder can turn same-device topical similarity into an unsupported private answer. Both failures must remain visible before the next protocol is designed."
+}

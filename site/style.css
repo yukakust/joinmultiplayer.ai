@@ -6525,6 +6525,29 @@ blockquote {
 .e007-physical-questions { display: grid; grid-template-columns: repeat(3, 1fr); border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
 .e007-physical-questions article { min-height: 210px; padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .e007-physical-questions article > div { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; color: var(--muted); }
+.e007-physical-cases { display: grid; gap: 28px; }
+.e007-physical-case { border: 1px solid var(--line); border-top: 7px solid #dfa74e; }
+.e007-physical-case.is-pass { border-top-color: #89ba82; }
+.e007-physical-case.is-fail { border-top-color: #e77461; }
+.e007-physical-case > header { display: flex; justify-content: space-between; padding: 18px 22px; border-bottom: 1px solid var(--line); }
+.e007-physical-case > header strong { font: 700 12px/1.2 var(--mono); }
+.e007-physical-case > h2, .e007-physical-answer, .e007-physical-reason { margin: 0; padding: 22px; }
+.e007-physical-answer { background: rgba(137,186,130,.09); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.e007-physical-case.is-fail .e007-physical-answer { background: rgba(231,116,97,.08); }
+.e007-physical-answer small, .e007-physical-shelves small { font: 700 11px/1.2 var(--mono); color: var(--muted); }
+.e007-physical-answer p { font-size: 22px; line-height: 1.45; }
+.e007-physical-reason { color: var(--muted); }
+.e007-physical-shelves { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.e007-physical-shelves section { padding: 22px; }
+.e007-physical-shelves section + section { border-left: 1px solid var(--line); }
+.e007-physical-shelves ul, .e007-physical-received { list-style: none; padding: 0; }
+.e007-physical-shelves li { margin-top: 16px; }
+.e007-physical-shelves li p { margin: 5px 0 0; }
+.e007-physical-case > details { padding: 18px 22px; }
+.e007-physical-case > details summary { cursor: pointer; font: 700 12px/1.2 var(--mono); }
+.e007-physical-received li { display: grid; grid-template-columns: 130px 150px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.e007-physical-received p { margin: 0; }
+.e007-device-pill { font: 700 10px/1.2 var(--mono); text-transform: uppercase; color: var(--muted); }
 
 @media (max-width: 800px) {
   .e007-physical-mvp-page { width: calc(100vw - 24px); }
@@ -6532,4 +6555,7 @@ blockquote {
   .e007-physical-wire { min-height: 100px; transform: rotate(90deg); }
   .e007-physical-wire small { display: none; }
   .e007-physical-questions { grid-template-columns: 1fr; }
+  .e007-physical-shelves { grid-template-columns: 1fr; }
+  .e007-physical-shelves section + section { border-left: 0; border-top: 1px solid var(--line); }
+  .e007-physical-received li { grid-template-columns: 1fr; }
 }

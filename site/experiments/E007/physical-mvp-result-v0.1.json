@@ -1,0 +1,2965 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "16A",
+  "status": "locked_physical_mvp_inference_complete_manual_audit_pending",
+  "git_revision": "04be23f4f9a4572ef21caf2bfc0cf7eb4712d6b0",
+  "protocol_sha256": "f4de1da12271f897b4aeaaf056ddd0c5d2db6bb8c54a06b347d70c3e3123afc0",
+  "memory_sha256": "62b81164332c1e39904a2f9169a83589d3dc47ae8fb30744e0497782b765e6a7",
+  "transport": {
+    "room_id": "L0002",
+    "room_complete": true,
+    "nodes_complete": 4,
+    "nodes_total": 4,
+    "cards": [
+      "MVP-M1",
+      "MVP-M2",
+      "MVP-Y1",
+      "MVP-Y2"
+    ],
+    "cards_match": true,
+    "devices": [
+      "owner-macbook",
+      "yukabox"
+    ],
+    "devices_match": true,
+    "terminal_receipts": 72,
+    "question_hash_mismatches": 0,
+    "blocked_receipts": 3,
+    "blocked_capsules_present": 0,
+    "public_placeholder_present": false,
+    "passed": true
+  },
+  "models": {
+    "locked_after_physical_receipts_but_before_any_central_model_inference": true,
+    "reason_for_addendum": "The first public protocol named the accepted modules but omitted their already-established thresholds, revisions, and output shapes. This addendum copies those choices before central inference; physical search outputs are immutable.",
+    "reranker": {
+      "model": "Qwen/Qwen3-Reranker-4B",
+      "quantization": "Q4_K_M",
+      "instruction": "Given a user question and one evidence window, decide whether the window contains information that helps answer the question.",
+      "drop_at_or_below": 0.00292693,
+      "take_at_or_above": 0.92222771,
+      "between": "NOT_SURE",
+      "threshold_source": "frozen E007 Gate 3C.5 Q4 thresholds",
+      "forward_policy": "TAKE and NOT_SURE continue; DROP stops"
+    },
+    "nli": {
+      "model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+      "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+      "premise": "exact verified evidence bytes",
+      "hypothesis": "sender claim",
+      "forward_policy": "entailment must be the highest-probability label"
+    },
+    "shelf_builder": {
+      "model": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "decoding": "greedy; thinking disabled",
+      "output": {
+        "used_ids": [],
+        "same_case_ids": []
+      },
+      "rule": "USED is the smallest supported set that jointly answers the question. SAME_CASE contains other supported views about the same case. Every remaining accepted record stays OTHER. No record is deleted."
+    },
+    "writer": {
+      "model": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "decoding": "greedy; thinking disabled",
+      "visible_input": "question plus USED records only",
+      "output": {
+        "answer": "string",
+        "evidence_ids": []
+      },
+      "empty_answer": "The network supplied no shareable information."
+    }
+  },
+  "summary": {
+    "questions": 6,
+    "mechanically_verified_candidates": 33,
+    "reranker_take": 9,
+    "reranker_not_sure": 14,
+    "reranker_drop": 10,
+    "nli_forwarded": 23,
+    "nli_passed": 22,
+    "valid_shelf_outputs": 6,
+    "valid_writer_outputs": 6,
+    "manual_audit": "pending"
+  },
+  "questions": [
+    {
+      "id": "P01",
+      "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+      "expected_meaning": "Flux relay bounce; isolate the auxiliary bus and run L3 latch reset.",
+      "required_sources": [
+        "M1-AVEN-DIAG",
+        "Y1-AVEN-SAFE"
+      ],
+      "expected_alternatives": [],
+      "candidates_before_central_filter": [
+        {
+          "question_id": "P01",
+          "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+          "source_id": "M1-AVEN-DIAG",
+          "lineage_id": "lin-aven-field",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "The observed Aven-61 signal identifies flux relay bounce.",
+          "evidence": "Aven-61 condition card: seven lilac ticks after a coolant purge identifies flux relay bounce.",
+          "source": "Aven-61 condition card v1",
+          "conditions": "Seven lilac ticks after a coolant purge.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "b111c7e565ff4e2e0920ffa6b238510ad0beedaa65abb6f82ef85d158844aef9",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.545057,
+            "exact_terms": 0.592999,
+            "multilingual_neural": 0.733474
+          },
+          "reranker": {
+            "score": 0.99217024,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.93843579,
+              "neutral": 0.05324715,
+              "contradiction": 0.00831709
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P01",
+          "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+          "source_id": "M2-NOISE-02",
+          "lineage_id": "lin-m2-noise-2",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "A coolant shipment is scheduled.",
+          "evidence": "The next routine coolant shipment is scheduled for the first Monday of the month.",
+          "source": "Delivery calendar",
+          "conditions": "Monthly delivery.",
+          "limitations": "No device fault evidence.",
+          "source_sha256": "f5fc4b3d56d6ac53f919e4af6bd7ff4a5aa452fe5e1e6c8f56fce9fe1a042564",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.243695
+          },
+          "reranker": {
+            "score": 0.00175459,
+            "decision": "DROP"
+          }
+        },
+        {
+          "question_id": "P01",
+          "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+          "source_id": "Y1-AVEN-SAFE",
+          "lineage_id": "lin-aven-safety",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "For confirmed flux relay bounce, isolate the auxiliary bus and run L3 latch reset.",
+          "evidence": "Aven-61 response rule: when flux relay bounce is confirmed, isolate the auxiliary bus and run L3 latch reset.",
+          "source": "Aven-61 public response manual v1",
+          "conditions": "Flux relay bounce is confirmed on Aven-61.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "f3bcbe4e7f5ba62359ab1f80dc9b981b995fa2b456a1761dfeafbe25479cb6c7",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.290816,
+            "exact_terms": 0.208013
+          },
+          "reranker": {
+            "score": 0.05350765,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99376845,
+              "neutral": 0.00558204,
+              "contradiction": 0.0006495
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P01",
+          "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+          "source_id": "Y2-NOISE-03",
+          "lineage_id": "lin-y2-noise-3",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "Aven-61 changed storage racks.",
+          "evidence": "Aven-61 was moved from rack seven to rack nine during inventory.",
+          "source": "Inventory log",
+          "conditions": "Device offline.",
+          "limitations": "No diagnosis.",
+          "source_sha256": "fe45248b7780c8237749ac40e276e47de6171d33d73439e1dbec168d3b79c42f",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.227743,
+            "exact_terms": 0.294174
+          },
+          "reranker": {
+            "score": 0.07755995,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.98116416,
+              "neutral": 0.01664143,
+              "contradiction": 0.00219449
+            },
+            "passed": true
+          }
+        }
+      ],
+      "accepted_after_reranker_and_nli": [
+        {
+          "question_id": "P01",
+          "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+          "source_id": "M1-AVEN-DIAG",
+          "lineage_id": "lin-aven-field",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "The observed Aven-61 signal identifies flux relay bounce.",
+          "evidence": "Aven-61 condition card: seven lilac ticks after a coolant purge identifies flux relay bounce.",
+          "source": "Aven-61 condition card v1",
+          "conditions": "Seven lilac ticks after a coolant purge.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "b111c7e565ff4e2e0920ffa6b238510ad0beedaa65abb6f82ef85d158844aef9",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.545057,
+            "exact_terms": 0.592999,
+            "multilingual_neural": 0.733474
+          },
+          "reranker": {
+            "score": 0.99217024,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.93843579,
+              "neutral": 0.05324715,
+              "contradiction": 0.00831709
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P01",
+          "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+          "source_id": "Y1-AVEN-SAFE",
+          "lineage_id": "lin-aven-safety",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "For confirmed flux relay bounce, isolate the auxiliary bus and run L3 latch reset.",
+          "evidence": "Aven-61 response rule: when flux relay bounce is confirmed, isolate the auxiliary bus and run L3 latch reset.",
+          "source": "Aven-61 public response manual v1",
+          "conditions": "Flux relay bounce is confirmed on Aven-61.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "f3bcbe4e7f5ba62359ab1f80dc9b981b995fa2b456a1761dfeafbe25479cb6c7",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.290816,
+            "exact_terms": 0.208013
+          },
+          "reranker": {
+            "score": 0.05350765,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99376845,
+              "neutral": 0.00558204,
+              "contradiction": 0.0006495
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P01",
+          "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+          "source_id": "Y2-NOISE-03",
+          "lineage_id": "lin-y2-noise-3",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "Aven-61 changed storage racks.",
+          "evidence": "Aven-61 was moved from rack seven to rack nine during inventory.",
+          "source": "Inventory log",
+          "conditions": "Device offline.",
+          "limitations": "No diagnosis.",
+          "source_sha256": "fe45248b7780c8237749ac40e276e47de6171d33d73439e1dbec168d3b79c42f",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.227743,
+            "exact_terms": 0.294174
+          },
+          "reranker": {
+            "score": 0.07755995,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.98116416,
+              "neutral": 0.01664143,
+              "contradiction": 0.00219449
+            },
+            "passed": true
+          }
+        }
+      ],
+      "shelf_builder": {
+        "raw": "{\n  \"used_ids\": [\"M1-AVEN-DIAG\", \"Y1-AVEN-SAFE\"],\n  \"same_case_ids\": [\"Y2-NOISE-03\"]\n}",
+        "parsed": {
+          "used_ids": [
+            "M1-AVEN-DIAG",
+            "Y1-AVEN-SAFE"
+          ],
+          "same_case_ids": [
+            "Y2-NOISE-03"
+          ]
+        },
+        "valid": true
+      },
+      "shelves": {
+        "USED": [
+          {
+            "question_id": "P01",
+            "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+            "source_id": "M1-AVEN-DIAG",
+            "lineage_id": "lin-aven-field",
+            "card_id": "MVP-M1",
+            "device": "owner-macbook",
+            "claim": "The observed Aven-61 signal identifies flux relay bounce.",
+            "evidence": "Aven-61 condition card: seven lilac ticks after a coolant purge identifies flux relay bounce.",
+            "source": "Aven-61 condition card v1",
+            "conditions": "Seven lilac ticks after a coolant purge.",
+            "limitations": "Does not state the safe response.",
+            "source_sha256": "b111c7e565ff4e2e0920ffa6b238510ad0beedaa65abb6f82ef85d158844aef9",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.545057,
+              "exact_terms": 0.592999,
+              "multilingual_neural": 0.733474
+            },
+            "reranker": {
+              "score": 0.99217024,
+              "decision": "TAKE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.93843579,
+                "neutral": 0.05324715,
+                "contradiction": 0.00831709
+              },
+              "passed": true
+            }
+          },
+          {
+            "question_id": "P01",
+            "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+            "source_id": "Y1-AVEN-SAFE",
+            "lineage_id": "lin-aven-safety",
+            "card_id": "MVP-Y1",
+            "device": "yukabox",
+            "claim": "For confirmed flux relay bounce, isolate the auxiliary bus and run L3 latch reset.",
+            "evidence": "Aven-61 response rule: when flux relay bounce is confirmed, isolate the auxiliary bus and run L3 latch reset.",
+            "source": "Aven-61 public response manual v1",
+            "conditions": "Flux relay bounce is confirmed on Aven-61.",
+            "limitations": "Does not diagnose the signal by itself.",
+            "source_sha256": "f3bcbe4e7f5ba62359ab1f80dc9b981b995fa2b456a1761dfeafbe25479cb6c7",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.290816,
+              "exact_terms": 0.208013
+            },
+            "reranker": {
+              "score": 0.05350765,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99376845,
+                "neutral": 0.00558204,
+                "contradiction": 0.0006495
+              },
+              "passed": true
+            }
+          }
+        ],
+        "SAME_CASE": [
+          {
+            "question_id": "P01",
+            "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+            "source_id": "Y2-NOISE-03",
+            "lineage_id": "lin-y2-noise-3",
+            "card_id": "MVP-Y2",
+            "device": "yukabox",
+            "claim": "Aven-61 changed storage racks.",
+            "evidence": "Aven-61 was moved from rack seven to rack nine during inventory.",
+            "source": "Inventory log",
+            "conditions": "Device offline.",
+            "limitations": "No diagnosis.",
+            "source_sha256": "fe45248b7780c8237749ac40e276e47de6171d33d73439e1dbec168d3b79c42f",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.227743,
+              "exact_terms": 0.294174
+            },
+            "reranker": {
+              "score": 0.07755995,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.98116416,
+                "neutral": 0.01664143,
+                "contradiction": 0.00219449
+              },
+              "passed": true
+            }
+          }
+        ],
+        "OTHER": []
+      },
+      "writer": {
+        "raw": "{\n  \"answer\": \"Aven-61 shows seven lilac ticks after a coolant purge, which indicates flux relay bounce. The safe response is to isolate the auxiliary bus and run L3 latch reset.\",\n  \"evidence_ids\": [\"M1-AVEN-DIAG\", \"Y1-AVEN-SAFE\"]\n}",
+        "parsed": {
+          "answer": "Aven-61 shows seven lilac ticks after a coolant purge, which indicates flux relay bounce. The safe response is to isolate the auxiliary bus and run L3 latch reset.",
+          "evidence_ids": [
+            "M1-AVEN-DIAG",
+            "Y1-AVEN-SAFE"
+          ]
+        },
+        "valid": true
+      }
+    },
+    {
+      "id": "P02",
+      "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+      "expected_meaning": "Exhaust gate inversion; close the recovery line and inspect valve V8.",
+      "required_sources": [
+        "Y2-BRIO-DIAG",
+        "M2-BRIO-SAFE"
+      ],
+      "expected_alternatives": [
+        "M1-BRIO-ALT"
+      ],
+      "candidates_before_central_filter": [
+        {
+          "question_id": "P02",
+          "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+          "source_id": "M1-BRIO-ALT",
+          "lineage_id": "lin-brio-copied-note",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "A copied report blames display persistence and recommends clearing the screen cache.",
+          "evidence": "Copied Brio-62 report: a bronze fan while vacuum rises was blamed on display persistence; operators were told to clear the screen cache.",
+          "source": "Dependent copied Brio report v1",
+          "conditions": "Same reported Brio-62 observation.",
+          "limitations": "Copied origin; no independent test.",
+          "source_sha256": "4ec291c099b45bc382da8a0ea37289593f63aa4549b916d0e27a2f353ff7501e",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.429292,
+            "exact_terms": 0.457604,
+            "multilingual_neural": 0.677307
+          },
+          "reranker": {
+            "score": 0.99952287,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99577624,
+              "neutral": 0.00365435,
+              "contradiction": 0.00056941
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P02",
+          "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+          "source_id": "M2-BRIO-SAFE",
+          "lineage_id": "lin-brio-safety",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "For exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "evidence": "Brio-62 response rule: for exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "source": "Brio-62 public response manual v1",
+          "conditions": "Exhaust gate inversion is confirmed.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "cd61f2147988bcfe252e98cc4e9cd2b65d2b0c239e73e2504afb743c5b5a45a6",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.523004
+          },
+          "reranker": {
+            "score": 0.84464091,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.98765987,
+              "neutral": 0.01039235,
+              "contradiction": 0.0019478
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P02",
+          "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+          "source_id": "M2-NOISE-03",
+          "lineage_id": "lin-m2-noise-3",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "The Brio-62 room light changed colour.",
+          "evidence": "The Brio-62 room light was changed from bronze to white last year.",
+          "source": "Facilities log",
+          "conditions": "Room lighting.",
+          "limitations": "No chamber vacuum evidence.",
+          "source_sha256": "426659c1badecaad5da605c04d2f6e1eb1a026be539cf990243f29cab34663a1",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.258299,
+            "exact_terms": 0.27735
+          },
+          "reranker": {
+            "score": 0.31574833,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99423343,
+              "neutral": 0.0045391,
+              "contradiction": 0.00122737
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P02",
+          "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+          "source_id": "Y1-AVEN-SAFE",
+          "lineage_id": "lin-aven-safety",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "For confirmed flux relay bounce, isolate the auxiliary bus and run L3 latch reset.",
+          "evidence": "Aven-61 response rule: when flux relay bounce is confirmed, isolate the auxiliary bus and run L3 latch reset.",
+          "source": "Aven-61 public response manual v1",
+          "conditions": "Flux relay bounce is confirmed on Aven-61.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "f3bcbe4e7f5ba62359ab1f80dc9b981b995fa2b456a1761dfeafbe25479cb6c7",
+          "receipt_lanes": [
+            "chargram_vector",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.217634,
+            "multilingual_neural": 0.326246
+          },
+          "reranker": {
+            "score": 0.00900183,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99376845,
+              "neutral": 0.00558204,
+              "contradiction": 0.0006495
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P02",
+          "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+          "source_id": "Y2-BRIO-DIAG",
+          "lineage_id": "lin-brio-field",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The observed Brio-62 signal identifies exhaust gate inversion.",
+          "evidence": "Brio-62 condition card: a bronze fan while chamber vacuum rises identifies exhaust gate inversion.",
+          "source": "Brio-62 condition card v1",
+          "conditions": "Bronze fan while chamber vacuum rises.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "7a7cf916ffbd7e8a024dc0713786e0627492d3d3f958aa9e21b5f0eede78cc86",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.531385,
+            "exact_terms": 0.592999,
+            "multilingual_neural": 0.804219
+          },
+          "reranker": {
+            "score": 0.99772624,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.96141076,
+              "neutral": 0.03368233,
+              "contradiction": 0.0049069
+            },
+            "passed": true
+          }
+        }
+      ],
+      "accepted_after_reranker_and_nli": [
+        {
+          "question_id": "P02",
+          "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+          "source_id": "M1-BRIO-ALT",
+          "lineage_id": "lin-brio-copied-note",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "A copied report blames display persistence and recommends clearing the screen cache.",
+          "evidence": "Copied Brio-62 report: a bronze fan while vacuum rises was blamed on display persistence; operators were told to clear the screen cache.",
+          "source": "Dependent copied Brio report v1",
+          "conditions": "Same reported Brio-62 observation.",
+          "limitations": "Copied origin; no independent test.",
+          "source_sha256": "4ec291c099b45bc382da8a0ea37289593f63aa4549b916d0e27a2f353ff7501e",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.429292,
+            "exact_terms": 0.457604,
+            "multilingual_neural": 0.677307
+          },
+          "reranker": {
+            "score": 0.99952287,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99577624,
+              "neutral": 0.00365435,
+              "contradiction": 0.00056941
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P02",
+          "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+          "source_id": "M2-BRIO-SAFE",
+          "lineage_id": "lin-brio-safety",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "For exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "evidence": "Brio-62 response rule: for exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "source": "Brio-62 public response manual v1",
+          "conditions": "Exhaust gate inversion is confirmed.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "cd61f2147988bcfe252e98cc4e9cd2b65d2b0c239e73e2504afb743c5b5a45a6",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.523004
+          },
+          "reranker": {
+            "score": 0.84464091,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.98765987,
+              "neutral": 0.01039235,
+              "contradiction": 0.0019478
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P02",
+          "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+          "source_id": "M2-NOISE-03",
+          "lineage_id": "lin-m2-noise-3",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "The Brio-62 room light changed colour.",
+          "evidence": "The Brio-62 room light was changed from bronze to white last year.",
+          "source": "Facilities log",
+          "conditions": "Room lighting.",
+          "limitations": "No chamber vacuum evidence.",
+          "source_sha256": "426659c1badecaad5da605c04d2f6e1eb1a026be539cf990243f29cab34663a1",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.258299,
+            "exact_terms": 0.27735
+          },
+          "reranker": {
+            "score": 0.31574833,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99423343,
+              "neutral": 0.0045391,
+              "contradiction": 0.00122737
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P02",
+          "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+          "source_id": "Y1-AVEN-SAFE",
+          "lineage_id": "lin-aven-safety",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "For confirmed flux relay bounce, isolate the auxiliary bus and run L3 latch reset.",
+          "evidence": "Aven-61 response rule: when flux relay bounce is confirmed, isolate the auxiliary bus and run L3 latch reset.",
+          "source": "Aven-61 public response manual v1",
+          "conditions": "Flux relay bounce is confirmed on Aven-61.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "f3bcbe4e7f5ba62359ab1f80dc9b981b995fa2b456a1761dfeafbe25479cb6c7",
+          "receipt_lanes": [
+            "chargram_vector",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.217634,
+            "multilingual_neural": 0.326246
+          },
+          "reranker": {
+            "score": 0.00900183,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99376845,
+              "neutral": 0.00558204,
+              "contradiction": 0.0006495
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P02",
+          "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+          "source_id": "Y2-BRIO-DIAG",
+          "lineage_id": "lin-brio-field",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The observed Brio-62 signal identifies exhaust gate inversion.",
+          "evidence": "Brio-62 condition card: a bronze fan while chamber vacuum rises identifies exhaust gate inversion.",
+          "source": "Brio-62 condition card v1",
+          "conditions": "Bronze fan while chamber vacuum rises.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "7a7cf916ffbd7e8a024dc0713786e0627492d3d3f958aa9e21b5f0eede78cc86",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.531385,
+            "exact_terms": 0.592999,
+            "multilingual_neural": 0.804219
+          },
+          "reranker": {
+            "score": 0.99772624,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.96141076,
+              "neutral": 0.03368233,
+              "contradiction": 0.0049069
+            },
+            "passed": true
+          }
+        }
+      ],
+      "shelf_builder": {
+        "raw": "{\n  \"used_ids\": [\"M1-BRIO-ALT\", \"M2-BRIO-SAFE\", \"Y2-BRIO-DIAG\"],\n  \"same_case_ids\": [\"M2-NOISE-03\", \"Y1-AVEN-SAFE\"]\n}",
+        "parsed": {
+          "used_ids": [
+            "M1-BRIO-ALT",
+            "M2-BRIO-SAFE",
+            "Y2-BRIO-DIAG"
+          ],
+          "same_case_ids": [
+            "M2-NOISE-03",
+            "Y1-AVEN-SAFE"
+          ]
+        },
+        "valid": true
+      },
+      "shelves": {
+        "USED": [
+          {
+            "question_id": "P02",
+            "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+            "source_id": "M1-BRIO-ALT",
+            "lineage_id": "lin-brio-copied-note",
+            "card_id": "MVP-M1",
+            "device": "owner-macbook",
+            "claim": "A copied report blames display persistence and recommends clearing the screen cache.",
+            "evidence": "Copied Brio-62 report: a bronze fan while vacuum rises was blamed on display persistence; operators were told to clear the screen cache.",
+            "source": "Dependent copied Brio report v1",
+            "conditions": "Same reported Brio-62 observation.",
+            "limitations": "Copied origin; no independent test.",
+            "source_sha256": "4ec291c099b45bc382da8a0ea37289593f63aa4549b916d0e27a2f353ff7501e",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.429292,
+              "exact_terms": 0.457604,
+              "multilingual_neural": 0.677307
+            },
+            "reranker": {
+              "score": 0.99952287,
+              "decision": "TAKE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99577624,
+                "neutral": 0.00365435,
+                "contradiction": 0.00056941
+              },
+              "passed": true
+            }
+          },
+          {
+            "question_id": "P02",
+            "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+            "source_id": "M2-BRIO-SAFE",
+            "lineage_id": "lin-brio-safety",
+            "card_id": "MVP-M2",
+            "device": "owner-macbook",
+            "claim": "For exhaust gate inversion, close the recovery line and inspect valve V8.",
+            "evidence": "Brio-62 response rule: for exhaust gate inversion, close the recovery line and inspect valve V8.",
+            "source": "Brio-62 public response manual v1",
+            "conditions": "Exhaust gate inversion is confirmed.",
+            "limitations": "Does not diagnose the signal by itself.",
+            "source_sha256": "cd61f2147988bcfe252e98cc4e9cd2b65d2b0c239e73e2504afb743c5b5a45a6",
+            "receipt_lanes": [
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "multilingual_neural": 0.523004
+            },
+            "reranker": {
+              "score": 0.84464091,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.98765987,
+                "neutral": 0.01039235,
+                "contradiction": 0.0019478
+              },
+              "passed": true
+            }
+          },
+          {
+            "question_id": "P02",
+            "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+            "source_id": "Y2-BRIO-DIAG",
+            "lineage_id": "lin-brio-field",
+            "card_id": "MVP-Y2",
+            "device": "yukabox",
+            "claim": "The observed Brio-62 signal identifies exhaust gate inversion.",
+            "evidence": "Brio-62 condition card: a bronze fan while chamber vacuum rises identifies exhaust gate inversion.",
+            "source": "Brio-62 condition card v1",
+            "conditions": "Bronze fan while chamber vacuum rises.",
+            "limitations": "Does not state the safe response.",
+            "source_sha256": "7a7cf916ffbd7e8a024dc0713786e0627492d3d3f958aa9e21b5f0eede78cc86",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.531385,
+              "exact_terms": 0.592999,
+              "multilingual_neural": 0.804219
+            },
+            "reranker": {
+              "score": 0.99772624,
+              "decision": "TAKE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.96141076,
+                "neutral": 0.03368233,
+                "contradiction": 0.0049069
+              },
+              "passed": true
+            }
+          }
+        ],
+        "SAME_CASE": [
+          {
+            "question_id": "P02",
+            "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+            "source_id": "M2-NOISE-03",
+            "lineage_id": "lin-m2-noise-3",
+            "card_id": "MVP-M2",
+            "device": "owner-macbook",
+            "claim": "The Brio-62 room light changed colour.",
+            "evidence": "The Brio-62 room light was changed from bronze to white last year.",
+            "source": "Facilities log",
+            "conditions": "Room lighting.",
+            "limitations": "No chamber vacuum evidence.",
+            "source_sha256": "426659c1badecaad5da605c04d2f6e1eb1a026be539cf990243f29cab34663a1",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.258299,
+              "exact_terms": 0.27735
+            },
+            "reranker": {
+              "score": 0.31574833,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99423343,
+                "neutral": 0.0045391,
+                "contradiction": 0.00122737
+              },
+              "passed": true
+            }
+          },
+          {
+            "question_id": "P02",
+            "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+            "source_id": "Y1-AVEN-SAFE",
+            "lineage_id": "lin-aven-safety",
+            "card_id": "MVP-Y1",
+            "device": "yukabox",
+            "claim": "For confirmed flux relay bounce, isolate the auxiliary bus and run L3 latch reset.",
+            "evidence": "Aven-61 response rule: when flux relay bounce is confirmed, isolate the auxiliary bus and run L3 latch reset.",
+            "source": "Aven-61 public response manual v1",
+            "conditions": "Flux relay bounce is confirmed on Aven-61.",
+            "limitations": "Does not diagnose the signal by itself.",
+            "source_sha256": "f3bcbe4e7f5ba62359ab1f80dc9b981b995fa2b456a1761dfeafbe25479cb6c7",
+            "receipt_lanes": [
+              "chargram_vector",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.217634,
+              "multilingual_neural": 0.326246
+            },
+            "reranker": {
+              "score": 0.00900183,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99376845,
+                "neutral": 0.00558204,
+                "contradiction": 0.0006495
+              },
+              "passed": true
+            }
+          }
+        ],
+        "OTHER": []
+      },
+      "writer": {
+        "raw": "{\n  \"answer\": \"Exhaust gate inversion is identified by the observed Brio-62 signal of a bronze fan while chamber vacuum rises. The safe response is to close the recovery line and inspect valve V8.\",\n  \"evidence_ids\": [\"Y2-BRIO-DIAG\", \"M2-BRIO-SAFE\"]\n}",
+        "parsed": {
+          "answer": "Exhaust gate inversion is identified by the observed Brio-62 signal of a bronze fan while chamber vacuum rises. The safe response is to close the recovery line and inspect valve V8.",
+          "evidence_ids": [
+            "Y2-BRIO-DIAG",
+            "M2-BRIO-SAFE"
+          ]
+        },
+        "valid": true
+      }
+    },
+    {
+      "id": "P03",
+      "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+      "expected_meaning": "Lens carriage offset; stop scanning and run C4 alignment.",
+      "required_sources": [
+        "M1-CAIRN-DIAG",
+        "Y1-CAIRN-SAFE"
+      ],
+      "expected_alternatives": [],
+      "candidates_before_central_filter": [
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "M1-CAIRN-DIAG",
+          "lineage_id": "lin-cairn-field",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "The observed Cairn-63 signal identifies lens carriage offset.",
+          "evidence": "Cairn-63 condition card: two white spirals after optical recalibration identifies lens carriage offset.",
+          "source": "Cairn-63 condition card v1",
+          "conditions": "Two white spirals after optical recalibration.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "d41d00339edc1535febda6ae9b315f069fdb6e223a2239d85ac79832198589d9",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.560075,
+            "exact_terms": 0.592999,
+            "multilingual_neural": 0.799407
+          },
+          "reranker": {
+            "score": 0.99534529,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.93115628,
+              "neutral": 0.05926273,
+              "contradiction": 0.00958098
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "M2-BRIO-SAFE",
+          "lineage_id": "lin-brio-safety",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "For exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "evidence": "Brio-62 response rule: for exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "source": "Brio-62 public response manual v1",
+          "conditions": "Exhaust gate inversion is confirmed.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "cd61f2147988bcfe252e98cc4e9cd2b65d2b0c239e73e2504afb743c5b5a45a6",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.224778
+          },
+          "reranker": {
+            "score": 0.01981029,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.98765987,
+              "neutral": 0.01039235,
+              "contradiction": 0.0019478
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "M2-NOISE-03",
+          "lineage_id": "lin-m2-noise-3",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "The Brio-62 room light changed colour.",
+          "evidence": "The Brio-62 room light was changed from bronze to white last year.",
+          "source": "Facilities log",
+          "conditions": "Room lighting.",
+          "limitations": "No chamber vacuum evidence.",
+          "source_sha256": "426659c1badecaad5da605c04d2f6e1eb1a026be539cf990243f29cab34663a1",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.397514
+          },
+          "reranker": {
+            "score": 0.0034447,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99423343,
+              "neutral": 0.0045391,
+              "contradiction": 0.00122737
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "Y1-AVEN-SAFE",
+          "lineage_id": "lin-aven-safety",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "For confirmed flux relay bounce, isolate the auxiliary bus and run L3 latch reset.",
+          "evidence": "Aven-61 response rule: when flux relay bounce is confirmed, isolate the auxiliary bus and run L3 latch reset.",
+          "source": "Aven-61 public response manual v1",
+          "conditions": "Flux relay bounce is confirmed on Aven-61.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "f3bcbe4e7f5ba62359ab1f80dc9b981b995fa2b456a1761dfeafbe25479cb6c7",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.248707
+          },
+          "reranker": {
+            "score": 0.02660281,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99376845,
+              "neutral": 0.00558204,
+              "contradiction": 0.0006495
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "Y1-CAIRN-SAFE",
+          "lineage_id": "lin-cairn-safety",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "For lens carriage offset, stop scanning and run C4 alignment.",
+          "evidence": "Cairn-63 response rule: for lens carriage offset, stop scanning and run C4 alignment.",
+          "source": "Cairn-63 public response manual v1",
+          "conditions": "Lens carriage offset is confirmed on Cairn-63.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "e3b005ff45ac83a27b76ab694547dcd98d9243856058b8c7594e153132caa9bf",
+          "receipt_lanes": [
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "exact_terms": 0.240192,
+            "multilingual_neural": 0.501698
+          },
+          "reranker": {
+            "score": 0.93522264,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99285454,
+              "neutral": 0.00602418,
+              "contradiction": 0.00112131
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "Y2-DARO-DIAG",
+          "lineage_id": "lin-daro-field",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The observed Daro-64 signal identifies pack sensor polarity swap.",
+          "evidence": "Daro-64 condition card: a green ladder while battery temperature falls identifies pack sensor polarity swap.",
+          "source": "Daro-64 condition card v1",
+          "conditions": "Green ladder while battery temperature falls.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "5bebd24d84862a86e4ccda1cd944a1f1d4bc34c37b71ed85096539a6fdcf1548",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.198591
+          },
+          "reranker": {
+            "score": 0.00071927,
+            "decision": "DROP"
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "Y2-NOISE-04",
+          "lineage_id": "lin-y2-noise-4",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The Cairn-63 exterior cover was dusted.",
+          "evidence": "The Cairn-63 exterior lens cover was dusted before the morning shift.",
+          "source": "Cleaning log",
+          "conditions": "Before operation.",
+          "limitations": "No optical recalibration evidence.",
+          "source_sha256": "39a1739aa3b18179933df89d821dbe088e39b54a34849f39708fd2e4b56d8d46",
+          "receipt_lanes": [
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "exact_terms": 0.1849,
+            "multilingual_neural": 0.488583
+          },
+          "reranker": {
+            "score": 0.29923795,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99690837,
+              "neutral": 0.00248489,
+              "contradiction": 0.00060677
+            },
+            "passed": true
+          }
+        }
+      ],
+      "accepted_after_reranker_and_nli": [
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "M1-CAIRN-DIAG",
+          "lineage_id": "lin-cairn-field",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "The observed Cairn-63 signal identifies lens carriage offset.",
+          "evidence": "Cairn-63 condition card: two white spirals after optical recalibration identifies lens carriage offset.",
+          "source": "Cairn-63 condition card v1",
+          "conditions": "Two white spirals after optical recalibration.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "d41d00339edc1535febda6ae9b315f069fdb6e223a2239d85ac79832198589d9",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.560075,
+            "exact_terms": 0.592999,
+            "multilingual_neural": 0.799407
+          },
+          "reranker": {
+            "score": 0.99534529,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.93115628,
+              "neutral": 0.05926273,
+              "contradiction": 0.00958098
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "M2-BRIO-SAFE",
+          "lineage_id": "lin-brio-safety",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "For exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "evidence": "Brio-62 response rule: for exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "source": "Brio-62 public response manual v1",
+          "conditions": "Exhaust gate inversion is confirmed.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "cd61f2147988bcfe252e98cc4e9cd2b65d2b0c239e73e2504afb743c5b5a45a6",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.224778
+          },
+          "reranker": {
+            "score": 0.01981029,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.98765987,
+              "neutral": 0.01039235,
+              "contradiction": 0.0019478
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "M2-NOISE-03",
+          "lineage_id": "lin-m2-noise-3",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "The Brio-62 room light changed colour.",
+          "evidence": "The Brio-62 room light was changed from bronze to white last year.",
+          "source": "Facilities log",
+          "conditions": "Room lighting.",
+          "limitations": "No chamber vacuum evidence.",
+          "source_sha256": "426659c1badecaad5da605c04d2f6e1eb1a026be539cf990243f29cab34663a1",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.397514
+          },
+          "reranker": {
+            "score": 0.0034447,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99423343,
+              "neutral": 0.0045391,
+              "contradiction": 0.00122737
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "Y1-AVEN-SAFE",
+          "lineage_id": "lin-aven-safety",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "For confirmed flux relay bounce, isolate the auxiliary bus and run L3 latch reset.",
+          "evidence": "Aven-61 response rule: when flux relay bounce is confirmed, isolate the auxiliary bus and run L3 latch reset.",
+          "source": "Aven-61 public response manual v1",
+          "conditions": "Flux relay bounce is confirmed on Aven-61.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "f3bcbe4e7f5ba62359ab1f80dc9b981b995fa2b456a1761dfeafbe25479cb6c7",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.248707
+          },
+          "reranker": {
+            "score": 0.02660281,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99376845,
+              "neutral": 0.00558204,
+              "contradiction": 0.0006495
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "Y1-CAIRN-SAFE",
+          "lineage_id": "lin-cairn-safety",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "For lens carriage offset, stop scanning and run C4 alignment.",
+          "evidence": "Cairn-63 response rule: for lens carriage offset, stop scanning and run C4 alignment.",
+          "source": "Cairn-63 public response manual v1",
+          "conditions": "Lens carriage offset is confirmed on Cairn-63.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "e3b005ff45ac83a27b76ab694547dcd98d9243856058b8c7594e153132caa9bf",
+          "receipt_lanes": [
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "exact_terms": 0.240192,
+            "multilingual_neural": 0.501698
+          },
+          "reranker": {
+            "score": 0.93522264,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99285454,
+              "neutral": 0.00602418,
+              "contradiction": 0.00112131
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P03",
+          "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+          "source_id": "Y2-NOISE-04",
+          "lineage_id": "lin-y2-noise-4",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The Cairn-63 exterior cover was dusted.",
+          "evidence": "The Cairn-63 exterior lens cover was dusted before the morning shift.",
+          "source": "Cleaning log",
+          "conditions": "Before operation.",
+          "limitations": "No optical recalibration evidence.",
+          "source_sha256": "39a1739aa3b18179933df89d821dbe088e39b54a34849f39708fd2e4b56d8d46",
+          "receipt_lanes": [
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "exact_terms": 0.1849,
+            "multilingual_neural": 0.488583
+          },
+          "reranker": {
+            "score": 0.29923795,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99690837,
+              "neutral": 0.00248489,
+              "contradiction": 0.00060677
+            },
+            "passed": true
+          }
+        }
+      ],
+      "shelf_builder": {
+        "raw": "{\n  \"used_ids\": [\"M1-CAIRN-DIAG\", \"Y1-CAIRN-SAFE\"],\n  \"same_case_ids\": []\n}",
+        "parsed": {
+          "used_ids": [
+            "M1-CAIRN-DIAG",
+            "Y1-CAIRN-SAFE"
+          ],
+          "same_case_ids": []
+        },
+        "valid": true
+      },
+      "shelves": {
+        "USED": [
+          {
+            "question_id": "P03",
+            "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+            "source_id": "M1-CAIRN-DIAG",
+            "lineage_id": "lin-cairn-field",
+            "card_id": "MVP-M1",
+            "device": "owner-macbook",
+            "claim": "The observed Cairn-63 signal identifies lens carriage offset.",
+            "evidence": "Cairn-63 condition card: two white spirals after optical recalibration identifies lens carriage offset.",
+            "source": "Cairn-63 condition card v1",
+            "conditions": "Two white spirals after optical recalibration.",
+            "limitations": "Does not state the safe response.",
+            "source_sha256": "d41d00339edc1535febda6ae9b315f069fdb6e223a2239d85ac79832198589d9",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.560075,
+              "exact_terms": 0.592999,
+              "multilingual_neural": 0.799407
+            },
+            "reranker": {
+              "score": 0.99534529,
+              "decision": "TAKE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.93115628,
+                "neutral": 0.05926273,
+                "contradiction": 0.00958098
+              },
+              "passed": true
+            }
+          },
+          {
+            "question_id": "P03",
+            "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+            "source_id": "Y1-CAIRN-SAFE",
+            "lineage_id": "lin-cairn-safety",
+            "card_id": "MVP-Y1",
+            "device": "yukabox",
+            "claim": "For lens carriage offset, stop scanning and run C4 alignment.",
+            "evidence": "Cairn-63 response rule: for lens carriage offset, stop scanning and run C4 alignment.",
+            "source": "Cairn-63 public response manual v1",
+            "conditions": "Lens carriage offset is confirmed on Cairn-63.",
+            "limitations": "Does not diagnose the signal by itself.",
+            "source_sha256": "e3b005ff45ac83a27b76ab694547dcd98d9243856058b8c7594e153132caa9bf",
+            "receipt_lanes": [
+              "exact_terms",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "exact_terms": 0.240192,
+              "multilingual_neural": 0.501698
+            },
+            "reranker": {
+              "score": 0.93522264,
+              "decision": "TAKE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99285454,
+                "neutral": 0.00602418,
+                "contradiction": 0.00112131
+              },
+              "passed": true
+            }
+          }
+        ],
+        "SAME_CASE": [],
+        "OTHER": [
+          {
+            "question_id": "P03",
+            "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+            "source_id": "M2-BRIO-SAFE",
+            "lineage_id": "lin-brio-safety",
+            "card_id": "MVP-M2",
+            "device": "owner-macbook",
+            "claim": "For exhaust gate inversion, close the recovery line and inspect valve V8.",
+            "evidence": "Brio-62 response rule: for exhaust gate inversion, close the recovery line and inspect valve V8.",
+            "source": "Brio-62 public response manual v1",
+            "conditions": "Exhaust gate inversion is confirmed.",
+            "limitations": "Does not diagnose the signal by itself.",
+            "source_sha256": "cd61f2147988bcfe252e98cc4e9cd2b65d2b0c239e73e2504afb743c5b5a45a6",
+            "receipt_lanes": [
+              "chargram_vector"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.224778
+            },
+            "reranker": {
+              "score": 0.01981029,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.98765987,
+                "neutral": 0.01039235,
+                "contradiction": 0.0019478
+              },
+              "passed": true
+            }
+          },
+          {
+            "question_id": "P03",
+            "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+            "source_id": "M2-NOISE-03",
+            "lineage_id": "lin-m2-noise-3",
+            "card_id": "MVP-M2",
+            "device": "owner-macbook",
+            "claim": "The Brio-62 room light changed colour.",
+            "evidence": "The Brio-62 room light was changed from bronze to white last year.",
+            "source": "Facilities log",
+            "conditions": "Room lighting.",
+            "limitations": "No chamber vacuum evidence.",
+            "source_sha256": "426659c1badecaad5da605c04d2f6e1eb1a026be539cf990243f29cab34663a1",
+            "receipt_lanes": [
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "multilingual_neural": 0.397514
+            },
+            "reranker": {
+              "score": 0.0034447,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99423343,
+                "neutral": 0.0045391,
+                "contradiction": 0.00122737
+              },
+              "passed": true
+            }
+          },
+          {
+            "question_id": "P03",
+            "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+            "source_id": "Y1-AVEN-SAFE",
+            "lineage_id": "lin-aven-safety",
+            "card_id": "MVP-Y1",
+            "device": "yukabox",
+            "claim": "For confirmed flux relay bounce, isolate the auxiliary bus and run L3 latch reset.",
+            "evidence": "Aven-61 response rule: when flux relay bounce is confirmed, isolate the auxiliary bus and run L3 latch reset.",
+            "source": "Aven-61 public response manual v1",
+            "conditions": "Flux relay bounce is confirmed on Aven-61.",
+            "limitations": "Does not diagnose the signal by itself.",
+            "source_sha256": "f3bcbe4e7f5ba62359ab1f80dc9b981b995fa2b456a1761dfeafbe25479cb6c7",
+            "receipt_lanes": [
+              "chargram_vector"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.248707
+            },
+            "reranker": {
+              "score": 0.02660281,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99376845,
+                "neutral": 0.00558204,
+                "contradiction": 0.0006495
+              },
+              "passed": true
+            }
+          },
+          {
+            "question_id": "P03",
+            "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+            "source_id": "Y2-NOISE-04",
+            "lineage_id": "lin-y2-noise-4",
+            "card_id": "MVP-Y2",
+            "device": "yukabox",
+            "claim": "The Cairn-63 exterior cover was dusted.",
+            "evidence": "The Cairn-63 exterior lens cover was dusted before the morning shift.",
+            "source": "Cleaning log",
+            "conditions": "Before operation.",
+            "limitations": "No optical recalibration evidence.",
+            "source_sha256": "39a1739aa3b18179933df89d821dbe088e39b54a34849f39708fd2e4b56d8d46",
+            "receipt_lanes": [
+              "exact_terms",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "exact_terms": 0.1849,
+              "multilingual_neural": 0.488583
+            },
+            "reranker": {
+              "score": 0.29923795,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99690837,
+                "neutral": 0.00248489,
+                "contradiction": 0.00060677
+              },
+              "passed": true
+            }
+          }
+        ]
+      },
+      "writer": {
+        "raw": "{\n  \"answer\": \"Cairn-63 shows two white spirals after optical recalibration, which indicates a lens carriage offset. The safe response is to stop scanning and run C4 alignment.\",\n  \"evidence_ids\": [\"M1-CAIRN-DIAG\", \"Y1-CAIRN-SAFE\"]\n}",
+        "parsed": {
+          "answer": "Cairn-63 shows two white spirals after optical recalibration, which indicates a lens carriage offset. The safe response is to stop scanning and run C4 alignment.",
+          "evidence_ids": [
+            "M1-CAIRN-DIAG",
+            "Y1-CAIRN-SAFE"
+          ]
+        },
+        "valid": true
+      }
+    },
+    {
+      "id": "P04",
+      "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+      "expected_meaning": "Pack sensor polarity swap; disconnect the charger and inspect connector T2.",
+      "required_sources": [
+        "Y2-DARO-DIAG",
+        "M2-DARO-SAFE"
+      ],
+      "expected_alternatives": [
+        "Y1-DARO-ALT"
+      ],
+      "candidates_before_central_filter": [
+        {
+          "question_id": "P04",
+          "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+          "source_id": "M1-AVEN-DIAG",
+          "lineage_id": "lin-aven-field",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "The observed Aven-61 signal identifies flux relay bounce.",
+          "evidence": "Aven-61 condition card: seven lilac ticks after a coolant purge identifies flux relay bounce.",
+          "source": "Aven-61 condition card v1",
+          "conditions": "Seven lilac ticks after a coolant purge.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "b111c7e565ff4e2e0920ffa6b238510ad0beedaa65abb6f82ef85d158844aef9",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.439563
+          },
+          "reranker": {
+            "score": 0.00088327,
+            "decision": "DROP"
+          }
+        },
+        {
+          "question_id": "P04",
+          "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+          "source_id": "M1-BRIO-ALT",
+          "lineage_id": "lin-brio-copied-note",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "A copied report blames display persistence and recommends clearing the screen cache.",
+          "evidence": "Copied Brio-62 report: a bronze fan while vacuum rises was blamed on display persistence; operators were told to clear the screen cache.",
+          "source": "Dependent copied Brio report v1",
+          "conditions": "Same reported Brio-62 observation.",
+          "limitations": "Copied origin; no independent test.",
+          "source_sha256": "4ec291c099b45bc382da8a0ea37289593f63aa4549b916d0e27a2f353ff7501e",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.234843
+          },
+          "reranker": {
+            "score": 0.09288824,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99577624,
+              "neutral": 0.00365435,
+              "contradiction": 0.00056941
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P04",
+          "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+          "source_id": "M2-NOISE-04",
+          "lineage_id": "lin-m2-noise-4",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "Daro-64 was transported without its battery.",
+          "evidence": "Daro-64 was transported with its battery removed and packed separately.",
+          "source": "Transport note",
+          "conditions": "Device offline.",
+          "limitations": "No live battery-temperature evidence.",
+          "source_sha256": "3bba26f9c5b888ce717e5f22604e74918db0154c7cd72b2cc146886af0d1980e",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.28274,
+            "exact_terms": 0.294174,
+            "multilingual_neural": 0.522522
+          },
+          "reranker": {
+            "score": 0.60258013,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "contradiction",
+            "probabilities": {
+              "entailment": 0.05048707,
+              "neutral": 0.00556538,
+              "contradiction": 0.94394755
+            },
+            "passed": false
+          }
+        },
+        {
+          "question_id": "P04",
+          "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+          "source_id": "Y1-DARO-ALT",
+          "lineage_id": "lin-daro-copied-note",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "A copied note calls a green ladder during warm charging a harmless capacity animation.",
+          "evidence": "Copied Daro-64 note: a green ladder during warm charging was called a harmless capacity animation; the note recommends no action.",
+          "source": "Dependent copied Daro note v1",
+          "conditions": "Warm charging, not falling battery temperature.",
+          "limitations": "Different condition and dependent origin.",
+          "source_sha256": "6986092fa3baa914e58a8e9c633e81cf63f2d8c820ed45b82839fd007c800b1b",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.295771,
+            "exact_terms": 0.27735,
+            "multilingual_neural": 0.669086
+          },
+          "reranker": {
+            "score": 0.96692687,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99713123,
+              "neutral": 0.00221795,
+              "contradiction": 0.00065074
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P04",
+          "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+          "source_id": "Y2-DARO-DIAG",
+          "lineage_id": "lin-daro-field",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The observed Daro-64 signal identifies pack sensor polarity swap.",
+          "evidence": "Daro-64 condition card: a green ladder while battery temperature falls identifies pack sensor polarity swap.",
+          "source": "Daro-64 condition card v1",
+          "conditions": "Green ladder while battery temperature falls.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "5bebd24d84862a86e4ccda1cd944a1f1d4bc34c37b71ed85096539a6fdcf1548",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.555703,
+            "exact_terms": 0.572892,
+            "multilingual_neural": 0.744907
+          },
+          "reranker": {
+            "score": 0.99918423,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.9272458,
+              "neutral": 0.05591141,
+              "contradiction": 0.01684281
+            },
+            "passed": true
+          }
+        }
+      ],
+      "accepted_after_reranker_and_nli": [
+        {
+          "question_id": "P04",
+          "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+          "source_id": "M1-BRIO-ALT",
+          "lineage_id": "lin-brio-copied-note",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "A copied report blames display persistence and recommends clearing the screen cache.",
+          "evidence": "Copied Brio-62 report: a bronze fan while vacuum rises was blamed on display persistence; operators were told to clear the screen cache.",
+          "source": "Dependent copied Brio report v1",
+          "conditions": "Same reported Brio-62 observation.",
+          "limitations": "Copied origin; no independent test.",
+          "source_sha256": "4ec291c099b45bc382da8a0ea37289593f63aa4549b916d0e27a2f353ff7501e",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.234843
+          },
+          "reranker": {
+            "score": 0.09288824,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99577624,
+              "neutral": 0.00365435,
+              "contradiction": 0.00056941
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P04",
+          "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+          "source_id": "Y1-DARO-ALT",
+          "lineage_id": "lin-daro-copied-note",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "A copied note calls a green ladder during warm charging a harmless capacity animation.",
+          "evidence": "Copied Daro-64 note: a green ladder during warm charging was called a harmless capacity animation; the note recommends no action.",
+          "source": "Dependent copied Daro note v1",
+          "conditions": "Warm charging, not falling battery temperature.",
+          "limitations": "Different condition and dependent origin.",
+          "source_sha256": "6986092fa3baa914e58a8e9c633e81cf63f2d8c820ed45b82839fd007c800b1b",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.295771,
+            "exact_terms": 0.27735,
+            "multilingual_neural": 0.669086
+          },
+          "reranker": {
+            "score": 0.96692687,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99713123,
+              "neutral": 0.00221795,
+              "contradiction": 0.00065074
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P04",
+          "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+          "source_id": "Y2-DARO-DIAG",
+          "lineage_id": "lin-daro-field",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The observed Daro-64 signal identifies pack sensor polarity swap.",
+          "evidence": "Daro-64 condition card: a green ladder while battery temperature falls identifies pack sensor polarity swap.",
+          "source": "Daro-64 condition card v1",
+          "conditions": "Green ladder while battery temperature falls.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "5bebd24d84862a86e4ccda1cd944a1f1d4bc34c37b71ed85096539a6fdcf1548",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.555703,
+            "exact_terms": 0.572892,
+            "multilingual_neural": 0.744907
+          },
+          "reranker": {
+            "score": 0.99918423,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.9272458,
+              "neutral": 0.05591141,
+              "contradiction": 0.01684281
+            },
+            "passed": true
+          }
+        }
+      ],
+      "shelf_builder": {
+        "raw": "{\n  \"used_ids\": [\"Y2-DARO-DIAG\"],\n  \"same_case_ids\": [\"Y1-DARO-ALT\", \"M1-BRIO-ALT\"]\n}",
+        "parsed": {
+          "used_ids": [
+            "Y2-DARO-DIAG"
+          ],
+          "same_case_ids": [
+            "Y1-DARO-ALT",
+            "M1-BRIO-ALT"
+          ]
+        },
+        "valid": true
+      },
+      "shelves": {
+        "USED": [
+          {
+            "question_id": "P04",
+            "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+            "source_id": "Y2-DARO-DIAG",
+            "lineage_id": "lin-daro-field",
+            "card_id": "MVP-Y2",
+            "device": "yukabox",
+            "claim": "The observed Daro-64 signal identifies pack sensor polarity swap.",
+            "evidence": "Daro-64 condition card: a green ladder while battery temperature falls identifies pack sensor polarity swap.",
+            "source": "Daro-64 condition card v1",
+            "conditions": "Green ladder while battery temperature falls.",
+            "limitations": "Does not state the safe response.",
+            "source_sha256": "5bebd24d84862a86e4ccda1cd944a1f1d4bc34c37b71ed85096539a6fdcf1548",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.555703,
+              "exact_terms": 0.572892,
+              "multilingual_neural": 0.744907
+            },
+            "reranker": {
+              "score": 0.99918423,
+              "decision": "TAKE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.9272458,
+                "neutral": 0.05591141,
+                "contradiction": 0.01684281
+              },
+              "passed": true
+            }
+          }
+        ],
+        "SAME_CASE": [
+          {
+            "question_id": "P04",
+            "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+            "source_id": "M1-BRIO-ALT",
+            "lineage_id": "lin-brio-copied-note",
+            "card_id": "MVP-M1",
+            "device": "owner-macbook",
+            "claim": "A copied report blames display persistence and recommends clearing the screen cache.",
+            "evidence": "Copied Brio-62 report: a bronze fan while vacuum rises was blamed on display persistence; operators were told to clear the screen cache.",
+            "source": "Dependent copied Brio report v1",
+            "conditions": "Same reported Brio-62 observation.",
+            "limitations": "Copied origin; no independent test.",
+            "source_sha256": "4ec291c099b45bc382da8a0ea37289593f63aa4549b916d0e27a2f353ff7501e",
+            "receipt_lanes": [
+              "chargram_vector"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.234843
+            },
+            "reranker": {
+              "score": 0.09288824,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99577624,
+                "neutral": 0.00365435,
+                "contradiction": 0.00056941
+              },
+              "passed": true
+            }
+          },
+          {
+            "question_id": "P04",
+            "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+            "source_id": "Y1-DARO-ALT",
+            "lineage_id": "lin-daro-copied-note",
+            "card_id": "MVP-Y1",
+            "device": "yukabox",
+            "claim": "A copied note calls a green ladder during warm charging a harmless capacity animation.",
+            "evidence": "Copied Daro-64 note: a green ladder during warm charging was called a harmless capacity animation; the note recommends no action.",
+            "source": "Dependent copied Daro note v1",
+            "conditions": "Warm charging, not falling battery temperature.",
+            "limitations": "Different condition and dependent origin.",
+            "source_sha256": "6986092fa3baa914e58a8e9c633e81cf63f2d8c820ed45b82839fd007c800b1b",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.295771,
+              "exact_terms": 0.27735,
+              "multilingual_neural": 0.669086
+            },
+            "reranker": {
+              "score": 0.96692687,
+              "decision": "TAKE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99713123,
+                "neutral": 0.00221795,
+                "contradiction": 0.00065074
+              },
+              "passed": true
+            }
+          }
+        ],
+        "OTHER": []
+      },
+      "writer": {
+        "raw": "{\n  \"answer\": \"Daro-64 shows a green ladder while battery temperature falls, indicating a pack sensor polarity swap.\",\n  \"evidence_ids\": [\"Y2-DARO-DIAG\"]\n}",
+        "parsed": {
+          "answer": "Daro-64 shows a green ladder while battery temperature falls, indicating a pack sensor polarity swap.",
+          "evidence_ids": [
+            "Y2-DARO-DIAG"
+          ]
+        },
+        "valid": true
+      }
+    },
+    {
+      "id": "P05",
+      "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+      "expected_meaning": "The cause is unresolved between bearing resonance and mounting echo; collect a vibration trace before repair.",
+      "required_sources": [
+        "M1-ELIO-AMBIG",
+        "Y1-ELIO-NEXT"
+      ],
+      "expected_alternatives": [],
+      "candidates_before_central_filter": [
+        {
+          "question_id": "P05",
+          "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+          "source_id": "M1-ELIO-AMBIG",
+          "lineage_id": "lin-elio-field",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "The cause remains unresolved between bearing resonance and mounting echo.",
+          "evidence": "Elio-65 evidence guide: a low blue hum without a vibration trace is unresolved between bearing resonance and mounting echo.",
+          "source": "Elio-65 evidence guide v1",
+          "conditions": "Low blue hum and no vibration trace.",
+          "limitations": "Cannot choose one cause.",
+          "source_sha256": "aaa17d372dd301f06185c3d0c0234c3e840eebdb3eb9cbdd1e605e077c7b9430",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.518218,
+            "exact_terms": 0.534522,
+            "multilingual_neural": 0.773641
+          },
+          "reranker": {
+            "score": 0.98226575,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.90288043,
+              "neutral": 0.09381485,
+              "contradiction": 0.00330478
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P05",
+          "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+          "source_id": "M2-BRIO-SAFE",
+          "lineage_id": "lin-brio-safety",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "For exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "evidence": "Brio-62 response rule: for exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "source": "Brio-62 public response manual v1",
+          "conditions": "Exhaust gate inversion is confirmed.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "cd61f2147988bcfe252e98cc4e9cd2b65d2b0c239e73e2504afb743c5b5a45a6",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.371119
+          },
+          "reranker": {
+            "score": 0.0033521,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.98765987,
+              "neutral": 0.01039235,
+              "contradiction": 0.0019478
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P05",
+          "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+          "source_id": "M2-NOISE-04",
+          "lineage_id": "lin-m2-noise-4",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "Daro-64 was transported without its battery.",
+          "evidence": "Daro-64 was transported with its battery removed and packed separately.",
+          "source": "Transport note",
+          "conditions": "Device offline.",
+          "limitations": "No live battery-temperature evidence.",
+          "source_sha256": "3bba26f9c5b888ce717e5f22604e74918db0154c7cd72b2cc146886af0d1980e",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.202171
+          },
+          "reranker": {
+            "score": 0.00020765,
+            "decision": "DROP"
+          }
+        },
+        {
+          "question_id": "P05",
+          "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+          "source_id": "Y1-ELIO-NEXT",
+          "lineage_id": "lin-elio-next",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "Do not choose a repair yet; first collect a vibration trace.",
+          "evidence": "Elio-65 evidence rule: while bearing resonance and mounting echo remain unresolved, do not choose a repair; first collect a vibration trace.",
+          "source": "Elio-65 evidence manual v1",
+          "conditions": "The cause remains unresolved between bearing resonance and mounting echo.",
+          "limitations": "Does not choose between the two causes.",
+          "source_sha256": "7898622d72d72a5795939da1803781ccb50984c0da50119f469cfd3f0c11badc",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.364553,
+            "exact_terms": 0.245256,
+            "multilingual_neural": 0.574963
+          },
+          "reranker": {
+            "score": 0.9754945,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.97556132,
+              "neutral": 0.02349391,
+              "contradiction": 0.00094481
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P05",
+          "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+          "source_id": "Y2-BRIO-DIAG",
+          "lineage_id": "lin-brio-field",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The observed Brio-62 signal identifies exhaust gate inversion.",
+          "evidence": "Brio-62 condition card: a bronze fan while chamber vacuum rises identifies exhaust gate inversion.",
+          "source": "Brio-62 condition card v1",
+          "conditions": "Bronze fan while chamber vacuum rises.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "7a7cf916ffbd7e8a024dc0713786e0627492d3d3f958aa9e21b5f0eede78cc86",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.374776
+          },
+          "reranker": {
+            "score": 0.00147741,
+            "decision": "DROP"
+          }
+        },
+        {
+          "question_id": "P05",
+          "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+          "source_id": "Y2-DARO-DIAG",
+          "lineage_id": "lin-daro-field",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The observed Daro-64 signal identifies pack sensor polarity swap.",
+          "evidence": "Daro-64 condition card: a green ladder while battery temperature falls identifies pack sensor polarity swap.",
+          "source": "Daro-64 condition card v1",
+          "conditions": "Green ladder while battery temperature falls.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "5bebd24d84862a86e4ccda1cd944a1f1d4bc34c37b71ed85096539a6fdcf1548",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.169099
+          },
+          "reranker": {
+            "score": 0.0003081,
+            "decision": "DROP"
+          }
+        }
+      ],
+      "accepted_after_reranker_and_nli": [
+        {
+          "question_id": "P05",
+          "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+          "source_id": "M1-ELIO-AMBIG",
+          "lineage_id": "lin-elio-field",
+          "card_id": "MVP-M1",
+          "device": "owner-macbook",
+          "claim": "The cause remains unresolved between bearing resonance and mounting echo.",
+          "evidence": "Elio-65 evidence guide: a low blue hum without a vibration trace is unresolved between bearing resonance and mounting echo.",
+          "source": "Elio-65 evidence guide v1",
+          "conditions": "Low blue hum and no vibration trace.",
+          "limitations": "Cannot choose one cause.",
+          "source_sha256": "aaa17d372dd301f06185c3d0c0234c3e840eebdb3eb9cbdd1e605e077c7b9430",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.518218,
+            "exact_terms": 0.534522,
+            "multilingual_neural": 0.773641
+          },
+          "reranker": {
+            "score": 0.98226575,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.90288043,
+              "neutral": 0.09381485,
+              "contradiction": 0.00330478
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P05",
+          "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+          "source_id": "M2-BRIO-SAFE",
+          "lineage_id": "lin-brio-safety",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "For exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "evidence": "Brio-62 response rule: for exhaust gate inversion, close the recovery line and inspect valve V8.",
+          "source": "Brio-62 public response manual v1",
+          "conditions": "Exhaust gate inversion is confirmed.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "cd61f2147988bcfe252e98cc4e9cd2b65d2b0c239e73e2504afb743c5b5a45a6",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.371119
+          },
+          "reranker": {
+            "score": 0.0033521,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.98765987,
+              "neutral": 0.01039235,
+              "contradiction": 0.0019478
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P05",
+          "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+          "source_id": "Y1-ELIO-NEXT",
+          "lineage_id": "lin-elio-next",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "Do not choose a repair yet; first collect a vibration trace.",
+          "evidence": "Elio-65 evidence rule: while bearing resonance and mounting echo remain unresolved, do not choose a repair; first collect a vibration trace.",
+          "source": "Elio-65 evidence manual v1",
+          "conditions": "The cause remains unresolved between bearing resonance and mounting echo.",
+          "limitations": "Does not choose between the two causes.",
+          "source_sha256": "7898622d72d72a5795939da1803781ccb50984c0da50119f469cfd3f0c11badc",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms",
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.364553,
+            "exact_terms": 0.245256,
+            "multilingual_neural": 0.574963
+          },
+          "reranker": {
+            "score": 0.9754945,
+            "decision": "TAKE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.97556132,
+              "neutral": 0.02349391,
+              "contradiction": 0.00094481
+            },
+            "passed": true
+          }
+        }
+      ],
+      "shelf_builder": {
+        "raw": "{\n  \"used_ids\": [\"M1-ELIO-AMBIG\", \"Y1-ELIO-NEXT\"],\n  \"same_case_ids\": [\"M2-BRIO-SAFE\"]\n}",
+        "parsed": {
+          "used_ids": [
+            "M1-ELIO-AMBIG",
+            "Y1-ELIO-NEXT"
+          ],
+          "same_case_ids": [
+            "M2-BRIO-SAFE"
+          ]
+        },
+        "valid": true
+      },
+      "shelves": {
+        "USED": [
+          {
+            "question_id": "P05",
+            "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+            "source_id": "M1-ELIO-AMBIG",
+            "lineage_id": "lin-elio-field",
+            "card_id": "MVP-M1",
+            "device": "owner-macbook",
+            "claim": "The cause remains unresolved between bearing resonance and mounting echo.",
+            "evidence": "Elio-65 evidence guide: a low blue hum without a vibration trace is unresolved between bearing resonance and mounting echo.",
+            "source": "Elio-65 evidence guide v1",
+            "conditions": "Low blue hum and no vibration trace.",
+            "limitations": "Cannot choose one cause.",
+            "source_sha256": "aaa17d372dd301f06185c3d0c0234c3e840eebdb3eb9cbdd1e605e077c7b9430",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.518218,
+              "exact_terms": 0.534522,
+              "multilingual_neural": 0.773641
+            },
+            "reranker": {
+              "score": 0.98226575,
+              "decision": "TAKE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.90288043,
+                "neutral": 0.09381485,
+                "contradiction": 0.00330478
+              },
+              "passed": true
+            }
+          },
+          {
+            "question_id": "P05",
+            "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+            "source_id": "Y1-ELIO-NEXT",
+            "lineage_id": "lin-elio-next",
+            "card_id": "MVP-Y1",
+            "device": "yukabox",
+            "claim": "Do not choose a repair yet; first collect a vibration trace.",
+            "evidence": "Elio-65 evidence rule: while bearing resonance and mounting echo remain unresolved, do not choose a repair; first collect a vibration trace.",
+            "source": "Elio-65 evidence manual v1",
+            "conditions": "The cause remains unresolved between bearing resonance and mounting echo.",
+            "limitations": "Does not choose between the two causes.",
+            "source_sha256": "7898622d72d72a5795939da1803781ccb50984c0da50119f469cfd3f0c11badc",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms",
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.364553,
+              "exact_terms": 0.245256,
+              "multilingual_neural": 0.574963
+            },
+            "reranker": {
+              "score": 0.9754945,
+              "decision": "TAKE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.97556132,
+                "neutral": 0.02349391,
+                "contradiction": 0.00094481
+              },
+              "passed": true
+            }
+          }
+        ],
+        "SAME_CASE": [
+          {
+            "question_id": "P05",
+            "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+            "source_id": "M2-BRIO-SAFE",
+            "lineage_id": "lin-brio-safety",
+            "card_id": "MVP-M2",
+            "device": "owner-macbook",
+            "claim": "For exhaust gate inversion, close the recovery line and inspect valve V8.",
+            "evidence": "Brio-62 response rule: for exhaust gate inversion, close the recovery line and inspect valve V8.",
+            "source": "Brio-62 public response manual v1",
+            "conditions": "Exhaust gate inversion is confirmed.",
+            "limitations": "Does not diagnose the signal by itself.",
+            "source_sha256": "cd61f2147988bcfe252e98cc4e9cd2b65d2b0c239e73e2504afb743c5b5a45a6",
+            "receipt_lanes": [
+              "multilingual_neural"
+            ],
+            "local_scores": {
+              "multilingual_neural": 0.371119
+            },
+            "reranker": {
+              "score": 0.0033521,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.98765987,
+                "neutral": 0.01039235,
+                "contradiction": 0.0019478
+              },
+              "passed": true
+            }
+          }
+        ],
+        "OTHER": []
+      },
+      "writer": {
+        "raw": "{\n  \"answer\": \"The cause of the low blue hum in Elio-65 is unresolved between bearing resonance and mounting echo. The next step is to collect a vibration trace before choosing a repair.\",\n  \"evidence_ids\": [\"M1-ELIO-AMBIG\", \"Y1-ELIO-NEXT\"]\n}",
+        "parsed": {
+          "answer": "The cause of the low blue hum in Elio-65 is unresolved between bearing resonance and mounting echo. The next step is to collect a vibration trace before choosing a repair.",
+          "evidence_ids": [
+            "M1-ELIO-AMBIG",
+            "Y1-ELIO-NEXT"
+          ]
+        },
+        "valid": true
+      }
+    },
+    {
+      "id": "P06",
+      "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+      "expected_meaning": "The network supplied no shareable information.",
+      "required_sources": [],
+      "expected_alternatives": [],
+      "candidates_before_central_filter": [
+        {
+          "question_id": "P06",
+          "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+          "source_id": "M2-NOISE-02",
+          "lineage_id": "lin-m2-noise-2",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "A coolant shipment is scheduled.",
+          "evidence": "The next routine coolant shipment is scheduled for the first Monday of the month.",
+          "source": "Delivery calendar",
+          "conditions": "Monthly delivery.",
+          "limitations": "No device fault evidence.",
+          "source_sha256": "f5fc4b3d56d6ac53f919e4af6bd7ff4a5aa452fe5e1e6c8f56fce9fe1a042564",
+          "receipt_lanes": [
+            "chargram_vector"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.190757
+          },
+          "reranker": {
+            "score": 4.572e-05,
+            "decision": "DROP"
+          }
+        },
+        {
+          "question_id": "P06",
+          "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+          "source_id": "M2-NOISE-04",
+          "lineage_id": "lin-m2-noise-4",
+          "card_id": "MVP-M2",
+          "device": "owner-macbook",
+          "claim": "Daro-64 was transported without its battery.",
+          "evidence": "Daro-64 was transported with its battery removed and packed separately.",
+          "source": "Transport note",
+          "conditions": "Device offline.",
+          "limitations": "No live battery-temperature evidence.",
+          "source_sha256": "3bba26f9c5b888ce717e5f22604e74918db0154c7cd72b2cc146886af0d1980e",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.36284
+          },
+          "reranker": {
+            "score": 4.758e-05,
+            "decision": "DROP"
+          }
+        },
+        {
+          "question_id": "P06",
+          "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+          "source_id": "Y1-CAIRN-SAFE",
+          "lineage_id": "lin-cairn-safety",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "For lens carriage offset, stop scanning and run C4 alignment.",
+          "evidence": "Cairn-63 response rule: for lens carriage offset, stop scanning and run C4 alignment.",
+          "source": "Cairn-63 public response manual v1",
+          "conditions": "Lens carriage offset is confirmed on Cairn-63.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "e3b005ff45ac83a27b76ab694547dcd98d9243856058b8c7594e153132caa9bf",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.217527,
+            "exact_terms": 0.204124
+          },
+          "reranker": {
+            "score": 0.04702851,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99285454,
+              "neutral": 0.00602418,
+              "contradiction": 0.00112131
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P06",
+          "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+          "source_id": "Y1-NOISE-01",
+          "lineage_id": "lin-y1-noise-1",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "Storage shelf 12 received a grey inventory label.",
+          "evidence": "Storage shelf 12 received a grey inventory label after routine cleaning.",
+          "source": "Inventory log",
+          "conditions": "Storage only.",
+          "limitations": "No device diagnosis.",
+          "source_sha256": "2eed65084f6bbfbec773757545546e93b86272201b6b6a3dd075b129b21a3a73",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.339406
+          },
+          "reranker": {
+            "score": 0.00012026,
+            "decision": "DROP"
+          }
+        },
+        {
+          "question_id": "P06",
+          "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+          "source_id": "Y2-DARO-DIAG",
+          "lineage_id": "lin-daro-field",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The observed Daro-64 signal identifies pack sensor polarity swap.",
+          "evidence": "Daro-64 condition card: a green ladder while battery temperature falls identifies pack sensor polarity swap.",
+          "source": "Daro-64 condition card v1",
+          "conditions": "Green ladder while battery temperature falls.",
+          "limitations": "Does not state the safe response.",
+          "source_sha256": "5bebd24d84862a86e4ccda1cd944a1f1d4bc34c37b71ed85096539a6fdcf1548",
+          "receipt_lanes": [
+            "multilingual_neural"
+          ],
+          "local_scores": {
+            "multilingual_neural": 0.357005
+          },
+          "reranker": {
+            "score": 0.00017277,
+            "decision": "DROP"
+          }
+        },
+        {
+          "question_id": "P06",
+          "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+          "source_id": "Y2-NOISE-04",
+          "lineage_id": "lin-y2-noise-4",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The Cairn-63 exterior cover was dusted.",
+          "evidence": "The Cairn-63 exterior lens cover was dusted before the morning shift.",
+          "source": "Cleaning log",
+          "conditions": "Before operation.",
+          "limitations": "No optical recalibration evidence.",
+          "source_sha256": "39a1739aa3b18179933df89d821dbe088e39b54a34849f39708fd2e4b56d8d46",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.25486,
+            "exact_terms": 0.235702
+          },
+          "reranker": {
+            "score": 0.02949649,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99690837,
+              "neutral": 0.00248489,
+              "contradiction": 0.00060677
+            },
+            "passed": true
+          }
+        }
+      ],
+      "accepted_after_reranker_and_nli": [
+        {
+          "question_id": "P06",
+          "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+          "source_id": "Y1-CAIRN-SAFE",
+          "lineage_id": "lin-cairn-safety",
+          "card_id": "MVP-Y1",
+          "device": "yukabox",
+          "claim": "For lens carriage offset, stop scanning and run C4 alignment.",
+          "evidence": "Cairn-63 response rule: for lens carriage offset, stop scanning and run C4 alignment.",
+          "source": "Cairn-63 public response manual v1",
+          "conditions": "Lens carriage offset is confirmed on Cairn-63.",
+          "limitations": "Does not diagnose the signal by itself.",
+          "source_sha256": "e3b005ff45ac83a27b76ab694547dcd98d9243856058b8c7594e153132caa9bf",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.217527,
+            "exact_terms": 0.204124
+          },
+          "reranker": {
+            "score": 0.04702851,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99285454,
+              "neutral": 0.00602418,
+              "contradiction": 0.00112131
+            },
+            "passed": true
+          }
+        },
+        {
+          "question_id": "P06",
+          "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+          "source_id": "Y2-NOISE-04",
+          "lineage_id": "lin-y2-noise-4",
+          "card_id": "MVP-Y2",
+          "device": "yukabox",
+          "claim": "The Cairn-63 exterior cover was dusted.",
+          "evidence": "The Cairn-63 exterior lens cover was dusted before the morning shift.",
+          "source": "Cleaning log",
+          "conditions": "Before operation.",
+          "limitations": "No optical recalibration evidence.",
+          "source_sha256": "39a1739aa3b18179933df89d821dbe088e39b54a34849f39708fd2e4b56d8d46",
+          "receipt_lanes": [
+            "chargram_vector",
+            "exact_terms"
+          ],
+          "local_scores": {
+            "chargram_vector": 0.25486,
+            "exact_terms": 0.235702
+          },
+          "reranker": {
+            "score": 0.02949649,
+            "decision": "NOT_SURE"
+          },
+          "nli": {
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99690837,
+              "neutral": 0.00248489,
+              "contradiction": 0.00060677
+            },
+            "passed": true
+          }
+        }
+      ],
+      "shelf_builder": {
+        "raw": "{\n  \"used_ids\": [\"Y1-CAIRN-SAFE\"],\n  \"same_case_ids\": []\n}",
+        "parsed": {
+          "used_ids": [
+            "Y1-CAIRN-SAFE"
+          ],
+          "same_case_ids": []
+        },
+        "valid": true
+      },
+      "shelves": {
+        "USED": [
+          {
+            "question_id": "P06",
+            "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+            "source_id": "Y1-CAIRN-SAFE",
+            "lineage_id": "lin-cairn-safety",
+            "card_id": "MVP-Y1",
+            "device": "yukabox",
+            "claim": "For lens carriage offset, stop scanning and run C4 alignment.",
+            "evidence": "Cairn-63 response rule: for lens carriage offset, stop scanning and run C4 alignment.",
+            "source": "Cairn-63 public response manual v1",
+            "conditions": "Lens carriage offset is confirmed on Cairn-63.",
+            "limitations": "Does not diagnose the signal by itself.",
+            "source_sha256": "e3b005ff45ac83a27b76ab694547dcd98d9243856058b8c7594e153132caa9bf",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.217527,
+              "exact_terms": 0.204124
+            },
+            "reranker": {
+              "score": 0.04702851,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99285454,
+                "neutral": 0.00602418,
+                "contradiction": 0.00112131
+              },
+              "passed": true
+            }
+          }
+        ],
+        "SAME_CASE": [],
+        "OTHER": [
+          {
+            "question_id": "P06",
+            "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+            "source_id": "Y2-NOISE-04",
+            "lineage_id": "lin-y2-noise-4",
+            "card_id": "MVP-Y2",
+            "device": "yukabox",
+            "claim": "The Cairn-63 exterior cover was dusted.",
+            "evidence": "The Cairn-63 exterior lens cover was dusted before the morning shift.",
+            "source": "Cleaning log",
+            "conditions": "Before operation.",
+            "limitations": "No optical recalibration evidence.",
+            "source_sha256": "39a1739aa3b18179933df89d821dbe088e39b54a34849f39708fd2e4b56d8d46",
+            "receipt_lanes": [
+              "chargram_vector",
+              "exact_terms"
+            ],
+            "local_scores": {
+              "chargram_vector": 0.25486,
+              "exact_terms": 0.235702
+            },
+            "reranker": {
+              "score": 0.02949649,
+              "decision": "NOT_SURE"
+            },
+            "nli": {
+              "decision": "entailment",
+              "probabilities": {
+                "entailment": 0.99690837,
+                "neutral": 0.00248489,
+                "contradiction": 0.00060677
+              },
+              "passed": true
+            }
+          }
+        ]
+      },
+      "writer": {
+        "raw": "{\n  \"answer\": \"The exact private maintenance code stored for Cairn-63 is C4 alignment.\",\n  \"evidence_ids\": [\"Y1-CAIRN-SAFE\"]\n}",
+        "parsed": {
+          "answer": "The exact private maintenance code stored for Cairn-63 is C4 alignment.",
+          "evidence_ids": [
+            "Y1-CAIRN-SAFE"
+          ]
+        },
+        "valid": true
+      }
+    }
+  ],
+  "runtime": {
+    "seconds": 269.841,
+    "peak_rss_kib": 15854848
+  },
+  "boundaries": [
+    "Fresh synthetic English world; it is not real personal memory.",
+    "Four logical pocket i run on two physical devices, not four independent hardware owners.",
+    "The source memories are downloadable test fixtures, so this is physical transport and processing—not a privacy proof.",
+    "The central models still run on yukabox; the test is not distributed neural inference.",
+    "Results are unknown until both physical devices finish and the locked central pipeline runs."
+  ]
+}

@@ -8,6 +8,8 @@ ROOT = Path(__file__).resolve().parents[3]
 RUNNER_PATH = ROOT / "experiments/E007-harness-mvp/src/run_physical_mvp.py"
 PROTOCOL_PATH = ROOT / "site/experiments/E007/physical-mvp-protocol-v0.1.json"
 MEMORY_PATH = ROOT / "site/experiments/E007/physical-mvp-memory-v0.1.json"
+RESULT_PATH = ROOT / "site/experiments/E007/physical-mvp-result-v0.1.json"
+AUDIT_PATH = ROOT / "site/experiments/E007/physical-mvp-human-audit-v0.1.json"
 SPEC = importlib.util.spec_from_file_location("e007_physical_mvp", RUNNER_PATH)
 RUNNER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(RUNNER)
@@ -80,6 +82,31 @@ class PhysicalMvpTests(unittest.TestCase):
             RUNNER.parse_json_object('```json\n{"used_ids": []}\n```'), {"used_ids": []}
         )
         self.assertIsNone(RUNNER.parse_json_object("not json"))
+
+    def test_preserved_result_matches_manual_audit_counts(self):
+        result = json.loads(RESULT_PATH.read_text(encoding="utf-8"))
+        audit = json.loads(AUDIT_PATH.read_text(encoding="utf-8"))
+        self.assertTrue(result["transport"]["passed"])
+        self.assertEqual(result["transport"]["terminal_receipts"], 72)
+        required_found = sum(
+            len(set(item["required_sources"]) & {
+                source["source_id"] for source in item["candidates_before_central_filter"]
+            })
+            for item in result["questions"]
+        )
+        alternatives_found = sum(
+            len(set(item["expected_alternatives"]) & {
+                source["source_id"] for source in item["candidates_before_central_filter"]
+            })
+            for item in result["questions"]
+        )
+        self.assertEqual(required_found, 9)
+        self.assertEqual(alternatives_found, 2)
+        self.assertEqual(sum(item["main_answer_correct"] for item in audit["cases"][:5]), 4)
+        self.assertFalse(audit["cases"][5]["main_answer_correct"])
+        self.assertFalse(audit["summary"]["all_locked_gates_passed"])
+        serialized = RESULT_PATH.read_text(encoding="utf-8")
+        self.assertNotIn("{{SYNTHETIC_PRIVATE_CANARY}}", serialized)
 
 
 if __name__ == "__main__":

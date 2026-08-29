@@ -937,3 +937,21 @@ write the main answer from `USED` only. Protocol and fresh test memory:
 This remains synthetic and uses two devices owned by one person. It is the
 first complete physical transport test, not a privacy proof, distributed neural
 inference, or evidence about internet scale.
+
+Gate 16A failed and is preserved without a retry. Physical transport passed:
+4/4 nodes on MacBook and yukabox returned 72/72 terminal receipts, and the raw
+private canary never left the MacBook. Nine of ten required public sources
+reached the verified candidate ledger, and four of five ordinary questions
+received a complete correct answer.
+
+`P04` failed because local MacBook search never offered `M2-DARO-SAFE`; later
+stages could not recover that missing half. `P06` failed even though the private
+record was blocked: the shelf builder mistook a public C4 safety instruction
+for the requested private code, and the writer repeated that unsupported
+inference. Qwen also misplaced several irrelevant or competing records between
+`USED`, `SAME_CASE`, and `OTHER` without always contaminating the final answer.
+Cross-device composition is real, but local recall and closed-world shelf
+construction remain unsafe failure points. Result and manual audit:
+
+- `site/experiments/E007/physical-mvp-result-v0.1.json`
+- `site/experiments/E007/physical-mvp-human-audit-v0.1.json`
