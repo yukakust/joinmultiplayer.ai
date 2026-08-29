@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.2",
+  "experiment": "E007",
+  "gate": "16B.3",
+  "status": "valid_but_uninformative_floor_attempt",
+  "protocol": "/experiments/E007/kv-cache-quantization-protocol-v0.2.json",
+  "finding": "With Q4_K_M model weights, neither KV lane reliably answered three long-context questions in one structured JSON response. Q8 mostly repeated instructions or questions. Q4 produced one degenerate overlong evidence string and some incomplete answers.",
+  "decision": "Do not claim a cache-quality difference from this floor result. Reduce only the output task to one short answer at a time while preserving the same long source contexts.",
+  "timing": {
+    "q8_kv": {
+      "prompt_tokens_per_second_mean": 277.88,
+      "generated_tokens_per_second_mean": 8.95
+    },
+    "q4_kv": {
+      "prompt_tokens_per_second_mean": 286.34,
+      "generated_tokens_per_second_mean": 9.57
+    }
+  },
+  "privacy": "Raw conversations remain private. Public text contains only questions and model-produced answers."
+}

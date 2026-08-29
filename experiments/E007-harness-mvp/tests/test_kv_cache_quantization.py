@@ -21,12 +21,12 @@ class KvCacheQuantizationTest(unittest.TestCase):
         self.assertEqual(protocol["model"]["weight_quantization"], "Q4_K_M")
 
     def test_prompt_does_not_teach_a_fake_message_id(self):
-        prompt = MODULE.build_prompt(MODULE.CASES[0], "[M0042] fact")
-        self.assertIn("настоящий номер", prompt)
+        prompt = MODULE.build_prompt(MODULE.CASES[0]["questions"][0], "[M0042] fact")
         self.assertNotIn('"M0001"', prompt)
         self.assertNotIn('"M0123"', prompt)
         self.assertNotIn('"answer":"краткий ответ"', prompt)
-        self.assertIn("ровно три поля", prompt)
+        self.assertIn("один вопрос", prompt)
+        self.assertIn("одним коротким абзацем", prompt)
 
 
 if __name__ == "__main__":

@@ -1031,3 +1031,11 @@ than scored. The corrected protocol removes all example values:
 
 - `site/experiments/E007/kv-cache-quantization-invalid-attempt-v0.1.json`
 - `site/experiments/E007/kv-cache-quantization-protocol-v0.2.json`
+
+The corrected three-answer JSON run was valid but both lanes hit a quality
+floor, so it could not cleanly compare cache precision. It remains public. A
+third locked protocol removes JSON and asks each of the six questions
+individually with at most 128 generated tokens:
+
+- `site/experiments/E007/kv-cache-quantization-floor-attempt-v0.2.json`
+- `site/experiments/E007/kv-cache-quantization-protocol-v0.3.json`
