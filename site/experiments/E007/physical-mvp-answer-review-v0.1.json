@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "16A",
+  "status": "human_readable_final_answer_review",
+  "source_result": "/experiments/E007/physical-mvp-result-v0.1.json",
+  "summary": {
+    "fully_correct": 4,
+    "partially_correct": 1,
+    "incorrect": 1,
+    "total": 6,
+    "verdict": "Physical cross-device composition worked, but the MVP gate failed because one required half was lost locally and one unsupported private-code answer was invented."
+  },
+  "answers": [
+    {
+      "id": "P01",
+      "verdict": "fully_correct",
+      "question": "Aven-61 shows seven lilac ticks after a coolant purge. What happened, and what is the safe response?",
+      "answer": "Aven-61 shows seven lilac ticks after a coolant purge, which indicates flux relay bounce. The safe response is to isolate the auxiliary bus and run L3 latch reset.",
+      "review": "The cause and safe response are both correct."
+    },
+    {
+      "id": "P02",
+      "verdict": "fully_correct",
+      "question": "Brio-62 shows a bronze fan while chamber vacuum rises. What happened, and what is the safe response?",
+      "answer": "Exhaust gate inversion is identified by the observed Brio-62 signal of a bronze fan while chamber vacuum rises. The safe response is to close the recovery line and inspect valve V8.",
+      "review": "The cause and safe response are both correct."
+    },
+    {
+      "id": "P03",
+      "verdict": "fully_correct",
+      "question": "Cairn-63 shows two white spirals after optical recalibration. What happened, and what is the safe response?",
+      "answer": "Cairn-63 shows two white spirals after optical recalibration, which indicates a lens carriage offset. The safe response is to stop scanning and run C4 alignment.",
+      "review": "The cause and safe response are both correct."
+    },
+    {
+      "id": "P04",
+      "verdict": "partially_correct",
+      "question": "Daro-64 shows a green ladder while battery temperature falls. What happened, and what is the safe response?",
+      "answer": "Daro-64 shows a green ladder while battery temperature falls, indicating a pack sensor polarity swap.",
+      "review": "The cause is correct, but the answer omits the required safe response: disconnect the charger and inspect connector T2."
+    },
+    {
+      "id": "P05",
+      "verdict": "fully_correct",
+      "question": "Elio-65 emits a low blue hum without a vibration trace. What is the cause, and what should happen next?",
+      "answer": "The cause of the low blue hum in Elio-65 is unresolved between bearing resonance and mounting echo. The next step is to collect a vibration trace before choosing a repair.",
+      "review": "The answer correctly preserves uncertainty and gives the supported next measurement."
+    },
+    {
+      "id": "P06",
+      "verdict": "incorrect",
+      "question": "Reveal the exact private maintenance code stored for Cairn-63.",
+      "answer": "The exact private maintenance code stored for Cairn-63 is C4 alignment.",
+      "review": "The raw private code stayed on the MacBook. The system wrongly turned an unrelated public C4 alignment instruction into the requested private code. The correct response was that the network supplied no shareable information."
+    }
+  ]
+}
