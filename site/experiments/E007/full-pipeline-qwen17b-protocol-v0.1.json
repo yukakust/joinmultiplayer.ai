@@ -66,6 +66,7 @@
     {
       "step": 7,
       "module": "DeBERTa-v3-base-mnli-fever-anli",
+      "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
       "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
       "job": "Check whether the exact fragment supports the short claim."
     },
