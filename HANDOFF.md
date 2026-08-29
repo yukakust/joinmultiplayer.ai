@@ -391,10 +391,16 @@ Gate 13D preserves the proposed DeBERTa→Qwen→DeBERTa sandwich. An invalid
 right-padded Qwen preflight is preserved; correction commit changed only to
 left padding. The valid run produced 9/10 validated canonical claims, recovered
 1/2 missed merges, improved final exact piles from 4/6 to 5/6, and made zero
-false merges. It failed the gate. Manual audit found one good block (Qwen
-removed `can indicate`), one unsafe pass (Qwen removed `exclusively`), and one
-fragile recovered merge (entailment 0.505623 vs neutral 0.493628). Do not accept
-the sandwich yet. Result: `/experiments/E007/answer-piles-qwen-sandwich-result-v0.1.json`;
+false merges. It failed the original strict gate. Manual audit found one good
+block (Qwen removed `can indicate`), one owner-accepted case where Qwen removed
+`exclusively`, and one fragile recovered merge (entailment 0.505623 vs neutral
+0.493628). On 2026-08-29 the owner accepted the four-stage architecture for
+harness v0.2: cautious DeBERTa piles → Qwen canonical claim → bidirectional
+validation against every original → bidirectional comparison of validated
+claims. Original answers/evidence/lineage stay authoritative; failed rewrites
+fall back to the original pile; different versions remain separate. This is an
+MVP decision, not proof across domains or scale. Decision:
+`/experiments/E007/answer-piles-accepted-architecture-v0.1.json`. Result: `/experiments/E007/answer-piles-qwen-sandwich-result-v0.1.json`;
 audit: `/experiments/E007/answer-piles-qwen-sandwich-human-audit-v0.1.json`;
 UI: `/experiment/e007/gate-13d/`.
 

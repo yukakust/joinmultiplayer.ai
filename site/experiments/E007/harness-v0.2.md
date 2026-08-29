@@ -95,13 +95,22 @@ This checkpoint was trained for literal premise-to-hypothesis inference, not
 meta-statements about groups. Do not add the Gate 13C second pass to the
 accepted harness.
 
-## What Gate 13D taught us
+## Accepted Gate 13D architecture
 
-Qwen3-0.6B rewrote each pile as one atomic claim. DeBERTa checked every rewrite
-in both directions before a second ordinary claim comparison. The valid run
-improved 4/6 piles to 5/6 with zero false merges, but failed the locked gate.
+The owner accepted this pipeline for harness v0.2 on 2026-08-29:
 
-The guard blocked one Qwen rewrite that removed uncertainty, but accepted a
-different rewrite that dropped `exclusively`. The recovered merge also depended
-on a near tie: entailment 0.505623 versus neutral 0.493628. Therefore this
-sandwich is not part of the accepted harness yet.
+1. DeBERTa builds cautious piles from mutually supporting original answers.
+2. Qwen3-0.6B rewrites each pile as one short readable claim.
+3. DeBERTa checks that claim against every original in both directions. If it
+   fails, the Qwen rewrite is discarded and the original pile remains.
+4. Only validated claims are compared in both directions to form final piles.
+
+Original answers, evidence, sources, and lineage are never replaced by the Qwen
+summary. Separate versions remain visible. The locked synthetic development run
+improved 4/6 piles to 5/6 with zero false merges and validated 9/10 rewrites.
+The owner considered the lost word `exclusively` acceptable in that specific
+affirmative instruction; this does not make the loss safe in every domain. The
+recovered merge also depended on a near tie: entailment 0.505623 versus neutral
+0.493628. The architecture is accepted for the MVP, while its reliability at
+scale and across domains remains unproven. Decision record:
+`/experiments/E007/answer-piles-accepted-architecture-v0.1.json`.

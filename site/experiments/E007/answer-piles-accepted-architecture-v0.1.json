@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "13D",
+  "decision": "accepted_for_harness_v0.2",
+  "decision_date": "2026-08-29",
+  "decision_maker": "owner",
+  "architecture": [
+    {
+      "step": 1,
+      "module": "deberta_initial_piles",
+      "plain_language": "DeBERTa places mutually supporting original answers into cautious initial piles."
+    },
+    {
+      "step": 2,
+      "module": "qwen_canonical_claim",
+      "plain_language": "Qwen rewrites each pile as one short readable claim."
+    },
+    {
+      "step": 3,
+      "module": "deberta_rewrite_guard",
+      "plain_language": "DeBERTa checks the Qwen claim against every original answer in both directions. A failed rewrite is discarded, while the original pile is preserved."
+    },
+    {
+      "step": 4,
+      "module": "deberta_final_piles",
+      "plain_language": "Only validated claims are compared in both directions. Mutually supporting claims may join; other versions remain separate."
+    }
+  ],
+  "invariants": [
+    "Original answers, evidence, sources, and lineage are never deleted.",
+    "A Qwen rewrite is a comparison aid, not the source of truth.",
+    "A blocked rewrite falls back to its original pile.",
+    "Different or unsupported versions remain visible in separate piles.",
+    "No pile count is treated as independent consensus until lineage is checked."
+  ],
+  "evidence": {
+    "kind": "locked_paired_synthetic_development",
+    "exact_paraphrase_piles": "5/6",
+    "false_merges": 0,
+    "valid_canonical_claims": "9/10",
+    "source_result": "/experiments/E007/answer-piles-qwen-sandwich-result-v0.1.json",
+    "manual_audit": "/experiments/E007/answer-piles-qwen-sandwich-human-audit-v0.1.json"
+  },
+  "owner_interpretation": "Dropping the word exclusively was acceptable in this specific affirmative instruction because the resulting sentence still stated the correct action. This does not establish that losing exclusivity is safe in every domain.",
+  "boundary": "Accepted as the current MVP architecture, not proven at scale or across domains."
+}
