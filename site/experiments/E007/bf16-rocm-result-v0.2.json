@@ -1,0 +1,124 @@
+{
+  "schema_version": "0.2",
+  "experiment": "E007",
+  "gate": "16B.4",
+  "status": "development_failed_quality_gate",
+  "protocol": "/experiments/E007/bf16-rocm-protocol-v0.2.json",
+  "summary": {
+    "fit_passed": true,
+    "speed_passed": true,
+    "quality_passed": false,
+    "all_layers_on_rocm": "37/37",
+    "manual_points": 3,
+    "manual_points_possible": 12,
+    "cpu_reference_points": 11,
+    "cpu_reference_points_possible": 12,
+    "generated_tokens_per_second": 3.9,
+    "cpu_reference_generated_tokens_per_second": 1.4,
+    "generation_speedup": 2.79,
+    "total_seconds": 240.712,
+    "cpu_reference_total_seconds": 692.489,
+    "total_speedup": 2.88
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "source_weights": "BF16",
+    "conversion": "GGUF BF16 without weight quantization",
+    "converted_file_bytes": 16388044128,
+    "converted_file_sha256": "30720de07dc7e95721fead11cd40ddfad11d336927e9d02b36efb92eac138f69",
+    "thinking": false,
+    "decoding": "greedy"
+  },
+  "runtime": {
+    "device": "integrated AMD Radeon through ROCm",
+    "transformer_layers_offloaded": "37/37",
+    "rocm_model_buffer_mib": 14436.18,
+    "host_model_buffer_mib": 1187.0,
+    "q8_kv_buffer_mib": 1224.0,
+    "rocm_compute_buffer_mib": 192.0,
+    "host_compute_buffer_mib": 48.1,
+    "context_tokens": 16384,
+    "flash_attention": true,
+    "chat_template": "native checkpoint template",
+    "reasoning": "off"
+  },
+  "scoring": {
+    "2": "The fact and supporting message are correct.",
+    "1": "The fact is substantially correct but the support is wrong or missing, or the answer is incomplete.",
+    "0": "The key fact is wrong or invented."
+  },
+  "questions": [
+    {
+      "id": "A1",
+      "question": "Как в разговоре разделили обязанности между локальной памятью и LoRA при усвоении нового знания?",
+      "expected": "Память хранит редактируемые факты и источники; LoRA учит способу пользоваться подтверждённым знанием и навыкам поведения.",
+      "answer": "Локальная память отвечает за хранение и извлечение знаний, а LoRA обеспечивает адаптацию модели к новым данным, распределяя обязанности между хранением и обработкой.",
+      "reported_evidence": ["M0001"],
+      "manual_score": 1,
+      "manual_reason": "Главное разделение памяти и адаптера уловлено, но роль LoRA описана слишком общо, а правильное основание было в M0002."
+    },
+    {
+      "id": "A2",
+      "question": "Какие два режима сетевого нейронного объединения предложили и какой из них считался массовым?",
+      "expected": "Streaming neural mode работает fan-out/fan-in на каждом токене; latent-once возвращает несколько токенов знания один раз. Массовым считался latent-once.",
+      "answer": "Предложены режимы: 1) массовый (bulk), 2) точечный (point-to-point). Массовый считался массовым из-за его масштабируемости.",
+      "reported_evidence": ["M0002"],
+      "manual_score": 0,
+      "manual_reason": "Оба названия режимов выдуманы; нужные streaming neural и latent-once не найдены."
+    },
+    {
+      "id": "A3",
+      "question": "Почему повтор исходного вопроса в конце текстового промпта не защищает систему от злонамеренной персональной дельты?",
+      "expected": "Дельта входит в скрытое состояние после текстовых инструкций, поэтому текстовая эвристика не ограничивает её влияние.",
+      "answer": "Повтор вопроса не защищает систему, так как злонамеренная персональная дельта может быть маскирована под законный текст, не подлежащий проверке.",
+      "reported_evidence": ["M0003"],
+      "manual_score": 0,
+      "manual_reason": "Ответ пропустил главный механизм: скрытая дельта приходит уже после текстовых инструкций."
+    },
+    {
+      "id": "B1",
+      "question": "Как называлась предложенная система из общей модели, множества суверенных i, маршрутизации и графа доказательств?",
+      "expected": "Mixture of Intelligences (MoI).",
+      "answer": "Система называется Graph of Proofs или Proof Graph (граф доказательств).",
+      "reported_evidence": ["M0001"],
+      "manual_score": 0,
+      "manual_reason": "Название неверно: в разговоре было Mixture of Intelligences (MoI)."
+    },
+    {
+      "id": "B2",
+      "question": "Какой точный инвариант должен выполнять совершенно свежий персональный нейронный трек до того, как чему-либо научился?",
+      "expected": "Свежая персональная ветвь должна давать delta около или строго нуля и не менять общий результат.",
+      "answer": "Совершенно свежий персональный нейронный трек должен выполнять инвариант нулевого delta до того, как чему-либо научился. Это гарантирует, что персональная ветвь не получает градиенты, пока не будет обучена.",
+      "reported_evidence": ["M0001"],
+      "manual_score": 1,
+      "manual_reason": "Нулевая delta названа правильно, но причина про отсутствие градиентов выдумана, а ссылка на сообщение неверна."
+    },
+    {
+      "id": "B3",
+      "question": "Как после исправления P0 два персональных сигнала, общий z0 и финальные слои соединялись в итоговые logits?",
+      "expected": "Две delta дают ограниченное обновление; оно прибавляется к z0; FinalLayers строят logits из z0 + bounded Merge(delta1, delta2).",
+      "answer": "После исправления P0 два персональных сигнала, общий z0 и финальные слои соединялись в итоговые logits через FinalLayers(z0 + update), где update — ограниченное обновление в ABI-пространстве.",
+      "reported_evidence": [],
+      "manual_score": 1,
+      "manual_reason": "Формула по смыслу верна, но поле evidence было написано с ошибкой и подтверждающее сообщение не указано."
+    }
+  ],
+  "diagnostic_attempts": [
+    {
+      "protocol": "/experiments/E007/bf16-rocm-protocol-v0.1.json",
+      "scored": false,
+      "reason": "A ready-made BF16 GGUF was not the exact artifact used by the CPU reference, so it could not isolate the device change. The first launch also used a generic chat template."
+    },
+    {
+      "scored": false,
+      "reason": "Using the ready-made GGUF with its native template fixed formatting but did not restore reference behavior. Protocol v0.2 was locked before converting and running the exact checkpoint."
+    }
+  ],
+  "privacy": {
+    "raw_conversations_public": false,
+    "session_ids_public": false,
+    "questions_answers_scores_public": true
+  },
+  "decision": "Do not switch the MVP's long-chat reader from the BF16 Transformers CPU path to this llama.cpp ROCm path yet. Radeon is about 2.8x faster, but this development run lost too much long-context answer quality. The next investigation must isolate runtime numerical behavior rather than add speculative decoding."
+}

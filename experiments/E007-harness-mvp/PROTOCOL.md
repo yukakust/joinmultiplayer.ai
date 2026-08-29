@@ -1068,3 +1068,10 @@ scored as a CPU-versus-Radeon comparison. Protocol v0.2 instead converts the
 exact cached Hugging Face revision from Gate 16B.1 without weight quantization:
 
 - `site/experiments/E007/bf16-rocm-protocol-v0.2.json`
+
+Development result: all 37/37 layers fit on ROCm and generation rose from about
+1.4 to 3.9 tokens/s, but the manual long-context score fell from 11/12 to 3/12.
+The optimized path is rejected for the MVP until the runtime quality gap is
+understood. All six questions and answers are published for visual review.
+
+- `site/experiments/E007/bf16-rocm-result-v0.2.json`

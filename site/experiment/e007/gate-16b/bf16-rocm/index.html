@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>E007 · BF16 на Radeon</title>
+  <link rel="stylesheet" href="/style.css?v=e007-bf16-rocm-v02">
+  <style>
+    body{background:#f4f0e5;color:#111;margin:0}.bf16-page{width:100%;max-width:none;padding:clamp(24px,4vw,72px);box-sizing:border-box}.bf16-page h1{font-size:clamp(42px,7vw,112px);line-height:.92;max-width:13ch;margin:.25em 0}.bf16-lead{font-size:clamp(20px,2.2vw,34px);max-width:38em}.bf16-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:48px 0;border:1px solid #aaa}.bf16-metrics div{padding:24px;border-right:1px solid #aaa}.bf16-metrics div:last-child{border:0}.bf16-metrics span,.qa small{display:block;color:#6d675d;text-transform:uppercase}.bf16-metrics strong{display:block;font-size:clamp(36px,5vw,72px);margin-top:12px}.qa{display:grid;grid-template-columns:minmax(220px,1fr) minmax(260px,1.2fr) minmax(260px,1.2fr);border-top:1px solid #aaa}.qa>div{padding:24px;border-right:1px solid #aaa}.qa>div:last-child{border:0}.qa h2{font-size:clamp(20px,2vw,30px);margin:.4em 0}.score-0{box-shadow:inset 8px 0 #df6b55}.score-1{box-shadow:inset 8px 0 #daa44f}.decision{border-left:8px solid #df6b55;padding:20px 24px;margin:48px 0;font-size:20px}.links{display:flex;gap:24px;flex-wrap:wrap}.links a{color:inherit;font-weight:700}@media(max-width:900px){.bf16-metrics{grid-template-columns:1fr 1fr}.bf16-metrics div:nth-child(2){border-right:0}.qa{grid-template-columns:1fr}.qa>div{border-right:0;border-bottom:1px solid #aaa}}
+  </style>
+</head>
+<body>
+<main class="bf16-page">
+  <p>E007 · GATE 16B.4 · РЕЗУЛЬТАТ</p>
+  <h1>Быстрее. Но хуже понимает.</h1>
+  <p class="bf16-lead">Тот же BF16 checkpoint полностью поместился в Radeon и заработал примерно в 2,8 раза быстрее CPU. Но на тех же вопросах качество упало с 11/12 до 3/12.</p>
+  <section class="bf16-metrics"><div><span>слоёв на Radeon</span><strong>37/37</strong></div><div><span>скорость</span><strong>3,9 t/s</strong></div><div><span>Radeon</span><strong>3/12</strong></div><div><span>CPU-контроль</span><strong>11/12</strong></div></section>
+  <h2>Все шесть вопросов и ответов</h2>
+  <section id="answers">Загрузка…</section>
+  <div class="decision"><strong>Решение:</strong> пока не переносим MVP-reader на этот путь. Сначала нужно понять, почему точные веса в llama.cpp/ROCm потеряли качество на длинном контексте. Speculative decoding эту проблему не исправит.</div>
+  <nav class="links"><a href="/experiments/E007/bf16-rocm-result-v0.2.json">Открыть результат JSON ↗</a><a href="/experiments/E007/bf16-rocm-protocol-v0.2.json">Открыть протокол ↗</a><a href="/experiment/e007/gate-16b/">Назад к Gate 16B</a></nav>
+</main>
+<script>
+fetch('/experiments/E007/bf16-rocm-result-v0.2.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));document.querySelector('#answers').innerHTML=data.questions.map(q=>`<article class="qa score-${q.manual_score}"><div><small>${esc(q.id)} · ${q.manual_score}/2</small><h2>${esc(q.question)}</h2><p>${esc(q.manual_reason)}</p></div><div><small>Ожидалось</small><p>${esc(q.expected)}</p></div><div><small>Ответ Radeon</small><p>${esc(q.answer)}</p></div></article>`).join('')}).catch(()=>{document.querySelector('#answers').textContent='Не удалось загрузить результат.'})
+</script>
+</body>
+</html>
