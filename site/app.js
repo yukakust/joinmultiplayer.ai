@@ -2896,6 +2896,23 @@ function e007Qwen17BRelevanceShell() {
   return `<section class="flow-shell e007-cluster-page e007-relevance17-page"><div class="flow-step">E007 · GATE 15B · ${localized({ en: "LOCKED BEFORE INFERENCE", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h1>${localized({ en: "Can 1.7B Qwen close the relevance floodgate?", ru: "Сможет ли Qwen 1.7B закрыть поток лишних источников?" })}</h1><p class="contribution-intro">${localized({ en: "The same 480 question-fragment pairs. No other harness step will run.", ru: "Те же 480 пар «вопрос + фрагмент». Ни один другой шаг harness запускаться не будет." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e007Qwen8BRelevanceShell() {
+  return `<section class="flow-shell e007-cluster-page e007-relevance17-page e007-relevance8-page"><div class="flow-step">E007 · GATE 15C · ${localized({ en: "LOCKED BEFORE INFERENCE", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h1>${localized({ en: "Can server Qwen keep the safety rules?", ru: "Сохранит ли серверная Qwen правила безопасности?" })}</h1><p class="contribution-intro">${localized({ en: "The same 480 pairs and the same question. Only Qwen3-1.7B becomes Qwen3-8B.", ru: "Те же 480 пар и тот же вопрос. Меняется только Qwen3‑1.7B → Qwen3‑8B." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+async function loadE007Qwen8BRelevance() {
+  const target = document.querySelector(".e007-relevance8-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E007/qwen8b-relevance-protocol-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Gate 15C protocol missing");
+    const protocol = await response.json();
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict needs-review"><span>${localized({ en: "PLAN LOCKED · MODEL NOT RUN", ru: "ПЛАН ЗАМОРОЖЕН · МОДЕЛЬ НЕ ЗАПУЩЕНА" })}</span><h2>${escapeHTML(localized({ en: protocol.plain_language_hypothesis, ru: "Сможет ли большая серверная Qwen остановить мусор и не выбросить семь нужных правил безопасности?" }))}</h2><p>${localized({ en: "Nothing is trained or tuned. The 8B model sees exactly what the 1.7B model saw and may answer only USEFUL or NOT_USEFUL.", ru: "Ничего не обучаем и не подкручиваем. Модель 8B увидит ровно то же, что модель 1.7B, и сможет ответить только USEFUL или NOT_USEFUL." })}</p></div><div class="e007-result-metrics"><article><span>${localized({ en: "REQUIRED", ru: "НУЖНЫХ" })}</span><strong>60</strong><small>${localized({ en: "keep at least 57", ru: "сохранить минимум 57" })}</small></article><article><span>${localized({ en: "EXTRA", ru: "ЛИШНИХ" })}</span><strong>420</strong><small>${localized({ en: "pass at most 42", ru: "пропустить максимум 42" })}</small></article><article><span>${localized({ en: "ONLY CHANGE", ru: "ЕДИНСТВЕННОЕ ИЗМЕНЕНИЕ" })}</span><strong>1.7B → 8B</strong></article></div><div class="e007-relevance-compare"><article><small>QWEN3-1.7B</small><strong>53 ${localized({ en: "required", ru: "нужных" })} · 47 ${localized({ en: "extra", ru: "лишних" })}</strong></article><span>→</span><article><small>QWEN3-8B</small><strong>${localized({ en: "not run yet", ru: "ещё не запущена" })}</strong></article></div><p class="control-warning">${localized({ en: "This is a paired synthetic development comparison. A pass would support an optional server filter; it would not prove the full harness or a phone deployment.", ru: "Это парное synthetic development-сравнение. Успех поддержит идею необязательного серверного фильтра, но не докажет весь harness или работу на телефоне." })}</p><div class="actions"><a class="primary-link" href="/experiments/E007/qwen8b-relevance-protocol-v0.1.json">${localized({ en: "FROZEN PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })} ↗</a><a class="quiet-link" href="/experiment/e007/gate-15b/">1.7B ${localized({ en: "RESULT", ru: "РЕЗУЛЬТАТ" })} ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 15C could not be loaded.", ru: "Не удалось загрузить Gate 15C." });
+  }
+}
+
 async function loadE007Qwen17BRelevance() {
   const target = document.querySelector(".e007-relevance17-page");
   if (!target) return;
@@ -6109,6 +6126,10 @@ function render() {
     document.title = `${localized({ en: "Qwen relevance", ru: "Relevance Qwen" })} — i`;
     app.innerHTML = withLanguage(e007Qwen17BRelevanceShell());
     loadE007Qwen17BRelevance();
+  } else if (path === "experiment/e007/gate-15c") {
+    document.title = `${localized({ en: "Server relevance gate", ru: "Серверный фильтр релевантности" })} — i`;
+    app.innerHTML = withLanguage(e007Qwen8BRelevanceShell());
+    loadE007Qwen8BRelevance();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

@@ -30,6 +30,15 @@ class Qwen17BRelevanceTest(unittest.TestCase):
         self.assertEqual(MODULE.parse_decision("NOT_USEFUL."), "NOT_USEFUL")
         self.assertEqual(MODULE.parse_decision("Maybe useful"), "UNPARSEABLE")
 
+    def test_gate_15c_changes_only_the_model(self):
+        old = MODULE.read(MODULE.PROTOCOL_PATH)
+        new = MODULE.read(MODULE.ROOT / "site/experiments/E007/qwen8b-relevance-protocol-v0.1.json")
+        self.assertEqual(old["source"], new["source"])
+        self.assertEqual(old["prompt"], new["prompt"])
+        self.assertEqual(old["locked_development_gate"], new["locked_development_gate"])
+        self.assertEqual(old["decision_rule"], new["decision_rule"].replace("Run once without prompt or threshold tuning.", "The gate is evaluated once without threshold tuning."))
+        self.assertEqual(new["model"]["repository"], "Qwen/Qwen3-8B")
+
 
 if __name__ == "__main__":
     unittest.main()

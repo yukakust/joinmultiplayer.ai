@@ -102,6 +102,7 @@ SPA_ROUTES = {
     "/experiment/e007/gate-14a",
     "/experiment/e007/gate-15a",
     "/experiment/e007/gate-15b",
+    "/experiment/e007/gate-15c",
     "/experiment/e007/ten-buttons",
     "/experiment/connector",
     "/experiment/run",

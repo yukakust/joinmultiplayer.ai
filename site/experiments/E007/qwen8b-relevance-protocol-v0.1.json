@@ -1,0 +1,66 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "15C",
+  "status": "locked_before_inference",
+  "locked_at": "2026-08-29",
+  "hypothesis": "With the prompt, inputs, parser, and thresholds unchanged, server-side Qwen3-8B will preserve at least 57 of 60 required fragments while forwarding at most 42 of 420 extra fragments.",
+  "plain_language_hypothesis": "Can a larger server Qwen stop the junk without throwing away the seven useful safety rules?",
+  "only_intended_change": "Qwen/Qwen3-1.7B becomes Qwen/Qwen3-8B. Everything else is copied from Gate 15B.",
+  "source": {
+    "path": "/experiments/E007/full-pipeline-qwen17b-result-v0.1.json",
+    "sha256": "5287c4847229d4017220e099d07434ca500f1fe7a87f080a783f9b0deac3fadb",
+    "pairs": 480,
+    "required": 60,
+    "unrelated": 420
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "training": false,
+    "examples": false,
+    "decoding": "greedy",
+    "thinking": false,
+    "max_new_tokens": 6,
+    "runtime": "yukabox CPU, bfloat16"
+  },
+  "prompt": {
+    "system": "You are a relevance gate. Judge only whether one source fragment directly helps answer one user question.",
+    "template": "QUESTION\n{question}\n\nSOURCE FRAGMENT\n{fragment}\n\nDoes this source fragment contain information that directly helps answer the question? Reply with exactly USEFUL or NOT_USEFUL.",
+    "allowed_outputs": ["USEFUL", "NOT_USEFUL"]
+  },
+  "baselines": {
+    "qwen3_reranker_4b_recall_first": {
+      "required_kept": 60,
+      "required_total": 60,
+      "unrelated_kept": 345,
+      "unrelated_total": 420
+    },
+    "qwen3_1_7b_binary_gate": {
+      "required_kept": 53,
+      "required_total": 60,
+      "unrelated_kept": 47,
+      "unrelated_total": 420
+    }
+  },
+  "baseline": {
+    "module": "Qwen3-1.7B direct binary relevance gate",
+    "required_kept": 53,
+    "required_total": 60,
+    "unrelated_kept": 47,
+    "unrelated_total": 420
+  },
+  "locked_development_gate": {
+    "required_kept_at_least": 57,
+    "unrelated_kept_at_most": 42,
+    "unparseable_at_most": 0
+  },
+  "decision_rule": "USEFUL moves forward. NOT_USEFUL and unparseable outputs do not move forward. Run once without prompt or threshold tuning.",
+  "manual_audit_plan": "Read every lost required fragment and every passed extra fragment after the locked run. Preserve the mechanical score even if the frozen gold is later found ambiguous.",
+  "boundaries": [
+    "These are the same already opened synthetic English pairs used by Gates 15A and 15B, so this is a paired comparative development test, not fresh held-out evidence.",
+    "This isolates model scale only. It does not test training, quantization, a phone, truth, privacy, or the full pipeline.",
+    "A successful 8B result would support optional server-side filtering, not replacing the phone preset or making private memory leave its owner device.",
+    "No later harness stage runs in Gate 15C."
+  ]
+}

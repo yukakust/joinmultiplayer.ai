@@ -63,7 +63,7 @@ def run(args: argparse.Namespace) -> dict:
         raise RuntimeError(f"Refusing to overwrite preserved result: {args.output}")
     protocol, source = read(args.protocol), read(args.source)
     if protocol["status"] != "locked_before_inference" or digest(args.source) != protocol["source"]["sha256"]:
-        raise RuntimeError("Gate 15B inputs are not the locked source")
+        raise RuntimeError("Relevance-gate inputs are not the locked source")
     pairs = frozen_pairs(source)
     if len(pairs) != 480 or sum(item["gold"] == "USEFUL" for item in pairs) != 60:
         raise RuntimeError("Frozen pair population changed")
@@ -120,10 +120,11 @@ def run(args: argparse.Namespace) -> dict:
         and summary["unrelated_kept"] <= gate["unrelated_kept_at_most"]
         and summary["unparseable"] <= gate["unparseable_at_most"]
     )
+    gate_id = protocol["gate"]
     result = {
-        "schema_version":"0.1", "experiment_id":"E007", "gate":"15B",
+        "schema_version":"0.1", "experiment_id":"E007", "gate":gate_id,
         "status":"locked_comparative_synthetic_development_complete",
-        "git_revision":git_revision(), "protocol":"/experiments/E007/qwen17b-relevance-protocol-v0.1.json",
+        "git_revision":git_revision(), "protocol":f"/experiments/E007/{args.protocol.name}",
         "protocol_sha256":digest(args.protocol), "source_sha256":digest(args.source),
         "model":{"repository":spec["repository"],"revision":spec["revision"]},
         "summary":summary, "baseline":protocol["baseline"], "records":records,
