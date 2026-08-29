@@ -573,6 +573,10 @@ plugin, attachment, queue, and temporary state. No content was emitted. This
 means the next parser must start with a strict session allowlist; never index
 all of `~/.codex`. Claude Code and ChatGPT desktop were not found on yukabox,
 which is expected for this Linux server. The MacBook checkpoint is still open.
+The owner accepted the learning as an MVP law: an app folder is not a library;
+source adapters use a strict allowlist of useful conversation locations and
+deny all other files by default. Discovery alone never grants parse, index, or
+share permission.
 
 ## Immediate next work
 

@@ -166,7 +166,7 @@ evidence, not an end-to-end or phone result. Decision:
 
 1. One installable app with pinned presets and uninstall/update.
 2. Real-phone runtime measurements for quantized 1.7B and the 4B reranker.
-3. Owner-approved local-memory import plus a privacy-safe capability card.
+3. Allowlisted local-library adapters plus a privacy-safe capability card.
 4. One integrated run across all accepted modules rather than separate scripts.
 5. An authenticated MacBook + yukabox + phone room with complete receipts.
 6. A locked end-to-end test and one simple public inspection UI.
@@ -180,3 +180,10 @@ errors. It may not print conversation text, create an index, contact a server,
 or modify a source file. The owner must review the MacBook inventory before the
 next step. Finding a ChatGPT app database does not prove that every cloud chat
 is cached locally.
+
+The yukabox inventory established the first local-library law for the MVP:
+**an app folder is not a library**. Codex had 115 likely session files, but its
+root also contained authentication, caches, logs, plugins, attachments, queues,
+and temporary state. Each source adapter must therefore use a strict allowlist;
+everything else is denied by default. Discovery never grants permission to
+parse, index, or share a file.

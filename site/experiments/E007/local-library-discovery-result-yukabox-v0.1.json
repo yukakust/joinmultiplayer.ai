@@ -50,5 +50,6 @@
     "session_index.jsonl",
     "history.jsonl"
   ],
+  "accepted_mvp_learning": "An app folder is not a library. Read useful conversation locations through a strict source-adapter allowlist; deny every other file by default.",
   "honest_boundary": "No file contents were parsed. The 115 session files are candidates, not yet a proven count of complete readable conversations. MacBook discovery remains pending. Segmentation remains undecided."
 }

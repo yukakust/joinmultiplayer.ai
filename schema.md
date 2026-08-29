@@ -84,11 +84,27 @@ index, contact the network, or decide how to split conversations. ChatGPT's
 cloud-backed history may be only partly cached locally, so the detector must
 report what is actually present rather than promise a complete history.
 
+### MVP law: useful conversations by allowlist
+
+An application folder is not a library. Pocket i may read only formats and
+locations explicitly approved by that application's source adapter. Everything
+else is denied by default.
+
+For the current Codex adapter candidate, the allowlist starts with:
+
+- `sessions/**/*.jsonl`;
+- `session_index.jsonl`;
+- `history.jsonl`.
+
+Authentication, caches, logs, plugins, attachments, queues, operational
+databases, and temporary files are never library material. Finding a file does
+not grant permission to parse, index, or share it.
+
 ## 4. Local search
 
-A pocket i never searches the whole device. In the MVP it may inspect only the
-three app-owned collections above. More source adapters may be added later as
-separate modules.
+A pocket i never searches the whole device or even a whole application folder.
+In the MVP it may inspect only the allowlisted conversation locations of the
+three apps above. More source adapters may be added later as separate modules.
 
 The exact question enters the device. Search happens locally. The full memory
 does not leave the device.
