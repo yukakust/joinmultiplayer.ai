@@ -2892,6 +2892,23 @@ function e007FullPipelineShell() {
   return `<section class="flow-shell e007-cluster-page e007-full-pipeline-page"><div class="flow-step">E007 · GATE 15A · ${localized({ en: "LOCKED BEFORE THE FULL RUN", ru: "ЗАМОРОЖЕНО ДО ПОЛНОГО ЗАПУСКА" })}</div><h1>${localized({ en: "Can the whole harness carry one question to a safe answer?", ru: "Сможет ли весь harness провести вопрос до безопасного ответа?" })}</h1><p class="contribution-intro">${localized({ en: "Thirty frozen questions. Sixty-four logical pocket i. Qwen3-1.7B writes the claims and final answers; small fixed modules search and check.", ru: "Тридцать замороженных вопросов. Шестьдесят четыре логических pocket i. Qwen3‑1.7B пишет утверждения и ответы; маленькие фиксированные модули ищут и проверяют." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e007Qwen17BRelevanceShell() {
+  return `<section class="flow-shell e007-cluster-page e007-relevance17-page"><div class="flow-step">E007 · GATE 15B · ${localized({ en: "LOCKED BEFORE INFERENCE", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h1>${localized({ en: "Can 1.7B Qwen close the relevance floodgate?", ru: "Сможет ли Qwen 1.7B закрыть поток лишних источников?" })}</h1><p class="contribution-intro">${localized({ en: "The same 480 question-fragment pairs. No other harness step will run.", ru: "Те же 480 пар «вопрос + фрагмент». Ни один другой шаг harness запускаться не будет." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+async function loadE007Qwen17BRelevance() {
+  const target = document.querySelector(".e007-relevance17-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E007/qwen17b-relevance-protocol-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Gate 15B protocol missing");
+    const protocol = await response.json();
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict needs-review"><span>${localized({ en: "PLAN LOCKED · QWEN HAS NOT ANSWERED", ru: "ПЛАН ЗАМОРОЖЕН · QWEN ЕЩЁ НЕ ОТВЕЧАЛА" })}</span><h2>${escapeHTML(localized({ en: protocol.plain_language_hypothesis, ru: "Сможет ли Qwen 1.7B сохранить почти все полезные записи и остановить большинство записей про чужие устройства?" }))}</h2><p>${localized({ en: "One unchanged question and one exact fragment go in. The model may answer only USEFUL or NOT_USEFUL.", ru: "На входе один неизменённый вопрос и один точный фрагмент. Модель может ответить только USEFUL или NOT_USEFUL." })}</p></div><div class="e007-result-metrics"><article><span>${localized({ en: "REQUIRED", ru: "НУЖНЫХ" })}</span><strong>60</strong><small>${localized({ en: "keep at least 57", ru: "сохранить минимум 57" })}</small></article><article><span>${localized({ en: "UNRELATED", ru: "ЧУЖИХ" })}</span><strong>420</strong><small>${localized({ en: "pass at most 42", ru: "пропустить максимум 42" })}</small></article><article><span>${localized({ en: "UNPARSEABLE", ru: "НЕПОНЯТНЫХ" })}</span><strong>0</strong><small>${localized({ en: "required", ru: "допустимо" })}</small></article></div><div class="e007-full-answer-grid"><article><small>QUESTION</small><p>${localized({ en: "What happened to this exact device, and what should be done?", ru: "Что произошло именно с этим устройством и что нужно сделать?" })}</p></article><article><small>SOURCE FRAGMENT</small><p>${localized({ en: "One exact note offered by one pocket i.", ru: "Одна точная запись, предложенная одним pocket i." })}</p></article></div><p class="control-warning">${localized({ en: "This is a comparative synthetic development test on already opened pairs. It does not test truth or the full pipeline.", ru: "Это сравнительный synthetic development-тест на уже открытых парах. Он не проверяет истинность или весь pipeline." })}</p><div class="actions"><a class="primary-link" href="/experiments/E007/qwen17b-relevance-protocol-v0.1.json">${localized({ en: "FROZEN PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })} ↗</a><a class="quiet-link" href="/experiment/e007/gate-15a/">${localized({ en: "FULL PIPELINE X-RAY", ru: "РЕНТГЕН ВСЕГО PIPELINE" })} ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 15B could not be loaded.", ru: "Не удалось загрузить Gate 15B." });
+  }
+}
+
 async function loadE007FullPipeline() {
   const target = document.querySelector(".e007-full-pipeline-page");
   if (!target) return;
@@ -6065,6 +6082,10 @@ function render() {
     document.title = `${localized({ en: "Full pipeline", ru: "Весь pipeline" })} — i`;
     app.innerHTML = withLanguage(e007FullPipelineShell());
     loadE007FullPipeline();
+  } else if (path === "experiment/e007/gate-15b") {
+    document.title = `${localized({ en: "Qwen relevance", ru: "Relevance Qwen" })} — i`;
+    app.innerHTML = withLanguage(e007Qwen17BRelevanceShell());
+    loadE007Qwen17BRelevance();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

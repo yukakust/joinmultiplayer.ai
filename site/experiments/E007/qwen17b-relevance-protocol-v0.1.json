@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "15B",
+  "status": "locked_before_inference",
+  "locked_at": "2026-08-29",
+  "hypothesis": "Qwen3-1.7B can classify the same frozen question-fragment pairs with far fewer unrelated passes than Qwen3-Reranker-4B, while preserving nearly all required evidence.",
+  "plain_language_hypothesis": "Can the 1.7B Qwen keep almost every useful note and stop most notes about somebody else's device?",
+  "source": {
+    "path": "/experiments/E007/full-pipeline-qwen17b-result-v0.1.json",
+    "sha256": "5287c4847229d4017220e099d07434ca500f1fe7a87f080a783f9b0deac3fadb",
+    "pairs": 480,
+    "required": 60,
+    "unrelated": 420
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "training": false,
+    "examples": false,
+    "decoding": "greedy",
+    "thinking": false,
+    "max_new_tokens": 6
+  },
+  "prompt": {
+    "system": "You are a relevance gate. Judge only whether one source fragment directly helps answer one user question.",
+    "template": "QUESTION\n{question}\n\nSOURCE FRAGMENT\n{fragment}\n\nDoes this source fragment contain information that directly helps answer the question? Reply with exactly USEFUL or NOT_USEFUL.",
+    "allowed_outputs": ["USEFUL", "NOT_USEFUL"]
+  },
+  "baseline": {
+    "module": "Qwen3-Reranker-4B-Q4_K_M with TAKE plus NOT SURE forwarded",
+    "required_kept": 60,
+    "required_total": 60,
+    "unrelated_kept": 345,
+    "unrelated_total": 420
+  },
+  "locked_development_gate": {
+    "required_kept_at_least": 57,
+    "unrelated_kept_at_most": 42,
+    "unparseable_at_most": 0
+  },
+  "decision_rule": "USEFUL moves forward. NOT_USEFUL and unparseable outputs do not move forward. The gate is evaluated once without threshold tuning.",
+  "boundaries": [
+    "These are synthetic English pairs already opened by Gate 15A, so this is a comparative development test, not fresh held-out evidence.",
+    "The test changes both model family and decision interface: a generative binary decision replaces a calibrated reranker score.",
+    "This tests relevance only, not truth, source support, privacy, lineage, piling, or final answer quality.",
+    "No other pipeline stage runs in Gate 15B."
+  ]
+}
