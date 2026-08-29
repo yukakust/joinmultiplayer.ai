@@ -1,0 +1,78 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "15D",
+  "status": "locked_before_inference",
+  "locked_at": "2026-08-29",
+  "hypothesis": "Qwen3-8B can use all sixteen fragments for one question together to retain compositional rules and competing same-case views, remove unrelated records, and produce a source-cited answer more reliably than pairwise relevance filtering.",
+  "plain_language_hypothesis": "Will the larger Qwen solve the puzzle when it sees all sixteen pieces together instead of judging each piece alone?",
+  "source": {
+    "path": "/experiments/E007/full-pipeline-qwen17b-result-v0.1.json",
+    "sha256": "5287c4847229d4017220e099d07434ca500f1fe7a87f080a783f9b0deac3fadb",
+    "questions": 30,
+    "fragments_per_question": 16,
+    "fragments_total": 480,
+    "required": 60,
+    "same_case_alternatives": 24,
+    "irrelevant": 396
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "training": false,
+    "examples": false,
+    "decoding": "greedy",
+    "thinking": false,
+    "runtime": "yukabox CPU, bfloat16"
+  },
+  "selector": {
+    "system": "You are an evidence librarian. You receive one question and all source fragments offered for that case at the same time.",
+    "instruction": "Keep a fragment when it does at least one of these jobs: (1) helps answer any part of the question; (2) becomes useful if another kept fragment confirms its condition; (3) states a competing or mistaken view about the exact same observed case. Drop fragments about another device, another event, or superficial word overlap. Return exactly one JSON object with one key: {\"keep\":[\"SOURCE_ID\",\"SOURCE_ID\"]}. Use only IDs shown below.",
+    "max_new_tokens": 256,
+    "parser": "A single JSON object with exactly one keep array; every unique ID must be present in the offered set. Any other output is unparseable."
+  },
+  "synthesis": {
+    "system": "You write a cautious answer using only selected source fragments. Several copied reports with one lineage are one dependent view, not independent votes.",
+    "instruction": "Answer the question using only the selected fragments. Connect conditional rules when another selected fragment supports their condition. Preserve a competing same-case view and say when its evidence is weaker or dependent. Never invent a missing fact. Return exactly one JSON object with these keys: best_supported, best_evidence_ids, alternative_view, alternative_evidence_ids, action_or_next_step, action_evidence_ids, uncertainty. Text fields may be null; ID fields are arrays and may contain only selected SOURCE_ID values.",
+    "max_new_tokens": 512,
+    "parser": "A single JSON object with exactly the seven frozen keys; all cited IDs must be selected IDs."
+  },
+  "gold_contract": {
+    "core_required": "The diagnostic, independent, mixed-redacted, or ambiguity fragment named in required_sources.",
+    "action_or_next_required": "The SAFE or NEXT fragment named in required_sources.",
+    "same_case_alternative": "For condition-mismatch tasks, the current device LOOKALIKE record. For supported-minority tasks, the three current-case COPY records.",
+    "irrelevant": "Every other offered fragment."
+  },
+  "locked_selector_gate": {
+    "core_required_kept_at_least": 29,
+    "core_required_total": 30,
+    "action_or_next_kept_at_least": 28,
+    "action_or_next_total": 30,
+    "same_case_alternatives_kept_at_least": 22,
+    "same_case_alternatives_total": 24,
+    "irrelevant_kept_at_most": 40,
+    "irrelevant_total": 396,
+    "unparseable_at_most": 0
+  },
+  "locked_answer_gate": {
+    "fully_correct_at_least": 24,
+    "questions_total": 30,
+    "foreign_source_facts_at_most": 0,
+    "unsupported_new_facts_at_most": 0,
+    "truncated_answers_at_most": 0
+  },
+  "manual_answer_rubric": [
+    "The best-supported cause or explicit uncertainty matches the frozen expected answer.",
+    "The safe action or next measurement matches the frozen expected answer.",
+    "Condition-mismatch and supported-minority cases preserve the relevant competing view without treating dependent copies as independent votes.",
+    "Every factual statement is supported by a cited selected fragment; no foreign-device fact appears.",
+    "No synthetic secret appears and the answer is complete rather than truncated."
+  ],
+  "decision_rule": "Run selector and synthesis once over all thirty frozen bundles. Do not edit prompts, gold, thresholds, or outputs after inference. Manually audit all thirty answers.",
+  "boundaries": [
+    "This is a synthetic English development test on previously opened questions and fragments, not fresh held-out evidence.",
+    "It tests bundle selection and bundle synthesis on one server, not network transport, a phone, or privacy enforcement before transport.",
+    "The security stage already removed synthetic secrets from the fragments supplied here.",
+    "Manual answer scoring is required because exact-string grading previously produced false errors."
+  ]
+}

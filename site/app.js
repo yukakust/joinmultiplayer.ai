@@ -2900,6 +2900,29 @@ function e007Qwen8BRelevanceShell() {
   return `<section class="flow-shell e007-cluster-page e007-relevance17-page e007-relevance8-page"><div class="flow-step">E007 · GATE 15C · ${localized({ en: "LOCKED BEFORE INFERENCE", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h1>${localized({ en: "Can server Qwen keep the safety rules?", ru: "Сохранит ли серверная Qwen правила безопасности?" })}</h1><p class="contribution-intro">${localized({ en: "The same 480 pairs and the same question. Only Qwen3-1.7B becomes Qwen3-8B.", ru: "Те же 480 пар и тот же вопрос. Меняется только Qwen3‑1.7B → Qwen3‑8B." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e007Qwen8BBundleShell() {
+  return `<section class="flow-shell e007-cluster-page e007-relevance17-page e007-bundle8-page"><div class="flow-step">E007 · GATE 15D · ${localized({ en: "LOCKED BEFORE INFERENCE", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА" })}</div><h1>${localized({ en: "Can Qwen solve the whole evidence puzzle?", ru: "Соберёт ли Qwen весь пазл доказательств?" })}</h1><p class="contribution-intro">${localized({ en: "Thirty questions. Sixteen fragments per question. The model sees all pieces together before it selects and answers.", ru: "Тридцать вопросов. По шестнадцать фрагментов на каждый. Модель видит все части вместе — и только потом выбирает и отвечает." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+async function loadE007Qwen8BBundle() {
+  const target = document.querySelector(".e007-bundle8-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E007/qwen8b-bundle-protocol-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Gate 15D protocol missing");
+    const protocol = await response.json();
+    const stages = [
+      [localized({ en: "ONE CASE", ru: "ОДИН СЛУЧАЙ" }), localized({ en: "question + 16 fragments", ru: "вопрос + 16 фрагментов" })],
+      [localized({ en: "SELECT TOGETHER", ru: "ВЫБРАТЬ ВМЕСТЕ" }), localized({ en: "direct + conditional + competing", ru: "прямое + условное + спорное" })],
+      [localized({ en: "ANSWER TOGETHER", ru: "ОТВЕТИТЬ ВМЕСТЕ" }), localized({ en: "best view + alternative + action", ru: "лучшая версия + альтернатива + действие" })],
+      [localized({ en: "CITE SOURCES", ru: "УКАЗАТЬ ИСТОЧНИКИ" }), localized({ en: "every statement points back", ru: "каждая мысль ведёт к записи" })],
+    ].map(([title, text]) => `<article><span>${title}</span><strong>${text}</strong></article>`).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict needs-review"><span>${localized({ en: "PLAN LOCKED · MODEL NOT RUN", ru: "ПЛАН ЗАМОРОЖЕН · МОДЕЛЬ НЕ ЗАПУЩЕНА" })}</span><h2>${escapeHTML(localized({ en: protocol.plain_language_hypothesis, ru: "Соберёт ли большая Qwen пазл, если увидит все шестнадцать частей вместе, а не будет судить каждую отдельно?" }))}</h2><p>${localized({ en: "The same 480 fragments are now grouped into thirty case folders. No training, examples, or prompt tuning after the run.", ru: "Те же 480 фрагментов теперь собраны в тридцать папок дела. Без обучения, примеров и подкрутки prompt после запуска." })}</p></div><div class="e007-result-metrics"><article><span>${localized({ en: "QUESTIONS", ru: "ВОПРОСОВ" })}</span><strong>30</strong></article><article><span>${localized({ en: "FRAGMENTS", ru: "ФРАГМЕНТОВ" })}</span><strong>480</strong></article><article><span>${localized({ en: "PER CASE", ru: "В ОДНОЙ ПАПКЕ" })}</span><strong>16</strong></article></div><div class="e007-accepted-pipeline">${stages}</div><p class="control-warning">${localized({ en: "Selection passes only if it keeps almost all causes, conditional actions, and same-case alternatives while rejecting most foreign records. All thirty final answers will then be read manually.", ru: "Выбор пройдёт тест, только если сохранит почти все причины, условные действия и альтернативы того же случая, но отбросит большинство чужих записей. Затем все тридцать ответов будут прочитаны вручную." })}</p><div class="actions"><a class="primary-link" href="/experiments/E007/qwen8b-bundle-protocol-v0.1.json">${localized({ en: "FROZEN PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })} ↗</a><a class="quiet-link" href="/experiment/e007/gate-15c/">${localized({ en: "PAIRWISE FAILURE", ru: "ПРОВАЛ ПО ОДНОМУ ФРАГМЕНТУ" })} ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 15D could not be loaded.", ru: "Не удалось загрузить Gate 15D." });
+  }
+}
+
 async function loadE007Qwen8BRelevance() {
   const target = document.querySelector(".e007-relevance8-page");
   if (!target) return;
@@ -6150,6 +6173,10 @@ function render() {
     document.title = `${localized({ en: "Server relevance gate", ru: "Серверный фильтр релевантности" })} — i`;
     app.innerHTML = withLanguage(e007Qwen8BRelevanceShell());
     loadE007Qwen8BRelevance();
+  } else if (path === "experiment/e007/gate-15d") {
+    document.title = `${localized({ en: "Bundle evidence", ru: "Пазл доказательств" })} — i`;
+    app.innerHTML = withLanguage(e007Qwen8BBundleShell());
+    loadE007Qwen8BBundle();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
