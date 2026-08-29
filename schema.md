@@ -499,3 +499,17 @@ The unchanged binary `directly helps` contract is rejected for both model
 sizes. Do not solve this by choosing a larger server model. Define the missing
 answer slot before judging a fragment, then permit useful multi-fragment
 composition.
+
+Gate 15D tested that composition directly by showing Qwen3-8B all sixteen
+fragments for one case together. It retained 30/30 core pieces and 30/30
+conditional action or next-measurement pieces, while retaining 0/396 frozen
+irrelevant records. Therefore the whole-bundle view repairs the pairwise
+`evidence X → condition X → action Y` failure.
+
+It is not the complete accepted selector. Qwen removed all 24 same-case
+alternatives and the final writer could not cite or faithfully preserve them.
+The core answer was right in 30/30, but only 16/30 passed the complete manual
+rubric and three answers added unsupported generic alternatives. Preserve two
+separate shelves before synthesis: an evidence-landscape shelf with same-case
+alternatives and lineage, and a best-supported-answer shelf produced from the
+whole bundle. Never let an answer cite the opposing shelf as its evidence.

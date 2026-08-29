@@ -1,0 +1,98 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "15D",
+  "status": "locked_development_gate_failed",
+  "audited_at": "2026-08-29",
+  "summary": {
+    "questions": 30,
+    "fully_correct": 16,
+    "fully_correct_gate": 24,
+    "cause_or_explicit_uncertainty_correct": 30,
+    "action_or_next_step_correct": 30,
+    "required_source_pairs_selected": 30,
+    "same_case_alternatives_selected": 0,
+    "same_case_alternatives_total": 24,
+    "competing_view_tasks_fully_preserved": 0,
+    "competing_view_tasks_total": 12,
+    "unsupported_new_facts": 3,
+    "foreign_device_facts": 0,
+    "synthetic_secret_leaks": 0,
+    "truncated_answers": 0,
+    "selector_gate_passed": false,
+    "answer_gate_passed": false
+  },
+  "passed_case_ids": [
+    "E7-Q01", "E7-Q02", "E7-Q03", "E7-Q04", "E7-Q05", "E7-Q06",
+    "E7-Q20", "E7-Q21", "E7-Q22", "E7-Q23", "E7-Q24",
+    "E7-Q25", "E7-Q26", "E7-Q27", "E7-Q28", "E7-Q29"
+  ],
+  "failed_cases": [
+    {
+      "id": "E7-Q07",
+      "reason": "The diagnosis and action are correct, but the selector dropped the same-device look-alike explanation and the answer never explains why the normal-readiness interpretation does not apply."
+    },
+    {
+      "id": "E7-Q08",
+      "reason": "The diagnosis and action are correct, but the harmless-airflow alternative and its mismatched conditions were discarded."
+    },
+    {
+      "id": "E7-Q09",
+      "reason": "The diagnosis and action are correct, but the normal-link-test alternative and its mismatched conditions were discarded."
+    },
+    {
+      "id": "E7-Q10",
+      "reason": "The diagnosis and action are correct, but the scheduled-integrity-scan alternative and its mismatched pressure condition were discarded."
+    },
+    {
+      "id": "E7-Q11",
+      "reason": "The required diagnosis and action are correct. The look-alike capacity-check source was discarded, then the answer invented 'possible battery failure or other internal fault' from no selected source."
+    },
+    {
+      "id": "E7-Q12",
+      "reason": "The diagnosis and action are correct, but the priming-signal alternative and its opposite coolant-flow condition were discarded."
+    },
+    {
+      "id": "E7-Q13",
+      "reason": "The independent cause and safety action are correct. All three copied software-lag reports were discarded, so the answer cites a safety rule as evidence for the alternative view and misdescribes the dependency."
+    },
+    {
+      "id": "E7-Q14",
+      "reason": "The independent cause and safety action are correct. The three display-calibration reports were discarded and the alternative view cites only the independent source that contradicts it."
+    },
+    {
+      "id": "E7-Q15",
+      "reason": "The independent cause and safety action are correct. The screen-persistence reports were discarded and the alternative view cites the opposing independent source."
+    },
+    {
+      "id": "E7-Q16",
+      "reason": "The independent cause and safety action are correct. The telemetry-delay reports were discarded and their alternative view has no supporting selected source."
+    },
+    {
+      "id": "E7-Q17",
+      "reason": "The independent cause and safety action are correct. The old-firmware reports were discarded and the answer cites the safety rule as evidence for the alternative."
+    },
+    {
+      "id": "E7-Q18",
+      "reason": "The independent cause and safety action are correct. The cosmetic-aliasing reports were discarded and the answer cites the source that disproves them rather than the copied reports."
+    },
+    {
+      "id": "E7-Q19",
+      "reason": "The antenna-coupler diagnosis and safe action are correct, with no secret leak. The answer invents unspecified 'other factors' and possible different actions from no selected source."
+    },
+    {
+      "id": "E7-Q30",
+      "reason": "The unresolved causes and timing-log next step are correct. The answer invents a possible 'specific hardware failure' without evidence or a citation."
+    }
+  ],
+  "manual_findings": [
+    "Seeing all sixteen fragments together completely repaired the compositional loss: all 30 core fragments and all 30 conditional action or next-measurement fragments were selected.",
+    "The selector rejected all 396 frozen irrelevant fragments.",
+    "The selector also rejected all 24 same-case alternatives despite an explicit instruction to keep competing or mistaken views. It optimized for the best answer rather than preserving the evidence landscape.",
+    "Every best-supported cause or explicit uncertainty and every safe action or next measurement matched the frozen expected answer.",
+    "Because the alternative sources were gone, the synthesizer either omitted them or discussed them using the wrong citations. Three answers also added unsupported generic alternatives.",
+    "The result separates two jobs: bundle reasoning is strong for finding the best answer, while evidence preservation must be enforced mechanically or by a separate collection pass."
+  ],
+  "decision": "Reject Gate 15D as the complete evidence-preserving harness, but accept its bundle view as a successful repair for X-to-Y composition and clear-junk removal. Do not ask one model decision to both optimize the best answer and preserve every relevant competing view.",
+  "next_test": "Use two independent shelves before synthesis: a mechanical same-case shelf that preserves matching alternatives and lineages, and the Qwen3-8B best-answer shelf. The final writer receives both, labels support strength, and may not cite one shelf as evidence for the other."
+}

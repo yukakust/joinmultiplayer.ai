@@ -799,3 +799,42 @@ fragments separately. Protocol, raw trace, and manual audit:
 - `site/experiments/E007/qwen8b-relevance-protocol-v0.1.json`
 - `site/experiments/E007/qwen8b-relevance-result-v0.1.json`
 - `site/experiments/E007/qwen8b-relevance-human-audit-v0.1.json`
+
+## Gate 15D — Qwen3-8B sees each whole evidence bundle
+
+Freeze the same 480 fragments as thirty case folders with sixteen fragments
+each. Before the run, broaden relevant gold beyond the sixty required pieces:
+six condition-mismatch look-alikes and eighteen dependent copied reports are
+same-case alternatives, for 24 alternatives and 396 irrelevant records.
+
+Run two sequential Qwen3-8B calls per folder without training or examples.
+First, select direct evidence, conditionally useful rules, and competing views
+from all sixteen fragments together. Second, synthesize a JSON answer containing
+the best-supported view, cited evidence IDs, an alternative view, the safe
+action or next measurement, citations, and uncertainty. Manually score all
+thirty final answers; exact strings are not the judge.
+
+The locked selector found all 30 core pieces and all 30 conditional action or
+next-measurement pieces, while retaining 0/396 frozen irrelevant fragments.
+This completely repaired the pairwise X-to-Y composition failure. However, it
+also discarded all 24 same-case alternatives despite an explicit instruction
+to preserve them, so the selector gate failed.
+
+Manual review found the best-supported cause or explicit uncertainty and the
+safe action or next measurement correct in all 30/30 answers. Only 16/30 passed
+the complete rubric. All twelve tasks requiring a competing view failed because
+its source had already been removed; the writer then omitted it or cited the
+opposing source as support. Q11, Q19, and Q30 added three unsupported generic
+alternatives. No foreign-device fact, synthetic secret, parse failure, or token
+limit occurred. Runtime on yukabox CPU BF16 was 1,297.745 seconds.
+
+The whole-bundle view is accepted as a successful repair for composition and
+clear-junk removal, but Gate 15D is rejected as a complete evidence-preserving
+harness. Separate the jobs next: mechanically retain same-case alternatives
+and lineage on one shelf, while Qwen builds the best-supported answer on a
+second shelf. The writer receives both and may not cite one view's source as
+evidence for the other. Protocol, trace, and audit:
+
+- `site/experiments/E007/qwen8b-bundle-protocol-v0.1.json`
+- `site/experiments/E007/qwen8b-bundle-result-v0.1.json`
+- `site/experiments/E007/qwen8b-bundle-human-audit-v0.1.json`
