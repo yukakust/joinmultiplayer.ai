@@ -735,3 +735,12 @@ required uncertainty plus next step in 3/6 cases, both below their 5/6 gates.
 The result is a preserved synthetic development failure. The next experiment
 must test an explicit question-to-source identity and condition gate before
 claim generation; application work remains paused.
+
+Post-run stage audit separates the failure instead of blaming the final model.
+Steps 1–4 passed: unchanged questions, required-owner routing, required-source
+local recall, and secret redaction. Step 5 was the first break: it retained all
+60 required passages but also 345 of 420 extra passages. Step 6 was the second
+break: only 34 of 60 required source claims survived because the claim writer
+expanded exact evidence and the source NLI checker rejected the expansion.
+Only 9 of 30 questions therefore reached piling with both required sources.
+Steps 7 and 8 received damaged input and are not isolated by this run.

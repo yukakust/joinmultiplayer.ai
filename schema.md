@@ -471,3 +471,10 @@ belonging to another device. This produced only 10/30 completely correct final
 answers. Gate 15A is rejected and preserved. Before an app MVP, the harness
 needs a tested gate for `question identity and conditions ↔ source identity and
 conditions`.
+
+The stage audit identifies two separate repair targets. Step 5 preserved recall
+but admitted 345/420 extra passages. Step 6 retained only 34/60 required claims
+after Qwen rewrites were checked against their exact sources. Do not retest the
+whole chain yet: isolate relevance first, then claim extraction on clean required
+sources. Piling and final synthesis cannot be judged fairly until those inputs
+are repaired.

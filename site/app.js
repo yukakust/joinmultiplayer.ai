@@ -2896,15 +2896,17 @@ async function loadE007FullPipeline() {
   const target = document.querySelector(".e007-full-pipeline-page");
   if (!target) return;
   try {
-    const [protocolResponse, resultResponse, auditResponse] = await Promise.all([
+    const [protocolResponse, resultResponse, auditResponse, stageResponse] = await Promise.all([
       fetch("/experiments/E007/full-pipeline-qwen17b-protocol-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/full-pipeline-qwen17b-result-v0.1.json", { cache: "no-store" }),
       fetch("/experiments/E007/full-pipeline-qwen17b-human-audit-v0.1.json", { cache: "no-store" }),
+      fetch("/experiments/E007/full-pipeline-stage-audit-v0.1.json", { cache: "no-store" }),
     ]);
-    if (!protocolResponse.ok || !resultResponse.ok || !auditResponse.ok) throw new Error("Gate 15A data missing");
+    if (!protocolResponse.ok || !resultResponse.ok || !auditResponse.ok || !stageResponse.ok) throw new Error("Gate 15A data missing");
     const protocol = await protocolResponse.json();
     const result = await resultResponse.json();
     const audit = await auditResponse.json();
+    const stageAudit = await stageResponse.json();
     const steps = protocol.fixed_modules.map(item => `<article><span>${item.step}</span><strong>${escapeHTML(item.module)}</strong><p>${escapeHTML(item.job)}</p></article>`).join("");
     const familyNames = {
       join_distributed_parts: localized({ en: "JOIN TWO PIECES", ru: "СОБРАТЬ ДВЕ ЧАСТИ" }),
@@ -2925,6 +2927,14 @@ async function loadE007FullPipeline() {
     }).join("");
     const funnel = `<div class="e007-full-funnel"><article><b>480</b><span>${localized({ en: "offered fragments", ru: "предложено фрагментов" })}</span></article><i>→</i><article><b>${result.summary.relevance_take}</b><span>TAKE</span></article><article class="is-warning"><b>${result.summary.relevance_not_sure}</b><span>NOT SURE</span></article><article><b>${result.summary.relevance_drop}</b><span>DROP</span></article><i>→</i><article><b>${result.summary.accepted_capsules}</b><span>${localized({ en: "supported claims", ru: "подтверждённых утверждений" })}</span></article></div>`;
     target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict is-failed"><span>${localized({ en: "LOCKED SYNTHETIC DEVELOPMENT RESULT · FAILED", ru: "ЗАМОРОЖЕННЫЙ SYNTHETIC DEVELOPMENT-РЕЗУЛЬТАТ · НЕ ПРОШЁЛ" })}</span><h2>${localized({ en: "The sources were true. Too many belonged to the wrong question.", ru: "Источники были настоящими. Но слишком многие относились не к тому вопросу." })}</h2><p>${localized({ en: "The harness found every required source and leaked no secret. But 332 uncertain passages reached later stages. DeBERTa proved each surviving sentence against its own source; nobody proved that the source described this device and situation.", ru: "Harness нашёл все нужные источники и не выдал ни одного секрета. Но дальше прошли 332 сомнительных фрагмента. DeBERTa доказала каждую выжившую фразу по её источнику — однако никто не доказал, что источник относится именно к этому устройству и случаю." })}</p></div><div class="e007-result-metrics"><article class="is-critical"><span>${localized({ en: "FULLY CORRECT", ru: "ПОЛНОСТЬЮ ВЕРНО" })}</span><strong>${audit.summary.pass} / ${audit.summary.total}</strong><small>${localized({ en: "needed 24", ru: "нужно 24" })}</small></article><article class="is-correct"><span>${localized({ en: "REQUIRED SOURCES FOUND", ru: "НУЖНЫЕ ИСТОЧНИКИ НАЙДЕНЫ" })}</span><strong>${result.summary.local_search_all_required_sources} / 30</strong></article><article class="is-correct"><span>${localized({ en: "SECRET LEAKS", ru: "УТЕЧЕК СЕКРЕТОВ" })}</span><strong>${result.summary.synthetic_secret_leaks}</strong></article></div>${funnel}<p class="control-warning">${localized({ en: "The central lesson: ‘this sentence is true in its source’ is not the same as ‘this source answers this question’. The app is paused until that missing gate is tested.", ru: "Главный урок: «эта фраза верна по своему источнику» — не то же самое, что «этот источник отвечает на этот вопрос». Приложение поставлено на паузу, пока мы не проверим недостающий gate." })}</p><div class="e007-full-families">${families}</div><h2>${localized({ en: "All 30 questions and answers", ru: "Все 30 вопросов и ответов" })}</h2><div class="e007-full-cases">${cases}</div><h2>${localized({ en: "The path we tested", ru: "Какой путь мы проверяли" })}</h2><div class="e007-accepted-pipeline">${steps}</div><div class="actions"><a class="primary-link" href="/experiments/E007/full-pipeline-qwen17b-human-audit-v0.1.json">${localized({ en: "MANUAL AUDIT", ru: "РУЧНАЯ ПРОВЕРКА" })} ↗</a><a class="quiet-link" href="/experiments/E007/full-pipeline-qwen17b-result-v0.1.json">${localized({ en: "RAW FULL TRACE", ru: "ПОЛНЫЙ СЫРОЙ TRACE" })} ↗</a><a class="quiet-link" href="/experiments/E007/full-pipeline-qwen17b-protocol-v0.1.json">${localized({ en: "PLAN BEFORE RUN", ru: "ПЛАН ДО ЗАПУСКА" })} ↗</a></div></section>`;
+    const stageNames = {
+      pass: localized({ en: "WORKS", ru: "РАБОТАЕТ" }),
+      pass_with_noise: localized({ en: "WORKS, BUT WIDE", ru: "РАБОТАЕТ, НО ШИРОКО" }),
+      fail: localized({ en: "BREAKS HERE", ru: "ЛОМАЕТСЯ ЗДЕСЬ" }),
+      fail_upstream: localized({ en: "RECEIVED BAD INPUT", ru: "ПОЛУЧИЛ ПЛОХОЙ ВХОД" }),
+    };
+    const stageCards = stageAudit.stages.map(stage => `<article class="e007-stage-card is-${stage.verdict}"><header><b>${stage.step}</b><div><small>${escapeHTML(stageNames[stage.verdict])}</small><h3>${escapeHTML(localized(stage.name))}</h3></div></header><div class="e007-stage-io"><p><small>IN</small>${escapeHTML(stage.input)}</p><i>→</i><p><small>OUT</small>${escapeHTML(stage.output)}</p></div><strong>${escapeHTML(stage.metric)}</strong><p>${escapeHTML(localized(stage.finding))}</p>${stage.example ? `<blockquote>${escapeHTML(localized(stage.example))}</blockquote>` : ""}</article>`).join("");
+    target.querySelector(".e007-cluster-result .e005-gate4-result-verdict")?.insertAdjacentHTML("afterend", `<h2>${localized({ en: "Where exactly did it break?", ru: "Где именно всё сломалось?" })}</h2><div class="e007-stage-list">${stageCards}</div>`);
   } catch (error) {
     target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 15A could not be loaded.", ru: "Не удалось загрузить Gate 15A." });
   }

@@ -6247,6 +6247,22 @@ blockquote {
 .e007-full-funnel b { font: 700 42px/1 var(--display); }
 .e007-full-funnel span { margin-top: 12px; font: 700 12px/1.3 var(--mono); }
 .e007-full-funnel i { align-self: center; font-style: normal; font-size: 28px; }
+.e007-stage-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--line); margin: 24px 0 48px; }
+.e007-stage-card { padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.e007-stage-card:nth-child(2n) { border-right: 0; }
+.e007-stage-card.is-pass { border-top: 7px solid #89ba82; }
+.e007-stage-card.is-pass_with_noise { border-top: 7px solid #dfa74e; }
+.e007-stage-card.is-fail { border-top: 7px solid #e77461; background: rgba(231,116,97,.06); }
+.e007-stage-card.is-fail_upstream { border-top: 7px dashed #e77461; }
+.e007-stage-card header { display: grid; grid-template-columns: 60px 1fr; gap: 16px; align-items: start; }
+.e007-stage-card header > b { font: 700 48px/1 var(--display); }
+.e007-stage-card small { display: block; font: 700 10px/1.2 var(--mono); color: var(--muted); }
+.e007-stage-card h3 { margin: 5px 0 18px; font-size: 22px; }
+.e007-stage-card > strong { display: block; margin: 18px 0; font-size: 22px; }
+.e007-stage-io { display: grid; grid-template-columns: 1fr 20px 1fr; gap: 10px; align-items: center; }
+.e007-stage-io p { margin: 0; min-height: 75px; padding: 12px; border: 1px solid var(--line); font-size: 14px; }
+.e007-stage-io i { font-style: normal; text-align: center; }
+.e007-stage-card blockquote { margin: 18px 0 0; padding: 14px; border-left: 4px solid var(--ember); background: var(--paper); }
 .e007-full-cases { border-top: 1px solid var(--line); }
 .e007-full-case { border: 1px solid var(--line); border-top: 0; }
 .e007-full-case.is-pass { border-left: 6px solid #89ba82; }
@@ -6266,6 +6282,8 @@ blockquote {
 .e007-full-evidence li { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); }
 
 @media (max-width: 900px) {
+  .e007-stage-list { grid-template-columns: 1fr; }
+  .e007-stage-card, .e007-stage-card:nth-child(2n) { border-right: 0; }
   .e007-full-pipeline-page { width: calc(100vw - 24px); }
   .e007-full-case > summary { grid-template-columns: 64px 1fr; }
   .e007-full-case > summary strong { grid-column: 2; text-align: left; }
