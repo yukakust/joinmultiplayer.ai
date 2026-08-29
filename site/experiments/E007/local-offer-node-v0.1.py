@@ -119,6 +119,17 @@ def request_json(server: str, path: str, body: dict | None = None) -> dict:
         raise SystemExit(f"Server rejected the request: {detail}") from error
 
 
+def request_bytes(server: str, path: str) -> bytes:
+    request = urllib.request.Request(server.rstrip("/") + path)
+    request.add_header("Accept", "application/json")
+    request.add_header("User-Agent", "joinmultiplayer-pocket-i-local-offer/0.1")
+    try:
+        with urllib.request.urlopen(request, timeout=120) as response:
+            return response.read()
+    except urllib.error.HTTPError as error:
+        raise SystemExit(f"Could not download locked experiment data: {error}") from error
+
+
 def save_private(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
@@ -175,9 +186,17 @@ def join_and_search(
     card_id: str,
     device_label: str,
     cache_dir: Path,
+    protocol_path: str = PROTOCOL_PATH,
+    memory_path: str = MEMORY_PATH,
 ) -> dict:
-    protocol = request_json(server, PROTOCOL_PATH)
-    memory = request_json(server, MEMORY_PATH)
+    protocol_raw = request_bytes(server, protocol_path)
+    memory_raw = request_bytes(server, memory_path)
+    protocol = json.loads(protocol_raw)
+    memory = json.loads(memory_raw)
+    expected_memory_hash = protocol.get("memory_sha256")
+    actual_memory_hash = hashlib.sha256(memory_raw).hexdigest()
+    if expected_memory_hash and actual_memory_hash != expected_memory_hash:
+        raise SystemExit("Locked local-memory file changed; no local search was started")
     documents = [dict(document) for document in memory["libraries"].get(card_id, [])]
     if len(documents) != 6:
         raise SystemExit(f"Locked local library for {card_id} is unavailable")
@@ -289,6 +308,7 @@ def main() -> None:
     create = subparsers.add_parser("create")
     create.add_argument("--server", default="https://joinmultiplayer.ai")
     create.add_argument("--state", type=Path, required=True)
+    create.add_argument("--protocol-revision", default="e007-local-offer-v0.1")
 
     join = subparsers.add_parser("join")
     join.add_argument("--server", default="https://joinmultiplayer.ai")
@@ -296,12 +316,16 @@ def main() -> None:
     join.add_argument("--card", required=True)
     join.add_argument("--device", required=True)
     join.add_argument("--cache-dir", type=Path, required=True)
+    join.add_argument("--protocol-path", default=PROTOCOL_PATH)
+    join.add_argument("--memory-path", default=MEMORY_PATH)
 
     owner_join = subparsers.add_parser("owner-join")
     owner_join.add_argument("--state", type=Path, required=True)
     owner_join.add_argument("--card", required=True)
     owner_join.add_argument("--device", required=True)
     owner_join.add_argument("--cache-dir", type=Path, required=True)
+    owner_join.add_argument("--protocol-path", default=PROTOCOL_PATH)
+    owner_join.add_argument("--memory-path", default=MEMORY_PATH)
 
     status = subparsers.add_parser("status")
     status.add_argument("--state", type=Path, required=True)
@@ -314,15 +338,15 @@ def main() -> None:
         room = request_json(
             args.server,
             "/api/local-offer/rooms",
-            {"author_mode": "pseudonym", "pseudonym": "Morrow", "consent": True},
+            {"author_mode": "pseudonym", "pseudonym": "Morrow", "consent": True, "protocol_revision": args.protocol_revision},
         )
         save_private(args.state, {"server": args.server, **room})
         print(json.dumps({"room_id": room["room_id"], "state": str(args.state)}, indent=2))
     elif args.command == "join":
-        join_and_search(args.server, args.join_token, args.card.upper(), args.device, args.cache_dir)
+        join_and_search(args.server, args.join_token, args.card.upper(), args.device, args.cache_dir, args.protocol_path, args.memory_path)
     elif args.command == "owner-join":
         state = load_private(args.state)
-        join_and_search(state["server"], state["join_token"], args.card.upper(), args.device, args.cache_dir)
+        join_and_search(state["server"], state["join_token"], args.card.upper(), args.device, args.cache_dir, args.protocol_path, args.memory_path)
     elif args.command == "status":
         state = load_private(args.state)
         value = request_json(state["server"], "/api/local-offer/status", {"owner_token": state["owner_token"]})

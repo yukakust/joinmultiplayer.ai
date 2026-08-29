@@ -691,6 +691,73 @@ class SubmissionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "only found"):
                 handler.contribute_local_offer_node(leaked_capsule)
 
+    def test_physical_mvp_room_uses_its_own_locked_cards_and_questions(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.sqlite3"
+            init_db(path)
+            handler = handler_for(path)
+            handler.create_local_offer_room(
+                {
+                    "author_mode": "anonymous",
+                    "consent": True,
+                    "protocol_revision": "e007-physical-mvp-v0.1",
+                }
+            )
+            self.assertEqual(handler.sent[0], HTTPStatus.CREATED)
+            self.assertEqual(handler.sent[1]["protocol_revision"], "e007-physical-mvp-v0.1")
+            join_token = handler.sent[1]["join_token"]
+
+            handler.join_local_offer_room(
+                {"join_token": join_token, "card_id": "MVP-Y1", "device_label": "yukabox"}
+            )
+            self.assertEqual(handler.sent[0], HTTPStatus.CREATED)
+            joined = handler.sent[1]
+            self.assertEqual(joined["protocol_revision"], "e007-physical-mvp-v0.1")
+            self.assertEqual([item["id"] for item in joined["questions"]], [f"P{i:02d}" for i in range(1, 7)])
+            self.assertTrue(all(len(item["question_hash"]) == 64 for item in joined["questions"]))
+
+            with self.assertRaisesRegex(ValueError, "another declared device"):
+                handler.join_local_offer_room(
+                    {
+                        "join_token": join_token,
+                        "card_id": "MVP-M1",
+                        "device_label": "yukabox",
+                    }
+                )
+
+    def test_physical_mvp_fixture_has_all_locked_sources(self):
+        root = Path(__file__).resolve().parents[1]
+        protocol = json.loads(
+            (root / "site/experiments/E007/physical-mvp-protocol-v0.1.json").read_text()
+        )
+        memory = json.loads(
+            (root / "site/experiments/E007/physical-mvp-memory-v0.1.json").read_text()
+        )
+        documents = {
+            document["id"]: (card_id, document)
+            for card_id, documents in memory["libraries"].items()
+            for document in documents
+        }
+        self.assertEqual(set(memory["libraries"]), {"MVP-Y1", "MVP-Y2", "MVP-M1", "MVP-M2"})
+        self.assertTrue(all(len(documents) == 6 for documents in memory["libraries"].values()))
+        required = {
+            source_id
+            for question in protocol["questions"]
+            for source_id in question.get("required_sources", [])
+        }
+        alternatives = {
+            source_id
+            for question in protocol["questions"]
+            for source_id in question.get("same_case_alternatives", [])
+        }
+        self.assertEqual(len(required), 10)
+        self.assertEqual(len(alternatives), 2)
+        self.assertTrue(required | alternatives <= set(documents))
+        blocked_card, blocked = documents["M1-PRIVATE-CAIRN"]
+        self.assertEqual(blocked_card, "MVP-M1")
+        self.assertEqual(blocked["permission"], "blocked")
+        self.assertIn("{{SYNTHETIC_PRIVATE_CANARY}}", blocked["text"])
+
     def test_local_offer_can_rejoin_an_incomplete_slot_after_local_failure(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "test.sqlite3"

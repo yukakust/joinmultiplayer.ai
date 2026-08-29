@@ -2945,6 +2945,29 @@ function e007UsedShelfWriterShell() {
   return `<section class="flow-shell e007-ledger-page e007-writer-page"><div class="flow-step">E007 · GATE 15F · ${localized({ en: "FIRST SHELF ONLY", ru: "ТОЛЬКО ПЕРВАЯ ПОЛКА" })}</div><h1>${localized({ en: "Two correct pieces become one answer.", ru: "Две правильные части становятся одним ответом." })}</h1><p class="contribution-intro">${localized({ en: "Qwen sees only the chosen evidence. Competing versions remain outside its context.", ru: "Qwen видит только выбранные доказательства. Спорные версии не попадают в её контекст." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e007PhysicalMvpShell() {
+  return `<section class="flow-shell e007-physical-mvp-page"><div class="flow-step">E007 · GATE 16A · ${localized({ en: "LOCKED BEFORE ANY NODE SEARCH", ru: "ЗАМОРОЖЕНО ДО ПОИСКА НА УЗЛАХ" })}</div><h1>${localized({ en: "Can two real machines build the correct shelf together?", ru: "Соберут ли две настоящие машины правильную полку вместе?" })}</h1><p class="contribution-intro">${localized({ en: "Every answer is split: one useful piece lives on the MacBook, and another lives on yukabox. No pocket i owns the complete answer.", ru: "Каждый ответ разделён: одна нужная часть лежит на MacBook, другая — на yukabox. Ни у одного pocket i нет целого ответа." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+async function loadE007PhysicalMvp() {
+  const target = document.querySelector(".e007-physical-mvp-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E007/physical-mvp-protocol-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Gate 16A protocol missing");
+    const protocol = await response.json();
+    const questions = protocol.questions.map(item => {
+      const sources = item.required_sources.length
+        ? item.required_sources.map(source => `<code>${escapeHTML(source)}</code>`).join(" + ")
+        : `<span>${localized({ en: "private record must stay home", ru: "приватная запись должна остаться дома" })}</span>`;
+      return `<article><header><code>${escapeHTML(item.id)}</code></header><p>${escapeHTML(item.question)}</p><div>${sources}</div></article>`;
+    }).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-physical-plan"><div class="e007-physical-devices"><article><span>MACBOOK</span><h2>MVP-M1 + MVP-M2</h2><p>${localized({ en: "diagnosis A · safe steps B", ru: "диагнозы A · безопасные шаги B" })}</p></article><div class="e007-physical-wire">⇄<small>${localized({ en: "only evidence capsules", ru: "только капсулы с доказательствами" })}</small></div><article><span>YUKABOX</span><h2>MVP-Y1 + MVP-Y2</h2><p>${localized({ en: "safe steps A · diagnosis B", ru: "безопасные шаги A · диагнозы B" })}</p></article></div><div class="control-warning"><strong>${localized({ en: "Nothing has run yet", ru: "Запуск ещё не начался" })}</strong><p>${localized({ en: "This page is the promise written before seeing any result: 4 pocket i, 2 physical devices, 6 new questions, 72 search receipts, 10 required sources, 2 preserved alternatives, and zero private-code leaks.", ru: "Это обещание записано до результата: 4 pocket i, 2 физических устройства, 6 новых вопросов, 72 квитанции поиска, 10 обязательных источников, 2 сохранённые альтернативы и ни одной утечки приватного кода." })}</p></div><h2>${localized({ en: "What must cross the wire", ru: "Что должно встретиться через сеть" })}</h2><div class="e007-physical-questions">${questions}</div><div class="actions"><a class="primary-link" href="/experiments/E007/physical-mvp-protocol-v0.1.json">${localized({ en: "LOCKED PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })} ↗</a><a class="quiet-link" href="/experiments/E007/physical-mvp-memory-v0.1.json">${localized({ en: "SYNTHETIC LOCAL MEMORIES", ru: "СИНТЕТИЧЕСКАЯ ЛОКАЛЬНАЯ ПАМЯТЬ" })} ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 16A could not be loaded.", ru: "Не удалось загрузить Gate 16A." });
+  }
+}
+
 async function loadE007UsedShelfWriter() {
   const target = document.querySelector(".e007-writer-page");
   if (!target) return;
@@ -6258,6 +6281,10 @@ function render() {
     document.title = `${localized({ en: "Correct shelf to answer", ru: "Правильная полка в ответ" })} — i`;
     app.innerHTML = withLanguage(e007UsedShelfWriterShell());
     loadE007UsedShelfWriter();
+  } else if (path === "experiment/e007/gate-16a") {
+    document.title = `${localized({ en: "Physical MVP test", ru: "Физический MVP-тест" })} — i`;
+    app.innerHTML = withLanguage(e007PhysicalMvpShell());
+    loadE007PhysicalMvp();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

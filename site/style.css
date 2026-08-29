@@ -6515,3 +6515,21 @@ blockquote {
   .e007-cluster-card li { grid-template-columns: 1fr; }
   .e007-cluster-card li small { grid-column: 1; }
 }
+
+.e007-physical-mvp-page { width: min(1500px, calc(100vw - 48px)); }
+.e007-physical-devices { display: grid; grid-template-columns: 1fr 150px 1fr; align-items: stretch; margin: 48px 0; }
+.e007-physical-devices article { border: 1px solid var(--line); padding: 28px; }
+.e007-physical-devices span, .e007-physical-devices small { font: 700 12px/1.3 var(--mono); color: var(--muted); }
+.e007-physical-wire { display: grid; place-content: center; text-align: center; font-size: 42px; }
+.e007-physical-wire small { display: block; max-width: 130px; margin-top: 8px; font-size: 10px; }
+.e007-physical-questions { display: grid; grid-template-columns: repeat(3, 1fr); border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
+.e007-physical-questions article { min-height: 210px; padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.e007-physical-questions article > div { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; color: var(--muted); }
+
+@media (max-width: 800px) {
+  .e007-physical-mvp-page { width: calc(100vw - 24px); }
+  .e007-physical-devices { grid-template-columns: 1fr; }
+  .e007-physical-wire { min-height: 100px; transform: rotate(90deg); }
+  .e007-physical-wire small { display: none; }
+  .e007-physical-questions { grid-template-columns: 1fr; }
+}

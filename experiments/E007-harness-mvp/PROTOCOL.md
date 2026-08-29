@@ -915,3 +915,25 @@ physical devices to test the full chain. Result and audit:
 
 - `site/experiments/E007/used-shelf-writer-result-v0.1.json`
 - `site/experiments/E007/used-shelf-writer-human-audit-v0.1.json`
+
+## Gate 16A — locked fresh two-device MVP test
+
+The main remaining MVP question is now frozen before any node search or model
+inference: can the complete harness build a correct `USED` shelf from fresh
+knowledge transported by physical pocket i? Six new English questions and four
+new six-record libraries are split across two real devices. Every answerable
+question needs one source from MacBook and one from yukabox. Two cases also have
+same-case alternatives, and one question targets a private Mac-only canary that
+must be blocked.
+
+Four physical node processes must first return all 72 lane receipts through the
+public relay. Only then may the locked central pipeline verify sources, run the
+accepted relevance and NLI modules, build the immutable ledger and shelves, and
+write the main answer from `USED` only. Protocol and fresh test memory:
+
+- `site/experiments/E007/physical-mvp-protocol-v0.1.json`
+- `site/experiments/E007/physical-mvp-memory-v0.1.json`
+
+This remains synthetic and uses two devices owned by one person. It is the
+first complete physical transport test, not a privacy proof, distributed neural
+inference, or evidence about internet scale.
