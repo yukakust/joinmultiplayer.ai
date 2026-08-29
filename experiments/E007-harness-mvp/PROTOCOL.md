@@ -888,3 +888,19 @@ records collapse into six dependent lineage views without deleting their
 originals. This validates the deterministic storage/view mechanism only; it
 does not validate sender tags, unseen questions, or the final writer. Result:
 `site/experiments/E007/evidence-ledger-result-v0.1.json`.
+
+## Gate 15F — locked USED-shelf writer
+
+Gate 15F gives Qwen3-8B only the thirty questions and sixty fragments already
+placed on `USED` by Gate 15E. The model cannot see `SAME_CASE` or `OTHER`. It
+must write one short natural answer containing the supported cause or explicit
+uncertainty and the safe action or next measurement, with citations drawn only
+from that question's two supplied fragments.
+
+This is not the unseen physical-device test. It isolates one remaining joint:
+whether a complete correct shelf can become a complete human answer without
+dropping a part or inventing advice. The locked gate requires 30/30 parseable
+answers, zero token-limit hits, 30/30 causes or uncertainties, 30/30 actions or
+next measurements, zero unsupported additions, and zero alternative leaks.
+Manual meaning review is required. Protocol:
+`site/experiments/E007/used-shelf-writer-protocol-v0.1.json`.

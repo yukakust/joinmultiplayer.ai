@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "15F",
+  "status": "locked_before_inference",
+  "kind": "synthetic_development_writer_isolation_test",
+  "name": "Turn only the correct shelf into one human answer",
+  "hypothesis": "Can Qwen3-8B turn the complete USED shelf into one clear answer without seeing alternatives, dropping a required part, or inventing a new fact?",
+  "source": {
+    "path": "site/experiments/E007/evidence-ledger-result-v0.1.json",
+    "sha256": "fed924f907f94dc2730f5edfbf7c6076e8212ee5cd73d45ee06ce28b8d7cf1ae",
+    "questions": 30,
+    "used_fragments": 60
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "training": false,
+    "examples": false,
+    "decoding": "greedy",
+    "thinking": false,
+    "runtime": "yukabox CPU, bfloat16"
+  },
+  "writer": {
+    "system": "You are a careful technical writer. Use only the supplied USED shelf. Never add a competing view, general advice, or a fact not stated there.",
+    "instruction": "Write one short, natural answer to the question. Include every part supported by the USED shelf: the cause or explicit uncertainty, and the safe action or next measurement. Connect a conditional action only when another supplied fragment establishes its condition. Return exactly one JSON object: {\"answer\":\"...\",\"evidence_ids\":[\"SOURCE_ID\"]}. Cite every supplied fragment that supports the answer and no other ID.",
+    "max_new_tokens": 384,
+    "input_policy": "The writer receives the question and USED fragments only. SAME_CASE and OTHER are not in its context."
+  },
+  "locked_gate": {
+    "parseable_answers": 30,
+    "answers_hitting_token_limit": 0,
+    "manual_cause_or_uncertainty_correct": 30,
+    "manual_action_or_next_correct": 30,
+    "manual_unsupported_additions": 0,
+    "manual_alternative_leaks": 0
+  },
+  "boundaries": [
+    "These are the same synthetic English questions already used in Gates 15A–15E.",
+    "The USED shelf is already known to contain the correct sixty pieces.",
+    "This tests only final writing from a correct shelf, not routing, retrieval, sender honesty, unseen data, or physical transport.",
+    "Manual semantic review is required; exact string matching is not the judge."
+  ]
+}
