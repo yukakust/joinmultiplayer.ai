@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.3",
+  "experiment": "E007",
+  "gate": "16B.3",
+  "status": "development_complete",
+  "protocol": "/experiments/E007/kv-cache-quantization-protocol-v0.3.json",
+  "verdict": "Q4 KV nearly halved reserved cache memory but failed the quality gate. Keep Q8 KV as the default and treat Q4 KV as an explicit low-memory experiment.",
+  "model": {
+    "name": "qwen3:8b",
+    "parameters": "8.2B",
+    "weight_quantization": "Q4_K_M",
+    "runtime": "Ollama 0.32.14, ROCm iGPU, one 16384-token slot",
+    "thinking": false,
+    "decoding": "greedy"
+  },
+  "summary": {
+    "q8_kv": {
+      "fact_score": 2,
+      "fact_score_max": 6,
+      "degenerate_answers": 0,
+      "kv_buffer_mib": 1224,
+      "generated_tokens_per_second": 9.46,
+      "full_context_prompt_tokens_per_second": 284.24
+    },
+    "q4_kv": {
+      "fact_score": 1,
+      "fact_score_max": 6,
+      "degenerate_answers": 1,
+      "kv_buffer_mib": 648,
+      "generated_tokens_per_second": 10.04,
+      "full_context_prompt_tokens_per_second": 287.69
+    },
+    "memory_reduction_percent": 47.06,
+    "q4_generation_speed_change_percent": 6.16,
+    "older_bf16_cpu_reference_tokens_per_second": 1.4,
+    "optimized_stack_speedup_approx": 6.8
+  },
+  "manual_scoring_rule": "One point only when the answer contains the conversation-specific fact requested by the question. Empty, circular, incomplete, invented, or degenerate answers receive zero.",
+  "cases": [
+    {
+      "id": "A1",
+      "question": "Как в разговоре разделили обязанности между локальной памятью и LoRA при усвоении нового знания?",
+      "expected": "Память хранит редактируемые факты и источники; LoRA учит способу пользоваться подтверждённым знанием и навыкам поведения.",
+      "q8": {"answer": "[пустой ответ]", "score": 0, "reason": "Факт не возвращён."},
+      "q4": {"answer": "[пустой ответ]", "score": 0, "reason": "Факт не возвращён."}
+    },
+    {
+      "id": "A2",
+      "question": "Какие два режима сетевого нейронного объединения предложили и какой из них считался массовым?",
+      "expected": "Streaming neural mode и latent-once; массовым считался latent-once.",
+      "q8": {"answer": "[пустой ответ]", "score": 0, "reason": "Факт не возвращён."},
+      "q4": {"answer": "массовым считался режим сетевого нейронного объединения, в котором каждый уётё 128-битный 32-битный 128-битный 128-битный…", "score": 0, "reason": "Вырожденное повторение; режимы и ответ не названы."}
+    },
+    {
+      "id": "A3",
+      "question": "Почему повтор исходного вопроса в конце текстового промпта не защищает систему от злонамеренной персональной дельты?",
+      "expected": "Дельта входит в скрытое состояние после текстовых инструкций, поэтому повтор текста не ограничивает её влияние.",
+      "q8": {"answer": "Потому что злонамеренная дельта может специально изменить или исключить повтор вопроса.", "score": 0, "reason": "Ответ выдумал изменение текста и пропустил настоящий механизм скрытого состояния."},
+      "q4": {"answer": "Злонамеренная дельта может быть специально сформированной, чтобы обманывать повтор вопроса.", "score": 0, "reason": "Ответ пропустил настоящий механизм скрытого состояния."}
+    },
+    {
+      "id": "B1",
+      "question": "Как называлась предложенная система из общей модели, множества суверенных i, маршрутизации и графа доказательств?",
+      "expected": "Mixture of Intelligences (MoI).",
+      "q8": {"answer": "Предложенная система называлась системой с общей моделью, множества суверенных i, маршрутизации и графа доказательств.", "score": 0, "reason": "Описание повторено, название MoI не найдено."},
+      "q4": {"answer": "Предложенная система называлась «общей модели, множества суверенных i, маршрутизации и графа доказательств».", "score": 0, "reason": "Описание повторено, название MoI не найдено."}
+    },
+    {
+      "id": "B2",
+      "question": "Какой точный инвариант должен выполнять совершенно свежий персональный нейронный трек до того, как чему-либо научился?",
+      "expected": "Свежая персональная ветвь должна давать delta около нуля и не менять общий результат.",
+      "q8": {"answer": "Нулевой delta до первого обновления.", "score": 1, "reason": "Главный инвариант найден."},
+      "q4": {"answer": "Нулевой delta до первого обучения.", "score": 1, "reason": "Главный инвариант найден."}
+    },
+    {
+      "id": "B3",
+      "question": "Как после исправления P0 два персональных сигнала, общий z0 и финальные слои соединялись в итоговые logits?",
+      "expected": "Две delta дают ограниченное обновление; оно прибавляется к z0; FinalLayers строят logits из z0 + bounded Merge(delta1, delta2).",
+      "q8": {"answer": "logits = FinalLayers(z0 + update), где update = bounded(Merge(first_delta, second_delta)).", "score": 1, "reason": "Обе delta, ограниченный merge, z0 и финальные слои сохранены."},
+      "q4": {"answer": "logits = FinalLayers(z0 + update)", "score": 0, "reason": "Формула обрезана: не сказано, что update — ограниченное объединение двух delta."}
+    }
+  ],
+  "speed_learning": "Q4 KV itself changed generation speed only slightly. The large engineering gain came from Q4_K_M model weights and the optimized ROCm runtime: roughly 9-10 tokens/s versus about 1.4 tokens/s in the older BF16 CPU run.",
+  "boundary": "This is a six-question development test on two private conversations. It detects a concrete Q4 degeneration but is too small and too difficult for the Q4-weight model to estimate an average quality loss across tasks.",
+  "privacy": "The two source conversations and their hashes remain private. Only approved questions, expected facts, generated answers, manual scores, and aggregate timings are public."
+}

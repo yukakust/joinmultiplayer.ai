@@ -1039,3 +1039,14 @@ individually with at most 128 generated tokens:
 
 - `site/experiments/E007/kv-cache-quantization-floor-attempt-v0.2.json`
 - `site/experiments/E007/kv-cache-quantization-protocol-v0.3.json`
+
+Development result: Q4 KV reduced the one-slot 16,384-token buffer from 1,224
+MiB to 648 MiB, but scored 1/6 versus 2/6 for Q8 and produced one degenerate
+answer. Both lanes were weak on the difficult long-conversation task, so this
+does not estimate a general average loss. It is enough to reject Q4 KV as the
+default for the MVP. Q8 remains the default; Q4 is an explicit low-memory mode.
+The optimized Q4-weight ROCm stack generated roughly 9–10 tokens/s, versus
+about 1.4 tokens/s in the prior BF16 CPU run. The big speed gain came from the
+weight/runtime change, not from Q4 KV itself.
+
+- `site/experiments/E007/kv-cache-quantization-result-v0.3.json`
