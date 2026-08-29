@@ -13,7 +13,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 ROOT = Path(__file__).resolve().parents[3]
-PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reader-protocol-v0.1.json"
+PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reader-protocol-v0.2.json"
 
 CASES = [
     {
@@ -22,18 +22,18 @@ CASES = [
         "questions": [
             {
                 "id": "A1",
-                "question": "Почему повтор исходного вопроса в конце текстового промпта не защищает систему от злонамеренной персональной дельты?",
-                "gold": "Дельта входит в скрытое состояние после текстовых инструкций/tokenizer, поэтому текстовая эвристика не ограничивает её влияние.",
+                "question": "Как в разговоре разделили обязанности между локальной памятью и LoRA при усвоении нового знания?",
+                "gold": "Память хранит редактируемые факты и источники; LoRA учит способу пользоваться подтверждённым знанием и навыкам поведения.",
             },
             {
                 "id": "A2",
-                "question": "Как именно было решено переживать отключение лучшего шахматного эксперта: копировать его или выбрать нескольких разных экспертов?",
-                "gold": "Выбрать top-2 разных шахматных pocket i параллельно; незавершённый вклад отбросить целиком и использовать полностью завершившийся.",
+                "question": "Какие два режима сетевого нейронного объединения предложили и какой из них считался массовым?",
+                "gold": "Streaming neural mode работает fan-out/fan-in на каждом токене; latent-once возвращает несколько токенов знания один раз. Массовым считался latent-once.",
             },
             {
                 "id": "A3",
-                "question": "Что на yukabox уже было готово для запуска моделей, а какого стека не хватало именно для обучения собственного delta-merger?",
-                "gold": "Ollama с ROCm уже был готов для инференса; отдельного PyTorch/ROCm-стека для обучения delta-merger не было.",
+                "question": "Почему повтор исходного вопроса в конце текстового промпта не защищает систему от злонамеренной персональной дельты?",
+                "gold": "Дельта входит в скрытое состояние после текстовых инструкций/tokenizer, поэтому текстовая эвристика не ограничивает её влияние.",
             },
         ],
     },
@@ -121,6 +121,7 @@ def render_transcript(messages: list[dict]) -> str:
 def prompt(case: dict, transcript: str | None) -> str:
     questions = "\n".join(f"{item['id']}. {item['question']}" for item in case["questions"])
     context = transcript if transcript is not None else "[РАЗГОВОР НЕ ПЕРЕДАН]"
+    example_id = case["questions"][0]["id"]
     return f"""Ниже дан разговор и три вопроса о конкретных решениях внутри него.
 Отвечай только по разговору. Не используй внешние знания и не додумывай.
 Если ответа нет, напиши NOT_FOUND.
@@ -136,7 +137,7 @@ def prompt(case: dict, transcript: str | None) -> str:
 
 Верни строго JSON-массив из трёх объектов:
 [
-  {{"id":"A1", "answer":"...", "evidence":["M0001"]}}
+  {{"id":"{example_id}", "answer":"...", "evidence":["M0001"]}}
 ]"""
 
 
