@@ -387,6 +387,17 @@ forbidden merges. Do not add this meta-NLI pass to the harness. Result:
 `/experiments/E007/answer-piles-second-pass-result-v0.1.json`; UI:
 `/experiment/e007/gate-13c/`.
 
+Gate 13D preserves the proposed DeBERTa→Qwen→DeBERTa sandwich. An invalid
+right-padded Qwen preflight is preserved; correction commit changed only to
+left padding. The valid run produced 9/10 validated canonical claims, recovered
+1/2 missed merges, improved final exact piles from 4/6 to 5/6, and made zero
+false merges. It failed the gate. Manual audit found one good block (Qwen
+removed `can indicate`), one unsafe pass (Qwen removed `exclusively`), and one
+fragile recovered merge (entailment 0.505623 vs neutral 0.493628). Do not accept
+the sandwich yet. Result: `/experiments/E007/answer-piles-qwen-sandwich-result-v0.1.json`;
+audit: `/experiments/E007/answer-piles-qwen-sandwich-human-audit-v0.1.json`;
+UI: `/experiment/e007/gate-13d/`.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

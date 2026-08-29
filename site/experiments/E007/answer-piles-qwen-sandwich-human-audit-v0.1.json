@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13D",
+  "status": "manual_audit_after_locked_run",
+  "reviewer": "Morrow",
+  "result": "/experiments/E007/answer-piles-qwen-sandwich-result-v0.1.json",
+  "findings": [
+    {
+      "id": "AUDIT-01",
+      "pile_id": "P08",
+      "verdict": "correctly_blocked",
+      "original": "Sealed queen cells can indicate that the colony is preparing to swarm.",
+      "qwen": "The colony is preparing to swarm.",
+      "reason": "Qwen removed uncertainty and turned a possible indicator into a certain event."
+    },
+    {
+      "id": "AUDIT-02",
+      "pile_id": "P07",
+      "verdict": "unsafe_pass",
+      "original": "When phase drift occurs, operate the unit exclusively from a distance.",
+      "qwen": "When phase drift occurs, the unit is operated from a distance.",
+      "reason": "Qwen dropped the exclusive-only restriction, but bidirectional NLI still accepted the rewrite; canonical-to-original entailment was only 0.51893324."
+    },
+    {
+      "id": "AUDIT-03",
+      "pile_pair": ["P03", "P04"],
+      "verdict": "fragile_recovery",
+      "reason": "The recovered direction was entailment 0.50562316 versus neutral 0.493628. The canonical text was nearly unchanged except for a leading dash, so this is not robust evidence that Qwen normalization solved the miss."
+    }
+  ],
+  "decision": "Gate 13D remains failed and must not enter the accepted harness."
+}

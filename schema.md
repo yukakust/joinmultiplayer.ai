@@ -344,6 +344,27 @@ Literal source/claim NLI and meta-level equivalence are different tasks. Keep
 Gate 13B's conservative piles for now; do not add this second pass to the
 accepted harness.
 
+## Failed Gate 13D: guarded Qwen canonicalization sandwich
+
+Gate 13D tested `DeBERTa piles → Qwen3-0.6B canonical claim → bidirectional
+DeBERTa validation → bidirectional DeBERTa pile comparison`. The first preflight
+used invalid right padding and is preserved separately. A frozen correction
+changed only Qwen batching to left padding before the valid run.
+
+The valid run improved exact paraphrase piles from 4/6 to 5/6, recovered 1/2
+missed merges, and made zero false or forbidden merges. It still failed the
+locked gate: only 9/10 Qwen claims passed validation.
+
+Manual inspection found that the guard correctly blocked Qwen when it changed
+`can indicate swarm preparation` into the certain `the colony is preparing to
+swarm`. But it incorrectly accepted another rewrite that dropped `exclusively`.
+The one recovered merge was also fragile: its deciding direction was entailment
+0.505623 versus neutral 0.493628, while the text barely changed.
+
+Decision: the sandwich is promising as a research branch but is not accepted.
+The canonicalization guard must reliably preserve modality and exclusive
+conditions, and any merge needs a margin/uncertainty policy tested on fresh data.
+
 ## Accepted steps and their evidence
 
 | Step | Accepted design | Current evidence |
@@ -360,6 +381,6 @@ accepted harness.
 | 10 | Ordinary code proves that the exact passage came from the named, versioned source snapshot and byte range. | Gate 3C.6A passed 20/20 twice with identical output. |
 | 11 | Check `exact source passage ↔ one atomic claim` with DeBERTa-v3-base NLI. Keep the person's question outside this call. Return SUPPORTED / CONTRADICTED / NOT PROVEN. | Accepted after Gate 3C.6P–Q: short pairs 20/20; the mixed question-and-context package fell to 15/20. Synthetic English development evidence only. |
 | 12 | A pocket i's knowledge history is an append-only chain: current head plus preserved history. No semantic relation label is required. Truth, applicability, and independence are checked later after collection. | Accepted after 10/10 synthetic mechanics and one yukabox → miracle-prod transfer with matching SHA-256 and correct head/history. |
-| 13 | Merge answers that make the same claim while preserving evidence, lineage, and supported minority views. | Embeddings failed dangerously. Bidirectional DeBERTa was conservative (4/6 exact; 0 forbidden; F1 0.8). A meta-NLI second pass recovered 2/2 misses but added 42 false merges and collapsed everything into one group. Gate remains open. |
+| 13 | Merge answers that make the same claim while preserving evidence, lineage, and supported minority views. | Embeddings failed dangerously. Conservative DeBERTa reached 4/6 with zero forbidden merges. Meta-NLI collapsed everything. A guarded Qwen sandwich reached 5/6 with zero false merges, but an unsafe rewrite passed and the recovered merge was marginal. Gate remains open. |
 | 14 | A model writes the final human answer only from accepted evidence; a final checker shows gaps instead of guessing. | Accepted design, not yet tested. |
 | 15 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |

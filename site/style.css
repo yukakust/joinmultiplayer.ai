@@ -6090,6 +6090,43 @@ blockquote {
   color: #568d50;
 }
 
+.e007-audit-list,
+.e007-canonical-list {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 24px 0 48px;
+}
+
+.e007-audit-card,
+.e007-canonical-card {
+  border: 1px solid var(--line);
+  border-top: 6px solid var(--ember);
+  padding: 20px;
+}
+
+.e007-audit-card.is-correct,
+.e007-canonical-card.is-correct {
+  border-top-color: #7cad72;
+}
+
+.e007-canonical-card header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.e007-canonical-card small {
+  color: var(--muted);
+  display: block;
+  margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+  .e007-audit-list,
+  .e007-canonical-list { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 900px) {
   .e007-cluster-list { grid-template-columns: 1fr; }
   .e007-missed-list { grid-template-columns: 1fr; }

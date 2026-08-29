@@ -94,3 +94,14 @@ returned entailment for 44/45 pairs, and collapsed all answers into one group.
 This checkpoint was trained for literal premise-to-hypothesis inference, not
 meta-statements about groups. Do not add the Gate 13C second pass to the
 accepted harness.
+
+## What Gate 13D taught us
+
+Qwen3-0.6B rewrote each pile as one atomic claim. DeBERTa checked every rewrite
+in both directions before a second ordinary claim comparison. The valid run
+improved 4/6 piles to 5/6 with zero false merges, but failed the locked gate.
+
+The guard blocked one Qwen rewrite that removed uncertainty, but accepted a
+different rewrite that dropped `exclusively`. The recovered merge also depended
+on a near tie: entailment 0.505623 versus neutral 0.493628. Therefore this
+sandwich is not part of the accepted harness yet.

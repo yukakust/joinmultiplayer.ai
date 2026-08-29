@@ -34,6 +34,17 @@ class AnswerPilesQwenSandwichTests(unittest.TestCase):
         self.assertEqual(MODULE.digest(invalid), correction["invalid_preflight_sha256"])
         self.assertEqual(correction["only_allowed_change"], "Set the frozen Qwen tokenizer padding_side to left before batching.")
 
+    def test_published_result_and_manual_audit_preserve_failure(self):
+        result = json.loads((ROOT / "site/experiments/E007/answer-piles-qwen-sandwich-result-v0.1.json").read_text())
+        summary = result["summary"]
+        self.assertFalse(summary["passed_locked_development_gate"])
+        self.assertEqual(summary["valid_canonical_claims"], 9)
+        self.assertEqual(summary["expected_merges_recovered"], 1)
+        self.assertEqual(summary["false_merges"], 0)
+        self.assertEqual(summary["final_exact_paraphrase_piles"], 5)
+        audit = json.loads((ROOT / "site/experiments/E007/answer-piles-qwen-sandwich-human-audit-v0.1.json").read_text())
+        self.assertEqual([item["verdict"] for item in audit["findings"]], ["correctly_blocked", "unsafe_pass", "fragile_recovery"])
+
 
 if __name__ == "__main__":
     unittest.main()
