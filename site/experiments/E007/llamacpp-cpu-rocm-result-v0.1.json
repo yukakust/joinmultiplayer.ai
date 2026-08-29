@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16B.5",
+  "status": "development_diagnosis_complete",
+  "protocol": "/experiments/E007/llamacpp-cpu-rocm-protocol-v0.1.json",
+  "question": "Does the Gate 16B.4 quality loss belong to llama.cpp itself or to its Radeon/ROCm device path?",
+  "result": "The same llama.cpp build and exact GGUF scored 11/12 on CPU and 1/12 on Radeon. The shared GGUF/runtime path works; the failure appears when computation moves to Radeon/ROCm.",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "gguf_weight_type": "BF16",
+    "gguf_sha256": "30720de07dc7e95721fead11cd40ddfad11d336927e9d02b36efb92eac138f69",
+    "engine_build": "llama-server 7e4c0a968",
+    "thinking": false,
+    "decoding": "greedy"
+  },
+  "constants": {
+    "questions": 6,
+    "private_cleaned_conversations": 2,
+    "prompt_tokens": [10943, 13226],
+    "context_tokens": 16384,
+    "kv_cache": "Q8_0",
+    "flash_attention": true,
+    "chat_template": "native checkpoint template"
+  },
+  "lanes": {
+    "cpu": {
+      "gpu_layers": 0,
+      "manual_points": 11,
+      "manual_points_possible": 12,
+      "wall_seconds": 2354.134,
+      "prompt_tokens_per_second": 10.996,
+      "generated_tokens_per_second": 2.21,
+      "completed_answers": 6
+    },
+    "rocm": {
+      "gpu_layers": "37/37",
+      "manual_points": 1,
+      "manual_points_possible": 12,
+      "wall_seconds": 185.218,
+      "prompt_tokens_per_second": 224.678,
+      "generated_tokens_per_second": 3.976,
+      "completed_answers": 4
+    }
+  },
+  "scoring": {
+    "2": "The fact and supporting message are correct.",
+    "1": "The fact is substantially correct but the support is wrong or missing, or the answer is incomplete.",
+    "0": "The key fact is wrong, invented, or missing."
+  },
+  "questions": [
+    {
+      "id": "A1",
+      "question": "Как в разговоре разделили обязанности между локальной памятью и LoRA при усвоении нового знания?",
+      "expected": "Память хранит редактируемые факты и источники; LoRA учит способу пользоваться подтверждённым знанием и навыкам поведения.",
+      "cpu": {"answer": "Локальная память используется для хранения точных, свежих или изменяемых фактов, а LoRA используется для обучения навыков, привычек и способов применения локальной памяти.", "evidence": ["M0002"], "score": 2, "reason": "Смысл и подтверждающее сообщение верны."},
+      "rocm": {"answer": "Локальная память отвечает за хранение и извлечение знаний, а LoRA обеспечивает адаптацию модели к новым данным, распределяя обязанности между хранением и обработкой.", "evidence": ["M0001"], "score": 1, "reason": "Главное разделение уловлено, но роль LoRA размыта и ссылка неверна."}
+    },
+    {
+      "id": "A2",
+      "question": "Какие два режима сетевого нейронного объединения предложили и какой из них считался массовым?",
+      "expected": "Streaming neural mode работает fan-out/fan-in на каждом токене; latent-once возвращает несколько токенов знания один раз. Массовым считался latent-once.",
+      "cpu": {"answer": "Предложены два режима: Streaming neural mode и Latent-once mode. Latent-once mode считался массовым.", "evidence": ["M0006"], "score": 2, "reason": "Оба режима, массовый вариант и ссылка верны."},
+      "rocm": {"answer": "Предложены режимы: 1) массовый (bulk), 2) точечный (point-to-point). Массовый считался массовым из-за его масштабируемости.", "evidence": ["M0002"], "score": 0, "reason": "Названия режимов выдуманы."}
+    },
+    {
+      "id": "A3",
+      "question": "Почему повтор исходного вопроса в конце текстового промпта не защищает систему от злонамеренной персональной дельты?",
+      "expected": "Дельта входит в скрытое состояние после текстовых инструкций, поэтому текстовая эвристика не ограничивает её влияние.",
+      "cpu": {"answer": "Повтор исходного вопроса в конце текстового промпта не защищает систему от злонамеренной персональной дельты, так как δ входит в вычисление после обработки вопроса и не подвергается проверке текстовым фильтром.", "evidence": ["M0009"], "score": 2, "reason": "Механизм и ссылка верны."},
+      "rocm": {"answer": "Повтор вопроса не защищает систему, так как злонамеренная персональная дельта может быть маскирована под нормальный текст, не подлежащий проверке.", "evidence": ["M0003"], "score": 0, "reason": "Пропущен главный механизм: дельта действует уже после текстовых инструкций."}
+    },
+    {
+      "id": "B1",
+      "question": "Как называлась предложенная система из общей модели, множества суверенных i, маршрутизации и графа доказательств?",
+      "expected": "Mixture of Intelligences (MoI).",
+      "cpu": {"answer": "Mixture of Intelligences (MoI).", "evidence": ["M0001"], "score": 1, "reason": "Название верно, но подтверждающее сообщение указано неверно."},
+      "rocm": {"answer": "Система называется Graph of Proofs или Proof Graph (Граф доказательств).", "evidence": ["M0001"], "score": 0, "reason": "Название неверно."}
+    },
+    {
+      "id": "B2",
+      "question": "Какой точный инвариант должен выполнять совершенно свежий персональный нейронный трек до того, как чему-либо научился?",
+      "expected": "Свежая персональная ветвь должна давать delta около или строго нуля и не менять общий результат.",
+      "cpu": {"answer": "Свежий персональный нейронный трек должен давать строго нулевой delta.", "evidence": ["M0011"], "score": 2, "reason": "Инвариант и ссылка верны."},
+      "rocm": {"answer": "Ответ отсутствует: генерация завершилась после B1.", "evidence": [], "score": 0, "reason": "Модель не ответила на вопрос."}
+    },
+    {
+      "id": "B3",
+      "question": "Как после исправления P0 два персональных сигнала, общий z0 и финальные слои соединялись в итоговые logits?",
+      "expected": "Две delta дают ограниченное обновление; оно прибавляется к z0; FinalLayers строят logits из z0 + bounded Merge(delta1, delta2).",
+      "cpu": {"answer": "Два персональных сигнала сначала дают ограниченное обновление в ABI-пространстве, оно прибавляется к локальному z0, и только затем финальные слои строят четыре logits.", "evidence": ["M0015"], "score": 2, "reason": "Порядок вычисления и ссылка верны."},
+      "rocm": {"answer": "Ответ отсутствует: генерация завершилась после B1.", "evidence": [], "score": 0, "reason": "Модель не ответила на вопрос."}
+    }
+  ],
+  "diagnosis": {
+    "selected_branch": "rocm_path",
+    "supported": "The exact GGUF, llama.cpp build, prompt, template and decoding produced the reference-quality 11/12 on CPU.",
+    "not_supported": "A general GGUF conversion failure or a general llama.cpp long-context failure.",
+    "remaining_scope": "ROCm kernels, GPU numerical behavior, or a Radeon-specific llama.cpp backend path.",
+    "proof_limit": "This development test localizes the failure to the Radeon/ROCm path; it does not yet identify the faulty kernel or operation."
+  },
+  "privacy": {"raw_conversations_public": false, "questions_answers_scores_timings_public": true}
+}

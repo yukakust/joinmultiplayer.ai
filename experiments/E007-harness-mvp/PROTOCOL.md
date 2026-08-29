@@ -1085,3 +1085,12 @@ shared llama.cpp path. If CPU recovers the 11/12 reference while ROCm remains
 poor, investigate the ROCm device path.
 
 - `site/experiments/E007/llamacpp-cpu-rocm-protocol-v0.1.json`
+
+## Gate 16B.5 — same GGUF on CPU and Radeon
+
+The locked device-pair test is complete. The exact BF16 GGUF and the same
+`llama-server` build scored 11/12 on CPU and 1/12 on the integrated Radeon.
+This rules against a general GGUF conversion or shared llama.cpp failure for
+these prompts and localizes the observed quality loss to the Radeon/ROCm path.
+It does not yet identify the faulty GPU operation. Public result:
+`/experiments/E007/llamacpp-cpu-rocm-result-v0.1.json`.

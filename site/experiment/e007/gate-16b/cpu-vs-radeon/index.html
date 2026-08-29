@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>E007 · CPU против Radeon</title>
+  <link rel="stylesheet" href="/style.css?v=e007-cpu-rocm-v01">
+  <style>
+    body{background:#f4f0e5;color:#111;margin:0}.page{width:100%;max-width:none;padding:clamp(22px,3.5vw,64px);box-sizing:border-box}.page h1{font-size:clamp(42px,7vw,108px);line-height:.92;max-width:14ch;margin:.25em 0}.lead{font-size:clamp(20px,2.2vw,34px);max-width:42em}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:42px 0;border:1px solid #aaa}.metrics div{padding:24px;border-right:1px solid #aaa}.metrics div:last-child{border:0}.metrics span,.cell small{display:block;color:#6d675d;text-transform:uppercase}.metrics strong{display:block;font-size:clamp(34px,5vw,70px);margin-top:10px}.qa{display:grid;grid-template-columns:minmax(240px,1.05fr) minmax(260px,1.1fr) minmax(260px,1.1fr);border-top:1px solid #aaa}.cell{padding:22px;border-right:1px solid #aaa}.cell:last-child{border:0}.cell h2{font-size:clamp(19px,1.8vw,28px);margin:.4em 0}.score-2{box-shadow:inset 8px 0 #83b77c}.score-1{box-shadow:inset 8px 0 #daa44f}.score-0{box-shadow:inset 8px 0 #df6b55}.decision{border-left:8px solid #83b77c;padding:20px 24px;margin:42px 0;font-size:clamp(18px,1.7vw,26px)}.links{display:flex;gap:24px;flex-wrap:wrap}.links a{color:inherit;font-weight:700}@media(max-width:900px){.metrics{grid-template-columns:1fr 1fr}.metrics div:nth-child(2){border-right:0}.qa{grid-template-columns:1fr}.cell{border-right:0;border-bottom:1px solid #aaa}}
+  </style>
+</head>
+<body>
+<main class="page">
+  <p>E007 · GATE 16B.5 · ДИАГНОЗ</p>
+  <h1>GGUF исправен. Ломается Radeon.</h1>
+  <p class="lead">Один и тот же файл модели, один llama.cpp и одни вопросы. CPU нашёл почти всё. Radeon выдумал ответы и оборвал второй список.</p>
+  <section class="metrics"><div><span>CPU</span><strong>11/12</strong></div><div><span>Radeon</span><strong>1/12</strong></div><div><span>CPU, весь тест</span><strong>39,2 мин</strong></div><div><span>Radeon, весь тест</span><strong>3,1 мин</strong></div></section>
+  <h2>Все шесть сравнений</h2>
+  <section id="answers">Загрузка…</section>
+  <div class="decision"><strong>Что доказали:</strong> общий путь GGUF + llama.cpp умеет читать эти разговоры. Ошибка появляется при переносе вычисления на Radeon/ROCm. Какой именно GPU-шаг ломается — следующий отдельный вопрос.</div>
+  <nav class="links"><a href="/experiments/E007/llamacpp-cpu-rocm-result-v0.1.json">Результат JSON ↗</a><a href="/experiments/E007/llamacpp-cpu-rocm-protocol-v0.1.json">Протокол ↗</a><a href="/experiment/e007/gate-16b/">Назад к Gate 16B</a></nav>
+</main>
+<script>
+fetch('/experiments/E007/llamacpp-cpu-rocm-result-v0.1.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));document.querySelector('#answers').innerHTML=data.questions.map(q=>`<article class="qa"><div class="cell"><small>${esc(q.id)}</small><h2>${esc(q.question)}</h2><p><strong>Ожидалось:</strong> ${esc(q.expected)}</p></div><div class="cell score-${q.cpu.score}"><small>CPU · ${q.cpu.score}/2</small><p>${esc(q.cpu.answer)}</p><p>${esc(q.cpu.reason)}</p></div><div class="cell score-${q.rocm.score}"><small>Radeon · ${q.rocm.score}/2</small><p>${esc(q.rocm.answer)}</p><p>${esc(q.rocm.reason)}</p></div></article>`).join('')}).catch(()=>{document.querySelector('#answers').textContent='Не удалось загрузить результат.'})
+</script>
+</body>
+</html>
