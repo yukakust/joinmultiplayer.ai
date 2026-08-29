@@ -424,6 +424,13 @@ ordinary code preserves every pile and its version label. Raw result:
 `/experiments/E007/answer-synthesis-result-v0.1.json`; audit:
 `/experiments/E007/answer-synthesis-human-audit-v0.1.json`.
 
+Gate 14A.2 is locked as a paired Qwen3-1.7B repeat. The same ten cases, system
+prompt, generation settings, empty-input path, and manual rubric are reused;
+only the model changes from 0.6B to 1.7B, pinned at `70d244cc...1ad5e` (HF API
+reports 2,031,739,904 parameters). Protocol:
+`/experiments/E007/answer-synthesis-qwen17b-protocol-v0.1.json`. Do not alter the
+opened cases or rubric before preserving the first result.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

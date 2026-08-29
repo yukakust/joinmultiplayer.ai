@@ -139,3 +139,9 @@ accepted. The next candidate gives Qwen one pile at a time and lets ordinary
 code preserve pile order and version labels. Result:
 `/experiments/E007/answer-synthesis-result-v0.1.json`; audit:
 `/experiments/E007/answer-synthesis-human-audit-v0.1.json`.
+
+Gate 14A.2 repeats the exact ten-case test with Qwen3-1.7B. Inputs, prompt,
+decoding, empty-input response, and manual rubric remain frozen; only model size
+changes. The paired test asks whether a larger allowed model can beat the 0.6B
+score of 8/10 without inventing more facts. Protocol:
+`/experiments/E007/answer-synthesis-qwen17b-protocol-v0.1.json`.

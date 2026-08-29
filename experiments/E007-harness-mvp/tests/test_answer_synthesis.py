@@ -59,6 +59,18 @@ class AnswerSynthesisProtocolTests(unittest.TestCase):
         self.assertEqual(audit["summary"]["passed_cases"], 8)
         self.assertFalse(audit["summary"]["passed_locked_gate"])
 
+    def test_qwen17b_protocol_changes_only_the_model(self):
+        baseline = json.loads(PROTOCOL_PATH.read_text(encoding="utf-8"))
+        paired_path = ROOT / "site/experiments/E007/answer-synthesis-qwen17b-protocol-v0.1.json"
+        paired = json.loads(paired_path.read_text(encoding="utf-8"))
+        self.assertEqual(paired["source"], baseline["source"])
+        self.assertEqual(paired["model"]["system"], baseline["model"]["system"])
+        self.assertEqual(paired["model"]["max_new_tokens"], baseline["model"]["max_new_tokens"])
+        self.assertEqual(paired["model"]["thinking"], baseline["model"]["thinking"])
+        self.assertEqual(paired["model"]["do_sample"], baseline["model"]["do_sample"])
+        self.assertEqual(paired["model"]["repository"], "Qwen/Qwen3-1.7B")
+        self.assertEqual(paired["paired_baseline"]["protocol_sha256"], hashlib.sha256(PROTOCOL_PATH.read_bytes()).hexdigest())
+
 
 if __name__ == "__main__":
     unittest.main()

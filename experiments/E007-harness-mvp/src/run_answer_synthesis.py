@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import resource
@@ -100,10 +101,10 @@ def generate_nonempty(model, tokenizer, cases: list[dict], spec: dict, batch_siz
     return records
 
 
-def main() -> None:
-    if RESULT_PATH.exists():
-        raise RuntimeError(f"Refusing to overwrite preserved result: {RESULT_PATH}")
-    world, protocol = read(WORLD_PATH), read(PROTOCOL_PATH)
+def run(protocol_path: Path, result_path: Path) -> None:
+    if result_path.exists():
+        raise RuntimeError(f"Refusing to overwrite preserved result: {result_path}")
+    world, protocol = read(WORLD_PATH), read(protocol_path)
     if digest(WORLD_PATH) != protocol["source"]["sha256"]:
         raise RuntimeError("Frozen Gate 14A world changed")
     started = time.perf_counter()
@@ -164,7 +165,7 @@ def main() -> None:
         "gate": "14A",
         "kind": "locked_synthetic_english_development",
         "git_revision": git_revision(),
-        "protocol_sha256": digest(PROTOCOL_PATH),
+        "protocol_sha256": digest(protocol_path),
         "world_sha256": digest(WORLD_PATH),
         "model": {"repository": spec["repository"], "revision": spec["revision"]},
         "diagnostic_model": {"repository": DEBERTA_REPOSITORY, "revision": DEBERTA_REVISION},
@@ -183,8 +184,16 @@ def main() -> None:
             "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
         },
     }
-    RESULT_PATH.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    result_path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result["mechanical_summary"], indent=2))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--protocol", type=Path, default=PROTOCOL_PATH)
+    parser.add_argument("--result", type=Path, default=RESULT_PATH)
+    args = parser.parse_args()
+    run(args.protocol, args.result)
 
 
 if __name__ == "__main__":

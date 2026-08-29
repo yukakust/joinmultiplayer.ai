@@ -419,3 +419,10 @@ let ordinary code preserve pile order and version labels, so a language model
 cannot silently delete a pile. Raw result:
 `/experiments/E007/answer-synthesis-result-v0.1.json`; audit:
 `/experiments/E007/answer-synthesis-human-audit-v0.1.json`.
+
+Gate 14A.2 is a paired repeat frozen before the first Qwen3-1.7B run. It reuses
+the same ten cases, prompt, deterministic empty path, decoding settings, and
+manual rubric. The only intended change is Qwen3-0.6B → Qwen3-1.7B at pinned
+revision `70d244cc...1ad5e`. It passes at 10/10 and beats the 0.6B baseline only
+if it scores above 8/10 without more invented facts. Protocol:
+`/experiments/E007/answer-synthesis-qwen17b-protocol-v0.1.json`.

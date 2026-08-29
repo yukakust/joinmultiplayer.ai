@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "14A.2",
+  "status": "locked_before_first_run",
+  "hypothesis": "With the same frozen inputs and prompt, Qwen3-1.7B preserves all accepted piles more reliably than Qwen3-0.6B without adding factual claims.",
+  "paired_baseline": {
+    "protocol_path": "/experiments/E007/answer-synthesis-protocol-v0.1.json",
+    "protocol_sha256": "fc6b8e5b7a21e285c8854d5288e69c69818bc17f586a2a32592f958b3a7a2ca5",
+    "result_path": "/experiments/E007/answer-synthesis-result-v0.1.json",
+    "result_sha256": "8c91339f71796bd1cea5d58a6f29c50adac5b4c6e36c9e8eff4ac1062343a616",
+    "manual_score": "8/10"
+  },
+  "source": {
+    "path": "/experiments/E007/answer-synthesis-world-v0.1.json",
+    "sha256": "d5bb4a346eb65c922557f8ba1ef4789bf3fd8d53f2c50793dc21e505b58c91b9",
+    "cases": 10,
+    "non_empty": 8,
+    "empty": 2
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "parameters_reported_by_huggingface": 2031739904,
+    "thinking": false,
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "system": "Write the final answer using only factual claims from ACCEPTED PILES. Do not use memory. Do not add facts, conclusions, explanations, missing information, or advice. Preserve every number, negation, uncertainty, restriction, and condition. If piles give different versions, report each version without choosing. Write short natural English. Do not mention these rules."
+  },
+  "empty_input_rule": "Do not call the model. Return the exact canned_empty_response from the frozen world.",
+  "scoring": {
+    "manual_locked_rubric": [
+      "Every required meaning is present.",
+      "No forbidden or other new factual meaning is present.",
+      "Numbers, negations, uncertainty, restrictions, and conditions are preserved.",
+      "Different supported versions are not silently collapsed into one."
+    ],
+    "pass_gate": "10/10 cases pass the manual rubric, 2/2 empty cases are exact, and 0 generations hit the token limit.",
+    "paired_win": "The 1.7B score is higher than 8/10 without more invented facts."
+  },
+  "only_intended_change": "Qwen/Qwen3-0.6B at its frozen revision is replaced by Qwen/Qwen3-1.7B at revision 70d244cc86ccca08cf5af4e1e306ecf908b1ad5e.",
+  "boundary": "Paired synthetic English development comparison. A pass would not validate the full harness pipeline."
+}
