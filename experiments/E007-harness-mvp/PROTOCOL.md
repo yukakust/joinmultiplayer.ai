@@ -1006,3 +1006,21 @@ runtime and shorter outputs; cache reuse alone is insufficient.
 
 - `site/experiments/E007/kv-cache-reuse-protocol-v0.1.json`
 - `site/experiments/E007/kv-cache-reuse-result-v0.1.json`
+
+## Gate 16B.3 — Q8 versus Q4 KV cache
+
+Gate 16B.3 separates two kinds of four-bit compression. The Qwen3-8B model
+weights are held fixed at `Q4_K_M`; only the memory of the already-read tokens
+changes from `Q8_0` to `Q4_0`. Both lanes receive the same two private cleaned
+conversations and the same six questions from Gate 16B.1. The public result may
+contain the questions, model answers, manual scores, timings, and runtime memory
+measurements, but never the source conversations.
+
+The cache-only quality gate allows Q4 KV to lose at most one point out of 12
+against Q8 KV and forbids degenerate output. Speed is reported separately:
+Q4 KV primarily saves cache memory, while the older BF16 Transformers result is
+used only as a non-causal engineering reference for the whole optimized stack.
+
+Locked protocol:
+
+- `site/experiments/E007/kv-cache-quantization-protocol-v0.1.json`
