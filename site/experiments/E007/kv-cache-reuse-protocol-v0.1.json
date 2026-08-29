@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16B.2",
+  "status": "locked_before_inference",
+  "hypothesis": "After Qwen3-8B reads one complete 10k-token conversation once, a second question can reuse the exact conversation KV-cache and avoid the multi-minute prefill while preserving a correct, source-linked answer.",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "training": false,
+    "thinking": false,
+    "decoding": "greedy",
+    "runtime": "yukabox CPU, bfloat16"
+  },
+  "input": {
+    "conversation": "CHAT-A from Gate 16B.1",
+    "raw_conversation_public": false,
+    "questions": 2,
+    "chunking": false,
+    "retrieval": false,
+    "summaries": false
+  },
+  "procedure": [
+    "Build the exact common token prefix containing the complete cleaned conversation.",
+    "Run one forward prefill with use_cache=true.",
+    "Clone the immutable prefix cache and answer question 1.",
+    "Clone the same immutable prefix cache and answer question 2.",
+    "Measure prefix tokens, tensor bytes, prefill time, cache-clone time, and answer time separately."
+  ],
+  "success": {
+    "quality": "Both answers are correct and cite their supporting message.",
+    "reuse": "The second question starts from the same unchanged prefix cache.",
+    "latency": "The second cached answer takes at most one quarter of the first question's prefill plus answer time."
+  },
+  "boundary": "This tests a hot in-memory BF16 cache for one conversation. It does not test cache persistence, quantized KV, many simultaneous chats, or cache reuse after editing an earlier message."
+}
