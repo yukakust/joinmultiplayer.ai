@@ -114,3 +114,19 @@ recovered merge also depended on a near tie: entailment 0.505623 versus neutral
 0.493628. The architecture is accepted for the MVP, while its reliability at
 scale and across domains remains unproven. Decision record:
 `/experiments/E007/answer-piles-accepted-architecture-v0.1.json`.
+
+## Locked Gate 14A: write only what the swarm supplied
+
+Ten English synthetic cases are frozen before Qwen's first run. Eight provide
+accepted piles; two are empty. Qwen may make the supplied claims readable, but
+may not add facts, conclusions, advice, or invented statements about missing
+knowledge. Different versions must stay visible as different versions. Empty
+input bypasses Qwen and returns one fixed response.
+
+The result passes only if all ten cases preserve every supplied meaning, add no
+new factual meaning, keep numbers/negation/uncertainty/conditions, return both
+empty cases exactly, and avoid truncation. Manual review is authoritative;
+DeBERTa is diagnostic. Protocol:
+`/experiments/E007/answer-synthesis-protocol-v0.1.json`; cases:
+`/experiments/E007/answer-synthesis-world-v0.1.json`; UI:
+`/experiment/e007/gate-14a/`.

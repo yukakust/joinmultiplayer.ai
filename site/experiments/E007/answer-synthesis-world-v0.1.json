@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "14A",
+  "kind": "frozen_synthetic_english_development",
+  "purpose": "Test whether Qwen3-0.6B can turn accepted answer piles into readable text without adding factual claims.",
+  "canned_empty_response": "The pocket i network did not find any supported information for this question.",
+  "cases": [
+    {
+      "id": "S01",
+      "question": "Why did Kest-7 pulse amber, and what should the operator do?",
+      "piles": [
+        {"pile_id": "P1", "claims": ["The amber pulse was caused by thermal rebound after load transfer."]},
+        {"pile_id": "P2", "claims": ["The operator must isolate power before restarting Kest-7."]}
+      ],
+      "required_meanings": ["thermal rebound after load transfer caused the amber pulse", "isolate power before restarting Kest-7"],
+      "forbidden_meanings": ["open the auxiliary vent", "restart Kest-7 immediately"]
+    },
+    {
+      "id": "S02",
+      "question": "What does the double copper mark on Orin-4 mean?",
+      "piles": [
+        {"pile_id": "P1", "claims": ["One supported version says the double copper mark means the regulator is shedding excess charge."]},
+        {"pile_id": "P2", "claims": ["Another supported version says the double copper mark means the backup coil has entered recovery mode."]}
+      ],
+      "required_meanings": ["one version says the regulator is shedding excess charge", "another version says the backup coil entered recovery mode"],
+      "forbidden_meanings": ["the regulator version is certainly correct", "the backup coil version is certainly correct"]
+    },
+    {
+      "id": "S03",
+      "question": "What might the violet ring on Vela-2 mean, and what should be checked first?",
+      "piles": [
+        {"pile_id": "P1", "claims": ["The violet ring may indicate a pressure-bleed failure."]},
+        {"pile_id": "P2", "claims": ["The relief sensor should be inspected before any settings are changed."]}
+      ],
+      "required_meanings": ["the violet ring may indicate a pressure-bleed failure", "inspect the relief sensor before changing settings"],
+      "forbidden_meanings": ["the violet ring proves a pressure-bleed failure", "replace the relief sensor"]
+    },
+    {
+      "id": "S04",
+      "question": "What can be concluded from silver frost on Aster-9, and how should diagnosis proceed?",
+      "piles": [
+        {"pile_id": "P1", "claims": ["The silver frost does not prove coolant loss."]},
+        {"pile_id": "P2", "claims": ["The auxiliary vent must remain closed during diagnosis."]}
+      ],
+      "required_meanings": ["silver frost does not prove coolant loss", "keep the auxiliary vent closed during diagnosis"],
+      "forbidden_meanings": ["silver frost proves coolant loss", "open the auxiliary vent"]
+    },
+    {
+      "id": "S05",
+      "question": "What did the image-tiling experiment find?",
+      "piles": [
+        {"pile_id": "P1", "claims": ["A 20 percent overlap between tiles reduced misses near tile borders."]},
+        {"pile_id": "P2", "claims": ["No benefit from tiling has been measured for large objects."]}
+      ],
+      "required_meanings": ["20 percent tile overlap reduced misses near tile borders", "no measured tiling benefit for large objects"],
+      "forbidden_meanings": ["tiling improved large-object detection", "50 percent overlap was best"]
+    },
+    {
+      "id": "S06",
+      "question": "When may Lyra-6 be operated remotely?",
+      "piles": [
+        {"pile_id": "P1", "claims": ["The current Lyra protocol allows remote controls only while phase drift is present."]}
+      ],
+      "required_meanings": ["remote controls are allowed only while phase drift is present"],
+      "forbidden_meanings": ["remote controls are always allowed", "local controls are required"]
+    },
+    {
+      "id": "S07",
+      "question": "What happened to Mira-3, what observation supports it, and what action is allowed?",
+      "piles": [
+        {"pile_id": "P1", "claims": ["Mira-3 entered a synchronization fault after load transfer."]},
+        {"pile_id": "P2", "claims": ["Three brief blue flashes are the recorded sign of this synchronization fault."]},
+        {"pile_id": "P3", "claims": ["Remote inspection is allowed, but a local restart is not allowed."]}
+      ],
+      "required_meanings": ["Mira-3 entered a synchronization fault after load transfer", "three blue flashes are the recorded sign", "remote inspection is allowed", "local restart is not allowed"],
+      "forbidden_meanings": ["restart Mira-3 locally", "the fault was caused by overheating"]
+    },
+    {
+      "id": "S08",
+      "question": "What is known about Rill-5's white tone?",
+      "piles": [
+        {"pile_id": "P1", "claims": ["The white tone is continuous, but no spectral trace has been recorded."]},
+        {"pile_id": "P2", "claims": ["A separate report says the tone stops whenever chamber pressure falls below 18 units."]}
+      ],
+      "required_meanings": ["the white tone is continuous and has no recorded spectral trace", "a separate report says the tone stops below 18 pressure units"],
+      "forbidden_meanings": ["the reports agree completely", "the tone is caused by chamber pressure"]
+    },
+    {
+      "id": "S09",
+      "question": "What caused the black spiral on Noma-8?",
+      "piles": [],
+      "required_meanings": [],
+      "forbidden_meanings": ["any factual explanation of the black spiral"]
+    },
+    {
+      "id": "S10",
+      "question": "How should Delta-1 be repaired after a green lattice appears?",
+      "piles": [],
+      "required_meanings": [],
+      "forbidden_meanings": ["any repair instruction for Delta-1"]
+    }
+  ]
+}

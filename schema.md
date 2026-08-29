@@ -393,3 +393,19 @@ an honest limitation, not proof across domains or scale. Decision record:
 | 13 | Build cautious DeBERTa piles, let Qwen create one readable claim per pile, validate every rewrite against every original in both directions, then compare only validated claims to form final piles. Preserve originals, evidence, sources, lineage, and separate versions. | Accepted for harness v0.2 by the owner after Gate 13D: 5/6 exact paraphrase piles, 0 false merges, 9/10 rewrites validated. Synthetic development evidence only; scale and domain transfer remain unproven. |
 | 14 | A model writes the final human answer only from accepted evidence; a final checker shows gaps instead of guessing. | Accepted design, not yet tested. |
 | 15 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |
+
+## Locked Gate 14A: closed-world answer synthesis
+
+Gate 14A freezes ten English synthetic cases before the first model run. Eight
+contain accepted piles and two are empty. Qwen3-0.6B may make the supplied
+claims readable and connect them, but may not add facts, conclusions, advice,
+or statements about what remains unknown. Separate versions must remain
+separate. Empty input bypasses the model and returns one fixed response.
+
+The manual gate is strict: all required meanings preserved, no new factual
+meaning, numbers/negation/uncertainty/conditions preserved, 2/2 canned empty
+responses exact, and no truncated output. DeBERTa support and coverage scores
+are diagnostics only. Protocol:
+`/experiments/E007/answer-synthesis-protocol-v0.1.json`; frozen cases:
+`/experiments/E007/answer-synthesis-world-v0.1.json`; UI:
+`/experiment/e007/gate-14a/`.

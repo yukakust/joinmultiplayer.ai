@@ -2884,6 +2884,10 @@ function e007AnswerPilesQwenSandwichShell() {
   return `<section class="flow-shell e007-cluster-page e007-sandwich-page"><div class="flow-step">E007 · GATE 13D · DEBERTA → QWEN → DEBERTA</div><h1>${localized({ en: "Did Qwen make the piles easier to compare?", ru: "Помогла ли Qwen сравнить стопки?" })}</h1><p class="contribution-intro">${localized({ en: "Qwen rewrote each pile as one claim. DeBERTa checked every rewrite before comparing the claims again.", ru: "Qwen переписала каждую стопку одной фразой. DeBERTa проверила каждую фразу, а затем сравнила их снова." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e007AnswerSynthesisShell() {
+  return `<section class="flow-shell e007-cluster-page e007-synthesis-page"><div class="flow-step">E007 · GATE 14A · ${localized({ en: "CLOSED-WORLD ANSWER", ru: "ОТВЕТ БЕЗ ДОДУМЫВАНИЯ" })}</div><h1>${localized({ en: "Can Qwen join facts without inventing one?", ru: "Сможет ли Qwen склеить факты и ничего не придумать?" })}</h1><p class="contribution-intro">${localized({ en: "Eight cases contain accepted piles. Two contain nothing and must receive one fixed answer. The cases were frozen before the model ran.", ru: "В восьми примерах есть принятые стопки. В двух нет ничего — там нужен один готовый ответ. Примеры заморожены до запуска модели." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -4985,6 +4989,25 @@ async function loadE007AnswerPilesQwenSandwich() {
   }
 }
 
+async function loadE007AnswerSynthesis() {
+  const target = document.querySelector(".e007-synthesis-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E007/answer-synthesis-world-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Gate 14A world missing");
+    const world = await response.json();
+    const cases = world.cases.map(item => {
+      const piles = item.piles.length
+        ? item.piles.map(pile => `<article><b>${escapeHTML(pile.pile_id)}</b>${pile.claims.map(claim => `<p>${escapeHTML(claim)}</p>`).join("")}</article>`).join("")
+        : `<article class="is-empty"><b>${localized({ en: "NO ACCEPTED INFORMATION", ru: "НЕТ ПРИНЯТОЙ ИНФОРМАЦИИ" })}</b><p>${escapeHTML(world.canned_empty_response)}</p></article>`;
+      return `<details class="e007-synthesis-case" open><summary><b>${escapeHTML(item.id)}</b><span>${escapeHTML(item.question)}</span><strong>${item.piles.length ? `${item.piles.length} ${localized({ en: "piles", ru: "стопки" })}` : localized({ en: "empty", ru: "пусто" })}</strong></summary><div>${piles}</div></details>`;
+    }).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict needs-review"><span>${localized({ en: "FROZEN BEFORE MODEL RUN", ru: "ЗАМОРОЖЕНО ДО ЗАПУСКА МОДЕЛИ" })}</span><h2>${localized({ en: "Ten inputs are locked. No answer exists yet.", ru: "Десять входов зафиксированы. Ответов модели пока нет." })}</h2><p>${localized({ en: "Success means: keep every supplied meaning, add no new factual meaning, and use the fixed response when the network supplied nothing.", ru: "Успех: сохранить каждый переданный смысл, не добавить нового факта и использовать готовый ответ, когда сеть ничего не прислала." })}</p></div><div class="e007-synthesis-list">${cases}</div><div class="actions"><a class="primary-link" href="/experiments/E007/answer-synthesis-protocol-v0.1.json">${localized({ en: "LOCKED TEST PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })} ↗</a><a class="quiet-link" href="/experiments/E007/answer-synthesis-world-v0.1.json">${localized({ en: "ALL TEN INPUTS", ru: "ВСЕ ДЕСЯТЬ ВХОДОВ" })} ↗</a><a class="quiet-link" href="/experiment/e007/gate-13d/">${localized({ en: "ACCEPTED PILES", ru: "ПРИНЯТЫЕ СТОПКИ" })} ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 14A could not be loaded.", ru: "Не удалось загрузить Gate 14A." });
+  }
+}
+
 async function loadE005() {
   const target = document.querySelector(".e005-page");
   if (!target) return;
@@ -5962,6 +5985,10 @@ function render() {
     document.title = `DeBERTa → Qwen → DeBERTa — i`;
     app.innerHTML = withLanguage(e007AnswerPilesQwenSandwichShell());
     loadE007AnswerPilesQwenSandwich();
+  } else if (path === "experiment/e007/gate-14a") {
+    document.title = `${localized({ en: "Closed-world answer", ru: "Ответ без додумывания" })} — i`;
+    app.innerHTML = withLanguage(e007AnswerSynthesisShell());
+    loadE007AnswerSynthesis();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());

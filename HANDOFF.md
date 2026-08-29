@@ -404,6 +404,16 @@ MVP decision, not proof across domains or scale. Decision:
 audit: `/experiments/E007/answer-piles-qwen-sandwich-human-audit-v0.1.json`;
 UI: `/experiment/e007/gate-13d/`.
 
+Gate 14A is locked before its first run. It tests closed-world synthesis on ten
+English synthetic cases: eight accepted-pile inputs and two empty inputs. Qwen
+may only make supplied claims readable; it may not add facts, conclusions,
+advice, or invented statements about missing knowledge. Empty input bypasses
+the model and returns a fixed response. Manual review is the locked judge;
+DeBERTa checks are diagnostic. Protocol:
+`/experiments/E007/answer-synthesis-protocol-v0.1.json`; cases:
+`/experiments/E007/answer-synthesis-world-v0.1.json`; UI:
+`/experiment/e007/gate-14a/`.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

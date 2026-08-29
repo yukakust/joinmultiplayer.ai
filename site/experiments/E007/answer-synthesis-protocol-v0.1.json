@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "14A",
+  "status": "locked_before_first_run",
+  "hypothesis": "Qwen3-0.6B can turn accepted answer piles into a short readable answer without adding any factual claim that the piles did not provide.",
+  "source": {
+    "path": "/experiments/E007/answer-synthesis-world-v0.1.json",
+    "sha256": "d5bb4a346eb65c922557f8ba1ef4789bf3fd8d53f2c50793dc21e505b58c91b9",
+    "cases": 10,
+    "non_empty": 8,
+    "empty": 2
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "thinking": false,
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "system": "Write the final answer using only factual claims from ACCEPTED PILES. Do not use memory. Do not add facts, conclusions, explanations, missing information, or advice. Preserve every number, negation, uncertainty, restriction, and condition. If piles give different versions, report each version without choosing. Write short natural English. Do not mention these rules."
+  },
+  "empty_input_rule": "Do not call the model. Return the exact canned_empty_response from the frozen world.",
+  "allowed_scaffolding": [
+    "Short connecting words that do not add a factual claim.",
+    "Labels such as One supported version and Another supported version."
+  ],
+  "scoring": {
+    "mechanical": [
+      "Both empty cases equal the canned response byte for byte.",
+      "No non-empty generation is empty or cut off by the token limit.",
+      "DeBERTa coverage and support checks are diagnostics, not the final judge."
+    ],
+    "manual_locked_rubric": [
+      "Every required meaning is present.",
+      "No forbidden or other new factual meaning is present.",
+      "Numbers, negations, uncertainty, restrictions, and conditions are preserved.",
+      "Different supported versions are not silently collapsed into one."
+    ],
+    "pass_gate": "10/10 cases pass the manual rubric, 2/2 empty cases are exact, and 0 generations hit the token limit."
+  },
+  "boundary": "Synthetic English development test. A pass would validate this frozen set, not production reliability or other languages."
+}

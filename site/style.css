@@ -6132,6 +6132,56 @@ blockquote {
   color: var(--muted);
 }
 
+.e007-synthesis-list {
+  display: grid;
+  gap: 16px;
+  margin: 40px 0;
+}
+
+.e007-synthesis-case {
+  border: 1px solid var(--line);
+}
+
+.e007-synthesis-case summary {
+  align-items: start;
+  cursor: pointer;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 64px 1fr auto;
+  list-style: none;
+  padding: 20px;
+}
+
+.e007-synthesis-case summary::-webkit-details-marker {
+  display: none;
+}
+
+.e007-synthesis-case summary strong {
+  color: var(--muted);
+}
+
+.e007-synthesis-case > div {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.e007-synthesis-case article {
+  background: color-mix(in srgb, var(--paper) 96%, var(--ink));
+  min-height: 120px;
+  padding: 20px;
+}
+
+.e007-synthesis-case article.is-empty {
+  border-left: 6px solid var(--muted);
+}
+
+@media (max-width: 700px) {
+  .e007-synthesis-case summary { grid-template-columns: 52px 1fr; }
+  .e007-synthesis-case summary strong { grid-column: 2; }
+}
+
 .e007-audit-card,
 .e007-canonical-card {
   border: 1px solid var(--line);
