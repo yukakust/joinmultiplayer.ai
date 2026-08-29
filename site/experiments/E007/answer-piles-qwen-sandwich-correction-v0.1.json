@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13D",
+  "status": "implementation_correction_frozen_before_valid_run",
+  "invalid_preflight": "/experiments/E007/answer-piles-qwen-sandwich-invalid-preflight-v0.1.json",
+  "invalid_preflight_sha256": "5193088078ee089756ee61313b6859ef9c6a4bb0448a4e72229e6dbc8b62312c",
+  "observed_warning": "A decoder-only architecture is being used, but right-padding was detected.",
+  "fault": "The batched Qwen prompts used right padding, so shorter prompts generated from padding positions instead of their final real token.",
+  "only_allowed_change": "Set the frozen Qwen tokenizer padding_side to left before batching.",
+  "unchanged": [
+    "model repositories and revisions",
+    "all ten source piles",
+    "Qwen system and user prompts",
+    "greedy generation and 64-token ceiling",
+    "DeBERTa validation rules",
+    "second-pass merge rule",
+    "locked success gates"
+  ],
+  "claim_boundary": "The invalid preflight is preserved but cannot answer Gate 13D. The corrected run must be committed only after this receipt and code fix are public."
+}

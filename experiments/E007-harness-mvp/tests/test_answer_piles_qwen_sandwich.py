@@ -28,6 +28,12 @@ class AnswerPilesQwenSandwichTests(unittest.TestCase):
         self.assertEqual(MODULE.digest(source), protocol["source"]["sha256"])
         self.assertEqual(protocol["source"]["expected_merges"], [["P03", "P04"], ["P06", "P07"]])
 
+    def test_invalid_preflight_and_only_correction_are_preserved(self):
+        correction = json.loads((ROOT / "site/experiments/E007/answer-piles-qwen-sandwich-correction-v0.1.json").read_text())
+        invalid = ROOT / "site/experiments/E007/answer-piles-qwen-sandwich-invalid-preflight-v0.1.json"
+        self.assertEqual(MODULE.digest(invalid), correction["invalid_preflight_sha256"])
+        self.assertEqual(correction["only_allowed_change"], "Set the frozen Qwen tokenizer padding_side to left before batching.")
+
 
 if __name__ == "__main__":
     unittest.main()

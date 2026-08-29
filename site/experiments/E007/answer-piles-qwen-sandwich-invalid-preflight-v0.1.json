@@ -1,0 +1,1049 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13D",
+  "status": "posthoc_qwen_sandwich_development_complete",
+  "protocol": "/experiments/E007/answer-piles-qwen-sandwich-protocol-v0.1.json",
+  "source": "/experiments/E007/answer-piles-second-pass-world-v0.1.json",
+  "protocol_sha256": "1fb9be82cac53c5cadd9125ad468ea85baf8c14d3ab9104f904b7553303fc445",
+  "source_sha256": "64db68ab97ffc7df396c9eacb61532539f8872355a59a609339f3bea2c772557",
+  "qwen": {
+    "repository": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "thinking": false,
+    "do_sample": false,
+    "max_new_tokens": 64,
+    "system": "You rewrite one pile of statements as one short atomic factual claim. Preserve every number, scope, negation, uncertainty, and condition. Add nothing. Return the claim only.",
+    "user_template": "STATEMENTS IN ONE PILE:\n- {all statements}\n\nONE ATOMIC CLAIM:"
+  },
+  "deberta": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "classes": [
+      "entailment",
+      "neutral",
+      "contradiction"
+    ],
+    "decision": "largest_logit"
+  },
+  "runtime": {
+    "seconds_including_model_load": 33.262,
+    "peak_rss_mib": 2542.3,
+    "device": "cpu"
+  },
+  "summary": {
+    "input_piles": 10,
+    "valid_canonical_claims": 5,
+    "expected_merges_recovered": 0,
+    "expected_merges_total": 2,
+    "false_merges": 0,
+    "missed_expected_merges": 2,
+    "final_groups": 10,
+    "final_exact_paraphrase_piles": 4,
+    "final_forbidden_merges": 0,
+    "lost_answers": 0,
+    "passed_locked_development_gate": false
+  },
+  "canonical_records": [
+    {
+      "pile_id": "P01",
+      "original_answers": [
+        "Image tiling improved recall for objects between 8 and 16 pixels.",
+        "Tiny 8–16 pixel targets were found more often when the image was split into tiles."
+      ],
+      "user_prompt": "STATEMENTS IN ONE PILE:\n- Image tiling improved recall for objects between 8 and 16 pixels.\n- Tiny 8–16 pixel targets were found more often when the image was split into tiles.\n\nONE ATOMIC CLAIM:",
+      "canonical_claim": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+      "generated_tokens": 18,
+      "hit_token_limit": false,
+      "validation": [
+        {
+          "pile_id": "P01",
+          "original_index": 0,
+          "direction": "original_to_canonical",
+          "premise": "Image tiling improved recall for objects between 8 and 16 pixels.",
+          "hypothesis": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.99461913,
+            "neutral": 0.00468309,
+            "contradiction": 0.00069782
+          },
+          "input_tokens": 28
+        },
+        {
+          "pile_id": "P01",
+          "original_index": 0,
+          "direction": "canonical_to_original",
+          "premise": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+          "hypothesis": "Image tiling improved recall for objects between 8 and 16 pixels.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.99599034,
+            "neutral": 0.00346018,
+            "contradiction": 0.00054947
+          },
+          "input_tokens": 28
+        },
+        {
+          "pile_id": "P01",
+          "original_index": 1,
+          "direction": "original_to_canonical",
+          "premise": "Tiny 8–16 pixel targets were found more often when the image was split into tiles.",
+          "hypothesis": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.99008358,
+            "neutral": 0.00960992,
+            "contradiction": 0.00030651
+          },
+          "input_tokens": 34
+        },
+        {
+          "pile_id": "P01",
+          "original_index": 1,
+          "direction": "canonical_to_original",
+          "premise": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+          "hypothesis": "Tiny 8–16 pixel targets were found more often when the image was split into tiles.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.99372548,
+            "neutral": 0.00599616,
+            "contradiction": 0.00027835
+          },
+          "input_tokens": 34
+        }
+      ],
+      "valid": true
+    },
+    {
+      "pile_id": "P02",
+      "original_answers": [
+        "Using 20% overlap between tiles reduced misses near tile borders.",
+        "Fewer edge objects were lost when neighbouring tiles overlapped by one fifth."
+      ],
+      "user_prompt": "STATEMENTS IN ONE PILE:\n- Using 20% overlap between tiles reduced misses near tile borders.\n- Fewer edge objects were lost when neighbouring tiles overlapped by one fifth.\n\nONE ATOMIC CLAIM:",
+      "canonical_claim": "",
+      "generated_tokens": 18,
+      "hit_token_limit": false,
+      "validation": [
+        {
+          "pile_id": "P02",
+          "original_index": 0,
+          "direction": "original_to_canonical",
+          "premise": "Using 20% overlap between tiles reduced misses near tile borders.",
+          "hypothesis": "",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00172948,
+            "neutral": 0.99757189,
+            "contradiction": 0.00069868
+          },
+          "input_tokens": 15
+        },
+        {
+          "pile_id": "P02",
+          "original_index": 0,
+          "direction": "canonical_to_original",
+          "premise": "",
+          "hypothesis": "Using 20% overlap between tiles reduced misses near tile borders.",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00136897,
+            "neutral": 0.99806863,
+            "contradiction": 0.00056237
+          },
+          "input_tokens": 15
+        },
+        {
+          "pile_id": "P02",
+          "original_index": 1,
+          "direction": "original_to_canonical",
+          "premise": "Fewer edge objects were lost when neighbouring tiles overlapped by one fifth.",
+          "hypothesis": "",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00588213,
+            "neutral": 0.97312951,
+            "contradiction": 0.02098835
+          },
+          "input_tokens": 16
+        },
+        {
+          "pile_id": "P02",
+          "original_index": 1,
+          "direction": "canonical_to_original",
+          "premise": "",
+          "hypothesis": "Fewer edge objects were lost when neighbouring tiles overlapped by one fifth.",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00201844,
+            "neutral": 0.99251527,
+            "contradiction": 0.00546622
+          },
+          "input_tokens": 16
+        }
+      ],
+      "valid": false
+    },
+    {
+      "pile_id": "P03",
+      "original_answers": [
+        "No benefit from tiling has been measured for large objects."
+      ],
+      "user_prompt": "STATEMENTS IN ONE PILE:\n- No benefit from tiling has been measured for large objects.\n\nONE ATOMIC CLAIM:",
+      "canonical_claim": ": \"No benefit from tiling has been measured for large objects.",
+      "generated_tokens": 18,
+      "hit_token_limit": false,
+      "validation": [
+        {
+          "pile_id": "P03",
+          "original_index": 0,
+          "direction": "original_to_canonical",
+          "premise": "No benefit from tiling has been measured for large objects.",
+          "hypothesis": ": \"No benefit from tiling has been measured for large objects.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.98778194,
+            "neutral": 0.00976206,
+            "contradiction": 0.00245602
+          },
+          "input_tokens": 27
+        },
+        {
+          "pile_id": "P03",
+          "original_index": 0,
+          "direction": "canonical_to_original",
+          "premise": ": \"No benefit from tiling has been measured for large objects.",
+          "hypothesis": "No benefit from tiling has been measured for large objects.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.99564677,
+            "neutral": 0.00350109,
+            "contradiction": 0.00085204
+          },
+          "input_tokens": 27
+        }
+      ],
+      "valid": true
+    },
+    {
+      "pile_id": "P04",
+      "original_answers": [
+        "The experiment did not show that image tiles help with large targets."
+      ],
+      "user_prompt": "STATEMENTS IN ONE PILE:\n- The experiment did not show that image tiles help with large targets.\n\nONE ATOMIC CLAIM:",
+      "canonical_claim": "",
+      "generated_tokens": 18,
+      "hit_token_limit": false,
+      "validation": [
+        {
+          "pile_id": "P04",
+          "original_index": 0,
+          "direction": "original_to_canonical",
+          "premise": "The experiment did not show that image tiles help with large targets.",
+          "hypothesis": "",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00085569,
+            "neutral": 0.99829561,
+            "contradiction": 0.00084875
+          },
+          "input_tokens": 16
+        },
+        {
+          "pile_id": "P04",
+          "original_index": 0,
+          "direction": "canonical_to_original",
+          "premise": "",
+          "hypothesis": "The experiment did not show that image tiles help with large targets.",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00061122,
+            "neutral": 0.99890554,
+            "contradiction": 0.00048323
+          },
+          "input_tokens": 16
+        }
+      ],
+      "valid": false
+    },
+    {
+      "pile_id": "P05",
+      "original_answers": [
+        "Isolate power before restarting the unit.",
+        "Disconnect the power supply first, and only then restart."
+      ],
+      "user_prompt": "STATEMENTS IN ONE PILE:\n- Isolate power before restarting the unit.\n- Disconnect the power supply first, and only then restart.\n\nONE ATOMIC CLAIM:",
+      "canonical_claim": "",
+      "generated_tokens": 17,
+      "hit_token_limit": false,
+      "validation": [
+        {
+          "pile_id": "P05",
+          "original_index": 0,
+          "direction": "original_to_canonical",
+          "premise": "Isolate power before restarting the unit.",
+          "hypothesis": "",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00766018,
+            "neutral": 0.98813695,
+            "contradiction": 0.00420281
+          },
+          "input_tokens": 10
+        },
+        {
+          "pile_id": "P05",
+          "original_index": 0,
+          "direction": "canonical_to_original",
+          "premise": "",
+          "hypothesis": "Isolate power before restarting the unit.",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00283234,
+            "neutral": 0.99569327,
+            "contradiction": 0.00147441
+          },
+          "input_tokens": 10
+        },
+        {
+          "pile_id": "P05",
+          "original_index": 1,
+          "direction": "original_to_canonical",
+          "premise": "Disconnect the power supply first, and only then restart.",
+          "hypothesis": "",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00156516,
+            "neutral": 0.98769754,
+            "contradiction": 0.01073734
+          },
+          "input_tokens": 14
+        },
+        {
+          "pile_id": "P05",
+          "original_index": 1,
+          "direction": "canonical_to_original",
+          "premise": "",
+          "hypothesis": "Disconnect the power supply first, and only then restart.",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00083816,
+            "neutral": 0.99314272,
+            "contradiction": 0.00601903
+          },
+          "input_tokens": 14
+        }
+      ],
+      "valid": false
+    },
+    {
+      "pile_id": "P06",
+      "original_answers": [
+        "Use remote controls only while phase drift is present."
+      ],
+      "user_prompt": "STATEMENTS IN ONE PILE:\n- Use remote controls only while phase drift is present.\n\nONE ATOMIC CLAIM:",
+      "canonical_claim": ": \"Phase drift is present in the current phase drift is present.",
+      "generated_tokens": 17,
+      "hit_token_limit": false,
+      "validation": [
+        {
+          "pile_id": "P06",
+          "original_index": 0,
+          "direction": "original_to_canonical",
+          "premise": "Use remote controls only while phase drift is present.",
+          "hypothesis": ": \"Phase drift is present in the current phase drift is present.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.95960653,
+            "neutral": 0.0372249,
+            "contradiction": 0.00316858
+          },
+          "input_tokens": 27
+        },
+        {
+          "pile_id": "P06",
+          "original_index": 0,
+          "direction": "canonical_to_original",
+          "premise": ": \"Phase drift is present in the current phase drift is present.",
+          "hypothesis": "Use remote controls only while phase drift is present.",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00111722,
+            "neutral": 0.99767154,
+            "contradiction": 0.00121118
+          },
+          "input_tokens": 27
+        }
+      ],
+      "valid": false
+    },
+    {
+      "pile_id": "P07",
+      "original_answers": [
+        "When phase drift occurs, operate the unit exclusively from a distance."
+      ],
+      "user_prompt": "STATEMENTS IN ONE PILE:\n- When phase drift occurs, operate the unit exclusively from a distance.\n\nONE ATOMIC CLAIM:",
+      "canonical_claim": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+      "generated_tokens": 17,
+      "hit_token_limit": false,
+      "validation": [
+        {
+          "pile_id": "P07",
+          "original_index": 0,
+          "direction": "original_to_canonical",
+          "premise": "When phase drift occurs, operate the unit exclusively from a distance.",
+          "hypothesis": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.98722547,
+            "neutral": 0.01131438,
+            "contradiction": 0.00146018
+          },
+          "input_tokens": 31
+        },
+        {
+          "pile_id": "P07",
+          "original_index": 0,
+          "direction": "canonical_to_original",
+          "premise": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+          "hypothesis": "When phase drift occurs, operate the unit exclusively from a distance.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.56284136,
+            "neutral": 0.42723024,
+            "contradiction": 0.00992836
+          },
+          "input_tokens": 31
+        }
+      ],
+      "valid": true
+    },
+    {
+      "pile_id": "P08",
+      "original_answers": [
+        "Sealed queen cells can indicate that the colony is preparing to swarm.",
+        "The hive may be getting ready to swarm when capped queen cells appear."
+      ],
+      "user_prompt": "STATEMENTS IN ONE PILE:\n- Sealed queen cells can indicate that the colony is preparing to swarm.\n- The hive may be getting ready to swarm when capped queen cells appear.\n\nONE ATOMIC CLAIM:",
+      "canonical_claim": "The colony is preparing to swarm.",
+      "generated_tokens": 17,
+      "hit_token_limit": false,
+      "validation": [
+        {
+          "pile_id": "P08",
+          "original_index": 0,
+          "direction": "original_to_canonical",
+          "premise": "Sealed queen cells can indicate that the colony is preparing to swarm.",
+          "hypothesis": "The colony is preparing to swarm.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.89532089,
+            "neutral": 0.09916434,
+            "contradiction": 0.00551478
+          },
+          "input_tokens": 23
+        },
+        {
+          "pile_id": "P08",
+          "original_index": 0,
+          "direction": "canonical_to_original",
+          "premise": "The colony is preparing to swarm.",
+          "hypothesis": "Sealed queen cells can indicate that the colony is preparing to swarm.",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.0022171,
+            "neutral": 0.99723828,
+            "contradiction": 0.00054455
+          },
+          "input_tokens": 23
+        },
+        {
+          "pile_id": "P08",
+          "original_index": 1,
+          "direction": "original_to_canonical",
+          "premise": "The hive may be getting ready to swarm when capped queen cells appear.",
+          "hypothesis": "The colony is preparing to swarm.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.98429859,
+            "neutral": 0.01448585,
+            "contradiction": 0.00121549
+          },
+          "input_tokens": 24
+        },
+        {
+          "pile_id": "P08",
+          "original_index": 1,
+          "direction": "canonical_to_original",
+          "premise": "The colony is preparing to swarm.",
+          "hypothesis": "The hive may be getting ready to swarm when capped queen cells appear.",
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.00229884,
+            "neutral": 0.99701297,
+            "contradiction": 0.00068812
+          },
+          "input_tokens": 24
+        }
+      ],
+      "valid": false
+    },
+    {
+      "pile_id": "P09",
+      "original_answers": [
+        "Sealed queen cells may instead be part of supersedure when the old queen is failing."
+      ],
+      "user_prompt": "STATEMENTS IN ONE PILE:\n- Sealed queen cells may instead be part of supersedure when the old queen is failing.\n\nONE ATOMIC CLAIM:",
+      "canonical_claim": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+      "generated_tokens": 19,
+      "hit_token_limit": false,
+      "validation": [
+        {
+          "pile_id": "P09",
+          "original_index": 0,
+          "direction": "original_to_canonical",
+          "premise": "Sealed queen cells may instead be part of supersedure when the old queen is failing.",
+          "hypothesis": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.99322128,
+            "neutral": 0.00609451,
+            "contradiction": 0.00068419
+          },
+          "input_tokens": 40
+        },
+        {
+          "pile_id": "P09",
+          "original_index": 0,
+          "direction": "canonical_to_original",
+          "premise": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+          "hypothesis": "Sealed queen cells may instead be part of supersedure when the old queen is failing.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.84689224,
+            "neutral": 0.12499305,
+            "contradiction": 0.02811474
+          },
+          "input_tokens": 40
+        }
+      ],
+      "valid": true
+    },
+    {
+      "pile_id": "P10",
+      "original_answers": [
+        "Image tiling increased peak GPU memory use by 35%."
+      ],
+      "user_prompt": "STATEMENTS IN ONE PILE:\n- Image tiling increased peak GPU memory use by 35%.\n\nONE ATOMIC CLAIM:",
+      "canonical_claim": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+      "generated_tokens": 19,
+      "hit_token_limit": false,
+      "validation": [
+        {
+          "pile_id": "P10",
+          "original_index": 0,
+          "direction": "original_to_canonical",
+          "premise": "Image tiling increased peak GPU memory use by 35%.",
+          "hypothesis": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.99099123,
+            "neutral": 0.00746401,
+            "contradiction": 0.00154475
+          },
+          "input_tokens": 26
+        },
+        {
+          "pile_id": "P10",
+          "original_index": 0,
+          "direction": "canonical_to_original",
+          "premise": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+          "hypothesis": "Image tiling increased peak GPU memory use by 35%.",
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.99509627,
+            "neutral": 0.00411548,
+            "contradiction": 0.00078829
+          },
+          "input_tokens": 26
+        }
+      ],
+      "valid": true
+    }
+  ],
+  "comparison_records": [
+    {
+      "left_pile": "P01",
+      "right_pile": "P03",
+      "left_to_right": {
+        "left_pile": "P01",
+        "right_pile": "P03",
+        "direction": "left_to_right",
+        "premise": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+        "hypothesis": ": \"No benefit from tiling has been measured for large objects.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0031067,
+          "neutral": 0.97910655,
+          "contradiction": 0.01778679
+        },
+        "input_tokens": 29
+      },
+      "right_to_left": {
+        "left_pile": "P01",
+        "right_pile": "P03",
+        "direction": "right_to_left",
+        "premise": ": \"No benefit from tiling has been measured for large objects.",
+        "hypothesis": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00108451,
+          "neutral": 0.99684191,
+          "contradiction": 0.00207359
+        },
+        "input_tokens": 29
+      },
+      "merge": false
+    },
+    {
+      "left_pile": "P01",
+      "right_pile": "P07",
+      "left_to_right": {
+        "left_pile": "P01",
+        "right_pile": "P07",
+        "direction": "left_to_right",
+        "premise": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+        "hypothesis": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0178511,
+          "neutral": 0.60216141,
+          "contradiction": 0.37998754
+        },
+        "input_tokens": 31
+      },
+      "right_to_left": {
+        "left_pile": "P01",
+        "right_pile": "P07",
+        "direction": "right_to_left",
+        "premise": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+        "hypothesis": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00359887,
+          "neutral": 0.97510016,
+          "contradiction": 0.02130106
+        },
+        "input_tokens": 31
+      },
+      "merge": false
+    },
+    {
+      "left_pile": "P01",
+      "right_pile": "P09",
+      "left_to_right": {
+        "left_pile": "P01",
+        "right_pile": "P09",
+        "direction": "left_to_right",
+        "premise": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+        "hypothesis": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.03721141,
+          "neutral": 0.95112741,
+          "contradiction": 0.01166108
+        },
+        "input_tokens": 34
+      },
+      "right_to_left": {
+        "left_pile": "P01",
+        "right_pile": "P09",
+        "direction": "right_to_left",
+        "premise": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+        "hypothesis": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.02943105,
+          "neutral": 0.95603275,
+          "contradiction": 0.01453611
+        },
+        "input_tokens": 34
+      },
+      "merge": false
+    },
+    {
+      "left_pile": "P01",
+      "right_pile": "P10",
+      "left_to_right": {
+        "left_pile": "P01",
+        "right_pile": "P10",
+        "direction": "left_to_right",
+        "premise": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+        "hypothesis": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00033286,
+          "neutral": 0.98505765,
+          "contradiction": 0.01460951
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "left_pile": "P01",
+        "right_pile": "P10",
+        "direction": "right_to_left",
+        "premise": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+        "hypothesis": "- Image tiling improved recall for objects between 8 and 16 pixels.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00140258,
+          "neutral": 0.99568295,
+          "contradiction": 0.00291438
+        },
+        "input_tokens": 28
+      },
+      "merge": false
+    },
+    {
+      "left_pile": "P03",
+      "right_pile": "P07",
+      "left_to_right": {
+        "left_pile": "P03",
+        "right_pile": "P07",
+        "direction": "left_to_right",
+        "premise": ": \"No benefit from tiling has been measured for large objects.",
+        "hypothesis": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.10192441,
+          "neutral": 0.65724486,
+          "contradiction": 0.2408307
+        },
+        "input_tokens": 31
+      },
+      "right_to_left": {
+        "left_pile": "P03",
+        "right_pile": "P07",
+        "direction": "right_to_left",
+        "premise": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+        "hypothesis": ": \"No benefit from tiling has been measured for large objects.",
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.01217212,
+          "neutral": 0.28153917,
+          "contradiction": 0.7062887
+        },
+        "input_tokens": 31
+      },
+      "merge": false
+    },
+    {
+      "left_pile": "P03",
+      "right_pile": "P09",
+      "left_to_right": {
+        "left_pile": "P03",
+        "right_pile": "P09",
+        "direction": "left_to_right",
+        "premise": ": \"No benefit from tiling has been measured for large objects.",
+        "hypothesis": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00818977,
+          "neutral": 0.98756635,
+          "contradiction": 0.00424384
+        },
+        "input_tokens": 34
+      },
+      "right_to_left": {
+        "left_pile": "P03",
+        "right_pile": "P09",
+        "direction": "right_to_left",
+        "premise": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+        "hypothesis": ": \"No benefit from tiling has been measured for large objects.",
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.00312476,
+          "neutral": 0.09563265,
+          "contradiction": 0.90124255
+        },
+        "input_tokens": 34
+      },
+      "merge": false
+    },
+    {
+      "left_pile": "P03",
+      "right_pile": "P10",
+      "left_to_right": {
+        "left_pile": "P03",
+        "right_pile": "P10",
+        "direction": "left_to_right",
+        "premise": ": \"No benefit from tiling has been measured for large objects.",
+        "hypothesis": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 6.317e-05,
+          "neutral": 0.02512534,
+          "contradiction": 0.97481155
+        },
+        "input_tokens": 28
+      },
+      "right_to_left": {
+        "left_pile": "P03",
+        "right_pile": "P10",
+        "direction": "right_to_left",
+        "premise": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+        "hypothesis": ": \"No benefit from tiling has been measured for large objects.",
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 5.571e-05,
+          "neutral": 0.00179721,
+          "contradiction": 0.99814713
+        },
+        "input_tokens": 28
+      },
+      "merge": false
+    },
+    {
+      "left_pile": "P07",
+      "right_pile": "P09",
+      "left_to_right": {
+        "left_pile": "P07",
+        "right_pile": "P09",
+        "direction": "left_to_right",
+        "premise": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+        "hypothesis": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01419305,
+          "neutral": 0.98237199,
+          "contradiction": 0.00343501
+        },
+        "input_tokens": 36
+      },
+      "right_to_left": {
+        "left_pile": "P07",
+        "right_pile": "P09",
+        "direction": "right_to_left",
+        "premise": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+        "hypothesis": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+        "decision": "contradiction",
+        "probabilities": {
+          "entailment": 0.024816,
+          "neutral": 0.42579496,
+          "contradiction": 0.54938906
+        },
+        "input_tokens": 36
+      },
+      "merge": false
+    },
+    {
+      "left_pile": "P07",
+      "right_pile": "P10",
+      "left_to_right": {
+        "left_pile": "P07",
+        "right_pile": "P10",
+        "direction": "left_to_right",
+        "premise": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+        "hypothesis": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00151324,
+          "neutral": 0.99625576,
+          "contradiction": 0.00223091
+        },
+        "input_tokens": 30
+      },
+      "right_to_left": {
+        "left_pile": "P07",
+        "right_pile": "P10",
+        "direction": "right_to_left",
+        "premise": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+        "hypothesis": ":  \n- When phase drift occurs, the unit is operated from a distance.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00374539,
+          "neutral": 0.96803445,
+          "contradiction": 0.02822015
+        },
+        "input_tokens": 30
+      },
+      "merge": false
+    },
+    {
+      "left_pile": "P09",
+      "right_pile": "P10",
+      "left_to_right": {
+        "left_pile": "P09",
+        "right_pile": "P10",
+        "direction": "left_to_right",
+        "premise": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+        "hypothesis": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00989269,
+          "neutral": 0.98752868,
+          "contradiction": 0.00257855
+        },
+        "input_tokens": 33
+      },
+      "right_to_left": {
+        "left_pile": "P09",
+        "right_pile": "P10",
+        "direction": "right_to_left",
+        "premise": ":  \n- Image tiling increased peak GPU memory usage by 35%",
+        "hypothesis": "Sealed queen cells may be part of supersedure when the old queen is failing.",
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00420073,
+          "neutral": 0.99446952,
+          "contradiction": 0.00132975
+        },
+        "input_tokens": 33
+      },
+      "merge": false
+    }
+  ],
+  "predicted_merge_pairs": [],
+  "missed_merge_pairs": [
+    [
+      "P03",
+      "P04"
+    ],
+    [
+      "P06",
+      "P07"
+    ]
+  ],
+  "false_merge_pairs": [],
+  "final_groups": [
+    {
+      "group_id": "Q01",
+      "source_piles": [
+        "P01"
+      ],
+      "gold_piles": [
+        "G1"
+      ],
+      "answers": [
+        "Image tiling improved recall for objects between 8 and 16 pixels.",
+        "Tiny 8–16 pixel targets were found more often when the image was split into tiles."
+      ]
+    },
+    {
+      "group_id": "Q02",
+      "source_piles": [
+        "P02"
+      ],
+      "gold_piles": [
+        "G2"
+      ],
+      "answers": [
+        "Using 20% overlap between tiles reduced misses near tile borders.",
+        "Fewer edge objects were lost when neighbouring tiles overlapped by one fifth."
+      ]
+    },
+    {
+      "group_id": "Q03",
+      "source_piles": [
+        "P03"
+      ],
+      "gold_piles": [
+        "G3"
+      ],
+      "answers": [
+        "No benefit from tiling has been measured for large objects."
+      ]
+    },
+    {
+      "group_id": "Q04",
+      "source_piles": [
+        "P04"
+      ],
+      "gold_piles": [
+        "G3"
+      ],
+      "answers": [
+        "The experiment did not show that image tiles help with large targets."
+      ]
+    },
+    {
+      "group_id": "Q05",
+      "source_piles": [
+        "P05"
+      ],
+      "gold_piles": [
+        "G4"
+      ],
+      "answers": [
+        "Isolate power before restarting the unit.",
+        "Disconnect the power supply first, and only then restart."
+      ]
+    },
+    {
+      "group_id": "Q06",
+      "source_piles": [
+        "P06"
+      ],
+      "gold_piles": [
+        "G5"
+      ],
+      "answers": [
+        "Use remote controls only while phase drift is present."
+      ]
+    },
+    {
+      "group_id": "Q07",
+      "source_piles": [
+        "P07"
+      ],
+      "gold_piles": [
+        "G5"
+      ],
+      "answers": [
+        "When phase drift occurs, operate the unit exclusively from a distance."
+      ]
+    },
+    {
+      "group_id": "Q08",
+      "source_piles": [
+        "P08"
+      ],
+      "gold_piles": [
+        "G6"
+      ],
+      "answers": [
+        "Sealed queen cells can indicate that the colony is preparing to swarm.",
+        "The hive may be getting ready to swarm when capped queen cells appear."
+      ]
+    },
+    {
+      "group_id": "Q09",
+      "source_piles": [
+        "P09"
+      ],
+      "gold_piles": [
+        "G7"
+      ],
+      "answers": [
+        "Sealed queen cells may instead be part of supersedure when the old queen is failing."
+      ]
+    },
+    {
+      "group_id": "Q10",
+      "source_piles": [
+        "P10"
+      ],
+      "gold_piles": [
+        "G8"
+      ],
+      "answers": [
+        "Image tiling increased peak GPU memory use by 35%."
+      ]
+    }
+  ],
+  "boundary": {
+    "en": "This is a post-hoc paired diagnostic on opened synthetic English answers. Success would justify a new held-out test; it would not validate production merging or multilingual use.",
+    "ru": "Это post-hoc paired diagnostic на уже открытых синтетических английских ответах. Успех позволит поставить новый закрытый тест, но не подтвердит production-склейку или другие языки."
+  }
+}

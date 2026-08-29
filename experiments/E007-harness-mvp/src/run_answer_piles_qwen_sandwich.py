@@ -137,6 +137,9 @@ def main() -> None:
 
     qspec = protocol["qwen"]
     qtokenizer = AutoTokenizer.from_pretrained(qspec["repository"], revision=qspec["revision"])
+    qtokenizer.padding_side = "left"
+    if qtokenizer.pad_token_id is None:
+        qtokenizer.pad_token = qtokenizer.eos_token
     qmodel = AutoModelForCausalLM.from_pretrained(
         qspec["repository"], revision=qspec["revision"], dtype=torch.bfloat16
     )
