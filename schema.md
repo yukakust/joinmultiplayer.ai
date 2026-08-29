@@ -513,3 +513,29 @@ rubric and three answers added unsupported generic alternatives. Preserve two
 separate shelves before synthesis: an evidence-landscape shelf with same-case
 alternatives and lineage, and a best-supported-answer shelf produced from the
 whole bundle. Never let an answer cite the opposing shelf as its evidence.
+
+## Accepted evidence-ledger law
+
+Owner decision on 2026-08-29: a model may choose what to use, but it may not
+decide what ceases to exist. Every consented incoming capsule is appended to an
+immutable question ledger after permission, secret, exact-source, and envelope
+checks. Model decisions add labels and views; they never delete the capsule.
+
+The same ledger has two primary views. `best_answer` contains the strongest
+supported cause or explicit uncertainty plus its safe action or next evidence.
+`all_versions` preserves same-case alternatives, conditional rules, sources,
+and lineage. The visible shelves are `USED`, `SAME_CASE`, `CONDITIONAL`,
+`UNCERTAIN`, and collapsed-by-default `OTHER`. Ten copies from one lineage are
+one dependent view rather than ten confirmations.
+
+Every factual view must cite evidence from its own shelf. The final writer may
+describe a weaker or contradicted alternative, but it may not cite the main
+view's opposing source as evidence for that alternative. Accepted decision:
+`/experiments/E007/evidence-ledger-accepted-architecture-v0.1.json`.
+
+Gate 15E is the next test and requires no new model inference. Build both views
+from the preserved Gate 15C and 15D traces. It must retain all sixty required
+pieces and all twenty-four same-case alternatives, keep the 396 other fragments
+available for audit but hidden by default, and collapse dependent copies by
+lineage. Only after this ledger mechanics pass should a writer receive both
+shelves in Gate 15F.

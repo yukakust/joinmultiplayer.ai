@@ -838,3 +838,27 @@ evidence for the other. Protocol, trace, and audit:
 - `site/experiments/E007/qwen8b-bundle-protocol-v0.1.json`
 - `site/experiments/E007/qwen8b-bundle-result-v0.1.json`
 - `site/experiments/E007/qwen8b-bundle-human-audit-v0.1.json`
+
+## Accepted architecture after Gate 15D — immutable ledger, two views
+
+Owner decision on 2026-08-29: preserve every consented incoming capsule in an
+append-only question ledger after permission, secret, source-anchor, and
+envelope checks. A model may choose what to use, but it may not decide what
+ceases to exist.
+
+Expose two primary views over the same ledger. `best_answer` contains the
+strongest supported answer and its own citations. `all_versions` preserves
+same-case alternatives, conditional rules, sources, and lineage. UI shelves are
+`USED`, `SAME_CASE`, `CONDITIONAL`, `UNCERTAIN`, and collapsed `OTHER`. Copies
+sharing one lineage count as one dependent view.
+
+This combines the observed strengths rather than intersecting their outputs:
+Gate 15D found all sixty required cause/action pieces; Gate 15C retained the
+same-case copied reports that best-answer optimization removed. Neither model
+view is allowed to erase the original capsule. Decision record:
+`site/experiments/E007/evidence-ledger-accepted-architecture-v0.1.json`.
+
+Next, Gate 15E deterministically constructs both shelves from the preserved
+15C and 15D traces, with no new inference. Gate 15F may test a final writer only
+after the ledger retains all required pieces, alternatives, and lineage without
+putting foreign records in the visible shelves.

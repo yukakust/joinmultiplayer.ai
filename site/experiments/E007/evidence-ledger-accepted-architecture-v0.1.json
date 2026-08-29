@@ -1,0 +1,74 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "decision_id": "E007-ARCH-LEDGER-01",
+  "status": "accepted_by_owner",
+  "accepted_at": "2026-08-29",
+  "name": "Immutable evidence ledger with two views",
+  "law": "A model may choose what to use, but it may not decide what ceases to exist.",
+  "storage_contract": {
+    "append_only": true,
+    "received_capsule_is_never_deleted_by_a_model": true,
+    "required_envelope_fields": [
+      "reply_to",
+      "claim",
+      "exact_evidence",
+      "source_id",
+      "source_version",
+      "source_coordinates",
+      "lineage_id",
+      "conditions",
+      "permission"
+    ],
+    "ordinary_code_checks": [
+      "reply_to binds the capsule to the exact question",
+      "the evidence exists at the declared source version and coordinates",
+      "permission allows the fragment to travel",
+      "secret filtering ran before transport",
+      "lineage and content hashes are stored without counting copies as independent"
+    ]
+  },
+  "views": {
+    "best_answer": {
+      "purpose": "Show the best-supported cause or explicit uncertainty and the safe action or next measurement.",
+      "model_may_select": true,
+      "model_may_delete_from_ledger": false
+    },
+    "all_versions": {
+      "purpose": "Preserve every same-case claim, competing view, conditional rule, source, and lineage.",
+      "model_may_label": true,
+      "model_may_delete_from_ledger": false
+    }
+  },
+  "visible_shelves": [
+    {"id": "USED", "meaning": "Used by the best-supported answer."},
+    {"id": "SAME_CASE", "meaning": "A competing or mistaken view about the same observed case."},
+    {"id": "CONDITIONAL", "meaning": "Becomes actionable when another accepted fragment supports its condition."},
+    {"id": "UNCERTAIN", "meaning": "May relate to the case, but the relationship is not established yet."},
+    {"id": "OTHER", "meaning": "Probably belongs to another case; hidden by default but preserved for audit."}
+  ],
+  "lineage_rule": "Ten copies from one lineage are one dependent view, not ten independent confirmations.",
+  "answer_contract": {
+    "main_view": "State the best-supported answer and cite its own evidence.",
+    "alternative_view": "State relevant alternatives, their support, conflicts, and lineage dependence without citing the main view as evidence for them.",
+    "missing_information": "State only missing information explicitly supplied by an accepted capsule or use the fixed no-information response.",
+    "citations": "Every factual view must cite evidence from its own shelf."
+  },
+  "evidence": {
+    "gate_15c": "Pairwise Qwen3-8B rejected every clearly foreign fragment in manual review but retained eighteen same-case copied reports.",
+    "gate_15d": "Whole-bundle Qwen3-8B retained all sixty required cause/action pieces and zero of 396 frozen irrelevant fragments, but discarded all twenty-four same-case alternatives.",
+    "combined_design_reason": "The two views solve different jobs. Best-answer optimization must not control evidence preservation."
+  },
+  "not_yet_proven": [
+    "The union can recover all twenty-four same-case alternatives without exposing foreign records on unseen questions.",
+    "Lineage grouping remains correct at network scale.",
+    "A final writer can use both shelves without mixing their citations or inventing facts.",
+    "The policy works outside the synthetic English world."
+  ],
+  "next_gate": {
+    "id": "15E",
+    "name": "Build the two shelves from preserved Gate 15C and 15D traces",
+    "model_inference_required": false,
+    "goal": "Recover all sixty required pieces and all twenty-four same-case alternatives, keep all 396 other fragments auditable but hidden by default, and collapse dependent copies by lineage."
+  }
+}
