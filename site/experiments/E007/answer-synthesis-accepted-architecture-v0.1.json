@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "14",
+  "decision": "accepted_for_harness_v0.2_with_qwen3_1_7b",
+  "decision_date": "2026-08-29",
+  "decision_maker": "owner",
+  "accepted_contract": [
+    "The final writer receives only accepted piles.",
+    "It may make supplied claims readable but may not add factual claims, conclusions, advice, or invented statements about missing knowledge.",
+    "Different supported versions remain visibly separate.",
+    "If no accepted pile exists, the model is bypassed and the harness returns a fixed no-information response.",
+    "Original piles, evidence, sources, and lineage remain available under the final answer."
+  ],
+  "accepted_model_preset": {
+    "repository": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+  },
+  "not_accepted": "Free-form multi-pile synthesis with Qwen3-0.6B. It omitted one supplied pile in the frozen test.",
+  "evidence": {
+    "kind": "paired_locked_synthetic_english_development",
+    "qwen3_0_6b": "8/10 under the strict rubric",
+    "qwen3_1_7b": "10/10 under the same strict rubric",
+    "invented_facts_qwen3_1_7b": 0,
+    "result": "/experiments/E007/answer-synthesis-qwen17b-result-v0.1.json",
+    "audit": "/experiments/E007/answer-synthesis-qwen17b-human-audit-v0.1.json"
+  },
+  "boundary": "Accepted for the MVP architecture. The result is synthetic English development evidence and does not validate the full end-to-end harness or phone runtime."
+}

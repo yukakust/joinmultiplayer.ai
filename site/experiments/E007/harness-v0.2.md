@@ -27,8 +27,9 @@ as tested parts. This is not yet a downloadable end-to-end product.
     candidate answers arrive.
 13. Merge only answers that make the same claim. Evidence, lineage, and a
     supported minority must remain visible.
-14. A model writes the final answer only from accepted evidence and clearly
-    names missing pieces.
+14. Pinned Qwen3-1.7B writes the final answer using only accepted piles. It does
+    not invent missing pieces. Empty input bypasses the model and returns a
+    fixed response.
 15. The harness records `contacted → found → accepted → used → improved` so it
     learns value, not popularity.
 
@@ -154,3 +155,18 @@ supports a larger model preset for final synthesis. It does not yet show that
 formation; those modules must be replayed separately. Result:
 `/experiments/E007/answer-synthesis-qwen17b-result-v0.1.json`; audit:
 `/experiments/E007/answer-synthesis-qwen17b-human-audit-v0.1.json`.
+
+The owner accepted Gate 14 for harness v0.2 with pinned Qwen3-1.7B on
+2026-08-29. Free-form multi-pile synthesis on 0.6B is not accepted. This is an
+MVP architecture decision supported by paired synthetic English development
+evidence, not an end-to-end or phone result. Decision:
+`/experiments/E007/answer-synthesis-accepted-architecture-v0.1.json`.
+
+## Still missing before the first MVP
+
+1. One installable app with pinned presets and uninstall/update.
+2. Real-phone runtime measurements for quantized 1.7B and the 4B reranker.
+3. Owner-approved local-memory import plus a privacy-safe capability card.
+4. One integrated run across all accepted modules rather than separate scripts.
+5. An authenticated MacBook + yukabox + phone room with complete receipts.
+6. A locked end-to-end test and one simple public inspection UI.

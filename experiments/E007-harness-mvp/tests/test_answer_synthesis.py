@@ -81,6 +81,13 @@ class AnswerSynthesisProtocolTests(unittest.TestCase):
         self.assertTrue(audit["summary"]["passed_locked_gate"])
         self.assertTrue(audit["summary"]["beat_qwen06b_baseline"])
 
+    def test_gate14_decision_accepts_17b_and_rejects_06b_free_synthesis(self):
+        decision_path = ROOT / "site/experiments/E007/answer-synthesis-accepted-architecture-v0.1.json"
+        decision = json.loads(decision_path.read_text(encoding="utf-8"))
+        self.assertEqual(decision["decision"], "accepted_for_harness_v0.2_with_qwen3_1_7b")
+        self.assertEqual(decision["accepted_model_preset"]["repository"], "Qwen/Qwen3-1.7B")
+        self.assertIn("Qwen3-0.6B", decision["not_accepted"])
+
 
 if __name__ == "__main__":
     unittest.main()

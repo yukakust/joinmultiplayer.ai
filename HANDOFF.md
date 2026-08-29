@@ -441,6 +441,19 @@ the full E007 pipeline has not yet been replayed with 1.7B. Result:
 `/experiments/E007/answer-synthesis-qwen17b-human-audit-v0.1.json`; comparison
 UI: `/experiment/e007/gate-14a/`.
 
+On 2026-08-29 the owner accepted Gate 14 for harness v0.2 with pinned
+Qwen3-1.7B. The accepted writer may only restate accepted piles, must keep
+different versions separate, and must never invent missing information. Empty
+input bypasses the model. Free-form multi-pile synthesis on 0.6B remains
+unaccepted. Decision:
+`/experiments/E007/answer-synthesis-accepted-architecture-v0.1.json`.
+
+MVP exit work remains: package the app/presets; test quantized 1.7B and the 4B
+reranker on the actual phone; build owner-approved local-memory import and safe
+capability cards; integrate all accepted modules; connect MacBook+yukabox+phone
+in one authenticated room; then run and publish one locked end-to-end test with
+a simple inspection UI.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict
