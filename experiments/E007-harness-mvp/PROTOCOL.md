@@ -769,3 +769,33 @@ redundancy, and condition mismatch. Protocol, raw decisions, and audit:
 - `site/experiments/E007/qwen17b-relevance-protocol-v0.1.json`
 - `site/experiments/E007/qwen17b-relevance-result-v0.1.json`
 - `site/experiments/E007/qwen17b-relevance-human-audit-v0.1.json`
+
+## Gate 15C — server-side Qwen3-8B relevance comparison
+
+Freeze a paired comparison before downloading or running the model. Reuse the
+same 480 pairs, prompt, strict parser, greedy non-thinking generation, and
+57/60 recall plus 42/420 extra-pass thresholds from Gate 15B. Change only the
+model from pinned Qwen3-1.7B to pinned Qwen3-8B in BF16 on yukabox. Run once
+without examples, training, prompt edits, threshold tuning, or later stages.
+
+The locked run failed. Qwen3-8B retained 41/60 required fragments and passed
+18/420 mechanically extra fragments. It therefore reduced the extra set again
+but lost nineteen required pieces, versus seven for 1.7B. All outputs parsed.
+
+Manual review found a clean semantic pattern. All nineteen losses were useful:
+fifteen conditional safety rules and four instructions for the next missing
+measurement. All eighteen passed extras were copied reports about the exact
+same device and symptom; no clearly foreign device or generic background note
+survived. The larger model interpreted `directly helps` more strictly. It kept
+single-fragment diagnoses while rejecting pieces that become useful through
+composition with another fragment.
+
+Do not install this 8B binary decision as the server relevance gate. More model
+parameters traded recall for precision and did not repair the contract. The
+next test should name the missing answer slot—cause, safe action, or next
+evidence—and measure unrelated, same-case redundant, and condition-mismatch
+fragments separately. Protocol, raw trace, and manual audit:
+
+- `site/experiments/E007/qwen8b-relevance-protocol-v0.1.json`
+- `site/experiments/E007/qwen8b-relevance-result-v0.1.json`
+- `site/experiments/E007/qwen8b-relevance-human-audit-v0.1.json`

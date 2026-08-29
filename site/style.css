@@ -6278,6 +6278,10 @@ blockquote {
   margin: 2rem 0;
 }
 
+.e007-relevance-compare-three {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
 .e007-relevance-compare article {
   border: 1px solid var(--line);
   padding: 1.25rem;
@@ -6331,6 +6335,7 @@ blockquote {
 
 @media (max-width: 800px) {
   .e007-relevance-compare,
+  .e007-relevance-compare-three,
   .e007-relevance-errors { grid-template-columns: 1fr; }
   .e007-relevance-compare > span { transform: rotate(90deg); justify-self: center; }
 }

@@ -490,3 +490,12 @@ same disputed case. Keep the locked failure and raw 480 decisions. Do not place
 this direct binary gate in the accepted harness. The next relevance contract
 must name the answer slot being filled and score truly unrelated, redundant,
 and condition-mismatch records separately.
+
+Gate 15C changed only Qwen3-1.7B to server-side Qwen3-8B on the same 480 pairs.
+The larger model kept 41/60 required fragments and passed 18/420 extras. It
+rejected all clearly unrelated records, but also rejected every one of fifteen
+conditional safety rules in the error set plus four next-measurement rules.
+The unchanged binary `directly helps` contract is rejected for both model
+sizes. Do not solve this by choosing a larger server model. Define the missing
+answer slot before judging a fragment, then permit useful multi-fragment
+composition.
