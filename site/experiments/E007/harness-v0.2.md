@@ -84,3 +84,13 @@ This is safer than the embedding baseline, but it did not pass. DeBERTa also
 called 19 unrelated pairs contradictions. Because this set had no separately
 labelled true-conflict exam, the harness must not display those edges as real
 disputes. Gate 13 remains open.
+
+## What failed in Gate 13C
+
+A second pass showed DeBERTa two complete piles and asked whether they express
+the same claim. It recovered both missed pairs, but approved 42 false merges,
+returned entailment for 44/45 pairs, and collapsed all answers into one group.
+
+This checkpoint was trained for literal premise-to-hypothesis inference, not
+meta-statements about groups. Do not add the Gate 13C second pass to the
+accepted harness.

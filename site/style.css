@@ -6051,6 +6051,45 @@ blockquote {
   padding-top: 14px;
 }
 
+.e007-second-pass-table-wrap {
+  border: 1px solid var(--line);
+  margin-top: 24px;
+  overflow-x: auto;
+}
+
+.e007-second-pass-table {
+  border-collapse: collapse;
+  min-width: 980px;
+  width: 100%;
+}
+
+.e007-second-pass-table th,
+.e007-second-pass-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 16px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.e007-second-pass-table td:first-child {
+  display: grid;
+  gap: 8px;
+}
+
+.e007-second-pass-table td:first-child span {
+  color: var(--muted);
+}
+
+.e007-second-pass-table tr.is-critical td:nth-child(2),
+.e007-second-pass-table tr.is-critical td:nth-child(3) {
+  color: var(--ember);
+}
+
+.e007-second-pass-table tr.is-correct td:nth-child(2),
+.e007-second-pass-table tr.is-correct td:nth-child(3) {
+  color: #568d50;
+}
+
 @media (max-width: 900px) {
   .e007-cluster-list { grid-template-columns: 1fr; }
   .e007-missed-list { grid-template-columns: 1fr; }

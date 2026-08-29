@@ -30,6 +30,15 @@ class AnswerPilesSecondPassTests(unittest.TestCase):
         self.assertEqual(len(world["piles"]) * (len(world["piles"]) - 1) // 2, protocol["frozen_input"]["unordered_pile_pairs"])
         self.assertEqual(len(world["expected_merges"]), 2)
 
+    def test_published_result_preserves_failed_second_pass(self):
+        result = json.loads((ROOT / "site/experiments/E007/answer-piles-second-pass-result-v0.1.json").read_text())
+        summary = result["summary"]
+        self.assertFalse(summary["passed_locked_development_gate"])
+        self.assertEqual(summary["expected_merges_recovered"], 2)
+        self.assertEqual(summary["false_merges"], 42)
+        self.assertEqual(summary["final_groups"], 1)
+        self.assertEqual(summary["final_forbidden_merges"], 4)
+
 
 if __name__ == "__main__":
     unittest.main()

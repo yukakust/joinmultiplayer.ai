@@ -379,6 +379,14 @@ had no gold conflict exam; do not expose those edges as real disputes. Result:
 `/experiments/E007/answer-piles-nli-result-v0.1.json`; UI:
 `/experiment/e007/gate-13b/`. Gate 13 remains open.
 
+Gate 13C preserves a failed post-hoc second pass proposed after Gate 13B. It
+showed DeBERTa two whole piles and asked whether they express the same claim.
+It recovered 2/2 missed paraphrase pairs but approved 42 false merges, returned
+entailment for 44/45 pairs, formed one final group, and recreated all four
+forbidden merges. Do not add this meta-NLI pass to the harness. Result:
+`/experiments/E007/answer-piles-second-pass-result-v0.1.json`; UI:
+`/experiment/e007/gate-13c/`.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

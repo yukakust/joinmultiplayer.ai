@@ -328,6 +328,22 @@ mutual entailment is a promising conservative merge check, but Gate 13 still
 remains open. A fresh test must separately measure same, different, and truly
 contradictory versions before conflict links reach users.
 
+## Failed Gate 13C: meta-NLI second pass
+
+Gate 13C tested the owner's proposed second look at the ten piles from Gate
+13B. Each pile pair became one premise, and DeBERTa judged the fixed hypothesis
+`Pile A and Pile B express the same claim.`
+
+The second pass recovered both missed paraphrase pairs, but it also approved 42
+false merges. It returned entailment for 44/45 pile pairs, connected every
+answer into one final group, and recreated all four forbidden merges. The
+locked gate failed.
+
+Decision: this DeBERTa checkpoint must not judge meta-statements about groups.
+Literal source/claim NLI and meta-level equivalence are different tasks. Keep
+Gate 13B's conservative piles for now; do not add this second pass to the
+accepted harness.
+
 ## Accepted steps and their evidence
 
 | Step | Accepted design | Current evidence |
@@ -344,6 +360,6 @@ contradictory versions before conflict links reach users.
 | 10 | Ordinary code proves that the exact passage came from the named, versioned source snapshot and byte range. | Gate 3C.6A passed 20/20 twice with identical output. |
 | 11 | Check `exact source passage ↔ one atomic claim` with DeBERTa-v3-base NLI. Keep the person's question outside this call. Return SUPPORTED / CONTRADICTED / NOT PROVEN. | Accepted after Gate 3C.6P–Q: short pairs 20/20; the mixed question-and-context package fell to 15/20. Synthetic English development evidence only. |
 | 12 | A pocket i's knowledge history is an append-only chain: current head plus preserved history. No semantic relation label is required. Truth, applicability, and independence are checked later after collection. | Accepted after 10/10 synthetic mechanics and one yukabox → miracle-prod transfer with matching SHA-256 and correct head/history. |
-| 13 | Merge answers that make the same claim while preserving evidence, lineage, and supported minority views. | Embeddings failed dangerously (0/6 exact; 4/5 forbidden merges). Bidirectional DeBERTa was conservative (4/6 exact; 0 forbidden; F1 0.8) but overcalled unrelated pairs as contradictions. Safe piles and conflict links remain open. |
+| 13 | Merge answers that make the same claim while preserving evidence, lineage, and supported minority views. | Embeddings failed dangerously. Bidirectional DeBERTa was conservative (4/6 exact; 0 forbidden; F1 0.8). A meta-NLI second pass recovered 2/2 misses but added 42 false merges and collapsed everything into one group. Gate remains open. |
 | 14 | A model writes the final human answer only from accepted evidence; a final checker shows gaps instead of guessing. | Accepted design, not yet tested. |
 | 15 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |
