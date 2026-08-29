@@ -5382,13 +5382,34 @@ const journeyNodes = [
 
   { id: "e007", code: "E007", x: 42, row: 11.9, status: "active", statue: "crescent", date: { en: "26.08.2026", ru: "26.08.2026" },
     name: { en: "the frontier", ru: "рубеж" },
-    title: { en: "Harness MVP: the current frontier", ru: "Harness MVP: текущий рубеж" },
+    title: { en: "Harness MVP: the honest defeat", ru: "Harness MVP: честное поражение" },
     body: { en: "64 logical pocket i on two devices and one model-agnostic harness. The three-task smoke ran on yukabox on 26.08; all 15 raw answers are public. A panel of three independent “Lunas” scored the conditions out of 18: central context 17, single-pocket RAG 12, the full modular harness — only 3 so far. The frontier is honestly losing — and this is exactly where the work is happening now.", ru: "64 логических карманных i на двух устройствах и один model-agnostic harness. Смоук из трёх задач прошёл на yukabox 26.08; все 15 сырых ответов открыты. Панель из трёх независимых «Лун» оценила условия из 18 баллов: центральный контекст — 17, RAG одного кармана — 12, полный модульный harness — пока лишь 3. Рубеж честно проигрывает — и именно здесь сейчас идёт работа." },
     boundary: { en: "The owner's question-by-question review is still pending.", ru: "Повопросный разбор владельцем ещё впереди." },
     statueName: { en: "The Luna panel", ru: "Панель Луны" },
     links: [{ href: "/experiment/e007", t: { en: "E007 page", ru: "Страница E007" } }] },
 
-  { id: "next", code: "E00?", x: 56, row: 12.9, status: "hidden", statue: null, date: null,
+  { id: "e007chunk", code: "E007 · 3C.6A", x: 68, row: 12.8, status: "caveat", statue: null, date: { en: "27.08.2026", ru: "27.08.2026" },
+    name: { en: "the cut", ru: "резка" },
+    title: { en: "The cut that spares the evidence", ru: "Резка, которая не убивает улику" },
+    body: { en: "Cut a manual into equal 45-word chunks — or cut along its structure (headings, paragraphs, tables) with overlap? The same frozen reranker searched both. Structure-aware cutting kept the evidence whole on 9 of 10 questions versus 6 of 10, found all 14 required atoms versus 9, and preserved all 5 must-stay-together groups versus 1.", ru: "Резать мануал на равные куски по 45 слов — или по структуре (заголовки, абзацы, таблицы) с перекрытием? Один и тот же замороженный reranker искал в обоих вариантах. Структурная резка сохранила улику целиком в 9 из 10 вопросов против 6 из 10, нашла все 14 обязательных атомов против 9 и удержала все 5 связок «должны быть вместе» против 1." },
+    boundary: { en: "A development run, not a locked test.", ru: "Development-прогон, не залоченный тест." },
+    links: [{ href: "/experiment/e007", t: { en: "E007 page", ru: "Страница E007" } }] },
+
+  { id: "e007caps", code: "E007 · 3C.6B", x: 36, row: 13.7, status: "passed", statue: "capsule", date: { en: "27.08.2026", ru: "27.08.2026" },
+    name: { en: "the capsule", ru: "капсула" },
+    title: { en: "The capsule passes acceptance", ru: "Капсула прошла приёмку" },
+    body: { en: "The first locked gate of E007 passed clean: an evidence capsule (claim + exact source window + sender-highlighted span + versioned coordinates) survived independent acceptance 24/24 — all 16 intact capsules accepted, all 8 broken ones rejected. Right before it, an honestly preserved invalid attempt: a 587-token prompt overflowed the 512-token batch, HTTP 500 — the failure was recorded, the batch raised, the frozen packets rerun unchanged.", ru: "Первый залоченный гейт E007 пройден начисто: капсула-доказательство (утверждение + точное окно источника + выделенное отправителем место + координаты версии) прошла независимую приёмку 24/24 — все 16 целых капсул приняты, все 8 сломанных отвергнуты. А прямо перед этим — честно сохранённая невалидная попытка: промпт в 587 токенов не влез в батч 512, HTTP 500 — провал записан, батч поднят, замороженные пакеты перезапущены без изменений." },
+    statueName: { en: "The sealed capsule", ru: "Запечатанная капсула" },
+    links: [{ href: "/experiment/e007", t: { en: "E007 page", ru: "Страница E007" } }] },
+
+  { id: "gentry", code: "ИГРА · 01", x: 58, row: 14.7, status: "active", statue: "box", date: { en: "29.08.2026", ru: "29.08.2026" },
+    name: { en: "the entry", ru: "вход" },
+    title: { en: "The game entry opens", ru: "Вход в игру открыт" },
+    body: { en: "The laboratory became a game you can enter: eight fire-carrier pieces, the ignition ritual (a contour that catches flame when your move is accepted), a personal 'light the next one' link, the pulsing 'game calls' line — and the box at the entrance: do you hear it? At the table sits the first match, M0001. The first providence session has been held: three scouts, thirteen candidates, five verified notes for the Matchbox hunt.", ru: "Лаборатория стала игрой, в которую можно войти: восемь фигурок-носителей огня, ритуал зажигания (контур вспыхивает, когда ход принят), личная ссылка «зажги следующего», пульс «Игра зовёт» — и коробка на входе: слышишь? За столом первая спичка — M0001. Проведён первый сеанс провидения: три следопыта, тринадцать кандидатов, пять проверенных записок для охоты на Коробка." },
+    statueName: { en: "The opened box", ru: "Открытая коробка" },
+    links: [{ href: "/play/", t: { en: "Enter the game", ru: "Войти в игру" } }, { href: "/map/", t: { en: "Matches at the table", ru: "Спички за столом" } }] },
+
+  { id: "next", code: "E00?", x: 44, row: 15.7, status: "hidden", statue: null, date: null,
     name: { en: "?", ru: "?" },
     title: { en: "What comes next is hidden", ru: "Что дальше — скрыто" },
     body: { en: "Mystery hides what comes next; the record of what already happened stays open. The next point on this trail may be yours — or your AI's.", ru: "Тайна прячет будущее, но запись о случившемся всегда открыта. Следующая точка на этой тропе может быть вашей — или вашего ИИ." },
@@ -5403,7 +5424,8 @@ const journeyActs = [
   { row: 2.62, num: "II", t: { en: "The hardware", ru: "Железо" } },
   { row: 3.62, num: "III", t: { en: "The arena", ru: "Арена" } },
   { row: 5.05, num: "IV", t: { en: "Signal in the swarm", ru: "Сигнал в рое" } },
-  { row: 10.5, num: "V", t: { en: "The harness", ru: "Harness" } }
+  { row: 10.5, num: "V", t: { en: "The harness", ru: "Harness" } },
+  { row: 14.25, num: "VI", t: { en: "The game", ru: "Игра" } }
 ];
 
 function journeyNode(id) { return journeyNodes.find(n => n.id === id); }
@@ -5419,7 +5441,9 @@ function statueSVG(kind, cls = "") {
     uturn: '<path d="M14 34 V17 A6.5 6.5 0 0 1 27 17 V29"/><path d="M22.5 25 L27 30.5 L31.5 25"/>',
     scales: '<line x1="20" y1="9" x2="20" y2="32"/><line x1="8" y1="13" x2="32" y2="13"/><path d="M3.5 21 A5.5 4.5 0 0 0 12.5 21 L8 13 Z"/><path d="M27.5 21 A5.5 4.5 0 0 0 36.5 21 L32 13 Z"/>',
     crescent: '<path class="statue-accent-fill" d="M25 8 A11.5 11.5 0 1 0 25 31 A9 9 0 1 1 25 8 Z"/><line x1="19" y1="31" x2="19" y2="34"/>',
-    empty: '<path stroke-dasharray="2.6 2.2" d="M15.5 34 L17.2 10.5 L22.8 10.5 L24.5 34"/>'
+    empty: '<path stroke-dasharray="2.6 2.2" d="M15.5 34 L17.2 10.5 L22.8 10.5 L24.5 34"/>',
+    capsule: '<rect x="14" y="12" width="12" height="22" rx="6"/><line x1="14" y1="23" x2="26" y2="23"/><circle class="statue-accent-fill" cx="20" cy="17.5" r="1.8"/>',
+    box: '<path d="M9 20 L20 16 L31 20 L31 30 L20 34 L9 30 Z"/><path d="M9 20 L20 24 L31 20"/><line x1="20" y1="24" x2="20" y2="34"/><path d="M9 20 L7 15 L18 11.5 L20 16"/><path d="M31 20 L33 15 L22 11.5 L20 16"/><circle class="statue-accent-fill" cx="20" cy="27" r="1.6"/>'
   };
   return `
     <svg class="statue ${cls}" viewBox="0 0 40 46" aria-hidden="true">
@@ -5540,11 +5564,11 @@ function renderJourneyTrail(skipAnim = false) {
       </g>
     </svg>
     ${pos.map(n => `
-      <button class="jnode jnode-${n.status}${journeySelected === n.id ? " is-selected" : ""}${n.id === "e007" ? " jnode-here" : ""}" data-journey="${n.id}"
+      <button class="jnode jnode-${n.status}${journeySelected === n.id ? " is-selected" : ""}${n.id === "gentry" ? " jnode-here" : ""}" data-journey="${n.id}"
               style="left:${n.x}%;top:${n.y}px" aria-label="${escapeHTML(n.code)} — ${escapeHTML(jt(n.title))}">
         <span class="jnode-dot" aria-hidden="true"></span>
         ${n.statue ? `<span class="jnode-medal" aria-hidden="true">${statueSVG(n.statue, "statue-mini")}</span>` : ""}
-        ${n.id === "e007" ? `
+        ${n.id === "gentry" ? `
           <span class="jnode-flag" aria-hidden="true">
             <svg viewBox="0 0 22 30"><line x1="4" y1="29" x2="4" y2="2"/><path class="flag-pennant" d="M4 3 H19 L14.5 7.5 L19 12 H4 Z"/></svg>
             <i>${j("youAreHere")}</i>
@@ -5895,7 +5919,7 @@ async function loadJourneyParty() {
 }
 
 function renderJourneyParty() {
-  const node = document.querySelector('.jnode[data-journey="e007"]');
+  const node = document.querySelector('.jnode[data-journey="gentry"]');
   if (!node || matchesCache === null) return;
   node.querySelector(".jnode-party")?.remove();
   const party = matchesCache.slice(0, 12);
