@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16B.2",
+  "status": "development_failed_strict_gate",
+  "protocol": "/experiments/E007/kv-cache-reuse-protocol-v0.1.json",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "runtime": "yukabox CPU, bfloat16",
+    "training": false,
+    "thinking": false
+  },
+  "conversation": {
+    "label": "CHAT-A",
+    "visible_messages": 9,
+    "common_prefix_tokens": 10750,
+    "raw_text_public": false
+  },
+  "cache": {
+    "sequence_length": 10750,
+    "bytes": 1585152000,
+    "gibibytes": 1.476288,
+    "dtype": "bfloat16",
+    "layers": 36,
+    "key_value_heads": 8,
+    "head_dim": 128,
+    "remained_unchanged_across_both_branches": true
+  },
+  "timing": {
+    "prefill_seconds": 137.608,
+    "first_question": {
+      "cache_clone_seconds": 0.147,
+      "generation_seconds": 83.646,
+      "cached_total_seconds": 83.793,
+      "first_use_including_prefill_seconds": 221.401,
+      "new_tokens": 117
+    },
+    "second_question": {
+      "cache_clone_seconds": 0.086,
+      "generation_seconds": 83.907,
+      "cached_total_seconds": 83.993,
+      "new_tokens": 118
+    },
+    "second_question_speedup_vs_first_use": 2.636,
+    "prefill_seconds_avoided_on_second_question": 137.408,
+    "generation_tokens_per_second_approx": 1.4
+  },
+  "answers": [
+    {
+      "id": "CACHE-Q1",
+      "question": "Как в разговоре разделили обязанности между локальной памятью и LoRA при усвоении нового знания?",
+      "answer": "В разговоре обязанности между локальной памятью и LoRA разделяются следующим образом: локальная память отвечает за хранение и хранение точных, свежих и изменяемых фактов, а LoRA используется для обучения навыков, привычек и способов применения локальной памяти. Локальная память сохраняет информацию, а LoRA учит, как использовать эту информацию в новых ситуациях. SUPPORT: M0000.",
+      "fact_correct": true,
+      "support_correct": false,
+      "expected_support": "M0002",
+      "reported_support": "M0000"
+    },
+    {
+      "id": "CACHE-Q2",
+      "question": "Какие два режима сетевого нейронного объединения предложили и какой из них считался массовым?",
+      "answer": "Два режима сетевого нейронного объединения, предложенные, — это Streaming neural mode и Latent-once mode. Массовым считался Latent-once mode, так как он позволяет устройствам обрабатывать вопрос один раз и возвращать результат, который затем используется для локальной генерации ответа, что более эффективно и устойчиво к проблемам с сетевыми задержками и нестабильностью узлов. SUPPORT: M0000.",
+      "fact_correct": true,
+      "support_correct": false,
+      "expected_support": "M0006",
+      "reported_support": "M0000"
+    }
+  ],
+  "strict_gate": {
+    "quality_passed": false,
+    "cache_reuse_passed": true,
+    "latency_passed": false,
+    "overall_passed": false,
+    "reason": "Both facts were correct and the immutable cache was reused, but both support IDs copied the literal M0000 format placeholder and the cached answer took more than one quarter of first-use time."
+  },
+  "finding": "KV reuse removed the 137.6-second conversation prefill from the second question, but BF16 CPU generation still took about 84 seconds for 118 output tokens. The next speed bottleneck is generation runtime, not context rereading.",
+  "privacy": {
+    "conversation_text_public": false,
+    "session_id_public": false,
+    "questions_and_answers_public": true
+  }
+}

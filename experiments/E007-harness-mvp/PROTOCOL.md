@@ -984,3 +984,25 @@ session IDs are not published.
 
 - `site/experiments/E007/whole-chat-reader-protocol-v0.2.json`
 - `site/experiments/E007/whole-chat-reader-result-v0.2.json`
+
+## Gate 16B.2 — reuse one exact conversation KV-cache
+
+Gate 16B.2 prefills the unchanged 10,750-token CHAT-A prefix once with
+Qwen3-8B BF16 on yukabox CPU. Two different questions branch from deep copies
+of that same immutable `past_key_values`; neither branch rereads the chat.
+
+The cache mechanism worked, but the strict development gate failed. Prefill
+took 137.608 seconds. The first question cost 221.401 seconds including prefill;
+the second cached question cost 83.993 seconds, a 2.636x first-use speedup. Cache
+cloning itself took under 0.15 seconds. Both facts were correct, but both source
+IDs copied the prompt's literal `M0000` placeholder, so source quality was 0/2.
+The cached answer also missed the locked quarter-time target.
+
+The measured BF16 cache was 1,585,152,000 bytes (1.476288 GiB). This is not the
+text: every token stores K and V tensors across 36 layers, 8 KV heads, and 128
+dimensions. After prefill, the dominant bottleneck was CPU generation at about
+1.4 output tokens per second. Next speed work must test an optimized quantized
+runtime and shorter outputs; cache reuse alone is insufficient.
+
+- `site/experiments/E007/kv-cache-reuse-protocol-v0.1.json`
+- `site/experiments/E007/kv-cache-reuse-result-v0.1.json`
