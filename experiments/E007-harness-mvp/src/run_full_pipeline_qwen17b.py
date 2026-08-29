@@ -104,13 +104,17 @@ def reranker_prompt(question: str, passage: str, instruction: str) -> str:
 
 
 def reranker_score(server: str, prompt: str) -> float:
-    payload = json.dumps({"content": prompt}).encode("utf-8")
+    payload = json.dumps({"content": prompt, "embd_normalize": -1}).encode("utf-8")
     request = urllib.request.Request(
         server.rstrip("/") + "/embedding", data=payload, headers={"Content-Type": "application/json"}
     )
     with urllib.request.urlopen(request, timeout=120) as response:
         body = json.load(response)
-    values = body["data"][0]["embedding"]
+    values = body[0]["embedding"]
+    if values and isinstance(values[0], list):
+        values = values[0]
+    if len(values) < 2:
+        raise RuntimeError("reranker response has no yes/no scores")
     yes, no = float(values[0]), float(values[1])
     return yes / (yes + no) if yes + no else 0.5
 
