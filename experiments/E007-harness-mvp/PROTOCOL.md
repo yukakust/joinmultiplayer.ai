@@ -1050,3 +1050,14 @@ about 1.4 tokens/s in the prior BF16 CPU run. The big speed gain came from the
 weight/runtime change, not from Q4 KV itself.
 
 - `site/experiments/E007/kv-cache-quantization-result-v0.3.json`
+
+## Gate 16B.4 — exact BF16 weights on the integrated Radeon
+
+Gate 16B.4 keeps the unquantized BF16 Qwen3-8B weights and Q8 KV cache, but
+moves every transformer layer from CPU execution to the integrated Radeon via
+ROCm. It reuses the exact Gate 16B.1 conversations, six questions, and grouped
+prompt. The prior BF16 CPU run is the locked reference: 11/12 and roughly 1.4
+generated tokens per second. Success requires all layers on ROCm, at least
+11/12, and throughput above 1.4 tokens/s.
+
+- `site/experiments/E007/bf16-rocm-protocol-v0.1.json`

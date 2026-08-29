@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16B.4",
+  "status": "locked_before_inference",
+  "hypothesis": "The unquantized BF16 Qwen3-8B can run fully on yukabox's integrated Radeon through ROCm, preserve the 11/12 quality of the prior BF16 CPU whole-chat test, and generate faster than the prior approximately 1.4 tokens per second.",
+  "model": {
+    "source": "ggml-org/Qwen3-8B-GGUF",
+    "revision": "bbd9eb5efae3fd6d45dd620650916346d7cecc67",
+    "file": "Qwen3-8B-BF16.gguf",
+    "expected_bytes": 16388044096,
+    "expected_sha256": "38e40ea3a4b944a34f15ce902ba2daae353efeeea54096e9912c47b7e2523732",
+    "weight_type": "BF16",
+    "training": false,
+    "thinking": false,
+    "decoding": "greedy"
+  },
+  "runtime": {
+    "engine": "llama-server bundled with Ollama 0.32.14",
+    "device": "ROCm0 / integrated AMD Radeon 880M-890M",
+    "gpu_layers": "all",
+    "flash_attention": true,
+    "kv_cache": "Q8_0",
+    "context_tokens": 16384,
+    "parallel_slots": 1
+  },
+  "input": {
+    "source": "The same two private cleaned Codex conversations and six questions used by Gate 16B.1",
+    "prompt": "Exactly the Gate 16B.1 three-question prompt",
+    "raw_conversations_public": false,
+    "retrieval": false,
+    "chunking": false,
+    "summaries": false
+  },
+  "comparison": {
+    "quality_reference": "/experiments/E007/whole-chat-reader-result-v0.2.json",
+    "quality_reference_score": "11/12",
+    "speed_reference": "/experiments/E007/kv-cache-reuse-result-v0.1.json",
+    "speed_reference_generated_tokens_per_second": 1.4
+  },
+  "success": {
+    "fit": "All transformer layers are offloaded to ROCm without out-of-memory or host fallback.",
+    "quality": "At least 11/12 manual points on the same six questions.",
+    "speed": "Generated-token throughput is greater than 1.4 tokens per second."
+  },
+  "boundary": "This is one development run on one integrated GPU. Passing does not prove identical token sequences across CPU and ROCm; it tests preserved task quality under the locked manual rubric."
+}
