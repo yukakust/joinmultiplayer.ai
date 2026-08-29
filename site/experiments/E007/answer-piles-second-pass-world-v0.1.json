@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13C",
+  "status": "frozen_before_inference",
+  "source_result": "/experiments/E007/answer-piles-nli-result-v0.1.json",
+  "piles": [
+    {"pile_id":"P01","gold_piles":["G1"],"answers":["Image tiling improved recall for objects between 8 and 16 pixels.","Tiny 8–16 pixel targets were found more often when the image was split into tiles."]},
+    {"pile_id":"P02","gold_piles":["G2"],"answers":["Using 20% overlap between tiles reduced misses near tile borders.","Fewer edge objects were lost when neighbouring tiles overlapped by one fifth."]},
+    {"pile_id":"P03","gold_piles":["G3"],"answers":["No benefit from tiling has been measured for large objects."]},
+    {"pile_id":"P04","gold_piles":["G3"],"answers":["The experiment did not show that image tiles help with large targets."]},
+    {"pile_id":"P05","gold_piles":["G4"],"answers":["Isolate power before restarting the unit.","Disconnect the power supply first, and only then restart."]},
+    {"pile_id":"P06","gold_piles":["G5"],"answers":["Use remote controls only while phase drift is present."]},
+    {"pile_id":"P07","gold_piles":["G5"],"answers":["When phase drift occurs, operate the unit exclusively from a distance."]},
+    {"pile_id":"P08","gold_piles":["G6"],"answers":["Sealed queen cells can indicate that the colony is preparing to swarm.","The hive may be getting ready to swarm when capped queen cells appear."]},
+    {"pile_id":"P09","gold_piles":["G7"],"answers":["Sealed queen cells may instead be part of supersedure when the old queen is failing."]},
+    {"pile_id":"P10","gold_piles":["G8"],"answers":["Image tiling increased peak GPU memory use by 35%."]}
+  ],
+  "expected_merges": [
+    {"left_pile":"P03","right_pile":"P04","gold_pile":"G3"},
+    {"left_pile":"P06","right_pile":"P07","gold_pile":"G5"}
+  ],
+  "all_other_pairs_must_remain_separate": true,
+  "forbidden_gold_merges": [
+    ["G1","G2"],
+    ["G1","G3"],
+    ["G1","G8"],
+    ["G6","G7"]
+  ]
+}

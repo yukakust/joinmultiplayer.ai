@@ -1,0 +1,45 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "13C",
+  "status": "frozen_before_inference",
+  "title": {
+    "en": "Can DeBERTa reconsider whole answer piles?",
+    "ru": "Сможет ли DeBERTa пересмотреть целые стопки ответов?"
+  },
+  "hypothesis": {
+    "en": "A second meta-NLI pass over whole piles can recover the two paraphrase pairs missed by Gate 13B without creating a false merge.",
+    "ru": "Второй meta-NLI-проход по целым стопкам сможет вернуть две пары пересказов, пропущенные Gate 13B, и не создаст ошибочных склеек."
+  },
+  "model": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "classes": ["entailment", "neutral", "contradiction"],
+    "decision": "largest_logit"
+  },
+  "frozen_input": {
+    "source_result": "/experiments/E007/answer-piles-nli-result-v0.1.json",
+    "piles": 10,
+    "unordered_pile_pairs": 45,
+    "model_calls": 45,
+    "premise_template": "PILE A:\n- {all statements in pile A}\n\nPILE B:\n- {all statements in pile B}",
+    "hypothesis": "Pile A and Pile B express the same claim.",
+    "merge_decision": "entailment",
+    "other_decisions": "keep separate",
+    "final_groups": "connected components of merge decisions",
+    "training": "none",
+    "examples": "none",
+    "calibration": "none"
+  },
+  "locked_development_gate": {
+    "recover_expected_merges": 2,
+    "false_merges": 0,
+    "final_exact_paraphrase_piles": 6,
+    "final_forbidden_merges": 0,
+    "lost_answers": 0
+  },
+  "boundary": {
+    "en": "This is a post-hoc paired diagnostic on opened synthetic English answers. DeBERTa was not trained specifically to judge the meta-sentence in this input format. Success would justify a fresh locked test, not validate production merging.",
+    "ru": "Это post-hoc paired diagnostic на уже открытых синтетических английских ответах. DeBERTa не обучали специально оценивать мета-фразу в таком формате. Успех позволит поставить новый закрытый тест, но не подтвердит production-склейку."
+  }
+}
