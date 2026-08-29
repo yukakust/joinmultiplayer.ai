@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "15E",
+  "status": "locked_before_build",
+  "kind": "deterministic_development_mechanics_test",
+  "name": "Two shelves from one immutable ledger",
+  "hypothesis": "Can ordinary code preserve every received fragment while showing the best-supported answer separately from same-case alternatives?",
+  "inputs": [
+    "Gate 15C pairwise Qwen3-8B decisions",
+    "Gate 15D whole-bundle Qwen3-8B selections",
+    "the frozen source cards and their sender-declared tags"
+  ],
+  "no_new_model_inference": true,
+  "build_rules": [
+    "Copy all 480 received fragments into an append-only ledger before making a view.",
+    "USED is exactly the set selected by Gate 15D.",
+    "SAME_CASE contains an unselected fragment only when its frozen sender card and task contract agree: lookalike for a condition-mismatch task or dependent-copy for a copied-report dispute, and the question's named object occurs in the fragment.",
+    "CONDITIONAL is a badge on selected safe-action or source-checking fragments; it does not remove them from USED.",
+    "All remaining fragments are OTHER: hidden by default, never deleted.",
+    "Fragments with one lineage are one visible dependent view, but every original record remains in the ledger."
+  ],
+  "anti_leak_rule": "Expected answers, required_sources, distractor_sources and Gate 15C/15D gold labels may be used only after construction to score the frozen result; they may not choose a shelf.",
+  "success_gates": {
+    "ledger_records_preserved": 480,
+    "required_pieces_in_used": 60,
+    "same_case_alternative_records": 24,
+    "other_records_preserved_hidden": 396,
+    "dependent_copy_records": 18,
+    "dependent_copy_visible_lineages": 6,
+    "new_model_calls": 0
+  },
+  "boundaries": [
+    "This reuses the same synthetic English questions seen in Gates 15C and 15D.",
+    "Sender-declared tags are trusted in this mechanics test.",
+    "It tests storage and views, not whether unseen senders label capsules honestly.",
+    "It does not test the final natural-language writer."
+  ]
+}

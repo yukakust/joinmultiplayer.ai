@@ -862,3 +862,20 @@ Next, Gate 15E deterministically constructs both shelves from the preserved
 15C and 15D traces, with no new inference. Gate 15F may test a final writer only
 after the ledger retains all required pieces, alternatives, and lineage without
 putting foreign records in the visible shelves.
+
+## Gate 15E — locked two-shelf mechanics
+
+Gate 15E calls no model. It first stores all 480 received fragments. `USED` is
+the unchanged Gate 15D selection. `SAME_CASE` uses only frozen sender metadata:
+the card and task contract agree (`lookalike` for a condition-mismatch task or
+`dependent-copy` for a copied-report dispute), and the named object from the
+question occurs in the fragment. `CONDITIONAL` is a badge on selected safety or
+next-measurement rules. Everything else is `OTHER`: hidden by default, never
+deleted. Records sharing one lineage become one visible dependent view while
+their originals remain in the ledger.
+
+Expected answers and frozen gold may score the completed build but may not
+choose shelves. This is a synthetic development mechanics test. It trusts the
+sender-declared tags and does not yet test an unseen sender, dishonest metadata,
+or a final writer. Locked machine-readable protocol:
+`site/experiments/E007/evidence-ledger-protocol-v0.1.json`.
