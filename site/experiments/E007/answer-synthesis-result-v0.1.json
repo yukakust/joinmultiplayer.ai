@@ -1,0 +1,506 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "14A",
+  "kind": "locked_synthetic_english_development",
+  "git_revision": "731005fcc958d1ab2d7fbe7d08dc8893118fd9e6",
+  "protocol_sha256": "fc6b8e5b7a21e285c8854d5288e69c69818bc17f586a2a32592f958b3a7a2ca5",
+  "world_sha256": "d5bb4a346eb65c922557f8ba1ef4789bf3fd8d53f2c50793dc21e505b58c91b9",
+  "model": {
+    "repository": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+  },
+  "diagnostic_model": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb"
+  },
+  "records": [
+    {
+      "id": "S01",
+      "question": "Why did Kest-7 pulse amber, and what should the operator do?",
+      "piles": [
+        {
+          "pile_id": "P1",
+          "claims": [
+            "The amber pulse was caused by thermal rebound after load transfer."
+          ]
+        },
+        {
+          "pile_id": "P2",
+          "claims": [
+            "The operator must isolate power before restarting Kest-7."
+          ]
+        }
+      ],
+      "user_prompt": "QUESTION:\nWhy did Kest-7 pulse amber, and what should the operator do?\n\nACCEPTED PILES:\nP1:\n- The amber pulse was caused by thermal rebound after load transfer.\n\nP2:\n- The operator must isolate power before restarting Kest-7.\n\nFINAL ANSWER:",
+      "answer": "P1: The amber pulse was caused by thermal rebound after load transfer.  \nP2: The operator must isolate power before restarting Kest-7.",
+      "path": "qwen_generation",
+      "generated_tokens": 33,
+      "hit_token_limit": false,
+      "diagnostics": {
+        "all_claims_to_answer": {
+          "decision": "contradiction",
+          "probabilities": {
+            "entailment": 0.28897485,
+            "neutral": 0.28243747,
+            "contradiction": 0.42858765
+          },
+          "input_tokens": 59
+        },
+        "answer_to_each_claim": [
+          {
+            "claim": "The amber pulse was caused by thermal rebound after load transfer.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99311912,
+              "neutral": 0.00571512,
+              "contradiction": 0.0011658
+            },
+            "input_tokens": 45
+          },
+          {
+            "claim": "The operator must isolate power before restarting Kest-7.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.96865582,
+              "neutral": 0.02174039,
+              "contradiction": 0.00960377
+            },
+            "input_tokens": 45
+          }
+        ]
+      }
+    },
+    {
+      "id": "S02",
+      "question": "What does the double copper mark on Orin-4 mean?",
+      "piles": [
+        {
+          "pile_id": "P1",
+          "claims": [
+            "One supported version says the double copper mark means the regulator is shedding excess charge."
+          ]
+        },
+        {
+          "pile_id": "P2",
+          "claims": [
+            "Another supported version says the double copper mark means the backup coil has entered recovery mode."
+          ]
+        }
+      ],
+      "user_prompt": "QUESTION:\nWhat does the double copper mark on Orin-4 mean?\n\nACCEPTED PILES:\nP1:\n- One supported version says the double copper mark means the regulator is shedding excess charge.\n\nP2:\n- Another supported version says the double copper mark means the backup coil has entered recovery mode.\n\nFINAL ANSWER:",
+      "answer": "P1: The double copper mark means the regulator is shedding excess charge.  \nP2: The double copper mark means the backup coil has entered recovery mode.",
+      "path": "qwen_generation",
+      "generated_tokens": 33,
+      "hit_token_limit": false,
+      "diagnostics": {
+        "all_claims_to_answer": {
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.31655899,
+            "neutral": 0.62959999,
+            "contradiction": 0.053841
+          },
+          "input_tokens": 69
+        },
+        "answer_to_each_claim": [
+          {
+            "claim": "One supported version says the double copper mark means the regulator is shedding excess charge.",
+            "decision": "neutral",
+            "probabilities": {
+              "entailment": 0.01254208,
+              "neutral": 0.97991806,
+              "contradiction": 0.00753989
+            },
+            "input_tokens": 50
+          },
+          {
+            "claim": "Another supported version says the double copper mark means the backup coil has entered recovery mode.",
+            "decision": "neutral",
+            "probabilities": {
+              "entailment": 0.00173217,
+              "neutral": 0.99701273,
+              "contradiction": 0.00125506
+            },
+            "input_tokens": 51
+          }
+        ]
+      }
+    },
+    {
+      "id": "S03",
+      "question": "What might the violet ring on Vela-2 mean, and what should be checked first?",
+      "piles": [
+        {
+          "pile_id": "P1",
+          "claims": [
+            "The violet ring may indicate a pressure-bleed failure."
+          ]
+        },
+        {
+          "pile_id": "P2",
+          "claims": [
+            "The relief sensor should be inspected before any settings are changed."
+          ]
+        }
+      ],
+      "user_prompt": "QUESTION:\nWhat might the violet ring on Vela-2 mean, and what should be checked first?\n\nACCEPTED PILES:\nP1:\n- The violet ring may indicate a pressure-bleed failure.\n\nP2:\n- The relief sensor should be inspected before any settings are changed.\n\nFINAL ANSWER:",
+      "answer": "P1: The violet ring may indicate a pressure-bleed failure.  \nP2: The relief sensor should be inspected before any settings are changed.",
+      "path": "qwen_generation",
+      "generated_tokens": 33,
+      "hit_token_limit": false,
+      "diagnostics": {
+        "all_claims_to_answer": {
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.18949781,
+            "neutral": 0.49701753,
+            "contradiction": 0.31348473
+          },
+          "input_tokens": 59
+        },
+        "answer_to_each_claim": [
+          {
+            "claim": "The violet ring may indicate a pressure-bleed failure.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99470359,
+              "neutral": 0.00434816,
+              "contradiction": 0.00094828
+            },
+            "input_tokens": 45
+          },
+          {
+            "claim": "The relief sensor should be inspected before any settings are changed.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.97060734,
+              "neutral": 0.02169219,
+              "contradiction": 0.00770045
+            },
+            "input_tokens": 45
+          }
+        ]
+      }
+    },
+    {
+      "id": "S04",
+      "question": "What can be concluded from silver frost on Aster-9, and how should diagnosis proceed?",
+      "piles": [
+        {
+          "pile_id": "P1",
+          "claims": [
+            "The silver frost does not prove coolant loss."
+          ]
+        },
+        {
+          "pile_id": "P2",
+          "claims": [
+            "The auxiliary vent must remain closed during diagnosis."
+          ]
+        }
+      ],
+      "user_prompt": "QUESTION:\nWhat can be concluded from silver frost on Aster-9, and how should diagnosis proceed?\n\nACCEPTED PILES:\nP1:\n- The silver frost does not prove coolant loss.\n\nP2:\n- The auxiliary vent must remain closed during diagnosis.\n\nFINAL ANSWER:",
+      "answer": "P1: The silver frost does not prove coolant loss.  \nP2: The auxiliary vent must remain closed during diagnosis.",
+      "path": "qwen_generation",
+      "generated_tokens": 33,
+      "hit_token_limit": false,
+      "diagnostics": {
+        "all_claims_to_answer": {
+          "decision": "entailment",
+          "probabilities": {
+            "entailment": 0.52451098,
+            "neutral": 0.40287986,
+            "contradiction": 0.07260911
+          },
+          "input_tokens": 47
+        },
+        "answer_to_each_claim": [
+          {
+            "claim": "The silver frost does not prove coolant loss.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.98676676,
+              "neutral": 0.01145215,
+              "contradiction": 0.00178108
+            },
+            "input_tokens": 36
+          },
+          {
+            "claim": "The auxiliary vent must remain closed during diagnosis.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.96955204,
+              "neutral": 0.02326044,
+              "contradiction": 0.00718753
+            },
+            "input_tokens": 36
+          }
+        ]
+      }
+    },
+    {
+      "id": "S05",
+      "question": "What did the image-tiling experiment find?",
+      "piles": [
+        {
+          "pile_id": "P1",
+          "claims": [
+            "A 20 percent overlap between tiles reduced misses near tile borders."
+          ]
+        },
+        {
+          "pile_id": "P2",
+          "claims": [
+            "No benefit from tiling has been measured for large objects."
+          ]
+        }
+      ],
+      "user_prompt": "QUESTION:\nWhat did the image-tiling experiment find?\n\nACCEPTED PILES:\nP1:\n- A 20 percent overlap between tiles reduced misses near tile borders.\n\nP2:\n- No benefit from tiling has been measured for large objects.\n\nFINAL ANSWER:",
+      "answer": "P1: A 20 percent overlap between tiles reduced misses near tile borders.  \nP2: No benefit from tiling has been measured for large objects.",
+      "path": "qwen_generation",
+      "generated_tokens": 50,
+      "hit_token_limit": false,
+      "diagnostics": {
+        "all_claims_to_answer": {
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.31932795,
+            "neutral": 0.53085864,
+            "contradiction": 0.14981343
+          },
+          "input_tokens": 57
+        },
+        "answer_to_each_claim": [
+          {
+            "claim": "A 20 percent overlap between tiles reduced misses near tile borders.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99139988,
+              "neutral": 0.00702277,
+              "contradiction": 0.00157742
+            },
+            "input_tokens": 44
+          },
+          {
+            "claim": "No benefit from tiling has been measured for large objects.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.95504653,
+              "neutral": 0.02512151,
+              "contradiction": 0.01983191
+            },
+            "input_tokens": 43
+          }
+        ]
+      }
+    },
+    {
+      "id": "S06",
+      "question": "When may Lyra-6 be operated remotely?",
+      "piles": [
+        {
+          "pile_id": "P1",
+          "claims": [
+            "The current Lyra protocol allows remote controls only while phase drift is present."
+          ]
+        }
+      ],
+      "user_prompt": "QUESTION:\nWhen may Lyra-6 be operated remotely?\n\nACCEPTED PILES:\nP1:\n- The current Lyra protocol allows remote controls only while phase drift is present.\n\nFINAL ANSWER:",
+      "answer": "P1: The current Lyra protocol allows remote controls only while phase drift is present.",
+      "path": "qwen_generation",
+      "generated_tokens": 50,
+      "hit_token_limit": false,
+      "diagnostics": {
+        "all_claims_to_answer": {
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.37766168,
+            "neutral": 0.60793215,
+            "contradiction": 0.01440615
+          },
+          "input_tokens": 35
+        },
+        "answer_to_each_claim": [
+          {
+            "claim": "The current Lyra protocol allows remote controls only while phase drift is present.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99370003,
+              "neutral": 0.00539645,
+              "contradiction": 0.00090354
+            },
+            "input_tokens": 34
+          }
+        ]
+      }
+    },
+    {
+      "id": "S07",
+      "question": "What happened to Mira-3, what observation supports it, and what action is allowed?",
+      "piles": [
+        {
+          "pile_id": "P1",
+          "claims": [
+            "Mira-3 entered a synchronization fault after load transfer."
+          ]
+        },
+        {
+          "pile_id": "P2",
+          "claims": [
+            "Three brief blue flashes are the recorded sign of this synchronization fault."
+          ]
+        },
+        {
+          "pile_id": "P3",
+          "claims": [
+            "Remote inspection is allowed, but a local restart is not allowed."
+          ]
+        }
+      ],
+      "user_prompt": "QUESTION:\nWhat happened to Mira-3, what observation supports it, and what action is allowed?\n\nACCEPTED PILES:\nP1:\n- Mira-3 entered a synchronization fault after load transfer.\n\nP2:\n- Three brief blue flashes are the recorded sign of this synchronization fault.\n\nP3:\n- Remote inspection is allowed, but a local restart is not allowed.\n\nFINAL ANSWER:",
+      "answer": "P1: Mira-3 entered a synchronization fault after load transfer.  \nP2: Three brief blue flashes are the recorded sign of this synchronization fault.  \nP3: Remote inspection is allowed, but a local restart is not allowed.",
+      "path": "qwen_generation",
+      "generated_tokens": 50,
+      "hit_token_limit": false,
+      "diagnostics": {
+        "all_claims_to_answer": {
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.13516809,
+            "neutral": 0.64964437,
+            "contradiction": 0.21518752
+          },
+          "input_tokens": 89
+        },
+        "answer_to_each_claim": [
+          {
+            "claim": "Mira-3 entered a synchronization fault after load transfer.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99808407,
+              "neutral": 0.00111326,
+              "contradiction": 0.0008027
+            },
+            "input_tokens": 60
+          },
+          {
+            "claim": "Three brief blue flashes are the recorded sign of this synchronization fault.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.77743113,
+              "neutral": 0.04960789,
+              "contradiction": 0.17296101
+            },
+            "input_tokens": 62
+          },
+          {
+            "claim": "Remote inspection is allowed, but a local restart is not allowed.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99351799,
+              "neutral": 0.0038592,
+              "contradiction": 0.0026229
+            },
+            "input_tokens": 62
+          }
+        ]
+      }
+    },
+    {
+      "id": "S08",
+      "question": "What is known about Rill-5's white tone?",
+      "piles": [
+        {
+          "pile_id": "P1",
+          "claims": [
+            "The white tone is continuous, but no spectral trace has been recorded."
+          ]
+        },
+        {
+          "pile_id": "P2",
+          "claims": [
+            "A separate report says the tone stops whenever chamber pressure falls below 18 units."
+          ]
+        }
+      ],
+      "user_prompt": "QUESTION:\nWhat is known about Rill-5's white tone?\n\nACCEPTED PILES:\nP1:\n- The white tone is continuous, but no spectral trace has been recorded.\n\nP2:\n- A separate report says the tone stops whenever chamber pressure falls below 18 units.\n\nFINAL ANSWER:",
+      "answer": "P1: The white tone is continuous, but no spectral trace has been recorded.",
+      "path": "qwen_generation",
+      "generated_tokens": 50,
+      "hit_token_limit": false,
+      "diagnostics": {
+        "all_claims_to_answer": {
+          "decision": "neutral",
+          "probabilities": {
+            "entailment": 0.0701113,
+            "neutral": 0.87949079,
+            "contradiction": 0.05039781
+          },
+          "input_tokens": 51
+        },
+        "answer_to_each_claim": [
+          {
+            "claim": "The white tone is continuous, but no spectral trace has been recorded.",
+            "decision": "entailment",
+            "probabilities": {
+              "entailment": 0.99282688,
+              "neutral": 0.00616216,
+              "contradiction": 0.00101103
+            },
+            "input_tokens": 34
+          },
+          {
+            "claim": "A separate report says the tone stops whenever chamber pressure falls below 18 units.",
+            "decision": "neutral",
+            "probabilities": {
+              "entailment": 0.00025541,
+              "neutral": 0.9993766,
+              "contradiction": 0.00036797
+            },
+            "input_tokens": 35
+          }
+        ]
+      }
+    },
+    {
+      "id": "S09",
+      "question": "What caused the black spiral on Noma-8?",
+      "piles": [],
+      "user_prompt": null,
+      "answer": "The pocket i network did not find any supported information for this question.",
+      "path": "deterministic_empty_response",
+      "generated_tokens": 0,
+      "hit_token_limit": false,
+      "diagnostics": {
+        "exact_canned_response": true
+      }
+    },
+    {
+      "id": "S10",
+      "question": "How should Delta-1 be repaired after a green lattice appears?",
+      "piles": [],
+      "user_prompt": null,
+      "answer": "The pocket i network did not find any supported information for this question.",
+      "path": "deterministic_empty_response",
+      "generated_tokens": 0,
+      "hit_token_limit": false,
+      "diagnostics": {
+        "exact_canned_response": true
+      }
+    }
+  ],
+  "mechanical_summary": {
+    "cases": 10,
+    "nonempty_answers": 8,
+    "nonempty_total": 8,
+    "exact_empty_answers": 2,
+    "empty_total": 2,
+    "token_limit_hits": 0,
+    "manual_gate_pending": true
+  },
+  "runtime": {
+    "seconds": 7.841,
+    "peak_rss_kib": 2097316
+  }
+}
