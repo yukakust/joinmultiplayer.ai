@@ -456,3 +456,18 @@ Original piles and evidence remain authoritative. Decision record:
 6. Run a locked end-to-end comparison, publish every intermediate decision,
    and show question, contacted pocket i, evidence, versions, and final answer
    in one simple UI.
+
+## Locked Gate 15A: the complete route failed
+
+Gate 15A connected the already accepted pieces over all 30 frozen E007
+questions and 64 logical pocket i. Qwen3-1.7B wrote the short claims and final
+answers; the 4B reranker, ordinary source-anchor code, and DeBERTa kept their
+separate jobs.
+
+The mechanical chain worked, but the meaning chain did not. All required
+sources were found and no secret leaked, yet 332 uncertain passages travelled
+onward. A claim could be perfectly supported by its own source while still
+belonging to another device. This produced only 10/30 completely correct final
+answers. Gate 15A is rejected and preserved. Before an app MVP, the harness
+needs a tested gate for `question identity and conditions ↔ source identity and
+conditions`.

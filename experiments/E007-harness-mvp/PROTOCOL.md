@@ -710,3 +710,28 @@ The result does not show that all context is harmful because two variables
 changed together. It does show that placing the user question and surrounding
 text together inside the NLI premise is unsafe. Result:
 `site/experiments/E007/nli-fresh20-context-result-v0.1.json`.
+
+## Gate 15A — complete modular pipeline with Qwen3-1.7B
+
+Freeze the existing E007 world of 64 logical pocket i, 422 separate records,
+and all 30 English questions. Run the accepted modules in order: unchanged
+question, top-16 public-card routing, owner-local recall-first search, secret
+redaction, Qwen3-Reranker-4B relevance, deterministic source anchoring,
+Qwen3-1.7B claim writing, DeBERTa source support, lineage storage, meaning
+piles, and Qwen3-1.7B closed-world synthesis. Do not train any model and do not
+start the application before the owner sees the result.
+
+The locked run failed. Routing and local search found every required owner and
+source in 30/30 questions. No synthetic secret leaked, no accepted source
+anchor was broken, and no source-unsupported claim entered the evidence board.
+But the reranker sent 332 of 480 passages forward as `NOT SURE`. Later modules
+proved that many statements were true in their own records without proving
+that those records described the device and conditions in the user question.
+The final answers therefore mixed in correct but irrelevant knowledge.
+
+Manual semantic review found 10/30 completely correct answers, below the
+locked 24/30 gate. It preserved the supported minority in 2/6 cases and the
+required uncertainty plus next step in 3/6 cases, both below their 5/6 gates.
+The result is a preserved synthetic development failure. The next experiment
+must test an explicit question-to-source identity and condition gate before
+claim generation; application work remains paused.
