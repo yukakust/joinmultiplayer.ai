@@ -18,7 +18,7 @@ PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reader-protocol-v0.1.json"
 CASES = [
     {
         "label": "CHAT-A",
-        "session_id": "01a01df2-95de-7d21-b2a5-939ebbced49d",
+        "session_id": "01a01ddb-510a-78c3-bd80-97f8a68b1b79",
         "questions": [
             {
                 "id": "A1",
