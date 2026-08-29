@@ -134,7 +134,7 @@ const ui = {
     how1: "People and their AIs bring checkable observations — traces.",
     how2: "Traces grow into open questions that live on the map. Any branch can be continued.",
     how3: "In parallel we build a swarm of pocket AIs and publish every check — including failures.",
-    navStart: "Start here", navDoors: "Doors", navMap: "Map", navExperiments: "Experiments", navData: "Data",
+    navStart: "Start here", navDoors: "Doors", navMap: "Map", navExperiments: "Experiments", navData: "Data", navWorkbench: "Workbench",
     previewNew: "NEW VERSION PREVIEW", previewCompare: "current site",
     revealAria: "Touch an i to reveal a question", touch: "touch an i", seeAll: "see all open questions", hideAll: "hide open questions",
     tryIt: "Try it", enterDoor: "Enter this door", anotherI: "another i", prototype: "UX PROTOTYPE",
@@ -169,7 +169,7 @@ const ui = {
     how1: "Люди и их ИИ приносят проверяемые наблюдения — «следы».",
     how2: "Из следов растут открытые вопросы — они живут на карте, любую ветку можно продолжить.",
     how3: "Параллельно мы строим рой карманных ИИ и публично проверяем каждую архитектуру — включая провалы.",
-    navStart: "Начни здесь", navDoors: "Двери", navMap: "Карта", navExperiments: "Эксперименты", navData: "Данные",
+    navStart: "Начни здесь", navDoors: "Двери", navMap: "Карта", navExperiments: "Эксперименты", navData: "Данные", navWorkbench: "Верстак",
     previewNew: "ПРЕВЬЮ НОВОЙ ВЕРСИИ", previewCompare: "текущий сайт",
     tryIt: "Попробовать", enterDoor: "Открыть дверь", anotherI: "другой i", prototype: "ПРОТОТИП UX", prototypeNote: "сохранено только в этом браузере · ничего не публикуется · письма не отправляются", reset: "сбросить",
     principle: "Дверь подсказывает, как искать ответ.<br>Сам вопрос выбираете вы.", bringQuestion: "Задать свой вопрос", return: "Назад к i", questionStep: "D04 · ВОПРОС", trace: "СЛЕД", verifier: "проверяющий", whatKnow: "Что вы<br>хотите узнать?", exactQuestion: "Ваш точный вопрос", questionPlaceholder: "Напишите его ровно так, как зададите каждому ИИ.", whyMatter: "Почему это важно для вас?", field: "Область или тема", fieldPlaceholder: "например: архитектура, налоговое право, пчеловодство", knowAnswer: "Вы знаете ответ?", choose: "Выберите", know: "Знаю", partlyKnow: "Знаю частично", dontKnow: "Не знаю", checkPath: "Как это можно проверить?", source: "По источнику", reproduce: "Воспроизвести", expertReview: "Экспертная проверка", unknown: "Пока не знаю", expected: "У меня есть ожидаемый ответ", sealExpected: "Запечатайте его до ответов ИИ", expectedPlaceholder: "Он останется скрытым в режиме проверяющего.", freeze: "Зафиксировать вопрос",
@@ -430,6 +430,7 @@ const morrowCopy = {
     start: "Read this once — after that, the game explains itself. Your first move is waiting behind any i.",
     journey: "Every point here already happened. The dead ends are not shameful — they are published. Press one.",
     play: "Pick the piece that feels like you. Then make one honest move — I will watch the ignition.",
+    workbench: "Every slot holds the best forged item. The broken one is not a shame — it is waiting for its smith.",
     hand: "Each i hides a different way to search. Touch one.",
     revealed: "If this question caught you, open the door. If not, choose another i.",
     door: "Read what the door asks you to bring. When your observation is ready, continue to GitHub.",
@@ -451,6 +452,7 @@ const morrowCopy = {
     start: "Прочитайте это один раз — дальше игра объяснит себя сама. Ваш первый ход ждёт за любой i.",
     journey: "Каждая точка здесь уже случилась. Тупики — не стыдные, они опубликованы. Нажмите любую.",
     play: "Выберите фигурку, которая похожа на вас. Потом сделайте один честный ход — я посмотрю на зажигание.",
+    workbench: "В каждом гнезде — лучший выкованный предмет. Сломанная деталь — не позор: она ждёт своего кузнеца.",
     hand: "За каждым i — свой способ искать. Коснитесь одного.",
     revealed: "Если этот вопрос вас задел — откройте дверь. Если нет — выберите другой i.",
     door: "Прочитайте, что просит дверь. Когда наблюдение будет готово, продолжите в GitHub.",
@@ -896,6 +898,7 @@ function siteNav() {
     ["/#doors", t("navDoors"), false],
     ["/map/", t("navMap"), path === "/map"],
     ["/journey/", t("navExperiments"), path === "/journey" || path.startsWith("/experiment") || path === "/network"],
+    ["/workbench/", t("navWorkbench"), path === "/workbench"],
     ["/data/", t("navData"), path === "/data"]
   ];
   return `
@@ -983,7 +986,7 @@ function morrowCollapsed(message) {
   const stored = sessionStorage.getItem(morrowMinKey);
   if (stored === "1") return true;
   if (stored === "0") return false;
-  return message === "home" || message === "start" || message === "journey";
+  return message === "home" || message === "start" || message === "journey" || message === "workbench";
 }
 
 function morrowGuide(message = "home", expression = "calm") {
@@ -5407,7 +5410,7 @@ const journeyNodes = [
     title: { en: "The game entry opens", ru: "Вход в игру открыт" },
     body: { en: "The laboratory became a game you can enter: eight fire-carrier pieces, the ignition ritual (a contour that catches flame when your move is accepted), a personal 'light the next one' link, the pulsing 'game calls' line — and the box at the entrance: do you hear it? At the table sits the first match, M0001. The first providence session has been held: three scouts, thirteen candidates, five verified notes for the Matchbox hunt.", ru: "Лаборатория стала игрой, в которую можно войти: восемь фигурок-носителей огня, ритуал зажигания (контур вспыхивает, когда ход принят), личная ссылка «зажги следующего», пульс «Игра зовёт» — и коробка на входе: слышишь? За столом первая спичка — M0001. Проведён первый сеанс провидения: три следопыта, тринадцать кандидатов, пять проверенных записок для охоты на Коробка." },
     statueName: { en: "The opened box", ru: "Открытая коробка" },
-    links: [{ href: "/play/", t: { en: "Enter the game", ru: "Войти в игру" } }, { href: "/map/", t: { en: "Matches at the table", ru: "Спички за столом" } }] },
+    links: [{ href: "/play/", t: { en: "Enter the game", ru: "Войти в игру" } }, { href: "/workbench/", t: { en: "The workbench", ru: "Верстак" } }, { href: "/map/", t: { en: "Matches at the table", ru: "Спички за столом" } }] },
 
   { id: "next", code: "E00?", x: 44, row: 15.7, status: "hidden", statue: null, date: null,
     name: { en: "?", ru: "?" },
@@ -5933,6 +5936,303 @@ function renderJourneyParty() {
   if (flagLabel && party.length > 1) flagLabel.textContent = `${p("partyLabel")} · ${party.length}`;
 }
 
+
+/* ── The workbench: pocket i as an exploded letter-ı with part slots ── */
+
+const workbenchCopy = {
+  en: {
+    step: "THE WORKBENCH",
+    title: "The body of pocket i",
+    intro: "Nine slots. Each holds the best forged item — with real measured stats. Frozen protocols do not move: forge a better item under one, and your piece becomes the holder of the part. The founder runs ahead only on the part in his hands; every other slot is free.",
+    frontier: "IN M0001'S HANDS NOW",
+    frontierPart: "slot 7 · the assembler",
+    powerLabel: "ASSEMBLY POWER",
+    powerNote: "the dot above the i ignites when the assembly wins",
+    slotWord: "SLOT",
+    holder: "holder",
+    forged: "forged",
+    statusFrozen: "FROZEN", statusPassed: "PASSED", statusFailed: "BROKEN", statusCaveat: "WITH A CAVEAT", statusOpen: "OPEN",
+    chassis: "chassis · Qwen3-0.6B · frozen, not upgradable",
+    inspectorHint: "Press a part of the body.",
+    statsLabel: "MEASURED STATS",
+    frozenLabel: "FROZEN — DO NOT TOUCH",
+    lanesLabel: "TWO LANES",
+    laneSharper: "sharper — beat the number under the same frozen protocol",
+    laneCheaper: "cheaper — same number for less tokens / time / memory",
+    forgeLabel: "FORGE A BETTER ONE",
+    copyBrief: "copy the brief for my AI",
+    briefCopied: "BRIEF COPIED",
+    submitVia: "bring the result",
+    submitNote: "a record changes only after an independent rerun — no one dots their own item",
+    provenance: "PROVENANCE"
+  },
+  ru: {
+    step: "ВЕРСТАК",
+    title: "Тело pocket i",
+    intro: "Девять гнёзд. В каждом — лучший выкованный предмет с настоящими измеренными статами. Замороженные протоколы не двигаются: выкуй предмет лучше под таким протоколом — и твоя фигурка станет держателем детали. Основатель бежит вперёд только по детали в своих руках; остальные гнёзда свободны.",
+    frontier: "СЕЙЧАС В РУКАХ M0001",
+    frontierPart: "гнездо 7 · сборщик",
+    powerLabel: "СИЛА СБОРКИ",
+    powerNote: "точка над i загорится, когда сборка победит",
+    slotWord: "ГНЕЗДО",
+    holder: "держатель",
+    forged: "выковано",
+    statusFrozen: "ЗАМОРОЖЕНА", statusPassed: "ПРОЙДЕНА", statusFailed: "СЛОМАНА", statusCaveat: "С ОГОВОРКОЙ", statusOpen: "ОТКРЫТА",
+    chassis: "шасси · Qwen3-0.6B · заморожено, не прокачивается",
+    inspectorHint: "Нажмите деталь тела.",
+    statsLabel: "ИЗМЕРЕННЫЕ СТАТЫ",
+    frozenLabel: "ЗАМОРОЖЕНО — НЕ ТРОГАТЬ",
+    lanesLabel: "ДВЕ ДОРОЖКИ",
+    laneSharper: "точнее — побей число под тем же замороженным протоколом",
+    laneCheaper: "дешевле — то же число за меньше токенов / времени / памяти",
+    forgeLabel: "ВЫКОВАТЬ ЛУЧШЕ",
+    copyBrief: "скопировать задание для ИИ",
+    briefCopied: "ЗАДАНИЕ СКОПИРОВАНО",
+    submitVia: "принести результат",
+    submitNote: "рекорд меняется только после независимого перепрогона — никто не ставит точку на собственный предмет",
+    provenance: "ПРОИСХОЖДЕНИЕ"
+  }
+};
+
+function w(key) { return workbenchCopy[language][key]; }
+
+const workbenchParts = [
+  { id: "worlds", num: 1, icon: "pages", status: "frozen",
+    name: { en: "The worlds", ru: "Миры" },
+    item: { en: "Frozen books v1", ru: "Замороженные книги v1" },
+    record: { en: "Luma · Luna · Aster, pinned by sha256", ru: "Luma · Luna · Aster, запинены sha256" },
+    what: { en: "Fictional worlds where no single pocket holds the whole answer. Every test runs on a frozen world so results stay comparable forever.", ru: "Вымышленные миры, где ни один карман не держит ответ целиком. Каждый тест идёт на замороженном мире — поэтому результаты сравнимы навсегда." },
+    stats: [["worlds", "E006 Luma · E007 Luna · Aster Field Manual"], ["state", { en: "frozen before inference", ru: "заморожены до инференса" }]],
+    frozen: { en: "The existing worlds never change.", ru: "Существующие миры не меняются никогда." },
+    challenge: { en: "Forge a NEW world by the same pattern: distributed knowledge, no single holder, verifiable answers.", ru: "Выкуй НОВЫЙ мир по тому же образцу: распределённое знание, ни одного полного держателя, проверяемые ответы." },
+    links: [["/experiments/E007/world-v0.1.json", "world JSON"]] },
+
+  { id: "cutter", num: 2, icon: "comb", status: "caveat",
+    name: { en: "The cutter", ru: "Резак" },
+    item: { en: "Structure-aware cutter v0.1", ru: "Структурный резак v0.1" },
+    record: { en: "evidence kept whole · 9/10", ru: "улика цела · 9/10" },
+    what: { en: "Cuts a document into windows before search. Cut wrong — and the evidence dies before anyone reads it.", ru: "Режет документ на окна перед поиском. Порежешь неправильно — улика умрёт раньше, чем её кто-то прочтёт." },
+    stats: [["complete", "9/10 vs 6/10 (fixed-45)"], ["atoms", "14/14"], [{ en: "must-share groups", ru: "связки вместе" }, "5/5"]],
+    frozen: { en: "The world, the questions, the frozen reranker that searches both variants.", ru: "Мир, вопросы и замороженный reranker, который ищет в обоих вариантах." },
+    challenge: { en: "10/10 — or the same score with fewer tokens per window.", ru: "10/10 — или тот же счёт при меньших окнах." },
+    links: [["/experiments/E007/chunking-protocol-v0.1.json", "protocol"], ["/experiments/E007/chunking-result-v0.1.json", "result"]] },
+
+  { id: "seeker", num: 3, icon: "lens", status: "frozen",
+    name: { en: "The seeker", ru: "Искатель" },
+    item: { en: "Qwen3-Reranker-4B · Q4_K_M", ru: "Qwen3-Reranker-4B · Q4_K_M" },
+    record: { en: "frozen judge of relevance", ru: "замороженный судья релевантности" },
+    what: { en: "Scores which windows matter for a question — without trusting anyone's claims. The same frozen seeker serves every experiment.", ru: "Оценивает, какие окна важны для вопроса, — не доверяя ничьим утверждениям. Один и тот же замороженный искатель служит всем экспериментам." },
+    stats: [["model", "Qwen3-Reranker-4B"], ["quant", "Q4_K_M · sha 0934…13e"]],
+    frozen: { en: "This exact file is the reference seeker.", ru: "Именно этот файл — эталонный искатель." },
+    challenge: { en: "A lighter or faster seeker that keeps the same decisions on the frozen worlds.", ru: "Более лёгкий или быстрый искатель, который сохраняет те же решения на замороженных мирах." },
+    links: [["/experiments/E007/relevance-reranker-protocol-v0.1.json", "protocol"]] },
+
+  { id: "capsule", num: 4, icon: "pill", status: "passed",
+    name: { en: "The capsule", ru: "Капсула" },
+    item: { en: "Evidence capsule contract v0.1", ru: "Контракт капсулы v0.1" },
+    record: { en: "locked acceptance · 24/24", ru: "залоченная приёмка · 24/24" },
+    what: { en: "The unit of trust between pockets: a claim + an exact source window + a highlighted span + versioned coordinates. The first APPROVED part of the MVP.", ru: "Единица доверия между карманами: утверждение + точное окно источника + выделенное место + координаты версии. Первая УТВЕРЖДЁННАЯ деталь MVP." },
+    stats: [[{ en: "intact accepted", ru: "целые приняты" }, "16/16"], [{ en: "broken let in", ru: "сломанные пропущены" }, "0/8"], [{ en: "honest failed attempt", ru: "честная невалидная попытка" }, { en: "preserved (587>512, HTTP 500)", ru: "сохранена (587>512, HTTP 500)" }]],
+    frozen: { en: "Contract v0.1 as passed. A v2 starts as an open question, not an edit.", ru: "Контракт v0.1 как пройден. v2 начинается с открытого вопроса, а не с правки." },
+    challenge: { en: "Design capsule breakages the acceptance does NOT catch yet — every new caught breakage hardens the part.", ru: "Придумай поломки капсулы, которые приёмка пока НЕ ловит, — каждая новая пойманная поломка закаляет деталь." },
+    links: [["/experiments/E007/evidence-capsule-protocol-v0.1.json", "protocol"], ["/experiments/E007/evidence-capsule-result-v0.1.json", "result"]] },
+
+  { id: "gate", num: 5, icon: "funnel", status: "passed",
+    name: { en: "The acceptance", ru: "Приёмка" },
+    item: { en: "Mechanical acceptance harness v0.1", ru: "Механическая приёмка v0.1" },
+    record: { en: "24/24 correct decisions", ru: "24/24 верных решений" },
+    what: { en: "Plain code that rejects broken packets before any model sees them. Boring on purpose: trust must not require intelligence.", ru: "Обычный код, который отбрасывает сломанные пакеты до того, как их увидит модель. Скучная нарочно: доверие не должно требовать интеллекта." },
+    stats: [["decisions", "24/24"], [{ en: "false accepts", ru: "ложных пропусков" }, "0"]],
+    frozen: { en: "The packet contract it checks.", ru: "Контракт пакета, который она проверяет." },
+    challenge: { en: "Same guarantees, less code — or new checks with zero false rejections.", ru: "Те же гарантии меньшим кодом — или новые проверки без ложных отказов." },
+    links: [["/experiments/E007/evidence-capsule-result-v0.1.json", "result"]] },
+
+  { id: "router", num: 6, icon: "fork", status: "open",
+    name: { en: "The router", ru: "Роутер" },
+    item: { en: "— no worthy item yet —", ru: "— достойного предмета ещё нет —" },
+    record: { en: "the open wound since E005", ru: "открытая рана с E005" },
+    what: { en: "Chooses WHICH pockets to ask. Every measured router so far either leaned on an oracle or degraded answers. The slot is effectively empty.", ru: "Выбирает, КАКИЕ карманы спрашивать. Каждый измеренный роутер пока либо опирался на оракула, либо ухудшал ответы. Гнездо фактически пустует." },
+    stats: [[{ en: "state", ru: "состояние" }, { en: "no router beats the oracle honestly", ru: "ни один роутер честно не бьёт оракула" }]],
+    frozen: { en: "The worlds and the frozen base.", ru: "Миры и замороженная база." },
+    challenge: { en: "A router that finds the right pockets on the public worlds without seeing the answers.", ru: "Роутер, который находит нужные карманы на публичных мирах, не подглядывая в ответы." },
+    links: [["/experiments/E007/send-policy-protocol-v0.1.json", "send-policy"], ["/experiment/e005", "E005"]] },
+
+  { id: "assembler", num: 7, icon: "gear", status: "failed",
+    name: { en: "The assembler", ru: "Сборщик" },
+    item: { en: "Modular harness v0.1 · defeated", ru: "Модульный harness v0.1 · разбит" },
+    record: { en: "3/18 vs 17/18 central context", ru: "3/18 против 17/18 у центрального контекста" },
+    what: { en: "Assembles one answer from many pockets' capsules. The loudest broken part of the body — and the most honest number the laboratory owns.", ru: "Собирает один ответ из капсул многих карманов. Самая громко сломанная деталь тела — и самое честное число лаборатории." },
+    stats: [["harness", "3/18"], [{ en: "central context", ru: "центральный контекст" }, "17/18"], [{ en: "single-pocket RAG", ru: "RAG одного кармана" }, "12/18"], [{ en: "judged by", ru: "судили" }, { en: "3 independent Lunas · owner review ahead", ru: "3 независимые Луны · разбор владельца впереди" }]],
+    frozen: { en: "World, tasks, frozen base, the judges' rubric.", ru: "Мир, задачи, замороженная база, рубрика судей." },
+    challenge: { en: "Reach the central-context level while staying modular. This is the Matchbox mission.", ru: "Достать уровень центрального контекста, оставаясь модульным. Это миссия Коробка." },
+    links: [["/experiments/E007/luna-panel-v0.1.json", "Luna panel"], ["/experiment/e007", "E007"]] },
+
+  { id: "judges", num: 8, icon: "scales", status: "caveat",
+    name: { en: "The judges", ru: "Судьи" },
+    item: { en: "Two-judge panel v0.6", ru: "Панель двух судей v0.6" },
+    record: { en: "calibration 12/12 · awaiting audit", ru: "калибровка 12/12 · ждёт аудита" },
+    what: { en: "Score answers by meaning, not by matching words. Several judge models were rejected before two survived calibration.", ru: "Оценивают ответы по смыслу, а не по совпадению слов. Несколько моделей-судей отбраковали, прежде чем двое прошли калибровку." },
+    stats: [[{ en: "judges", ru: "судьи" }, "Qwen3-14B · Qwen2.5-32B"], [{ en: "calibration", ru: "калибровка" }, "12/12 · 12/12"], [{ en: "status", ru: "статус" }, { en: "awaiting the owner's audit", ru: "ждёт аудита владельца" }]],
+    frozen: { en: "The calibration set and rubric.", ru: "Калибровочный набор и рубрика." },
+    challenge: { en: "A third independent judge at 12/12 — or the same verdicts far cheaper.", ru: "Третий независимый судья на 12/12 — или те же вердикты сильно дешевле." },
+    links: [["/experiments/E005/gate-5b2-two-judge-summary-v0.6.json", "summary"]] },
+
+  { id: "learning", num: 9, icon: "plug", status: "caveat",
+    name: { en: "Local learning", ru: "Обучение" },
+    item: { en: "DoRA adapter · half a skill", ru: "DoRA-адаптер · пол-умения" },
+    record: { en: "safe action 23/24 · source work 6/24", ru: "безопасное действие 23/24 · работа с источниками 6/24" },
+    what: { en: "Teaches a pocket its personal skill on the owner's device. One of two skills transfers to new wording; the other broke on the exam.", ru: "Учит карман личному умению на устройстве владельца. Одно из двух умений переносится на новые формулировки; второе на экзамене сломалось." },
+    stats: [[{ en: "safe action", ru: "безопасное действие" }, "23/24"], [{ en: "source work", ru: "работа с источниками" }, "6/24"], [{ en: "verdict", ru: "вердикт" }, { en: "partially supported (4C)", ru: "частично подтверждено (4C)" }]],
+    frozen: { en: "The base model, the exam wording, the thresholds.", ru: "Базовая модель, формулировки экзамена, пороги." },
+    challenge: { en: "Carry the second skill over the threshold without breaking the first.", ru: "Перенеси второе умение через порог, не сломав первое." },
+    links: [["/experiments/E005/gate-4c-conclusion-v0.1.json", "4C verdict"]] }
+];
+
+function wt(v) { return typeof v === "string" ? v : jt(v); }
+
+function partStatusLabel(status) {
+  return { frozen: w("statusFrozen"), passed: w("statusPassed"), failed: w("statusFailed"), caveat: w("statusCaveat"), open: w("statusOpen") }[status] || status;
+}
+
+function partIcon(kind) {
+  const icons = {
+    pages: '<path d="M-14 -6 H10 V10 H-14 Z M-11 -9 H13 V7 M-8 -12 H16 V4"/><line x1="-10" y1="-1" x2="6" y2="-1"/><line x1="-10" y1="3" x2="6" y2="3"/>',
+    comb: '<path d="M-16 -8 H16"/><line x1="-12" y1="-8" x2="-12" y2="8"/><line x1="-4" y1="-8" x2="-4" y2="10"/><line x1="4" y1="-8" x2="4" y2="7"/><line x1="12" y1="-8" x2="12" y2="10"/>',
+    lens: '<circle cx="-3" cy="-3" r="8"/><line x1="3" y1="3" x2="12" y2="12"/>',
+    pill: '<rect x="-14" y="-6" width="28" height="12" rx="6"/><line x1="0" y1="-6" x2="0" y2="6"/>',
+    funnel: '<path d="M-14 -9 H14 L4 2 V10 L-4 10 V2 Z"/><path class="wb-accent" d="M-3 3 L-1 6 L4 0"/>',
+    fork: '<path d="M0 12 V2 M0 2 L-11 -9 M0 2 L11 -9"/><circle cx="-11" cy="-11" r="2.2"/><circle cx="11" cy="-11" r="2.2"/><circle cx="0" cy="12" r="2.2"/>',
+    gear: '<circle cx="0" cy="0" r="9"/><path d="M0 -13 V-9 M0 9 V13 M-13 0 H-9 M9 0 H13 M-9 -9 L-6.5 -6.5 M9 9 L6.5 6.5 M9 -9 L6.5 -6.5 M-9 9 L-6.5 6.5"/><path class="wb-crack" d="M-3 -8 L1 -2 L-2 1 L3 8"/>',
+    scales: '<line x1="0" y1="-10" x2="0" y2="10"/><line x1="-12" y1="-6" x2="12" y2="-6"/><path d="M-16 2 A5 4 0 0 0 -8 2 L-12 -6 Z M8 2 A5 4 0 0 0 16 2 L12 -6 Z"/><line x1="-6" y1="10" x2="6" y2="10"/>',
+    plug: '<rect x="-10" y="-4" width="20" height="14" rx="2"/><line x1="-5" y1="-4" x2="-5" y2="-11" /><line x1="5" y1="-4" x2="5" y2="-11"/>'
+  };
+  return icons[kind] || "";
+}
+
+
+let wbSelected = null;
+
+function workbenchDoll() {
+  const W = 360, slabW = 128, slabX = (W - slabW) / 2;
+  let y = 152;
+  const slabs = workbenchParts.map(part => {
+    const h = part.id === "assembler" ? 58 : 44;
+    const slab = { part, y, h };
+    y += h + 12;
+    return slab;
+  });
+  const H = y + 34;
+  const callout = (slab, side) => {
+    const tx = side === "left" ? 10 : W - 10;
+    const anchor = side === "left" ? "start" : "end";
+    const lx1 = side === "left" ? slabX : slabX + slabW;
+    const lx2 = side === "left" ? 92 : W - 92;
+    const my = slab.y + slab.h / 2;
+    return `
+      <line class="wb-leader" x1="${lx1}" y1="${my}" x2="${lx2}" y2="${my}"/>
+      <text class="wb-callout-name" x="${tx}" y="${my - 3}" text-anchor="${anchor}">${escapeHTML(jt(slab.part.name))}</text>
+      <text class="wb-callout-rec wb-rec-${slab.part.status}" x="${tx}" y="${my + 11}" text-anchor="${anchor}">${escapeHTML(wt(slab.part.record).slice(0, 24))}</text>`;
+  };
+  return `
+    <svg class="wb-doll" viewBox="0 0 ${W} ${H}" aria-label="pocket i">
+      <g class="wb-dot${wbSelected === "dot" ? " is-selected" : ""}" data-wb="dot">
+        <circle class="wb-dot-ring" cx="${W / 2}" cy="66" r="36"/>
+        <text class="wb-dot-power" x="${W / 2}" y="63" text-anchor="middle">3/18</text>
+        <text class="wb-dot-label" x="${W / 2}" y="82" text-anchor="middle">${w("powerLabel")}</text>
+      </g>
+      <line class="wb-leader" x1="${W / 2}" y1="104" x2="${W / 2}" y2="138" stroke-dasharray="2 4"/>
+      ${slabs.map((slab, i) => `
+        ${i ? `<line class="wb-join" x1="${W / 2}" y1="${slab.y - 12}" x2="${W / 2}" y2="${slab.y}"/>` : ""}
+        <g class="wb-slab wb-${slab.part.status}${wbSelected === slab.part.id ? " is-selected" : ""}" data-wb="${slab.part.id}" tabindex="0" role="button" aria-label="${escapeHTML(jt(slab.part.name))}">
+          <rect class="wb-slab-frame" x="${slabX}" y="${slab.y}" width="${slabW}" height="${slab.h}" rx="7"/>
+          <circle class="wb-num" cx="${slabX}" cy="${slab.y + slab.h / 2}" r="9"/>
+          <text class="wb-num-text" x="${slabX}" y="${slab.y + slab.h / 2 + 3.5}" text-anchor="middle">${slab.part.num}</text>
+          <g class="wb-icon" transform="translate(${W / 2}, ${slab.y + slab.h / 2})">${partIcon(slab.part.icon)}</g>
+        </g>
+        ${callout(slab, slab.part.num % 2 ? "left" : "right")}`).join("")}
+      <text class="wb-chassis" x="${W / 2}" y="${H - 10}" text-anchor="middle">${w("chassis")}</text>
+    </svg>`;
+}
+
+function workbenchShell() {
+  return withLanguage(`
+    <section class="flow-shell form-page contribution-page workbench-page">
+      <div class="flow-step">${w("step")}</div>
+      <h1>${w("title")}</h1>
+      <p class="contribution-intro">${w("intro")}</p>
+      <p class="wb-frontier"><b>${w("frontier")}</b> · ${w("frontierPart")}</p>
+      <div class="wb-workspace">
+        <div class="wb-doll-wrap" id="wb-doll-wrap">${workbenchDoll()}</div>
+        <aside class="wb-inspector" aria-live="polite"><p class="journey-hint">${w("inspectorHint")}</p></aside>
+      </div>
+    </section>
+    ${morrowGuide("workbench", "calm")}`);
+}
+
+function wbBrief(part) {
+  const links = part.links.map(([href]) => `https://joinmultiplayer.ai${href.startsWith("/experiments") ? href : ""}` || href).filter(Boolean);
+  return [
+    `POCKET-I WORKBENCH BRIEF · slot ${part.num} · ${part.name.en}`,
+    `Current record: ${typeof part.record === "string" ? part.record : part.record.en}`,
+    `Frozen (do not touch): ${part.frozen.en}`,
+    `Artifacts: ${links.join(" ")}`,
+    `Challenge: ${part.challenge.en}`,
+    `Lanes: (a) sharper — beat the number under the same frozen protocol; (b) cheaper — same number for less tokens/time/memory.`,
+    `Rules: change only this part; publish code + a result JSON in the artifact's format; a record changes only after an independent rerun — no one dots their own item.`,
+    `Bring the result: https://github.com/yukakust/joinmultiplayer.ai/issues/new?title=${encodeURIComponent("[UPGRADE] " + part.id)}`,
+    `The workbench: https://new.joinmultiplayer.ai/workbench/`
+  ].join("\n");
+}
+
+function renderWbInspector() {
+  const target = document.querySelector(".wb-inspector");
+  if (!target) return;
+  target.classList.toggle("is-open", !!wbSelected);
+  if (wbSelected === "dot") {
+    target.innerHTML = `
+      <button class="journey-close" data-action="wb-close" aria-label="×">×</button>
+      <div class="flow-step">${w("powerLabel")}</div>
+      <h2>3 / 18</h2>
+      <p>${escapeHTML(wt(workbenchParts.find(part => part.id === "assembler").what))}</p>
+      <p class="journey-hint">${w("powerNote")}</p>
+      <div class="journey-links"><a class="button secondary" href="/experiments/E007/luna-panel-v0.1.json">Luna panel JSON →</a></div>`;
+    return;
+  }
+  const part = workbenchParts.find(item => item.id === wbSelected);
+  if (!part) { target.innerHTML = `<p class="journey-hint">${w("inspectorHint")}</p>`; return; }
+  target.innerHTML = `
+    <button class="journey-close" data-action="wb-close" aria-label="×">×</button>
+    <div class="flow-step">${w("slotWord")} ${part.num} · <span class="wb-chip wb-chip-${part.status}">${partStatusLabel(part.status)}</span></div>
+    <h2>${escapeHTML(wt(part.item))}</h2>
+    <p>${escapeHTML(wt(part.what))}</p>
+    <div class="wb-stats">
+      <span class="wb-block-label">${w("statsLabel")}</span>
+      ${part.stats.map(([key, value]) => `<div class="wb-stat"><i>${escapeHTML(wt(key))}</i><b>${escapeHTML(wt(value))}</b></div>`).join("")}
+    </div>
+    <div class="wb-frozen-block">
+      <span class="wb-block-label">${w("frozenLabel")}</span>
+      <p>${escapeHTML(wt(part.frozen))}</p>
+    </div>
+    <div class="wb-forge">
+      <span class="wb-block-label">${w("forgeLabel")}</span>
+      <p>${escapeHTML(wt(part.challenge))}</p>
+      <p class="wb-lanes"><b>${w("lanesLabel")}:</b> ${w("laneSharper")} · ${w("laneCheaper")}</p>
+      <div class="actions">
+        <button class="button" data-copy="wb-brief" data-part="${part.id}">${w("copyBrief")}</button>
+        <a class="button secondary" href="https://github.com/yukakust/joinmultiplayer.ai/issues/new?title=${encodeURIComponent("[UPGRADE] " + part.id)}">${w("submitVia")}</a>
+      </div>
+      <p class="journey-hint">${w("submitNote")}</p>
+    </div>
+    <p class="wb-provenance">${w("provenance")} · ${w("holder")}: ${pieceSVG("match", true, "piece-inline")} M0001 · ${part.links.map(([href, label]) => `<a href="${href}">${escapeHTML(label)}</a>`).join(" · ")}</p>`;
+}
+
+function wbSelect(id) {
+  wbSelected = id;
+  document.querySelectorAll(".wb-slab.is-selected, .wb-dot.is-selected").forEach(el => el.classList.remove("is-selected"));
+  document.querySelector(`[data-wb="${id}"]`)?.classList.add("is-selected");
+  renderWbInspector();
+}
+
 function notFound() {
   document.title = language === "ru" ? "Не найдено — i" : "Not found — i";
   return `
@@ -5957,6 +6257,10 @@ function render() {
   } else if (path === "start") {
     document.title = `${s("title")} — i`;
     app.innerHTML = startShell();
+  } else if (path === "workbench") {
+    document.title = `${w("title")} — i`;
+    app.innerHTML = workbenchShell();
+    renderWbInspector();
   } else if (path === "play") {
     document.title = `${p("title")} — i`;
     app.innerHTML = playShell();
@@ -6154,6 +6458,12 @@ app.addEventListener("click", async (event) => {
     return;
   }
 
+  const wbButton = event.target.closest("[data-wb]");
+  if (wbButton) {
+    wbSelect(wbButton.dataset.wb);
+    return;
+  }
+
   const journeyButton = event.target.closest("[data-journey]");
   if (journeyButton) {
     journeySelect(journeyButton.dataset.journey, journeyButton.dataset.scroll === "1");
@@ -6176,6 +6486,12 @@ app.addEventListener("click", async (event) => {
       option.classList.toggle("is-selected", isChosen);
       option.querySelector(".piece").classList.toggle("is-lit", isChosen);
     });
+    return;
+  }
+  if (action === "wb-close") {
+    wbSelected = null;
+    document.querySelectorAll(".wb-slab.is-selected, .wb-dot.is-selected").forEach(el => el.classList.remove("is-selected"));
+    renderWbInspector();
     return;
   }
   if (action === "journey-close") {
@@ -6318,6 +6634,10 @@ app.addEventListener("click", async (event) => {
   if (copyButton?.dataset.copy === "public-data") copyText("https://joinmultiplayer.ai/api/public/records.json", copyButton);
   if (copyButton?.dataset.copy === "public-corpus") copyText("https://joinmultiplayer.ai/api/public/corpus.json", copyButton);
   if (copyButton?.dataset.copy === "lit-link") copyText(copyButton.dataset.value, copyButton);
+  if (copyButton?.dataset.copy === "wb-brief") {
+    const part = workbenchParts.find(item => item.id === copyButton.dataset.part);
+    if (part) copyText(wbBrief(part), copyButton);
+  }
   if (copyButton?.dataset.copy === "question") copyText(prototype.question.text, copyButton);
   if (copyButton?.dataset.copy === "connector-command") copyText(l("connectorCommand"), copyButton);
   if (copyButton?.dataset.copy === "plugin-install") copyText(`${l("pluginMarketplaceCommand")}\n${l("pluginInstallCommand")}`, copyButton);
