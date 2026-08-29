@@ -565,6 +565,15 @@ run on the owner's MacBook; do not claim that all three histories are present
 or parseable until the owner reviews that inventory. Segmentation is explicitly
 unresolved.
 
+The yukabox probe result is published separately at
+`/experiments/E007/local-library-discovery-result-yukabox-v0.1.json`. It found
+115 likely Codex session JSONL files. The broad root also surfaced 511 service
+JSON/JSONL files and seven databases, including authentication, cache, log,
+plugin, attachment, queue, and temporary state. No content was emitted. This
+means the next parser must start with a strict session allowlist; never index
+all of `~/.codex`. Claude Code and ChatGPT desktop were not found on yukabox,
+which is expected for this Linux server. The MacBook checkpoint is still open.
+
 ## Immediate next work
 
 Verify the preferred E002 vertical slice in this order:

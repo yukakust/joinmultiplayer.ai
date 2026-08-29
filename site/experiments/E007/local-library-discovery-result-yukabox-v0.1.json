@@ -1,0 +1,54 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "gate": "16B.0",
+  "device": "yukabox",
+  "platform": "Linux",
+  "status": "device_inventory_complete_macbook_still_pending",
+  "privacy": {
+    "network_calls_from_probe": 0,
+    "source_files_modified": 0,
+    "conversation_text_emitted": false,
+    "index_created": false
+  },
+  "sources": {
+    "codex": {
+      "storage_found": true,
+      "root": "~/.codex",
+      "broad_candidate_files": 626,
+      "broad_candidate_bytes": 2412747446,
+      "likely_session_files": 115,
+      "likely_session_bytes": 2248272401,
+      "formats": {
+        "json": 501,
+        "jsonl": 118,
+        "sqlite": 6,
+        "sqlite3": 1
+      }
+    },
+    "claude_code": {
+      "storage_found": false,
+      "note": "No Claude Code app-owned root was found on yukabox."
+    },
+    "chatgpt_desktop": {
+      "storage_found": false,
+      "note": "ChatGPT desktop is not expected on this Linux server and no app-owned root was found."
+    }
+  },
+  "critical_finding": "A source root is not itself a safe library. The broad Codex root also contains authentication, caches, logs, plugins, attachments, queues, and temporary files.",
+  "must_exclude_before_parsing": [
+    "auth.json",
+    ".tmp/",
+    "cache/",
+    "plugins/",
+    "attachments/",
+    "logs databases",
+    "queue and operational state databases"
+  ],
+  "candidate_allowlist_for_next_checkpoint": [
+    "sessions/**/*.jsonl",
+    "session_index.jsonl",
+    "history.jsonl"
+  ],
+  "honest_boundary": "No file contents were parsed. The 115 session files are candidates, not yet a proven count of complete readable conversations. MacBook discovery remains pending. Segmentation remains undecided."
+}
