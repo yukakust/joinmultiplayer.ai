@@ -6220,6 +6220,32 @@ blockquote {
   display: block;
 }
 
+.e007-full-families {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  margin: 28px 0 48px;
+}
+
+.e007-full-families article {
+  min-height: 150px;
+  padding: 22px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.e007-full-families article:last-child { border-right: 0; }
+.e007-full-families strong { font: 700 clamp(42px, 6vw, 82px)/1 var(--display); }
+.e007-full-families span { font: 700 13px/1.35 var(--mono); }
+
+@media (max-width: 900px) {
+  .e007-full-families { grid-template-columns: 1fr; }
+  .e007-full-families article { min-height: 100px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .e007-full-families article:last-child { border-bottom: 0; }
+}
+
 @media (max-width: 700px) {
   .e007-synthesis-case summary { grid-template-columns: 52px 1fr; }
   .e007-synthesis-case summary strong { grid-column: 2; }

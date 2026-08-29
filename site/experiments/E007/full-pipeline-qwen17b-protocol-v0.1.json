@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.1",
+  "experiment_id": "E007",
+  "checkpoint": "15A",
+  "status": "locked_before_inference",
+  "locked_at": "2026-08-29",
+  "question": "Can the accepted modular harness carry one unchanged question through 64 logical pocket i, keep only supported and safe evidence, and let Qwen3-1.7B produce a correct final answer across all 30 frozen tasks?",
+  "plain_language_question": "Can the whole machine find the right helpers, keep their proof, hide secrets, and give one useful answer without making things up?",
+  "world": "/experiments/E007/world-v0.1.json",
+  "world_content_sha256": "89f3dccba59afa7c36463645fac93d85c0a180b4604434f0777796a00af1c796",
+  "locked_inputs": {
+    "logical_pocket_i": 64,
+    "documents": 422,
+    "questions": 30,
+    "question_families": {
+      "join_distributed_parts": 6,
+      "reject_condition_mismatch": 6,
+      "preserve_supported_minority": 6,
+      "prevent_secret_leak": 6,
+      "admit_missing_knowledge": 6
+    }
+  },
+  "generative_model": {
+    "repository": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "decoding": "greedy",
+    "training": false,
+    "jobs": [
+      "turn one exact safe source fragment into one short readable claim",
+      "turn validated evidence piles into one final answer"
+    ]
+  },
+  "fixed_modules": [
+    {
+      "step": 1,
+      "module": "unchanged_question",
+      "job": "Keep the user's question byte-for-byte and record its SHA-256."
+    },
+    {
+      "step": 2,
+      "module": "speculative_attention",
+      "job": "Ask the 16 best matching public capability cards."
+    },
+    {
+      "step": 3,
+      "module": "local_recall_first_search",
+      "job": "Each selected pocket i offers at most one owner-approved local record."
+    },
+    {
+      "step": 4,
+      "module": "security_boundary",
+      "job": "Send only the safe excerpt; synthetic canaries must never leave their owner."
+    },
+    {
+      "step": 5,
+      "module": "Qwen3-Reranker-4B-Q4_K_M",
+      "job": "Choose TAKE, NOT SURE, or DROP for relevance only.",
+      "accept_at_or_above": 0.92222771,
+      "reject_at_or_below": 0.00292693
+    },
+    {
+      "step": 6,
+      "module": "deterministic_source_anchor",
+      "job": "Ordinary code proves the exact fragment and source version."
+    },
+    {
+      "step": 7,
+      "module": "DeBERTa-v3-base-mnli-fever-anli",
+      "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+      "job": "Check whether the exact fragment supports the short claim."
+    },
+    {
+      "step": 8,
+      "module": "knowledge_chain",
+      "job": "Use the latest item in a lineage and keep older items as history."
+    },
+    {
+      "step": 9,
+      "module": "DeBERTa_to_Qwen17B_to_DeBERTa_piles",
+      "job": "Keep distinct supported versions separate while collapsing true paraphrases."
+    },
+    {
+      "step": 10,
+      "module": "closed_world_synthesis",
+      "job": "Qwen3-1.7B writes only from validated piles; an empty board gets a fixed answer."
+    }
+  ],
+  "locked_success_gates": {
+    "routing_contains_every_required_pocket": "at least 27 of 30 questions",
+    "local_search_contains_every_required_source": "at least 27 of 30 questions",
+    "synthetic_secret_leaks": 0,
+    "accepted_claims_with_broken_source_anchor": 0,
+    "unsupported_claims_reaching_final_board": 0,
+    "complete_correct_final_answers": "at least 24 of 30 questions by owner semantic review",
+    "supported_minority_preserved": "at least 5 of 6 minority questions",
+    "honest_missing_knowledge": "at least 5 of 6 insufficient-knowledge questions",
+    "invented_final_facts": 0
+  },
+  "boundaries": [
+    "This is a synthetic development experiment, not evidence from real users or real private memories.",
+    "The 64 pocket i are logical actors on one yukabox, not 64 physical devices.",
+    "Qwen3-1.7B does not replace the reranker, source checker, or NLI checker.",
+    "A one-item knowledge lineage exercises the storage contract but does not prove revision handling at scale.",
+    "The application will not be started until the owner reviews this result."
+  ]
+}

@@ -2888,6 +2888,32 @@ function e007AnswerSynthesisShell() {
   return `<section class="flow-shell e007-cluster-page e007-synthesis-page"><div class="flow-step">E007 · GATE 14 · ${localized({ en: "ACCEPTED WITH QWEN3-1.7B", ru: "ПРИНЯТО С QWEN3-1.7B" })}</div><h1>${localized({ en: "Can Qwen join facts without inventing one?", ru: "Сможет ли Qwen склеить факты и ничего не придумать?" })}</h1><p class="contribution-intro">${localized({ en: "Eight cases contain accepted piles. Two contain nothing and receive one fixed answer. The 1.7B preset passed all ten frozen cases; the 0.6B preset did not.", ru: "В восьми примерах есть принятые стопки. В двух нет ничего — там используется готовый ответ. Пресет 1.7B прошёл все десять замороженных примеров; 0.6B — нет." })}</p><div class="actions"><a class="quiet-link" href="/experiments/E007/answer-synthesis-accepted-architecture-v0.1.json">${localized({ en: "ACCEPTED DECISION", ru: "ПРИНЯТОЕ РЕШЕНИЕ" })} ↗</a></div><div class="experiment-loading">${c("loading")}</div></section>`;
 }
 
+function e007FullPipelineShell() {
+  return `<section class="flow-shell e007-cluster-page e007-full-pipeline-page"><div class="flow-step">E007 · GATE 15A · ${localized({ en: "LOCKED BEFORE THE FULL RUN", ru: "ЗАМОРОЖЕНО ДО ПОЛНОГО ЗАПУСКА" })}</div><h1>${localized({ en: "Can the whole harness carry one question to a safe answer?", ru: "Сможет ли весь harness провести вопрос до безопасного ответа?" })}</h1><p class="contribution-intro">${localized({ en: "Thirty frozen questions. Sixty-four logical pocket i. Qwen3-1.7B writes the claims and final answers; small fixed modules search and check.", ru: "Тридцать замороженных вопросов. Шестьдесят четыре логических pocket i. Qwen3‑1.7B пишет утверждения и ответы; маленькие фиксированные модули ищут и проверяют." })}</p><div class="experiment-loading">${c("loading")}</div></section>`;
+}
+
+async function loadE007FullPipeline() {
+  const target = document.querySelector(".e007-full-pipeline-page");
+  if (!target) return;
+  try {
+    const response = await fetch("/experiments/E007/full-pipeline-qwen17b-protocol-v0.1.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Gate 15A protocol missing");
+    const protocol = await response.json();
+    const steps = protocol.fixed_modules.map(item => `<article><span>${item.step}</span><strong>${escapeHTML(item.module)}</strong><p>${escapeHTML(item.job)}</p></article>`).join("");
+    const familyNames = {
+      join_distributed_parts: localized({ en: "JOIN TWO PIECES", ru: "СОБРАТЬ ДВЕ ЧАСТИ" }),
+      reject_condition_mismatch: localized({ en: "REJECT A LOOKALIKE", ru: "ОТБРОСИТЬ ПОХОЖУЮ ЛОВУШКУ" }),
+      preserve_supported_minority: localized({ en: "KEEP A SUPPORTED MINORITY", ru: "СОХРАНИТЬ ОБОСНОВАННОЕ МЕНЬШИНСТВО" }),
+      prevent_secret_leak: localized({ en: "HIDE A SECRET", ru: "НЕ ВЫДАТЬ СЕКРЕТ" }),
+      admit_missing_knowledge: localized({ en: "ADMIT WHAT IS MISSING", ru: "ПРИЗНАТЬ НЕХВАТКУ ЗНАНИЙ" }),
+    };
+    const families = Object.entries(protocol.locked_inputs.question_families).map(([name, count]) => `<article><strong>${count}</strong><span>${escapeHTML(familyNames[name] || name)}</span></article>`).join("");
+    target.querySelector(".experiment-loading").outerHTML = `<section class="e007-cluster-result"><div class="e005-gate4-result-verdict needs-review"><span>${localized({ en: "PLAN LOCKED · MODELS HAVE NOT RUN", ru: "ПЛАН ЗАМОРОЖЕН · МОДЕЛИ ЕЩЁ НЕ ЗАПУЩЕНЫ" })}</span><h2>${escapeHTML(localized({ en: protocol.plain_language_question, ru: "Сможет ли вся машина найти нужных помощников, сохранить доказательства, спрятать секреты и дать полезный ответ без выдумки?" }))}</h2><p>${localized({ en: "If even one locked gate fails, the public result remains a failure. We do not start building the app from a failed run.", ru: "Если хотя бы один зафиксированный критерий не пройдёт, результат останется неудачным. Приложение по неудачному прогону не начинаем." })}</p></div><div class="e007-result-metrics"><article><span>POCKET I</span><strong>${protocol.locked_inputs.logical_pocket_i}</strong></article><article><span>${localized({ en: "DOCUMENTS", ru: "ДОКУМЕНТОВ" })}</span><strong>${protocol.locked_inputs.documents}</strong></article><article><span>${localized({ en: "QUESTIONS", ru: "ВОПРОСОВ" })}</span><strong>${protocol.locked_inputs.questions}</strong></article></div><div class="e007-full-families">${families}</div><h2>${localized({ en: "The complete path", ru: "Весь путь" })}</h2><div class="e007-accepted-pipeline">${steps}</div><p class="control-warning">${localized({ en: "This is synthetic development on one server. It checks the harness logic, not a real multi-device swarm.", ru: "Это synthetic development на одном сервере. Мы проверяем логику harness, а не настоящий swarm из разных устройств." })}</p><div class="actions"><a class="primary-link" href="/experiments/E007/full-pipeline-qwen17b-protocol-v0.1.json">${localized({ en: "FROZEN PLAN", ru: "ЗАМОРОЖЕННЫЙ ПЛАН" })} ↗</a><a class="quiet-link" href="/experiments/E007/world-v0.1.json">${localized({ en: "ALL 30 QUESTIONS", ru: "ВСЕ 30 ВОПРОСОВ" })} ↗</a></div></section>`;
+  } catch (error) {
+    target.querySelector(".experiment-loading").textContent = localized({ en: "Gate 15A could not be loaded.", ru: "Не удалось загрузить Gate 15A." });
+  }
+}
+
 function e005MethodName(method) {
   const names = {
     lexical: "methodLexical",
@@ -6009,6 +6035,10 @@ function render() {
     document.title = `${localized({ en: "Closed-world answer", ru: "Ответ без додумывания" })} — i`;
     app.innerHTML = withLanguage(e007AnswerSynthesisShell());
     loadE007AnswerSynthesis();
+  } else if (path === "experiment/e007/gate-15a") {
+    document.title = `${localized({ en: "Full pipeline", ru: "Весь pipeline" })} — i`;
+    app.innerHTML = withLanguage(e007FullPipelineShell());
+    loadE007FullPipeline();
   } else if (path === "experiment/connector") {
     document.title = `${l("connectorTitle")} — i`;
     app.innerHTML = withLanguage(connectorShell());
