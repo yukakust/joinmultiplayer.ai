@@ -1190,3 +1190,16 @@ merge remain out of scope until the owner reviews the cards.
 
 - `/experiments/E007/topic-index-protocol-v0.1.json`
 - `/experiments/E007/topic-index-node-v0.1.py`
+
+The first yukabox index run is complete. Of 64 main conversations, 52 produced
+protocol-valid cards. Eight of sixty short conversations failed. None of four
+long conversations passed the strict contract: three ended as ERROR and one
+returned fourteen topics despite the locked maximum of twelve. Total sequential
+runtime was 4,660 seconds. The most common failure was an incomplete topic tool
+call; invalid evidence coordinates and invalid tool JSON also occurred.
+
+Do not start question search or MacBook indexing with this implementation yet.
+Human semantic review of valid cards remains pending, and long conversations
+need a resumable bounded tree merge rather than one final unbounded merge. Public
+mechanical result:
+`/experiments/E007/topic-index-result-yukabox-v0.1.json`.

@@ -1,0 +1,583 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.1",
+  "status": "yukabox_index_complete_owner_topic_review_pending",
+  "protocol": "/experiments/E007/topic-index-protocol-v0.1.json",
+  "result": {
+    "conversations": 64,
+    "valid_cards": 52,
+    "invalid_cards": 12,
+    "short_conversations": {
+      "valid": 52,
+      "total": 60
+    },
+    "long_conversations": {
+      "valid": 0,
+      "total": 4
+    },
+    "runtime_seconds": 4660,
+    "error_kinds": {
+      "incomplete merge tool-call": 3,
+      "incomplete topic tool-call": 6,
+      "invalid tool JSON": 3,
+      "invalid evidence coordinate": 3,
+      "too many conversation topics": 1
+    }
+  },
+  "cards": [
+    {
+      "card_id": "YUKA-C0001",
+      "qwen_tokens": 2417,
+      "blocks": 1,
+      "topic_count": 5,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0002",
+      "qwen_tokens": 252010,
+      "blocks": 32,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "incomplete merge tool-call",
+        "incomplete topic tool-call",
+        "invalid tool JSON"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0003",
+      "qwen_tokens": 3579,
+      "blocks": 1,
+      "topic_count": 5,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0004",
+      "qwen_tokens": 3040,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0005",
+      "qwen_tokens": 4027,
+      "blocks": 1,
+      "topic_count": 8,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0006",
+      "qwen_tokens": 2861,
+      "blocks": 1,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "invalid evidence coordinate"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0007",
+      "qwen_tokens": 3623,
+      "blocks": 1,
+      "topic_count": 5,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0008",
+      "qwen_tokens": 3609,
+      "blocks": 1,
+      "topic_count": 6,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0009",
+      "qwen_tokens": 2261,
+      "blocks": 1,
+      "topic_count": 8,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0010",
+      "qwen_tokens": 3423,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0011",
+      "qwen_tokens": 1732,
+      "blocks": 1,
+      "topic_count": 8,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0012",
+      "qwen_tokens": 3161,
+      "blocks": 1,
+      "topic_count": 6,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0013",
+      "qwen_tokens": 2475,
+      "blocks": 1,
+      "topic_count": 5,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0014",
+      "qwen_tokens": 2739,
+      "blocks": 1,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "invalid tool JSON"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0015",
+      "qwen_tokens": 3267,
+      "blocks": 1,
+      "topic_count": 8,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0016",
+      "qwen_tokens": 3548,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0017",
+      "qwen_tokens": 3391,
+      "blocks": 1,
+      "topic_count": 6,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0018",
+      "qwen_tokens": 1025,
+      "blocks": 1,
+      "topic_count": 3,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0019",
+      "qwen_tokens": 1752,
+      "blocks": 1,
+      "topic_count": 6,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0020",
+      "qwen_tokens": 3277,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0021",
+      "qwen_tokens": 789,
+      "blocks": 1,
+      "topic_count": 3,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0022",
+      "qwen_tokens": 446,
+      "blocks": 1,
+      "topic_count": 2,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0023",
+      "qwen_tokens": 1373,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0024",
+      "qwen_tokens": 134390,
+      "blocks": 18,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "incomplete merge tool-call",
+        "incomplete topic tool-call"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0025",
+      "qwen_tokens": 1847,
+      "blocks": 1,
+      "topic_count": 8,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0026",
+      "qwen_tokens": 943,
+      "blocks": 1,
+      "topic_count": 3,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0027",
+      "qwen_tokens": 482,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0028",
+      "qwen_tokens": 5143,
+      "blocks": 1,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "incomplete topic tool-call"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0029",
+      "qwen_tokens": 3631,
+      "blocks": 1,
+      "topic_count": 6,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0030",
+      "qwen_tokens": 725,
+      "blocks": 1,
+      "topic_count": 3,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0031",
+      "qwen_tokens": 1858,
+      "blocks": 1,
+      "topic_count": 3,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0032",
+      "qwen_tokens": 77233,
+      "blocks": 11,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "incomplete merge tool-call",
+        "incomplete topic tool-call"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0033",
+      "qwen_tokens": 509,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0034",
+      "qwen_tokens": 1085,
+      "blocks": 1,
+      "topic_count": 6,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0035",
+      "qwen_tokens": 3024,
+      "blocks": 1,
+      "topic_count": 8,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0036",
+      "qwen_tokens": 509,
+      "blocks": 1,
+      "topic_count": 2,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0037",
+      "qwen_tokens": 2280,
+      "blocks": 1,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "invalid evidence coordinate"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0038",
+      "qwen_tokens": 137,
+      "blocks": 1,
+      "topic_count": 1,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0039",
+      "qwen_tokens": 19881,
+      "blocks": 3,
+      "topic_count": 14,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "too many conversation topics"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0040",
+      "qwen_tokens": 3385,
+      "blocks": 1,
+      "topic_count": 5,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0041",
+      "qwen_tokens": 1928,
+      "blocks": 1,
+      "topic_count": 3,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0042",
+      "qwen_tokens": 444,
+      "blocks": 1,
+      "topic_count": 2,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0043",
+      "qwen_tokens": 3065,
+      "blocks": 1,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "invalid evidence coordinate"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0044",
+      "qwen_tokens": 716,
+      "blocks": 1,
+      "topic_count": 2,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0045",
+      "qwen_tokens": 1153,
+      "blocks": 1,
+      "topic_count": 3,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0046",
+      "qwen_tokens": 139,
+      "blocks": 1,
+      "topic_count": 2,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0047",
+      "qwen_tokens": 1372,
+      "blocks": 1,
+      "topic_count": 5,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0048",
+      "qwen_tokens": 691,
+      "blocks": 1,
+      "topic_count": 2,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0049",
+      "qwen_tokens": 695,
+      "blocks": 1,
+      "topic_count": 2,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0050",
+      "qwen_tokens": 5512,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0051",
+      "qwen_tokens": 1926,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0052",
+      "qwen_tokens": 557,
+      "blocks": 1,
+      "topic_count": 2,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0053",
+      "qwen_tokens": 5028,
+      "blocks": 1,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "incomplete topic tool-call"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0054",
+      "qwen_tokens": 693,
+      "blocks": 1,
+      "topic_count": 2,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0055",
+      "qwen_tokens": 805,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0056",
+      "qwen_tokens": 117,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0057",
+      "qwen_tokens": 129,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0058",
+      "qwen_tokens": 1045,
+      "blocks": 1,
+      "topic_count": 3,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0059",
+      "qwen_tokens": 860,
+      "blocks": 1,
+      "topic_count": 3,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0060",
+      "qwen_tokens": 1623,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0061",
+      "qwen_tokens": 5247,
+      "blocks": 1,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "invalid tool JSON"
+      ]
+    },
+    {
+      "card_id": "YUKA-C0062",
+      "qwen_tokens": 4936,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0063",
+      "qwen_tokens": 1872,
+      "blocks": 1,
+      "topic_count": 4,
+      "protocol_status": "VALID",
+      "error_kinds": []
+    },
+    {
+      "card_id": "YUKA-C0064",
+      "qwen_tokens": 7174,
+      "blocks": 1,
+      "topic_count": 0,
+      "protocol_status": "ERROR",
+      "error_kinds": [
+        "incomplete topic tool-call"
+      ]
+    }
+  ],
+  "decision": {
+    "accepted": "Conversation-level cards are promising for short chats and deserve human semantic review.",
+    "rejected": "The current one-shot long-conversation merge and current tool-call reliability are not accepted.",
+    "next": "Inspect real card meanings, then replace long-chat one-shot merge with a resumable bounded tree merge before indexing MacBook. Do not test question search yet."
+  },
+  "privacy": {
+    "raw_conversations_public": false,
+    "topic_names_public": false,
+    "topic_summaries_public": false,
+    "session_ids_public": false,
+    "card_metrics_public": true
+  },
+  "claim_boundary": "This result measures mechanical card completion, not whether the generated topic names faithfully summarize every conversation."
+}

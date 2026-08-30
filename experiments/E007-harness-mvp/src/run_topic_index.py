@@ -8,10 +8,6 @@ import json
 import re
 from pathlib import Path
 
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-
 MODEL = "Qwen/Qwen3-8B"
 REVISION = "b968826d9c46dd6066d109eabc6255188de91218"
 SHORT_LIMIT = 10_000
@@ -52,6 +48,8 @@ def parse_call(raw: str, name: str) -> dict:
 
 
 def generate(model, tokenizer, user: str, tools: list[dict]) -> tuple[str, int]:
+    import torch
+
     prompt = tokenizer.apply_chat_template(
         [{"role": "system", "content": "You make a faithful table of contents. Use only supplied text. Never invent a topic or evidence coordinate."}, {"role": "user", "content": user}],
         tools=tools, tokenize=False, add_generation_prompt=True, enable_thinking=False,
@@ -143,6 +141,9 @@ def index_conversation(model, tokenizer, conversation: dict) -> dict:
 
 
 def main() -> None:
+    import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)

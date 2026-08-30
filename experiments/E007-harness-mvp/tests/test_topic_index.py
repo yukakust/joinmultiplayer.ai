@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 CLIENT = ROOT / "site/experiments/E007/topic-index-node-v0.1.py"
 INDEXER = ROOT / "experiments/E007-harness-mvp/src/run_topic_index.py"
+PUBLIC_BUILDER = ROOT / "experiments/E007-harness-mvp/src/build_topic_index_public.py"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -41,6 +42,24 @@ class TopicIndexTest(unittest.TestCase):
         indexer = load(INDEXER, "topic_indexer")
         units = [{"tokens": 4000}, {"tokens": 4000}, {"tokens": 4000}]
         self.assertEqual([len(item) for item in indexer.blocks(units)], [2, 1])
+
+    def test_public_result_contains_metrics_but_no_private_topic_text(self):
+        builder = load(PUBLIC_BUILDER, "topic_public_builder")
+        private = {"cards": [{
+            "card_id": "C0001", "qwen_tokens": 900,
+            "blocks": 1, "status": "CARD", "errors": [],
+            "topics": [{
+                "name": "PRIVATE TOPIC", "summary": "PRIVATE SUMMARY",
+                "evidence": [{"message_id": "PRIVATE-MESSAGE"}],
+            }],
+        }]}
+        public = builder.build(private, 12)
+        encoded = json.dumps(public)
+        self.assertEqual(public["result"]["valid_cards"], 1)
+        self.assertEqual(public["cards"][0]["topic_count"], 1)
+        self.assertNotIn("PRIVATE TOPIC", encoded)
+        self.assertNotIn("PRIVATE SUMMARY", encoded)
+        self.assertNotIn("PRIVATE-MESSAGE", encoded)
 
 
 if __name__ == "__main__":
