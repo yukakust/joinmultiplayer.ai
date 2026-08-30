@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>E007 · Gate 16C.1</title>
+  <link rel="stylesheet" href="/style.css?v=e007-gate16c1-v01">
+  <style>
+    body{background:#f4f0e5;color:#111;margin:0}.page{width:100%;max-width:none;padding:clamp(20px,3vw,58px);box-sizing:border-box}.page h1{font-size:clamp(42px,7vw,108px);line-height:.92;max-width:16ch;margin:.25em 0}.lead{font-size:clamp(20px,2vw,31px);max-width:48em}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:38px 0;border:1px solid #aaa}.metrics div{padding:22px;border-right:1px solid #aaa}.metrics div:last-child{border:0}.metrics span{display:block;color:#6d675d;text-transform:uppercase}.metrics strong{display:block;font-size:clamp(34px,5vw,70px);margin-top:8px}.table-wrap{overflow-x:auto;border:1px solid #aaa}.results{width:100%;border-collapse:collapse;min-width:1120px}.results th,.results td{text-align:left;vertical-align:top;padding:17px;border-right:1px solid #aaa;border-bottom:1px solid #aaa}.results th:last-child,.results td:last-child{border-right:0}.results tr:last-child td{border-bottom:0}.results th{font-size:14px;text-transform:uppercase;color:#6d675d}.results .q{width:28%}.results .claim{width:30%}.ok{box-shadow:inset 8px 0 #83b77c}.partial{box-shadow:inset 8px 0 #daa44f}.bad{box-shadow:inset 8px 0 #df6b55}.tag{display:inline-block;padding:5px 9px;border:1px solid currentColor;border-radius:999px;font-weight:700;margin-bottom:8px}.note,.decision{padding:20px 24px;margin:34px 0;font-size:clamp(17px,1.5vw,23px)}.note{border-left:8px solid #daa44f}.decision{border-left:8px solid #df6b55}.links{display:flex;gap:24px;flex-wrap:wrap}.links a{color:inherit;font-weight:700}@media(max-width:850px){.metrics{grid-template-columns:1fr 1fr}.metrics div:nth-child(2){border-right:0}}
+  </style>
+</head>
+<body>
+<main class="page">
+  <p>E007 · GATE 16C.1 · ОДИН ВОПРОС — ОДНА КНОПКА</p>
+  <h1>Ни один вопрос больше не потерялся.</h1>
+  <p class="lead">Обычный код задавал Qwen3‑8B по одному вопросу к уже прочитанному разговору. Модель десять раз нажала ровно одну кнопку. Она нашла все пять существующих ответов, но один раз неправильно назвала отсутствие ответа найденным ответом.</p>
+  <section class="metrics"><div><span>кнопок получено</span><strong>10/10</strong></div><div><span>ответы найдены</span><strong>5/5</strong></div><div><span>пусто распознано</span><strong>4/5</strong></div><div><span>молчаливых потерь</span><strong>0</strong></div></section>
+  <div class="note"><strong>Главная находка:</strong> C2 раньше потерялся внутри пачки из пяти вопросов. Отдельно модель нашла его в том же длинном разговоре. Значит проблема была не только в понимании текста — её создавал и групповой формат задания.</div>
+  <h2>Все десять вопросов и кнопок</h2>
+  <div class="table-wrap"><table class="results"><thead><tr><th>Вопрос</th><th>Нужно</th><th>Нажато</th><th class="claim">Что вернул pocket i</th><th>Проверка</th></tr></thead><tbody id="rows"><tr><td colspan="5">Загрузка…</td></tr></tbody></table></div>
+  <div class="decision"><strong>Честный итог:</strong> строгий Gate не пройден. Мы принимаем архитектуру «один вопрос — одна обязательная квитанция», но пока не принимаем качество выбора FOUND/EMPTY и точность списка доказательств.</div>
+  <nav class="links"><a href="/experiments/E007/sender-single-tool-result-v0.1.json">Результат JSON ↗</a><a href="/experiments/E007/sender-single-tool-protocol-v0.1.json">Locked protocol ↗</a><a href="/experiment/e007/gate-16c/">Предыдущий Gate ↗</a></nav>
+</main>
+<script>
+fetch('/experiments/E007/sender-single-tool-result-v0.1.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));document.querySelector('#rows').innerHTML=data.questions.map(q=>`<tr class="${q.score===2?'ok':q.score===1?'partial':'bad'}"><td><strong>${esc(q.id)}</strong><br>${esc(q.question)}</td><td>${esc(q.expected)}</td><td><span class="tag">${esc(q.tool)}</span></td><td>${q.claim?esc(q.claim):'—'}<br><small>Сообщения: ${esc(q.evidence.length?q.evidence.join(', '):'—')}</small></td><td><strong>${esc(q.verdict)}</strong><br>${esc(q.reason)}</td></tr>`).join('')}).catch(()=>{document.querySelector('#rows').innerHTML='<tr><td colspan="5">Не удалось загрузить результат.</td></tr>'})
+</script>
+</body>
+</html>

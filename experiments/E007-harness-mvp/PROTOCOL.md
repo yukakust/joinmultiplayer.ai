@@ -1134,3 +1134,15 @@ exactly one of `send_found(claim, evidence)` or `send_empty()`. Ordinary code
 owns the loop and converts a missing or malformed call into `ERROR`.
 
 - `/experiments/E007/sender-single-tool-protocol-v0.1.json`
+
+The run returned 10/10 valid tool receipts with no silently lost question. All
+five supported answers were found, including C2, which the grouped Gate 16C had
+incorrectly closed as EMPTY. Four of five absent controls used `send_empty`.
+For C5 the model instead called `send_found` to say that the requested value was
+not specified and cited the entire conversation. Evidence selection was exact
+for three of five supported answers; C2 and C3 included unnecessary messages.
+
+The locked gate therefore fails. Accept the code-owned one-question loop and
+mandatory receipt. Do not yet accept the current FOUND/EMPTY wording or
+unverified evidence list. Public result:
+`/experiments/E007/sender-single-tool-result-v0.1.json`.

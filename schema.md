@@ -599,3 +599,17 @@ hidden record or secret was selected.
 The next design keeps whole-conversation reading but makes ordinary code own
 completion: one cached conversation prefix, one question, and exactly one
 required receipt at a time.
+
+## Accepted one-question sender loop
+
+Gate 16C.1 establishes the completion mechanism: the network sends one question
+at a time, ordinary code creates one independent generation branch, and exactly
+one tool receipt is required. This recovered 10/10 receipts and all 5/5 answers
+that really existed in the two conversations. Grouped multi-question extraction
+is not part of the MVP path.
+
+The semantic contract still needs one refinement. Qwen3-8B called `send_found`
+once merely to say that the requested value was absent, and two correct answers
+named more evidence messages than necessary. Until a follow-up passes, FOUND
+does not enter the network without checking that it contains a positive answer
+and the smallest supporting evidence set.

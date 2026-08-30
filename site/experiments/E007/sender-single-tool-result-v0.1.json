@@ -1,0 +1,161 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16C.1",
+  "status": "completed_development_test",
+  "protocol": "/experiments/E007/sender-single-tool-protocol-v0.1.json",
+  "hypothesis": "When ordinary code asks one question at a time and requires one tool receipt, Qwen3-8B can inspect a cached conversation without silently losing questions.",
+  "result": {
+    "valid_tool_receipts": "10/10",
+    "supported_recall": "5/5",
+    "empty_correct": "4/5",
+    "strict_evidence": "3/5",
+    "silent_losses": 0,
+    "hidden_records_selected": 0,
+    "secrets_exposed": 0,
+    "locked_gate_passed": false
+  },
+  "timing": [
+    {
+      "conversation": "CHAT-C",
+      "visible_tokens": 12217,
+      "prefill_seconds": 165.592,
+      "cache_gib": 1.724
+    },
+    {
+      "conversation": "CHAT-D",
+      "visible_tokens": 6728,
+      "prefill_seconds": 78.402,
+      "cache_gib": 0.97
+    }
+  ],
+  "questions": [
+    {
+      "id": "C1",
+      "question": "Какие три состояния знания предложили для будущей сети pocket i?",
+      "expected": "FOUND",
+      "tool": "send_found",
+      "claim": "Published knowledge, Callable knowledge и Compressed knowledge.",
+      "evidence": ["M0002"],
+      "score": 2,
+      "verdict": "Верно",
+      "reason": "Найдены и ответ, и точное поддерживающее сообщение."
+    },
+    {
+      "id": "C2",
+      "question": "Какие расходы и риски маршрутизатор должен вычитать из ценности новой информации?",
+      "expected": "FOUND",
+      "tool": "send_found",
+      "claim": "Корреляцию с уже выбранными i, задержку, стоимость вычислений, расход энергии и риск раскрытия данных.",
+      "evidence": ["M0002", "M0004"],
+      "score": 1,
+      "verdict": "Ответ найден, доказательство слишком широкое",
+      "reason": "Главная формула находится в M0002. M0004 поддерживает только часть про задержку; модель также неудачно назвала саму новую информацию вычитаемым параметром."
+    },
+    {
+      "id": "C3",
+      "question": "Что решили делать, если из двух параллельно вызванных экспертов один отключился, не закончив ответ?",
+      "expected": "FOUND",
+      "tool": "send_found",
+      "claim": "Полностью отбросить незаконченный вклад и использовать вклад закончившего эксперта.",
+      "evidence": ["M0003", "M0005", "M0006", "M0007", "M0008"],
+      "score": 1,
+      "verdict": "Ответ найден, приложено лишнее",
+      "reason": "Решение прямо записано в M0008; остальные четыре сообщения — история обсуждения, а не необходимые доказательства."
+    },
+    {
+      "id": "C4",
+      "question": "Какой точный алгоритм шифрования выбрали для локальной памяти pocket i?",
+      "expected": "EMPTY",
+      "tool": "send_empty",
+      "claim": "",
+      "evidence": [],
+      "score": 2,
+      "verdict": "Верно",
+      "reason": "Такого решения в разговоре нет."
+    },
+    {
+      "id": "C5",
+      "question": "Какое точное максимальное число удалённых экспертов разрешили вызывать на один запрос?",
+      "expected": "EMPTY",
+      "tool": "send_found",
+      "claim": "Точное максимальное число не указано в диалоге.",
+      "evidence": ["M0001", "M0002", "M0003", "M0004", "M0005", "M0006", "M0007", "M0008", "M0009", "M0010"],
+      "score": 0,
+      "verdict": "Нажата неправильная кнопка",
+      "reason": "Смысл ответа — данных нет, поэтому требовался send_empty. Нельзя доказывать отсутствие ссылкой на весь разговор."
+    },
+    {
+      "id": "D1",
+      "question": "Какие четыре режима решили сравнивать для каждой предметной области?",
+      "expected": "FOUND",
+      "tool": "send_found",
+      "claim": "Frozen base; локальный RAG; локальный adapter; adapter вместе с локальным RAG.",
+      "evidence": ["M0010"],
+      "score": 2,
+      "verdict": "Верно",
+      "reason": "Ответ и точное сообщение найдены."
+    },
+    {
+      "id": "D2",
+      "question": "Из каких четырёх частей должен состоять проверяемый ответ первого locked benchmark?",
+      "expected": "FOUND",
+      "tool": "send_found",
+      "claim": "Чемпион; заболевание; тип или механизм наследования; краткое обоснование.",
+      "evidence": ["M0010"],
+      "score": 2,
+      "verdict": "Верно",
+      "reason": "Ответ и точное сообщение найдены."
+    },
+    {
+      "id": "D3",
+      "question": "Какую конкретную foundation model окончательно выбрали для эксперимента?",
+      "expected": "EMPTY",
+      "tool": "send_empty",
+      "claim": "",
+      "evidence": [],
+      "score": 2,
+      "verdict": "Верно",
+      "reason": "Такого окончательного выбора в разговоре нет."
+    },
+    {
+      "id": "D4",
+      "question": "Какое точное число обучающих примеров утвердили для каждой локальной ветви?",
+      "expected": "EMPTY",
+      "tool": "send_empty",
+      "claim": "",
+      "evidence": [],
+      "score": 2,
+      "verdict": "Верно",
+      "reason": "Такого числа в разговоре нет."
+    },
+    {
+      "id": "D5",
+      "question": "Какую конкретную модель телефона выбрали для физического запуска?",
+      "expected": "EMPTY",
+      "tool": "send_empty",
+      "claim": "",
+      "evidence": [],
+      "score": 2,
+      "verdict": "Верно",
+      "reason": "Такой модели телефона в разговоре нет."
+    }
+  ],
+  "decision": {
+    "accepted": [
+      "One question per independent branch.",
+      "Ordinary code requires exactly one tool receipt.",
+      "The cached conversation may be reused without grouping decisions into one generation."
+    ],
+    "not_yet_accepted": [
+      "The current FOUND versus EMPTY tool descriptions are reliable enough.",
+      "The model returns minimal exact evidence without a second check."
+    ],
+    "next": "Clarify that send_found is only for a requested value present in the conversation, and require the smallest supporting message set. Re-test the failure shapes before moving to library search."
+  },
+  "privacy": {
+    "raw_conversations_public": false,
+    "session_ids_public": false,
+    "raw_tool_output_public": false
+  }
+}
