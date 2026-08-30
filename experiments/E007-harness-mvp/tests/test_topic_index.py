@@ -20,6 +20,8 @@ WHOLE_CHAT_READER_16D5_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reade
 WHOLE_CHAT_READER_16D5_RESULT = ROOT / "site/experiments/E007/whole-chat-reader-gate16d5-result-v0.1.json"
 ATOMIC_READER_16D6_PROTOCOL = ROOT / "site/experiments/E007/atomic-reader-gate16d6-protocol-v0.1.json"
 ATOMIC_READER_16D6_RESULT = ROOT / "site/experiments/E007/atomic-reader-gate16d6-result-v0.1.json"
+FACT_READER_16D7_PROTOCOL = ROOT / "site/experiments/E007/fact-reader-gate16d7-protocol-v0.1.json"
+FACT_READER_16D7_RESULT = ROOT / "site/experiments/E007/fact-reader-gate16d7-result-v0.1.json"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -168,6 +170,19 @@ class TopicIndexTest(unittest.TestCase):
         self.assertEqual(result["summary"]["complete_answers"], 5)
         self.assertFalse(result["summary"]["gate_passed"])
         public_text = ATOMIC_READER_16D6_RESULT.read_text()
+        self.assertNotIn("raw_message", public_text)
+        self.assertNotIn('"usage"', public_text)
+
+    def test_gate16d7_has_one_fact_calls_and_preserves_failed_result(self):
+        protocol = json.loads(FACT_READER_16D7_PROTOCOL.read_text())
+        result = json.loads(FACT_READER_16D7_RESULT.read_text())
+        self.assertEqual(len(protocol["questions"]), 5)
+        self.assertEqual(sum(len(item["facts"]) for item in protocol["questions"]), 25)
+        self.assertEqual(result["summary"]["correct_message"], 21)
+        self.assertEqual(result["summary"]["fact_meanings_preserved"], 17)
+        self.assertEqual(result["summary"]["complete_hard_questions"], 2)
+        self.assertFalse(result["summary"]["gate_passed"])
+        public_text = FACT_READER_16D7_RESULT.read_text()
         self.assertNotIn("raw_message", public_text)
         self.assertNotIn('"usage"', public_text)
 

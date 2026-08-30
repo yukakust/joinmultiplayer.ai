@@ -1,0 +1,362 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.7",
+  "status": "completed_failed",
+  "protocol": "/experiments/E007/fact-reader-gate16d7-protocol-v0.1.json",
+  "model": "Qwen3-8B Q4_K_M",
+  "summary": {
+    "valid_locator_receipts": 25,
+    "correct_message": 21,
+    "tool_format_passed": 12,
+    "fact_meanings_preserved": 17,
+    "fact_meanings_possible": 25,
+    "complete_hard_questions": 2,
+    "complete_hard_questions_possible": 5,
+    "baseline_complete_hard_questions": 0,
+    "gate_passed": false
+  },
+  "questions": [
+    {
+      "question_id": "Q02",
+      "question": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+      "facts": [
+        {
+          "id": "Q02-F1",
+          "question_id": "Q02",
+          "fact_id": "F1",
+          "fact_question": "Какую точность показал full swarm в E002?",
+          "selected_message_id": "M0013",
+          "locator_passed": true,
+          "answer": "Full-swarm accuracy was 100% for N=2,4,8,16,32.",
+          "tool_format_passed": true,
+          "meaning_passed": true,
+          "review": "Точность 100% найдена."
+        },
+        {
+          "id": "Q02-F2",
+          "question_id": "Q02",
+          "fact_id": "F2",
+          "fact_question": "При каких значениях N проверили full swarm в E002?",
+          "selected_message_id": "M0013",
+          "locator_passed": true,
+          "answer": "Full-swarm accuracy was 100% for N=2,4,8,16,32.",
+          "tool_format_passed": true,
+          "meaning_passed": true,
+          "review": "Все пять значений N найдены."
+        },
+        {
+          "id": "Q02-F3",
+          "question_id": "Q02",
+          "fact_id": "F3",
+          "fact_question": "Какую точность показал exact RAG в E002?",
+          "selected_message_id": "M0013",
+          "locator_passed": true,
+          "answer": "Exact RAG showed 100% accuracy in E002.",
+          "tool_format_passed": true,
+          "meaning_passed": true,
+          "review": "Результат exact RAG найден."
+        },
+        {
+          "id": "Q02-F4",
+          "question_id": "Q02",
+          "fact_id": "F4",
+          "fact_question": "Какую точность показал symbolic ensemble в E002?",
+          "selected_message_id": "M0013",
+          "locator_passed": true,
+          "answer": "Symbolic ensemble показал точность 100% в E002.",
+          "tool_format_passed": true,
+          "meaning_passed": true,
+          "review": "Результат symbolic ensemble найден."
+        },
+        {
+          "id": "Q02-F5",
+          "question_id": "Q02",
+          "fact_id": "F5",
+          "fact_question": "Какой вывод о преимуществе swarm разрешают результаты E002?",
+          "selected_message_id": "M0013",
+          "locator_passed": true,
+          "answer": "Результаты E002 показывают, что swarm обеспечивает 100% точность в нескольких тестах.",
+          "tool_format_passed": true,
+          "meaning_passed": false,
+          "review": "Вместо «преимущество не доказано» снова повторила 100% swarm."
+        }
+      ],
+      "code_joined_answer": "Full-swarm accuracy was 100% for N=2,4,8,16,32. Full-swarm accuracy was 100% for N=2,4,8,16,32. Exact RAG showed 100% accuracy in E002. Symbolic ensemble показал точность 100% в E002. Результаты E002 показывают, что swarm обеспечивает 100% точность в нескольких тестах.",
+      "complete": false
+    },
+    {
+      "question_id": "Q06",
+      "question": "Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?",
+      "facts": [
+        {
+          "id": "Q06-F1",
+          "question_id": "Q06",
+          "fact_id": "F1",
+          "fact_question": "Что создавалось заново при каждом session call?",
+          "selected_message_id": "M0005",
+          "locator_passed": false,
+          "answer": "При каждом session call создавалось заново C4 RED inventory.",
+          "tool_format_passed": true,
+          "meaning_passed": false,
+          "review": "Выбрала соседнюю проблему C4 вместо fresh unrestricted record."
+        },
+        {
+          "id": "Q06-F2",
+          "question_id": "Q06",
+          "fact_id": "F2",
+          "fact_question": "Как создавалась correlation при каждом session call?",
+          "selected_message_id": "M0005",
+          "locator_passed": false,
+          "answer": "Correlation was created during the session call by treating the session-to-parser audit handoff as if the still-future C3 receipt handoff existed.",
+          "tool_format_passed": true,
+          "meaning_passed": false,
+          "review": "Выбрала соседнюю проблему C4 вместо random correlation."
+        },
+        {
+          "id": "Q06-F3",
+          "question_id": "Q06",
+          "fact_id": "F3",
+          "fact_question": "Что делал первый завершившийся socket с audit?",
+          "selected_message_id": "M0005",
+          "locator_passed": true,
+          "answer": "Первый завершившийся socket с audit выполнял проверку бюджета и схемы аудита, даже though они предназначены для многократных запросов.",
+          "tool_format_passed": true,
+          "meaning_passed": false,
+          "review": "Не сказала, что первый socket закрывал весь audit или singleton array."
+        },
+        {
+          "id": "Q06-F4",
+          "question_id": "Q06",
+          "fact_id": "F4",
+          "fact_question": "Что происходило с другими concurrent sockets в audit?",
+          "selected_message_id": "M0005",
+          "locator_passed": false,
+          "answer": "Other concurrent sockets were affected by the audit due to the session-to-parser handoff being treated as if the C3 receipt handoff existed.",
+          "tool_format_passed": true,
+          "meaning_passed": false,
+          "review": "Не сказала, что другие concurrent sockets выпадали из audit."
+        },
+        {
+          "id": "Q06-F5",
+          "question_id": "Q06",
+          "fact_id": "F5",
+          "fact_question": "Какие общие лимиты admission мог превысить?",
+          "selected_message_id": "M0005",
+          "locator_passed": false,
+          "answer": "Общие лимиты admission могли превысить из-за того, что производитель закрывал всю обработку после одного сокета/запроса, даже если бюджет и схема аудита были распределены по нескольким запросам.",
+          "tool_format_passed": true,
+          "meaning_passed": false,
+          "review": "Не назвала оба превышаемых лимита: maxHttpRequests и maxBytes."
+        }
+      ],
+      "code_joined_answer": "При каждом session call создавалось заново C4 RED inventory. Correlation was created during the session call by treating the session-to-parser audit handoff as if the still-future C3 receipt handoff existed. Первый завершившийся socket с audit выполнял проверку бюджета и схемы аудита, даже though они предназначены для многократных запросов. Other concurrent sockets were affected by the audit due to the session-to-parser handoff being treated as if the C3 receipt handoff existed. Общие лимиты admission могли превысить из-за того, что производитель закрывал всю обработку после одного сокета/запроса, даже если бюджет и схема аудита были распределены по нескольким запросам.",
+      "complete": false
+    },
+    {
+      "question_id": "Q07",
+      "question": "Что удалось независимо подтвердить в customer-packaging checkout и какие две проверки выполнить не позволило окружение?",
+      "facts": [
+        {
+          "id": "Q07-F1",
+          "question_id": "Q07",
+          "fact_id": "F1",
+          "fact_question": "Какое состояние tracking-ветки customer-packaging подтвердили?",
+          "selected_message_id": "M0004",
+          "locator_passed": true,
+          "answer": "Состояние tracking-ветки customer-packaging подтверждено как корректное.",
+          "tool_format_passed": false,
+          "meaning_passed": false,
+          "review": "Сказала лишь «состояние корректное», но не зафиксировала clean tracking branch."
+        },
+        {
+          "id": "Q07-F2",
+          "question_id": "Q07",
+          "fact_id": "F2",
+          "fact_question": "Какой commit checkout customer-packaging подтвердили?",
+          "selected_message_id": "M0004",
+          "locator_passed": true,
+          "answer": "Commit checkout customer-packaging подтвержден как независимо совпавший с чистой tracking-веткой и exact SHA.",
+          "tool_format_passed": true,
+          "meaning_passed": true,
+          "review": "Exact candidate SHA найден."
+        },
+        {
+          "id": "Q07-F3",
+          "question_id": "Q07",
+          "fact_id": "F3",
+          "fact_question": "Какой remote использовал checkout customer-packaging?",
+          "selected_message_id": "M0004",
+          "locator_passed": true,
+          "answer": "Checkout использовал remote с alias Bitbucket.",
+          "tool_format_passed": false,
+          "meaning_passed": false,
+          "review": "Bitbucket назван, но потеряно важное свойство owner-private."
+        },
+        {
+          "id": "Q07-F4",
+          "question_id": "Q07",
+          "fact_id": "F4",
+          "fact_question": "Какую Docker-проверку заблокировало окружение?",
+          "selected_message_id": "M0004",
+          "locator_passed": true,
+          "answer": "Sandbox заблокировал доступ к Docker socket.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Docker socket найден."
+        },
+        {
+          "id": "Q07-F5",
+          "question_id": "Q07",
+          "fact_id": "F5",
+          "fact_question": "Какую loopback-проверку заблокировало окружение?",
+          "selected_message_id": "M0004",
+          "locator_passed": true,
+          "answer": "Sandbox заблокировал loopback-проверку.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Loopback curl найден."
+        }
+      ],
+      "code_joined_answer": "Состояние tracking-ветки customer-packaging подтверждено как корректное. Commit checkout customer-packaging подтвержден как независимо совпавший с чистой tracking-веткой и exact SHA. Checkout использовал remote с alias Bitbucket. Sandbox заблокировал доступ к Docker socket. Sandbox заблокировал loopback-проверку.",
+      "complete": false
+    },
+    {
+      "question_id": "Q08",
+      "question": "Какую точную проверку происхождения пропустил receipt loader и к какой ошибке это могло привести?",
+      "facts": [
+        {
+          "id": "Q08-F1",
+          "question_id": "Q08",
+          "fact_id": "F1",
+          "fact_question": "Какое поле root должен был взять receipt loader из manifest?",
+          "selected_message_id": "M0005",
+          "locator_passed": true,
+          "answer": "Root должен был взять из manifest поле `root.manifest.rootName`.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Поле root.manifest.rootName найдено."
+        },
+        {
+          "id": "Q08-F2",
+          "question_id": "Q08",
+          "fact_id": "F2",
+          "fact_question": "С каким именем receipt loader должен был сравнить manifest rootName?",
+          "selected_message_id": "M0005",
+          "locator_passed": true,
+          "answer": "Receipt loader should compare the manifest rootName with the root name in the receiptReference.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Имя из receiptReference найдено."
+        },
+        {
+          "id": "Q08-F3",
+          "question_id": "Q08",
+          "fact_id": "F3",
+          "fact_question": "Какой проверки равенства не было в receipt loader?",
+          "selected_message_id": "M0005",
+          "locator_passed": true,
+          "answer": "В receipt loader не проверяется равенство `root.manifest.rootName` и имени корня из `receiptReference`.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Отсутствующее сравнение равенства найдено."
+        },
+        {
+          "id": "Q08-F4",
+          "question_id": "Q08",
+          "fact_id": "F4",
+          "fact_question": "Какой неправильный root мог пройти из-за отсутствующей проверки?",
+          "selected_message_id": "M0005",
+          "locator_passed": true,
+          "answer": "Неправильный root мог пройти из-за отсутствия проверки соответствия имени root в manifest с именем root в receiptReference.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Copied или misrouted root передан по смыслу как неправильный root."
+        },
+        {
+          "id": "Q08-F5",
+          "question_id": "Q08",
+          "fact_id": "F5",
+          "fact_question": "Какую другую ссылку при этом могла записать очередь?",
+          "selected_message_id": "M0005",
+          "locator_passed": true,
+          "answer": "Очередь могла записать ссылку на корень, который не соответствует имени корня в manifest.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Ссылка очереди на другой root найдена."
+        }
+      ],
+      "code_joined_answer": "Root должен был взять из manifest поле `root.manifest.rootName`. Receipt loader should compare the manifest rootName with the root name in the receiptReference. В receipt loader не проверяется равенство `root.manifest.rootName` и имени корня из `receiptReference`. Неправильный root мог пройти из-за отсутствия проверки соответствия имени root в manifest с именем root в receiptReference. Очередь могла записать ссылку на корень, который не соответствует имени корня в manifest.",
+      "complete": true
+    },
+    {
+      "question_id": "Q09",
+      "question": "Кому в итоге выдали доступ к rental-market-engine, какого уровня был доступ и что ещё должен сделать получатель?",
+      "facts": [
+        {
+          "id": "Q09-F1",
+          "question_id": "Q09",
+          "fact_id": "F1",
+          "fact_question": "Какому пользователю отправили доступ?",
+          "selected_message_id": "M0021",
+          "locator_passed": true,
+          "answer": "Доступ отправлен пользователю Dianach.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Получатель Dianach найден."
+        },
+        {
+          "id": "Q09-F2",
+          "question_id": "Q09",
+          "fact_id": "F2",
+          "fact_question": "К какому репозиторию отправили доступ?",
+          "selected_message_id": "M0021",
+          "locator_passed": true,
+          "answer": "Доступ отправлен в репозиторий `yukakust/rental-market-engine`.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Репозиторий найден."
+        },
+        {
+          "id": "Q09-F3",
+          "question_id": "Q09",
+          "fact_id": "F3",
+          "fact_question": "Какой уровень доступа отправили?",
+          "selected_message_id": "M0021",
+          "locator_passed": true,
+          "answer": "Права `write` были отправлены пользователю Dianach.",
+          "tool_format_passed": true,
+          "meaning_passed": true,
+          "review": "Уровень write найден."
+        },
+        {
+          "id": "Q09-F4",
+          "question_id": "Q09",
+          "fact_id": "F4",
+          "fact_question": "Что уже было сделано с GitHub-доступом?",
+          "selected_message_id": "M0021",
+          "locator_passed": true,
+          "answer": "Приглашение на доступ к репозиторию было отправлено пользователю Dianach.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Отправленное приглашение найдено."
+        },
+        {
+          "id": "Q09-F5",
+          "question_id": "Q09",
+          "fact_id": "F5",
+          "fact_question": "Что ещё должен сделать получатель GitHub-доступа?",
+          "selected_message_id": "M0021",
+          "locator_passed": true,
+          "answer": "Получатель GitHub-доступа должен принять приглашение в GitHub.",
+          "tool_format_passed": false,
+          "meaning_passed": true,
+          "review": "Необходимость принять приглашение найдена."
+        }
+      ],
+      "code_joined_answer": "Доступ отправлен пользователю Dianach. Доступ отправлен в репозиторий `yukakust/rental-market-engine`. Права `write` были отправлены пользователю Dianach. Приглашение на доступ к репозиторию было отправлено пользователю Dianach. Получатель GitHub-доступа должен принять приглашение в GitHub.",
+      "complete": true
+    }
+  ],
+  "decision": "One-fact calls recovered two previously failed answers, but missed the locked 4/5 gate. Finer decomposition helps some cases but does not fix evidence location or implication questions by itself."
+}

@@ -1358,3 +1358,15 @@ granularity; it does not test automatic decomposition or unrelated-chat
 rejection. The hard-question baseline is 0/5 complete in Gate 16D.6.
 
 - `/experiments/E007/fact-reader-gate16d7-protocol-v0.1.json`
+
+The locked run returned a valid locator receipt for all 25 facts and selected an
+accepted message for 21/25. Human review found 17/25 required fact meanings.
+Only 12/25 extractor responses used the requested tool envelope; thirteen wrote
+their short fact as ordinary assistant text, so format and meaning are reported
+separately. Two of the five previously failed questions became complete; the
+locked 4/5 gate fails. Smaller calls help some cases, but do not by themselves
+fix nearby-message selection or implication questions such as “does this prove
+superiority?”.
+
+- `/experiments/E007/fact-reader-gate16d7-result-v0.1.json`
+- `/experiment/e007/gate-16d/fact-reader/`
