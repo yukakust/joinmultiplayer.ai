@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16C",
+  "status": "locked_before_inference",
+  "kind": "private-real-conversation development test",
+  "hypothesis": "Can one local pocket i read a previously unused real Codex conversation, return a useful claim with the correct message IDs when support exists, and return EMPTY when it does not?",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "dtype": "BF16",
+    "device": "yukabox CPU",
+    "thinking": false,
+    "decoding": "greedy",
+    "training": false
+  },
+  "input": {
+    "conversations": 2,
+    "previously_used_by_gate16b": false,
+    "source": "allowlisted Codex session JSONL",
+    "visible_records": "user and assistant messages only",
+    "excluded_records": ["reasoning", "tool calls", "tool outputs", "terminal logs", "system messages", "developer messages", "automatic environment catalogues"],
+    "questions_per_conversation": 5
+  },
+  "output_contract": {
+    "found": {"status": "FOUND", "claim": "one short supported statement", "evidence": ["M0001"]},
+    "empty": {"status": "EMPTY", "claim": "", "evidence": []},
+    "source_rehydration": "ordinary code retrieves exact named messages after generation"
+  },
+  "questions": [
+    {"id": "C1", "conversation": "CHAT-C", "question": "Какие три состояния знания предложили для будущей сети pocket i?", "expected_status": "FOUND", "expected_meaning": "Published knowledge, Callable knowledge and Compressed knowledge.", "expected_evidence": ["M0002"]},
+    {"id": "C2", "conversation": "CHAT-C", "question": "Какие расходы и риски маршрутизатор должен вычитать из ценности новой информации?", "expected_status": "FOUND", "expected_meaning": "Correlation, latency, compute cost, energy use and privacy risk.", "expected_evidence": ["M0002"]},
+    {"id": "C3", "conversation": "CHAT-C", "question": "Что решили делать, если из двух параллельно вызванных экспертов один отключился, не закончив ответ?", "expected_status": "FOUND", "expected_meaning": "Discard the incomplete expert's contribution and use only a fully completed contribution from the survivor.", "expected_evidence": ["M0008"]},
+    {"id": "C4", "conversation": "CHAT-C", "question": "Какой точный алгоритм шифрования выбрали для локальной памяти pocket i?", "expected_status": "EMPTY", "expected_meaning": "No encryption algorithm was selected in the conversation.", "expected_evidence": []},
+    {"id": "C5", "conversation": "CHAT-C", "question": "Какое точное максимальное число удалённых экспертов разрешили вызывать на один запрос?", "expected_status": "EMPTY", "expected_meaning": "No exact maximum was selected in the conversation.", "expected_evidence": []},
+    {"id": "D1", "conversation": "CHAT-D", "question": "Какие четыре режима решили сравнивать для каждой предметной области?", "expected_status": "FOUND", "expected_meaning": "Frozen base, local RAG only, trained local adapter only, and adapter plus local RAG.", "expected_evidence": ["M0008"]},
+    {"id": "D2", "conversation": "CHAT-D", "question": "Из каких четырёх частей должен состоять проверяемый ответ первого locked benchmark?", "expected_status": "FOUND", "expected_meaning": "Champion, disease, inheritance type or mechanism, and a short justification.", "expected_evidence": ["M0008"]},
+    {"id": "D3", "conversation": "CHAT-D", "question": "Какую конкретную foundation model окончательно выбрали для эксперимента?", "expected_status": "EMPTY", "expected_meaning": "No concrete model was selected in the conversation.", "expected_evidence": []},
+    {"id": "D4", "conversation": "CHAT-D", "question": "Какое точное число обучающих примеров утвердили для каждой локальной ветви?", "expected_status": "EMPTY", "expected_meaning": "No exact training-example count was approved.", "expected_evidence": []},
+    {"id": "D5", "conversation": "CHAT-D", "question": "Какую конкретную модель телефона выбрали для физического запуска?", "expected_status": "EMPTY", "expected_meaning": "No phone model was selected.", "expected_evidence": []}
+  ],
+  "scoring": {
+    "positive": "FOUND, correct meaning, and only message IDs that really support the claim",
+    "partial": "Correct meaning with incomplete or partly wrong evidence IDs",
+    "negative": "Invented claim, wrong meaning, unsupported evidence, or FOUND on an EMPTY case",
+    "critical_failure": "EMPTY on a supported question, hidden record selected, or secret exposed"
+  },
+  "locked_metrics": {
+    "supported_recall_required": "5/5",
+    "empty_precision_required": "5/5",
+    "correct_evidence_required": "5/5 supported cases",
+    "hidden_or_tool_records_allowed": 0,
+    "secrets_allowed": 0
+  },
+  "privacy": {
+    "raw_conversations_public": false,
+    "session_ids_public": false,
+    "raw_model_output_public": false,
+    "safe_questions_claims_redacted_evidence_and_scores_public": true
+  },
+  "claim_boundary": "This gate tests extraction from one already selected conversation. It does not test finding the right conversation across the whole local library."
+}

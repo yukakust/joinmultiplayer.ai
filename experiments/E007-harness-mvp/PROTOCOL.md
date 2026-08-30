@@ -1094,3 +1094,16 @@ This rules against a general GGUF conversion or shared llama.cpp failure for
 these prompts and localizes the observed quality loss to the Radeon/ROCm path.
 It does not yet identify the faulty GPU operation. Public result:
 `/experiments/E007/llamacpp-cpu-rocm-result-v0.1.json`.
+
+## Gate 16C — local sender extraction from real conversations
+
+Before inference, Gate 16C freezes two previously unused allowlisted Codex
+conversation files and ten questions: five supported and five close but absent
+controls. Qwen3-8B on CPU sees one cleaned conversation and five questions at a
+time. It must return either `FOUND` with one short claim and exact visible
+message IDs, or `EMPTY`. Ordinary code then rehydrates the named messages from
+the immutable local JSONL. Raw conversations, session IDs, and raw model output
+stay private. This tests extraction from an already selected conversation, not
+search across the full local library.
+
+- `/experiments/E007/sender-extraction-protocol-v0.1.json`
