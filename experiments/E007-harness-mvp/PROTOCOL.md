@@ -1219,3 +1219,27 @@ not yet been rerun on this corrected inventory.
 
 - `/experiments/E007/topic-index-node-v0.2.py`
 - `/experiments/E007/topic-inventory-yukabox-v0.2.json`
+
+## Gate 16D.2 — retrieve a whole conversation before Qwen reads it
+
+Gate 16D.2 tests a model-independent local index instead of Qwen-generated topic
+cards. Every natural visible message receives one multilingual embedding, but
+the source conversation remains whole. A conversation's score is its best
+message score. Ten paraphrased questions and ten expected conversations were
+committed before the run. The locked gate required 10/10 recall at five and at
+least 9/10 recall at three.
+
+The baseline failed: 8/10 expected chats ranked first, 9/10 ranked within three,
+five and ten. For the one miss, the correct conversation ranked 26th. Manual
+review confirmed a real false positive: an unrelated huge chat mentioned
+PostgreSQL backups and outranked the intended transferred curator corpus audit.
+The baseline indexed 2,727 visible messages across 58 conversations in 409.15
+seconds. Qwen did not read or answer any retrieved chat in this gate.
+
+Preserve the useful multi-vector baseline, but do not advance it to the reader.
+The next comparison must keep the same locked questions and test either a
+lexical-plus-neural union or a stronger embedding model.
+
+- `/experiments/E007/whole-chat-index-protocol-v0.1.json`
+- `/experiments/E007/whole-chat-index-result-v0.1.json`
+- `/experiment/e007/gate-16d/whole-chat-index/`

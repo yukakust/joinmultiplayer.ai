@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ru"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>E007 · Gate 16D.2</title><link rel="stylesheet" href="/style.css?v=e007-gate16d2-v01">
+  <style>
+    body{margin:0;background:#f4f0e5;color:#111}.page{box-sizing:border-box;width:100%;max-width:none;padding:clamp(20px,3vw,58px)}h1{font-size:clamp(42px,7vw,108px);line-height:.92;max-width:15ch;margin:.25em 0}.lead{font-size:clamp(20px,2vw,31px);max-width:52em}.metrics{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #aaa;margin:36px 0}.metrics div{padding:22px;border-right:1px solid #aaa}.metrics div:last-child{border:0}.metrics span{display:block;color:#6d675d}.metrics strong{font-size:clamp(34px,5vw,70px)}table{width:100%;border-collapse:collapse;font-size:clamp(14px,1.2vw,20px)}th,td{padding:16px;border:1px solid #aaa;text-align:left;vertical-align:top}.ok{background:#dcebd7}.bad{background:#f4cfc7}.note{border-left:8px solid #df6b55;padding:20px 24px;margin:30px 0;font-size:clamp(17px,1.5vw,23px)}a{color:inherit}@media(max-width:800px){.metrics{grid-template-columns:1fr 1fr}.scroll{overflow:auto}table{min-width:900px}}
+  </style>
+</head><body><main class="page">
+  <p>E007 · GATE 16D.2 · ПОИСК ЦЕЛОГО ЧАТА</p>
+  <h1>Девять нашли. Один потеряли.</h1>
+  <p class="lead">Индекс не просил Qwen придумывать темы. Он сравнил новый вопрос со всеми 2 727 видимыми сообщениями и поднял целые разговоры, которым принадлежат похожие сообщения.</p>
+  <section class="metrics"><div><span>первое место</span><strong>8/10</strong></div><div><span>первые три</span><strong>9/10</strong></div><div><span>первые пять</span><strong>9/10</strong></div><div><span>индексация</span><strong>6:49</strong></div></section>
+  <div class="note"><strong>Строгий результат: FAIL.</strong> Для Q01 индекс спутал настоящий аудит перенесённого корпуса с другим огромным чатом, где тоже говорили о PostgreSQL и резервных копиях. Правильный чат оказался 26-м.</div>
+  <div class="scroll"><table><thead><tr><th>Вопрос</th><th>Ожидали</th><th>Место</th><th>Первые пять</th></tr></thead><tbody id="rows"><tr><td colspan="4">Загрузка…</td></tr></tbody></table></div>
+  <p><a href="/experiments/E007/whole-chat-index-result-v0.1.json">Безопасный результат JSON ↗</a> · <a href="/experiments/E007/whole-chat-index-protocol-v0.1.json">Протокол, зафиксированный до запуска ↗</a></p>
+</main><script>
+fetch('/experiments/E007/whole-chat-index-result-v0.1.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));document.querySelector('#rows').innerHTML=d.queries.map(q=>`<tr class="${q.expected_chat_rank<=5?'ok':'bad'}"><td><strong>${esc(q.id)}</strong><br>${esc(q.question)}</td><td>${esc(q.expected_chat)}</td><td><strong>${q.expected_chat_rank}</strong></td><td>${q.first_five_chats.map(x=>`${esc(x.card_id)} · ${x.score.toFixed(3)}`).join('<br>')}</td></tr>`).join('')}).catch(()=>{document.querySelector('#rows').innerHTML='<tr><td colspan="4">Не удалось загрузить результат.</td></tr>'})
+</script></body></html>

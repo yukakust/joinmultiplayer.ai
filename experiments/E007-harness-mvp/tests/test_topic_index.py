@@ -12,6 +12,7 @@ INDEXER = ROOT / "experiments/E007-harness-mvp/src/run_topic_index.py"
 PUBLIC_BUILDER = ROOT / "experiments/E007-harness-mvp/src/build_topic_index_public.py"
 WHOLE_CHAT_RUNNER = ROOT / "experiments/E007-harness-mvp/src/run_whole_chat_index.py"
 WHOLE_CHAT_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-index-protocol-v0.1.json"
+WHOLE_CHAT_PUBLIC_BUILDER = ROOT / "experiments/E007-harness-mvp/src/build_whole_chat_index_public.py"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -94,6 +95,22 @@ class TopicIndexTest(unittest.TestCase):
             def __matmul__(self, other): return sum(a * b for a, b in zip(self.values, other.values))
         query = Vector([1.0, 0.0])
         self.assertGreater(runner.cosine(query, query), runner.cosine(query, Vector([0.0, 1.0])))
+
+    def test_whole_chat_public_builder_drops_matched_message_coordinates(self):
+        builder = load(WHOLE_CHAT_PUBLIC_BUILDER, "whole_chat_public_builder")
+        private = {
+            "experiment": "E007", "gate": "16D.2", "status": "FAIL",
+            "model": "m", "fastembed": "0.8.0", "conversations": 1,
+            "indexed_messages": 1, "runtime_seconds": 1, "summary": {},
+            "claim_boundary": "retrieval only", "queries": [{
+                "id": "Q", "question": "safe", "gold_card_id": "C",
+                "gold_rank": 1, "top_5": [{
+                    "card_id": "C", "message_id": "PRIVATE-COORDINATE", "score": 1.0,
+                }],
+            }],
+        }
+        public = builder.build(private)
+        self.assertNotIn("PRIVATE-COORDINATE", json.dumps(public))
 
 
 if __name__ == "__main__":

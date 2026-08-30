@@ -1,0 +1,308 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.2",
+  "status": "FAIL",
+  "protocol": "/experiments/E007/whole-chat-index-protocol-v0.1.json",
+  "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "fastembed": "0.8.0",
+  "conversations": 58,
+  "indexed_messages": 2727,
+  "runtime_seconds": 409.15,
+  "summary": {
+    "recall_at_1": 8,
+    "recall_at_3": 9,
+    "recall_at_5": 9,
+    "recall_at_10": 9,
+    "mean_reciprocal_rank": 0.837179
+  },
+  "queries": [
+    {
+      "id": "Q01",
+      "question": "В каком разговоре проверяли целостность перенесённого корпуса и резервной копии PostgreSQL для системы-куратора?",
+      "expected_chat": "YUKA-C0001",
+      "expected_chat_rank": 26,
+      "first_five_chats": [
+        {
+          "card_id": "YUKA-C0002",
+          "score": 0.659573
+        },
+        {
+          "card_id": "YUKA-C0055",
+          "score": 0.629415
+        },
+        {
+          "card_id": "YUKA-C0020",
+          "score": 0.587385
+        },
+        {
+          "card_id": "YUKA-C0037",
+          "score": 0.570073
+        },
+        {
+          "card_id": "YUKA-C0015",
+          "score": 0.554266
+        }
+      ]
+    },
+    {
+      "id": "Q02",
+      "question": "Где эксперимент с растущим swarm показал 100%, но не доказал превосходство над точным RAG?",
+      "expected_chat": "YUKA-C0005",
+      "expected_chat_rank": 1,
+      "first_five_chats": [
+        {
+          "card_id": "YUKA-C0005",
+          "score": 0.628071
+        },
+        {
+          "card_id": "YUKA-C0030",
+          "score": 0.522482
+        },
+        {
+          "card_id": "YUKA-C0002",
+          "score": 0.511461
+        },
+        {
+          "card_id": "YUKA-C0037",
+          "score": 0.436903
+        },
+        {
+          "card_id": "YUKA-C0014",
+          "score": 0.415587
+        }
+      ]
+    },
+    {
+      "id": "Q03",
+      "question": "Где расследовали SSH-туннель к арендованным GPU, который сначала работал, а затем снова получал отказ по публичному ключу?",
+      "expected_chat": "YUKA-C0030",
+      "expected_chat_rank": 1,
+      "first_five_chats": [
+        {
+          "card_id": "YUKA-C0030",
+          "score": 0.647806
+        },
+        {
+          "card_id": "YUKA-C0002",
+          "score": 0.581578
+        },
+        {
+          "card_id": "YUKA-C0037",
+          "score": 0.461213
+        },
+        {
+          "card_id": "YUKA-C0044",
+          "score": 0.436765
+        },
+        {
+          "card_id": "YUKA-C0055",
+          "score": 0.432553
+        }
+      ]
+    },
+    {
+      "id": "Q04",
+      "question": "В каком ревью заметили, что лимит распаковки PNG защищает IDAT, но не вспомогательные и APNG-чанки?",
+      "expected_chat": "YUKA-C0035",
+      "expected_chat_rank": 3,
+      "first_five_chats": [
+        {
+          "card_id": "YUKA-C0006",
+          "score": 0.62455
+        },
+        {
+          "card_id": "YUKA-C0019",
+          "score": 0.583944
+        },
+        {
+          "card_id": "YUKA-C0035",
+          "score": 0.581576
+        },
+        {
+          "card_id": "YUKA-C0012",
+          "score": 0.526384
+        },
+        {
+          "card_id": "YUKA-C0002",
+          "score": 0.514853
+        }
+      ]
+    },
+    {
+      "id": "Q05",
+      "question": "Где проверяли происхождение пакета исполнителя и приём его receipt для meatgrinder?",
+      "expected_chat": "YUKA-C0037",
+      "expected_chat_rank": 1,
+      "first_five_chats": [
+        {
+          "card_id": "YUKA-C0037",
+          "score": 0.506361
+        },
+        {
+          "card_id": "YUKA-C0002",
+          "score": 0.479448
+        },
+        {
+          "card_id": "YUKA-C0011",
+          "score": 0.460305
+        },
+        {
+          "card_id": "YUKA-C0030",
+          "score": 0.42175
+        },
+        {
+          "card_id": "YUKA-C0049",
+          "score": 0.413848
+        }
+      ]
+    },
+    {
+      "id": "Q06",
+      "question": "В каком ревью выяснилось, что подписанный аудит описывает трафик, который на самом деле ушёл в компонент с готовыми ответами?",
+      "expected_chat": "YUKA-C0041",
+      "expected_chat_rank": 1,
+      "first_five_chats": [
+        {
+          "card_id": "YUKA-C0041",
+          "score": 0.69144
+        },
+        {
+          "card_id": "YUKA-C0002",
+          "score": 0.61402
+        },
+        {
+          "card_id": "YUKA-C0055",
+          "score": 0.589947
+        },
+        {
+          "card_id": "YUKA-C0030",
+          "score": 0.579532
+        },
+        {
+          "card_id": "YUKA-C0009",
+          "score": 0.551654
+        }
+      ]
+    },
+    {
+      "id": "Q07",
+      "question": "Где проверяли приватный Bitbucket checkout для customer packaging, но упёрлись в запрет Docker socket и loopback?",
+      "expected_chat": "YUKA-C0044",
+      "expected_chat_rank": 1,
+      "first_five_chats": [
+        {
+          "card_id": "YUKA-C0044",
+          "score": 0.698776
+        },
+        {
+          "card_id": "YUKA-C0011",
+          "score": 0.577021
+        },
+        {
+          "card_id": "YUKA-C0002",
+          "score": 0.571273
+        },
+        {
+          "card_id": "YUKA-C0039",
+          "score": 0.559256
+        },
+        {
+          "card_id": "YUKA-C0014",
+          "score": 0.532359
+        }
+      ]
+    },
+    {
+      "id": "Q08",
+      "question": "В каком ревью нашли, что загрузчик receipt не сравнивает имя root из ссылки с именем в manifest?",
+      "expected_chat": "YUKA-C0054",
+      "expected_chat_rank": 1,
+      "first_five_chats": [
+        {
+          "card_id": "YUKA-C0054",
+          "score": 0.695854
+        },
+        {
+          "card_id": "YUKA-C0037",
+          "score": 0.548762
+        },
+        {
+          "card_id": "YUKA-C0002",
+          "score": 0.535115
+        },
+        {
+          "card_id": "YUKA-C0042",
+          "score": 0.520328
+        },
+        {
+          "card_id": "YUKA-C0021",
+          "score": 0.52002
+        }
+      ]
+    },
+    {
+      "id": "Q09",
+      "question": "Где разработчику выдавали write-доступ к репозиторию движка аренды?",
+      "expected_chat": "YUKA-C0055",
+      "expected_chat_rank": 1,
+      "first_five_chats": [
+        {
+          "card_id": "YUKA-C0055",
+          "score": 0.544895
+        },
+        {
+          "card_id": "YUKA-C0030",
+          "score": 0.529004
+        },
+        {
+          "card_id": "YUKA-C0058",
+          "score": 0.525289
+        },
+        {
+          "card_id": "YUKA-C0002",
+          "score": 0.520457
+        },
+        {
+          "card_id": "YUKA-C0056",
+          "score": 0.465135
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "Где объясняли, что pocket-i-lab уже установлен, а для запуска hook нужно перезапустить Codex и открыть проект заново?",
+      "expected_chat": "YUKA-C0058",
+      "expected_chat_rank": 1,
+      "first_five_chats": [
+        {
+          "card_id": "YUKA-C0058",
+          "score": 0.648837
+        },
+        {
+          "card_id": "YUKA-C0002",
+          "score": 0.610479
+        },
+        {
+          "card_id": "YUKA-C0005",
+          "score": 0.469696
+        },
+        {
+          "card_id": "YUKA-C0045",
+          "score": 0.46556
+        },
+        {
+          "card_id": "YUKA-C0032",
+          "score": 0.463592
+        }
+      ]
+    }
+  ],
+  "manual_review": {
+    "result": "The only top-10 miss is real, not a gold-label error.",
+    "failure": "Q01 retrieved an unrelated huge chat containing PostgreSQL backup language. The correct transferred curator corpus conversation ranked 26th."
+  },
+  "decision": "FAIL the locked gate. Preserve the multi-vector baseline; test a lexical-plus-neural union or stronger embedding model on the same locked questions.",
+  "claim_boundary": "This measures chat retrieval only. Qwen did not read, judge or answer the retrieved conversations.",
+  "privacy": "No conversation text, matched message text, session identifier, path or conversation hash is public."
+}
