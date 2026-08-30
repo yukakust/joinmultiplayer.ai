@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 CLIENT = ROOT / "site/experiments/E007/topic-index-node-v0.1.py"
+CLIENT_V2 = ROOT / "site/experiments/E007/topic-index-node-v0.2.py"
 INDEXER = ROOT / "experiments/E007-harness-mvp/src/run_topic_index.py"
 PUBLIC_BUILDER = ROOT / "experiments/E007-harness-mvp/src/build_topic_index_public.py"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
@@ -37,6 +38,21 @@ class TopicIndexTest(unittest.TestCase):
             ]
             path.write_text("".join(json.dumps(row) + "\n" for row in rows))
             self.assertEqual([item["text"] for item in client.visible_messages([path])], ["question", "answer"])
+
+    def test_v2_uses_ui_events_and_ignores_model_input_roles(self):
+        client = load(CLIENT_V2, "topic_client_v2")
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "s.jsonl"
+            rows = [
+                {"timestamp": "1", "type": "response_item", "payload": {"type": "message", "role": "user", "content": [{"type": "input_text", "text": "runtime context"}]}},
+                {"timestamp": "2", "type": "event_msg", "payload": {"type": "user_message", "message": "real question"}},
+                {"timestamp": "3", "type": "event_msg", "payload": {"type": "agent_message", "message": "visible answer"}},
+                {"timestamp": "4", "type": "event_msg", "payload": {"type": "task_complete", "message": "internal"}},
+            ]
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows))
+            messages = client.visible_ui_messages([path])
+            self.assertEqual([item["text"] for item in messages], ["real question", "visible answer"])
+            self.assertEqual([item["role"] for item in messages], ["user", "assistant"])
 
     def test_blocks_never_exceed_target_for_normal_units(self):
         indexer = load(INDEXER, "topic_indexer")

@@ -1203,3 +1203,19 @@ Human semantic review of valid cards remains pending, and long conversations
 need a resumable bounded tree merge rather than one final unbounded merge. Public
 mechanical result:
 `/experiments/E007/topic-index-result-yukabox-v0.1.json`.
+
+Human review then found that the v0.1 connector read `response_item` records.
+Those records describe the model input, so runtime context can legitimately use
+the `user` role even when the human never authored it. The connector must not
+infer provenance from that coarse role.
+
+The accepted v0.2 Source Connector reads only the UI event stream:
+`event_msg.user_message` and `event_msg.agent_message`. Every other Codex record
+type is excluded by default. This is a structural allowlist, not a list of banned
+words or tags. On yukabox it found 58 conversations, 2,727 visible messages and
+391,964 Qwen3-8B tokens. Fifty-five conversations fit within 10,000 tokens; the
+remaining three contain 16,775, 70,178 and 250,621 tokens. Topic extraction has
+not yet been rerun on this corrected inventory.
+
+- `/experiments/E007/topic-index-node-v0.2.py`
+- `/experiments/E007/topic-inventory-yukabox-v0.2.json`
