@@ -1,0 +1,93 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.7",
+  "status": "locked_before_inference",
+  "hypothesis": "Can Qwen recover complete answers when every model call handles exactly one fact: locate one message, then extract one fact, while ordinary code performs the final join?",
+  "boundary": "Development diagnostic on the five Gate 16D.6 failures. Fact decomposition is human-frozen and is not tested here.",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "local_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "quantization": "Q4_K_M",
+    "thinking": false,
+    "sampling": false
+  },
+  "pipeline": [
+    "Human freezes one-fact questions before inference.",
+    "Locator sees one fact question and one whole conversation; it returns exactly one message ID or EMPTY.",
+    "Extractor sees one fact question and only that one selected message; it returns one short fact.",
+    "Ordinary code joins the facts in the frozen order. No model merger is used."
+  ],
+  "baseline": {
+    "source": "Gate 16D.6",
+    "hard_questions_complete": "0/5",
+    "hard_question_atom_meanings": "4/10"
+  },
+  "success_gate": {
+    "correct_message": "23/25",
+    "correct_fact": "23/25",
+    "complete_hard_questions": "4/5"
+  },
+  "questions": [
+    {
+      "id": "Q02",
+      "text": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+      "gold_card_id": "YUKA-C0005",
+      "facts": [
+        {"id":"F1","question":"Какую точность показал full swarm в E002?","accepted_evidence":["M0011","M0013"],"required_meaning":"Full-swarm accuracy was 100%."},
+        {"id":"F2","question":"При каких значениях N проверили full swarm в E002?","accepted_evidence":["M0013"],"required_meaning":"N was 2, 4, 8, 16 and 32."},
+        {"id":"F3","question":"Какую точность показал exact RAG в E002?","accepted_evidence":["M0011","M0013"],"required_meaning":"Exact RAG also reached 100%."},
+        {"id":"F4","question":"Какую точность показал symbolic ensemble в E002?","accepted_evidence":["M0011","M0013"],"required_meaning":"The symbolic ensemble also reached 100%."},
+        {"id":"F5","question":"Какой вывод о преимуществе swarm разрешают результаты E002?","accepted_evidence":["M0011","M0013"],"required_meaning":"No superiority claim was established."}
+      ]
+    },
+    {
+      "id": "Q06",
+      "text": "Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?",
+      "gold_card_id": "YUKA-C0041",
+      "facts": [
+        {"id":"F1","question":"Что создавалось заново при каждом session call?","accepted_evidence":["M0006"],"required_meaning":"Each call created a fresh unrestricted record."},
+        {"id":"F2","question":"Как создавалась correlation при каждом session call?","accepted_evidence":["M0006"],"required_meaning":"Each call created a random correlation instead of shared admission state."},
+        {"id":"F3","question":"Что делал первый завершившийся socket с audit?","accepted_evidence":["M0005","M0006"],"required_meaning":"The first completing socket sealed a singleton request array or the whole observation."},
+        {"id":"F4","question":"Что происходило с другими concurrent sockets в audit?","accepted_evidence":["M0006"],"required_meaning":"Other concurrent sockets could be omitted from the winning audit."},
+        {"id":"F5","question":"Какие общие лимиты admission мог превысить?","accepted_evidence":["M0006"],"required_meaning":"Aggregate traffic could exceed maxHttpRequests and maxBytes."}
+      ]
+    },
+    {
+      "id": "Q07",
+      "text": "Что удалось независимо подтвердить в customer-packaging checkout и какие две проверки выполнить не позволило окружение?",
+      "gold_card_id": "YUKA-C0044",
+      "facts": [
+        {"id":"F1","question":"Какое состояние tracking-ветки customer-packaging подтвердили?","accepted_evidence":["M0003","M0004"],"required_meaning":"The tracking branch was clean."},
+        {"id":"F2","question":"Какой commit checkout customer-packaging подтвердили?","accepted_evidence":["M0003","M0004"],"required_meaning":"The checkout matched the exact candidate SHA."},
+        {"id":"F3","question":"Какой remote использовал checkout customer-packaging?","accepted_evidence":["M0003","M0004"],"required_meaning":"It used the owner-private Bitbucket remote alias."},
+        {"id":"F4","question":"Какую Docker-проверку заблокировало окружение?","accepted_evidence":["M0004"],"required_meaning":"The sandbox blocked Docker socket access."},
+        {"id":"F5","question":"Какую loopback-проверку заблокировало окружение?","accepted_evidence":["M0004"],"required_meaning":"The sandbox blocked loopback curl."}
+      ]
+    },
+    {
+      "id": "Q08",
+      "text": "Какую точную проверку происхождения пропустил receipt loader и к какой ошибке это могло привести?",
+      "gold_card_id": "YUKA-C0054",
+      "facts": [
+        {"id":"F1","question":"Какое поле root должен был взять receipt loader из manifest?","accepted_evidence":["M0005"],"required_meaning":"The loader should take root.manifest.rootName."},
+        {"id":"F2","question":"С каким именем receipt loader должен был сравнить manifest rootName?","accepted_evidence":["M0005"],"required_meaning":"It should compare with the root name encoded in receiptReference."},
+        {"id":"F3","question":"Какой проверки равенства не было в receipt loader?","accepted_evidence":["M0005"],"required_meaning":"It did not require the two root names to be equal."},
+        {"id":"F4","question":"Какой неправильный root мог пройти из-за отсутствующей проверки?","accepted_evidence":["M0005"],"required_meaning":"A copied or misrouted root could pass."},
+        {"id":"F5","question":"Какую другую ссылку при этом могла записать очередь?","accepted_evidence":["M0005"],"required_meaning":"The queue could record a reference to a different root."}
+      ]
+    },
+    {
+      "id": "Q09",
+      "text": "Кому в итоге выдали доступ к rental-market-engine, какого уровня был доступ и что ещё должен сделать получатель?",
+      "gold_card_id": "YUKA-C0055",
+      "facts": [
+        {"id":"F1","question":"Какому пользователю отправили доступ?","accepted_evidence":["M0021"],"required_meaning":"The user was Dianach."},
+        {"id":"F2","question":"К какому репозиторию отправили доступ?","accepted_evidence":["M0021"],"required_meaning":"The repository was yukakust/rental-market-engine."},
+        {"id":"F3","question":"Какой уровень доступа отправили?","accepted_evidence":["M0021"],"required_meaning":"The access level was write."},
+        {"id":"F4","question":"Что уже было сделано с GitHub-доступом?","accepted_evidence":["M0021"],"required_meaning":"A GitHub invitation had been sent."},
+        {"id":"F5","question":"Что ещё должен сделать получатель GitHub-доступа?","accepted_evidence":["M0021"],"required_meaning":"Dianach still needed to accept the invitation."}
+      ]
+    }
+  ]
+}

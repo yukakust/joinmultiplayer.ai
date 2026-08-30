@@ -1346,3 +1346,15 @@ question even when it receives the right evidence.
 
 - `/experiments/E007/atomic-reader-gate16d6-result-v0.1.json`
 - `/experiment/e007/gate-16d/atomic-reader/`
+
+## Gate 16D.7 — one fact per model call
+
+Gate 16D.7 keeps only the five questions that failed Gate 16D.6. Before
+inference, each is split by a human into five one-fact questions. For each fact,
+one locator call may select exactly one message or EMPTY. A separate extractor
+call sees only that one message and returns only that one fact. Ordinary code
+joins the five facts in locked order. This is a development diagnostic of
+granularity; it does not test automatic decomposition or unrelated-chat
+rejection. The hard-question baseline is 0/5 complete in Gate 16D.6.
+
+- `/experiments/E007/fact-reader-gate16d7-protocol-v0.1.json`
