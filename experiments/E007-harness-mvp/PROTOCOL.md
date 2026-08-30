@@ -1268,3 +1268,16 @@ that the claim must be entailed by evidence independently of the question.
 - `/experiments/E007/whole-chat-reader-gate16d3-protocol-v0.1.json`
 - `/experiments/E007/whole-chat-reader-gate16d3-result-v0.1.json`
 - `/experiment/e007/gate-16d/whole-chat-reader/`
+
+## Gate 16D.4 — extract an answer that is not written in the question
+
+Gate 16D.3 exposed a fixture shortcut: most questions already contained the
+claim that the reader was supposed to return. Gate 16D.4 removes that shortcut.
+One real information-seeking question asks what E002 found and why the result is
+not evidence of swarm superiority. The answer is absent from the question.
+Qwen3-8B receives either the complete supporting conversation or one unrelated
+conversation and must return one structured FOUND receipt with exact message
+coordinates, or EMPTY. The two required pieces of meaning and the accepted
+evidence IDs were locked before inference.
+
+- `/experiments/E007/whole-chat-reader-gate16d4-protocol-v0.1.json`

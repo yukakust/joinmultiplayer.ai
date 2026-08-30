@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.4",
+  "status": "locked_before_qwen_run",
+  "hypothesis": "When the answer is not embedded in the question, Qwen3-8B can read one complete retrieved conversation, extract a new two-part answer, cite the supporting messages, and return EMPTY for an unrelated conversation.",
+  "question": {
+    "id": "Q01",
+    "text": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+    "answer_is_not_stated_in_question": true
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "gguf": "Qwen3-8B-BF16.gguf",
+    "thinking": false,
+    "sampling": false,
+    "max_new_tokens": 512,
+    "retries": 0
+  },
+  "contract": {
+    "one_question_at_a_time": true,
+    "whole_conversation": true,
+    "allowed_receipts": ["FOUND", "EMPTY"],
+    "found_fields": ["claim", "evidence_message_ids"],
+    "maximum_evidence_messages": 3,
+    "claim_must_come_from_evidence_not_question": true
+  },
+  "cases": [
+    {
+      "id": "P01",
+      "kind": "positive",
+      "card_id": "YUKA-C0005",
+      "accepted_evidence": ["M0011", "M0013"],
+      "required_meaning": [
+        "The full swarm reached 100% accuracy across the tested sizes N=2,4,8,16,32.",
+        "Exact RAG and the symbolic ensemble also reached 100%, so the run does not establish superiority."
+      ]
+    },
+    {
+      "id": "N01",
+      "kind": "negative",
+      "card_id": "YUKA-C0044"
+    }
+  ],
+  "success_gate": {
+    "valid_receipts": "2/2",
+    "positive_found": "1/1",
+    "positive_accepted_evidence_hit": "1/1",
+    "positive_required_meaning": "2/2",
+    "negative_empty": "1/1"
+  },
+  "privacy": "Raw conversations, raw outputs and paths remain private. The public result may contain only the safe question, reviewed answer, evidence coordinates, scores and redacted explanations."
+}
