@@ -1281,3 +1281,16 @@ coordinates, or EMPTY. The two required pieces of meaning and the accepted
 evidence IDs were locked before inference.
 
 - `/experiments/E007/whole-chat-reader-gate16d4-protocol-v0.1.json`
+
+The BF16 CPU run produced two valid receipts. On the supporting conversation,
+Qwen cited the correct message and independently extracted that the swarm
+reached 100% across the tested sizes. It did not preserve the decisive second
+fact: exact RAG and the symbolic ensemble also reached 100%. Instead it gave a
+vague explanation about random controls. On the unrelated conversation it
+correctly returned EMPTY. The locked gate therefore fails with one of two
+required positive meanings preserved. This is a narrower failure than Gate
+16D.3: the copy-from-question shortcut is gone, while answer completeness is
+now the reader's first visible break.
+
+- `/experiments/E007/whole-chat-reader-gate16d4-result-v0.1.json`
+- `/experiment/e007/gate-16d/information-extraction/`

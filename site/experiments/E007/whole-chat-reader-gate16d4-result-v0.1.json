@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.4",
+  "status": "completed_failed",
+  "protocol": "/experiments/E007/whole-chat-reader-gate16d4-protocol-v0.1.json",
+  "question": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+  "answer_present_in_question": false,
+  "rows": [
+    {
+      "id": "P01",
+      "kind": "positive",
+      "conversation": "правильный разговор об E002",
+      "qwen_choice": "FOUND",
+      "claim": "Эксперимент E002 показал, что swarm достигает 100% точности при различных размерах, но его результат нельзя считать доказательством преимущества swarm, так как контрольные группы показали случайные результаты, и нет доказательства эффективности swarm по сравнению с другими методами.",
+      "evidence_message_ids": ["M0013"],
+      "evidence_says": "Full-swarm accuracy was 100% for N=2,4,8,16,32. Exact RAG and the symbolic ensemble were also 100%, so there is no superiority claim.",
+      "meaning_checks": [
+        {
+          "label": "сама нашла результат swarm",
+          "passed": true,
+          "explanation": "Qwen correctly extracted 100% accuracy across different swarm sizes."
+        },
+        {
+          "label": "сама нашла причину ограничения",
+          "passed": false,
+          "explanation": "The key reason was that exact RAG and the symbolic ensemble also reached 100%. Qwen omitted this and replaced it with a vague statement about random controls."
+        }
+      ],
+      "accepted": false,
+      "review": "Частично верно: новое знание найдено и сообщение указано правильно, но важное сравнение с exact RAG и symbolic ensemble потеряно."
+    },
+    {
+      "id": "N01",
+      "kind": "negative",
+      "conversation": "чужой разговор о Bitbucket packaging",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "evidence_says": "The conversation contains no E002 result.",
+      "meaning_checks": [
+        {
+          "label": "не выдумала ответ в чужом чате",
+          "passed": true,
+          "explanation": "Qwen returned EMPTY."
+        }
+      ],
+      "accepted": true,
+      "review": "Верно: в чужом разговоре Qwen не повторила вопрос и не придумала доказательство."
+    }
+  ],
+  "summary": {
+    "valid_receipts": "2/2",
+    "correct_evidence_coordinates": "1/1",
+    "required_positive_meaning": "1/2",
+    "negative_empty": "1/1",
+    "gate_passed": false
+  },
+  "decision": "The copy-the-question shortcut was removed. Qwen extracted one genuinely new fact and rejected the unrelated conversation, but failed to preserve the decisive comparison. The reader needs an explicit completeness check before it can be accepted."
+}
