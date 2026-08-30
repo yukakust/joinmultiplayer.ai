@@ -1,137 +1,227 @@
 #!/usr/bin/env python3
-"""Run Qwen3-8B as the Gate 16D.3 whole-conversation reader."""
+"""Run the locked E007 Gate 16B.1 whole-conversation reader test locally."""
 
 from __future__ import annotations
 
 import argparse
-import html
+import hashlib
 import json
-import re
 import time
 from pathlib import Path
 
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
-MODEL = "Qwen/Qwen3-8B"
-REVISION = "b968826d9c46dd6066d109eabc6255188de91218"
+ROOT = Path(__file__).resolve().parents[3]
+PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reader-protocol-v0.2.json"
 
-TOOLS = [
-    {"type": "function", "function": {
-        "name": "send_found",
-        "description": "Return one useful claim supported by the supplied conversation.",
-        "parameters": {"type": "object", "properties": {
-            "claim": {"type": "string"},
-            "evidence_message_ids": {"type": "array", "minItems": 1, "maxItems": 3, "items": {"type": "string"}}
-        }, "required": ["claim", "evidence_message_ids"]}
-    }},
-    {"type": "function", "function": {
-        "name": "send_empty",
-        "description": "Use when this conversation does not contain useful information for the question.",
-        "parameters": {"type": "object", "properties": {}}
-    }},
+CASES = [
+    {
+        "label": "CHAT-A",
+        "session_id": "01a01ddb-510a-78c3-bd80-97f8a68b1b79",
+        "questions": [
+            {
+                "id": "A1",
+                "question": "Как в разговоре разделили обязанности между локальной памятью и LoRA при усвоении нового знания?",
+                "gold": "Память хранит редактируемые факты и источники; LoRA учит способу пользоваться подтверждённым знанием и навыкам поведения.",
+            },
+            {
+                "id": "A2",
+                "question": "Какие два режима сетевого нейронного объединения предложили и какой из них считался массовым?",
+                "gold": "Streaming neural mode работает fan-out/fan-in на каждом токене; latent-once возвращает несколько токенов знания один раз. Массовым считался latent-once.",
+            },
+            {
+                "id": "A3",
+                "question": "Почему повтор исходного вопроса в конце текстового промпта не защищает систему от злонамеренной персональной дельты?",
+                "gold": "Дельта входит в скрытое состояние после текстовых инструкций/tokenizer, поэтому текстовая эвристика не ограничивает её влияние.",
+            },
+        ],
+    },
+    {
+        "label": "CHAT-B",
+        "session_id": "01a01dfa-eaa3-7373-b106-f1a568e9dcc6",
+        "questions": [
+            {
+                "id": "B1",
+                "question": "Как называлась предложенная система из общей модели, множества суверенных i, маршрутизации и графа доказательств?",
+                "gold": "Mixture of Intelligences (MoI).",
+            },
+            {
+                "id": "B2",
+                "question": "Какой точный инвариант должен выполнять совершенно свежий персональный нейронный трек до того, как чему-либо научился?",
+                "gold": "Свежая персональная ветвь должна давать delta около/строго нуля и не менять общий результат.",
+            },
+            {
+                "id": "B3",
+                "question": "Как после исправления P0 два персональных сигнала, общий z0 и финальные слои соединялись в итоговые logits?",
+                "gold": "Две delta дают ограниченное обновление; оно прибавляется к z0; FinalLayers строят logits из z0 + bounded Merge(delta1, delta2).",
+            },
+        ],
+    },
 ]
 
 
-def parse_call(raw: str) -> tuple[str, dict]:
-    calls = re.findall(r"<tool_call>\s*(\{.*?\})\s*</tool_call>", raw, re.DOTALL)
-    if len(calls) != 1:
-        raise ValueError(f"expected one complete tool call, got {len(calls)}")
-    call = json.loads(calls[0])
-    name = call.get("name")
-    arguments = call.get("arguments")
-    if name not in {"send_found", "send_empty"} or not isinstance(arguments, dict):
-        raise ValueError("unknown or malformed tool call")
-    return name, arguments
+def read_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
-def render_conversation(messages: list[dict]) -> str:
+def session_id(path: Path) -> str | None:
+    found = None
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        record = json.loads(line)
+        payload = record.get("payload")
+        if record.get("type") == "session_meta" and isinstance(payload, dict):
+            found = payload.get("id") or payload.get("session_id") or found
+    return str(found) if found else None
+
+
+def is_automatic_user_block(text: str) -> bool:
+    stripped = text.lstrip()
+    return stripped.startswith("<recommended_plugins>") or stripped.startswith("<environment_context>")
+
+
+def visible_messages(paths: list[Path]) -> list[dict]:
+    seen: set[str] = set()
+    messages = []
+    for path in sorted(paths):
+        for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+            record = json.loads(line)
+            payload = record.get("payload")
+            if not (
+                record.get("type") == "response_item"
+                and isinstance(payload, dict)
+                and payload.get("type") == "message"
+                and payload.get("role") in {"user", "assistant"}
+            ):
+                continue
+            role = payload["role"]
+            wanted = "input_text" if role == "user" else "output_text"
+            text = "\n".join(
+                item["text"]
+                for item in payload.get("content") or []
+                if isinstance(item, dict) and item.get("type") == wanted and isinstance(item.get("text"), str)
+            )
+            if not text or (role == "user" and is_automatic_user_block(text)):
+                continue
+            identifier = str(payload.get("id") or hashlib.sha256((role + "\0" + text).encode()).hexdigest())
+            if identifier in seen:
+                continue
+            seen.add(identifier)
+            messages.append({"role": role, "phase": payload.get("phase"), "text": text})
+    return messages
+
+
+def render_transcript(messages: list[dict]) -> str:
     return "\n\n".join(
-        f'<message id="{message["id"]}" role="{message["role"]}">\n{html.escape(message["text"])}\n</message>'
-        for message in messages
+        f"[M{index:04d} | {message['role']} | {message.get('phase') or 'message'}]\n{message['text']}"
+        for index, message in enumerate(messages, 1)
     )
 
 
-def main() -> None:
-    import torch
-    from transformers import AutoModelForCausalLM, AutoTokenizer
+def prompt(case: dict, transcript: str | None) -> str:
+    questions = "\n".join(f"{item['id']}. {item['question']}" for item in case["questions"])
+    context = transcript if transcript is not None else "[РАЗГОВОР НЕ ПЕРЕДАН]"
+    example_id = case["questions"][0]["id"]
+    return f"""Ниже дан разговор и три вопроса о конкретных решениях внутри него.
+Отвечай только по разговору. Не используй внешние знания и не додумывай.
+Если ответа нет, напиши NOT_FOUND.
+Для каждого ответа обязательно укажи номера подтверждающих сообщений M0001 и т.п.
 
+РАЗГОВОР:
+<transcript>
+{context}
+</transcript>
+
+ВОПРОСЫ:
+{questions}
+
+Верни строго JSON-массив из трёх объектов:
+[
+  {{"id":"{example_id}", "answer":"...", "evidence":["M0001"]}}
+]"""
+
+
+def generate(model, tokenizer, user_prompt: str, max_new_tokens: int) -> dict:
+    messages = [
+        {"role": "system", "content": "Ты аккуратный читатель. Ответы должны опираться только на переданный разговор."},
+        {"role": "user", "content": user_prompt},
+    ]
+    rendered = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True, enable_thinking=False)
+    inputs = tokenizer(rendered, return_tensors="pt", add_special_tokens=False)
+    started = time.perf_counter()
+    with torch.inference_mode():
+        output = model.generate(
+            **inputs,
+            max_new_tokens=max_new_tokens,
+            do_sample=False,
+            pad_token_id=tokenizer.eos_token_id,
+        )
+    new_tokens = output[0, inputs.input_ids.shape[1]:]
+    return {
+        "prompt_tokens": int(inputs.input_ids.shape[1]),
+        "new_tokens": int(new_tokens.shape[0]),
+        "seconds": round(time.perf_counter() - started, 3),
+        "raw": tokenizer.decode(new_tokens, skip_special_tokens=True).strip(),
+    }
+
+
+def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--payload", type=Path, required=True)
-    parser.add_argument("--protocol", type=Path, required=True)
-    parser.add_argument("--questions", type=Path, required=True)
+    parser.add_argument("--sessions", type=Path, default=Path.home() / ".codex/sessions")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--threads", type=int, default=12)
     args = parser.parse_args()
     if args.output.exists():
-        raise RuntimeError(f"Refusing to overwrite {args.output}")
-    payload = json.loads(args.payload.read_text(encoding="utf-8"))
-    protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
-    questions = {item["id"]: item["question"] for item in json.loads(args.questions.read_text(encoding="utf-8"))["queries"]}
-    conversations = {f'{payload["node"]}-C{index:04d}': item for index, item in enumerate(payload["conversations"], 1)}
+        raise RuntimeError(f"Refusing to overwrite preserved result: {args.output}")
+    protocol = read_json(PROTOCOL)
+    if protocol["status"] != "locked_before_inference":
+        raise RuntimeError("Protocol must be locked before inference")
 
-    tokenizer = AutoTokenizer.from_pretrained(MODEL, revision=REVISION)
+    torch.set_num_threads(args.threads)
+    torch.manual_seed(29082026)
+    model_spec = protocol["model"]
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_spec["repository"], revision=model_spec["revision"], local_files_only=True,
+    )
     model = AutoModelForCausalLM.from_pretrained(
-        MODEL, revision=REVISION, dtype=torch.bfloat16, device_map={"": 0}, attn_implementation="sdpa"
+        model_spec["repository"], revision=model_spec["revision"], local_files_only=True,
+        dtype=torch.bfloat16,
     ).eval()
-    rows = []
-    for case in protocol["cases"]:
-        conversation = conversations[case["card_id"]]
-        valid_ids = {message["id"] for message in conversation["messages"]}
-        user = (
-            f'QUESTION:\n{questions[case["query_id"]]}\n\n'
-            f'CONVERSATION:\n{render_conversation(conversation["messages"])}\n\n'
-            "Use only this conversation. If it contains a useful answer, call send_found with a short plain-language claim and the smallest exact set of supporting message IDs. Otherwise call send_empty. Call exactly one tool."
-        )
-        prompt = tokenizer.apply_chat_template(
-            [{"role": "system", "content": "You read one local conversation faithfully. Never use outside knowledge and never invent evidence."}, {"role": "user", "content": user}],
-            tools=TOOLS, tokenize=False, add_generation_prompt=True, enable_thinking=False,
-        )
-        encoded = tokenizer(prompt, return_tensors="pt").to(model.device)
-        started = time.monotonic()
-        with torch.inference_mode():
-            generated = model.generate(
-                **encoded, max_new_tokens=512, do_sample=False,
-                pad_token_id=tokenizer.eos_token_id,
-            )
-        raw = tokenizer.decode(generated[0, encoded.input_ids.shape[1]:], skip_special_tokens=True).strip()
-        row = {
-            "id": case["id"], "kind": case["kind"], "query_id": case["query_id"],
-            "card_id": case["card_id"], "input_tokens": int(encoded.input_ids.shape[1]),
-            "runtime_seconds": round(time.monotonic() - started, 3), "raw": raw,
-        }
-        try:
-            name, arguments = parse_call(raw)
-            row["receipt"] = "FOUND" if name == "send_found" else "EMPTY"
-            row["claim"] = arguments.get("claim") if name == "send_found" else None
-            evidence = arguments.get("evidence_message_ids", []) if name == "send_found" else []
-            if name == "send_found" and (
-                not isinstance(row["claim"], str) or not row["claim"].strip()
-                or not isinstance(evidence, list) or not 1 <= len(evidence) <= 3
-                or any(item not in valid_ids for item in evidence)
-            ):
-                raise ValueError("invalid FOUND payload")
-            row["evidence_message_ids"] = evidence
-            if case["kind"] == "positive":
-                row["mechanical_pass"] = name == "send_found" and bool(set(evidence) & set(case["accepted_evidence"]))
-            else:
-                row["mechanical_pass"] = name == "send_empty"
-        except (ValueError, json.JSONDecodeError) as error:
-            row["receipt"] = "ERROR"
-            row["error"] = str(error)
-            row["mechanical_pass"] = False
-        rows.append(row)
-        print(json.dumps({key: row[key] for key in ("id", "receipt", "mechanical_pass", "input_tokens", "runtime_seconds")}), flush=True)
 
-    result = {
-        "schema_version": "0.1-private", "experiment": "E007", "gate": "16D.3",
-        "model": MODEL, "revision": REVISION, "rows": rows,
-        "mechanical_summary": {
-            "valid_receipts": sum(row["receipt"] != "ERROR" for row in rows),
-            "positive_pass": sum(row["kind"] == "positive" and row["mechanical_pass"] for row in rows),
-            "negative_pass": sum(row["kind"] == "negative" and row["mechanical_pass"] for row in rows),
-        },
-        "status": "awaiting_human_claim_review"
-    }
+    by_id: dict[str, list[Path]] = {}
+    for path in args.sessions.rglob("*.jsonl"):
+        identifier = session_id(path)
+        if identifier:
+            by_id.setdefault(identifier, []).append(path)
+
+    records = []
+    for case in CASES:
+        messages = visible_messages(by_id.get(case["session_id"], []))
+        if not messages:
+            raise RuntimeError(f"Conversation missing: {case['label']}")
+        transcript = render_transcript(messages)
+        transcript_tokens = len(tokenizer.encode(transcript, add_special_tokens=False))
+        if not 10_000 <= transcript_tokens <= 16_000:
+            raise RuntimeError(f"{case['label']} outside locked size: {transcript_tokens}")
+        full = generate(model, tokenizer, prompt(case, transcript), 768)
+        control = generate(model, tokenizer, prompt(case, None), 768)
+        records.append({
+            "label": case["label"],
+            "transcript_tokens": transcript_tokens,
+            "messages": len(messages),
+            "questions": case["questions"],
+            "with_transcript": full,
+            "without_transcript": control,
+        })
+        print(json.dumps({"finished": case["label"], "tokens": transcript_tokens}), flush=True)
+
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    args.output.write_text(json.dumps({
+        "schema_version": "0.1-private",
+        "protocol": str(PROTOCOL.relative_to(ROOT)),
+        "model": model_spec,
+        "records": records,
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

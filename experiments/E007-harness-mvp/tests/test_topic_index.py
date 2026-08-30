@@ -13,8 +13,6 @@ PUBLIC_BUILDER = ROOT / "experiments/E007-harness-mvp/src/build_topic_index_publ
 WHOLE_CHAT_RUNNER = ROOT / "experiments/E007-harness-mvp/src/run_whole_chat_index.py"
 WHOLE_CHAT_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-index-protocol-v0.1.json"
 WHOLE_CHAT_PUBLIC_BUILDER = ROOT / "experiments/E007-harness-mvp/src/build_whole_chat_index_public.py"
-WHOLE_CHAT_READER = ROOT / "experiments/E007-harness-mvp/src/run_whole_chat_reader.py"
-WHOLE_CHAT_READER_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reader-protocol-v0.1.json"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -113,21 +111,6 @@ class TopicIndexTest(unittest.TestCase):
         }
         public = builder.build(private)
         self.assertNotIn("PRIVATE-COORDINATE", json.dumps(public))
-
-    def test_whole_chat_reader_protocol_has_balanced_locked_cases(self):
-        protocol = json.loads(WHOLE_CHAT_READER_PROTOCOL.read_text())
-        self.assertEqual(protocol["status"], "locked_before_qwen_run")
-        self.assertEqual(sum(item["kind"] == "positive" for item in protocol["cases"]), 8)
-        self.assertEqual(sum(item["kind"] == "negative" for item in protocol["cases"]), 8)
-        self.assertEqual(len({item["id"] for item in protocol["cases"]}), 16)
-
-    def test_whole_chat_reader_parses_exactly_one_tool(self):
-        reader = load(WHOLE_CHAT_READER, "whole_chat_reader")
-        name, arguments = reader.parse_call('<tool_call>{"name":"send_empty","arguments":{}}</tool_call>')
-        self.assertEqual(name, "send_empty")
-        self.assertEqual(arguments, {})
-        with self.assertRaises(ValueError):
-            reader.parse_call("no call")
 
 
 if __name__ == "__main__":
