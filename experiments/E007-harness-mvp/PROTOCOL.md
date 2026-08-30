@@ -1395,3 +1395,16 @@ checks were performed. Completeness and grounding are therefore separate gates.
 
 - `/experiments/E007/shelf-synthesis-gate16d8-result-v0.1.json`
 - `/experiment/e007/gate-16d/shelf-synthesis/`
+
+## Gate 16D.9 — exact quote and NLI grounding turnstile
+
+Gate 16D.9 keeps the original question and whole-shelf synthesis insight but
+does not trust free prose. On the eight Gate 16D.8 conditions with English
+sources, Qwen must return atomic English claims with one message ID and an exact
+source quote. Ordinary code checks the ID and exact substring. The previously
+accepted English DeBERTa model then compares one exact quote with one claim.
+Only entailment claims survive into a code-rendered bullet list; there is no
+second generative rewrite. Q09 is excluded because its source is Russian and
+the locked NLI model is English.
+
+- `/experiments/E007/grounded-synthesis-gate16d9-protocol-v0.1.json`

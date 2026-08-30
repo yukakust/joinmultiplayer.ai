@@ -1,0 +1,52 @@
+{
+  "schema_version":"0.1",
+  "experiment":"E007",
+  "gate":"16D.9",
+  "status":"locked_before_inference",
+  "hypothesis":"Can Qwen claims with exact source quotes, deterministic substring checks and DeBERTa NLI remove the three known unsupported additions from Gate 16D.8 without losing grounded answer parts?",
+  "boundary":"Development test on the eight Gate 16D.8 conditions whose source shelf is English. Russian-source Q09 is excluded because the locked DeBERTa model is English.",
+  "source_result":"/experiments/E007/shelf-synthesis-gate16d8-result-v0.1.json",
+  "question_protocol":"/experiments/E007/fact-reader-gate16d7-protocol-v0.1.json",
+  "qwen":{
+    "repository":"Qwen/Qwen3-8B",
+    "local_digest":"500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "quantization":"Q4_K_M",
+    "thinking":false,
+    "sampling":false,
+    "retries":0
+  },
+  "nli":{
+    "repository":"MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision":"6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "decision":"entailment must be the highest-probability class",
+    "language":"English"
+  },
+  "pipeline":[
+    "Qwen sees the original question, coverage checklist and full shelf.",
+    "Qwen returns English atomic claims, each with one message ID and one exact quote.",
+    "Ordinary code rejects an unknown message ID or a quote that is not an exact substring.",
+    "DeBERTa checks exact quote as premise and one claim as hypothesis.",
+    "Ordinary code keeps only entailment claims and renders them as a bullet list. No second generative rewrite."
+  ],
+  "conditions":[
+    {"question_id":"Q02","condition":"retrieved_shelf","message_ids":["M0013"]},
+    {"question_id":"Q02","condition":"oracle_shelf","message_ids":["M0011","M0013"]},
+    {"question_id":"Q06","condition":"retrieved_shelf","message_ids":["M0005"]},
+    {"question_id":"Q06","condition":"oracle_shelf","message_ids":["M0005","M0006"]},
+    {"question_id":"Q07","condition":"retrieved_shelf","message_ids":["M0004"]},
+    {"question_id":"Q07","condition":"oracle_shelf","message_ids":["M0003","M0004"]},
+    {"question_id":"Q08","condition":"retrieved_shelf","message_ids":["M0005"]},
+    {"question_id":"Q08","condition":"oracle_shelf","message_ids":["M0005"]}
+  ],
+  "known_unsupported_targets":[
+    "Q06 retrieved shelf: invented local-budget, zeroing or synchronization details absent from M0005.",
+    "Q07 retrieved shelf: claim that the blocked checks were performed.",
+    "Q07 oracle shelf: claim that the blocked checks were performed."
+  ],
+  "maximum_grounded_required_parts":36,
+  "success_gate":{
+    "valid_structured_answers":"8/8",
+    "known_unsupported_targets_accepted":"0/3",
+    "grounded_required_parts_retained_at_least":"34/36"
+  }
+}
