@@ -1243,3 +1243,28 @@ lexical-plus-neural union or a stronger embedding model.
 - `/experiments/E007/whole-chat-index-protocol-v0.1.json`
 - `/experiments/E007/whole-chat-index-result-v0.1.json`
 - `/experiment/e007/gate-16d/whole-chat-index/`
+
+## Gate 16D.3 — Qwen reads one retrieved short conversation
+
+Gate 16D.3 isolates the reader after accepting the 9/10 retrieval baseline for
+MVP use. Qwen3-8B receives one question and one complete conversation under
+10,000 tokens, then must call exactly one of `send_found` with a short claim and
+one to three exact message IDs, or `send_empty`. Eight pairs contain the answer;
+eight pair the same questions with clearly unrelated conversations. The cases,
+evidence coordinates and strict 8/8 + 8/8 gates were committed before inference.
+
+All 16 runs produced a valid tool receipt. Seven of eight positive pairs used an
+accepted evidence message; one stated the right fact but cited a different
+message that did not support it. Only five of eight negative pairs returned
+EMPTY. In all three false positives Qwen largely copied the question into the
+claim and attached an unrelated message. Human review therefore accepts 12/16
+rows and fails the locked reader gate.
+
+This is also a fixture lesson: the current questions ask where a fact was
+discussed, so many positive claims merely restate the retrieval question. The
+next reader test needs real information-seeking questions and a mechanical rule
+that the claim must be entailed by evidence independently of the question.
+
+- `/experiments/E007/whole-chat-reader-gate16d3-protocol-v0.1.json`
+- `/experiments/E007/whole-chat-reader-gate16d3-result-v0.1.json`
+- `/experiment/e007/gate-16d/whole-chat-reader/`

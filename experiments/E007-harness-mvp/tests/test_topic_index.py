@@ -15,6 +15,7 @@ WHOLE_CHAT_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-index-protocol-v0
 WHOLE_CHAT_PUBLIC_BUILDER = ROOT / "experiments/E007-harness-mvp/src/build_whole_chat_index_public.py"
 WHOLE_CHAT_READER_16D3 = ROOT / "experiments/E007-harness-mvp/src/run_whole_chat_reader_gate16d3.py"
 WHOLE_CHAT_READER_16D3_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reader-gate16d3-protocol-v0.1.json"
+WHOLE_CHAT_READER_16D3_PUBLIC = ROOT / "experiments/E007-harness-mvp/src/build_whole_chat_reader_gate16d3_public.py"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -128,6 +129,19 @@ class TopicIndexTest(unittest.TestCase):
         self.assertEqual(arguments, {})
         with self.assertRaises(ValueError):
             reader.parse_call("no call")
+
+    def test_gate16d3_public_builder_drops_raw_model_output(self):
+        builder = load(WHOLE_CHAT_READER_16D3_PUBLIC, "whole_chat_reader_16d3_public")
+        private = {
+            "model": "m", "revision": "r", "rows": [{
+                "id": case_id, "kind": "positive" if case_id.startswith("P") else "negative",
+                "query_id": "Q", "card_id": "C", "receipt": "EMPTY",
+                "claim": None, "evidence_message_ids": [], "input_tokens": 1,
+                "runtime_seconds": 1, "raw": "PRIVATE RAW OUTPUT",
+            } for case_id in builder.REVIEWS]
+        }
+        public = builder.build(private, {"queries": [{"id": "Q", "question": "safe"}]})
+        self.assertNotIn("PRIVATE RAW OUTPUT", json.dumps(public))
 
 
 if __name__ == "__main__":

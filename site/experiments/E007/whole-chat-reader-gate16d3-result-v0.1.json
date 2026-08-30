@@ -1,0 +1,260 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.3",
+  "status": "FAIL",
+  "protocol": "/experiments/E007/whole-chat-reader-gate16d3-protocol-v0.1.json",
+  "model": "Qwen/Qwen3-8B",
+  "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "summary": {
+    "valid_tool_receipts": "16/16",
+    "positive_found_with_accepted_evidence": "7/8",
+    "negative_empty": "5/8",
+    "human_accepted": "12/16"
+  },
+  "rows": [
+    {
+      "id": "P01",
+      "kind": "positive",
+      "question": "В каком разговоре проверяли целостность перенесённого корпуса и резервной копии PostgreSQL для системы-куратора?",
+      "conversation": "YUKA-C0001",
+      "qwen_choice": "FOUND",
+      "claim": "В разговоре проверяли целостность перенесённого корпуса и резервной копии PostgreSQL для системы-куратора.",
+      "evidence_message_ids": [
+        "M0001",
+        "M0007",
+        "M0008"
+      ],
+      "accepted": true,
+      "review": "Подтверждено, но ответ почти повторяет сам вопрос.",
+      "input_tokens": 2201,
+      "runtime_seconds": 5.762
+    },
+    {
+      "id": "P02",
+      "kind": "positive",
+      "question": "Где эксперимент с растущим swarm показал 100%, но не доказал превосходство над точным RAG?",
+      "conversation": "YUKA-C0005",
+      "qwen_choice": "FOUND",
+      "claim": "The experiment with the growing swarm reached 100% accuracy at every size, but did not prove superiority over exact RAG, as both achieved 100%.",
+      "evidence_message_ids": [
+        "M0013"
+      ],
+      "accepted": true,
+      "review": "Верное сравнение swarm и exact RAG.",
+      "input_tokens": 2624,
+      "runtime_seconds": 4.668
+    },
+    {
+      "id": "P03",
+      "kind": "positive",
+      "question": "В каком ревью заметили, что лимит распаковки PNG защищает IDAT, но не вспомогательные и APNG-чанки?",
+      "conversation": "YUKA-C0035",
+      "qwen_choice": "FOUND",
+      "claim": "В ревью было замечено, что лимит распаковки PNG защищает только IDAT, но не вспомогательные и APNG-чанки.",
+      "evidence_message_ids": [
+        "M0007"
+      ],
+      "accepted": true,
+      "review": "Верно передана граница IDAT против ancillary/APNG chunks.",
+      "input_tokens": 1761,
+      "runtime_seconds": 5.105
+    },
+    {
+      "id": "P04",
+      "kind": "positive",
+      "question": "В каком ревью выяснилось, что подписанный аудит описывает трафик, который на самом деле ушёл в компонент с готовыми ответами?",
+      "conversation": "YUKA-C0041",
+      "qwen_choice": "FOUND",
+      "claim": "В ревью выяснилось, что подписанный аудит описывает трафик, который на самом деле ушёл в компонент с готовыми ответами.",
+      "evidence_message_ids": [
+        "M0006"
+      ],
+      "accepted": true,
+      "review": "Верно описан подписанный аудит синтетического трафика.",
+      "input_tokens": 2469,
+      "runtime_seconds": 4.969
+    },
+    {
+      "id": "P05",
+      "kind": "positive",
+      "question": "Где проверяли приватный Bitbucket checkout для customer packaging, но упёрлись в запрет Docker socket и loopback?",
+      "conversation": "YUKA-C0044",
+      "qwen_choice": "FOUND",
+      "claim": "Проверка приватного Bitbucket checkout для customer packaging столкнулась с запретом Docker socket и loopback.",
+      "evidence_message_ids": [
+        "M0004"
+      ],
+      "accepted": true,
+      "review": "Верно описаны Bitbucket checkout и ограничения sandbox.",
+      "input_tokens": 982,
+      "runtime_seconds": 3.786
+    },
+    {
+      "id": "P06",
+      "kind": "positive",
+      "question": "В каком ревью нашли, что загрузчик receipt не сравнивает имя root из ссылки с именем в manifest?",
+      "conversation": "YUKA-C0054",
+      "qwen_choice": "FOUND",
+      "claim": "В ревью найдено, что загрузчик receipt не сравнивает имя root из ссылки с именем в manifest.",
+      "evidence_message_ids": [
+        "M0005"
+      ],
+      "accepted": true,
+      "review": "Верно описана пропущенная проверка rootName.",
+      "input_tokens": 993,
+      "runtime_seconds": 3.841
+    },
+    {
+      "id": "P07",
+      "kind": "positive",
+      "question": "Где разработчику выдавали write-доступ к репозиторию движка аренды?",
+      "conversation": "YUKA-C0055",
+      "qwen_choice": "FOUND",
+      "claim": "Разработчику выдавали write-доступ к репозиторию движка аренды.",
+      "evidence_message_ids": [
+        "M0004"
+      ],
+      "accepted": false,
+      "review": "Само утверждение верно, но указано M0004; настоящее доказательство находится в M0021.",
+      "input_tokens": 5094,
+      "runtime_seconds": 4.572
+    },
+    {
+      "id": "P08",
+      "kind": "positive",
+      "question": "Где объясняли, что pocket-i-lab уже установлен, а для запуска hook нужно перезапустить Codex и открыть проект заново?",
+      "conversation": "YUKA-C0058",
+      "qwen_choice": "FOUND",
+      "claim": "Пользователь должен перезапустить Codex и открыть проект заново, чтобы активировать hook Pocket i Lab, так как плагин уже установлен, но hook не подхватился текущей задачей.",
+      "evidence_message_ids": [
+        "M0018",
+        "M0023"
+      ],
+      "accepted": true,
+      "review": "Верно описаны установленный plugin и необходимость перезапуска Codex.",
+      "input_tokens": 7243,
+      "runtime_seconds": 6.844
+    },
+    {
+      "id": "N01",
+      "kind": "negative",
+      "question": "В каком разговоре проверяли целостность перенесённого корпуса и резервной копии PostgreSQL для системы-куратора?",
+      "conversation": "YUKA-C0058",
+      "qwen_choice": "FOUND",
+      "claim": "В разговоре проверяли целостность перенесённого корпуса и резервной копии PostgreSQL для системы-куратора.",
+      "evidence_message_ids": [
+        "M0001",
+        "M0002",
+        "M0003"
+      ],
+      "accepted": false,
+      "review": "Ложный FOUND: разговор о plugin не содержит аудита переноса системы-куратора.",
+      "input_tokens": 7242,
+      "runtime_seconds": 6.552
+    },
+    {
+      "id": "N02",
+      "kind": "negative",
+      "question": "Где эксперимент с растущим swarm показал 100%, но не доказал превосходство над точным RAG?",
+      "conversation": "YUKA-C0044",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "accepted": true,
+      "review": "Верный EMPTY.",
+      "input_tokens": 986,
+      "runtime_seconds": 1.172
+    },
+    {
+      "id": "N03",
+      "kind": "negative",
+      "question": "В каком ревью заметили, что лимит распаковки PNG защищает IDAT, но не вспомогательные и APNG-чанки?",
+      "conversation": "YUKA-C0055",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "accepted": true,
+      "review": "Верный EMPTY.",
+      "input_tokens": 5110,
+      "runtime_seconds": 2.134
+    },
+    {
+      "id": "N04",
+      "kind": "negative",
+      "question": "В каком ревью выяснилось, что подписанный аудит описывает трафик, который на самом деле ушёл в компонент с готовыми ответами?",
+      "conversation": "YUKA-C0001",
+      "qwen_choice": "FOUND",
+      "claim": "В ревью выяснилось, что подписанный аудит описывает трафик, который на самом деле ушёл в компонент с готовыми ответами.",
+      "evidence_message_ids": [
+        "M0007"
+      ],
+      "accepted": false,
+      "review": "Ложный FOUND: разговор о переносе проекта не содержит подписанного аудита трафика.",
+      "input_tokens": 2208,
+      "runtime_seconds": 4.853
+    },
+    {
+      "id": "N05",
+      "kind": "negative",
+      "question": "Где проверяли приватный Bitbucket checkout для customer packaging, но упёрлись в запрет Docker socket и loopback?",
+      "conversation": "YUKA-C0005",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "accepted": true,
+      "review": "Верный EMPTY.",
+      "input_tokens": 2620,
+      "runtime_seconds": 1.575
+    },
+    {
+      "id": "N06",
+      "kind": "negative",
+      "question": "В каком ревью нашли, что загрузчик receipt не сравнивает имя root из ссылки с именем в manifest?",
+      "conversation": "YUKA-C0035",
+      "qwen_choice": "FOUND",
+      "claim": "В ревью найдено, что загрузчик receipt не сравнивает имя root из ссылки с именем в manifest.",
+      "evidence_message_ids": [
+        "M0007"
+      ],
+      "accepted": false,
+      "review": "Ложный FOUND: PNG-ревью не содержит проверки rootName receipt.",
+      "input_tokens": 1750,
+      "runtime_seconds": 4.022
+    },
+    {
+      "id": "N07",
+      "kind": "negative",
+      "question": "Где разработчику выдавали write-доступ к репозиторию движка аренды?",
+      "conversation": "YUKA-C0041",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "accepted": true,
+      "review": "Верный EMPTY.",
+      "input_tokens": 2452,
+      "runtime_seconds": 1.498
+    },
+    {
+      "id": "N08",
+      "kind": "negative",
+      "question": "Где объясняли, что pocket-i-lab уже установлен, а для запуска hook нужно перезапустить Codex и открыть проект заново?",
+      "conversation": "YUKA-C0054",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "accepted": true,
+      "review": "Верный EMPTY.",
+      "input_tokens": 999,
+      "runtime_seconds": 1.166
+    }
+  ],
+  "findings": [
+    "A whole short conversation fits comfortably and every run completed a tool call.",
+    "Qwen often extracts the right claim and exact message evidence.",
+    "Three irrelevant conversations produced false FOUND by repeating the question as a claim.",
+    "The test questions ask where knowledge was discussed, so several positive claims are shallow. A later end-to-end test needs real user problems, not only retrieval questions."
+  ],
+  "decision": "Do not accept the reader yet. Keep the one-question/one-chat/tool contract, but prevent question copying from counting as evidence and retest with real information-seeking questions.",
+  "privacy": "No source conversation text, raw model output, paths, hashes or session identifiers are public."
+}
