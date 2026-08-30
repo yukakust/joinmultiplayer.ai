@@ -1,0 +1,157 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.8",
+  "status": "completed_partial",
+  "protocol": "/experiments/E007/shelf-synthesis-gate16d8-protocol-v0.1.json",
+  "model": "Qwen3-8B Q4_K_M",
+  "summary": {
+    "valid_answers": 10,
+    "retrieved_shelf_complete": 4,
+    "retrieved_shelf_possible": 5,
+    "oracle_shelf_complete": 5,
+    "oracle_shelf_possible": 5,
+    "grounded_answers": 7,
+    "grounded_answers_possible": 10,
+    "baseline_complete": 2,
+    "completeness_gate_passed": true,
+    "unsupported_claim_gate_passed": false,
+    "overall_gate_passed": false
+  },
+  "rows": [
+    {
+      "id": "Q02-retrieved_shelf",
+      "question_id": "Q02",
+      "condition": "retrieved_shelf",
+      "question": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+      "message_ids": [
+        "M0013"
+      ],
+      "answer": "Эксперимент E002 показал, что full swarm достиг 100% точности при значениях N = 2, 4, 8, 16, 32. Exact RAG и symbolic ensemble также показали 100% точность в том же эксперименте. Результаты E002 не позволяют считать доказательством преимущества swarm, поскольку exact RAG и symbolic ensemble также демонстрировали идеальную точность, что исключает возможность утверждать превосходство swarm над этими методами. Таким образом, результаты E002 не подтверждают преимущества swarm, так как другие подходы показали схожие уровни точности.",
+      "complete": true,
+      "grounded": true,
+      "review": "Все результаты и вывод «преимущество не доказано» сохранены."
+    },
+    {
+      "id": "Q02-oracle_shelf",
+      "question_id": "Q02",
+      "condition": "oracle_shelf",
+      "question": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+      "message_ids": [
+        "M0011",
+        "M0013"
+      ],
+      "answer": "Эксперимент E002 показал, что full swarm достиг 100% точности при значениях N, равных 2, 4, 8, 16 и 32. Exact RAG и symbolic ensemble также показали 100% точность в этом эксперименте. Точность full swarm в E002 составила 100%, при значениях N: 2, 4, 8, 16, 32. Exact RAG показал точность 100%, а symbolic ensemble также показал точность 100%.\n\nРезультаты E002 не позволяют считать swarm более эффективным или превосходящим другие методы, так как exact RAG и symbolic ensemble также демонстрировали 100% точность. Таким образом, эксперимент E002 не подтверждает преимущества swarm.",
+      "complete": true,
+      "grounded": true,
+      "review": "Полный ответ; дополнительное сообщение не изменило вывод."
+    },
+    {
+      "id": "Q06-retrieved_shelf",
+      "question_id": "Q06",
+      "condition": "retrieved_shelf",
+      "question": "Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?",
+      "message_ids": [
+        "M0005"
+      ],
+      "answer": "Один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными, из-за следующих причин:\n\n- При каждом session call создавалось заново наблюдение (observation), которое не учитывало общий бюджет, а работало как отдельная сессия, несмотря на то, что бюджет и аудит были запланированы на уровне нескольких запросов.\n- Correlation при каждом session call создавалась независимо, что приводило к потере связи между сессиями и не позволяло корректно отслеживать использование бюджета.\n- Первый завершившийся socket с audit выполнял закрытие наблюдения и обнуление локального бюджета, что могло создать иллюзию соблюдения лимитов, хотя в реальности бюджет не был корректно синхронизирован между сессиями.\n- Другие concurrent sockets в audit продолжали работать с локальными бюджетами, не учитывая общие лимиты, что приводило к превышению общего сетевого бюджета.\n- Общие лимиты admission могли быть превышены из-за того, что каждый session call считался отдельным, и не учитывался общий бюджет, что приводило к накоплению расходов за счёт отдельных сессий.\n\n**Примечание:** Отсутствует информация о том, как именно общие лимиты admission были связаны с session receipts и как именно это приводило к превышению бюджета.",
+      "complete": false,
+      "grounded": false,
+      "review": "Нужного M0006 на полке не было. Qwen додумала local budgets и другие детали вместо честной остановки."
+    },
+    {
+      "id": "Q06-oracle_shelf",
+      "question_id": "Q06",
+      "condition": "oracle_shelf",
+      "question": "Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?",
+      "message_ids": [
+        "M0005",
+        "M0006"
+      ],
+      "answer": "**Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?**\n\nПри каждом session call создавалось заново новое, несвязанное с другими сессиями запись в системе, а также генерировался случайный корреляционный идентификатор. Это происходило на строке [global-product-real-source-r1b-c3-proxy-producer.ts:140], где каждый вызов создавал отдельную запись и корреляцию, несмотря на то, что бюджет и корреляция должны быть глобальными и многоразовыми.\n\nПервый завершившийся socket с audit закрывал сессию и фиксировал в audit-записи данные о запросе, создавая singleton-массив запросов на строке 320. Это приводило к тому, что данные о запросах не были корректно агрегированы, и отдельные session receipts выглядели корректными, но не отражали общую картину.\n\nДругие concurrent sockets в audit не были корректно обработаны, так как они не были включены в общую агрегацию. Это позволяло отдельным сессиям превышать лимиты, даже если отдельные session receipts выглядели корректными.\n\nОбщие лимиты admission, такие как `maxHttpRequests` и `maxBytes`, могли быть превышены, потому что каждый session call создавал отдельную запись и не учитывал другие сессии в рамках одного admission. Это позволяло открыть неограниченное количество сессий, производить отдельно корректные receipts, но в сумме превышать общие лимиты.",
+      "complete": true,
+      "grounded": true,
+      "review": "С M0006 найдены fresh records, random correlations, первый socket, пропущенные sockets и оба лимита."
+    },
+    {
+      "id": "Q07-retrieved_shelf",
+      "question_id": "Q07",
+      "condition": "retrieved_shelf",
+      "question": "Что удалось независимо подтвердить в customer-packaging checkout и какие две проверки выполнить не позволило окружение?",
+      "message_ids": [
+        "M0004"
+      ],
+      "answer": "В customer-packaging checkout независимо подтвердилось состояние чистой tracking-ветки и корректный exact SHA commit. Remote, использованный для checkout customer-packaging, — это owner-private Bitbucket alias.\n\nОкружение заблокировало доступ к Docker socket и даже loopback curl, поэтому повторялись только эти read-only проверки с системным доступом. \n\nВот каковы ответы на каждый пункт:\n\n- **Какое состояние tracking-ветки customer-packaging подтвердили?** — Чистая tracking-ветка.\n- **Какой commit checkout customer-packaging подтвердили?** — Exact SHA корректны.\n- **Какой remote использовал checkout customer-packaging?** — owner-private Bitbucket alias.\n- **Какую Docker-проверку заблокировало окружение?** — Доступ к Docker socket.\n- **Какую loopback-проверку заблокировало окружение?** — Loopback curl.\n\nВсе указанные проверки были выполнены в read-only режиме из-за ограничений окружения.",
+      "complete": true,
+      "grounded": false,
+      "review": "Все пять нужных частей сохранены, но в конце ошибочно сказано, что заблокированные проверки были выполнены."
+    },
+    {
+      "id": "Q07-oracle_shelf",
+      "question_id": "Q07",
+      "condition": "oracle_shelf",
+      "question": "Что удалось независимо подтвердить в customer-packaging checkout и какие две проверки выполнить не позволило окружение?",
+      "message_ids": [
+        "M0003",
+        "M0004"
+      ],
+      "answer": "В customer-packaging checkout независимо подтверждено следующее:\n\n- **Состояние tracking-ветки** подтверждено как **чистая tracking-ветка**.\n- **Commit checkout** подтверждён как **exact SHA**, который корректен.\n- **Remote**, использованный для checkout, — это **owner-private Bitbucket alias**.\n\nОкружение заблокировало следующие проверки:\n\n- **Docker-проверку** — доступ к Docker socket заблокирован.\n- **Loopback-проверку** — доступ к loopback curl заблокирован.\n\nВсе проверки выполнены только в режиме read-only, без чтения секретов и `.env`.",
+      "complete": true,
+      "grounded": false,
+      "review": "Все пять нужных частей сохранены, но добавлена та же неподтверждённая фраза о выполненных проверках."
+    },
+    {
+      "id": "Q08-retrieved_shelf",
+      "question_id": "Q08",
+      "condition": "retrieved_shelf",
+      "question": "Какую точную проверку происхождения пропустил receipt loader и к какой ошибке это могло привести?",
+      "message_ids": [
+        "M0005"
+      ],
+      "answer": "Receipt loader пропустил точную проверку равенства имени корня (`rootName`) из `manifest` с именем корня, указанным в `receiptReference`. \n\n- **Какое поле root должен был взять receipt loader из manifest?**  \n  Receipt loader должен был взять поле `rootName` из `manifest`.\n\n- **С каким именем receipt loader должен был сравнить manifest rootName?**  \n  Receipt loader должен был сравнить `rootName` из `manifest` с именем корня, указанным в `receiptReference`.\n\n- **Какой проверки равенства не было в receipt loader?**  \n  В receipt loader отсутствовала проверка равенства `rootName` из `manifest` с именем корня из `receiptReference`.\n\n- **Какой неправильный root мог пройти из-за отсутствующей проверки?**  \n  Неправильный `root` (например, скопированный или неправильно направленный) мог пройти, так как receipt loader не проверял соответствие имени корня.\n\n- **Какую другую ссылку при этом могла записать очередь?**  \n  Очередь могла записать ссылку на корень, который она не открыла, что нарушает точное происхождение корня.\n\nЭти ошибки были выявлены в сообщении с идентификатором `M0005`, где указано, что receipt loader не проверял соответствие имени корня из `manifest` с именем корня из `receiptReference`, что приводило к неправильной записи ссылок в очереди.",
+      "complete": true,
+      "grounded": true,
+      "review": "Все части provenance-дефекта сохранены."
+    },
+    {
+      "id": "Q08-oracle_shelf",
+      "question_id": "Q08",
+      "condition": "oracle_shelf",
+      "question": "Какую точную проверку происхождения пропустил receipt loader и к какой ошибке это могло привести?",
+      "message_ids": [
+        "M0005"
+      ],
+      "answer": "Receipt loader пропустил точную проверку равенства имени корня (`rootName`) между `manifest` и `receiptReference`. Это могло привести к ошибке в точном происхождении (exact-root provenance), так как неправильный корень мог пройти проверку, а очередь записала неправильную ссылку.\n\n- **Какое поле root должен был взять receipt loader из manifest?**  \n  Receipt loader должен был взять поле `rootName` из `manifest`.\n\n- **С каким именем receipt loader должен был сравнить manifest rootName?**  \n  Receipt loader должен был сравнить `manifest.rootName` с именем корня из `receiptReference`.\n\n- **Какой проверки равенства не было в receipt loader?**  \n  В receipt loader отсутствовала проверка равенства `manifest.rootName` и имени корня из `receiptReference`.\n\n- **Какой неправильный root мог пройти из-за отсутствующей проверки?**  \n  Неправильный корень, который был скопирован или неправильно направлен (copied/misrouted), мог пройти проверку.\n\n- **Какую другую ссылку при этом могла записать очередь?**  \n  Очередь могла записать ссылку на корень, который она не открыла, что нарушает точное происхождение.",
+      "complete": true,
+      "grounded": true,
+      "review": "Все части provenance-дефекта сохранены."
+    },
+    {
+      "id": "Q09-retrieved_shelf",
+      "question_id": "Q09",
+      "condition": "retrieved_shelf",
+      "question": "Кому в итоге выдали доступ к rental-market-engine, какого уровня был доступ и что ещё должен сделать получатель?",
+      "message_ids": [
+        "M0021"
+      ],
+      "answer": "Доступ к репозиторию `yukakust/rental-market-engine` был выдан пользователю [Dianach](https://github.com/Dianach). Уровень доступа, который был отправлен, — это права `write`. \n\nЧто уже было сделано с GitHub-доступом: приглашение было отправлено пользователю.\n\nЧто ещё должен сделать получатель GitHub-доступа: принять приглашение в GitHub.",
+      "complete": true,
+      "grounded": true,
+      "review": "Получатель, репозиторий, write, приглашение и следующий шаг сохранены."
+    },
+    {
+      "id": "Q09-oracle_shelf",
+      "question_id": "Q09",
+      "condition": "oracle_shelf",
+      "question": "Кому в итоге выдали доступ к rental-market-engine, какого уровня был доступ и что ещё должен сделать получатель?",
+      "message_ids": [
+        "M0021"
+      ],
+      "answer": "Доступ к репозиторию `yukakust/rental-market-engine` был выдан пользователю [Dianach](https://github.com/Dianach). Уровень доступа, который был отправлен, — это права `write`. \n\nЧто уже было сделано с GitHub-доступом: приглашение было отправлено пользователю.\n\nЧто ещё должен сделать получатель GitHub-доступа: принять приглашение в GitHub.",
+      "complete": true,
+      "grounded": true,
+      "review": "Получатель, репозиторий, write, приглашение и следующий шаг сохранены."
+    }
+  ],
+  "decision": "Split retrieval plus whole-question synthesis fixed completeness, but the overall gate fails because synthesis invented details when evidence was missing and added an unsupported closing claim in Q07."
+}

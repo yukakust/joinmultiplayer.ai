@@ -1383,3 +1383,15 @@ messages locked before that run. This separates retrieval loss from synthesis
 loss without rerunning search.
 
 - `/experiments/E007/shelf-synthesis-gate16d8-protocol-v0.1.json`
+
+The locked run returned ten valid natural-language answers. With the messages
+actually found by Gate 16D.7, whole-question synthesis produced 4/5 complete
+answers, up from the 2/5 one-fact extraction baseline. With the oracle shelf it
+produced 5/5. This supports splitting retrieval while restoring the full
+question for synthesis. The overall gate still fails: only 7/10 answers were
+fully grounded. With M0006 missing, Q06 invented local-budget details instead
+of stopping; both Q07 conditions appended an unsupported claim that the blocked
+checks were performed. Completeness and grounding are therefore separate gates.
+
+- `/experiments/E007/shelf-synthesis-gate16d8-result-v0.1.json`
+- `/experiment/e007/gate-16d/shelf-synthesis/`

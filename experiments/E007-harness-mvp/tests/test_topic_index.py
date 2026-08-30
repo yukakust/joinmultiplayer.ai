@@ -22,6 +22,8 @@ ATOMIC_READER_16D6_PROTOCOL = ROOT / "site/experiments/E007/atomic-reader-gate16
 ATOMIC_READER_16D6_RESULT = ROOT / "site/experiments/E007/atomic-reader-gate16d6-result-v0.1.json"
 FACT_READER_16D7_PROTOCOL = ROOT / "site/experiments/E007/fact-reader-gate16d7-protocol-v0.1.json"
 FACT_READER_16D7_RESULT = ROOT / "site/experiments/E007/fact-reader-gate16d7-result-v0.1.json"
+SHELF_SYNTHESIS_16D8_PROTOCOL = ROOT / "site/experiments/E007/shelf-synthesis-gate16d8-protocol-v0.1.json"
+SHELF_SYNTHESIS_16D8_RESULT = ROOT / "site/experiments/E007/shelf-synthesis-gate16d8-result-v0.1.json"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -185,6 +187,21 @@ class TopicIndexTest(unittest.TestCase):
         public_text = FACT_READER_16D7_RESULT.read_text()
         self.assertNotIn("raw_message", public_text)
         self.assertNotIn('"usage"', public_text)
+
+    def test_gate16d8_separates_completeness_from_grounding(self):
+        protocol = json.loads(SHELF_SYNTHESIS_16D8_PROTOCOL.read_text())
+        result = json.loads(SHELF_SYNTHESIS_16D8_RESULT.read_text())
+        self.assertEqual(len(protocol["questions"]), 5)
+        self.assertEqual(len(result["rows"]), 10)
+        self.assertEqual(result["summary"]["retrieved_shelf_complete"], 4)
+        self.assertEqual(result["summary"]["oracle_shelf_complete"], 5)
+        self.assertEqual(result["summary"]["grounded_answers"], 7)
+        self.assertTrue(result["summary"]["completeness_gate_passed"])
+        self.assertFalse(result["summary"]["overall_gate_passed"])
+        public_text = SHELF_SYNTHESIS_16D8_RESULT.read_text()
+        self.assertNotIn("raw_message", public_text)
+        self.assertNotIn('"usage"', public_text)
+        self.assertNotIn("/home/", public_text)
 
 
 if __name__ == "__main__":
