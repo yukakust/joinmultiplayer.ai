@@ -1408,3 +1408,16 @@ second generative rewrite. Q09 is excluded because its source is Russian and
 the locked NLI model is English.
 
 - `/experiments/E007/grounded-synthesis-gate16d9-protocol-v0.1.json`
+
+All eight Qwen calls returned structured claims: 35 claims total, with 32 exact
+quotes. Human review marked 30 claims grounded and five unsupported or tied to
+the wrong quote. The turnstile accepted eight claims, all eight grounded, and
+accepted none of the five bad claims. But it rejected 22/30 grounded claims and
+retained only 12/36 required answer parts. The gate fails. Exact substring
+checking is useful, but this DeBERTa setup is too destructive: list fragments,
+mixed-language evidence and modest paraphrases were often classified neutral.
+The known Gate 16D.8 inventions were not regenerated under the structured
+claim-and-quote prompt; five new citation/support mistakes were all blocked.
+
+- `/experiments/E007/grounded-synthesis-gate16d9-result-v0.1.json`
+- `/experiment/e007/gate-16d/grounded-synthesis/`

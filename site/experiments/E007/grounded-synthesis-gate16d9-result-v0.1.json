@@ -1,0 +1,684 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.9",
+  "status": "completed_failed",
+  "protocol": "/experiments/E007/grounded-synthesis-gate16d9-protocol-v0.1.json",
+  "summary": {
+    "valid_structured_answers": 8,
+    "valid_structured_answers_possible": 8,
+    "claims": 35,
+    "exact_quotes": 32,
+    "human_grounded_claims": 30,
+    "nli_accepted": 8,
+    "grounded_claims_accepted": 8,
+    "unsupported_claims": 5,
+    "unsupported_claims_accepted": 0,
+    "grounded_claims_rejected": 22,
+    "required_parts_retained": 12,
+    "required_parts_possible": 36,
+    "gate_passed": false
+  },
+  "rows": [
+    {
+      "id": "Q02-retrieved_shelf",
+      "question_id": "Q02",
+      "condition": "retrieved_shelf",
+      "question": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+      "message_ids": [
+        "M0013"
+      ],
+      "claims": [
+        {
+          "id": "C01",
+          "claim": "The full swarm in E002 showed 100% accuracy for N=2,4,8,16,32.",
+          "source_id": "M0013",
+          "quote": "Full-swarm accuracy: 100% for `N=2,4,8,16,32`",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00539706,
+            "neutral": 0.99425137,
+            "contradiction": 0.00035151
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C02",
+          "claim": "The full swarm in E002 was tested with N values of 2, 4, 8, 16, and 32.",
+          "source_id": "M0013",
+          "quote": "Full-swarm accuracy: 100% for `N=2,4,8,16,32`",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00839329,
+            "neutral": 0.99124169,
+            "contradiction": 0.00036507
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C03",
+          "claim": "The exact RAG in E002 showed 100% accuracy.",
+          "source_id": "M0013",
+          "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00456567,
+            "neutral": 0.99478501,
+            "contradiction": 0.00064933
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C04",
+          "claim": "The symbolic ensemble in E002 showed 100% accuracy.",
+          "source_id": "M0013",
+          "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00861019,
+            "neutral": 0.99071562,
+            "contradiction": 0.00067429
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C05",
+          "claim": "The results of E002 do not support a claim of superiority for the swarm over exact RAG and symbolic ensemble.",
+          "source_id": "M0013",
+          "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00636396,
+            "neutral": 0.99314296,
+            "contradiction": 0.00049312
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        }
+      ],
+      "accepted_claims": []
+    },
+    {
+      "id": "Q02-oracle_shelf",
+      "question_id": "Q02",
+      "condition": "oracle_shelf",
+      "question": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+      "message_ids": [
+        "M0011",
+        "M0013"
+      ],
+      "claims": [
+        {
+          "id": "C01",
+          "claim": "The full swarm in E002 showed 100% accuracy for N=2,4,8,16,32.",
+          "source_id": "M0013",
+          "quote": "Full-swarm accuracy: 100% for `N=2,4,8,16,32`",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00539706,
+            "neutral": 0.99425137,
+            "contradiction": 0.00035151
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C02",
+          "claim": "The full swarm in E002 was tested with N values of 2, 4, 8, 16, and 32.",
+          "source_id": "M0013",
+          "quote": "Full-swarm accuracy: 100% for `N=2,4,8,16,32`",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00839329,
+            "neutral": 0.99124169,
+            "contradiction": 0.00036507
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C03",
+          "claim": "The exact RAG in E002 showed 100% accuracy.",
+          "source_id": "M0013",
+          "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00456567,
+            "neutral": 0.99478501,
+            "contradiction": 0.00064933
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C04",
+          "claim": "The symbolic ensemble in E002 showed 100% accuracy.",
+          "source_id": "M0013",
+          "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00861019,
+            "neutral": 0.99071562,
+            "contradiction": 0.00067429
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C05",
+          "claim": "The results of E002 do not support a claim of superiority for the swarm over other methods.",
+          "source_id": "M0011",
+          "quote": "so there is no efficiency or superiority claim.",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00236316,
+            "neutral": 0.99717343,
+            "contradiction": 0.0004633
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C06",
+          "claim": "The results of E002 do not prove any advantage for the swarm over exact RAG or symbolic ensemble.",
+          "source_id": "M0013",
+          "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.02514445,
+            "neutral": 0.9737795,
+            "contradiction": 0.00107614
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        }
+      ],
+      "accepted_claims": []
+    },
+    {
+      "id": "Q06-retrieved_shelf",
+      "question_id": "Q06",
+      "condition": "retrieved_shelf",
+      "question": "Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?",
+      "message_ids": [
+        "M0005"
+      ],
+      "claims": [
+        {
+          "id": "C01",
+          "claim": "The admission budget was exceeded because the producer closed the entire observation after one socket/request, even though the admission budget and audit schema are run-wide/multi-request.",
+          "source_id": "M0005",
+          "quote": "the producer closes the entire observation after one socket/request even though the admission budget and audit schema are run-wide/multi-request",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00596754,
+            "neutral": 0.99230653,
+            "contradiction": 0.00172602
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C02",
+          "claim": "The C4 RED inventory incorrectly treats the session-to-parser audit handoff as if the still-future C3 receipt handoff existed, leading to an admission budget overrun.",
+          "source_id": "M0005",
+          "quote": "the C4 RED inventory now treats the session-to-parser audit handoff as if the still-future C3 receipt handoff existed",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00024807,
+            "neutral": 0.99927372,
+            "contradiction": 0.00047819
+          },
+          "accepted": false,
+          "human_grounded": false,
+          "review": "Связала отдельный C4 handoff-дефект с превышением budget без такого доказательства в цитате."
+        }
+      ],
+      "accepted_claims": []
+    },
+    {
+      "id": "Q06-oracle_shelf",
+      "question_id": "Q06",
+      "condition": "oracle_shelf",
+      "question": "Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?",
+      "message_ids": [
+        "M0005",
+        "M0006"
+      ],
+      "claims": [
+        {
+          "id": "C01",
+          "claim": "The first completing socket seals a singleton request array, which can cause the admission to exceed the global budget.",
+          "source_id": "M0006",
+          "quote": "The first completing socket seals a singleton request array at line 320. The same admission can therefore open unlimited sessions, produce individually valid receipts under distinct correlations, or relay concurrent sockets that never enter the winning audit.",
+          "exact_quote": false,
+          "nli_decision": null,
+          "nli_probabilities": null,
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: Qwen изменила цитату, поэтому код не нашёл её дословно."
+        },
+        {
+          "id": "C02",
+          "claim": "Each session call creates a fresh, unrestricted record and random correlation, which can lead to the admission budget being exceeded.",
+          "source_id": "M0006",
+          "quote": "Each call creates an unrestricted fresh record and random correlation at [global-product-real-source-r1b-c3-proxy-producer.ts:140], while the first completing socket seals a singleton request array at line 320.",
+          "exact_quote": false,
+          "nli_decision": null,
+          "nli_probabilities": null,
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: Qwen изменила цитату, поэтому код не нашёл её дословно."
+        },
+        {
+          "id": "C03",
+          "claim": "The admission can exceed the global request and byte limits because session-level budgeting is not enforced across all sessions.",
+          "source_id": "M0006",
+          "quote": "Impact: aggregate traffic can exceed `maxHttpRequests`/`maxBytes`, normal multi-request browser traffic is omitted, and C3’s private random correlation cannot match independent C2/browser observations for C4.",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.01888153,
+            "neutral": 0.974648,
+            "contradiction": 0.00647049
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C04",
+          "claim": "The C4 RED gate mistakenly treats the session-to-parser audit handoff as if it were the future receipt handoff, leading to incorrect budgeting.",
+          "source_id": "M0006",
+          "quote": "The C4 RED gate now mistakes an audit handoff for the future receipt handoff. [global-product-real-source-r1b-p2-c2-c3-producer-handoff.ts:35] aliases `claim...ReceiptHandoff` to the session-to-parser audit handoff, although its blueprint explicitly says the C4 receipt projection remains future.",
+          "exact_quote": false,
+          "nli_decision": null,
+          "nli_probabilities": null,
+          "accepted": false,
+          "human_grounded": false,
+          "review": "Связала C4 handoff-дефект с неправильным budgeting без такого доказательства."
+        }
+      ],
+      "accepted_claims": []
+    },
+    {
+      "id": "Q07-retrieved_shelf",
+      "question_id": "Q07",
+      "condition": "retrieved_shelf",
+      "question": "Что удалось независимо подтвердить в customer-packaging checkout и какие две проверки выполнить не позволило окружение?",
+      "message_ids": [
+        "M0004"
+      ],
+      "claims": [
+        {
+          "id": "C01",
+          "claim": "The checkout process confirmed that the tracking branch is clean and the exact SHA is correct.",
+          "source_id": "M0004",
+          "quote": "Checkout независимо совпал: чистая tracking-ветка и exact SHA корректны;",
+          "exact_quote": true,
+          "nli_decision": "entailment",
+          "nli_probabilities": {
+            "entailment": 0.97745478,
+            "neutral": 0.0218511,
+            "contradiction": 0.00069415
+          },
+          "accepted": true,
+          "human_grounded": true,
+          "review": "Верное утверждение принято."
+        },
+        {
+          "id": "C02",
+          "claim": "The checkout process confirmed the correct commit hash for the customer-packaging repository.",
+          "source_id": "M0004",
+          "quote": "Checkout независимо совпал: чистая tracking-ветка и exact SHA корректны;",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00264955,
+            "neutral": 0.99698275,
+            "contradiction": 0.00036768
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C03",
+          "claim": "The checkout process used the owner-private Bitbucket alias as the remote.",
+          "source_id": "M0004",
+          "quote": "remote — owner-private Bitbucket alias.",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00135654,
+            "neutral": 0.99818951,
+            "contradiction": 0.00045398
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C04",
+          "claim": "The environment blocked access to the Docker socket, preventing the Docker check from running.",
+          "source_id": "M0004",
+          "quote": "Sandbox заблокировал доступ к Docker socket и даже loopback curl, поэтому повторяю только эти read-only проверки с системным доступом;",
+          "exact_quote": true,
+          "nli_decision": "entailment",
+          "nli_probabilities": {
+            "entailment": 0.97664875,
+            "neutral": 0.02168282,
+            "contradiction": 0.00166839
+          },
+          "accepted": true,
+          "human_grounded": true,
+          "review": "Верное утверждение принято."
+        },
+        {
+          "id": "C05",
+          "claim": "The environment blocked access to loopback curl, preventing the loopback check from running.",
+          "source_id": "M0004",
+          "quote": "Sandbox заблокировал доступ к Docker socket и даже loopback curl, поэтому повторяю только эти read-only проверки с системным доступом;",
+          "exact_quote": true,
+          "nli_decision": "entailment",
+          "nli_probabilities": {
+            "entailment": 0.99138498,
+            "neutral": 0.00745089,
+            "contradiction": 0.00116414
+          },
+          "accepted": true,
+          "human_grounded": true,
+          "review": "Верное утверждение принято."
+        }
+      ],
+      "accepted_claims": [
+        "The checkout process confirmed that the tracking branch is clean and the exact SHA is correct.",
+        "The environment blocked access to the Docker socket, preventing the Docker check from running.",
+        "The environment blocked access to loopback curl, preventing the loopback check from running."
+      ]
+    },
+    {
+      "id": "Q07-oracle_shelf",
+      "question_id": "Q07",
+      "condition": "oracle_shelf",
+      "question": "Что удалось независимо подтвердить в customer-packaging checkout и какие две проверки выполнить не позволило окружение?",
+      "message_ids": [
+        "M0003",
+        "M0004"
+      ],
+      "claims": [
+        {
+          "id": "C01",
+          "claim": "The tracking branch state for customer-packaging was confirmed as clean and correct.",
+          "source_id": "M0003",
+          "quote": "Handoff прочитан полностью: он подтверждает жёсткий gate и границы. Сейчас сверяю SHA, чистоту/ветку/remote, локальные refs и loopback acceptance (контейнеры, health, миграционный ledger и сохранённый receipt) только read-only проверками.",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.0315711,
+            "neutral": 0.95466197,
+            "contradiction": 0.01376697
+          },
+          "accepted": false,
+          "human_grounded": false,
+          "review": "Цитата говорит лишь «сейчас сверяю», а claim уже объявляет проверку завершённой."
+        },
+        {
+          "id": "C02",
+          "claim": "The exact commit SHA for customer-packaging checkout was confirmed as correct.",
+          "source_id": "M0003",
+          "quote": "Handoff прочитан полностью: он подтверждает жёсткий gate и границы. Сейчас сверяю SHA, чистоту/ветку/remote, локальные refs и loopback acceptance (контейнеры, health, миграционный ledger и сохранённый receipt) только read-only проверками.",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00219765,
+            "neutral": 0.99477708,
+            "contradiction": 0.00302527
+          },
+          "accepted": false,
+          "human_grounded": false,
+          "review": "Цитата говорит лишь «сейчас сверяю», а claim уже объявляет SHA подтверждённым."
+        },
+        {
+          "id": "C03",
+          "claim": "The remote used for checkout of customer-packaging was owner-private Bitbucket alias.",
+          "source_id": "M0004",
+          "quote": "Checkout независимо совпал: чистая tracking-ветка и exact SHA корректны; remote — owner-private Bitbucket alias.",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00210306,
+            "neutral": 0.99719965,
+            "contradiction": 0.00069731
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C04",
+          "claim": "The Docker check was blocked by the environment.",
+          "source_id": "M0004",
+          "quote": "Sandbox заблокировал доступ к Docker socket и даже loopback curl, поэтому повторяю только эти read-only проверки с системным доступом;",
+          "exact_quote": true,
+          "nli_decision": "entailment",
+          "nli_probabilities": {
+            "entailment": 0.90843338,
+            "neutral": 0.05039638,
+            "contradiction": 0.04117019
+          },
+          "accepted": true,
+          "human_grounded": true,
+          "review": "Верное утверждение принято."
+        },
+        {
+          "id": "C05",
+          "claim": "The loopback check was blocked by the environment.",
+          "source_id": "M0004",
+          "quote": "Sandbox заблокировал доступ к Docker socket и даже loopback curl, поэтому повторяю только эти read-only проверки с системным доступом;",
+          "exact_quote": true,
+          "nli_decision": "entailment",
+          "nli_probabilities": {
+            "entailment": 0.84204936,
+            "neutral": 0.07060347,
+            "contradiction": 0.08734712
+          },
+          "accepted": true,
+          "human_grounded": true,
+          "review": "Верное утверждение принято."
+        }
+      ],
+      "accepted_claims": [
+        "The Docker check was blocked by the environment.",
+        "The loopback check was blocked by the environment."
+      ]
+    },
+    {
+      "id": "Q08-retrieved_shelf",
+      "question_id": "Q08",
+      "condition": "retrieved_shelf",
+      "question": "Какую точную проверку происхождения пропустил receipt loader и к какой ошибке это могло привести?",
+      "message_ids": [
+        "M0005"
+      ],
+      "claims": [
+        {
+          "id": "C01",
+          "claim": "The receipt loader did not verify that `root.manifest.rootName` matches the root name in `receiptReference`.",
+          "source_id": "M0005",
+          "quote": "The new receipt loader verifies digest, purpose, and files but never checks that `root.manifest.rootName` matches the root name in `receiptReference`.",
+          "exact_quote": true,
+          "nli_decision": "entailment",
+          "nli_probabilities": {
+            "entailment": 0.99041837,
+            "neutral": 0.00768948,
+            "contradiction": 0.00189215
+          },
+          "accepted": true,
+          "human_grounded": true,
+          "review": "Верное утверждение принято."
+        },
+        {
+          "id": "C02",
+          "claim": "The receipt loader did not perform a check for equality between the manifest root name and the receipt reference root name.",
+          "source_id": "M0005",
+          "quote": "The new receipt loader verifies digest, purpose, and files but never checks that `root.manifest.rootName` matches the root name in `receiptReference`.",
+          "exact_quote": true,
+          "nli_decision": "entailment",
+          "nli_probabilities": {
+            "entailment": 0.98131704,
+            "neutral": 0.01726505,
+            "contradiction": 0.00141793
+          },
+          "accepted": true,
+          "human_grounded": true,
+          "review": "Верное утверждение принято."
+        },
+        {
+          "id": "C03",
+          "claim": "A copied or misrouted root could have passed through the receipt loader due to the missing check.",
+          "source_id": "M0005",
+          "quote": "A copied/misrouted root therefore passes while the queue records a reference to a root it did not actually reopen, breaking exact-root provenance.",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00899712,
+            "neutral": 0.98165375,
+            "contradiction": 0.00934908
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C04",
+          "claim": "The queue could have recorded a reference to an incorrect root due to the missing check.",
+          "source_id": "M0005",
+          "quote": "A copied/misrouted root therefore passes while the queue records a reference to a root it did not actually reopen, breaking exact-root provenance.",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.0087319,
+            "neutral": 0.99010181,
+            "contradiction": 0.0011662
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        }
+      ],
+      "accepted_claims": [
+        "The receipt loader did not verify that `root.manifest.rootName` matches the root name in `receiptReference`.",
+        "The receipt loader did not perform a check for equality between the manifest root name and the receipt reference root name."
+      ]
+    },
+    {
+      "id": "Q08-oracle_shelf",
+      "question_id": "Q08",
+      "condition": "oracle_shelf",
+      "question": "Какую точную проверку происхождения пропустил receipt loader и к какой ошибке это могло привести?",
+      "message_ids": [
+        "M0005"
+      ],
+      "claims": [
+        {
+          "id": "C01",
+          "claim": "The receipt loader did not verify that `root.manifest.rootName` matches the root name in `receiptReference`.",
+          "source_id": "M0005",
+          "quote": "The new receipt loader verifies digest, purpose, and files but never checks that `root.manifest.rootName` matches the root name in `receiptReference`.",
+          "exact_quote": true,
+          "nli_decision": "entailment",
+          "nli_probabilities": {
+            "entailment": 0.99041837,
+            "neutral": 0.00768948,
+            "contradiction": 0.00189215
+          },
+          "accepted": true,
+          "human_grounded": true,
+          "review": "Верное утверждение принято."
+        },
+        {
+          "id": "C02",
+          "claim": "The receipt loader failed to check for equality between the manifest root name and the receipt reference root name.",
+          "source_id": "M0005",
+          "quote": "require equality with the manifest root name for both receipt and report loaders",
+          "exact_quote": true,
+          "nli_decision": "contradiction",
+          "nli_probabilities": {
+            "entailment": 0.00024503,
+            "neutral": 0.00659891,
+            "contradiction": 0.99315602
+          },
+          "accepted": false,
+          "human_grounded": false,
+          "review": "Цитата рекомендует будущую проверку, но сама по себе не доказывает формулировку claim."
+        },
+        {
+          "id": "C03",
+          "claim": "A copied or misrouted root could have passed through the receipt loader due to the missing check.",
+          "source_id": "M0005",
+          "quote": "A copied/misrouted root therefore passes while the queue records a reference to a root it did not actually reopen",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00693354,
+            "neutral": 0.98211241,
+            "contradiction": 0.0109541
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        },
+        {
+          "id": "C04",
+          "claim": "The queue could have recorded a reference to an incorrect root due to the missing check.",
+          "source_id": "M0005",
+          "quote": "breaking exact-root provenance",
+          "exact_quote": true,
+          "nli_decision": "neutral",
+          "nli_probabilities": {
+            "entailment": 0.00363812,
+            "neutral": 0.99456632,
+            "contradiction": 0.00179565
+          },
+          "accepted": false,
+          "human_grounded": true,
+          "review": "Верное утверждение потеряно: DeBERTa назвала связь neutral или contradiction."
+        }
+      ],
+      "accepted_claims": [
+        "The receipt loader did not verify that `root.manifest.rootName` matches the root name in `receiptReference`."
+      ]
+    }
+  ],
+  "decision": "The turnstile had 8/8 precision on accepted claims and rejected all five unsupported or mis-cited claims, but retained only 8/30 grounded claims and 12/36 required parts. Exact quotes plus this English DeBERTa configuration are too destructive for the harness."
+}

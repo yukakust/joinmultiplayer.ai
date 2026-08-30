@@ -24,6 +24,8 @@ FACT_READER_16D7_PROTOCOL = ROOT / "site/experiments/E007/fact-reader-gate16d7-p
 FACT_READER_16D7_RESULT = ROOT / "site/experiments/E007/fact-reader-gate16d7-result-v0.1.json"
 SHELF_SYNTHESIS_16D8_PROTOCOL = ROOT / "site/experiments/E007/shelf-synthesis-gate16d8-protocol-v0.1.json"
 SHELF_SYNTHESIS_16D8_RESULT = ROOT / "site/experiments/E007/shelf-synthesis-gate16d8-result-v0.1.json"
+GROUNDED_SYNTHESIS_16D9_PROTOCOL = ROOT / "site/experiments/E007/grounded-synthesis-gate16d9-protocol-v0.1.json"
+GROUNDED_SYNTHESIS_16D9_RESULT = ROOT / "site/experiments/E007/grounded-synthesis-gate16d9-result-v0.1.json"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -199,6 +201,21 @@ class TopicIndexTest(unittest.TestCase):
         self.assertTrue(result["summary"]["completeness_gate_passed"])
         self.assertFalse(result["summary"]["overall_gate_passed"])
         public_text = SHELF_SYNTHESIS_16D8_RESULT.read_text()
+        self.assertNotIn("raw_message", public_text)
+        self.assertNotIn('"usage"', public_text)
+        self.assertNotIn("/home/", public_text)
+
+    def test_gate16d9_preserves_safe_but_destructive_failure(self):
+        protocol = json.loads(GROUNDED_SYNTHESIS_16D9_PROTOCOL.read_text())
+        result = json.loads(GROUNDED_SYNTHESIS_16D9_RESULT.read_text())
+        self.assertEqual(len(protocol["conditions"]), 8)
+        self.assertEqual(len(result["rows"]), 8)
+        self.assertEqual(result["summary"]["claims"], 35)
+        self.assertEqual(result["summary"]["unsupported_claims_accepted"], 0)
+        self.assertEqual(result["summary"]["grounded_claims_accepted"], 8)
+        self.assertEqual(result["summary"]["grounded_claims_rejected"], 22)
+        self.assertFalse(result["summary"]["gate_passed"])
+        public_text = GROUNDED_SYNTHESIS_16D9_RESULT.read_text()
         self.assertNotIn("raw_message", public_text)
         self.assertNotIn('"usage"', public_text)
         self.assertNotIn("/home/", public_text)
