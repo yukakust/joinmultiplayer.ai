@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import os
+import sys
 from pathlib import Path
 
 
@@ -71,9 +72,8 @@ def build_payload(sessions: Path, node: str, device: str) -> dict:
         if child:
             children.add(identifier)
     conversations = []
-    for identifier, paths in grouped.items():
-        if identifier in children:
-            continue
+    eligible = [(identifier, paths) for identifier, paths in grouped.items() if identifier not in children]
+    for position, (identifier, paths) in enumerate(eligible, 1):
         messages = visible_messages(paths)
         if not messages:
             continue
@@ -84,6 +84,8 @@ def build_payload(sessions: Path, node: str, device: str) -> dict:
             "source_snapshot_hash": snapshot,
             "messages": rows,
         })
+        if position == 1 or position % 20 == 0 or position == len(eligible):
+            print(f"Scanned {position}/{len(eligible)} main conversations…", file=sys.stderr, flush=True)
     conversations.sort(key=lambda item: item["conversation_hash"])
     return {
         "schema_version": "0.1-private",
