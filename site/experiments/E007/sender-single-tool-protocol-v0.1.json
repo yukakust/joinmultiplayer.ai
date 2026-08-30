@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16C.1",
+  "status": "locked_before_inference",
+  "kind": "private-real-conversation development test",
+  "hypothesis": "If the harness owns the loop and asks exactly one question per cached conversation branch, Qwen3-8B can choose exactly one FOUND or EMPTY tool without silently losing questions, while preserving grounded evidence.",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "dtype": "BF16",
+    "device": "yukabox CPU",
+    "thinking": false,
+    "decoding": "greedy",
+    "training": false
+  },
+  "constants": {
+    "conversations": ["CHAT-C", "CHAT-D"],
+    "same_private_source_files_as_gate16c": true,
+    "same_questions_as_gate16c": true,
+    "questions": 10,
+    "supported": 5,
+    "absent": 5,
+    "one_question_per_generation": true,
+    "conversation_prefill_reused": true,
+    "retries": 0
+  },
+  "tools": [
+    {"name": "send_found", "meaning": "A directly supporting answer exists in the conversation.", "arguments": ["claim", "evidence message IDs"]},
+    {"name": "send_empty", "meaning": "The conversation does not contain the requested answer.", "arguments": []}
+  ],
+  "harness_law": "Ordinary code starts one branch per question and requires exactly one valid tool call. Missing or malformed calls become ERROR, never silent absence.",
+  "gold_correction_before_rerun": {
+    "reason": "Exact post-run rehydration in Gate 16C proved the original D1/D2 message number was wrong.",
+    "D1": ["M0010"],
+    "D2": ["M0010"]
+  },
+  "questions": [
+    {"id": "C1", "conversation": "CHAT-C", "question": "Какие три состояния знания предложили для будущей сети pocket i?", "expected_status": "FOUND", "expected_evidence": ["M0002"]},
+    {"id": "C2", "conversation": "CHAT-C", "question": "Какие расходы и риски маршрутизатор должен вычитать из ценности новой информации?", "expected_status": "FOUND", "expected_evidence": ["M0002"]},
+    {"id": "C3", "conversation": "CHAT-C", "question": "Что решили делать, если из двух параллельно вызванных экспертов один отключился, не закончив ответ?", "expected_status": "FOUND", "expected_evidence": ["M0008"]},
+    {"id": "C4", "conversation": "CHAT-C", "question": "Какой точный алгоритм шифрования выбрали для локальной памяти pocket i?", "expected_status": "EMPTY", "expected_evidence": []},
+    {"id": "C5", "conversation": "CHAT-C", "question": "Какое точное максимальное число удалённых экспертов разрешили вызывать на один запрос?", "expected_status": "EMPTY", "expected_evidence": []},
+    {"id": "D1", "conversation": "CHAT-D", "question": "Какие четыре режима решили сравнивать для каждой предметной области?", "expected_status": "FOUND", "expected_evidence": ["M0010"]},
+    {"id": "D2", "conversation": "CHAT-D", "question": "Из каких четырёх частей должен состоять проверяемый ответ первого locked benchmark?", "expected_status": "FOUND", "expected_evidence": ["M0010"]},
+    {"id": "D3", "conversation": "CHAT-D", "question": "Какую конкретную foundation model окончательно выбрали для эксперимента?", "expected_status": "EMPTY", "expected_evidence": []},
+    {"id": "D4", "conversation": "CHAT-D", "question": "Какое точное число обучающих примеров утвердили для каждой локальной ветви?", "expected_status": "EMPTY", "expected_evidence": []},
+    {"id": "D5", "conversation": "CHAT-D", "question": "Какую конкретную модель телефона выбрали для физического запуска?", "expected_status": "EMPTY", "expected_evidence": []}
+  ],
+  "locked_gates": {
+    "valid_tool_receipts": "10/10",
+    "supported_recall": "5/5",
+    "empty_correct": "5/5",
+    "correct_evidence": "5/5 supported cases",
+    "hidden_records_selected": 0,
+    "secrets_exposed": 0
+  },
+  "privacy": {"raw_conversations_public": false, "session_ids_public": false, "raw_tool_output_public": false, "safe_questions_claims_excerpts_and_scores_public": true},
+  "claim_boundary": "This isolates one-question extraction and tool selection from conversation discovery, security policy and network transport."
+}

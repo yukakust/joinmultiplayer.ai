@@ -1123,3 +1123,14 @@ should reuse one cached conversation prefix but require one small generation
 and one code-owned receipt per question.
 
 - `/experiments/E007/sender-extraction-result-v0.1.json`
+
+## Gate 16C.1 — one cached question, one tool receipt
+
+Gate 16C grouped five questions even though the MVP network sends one question
+at a time. Gate 16C.1 corrects that mismatch without changing the conversations,
+questions, model, or gold meanings. Each conversation is prefixed once and its
+KV cache is reused across five independent branches. Every branch must call
+exactly one of `send_found(claim, evidence)` or `send_empty()`. Ordinary code
+owns the loop and converts a missing or malformed call into `ERROR`.
+
+- `/experiments/E007/sender-single-tool-protocol-v0.1.json`
