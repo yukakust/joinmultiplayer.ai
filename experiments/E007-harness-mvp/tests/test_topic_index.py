@@ -215,6 +215,8 @@ class TopicIndexTest(unittest.TestCase):
         self.assertEqual(result["summary"]["grounded_claims_accepted"], 8)
         self.assertEqual(result["summary"]["grounded_claims_rejected"], 22)
         self.assertFalse(result["summary"]["gate_passed"])
+        self.assertEqual(result["status"], "completed_failed_protocol_error")
+        self.assertIn("Q07", result["protocol_error"])
         public_text = GROUNDED_SYNTHESIS_16D9_RESULT.read_text()
         self.assertNotIn("raw_message", public_text)
         self.assertNotIn('"usage"', public_text)

@@ -1418,6 +1418,10 @@ checking is useful, but this DeBERTa setup is too destructive: list fragments,
 mixed-language evidence and modest paraphrases were often classified neutral.
 The known Gate 16D.8 inventions were not regenerated under the structured
 claim-and-quote prompt; five new citation/support mistakes were all blocked.
+Post-run review also found a protocol error: Q07 evidence is Russian although
+the locked boundary described all eight source shelves as English. The locked
+file remains unchanged as evidence of the mistake. Its two Q07 conditions
+cannot be used to estimate English-only NLI recall.
 
 - `/experiments/E007/grounded-synthesis-gate16d9-result-v0.1.json`
 - `/experiment/e007/gate-16d/grounded-synthesis/`

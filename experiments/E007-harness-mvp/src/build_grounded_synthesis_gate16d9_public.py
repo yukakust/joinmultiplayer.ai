@@ -52,11 +52,12 @@ def build(private: dict) -> dict:
         rows.append({"id":source["id"],"question_id":source["question_id"],"condition":source["condition"],"question":source["question"],"message_ids":source["message_ids"],"claims":claims,"accepted_claims":[c["claim"] for c in claims if c["accepted"]]})
     total=sum(len(r["claims"]) for r in rows); exact=sum(c["exact_quote"] for r in rows for c in r["claims"]); accepted=sum(c["accepted"] for r in rows for c in r["claims"])
     return {
-        "schema_version":"0.1","experiment":"E007","gate":"16D.9","status":"completed_failed",
+        "schema_version":"0.1","experiment":"E007","gate":"16D.9","status":"completed_failed_protocol_error",
         "protocol":"/experiments/E007/grounded-synthesis-gate16d9-protocol-v0.1.json",
+        "protocol_error":"The locked boundary incorrectly described all eight source shelves as English. Q07 evidence is Russian, so English DeBERTa results for both Q07 conditions are not a valid monolingual NLI test.",
         "summary":{"valid_structured_answers":len(rows),"valid_structured_answers_possible":8,"claims":total,"exact_quotes":exact,"human_grounded_claims":supported,"nli_accepted":accepted,"grounded_claims_accepted":accepted_supported,"unsupported_claims":total-supported,"unsupported_claims_accepted":unsupported_accepted,"grounded_claims_rejected":supported-accepted_supported,"required_parts_retained":12,"required_parts_possible":36,"gate_passed":False},
         "rows":rows,
-        "decision":"The turnstile had 8/8 precision on accepted claims and rejected all five unsupported or mis-cited claims, but retained only 8/30 grounded claims and 12/36 required parts. Exact quotes plus this English DeBERTa configuration are too destructive for the harness."
+        "decision":"The turnstile had 8/8 precision on accepted claims and rejected all five unsupported or mis-cited claims, but retained only 8/30 grounded claims and 12/36 required parts. Exact quotes plus this English DeBERTa configuration are too destructive for the harness. Q07 also violated the locked English-source boundary, so this failed run cannot estimate monolingual NLI recall cleanly."
     }
 
 

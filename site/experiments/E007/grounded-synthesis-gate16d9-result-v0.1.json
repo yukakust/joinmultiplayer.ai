@@ -2,8 +2,9 @@
   "schema_version": "0.1",
   "experiment": "E007",
   "gate": "16D.9",
-  "status": "completed_failed",
+  "status": "completed_failed_protocol_error",
   "protocol": "/experiments/E007/grounded-synthesis-gate16d9-protocol-v0.1.json",
+  "protocol_error": "The locked boundary incorrectly described all eight source shelves as English. Q07 evidence is Russian, so English DeBERTa results for both Q07 conditions are not a valid monolingual NLI test.",
   "summary": {
     "valid_structured_answers": 8,
     "valid_structured_answers_possible": 8,
@@ -680,5 +681,5 @@
       ]
     }
   ],
-  "decision": "The turnstile had 8/8 precision on accepted claims and rejected all five unsupported or mis-cited claims, but retained only 8/30 grounded claims and 12/36 required parts. Exact quotes plus this English DeBERTa configuration are too destructive for the harness."
+  "decision": "The turnstile had 8/8 precision on accepted claims and rejected all five unsupported or mis-cited claims, but retained only 8/30 grounded claims and 12/36 required parts. Exact quotes plus this English DeBERTa configuration are too destructive for the harness. Q07 also violated the locked English-source boundary, so this failed run cannot estimate monolingual NLI recall cleanly."
 }
