@@ -586,3 +586,16 @@ message with conversation ID, message ID, role, phase, order, and source
 coordinates. Hidden reasoning, tools, logs, system/developer content, and
 automatically supplied UI catalogues are not library messages. Raw conversations
 stay local. Markdown is a derived human view, not the canonical store.
+
+## Rejected grouped sender extraction
+
+Gate 16C tested the next sender-side step on two previously unused real Codex
+conversation files. Grouping five extraction decisions into one generation is
+rejected: the 12,217-token case returned only two decisions, missed one present
+fact, and silently omitted three questions. The shorter case returned all five.
+All three returned `FOUND` claims were grounded in real visible messages, and no
+hidden record or secret was selected.
+
+The next design keeps whole-conversation reading but makes ordinary code own
+completion: one cached conversation prefix, one question, and exactly one
+required receipt at a time.

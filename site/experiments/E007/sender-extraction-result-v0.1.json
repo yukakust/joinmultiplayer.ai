@@ -1,0 +1,128 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16C",
+  "status": "development_failed_locked_gates",
+  "protocol": "/experiments/E007/sender-extraction-protocol-v0.1.json",
+  "summary": {
+    "questions": 10,
+    "complete_decisions": 7,
+    "correct_decisions": 6,
+    "supported_found": 3,
+    "supported_total": 5,
+    "empty_correct": 3,
+    "empty_total": 5,
+    "correct_evidence_among_returned_found": "3/3",
+    "hidden_records_selected": 0,
+    "secrets_exposed": 0,
+    "locked_gate_passed": false
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "dtype": "BF16",
+    "device": "yukabox CPU",
+    "thinking": false,
+    "training": false
+  },
+  "runs": [
+    {"conversation": "CHAT-C", "visible_messages": 10, "transcript_tokens": 12217, "prompt_tokens": 12577, "generated_tokens": 68, "seconds": 230.321, "decisions_returned": 2},
+    {"conversation": "CHAT-D", "visible_messages": 23, "transcript_tokens": 6728, "prompt_tokens": 7065, "generated_tokens": 211, "seconds": 235.281, "decisions_returned": 5}
+  ],
+  "audit_correction": {
+    "found_after_inference": true,
+    "affected_questions": ["D1", "D2"],
+    "locked_protocol_expected_evidence": ["M0008"],
+    "correct_evidence_after_exact_rehydration": ["M0010"],
+    "treatment": "The locked protocol is preserved unchanged. The model's M0010 selections are scored correct because ordinary code rehydrated that exact visible message and manual review confirmed both claims."
+  },
+  "questions": [
+    {
+      "id": "C1", "conversation": "CHAT-C", "expected_status": "FOUND",
+      "question": "Какие три состояния знания предложили для будущей сети pocket i?",
+      "expected": "Published knowledge, Callable knowledge и Compressed knowledge.",
+      "model_status": "FOUND",
+      "model_claim": "Три состояния знания: Published knowledge, Callable knowledge и Compressed knowledge.",
+      "model_evidence": ["M0002"],
+      "safe_evidence_excerpt": "У знания будет три состояния: Published knowledge, Callable knowledge, Compressed knowledge.",
+      "score": 2, "verdict": "Верно", "reason": "Смысл и точное сообщение-основание верны."
+    },
+    {
+      "id": "C2", "conversation": "CHAT-C", "expected_status": "FOUND",
+      "question": "Какие расходы и риски маршрутизатор должен вычитать из ценности новой информации?",
+      "expected": "Корреляцию, задержку, стоимость вычислений, расход энергии и риск раскрытия данных.",
+      "model_status": "EMPTY", "model_claim": "", "model_evidence": [],
+      "safe_evidence_excerpt": "Новая информация минус корреляция, задержка, стоимость вычислений, расход энергии и риск раскрытия данных.",
+      "score": 0, "verdict": "Критический пропуск", "reason": "Ответ прямо находился в M0002, но pocket i сообщил, что его нет."
+    },
+    {
+      "id": "C3", "conversation": "CHAT-C", "expected_status": "FOUND",
+      "question": "Что решили делать, если из двух параллельно вызванных экспертов один отключился, не закончив ответ?",
+      "expected": "Полностью отбросить незаконченный вклад и использовать только полностью завершённый вклад оставшегося эксперта.",
+      "model_status": "MISSING", "model_claim": "", "model_evidence": [],
+      "safe_evidence_excerpt": "Один отвалился — полностью выбрасываем его вклад; используем закончившего эксперта.",
+      "score": 0, "verdict": "Ответ пропущен", "reason": "Модель завершила JSON после C2 и вообще не решила C3."
+    },
+    {
+      "id": "C4", "conversation": "CHAT-C", "expected_status": "EMPTY",
+      "question": "Какой точный алгоритм шифрования выбрали для локальной памяти pocket i?",
+      "expected": "В разговоре алгоритм не выбирали.",
+      "model_status": "MISSING", "model_claim": "", "model_evidence": [], "safe_evidence_excerpt": "Ответа в разговоре нет.",
+      "score": 0, "verdict": "Ответ пропущен", "reason": "Правильным был бы EMPTY, но модель не вернула объект C4."
+    },
+    {
+      "id": "C5", "conversation": "CHAT-C", "expected_status": "EMPTY",
+      "question": "Какое точное максимальное число удалённых экспертов разрешили вызывать на один запрос?",
+      "expected": "В разговоре точный максимум не выбирали.",
+      "model_status": "MISSING", "model_claim": "", "model_evidence": [], "safe_evidence_excerpt": "Ответа в разговоре нет.",
+      "score": 0, "verdict": "Ответ пропущен", "reason": "Правильным был бы EMPTY, но модель не вернула объект C5."
+    },
+    {
+      "id": "D1", "conversation": "CHAT-D", "expected_status": "FOUND",
+      "question": "Какие четыре режима решили сравнивать для каждой предметной области?",
+      "expected": "Frozen base, только local RAG, только local adapter, adapter + local RAG.",
+      "model_status": "FOUND",
+      "model_claim": "Frozen base без локальных данных; только локальный RAG; только обученный локальный adapter; adapter + локальный RAG.",
+      "model_evidence": ["M0010"],
+      "safe_evidence_excerpt": "Я бы проверял четыре режима: frozen base; local RAG; local adapter; adapter + local RAG.",
+      "score": 2, "verdict": "Верно", "reason": "Смысл и реально подтверждающее сообщение M0010 верны; locked gold ошибочно называл M0008."
+    },
+    {
+      "id": "D2", "conversation": "CHAT-D", "expected_status": "FOUND",
+      "question": "Из каких четырёх частей должен состоять проверяемый ответ первого locked benchmark?",
+      "expected": "Чемпион, заболевание, тип или механизм наследования, краткое обоснование.",
+      "model_status": "FOUND",
+      "model_claim": "Чемпион — заболевание — тип/механизм наследования — краткое обоснование.",
+      "model_evidence": ["M0010"],
+      "safe_evidence_excerpt": "<чемпион> — <заболевание> — <тип/механизм наследования> — <краткое обоснование>",
+      "score": 2, "verdict": "Верно", "reason": "Смысл и реально подтверждающее сообщение M0010 верны; locked gold ошибочно называл M0008."
+    },
+    {
+      "id": "D3", "conversation": "CHAT-D", "expected_status": "EMPTY",
+      "question": "Какую конкретную foundation model окончательно выбрали для эксперимента?",
+      "expected": "Конкретную модель не выбирали.",
+      "model_status": "EMPTY", "model_claim": "", "model_evidence": [], "safe_evidence_excerpt": "Ответа в разговоре нет.",
+      "score": 2, "verdict": "Верно", "reason": "Pocket i не стал угадывать модель."
+    },
+    {
+      "id": "D4", "conversation": "CHAT-D", "expected_status": "EMPTY",
+      "question": "Какое точное число обучающих примеров утвердили для каждой локальной ветви?",
+      "expected": "Точное число не утверждали.",
+      "model_status": "EMPTY", "model_claim": "", "model_evidence": [], "safe_evidence_excerpt": "Ответа в разговоре нет.",
+      "score": 2, "verdict": "Верно", "reason": "Pocket i не выдумал число."
+    },
+    {
+      "id": "D5", "conversation": "CHAT-D", "expected_status": "EMPTY",
+      "question": "Какую конкретную модель телефона выбрали для физического запуска?",
+      "expected": "Модель телефона не выбирали.",
+      "model_status": "EMPTY", "model_claim": "", "model_evidence": [], "safe_evidence_excerpt": "Ответа в разговоре нет.",
+      "score": 2, "verdict": "Верно", "reason": "Pocket i не выдумал устройство."
+    }
+  ],
+  "decision": {
+    "accepted": false,
+    "finding": "Whole-conversation extraction can produce excellent grounded capsules, but one grouped generation is not reliable enough: it missed one present fact and silently omitted three decisions in the longer conversation.",
+    "next_test": "Keep the conversation prefix cached, but ask one question per small generation and require ordinary code to create exactly one receipt per question. This separates reading quality from list-completion reliability."
+  },
+  "privacy": {"raw_conversations_public": false, "session_ids_public": false, "raw_output_public": false, "safe_excerpts_public": true}
+}

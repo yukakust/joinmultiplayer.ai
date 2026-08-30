@@ -1107,3 +1107,19 @@ stay private. This tests extraction from an already selected conversation, not
 search across the full local library.
 
 - `/experiments/E007/sender-extraction-protocol-v0.1.json`
+
+Gate 16C failed its locked development gates. The short conversation returned
+all five decisions, but the longer 12,217-token conversation returned only two
+of five, including one false `EMPTY` for a fact present in the cited source.
+Across both conversations, 6/10 decisions were correct, supported recall was
+3/5, and empty-control accuracy was 3/5. Every returned `FOUND` capsule used a
+real supporting visible message; no hidden record or secret was selected.
+
+Manual audit also found a locked-gold mistake: D1 and D2 expected M0008, while
+exact rehydration proves M0010 is the supporting message selected by the model.
+The original protocol remains unchanged and the correction is explicit in the
+result. Do not accept grouped five-question extraction. The next isolated test
+should reuse one cached conversation prefix but require one small generation
+and one code-owned receipt per question.
+
+- `/experiments/E007/sender-extraction-result-v0.1.json`
