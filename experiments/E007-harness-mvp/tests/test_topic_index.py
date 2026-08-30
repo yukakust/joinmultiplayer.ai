@@ -10,6 +10,8 @@ CLIENT = ROOT / "site/experiments/E007/topic-index-node-v0.1.py"
 CLIENT_V2 = ROOT / "site/experiments/E007/topic-index-node-v0.2.py"
 INDEXER = ROOT / "experiments/E007-harness-mvp/src/run_topic_index.py"
 PUBLIC_BUILDER = ROOT / "experiments/E007-harness-mvp/src/build_topic_index_public.py"
+WHOLE_CHAT_RUNNER = ROOT / "experiments/E007-harness-mvp/src/run_whole_chat_index.py"
+WHOLE_CHAT_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-index-protocol-v0.1.json"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -76,6 +78,22 @@ class TopicIndexTest(unittest.TestCase):
         self.assertNotIn("PRIVATE TOPIC", encoded)
         self.assertNotIn("PRIVATE SUMMARY", encoded)
         self.assertNotIn("PRIVATE-MESSAGE", encoded)
+
+    def test_whole_chat_index_protocol_is_locked_and_has_unique_gold_queries(self):
+        protocol = json.loads(WHOLE_CHAT_PROTOCOL.read_text())
+        self.assertEqual(protocol["status"], "locked_before_embedding_run")
+        self.assertEqual(len(protocol["queries"]), 10)
+        self.assertEqual(len({item["id"] for item in protocol["queries"]}), 10)
+        self.assertEqual(len({item["gold_card_id"] for item in protocol["queries"]}), 10)
+        self.assertEqual(protocol["success_gate"]["recall_at_5"], "10/10")
+
+    def test_cosine_prefers_identical_vector(self):
+        runner = load(WHOLE_CHAT_RUNNER, "whole_chat_runner")
+        class Vector:
+            def __init__(self, values): self.values = values
+            def __matmul__(self, other): return sum(a * b for a, b in zip(self.values, other.values))
+        query = Vector([1.0, 0.0])
+        self.assertGreater(runner.cosine(query, query), runner.cosine(query, Vector([0.0, 1.0])))
 
 
 if __name__ == "__main__":

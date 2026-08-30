@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.2",
+  "status": "locked_before_embedding_run",
+  "hypothesis": "A local multi-vector index can find the correct whole conversation for a new question without asking Qwen to invent topic cards first.",
+  "source": {
+    "connector": "/experiments/E007/topic-index-node-v0.2.py",
+    "private_snapshot_sha256": "4c916989dbcf4a67596f159057713dddc3c589f5cd85dac111a8d8f3a801d9ee",
+    "conversations": 58,
+    "visible_messages": 2727
+  },
+  "index": {
+    "unit": "one natural visible message",
+    "conversation_is_preserved_whole": true,
+    "generated_topic_cards": false,
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "runtime": "fastembed==0.8.0",
+    "conversation_score": "maximum cosine similarity of any message belonging to that conversation"
+  },
+  "queries": [
+    {"id": "Q01", "question": "В каком разговоре проверяли целостность перенесённого корпуса и резервной копии PostgreSQL для системы-куратора?", "gold_card_id": "YUKA-C0001"},
+    {"id": "Q02", "question": "Где эксперимент с растущим swarm показал 100%, но не доказал превосходство над точным RAG?", "gold_card_id": "YUKA-C0005"},
+    {"id": "Q03", "question": "Где расследовали SSH-туннель к арендованным GPU, который сначала работал, а затем снова получал отказ по публичному ключу?", "gold_card_id": "YUKA-C0030"},
+    {"id": "Q04", "question": "В каком ревью заметили, что лимит распаковки PNG защищает IDAT, но не вспомогательные и APNG-чанки?", "gold_card_id": "YUKA-C0035"},
+    {"id": "Q05", "question": "Где проверяли происхождение пакета исполнителя и приём его receipt для meatgrinder?", "gold_card_id": "YUKA-C0037"},
+    {"id": "Q06", "question": "В каком ревью выяснилось, что подписанный аудит описывает трафик, который на самом деле ушёл в компонент с готовыми ответами?", "gold_card_id": "YUKA-C0041"},
+    {"id": "Q07", "question": "Где проверяли приватный Bitbucket checkout для customer packaging, но упёрлись в запрет Docker socket и loopback?", "gold_card_id": "YUKA-C0044"},
+    {"id": "Q08", "question": "В каком ревью нашли, что загрузчик receipt не сравнивает имя root из ссылки с именем в manifest?", "gold_card_id": "YUKA-C0054"},
+    {"id": "Q09", "question": "Где разработчику выдавали write-доступ к репозиторию движка аренды?", "gold_card_id": "YUKA-C0055"},
+    {"id": "Q10", "question": "Где объясняли, что pocket-i-lab уже установлен, а для запуска hook нужно перезапустить Codex и открыть проект заново?", "gold_card_id": "YUKA-C0058"}
+  ],
+  "metrics": ["recall_at_1", "recall_at_3", "recall_at_5", "recall_at_10", "mean_reciprocal_rank"],
+  "success_gate": {
+    "recall_at_5": "10/10",
+    "recall_at_3": "at least 9/10"
+  },
+  "privacy": "No conversation text, session identifier, path, conversation hash or matched message text may enter the public result.",
+  "next_if_pass": "Let Qwen read each retrieved whole conversation and return FOUND with exact message evidence or EMPTY.",
+  "next_if_fail": "Inspect missed ranks and compare a stronger embedding index or a lexical-plus-neural union without changing the locked queries."
+}
