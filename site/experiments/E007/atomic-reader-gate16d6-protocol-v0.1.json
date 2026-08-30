@@ -1,0 +1,141 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.6",
+  "status": "locked_before_qwen_run",
+  "hypothesis": "Splitting each two-part question into two frozen atoms, locating evidence separately for each atom, extracting one answer from only that evidence, and joining the answers with code will preserve more meaning than the single-call reader baseline.",
+  "baseline": {
+    "protocol": "/experiments/E007/whole-chat-reader-gate16d5-protocol-v0.1.json",
+    "result": "/experiments/E007/whole-chat-reader-gate16d5-result-v0.1.json",
+    "meanings_preserved": "15/20",
+    "complete_answers": "5/10",
+    "negative_empty": "9/10"
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "local_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "parameters": 8190735360,
+    "quantization": "Q4_K_M",
+    "thinking": false,
+    "sampling": false,
+    "retries": 0
+  },
+  "pipeline": [
+    "Frozen human decomposition supplies two atoms per question; decomposition is not being tested.",
+    "Locator sees one atom and one complete conversation and returns evidence message IDs or EMPTY. It cannot write an answer.",
+    "Extractor sees one atom and only the selected evidence messages and returns one short answer. It cannot search the full conversation.",
+    "Ordinary code joins atom A and atom B in their locked order. No model rewrites the merged answer."
+  ],
+  "questions": [
+    {
+      "id": "Q01",
+      "text": "Что удалось подтвердить при проверке переноса Counterform, а какие найденные рядом артефакты нельзя считать резервными копиями?",
+      "gold_card_id": "YUKA-C0001",
+      "negative_card_id": "YUKA-C0058",
+      "atoms": [
+        {"id": "A", "question": "Что именно удалось подтвердить при проверке переноса Counterform?", "accepted_evidence": ["M0007", "M0008"], "required_meaning": "The main PostgreSQL dump, repository bundle and corpus verification were valid."},
+        {"id": "B", "question": "Какие найденные рядом артефакты нельзя считать резервными копиями и почему?", "accepted_evidence": ["M0007"], "required_meaning": "Partial transfer artifacts were leftovers from incomplete attempts, not backups."}
+      ]
+    },
+    {
+      "id": "Q02",
+      "text": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+      "gold_card_id": "YUKA-C0005",
+      "negative_card_id": "YUKA-C0044",
+      "atoms": [
+        {"id": "A", "question": "Какую точность показал full swarm в E002 и при каких размерах N?", "accepted_evidence": ["M0011", "M0013"], "required_meaning": "Full-swarm accuracy was 100% for N=2,4,8,16,32."},
+        {"id": "B", "question": "Почему результат E002 не доказывает преимущество swarm?", "accepted_evidence": ["M0011", "M0013"], "required_meaning": "Exact RAG and the symbolic ensemble also reached 100%, so no superiority was established."}
+      ]
+    },
+    {
+      "id": "Q03",
+      "text": "Почему первый запуск E002 R0001 сохранили как неудачный и что изменили в следующей попытке?",
+      "gold_card_id": "YUKA-C0005",
+      "negative_card_id": "YUKA-C0054",
+      "atoms": [
+        {"id": "A", "question": "Почему первый запуск E002 R0001 признали неудачным?", "accepted_evidence": ["M0009", "M0013"], "required_meaning": "The first run had a symmetry in its shuffle or role-swap control and an underpowered chance threshold."},
+        {"id": "B", "question": "Что изменили в следующей попытке E002 R0001?", "accepted_evidence": ["M0009", "M0011", "M0013"], "required_meaning": "The revision used genuinely wrong-key contributions, enlarged evaluation and remained a separate artifact."}
+      ]
+    },
+    {
+      "id": "Q04",
+      "text": "Как тестовый PNG сумел пройти установленный лимит распаковки и насколько большой объём данных остался без проверки?",
+      "gold_card_id": "YUKA-C0035",
+      "negative_card_id": "YUKA-C0055",
+      "atoms": [
+        {"id": "A", "question": "Какие данные PNG проверялись лимитом, а какие позволили тестовому файлу пройти его?", "accepted_evidence": ["M0006", "M0007"], "required_meaning": "Only the static IDAT stream was checked; APNG fdAT frame data was not."},
+        {"id": "B", "question": "Какой декодированный объём данных тестового PNG остался без проверки?", "accepted_evidence": ["M0006", "M0007"], "required_meaning": "About 419,532,800 decoded bytes in fdAT frames were unchecked."}
+      ]
+    },
+    {
+      "id": "Q05",
+      "text": "Почему подписанный сетевой аудит в проверенном producer нельзя считать доказательством обращения к настоящей цели и какое исправление предложено?",
+      "gold_card_id": "YUKA-C0041",
+      "negative_card_id": "YUKA-C0001",
+      "atoms": [
+        {"id": "A", "question": "Почему подписанный аудит producer не доказывал обращение к настоящей цели?", "accepted_evidence": ["M0004", "M0006"], "required_meaning": "Traffic went to a component-owned synthetic upstream with canned responses and no bound real peer identity."},
+        {"id": "B", "question": "Как предложили исправить producer и его подписанный аудит?", "accepted_evidence": ["M0006"], "required_meaning": "Move canned responses to tests, use a lifecycle-owned real target and bind peer identity into the audit."}
+      ]
+    },
+    {
+      "id": "Q06",
+      "text": "Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?",
+      "gold_card_id": "YUKA-C0041",
+      "negative_card_id": "YUKA-C0035",
+      "atoms": [
+        {"id": "A", "question": "Какая ошибка в создании session records позволяла одному admission открыть неограниченное число сессий?", "accepted_evidence": ["M0006"], "required_meaning": "Every session created a fresh unrestricted record and random correlation instead of sharing admission-wide state."},
+        {"id": "B", "question": "Как первый завершившийся socket и другие concurrent sockets искажали общий audit и budget?", "accepted_evidence": ["M0005", "M0006"], "required_meaning": "Only the first socket was sealed; other sockets could be omitted while aggregate request and byte limits were exceeded."}
+      ]
+    },
+    {
+      "id": "Q07",
+      "text": "Что удалось независимо подтвердить в customer-packaging checkout и какие две проверки выполнить не позволило окружение?",
+      "gold_card_id": "YUKA-C0044",
+      "negative_card_id": "YUKA-C0005",
+      "atoms": [
+        {"id": "A", "question": "Какие свойства customer-packaging checkout удалось независимо подтвердить?", "accepted_evidence": ["M0003", "M0004"], "required_meaning": "The checkout was clean, tracked the exact candidate SHA and used the owner-private Bitbucket remote."},
+        {"id": "B", "question": "Какие две проверки customer-packaging заблокировало окружение?", "accepted_evidence": ["M0004"], "required_meaning": "The sandbox blocked Docker socket access and loopback curl."}
+      ]
+    },
+    {
+      "id": "Q08",
+      "text": "Какую точную проверку происхождения пропустил receipt loader и к какой ошибке это могло привести?",
+      "gold_card_id": "YUKA-C0054",
+      "negative_card_id": "YUKA-C0041",
+      "atoms": [
+        {"id": "A", "question": "Какое точное сравнение root names отсутствовало в receipt loader?", "accepted_evidence": ["M0005"], "required_meaning": "It did not compare root.manifest.rootName with the root name encoded in receiptReference."},
+        {"id": "B", "question": "К какой конкретной provenance-ошибке приводило отсутствующее сравнение root names?", "accepted_evidence": ["M0005"], "required_meaning": "A copied or misrouted root could pass while the queue recorded a reference to a different root."}
+      ]
+    },
+    {
+      "id": "Q09",
+      "text": "Кому в итоге выдали доступ к rental-market-engine, какого уровня был доступ и что ещё должен сделать получатель?",
+      "gold_card_id": "YUKA-C0055",
+      "negative_card_id": "YUKA-C0054",
+      "atoms": [
+        {"id": "A", "question": "Кому и с каким уровнем выдали доступ к rental-market-engine?", "accepted_evidence": ["M0021"], "required_meaning": "Dianach received a write-access invitation to yukakust/rental-market-engine."},
+        {"id": "B", "question": "Что ещё должен сделать получатель доступа к rental-market-engine?", "accepted_evidence": ["M0021"], "required_meaning": "Dianach still needed to accept the GitHub invitation."}
+      ]
+    },
+    {
+      "id": "Q10",
+      "text": "Почему уже установленный Pocket i Lab не начал вести журнал в текущей задаче и какие действия должны были это исправить?",
+      "gold_card_id": "YUKA-C0058",
+      "negative_card_id": "YUKA-C0044",
+      "atoms": [
+        {"id": "A", "question": "Почему установленный и enabled Pocket i Lab не начал вести журнал в уже открытой задаче?", "accepted_evidence": ["M0018", "M0022", "M0023"], "required_meaning": "The task had probably started without the plugin hook even though the plugin was installed and enabled."},
+        {"id": "B", "question": "Какие действия должны были подключить Pocket i Lab hook к новой задаче?", "accepted_evidence": ["M0023"], "required_meaning": "Restart Codex, reopen the project root, create a new task and send the start command there."}
+      ]
+    }
+  ],
+  "success_gate": {
+    "valid_locator_receipts": "40/40",
+    "positive_atom_evidence_hits": "20/20",
+    "negative_atom_empty": "20/20",
+    "valid_extractor_receipts": "20/20",
+    "positive_atom_meanings": "20/20",
+    "complete_composed_answers": "10/10",
+    "must_beat_baseline_meanings": ">15/20"
+  },
+  "privacy": "Raw conversations, raw model outputs and private paths remain private. Only reviewed atom questions, answers, evidence coordinates, deterministic compositions and scores may be published."
+}

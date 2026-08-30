@@ -1320,3 +1320,17 @@ claim-to-evidence checks before acceptance.
 
 - `/experiments/E007/whole-chat-reader-gate16d5-result-v0.1.json`
 - `/experiment/e007/gate-16d/ten-questions/`
+
+## Gate 16D.6 — atomic locator, extractor and code-only composer
+
+Gate 16D.6 keeps the ten Gate 16D.5 questions, conversations and Qwen3-8B
+Q4_K_M preset but removes the seven-action reader call. Each question is split
+into two human-frozen atoms before inference. A locator can only return message
+IDs or EMPTY for one atom. A separate extractor then receives only one atom and
+the selected message texts and can only return one short answer. Ordinary code
+joins atom A and B in locked order; no model rewrites the result. This
+development gate isolates the locator and extractor; it does not test automatic
+question decomposition. The baseline is 15/20 meanings and 5/10 complete
+answers from Gate 16D.5.
+
+- `/experiments/E007/atomic-reader-gate16d6-protocol-v0.1.json`
