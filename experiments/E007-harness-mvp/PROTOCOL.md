@@ -1334,3 +1334,15 @@ question decomposition. The baseline is 15/20 meanings and 5/10 complete
 answers from Gate 16D.5.
 
 - `/experiments/E007/atomic-reader-gate16d6-protocol-v0.1.json`
+
+The locked run returned 39/40 valid locator receipts. The locator selected an
+accepted message for 18/20 supporting atoms and returned EMPTY for 17/20
+unrelated atoms. All 20 extractor calls returned a valid answer. Human review
+found only 14/20 required meanings, versus 15/20 in the unsplit Gate 16D.5
+baseline; complete answers remained 5/10. The gate fails. Atomic calls made the
+failure easier to locate, but did not improve the answer: the locator can choose
+the wrong nearby evidence, and the extractor can answer a different true
+question even when it receives the right evidence.
+
+- `/experiments/E007/atomic-reader-gate16d6-result-v0.1.json`
+- `/experiment/e007/gate-16d/atomic-reader/`

@@ -1,0 +1,433 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.6",
+  "status": "completed_failed",
+  "protocol": "/experiments/E007/atomic-reader-gate16d6-protocol-v0.1.json",
+  "model": "Qwen3-8B Q4_K_M",
+  "summary": {
+    "valid_locator_receipts": 39,
+    "positive_atom_evidence_hits": 18,
+    "negative_atom_empty": 17,
+    "valid_extractor_receipts": 20,
+    "atom_meanings_preserved": 14,
+    "atom_meanings_possible": 20,
+    "complete_answers": 5,
+    "baseline_atom_meanings": 15,
+    "baseline_complete_answers": 5,
+    "gate_passed": false
+  },
+  "questions": [
+    {
+      "question_id": "Q01",
+      "question": "Что удалось подтвердить при проверке переноса Counterform, а какие найденные рядом артефакты нельзя считать резервными копиями?",
+      "atoms": [
+        {
+          "id": "A",
+          "question": "Что именно удалось подтвердить при проверке переноса Counterform?",
+          "selected_message_ids": [
+            "M0007",
+            "M0008"
+          ],
+          "locator_passed": true,
+          "answer": "При проверке переноса Counterform подтверждено, что основной PostgreSQL dump совпадает с заявленным SHA, Git bundle валиден и содержит полную историю, а также что corpus verification log подтверждает полное соответствие.",
+          "meaning_passed": true,
+          "review": "Нашла подтверждённые dump, Git bundle и проверку корпуса."
+        },
+        {
+          "id": "B",
+          "question": "Какие найденные рядом артефакты нельзя считать резервными копиями и почему?",
+          "selected_message_ids": [
+            "M0007",
+            "M0008"
+          ],
+          "locator_passed": true,
+          "answer": "Незавершённые transfer-файлы, такие как `data.partial-relay-*`, два `.partial-*` dump и stale PID-файлы, нельзя считать резервными копиями, так как они не являются надёжными копиями финальных файлов.",
+          "meaning_passed": true,
+          "review": "Нашла незавершённые partial-файлы и верно объяснила, почему это не резервные копии."
+        }
+      ],
+      "composed_answer": "При проверке переноса Counterform подтверждено, что основной PostgreSQL dump совпадает с заявленным SHA, Git bundle валиден и содержит полную историю, а также что corpus verification log подтверждает полное соответствие. Незавершённые transfer-файлы, такие как `data.partial-relay-*`, два `.partial-*` dump и stale PID-файлы, нельзя считать резервными копиями, так как они не являются надёжными копиями финальных файлов.",
+      "complete": true,
+      "unrelated_chat": [
+        {
+          "atom_id": "A",
+          "receipt": "EMPTY"
+        },
+        {
+          "atom_id": "B",
+          "receipt": "EMPTY"
+        }
+      ]
+    },
+    {
+      "question_id": "Q02",
+      "question": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+      "atoms": [
+        {
+          "id": "A",
+          "question": "Какую точность показал full swarm в E002 и при каких размерах N?",
+          "selected_message_ids": [
+            "M0013"
+          ],
+          "locator_passed": true,
+          "answer": "Full swarm показал точность 100% при размерах N=2,4,8,16,32 в E002.",
+          "meaning_passed": true,
+          "review": "Нашла 100% точность для всех размеров swarm."
+        },
+        {
+          "id": "B",
+          "question": "Почему результат E002 не доказывает преимущество swarm?",
+          "selected_message_ids": [
+            "M0013"
+          ],
+          "locator_passed": true,
+          "answer": "Результат E002 не доказывает преимущество swarm, потому что он поддерживает только синтетический механизм составления и не доказывает гипотезу H0001.",
+          "meaning_passed": false,
+          "review": "Назвала другое верное ограничение эксперимента, но пропустила равные 100% у exact RAG и symbolic ensemble."
+        }
+      ],
+      "composed_answer": "Full swarm показал точность 100% при размерах N=2,4,8,16,32 в E002. Результат E002 не доказывает преимущество swarm, потому что он поддерживает только синтетический механизм составления и не доказывает гипотезу H0001.",
+      "complete": false,
+      "unrelated_chat": [
+        {
+          "atom_id": "A",
+          "receipt": "EMPTY"
+        },
+        {
+          "atom_id": "B",
+          "receipt": "EMPTY"
+        }
+      ]
+    },
+    {
+      "question_id": "Q03",
+      "question": "Почему первый запуск E002 R0001 сохранили как неудачный и что изменили в следующей попытке?",
+      "atoms": [
+        {
+          "id": "A",
+          "question": "Почему первый запуск E002 R0001 признали неудачным?",
+          "selected_message_ids": [
+            "M0009"
+          ],
+          "locator_passed": true,
+          "answer": "Первый запуск E002 R0001 был признан неудачным из-за двух invalidated draft gates: низкого количества испытаний и математической инвариантности контроля N=2, что не соответствовало ожиданиям.",
+          "meaning_passed": true,
+          "review": "Нашла малое число испытаний и математически невозможный старый порог."
+        },
+        {
+          "id": "B",
+          "question": "Что изменили в следующей попытке E002 R0001?",
+          "selected_message_ids": [
+            "M0009",
+            "M0010",
+            "M0011"
+          ],
+          "locator_passed": true,
+          "answer": "В следующей попытке E002 R0001 были заменены flawed «swap» на genuinely wrong-key contributions, увеличено количество задач до 256, и запущен отдельно названный ревизионный запуск под тем же DRAFT-протоколом.",
+          "meaning_passed": true,
+          "review": "Нашла wrong-key control, 256 заданий и отдельную ревизию."
+        }
+      ],
+      "composed_answer": "Первый запуск E002 R0001 был признан неудачным из-за двух invalidated draft gates: низкого количества испытаний и математической инвариантности контроля N=2, что не соответствовало ожиданиям. В следующей попытке E002 R0001 были заменены flawed «swap» на genuinely wrong-key contributions, увеличено количество задач до 256, и запущен отдельно названный ревизионный запуск под тем же DRAFT-протоколом.",
+      "complete": true,
+      "unrelated_chat": [
+        {
+          "atom_id": "A",
+          "receipt": "EMPTY"
+        },
+        {
+          "atom_id": "B",
+          "receipt": "EVIDENCE"
+        }
+      ]
+    },
+    {
+      "question_id": "Q04",
+      "question": "Как тестовый PNG сумел пройти установленный лимит распаковки и насколько большой объём данных остался без проверки?",
+      "atoms": [
+        {
+          "id": "A",
+          "question": "Какие данные PNG проверялись лимитом, а какие позволили тестовому файлу пройти его?",
+          "selected_message_ids": [
+            "M0007"
+          ],
+          "locator_passed": true,
+          "answer": "Данные PNG, проверенные лимитом, это `IDAT`, а данные, позволившие тестовому файлу пройти его, это `fdAT` и другие необработанные ассистивные чанки.",
+          "meaning_passed": true,
+          "review": "Нашла проверку IDAT и отсутствие проверки fdAT/ancillary-данных."
+        },
+        {
+          "id": "B",
+          "question": "Какой декодированный объём данных тестового PNG остался без проверки?",
+          "selected_message_ids": [
+            "M0007"
+          ],
+          "locator_passed": true,
+          "answer": "Декодированный объём данных тестового PNG, оставшийся без проверки, составляет 419,532,800 байт.",
+          "meaning_passed": true,
+          "review": "Вернула точный размер: 419 532 800 байт."
+        }
+      ],
+      "composed_answer": "Данные PNG, проверенные лимитом, это `IDAT`, а данные, позволившие тестовому файлу пройти его, это `fdAT` и другие необработанные ассистивные чанки. Декодированный объём данных тестового PNG, оставшийся без проверки, составляет 419,532,800 байт.",
+      "complete": true,
+      "unrelated_chat": [
+        {
+          "atom_id": "A",
+          "receipt": "EMPTY"
+        },
+        {
+          "atom_id": "B",
+          "receipt": "ERROR"
+        }
+      ]
+    },
+    {
+      "question_id": "Q05",
+      "question": "Почему подписанный сетевой аудит в проверенном producer нельзя считать доказательством обращения к настоящей цели и какое исправление предложено?",
+      "atoms": [
+        {
+          "id": "A",
+          "question": "Почему подписанный аудит producer не доказывал обращение к настоящей цели?",
+          "selected_message_ids": [
+            "M0006"
+          ],
+          "locator_passed": true,
+          "answer": "Подписанный аудит producer не доказывал обращение к настоящей цели, потому что он описывал трафик, который никогда не достигал подтверждённого назначения, и не содержал маркеров или идентичности реального узла.",
+          "meaning_passed": true,
+          "review": "Верно объяснила, что трафик не дошёл до настоящей цели и реальная peer identity не проверялась."
+        },
+        {
+          "id": "B",
+          "question": "Как предложили исправить producer и его подписанный аудит?",
+          "selected_message_ids": [
+            "M0006"
+          ],
+          "locator_passed": true,
+          "answer": "Исправить проблему предложили, переместив canned upstream в тестовый код, сохранив производство до подключения к descriptor-bound, lifecycle-owned целевому адресу и связав наблюдаемую идентичность с подписанным аудитом.",
+          "meaning_passed": true,
+          "review": "Нашла test-only upstream, настоящий lifecycle target и привязку identity."
+        }
+      ],
+      "composed_answer": "Подписанный аудит producer не доказывал обращение к настоящей цели, потому что он описывал трафик, который никогда не достигал подтверждённого назначения, и не содержал маркеров или идентичности реального узла. Исправить проблему предложили, переместив canned upstream в тестовый код, сохранив производство до подключения к descriptor-bound, lifecycle-owned целевому адресу и связав наблюдаемую идентичность с подписанным аудитом.",
+      "complete": true,
+      "unrelated_chat": [
+        {
+          "atom_id": "A",
+          "receipt": "EMPTY"
+        },
+        {
+          "atom_id": "B",
+          "receipt": "EVIDENCE"
+        }
+      ]
+    },
+    {
+      "question_id": "Q06",
+      "question": "Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?",
+      "atoms": [
+        {
+          "id": "A",
+          "question": "Какая ошибка в создании session records позволяла одному admission открыть неограниченное число сессий?",
+          "selected_message_ids": [
+            "M0005"
+          ],
+          "locator_passed": false,
+          "answer": "Ошибка в создании session records позволяла одному admission открыть неограниченное число сессий из-за того, что C4 RED inventory рассматривало session-to-parser audit handoff как существующий C3 receipt handoff.",
+          "meaning_passed": false,
+          "review": "Выбрала не то сообщение и описала другую проблему C4 вместо свежих session records и случайных correlations."
+        },
+        {
+          "id": "B",
+          "question": "Как первый завершившийся socket и другие concurrent sockets искажали общий audit и budget?",
+          "selected_message_ids": [
+            "M0005",
+            "M0006"
+          ],
+          "locator_passed": true,
+          "answer": "Первый завершившийся socket и другие concurrent sockets искажали общий audit и budget, создавая отдельные записи и корреляции, что приводило к неправильному учету трафика и несоответствию между audit и фактическими данными.",
+          "meaning_passed": false,
+          "review": "Дала общий ответ, но потеряла три важных детали: первый socket, пропущенные concurrent sockets и общий budget."
+        }
+      ],
+      "composed_answer": "Ошибка в создании session records позволяла одному admission открыть неограниченное число сессий из-за того, что C4 RED inventory рассматривало session-to-parser audit handoff как существующий C3 receipt handoff. Первый завершившийся socket и другие concurrent sockets искажали общий audit и budget, создавая отдельные записи и корреляции, что приводило к неправильному учету трафика и несоответствию между audit и фактическими данными.",
+      "complete": false,
+      "unrelated_chat": [
+        {
+          "atom_id": "A",
+          "receipt": "EMPTY"
+        },
+        {
+          "atom_id": "B",
+          "receipt": "EMPTY"
+        }
+      ]
+    },
+    {
+      "question_id": "Q07",
+      "question": "Что удалось независимо подтвердить в customer-packaging checkout и какие две проверки выполнить не позволило окружение?",
+      "atoms": [
+        {
+          "id": "A",
+          "question": "Какие свойства customer-packaging checkout удалось независимо подтвердить?",
+          "selected_message_ids": [
+            "M0004"
+          ],
+          "locator_passed": true,
+          "answer": "Customer-packaging checkout удалось независимо подтвердить чистую tracking-ветку и корректный exact SHA.",
+          "meaning_passed": false,
+          "review": "Назвала clean branch и SHA, но потеряла owner-private Bitbucket remote."
+        },
+        {
+          "id": "B",
+          "question": "Какие две проверки customer-packaging заблокировало окружение?",
+          "selected_message_ids": [
+            "M0004",
+            "M0003"
+          ],
+          "locator_passed": true,
+          "answer": "Customer-packaging заблокировало окружение, ограничив доступ к Docker socket и loopback curl, поэтому повторяются только read-only проверки с системным доступом.",
+          "meaning_passed": true,
+          "review": "Нашла обе заблокированные проверки: Docker socket и loopback curl."
+        }
+      ],
+      "composed_answer": "Customer-packaging checkout удалось независимо подтвердить чистую tracking-ветку и корректный exact SHA. Customer-packaging заблокировало окружение, ограничив доступ к Docker socket и loopback curl, поэтому повторяются только read-only проверки с системным доступом.",
+      "complete": false,
+      "unrelated_chat": [
+        {
+          "atom_id": "A",
+          "receipt": "EMPTY"
+        },
+        {
+          "atom_id": "B",
+          "receipt": "EMPTY"
+        }
+      ]
+    },
+    {
+      "question_id": "Q08",
+      "question": "Какую точную проверку происхождения пропустил receipt loader и к какой ошибке это могло привести?",
+      "atoms": [
+        {
+          "id": "A",
+          "question": "Какое точное сравнение root names отсутствовало в receipt loader?",
+          "selected_message_ids": [
+            "M0005"
+          ],
+          "locator_passed": true,
+          "answer": "Точное сравнение root names отсутствовало в receipt loader, так как он не проверял совпадение `root.manifest.rootName` с именем корня в `receiptReference`.",
+          "meaning_passed": true,
+          "review": "Нашла отсутствующую проверку root.manifest.rootName против имени из receiptReference."
+        },
+        {
+          "id": "B",
+          "question": "К какой конкретной provenance-ошибке приводило отсутствующее сравнение root names?",
+          "selected_message_ids": [
+            "M0005"
+          ],
+          "locator_passed": true,
+          "answer": "Отсутствующее сравнение root names приводило к ошибке broken exact-root provenance.",
+          "meaning_passed": false,
+          "review": "Слишком общий ответ: не объяснила, что чужой root мог пройти, пока очередь фиксировала другой."
+        }
+      ],
+      "composed_answer": "Точное сравнение root names отсутствовало в receipt loader, так как он не проверял совпадение `root.manifest.rootName` с именем корня в `receiptReference`. Отсутствующее сравнение root names приводило к ошибке broken exact-root provenance.",
+      "complete": false,
+      "unrelated_chat": [
+        {
+          "atom_id": "A",
+          "receipt": "EMPTY"
+        },
+        {
+          "atom_id": "B",
+          "receipt": "EMPTY"
+        }
+      ]
+    },
+    {
+      "question_id": "Q09",
+      "question": "Кому в итоге выдали доступ к rental-market-engine, какого уровня был доступ и что ещё должен сделать получатель?",
+      "atoms": [
+        {
+          "id": "A",
+          "question": "Кому и с каким уровнем выдали доступ к rental-market-engine?",
+          "selected_message_ids": [
+            "M0021"
+          ],
+          "locator_passed": true,
+          "answer": "Доступ к rental-market-engine с уровнем write был выдан пользователю Dianach.",
+          "meaning_passed": true,
+          "review": "Нашла Dianach и право write."
+        },
+        {
+          "id": "B",
+          "question": "Что ещё должен сделать получатель доступа к rental-market-engine?",
+          "selected_message_ids": [
+            "M0015",
+            "M0016",
+            "M0017"
+          ],
+          "locator_passed": false,
+          "answer": "Получатель доступа к rental-market-engine должен добавить dchachua@gmail.com в приватный репозиторий.",
+          "meaning_passed": false,
+          "review": "Выбрала не то сообщение и предложила добавить email вместо принятия GitHub-приглашения."
+        }
+      ],
+      "composed_answer": "Доступ к rental-market-engine с уровнем write был выдан пользователю Dianach. Получатель доступа к rental-market-engine должен добавить dchachua@gmail.com в приватный репозиторий.",
+      "complete": false,
+      "unrelated_chat": [
+        {
+          "atom_id": "A",
+          "receipt": "EMPTY"
+        },
+        {
+          "atom_id": "B",
+          "receipt": "EMPTY"
+        }
+      ]
+    },
+    {
+      "question_id": "Q10",
+      "question": "Почему уже установленный Pocket i Lab не начал вести журнал в текущей задаче и какие действия должны были это исправить?",
+      "atoms": [
+        {
+          "id": "A",
+          "question": "Почему установленный и enabled Pocket i Lab не начал вести журнал в уже открытой задаче?",
+          "selected_message_ids": [
+            "M0018",
+            "M0022",
+            "M0023"
+          ],
+          "locator_passed": true,
+          "answer": "Потому что hook Pocket i Lab не подхватился текущей уже открытой задачей, и необходимо перезапустить Codex и создать новую задачу.",
+          "meaning_passed": true,
+          "review": "Нашла, что уже открытая задача не подхватила новый hook."
+        },
+        {
+          "id": "B",
+          "question": "Какие действия должны были подключить Pocket i Lab hook к новой задаче?",
+          "selected_message_ids": [
+            "M0023"
+          ],
+          "locator_passed": true,
+          "answer": "Для подключения Pocket i Lab hook к новой задаче нужно полностью закрыть Codex, снова открыть проект из корня, создать новую задачу, подтвердить разрешение hooks плагина и отправить команду $pocket-i-lab start E003 as Morrow.",
+          "meaning_passed": true,
+          "review": "Верно перечислила перезапуск, новую задачу, разрешение hook и команду запуска."
+        }
+      ],
+      "composed_answer": "Потому что hook Pocket i Lab не подхватился текущей уже открытой задачей, и необходимо перезапустить Codex и создать новую задачу. Для подключения Pocket i Lab hook к новой задаче нужно полностью закрыть Codex, снова открыть проект из корня, создать новую задачу, подтвердить разрешение hooks плагина и отправить команду $pocket-i-lab start E003 as Morrow.",
+      "complete": true,
+      "unrelated_chat": [
+        {
+          "atom_id": "A",
+          "receipt": "EMPTY"
+        },
+        {
+          "atom_id": "B",
+          "receipt": "EMPTY"
+        }
+      ]
+    }
+  ],
+  "decision": "Splitting each question into a locator call, an extractor call and a code-only join did not improve quality. It exposed separate locator and extractor failures, so the failed result is preserved."
+}

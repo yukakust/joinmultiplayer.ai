@@ -18,6 +18,8 @@ WHOLE_CHAT_READER_16D3_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reade
 WHOLE_CHAT_READER_16D3_PUBLIC = ROOT / "experiments/E007-harness-mvp/src/build_whole_chat_reader_gate16d3_public.py"
 WHOLE_CHAT_READER_16D5_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reader-gate16d5-protocol-v0.1.json"
 WHOLE_CHAT_READER_16D5_RESULT = ROOT / "site/experiments/E007/whole-chat-reader-gate16d5-result-v0.1.json"
+ATOMIC_READER_16D6_PROTOCOL = ROOT / "site/experiments/E007/atomic-reader-gate16d6-protocol-v0.1.json"
+ATOMIC_READER_16D6_RESULT = ROOT / "site/experiments/E007/atomic-reader-gate16d6-result-v0.1.json"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -153,6 +155,19 @@ class TopicIndexTest(unittest.TestCase):
         self.assertEqual(len(result["rows"]), 20)
         self.assertEqual(result["summary"]["valid_receipts"], 20)
         public_text = WHOLE_CHAT_READER_16D5_RESULT.read_text()
+        self.assertNotIn("raw_message", public_text)
+        self.assertNotIn('"usage"', public_text)
+
+    def test_gate16d6_preserves_failed_atomic_result_without_private_output(self):
+        protocol = json.loads(ATOMIC_READER_16D6_PROTOCOL.read_text())
+        result = json.loads(ATOMIC_READER_16D6_RESULT.read_text())
+        self.assertEqual(len(protocol["questions"]), 10)
+        self.assertEqual(sum(len(item["atoms"]) for item in protocol["questions"]), 20)
+        self.assertEqual(len(result["questions"]), 10)
+        self.assertEqual(result["summary"]["atom_meanings_preserved"], 14)
+        self.assertEqual(result["summary"]["complete_answers"], 5)
+        self.assertFalse(result["summary"]["gate_passed"])
+        public_text = ATOMIC_READER_16D6_RESULT.read_text()
         self.assertNotIn("raw_message", public_text)
         self.assertNotIn('"usage"', public_text)
 
