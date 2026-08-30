@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.8",
+  "status": "locked_before_inference",
+  "source_question_protocol": "/experiments/E007/fact-reader-gate16d7-protocol-v0.1.json",
+  "hypothesis": "Can one synthesis call recover a complete answer when retrieval is split into small searches, but understanding receives the original question and the whole deduplicated evidence shelf?",
+  "boundary": "Development A/B test on the same five hard questions. It reuses frozen Gate 16D.7 retrieval and does not rerun or improve search.",
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "local_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "quantization": "Q4_K_M",
+    "thinking": false,
+    "sampling": false,
+    "retries": 0
+  },
+  "conditions": {
+    "retrieved_shelf": "Deduplicated messages actually selected by Gate 16D.7.",
+    "oracle_shelf": "Deduplicated accepted messages locked before Gate 16D.7."
+  },
+  "synthesis_input": [
+    "Original full question",
+    "Five frozen coverage questions",
+    "All deduplicated messages on the selected shelf"
+  ],
+  "synthesis_output": "One natural complete answer using only shelf evidence. No per-fact extractor and no code concatenation.",
+  "baseline": {
+    "source": "Gate 16D.7",
+    "complete_hard_questions": "2/5"
+  },
+  "success_gate": {
+    "retrieved_shelf_complete": "4/5",
+    "oracle_shelf_complete": "5/5",
+    "unsupported_claims": "0/10"
+  },
+  "questions": [
+    {"id":"Q02","retrieved_message_ids":["M0013"],"oracle_message_ids":["M0011","M0013"]},
+    {"id":"Q06","retrieved_message_ids":["M0005"],"oracle_message_ids":["M0005","M0006"]},
+    {"id":"Q07","retrieved_message_ids":["M0004"],"oracle_message_ids":["M0003","M0004"]},
+    {"id":"Q08","retrieved_message_ids":["M0005"],"oracle_message_ids":["M0005"]},
+    {"id":"Q09","retrieved_message_ids":["M0021"],"oracle_message_ids":["M0021"]}
+  ]
+}

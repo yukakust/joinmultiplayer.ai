@@ -1370,3 +1370,16 @@ superiority?”.
 
 - `/experiments/E007/fact-reader-gate16d7-result-v0.1.json`
 - `/experiment/e007/gate-16d/fact-reader/`
+
+## Gate 16D.8 — split retrieval, whole-question synthesis
+
+Gate 16D.8 reuses the five hard questions and the exact locator choices from
+Gate 16D.7. Search remains split into one-fact calls, but the lossy per-fact
+extractors and code concatenation are removed. One synthesis call receives the
+original full question, the five frozen coverage questions and the complete
+deduplicated evidence shelf. The retrieved-shelf condition uses the messages
+actually selected in Gate 16D.7; the oracle-shelf condition uses the accepted
+messages locked before that run. This separates retrieval loss from synthesis
+loss without rerunning search.
+
+- `/experiments/E007/shelf-synthesis-gate16d8-protocol-v0.1.json`
