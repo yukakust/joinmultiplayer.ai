@@ -1294,3 +1294,16 @@ now the reader's first visible break.
 
 - `/experiments/E007/whole-chat-reader-gate16d4-result-v0.1.json`
 - `/experiment/e007/gate-16d/information-extraction/`
+
+## Gate 16D.5 — ten questions without answers in their wording
+
+Gate 16D.5 expands the single diagnostic into ten real information-seeking
+questions. Each question is run once against its correct complete conversation
+and once against a locked unrelated conversation, for twenty reads total. The
+questions cover single-fact extraction, cause and consequence, and two-message
+synthesis. Every required meaning and accepted evidence coordinate is locked
+before inference. The practical Qwen3-8B Q4_K_M preset is used without thinking,
+sampling or retries. The strict gate requires all twenty receipts, all twenty
+positive meanings, all ten evidence hits and all ten negative EMPTY decisions.
+
+- `/experiments/E007/whole-chat-reader-gate16d5-protocol-v0.1.json`
