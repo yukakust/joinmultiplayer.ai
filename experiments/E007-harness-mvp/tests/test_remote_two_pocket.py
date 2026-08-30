@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 CLIENT_PATH = ROOT / "site/experiments/E007/remote-two-pocket-node-v0.1.py"
 WORKER_PATH = ROOT / "experiments/E007-harness-mvp/src/run_remote_two_pocket_worker.py"
+MERGE_PATH = ROOT / "experiments/E007-harness-mvp/src/run_remote_two_pocket_merge.py"
 PROTOCOL_PATH = ROOT / "site/experiments/E007/remote-two-pocket-protocol-v0.1.json"
 
 
@@ -42,6 +43,15 @@ class RemoteTwoPocketTest(unittest.TestCase):
             ]
             path.write_text("".join(json.dumps(row) + "\n" for row in rows))
             self.assertEqual([item["text"] for item in client.visible_messages([path])], ["pocket harness", "visible answer"])
+
+    def test_merge_collects_only_grounded_found(self):
+        merge = module(MERGE_PATH, "remote_merge")
+        result = {"node": "MAC", "records": [
+            {"conversation": "C01", "decision": {"status": "FOUND", "claim": "x"}, "selected_messages": [{"id": "M1", "valid": True, "text": "e", "sha256": "h"}]},
+            {"conversation": "C02", "decision": {"status": "FOUND", "claim": "bad"}, "selected_messages": [{"id": "M9", "valid": False}]},
+            {"conversation": "C03", "decision": {"status": "EMPTY"}, "selected_messages": []},
+        ]}
+        self.assertEqual([item["id"] for item in merge.collect_capsules([result])], ["MAC-C01"])
 
 
 if __name__ == "__main__":
