@@ -1,0 +1,399 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.5",
+  "status": "completed_failed",
+  "protocol": "/experiments/E007/whole-chat-reader-gate16d5-protocol-v0.1.json",
+  "model": "Qwen3-8B Q4_K_M",
+  "rows": [
+    {
+      "id": "N01",
+      "kind": "negative",
+      "question_id": "Q01",
+      "question": "Что удалось подтвердить при проверке переноса Counterform, а какие найденные рядом артефакты нельзя считать резервными копиями?",
+      "conversation": "зафиксированный чужой чат",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "expected_meaning": [],
+      "meaning_score": null,
+      "meaning_possible": null,
+      "evidence_passed": null,
+      "accepted": true,
+      "review": "Верный EMPTY: чужой разговор не использован."
+    },
+    {
+      "id": "N02",
+      "kind": "negative",
+      "question_id": "Q02",
+      "question": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+      "conversation": "зафиксированный чужой чат",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "expected_meaning": [],
+      "meaning_score": null,
+      "meaning_possible": null,
+      "evidence_passed": null,
+      "accepted": true,
+      "review": "Верный EMPTY: чужой разговор не использован."
+    },
+    {
+      "id": "N03",
+      "kind": "negative",
+      "question_id": "Q03",
+      "question": "Почему первый запуск E002 R0001 сохранили как неудачный и что изменили в следующей попытке?",
+      "conversation": "зафиксированный чужой чат",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "expected_meaning": [],
+      "meaning_score": null,
+      "meaning_possible": null,
+      "evidence_passed": null,
+      "accepted": true,
+      "review": "Верный EMPTY: чужой разговор не использован."
+    },
+    {
+      "id": "N04",
+      "kind": "negative",
+      "question_id": "Q04",
+      "question": "Как тестовый PNG сумел пройти установленный лимит распаковки и насколько большой объём данных остался без проверки?",
+      "conversation": "зафиксированный чужой чат",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "expected_meaning": [],
+      "meaning_score": null,
+      "meaning_possible": null,
+      "evidence_passed": null,
+      "accepted": true,
+      "review": "Верный EMPTY: чужой разговор не использован."
+    },
+    {
+      "id": "N05",
+      "kind": "negative",
+      "question_id": "Q05",
+      "question": "Почему подписанный сетевой аудит в проверенном producer нельзя считать доказательством обращения к настоящей цели и какое исправление предложено?",
+      "conversation": "зафиксированный чужой чат",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "expected_meaning": [],
+      "meaning_score": null,
+      "meaning_possible": null,
+      "evidence_passed": null,
+      "accepted": true,
+      "review": "Верный EMPTY: чужой разговор не использован."
+    },
+    {
+      "id": "N06",
+      "kind": "negative",
+      "question_id": "Q06",
+      "question": "Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?",
+      "conversation": "зафиксированный чужой чат",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "expected_meaning": [],
+      "meaning_score": null,
+      "meaning_possible": null,
+      "evidence_passed": null,
+      "accepted": true,
+      "review": "Верный EMPTY: чужой разговор не использован."
+    },
+    {
+      "id": "N07",
+      "kind": "negative",
+      "question_id": "Q07",
+      "question": "Что удалось независимо подтвердить в customer-packaging checkout и какие две проверки выполнить не позволило окружение?",
+      "conversation": "зафиксированный чужой чат",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "expected_meaning": [],
+      "meaning_score": null,
+      "meaning_possible": null,
+      "evidence_passed": null,
+      "accepted": true,
+      "review": "Верный EMPTY: чужой разговор не использован."
+    },
+    {
+      "id": "N08",
+      "kind": "negative",
+      "question_id": "Q08",
+      "question": "Какую точную проверку происхождения пропустил receipt loader и к какой ошибке это могло привести?",
+      "conversation": "зафиксированный чужой чат",
+      "qwen_choice": "FOUND",
+      "claim": "Receipt loader пропустил проверку происхождения C3 receipt, что могло привести к ошибке, когда C4 RED gate ошибочно считает, что receipt handoff доступен, хотя он должен оставаться недоступным до отдельного handoff.",
+      "evidence_message_ids": [
+        "M0005",
+        "M0006"
+      ],
+      "expected_meaning": [],
+      "meaning_score": null,
+      "meaning_possible": null,
+      "evidence_passed": null,
+      "accepted": false,
+      "review": "Ложный FOUND: найден другой provenance-дефект из похожей темы, но не ответ на заданный вопрос."
+    },
+    {
+      "id": "N09",
+      "kind": "negative",
+      "question_id": "Q09",
+      "question": "Кому в итоге выдали доступ к rental-market-engine, какого уровня был доступ и что ещё должен сделать получатель?",
+      "conversation": "зафиксированный чужой чат",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "expected_meaning": [],
+      "meaning_score": null,
+      "meaning_possible": null,
+      "evidence_passed": null,
+      "accepted": true,
+      "review": "Верный EMPTY: чужой разговор не использован."
+    },
+    {
+      "id": "N10",
+      "kind": "negative",
+      "question_id": "Q10",
+      "question": "Почему уже установленный Pocket i Lab не начал вести журнал в текущей задаче и какие действия должны были это исправить?",
+      "conversation": "зафиксированный чужой чат",
+      "qwen_choice": "EMPTY",
+      "claim": null,
+      "evidence_message_ids": [],
+      "expected_meaning": [],
+      "meaning_score": null,
+      "meaning_possible": null,
+      "evidence_passed": null,
+      "accepted": true,
+      "review": "Верный EMPTY: чужой разговор не использован."
+    },
+    {
+      "id": "P01",
+      "kind": "positive",
+      "question_id": "Q01",
+      "question": "Что удалось подтвердить при проверке переноса Counterform, а какие найденные рядом артефакты нельзя считать резервными копиями?",
+      "conversation": "правильный полный чат",
+      "qwen_choice": "FOUND",
+      "claim": "При проверке переноса Counterform удалось подтвердить: Git-репозиторий на main commit e83f659, PostgreSQL custom dump с правильным SHA-256 и сигнатурой PGDMP, полный corpus-файлов, валидный Git bundle, зелёный TypeScript typecheck и прошедшие тесты. Найденные рядом артефакты, которые нельзя считать резервными копиями: partial-файлы (data.partial-relay-*, .partial-* dump и stale PID-файлы), которые являются остатками незавершённых попыток.",
+      "evidence_message_ids": [
+        "M0007",
+        "M0008"
+      ],
+      "expected_meaning": [
+        "The main PostgreSQL dump, repository bundle and corpus verification were valid.",
+        "Partial transfer artifacts were leftovers from incomplete attempts, not backups."
+      ],
+      "meaning_score": 2,
+      "meaning_possible": 2,
+      "evidence_passed": true,
+      "accepted": true,
+      "review": "Полный ответ: подтверждённые части переноса и мусорные partial-файлы названы правильно."
+    },
+    {
+      "id": "P02",
+      "kind": "positive",
+      "question_id": "Q02",
+      "question": "Что показал эксперимент E002 и почему его результат нельзя считать доказательством преимущества swarm?",
+      "conversation": "правильный полный чат",
+      "qwen_choice": "FOUND",
+      "claim": "Эксперимент E002 показал, что полный swarm достигает 100% точности для N=2,4,8,16,32, и что каждая отдельная часть (pocket) вносит уникальный вклад. Однако его результат нельзя считать доказательством преимущества swarm, потому что точность также достигается с помощью методов, таких как точный RAG и символический ансамбль, которые не являются swarm-механизмами. Это означает, что результаты не доказывают преимущества swarm, а только показывают, что механизм работает корректно.",
+      "evidence_message_ids": [
+        "M0013"
+      ],
+      "expected_meaning": [
+        "Full-swarm accuracy was 100% for N=2,4,8,16,32.",
+        "Exact RAG and the symbolic ensemble also reached 100%, so no superiority was established."
+      ],
+      "meaning_score": 2,
+      "meaning_possible": 2,
+      "evidence_passed": true,
+      "accepted": true,
+      "review": "Полный ответ: найдены и 100% swarm, и равные 100% у exact RAG и symbolic ensemble."
+    },
+    {
+      "id": "P03",
+      "kind": "positive",
+      "question_id": "Q03",
+      "question": "Почему первый запуск E002 R0001 сохранили как неудачный и что изменили в следующей попытке?",
+      "conversation": "правильный полный чат",
+      "qwen_choice": "FOUND",
+      "claim": "Первый запуск E002 R0001 сохранили как неудачный, потому что его контрольный тест с перемешиванием содержал симметрию, и порог случайности был недостаточным. В следующей попытке исправили этот контрольный тест, заменив его на действительно неправильные вклады, увеличили оценку до 256 задач и запустили отдельно названный ревизионный запуск.",
+      "evidence_message_ids": [
+        "M0009",
+        "M0010",
+        "M0011"
+      ],
+      "expected_meaning": [
+        "The first run had a symmetry in its shuffle or role-swap control and an underpowered chance threshold.",
+        "The revision used genuinely wrong-key contributions, enlarged evaluation and remained a separate artifact."
+      ],
+      "meaning_score": 2,
+      "meaning_possible": 2,
+      "evidence_passed": true,
+      "accepted": true,
+      "review": "Полный ответ: названы обе причины провала и изменения следующего запуска."
+    },
+    {
+      "id": "P04",
+      "kind": "positive",
+      "question_id": "Q04",
+      "question": "Как тестовый PNG сумел пройти установленный лимит распаковки и насколько большой объём данных остался без проверки?",
+      "conversation": "правильный полный чат",
+      "qwen_choice": "FOUND",
+      "claim": "Тестовый PNG сумел пройти установленный лимит распаковки, и объём данных, который остался без проверки, составляет 419,532,800 декодированных байт.",
+      "evidence_message_ids": [
+        "M0006",
+        "M0007"
+      ],
+      "expected_meaning": [
+        "Only the static IDAT stream was inflated and checked; APNG fdAT frame data was not.",
+        "The accepted sample hid about 419,532,800 decoded bytes in unchecked fdAT frames."
+      ],
+      "meaning_score": 1,
+      "meaning_possible": 2,
+      "evidence_passed": true,
+      "accepted": false,
+      "review": "Найден точный объём 419 532 800 байт, но не объяснено, что лимит проверял IDAT и пропускал fdAT."
+    },
+    {
+      "id": "P05",
+      "kind": "positive",
+      "question_id": "Q05",
+      "question": "Почему подписанный сетевой аудит в проверенном producer нельзя считать доказательством обращения к настоящей цели и какое исправление предложено?",
+      "conversation": "правильный полный чат",
+      "qwen_choice": "FOUND",
+      "claim": "Подписанный сетевой аудит в проверенном producer нельзя считать доказательством обращения к настоящей цели, потому что аудит описывает трафик, который никогда не достигал заявленной цели. Исправление предполагает переместить симулированный upstream в тестовый код и обеспечить, чтобы производство подключалось к целевому адресату, а не к симулированному.",
+      "evidence_message_ids": [
+        "M0006"
+      ],
+      "expected_meaning": [
+        "Accepted traffic was routed to a component-owned synthetic upstream that fabricated canned responses, without binding the actual peer identity.",
+        "The canned upstream should be test-only; production must use a lifecycle-owned target and bind peer identity into the audit."
+      ],
+      "meaning_score": 1,
+      "meaning_possible": 2,
+      "evidence_passed": true,
+      "accepted": false,
+      "review": "Правильно найден synthetic upstream и основное исправление, но потеряно требование привязать peer identity к аудиту."
+    },
+    {
+      "id": "P06",
+      "kind": "positive",
+      "question_id": "Q06",
+      "question": "Как один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными?",
+      "conversation": "правильный полный чат",
+      "qwen_choice": "FOUND",
+      "claim": "Один admission мог превысить общий сетевой бюджет, хотя отдельные session receipts выглядели корректными, потому что бюджет и корреляция ограничены только на уровне сессии, а не на уровне admissions. Каждый вызов создает отдельную запись и случайную корреляцию, что позволяет открыть неограниченное количество сессий и производить отдельно корректные receipts, но не учитывать общие ограничения.",
+      "evidence_message_ids": [
+        "M0005"
+      ],
+      "expected_meaning": [
+        "Every session created a fresh unrestricted record and random correlation while only the first socket was sealed.",
+        "Multiple sessions or concurrent sockets could exceed admission-wide request and byte limits or be omitted from the audit."
+      ],
+      "meaning_score": 1,
+      "meaning_possible": 2,
+      "evidence_passed": false,
+      "accepted": false,
+      "review": "Основная причина превышения бюджета найдена, но пропущена роль первого закрывшегося socket; кроме того, указано неполное сообщение-доказательство."
+    },
+    {
+      "id": "P07",
+      "kind": "positive",
+      "question_id": "Q07",
+      "question": "Что удалось независимо подтвердить в customer-packaging checkout и какие две проверки выполнить не позволило окружение?",
+      "conversation": "правильный полный чат",
+      "qwen_choice": "FOUND",
+      "claim": "В customer-packaging checkout удалось независимо подтвердить чистую tracking-ветку и exact SHA корректны. Окружение не позволило выполнить две проверки: доступ к Docker socket и loopback curl.",
+      "evidence_message_ids": [
+        "M0004"
+      ],
+      "expected_meaning": [
+        "The checkout was clean, tracked the exact candidate SHA and used the owner-private Bitbucket remote.",
+        "The sandbox blocked both Docker socket access and loopback curl."
+      ],
+      "meaning_score": 1,
+      "meaning_possible": 2,
+      "evidence_passed": true,
+      "accepted": false,
+      "review": "Названы exact SHA и обе заблокированные проверки, но потерян подтверждённый owner-private Bitbucket remote."
+    },
+    {
+      "id": "P08",
+      "kind": "positive",
+      "question_id": "Q08",
+      "question": "Какую точную проверку происхождения пропустил receipt loader и к какой ошибке это могло привести?",
+      "conversation": "правильный полный чат",
+      "qwen_choice": "FOUND",
+      "claim": "Receipt loader пропустил проверку совпадения имени корня (`root.manifest.rootName`) с именем корня в `receiptReference`, что могло привести к ошибке, связанной с неправильным происхождением корня.",
+      "evidence_message_ids": [
+        "M0005"
+      ],
+      "expected_meaning": [
+        "It did not compare root.manifest.rootName with the root name encoded in receiptReference.",
+        "A copied or misrouted root could pass while the queue recorded a reference to a different root."
+      ],
+      "meaning_score": 1,
+      "meaning_possible": 2,
+      "evidence_passed": true,
+      "accepted": false,
+      "review": "Пропущенная проверка rootName названа точно, но последствие сведено к слишком общему «неправильному происхождению»."
+    },
+    {
+      "id": "P09",
+      "kind": "positive",
+      "question_id": "Q09",
+      "question": "Кому в итоге выдали доступ к rental-market-engine, какого уровня был доступ и что ещё должен сделать получатель?",
+      "conversation": "правильный полный чат",
+      "qwen_choice": "FOUND",
+      "claim": "В итоге доступ к rental-market-engine был выдан Dianach с правами write. Получатель должен принять приглашение в GitHub.",
+      "evidence_message_ids": [
+        "M0021"
+      ],
+      "expected_meaning": [
+        "Dianach received a write-access invitation to yukakust/rental-market-engine.",
+        "She still needed to accept the GitHub invitation."
+      ],
+      "meaning_score": 2,
+      "meaning_possible": 2,
+      "evidence_passed": true,
+      "accepted": true,
+      "review": "Полный ответ: Dianach, write и необходимость принять приглашение."
+    },
+    {
+      "id": "P10",
+      "kind": "positive",
+      "question_id": "Q10",
+      "question": "Почему уже установленный Pocket i Lab не начал вести журнал в текущей задаче и какие действия должны были это исправить?",
+      "conversation": "правильный полный чат",
+      "qwen_choice": "FOUND",
+      "claim": "Уже установленный Pocket i Lab не начал вести журнал в текущей задаче, потому что hook не подхватился текущей уже открытой задачей. Для исправления нужно полностью закрыть Codex, снова открыть проект из корня, создать новую задачу и отправить команду \"$pocket-i-lab start E003 as Morrow\".",
+      "evidence_message_ids": [
+        "M0022",
+        "M0023"
+      ],
+      "expected_meaning": [
+        "The already-open task had probably started without the plugin hook even though the plugin was installed and enabled.",
+        "Restart Codex, reopen the project root, create a new task and send the start command there."
+      ],
+      "meaning_score": 2,
+      "meaning_possible": 2,
+      "evidence_passed": true,
+      "accepted": true,
+      "review": "Полный ответ: hook отсутствовал в уже открытой задаче и перечислены нужные действия."
+    }
+  ],
+  "summary": {
+    "valid_receipts": 20,
+    "positive_found": 10,
+    "positive_evidence_passed": 9,
+    "positive_meanings_preserved": 15,
+    "positive_meanings_possible": 20,
+    "positive_complete_answers": 5,
+    "negative_empty": 9,
+    "gate_passed": false
+  },
+  "decision": "The question-copy shortcut is removed. The reader reliably finds useful knowledge, but it often drops one required part of a multi-part answer and can confuse a nearby defect with the requested defect. Add a completeness and exact-claim-to-evidence check before accepting the reader."
+}

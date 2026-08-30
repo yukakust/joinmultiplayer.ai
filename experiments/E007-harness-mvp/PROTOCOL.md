@@ -1307,3 +1307,16 @@ sampling or retries. The strict gate requires all twenty receipts, all twenty
 positive meanings, all ten evidence hits and all ten negative EMPTY decisions.
 
 - `/experiments/E007/whole-chat-reader-gate16d5-protocol-v0.1.json`
+
+All twenty Q4_K_M reads returned valid structured receipts. Qwen returned FOUND
+for every supporting conversation and cited an accepted evidence message in
+nine of ten. Human review found all required meanings in five answers and one
+of two meanings in the other five: 15/20 meanings total. Nine of ten unrelated
+conversations returned EMPTY. The remaining hard negative contained a different
+receipt-provenance defect; Qwen treated that nearby issue as the requested
+root-name defect. The locked gate fails. The reader now demonstrates useful
+extraction without question-copying, but needs completeness and exact
+claim-to-evidence checks before acceptance.
+
+- `/experiments/E007/whole-chat-reader-gate16d5-result-v0.1.json`
+- `/experiment/e007/gate-16d/ten-questions/`

@@ -50,15 +50,28 @@ def render(messages: list[dict]) -> str:
     )
 
 
-def complete(endpoint: str, question: str, messages: list[dict]) -> tuple[dict, float]:
+def complete(
+    endpoint: str,
+    question: str,
+    messages: list[dict],
+    *,
+    model_name: str = "Qwen3-8B-BF16.gguf",
+    conversation_first: bool = False,
+) -> tuple[dict, float]:
+    conversation = render(messages)
+    input_sections = (
+        f"CONVERSATION:\n{conversation}\n\nQUESTION:\n{question}"
+        if conversation_first
+        else f"QUESTION:\n{question}\n\nCONVERSATION:\n{conversation}"
+    )
     prompt = (
-        f"/no_think\n\nQUESTION:\n{question}\n\nCONVERSATION:\n{render(messages)}\n\n"
+        f"/no_think\n\n{input_sections}\n\n"
         "Answer only from this conversation. The question does not contain its answer. "
         "If the conversation answers it, call send_found with a short complete answer and the smallest exact set of supporting message IDs. "
         "If it does not, call send_empty. Call exactly one tool."
     )
     body = {
-        "model": "Qwen3-8B-BF16.gguf",
+        "model": model_name,
         "messages": [
             {
                 "role": "system",

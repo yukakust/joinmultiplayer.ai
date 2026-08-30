@@ -16,6 +16,8 @@ WHOLE_CHAT_PUBLIC_BUILDER = ROOT / "experiments/E007-harness-mvp/src/build_whole
 WHOLE_CHAT_READER_16D3 = ROOT / "experiments/E007-harness-mvp/src/run_whole_chat_reader_gate16d3.py"
 WHOLE_CHAT_READER_16D3_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reader-gate16d3-protocol-v0.1.json"
 WHOLE_CHAT_READER_16D3_PUBLIC = ROOT / "experiments/E007-harness-mvp/src/build_whole_chat_reader_gate16d3_public.py"
+WHOLE_CHAT_READER_16D5_PROTOCOL = ROOT / "site/experiments/E007/whole-chat-reader-gate16d5-protocol-v0.1.json"
+WHOLE_CHAT_READER_16D5_RESULT = ROOT / "site/experiments/E007/whole-chat-reader-gate16d5-result-v0.1.json"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -142,6 +144,17 @@ class TopicIndexTest(unittest.TestCase):
         }
         public = builder.build(private, {"queries": [{"id": "Q", "question": "safe"}]})
         self.assertNotIn("PRIVATE RAW OUTPUT", json.dumps(public))
+
+    def test_gate16d5_has_ten_locked_questions_and_twenty_safe_rows(self):
+        protocol = json.loads(WHOLE_CHAT_READER_16D5_PROTOCOL.read_text())
+        result = json.loads(WHOLE_CHAT_READER_16D5_RESULT.read_text())
+        self.assertEqual(len(protocol["questions"]), 10)
+        self.assertEqual(len(protocol["negative_pairing"]), 10)
+        self.assertEqual(len(result["rows"]), 20)
+        self.assertEqual(result["summary"]["valid_receipts"], 20)
+        public_text = WHOLE_CHAT_READER_16D5_RESULT.read_text()
+        self.assertNotIn("raw_message", public_text)
+        self.assertNotIn('"usage"', public_text)
 
 
 if __name__ == "__main__":
