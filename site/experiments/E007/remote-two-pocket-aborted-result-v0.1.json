@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D",
+  "status": "aborted_wrong_method_before_second_node",
+  "reason": "The implementation ranked conversations with a fixed experiment-specific term list before Qwen saw them. This was not the agreed model-directed local-memory search architecture.",
+  "completed_work": {
+    "yukabox_payloads": 1,
+    "macbook_payloads": 0,
+    "gpu_workers_started": 1,
+    "gpu_workers_planned": 2,
+    "yukabox_conversations_selected": 3,
+    "valid_receipts": 1,
+    "format_errors": 2
+  },
+  "format_failure": "Two generations tried to emit over-broad evidence lists and reached the locked 384-token output limit before closing the tool call.",
+  "decision": "Do not continue or use this result to judge the swarm. Preserve it as a rejected retrieval design. Build topic cards for every allowlisted conversation first, then test model-directed search over the general index.",
+  "privacy": {
+    "raw_conversations_public": false,
+    "session_ids_public": false,
+    "raw_model_output_public": false
+  }
+}

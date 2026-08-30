@@ -1164,3 +1164,29 @@ absolute paths and raw model outputs remain private.
 
 - `/experiments/E007/remote-two-pocket-protocol-v0.1.json`
 - `/experiments/E007/remote-two-pocket-node-v0.1.py`
+
+Gate 16D was stopped after the first node because its fixed term list selected
+three conversations before Qwen saw the library. The MacBook did not submit a
+payload and the planned two-node test did not occur. The one completed worker
+also produced two truncated tool calls after attempting over-broad evidence
+lists. Preserve this as a rejected retrieval design, not a swarm result:
+`/experiments/E007/remote-two-pocket-aborted-result-v0.1.json`.
+
+## Gate 16D.1 — index conversation topics before searching
+
+Gate 16D.1 removes every question-specific semantic prefilter. Each physical
+node exports every allowlisted main Codex conversation, containing only visible
+user and assistant messages. Qwen3-8B creates a topic card for each conversation
+before any user question is searched.
+
+Conversations up to 10,000 Qwen tokens are read whole. Longer conversations are
+split into message-preserving blocks near 8,000 tokens; only an oversized single
+message receives token-window coordinates. Qwen extracts evidenced block topics
+and merges them into at most twelve conversation topics. Every topic coordinate
+is mechanically checked against the source payload. No retries are allowed.
+
+This gate only builds a table of contents. Search, answer extraction and swarm
+merge remain out of scope until the owner reviews the cards.
+
+- `/experiments/E007/topic-index-protocol-v0.1.json`
+- `/experiments/E007/topic-index-node-v0.1.py`

@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.1",
+  "status": "locked_before_topic_extraction",
+  "kind": "conversation-level local-library indexing",
+  "title": "Can Qwen3-8B make faithful topic cards for an entire Codex library?",
+  "plain_language": "Before answering any question, each pocket i makes a small table of contents for every allowed conversation. Search will be tested only after the owner can inspect these cards.",
+  "nodes": [
+    {"id": "MAC", "device": "owner-macbook", "gpu": 0},
+    {"id": "YUKA", "device": "yukabox", "gpu": 1}
+  ],
+  "library_contract": {
+    "source": "Codex session JSONL allowlist",
+    "include": ["visible user messages", "visible assistant messages"],
+    "exclude": ["child-agent conversations", "reasoning", "tool calls", "tool results", "commands", "logs", "system messages", "developer messages"],
+    "semantic_prefilter_before_indexing": false,
+    "raw_text_leaves_device_for_this_test": true
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "dtype": "BF16",
+    "thinking": false,
+    "decoding": "greedy",
+    "training": false
+  },
+  "indexing": {
+    "short_conversation_threshold_qwen_tokens": 10000,
+    "long_conversation_block_target_qwen_tokens": 8000,
+    "short_conversation": "Qwen reads the complete conversation once.",
+    "long_conversation": "Ordinary code splits only for indexing; Qwen extracts topics per block and then merges topic candidates into one conversation card.",
+    "max_topics_per_block": 8,
+    "max_topics_per_conversation": 12,
+    "topic": {
+      "name": "short noun phrase",
+      "summary": "one plain sentence",
+      "evidence_coordinates": ["exact message or token-window IDs"]
+    },
+    "output_limit_tokens": 1024,
+    "retries": 0
+  },
+  "card_contract": {
+    "conversation_hash": true,
+    "source_snapshot_hash": true,
+    "qwen_token_count": true,
+    "topics": true,
+    "exact_evidence_coordinates": true,
+    "raw_text_in_public_card": false
+  },
+  "locked_gates": {
+    "every_allowlisted_main_conversation_has_terminal_card_or_explicit_error": true,
+    "invented_evidence_coordinates": 0,
+    "raw_private_text_published": 0,
+    "owner_reviews_cards_before_question_search": true
+  },
+  "claim_boundary": "This gate tests table-of-contents creation only. It does not test question routing, answer extraction, source truth or final synthesis."
+}
