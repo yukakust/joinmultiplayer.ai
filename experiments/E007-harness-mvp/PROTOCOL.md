@@ -1146,3 +1146,21 @@ The locked gate therefore fails. Accept the code-owned one-question loop and
 mandatory receipt. Do not yet accept the current FOUND/EMPTY wording or
 unverified evidence list. Public result:
 `/experiments/E007/sender-single-tool-result-v0.1.json`.
+
+## Gate 16D — two physical libraries, two remote GPU brains
+
+Gate 16D is locked before local selection or inference. A MacBook and yukabox
+each inspect only allowlisted visible Codex messages and deterministically select
+at most three complete conversations for one real harness question. Their raw
+private payloads go to separate Qwen3-8B BF16 workers on separate RTX 3090 GPUs.
+This temporary test explicitly allows the selected text to leave the device.
+
+The sender uses the accepted Gate 16C.1 rule: one question, one required tool
+receipt. FOUND noise and over-broad evidence remain tolerated at the sender;
+missing useful knowledge is the critical failure. The central merge must keep a
+USED shelf and an auditable OTHER shelf, lose no unique supported decision, and
+write no unsupported final fact. Raw conversations, session identifiers,
+absolute paths and raw model outputs remain private.
+
+- `/experiments/E007/remote-two-pocket-protocol-v0.1.json`
+- `/experiments/E007/remote-two-pocket-node-v0.1.py`

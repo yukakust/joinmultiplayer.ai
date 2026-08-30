@@ -1,0 +1,68 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D",
+  "status": "locked_before_local_selection_or_model_inference",
+  "kind": "two physical local libraries with two remote GPU brains",
+  "title": "Can two physical pocket i find overlapping local knowledge and build one supported answer?",
+  "plain_language": "MacBook and yukabox each open only their own Codex library. Each sends a few likely conversations to its own Qwen3-8B on a separate RTX 3090. The harness keeps every supported contribution and builds one answer.",
+  "question": "Какие решения уже приняты для MVP pocket i о том, как локальный узел должен искать и отправлять полезное знание, и какие ошибки разрешено пока пропускать дальше?",
+  "nodes": [
+    {"id": "MAC", "device": "owner-macbook", "gpu": 0},
+    {"id": "YUKA", "device": "yukabox", "gpu": 1}
+  ],
+  "local_library": {
+    "source": "allowlisted Codex session JSONL only",
+    "allowed_records": "visible user messages and visible assistant messages",
+    "excluded_records": ["reasoning", "tool calls", "tool results", "commands", "logs", "system messages", "developer messages"],
+    "selection": "ordinary deterministic term ranking chooses at most three complete conversations before any Qwen inference",
+    "focus_terms": ["pocket", "harness", "локальн", "local", "знан", "knowledge", "поиск", "search", "отправ", "send", "evidence", "доказ", "empty", "found", "квитанц", "receipt"],
+    "max_conversations_per_node": 3,
+    "max_visible_characters_per_conversation": 65000,
+    "raw_library_leaves_device": true,
+    "privacy_note": "The owner explicitly accepted this for the test. It is not the final privacy architecture."
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "dtype": "BF16",
+    "thinking": false,
+    "decoding": "greedy",
+    "training": false,
+    "compute": "one independent worker on each of two RTX 3090 GPUs"
+  },
+  "sender_contract": {
+    "one_question_per_conversation": true,
+    "required_receipt": true,
+    "tools": ["send_found(claim, evidence_message_ids)", "send_empty()"],
+    "known_acceptable_noise": [
+      "An absent answer may occasionally be returned as a FOUND claim saying that it is absent.",
+      "A correct answer may contain more evidence message IDs than minimally necessary."
+    ],
+    "critical_failure": "A useful local answer exists but no node forwards it."
+  },
+  "merge_contract": {
+    "input": "all FOUND capsules whose evidence IDs mechanically exist in the submitted conversation",
+    "used_shelf": "smallest set of supported claims needed for the answer",
+    "other_shelf": "duplicates, weaker versions, unresolved alternatives and noise remain visible for audit",
+    "writer_input": "question plus USED shelf only",
+    "unsupported_facts_allowed": false
+  },
+  "locked_gates": {
+    "physical_payloads_received": "2/2",
+    "independent_gpu_workers_complete": "2/2",
+    "questions_with_receipts": "all selected conversations",
+    "at_least_one_relevant_supported_capsule_per_node": true,
+    "unique_supported_decisions_lost_during_merge": 0,
+    "unsupported_final_answer_facts": 0,
+    "human_can_trace_every_final_claim_to_node_and_message": true
+  },
+  "public_boundary": {
+    "raw_conversations": false,
+    "session_ids": false,
+    "absolute_paths": false,
+    "raw_model_output": false,
+    "safe_question_claims_redacted_evidence_and_scores": true
+  },
+  "claim_boundary": "This tests physical local-library origin plus remote parallel inference and evidence-preserving merge. It does not keep private text on-device and it is not distributed neural inference."
+}
