@@ -1520,3 +1520,23 @@ not downstream reading or answer extraction.
 
 - `/experiments/E007/long-chat-candidates-gate16e2-result-v0.1.json`
 - `/experiment/e007/gate-16e/long-chat-candidates/`
+
+## Gate 16F.1 — local outbound credential gate
+
+Immediately before transport, ordinary code serializes the complete knowledge
+capsule and checks it locally for the frozen credential families. A match
+blocks the whole capsule. Only `status=blocked`, a fixed reason and detector
+category may leave the device; no matched value, mask, prefix, suffix or
+surrounding text is returned. Permission and arbitrary private facts remain
+separate gates.
+
+The locked run blocked 24/24 synthetic credentials in realistic capsule fields,
+allowed 24/24 hard negatives (hashes, IDs, placeholders and public keys), leaked
+zero synthetic values into receipts and repeated deterministically. It also
+scanned 2,727 real visible Codex messages locally and found zero known
+credential formats. That last result may mean the corpus is clean or that a
+secret uses an unknown format; it is not proof of universal privacy.
+
+- `/experiments/E007/outbound-secret-gate16f1-protocol-v0.1.json`
+- `/experiments/E007/outbound-secret-gate16f1-result-v0.1.json`
+- `/experiment/e007/gate-16f/secret-gate/`

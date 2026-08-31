@@ -1,6 +1,6 @@
 # Pocket i harness — agreed path
 
-Status: working architecture agreement through E007 Gate 16E.2. This is not a
+Status: working architecture agreement through E007 Gate 16F.1. This is not a
 claim that every module already exists or has passed a physical-device test.
 
 E007 Gate 3C.6A.2 adds one development finding about local source retrieval:
@@ -459,7 +459,7 @@ an honest limitation, not proof across domains or scale. Decision record:
 | 5 | An online pocket i returns `found`, `empty`, `blocked`, or `error`. If nothing arrives before the deadline, the relay records `offline`. | Receipt states and a synthetic blocked secret passed. |
 | 6 | A useful offer travels as a readable capsule: claim, evidence, source, lineage, conditions, limits, and permission. | Exact stored-capsule transport passed; extraction from messy memory remains open. |
 | 7 | Prefer recall at the sending edge: a doubtful candidate may travel, because the receiver can filter it; missing useful knowledge is harder to repair. | New-question send-policy smoke passed. |
-| 8 | Before any network send, a separate security module enforces owner permission and removes secrets. | Contract accepted; only a synthetic canary has been tested. |
+| 8 | Immediately before network send, ordinary local code scans the complete capsule. A known credential blocks the whole capsule; only a value-free receipt leaves. Owner permission and arbitrary private facts remain separate gates. | Gate 16F.1 blocked 24/24 frozen credential cases, allowed 24/24 hard negatives, leaked 0 values, and scanned 2,727 real visible Codex messages without publishing text. Coverage is limited to known formats. |
 | 9 | The receiver checks `question ↔ one memory piece` with Qwen3-Reranker-4B Q4 and returns TAKE / NOT SURE / DROP. | Accepted after Gate 3C.5; Q4 matched BF16 24/24. Phone test pending. |
 | 10 | Ordinary code proves that the exact passage came from the named, versioned source snapshot and byte range. | Gate 3C.6A passed 20/20 twice with identical output. |
 | 11 | Check `verified exact quote + bounded source-only context ↔ one atomic claim` with DeBERTa-v3-base NLI. Keep the person's question outside this call. Return SUPPORTED / CONTRADICTED / NOT PROVEN. | Gate 16D.11 open diagnostic: 16/16 supported English claims accepted and 0/2 unsupported accepted after one label correction. Fresh locked replication and multilingual handling remain open. |
