@@ -6532,8 +6532,8 @@ const PIECE_SLOTS = {
   matchbox: {
     title: { en: "THE 16G.7 TURNSTILE", ru: "ТУРНИКЕТ 16G.7" },
     body: {
-      en: "Our reader returned FOUND for 17 of 40 distractor conversations. The locked fix: exact quote + multilingual NLI (mDeBERTa XNLI) must keep 9/9 grounded claims and pass 0/17 ungrounded ones, zero broken answers. The plan is sha-pinned; the run is nobody's. Pre-register your confounds against us — that is the house style.",
-      ru: "Наш reader вернул FOUND на 17 из 40 диалогов-дистракторов. Запертое лечение: точная цитата + мультиязычный NLI (mDeBERTa XNLI) должны удержать 9/9 обоснованных утверждений и пропустить 0/17 необоснованных, ноль сломанных ответов. План запинен; прогон — ничей." },
+      en: "Our reader returned FOUND for 17 of 40 distractor conversations; the evidence turnstile now catches what it lets through — but our own weakness ledger says the cases were locked, the audit was not blind. What the track needs next is exactly your sport: a fresh blind English replication by someone with no stake in the result. Pre-register your confounds against us — that is the house style.",
+      ru: "Наш reader вернул FOUND на 17 из 40 дистракторов; турникет улик теперь ловит его на выходе — но наш собственный реестр слабостей честно говорит: кейсы были заперты, а аудит не был слепым. Треку нужно ровно то, чем ты занимаешься: свежая слепая репликация человеком без ставки в результате. Зарегистрируй конфаундеры против нас — это и есть стиль дома." },
     links: [
       { label: "Gate 16G.6 · result JSON", href: EXP + "/chat-first-qwen-gate16g6-result-v0.3.json" },
       { label: "PROTOCOL.md · Gate 16G.7", href: GH },
@@ -6542,8 +6542,8 @@ const PIECE_SLOTS = {
   flint: {
     title: { en: "WHICH THIRD IS THIS ONE?", ru: "КОТОРАЯ ИЗ ТРЕТЕЙ?" },
     body: {
-      en: "The clean specimen: full modular harness 3/18, plain central context 17/18, same frozen 0.6B, every raw answer public. Specification, coordination, or verification — your taxonomy, our corpse. The diagnosis is the move.",
-      ru: "Чистый образец: полный модульный харнесс 3/18, простой центральный контекст 17/18, та же замороженная 0.6B, все сырые ответы публичны. Спецификация, координация или верификация — твоя таксономия, наш труп. Диагноз и есть ход." },
+      en: "Two clean specimens. One: full modular harness 3/18, plain central context 17/18, same frozen model. Two, fresher: the automatic pipeline reported 7/10 claims accepted — the human audit left 5/10 standing. Mechanical success overstates real success, and we wrote that down ourselves. Specification, coordination, or verification — your taxonomy, our corpses. The diagnosis is the move.",
+      ru: "Два чистых образца. Первый: модульный харнесс 3/18 против 17/18 простого контекста, та же замороженная модель. Второй, свежее: автоматика отчиталась 7/10 принятых утверждений — ручной аудит оставил 5/10. Механический успех преувеличивает настоящий, и мы сами это записали. Спецификация, координация или верификация — твоя таксономия, наши трупы. Диагноз и есть ход." },
     links: [
       { label: "PROTOCOL.md · CP2 и все гейты", href: GH },
       { label: language === "ru" ? "Летопись провалов" : "The chronicle of failures", href: "/journey/" }
@@ -6560,8 +6560,8 @@ const PIECE_SLOTS = {
   lantern: {
     title: { en: "THE ENGINE ECONOMY", ru: "ЭКОНОМИКА ДВИЖКА" },
     body: {
-      en: "BF16 vs Q4/Q5 measured on an integrated Radeon and CPU, raw runtimes published. The KV-cache reuse mechanism works — and its strict prefill gate failed honestly. Where do local wheels actually spin? You own the exact hardware class this question deserves.",
-      ru: "BF16 против Q4/Q5 измерены на встроенном Radeon и CPU, сырые тайминги опубликованы. Механика повторного KV-кэша работает — а её строгий prefill-гейт честно провален. Где именно буксуют локальные колёса? У тебя ровно тот класс железа, которого этот вопрос заслуживает." },
+      en: "One short evidence decision costs 15–89 seconds of Qwen3-8B on our CPU path — recorded in our own weakness ledger as an open wound. BF16 vs Q4/Q5 measured on an integrated Radeon and CPU, raw runtimes published; the strict KV-cache prefill gate failed honestly. Where do local wheels actually spin? You own the exact hardware class this question deserves.",
+      ru: "Одно короткое решение по уликам стоит 15–89 секунд Qwen3-8B на нашем CPU-пути — записано в нашем реестре слабостей как открытая рана. BF16 против Q4/Q5 измерены на Radeon и CPU, сырые тайминги опубликованы; строгий prefill-гейт KV-кэша честно провален. Где именно буксуют локальные колёса? У тебя ровно тот класс железа, которого этот вопрос заслуживает." },
     links: [
       { label: language === "ru" ? "gate-3c5 · сырые замеры (repo)" : "gate-3c5 · raw runtimes (repo)", href: "https://github.com/yukakust/joinmultiplayer.ai/tree/agent/game-loop-v0.1/experiments/E007-harness-mvp/artifacts/gate-3c5" },
       { label: "PROTOCOL.md · Gate 16B", href: GH }
@@ -6569,8 +6569,8 @@ const PIECE_SLOTS = {
   lighter: {
     title: { en: "5/5 WITHOUT TOUCHING THE WEIGHTS", ru: "5/5 НЕ ТРОГАЯ ВЕСА" },
     body: {
-      en: "One fact per model call turned 2 of 5 failed questions into complete answers. Three still resist the composer. Same frozen weights — only the software around them may change. Your 11%→18% observation, inverted and waiting.",
-      ru: "«Один факт — один вызов» превратил 2 из 5 провальных вопросов в полные ответы. Три всё ещё не поддаются композеру. Веса заморожены — меняться может только софт вокруг. Твоё наблюдение 11%→18%, вывернутое наизнанку." },
+      en: "One fact per model call turned 2 of 5 failed questions into complete answers; three still resist the composer. And our only semantic judge (DeBERTa) accepts 0/10 garbage but keeps just 7/10 of the good evidence — weak recall on multi-premise, numbers and negation, recorded in our weakness ledger. Same frozen weights — only the software around them may change. Your 11%→18% observation, inverted and waiting.",
+      ru: "«Один факт — один вызов» превратил 2 из 5 провальных вопросов в полные ответы; три не поддаются. А единственный семантический судья (DeBERTa) не пропускает мусор (0/10), но удерживает лишь 7/10 хороших улик — слабый recall на составных посылках, числах и отрицаниях, записано в реестре слабостей. Веса заморожены — меняться может только софт вокруг. Твоё 11%→18%, вывернутое наизнанку." },
     links: [
       { label: "PROTOCOL.md · Gates 16D.6–16D.7", href: GH },
       { label: language === "ru" ? "3/18 vs 17/18 · летопись" : "3/18 vs 17/18 · the chronicle", href: "/journey/" }
