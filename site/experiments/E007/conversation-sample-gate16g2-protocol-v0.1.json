@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16G.2",
+  "status": "locked_before_implementation",
+  "kind": "minimal real local-library sample",
+  "hypothesis": "Can strict source adapters read one recent Claude Code conversation and one recent locally cached ChatGPT conversation while retaining only the last twenty visible user/assistant messages from each?",
+  "sample_contract": {
+    "codex": "not read; its real adapter is already validated",
+    "claude_code": "newest main project JSONL only",
+    "chatgpt_desktop": "newest conversations-v3 .data file only",
+    "visible_messages_per_source": 20,
+    "network_uploads": 0,
+    "private_output_mode": "0600",
+    "public_output": "counts, format and pass/fail only; never text or local identifiers"
+  },
+  "excluded": [
+    "thinking",
+    "tool_use",
+    "tool_result",
+    "system and meta records",
+    "attachments and files",
+    "all other conversations"
+  ],
+  "next_test_if_sample_passes": [
+    "one question answerable from the Claude sample",
+    "one question answerable from the ChatGPT sample",
+    "one question answerable from neither sample"
+  ],
+  "success_gate": {
+    "source_files_read": "at most one per source",
+    "visible_messages": "1..20 per installed source",
+    "non_message_records_in_private_sample": 0,
+    "public_message_text": 0,
+    "secret_gate_required_before_later_transport": true
+  },
+  "claim_boundary": "This is a minimal adapter and retrieval hypothesis test, not a complete import, index or claim about all local conversation history."
+}
