@@ -1,0 +1,45 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16E.1",
+  "status": "locked_before_scoring",
+  "kind": "real long-conversation message retrieval",
+  "hypothesis": "Can a model-independent hybrid index find the right visible message inside real conversations of 16k, 70k and 250k Qwen tokens without rewriting or semantically cutting those conversations?",
+  "private_payload": "preserved E007 Codex visible-message inventory v0.2",
+  "population": {
+    "conversations": [
+      {"card_id": "YUKA-C0002", "qwen_tokens": 250621, "messages": 2043},
+      {"card_id": "YUKA-C0030", "qwen_tokens": 70178, "messages": 291},
+      {"card_id": "YUKA-C0037", "qwen_tokens": 16775, "messages": 83}
+    ],
+    "questions": 12,
+    "questions_per_conversation": 4
+  },
+  "methods": {
+    "dense": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 message embeddings",
+    "lexical": "deterministic Unicode-token BM25 over complete visible messages",
+    "hybrid": "reciprocal-rank fusion of dense and lexical rankings with k=60",
+    "context_return": "selected exact message plus one visible neighbour on each side; source coordinates remain unchanged"
+  },
+  "queries": [
+    {"id":"L01","card_id":"YUKA-C0002","question":"Где объяснено, как secret guard отличили от безопасного пути с названием token?","gold_message_ids":["M0103"]},
+    {"id":"L02","card_id":"YUKA-C0002","question":"В каком сообщении уточнили, что RSS ещё не применяли к группе из 1 499 сайтов?","gold_message_ids":["M0382"]},
+    {"id":"L03","card_id":"YUKA-C0002","question":"Где перечислены невидимые причины занятого диска: удалённые открытые файлы, контейнерные слои и журналы systemd?","gold_message_ids":["M1021"]},
+    {"id":"L04","card_id":"YUKA-C0002","question":"Где нашли, что recovery собрали не из того окна, и проверили matching sidecar для всех 8 697 envelopes?","gold_message_ids":["M1429"]},
+    {"id":"L05","card_id":"YUKA-C0030","question":"Где разобрана причина, почему постоянный SSH-туннель к GPU сначала работает, а потом получает publickey denial?","gold_message_ids":["M0291"]},
+    {"id":"L06","card_id":"YUKA-C0030","question":"Где зафиксировано ночное окно работы GPU с 23:00 до 08:00?","gold_message_ids":["M0071","M0075"]},
+    {"id":"L07","card_id":"YUKA-C0030","question":"Где сказано, что 23 дублирующиеся safety-задачи отменили, не затронув статьи?","gold_message_ids":["M0127"]},
+    {"id":"L08","card_id":"YUKA-C0030","question":"Где описана дополнительная машина с двумя RTX 3090 и необходимость дать ей доступ к yukabox?","gold_message_ids":["M0239","M0241"]},
+    {"id":"L09","card_id":"YUKA-C0037","question":"Где исправленный review снял старый P0 после чтения AGENTS с exact head, но сохранил NetLog finding?","gold_message_ids":["M0015"]},
+    {"id":"L10","card_id":"YUKA-C0037","question":"Где отказались выдавать verdict, потому что новый exact head отсутствовал в локальной object database?","gold_message_ids":["M0021"]},
+    {"id":"L11","card_id":"YUKA-C0037","question":"Где проверка backup root закончилась отсутствием c23 archive, prepare-job roots и executor receipts?","gold_message_ids":["M0068"]},
+    {"id":"L12","card_id":"YUKA-C0037","question":"Где установили, что для TERRA-1 подходит существующий checkout wingle и отдельный executor repository не требуется?","gold_message_ids":["M0072"]}
+  ],
+  "success_gate": {
+    "hybrid_recall_at_3": "12/12",
+    "hybrid_recall_at_1_at_least": "10/12",
+    "hybrid_recall_at_3_not_below_dense": true,
+    "source_coordinates_preserved": "12/12"
+  },
+  "claim_boundary": "This tests finding messages only after the correct long conversation is known. It does not test chat routing, answer extraction, truth, privacy or final synthesis."
+}

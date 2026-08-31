@@ -1476,3 +1476,14 @@ the rule for production.
 
 - `/experiments/E007/deberta-context-gate16d11-result-v0.1.json`
 - `/experiment/e007/gate-16d/deberta-context/`
+
+## Gate 16E.1 — search inside long conversations
+
+Gate 16E.1 freezes twelve questions and accepted message IDs from three real
+Codex conversations containing about 16k, 70k and 250k Qwen tokens. The source
+messages remain immutable. Dense message retrieval, deterministic BM25 and a
+fixed reciprocal-rank fusion are compared after the correct conversation is
+known. The selected exact message may be returned with one visible neighbour
+on each side; no Qwen topic summary or semantic chunk rewrite is involved.
+
+- `/experiments/E007/long-chat-retrieval-gate16e1-protocol-v0.1.json`
