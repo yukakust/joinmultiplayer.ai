@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16G.8",
+  "status": "locked_before_inference",
+  "language": "en",
+  "hypothesis": "Can Qwen3-8B extract one to three exact English spans for a supported atomic claim and refuse unsupported claims, while English DeBERTa independently separates entailment from non-entailment without losing useful evidence?",
+  "world": "/experiments/E007/english-atomic-evidence-gate16g8-world-v0.1.json",
+  "world_sha256": "6f00fcb72738135602c7e960c629f4d768368b28518e84aee2e22b3fd0ffbd41",
+  "design": {
+    "cases": 20,
+    "supported": 10,
+    "unsupported": 10,
+    "fresh_synthetic_names": true,
+    "all_test_content_english": true,
+    "translation_inside_pipeline": false,
+    "maximum_spans": 3,
+    "maximum_characters_per_span": 600
+  },
+  "lanes": [
+    "Qwen span lane: claim plus three source messages -> exact spans or NO_EVIDENCE",
+    "code lane: every returned span must be an exact substring of its named message",
+    "oracle NLI lane: locked exact spans -> English DeBERTa -> entailment, neutral or contradiction",
+    "end-to-end lane: accept only exact Qwen spans classified as entailment"
+  ],
+  "qwen": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "device": "yukabox CPU",
+    "dtype": "bfloat16",
+    "thinking": false,
+    "sampling": false,
+    "max_new_tokens": 256
+  },
+  "deberta": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "language": "en",
+    "accept": "entailment only",
+    "maximum_pair_tokens": 512
+  },
+  "success_gate": {
+    "qwen_supported_with_exact_spans_at_least": 9,
+    "qwen_unsupported_with_spans_at_most": 1,
+    "qwen_malformed_at_most": 1,
+    "oracle_nli_supported_accepted_at_least": 9,
+    "oracle_nli_unsupported_accepted_at_most": 1,
+    "end_to_end_supported_accepted_at_least": 9,
+    "end_to_end_unsupported_accepted_at_most": 1
+  },
+  "claim_boundary": "Fresh synthetic locked development test. Passing would justify a new blind English replication, not production approval."
+}
