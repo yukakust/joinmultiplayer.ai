@@ -6707,3 +6707,29 @@ a.move-card:hover { border-color: var(--ink); }
 .decrypted-tag { animation: crtblink 1.4s steps(1) infinite; color: var(--ember); font-weight: 700; }
 .decrypted-go { margin-left: auto; }
 @media (prefers-reduced-motion: reduce) { .decrypted-tag { animation: none; } }
+
+/* carrier icons: large object figurines in pickers */
+.piece-carrier {
+  align-items: flex-end;
+  display: flex;
+  height: 118px;
+  justify-content: center;
+  width: 100%;
+}
+.piece-carrier img {
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+  max-height: 100%;
+  max-width: 86%;
+  width: auto;
+}
+.piece-carrier.is-lit img { filter: drop-shadow(0 6px 18px rgba(237, 121, 66, 0.35)); }
+.crt-pieces .piece-option { padding: 0.9rem 0.5rem 0.7rem; }
+.crt-pieces .piece-carrier { height: 104px; }
+.piece-gallery .piece-option .piece-carrier { margin-bottom: 0.4rem; }
+@media (max-width: 640px) { .piece-carrier, .crt-pieces .piece-carrier { height: 88px; } }
+
+/* carrier overrides beat .piece-option .piece base sizing */
+.piece-option .piece-carrier { height: 118px; width: 100%; }
+.crt-pieces .piece-option .piece-carrier { height: 104px; }
+.piece-option:hover .piece-carrier { transform: translateY(-3px); }
+@media (max-width: 640px) { .piece-option .piece-carrier, .crt-pieces .piece-option .piece-carrier { height: 88px; } }

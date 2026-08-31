@@ -5634,7 +5634,29 @@ const gamePieces = [
 ];
 
 function pieceData(id) { return gamePieces.find(piece => piece.id === id) || gamePieces[0]; }
-function chosenPiece() { const stored = localStorage.getItem(pieceStorageKey); return gamePieces.some(piece => piece.id === stored) ? stored : "match"; }
+function pieceCarrier(kind, lit = false) {
+  return `
+    <span class="piece piece-carrier piece-${kind}${lit ? " is-lit" : ""}">
+      <img src="/assets/forge/pieces/carrier-${kind}-${lit ? "lit" : "unlit"}.webp?v=carriers1" alt="" loading="lazy">
+    </span>`;
+}
+
+function takenPieceIds() {
+  const list = Array.isArray(matchesCache) ? matchesCache : [];
+  return new Set(list.map(m => m.piece));
+}
+
+function availablePieces() {
+  const taken = takenPieceIds();
+  return gamePieces.filter(piece => FORGE_PIECES[piece.id] && !taken.has(piece.id));
+}
+
+function chosenPiece() {
+  const stored = localStorage.getItem(pieceStorageKey);
+  if (gamePieces.some(piece => piece.id === stored)) return stored;
+  const open = availablePieces();
+  return open.length ? open[0].id : "matchbox";
+}
 function storedLitBy() { return localStorage.getItem(litByStorageKey) || ""; }
 
 const FORGE_PIECES = { match: 1, matchbox: 1, lighter: 1, candle: 1, flint: 1 };
@@ -5757,10 +5779,10 @@ function playShell() {
       <section class="start-block">
         <div class="flow-step">${p("pieceTitle")}</div>
         <p class="contribution-intro">${p("pieceHint")}</p>
-        <div class="piece-gallery">
-          ${gamePieces.map(piece => `
+        <div class="piece-gallery" data-piece-gallery>
+          ${availablePieces().map(piece => `
             <button class="piece-option${piece.id === selected ? " is-selected" : ""}" data-action="choose-piece" data-piece="${piece.id}">
-              ${pieceSVG(piece.id, piece.id === selected)}
+              ${pieceCarrier(piece.id, piece.id === selected)}
               <strong>${jt(piece.name)}</strong>
               <span>${jt(piece.flavor)}</span>
             </button>`).join("")}
@@ -6499,7 +6521,7 @@ const terminalCopy = {
     cont: "CONTINUE",
     skipHint: "click — full text",
     whoTitle: "WHO ENTERS?",
-    whoHint: "every piece carries fire; the choice is character, not rank",
+    whoHint: "every piece carries fire — and belongs to one carrier, forever; the taken ones already stand at the table",
     missionTitle: "FIRST FIELD RUN",
     missionBody: "Take a question — the intercepted one (Q0001, nobody's for days) or your own. Ask several minds, word for word. Bring back every answer, unedited. Another match will check your trace — and you will ignite.",
     missionA: "TAKE Q0001",
@@ -6519,7 +6541,7 @@ const terminalCopy = {
     cont: "ПРОДОЛЖИТЬ",
     skipHint: "клик — весь текст",
     whoTitle: "КТО ВХОДИТ?",
-    whoHint: "каждая фигурка — носитель огня; выбор — характер, не ранг",
+    whoHint: "каждая фигурка — носитель огня, и достаётся одному — навсегда; занятые уже стоят на столе",
     missionTitle: "ПЕРВЫЙ ВЫХОД",
     missionBody: "Возьми вопрос — перехваченный (Q0001, ничей уже давно) или свой. Задай нескольким разумам слово в слово. Принеси все ответы целиком, без правок. Другая спичка проверит твой след — и ты зажжёшься.",
     missionA: "ВЗЯТЬ Q0001",
@@ -6610,9 +6632,9 @@ function introOverlay(phase) {
       <div class="crt-head"><span>[${tc("whoTitle")}]</span></div>
       <p class="crt-note">${tc("whoHint")}</p>
       <div class="piece-gallery crt-pieces">
-        ${gamePieces.map(piece => `
+        ${availablePieces().map(piece => `
           <button class="piece-option${piece.id === chosenPiece() ? " is-selected" : ""}" data-action="choose-piece" data-piece="${piece.id}">
-            ${pieceSVG(piece.id, piece.id === chosenPiece())}
+            ${pieceCarrier(piece.id, piece.id === chosenPiece())}
             <strong>${jt(piece.name)}</strong>
           </button>`).join("")}
       </div>
@@ -6629,7 +6651,8 @@ function introOverlay(phase) {
   return `<div class="safehouse-intro" data-intro-overlay data-phase="${phase}"><div class="crt-frame">${inner}</div></div>`;
 }
 
-function introGo(phase) {
+async function introGo(phase) {
+  if (phase === "piece") { try { await fetchMatches(); } catch {} }
   const overlay = document.querySelector("[data-intro-overlay]");
   if (phase === "done") {
     localStorage.setItem(introSeenKey, "1");
@@ -6713,6 +6736,17 @@ function render() {
     document.title = `${p("title")} — i`;
     app.innerHTML = playShell();
     loadGameCall();
+    fetchMatches().then(() => {
+      const gallery = document.querySelector("[data-piece-gallery]");
+      if (!gallery) return;
+      const selected = chosenPiece();
+      gallery.innerHTML = availablePieces().map(piece => `
+        <button class="piece-option${piece.id === selected ? " is-selected" : ""}" data-action="choose-piece" data-piece="${piece.id}">
+          ${pieceCarrier(piece.id, piece.id === selected)}
+          <strong>${jt(piece.name)}</strong>
+          <span>${jt(piece.flavor)}</span>
+        </button>`).join("");
+    });
   } else if (path === "journey") {
     document.title = `${j("title")} — i`;
     journeySelected = journeyNode(location.hash.slice(1)) ? location.hash.slice(1) : journeySelected;
@@ -6961,7 +6995,13 @@ app.addEventListener("click", async (event) => {
     document.querySelectorAll(".piece-option").forEach(option => {
       const isChosen = option.dataset.piece === pieceId;
       option.classList.toggle("is-selected", isChosen);
-      option.querySelector(".piece").classList.toggle("is-lit", isChosen);
+      const pieceEl = option.querySelector(".piece");
+      if (!pieceEl) return;
+      pieceEl.classList.toggle("is-lit", isChosen);
+      const img = pieceEl.querySelector("img");
+      if (img && pieceEl.classList.contains("piece-carrier")) {
+        img.src = img.src.replace(isChosen ? "-unlit.webp" : "-lit.webp", isChosen ? "-lit.webp" : "-unlit.webp");
+      }
     });
     return;
   }
