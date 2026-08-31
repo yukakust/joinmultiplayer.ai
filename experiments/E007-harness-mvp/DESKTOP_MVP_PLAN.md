@@ -14,6 +14,30 @@ The MVP answers one kind of request:
 > I already asked my own AI and still do not know how to solve this. Ask the
 > network of pocket i for useful knowledge with evidence.
 
+## One source tree, three packages
+
+The proposed packaging shape is:
+
+```text
+Tauri desktop window
+        ↓ local process channel; no open localhost server
+one Python harness core
+        ↓
+native llama.cpp runtime + downloaded model preset
+```
+
+The UI and core remain the same. A native build matrix supplies only the
+platform-specific shell, Python sidecar and llama.cpp runtime:
+
+- macOS: signed `.app` inside a `.dmg`;
+- Windows: signed `.exe` / `.msi`;
+- Linux: `.AppImage`, with `.deb` later if needed.
+
+Model weights are downloaded after installation, so installers stay small and
+the user can change presets without reinstalling the application. Native CI
+runners must test each package; cross-compiling one untested binary is not an
+MVP release.
+
 ## The seven checkpoints
 
 ### 1. One local core
@@ -88,4 +112,3 @@ The MVP is done only when a new user can:
 - multilingual quality claims;
 - arbitrary user-selected folders;
 - claims that the current harness is a complete distributed neural network.
-
