@@ -5569,7 +5569,11 @@ function renderJourneyTrail(skipAnim = false) {
     ${pos.map(n => `
       <button class="jnode jnode-${n.status}${journeySelected === n.id ? " is-selected" : ""}${n.id === "gentry" ? " jnode-here" : ""}" data-journey="${n.id}"
               style="left:${n.x}%;top:${n.y}px" aria-label="${escapeHTML(n.code)} — ${escapeHTML(jt(n.title))}">
-        <span class="jnode-dot" aria-hidden="true"></span>
+        <span class="jnode-dot${["passed","caveat","failed","active","hidden"].includes(n.status) ? " jnode-plaque" : ""}" aria-hidden="true">${
+          ["passed","caveat","failed","active","hidden"].includes(n.status)
+            ? `<img src="/assets/forge/sockets/${n.id === "origin" ? "start" : { passed: "passed", caveat: "qualified", failed: "broken", active: "current", hidden: "hidden" }[n.status]}.png" alt="" loading="lazy">`
+            : ""
+        }</span>
         ${n.statue ? `<span class="jnode-medal" aria-hidden="true">${statueSVG(n.statue, "statue-mini")}</span>` : ""}
         ${n.id === "gentry" ? `
           <span class="jnode-flag" aria-hidden="true">
@@ -5640,7 +5644,21 @@ function pieceData(id) { return gamePieces.find(piece => piece.id === id) || gam
 function chosenPiece() { const stored = localStorage.getItem(pieceStorageKey); return gamePieces.some(piece => piece.id === stored) ? stored : "match"; }
 function storedLitBy() { return localStorage.getItem(litByStorageKey) || ""; }
 
+const FORGE_PIECES = { match: 1, matchbox: 1, lighter: 1, candle: 1, flint: 1 };
+
 function pieceSVG(kind, lit = false, cls = "") {
+  if (FORGE_PIECES[kind]) {
+    return `
+      <span class="piece piece-forge piece-${kind}${lit ? " is-lit" : ""} ${cls}">
+        <img src="/assets/forge/pieces/${kind}-${lit ? "lit" : "unlit"}.webp" alt="" loading="lazy">
+      </span>`;
+  }
+  if (kind === "empty") {
+    return `
+      <span class="piece piece-forge piece-empty ${cls}">
+        <img src="/assets/forge/pieces/empty.webp" alt="" loading="lazy">
+      </span>`;
+  }
   const figures = {
     match: '<line x1="20" y1="42" x2="20" y2="19"/><circle class="piece-head" cx="20" cy="15" r="3.6"/><path class="piece-flame" d="M20 10.5 C16.6 6 18.8 2.8 20 0.8 C21.2 2.8 23.4 6 20 10.5 Z"/>',
     matchbox: '<rect x="8" y="27" width="24" height="14"/><line x1="8" y1="32" x2="32" y2="32"/><line x1="11" y1="44" x2="29" y2="44"/><line x1="12" y1="23.5" x2="26" y2="19"/><circle class="piece-head" cx="28.5" cy="18.2" r="2.5"/><path class="piece-flame" d="M28.5 14.5 C26.1 11.2 27.6 8.9 28.5 7.4 C29.4 8.9 30.9 11.2 28.5 14.5 Z"/>',
@@ -6136,9 +6154,10 @@ function workbenchDoll() {
   return `
     <svg class="wb-doll" viewBox="0 0 ${W} ${H}" aria-label="pocket i">
       <g class="wb-dot${wbSelected === "dot" ? " is-selected" : ""}" data-wb="dot">
-        <circle class="wb-dot-ring" cx="${W / 2}" cy="66" r="36"/>
-        <text class="wb-dot-power" x="${W / 2}" y="63" text-anchor="middle">3/18</text>
-        <text class="wb-dot-label" x="${W / 2}" y="82" text-anchor="middle">${w("powerLabel")}</text>
+        <image href="/assets/forge/sockets/power.png" x="${W / 2 - 44}" y="18" width="88" height="88" preserveAspectRatio="xMidYMid meet"/>
+        <circle class="wb-dot-ring" cx="${W / 2}" cy="62" r="40"/>
+        <text class="wb-dot-power wb-dot-power-bronze" x="${W / 2}" y="58" text-anchor="middle">3/18</text>
+        <text class="wb-dot-label" x="${W / 2}" y="118" text-anchor="middle">${w("powerLabel")}</text>
       </g>
       <line class="wb-leader" x1="${W / 2}" y1="104" x2="${W / 2}" y2="138" stroke-dasharray="2 4"/>
       ${slabs.map((slab, i) => `

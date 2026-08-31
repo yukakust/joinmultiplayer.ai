@@ -6377,3 +6377,31 @@ a.move-card:hover { border-color: var(--ink); }
   }
   .wb-inspector.is-open { display: block; }
 }
+
+/* ── Promethean Forge: bronze pieces and socket plaques ── */
+
+.piece-forge { display: inline-block; position: relative; }
+.piece-forge img {
+  display: block;
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+.piece-forge.is-lit img { filter: drop-shadow(0 0 6px color-mix(in srgb, var(--ember) 45%, transparent)); }
+.piece-option .piece-forge { height: 64px; width: 54px; }
+.ignition .piece-forge.piece-ritual { height: 96px; width: 82px; }
+.jnode-plaque {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  height: 30px !important;
+  width: 36px !important;
+}
+.jnode-plaque::after { content: none !important; }
+.jnode-plaque img { display: block; height: 100%; object-fit: contain; width: 100%; }
+.jnode-active .jnode-plaque { animation: none; }
+.jnode-active:hover .jnode-plaque img,
+.jnode.is-selected .jnode-plaque img { filter: drop-shadow(0 0 7px color-mix(in srgb, var(--ember) 55%, transparent)); }
+.jnode.is-selected .jnode-plaque { outline: none !important; }
+.wb-dot-ring { stroke: color-mix(in srgb, var(--ember) 45%, transparent); stroke-dasharray: 5 5; }
+.wb-dot-power-bronze { fill: #ECE9DF; paint-order: stroke; stroke: rgba(0,0,0,0.55); stroke-width: 3px; }
