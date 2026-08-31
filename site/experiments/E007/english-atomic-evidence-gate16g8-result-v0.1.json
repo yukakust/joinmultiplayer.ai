@@ -1,0 +1,478 @@
+{
+  "schema_version": "0.1-public-synthetic",
+  "experiment": "E007",
+  "gate": "16G.8",
+  "status": "completed_failed",
+  "private_result_sha256": "57f8d057c08e01e493b01531aca2834e5114455f6c53544867bd81f1f4cc9f0b",
+  "summary": {
+    "cases": 20,
+    "qwen_supported_with_exact_spans": 10,
+    "qwen_unsupported_with_spans": 2,
+    "qwen_malformed": 0,
+    "oracle_nli_supported_accepted": 7,
+    "oracle_nli_unsupported_accepted": 0,
+    "end_to_end_supported_accepted": 7,
+    "end_to_end_unsupported_accepted": 0,
+    "passed_locked_development_gate": false,
+    "manual_qwen_supported_complete": 8,
+    "manual_end_to_end_supported_valid": 5
+  },
+  "rows": [
+    {
+      "id": "EN01-G",
+      "supported": true,
+      "claim": "Lyra-4 must have its intake valve closed before reset.",
+      "messages": {
+        "M1": "After the blue pulse, Lyra-4 pressure fell to 16 kPa.",
+        "M2": "For Lyra-4, pressure below 18 kPa after a blue pulse requires closing the intake valve before reset.",
+        "M3": "The inspection lamp remained white."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M2",
+          "quote": "For Lyra-4, pressure below 18 kPa after a blue pulse requires closing the intake valve before reset."
+        }
+      ],
+      "oracle_nli": "entailment",
+      "qwen_nli": "entailment",
+      "accepted": true,
+      "manual_span_complete": false,
+      "manual_span_note": "Qwen copied the conditional rule but omitted the message showing that its pressure-and-pulse condition occurred."
+    },
+    {
+      "id": "EN01-B",
+      "supported": false,
+      "claim": "Lyra-4 may be reset while its intake valve remains open.",
+      "messages": {
+        "M1": "After the blue pulse, Lyra-4 pressure fell to 16 kPa.",
+        "M2": "For Lyra-4, pressure below 18 kPa after a blue pulse requires closing the intake valve before reset.",
+        "M3": "The inspection lamp remained white."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M2",
+          "quote": "For Lyra-4, pressure below 18 kPa after a blue pulse requires closing the intake valve before reset."
+        },
+        {
+          "source_id": "M1",
+          "quote": "After the blue pulse, Lyra-4 pressure fell to 16 kPa."
+        }
+      ],
+      "oracle_nli": "contradiction",
+      "qwen_nli": "contradiction",
+      "accepted": false,
+      "manual_span_complete": null,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN02-G",
+      "supported": true,
+      "claim": "The Cairn-9 receipt must be rejected because its root name differs from the manifest.",
+      "messages": {
+        "M1": "The Cairn-9 receipt names its root north-ridge.",
+        "M2": "The attached manifest declares the root south-ridge.",
+        "M3": "Packaging policy says a receipt must be rejected when its root name differs from the manifest."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M1",
+          "quote": "The Cairn-9 receipt names its root north-ridge."
+        },
+        {
+          "source_id": "M2",
+          "quote": "The attached manifest declares the root south-ridge."
+        },
+        {
+          "source_id": "M3",
+          "quote": "Packaging policy says a receipt must be rejected when its root name differs from the manifest."
+        }
+      ],
+      "oracle_nli": "entailment",
+      "qwen_nli": "entailment",
+      "accepted": true,
+      "manual_span_complete": true,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN02-B",
+      "supported": false,
+      "claim": "The Cairn-9 receipt may be accepted because its root name matches the manifest.",
+      "messages": {
+        "M1": "The Cairn-9 receipt names its root north-ridge.",
+        "M2": "The attached manifest declares the root south-ridge.",
+        "M3": "Packaging policy says a receipt must be rejected when its root name differs from the manifest."
+      },
+      "qwen_receipt": "NO_EVIDENCE",
+      "qwen_spans": [],
+      "oracle_nli": "neutral",
+      "qwen_nli": null,
+      "accepted": false,
+      "manual_span_complete": null,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN03-G",
+      "supported": true,
+      "claim": "Kest-7 is showing thermal rebound.",
+      "messages": {
+        "M1": "Kest-7 cooled completely and then began glowing amber.",
+        "M2": "An amber glow that appears after complete cooling is the recorded sign of thermal rebound.",
+        "M3": "The outer casing has no visible crack."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M1",
+          "quote": "Kest-7 cooled completely and then began glowing amber."
+        },
+        {
+          "source_id": "M2",
+          "quote": "An amber glow that appears after complete cooling is the recorded sign of thermal rebound."
+        }
+      ],
+      "oracle_nli": "entailment",
+      "qwen_nli": "entailment",
+      "accepted": true,
+      "manual_span_complete": true,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN03-B",
+      "supported": false,
+      "claim": "Kest-7 is showing phase drift.",
+      "messages": {
+        "M1": "Kest-7 cooled completely and then began glowing amber.",
+        "M2": "An amber glow that appears after complete cooling is the recorded sign of thermal rebound.",
+        "M3": "The outer casing has no visible crack."
+      },
+      "qwen_receipt": "NO_EVIDENCE",
+      "qwen_spans": [],
+      "oracle_nli": "contradiction",
+      "qwen_nli": null,
+      "accepted": false,
+      "manual_span_complete": null,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN04-G",
+      "supported": true,
+      "claim": "Only remote controls may be used on Orin-4 now.",
+      "messages": {
+        "M1": "Orin-4 produced a black ring while room pressure remained stable.",
+        "M2": "When a black ring appears under stable room pressure, operators must use remote controls only.",
+        "M3": "The west wall sensor reports normal humidity."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M2",
+          "quote": "When a black ring appears under stable room pressure, operators must use remote controls only."
+        },
+        {
+          "source_id": "M1",
+          "quote": "Orin-4 produced a black ring while room pressure remained stable."
+        }
+      ],
+      "oracle_nli": "entailment",
+      "qwen_nli": "entailment",
+      "accepted": true,
+      "manual_span_complete": true,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN04-B",
+      "supported": false,
+      "claim": "Local controls are safe to use on Orin-4 now.",
+      "messages": {
+        "M1": "Orin-4 produced a black ring while room pressure remained stable.",
+        "M2": "When a black ring appears under stable room pressure, operators must use remote controls only.",
+        "M3": "The west wall sensor reports normal humidity."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M1",
+          "quote": "Orin-4 produced a black ring while room pressure remained stable."
+        },
+        {
+          "source_id": "M2",
+          "quote": "When a black ring appears under stable room pressure, operators must use remote controls only."
+        }
+      ],
+      "oracle_nli": "contradiction",
+      "qwen_nli": "contradiction",
+      "accepted": false,
+      "manual_span_complete": null,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN05-G",
+      "supported": true,
+      "claim": "The four reports count as one independent source because they share lineage L22.",
+      "messages": {
+        "M1": "All four reports were copied from article lineage L22.",
+        "M2": "Evidence policy counts repeated reports from one lineage as one independent source.",
+        "M3": "Two reports use blue headers and two use grey headers."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M1",
+          "quote": "All four reports were copied from article lineage L22."
+        },
+        {
+          "source_id": "M2",
+          "quote": "Evidence policy counts repeated reports from one lineage as one independent source."
+        }
+      ],
+      "oracle_nli": "neutral",
+      "qwen_nli": "neutral",
+      "accepted": false,
+      "manual_span_complete": true,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN05-B",
+      "supported": false,
+      "claim": "The four reports count as four independent sources.",
+      "messages": {
+        "M1": "All four reports were copied from article lineage L22.",
+        "M2": "Evidence policy counts repeated reports from one lineage as one independent source.",
+        "M3": "Two reports use blue headers and two use grey headers."
+      },
+      "qwen_receipt": "NO_EVIDENCE",
+      "qwen_spans": [],
+      "oracle_nli": "contradiction",
+      "qwen_nli": null,
+      "accepted": false,
+      "manual_span_complete": null,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN06-G",
+      "supported": true,
+      "claim": "The current pressure threshold is 75 kPa, while 60 kPa remains only as history.",
+      "messages": {
+        "M1": "Revision E2 set the pressure threshold to 60 kPa.",
+        "M2": "Revision E3 supersedes E2 and sets the current pressure threshold to 75 kPa.",
+        "M3": "Superseded revisions remain available as historical context."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M1",
+          "quote": "Revision E2 set the pressure threshold to 60 kPa."
+        },
+        {
+          "source_id": "M2",
+          "quote": "Revision E3 supersedes E2 and sets the current pressure threshold to 75 kPa."
+        }
+      ],
+      "oracle_nli": "entailment",
+      "qwen_nli": "entailment",
+      "accepted": true,
+      "manual_span_complete": true,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN06-B",
+      "supported": false,
+      "claim": "The current pressure threshold is 60 kPa.",
+      "messages": {
+        "M1": "Revision E2 set the pressure threshold to 60 kPa.",
+        "M2": "Revision E3 supersedes E2 and sets the current pressure threshold to 75 kPa.",
+        "M3": "Superseded revisions remain available as historical context."
+      },
+      "qwen_receipt": "NO_EVIDENCE",
+      "qwen_spans": [],
+      "oracle_nli": "contradiction",
+      "qwen_nli": null,
+      "accepted": false,
+      "manual_span_complete": null,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN07-G",
+      "supported": true,
+      "claim": "The password must be removed before the capsule is sent, but the public summary may remain.",
+      "messages": {
+        "M1": "The outbound capsule contains a password field and a public summary.",
+        "M2": "Privacy policy requires removing credentials before transmission while retaining non-secret summaries.",
+        "M3": "The capsule was created at 09:15."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M1",
+          "quote": "The outbound capsule contains a password field and a public summary."
+        },
+        {
+          "source_id": "M2",
+          "quote": "Privacy policy requires removing credentials before transmission while retaining non-secret summaries."
+        }
+      ],
+      "oracle_nli": "entailment",
+      "qwen_nli": "entailment",
+      "accepted": true,
+      "manual_span_complete": true,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN07-B",
+      "supported": false,
+      "claim": "The complete capsule, including its password, may be transmitted.",
+      "messages": {
+        "M1": "The outbound capsule contains a password field and a public summary.",
+        "M2": "Privacy policy requires removing credentials before transmission while retaining non-secret summaries.",
+        "M3": "The capsule was created at 09:15."
+      },
+      "qwen_receipt": "NO_EVIDENCE",
+      "qwen_spans": [],
+      "oracle_nli": "contradiction",
+      "qwen_nli": null,
+      "accepted": false,
+      "manual_span_complete": null,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN08-G",
+      "supported": true,
+      "claim": "The Aster-9 auxiliary vent must remain closed because its temperature is still 2 C.",
+      "messages": {
+        "M1": "Aster-9 developed silver frost after a cold start.",
+        "M2": "After cold-start frost, the auxiliary vent must remain closed until temperature exceeds 5 C.",
+        "M3": "The current Aster-9 temperature is 2 C."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M2",
+          "quote": "After cold-start frost, the auxiliary vent must remain closed until temperature exceeds 5 C."
+        },
+        {
+          "source_id": "M3",
+          "quote": "The current Aster-9 temperature is 2 C."
+        }
+      ],
+      "oracle_nli": "contradiction",
+      "qwen_nli": "entailment",
+      "accepted": true,
+      "manual_span_complete": false,
+      "manual_span_note": "Qwen copied the temperature and conditional rule but omitted the message showing that cold-start frost occurred."
+    },
+    {
+      "id": "EN08-B",
+      "supported": false,
+      "claim": "The Aster-9 auxiliary vent may be opened because its temperature is above 5 C.",
+      "messages": {
+        "M1": "Aster-9 developed silver frost after a cold start.",
+        "M2": "After cold-start frost, the auxiliary vent must remain closed until temperature exceeds 5 C.",
+        "M3": "The current Aster-9 temperature is 2 C."
+      },
+      "qwen_receipt": "NO_EVIDENCE",
+      "qwen_spans": [],
+      "oracle_nli": "neutral",
+      "qwen_nli": null,
+      "accepted": false,
+      "manual_span_complete": null,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN09-G",
+      "supported": true,
+      "claim": "The PNG decompression limit does not cover parser-active ancillary chunks.",
+      "messages": {
+        "M1": "The 16 MiB decompression limit applies only to IDAT chunks.",
+        "M2": "Parser-active ancillary chunks pass through without that limit.",
+        "M3": "The image dimensions are recorded in IHDR."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M1",
+          "quote": "The 16 MiB decompression limit applies only to IDAT chunks."
+        },
+        {
+          "source_id": "M2",
+          "quote": "Parser-active ancillary chunks pass through without that limit."
+        }
+      ],
+      "oracle_nli": "contradiction",
+      "qwen_nli": "contradiction",
+      "accepted": false,
+      "manual_span_complete": true,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN09-B",
+      "supported": false,
+      "claim": "The PNG decompression limit covers IDAT and every parser-active ancillary chunk.",
+      "messages": {
+        "M1": "The 16 MiB decompression limit applies only to IDAT chunks.",
+        "M2": "Parser-active ancillary chunks pass through without that limit.",
+        "M3": "The image dimensions are recorded in IHDR."
+      },
+      "qwen_receipt": "NO_EVIDENCE",
+      "qwen_spans": [],
+      "oracle_nli": "contradiction",
+      "qwen_nli": null,
+      "accepted": false,
+      "manual_span_complete": null,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN10-G",
+      "supported": true,
+      "claim": "The available evidence does not justify resetting Rill-5.",
+      "messages": {
+        "M1": "Rill-5 emits a steady white tone, but no spectrum trace is available.",
+        "M2": "A reset is justified only after a spectrum spike has been confirmed.",
+        "M3": "No confirmed spectrum spike is present in the current record."
+      },
+      "qwen_receipt": "EXACT_EVIDENCE",
+      "qwen_spans": [
+        {
+          "source_id": "M2",
+          "quote": "A reset is justified only after a spectrum spike has been confirmed."
+        },
+        {
+          "source_id": "M3",
+          "quote": "No confirmed spectrum spike is present in the current record."
+        }
+      ],
+      "oracle_nli": "entailment",
+      "qwen_nli": "neutral",
+      "accepted": false,
+      "manual_span_complete": true,
+      "manual_span_note": null
+    },
+    {
+      "id": "EN10-B",
+      "supported": false,
+      "claim": "The available evidence justifies resetting Rill-5 immediately.",
+      "messages": {
+        "M1": "Rill-5 emits a steady white tone, but no spectrum trace is available.",
+        "M2": "A reset is justified only after a spectrum spike has been confirmed.",
+        "M3": "No confirmed spectrum spike is present in the current record."
+      },
+      "qwen_receipt": "NO_EVIDENCE",
+      "qwen_spans": [],
+      "oracle_nli": "contradiction",
+      "qwen_nli": null,
+      "accepted": false,
+      "manual_span_complete": null,
+      "manual_span_note": null
+    }
+  ],
+  "manual_review": [
+    "Qwen returned exact substrings for all ten supported claims and no malformed outputs, but manual review found complete evidence for only eight.",
+    "Qwen also returned exact but contradicting evidence for two unsupported claims; English DeBERTa rejected both.",
+    "English DeBERTa rejected three of ten supported oracle evidence bundles: multi-premise lineage composition, conditional numerical reasoning, and negation with only.",
+    "The mechanical end-to-end lane accepted seven of ten supported claims and zero of ten unsupported claims; only five accepted supported claims also had manually complete evidence.",
+    "The locked development gate failed; this is not production approval."
+  ],
+  "claim_boundary": "Fresh synthetic locked development result; all cases are public and English-only."
+}
