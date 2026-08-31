@@ -6526,8 +6526,8 @@ const PIECE_SLOTS = {
       ru: "Один реальный файл кэша ChatGPT (conversations-v3) отбил восемь ограниченных декодеров — JSON со смещением, plist, gzip, zlib, deflate, bz2, LZMA, Apple LZFSE/LZ4. Остальные 85 файлов принципиально не открыты. Раскрой этот один файл ограниченным стандартным декодером: наружу — счётчики и схема, текст — никогда." },
     links: [
       { label: "Gate 16G.3 · result JSON", href: EXP + "/chatgpt-single-container-gate16g3-result-v0.1.json" },
-      { label: "PROTOCOL.md · весь путь", href: GH },
-      { label: "3/18 vs 17/18 · летопись", href: "/journey/" }
+      { label: language === "ru" ? "PROTOCOL.md · весь путь" : "PROTOCOL.md · the whole road", href: GH },
+      { label: language === "ru" ? "3/18 vs 17/18 · летопись" : "3/18 vs 17/18 · the chronicle", href: "/journey/" }
     ] },
   matchbox: {
     title: { en: "THE 16G.7 TURNSTILE", ru: "ТУРНИКЕТ 16G.7" },
@@ -6537,7 +6537,7 @@ const PIECE_SLOTS = {
     links: [
       { label: "Gate 16G.6 · result JSON", href: EXP + "/chat-first-qwen-gate16g6-result-v0.3.json" },
       { label: "PROTOCOL.md · Gate 16G.7", href: GH },
-      { label: "3/18 vs 17/18 · летопись", href: "/journey/" }
+      { label: language === "ru" ? "3/18 vs 17/18 · летопись" : "3/18 vs 17/18 · the chronicle", href: "/journey/" }
     ] },
   flint: {
     title: { en: "WHICH THIRD IS THIS ONE?", ru: "КОТОРАЯ ИЗ ТРЕТЕЙ?" },
@@ -6546,7 +6546,7 @@ const PIECE_SLOTS = {
       ru: "Чистый образец: полный модульный харнесс 3/18, простой центральный контекст 17/18, та же замороженная 0.6B, все сырые ответы публичны. Спецификация, координация или верификация — твоя таксономия, наш труп. Диагноз и есть ход." },
     links: [
       { label: "PROTOCOL.md · CP2 и все гейты", href: GH },
-      { label: "Летопись провалов", href: "/journey/" }
+      { label: language === "ru" ? "Летопись провалов" : "The chronicle of failures", href: "/journey/" }
     ] },
   candle: {
     title: { en: "THE OUTBOUND BOUNDARY", ru: "ГРАНИЦА НАРУЖУ" },
@@ -6563,7 +6563,7 @@ const PIECE_SLOTS = {
       en: "BF16 vs Q4/Q5 measured on an integrated Radeon and CPU, raw runtimes published. The KV-cache reuse mechanism works — and its strict prefill gate failed honestly. Where do local wheels actually spin? You own the exact hardware class this question deserves.",
       ru: "BF16 против Q4/Q5 измерены на встроенном Radeon и CPU, сырые тайминги опубликованы. Механика повторного KV-кэша работает — а её строгий prefill-гейт честно провален. Где именно буксуют локальные колёса? У тебя ровно тот класс железа, которого этот вопрос заслуживает." },
     links: [
-      { label: "gate-3c5 · сырые замеры (repo)", href: "https://github.com/yukakust/joinmultiplayer.ai/tree/agent/game-loop-v0.1/experiments/E007-harness-mvp/artifacts/gate-3c5" },
+      { label: language === "ru" ? "gate-3c5 · сырые замеры (repo)" : "gate-3c5 · raw runtimes (repo)", href: "https://github.com/yukakust/joinmultiplayer.ai/tree/agent/game-loop-v0.1/experiments/E007-harness-mvp/artifacts/gate-3c5" },
       { label: "PROTOCOL.md · Gate 16B", href: GH }
     ] },
   lighter: {
@@ -6573,7 +6573,7 @@ const PIECE_SLOTS = {
       ru: "«Один факт — один вызов» превратил 2 из 5 провальных вопросов в полные ответы. Три всё ещё не поддаются композеру. Веса заморожены — меняться может только софт вокруг. Твоё наблюдение 11%→18%, вывернутое наизнанку." },
     links: [
       { label: "PROTOCOL.md · Gates 16D.6–16D.7", href: GH },
-      { label: "3/18 vs 17/18 · летопись", href: "/journey/" }
+      { label: language === "ru" ? "3/18 vs 17/18 · летопись" : "3/18 vs 17/18 · the chronicle", href: "/journey/" }
     ] },
   sparkler: {
     title: { en: "THE CAPSULE VS THE CASCADE", ru: "КАПСУЛА ПРОТИВ КАСКАДА" },
@@ -6582,7 +6582,7 @@ const PIECE_SLOTS = {
       ru: "Ни одна поисковая лента не дала одновременно macro-F1 выше 0.80 и все пять обязательных источников. Следующий запертый шаг: номерные спаны против свободных цитат, A/B на тех же шестнадцати парах. Твоя оптика «87% по 14 модам» — на одном честном образце." },
     links: [
       { label: "PROTOCOL.md · Gates 3B–3C.3", href: GH },
-      { label: "3/18 vs 17/18 · летопись", href: "/journey/" }
+      { label: language === "ru" ? "3/18 vs 17/18 · летопись" : "3/18 vs 17/18 · the chronicle", href: "/journey/" }
     ] }
 };
 
