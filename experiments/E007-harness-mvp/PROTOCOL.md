@@ -1508,3 +1508,15 @@ are persisted locally with the source snapshot so a second question performs
 no document re-embedding.
 
 - `/experiments/E007/long-chat-candidates-gate16e2-protocol-v0.1.json`
+
+The one-time build embedded 2,417 complete visible messages in 329.114 seconds.
+On twelve fresh questions the candidate union retained the accepted message in
+12/12 cases and returned seven to nine exact messages per question. A second
+run loaded the 3.3 MB local index in 0.014 seconds, embedded zero documents and
+searched all twelve questions in 0.733 seconds. Conversation text remains
+private; the public result contains only frozen questions, opaque coordinates,
+counts and timings. This closes candidate retrieval inside a known long chat,
+not downstream reading or answer extraction.
+
+- `/experiments/E007/long-chat-candidates-gate16e2-result-v0.1.json`
+- `/experiment/e007/gate-16e/long-chat-candidates/`

@@ -1,6 +1,6 @@
 # Pocket i harness — agreed path
 
-Status: working architecture agreement through E007 Gate 16D.11. This is not a
+Status: working architecture agreement through E007 Gate 16E.2. This is not a
 claim that every module already exists or has passed a physical-device test.
 
 E007 Gate 3C.6A.2 adds one development finding about local source retrieval:
@@ -111,6 +111,21 @@ does not leave the device.
 
 A found fragment is only a **candidate**. One pocket i cannot know whether its
 piece will improve the final answer because it cannot see the whole puzzle.
+
+### Long conversations: accepted candidate search
+
+Do not feed a 10k–250k-token conversation to Qwen and do not ask the index to
+choose one winner. Keep every complete visible message as an exact source unit.
+Build two local indexes once: ordinary word search and multilingual meaning
+vectors. For each question take the best five messages from each index, remove
+duplicates, and give Qwen at most ten exact messages **one at a time**.
+
+Gate 16E.2 retained the accepted message in 12/12 fresh questions from three
+real 16k, 70k and 250k-token Codex conversations. The one-time 2,417-message
+index took 329.114 seconds and occupied 3.3 MB. Reusing it embedded zero
+documents and searched all twelve questions in 0.733 seconds. This accepts
+candidate retrieval inside an already selected long chat; it does not yet
+accept the downstream reader.
 
 ## 5. Every contact gets a visible outcome
 
@@ -440,7 +455,7 @@ an honest limitation, not proof across domains or scale. Decision record:
 | 1 | Install one modular app and choose a model preset. Start with Qwen 0.6B; stronger devices may choose a larger model. | Agreed, not built. |
 | 2 | Keep the person's exact question. Do not silently rewrite it into another request. | Passed on MacBook + yukabox. |
 | 3 | Use Speculative Attention and public capability cards to ask many plausible pocket i in parallel. | Delivery and simple ranking passed; automatic cards and scale remain open. |
-| 4 | Search only owner-approved local memory. The complete private store stays on the device. | Physical local-search transport passed on two devices. |
+| 4 | Search only owner-approved local memory. For a long chat, union five word matches and five meaning matches, then inspect at most ten exact messages one at a time. The complete private store stays on the device. | Physical transport passed. Gate 16E.2 retained the accepted message in 12/12 fresh long-chat questions; downstream reading remains separate. |
 | 5 | An online pocket i returns `found`, `empty`, `blocked`, or `error`. If nothing arrives before the deadline, the relay records `offline`. | Receipt states and a synthetic blocked secret passed. |
 | 6 | A useful offer travels as a readable capsule: claim, evidence, source, lineage, conditions, limits, and permission. | Exact stored-capsule transport passed; extraction from messy memory remains open. |
 | 7 | Prefer recall at the sending edge: a doubtful candidate may travel, because the receiver can filter it; missing useful knowledge is harder to repair. | New-question send-policy smoke passed. |
