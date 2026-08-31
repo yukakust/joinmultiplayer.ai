@@ -1,0 +1,40 @@
+{
+  "runId": "pocket-loadout-v2-2026-08-31",
+  "phase": "phase3",
+  "step": "review",
+  "fileKey": "AJgKo10y0YPo7XangJb7z6",
+  "entities": {
+    "pages": { "Workbench": "2:5" },
+    "frames": {
+      "modularMaster": "166:2",
+      "oldLoadout": "132:2",
+      "loadoutV2": "199:2",
+      "header": "206:2",
+      "brain": "206:6",
+      "character": "206:9",
+      "gear": "206:10",
+      "party": "206:91"
+    },
+    "collections": { "Color": "VariableCollectionId:3:2", "Measures": "VariableCollectionId:3:9" },
+    "variables": {
+      "space/8": "VariableID:196:2",
+      "space/12": "VariableID:196:3",
+      "space/16": "VariableID:196:4",
+      "space/24": "VariableID:196:5"
+    },
+    "components": {
+      "loadoutSlot": "203:2",
+      "loadoutSlotVariants": ["200:2", "202:2", "202:7"]
+    }
+  },
+  "pendingValidations": [],
+  "completedSteps": [
+    "phase0",
+    "phase1",
+    "phase2",
+    "component-loadout-slot",
+    "screen-shell",
+    "screen-shell:metadata",
+    "screen-shell:screenshot"
+  ]
+}

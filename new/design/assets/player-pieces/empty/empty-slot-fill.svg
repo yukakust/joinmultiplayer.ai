@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1148" height="1370" viewBox="0 0 1148 1370">
+  <defs>
+    <linearGradient id="ghost" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f1e8" stop-opacity="0.52"/>
+      <stop offset="0.48" stop-color="#b49a70" stop-opacity="0.44"/>
+      <stop offset="1" stop-color="#716e64" stop-opacity="0.50"/>
+    </linearGradient>
+  </defs>
+  <path
+    d="M 443 870
+       C 447 770 456 650 487 536
+       C 496 507 510 486 528 471
+       C 487 450 466 413 466 371
+       C 466 311 514 263 574 263
+       C 634 263 682 311 682 371
+       C 682 413 661 450 620 471
+       C 638 486 652 507 661 536
+       C 692 650 701 770 705 870
+       Z"
+    fill="url(#ghost)"/>
+</svg>
