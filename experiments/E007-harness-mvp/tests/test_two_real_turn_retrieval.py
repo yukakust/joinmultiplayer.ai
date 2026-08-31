@@ -29,6 +29,13 @@ class TurnRetrievalTests(unittest.TestCase):
             )
             self.assertEqual(module.codex_metadata(path), ("S1", False))
 
+    def test_load_adapter_accepts_extensionless_script(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "pocket-i-conversations"
+            path.write_text("VALUE = 42\n", encoding="utf-8")
+            adapter = module.load_adapter(path)
+            self.assertEqual(adapter.VALUE, 42)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -7,6 +7,7 @@ import argparse
 import collections
 import hashlib
 import importlib.util
+from importlib.machinery import SourceFileLoader
 import json
 import math
 import os
@@ -21,7 +22,8 @@ MAX_METADATA_PREFIX = 2 * 1024 * 1024
 
 
 def load_adapter(path: Path):
-    spec = importlib.util.spec_from_file_location("pocket_i_adapters", path)
+    loader = SourceFileLoader("pocket_i_adapters", str(path))
+    spec = importlib.util.spec_from_loader(loader.name, loader)
     if spec is None or spec.loader is None:
         raise RuntimeError("Could not load the local adapter")
     module = importlib.util.module_from_spec(spec)
