@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16G.3",
+  "status": "locked_before_implementation",
+  "kind": "single ChatGPT binary-container decoder",
+  "hypothesis": "Is the one already selected ChatGPT conversations-v3 file encoded with a standard local macOS container or compression format that can be decoded without reading any other conversation?",
+  "input": "the newest single conversations-v3 .data file used by Gate 16G.2",
+  "decoders": ["JSON at a bounded leading offset", "property list", "gzip", "zlib", "raw deflate", "bz2", "LZMA", "Apple LZFSE", "Apple LZ4"],
+  "limits": {
+    "source_files_read": 1,
+    "maximum_decoded_bytes": 8388608,
+    "maximum_visible_messages": 20,
+    "network_uploads": 0
+  },
+  "public_output": "decoder name, structural field types, counts and status only; no bytes or values",
+  "success_gate": {
+    "standard_decoder_identified": true,
+    "visible_user_assistant_messages": "1..20",
+    "public_message_text": 0
+  },
+  "claim_boundary": "Failure means only that this single app-version container is not one of the frozen standard formats. It does not mean ChatGPT has no local conversations."
+}
