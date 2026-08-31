@@ -1,0 +1,16 @@
+{
+  "schema_version": "0.2-public",
+  "experiment": "E007",
+  "gate": "16G.6-routing-v0.2",
+  "status": "completed_passed",
+  "protocol": "/experiments/E007/chat-first-qwen-gate16g6-protocol-v0.2.json",
+  "summary": {
+    "questions": 10,
+    "expected_chat_routed_top_5": 10,
+    "index_built_this_run": false
+  },
+  "finding": "Keeping five fused chat candidates retained the expected conversation for every locked question. The persisted index was reused without embedding source documents again.",
+  "next": "Run Qwen3-8B on all five routed conversations per question, using whole short chats and selected complete-message areas for long chats.",
+  "privacy": "No conversation text, path, source identifier, hash or retrieved message is public.",
+  "claim_boundary": "This validates routing on the ten locked questions only. Qwen3-8B has not yet produced the end-to-end answers."
+}
