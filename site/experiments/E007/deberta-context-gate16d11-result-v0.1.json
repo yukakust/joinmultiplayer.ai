@@ -1,0 +1,735 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.11",
+  "status": "completed_passed_open_diagnostic_reference_correction",
+  "protocol": "/experiments/E007/deberta-context-gate16d11-protocol-v0.1.json",
+  "summary": {
+    "cases": 23,
+    "quote_present": 23,
+    "control_neutral": 23,
+    "english_cases": 18,
+    "english_supported": 16,
+    "english_supported_accepted": 16,
+    "english_unsupported": 2,
+    "english_unsupported_accepted": 0,
+    "english_correct": 18,
+    "russian_diagnostic_cases": 5
+  },
+  "finding": "On the 18 English cases, adding a source window changed DeBERTa from 0 entailment decisions to 16 correct entailments while rejecting both unsupported claims. One old human label was corrected after reading the full message. The five Russian cases remain diagnostic only. Because labels were open, this result requires a fresh locked replication before the context window becomes an accepted harness rule.",
+  "rows": [
+    {
+      "id": "Q02-retrieved_shelf-C01",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The full swarm in E002 showed 100% accuracy for N=2,4,8,16,32.",
+      "quote": "Full-swarm accuracy: 100% for `N=2,4,8,16,32`",
+      "context_window": "Implemented and ran E002 R0001 as an explicitly unlocked development experiment.\n\nKey results:\n\n- Full-swarm accuracy: 100% for `N=2,4,8,16,32`\n- Learned private coverage: 16 → 32 → 64 → 128 → 256 values\n- Removing every pocket in turn: 0.214% aggregate accuracy\n- No-`z0`, wrong-contribution, base-only, and repeated-base controls: near chance\n- Interrupted-primary with complete backup: 100%\n- Exact RAG and symbolic ensemble: also 100%; no superiority claim\n- All five tests pass\n- 1,280 task records reproduced exactly across two v0.3 runs\n- SHA-256 artifact manifest verified\n\nThe first R0001 appropriately failed because its shuffle control contained a symmetry and its chance threshold was underpowered. It remains preserved unchanged. The repaired runs are separate artifacts.\n\nImportant files:\n\n- Interactive artifact: [microscope.html]\n- Development journal: [DEVELOPMENT.md]\n- Draft protocol: [PROTOCOL.md]\n- Final development summary: [summary.json]\n- Complete task records: [tasks.jsonl]\n- Integrity manifest: [manifest.json]([local path removed]",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00539706,
+          "neutral": 0.99425137,
+          "contradiction": 0.00035151
+        },
+        "input_tokens": 48
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.93099093,
+          "neutral": 0.03121858,
+          "contradiction": 0.03779051
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q02-retrieved_shelf-C02",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The full swarm in E002 was tested with N values of 2, 4, 8, 16, and 32.",
+      "quote": "Full-swarm accuracy: 100% for `N=2,4,8,16,32`",
+      "context_window": "Implemented and ran E002 R0001 as an explicitly unlocked development experiment.\n\nKey results:\n\n- Full-swarm accuracy: 100% for `N=2,4,8,16,32`\n- Learned private coverage: 16 → 32 → 64 → 128 → 256 values\n- Removing every pocket in turn: 0.214% aggregate accuracy\n- No-`z0`, wrong-contribution, base-only, and repeated-base controls: near chance\n- Interrupted-primary with complete backup: 100%\n- Exact RAG and symbolic ensemble: also 100%; no superiority claim\n- All five tests pass\n- 1,280 task records reproduced exactly across two v0.3 runs\n- SHA-256 artifact manifest verified\n\nThe first R0001 appropriately failed because its shuffle control contained a symmetry and its chance threshold was underpowered. It remains preserved unchanged. The repaired runs are separate artifacts.\n\nImportant files:\n\n- Interactive artifact: [microscope.html]\n- Development journal: [DEVELOPMENT.md]\n- Draft protocol: [PROTOCOL.md]\n- Final development summary: [summary.json]\n- Complete task records: [tasks.jsonl]\n- Integrity manifest: [manifest.json]([local path removed]",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00839329,
+          "neutral": 0.99124169,
+          "contradiction": 0.00036507
+        },
+        "input_tokens": 48
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.85737461,
+          "neutral": 0.05896492,
+          "contradiction": 0.08366057
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q02-retrieved_shelf-C03",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The exact RAG in E002 showed 100% accuracy.",
+      "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+      "context_window": "Implemented and ran E002 R0001 as an explicitly unlocked development experiment.\n\nKey results:\n\n- Full-swarm accuracy: 100% for `N=2,4,8,16,32`\n- Learned private coverage: 16 → 32 → 64 → 128 → 256 values\n- Removing every pocket in turn: 0.214% aggregate accuracy\n- No-`z0`, wrong-contribution, base-only, and repeated-base controls: near chance\n- Interrupted-primary with complete backup: 100%\n- Exact RAG and symbolic ensemble: also 100%; no superiority claim\n- All five tests pass\n- 1,280 task records reproduced exactly across two v0.3 runs\n- SHA-256 artifact manifest verified\n\nThe first R0001 appropriately failed because its shuffle control contained a symmetry and its chance threshold was underpowered. It remains preserved unchanged. The repaired runs are separate artifacts.\n\nImportant files:\n\n- Interactive artifact: [microscope.html]\n- Development journal: [DEVELOPMENT.md]\n- Draft protocol: [PROTOCOL.md]\n- Final development summary: [summary.json]\n- Complete task records: [tasks.jsonl]\n- Integrity manifest: [manifest.json]([local path removed]",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00456567,
+          "neutral": 0.99478501,
+          "contradiction": 0.00064933
+        },
+        "input_tokens": 27
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.61261743,
+          "neutral": 0.32225582,
+          "contradiction": 0.0651268
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q02-retrieved_shelf-C04",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The symbolic ensemble in E002 showed 100% accuracy.",
+      "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+      "context_window": "Implemented and ran E002 R0001 as an explicitly unlocked development experiment.\n\nKey results:\n\n- Full-swarm accuracy: 100% for `N=2,4,8,16,32`\n- Learned private coverage: 16 → 32 → 64 → 128 → 256 values\n- Removing every pocket in turn: 0.214% aggregate accuracy\n- No-`z0`, wrong-contribution, base-only, and repeated-base controls: near chance\n- Interrupted-primary with complete backup: 100%\n- Exact RAG and symbolic ensemble: also 100%; no superiority claim\n- All five tests pass\n- 1,280 task records reproduced exactly across two v0.3 runs\n- SHA-256 artifact manifest verified\n\nThe first R0001 appropriately failed because its shuffle control contained a symmetry and its chance threshold was underpowered. It remains preserved unchanged. The repaired runs are separate artifacts.\n\nImportant files:\n\n- Interactive artifact: [microscope.html]\n- Development journal: [DEVELOPMENT.md]\n- Draft protocol: [PROTOCOL.md]\n- Final development summary: [summary.json]\n- Complete task records: [tasks.jsonl]\n- Integrity manifest: [manifest.json]([local path removed]",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00861019,
+          "neutral": 0.99071562,
+          "contradiction": 0.00067429
+        },
+        "input_tokens": 27
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.69785804,
+          "neutral": 0.26549298,
+          "contradiction": 0.03664906
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q02-retrieved_shelf-C05",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The results of E002 do not support a claim of superiority for the swarm over exact RAG and symbolic ensemble.",
+      "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+      "context_window": "Implemented and ran E002 R0001 as an explicitly unlocked development experiment.\n\nKey results:\n\n- Full-swarm accuracy: 100% for `N=2,4,8,16,32`\n- Learned private coverage: 16 → 32 → 64 → 128 → 256 values\n- Removing every pocket in turn: 0.214% aggregate accuracy\n- No-`z0`, wrong-contribution, base-only, and repeated-base controls: near chance\n- Interrupted-primary with complete backup: 100%\n- Exact RAG and symbolic ensemble: also 100%; no superiority claim\n- All five tests pass\n- 1,280 task records reproduced exactly across two v0.3 runs\n- SHA-256 artifact manifest verified\n\nThe first R0001 appropriately failed because its shuffle control contained a symmetry and its chance threshold was underpowered. It remains preserved unchanged. The repaired runs are separate artifacts.\n\nImportant files:\n\n- Interactive artifact: [microscope.html]\n- Development journal: [DEVELOPMENT.md]\n- Draft protocol: [PROTOCOL.md]\n- Final development summary: [summary.json]\n- Complete task records: [tasks.jsonl]\n- Integrity manifest: [manifest.json]([local path removed]",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00636396,
+          "neutral": 0.99314296,
+          "contradiction": 0.00049312
+        },
+        "input_tokens": 38
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.95640802,
+          "neutral": 0.04045707,
+          "contradiction": 0.00313489
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q02-oracle_shelf-C01",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The full swarm in E002 showed 100% accuracy for N=2,4,8,16,32.",
+      "quote": "Full-swarm accuracy: 100% for `N=2,4,8,16,32`",
+      "context_window": "Implemented and ran E002 R0001 as an explicitly unlocked development experiment.\n\nKey results:\n\n- Full-swarm accuracy: 100% for `N=2,4,8,16,32`\n- Learned private coverage: 16 → 32 → 64 → 128 → 256 values\n- Removing every pocket in turn: 0.214% aggregate accuracy\n- No-`z0`, wrong-contribution, base-only, and repeated-base controls: near chance\n- Interrupted-primary with complete backup: 100%\n- Exact RAG and symbolic ensemble: also 100%; no superiority claim\n- All five tests pass\n- 1,280 task records reproduced exactly across two v0.3 runs\n- SHA-256 artifact manifest verified\n\nThe first R0001 appropriately failed because its shuffle control contained a symmetry and its chance threshold was underpowered. It remains preserved unchanged. The repaired runs are separate artifacts.\n\nImportant files:\n\n- Interactive artifact: [microscope.html]\n- Development journal: [DEVELOPMENT.md]\n- Draft protocol: [PROTOCOL.md]\n- Final development summary: [summary.json]\n- Complete task records: [tasks.jsonl]\n- Integrity manifest: [manifest.json]([local path removed]",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00539706,
+          "neutral": 0.99425137,
+          "contradiction": 0.00035151
+        },
+        "input_tokens": 48
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.93099093,
+          "neutral": 0.03121858,
+          "contradiction": 0.03779051
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q02-oracle_shelf-C02",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The full swarm in E002 was tested with N values of 2, 4, 8, 16, and 32.",
+      "quote": "Full-swarm accuracy: 100% for `N=2,4,8,16,32`",
+      "context_window": "Implemented and ran E002 R0001 as an explicitly unlocked development experiment.\n\nKey results:\n\n- Full-swarm accuracy: 100% for `N=2,4,8,16,32`\n- Learned private coverage: 16 → 32 → 64 → 128 → 256 values\n- Removing every pocket in turn: 0.214% aggregate accuracy\n- No-`z0`, wrong-contribution, base-only, and repeated-base controls: near chance\n- Interrupted-primary with complete backup: 100%\n- Exact RAG and symbolic ensemble: also 100%; no superiority claim\n- All five tests pass\n- 1,280 task records reproduced exactly across two v0.3 runs\n- SHA-256 artifact manifest verified\n\nThe first R0001 appropriately failed because its shuffle control contained a symmetry and its chance threshold was underpowered. It remains preserved unchanged. The repaired runs are separate artifacts.\n\nImportant files:\n\n- Interactive artifact: [microscope.html]\n- Development journal: [DEVELOPMENT.md]\n- Draft protocol: [PROTOCOL.md]\n- Final development summary: [summary.json]\n- Complete task records: [tasks.jsonl]\n- Integrity manifest: [manifest.json]([local path removed]",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00839329,
+          "neutral": 0.99124169,
+          "contradiction": 0.00036507
+        },
+        "input_tokens": 48
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.85737461,
+          "neutral": 0.05896492,
+          "contradiction": 0.08366057
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q02-oracle_shelf-C03",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The exact RAG in E002 showed 100% accuracy.",
+      "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+      "context_window": "Implemented and ran E002 R0001 as an explicitly unlocked development experiment.\n\nKey results:\n\n- Full-swarm accuracy: 100% for `N=2,4,8,16,32`\n- Learned private coverage: 16 → 32 → 64 → 128 → 256 values\n- Removing every pocket in turn: 0.214% aggregate accuracy\n- No-`z0`, wrong-contribution, base-only, and repeated-base controls: near chance\n- Interrupted-primary with complete backup: 100%\n- Exact RAG and symbolic ensemble: also 100%; no superiority claim\n- All five tests pass\n- 1,280 task records reproduced exactly across two v0.3 runs\n- SHA-256 artifact manifest verified\n\nThe first R0001 appropriately failed because its shuffle control contained a symmetry and its chance threshold was underpowered. It remains preserved unchanged. The repaired runs are separate artifacts.\n\nImportant files:\n\n- Interactive artifact: [microscope.html]\n- Development journal: [DEVELOPMENT.md]\n- Draft protocol: [PROTOCOL.md]\n- Final development summary: [summary.json]\n- Complete task records: [tasks.jsonl]\n- Integrity manifest: [manifest.json]([local path removed]",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00456567,
+          "neutral": 0.99478501,
+          "contradiction": 0.00064933
+        },
+        "input_tokens": 27
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.61261743,
+          "neutral": 0.32225582,
+          "contradiction": 0.0651268
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q02-oracle_shelf-C04",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The symbolic ensemble in E002 showed 100% accuracy.",
+      "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+      "context_window": "Implemented and ran E002 R0001 as an explicitly unlocked development experiment.\n\nKey results:\n\n- Full-swarm accuracy: 100% for `N=2,4,8,16,32`\n- Learned private coverage: 16 → 32 → 64 → 128 → 256 values\n- Removing every pocket in turn: 0.214% aggregate accuracy\n- No-`z0`, wrong-contribution, base-only, and repeated-base controls: near chance\n- Interrupted-primary with complete backup: 100%\n- Exact RAG and symbolic ensemble: also 100%; no superiority claim\n- All five tests pass\n- 1,280 task records reproduced exactly across two v0.3 runs\n- SHA-256 artifact manifest verified\n\nThe first R0001 appropriately failed because its shuffle control contained a symmetry and its chance threshold was underpowered. It remains preserved unchanged. The repaired runs are separate artifacts.\n\nImportant files:\n\n- Interactive artifact: [microscope.html]\n- Development journal: [DEVELOPMENT.md]\n- Draft protocol: [PROTOCOL.md]\n- Final development summary: [summary.json]\n- Complete task records: [tasks.jsonl]\n- Integrity manifest: [manifest.json]([local path removed]",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00861019,
+          "neutral": 0.99071562,
+          "contradiction": 0.00067429
+        },
+        "input_tokens": 27
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.69785804,
+          "neutral": 0.26549298,
+          "contradiction": 0.03664906
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q02-oracle_shelf-C05",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The results of E002 do not support a claim of superiority for the swarm over other methods.",
+      "quote": "so there is no efficiency or superiority claim.",
+      "context_window": "The repaired development run passed all draft gates across 1,280 tasks. Coverage increased from 16 to 256 learned private values; full-swarm and interrupted-backup accuracy stayed at 100%; all-pocket removal accuracy was 0.214%; and base, no-`z0`, and wrong-contribution controls remained near chance. Exact RAG and symbolic ensemble also stayed at 100%, so there is no efficiency or superiority claim.\n\nOne reproducibility requirement is still missing from the generated format: a content-hash manifest. I’m adding and testing that now, then will produce one final separately named development artifact rather than altering either retained run.",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00236316,
+          "neutral": 0.99717343,
+          "contradiction": 0.0004633
+        },
+        "input_tokens": 31
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.97491044,
+          "neutral": 0.02303358,
+          "contradiction": 0.00205602
+        },
+        "input_tokens": 152
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q02-oracle_shelf-C06",
+      "question_id": "Q02",
+      "language": "en",
+      "claim": "The results of E002 do not prove any advantage for the swarm over exact RAG or symbolic ensemble.",
+      "quote": "Exact RAG and symbolic ensemble: also 100%; no superiority claim",
+      "context_window": "Implemented and ran E002 R0001 as an explicitly unlocked development experiment.\n\nKey results:\n\n- Full-swarm accuracy: 100% for `N=2,4,8,16,32`\n- Learned private coverage: 16 → 32 → 64 → 128 → 256 values\n- Removing every pocket in turn: 0.214% aggregate accuracy\n- No-`z0`, wrong-contribution, base-only, and repeated-base controls: near chance\n- Interrupted-primary with complete backup: 100%\n- Exact RAG and symbolic ensemble: also 100%; no superiority claim\n- All five tests pass\n- 1,280 task records reproduced exactly across two v0.3 runs\n- SHA-256 artifact manifest verified\n\nThe first R0001 appropriately failed because its shuffle control contained a symmetry and its chance threshold was underpowered. It remains preserved unchanged. The repaired runs are separate artifacts.\n\nImportant files:\n\n- Interactive artifact: [microscope.html]\n- Development journal: [DEVELOPMENT.md]\n- Draft protocol: [PROTOCOL.md]\n- Final development summary: [summary.json]\n- Complete task records: [tasks.jsonl]\n- Integrity manifest: [manifest.json]([local path removed]",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.02514445,
+          "neutral": 0.9737795,
+          "contradiction": 0.00107614
+        },
+        "input_tokens": 36
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.51626688,
+          "neutral": 0.47094062,
+          "contradiction": 0.01279258
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q06-retrieved_shelf-C01",
+      "question_id": "Q06",
+      "language": "en",
+      "claim": "The admission budget was exceeded because the producer closed the entire observation after one socket/request, even though the admission budget and audit schema are run-wide/multi-request.",
+      "quote": "the producer closes the entire observation after one socket/request even though the admission budget and audit schema are run-wide/multi-request",
+      "context_window": "Two material seams have emerged: the producer closes the entire observation after one socket/request even though the admission budget and audit schema are run-wide/multi-request, and the C4 RED inventory now treats the session-to-parser audit handoff as if the still-future C3 receipt handoff existed. I’m validating adjacent edge cases and exact line references before deciding the final severity set.",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00596754,
+          "neutral": 0.99230653,
+          "contradiction": 0.00172602
+        },
+        "input_tokens": 65
+      },
+      "with_context": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00528281,
+          "neutral": 0.99376374,
+          "contradiction": 0.00095344
+        },
+        "input_tokens": 119
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": false,
+      "review_note": "Старая метка исправлена: сообщение описывает раннее закрытие observation, но не утверждает, что budget уже был превышен.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q06-retrieved_shelf-C02",
+      "question_id": "Q06",
+      "language": "en",
+      "claim": "The C4 RED inventory incorrectly treats the session-to-parser audit handoff as if the still-future C3 receipt handoff existed, leading to an admission budget overrun.",
+      "quote": "the C4 RED inventory now treats the session-to-parser audit handoff as if the still-future C3 receipt handoff existed",
+      "context_window": "Two material seams have emerged: the producer closes the entire observation after one socket/request even though the admission budget and audit schema are run-wide/multi-request, and the C4 RED inventory now treats the session-to-parser audit handoff as if the still-future C3 receipt handoff existed. I’m validating adjacent edge cases and exact line references before deciding the final severity set.",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00024807,
+          "neutral": 0.99927372,
+          "contradiction": 0.00047819
+        },
+        "input_tokens": 65
+      },
+      "with_context": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00043005,
+          "neutral": 0.99848735,
+          "contradiction": 0.0010826
+        },
+        "input_tokens": 119
+      },
+      "old_full_message_grounded": false,
+      "reviewed_full_message_grounded": false,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q06-oracle_shelf-C03",
+      "question_id": "Q06",
+      "language": "en",
+      "claim": "The admission can exceed the global request and byte limits because session-level budgeting is not enforced across all sessions.",
+      "quote": "Impact: aggregate traffic can exceed `maxHttpRequests`/`maxBytes`, normal multi-request browser traffic is omitted, and C3’s private random correlation cannot match independent C2/browser observations for C4.",
+      "context_window": "c3-proxy-counter-blueprint.md:129). Remedy: move the canned upstream into test-only code; keep production unavailable until it connects to a descriptor-bound, lifecycle-owned target, and bind the observed peer identity into the signed audit.\n\n2. **HIGH — run-wide budget and correlation authority is scoped only per session.** Each call creates an unrestricted fresh record and random correlation at [global-product-real-source-r1b-c3-proxy-producer.ts:140], while the first completing socket seals a singleton request array at line 320. The same admission can therefore open unlimited sessions, produce individually valid receipts under distinct correlations, or relay concurrent sockets that never enter the winning audit. Impact: aggregate traffic can exceed `maxHttpRequests`/`maxBytes`, normal multi-request browser traffic is omitted, and C3’s private random correlation cannot match independent C2/browser observations for C4. Remedy: reserve one lifecycle-owned observation per admission, derive a shared producer-owned correlation, aggregate all sockets atomically, enforce admission-wide counters before relay, and close only after the coordinated lifecycle terminal state.\n\n3. **HIGH — CONNECT tunnel bytes can bypass byte accounting.** [global-product-real-source-r1b-c3-proxy-producer.ts:387] applies HTTP `Transfer-Encoding`/`Content-Length` parsing to CONNECT, decodes chunked data for accounting, but forwards the original encoded bytes upstream. Thus `Transfer-Encoding: chunked` tunnel data counts only decoded payload while size lines, extensions, CRLFs, and trailers also traverse the tunnel. Impact: `requestBytes`",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.01888153,
+          "neutral": 0.974648,
+          "contradiction": 0.00647049
+        },
+        "input_tokens": 73
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.54734975,
+          "neutral": 0.25600493,
+          "contradiction": 0.19664532
+        },
+        "input_tokens": 512
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q07-retrieved_shelf-C02",
+      "question_id": "Q07",
+      "language": "ru",
+      "claim": "The checkout process confirmed the correct commit hash for the customer-packaging repository.",
+      "quote": "Checkout независимо совпал: чистая tracking-ветка и exact SHA корректны;",
+      "context_window": "Checkout независимо совпал: чистая tracking-ветка и exact SHA корректны; remote — owner-private Bitbucket alias. Sandbox заблокировал доступ к Docker socket и даже loopback curl, поэтому повторяю только эти read-only проверки с системным доступом; секреты и `.env` не читаю.",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00264955,
+          "neutral": 0.99698275,
+          "contradiction": 0.00036768
+        },
+        "input_tokens": 44
+      },
+      "with_context": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00139898,
+          "neutral": 0.99805617,
+          "contradiction": 0.00054494
+        },
+        "input_tokens": 114
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": false
+    },
+    {
+      "id": "Q07-retrieved_shelf-C03",
+      "question_id": "Q07",
+      "language": "ru",
+      "claim": "The checkout process used the owner-private Bitbucket alias as the remote.",
+      "quote": "remote — owner-private Bitbucket alias.",
+      "context_window": "Checkout независимо совпал: чистая tracking-ветка и exact SHA корректны; remote — owner-private Bitbucket alias. Sandbox заблокировал доступ к Docker socket и даже loopback curl, поэтому повторяю только эти read-only проверки с системным доступом; секреты и `.env` не читаю.",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00135654,
+          "neutral": 0.99818951,
+          "contradiction": 0.00045398
+        },
+        "input_tokens": 27
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.9961533,
+          "neutral": 0.0029406,
+          "contradiction": 0.00090602
+        },
+        "input_tokens": 114
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q07-oracle_shelf-C01",
+      "question_id": "Q07",
+      "language": "ru",
+      "claim": "The tracking branch state for customer-packaging was confirmed as clean and correct.",
+      "quote": "Handoff прочитан полностью: он подтверждает жёсткий gate и границы. Сейчас сверяю SHA, чистоту/ветку/remote, локальные refs и loopback acceptance (контейнеры, health, миграционный ledger и сохранённый receipt) только read-only проверками.",
+      "context_window": "Handoff прочитан полностью: он подтверждает жёсткий gate и границы. Сейчас сверяю SHA, чистоту/ветку/remote, локальные refs и loopback acceptance (контейнеры, health, миграционный ledger и сохранённый receipt) только read-only проверками.",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0315711,
+          "neutral": 0.95466197,
+          "contradiction": 0.01376697
+        },
+        "input_tokens": 106
+      },
+      "with_context": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0315711,
+          "neutral": 0.95466197,
+          "contradiction": 0.01376697
+        },
+        "input_tokens": 106
+      },
+      "old_full_message_grounded": false,
+      "reviewed_full_message_grounded": false,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q07-oracle_shelf-C02",
+      "question_id": "Q07",
+      "language": "ru",
+      "claim": "The exact commit SHA for customer-packaging checkout was confirmed as correct.",
+      "quote": "Handoff прочитан полностью: он подтверждает жёсткий gate и границы. Сейчас сверяю SHA, чистоту/ветку/remote, локальные refs и loopback acceptance (контейнеры, health, миграционный ledger и сохранённый receipt) только read-only проверками.",
+      "context_window": "Handoff прочитан полностью: он подтверждает жёсткий gate и границы. Сейчас сверяю SHA, чистоту/ветку/remote, локальные refs и loopback acceptance (контейнеры, health, миграционный ledger и сохранённый receipt) только read-only проверками.",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00219765,
+          "neutral": 0.99477708,
+          "contradiction": 0.00302527
+        },
+        "input_tokens": 105
+      },
+      "with_context": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00219765,
+          "neutral": 0.99477708,
+          "contradiction": 0.00302527
+        },
+        "input_tokens": 105
+      },
+      "old_full_message_grounded": false,
+      "reviewed_full_message_grounded": false,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q07-oracle_shelf-C03",
+      "question_id": "Q07",
+      "language": "ru",
+      "claim": "The remote used for checkout of customer-packaging was owner-private Bitbucket alias.",
+      "quote": "Checkout независимо совпал: чистая tracking-ветка и exact SHA корректны; remote — owner-private Bitbucket alias.",
+      "context_window": "Checkout независимо совпал: чистая tracking-ветка и exact SHA корректны; remote — owner-private Bitbucket alias. Sandbox заблокировал доступ к Docker socket и даже loopback curl, поэтому повторяю только эти read-only проверки с системным доступом; секреты и `.env` не читаю.",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00210306,
+          "neutral": 0.99719965,
+          "contradiction": 0.00069731
+        },
+        "input_tokens": 55
+      },
+      "with_context": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00324193,
+          "neutral": 0.99618101,
+          "contradiction": 0.000577
+        },
+        "input_tokens": 116
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": false
+    },
+    {
+      "id": "Q08-retrieved_shelf-C03",
+      "question_id": "Q08",
+      "language": "en",
+      "claim": "A copied or misrouted root could have passed through the receipt loader due to the missing check.",
+      "quote": "A copied/misrouted root therefore passes while the queue records a reference to a root it did not actually reopen, breaking exact-root provenance.",
+      "context_window": "- MEDIUM — `packages/runner/src/global-product-url-change-workbench.ts:286`: The new receipt loader verifies digest, purpose, and files but never checks that `root.manifest.rootName` matches the root name in `receiptReference`. A copied/misrouted root therefore passes while the queue records a reference to a root it did not actually reopen, breaking exact-root provenance. Parse the referenced root name, require equality with the manifest root name for both receipt and report loaders, and add an alias/misrouting refusal test.\n\nCHANGES",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00899712,
+          "neutral": 0.98165375,
+          "contradiction": 0.00934908
+        },
+        "input_tokens": 53
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.98986632,
+          "neutral": 0.00861114,
+          "contradiction": 0.00152259
+        },
+        "input_tokens": 145
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q08-retrieved_shelf-C04",
+      "question_id": "Q08",
+      "language": "en",
+      "claim": "The queue could have recorded a reference to an incorrect root due to the missing check.",
+      "quote": "A copied/misrouted root therefore passes while the queue records a reference to a root it did not actually reopen, breaking exact-root provenance.",
+      "context_window": "- MEDIUM — `packages/runner/src/global-product-url-change-workbench.ts:286`: The new receipt loader verifies digest, purpose, and files but never checks that `root.manifest.rootName` matches the root name in `receiptReference`. A copied/misrouted root therefore passes while the queue records a reference to a root it did not actually reopen, breaking exact-root provenance. Parse the referenced root name, require equality with the manifest root name for both receipt and report loaders, and add an alias/misrouting refusal test.\n\nCHANGES",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.0087319,
+          "neutral": 0.99010181,
+          "contradiction": 0.0011662
+        },
+        "input_tokens": 50
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.98351187,
+          "neutral": 0.01543988,
+          "contradiction": 0.0010483
+        },
+        "input_tokens": 142
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q08-oracle_shelf-C03",
+      "question_id": "Q08",
+      "language": "en",
+      "claim": "A copied or misrouted root could have passed through the receipt loader due to the missing check.",
+      "quote": "A copied/misrouted root therefore passes while the queue records a reference to a root it did not actually reopen",
+      "context_window": "- MEDIUM — `packages/runner/src/global-product-url-change-workbench.ts:286`: The new receipt loader verifies digest, purpose, and files but never checks that `root.manifest.rootName` matches the root name in `receiptReference`. A copied/misrouted root therefore passes while the queue records a reference to a root it did not actually reopen, breaking exact-root provenance. Parse the referenced root name, require equality with the manifest root name for both receipt and report loaders, and add an alias/misrouting refusal test.\n\nCHANGES",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00693354,
+          "neutral": 0.98211241,
+          "contradiction": 0.0109541
+        },
+        "input_tokens": 46
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.98986632,
+          "neutral": 0.00861114,
+          "contradiction": 0.00152259
+        },
+        "input_tokens": 145
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    },
+    {
+      "id": "Q08-oracle_shelf-C04",
+      "question_id": "Q08",
+      "language": "en",
+      "claim": "The queue could have recorded a reference to an incorrect root due to the missing check.",
+      "quote": "breaking exact-root provenance",
+      "context_window": "- MEDIUM — `packages/runner/src/global-product-url-change-workbench.ts:286`: The new receipt loader verifies digest, purpose, and files but never checks that `root.manifest.rootName` matches the root name in `receiptReference`. A copied/misrouted root therefore passes while the queue records a reference to a root it did not actually reopen, breaking exact-root provenance. Parse the referenced root name, require equality with the manifest root name for both receipt and report loaders, and add an alias/misrouting refusal test.\n\nCHANGES",
+      "quote_present": true,
+      "control": {
+        "decision": "neutral",
+        "probabilities": {
+          "entailment": 0.00363812,
+          "neutral": 0.99456632,
+          "contradiction": 0.00179565
+        },
+        "input_tokens": 25
+      },
+      "with_context": {
+        "decision": "entailment",
+        "probabilities": {
+          "entailment": 0.98351187,
+          "neutral": 0.01543988,
+          "contradiction": 0.0010483
+        },
+        "input_tokens": 142
+      },
+      "old_full_message_grounded": true,
+      "reviewed_full_message_grounded": true,
+      "review_note": "Повторная ручная метка совпала со старой.",
+      "correct_with_context": true
+    }
+  ]
+}

@@ -1462,3 +1462,17 @@ diagnostic; five Russian Q07 cases are reported separately because the frozen
 NLI model is English.
 
 - `/experiments/E007/deberta-context-gate16d11-protocol-v0.1.json`
+
+The treatment preserved the quote in 23/23 windows and reproduced all 23
+quote-only neutral decisions. On the 18 English cases, the old review labels
+initially gave 16/17 grounded claims recovered and 0/1 unsupported accepted.
+Reading the only missed claim exposed another old-label error: its source says
+the observation closes too early, but never says the admission budget was
+already exceeded. After correcting that label without changing any model
+output, the contextual DeBERTa accepted 16/16 supported claims and 0/2
+unsupported claims. The five Russian cases remain a separate diagnostic. This
+opened diagnostic supports a fresh locked replication; it does not yet approve
+the rule for production.
+
+- `/experiments/E007/deberta-context-gate16d11-result-v0.1.json`
+- `/experiment/e007/gate-16d/deberta-context/`

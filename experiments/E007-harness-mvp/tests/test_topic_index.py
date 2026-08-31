@@ -28,6 +28,8 @@ GROUNDED_SYNTHESIS_16D9_PROTOCOL = ROOT / "site/experiments/E007/grounded-synthe
 GROUNDED_SYNTHESIS_16D9_RESULT = ROOT / "site/experiments/E007/grounded-synthesis-gate16d9-result-v0.1.json"
 NEUTRAL_TRIAGE_16D10_PROTOCOL = ROOT / "site/experiments/E007/neutral-triage-gate16d10-protocol-v0.1.json"
 NEUTRAL_TRIAGE_16D10_RESULT = ROOT / "site/experiments/E007/neutral-triage-gate16d10-result-v0.1.json"
+DEBERTA_CONTEXT_16D11_PROTOCOL = ROOT / "site/experiments/E007/deberta-context-gate16d11-protocol-v0.1.json"
+DEBERTA_CONTEXT_16D11_RESULT = ROOT / "site/experiments/E007/deberta-context-gate16d11-result-v0.1.json"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -236,6 +238,22 @@ class TopicIndexTest(unittest.TestCase):
         self.assertEqual(summary["correct_decisions"], 18)
         self.assertIn("failed", result["status"])
         public_text = NEUTRAL_TRIAGE_16D10_RESULT.read_text()
+        self.assertNotIn("raw_message", public_text)
+        self.assertNotIn('"usage"', public_text)
+        self.assertNotIn("/home/", public_text)
+
+    def test_gate16d11_preserves_context_recovery_and_label_correction(self):
+        protocol = json.loads(DEBERTA_CONTEXT_16D11_PROTOCOL.read_text())
+        result = json.loads(DEBERTA_CONTEXT_16D11_RESULT.read_text())
+        self.assertEqual(protocol["frozen_cases"]["total"], 23)
+        self.assertEqual(len(result["rows"]), 23)
+        summary = result["summary"]
+        self.assertEqual(summary["quote_present"], 23)
+        self.assertEqual(summary["control_neutral"], 23)
+        self.assertEqual(summary["english_supported_accepted"], 16)
+        self.assertEqual(summary["english_unsupported_accepted"], 0)
+        self.assertEqual(summary["english_correct"], 18)
+        public_text = DEBERTA_CONTEXT_16D11_RESULT.read_text()
         self.assertNotIn("raw_message", public_text)
         self.assertNotIn('"usage"', public_text)
         self.assertNotIn("/home/", public_text)
