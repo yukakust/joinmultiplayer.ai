@@ -1601,3 +1601,30 @@ and one already supported Codex sample. Keep ChatGPT marked as an open adapter;
 do not pretend the binary cache is supported.
 
 - `/experiments/E007/chatgpt-single-container-gate16g3-result-v0.1.json`
+
+## Gate 16G.6 — chat-first routing and Qwen reading
+
+The earlier ten-message test was rejected because it mixed messages from
+different conversations and changed the meaning of the expected answer. Gate
+16G.6 implements the agreed path instead: preserve all 58 conversation
+boundaries, route a new question to five whole conversations, give Qwen3-8B a
+whole conversation up to 10,000 model tokens, and use complete-message areas
+within the same budget for longer conversations.
+
+The locked top-5 router kept the expected conversation for all 10 questions.
+The sequential CPU reader then performed 50 reads. Private human review found
+faithful, message-grounded answers in 9/10 expected conversations. The one
+failure was a malformed, unfinished tool call on a long conversation. The
+reader also returned `FOUND` for 17/40 distractor conversations and produced
+seven format errors overall. All 26 parsed `FOUND` calls named message
+coordinates that existed in the supplied context, which proves provenance but
+not semantic support.
+
+Decision: accept top-5 routing, reject the reader as an acceptance gate. Qwen
+outputs remain candidate claims with provenance and must pass the evidence and
+acceptance modules before entering the answer shelf. Preserve the top-3 failure,
+the corrected top-5 routing result, and the failed locked reader gate.
+
+- `/experiments/E007/chat-first-qwen-gate16g6-protocol-v0.3.json`
+- `/experiments/E007/chat-first-qwen-gate16g6-result-v0.3.json`
+- `/experiment/e007/gate-16g/chat-first-reader/`

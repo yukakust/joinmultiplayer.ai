@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.3-public",
+  "experiment": "E007",
+  "gate": "16G.6",
+  "status": "completed_failed_locked_gate",
+  "protocol": "/experiments/E007/chat-first-qwen-gate16g6-protocol-v0.3.json",
+  "plain_result": "Top-5 routing kept the right conversation for all ten questions. Qwen returned a faithful, message-grounded answer from nine of the ten right conversations, but the full locked gate failed: one long-chat answer broke the tool format, and 17 of 40 distractor conversations also produced FOUND.",
+  "privacy": "No conversation text, private paths, raw model output, source hashes or unreviewed claims are published.",
+  "metrics": {
+    "questions": 10,
+    "conversation_reads": 50,
+    "right_conversation_routed_top_5": 10,
+    "right_conversation_found": 9,
+    "right_conversation_human_faithful": 9,
+    "right_conversation_errors": 1,
+    "distractor_conversations": 40,
+    "distractor_found": 17,
+    "distractor_empty": 17,
+    "distractor_errors": 6,
+    "all_found_with_existing_message_coordinates": "26/26",
+    "short_chat_reads": 25,
+    "long_chat_area_reads": 25,
+    "short_chat_errors": 1,
+    "long_chat_errors": 6,
+    "sequential_model_runtime_seconds": 8529.3,
+    "median_short_chat_seconds": 94.5,
+    "median_long_chat_seconds": 155.4
+  },
+  "locked_gate": {
+    "right_conversation_routed_top_5": { "required": "10/10", "observed": "10/10", "passed": true },
+    "right_conversation_grounded_found": { "required": "10/10", "observed": "9/10", "passed": false },
+    "right_conversation_evidence_coordinates": { "required": "10/10", "observed": "9/10", "passed": false },
+    "human_claim_faithfulness": { "required": "10/10", "observed": "9/10", "passed": false }
+  },
+  "human_review": {
+    "reviewer": "Morrow in the active owner task",
+    "method": "For every expected conversation, compare the model claim with every cited private message. For distractors, inspect every FOUND claim and its cited messages. Publish only safe summaries.",
+    "finding": "The nine usable answers were faithful. The 17 distractor FOUND claims were unsupported, about a different case, or repeated the question without evidence. Existing message coordinates prove where text came from; they do not prove that the text supports the claim."
+  },
+  "questions": [
+    { "id": "Q01", "right_chat_rank": 4, "right_chat_result": "faithful_found", "extra_found": 1, "errors": 0, "safe_review": "Correctly found the integrity checks for the moved corpus and PostgreSQL backup and cited existing messages." },
+    { "id": "Q02", "right_chat_rank": 1, "right_chat_result": "faithful_found", "extra_found": 2, "errors": 1, "safe_review": "Correctly stated that both the growing swarm and exact RAG reached 100%, so superiority was not shown." },
+    { "id": "Q03", "right_chat_rank": 1, "right_chat_result": "faithful_found", "extra_found": 1, "errors": 0, "safe_review": "Correctly found the recurring public-key refusal and its effect on GPU workers." },
+    { "id": "Q04", "right_chat_rank": 1, "right_chat_result": "faithful_found", "extra_found": 1, "errors": 0, "safe_review": "Correctly found the review about the IDAT-only limit and unchecked ancillary/APNG data." },
+    { "id": "Q05", "right_chat_rank": 1, "right_chat_result": "format_error", "extra_found": 1, "errors": 3, "safe_review": "Failed. The relevant long-chat area was supplied, but Qwen did not finish a valid tool call." },
+    { "id": "Q06", "right_chat_rank": 4, "right_chat_result": "faithful_found", "extra_found": 3, "errors": 0, "safe_review": "Correctly found the review where a signed audit described traffic sent to a canned-response component." },
+    { "id": "Q07", "right_chat_rank": 1, "right_chat_result": "faithful_found", "extra_found": 1, "errors": 1, "safe_review": "Correctly found the private checkout check blocked by Docker socket and loopback restrictions." },
+    { "id": "Q08", "right_chat_rank": 2, "right_chat_result": "faithful_found", "extra_found": 2, "errors": 1, "safe_review": "Correctly found the receipt-loader review and the missing root-name comparison." },
+    { "id": "Q09", "right_chat_rank": 1, "right_chat_result": "faithful_found", "extra_found": 4, "errors": 0, "safe_review": "Correctly found the handoff that granted repository write operations." },
+    { "id": "Q10", "right_chat_rank": 1, "right_chat_result": "faithful_found", "extra_found": 1, "errors": 1, "safe_review": "Correctly found the explanation that the plugin was installed and Codex needed a restart and a newly opened project." }
+  ],
+  "decision": {
+    "routing": "accepted_top_5",
+    "reading": "promising_but_not_accepted",
+    "why": "The reader recovered nine of ten target facts, but cannot yet be trusted to reject similar chats and is less stable on long-chat areas.",
+    "next": "Keep top-5 routing. Treat Qwen outputs as candidates with provenance, not accepted knowledge. Apply the already-tested evidence and acceptance modules before a claim enters the answer shelf."
+  }
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>E007 · Gate 16G.6 · Qwen читает пять чатов</title>
+  <link rel="stylesheet" href="/style.css?v=e007-gate16g6-reader-v01">
+  <style>
+    .page{max-width:none;width:100%;padding:clamp(24px,4vw,72px)}
+    .hero{max-width:1200px}.lead{font-size:clamp(20px,2.2vw,36px);line-height:1.25}
+    .metrics{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));border-top:1px solid var(--line,#3a3934);border-left:1px solid var(--line,#3a3934);margin:40px 0}
+    .metric{padding:24px;border-right:1px solid var(--line,#3a3934);border-bottom:1px solid var(--line,#3a3934)}
+    .metric span{display:block;color:#88857d}.metric strong{display:block;font-size:clamp(42px,6vw,96px);line-height:1;margin-top:14px}
+    .good{color:#6f9f66}.bad{color:#d9634f}.warn{color:#c79443}
+    .table-wrap{overflow:auto;border:1px solid var(--line,#3a3934)}table{width:100%;min-width:1100px;border-collapse:collapse}th,td{padding:18px;vertical-align:top;border-right:1px solid var(--line,#3a3934);border-bottom:1px solid var(--line,#3a3934);text-align:left}th:last-child,td:last-child{border-right:0}tbody tr:last-child td{border-bottom:0}td strong{font-size:22px}.pill{display:inline-block;padding:5px 9px;border:1px solid currentColor;border-radius:999px}.note{max-width:1200px;padding:24px;border-left:5px solid #d9634f;margin:36px 0;font-size:20px;line-height:1.5}.links{display:flex;flex-wrap:wrap;gap:18px;margin-top:32px}
+    @media(max-width:900px){.metrics{grid-template-columns:1fr 1fr}.page{padding:22px}}
+  </style>
+</head>
+<body>
+<main class="page">
+  <section class="hero">
+    <p>E007 · GATE 16G.6 · QWEN ЧИТАЕТ TOP‑5 ЧАТОВ</p>
+    <h1>Знание нашла.<br>Мусор не отсеяла.</h1>
+    <p class="lead">Поиск сохранил правильный чат для всех десяти вопросов. Qwen достала верный ответ из девяти. Но среди сорока лишних чатов она ещё семнадцать раз сказала «нашла».</p>
+  </section>
+  <section class="metrics" aria-label="Главные результаты">
+    <article class="metric"><span>ПРАВИЛЬНЫЙ ЧАТ В TOP‑5</span><strong class="good">10/10</strong></article>
+    <article class="metric"><span>ВЕРНЫЙ ОТВЕТ ИЗ НЕГО</span><strong class="warn">9/10</strong></article>
+    <article class="metric"><span>ЛИШНИЕ FOUND</span><strong class="bad">17/40</strong></article>
+    <article class="metric"><span>ОШИБКИ ФОРМАТА</span><strong class="bad">7/50</strong></article>
+  </section>
+  <div class="note"><strong>Gate не пройден.</strong> Координаты всех 26 ответов <code>FOUND</code> существовали, но это доказывает только «модель указала настоящее сообщение». Ручная проверка показала: девять ответов из правильных чатов подтверждены, а семнадцать ответов из лишних чатов доказательствами не подтверждены или относятся к другому случаю.</div>
+  <h2>Все десять вопросов</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>ВОПРОС</th><th>ГДЕ БЫЛ НУЖНЫЙ ЧАТ</th><th>ЧТО СДЕЛАЛА QWEN</th><th>ЛИШНИЕ FOUND</th><th>РУЧНАЯ ПРОВЕРКА</th></tr></thead>
+    <tbody id="rows"><tr><td colspan="5">Загрузка…</td></tr></tbody>
+  </table></div>
+  <div class="note" style="border-left-color:#c79443"><strong>Решение.</strong> Top‑5 маршрутизацию оставляем. Ответ Qwen считаем только кандидатом с происхождением. До полки знаний он должен пройти уже проверенные модули: точный источник, связь цитаты с утверждением и приёмку.</div>
+  <p class="links"><a href="/experiments/E007/chat-first-qwen-gate16g6-result-v0.3.json">Безопасный результат JSON ↗</a><a href="/experiments/E007/chat-first-qwen-gate16g6-protocol-v0.3.json">План до запуска ↗</a><a href="/experiment/e007/gate-16g/chat-first-routing/">Предыдущий шаг: маршрутизация ↗</a></p>
+</main>
+<script>
+const questions={Q01:'Целостность корпуса и PostgreSQL backup',Q02:'Swarm 100% и точный RAG 100%',Q03:'SSH‑туннель к арендованным GPU',Q04:'PNG: IDAT и вспомогательные чанки',Q05:'Meatgrinder package и receipt',Q06:'Подписанный аудит и готовые ответы',Q07:'Приватный Bitbucket checkout',Q08:'Root в receipt и manifest',Q09:'Write‑доступ к движку аренды',Q10:'Pocket‑i‑lab и перезапуск Codex'};
+fetch('/experiments/E007/chat-first-qwen-gate16g6-result-v0.3.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{
+  document.querySelector('#rows').innerHTML=d.questions.map(q=>`<tr><td><strong>${q.id}</strong><br>${questions[q.id]}</td><td>место ${q.right_chat_rank} из 5</td><td><span class="pill ${q.right_chat_result==='faithful_found'?'good':'bad'}">${q.right_chat_result==='faithful_found'?'верный FOUND':'ERROR'}</span></td><td class="${q.extra_found?'bad':'good'}"><strong>${q.extra_found}</strong>${q.errors?`<br><small>ошибок формата: ${q.errors}</small>`:''}</td><td>${q.safe_review}</td></tr>`).join('')
+}).catch(()=>{document.querySelector('#rows').innerHTML='<tr><td colspan="5">Не удалось загрузить результат.</td></tr>'});
+</script>
+</body>
+</html>
