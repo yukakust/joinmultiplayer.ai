@@ -66,13 +66,28 @@ def cosine(left, right) -> float:
 
 
 def last_turn(messages: list[dict]) -> tuple[int, int]:
-    for user_index in range(len(messages) - 2, -1, -1):
-        if messages[user_index]["role"] != "user":
+    return completed_turns(messages, 1)[0]
+
+
+def completed_turns(messages: list[dict], count: int) -> list[tuple[int, int]]:
+    """Return the last complete turns, using the final assistant message before the next user."""
+    turns = []
+    for user_index, message in enumerate(messages):
+        if message["role"] != "user":
             continue
-        for assistant_index in range(user_index + 1, len(messages)):
-            if messages[assistant_index]["role"] == "assistant":
-                return user_index, assistant_index
-    raise RuntimeError("No user → assistant turn exists in the twenty-message sample")
+        next_user = next(
+            (index for index in range(user_index + 1, len(messages)) if messages[index]["role"] == "user"),
+            len(messages),
+        )
+        assistants = [
+            index for index in range(user_index + 1, next_user)
+            if messages[index]["role"] == "assistant"
+        ]
+        if assistants:
+            turns.append((user_index, assistants[-1]))
+    if len(turns) < count:
+        raise RuntimeError(f"Need {count} complete user → assistant turns, found {len(turns)}")
+    return turns[-count:]
 
 
 def codex_metadata(path: Path) -> tuple[str, bool] | None:
@@ -182,6 +197,9 @@ def main() -> None:
     parser.add_argument("--adapter", type=Path, required=True)
     parser.add_argument("--cache-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--messages-per-source", type=int, default=20)
+    parser.add_argument("--turns-per-source", type=int, default=1)
+    parser.add_argument("--gate", default="16G.4")
     args = parser.parse_args()
     if args.output.exists():
         raise RuntimeError(f"Refusing to overwrite {args.output}")
@@ -189,17 +207,26 @@ def main() -> None:
         raise RuntimeError(f"Expected fastembed 0.8.0, got {fastembed.__version__}")
     adapter = load_adapter(args.adapter)
     home = Path.home()
-    claude = one_claude_sample(adapter, home)
-    codex, metadata_files = one_codex_sample(Path(os.environ.get("CODEX_HOME", home / ".codex")) / "sessions")
+    if args.messages_per_source < args.turns_per_source * 2:
+        raise RuntimeError("messages-per-source is too small for the requested turns")
+    claude = one_claude_sample(adapter, home, limit=args.messages_per_source)
+    codex, metadata_files = one_codex_sample(
+        Path(os.environ.get("CODEX_HOME", home / ".codex")) / "sessions",
+        limit=args.messages_per_source,
+    )
     all_messages = claude + codex
     turns = []
     query_positions = set()
+    offset = 0
     for source, messages in (("claude_code", claude), ("codex", codex)):
-        user_index, assistant_index = last_turn(messages)
-        absolute_user = all_messages.index(messages[user_index])
-        absolute_assistant = all_messages.index(messages[assistant_index])
-        query_positions.add(absolute_user)
-        turns.append({"source":source,"query":messages[user_index]["text"],"gold_index":absolute_assistant,"gold_coordinate":messages[assistant_index]["coordinate"]})
+        for turn_number, (user_index, assistant_index) in enumerate(
+            completed_turns(messages, args.turns_per_source), 1
+        ):
+            absolute_user = offset + user_index
+            absolute_assistant = offset + assistant_index
+            query_positions.add(absolute_user)
+            turns.append({"source":source,"turn_number":turn_number,"query":messages[user_index]["text"],"gold_index":absolute_assistant,"gold_coordinate":messages[assistant_index]["coordinate"]})
+        offset += len(messages)
     candidates = [(index, message) for index, message in enumerate(all_messages) if index not in query_positions]
     texts = [message["text"] for _, message in candidates]
     embedder = TextEmbedding(model_name=MODEL, cache_dir=str(args.cache_dir), threads=2)
@@ -215,6 +242,7 @@ def main() -> None:
         gold_candidate = next(index for index, (original, _) in enumerate(candidates) if original == turn["gold_index"])
         rows.append({
             "source": turn["source"],
+            "turn_number": turn["turn_number"],
             "gold_coordinate": turn["gold_coordinate"],
             "lexical_rank": lexical.index(gold_candidate) + 1 if gold_candidate in lexical else None,
             "dense_rank": dense.index(gold_candidate) + 1 if gold_candidate in dense else None,
@@ -222,15 +250,16 @@ def main() -> None:
             "candidate_count": len(union),
             "gold_found": gold_candidate in union,
         })
-    passed = sum(row["gold_found"] for row in rows) == 2
+    expected = args.turns_per_source * 2
+    passed = sum(row["gold_found"] for row in rows) == expected
     result = {
         "schema_version":"0.1-private-no-text",
         "experiment":"E007",
-        "gate":"16G.4",
+        "gate":args.gate,
         "status":"completed_passed" if passed else "completed_failed",
-        "summary":{"source_file_windows_read":2,"maximum_bytes_per_source_window":MAX_SOURCE_WINDOW,"codex_metadata_files_inspected":metadata_files,"visible_messages_indexed":len(all_messages),"turns":2,"gold_found":sum(row["gold_found"] for row in rows)},
+        "summary":{"source_file_windows_read":2,"maximum_bytes_per_source_window":MAX_SOURCE_WINDOW,"codex_metadata_files_inspected":metadata_files,"visible_messages_indexed":len(all_messages),"turns":expected,"gold_found":sum(row["gold_found"] for row in rows)},
         "rows":rows,
-        "claim_boundary":"Two-example exact historical-turn plumbing smoke; no paraphrase or empty-answer claim."
+        "claim_boundary":"Exact historical-turn retrieval smoke; no paraphrase, empty-answer or semantic-sufficiency claim."
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     descriptor = os.open(args.output, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
