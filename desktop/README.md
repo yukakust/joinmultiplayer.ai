@@ -58,3 +58,8 @@ POCKET_I_BUILD_PYTHON=/path/to/python ./build-current-platform.sh
 Linux produces an unsigned development AppImage; macOS produces an unsigned
 development DMG on a Mac. Signing and public distribution remain later release
 steps.
+
+The physical macOS checkpoint uses the versioned
+`site/experiments/E007/build-macos-alpha-v0.1.sh` helper. It builds in a new
+temporary Downloads directory and copies the resulting DMG into Downloads. It
+does not edit an existing checkout or remove an existing file.
