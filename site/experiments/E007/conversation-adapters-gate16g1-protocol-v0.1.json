@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16G.1",
+  "status": "locked_before_implementation",
+  "kind": "strict local conversation source adapters",
+  "hypothesis": "Can separate deny-by-default adapters turn only human-visible messages from Codex, Claude Code and locally cached ChatGPT conversations into one normalized private library without admitting tool calls, tool results, thinking, files, logs or credentials?",
+  "normalized_message": ["conversation_id", "message_id", "role=user|assistant", "text", "source_coordinate"],
+  "adapters": {
+    "codex": {
+      "roots": ["$CODEX_HOME/sessions", "~/.codex/sessions"],
+      "allowed_records": ["event_msg.user_message", "event_msg.agent_message"]
+    },
+    "claude_code": {
+      "roots": ["~/.claude/projects"],
+      "allowed_records": ["type=user with non-meta text", "type=assistant with content block type=text"],
+      "excluded": ["thinking", "tool_use", "tool_result", "system", "attachments", "subagents"]
+    },
+    "chatgpt_desktop": {
+      "roots": ["app-owned macOS containers only"],
+      "allowed_records": ["locally cached conversation node with author role user or assistant and text parts"],
+      "honest_boundary": "The adapter reads only data actually cached on the device. It does not promise complete cloud history and does not accept an export or arbitrary user-selected JSON file. Unknown local formats stay blocked until their structure is inspected and frozen."
+    }
+  },
+  "success_gate": {
+    "synthetic_visible_messages_preserved": "all",
+    "synthetic_non_message_records_excluded": "all",
+    "real_device_inventory": "counts only; no text published",
+    "unknown_format_policy": "blocked, never guessed"
+  },
+  "claim_boundary": "Fixture success does not validate an app adapter on a real device. Each detected real storage format must pass a count-and-spot-check checkpoint before joining the MVP library."
+}
