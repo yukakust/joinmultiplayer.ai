@@ -1437,3 +1437,16 @@ and non-exact quotes, and sends neutral to this second judge. Because the cases
 are open, success can only justify a fresh locked replication.
 
 - `/experiments/E007/neutral-triage-gate16d10-protocol-v0.1.json`
+
+All 23 decisions were structurally valid. Against the old full-message labels,
+Qwen recovered 17/20 grounded claims and accepted one of three unsupported
+claims, so the preregistered gate failed. Manual review exposed a deeper label
+mismatch: the old labels asked whether a claim was true in the whole source
+message, while this gate gave Qwen only the short quote. A second quote-only
+audit found 13 fully supported and ten under-cited claims. Qwen retained all
+13/13 fully supported claims but accepted five of the ten under-cited claims.
+The diagnostic therefore fails the safety boundary. Qwen is useful as a recall
+pass after DeBERTa-neutral, but it cannot be the only acceptance judge.
+
+- `/experiments/E007/neutral-triage-gate16d10-result-v0.1.json`
+- `/experiment/e007/gate-16d/neutral-triage/`

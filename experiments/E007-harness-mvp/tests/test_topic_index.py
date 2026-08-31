@@ -26,6 +26,8 @@ SHELF_SYNTHESIS_16D8_PROTOCOL = ROOT / "site/experiments/E007/shelf-synthesis-ga
 SHELF_SYNTHESIS_16D8_RESULT = ROOT / "site/experiments/E007/shelf-synthesis-gate16d8-result-v0.1.json"
 GROUNDED_SYNTHESIS_16D9_PROTOCOL = ROOT / "site/experiments/E007/grounded-synthesis-gate16d9-protocol-v0.1.json"
 GROUNDED_SYNTHESIS_16D9_RESULT = ROOT / "site/experiments/E007/grounded-synthesis-gate16d9-result-v0.1.json"
+NEUTRAL_TRIAGE_16D10_PROTOCOL = ROOT / "site/experiments/E007/neutral-triage-gate16d10-protocol-v0.1.json"
+NEUTRAL_TRIAGE_16D10_RESULT = ROOT / "site/experiments/E007/neutral-triage-gate16d10-result-v0.1.json"
 PROTOCOL = ROOT / "site/experiments/E007/topic-index-protocol-v0.1.json"
 
 
@@ -218,6 +220,22 @@ class TopicIndexTest(unittest.TestCase):
         self.assertEqual(result["status"], "completed_failed_protocol_error")
         self.assertIn("Q07", result["protocol_error"])
         public_text = GROUNDED_SYNTHESIS_16D9_RESULT.read_text()
+        self.assertNotIn("raw_message", public_text)
+        self.assertNotIn('"usage"', public_text)
+        self.assertNotIn("/home/", public_text)
+
+    def test_gate16d10_preserves_reference_mismatch_and_false_accepts(self):
+        protocol = json.loads(NEUTRAL_TRIAGE_16D10_PROTOCOL.read_text())
+        result = json.loads(NEUTRAL_TRIAGE_16D10_RESULT.read_text())
+        self.assertEqual(protocol["frozen_cases"]["total"], 23)
+        self.assertEqual(len(result["rows"]), 23)
+        summary = result["summary_after_quote_only_audit"]
+        self.assertEqual(summary["quote_supported"], 13)
+        self.assertEqual(summary["quote_supported_accepted"], 13)
+        self.assertEqual(summary["unsupported_accepted"], 5)
+        self.assertEqual(summary["correct_decisions"], 18)
+        self.assertIn("failed", result["status"])
+        public_text = NEUTRAL_TRIAGE_16D10_RESULT.read_text()
         self.assertNotIn("raw_message", public_text)
         self.assertNotIn('"usage"', public_text)
         self.assertNotIn("/home/", public_text)
