@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-SCRIPT = Path(__file__).resolve().parents[2] / ".." / "site" / "experiments" / "E007" / "local-conversation-adapters-v0.1.py"
+SCRIPT = Path(__file__).resolve().parents[2] / ".." / "site" / "experiments" / "E007" / "local-conversation-adapters-v0.2.py"
 SPEC = importlib.util.spec_from_file_location("adapters", SCRIPT.resolve())
 adapters = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(adapters)
