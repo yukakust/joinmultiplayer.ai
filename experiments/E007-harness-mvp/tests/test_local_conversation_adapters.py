@@ -2,9 +2,10 @@ import importlib.util
 import json
 import tempfile
 import unittest
+import zlib
 from pathlib import Path
 
-SCRIPT = Path(__file__).resolve().parents[2] / ".." / "site" / "experiments" / "E007" / "local-conversation-adapters-v0.4.py"
+SCRIPT = Path(__file__).resolve().parents[2] / ".." / "site" / "experiments" / "E007" / "local-conversation-adapters-v0.5.py"
 SPEC = importlib.util.spec_from_file_location("adapters", SCRIPT.resolve())
 adapters = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(adapters)
@@ -71,6 +72,19 @@ class AdapterTests(unittest.TestCase):
             self.assertEqual([item["visible_messages"] for item in public["sources"].values()], [20, 20])
             self.assertEqual([len(item["messages"]) for item in private["sources"]], [20, 20])
             self.assertNotIn("hidden", json.dumps(private))
+
+    def test_single_chatgpt_decoder_handles_zlib_json_without_printing_text(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            root = home / "Library" / "Application Support" / "com.openai.chat" / "conversations-v3-test"
+            root.mkdir(parents=True)
+            mapping = {"1":{"id":"1","message":{"id":"m1","create_time":1,"author":{"role":"user"},"content":{"content_type":"text","parts":["private sample"]}}}}
+            (root / "one.data").write_bytes(zlib.compress(json.dumps({"id":"c1","mapping":mapping}).encode()))
+            private, public = adapters.single_chatgpt_decode(home)
+            self.assertEqual(public["decoder"], "zlib_json")
+            self.assertEqual(public["visible_messages"], 1)
+            self.assertNotIn("private sample", json.dumps(public))
+            self.assertIn("private sample", json.dumps(private))
 
 
 if __name__ == "__main__":

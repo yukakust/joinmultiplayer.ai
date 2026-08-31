@@ -1580,3 +1580,15 @@ of guessing. No other ChatGPT file was opened. Preserve this partial result;
 the next test may try standard container decoders on the same single file.
 
 - `/experiments/E007/conversation-sample-gate16g2-result-v0.1.json`
+
+## Gate 16G.3 — one ChatGPT binary container
+
+Gate 16G.3 reuses the one `conversations-v3` file already selected in Gate
+16G.2. It tries only bounded standard decoders: JSON at a leading offset,
+property list, gzip, zlib, raw deflate, bz2, LZMA and Apple's LZFSE/LZ4 codecs.
+Decoded output is capped at 8 MB and at twenty visible messages. The other 85
+cached conversation files remain unopened. Public output contains decoder name,
+shape and counts only.
+
+- `/experiments/E007/chatgpt-single-container-gate16g3-protocol-v0.1.json`
+- `/experiment/e007/gate-16g/chatgpt-container/`
