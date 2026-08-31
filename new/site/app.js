@@ -6015,7 +6015,7 @@ const workbenchCopy = {
 function w(key) { return workbenchCopy[language][key]; }
 
 const workbenchParts = [
-  { id: "worlds", num: 1, icon: "pages", status: "frozen",
+  { id: "worlds", spot: { x: 30, y: 64 }, module: "sack", num: 1, icon: "pages", status: "frozen",
     name: { en: "The worlds", ru: "Миры" },
     item: { en: "Frozen books v1", ru: "Замороженные книги v1" },
     record: { en: "Luma · Luna · Aster, pinned by sha256", ru: "Luma · Luna · Aster, запинены sha256" },
@@ -6025,7 +6025,7 @@ const workbenchParts = [
     challenge: { en: "Forge a NEW world by the same pattern: distributed knowledge, no single holder, verifiable answers.", ru: "Выкуй НОВЫЙ мир по тому же образцу: распределённое знание, ни одного полного держателя, проверяемые ответы." },
     links: [["/experiments/E007/world-v0.1.json", "world JSON"]] },
 
-  { id: "cutter", num: 2, icon: "comb", status: "caveat",
+  { id: "cutter", spot: { x: 8,  y: 54 }, module: null, num: 2, icon: "comb", status: "caveat",
     name: { en: "The cutter", ru: "Резак" },
     item: { en: "Structure-aware cutter v0.1", ru: "Структурный резак v0.1" },
     record: { en: "evidence kept whole · 9/10", ru: "улика цела · 9/10" },
@@ -6035,7 +6035,7 @@ const workbenchParts = [
     challenge: { en: "10/10 — or the same score with fewer tokens per window.", ru: "10/10 — или тот же счёт при меньших окнах." },
     links: [["/experiments/E007/chunking-protocol-v0.1.json", "protocol"], ["/experiments/E007/chunking-result-v0.1.json", "result"]] },
 
-  { id: "seeker", num: 3, icon: "lens", status: "frozen",
+  { id: "seeker", spot: { x: 33, y: 23 }, module: "reranker", num: 3, icon: "lens", status: "frozen",
     name: { en: "The seeker", ru: "Искатель" },
     item: { en: "Qwen3-Reranker-4B · Q4_K_M", ru: "Qwen3-Reranker-4B · Q4_K_M" },
     record: { en: "frozen judge of relevance", ru: "замороженный судья релевантности" },
@@ -6045,7 +6045,7 @@ const workbenchParts = [
     challenge: { en: "A lighter or faster seeker that keeps the same decisions on the frozen worlds.", ru: "Более лёгкий или быстрый искатель, который сохраняет те же решения на замороженных мирах." },
     links: [["/experiments/E007/relevance-reranker-protocol-v0.1.json", "protocol"]] },
 
-  { id: "capsule", num: 4, icon: "pill", status: "passed",
+  { id: "capsule", spot: { x: 73, y: 73 }, module: null, num: 4, icon: "pill", status: "passed",
     name: { en: "The capsule", ru: "Капсула" },
     item: { en: "Evidence capsule contract v0.1", ru: "Контракт капсулы v0.1" },
     record: { en: "locked acceptance · 24/24", ru: "залоченная приёмка · 24/24" },
@@ -6055,7 +6055,7 @@ const workbenchParts = [
     challenge: { en: "Design capsule breakages the acceptance does NOT catch yet — every new caught breakage hardens the part.", ru: "Придумай поломки капсулы, которые приёмка пока НЕ ловит, — каждая новая пойманная поломка закаляет деталь." },
     links: [["/experiments/E007/evidence-capsule-protocol-v0.1.json", "protocol"], ["/experiments/E007/evidence-capsule-result-v0.1.json", "result"]] },
 
-  { id: "gate", num: 5, icon: "funnel", status: "passed",
+  { id: "gate", spot: { x: 39, y: 56 }, module: "security", num: 5, icon: "funnel", status: "passed",
     name: { en: "The acceptance", ru: "Приёмка" },
     item: { en: "Mechanical acceptance harness v0.1", ru: "Механическая приёмка v0.1" },
     record: { en: "24/24 correct decisions", ru: "24/24 верных решений" },
@@ -6065,7 +6065,7 @@ const workbenchParts = [
     challenge: { en: "Same guarantees, less code — or new checks with zero false rejections.", ru: "Те же гарантии меньшим кодом — или новые проверки без ложных отказов." },
     links: [["/experiments/E007/evidence-capsule-result-v0.1.json", "result"]] },
 
-  { id: "router", num: 6, icon: "fork", status: "open",
+  { id: "router", spot: { x: 40, y: 38 }, module: "router", num: 6, icon: "fork", status: "open",
     name: { en: "The router", ru: "Роутер" },
     item: { en: "— no worthy item yet —", ru: "— достойного предмета ещё нет —" },
     record: { en: "the open wound since E005", ru: "открытая рана с E005" },
@@ -6075,7 +6075,7 @@ const workbenchParts = [
     challenge: { en: "A router that finds the right pockets on the public worlds without seeing the answers.", ru: "Роутер, который находит нужные карманы на публичных мирах, не подглядывая в ответы." },
     links: [["/experiments/E007/send-policy-protocol-v0.1.json", "send-policy"], ["/experiment/e005", "E005"]] },
 
-  { id: "assembler", num: 7, icon: "gear", status: "failed",
+  { id: "assembler", spot: { x: 49, y: 14 }, module: "reader", num: 7, icon: "gear", status: "failed",
     name: { en: "The assembler", ru: "Сборщик" },
     item: { en: "Modular harness v0.1 · defeated", ru: "Модульный harness v0.1 · разбит" },
     record: { en: "3/18 on the CP2 smoke · being reforged", ru: "3/18 на смоуке CP2 · перековывается" },
@@ -6085,7 +6085,7 @@ const workbenchParts = [
     challenge: { en: "Reach the central-context level while staying modular. This is the Matchbox mission.", ru: "Достать уровень центрального контекста, оставаясь модульным. Это миссия Коробка." },
     links: [["/experiments/E007/luna-panel-v0.1.json", "Luna panel"], ["/experiment/e007", "E007"]] },
 
-  { id: "judges", num: 8, icon: "scales", status: "caveat",
+  { id: "judges", spot: { x: 60, y: 24 }, module: "judge", num: 8, icon: "scales", status: "caveat",
     name: { en: "The judges", ru: "Судьи" },
     item: { en: "Two-judge panel v0.6", ru: "Панель двух судей v0.6" },
     record: { en: "calibration 12/12 · awaiting audit", ru: "калибровка 12/12 · ждёт аудита" },
@@ -6095,7 +6095,7 @@ const workbenchParts = [
     challenge: { en: "A third independent judge at 12/12 — or the same verdicts far cheaper.", ru: "Третий независимый судья на 12/12 — или те же вердикты сильно дешевле." },
     links: [["/experiments/E005/gate-5b2-two-judge-summary-v0.6.json", "summary"]] },
 
-  { id: "learning", num: 9, icon: "plug", status: "caveat",
+  { id: "learning", spot: { x: 64, y: 62 }, module: "wrench", num: 9, icon: "plug", status: "caveat",
     name: { en: "Local learning", ru: "Обучение" },
     item: { en: "DoRA adapter · half a skill", ru: "DoRA-адаптер · пол-умения" },
     record: { en: "safe action 23/24 · source work 6/24", ru: "безопасное действие 23/24 · работа с источниками 6/24" },
@@ -6103,7 +6103,17 @@ const workbenchParts = [
     stats: [[{ en: "safe action", ru: "безопасное действие" }, "23/24"], [{ en: "source work", ru: "работа с источниками" }, "6/24"], [{ en: "verdict", ru: "вердикт" }, { en: "partially supported (4C)", ru: "частично подтверждено (4C)" }]],
     frozen: { en: "The base model, the exam wording, the thresholds.", ru: "Базовая модель, формулировки экзамена, пороги." },
     challenge: { en: "Carry the second skill over the threshold without breaking the first.", ru: "Перенеси второе умение через порог, не сломав первое." },
-    links: [["/experiments/E005/gate-4c-conclusion-v0.1.json", "4C verdict"]] }
+    links: [["/experiments/E005/gate-4c-conclusion-v0.1.json", "4C verdict"]] },
+
+  { id: "beacon", spot: { x: 12, y: 27 }, module: "beacon", num: 10, icon: "fork", status: "passed",
+    name: { en: "The beacon", ru: "Маяк" },
+    item: { en: "Physical knowledge chain 12A.2", ru: "Физическая цепочка знаний 12A.2" },
+    record: { en: "yukabox → prod crossed · 28.08", ru: "yukabox → прод пройдена · 28.08" },
+    what: { en: "Hears other pockets across real machines. The knowledge chain physically crossed from yukabox to the production node over SSH with sha-verified payloads; the three-device room of E003 assembles one answer out of 4,096 from three machines.", ru: "Слышит другие карманы через настоящие машины. Цепочка знаний физически прошла с yukabox на прод-ноду по SSH со sha-проверкой полезной нагрузки; комната трёх устройств E003 собирает один ответ из 4096 с трёх машин." },
+    stats: [[{ en: "chain 12A.2", ru: "цепочка 12A.2" }, { en: "passed 28.08.2026", ru: "прошла 28.08.2026" }], [{ en: "transport", ru: "транспорт" }, "SSH · sha256 receipts"], [{ en: "E003 room", ru: "комната E003" }, { en: "3 devices · 4096 answers", ru: "3 устройства · 4096 вариантов" }]],
+    frozen: { en: "The receipt contract of the chain.", ru: "Контракт квитанций цепочки." },
+    challenge: { en: "More devices, new transports, a room of N.", ru: "Больше устройств, новые транспорты, комната на N." },
+    links: [["/network/", { en: "the three-device room", ru: "комната трёх устройств" }], ["/experiments/E007/knowledge-chain-physical-result-v0.2.json", "chain result"]] }
 ];
 
 function wt(v) { return typeof v === "string" ? v : jt(v); }
@@ -6181,7 +6191,21 @@ function workbenchShell() {
       <p class="contribution-intro">${w("intro")}</p>
       <p class="wb-frontier"><b>${w("frontier")}</b> · ${w("frontierPart")}</p>
       <div class="wb-workspace">
-        <div class="wb-doll-wrap" id="wb-doll-wrap">${workbenchDoll()}</div>
+        <div class="wb2-stage-wrap">
+          <div class="wb2-stage">
+            <img class="wb2-chassis" src="/assets/forge/robot/chassis.webp" alt="pocket i">
+            <button class="wb2-spot wb2-dot${wbSelected === "dot" ? " is-selected" : ""}" data-wb="dot" style="left:52%;top:4%" title="${w("powerLabel")}">
+              <img src="/assets/forge/sockets/power.png" alt="">
+              <b>3/18</b>
+            </button>
+            ${workbenchParts.map(part => `
+              <button class="wb2-spot wb2-${part.status}${wbSelected === part.id ? " is-selected" : ""}" data-wb="${part.id}"
+                      style="left:${part.spot.x}%;top:${part.spot.y}%" title="${escapeHTML(jt(part.name))} · ${partStatusLabel(part.status)}">
+                <b>${part.num}</b>
+              </button>`).join("")}
+          </div>
+          <p class="wb2-hint">${w("inspectorHint")} · ${w("chassis")}</p>
+        </div>
         <aside class="wb-inspector" aria-live="polite"><p class="journey-hint">${w("inspectorHint")}</p></aside>
       </div>
     </section>
@@ -6221,6 +6245,7 @@ function renderWbInspector() {
   if (!part) { target.innerHTML = `<p class="journey-hint">${w("inspectorHint")}</p>`; return; }
   target.innerHTML = `
     <button class="journey-close" data-action="wb-close" aria-label="×">×</button>
+    ${part.module ? `<img class="wb-mod-thumb" src="/assets/forge/robot/mod-${part.module}.webp" alt="">` : ""}
     <div class="flow-step">${w("slotWord")} ${part.num} · <span class="wb-chip wb-chip-${part.status}">${partStatusLabel(part.status)}</span></div>
     <h2>${escapeHTML(wt(part.item))}</h2>
     <p>${escapeHTML(wt(part.what))}</p>
@@ -6242,7 +6267,7 @@ function renderWbInspector() {
       </div>
       <p class="journey-hint">${w("submitNote")}</p>
     </div>
-    <p class="wb-provenance">${w("provenance")} · ${w("holder")}: ${pieceSVG("match", true, "piece-inline")} M0001 · ${part.links.map(([href, label]) => `<a href="${href}">${escapeHTML(label)}</a>`).join(" · ")}</p>`;
+    <p class="wb-provenance">${w("provenance")} · ${w("holder")}: ${pieceSVG("match", true, "piece-inline")} M0001 · ${part.links.map(([href, label]) => `<a href="${href}">${escapeHTML(wt(label))}</a>`).join(" · ")}</p>`;
 }
 
 function wbSelect(id) {
