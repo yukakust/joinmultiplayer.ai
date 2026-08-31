@@ -1,0 +1,31 @@
+{
+  "schema_version": "e007-desktop-alpha-checkpoint4a-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "4A",
+  "status": "development_passed_linux_only",
+  "scope": "Codex-only desktop shell and private counts-only bridge",
+  "tests": {
+    "passed": 22,
+    "failed": 0
+  },
+  "linux_package": {
+    "format": "AppImage",
+    "signed": false,
+    "bytes_rounded_mb": 121,
+    "sha256": "4bfb4f29b2e912ca24f3c872871d1f1541436e06f2d3277240998ca5c099d3de",
+    "packaged_health_check": "passed"
+  },
+  "physical_linux_scan": {
+    "conversations": 58,
+    "visible_messages": 2948,
+    "private_text_published": false,
+    "paths_or_ids_published": false
+  },
+  "not_claimed": [
+    "Qwen evidence reading is connected",
+    "network exchange is connected",
+    "macOS package has been built",
+    "the development AppImage is signed or publicly released"
+  ],
+  "next_checkpoint": "Build and inspect the same shell on a physical Mac"
+}

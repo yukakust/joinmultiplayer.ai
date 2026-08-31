@@ -38,3 +38,23 @@ approve the message itself.
 vectors in a mode-0600 local SQLite file. It never stores conversation text or
 paths. An unchanged second start reuses every vector; changed messages alone
 are embedded again. A model-fingerprint change deliberately rebuilds the cache.
+
+## First desktop shell
+
+`app/` contains the Checkpoint 4A Electron shell and `pocket_i_app/bridge.py`
+contains its bundled private sidecar boundary. The current window can inspect
+the Codex-only Local Library and receives counts only. Asking the swarm remains
+disabled until the evidence reader is connected.
+
+Build the current native platform after installing the locked npm dependencies
+and PyInstaller in the selected Python environment:
+
+```bash
+cd desktop/app
+npm ci
+POCKET_I_BUILD_PYTHON=/path/to/python ./build-current-platform.sh
+```
+
+Linux produces an unsigned development AppImage; macOS produces an unsigned
+development DMG on a Mac. Signing and public distribution remain later release
+steps.

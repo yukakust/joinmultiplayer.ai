@@ -17,6 +17,13 @@ Checkpoint 3B implemented that cache. A real unchanged restart reused all
 only four new messages in 0.473 seconds. The cache is accepted as development
 plumbing on Linux. Crash/concurrency and macOS/Windows remain unverified.
 
+Checkpoint 4A created the first real desktop shell and a packaged Linux
+AppImage. The window can inspect the Codex-only Local Library through a bundled
+private Python sidecar. The renderer receives counts only. The 121 MB unsigned
+development AppImage passed its packaged health check and found 58 conversations
+and 2,948 visible messages on yukabox. The question field is deliberately
+disabled: Qwen reading, approval and network exchange are not connected yet.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.
@@ -92,6 +99,9 @@ exact source span.
 The owner can install a preset, see library status, ask the network, approve
 outgoing capsules, read the answer, open every source step and see recorded
 weaknesses. The interface must use plain language.
+
+The Checkpoint 4A shell implements only the first of these actions: viewing the
+Codex library status. It is a package checkpoint, not the finished UI.
 
 ### 7. Three builds and one locked test
 

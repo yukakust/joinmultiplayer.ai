@@ -1,0 +1,44 @@
+{
+  "name": "pocket-i-desktop",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "description": "Pocket i desktop alpha",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "dist:linux": "electron-builder --linux AppImage",
+    "dist:mac": "electron-builder --mac dmg"
+  },
+  "devDependencies": {
+    "electron": "39.2.7",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "ai.joinmultiplayer.pocketi",
+    "productName": "Pocket i",
+    "asar": true,
+    "files": [
+      "main.cjs",
+      "preload.cjs",
+      "renderer/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "sidecar-current",
+        "to": "sidecar"
+      }
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "linux": {
+      "category": "Utility",
+      "target": ["AppImage"]
+    },
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": ["dmg"]
+    }
+  }
+}
+

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'">
+  <title>Pocket i</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="mark"><span></span><i></i></div>
+      <div><p>POCKET i · DESKTOP ALPHA</p><h1>Your memory stays here.</h1></div>
+    </header>
+
+    <section class="library">
+      <div>
+        <p class="eyebrow">LOCAL LIBRARY</p>
+        <h2>Codex conversations</h2>
+        <p class="muted">Only visible user and Codex messages are counted. No text leaves this computer.</p>
+      </div>
+      <button id="scan">CHECK MY LIBRARY</button>
+    </section>
+
+    <section class="numbers" aria-live="polite">
+      <article><span>CONVERSATIONS</span><strong id="conversations">—</strong></article>
+      <article><span>VISIBLE MESSAGES</span><strong id="messages">—</strong></article>
+      <article><span>STATUS</span><strong id="status">NOT CHECKED</strong></article>
+    </section>
+
+    <section class="question">
+      <p class="eyebrow">NEXT CHECKPOINT</p>
+      <label for="prompt">What do you want to ask the network?</label>
+      <textarea id="prompt" disabled placeholder="Qwen evidence reading is connected in the next checkpoint."></textarea>
+      <p class="warning">This build checks the real Codex library and the private application boundary. It does not pretend that the swarm answer path is connected yet.</p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
+
