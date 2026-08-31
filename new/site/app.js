@@ -894,12 +894,9 @@ function s(key) {
 function siteNav() {
   const path = location.pathname.replace(/\/+$/, "") || "/";
   const links = [
-    ["/start/", t("navStart"), path === "/start"],
-    ["/#doors", t("navDoors"), false],
-    ["/map/", t("navMap"), path === "/map"],
-    ["/journey/", t("navExperiments"), path === "/journey" || path.startsWith("/experiment") || path === "/network"],
-    ["/workbench/", t("navWorkbench"), path === "/workbench"],
-    ["/data/", t("navData"), path === "/data"]
+    ["/game/", g("navGame"), path === "/game" || path === "/play" || path === "/workbench"],
+    ["/journey/", g("navChronicle"), path === "/journey" || path === "/map" || path === "/data" || path.startsWith("/experiment") || path === "/network"],
+    ["/start/", g("navRules"), path === "/start"]
   ];
   return `
     <nav class="site-nav" aria-label="Sections">
@@ -1082,17 +1079,12 @@ function home() {
       <p>${t("homeSub")}</p>
       <p class="home-lab">${t("homeLab")} <a href="/start/">${t("navStart")} →</a></p>
       <div class="links">
-        <a class="button" href="/play/">${p("playCta")}</a>
-        <a class="button secondary" href="#hand" data-action="enter-hand">${t("tryTwoMin")}</a>
-        <a class="button secondary" href="/start/">${t("navStart")}</a>
-        <a class="button secondary" href="/experiment/?id=E004">${l("currentExperiment")}</a>
-        <a class="button secondary" href="/map/#open">${c("openQuestionsCTA")}</a>
-        <a class="quiet-link" href="/data/">${c("openData")}</a>
-        <a class="quiet-link" href="${repository}">${t("openLab")}</a>
+        <a class="button" href="/game/">${g("navGame")}</a>
+        <a class="button secondary" href="/journey/">${g("navChronicle")}</a>
+        <a class="button secondary" href="/start/">${g("navRules")}</a>
       </div>
     </section>
     ${gameCall()}
-    ${howItWorks()}
     <section class="hand-section" id="hand">
       <div class="equation-stage" id="equation-stage" aria-live="polite"></div>
     </section>
@@ -6277,6 +6269,163 @@ function wbSelect(id) {
   renderWbInspector();
 }
 
+/* ── THE GAME: one Fallout-style screen ── */
+
+const gameCopy = {
+  en: {
+    title: "The game",
+    yours: "YOURS",
+    yourPiece: "your piece",
+    pickPiece: "pick a piece",
+    change: "change",
+    table: "AT THE TABLE",
+    slotMind: "MIND",
+    slotBody: "BODY",
+    slotLink: "BEACON",
+    statusDefault: "Assembly power 3/18 — the assembler in the dome is broken. The move is nobody's.",
+    flavor: "Pocket i. If you can see this, thank the laboratory. It weighs 252,409,456 grams of honesty.",
+    back: "← back",
+    makeMove: "MAKE A MOVE",
+    forge: "FORGE A BETTER ONE →",
+    fullBlueprint: "full blueprint →",
+    chronicle: "the chronicle →",
+    move1: "Take open question Q0001 (~15 min)",
+    move2: "Ask your own question to several AIs",
+    move3: "Bring your AI: give it the corpus link",
+    navGame: "The game", navChronicle: "Chronicle", navRules: "Rules"
+  },
+  ru: {
+    title: "Игра",
+    yours: "ТВОЁ",
+    yourPiece: "твоя фигурка",
+    pickPiece: "выбери фигурку",
+    change: "сменить",
+    table: "ЗА СТОЛОМ",
+    slotMind: "РАЗУМ",
+    slotBody: "ТЕЛО",
+    slotLink: "МАЯК",
+    statusDefault: "Сила сборки 3/18 — в куполе сломан сборщик. Ход ничей.",
+    flavor: "Pocket i. Если вы это видите — спасибо лаборатории. Весит 252 409 456 граммов честности.",
+    back: "← назад",
+    makeMove: "СДЕЛАТЬ ХОД",
+    forge: "ВЫКОВАТЬ ЛУЧШЕ →",
+    fullBlueprint: "весь чертёж →",
+    chronicle: "летопись →",
+    move1: "Взять открытый вопрос Q0001 (~15 мин)",
+    move2: "Задать свой вопрос нескольким ИИ",
+    move3: "Привести своего ИИ: дай ему ссылку корпуса",
+    navGame: "Игра", navChronicle: "Летопись", navRules: "Правила"
+  }
+};
+
+function g(key) { return gameCopy[language][key]; }
+
+const gameSlots = [
+  { id: "mind", spot: { x: 50, y: 20 }, parts: ["assembler", "seeker", "judges", "learning"] },
+  { id: "body", spot: { x: 42, y: 56 }, parts: ["router", "gate", "capsule", "cutter", "worlds"] },
+  { id: "link", spot: { x: 12, y: 27 }, parts: ["beacon"] }
+];
+
+let gameView = { kind: "status" };
+
+function gameSlotLabel(id) { return { mind: g("slotMind"), body: g("slotBody"), link: g("slotLink") }[id]; }
+
+function gameSlotStatus(slot) {
+  const statuses = slot.parts.map(pid => workbenchParts.find(p => p.id === pid)?.status);
+  if (statuses.includes("failed")) return "failed";
+  if (statuses.includes("open")) return "open";
+  if (statuses.every(st => st === "passed" || st === "frozen")) return "passed";
+  return "caveat";
+}
+
+function gameShell() {
+  const piece = chosenPiece();
+  return withLanguage(`
+    <section class="flow-shell form-page contribution-page game-page">
+      <div class="game-board">
+        <aside class="game-left">
+          <div class="game-panel-label">${g("yours")}</div>
+          <button class="game-inv-row" data-goto="/play/">
+            ${pieceSVG(piece, true, "piece-inv")}
+            <span>${jt(pieceData(piece).name)}<i>${g("change")}</i></span>
+          </button>
+          <div class="game-panel-label">${g("table")}</div>
+          <div class="game-table-list" data-game-table></div>
+          <div class="game-call-slot" data-call></div>
+        </aside>
+        <div class="game-center">
+          <div class="wb2-stage game-stage">
+            <img class="wb2-chassis" src="/assets/forge/robot/chassis.webp" alt="pocket i">
+            ${gameSlots.map(slot => `
+              <button class="wb2-spot game-slot wb2-${gameSlotStatus(slot)}" data-game-slot="${slot.id}"
+                      style="left:${slot.spot.x}%;top:${slot.spot.y}%">
+                <b>${gameSlotLabel(slot.id)}</b>
+              </button>`).join("")}
+          </div>
+        </div>
+        <aside class="game-right">
+          <div class="game-desc" data-game-desc></div>
+        </aside>
+      </div>
+      <div class="game-actions">
+        <button class="button game-done" data-game-moves>${g("makeMove")}</button>
+        <a class="quiet-link" href="/workbench/">${g("fullBlueprint")}</a>
+        <a class="quiet-link" href="/journey/">${g("chronicle")}</a>
+      </div>
+    </section>`);
+}
+
+function renderGameTable() {
+  const target = document.querySelector("[data-game-table]");
+  if (!target || matchesCache === null) return;
+  target.innerHTML = matchesCache.slice(0, 6).map(m => `
+    <div class="game-inv-row is-static">
+      ${pieceSVG(m.piece, true, "piece-inv")}
+      <span>${escapeHTML(m.public_id)}<i>${escapeHTML(m.name !== "anonymous" ? m.name : "")}</i></span>
+    </div>`).join("");
+}
+
+function renderGameDesc() {
+  const target = document.querySelector("[data-game-desc]");
+  if (!target) return;
+  if (gameView.kind === "slot") {
+    const slot = gameSlots.find(sl => sl.id === gameView.id);
+    target.innerHTML = `
+      <div class="game-desc-title">${gameSlotLabel(slot.id)}</div>
+      ${slot.parts.map(pid => {
+        const part = workbenchParts.find(p => p.id === pid);
+        return `<button class="game-part-row wb2-${part.status}-text" data-game-part="${part.id}">
+          <b>${escapeHTML(jt(part.name))}</b><span>${escapeHTML(wt(part.record).slice(0, 40))}</span>
+        </button>`;
+      }).join("")}
+      <button class="quiet-link game-back" data-game-back>${g("back")}</button>`;
+    return;
+  }
+  if (gameView.kind === "part") {
+    const part = workbenchParts.find(p => p.id === gameView.id);
+    target.innerHTML = `
+      <div class="game-desc-title">${escapeHTML(jt(part.name))} · <span class="wb-chip wb-chip-${part.status}">${partStatusLabel(part.status)}</span></div>
+      <p class="game-desc-text">${escapeHTML(wt(part.what))}</p>
+      <p class="game-desc-record">${escapeHTML(wt(part.record))}</p>
+      <a class="button game-forge-btn" href="/workbench/">${g("forge")}</a>
+      <button class="quiet-link game-back" data-game-back>${g("back")}</button>`;
+    return;
+  }
+  if (gameView.kind === "moves") {
+    target.innerHTML = `
+      <div class="game-desc-title">${g("makeMove")}</div>
+      <a class="game-part-row" href="/d04/?from=Q0001"><b>1.</b><span>${g("move1")}</span></a>
+      <a class="game-part-row" href="/d04/"><b>2.</b><span>${g("move2")}</span></a>
+      <button class="game-part-row" data-copy="public-corpus"><b>3.</b><span>${g("move3")}</span></button>
+      <button class="quiet-link game-back" data-game-back>${g("back")}</button>`;
+    return;
+  }
+  target.innerHTML = `
+    <div class="game-desc-title">pocket i</div>
+    <p class="game-desc-text">${g("statusDefault")}</p>
+    <p class="game-desc-flavor">${g("flavor")}</p>`;
+}
+
 function notFound() {
   document.title = language === "ru" ? "Не найдено — i" : "Not found — i";
   return `
@@ -6301,6 +6450,13 @@ function render() {
   } else if (path === "start") {
     document.title = `${s("title")} — i`;
     app.innerHTML = startShell();
+  } else if (path === "game") {
+    document.title = `${g("title")} — i`;
+    gameView = { kind: "status" };
+    app.innerHTML = gameShell();
+    renderGameDesc();
+    fetchMatches().then(renderGameTable);
+    loadGameCall();
   } else if (path === "workbench") {
     document.title = `${w("title")} — i`;
     app.innerHTML = workbenchShell();
@@ -6501,6 +6657,20 @@ app.addEventListener("click", async (event) => {
     updateMorrow("revealed", "curious");
     return;
   }
+
+  const gameGoto = event.target.closest("[data-goto]");
+  if (gameGoto) { location.href = gameGoto.dataset.goto; return; }
+  const gameSlotBtn = event.target.closest("[data-game-slot]");
+  if (gameSlotBtn) { gameView = { kind: "slot", id: gameSlotBtn.dataset.gameSlot }; renderGameDesc(); return; }
+  const gamePartBtn = event.target.closest("[data-game-part]");
+  if (gamePartBtn) { gameView = { kind: "part", id: gamePartBtn.dataset.gamePart }; renderGameDesc(); return; }
+  if (event.target.closest("[data-game-back]")) {
+    gameView = gameView.kind === "part" ? { kind: "slot", id: workbenchParts.find(p => p.id === gameView.id) ? gameSlots.find(sl => sl.parts.includes(gameView.id)).id : "mind" } : { kind: "status" };
+    if (gameView.kind === "slot" && !gameView.id) gameView = { kind: "status" };
+    renderGameDesc();
+    return;
+  }
+  if (event.target.closest("[data-game-moves]")) { gameView = { kind: "moves" }; renderGameDesc(); return; }
 
   const wbButton = event.target.closest("[data-wb]");
   if (wbButton) {
