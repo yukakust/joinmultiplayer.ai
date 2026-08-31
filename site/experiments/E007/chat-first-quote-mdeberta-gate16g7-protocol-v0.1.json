@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16G.7",
+  "status": "locked_before_inference",
+  "kind": "exact source quote plus multilingual NLI acceptance",
+  "hypothesis": "Can an exact-quote turnstile plus multilingual DeBERTa keep the nine grounded Qwen candidates and reject the seventeen unsupported candidates from Gate 16G.6?",
+  "inputs": {
+    "private_reader_result_sha256": "a88186da62b81ec83c35441bd94a168cae781c70b860bc091d9016cbd1341774",
+    "private_conversation_snapshot_sha256": "4c916989dbcf4a67596f159057713dddc3c589f5cd85dac111a8d8f3a801d9ee",
+    "candidates": 26,
+    "human_grounded": 9,
+    "human_unsupported": 17,
+    "label_rule": "The private human audit published in the immutable Gate 16G.6 result is frozen before this run: the nine usable FOUND rows from expected chats are grounded; all seventeen distractor FOUND rows are unsupported or describe another case."
+  },
+  "pipeline": [
+    "reuse each frozen Qwen claim and only the source messages it cited in Gate 16G.6",
+    "ask the same Qwen3-8B to copy one exact contiguous quote that proves the entire claim or return NO_QUOTE",
+    "ordinary code requires the message ID to be one of the frozen cited IDs and the quote to be an exact substring no longer than 600 characters",
+    "ordinary code builds the largest deterministic source window around that quote that fits the NLI model",
+    "multilingual mDeBERTa compares the source window with the original claim",
+    "accept only the entailment class; reject contradiction, neutral, NO_QUOTE and malformed output",
+    "compare every decision with the frozen private human label"
+  ],
+  "quote_extractor": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "dtype": "bfloat16",
+    "device": "yukabox CPU",
+    "thinking": false,
+    "sampling": false,
+    "max_new_tokens": 256,
+    "maximum_quote_characters": 600
+  },
+  "nli": {
+    "repository": "MoritzLaurer/mDeBERTa-v3-base-mnli-xnli",
+    "revision": "8adb042d524ecd5c26d3e3ba0e3fbcf7e2d0864c",
+    "license": "MIT",
+    "languages_include": ["en", "ru"],
+    "maximum_pair_tokens": 512,
+    "decision": "highest-probability class",
+    "accept": "entailment only"
+  },
+  "success_gate": {
+    "grounded_candidates_accepted": "9/9",
+    "unsupported_candidates_accepted": "0/17",
+    "accepted_quotes_exactly_present": "all",
+    "malformed_outputs": 0
+  },
+  "privacy": "Conversation text, exact quotes, claims, message IDs, raw model output and private paths remain private. Public output contains only aggregate decisions and manually reviewed safe explanations.",
+  "claim_boundary": "This is a development test on labels opened by the previous human audit. Passing can justify a fresh locked replication; it cannot establish production accuracy."
+}
