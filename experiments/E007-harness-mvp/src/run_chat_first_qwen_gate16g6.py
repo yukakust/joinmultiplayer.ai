@@ -240,6 +240,15 @@ def main() -> None:
         saved_routes = [(route["id"], route["routed_chats"]) for route in result.get("routes", [])]
         if saved_routes != expected_routes:
             raise RuntimeError("Cannot resume: routed conversations changed")
+        maximum_output = int(protocol["model"]["max_new_tokens"])
+        completed_lengths = [len(tokenizer.encode(row.get("raw", ""), add_special_tokens=False)) for row in result.get("rows", [])]
+        if any(length > maximum_output for length in completed_lengths):
+            raise RuntimeError("Cannot reuse a completed row that exceeds the current output cap")
+        result["resume_provenance"] = {
+            "completed_rows_reused": len(completed_lengths),
+            "maximum_reused_output_tokens": max(completed_lengths, default=0),
+            "current_output_cap": maximum_output,
+        }
         result["status"] = "running"
     else:
         result = {"schema_version":"0.1-private","experiment":"E007","gate":"16G.6","status":"running","index_built_this_run":index_built,"routes":routes,"rows":[]}
@@ -279,7 +288,7 @@ def main() -> None:
             started = time.monotonic()
             with torch.inference_mode():
                 generated = model.generate(
-                    **encoded, max_new_tokens=256, do_sample=False,
+                    **encoded, max_new_tokens=int(protocol["model"]["max_new_tokens"]), do_sample=False,
                     pad_token_id=tokenizer.eos_token_id,
                     stopping_criteria=[StopAfterToolCall(int(encoded.input_ids.shape[1]))],
                 )
