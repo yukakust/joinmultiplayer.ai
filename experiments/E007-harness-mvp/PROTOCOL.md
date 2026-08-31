@@ -1592,3 +1592,12 @@ shape and counts only.
 
 - `/experiments/E007/chatgpt-single-container-gate16g3-protocol-v0.1.json`
 - `/experiment/e007/gate-16g/chatgpt-container/`
+
+The real single-file run failed honestly. The selected cache file was neither
+direct JSON/plist nor gzip, zlib, raw deflate, bz2, LZMA, Apple LZFSE or Apple
+LZ4. The adapter returned zero messages and did not open the remaining 85
+files. For the minimal physical MVP, continue with one real Claude Code sample
+and one already supported Codex sample. Keep ChatGPT marked as an open adapter;
+do not pretend the binary cache is supported.
+
+- `/experiments/E007/chatgpt-single-container-gate16g3-result-v0.1.json`

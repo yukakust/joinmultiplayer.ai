@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1-public",
+  "experiment": "E007",
+  "gate": "16G.3",
+  "status": "completed_failed",
+  "protocol": "/experiments/E007/chatgpt-single-container-gate16g3-protocol-v0.1.json",
+  "source_files_read": 1,
+  "visible_messages": 0,
+  "decoder": "unsupported_binary",
+  "decoders_rejected": ["direct JSON/plist", "gzip", "zlib", "raw deflate", "bz2", "LZMA", "Apple LZFSE", "Apple LZ4"],
+  "privacy": "No source byte, message value, path or identifier is present in this result.",
+  "finding": "The one real ChatGPT conversations-v3 file is not any frozen standard container. The strict adapter returned zero messages and did not guess.",
+  "decision": "Do not scan the other 85 files for this MVP checkpoint. Continue the small retrieval test with one Claude Code conversation plus one already supported Codex conversation; keep ChatGPT as an explicit open adapter.",
+  "claim_boundary": "This does not prove that ChatGPT has no local conversations. It proves only that the selected app-version cache file needs a different, still unknown decoder."
+}
