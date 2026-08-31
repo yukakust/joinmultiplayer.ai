@@ -12,6 +12,7 @@ from .pipeline import (
 )
 from .library import AdapterStatus, LocalLibrary, scan_local_library
 from .retrieval import HybridChatIndex, RouteResult
+from .index_cache import CacheStats, build_cached_index
 
 __all__ = [
     "CandidateEvidence",
@@ -27,5 +28,7 @@ __all__ = [
     "scan_local_library",
     "HybridChatIndex",
     "RouteResult",
+    "CacheStats",
+    "build_cached_index",
 ]
 

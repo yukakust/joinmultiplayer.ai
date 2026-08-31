@@ -47,7 +47,13 @@ class RouteResult:
 class HybridChatIndex:
     """Rank whole chats by their best lexical and neural message matches."""
 
-    def __init__(self, conversations: Sequence[Conversation], embed: EmbedBatch) -> None:
+    def __init__(
+        self,
+        conversations: Sequence[Conversation],
+        embed: EmbedBatch,
+        *,
+        document_vectors: Sequence[Sequence[float]] | None = None,
+    ) -> None:
         self._conversation_ids = tuple(item.conversation_id for item in conversations)
         if len(self._conversation_ids) != len(set(self._conversation_ids)):
             raise ValueError("conversation IDs must be unique")
@@ -66,7 +72,8 @@ class HybridChatIndex:
             document_frequency.update(frequency.keys())
         self._document_frequency = document_frequency
         self._embed = embed
-        vectors = tuple(tuple(float(value) for value in vector) for vector in embed(self._texts)) if self._texts else ()
+        source_vectors = document_vectors if document_vectors is not None else (embed(self._texts) if self._texts else ())
+        vectors = tuple(tuple(float(value) for value in vector) for vector in source_vectors)
         if len(vectors) != len(self._texts):
             raise ValueError("embedder returned the wrong number of document vectors")
         widths = {len(item) for item in vectors}

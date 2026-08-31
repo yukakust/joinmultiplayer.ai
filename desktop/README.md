@@ -33,3 +33,8 @@ PYTHONPATH=desktop python3 -m pocket_i_core.library_cli extract --output private
 combines BM25 word matching with a replaceable local embedding model and uses
 the best matching message only to select the conversation; it does not send or
 approve the message itself.
+
+`build_cached_index` stores only hashed message keys, content hashes and float
+vectors in a mode-0600 local SQLite file. It never stores conversation text or
+paths. An unchanged second start reuses every vector; changed messages alone
+are embedded again. A model-fingerprint change deliberately rebuilds the cache.

@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "checkpoint": "desktop-mvp-3b",
+  "status": "development_passed_on_linux_codex",
+  "date": "2026-08-31",
+  "hypothesis": "Can a private persistent index reuse every unchanged local message and embed only messages added or changed since the previous run?",
+  "cache_contract": {
+    "storage": "local SQLite mode 0600",
+    "stored": ["hashed message key", "hashed conversation key", "content hash", "model fingerprint", "float vector"],
+    "not_stored": ["conversation text", "local path", "source coordinate in plaintext"],
+    "model_change": "fail closed and rebuild all vectors",
+    "deleted_message": "remove its stale vector"
+  },
+  "automated_tests": {"passed": 19, "failed": 0},
+  "physical_run": {
+    "platform": "Linux",
+    "initial_library": {"conversations": 58, "messages": 2926},
+    "cold": {
+      "reused": 0,
+      "embedded": 2926,
+      "index_seconds": 355.748,
+      "question_seconds": 0.325,
+      "expected_chat_rank": 1
+    },
+    "warm": {
+      "reused": 2926,
+      "embedded": 0,
+      "index_seconds": 0.238,
+      "question_seconds": 0.327,
+      "expected_chat_rank": 1
+    },
+    "library_scan_seconds": 4.367,
+    "incremental_catch_up": {
+      "old_vectors_reused": 2926,
+      "new_vectors_embedded": 4,
+      "explanation": "three new live visible Codex messages plus one explicit safe fixture",
+      "seconds": 0.473
+    },
+    "cleanup": {
+      "live_messages_reused": 2929,
+      "embedded": 0,
+      "fixture_vectors_deleted": 1
+    },
+    "cache_file_mode": "0600"
+  },
+  "decision": "Accept private persistent incremental caching for the desktop MVP. Cold construction remains expensive but occurs once; unchanged starts reuse all vectors and new messages alone are embedded.",
+  "claim_boundary": "This is one real Linux Codex development run. It does not yet prove crash recovery, concurrent writers, macOS/Windows behavior or packaged-app upgrades. The cache contains embeddings, which remain private sensitive local data even though plaintext is absent."
+}
+

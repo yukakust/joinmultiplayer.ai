@@ -1695,3 +1695,17 @@ did not exist in the library. This opened development result does not measure
 general accuracy and did not run Qwen. Result:
 `/experiments/E007/desktop-routing-checkpoint3a-result-v0.1.json`; UI:
 `/experiment/e007/desktop-mvp/routing/`.
+
+Checkpoint 3B added a mode-0600 private SQLite embedding cache. It stores only
+hashed message/conversation keys, content hashes, model fingerprint and float
+vectors; no plaintext or path. Nineteen desktop tests pass. On the real Linux
+library, cold construction embedded 2,926 messages in 355.748s. An unchanged
+second build reused 2,926/2,926, embedded zero and loaded the index in 0.238s;
+the same expected chat remained rank 1. While the task continued, three new
+visible messages plus one safe fixture appeared: the incremental update reused
+2,926 old vectors, embedded exactly four in 0.473s, then cleanup removed the
+fixture while reusing all 2,929 live vectors. Accept caching as development
+plumbing; embeddings remain sensitive local data. Crash/concurrency and
+macOS/Windows remain open. Result:
+`/experiments/E007/desktop-index-cache-checkpoint3b-result-v0.1.json`; UI:
+`/experiment/e007/desktop-mvp/index-cache/`.

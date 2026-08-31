@@ -473,6 +473,14 @@ indexing took 318.018s and is not accepted for the product: persist a private
 incremental index before packaging. Public UI:
 `/experiment/e007/desktop-mvp/routing/`.
 
+Desktop Checkpoint 3B is in `desktop/pocket_i_core/index_cache.py`. The private
+mode-0600 SQLite cache stores hashes + float vectors, never plaintext or paths.
+The suite is 19/19. Real Linux: cold 2,926-message build 355.748s; unchanged
+warm load reused 2,926/2,926 and took 0.238s; three new live messages plus one
+fixture embedded as exactly four updates in 0.473s. The fixture was then
+removed and all 2,929 live vectors reused. Public UI:
+`/experiment/e007/desktop-mvp/index-cache/`.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

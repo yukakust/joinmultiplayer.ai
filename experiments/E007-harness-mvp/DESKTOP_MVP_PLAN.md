@@ -12,6 +12,11 @@ found its anchor-defined chat at rank 1; a warm query took 0.201 seconds. The
 318-second cold build failed the product latency requirement, so a private
 persistent incremental index is mandatory before packaging.
 
+Checkpoint 3B implemented that cache. A real unchanged restart reused all
+2,926 vectors and loaded them in 0.238 seconds; an incremental catch-up embedded
+only four new messages in 0.473 seconds. The cache is accepted as development
+plumbing on Linux. Crash/concurrency and macOS/Windows remain unverified.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.
