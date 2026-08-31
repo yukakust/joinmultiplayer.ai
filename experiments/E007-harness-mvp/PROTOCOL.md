@@ -1540,3 +1540,22 @@ secret uses an unknown format; it is not proof of universal privacy.
 - `/experiments/E007/outbound-secret-gate16f1-protocol-v0.1.json`
 - `/experiments/E007/outbound-secret-gate16f1-result-v0.1.json`
 - `/experiment/e007/gate-16f/secret-gate/`
+
+## Gate 16G.1 — strict local conversation adapters
+
+Three separate deny-by-default adapters normalize only human-visible messages.
+Codex accepts only `event_msg.user_message` and `event_msg.agent_message` from
+main sessions. Claude Code accepts non-meta user text and assistant `text`
+blocks from main project JSONL files, excluding thinking, tool use/results,
+attachments and subagents. ChatGPT accepts only locally cached conversation
+nodes with user/assistant roles and text parts; unknown databases remain blocked.
+
+On yukabox the unified Codex reader reproduced the independent reference count
+exactly: 58 conversations and 2,779 visible messages. Claude Code and ChatGPT
+fixtures preserved all four visible messages and excluded all five planted
+non-message records. Neither app is installed on yukabox, so real MacBook
+inventory and count spot-check remain required before Gate 16G.1 can pass.
+
+- `/experiments/E007/conversation-adapters-gate16g1-protocol-v0.1.json`
+- `/experiments/E007/conversation-adapters-gate16g1-result-v0.1.json`
+- `/experiment/e007/gate-16g/conversation-adapters/`

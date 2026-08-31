@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1-public",
+  "experiment": "E007",
+  "gate": "16G.1",
+  "status": "implementation_ready_real_mac_validation_required",
+  "protocol": "/experiments/E007/conversation-adapters-gate16g1-protocol-v0.1.json",
+  "adapter": "/experiments/E007/local-conversation-adapters-v0.1.py",
+  "yukabox": {
+    "codex": {"conversations": 58, "visible_messages": 2779, "reference_count_parity": true},
+    "claude_code": {"storage_found": false},
+    "chatgpt_desktop": {"storage_found": false}
+  },
+  "fixtures": {
+    "claude_code": {"visible_messages_preserved": 2, "thinking_tool_and_meta_records_excluded": 3},
+    "chatgpt_desktop": {"visible_messages_preserved": 2, "system_and_tool_records_excluded": 2}
+  },
+  "next_required_receipt": "Run metadata-only inventory on the owner's MacBook. Unknown ChatGPT databases remain blocked until their table structure is frozen and tested.",
+  "privacy": "No conversation text, database row, credential, local username, absolute path or source identifier is published.",
+  "claim_boundary": "Codex is validated on a real device. Claude Code and ChatGPT parsing are validated only on frozen structural fixtures until a real Mac inventory and count spot-check are complete."
+}
