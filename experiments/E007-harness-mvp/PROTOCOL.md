@@ -1497,3 +1497,14 @@ separately.
 
 - `/experiments/E007/long-chat-retrieval-gate16e1-result-v0.1.json`
 - `/experiment/e007/gate-16e/long-chat-retrieval/`
+
+## Gate 16E.2 — bounded recall-first candidates
+
+Gate 16E.2 freezes twelve new questions and message IDs from the same three
+long conversations. It does not tune the failed fusion. It returns the union
+of five BM25 and five dense candidates, at most ten exact messages, and requires
+the downstream reader to inspect candidates one at a time. Document embeddings
+are persisted locally with the source snapshot so a second question performs
+no document re-embedding.
+
+- `/experiments/E007/long-chat-candidates-gate16e2-protocol-v0.1.json`

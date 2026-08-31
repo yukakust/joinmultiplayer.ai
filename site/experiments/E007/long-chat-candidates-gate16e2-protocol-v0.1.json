@@ -1,0 +1,39 @@
+{
+  "schema_version":"0.1",
+  "experiment":"E007",
+  "gate":"16E.2",
+  "status":"locked_before_indexing",
+  "kind":"fresh long-chat candidate retrieval",
+  "hypothesis":"Can a recall-first union of five lexical and five dense message candidates retain the needed evidence inside 16k, 70k and 250k-token conversations while returning at most ten exact messages for one-at-a-time reading?",
+  "source_payload":"the same immutable Codex visible-message inventory used by Gate 16E.1",
+  "index_contract":{
+    "unit":"one complete visible user or assistant message",
+    "storage":"persist vectors locally with source snapshot and exact message coordinates",
+    "lexical_candidates":5,
+    "dense_candidates":5,
+    "union_order":"best reciprocal rank, then exact message ID",
+    "maximum_candidates":10,
+    "reader_contract":"inspect one candidate at a time; no concatenated mega-prompt"
+  },
+  "queries":[
+    {"id":"F01","card_id":"YUKA-C0002","question":"Где объяснили, что общей веткой должна стать main, а Vita остаётся личной веткой Виталика?","gold_message_ids":["M0715"]},
+    {"id":"F02","card_id":"YUKA-C0002","question":"Где первый запуск остановился, потому что Node на staging находился не в /usr/bin/node?","gold_message_ids":["M1327"]},
+    {"id":"F03","card_id":"YUKA-C0002","question":"Где recovery дошёл до 5 627 из 8 697 и оставалось 3 070 источников?","gold_message_ids":["M1531"]},
+    {"id":"F04","card_id":"YUKA-C0002","question":"Где offline job на Netcup индексировал 8 697 envelopes с Node 24 и лимитом памяти 12 ГБ?","gold_message_ids":["M1633"]},
+    {"id":"F05","card_id":"YUKA-C0030","question":"Где решили сначала сравнить старый SearXNG-контейнер на Mac с репозиторием, прежде чем переносить его на yukabox?","gold_message_ids":["M0100"]},
+    {"id":"F06","card_id":"YUKA-C0030","question":"Где дневные GPU-ограничения временно сняли на 24 часа, сохранив один последовательный worker и safety-проверки?","gold_message_ids":["M0113"]},
+    {"id":"F07","card_id":"YUKA-C0030","question":"Где скорость 0,17 статьи в час признали слишком низкой и решили проверить память, GPU, очередь и расписание?","gold_message_ids":["M0211"]},
+    {"id":"F08","card_id":"YUKA-C0030","question":"Где выяснилось, что editable venv подсовывал feature-ветку вместо legacy worktree?","gold_message_ids":["M0253"]},
+    {"id":"F09","card_id":"YUKA-C0037","question":"Где host-side snapshot показал CLEAN и зелёный CI, но verdict остался NEEDS CHANGES из-за NetLog verifier?","gold_message_ids":["M0017"]},
+    {"id":"F10","card_id":"YUKA-C0037","question":"Где отделили статический review exact head из bare-репозитория от непроверенных host-side CI-сведений?","gold_message_ids":["M0025"]},
+    {"id":"F11","card_id":"YUKA-C0037","question":"Где docs-only изменение Product Map, registry и manifest получило APPROVE без изменения canonical status?","gold_message_ids":["M0049"]},
+    {"id":"F12","card_id":"YUKA-C0037","question":"Где review получил NEEDS CHANGES только потому, что exact successor head отсутствовал в переданном bare snapshot?","gold_message_ids":["M0053"]}
+  ],
+  "success_gate":{
+    "gold_in_candidate_union":"12/12",
+    "candidate_count_at_most":"10/10 per question",
+    "exact_coordinates_preserved":"12/12",
+    "persisted_index_reuse":"second query pass performs zero document embeddings"
+  },
+  "claim_boundary":"This tests candidate retrieval inside a known long conversation. It does not test whether the downstream reader extracts the correct answer from each candidate."
+}
