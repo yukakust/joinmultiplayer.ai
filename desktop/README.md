@@ -28,3 +28,8 @@ is created with mode `0600` and never overwritten:
 ```bash
 PYTHONPATH=desktop python3 -m pocket_i_core.library_cli extract --output private-library.json
 ```
+
+`HybridChatIndex` then routes one question to five whole conversations. It
+combines BM25 word matching with a replaceable local embedding model and uses
+the best matching message only to select the conversation; it does not send or
+approve the message itself.

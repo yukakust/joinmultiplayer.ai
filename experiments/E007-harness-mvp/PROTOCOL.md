@@ -1682,3 +1682,16 @@ Linux Codex; реальные macOS/Windows adapters и неизвестный m
 container остаются открыты. Result:
 `/experiments/E007/desktop-library-checkpoint2a-result-v0.1.json`; UI:
 `/experiment/e007/desktop-mvp/local-library/`.
+
+Checkpoint 3A connected the accepted hybrid whole-chat router directly to the
+desktop core: message-level BM25 + local multilingual MiniLM, max per whole
+conversation, then reciprocal-rank fusion to top-5. Fifteen desktop tests pass.
+On one real yukabox question the single anchor-defined expected conversation
+ranked 1st among 58 conversations / 2,917 visible messages. A query after index
+construction took 0.201s, but the cold index took 318.018s; cold-start
+performance therefore failed and requires a private persistent incremental
+cache. One earlier attempt is preserved as invalid because its expected anchor
+did not exist in the library. This opened development result does not measure
+general accuracy and did not run Qwen. Result:
+`/experiments/E007/desktop-routing-checkpoint3a-result-v0.1.json`; UI:
+`/experiment/e007/desktop-mvp/routing/`.

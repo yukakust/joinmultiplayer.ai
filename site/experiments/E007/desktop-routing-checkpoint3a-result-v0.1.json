@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "checkpoint": "desktop-mvp-3a",
+  "status": "development_routing_passed_cold_start_failed",
+  "date": "2026-08-31",
+  "hypothesis": "Can the desktop core route one new question to the correct whole conversation among the real local Codex library?",
+  "method": {
+    "router": "BM25 per message + paraphrase-multilingual-MiniLM-L12-v2 per message + reciprocal-rank fusion per whole conversation",
+    "top_k": 5,
+    "question": "Can many personal pocket i temporarily unite into one distributed neural network?",
+    "expected_chat_definition": "the one local conversation containing the already-public pocket i and distributed-network anchor",
+    "platform": "Linux",
+    "privacy": "no conversation text, IDs, coordinates, vectors or local paths"
+  },
+  "physical_result": {
+    "conversations": 58,
+    "messages": 2917,
+    "expected_anchor_conversations": 1,
+    "returned": 5,
+    "expected_conversation_in_top_5": true,
+    "best_expected_rank": 1,
+    "timing_seconds": {
+      "library_scan": 4.723,
+      "cold_index_build": 318.018,
+      "one_question_after_index": 0.201
+    }
+  },
+  "preserved_invalid_attempt": {
+    "question": "What is the desktop packaging architecture with Tauri, Python, and llama.cpp?",
+    "expected_anchor_conversations": 0,
+    "outcome": "invalid_quality_measurement",
+    "reason": "the expected anchor did not exist in the local library, so a top-5 hit could not be scored",
+    "cold_index_build_seconds": 321.322
+  },
+  "automated_tests": {"passed": 15, "failed": 0},
+  "decision": "Accept the hybrid whole-chat router as connected development plumbing. Do not accept cold-start performance. The product must persist the private index and update only new or changed messages.",
+  "claim_boundary": "One opened real-library question found one anchor-defined chat at rank 1. This is not a general retrieval accuracy estimate, and no Qwen reading, evidence extraction, network exchange or final answer ran."
+}
+

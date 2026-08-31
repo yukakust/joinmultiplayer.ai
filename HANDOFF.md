@@ -465,6 +465,14 @@ IDs were published. Real macOS/Windows runs and the unsupported macOS ChatGPT
 binary cache remain open. Public UI:
 `/experiment/e007/desktop-mvp/local-library/`.
 
+Desktop Checkpoint 3A is in `desktop/pocket_i_core/retrieval.py`. The hybrid
+BM25 + local MiniLM router is directly usable as the core route callback. The
+desktop suite is 15/15. One opened real yukabox question placed its one
+anchor-defined expected chat at rank 1 of 58; the warm query was 0.201s. Cold
+indexing took 318.018s and is not accepted for the product: persist a private
+incremental index before packaging. Public UI:
+`/experiment/e007/desktop-mvp/routing/`.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

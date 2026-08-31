@@ -7,6 +7,11 @@ Progress: Checkpoint 1A fixed the portable core contract. Checkpoint 2A added
 strict library adapters and passed a real Linux Codex inventory. macOS and
 Windows physical adapter runs remain open.
 
+Checkpoint 3A connected hybrid whole-chat routing. One opened real Linux query
+found its anchor-defined chat at rank 1; a warm query took 0.201 seconds. The
+318-second cold build failed the product latency requirement, so a private
+persistent incremental index is mandatory before packaging.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

@@ -11,6 +11,7 @@ from .pipeline import (
     ShelfPlan,
 )
 from .library import AdapterStatus, LocalLibrary, scan_local_library
+from .retrieval import HybridChatIndex, RouteResult
 
 __all__ = [
     "CandidateEvidence",
@@ -24,5 +25,7 @@ __all__ = [
     "AdapterStatus",
     "LocalLibrary",
     "scan_local_library",
+    "HybridChatIndex",
+    "RouteResult",
 ]
 
