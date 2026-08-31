@@ -6185,7 +6185,7 @@ function workbenchShell() {
       <div class="wb-workspace">
         <div class="wb2-stage-wrap">
           <div class="wb2-stage">
-            <img class="wb2-chassis" src="/assets/forge/robot/chassis.webp" alt="pocket i">
+            <img class="wb2-chassis" src="/assets/forge/robot/chassis.webp?v=loadout1" alt="pocket i">
             <button class="wb2-spot wb2-dot${wbSelected === "dot" ? " is-selected" : ""}" data-wb="dot" style="left:52%;top:4%" title="${w("powerLabel")}">
               <img src="/assets/forge/sockets/power.png" alt="">
               <b>3/18</b>
@@ -6355,7 +6355,7 @@ function gameShell() {
         </aside>
         <div class="game-center">
           <div class="wb2-stage game-stage">
-            <img class="wb2-chassis" src="/assets/forge/robot/chassis.webp" alt="pocket i">
+            <img class="wb2-chassis" src="/assets/forge/robot/chassis.webp?v=loadout1" alt="pocket i">
             ${gameSlots.map(slot => `
               <button class="wb2-spot game-slot wb2-${gameSlotStatus(slot)}" data-game-slot="${slot.id}"
                       style="left:${slot.spot.x}%;top:${slot.spot.y}%">
