@@ -1382,6 +1382,10 @@ async function prefillParentQuestion() {
     const record = await response.json();
     field.value = questionRecordValue(record, "question");
     field.readOnly = true;
+    if (language === "en" && parentId === "Q0001" && !form.querySelector(".prefill-translation")) {
+      field.insertAdjacentHTML("afterend",
+        `<p class="prefill-translation">EN (courtesy translation): “What do you get not from many minds, but simply from many attempts of one mind?” — ask it in either language; bring the answers whole.</p>`);
+    }
     const draft = formData(form);
     localStorage.setItem(contributionDraftKey(form.dataset.door), JSON.stringify(draft));
   } catch {
@@ -6511,6 +6515,77 @@ We missed the moment not because we were stupid. Each step was simply more comfo
 The cell's lesson: comfort is not an argument. Measurement is.` } }
 ];
 
+const GH = "https://github.com/yukakust/joinmultiplayer.ai/blob/agent/game-loop-v0.1/experiments/E007-harness-mvp/PROTOCOL.md";
+const EXP = "https://joinmultiplayer.ai/experiments/E007";
+
+const PIECE_SLOTS = {
+  lens: {
+    title: { en: "THE SEALED CONTAINER", ru: "НЕРАСКРЫТЫЙ КОНТЕЙНЕР" },
+    body: {
+      en: "One real ChatGPT conversations-v3 cache file bounced eight bounded decoders — JSON-at-offset, plist, gzip, zlib, raw deflate, bz2, LZMA, Apple LZFSE/LZ4. The 85 sibling files stay unopened on principle. Open that one file with a bounded standard decoder: counts and schema leave the device, text never does.",
+      ru: "Один реальный файл кэша ChatGPT (conversations-v3) отбил восемь ограниченных декодеров — JSON со смещением, plist, gzip, zlib, deflate, bz2, LZMA, Apple LZFSE/LZ4. Остальные 85 файлов принципиально не открыты. Раскрой этот один файл ограниченным стандартным декодером: наружу — счётчики и схема, текст — никогда." },
+    links: [
+      { label: "Gate 16G.3 · result JSON", href: EXP + "/chatgpt-single-container-gate16g3-result-v0.1.json" },
+      { label: "PROTOCOL.md · весь путь", href: GH },
+      { label: "3/18 vs 17/18 · летопись", href: "/journey/" }
+    ] },
+  matchbox: {
+    title: { en: "THE 16G.7 TURNSTILE", ru: "ТУРНИКЕТ 16G.7" },
+    body: {
+      en: "Our reader returned FOUND for 17 of 40 distractor conversations. The locked fix: exact quote + multilingual NLI (mDeBERTa XNLI) must keep 9/9 grounded claims and pass 0/17 ungrounded ones, zero broken answers. The plan is sha-pinned; the run is nobody's. Pre-register your confounds against us — that is the house style.",
+      ru: "Наш reader вернул FOUND на 17 из 40 диалогов-дистракторов. Запертое лечение: точная цитата + мультиязычный NLI (mDeBERTa XNLI) должны удержать 9/9 обоснованных утверждений и пропустить 0/17 необоснованных, ноль сломанных ответов. План запинен; прогон — ничей." },
+    links: [
+      { label: "Gate 16G.6 · result JSON", href: EXP + "/chat-first-qwen-gate16g6-result-v0.3.json" },
+      { label: "PROTOCOL.md · Gate 16G.7", href: GH },
+      { label: "3/18 vs 17/18 · летопись", href: "/journey/" }
+    ] },
+  flint: {
+    title: { en: "WHICH THIRD IS THIS ONE?", ru: "КОТОРАЯ ИЗ ТРЕТЕЙ?" },
+    body: {
+      en: "The clean specimen: full modular harness 3/18, plain central context 17/18, same frozen 0.6B, every raw answer public. Specification, coordination, or verification — your taxonomy, our corpse. The diagnosis is the move.",
+      ru: "Чистый образец: полный модульный харнесс 3/18, простой центральный контекст 17/18, та же замороженная 0.6B, все сырые ответы публичны. Спецификация, координация или верификация — твоя таксономия, наш труп. Диагноз и есть ход." },
+    links: [
+      { label: "PROTOCOL.md · CP2 и все гейты", href: GH },
+      { label: "Летопись провалов", href: "/journey/" }
+    ] },
+  candle: {
+    title: { en: "THE OUTBOUND BOUNDARY", ru: "ГРАНИЦА НАРУЖУ" },
+    body: {
+      en: "The credential gate passed: 24/24 synthetic secrets blocked, 24/24 hard negatives allowed, zero leaks, deterministic. What is not built yet: the owner-permission gate and arbitrary private facts with no known format. Your redoubtful sandbox is the same religion — a boundary you can prove.",
+      ru: "Кредо-гейт пройден: 24/24 синтетических секрета заблокированы, 24/24 hard negatives пропущены, ноль утечек, детерминизм. Чего ещё нет: гейт разрешений владельца и произвольные приватные факты без известного формата. Твой redoubtful — та же религия: граница, которую можно доказать." },
+    links: [
+      { label: "Gate 16F.1 · result JSON", href: EXP + "/outbound-secret-gate16f1-result-v0.1.json" },
+      { label: "PROTOCOL.md · Gate 16F.1", href: GH }
+    ] },
+  lantern: {
+    title: { en: "THE ENGINE ECONOMY", ru: "ЭКОНОМИКА ДВИЖКА" },
+    body: {
+      en: "BF16 vs Q4/Q5 measured on an integrated Radeon and CPU, raw runtimes published. The KV-cache reuse mechanism works — and its strict prefill gate failed honestly. Where do local wheels actually spin? You own the exact hardware class this question deserves.",
+      ru: "BF16 против Q4/Q5 измерены на встроенном Radeon и CPU, сырые тайминги опубликованы. Механика повторного KV-кэша работает — а её строгий prefill-гейт честно провален. Где именно буксуют локальные колёса? У тебя ровно тот класс железа, которого этот вопрос заслуживает." },
+    links: [
+      { label: "gate-3c5 · сырые замеры (repo)", href: "https://github.com/yukakust/joinmultiplayer.ai/tree/agent/game-loop-v0.1/experiments/E007-harness-mvp/artifacts/gate-3c5" },
+      { label: "PROTOCOL.md · Gate 16B", href: GH }
+    ] },
+  lighter: {
+    title: { en: "5/5 WITHOUT TOUCHING THE WEIGHTS", ru: "5/5 НЕ ТРОГАЯ ВЕСА" },
+    body: {
+      en: "One fact per model call turned 2 of 5 failed questions into complete answers. Three still resist the composer. Same frozen weights — only the software around them may change. Your 11%→18% observation, inverted and waiting.",
+      ru: "«Один факт — один вызов» превратил 2 из 5 провальных вопросов в полные ответы. Три всё ещё не поддаются композеру. Веса заморожены — меняться может только софт вокруг. Твоё наблюдение 11%→18%, вывернутое наизнанку." },
+    links: [
+      { label: "PROTOCOL.md · Gates 16D.6–16D.7", href: GH },
+      { label: "3/18 vs 17/18 · летопись", href: "/journey/" }
+    ] },
+  sparkler: {
+    title: { en: "THE CAPSULE VS THE CASCADE", ru: "КАПСУЛА ПРОТИВ КАСКАДА" },
+    body: {
+      en: "No search lane both exceeded macro-F1 0.80 and found all five required sources. The next locked step: numbered source spans vs free-form quotes, A/B on the same sixteen pairs. Your 87%-across-14-modes lens, pointed at one honest specimen.",
+      ru: "Ни одна поисковая лента не дала одновременно macro-F1 выше 0.80 и все пять обязательных источников. Следующий запертый шаг: номерные спаны против свободных цитат, A/B на тех же шестнадцати парах. Твоя оптика «87% по 14 модам» — на одном честном образце." },
+    links: [
+      { label: "PROTOCOL.md · Gates 3B–3C.3", href: GH },
+      { label: "3/18 vs 17/18 · летопись", href: "/journey/" }
+    ] }
+};
+
 const terminalCopy = {
   en: {
     radio1: "…carrier wave… someone left the channel open…",
@@ -6524,6 +6599,9 @@ const terminalCopy = {
     reservedHint: "reserved before you arrived; no one else can carry it",
     whoTitle: "WHO ENTERS?",
     whoHint: "every piece carries fire — and belongs to one carrier, forever; the taken ones already stand at the table",
+    slotEyebrow: "YOUR SLOT · RESERVED WITH THE PIECE",
+    slotHow: "The move: rerun, break, or open it — then reply to the letter that found you, or leave a trace here. Records change only by independent rerun.",
+    slotClassic: "or the classic entry:",
     missionTitle: "FIRST FIELD RUN",
     missionBody: "Take a question — the intercepted one (Q0001, nobody's for days) or your own. Ask several minds, word for word. Bring back every answer, unedited. Another match will check your trace — and you will ignite.",
     missionA: "TAKE Q0001",
@@ -6546,6 +6624,9 @@ const terminalCopy = {
     reservedHint: "зарезервирована до твоего прихода; никто другой её не возьмёт",
     whoTitle: "КТО ВХОДИТ?",
     whoHint: "каждая фигурка — носитель огня, и достаётся одному — навсегда; занятые уже стоят на столе",
+    slotEyebrow: "ТВОЯ ЩЕЛЬ · ЗАРЕЗЕРВИРОВАНА ВМЕСТЕ С ФИГУРКОЙ",
+    slotHow: "Ход: перепрогони, сломай или раскрой — и ответь на письмо, которое тебя нашло, или оставь след здесь. Рекорды меняются только независимым перепрогоном.",
+    slotClassic: "или классический вход:",
     missionTitle: "ПЕРВЫЙ ВЫХОД",
     missionBody: "Возьми вопрос — перехваченный (Q0001, ничей уже давно) или свой. Задай нескольким разумам слово в слово. Принеси все ответы целиком, без правок. Другая спичка проверит твой след — и ты зажжёшься.",
     missionA: "ВЗЯТЬ Q0001",
@@ -6655,14 +6736,32 @@ function introOverlay(phase) {
           </button>`).join("")}
       </div>
       <button class="button crt-button" data-intro="mission">${tc("cont")}</button>`,
-    mission: `
+    mission: (() => {
+      const slot = PIECE_SLOTS[localStorage.getItem(invitedPieceKey)];
+      if (slot) {
+        return `
+      <div class="crt-head"><span>[${tc("slotEyebrow")}]</span></div>
+      <p class="crt-slot-title">${jt(slot.title)}</p>
+      <p class="crt-text-static">${jt(slot.body)}</p>
+      <div class="crt-slot-links">
+        ${slot.links.map(link => `<a href="${link.href}" target="_blank" rel="noopener">${link.label} ↗</a>`).join("")}
+      </div>
+      <p class="crt-note">${tc("slotHow")}</p>
+      <div class="crt-mission-actions">
+        <a class="button crt-button" href="/d04/" data-intro-finish>${tc("missionB")}</a>
+        <button class="quiet-link" data-intro="done">${tc("missionLater")}</button>
+      </div>
+      <p class="crt-skip" style="margin-top:0.8rem">${tc("slotClassic")} <a class="quiet-link" href="/d04/?from=Q0001" data-intro-finish>Q0001</a></p>`;
+      }
+      return `
       <div class="crt-head"><span>[${tc("missionTitle")}]</span></div>
       <p class="crt-text-static">${tc("missionBody")}</p>
       <div class="crt-mission-actions">
         <a class="button crt-button" href="/d04/?from=Q0001" data-intro-finish>${tc("missionA")}</a>
         <a class="button secondary crt-button" href="/d04/" data-intro-finish>${tc("missionB")}</a>
         <button class="quiet-link" data-intro="done">${tc("missionLater")}</button>
-      </div>`
+      </div>`;
+    })()
   }[phase];
   return `<div class="safehouse-intro" data-intro-overlay data-phase="${phase}"><div class="crt-frame">${inner}</div></div>`;
 }
@@ -6756,7 +6855,15 @@ function render() {
       const gallery = document.querySelector("[data-piece-gallery]");
       if (!gallery) return;
       const selected = chosenPiece();
-      gallery.innerHTML = availablePieces().map(piece => `
+      const invitedId = localStorage.getItem(invitedPieceKey);
+      const invited = invitedId && !availablePieces().some(piece => piece.id === invitedId)
+        ? gamePieces.find(piece => piece.id === invitedId) : null;
+      gallery.innerHTML = (invited ? `
+        <button class="piece-option is-selected is-reserved" data-action="choose-piece" data-piece="${invited.id}">
+          ${FORGE_PIECES[invited.id] ? pieceCarrier(invited.id, true) : pieceSVG(invited.id, true)}
+          <strong>${jt(invited.name)}</strong>
+          <span>${jt(invited.flavor)}</span>
+        </button>` : "") + availablePieces().map(piece => `
         <button class="piece-option${piece.id === selected ? " is-selected" : ""}" data-action="choose-piece" data-piece="${piece.id}">
           ${pieceCarrier(piece.id, piece.id === selected)}
           <strong>${jt(piece.name)}</strong>

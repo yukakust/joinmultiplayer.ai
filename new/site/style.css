@@ -6748,3 +6748,12 @@ a.move-card:hover { border-color: var(--ink); }
 .crt-reserved .piece-reserved svg { height: 100%; width: 100%; }
 .crt-reserved strong { font-family: ui-monospace, Menlo, monospace; font-size: 0.9rem; letter-spacing: 0.08em; }
 .crt-reserved span { color: #9a8a72; font-size: 0.78rem; }
+
+/* personal slot card in the terminal mission */
+.crt-slot-title { color: #ed7942; font-family: ui-monospace, Menlo, monospace; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.05em; margin: 0 0 0.6rem; }
+.crt-slot-links { display: flex; flex-direction: column; gap: 0.35rem; margin: 0.9rem 0; }
+.crt-slot-links a { color: #e8c9a0; font-family: ui-monospace, Menlo, monospace; font-size: 0.74rem; letter-spacing: 0.04em; text-decoration-color: #6f6555; }
+.crt-slot-links a:hover { color: #ed7942; }
+.crt-skip a.quiet-link { color: #9a8a72; }
+.prefill-translation { background: color-mix(in srgb, var(--ember) 7%, transparent); border-left: 3px solid var(--ember); color: var(--ink-soft, inherit); font-size: 0.84rem; margin: 0.5rem 0 0; padding: 0.5rem 0.8rem; }
+.piece-option.is-reserved { border-style: solid; border-color: var(--ember); }
