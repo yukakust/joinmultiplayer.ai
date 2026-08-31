@@ -1664,3 +1664,10 @@ the corrected top-5 routing result, and the failed locked reader gate.
 моделей этим checkpoint не разрешено. Полный план:
 `DESKTOP_MVP_PLAN.md`; публичная версия:
 `/experiment/e007/desktop-mvp/`.
+
+Checkpoint 1A создал переносимый standard-library core contract. Он жёстко
+фиксирует порядок route → read → exact span → secret scan → owner approval →
+NLI signal → shelves → writer и не позволяет writer видеть alternative shelf.
+Шесть unit tests прошли. Это interface smoke, а не integrated pipeline: модели,
+реальные библиотеки, transport, UI и installers ещё не подключены. Публичный
+record: `/experiments/E007/desktop-core-checkpoint1a-v0.1.json`.

@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "checkpoint": "desktop-mvp-1a",
+  "status": "interface_smoke_passed_not_integrated",
+  "date": "2026-08-31",
+  "implementation": [
+    "desktop/pocket_i_core/pipeline.py",
+    "desktop/tests/test_pipeline.py"
+  ],
+  "fixed_order": [
+    "question",
+    "route whole conversations",
+    "read candidate evidence",
+    "verify exact source spans",
+    "scan for secrets",
+    "owner approval",
+    "record NLI signal",
+    "preserve used and alternative shelves",
+    "write from used shelf only"
+  ],
+  "tests": {
+    "passed": 6,
+    "failed": 0,
+    "checks": [
+      "alternative evidence never reaches the main writer",
+      "a non-exact quote is rejected",
+      "a secret or missing owner approval fails closed",
+      "DeBERTa is recorded but cannot silently delete evidence",
+      "every accepted candidate remains on exactly one shelf",
+      "empty evidence returns a fixed no-information answer"
+    ]
+  },
+  "claim_boundary": "This proves only the portable orchestration contract and its fail-closed mechanics. Real model runtimes, local libraries, transport, UI and installers are not connected yet."
+}
+
