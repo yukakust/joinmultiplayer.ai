@@ -1450,3 +1450,15 @@ pass after DeBERTa-neutral, but it cannot be the only acceptance judge.
 
 - `/experiments/E007/neutral-triage-gate16d10-result-v0.1.json`
 - `/experiment/e007/gate-16d/neutral-triage/`
+
+## Gate 16D.11 — more context for DeBERTa
+
+Gate 16D.11 keeps the same 23 exact-quote claims that DeBERTa classified
+neutral. The control is the preserved quote-only score. The treatment places
+the exact quote inside the largest deterministic window from its full source
+message that fits DeBERTa's token limit. The model, weights, label order and
+acceptance rule do not change. Eighteen English cases form the primary
+diagnostic; five Russian Q07 cases are reported separately because the frozen
+NLI model is English.
+
+- `/experiments/E007/deberta-context-gate16d11-protocol-v0.1.json`

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16D.11",
+  "status": "locked_before_inference",
+  "kind": "controlled context ablation",
+  "hypothesis": "Can the same DeBERTa judge recover grounded claims when the exact quote is surrounded by the largest source-message window that fits its context limit?",
+  "source_result": "/experiments/E007/grounded-synthesis-gate16d9-result-v0.1.json",
+  "private_source": "the preserved Gate 16D.9 source messages",
+  "frozen_cases": {
+    "selection": "exact_quote=true and nli_decision=neutral",
+    "total": 23,
+    "old_full_message_grounded": 20,
+    "old_full_message_unsupported": 3,
+    "english_cases": 18,
+    "russian_diagnostic_cases": 5
+  },
+  "judge": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "weights_frozen": true,
+    "decision": "the highest-probability class",
+    "accept": "entailment only"
+  },
+  "comparison": {
+    "control": "the already recorded exact quote only decision",
+    "treatment": "a deterministic token window from the same source message, centered around and guaranteed to contain the exact quote",
+    "maximum_combined_tokens": 512,
+    "reserved_special_and_claim_tokens": "computed per case",
+    "sampling": false,
+    "retries": 0
+  },
+  "success_gate": {
+    "all_cases_valid": "23/23",
+    "english_grounded_recovered_at_least": "16/17",
+    "english_unsupported_accepted": "0/1",
+    "quote_is_present_in_every_treatment_window": true
+  },
+  "known_boundary": "Five Q07 cases contain Russian evidence while the frozen DeBERTa model is English. They are reported separately and cannot pass or fail the English gate. The opened labels make this a diagnostic that must be replicated on fresh locked cases before production use."
+}
