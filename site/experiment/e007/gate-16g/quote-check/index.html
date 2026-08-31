@@ -20,24 +20,24 @@
 <body><main class="page">
   <section class="hero">
     <p>E007 · GATE 16G.7 · ТОЧНАЯ ЦИТАТА + MULTILINGUAL DEBERTA</p>
-    <h1>Мусора меньше.<br>Знаний тоже.</h1>
-    <p class="lead">Мы проверили 26 ответов Qwen двумя дверями: сначала потребовали буквальную цитату, затем спросили DeBERTa, доказывает ли она утверждение. Фильтр оказался слишком строгим.</p>
+    <h1>Тест смешал языки.<br>Вывод отозван.</h1>
+    <p class="lead">Вопросы и утверждения были русскими, а источники — смесью русского и английского. Наш MVP проверяется только на английском, поэтому эти числа сохраняются как диагностический провал, но не оценивают будущий English-only фильтр.</p>
   </section>
   <section class="funnel" aria-label="Путь кандидатов">
     <article class="step"><span>НА ВХОДЕ</span><strong>9 + 17</strong><p><b class="good">9 полезных</b><br><b class="bad">17 ошибочных</b></p></article>
     <article class="step"><span>ПОСЛЕ ТОЧНОЙ ЦИТАТЫ</span><strong>6 + 4</strong><p>Qwen убрала 13 ошибок, но потеряла 3 полезных ответа.</p></article>
     <article class="step"><span>ПОСЛЕ DEBERTA</span><strong>2 + 2</strong><p>DeBERTa убрала ещё 2 ошибки, но потеряла ещё 4 полезных ответа.</p></article>
   </section>
-  <div class="note"><strong>Gate не пройден.</strong> Система отсеяла 15 из 17 плохих ответов, но вместе с ними потеряла 7 из 9 хороших. Для MVP такой фильтр непригоден: он слишком часто молчит именно тогда, когда знание есть.</div>
+  <div class="note"><strong>Архитектурный вывод недействителен.</strong> Система отсеяла 15 из 17 плохих ответов и потеряла 7 из 9 хороших, но mixed-language setup не позволяет обвинять в этом English DeBERTa или принимать решение о модуле MVP.</div>
   <h2>Где сломалось</h2>
   <div class="table-wrap"><table>
     <thead><tr><th>ШАГ</th><th>ЧТО ОН ДОЛЖЕН БЫЛ СДЕЛАТЬ</th><th>ЧТО ПОЛУЧИЛОСЬ</th><th>ВЫВОД</th></tr></thead>
     <tbody>
-      <tr><td><strong>1 · Qwen‑цитатник</strong></td><td>Скопировать точный кусок или честно промолчать.</td><td><span class="good">6/9 полезных сохранил</span><br><span class="good">13/17 ошибок убрал</span><br><span class="bad">3 сломанных ответа</span></td><td>Полезен как первый фильтр, но один решать не может.</td></tr>
+      <tr><td><strong>1 · Qwen‑цитатник</strong></td><td>Скопировать один точный кусок до 600 символов или промолчать.</td><td><span class="good">6/9 полезных сохранил</span><br><span class="good">13/17 ошибок убрал</span><br><span class="bad">3 хороших потерял</span></td><td>Это была новая, более трудная задача: раньше Qwen могла выбрать до четырёх сообщений и пересказать их смысл.</td></tr>
       <tr><td><strong>2 · Multilingual DeBERTa</strong></td><td>Понять, доказывает ли точный кусок всё утверждение.</td><td><span class="bad">4/6 полезных отверг</span><br><span class="good">2/4 ошибок убрал</span></td><td>Слишком разрушителен для финальной приёмки.</td></tr>
-      <tr><td><strong>3 · Вместе</strong></td><td>Сохранить 9 полезных и убрать 17 ошибок.</td><td><span class="bad">2/9 полезных</span><br><span class="bad">2/17 ошибок прошли</span></td><td>Не принимаем в MVP.</td></tr>
+      <tr><td><strong>3 · Вместе</strong></td><td>Сохранить 9 полезных и убрать 17 ошибок.</td><td><span class="bad">2/9 полезных</span><br><span class="bad">2/17 ошибок прошли</span></td><td>Не используем для решения: сначала нужен чистый English-only повтор.</td></tr>
     </tbody>
   </table></div>
-  <div class="note" style="border-left-color:#c79443"><strong>Что узнали.</strong> «Цитата существует» и «цитата доказывает весь ответ» — разные задачи. Особенно хрупкими оказались перевод между русским и английским и ответы, где доказательство лежит в нескольких местах.</div>
+  <div class="note" style="border-left-color:#c79443"><strong>Что всё же узнали.</strong> «Найти нужное сообщение», «скопировать точный span» и «доказать составной ответ» — три разные задачи. Следующий тест разделит claim на английские атомы и разрешит каждому атому иметь несколько точных английских spans.</div>
   <p class="links"><a href="/experiments/E007/chat-first-quote-mdeberta-gate16g7-result-v0.1.json">Безопасный результат JSON ↗</a><a href="/experiments/E007/chat-first-quote-mdeberta-gate16g7-protocol-v0.1.json">План до запуска ↗</a><a href="/experiment/e007/gate-16g/chat-first-reader/">Предыдущий шаг ↗</a></p>
 </main></body></html>

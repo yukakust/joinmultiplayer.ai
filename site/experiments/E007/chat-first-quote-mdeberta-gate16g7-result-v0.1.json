@@ -2,7 +2,7 @@
   "schema_version": "0.1-public-safe",
   "experiment": "E007",
   "gate": "16G.7",
-  "status": "completed_failed",
+  "status": "completed_invalid_language_design",
   "private_result_sha256": "8eb42dcb646b298cc85a2f46c1ad3000751903c3003582adca94d3ce00e25ce5",
   "input": {
     "qwen_found_candidates": 26,
@@ -39,6 +39,11 @@
     "Cross-language and partial-evidence cases were especially fragile. Exact textual presence did not by itself prove the whole claim.",
     "The result does not approve this pair as an MVP acceptance gate. A new design must preserve recall before a fresh blind replication."
   ],
+  "validity": {
+    "architecture_decision": "withdrawn",
+    "reason": "Questions and claims were Russian while cited sources mixed Russian and English. The project requires English-only tests, so this run cannot evaluate the intended English NLI gate.",
+    "qwen_contract_mismatch": "The earlier reader located up to four evidence messages and paraphrased their meaning. This gate instead required one exact span of at most 600 characters to prove an entire possibly composite claim. The observed misses therefore test a new stricter span contract, not the previously successful message retrieval task."
+  },
   "privacy": "No conversation text, claim, quote, message identifier, private path or raw model output is public.",
-  "claim_boundary": "Opened development labels; this is a preserved failed result, not a production estimate."
+  "claim_boundary": "Preserved mixed-language diagnostic with opened labels. It must not accept or reject the English-only MVP architecture."
 }
