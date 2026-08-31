@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-SCRIPT = Path(__file__).resolve().parents[2] / ".." / "site" / "experiments" / "E007" / "local-conversation-adapters-v0.3.py"
+SCRIPT = Path(__file__).resolve().parents[2] / ".." / "site" / "experiments" / "E007" / "local-conversation-adapters-v0.4.py"
 SPEC = importlib.util.spec_from_file_location("adapters", SCRIPT.resolve())
 adapters = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(adapters)
@@ -47,6 +47,30 @@ class AdapterTests(unittest.TestCase):
             result = adapters.chatgpt_container_shapes(Path(directory))
             self.assertEqual(result["files_scanned"], 1)
             self.assertNotIn(secret_text, json.dumps(result))
+
+    def test_minimal_sample_reads_one_file_and_twenty_messages_per_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            claude = home / ".claude" / "projects" / "project"
+            claude.mkdir(parents=True)
+            claude_rows = [
+                {"type":"user" if index % 2 else "assistant", "sessionId":"s1", "uuid":f"c{index}", "message":{"role":"user" if index % 2 else "assistant", "content":f"claude visible {index}"}}
+                for index in range(1, 26)
+            ]
+            claude_rows.append({"type":"assistant","sessionId":"s1","uuid":"tool","message":{"role":"assistant","content":[{"type":"tool_use","input":"hidden"}]}})
+            (claude / "s1.jsonl").write_text("\n".join(json.dumps(row) for row in claude_rows))
+            chatgpt = home / "Library" / "Application Support" / "com.openai.chat" / "conversations-v3-test"
+            chatgpt.mkdir(parents=True)
+            mapping = {
+                str(index): {"id":str(index),"message":{"id":f"g{index}","create_time":index,"author":{"role":"user" if index % 2 else "assistant"},"content":{"content_type":"text","parts":[f"chatgpt visible {index}"]}}}
+                for index in range(1, 26)
+            }
+            (chatgpt / "one.data").write_text(json.dumps({"id":"g1","mapping":mapping}))
+            private, public = adapters.minimal_sample(home)
+            self.assertEqual(public["total_source_files_read"], 2)
+            self.assertEqual([item["visible_messages"] for item in public["sources"].values()], [20, 20])
+            self.assertEqual([len(item["messages"]) for item in private["sources"]], [20, 20])
+            self.assertNotIn("hidden", json.dumps(private))
 
 
 if __name__ == "__main__":

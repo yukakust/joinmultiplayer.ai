@@ -1559,3 +1559,16 @@ inventory and count spot-check remain required before Gate 16G.1 can pass.
 - `/experiments/E007/conversation-adapters-gate16g1-protocol-v0.1.json`
 - `/experiments/E007/conversation-adapters-gate16g1-result-v0.1.json`
 - `/experiment/e007/gate-16g/conversation-adapters/`
+
+## Gate 16G.2 — minimal real sample
+
+The owner rejected a full 35 GB / 196 MB library pass as unnecessary for the
+first hypothesis. Gate 16G.2 therefore reads at most two source files: the
+newest main Claude Code JSONL and the newest ChatGPT `conversations-v3` data
+file. Each contributes only its last twenty visible user/assistant messages.
+Codex is not read because its real adapter is already validated. Text remains
+in one local mode-0600 file; stdout and the public journal contain counts and
+schema only.
+
+- `/experiments/E007/conversation-sample-gate16g2-protocol-v0.1.json`
+- `/experiment/e007/gate-16g/conversation-sample/`
