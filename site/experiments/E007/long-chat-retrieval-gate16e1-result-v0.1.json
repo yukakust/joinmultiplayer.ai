@@ -1,0 +1,421 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16E.1",
+  "status": "completed_failed",
+  "protocol": "/experiments/E007/long-chat-retrieval-gate16e1-protocol-v0.1.json",
+  "summary": {
+    "questions": 12,
+    "indexed_messages": 2417,
+    "dense_recall_at_1": 5,
+    "dense_recall_at_3": 7,
+    "lexical_recall_at_1": 7,
+    "lexical_recall_at_3": 10,
+    "hybrid_recall_at_1": 6,
+    "hybrid_recall_at_3": 9,
+    "source_coordinates_preserved": 12,
+    "runtime_seconds": 347.475
+  },
+  "rows": [
+    {
+      "id": "L01",
+      "card_id": "YUKA-C0002",
+      "question": "Где объяснено, как secret guard отличили от безопасного пути с названием token?",
+      "gold_message_ids": [
+        "M0103"
+      ],
+      "dense_rank": 1,
+      "lexical_rank": 1,
+      "hybrid_rank": 1,
+      "dense_top_5_ids": [
+        "M0103",
+        "M0797",
+        "M0793",
+        "M0321",
+        "M1716"
+      ],
+      "lexical_top_5_ids": [
+        "M0103",
+        "M0232",
+        "M0008",
+        "M1677",
+        "M0853"
+      ],
+      "hybrid_top_5_ids": [
+        "M0103",
+        "M0792",
+        "M0772",
+        "M0232",
+        "M1486"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L02",
+      "card_id": "YUKA-C0002",
+      "question": "В каком сообщении уточнили, что RSS ещё не применяли к группе из 1 499 сайтов?",
+      "gold_message_ids": [
+        "M0382"
+      ],
+      "dense_rank": 2,
+      "lexical_rank": 5,
+      "hybrid_rank": 3,
+      "dense_top_5_ids": [
+        "M0379",
+        "M0382",
+        "M1655",
+        "M1651",
+        "M0380"
+      ],
+      "lexical_top_5_ids": [
+        "M0380",
+        "M0379",
+        "M0469",
+        "M1490",
+        "M0382"
+      ],
+      "hybrid_top_5_ids": [
+        "M0379",
+        "M0380",
+        "M0382",
+        "M0375",
+        "M1643"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L03",
+      "card_id": "YUKA-C0002",
+      "question": "Где перечислены невидимые причины занятого диска: удалённые открытые файлы, контейнерные слои и журналы systemd?",
+      "gold_message_ids": [
+        "M1021"
+      ],
+      "dense_rank": 1,
+      "lexical_rank": 1,
+      "hybrid_rank": 1,
+      "dense_top_5_ids": [
+        "M1021",
+        "M1019",
+        "M1611",
+        "M1828",
+        "M1606"
+      ],
+      "lexical_top_5_ids": [
+        "M1021",
+        "M0953",
+        "M1020",
+        "M1015",
+        "M1598"
+      ],
+      "hybrid_top_5_ids": [
+        "M1021",
+        "M1020",
+        "M1571",
+        "M1596",
+        "M1949"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L04",
+      "card_id": "YUKA-C0002",
+      "question": "Где нашли, что recovery собрали не из того окна, и проверили matching sidecar для всех 8 697 envelopes?",
+      "gold_message_ids": [
+        "M1429"
+      ],
+      "dense_rank": 1,
+      "lexical_rank": 1,
+      "hybrid_rank": 1,
+      "dense_top_5_ids": [
+        "M1429",
+        "M1525",
+        "M1523",
+        "M1531",
+        "M1426"
+      ],
+      "lexical_top_5_ids": [
+        "M1429",
+        "M1919",
+        "M1632",
+        "M0406",
+        "M1604"
+      ],
+      "hybrid_top_5_ids": [
+        "M1429",
+        "M1525",
+        "M1523",
+        "M1919",
+        "M1428"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L05",
+      "card_id": "YUKA-C0030",
+      "question": "Где разобрана причина, почему постоянный SSH-туннель к GPU сначала работает, а потом получает publickey denial?",
+      "gold_message_ids": [
+        "M0291"
+      ],
+      "dense_rank": 5,
+      "lexical_rank": 1,
+      "hybrid_rank": 1,
+      "dense_top_5_ids": [
+        "M0275",
+        "M0263",
+        "M0003",
+        "M0233",
+        "M0291"
+      ],
+      "lexical_top_5_ids": [
+        "M0291",
+        "M0270",
+        "M0269",
+        "M0248",
+        "M0280"
+      ],
+      "hybrid_top_5_ids": [
+        "M0291",
+        "M0280",
+        "M0233",
+        "M0269",
+        "M0276"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L06",
+      "card_id": "YUKA-C0030",
+      "question": "Где зафиксировано ночное окно работы GPU с 23:00 до 08:00?",
+      "gold_message_ids": [
+        "M0071",
+        "M0075"
+      ],
+      "dense_rank": 11,
+      "lexical_rank": 4,
+      "hybrid_rank": 4,
+      "dense_top_5_ids": [
+        "M0080",
+        "M0084",
+        "M0113",
+        "M0110",
+        "M0094"
+      ],
+      "lexical_top_5_ids": [
+        "M0109",
+        "M0110",
+        "M0113",
+        "M0071",
+        "M0180"
+      ],
+      "hybrid_top_5_ids": [
+        "M0110",
+        "M0113",
+        "M0094",
+        "M0071",
+        "M0084"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L07",
+      "card_id": "YUKA-C0030",
+      "question": "Где сказано, что 23 дублирующиеся safety-задачи отменили, не затронув статьи?",
+      "gold_message_ids": [
+        "M0127"
+      ],
+      "dense_rank": 15,
+      "lexical_rank": 1,
+      "hybrid_rank": 4,
+      "dense_top_5_ids": [
+        "M0256",
+        "M0129",
+        "M0075",
+        "M0072",
+        "M0122"
+      ],
+      "lexical_top_5_ids": [
+        "M0127",
+        "M0211",
+        "M0129",
+        "M0122",
+        "M0207"
+      ],
+      "hybrid_top_5_ids": [
+        "M0129",
+        "M0122",
+        "M0075",
+        "M0127",
+        "M0256"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L08",
+      "card_id": "YUKA-C0030",
+      "question": "Где описана дополнительная машина с двумя RTX 3090 и необходимость дать ей доступ к yukabox?",
+      "gold_message_ids": [
+        "M0239",
+        "M0241"
+      ],
+      "dense_rank": 1,
+      "lexical_rank": 1,
+      "hybrid_rank": 1,
+      "dense_top_5_ids": [
+        "M0241",
+        "M0246",
+        "M0239",
+        "M0245",
+        "M0003"
+      ],
+      "lexical_top_5_ids": [
+        "M0241",
+        "M0239",
+        "M0270",
+        "M0246",
+        "M0251"
+      ],
+      "hybrid_top_5_ids": [
+        "M0241",
+        "M0239",
+        "M0246",
+        "M0245",
+        "M0070"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L09",
+      "card_id": "YUKA-C0037",
+      "question": "Где исправленный review снял старый P0 после чтения AGENTS с exact head, но сохранил NetLog finding?",
+      "gold_message_ids": [
+        "M0015"
+      ],
+      "dense_rank": 15,
+      "lexical_rank": 2,
+      "hybrid_rank": 4,
+      "dense_top_5_ids": [
+        "M0030",
+        "M0012",
+        "M0021",
+        "M0060",
+        "M0046"
+      ],
+      "lexical_top_5_ids": [
+        "M0013",
+        "M0015",
+        "M0018",
+        "M0069",
+        "M0012"
+      ],
+      "hybrid_top_5_ids": [
+        "M0012",
+        "M0014",
+        "M0021",
+        "M0015",
+        "M0030"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L10",
+      "card_id": "YUKA-C0037",
+      "question": "Где отказались выдавать verdict, потому что новый exact head отсутствовал в локальной object database?",
+      "gold_message_ids": [
+        "M0021"
+      ],
+      "dense_rank": 6,
+      "lexical_rank": 2,
+      "hybrid_rank": 3,
+      "dense_top_5_ids": [
+        "M0052",
+        "M0038",
+        "M0054",
+        "M0076",
+        "M0020"
+      ],
+      "lexical_top_5_ids": [
+        "M0020",
+        "M0021",
+        "M0052",
+        "M0009",
+        "M0082"
+      ],
+      "hybrid_top_5_ids": [
+        "M0052",
+        "M0020",
+        "M0021",
+        "M0038",
+        "M0054"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L11",
+      "card_id": "YUKA-C0037",
+      "question": "Где проверка backup root закончилась отсутствием c23 archive, prepare-job roots и executor receipts?",
+      "gold_message_ids": [
+        "M0068"
+      ],
+      "dense_rank": 1,
+      "lexical_rank": 1,
+      "hybrid_rank": 1,
+      "dense_top_5_ids": [
+        "M0068",
+        "M0067",
+        "M0065",
+        "M0066",
+        "M0061"
+      ],
+      "lexical_top_5_ids": [
+        "M0068",
+        "M0064",
+        "M0065",
+        "M0061",
+        "M0063"
+      ],
+      "hybrid_top_5_ids": [
+        "M0068",
+        "M0065",
+        "M0067",
+        "M0061",
+        "M0066"
+      ],
+      "source_coordinates_preserved": true
+    },
+    {
+      "id": "L12",
+      "card_id": "YUKA-C0037",
+      "question": "Где установили, что для TERRA-1 подходит существующий checkout wingle и отдельный executor repository не требуется?",
+      "gold_message_ids": [
+        "M0072"
+      ],
+      "dense_rank": 2,
+      "lexical_rank": 2,
+      "hybrid_rank": 2,
+      "dense_top_5_ids": [
+        "M0069",
+        "M0072",
+        "M0071",
+        "M0061",
+        "M0019"
+      ],
+      "lexical_top_5_ids": [
+        "M0069",
+        "M0072",
+        "M0061",
+        "M0064",
+        "M0071"
+      ],
+      "hybrid_top_5_ids": [
+        "M0069",
+        "M0072",
+        "M0061",
+        "M0071",
+        "M0019"
+      ],
+      "source_coordinates_preserved": true
+    }
+  ],
+  "finding": "The locked hybrid gate failed: hybrid recall was 6/12 at one and 9/12 at three. Plain lexical BM25 was stronger and placed all 12 accepted messages in its top five. Do not select one hybrid winner. The next candidate returns a bounded union of candidates and lets the reader inspect them one at a time.",
+  "claim_boundary": "This tests finding messages only after the correct long conversation is known. It does not test chat routing, answer extraction, truth, privacy or final synthesis."
+}

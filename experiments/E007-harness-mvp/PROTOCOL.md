@@ -1487,3 +1487,13 @@ known. The selected exact message may be returned with one visible neighbour
 on each side; no Qwen topic summary or semantic chunk rewrite is involved.
 
 - `/experiments/E007/long-chat-retrieval-gate16e1-protocol-v0.1.json`
+
+The locked hybrid gate failed. Dense retrieval placed 7/12 accepted messages
+in its top three; hybrid placed 9/12 in its top three and only 6/12 first. Plain
+BM25 was stronger here: 7/12 first, 10/12 in the top three and 12/12 in the top
+five. Do not select one hybrid winner. The next candidate returns a bounded
+candidate set and lets the already agreed one-question reader inspect candidates
+separately.
+
+- `/experiments/E007/long-chat-retrieval-gate16e1-result-v0.1.json`
+- `/experiment/e007/gate-16e/long-chat-retrieval/`
