@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1-public",
+  "experiment": "E007",
+  "gate": "16G.6-routing-v0.1",
+  "status": "completed_failed",
+  "protocol": "/experiments/E007/chat-first-qwen-gate16g6-protocol-v0.1.json",
+  "summary": {
+    "questions": 10,
+    "expected_chat_routed_top_3": 8,
+    "index_built_this_run": true
+  },
+  "misses": [
+    {
+      "question_id": "Q01",
+      "lexical_rank": 3,
+      "dense_rank": 26,
+      "fused_rank": 4
+    },
+    {
+      "question_id": "Q06",
+      "lexical_rank": 44,
+      "dense_rank": 1,
+      "fused_rank": 4
+    }
+  ],
+  "finding": "Both expected chats were present in the union of the locked lexical and dense candidate lists, but the newly imposed top-three reader limit discarded each at fused rank four.",
+  "decision": "Preserve the failed top-three checkpoint. Before any Qwen reading, lock a top-five reader budget and rerun routing from the persisted index.",
+  "privacy": "No conversation text, path, source identifier, hash or retrieved message is public.",
+  "claim_boundary": "This tests routing only. Qwen3-8B was not loaded and produced no answer."
+}

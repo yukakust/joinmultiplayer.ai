@@ -155,6 +155,7 @@ def main() -> None:
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--protocol", type=Path, default=PROTOCOL)
     parser.add_argument("--payload", type=Path, required=True)
     parser.add_argument("--cache-dir", type=Path, required=True)
     parser.add_argument("--index-cache", type=Path, required=True)
@@ -164,7 +165,7 @@ def main() -> None:
     args = parser.parse_args()
     if args.output.exists():
         raise RuntimeError(f"Refusing to overwrite preserved result: {args.output}")
-    protocol = json.loads(PROTOCOL.read_text(encoding="utf-8"))
+    protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
     questions = json.loads(QUESTIONS.read_text(encoding="utf-8"))["queries"]
     source_bytes = args.payload.read_bytes()
     if hashlib.sha256(source_bytes).hexdigest() != protocol["source"]["private_snapshot_sha256"]:
@@ -203,7 +204,7 @@ def main() -> None:
             best_dense[card_id] = max(best_dense.get(card_id, float("-inf")), dense_message[index])
         lexical_chats = sorted(best_lexical, key=lambda card: (-best_lexical[card], card))[:5]
         dense_chats = sorted(best_dense, key=lambda card: (-best_dense[card], card))[:5]
-        routed = fuse(lexical_chats, dense_chats, 3)
+        routed = fuse(lexical_chats, dense_chats, int(protocol["routing"]["reader_chats"]))
         routes.append({"id":question["id"],"question":question["question"],"expected_chat":question["gold_card_id"],"routed_chats":routed,"expected_chat_routed":question["gold_card_id"] in routed})
     del embedder
 
