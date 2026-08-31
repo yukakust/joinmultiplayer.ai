@@ -10,6 +10,7 @@ from .pipeline import (
     PocketICore,
     ShelfPlan,
 )
+from .library import AdapterStatus, LocalLibrary, scan_local_library
 
 __all__ = [
     "CandidateEvidence",
@@ -20,5 +21,8 @@ __all__ = [
     "PipelineResult",
     "PocketICore",
     "ShelfPlan",
+    "AdapterStatus",
+    "LocalLibrary",
+    "scan_local_library",
 ]
 

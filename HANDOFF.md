@@ -457,6 +457,14 @@ package the same core for macOS, Windows and Linux; then run one fresh locked
 English end-to-end test on at least two physical computers. Phone support and
 model training remain explicitly later and are not authorised by this plan.
 
+Desktop Checkpoint 2A is implemented in `desktop/pocket_i_core/library.py`.
+It provides one strict Codex/Claude Code/ChatGPT-local adapter API plus a
+counts-only inventory CLI. The full desktop suite is 10/10. A real yukabox run
+found 58 main Codex conversations and 2,907 visible messages; no text, paths or
+IDs were published. Real macOS/Windows runs and the unsupported macOS ChatGPT
+binary cache remain open. Public UI:
+`/experiment/e007/desktop-mvp/local-library/`.
+
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary
 byte-level source anchoring from NLI: 20 frozen cases, no model, and a strict

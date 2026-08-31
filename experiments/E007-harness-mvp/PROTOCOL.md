@@ -1671,3 +1671,14 @@ NLI signal → shelves → writer и не позволяет writer видеть
 Шесть unit tests прошли. Это interface smoke, а не integrated pipeline: модели,
 реальные библиотеки, transport, UI и installers ещё не подключены. Публичный
 record: `/experiments/E007/desktop-core-checkpoint1a-v0.1.json`.
+
+Checkpoint 2A подключил к core deny-by-default Local Library. Fixture tests
+проверяют Codex, Claude Code и читаемый ChatGPT JSON; общий suite прошёл 10/10.
+Реальный Linux inventory на yukabox нашёл 58 main Codex conversations и 2,907
+visible user/agent messages в 115 JSONL files. Публичный результат содержит
+только counts: ни текст, ни пути, ни IDs, ни coordinates не публиковались.
+Claude Code и ChatGPT на yukabox отсутствуют. Это development pass только для
+Linux Codex; реальные macOS/Windows adapters и неизвестный macOS ChatGPT binary
+container остаются открыты. Result:
+`/experiments/E007/desktop-library-checkpoint2a-result-v0.1.json`; UI:
+`/experiment/e007/desktop-mvp/local-library/`.

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "checkpoint": "desktop-mvp-2a",
+  "status": "development_passed_on_linux_codex",
+  "date": "2026-08-31",
+  "hypothesis": "Can one strict cross-platform library module normalize only visible conversation messages and fail closed on unknown local formats?",
+  "allowlist": {
+    "codex": ["event_msg.user_message", "event_msg.agent_message", "main sessions only"],
+    "claude_code": ["user text", "assistant text blocks", "main project sessions only"],
+    "chatgpt_desktop": ["user text parts", "assistant text parts", "recognized application-owned JSON containers only"]
+  },
+  "always_excluded": [
+    "reasoning and thinking",
+    "tool calls and tool results",
+    "terminal output",
+    "meta messages",
+    "subagent sessions",
+    "unknown ChatGPT containers",
+    "arbitrary user files"
+  ],
+  "automated_tests": {
+    "passed": 10,
+    "failed": 0,
+    "adapter_fixture_checks": 4
+  },
+  "physical_run": {
+    "platform": "Linux",
+    "privacy": "counts only; no text, paths, conversation IDs or message coordinates",
+    "total_conversations": 58,
+    "total_messages": 2907,
+    "adapters": [
+      {"source": "codex", "status": "ready", "conversations": 58, "messages": 2907, "files_read": 115},
+      {"source": "claude_code", "status": "not_found_or_empty", "conversations": 0, "messages": 0, "files_read": 0},
+      {"source": "chatgpt_desktop", "status": "not_found_or_empty", "conversations": 0, "messages": 0, "files_read": 0}
+    ]
+  },
+  "claim_boundary": "The strict adapter contract passed fixtures for all three sources and a real Linux Codex inventory. Real macOS and Windows runs, real Claude Code data on this core, and the unsupported macOS ChatGPT binary cache remain unverified. No model, retrieval or network exchange ran."
+}
+

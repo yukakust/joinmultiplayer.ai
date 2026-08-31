@@ -3,6 +3,10 @@
 Status: Checkpoint 0 accepted on 2026-08-31. No model training is authorised by
 this checkpoint.
 
+Progress: Checkpoint 1A fixed the portable core contract. Checkpoint 2A added
+strict library adapters and passed a real Linux Codex inventory. macOS and
+Windows physical adapter runs remain open.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

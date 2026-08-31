@@ -15,3 +15,16 @@ Run the core tests:
 ```bash
 PYTHONPATH=desktop python3 -m unittest discover -s desktop/tests -v
 ```
+
+Inspect the local library without printing text, paths or identifiers:
+
+```bash
+PYTHONPATH=desktop python3 -m pocket_i_core.library_cli inventory
+```
+
+Writing the private normalized library is a separate explicit action. The file
+is created with mode `0600` and never overwritten:
+
+```bash
+PYTHONPATH=desktop python3 -m pocket_i_core.library_cli extract --output private-library.json
+```
