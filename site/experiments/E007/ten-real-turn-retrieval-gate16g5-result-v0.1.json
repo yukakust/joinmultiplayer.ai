@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.1-public",
+  "experiment": "E007",
+  "gate": "16G.5",
+  "status": "completed_failed",
+  "protocol": "/experiments/E007/ten-real-turn-retrieval-gate16g5-protocol-v0.1.json",
+  "summary": {
+    "source_file_windows_read": 2,
+    "maximum_bytes_per_source_window": 33554432,
+    "visible_messages_indexed": 120,
+    "historical_turns_tested": 10,
+    "gold_answers_retained": 2
+  },
+  "sources": [
+    {
+      "kind": "claude_code",
+      "turns": 5,
+      "gold_found": 0
+    },
+    {
+      "kind": "codex",
+      "turns": 5,
+      "gold_found": 2
+    }
+  ],
+  "retrieval_wins": {
+    "lexical_only": 1,
+    "dense_only": 1,
+    "both": 0
+  },
+  "finding": "The ten-turn expansion failed: the real final answer was retained for only two of ten exact historical questions. The earlier two-turn pass was too small to support a retrieval claim.",
+  "open_diagnosis": "This private-no-text result cannot distinguish a weak ranker from a wrong final-answer boundary. The next diagnostic must inspect failures locally without publishing conversation text.",
+  "privacy": "No conversation text, local path, source identifier, question hash or message coordinate is present in this public result.",
+  "claim_boundary": "This is a failed exact historical-turn smoke over two conversations. It does not measure whether another retrieved candidate was semantically sufficient."
+}
