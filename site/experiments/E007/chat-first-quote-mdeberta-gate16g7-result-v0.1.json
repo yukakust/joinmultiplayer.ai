@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1-public-safe",
+  "experiment": "E007",
+  "gate": "16G.7",
+  "status": "completed_failed",
+  "private_result_sha256": "8eb42dcb646b298cc85a2f46c1ad3000751903c3003582adca94d3ce00e25ce5",
+  "input": {
+    "qwen_found_candidates": 26,
+    "human_grounded": 9,
+    "human_unsupported": 17
+  },
+  "exact_quote_turnstile": {
+    "grounded_exact_quote": 6,
+    "grounded_no_quote": 1,
+    "grounded_malformed": 2,
+    "unsupported_exact_quote": 4,
+    "unsupported_no_quote": 12,
+    "unsupported_malformed": 1
+  },
+  "multilingual_nli_on_exact_quotes": {
+    "grounded_tested": 6,
+    "grounded_accepted": 2,
+    "unsupported_tested": 4,
+    "unsupported_accepted": 2
+  },
+  "final": {
+    "grounded_accepted": 2,
+    "grounded_total": 9,
+    "unsupported_accepted": 2,
+    "unsupported_total": 17,
+    "accepted_quotes_were_exact_substrings": true,
+    "malformed_outputs": 3,
+    "locked_gate_passed": false
+  },
+  "manual_review": [
+    "The Qwen quote turnstile removed thirteen of seventeen unsupported candidates, but it also lost three of nine grounded candidates before NLI.",
+    "Multilingual mDeBERTa rejected two of the four remaining unsupported candidates, but also rejected four of six grounded candidates with exact quotes.",
+    "The final pipeline therefore removed fifteen of seventeen unsupported candidates while losing seven of nine grounded candidates.",
+    "Cross-language and partial-evidence cases were especially fragile. Exact textual presence did not by itself prove the whole claim.",
+    "The result does not approve this pair as an MVP acceptance gate. A new design must preserve recall before a fresh blind replication."
+  ],
+  "privacy": "No conversation text, claim, quote, message identifier, private path or raw model output is public.",
+  "claim_boundary": "Opened development labels; this is a preserved failed result, not a production estimate."
+}
