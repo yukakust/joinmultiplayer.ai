@@ -6733,3 +6733,18 @@ a.move-card:hover { border-color: var(--ink); }
 .crt-pieces .piece-option .piece-carrier { height: 104px; }
 .piece-option:hover .piece-carrier { transform: translateY(-3px); }
 @media (max-width: 640px) { .piece-option .piece-carrier, .crt-pieces .piece-option .piece-carrier { height: 88px; } }
+
+/* reserved piece: the invited carrier's figurine waits alone */
+.crt-reserved {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0 0 1.2rem;
+  text-align: center;
+}
+.crt-reserved .piece-carrier { height: 150px; width: auto; }
+.crt-reserved .piece-reserved { color: #e8c9a0; display: block; height: 96px; width: 84px; }
+.crt-reserved .piece-reserved svg { height: 100%; width: 100%; }
+.crt-reserved strong { font-family: ui-monospace, Menlo, monospace; font-size: 0.9rem; letter-spacing: 0.08em; }
+.crt-reserved span { color: #9a8a72; font-size: 0.78rem; }

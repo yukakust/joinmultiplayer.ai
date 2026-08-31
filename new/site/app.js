@@ -6520,6 +6520,8 @@ const terminalCopy = {
     entryTag: "CELL RECORD", protocolTag: "PROTOCOL",
     cont: "CONTINUE",
     skipHint: "click — full text",
+    reservedTitle: "THE PIECE WAS WAITING FOR YOU",
+    reservedHint: "reserved before you arrived; no one else can carry it",
     whoTitle: "WHO ENTERS?",
     whoHint: "every piece carries fire — and belongs to one carrier, forever; the taken ones already stand at the table",
     missionTitle: "FIRST FIELD RUN",
@@ -6540,6 +6542,8 @@ const terminalCopy = {
     entryTag: "ЗАПИСЬ ЯЧЕЙКИ", protocolTag: "ПРОТОКОЛ",
     cont: "ПРОДОЛЖИТЬ",
     skipHint: "клик — весь текст",
+    reservedTitle: "ФИГУРКА ЖДАЛА ТЕБЯ",
+    reservedHint: "зарезервирована до твоего прихода; никто другой её не возьмёт",
     whoTitle: "КТО ВХОДИТ?",
     whoHint: "каждая фигурка — носитель огня, и достаётся одному — навсегда; занятые уже стоят на столе",
     missionTitle: "ПЕРВЫЙ ВЫХОД",
@@ -6557,6 +6561,7 @@ const terminalCopy = {
 function tc(key) { return terminalCopy[language][key]; }
 
 const introSeenKey = "multiplayer-safehouse-intro-v1";
+const invitedPieceKey = "multiplayer-invited-piece-v1";
 const unlockedKey = "multiplayer-terminal-unlocked-v1";
 const freshEntryKey = "multiplayer-terminal-fresh-v1";
 
@@ -6628,7 +6633,18 @@ function introOverlay(phase) {
       <pre class="crt-text" data-typewriter></pre>
       <p class="crt-skip">${tc("skipHint")}</p>
       <button class="button crt-button is-waiting" data-intro="piece" disabled>${tc("cont")}</button>`,
-    piece: `
+    piece: localStorage.getItem(invitedPieceKey) ? (() => {
+      const inv = gamePieces.find(piece => piece.id === localStorage.getItem(invitedPieceKey));
+      return `
+      <div class="crt-head"><span>[${tc("reservedTitle")}]</span></div>
+      <p class="crt-note">${tc("reservedHint")}</p>
+      <div class="crt-reserved">
+        ${FORGE_PIECES[inv.id] ? pieceCarrier(inv.id, true) : pieceSVG(inv.id, true, "piece-reserved")}
+        <strong>${jt(inv.name)}</strong>
+        <span>${jt(inv.flavor)}</span>
+      </div>
+      <button class="button crt-button" data-intro="mission">${tc("cont")}</button>`;
+    })() : `
       <div class="crt-head"><span>[${tc("whoTitle")}]</span></div>
       <p class="crt-note">${tc("whoHint")}</p>
       <div class="piece-gallery crt-pieces">
@@ -7442,6 +7458,12 @@ window.addEventListener("hashchange", () => {
 const litParam = new URLSearchParams(location.search).get("lit") || "";
 if (/^M[0-9]{4,}$/i.test(litParam)) {
   localStorage.setItem(litByStorageKey, litParam.toUpperCase());
+}
+
+const pieceParam = (new URLSearchParams(location.search).get("piece") || "").toLowerCase();
+if (gamePieces.some(piece => piece.id === pieceParam)) {
+  localStorage.setItem(pieceStorageKey, pieceParam);
+  localStorage.setItem(invitedPieceKey, pieceParam);
 }
 
 if (sessionStorage.getItem(morrowStorageKey) === "true") {
