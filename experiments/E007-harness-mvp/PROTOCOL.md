@@ -1572,3 +1572,11 @@ schema only.
 
 - `/experiments/E007/conversation-sample-gate16g2-protocol-v0.1.json`
 - `/experiment/e007/gate-16g/conversation-sample/`
+
+The real MacBook sample completed partially. One Claude Code JSONL yielded the
+locked twenty visible messages. The one selected ChatGPT `conversations-v3`
+file was binary, not JSON, so the strict adapter returned zero messages instead
+of guessing. No other ChatGPT file was opened. Preserve this partial result;
+the next test may try standard container decoders on the same single file.
+
+- `/experiments/E007/conversation-sample-gate16g2-result-v0.1.json`

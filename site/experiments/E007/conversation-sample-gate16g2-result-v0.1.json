@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1-public",
+  "experiment": "E007",
+  "gate": "16G.2",
+  "status": "completed_partial",
+  "protocol": "/experiments/E007/conversation-sample-gate16g2-protocol-v0.1.json",
+  "sources": {
+    "claude_code": {"source_files_read": 1, "visible_messages": 20, "status": "sampled"},
+    "chatgpt_desktop": {"source_files_read": 1, "visible_messages": 0, "container": "binary", "status": "format_not_supported"}
+  },
+  "total_source_files_read": 2,
+  "total_visible_messages": 20,
+  "privacy": "No message text, local path, source identifier or binary byte is present in this public result.",
+  "finding": "The strict Claude Code adapter worked on one real conversation. The newest ChatGPT conversations-v3 file is a binary container, so the JSON-only adapter correctly refused to parse it.",
+  "next_test": "Try standard macOS container and compression decoders on the same single ChatGPT file. Do not scan the remaining local history.",
+  "claim_boundary": "This result validates only the small Claude sample. It does not validate ChatGPT extraction or retrieval."
+}
