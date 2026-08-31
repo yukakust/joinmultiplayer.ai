@@ -1425,3 +1425,15 @@ cannot be used to estimate English-only NLI recall.
 
 - `/experiments/E007/grounded-synthesis-gate16d9-result-v0.1.json`
 - `/experiment/e007/gate-16d/grounded-synthesis/`
+
+## Gate 16D.10 — Qwen judge for DeBERTa-neutral claims
+
+Gate 16D.10 is a post-hoc diagnostic on the 23 exact-quote claims that Gate
+16D.9 classified neutral. Human review has already opened the labels: twenty
+claims are grounded and three are unsupported. Qwen3-8B sees only one exact
+quote and one claim, then must choose supported or not_supported with a short
+reason. The proposed triage accepts DeBERTa entailment, rejects contradiction
+and non-exact quotes, and sends neutral to this second judge. Because the cases
+are open, success can only justify a fresh locked replication.
+
+- `/experiments/E007/neutral-triage-gate16d10-protocol-v0.1.json`

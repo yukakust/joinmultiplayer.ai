@@ -1,0 +1,37 @@
+{
+  "schema_version":"0.1",
+  "experiment":"E007",
+  "gate":"16D.10",
+  "status":"locked_before_inference",
+  "kind":"post-hoc opened diagnostic",
+  "hypothesis":"Can Qwen3-8B reconsider the 23 exact-quote claims classified neutral by DeBERTa, recover most of the 20 grounded claims and still reject the three unsupported claims?",
+  "source_result":"/experiments/E007/grounded-synthesis-gate16d9-result-v0.1.json",
+  "frozen_cases":{
+    "selection":"exact_quote=true and nli_decision=neutral",
+    "total":23,
+    "human_grounded":20,
+    "human_unsupported":3
+  },
+  "judge":{
+    "repository":"Qwen/Qwen3-8B",
+    "local_digest":"500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "quantization":"Q4_K_M",
+    "thinking":false,
+    "sampling":false,
+    "retries":0,
+    "input":"one exact quote and one claim only",
+    "output":"supported or not_supported plus one short reason"
+  },
+  "triage_policy":{
+    "deberta_entailment":"accept without this second judge",
+    "deberta_contradiction":"reject",
+    "deberta_neutral":"send to this Qwen judge",
+    "non_exact_quote":"reject before semantic judges"
+  },
+  "success_gate":{
+    "valid_decisions":"23/23",
+    "grounded_claims_recovered_at_least":"18/20",
+    "unsupported_claims_accepted":"0/3"
+  },
+  "claim_boundary":"Because the cases and human labels are already open, success would justify a fresh locked replication, not validate the production judge."
+}
