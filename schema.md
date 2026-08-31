@@ -1,6 +1,6 @@
 # Pocket i harness — agreed path
 
-Status: working architecture agreement after E007 Gate 3C.6Q. This is not a
+Status: working architecture agreement through E007 Gate 16D.11. This is not a
 claim that every module already exists or has passed a physical-device test.
 
 E007 Gate 3C.6A.2 adds one development finding about local source retrieval:
@@ -301,6 +301,33 @@ Evidence boundary: this is a synthetic English development result checked by
 one researcher. It does not yet establish multilingual quality, independent
 labelling, phone performance, long-document behaviour, or production safety.
 
+### Gate 16D.11 update: keep the quote, add source-only context
+
+The earlier synthetic test mixed the person's question and surrounding text
+into one NLI input and got worse. Gate 16D.11 isolated a different change on
+real Codex messages: the person's question still stayed outside, but the exact
+quote was placed inside the largest neighbouring source window that fit the
+same frozen DeBERTa model.
+
+On the 18 English opened cases, quote-only DeBERTa had classified every pair
+neutral. With source-only context it accepted 16/16 claims supported by the
+full message and accepted 0/2 unsupported claims after one old human label was
+corrected. The five Russian cases remain diagnostic only.
+
+The working MVP candidate is now:
+
+```text
+verified exact quote + bounded neighbouring source context + one atomic claim
+→ DeBERTa-v3-base NLI
+→ SUPPORTED / CONTRADICTED / NOT PROVEN
+```
+
+The exact quote remains separately marked and byte-verified. Context may
+explain terse lists, pronouns, entities, and causal links; it may not replace
+the quote or include the person's question. Because the labels were already
+open, this update requires a fresh locked replication before it becomes a
+production acceptance rule.
+
 ## Accepted Gate 12A: knowledge revision chains
 
 The owner accepted Gate 12A as the narrow chain mechanism.
@@ -420,7 +447,7 @@ an honest limitation, not proof across domains or scale. Decision record:
 | 8 | Before any network send, a separate security module enforces owner permission and removes secrets. | Contract accepted; only a synthetic canary has been tested. |
 | 9 | The receiver checks `question ↔ one memory piece` with Qwen3-Reranker-4B Q4 and returns TAKE / NOT SURE / DROP. | Accepted after Gate 3C.5; Q4 matched BF16 24/24. Phone test pending. |
 | 10 | Ordinary code proves that the exact passage came from the named, versioned source snapshot and byte range. | Gate 3C.6A passed 20/20 twice with identical output. |
-| 11 | Check `exact source passage ↔ one atomic claim` with DeBERTa-v3-base NLI. Keep the person's question outside this call. Return SUPPORTED / CONTRADICTED / NOT PROVEN. | Accepted after Gate 3C.6P–Q: short pairs 20/20; the mixed question-and-context package fell to 15/20. Synthetic English development evidence only. |
+| 11 | Check `verified exact quote + bounded source-only context ↔ one atomic claim` with DeBERTa-v3-base NLI. Keep the person's question outside this call. Return SUPPORTED / CONTRADICTED / NOT PROVEN. | Gate 16D.11 open diagnostic: 16/16 supported English claims accepted and 0/2 unsupported accepted after one label correction. Fresh locked replication and multilingual handling remain open. |
 | 12 | A pocket i's knowledge history is an append-only chain: current head plus preserved history. No semantic relation label is required. Truth, applicability, and independence are checked later after collection. | Accepted after 10/10 synthetic mechanics and one yukabox → miracle-prod transfer with matching SHA-256 and correct head/history. |
 | 13 | Build cautious DeBERTa piles, let Qwen create one readable claim per pile, validate every rewrite against every original in both directions, then compare only validated claims to form final piles. Preserve originals, evidence, sources, lineage, and separate versions. | Accepted for harness v0.2 by the owner after Gate 13D: 5/6 exact paraphrase piles, 0 false merges, 9/10 rewrites validated. Synthetic development evidence only; scale and domain transfer remain unproven. |
 | 14 | With Qwen3-1.7B, produce a readable answer containing only claims supplied by accepted piles. Preserve separate versions. Empty input bypasses the model and returns a fixed response. | Accepted by the owner after the paired Gate 14A.2 result: 1.7B passed 10/10 versus 8/10 for 0.6B, with 0 invented facts. Synthetic English development evidence only; full-pipeline and phone tests remain open. |

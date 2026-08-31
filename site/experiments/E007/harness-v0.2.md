@@ -20,8 +20,9 @@ as tested parts. This is not yet a downloadable end-to-end product.
    `TAKE / NOT SURE / DROP`.
 10. Ordinary code proves that the exact passage came from the named source
     snapshot and byte range.
-11. DeBERTa NLI checks only `exact passage + one atomic claim`:
-    `SUPPORTED / CONTRADICTED / NOT PROVEN`. The user question stays outside.
+11. DeBERTa NLI checks `verified exact quote + bounded neighbouring source
+    context + one atomic claim`: `SUPPORTED / CONTRADICTED / NOT PROVEN`. The
+    user question stays outside.
 12. Keep each pocket i's knowledge as a chain: one current head plus preserved
     history. Check truth, applicability, and independence later, after all
     candidate answers arrive.
@@ -40,7 +41,7 @@ small claim. It scored `15/20` when we also mixed in the user's question and
 surrounding document text. A human checked every gold label and all five new
 errors.
 
-So the accepted interface is deliberately narrow:
+The first accepted interface was deliberately narrow:
 
 ```text
 exact verified source passage + one atomic claim
@@ -50,6 +51,15 @@ exact verified source passage + one atomic claim
 
 This does not prove that the source is true, current, independent, applicable,
 or safe to share. Those are different jobs for different modules.
+
+Gate 16D.11 later isolated source-only context on real Codex messages. The exact
+quote stayed marked and byte-verified, the person's question stayed outside,
+and only neighbouring text from the same message was added. On 18 opened
+English cases, contextual DeBERTa accepted 16/16 supported claims and 0/2
+unsupported claims after one old human label was corrected. This makes the
+bounded source window the working MVP candidate, but a fresh locked replication
+is still required before production acceptance. Results:
+`/experiment/e007/gate-16d/deberta-context/`.
 
 ## Evidence boundary
 
