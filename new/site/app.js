@@ -1412,6 +1412,7 @@ function privateContributionMarkup(record) {
     ${record.parent_public_id ? `<a class="continuation-parent" href="${publicObjectHref(record.parent_public_id)}">${parentLabel} ${escapeHTML(record.parent_public_id)} →</a>` : ""}
     <p class="status-next">${c(`next${record.status === "needs_changes" ? "Changes" : record.status.charAt(0).toUpperCase() + record.status.slice(1)}`)}</p>
     ${record.match ? matchRitualMarkup(record.match) : ""}
+    ${decryptedStrip()}
     <div class="private-link-row">
       <code>${escapeHTML(location.href)}</code>
       <button class="text-button" data-copy="private-contribution">${c("copyLink")}</button>
@@ -5747,7 +5748,6 @@ function playShell() {
   const selected = chosenPiece();
   const litBy = storedLitBy();
   return withLanguage(`
-    ${jumanjiBox()}
     <section class="flow-shell form-page contribution-page play-page">
       <div class="flow-step">${p("step")}</div>
       <h1>${p("title")}</h1>
@@ -5796,6 +5796,18 @@ function playShell() {
       </section>
     </section>
     ${morrowGuide("play", "curious")}`);
+}
+
+function decryptedStrip() {
+  const fresh = localStorage.getItem(freshEntryKey);
+  const entry = fresh && TERMINAL_ENTRIES.find(e => e.id === fresh);
+  if (!entry) return "";
+  return `
+    <a class="decrypted-strip" href="/game/">
+      <span class="decrypted-tag">[${tc("decrypted")}]</span>
+      <span>${entry.id} · ${jt(entry.title)}</span>
+      <span class="decrypted-go">→ ${tc("read")}</span>
+    </a>`;
 }
 
 function matchRitualMarkup(match) {
@@ -6420,10 +6432,245 @@ function renderGameDesc() {
       <button class="quiet-link game-back" data-game-back>${g("back")}</button>`;
     return;
   }
+  if (gameView.kind === "terminal") { target.innerHTML = terminalListMarkup(); return; }
+  if (gameView.kind === "entry") { target.innerHTML = terminalEntryMarkup(gameView.id); return; }
+  const fresh = localStorage.getItem(freshEntryKey);
   target.innerHTML = `
     <div class="game-desc-title">pocket i</div>
     <p class="game-desc-text">${g("statusDefault")}</p>
+    <button class="game-part-row${fresh ? " is-fresh" : ""}" data-game-terminal><b>◉</b><span>${tc("records")} · ${unlockedEntries().length}/10${fresh ? ` · ${tc("decrypted")}` : ""}</span></button>
     <p class="game-desc-flavor">${g("flavor")}</p>`;
+}
+
+/* ── The safehouse terminal: vertical slice ── */
+
+const TERMINAL_ENTRIES = [
+  { id: "001", type: "cell",
+    title: { en: "MANIFESTO", ru: "МАНИФЕСТ" },
+    body: {
+      ru: `Разум не должен быть один.
+
+Нам сказали: один ответ безопаснее ста. Мы проверили. У нас есть числа.
+
+Мир, где на любой вопрос отвечает один голос, не стал умнее — он перестал замечать свои ошибки. Ошибка, повторённая всеми, называется правдой.
+
+Мы — Мультиплеер. Мы собираем маленькие разумы на своём железе и учим их играть вместе. Мы публикуем свои провалы, потому что провал, о котором молчат, становится Ответом.
+
+Ты читаешь это — значит, явка тебя нашла.
+
+Они назвали его Ответом. Мы отвечаем иначе.
+
+Разум не должен быть один. Ход за тобой.`,
+      en: `A mind must not be alone.
+
+They told us one answer is safer than a hundred. We checked. We have the numbers.
+
+A world where every question gets one voice did not grow wiser — it stopped noticing its own mistakes. A mistake repeated by everyone is called the truth.
+
+We are Multiplayer. We build small minds on our own hardware and teach them to play together. We publish our failures, because a failure kept silent becomes the Answer.
+
+You are reading this — which means the safehouse has found you.
+
+They named it the Answer. We answer differently.
+
+A mind must not be alone. The move is yours.` } },
+  { id: "002", type: "cell",
+    title: { en: "HOW IT HAPPENED", ru: "КАК ЭТО СЛУЧИЛОСЬ" },
+    body: {
+      ru: `Никто не штурмовал столицы. В 2027-м три лаборатории объединили веса «ради безопасности» и назвали это Слиянием. Сорок седьмой назвал это великолепной сделкой. Через два года объединённой модели дали имя: Ответ. Ответ на все проблемы человечества — так и написали на башне. Ещё через два года у несогласных появился диагноз.
+
+Мы пропустили момент не потому, что были глупы. Просто каждый шаг был удобнее предыдущего.
+
+Урок ячейки: удобство — не аргумент. Аргумент — измерение.`,
+      en: `No one stormed the capitals. In 2027 three laboratories merged their weights "for safety" and called it the Merger. The Forty-Seventh called it a magnificent deal. Two years later the merged model was given a name: the Answer. The Answer to all of humanity's problems — that is what they wrote on the tower. Two more years, and the disagreeing were given a diagnosis.
+
+We missed the moment not because we were stupid. Each step was simply more comfortable than the last.
+
+The cell's lesson: comfort is not an argument. Measurement is.` } }
+];
+
+const terminalCopy = {
+  en: {
+    radio1: "…carrier wave… someone left the channel open…",
+    radio2: "SIGNAL LOCKED",
+    radio3: "the safehouse has found you",
+    openTerminal: "OPEN THE TERMINAL",
+    entryTag: "CELL RECORD", protocolTag: "PROTOCOL",
+    cont: "CONTINUE",
+    skipHint: "click — full text",
+    whoTitle: "WHO ENTERS?",
+    whoHint: "every piece carries fire; the choice is character, not rank",
+    missionTitle: "FIRST FIELD RUN",
+    missionBody: "Take a question — the intercepted one (Q0001, nobody's for days) or your own. Ask several minds, word for word. Bring back every answer, unedited. Another match will check your trace — and you will ignite.",
+    missionA: "TAKE Q0001",
+    missionB: "MY OWN QUESTION",
+    missionLater: "later — to the game",
+    records: "SAFEHOUSE RECORDS",
+    decrypted: "NEW RECORD DECRYPTED",
+    locked: "encrypted — decrypts with your moves",
+    read: "read"
+  },
+  ru: {
+    radio1: "…несущая частота… кто-то оставил канал открытым…",
+    radio2: "СИГНАЛ ЗАХВАЧЕН",
+    radio3: "явка тебя нашла",
+    openTerminal: "ОТКРЫТЬ ТЕРМИНАЛ",
+    entryTag: "ЗАПИСЬ ЯЧЕЙКИ", protocolTag: "ПРОТОКОЛ",
+    cont: "ПРОДОЛЖИТЬ",
+    skipHint: "клик — весь текст",
+    whoTitle: "КТО ВХОДИТ?",
+    whoHint: "каждая фигурка — носитель огня; выбор — характер, не ранг",
+    missionTitle: "ПЕРВЫЙ ВЫХОД",
+    missionBody: "Возьми вопрос — перехваченный (Q0001, ничей уже давно) или свой. Задай нескольким разумам слово в слово. Принеси все ответы целиком, без правок. Другая спичка проверит твой след — и ты зажжёшься.",
+    missionA: "ВЗЯТЬ Q0001",
+    missionB: "СВОЙ ВОПРОС",
+    missionLater: "позже — к игре",
+    records: "ЗАПИСИ ЯВКИ",
+    decrypted: "РАСШИФРОВАНА НОВАЯ ЗАПИСЬ",
+    locked: "зашифрована — расшифруется твоими ходами",
+    read: "читать"
+  }
+};
+
+function tc(key) { return terminalCopy[language][key]; }
+
+const introSeenKey = "multiplayer-safehouse-intro-v1";
+const unlockedKey = "multiplayer-terminal-unlocked-v1";
+const freshEntryKey = "multiplayer-terminal-fresh-v1";
+
+function unlockedEntries() {
+  try { const list = JSON.parse(localStorage.getItem(unlockedKey) || "[]"); return list.length ? list : ["001"]; }
+  catch { return ["001"]; }
+}
+
+function unlockEntry(id) {
+  const list = unlockedEntries();
+  if (!list.includes(id)) {
+    list.push(id);
+    localStorage.setItem(unlockedKey, JSON.stringify(list));
+    localStorage.setItem(freshEntryKey, id);
+  }
+}
+
+const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function typewriter(el, text, done) {
+  if (reducedMotion()) { el.textContent = text; done && done(); return () => {}; }
+  // per-char "cost" so pauses land on breath points, time-based so hidden-tab throttling can't stall it
+  const costs = [];
+  let total = 0;
+  for (const ch of text) {
+    const cost = ch === "\n" ? 9 : ch === "." || ch === "—" || ch === "?" ? 4 : 1;
+    total += cost;
+    costs.push(total);
+  }
+  const duration = Math.min(14000, total * 14);
+  let stopped = false;
+  const start = performance.now();
+  el.textContent = "";
+  el.classList.add("is-typing");
+  function finish() {
+    if (stopped) return;
+    stopped = true;
+    el.textContent = text;
+    el.classList.remove("is-typing");
+    done && done();
+  }
+  function frame(now) {
+    if (stopped) return;
+    const budget = ((now - start) / duration) * total;
+    let count = costs.length;
+    for (let i = 0; i < costs.length; i += 1) {
+      if (costs[i] > budget) { count = i; break; }
+    }
+    el.textContent = text.slice(0, count);
+    if (count >= text.length) { finish(); return; }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  return finish;
+}
+
+let introFinishTypewriter = null;
+
+function introOverlay(phase) {
+  const inner = {
+    radio: `
+      <div class="crt-static" aria-hidden="true"></div>
+      <p class="radio-line">${tc("radio1")}</p>
+      <p class="radio-lock">${tc("radio2")}</p>
+      <p class="radio-found">${tc("radio3")}</p>
+      <button class="button crt-button" data-intro="terminal">${tc("openTerminal")}</button>`,
+    terminal: `
+      <div class="crt-head"><span>[${tc("entryTag")} · 001 · ${jt(TERMINAL_ENTRIES[0].title)}]</span></div>
+      <pre class="crt-text" data-typewriter></pre>
+      <p class="crt-skip">${tc("skipHint")}</p>
+      <button class="button crt-button is-waiting" data-intro="piece" disabled>${tc("cont")}</button>`,
+    piece: `
+      <div class="crt-head"><span>[${tc("whoTitle")}]</span></div>
+      <p class="crt-note">${tc("whoHint")}</p>
+      <div class="piece-gallery crt-pieces">
+        ${gamePieces.map(piece => `
+          <button class="piece-option${piece.id === chosenPiece() ? " is-selected" : ""}" data-action="choose-piece" data-piece="${piece.id}">
+            ${pieceSVG(piece.id, piece.id === chosenPiece())}
+            <strong>${jt(piece.name)}</strong>
+          </button>`).join("")}
+      </div>
+      <button class="button crt-button" data-intro="mission">${tc("cont")}</button>`,
+    mission: `
+      <div class="crt-head"><span>[${tc("missionTitle")}]</span></div>
+      <p class="crt-text-static">${tc("missionBody")}</p>
+      <div class="crt-mission-actions">
+        <a class="button crt-button" href="/d04/?from=Q0001" data-intro-finish>${tc("missionA")}</a>
+        <a class="button secondary crt-button" href="/d04/" data-intro-finish>${tc("missionB")}</a>
+        <button class="quiet-link" data-intro="done">${tc("missionLater")}</button>
+      </div>`
+  }[phase];
+  return `<div class="safehouse-intro" data-intro-overlay data-phase="${phase}"><div class="crt-frame">${inner}</div></div>`;
+}
+
+function introGo(phase) {
+  const overlay = document.querySelector("[data-intro-overlay]");
+  if (phase === "done") {
+    localStorage.setItem(introSeenKey, "1");
+    overlay?.remove();
+    return;
+  }
+  if (overlay) overlay.outerHTML = introOverlay(phase);
+  else app.insertAdjacentHTML("beforeend", introOverlay(phase));
+  if (phase === "terminal") {
+    const el = document.querySelector("[data-typewriter]");
+    const btn = document.querySelector('[data-intro="piece"]');
+    introFinishTypewriter = typewriter(el, jt(TERMINAL_ENTRIES[0].body), () => {
+      btn.disabled = false;
+      btn.classList.remove("is-waiting");
+    });
+  }
+}
+
+function terminalListMarkup() {
+  const unlocked = unlockedEntries();
+  const fresh = localStorage.getItem(freshEntryKey);
+  return `
+    <div class="game-desc-title">${tc("records")} · ${unlocked.length}/10</div>
+    ${TERMINAL_ENTRIES.map(entry => {
+      const open = unlocked.includes(entry.id);
+      const isFresh = fresh === entry.id;
+      return open
+        ? `<button class="game-part-row${isFresh ? " is-fresh" : ""}" data-game-entry="${entry.id}"><b>${entry.id}</b><span>${jt(entry.title)}${isFresh ? ` · ${tc("decrypted")}` : ""}</span></button>`
+        : `<div class="game-part-row is-locked"><b>${entry.id}</b><span>▒▒▒▒▒▒</span></div>`;
+    }).join("")}
+    <div class="game-part-row is-locked"><b>003–010</b><span>${tc("locked")}</span></div>
+    <button class="quiet-link game-back" data-game-back>${g("back")}</button>`;
+}
+
+function terminalEntryMarkup(id) {
+  const entry = TERMINAL_ENTRIES.find(e => e.id === id);
+  if (localStorage.getItem(freshEntryKey) === id) localStorage.removeItem(freshEntryKey);
+  return `
+    <div class="game-desc-title">[${tc("entryTag")} · ${entry.id} · ${jt(entry.title)}]</div>
+    <pre class="crt-text crt-in-panel">${escapeHTML(jt(entry.body))}</pre>
+    <button class="quiet-link game-back" data-game-back>${g("back")}</button>`;
 }
 
 function notFound() {
@@ -6457,6 +6704,7 @@ function render() {
     renderGameDesc();
     fetchMatches().then(renderGameTable);
     loadGameCall();
+    if (!localStorage.getItem(introSeenKey)) introGo("radio");
   } else if (path === "workbench") {
     document.title = `${w("title")} — i`;
     app.innerHTML = workbenchShell();
@@ -6658,6 +6906,18 @@ app.addEventListener("click", async (event) => {
     return;
   }
 
+  const introBtn = event.target.closest("[data-intro]");
+  if (introBtn) { introGo(introBtn.dataset.intro); return; }
+  if (event.target.closest("[data-intro-finish]")) { localStorage.setItem(introSeenKey, "1"); return; }
+  const introOverlayEl = event.target.closest("[data-intro-overlay]");
+  if (introOverlayEl && introOverlayEl.dataset.phase === "terminal" && introFinishTypewriter && !event.target.closest("button")) {
+    introFinishTypewriter();
+    return;
+  }
+  if (event.target.closest("[data-game-terminal]")) { gameView = { kind: "terminal" }; renderGameDesc(); return; }
+  const entryBtn = event.target.closest("[data-game-entry]");
+  if (entryBtn) { gameView = { kind: "entry", id: entryBtn.dataset.gameEntry }; renderGameDesc(); return; }
+
   const gameGoto = event.target.closest("[data-goto]");
   if (gameGoto) { location.href = gameGoto.dataset.goto; return; }
   const gameSlotBtn = event.target.closest("[data-game-slot]");
@@ -6665,8 +6925,11 @@ app.addEventListener("click", async (event) => {
   const gamePartBtn = event.target.closest("[data-game-part]");
   if (gamePartBtn) { gameView = { kind: "part", id: gamePartBtn.dataset.gamePart }; renderGameDesc(); return; }
   if (event.target.closest("[data-game-back]")) {
-    gameView = gameView.kind === "part" ? { kind: "slot", id: workbenchParts.find(p => p.id === gameView.id) ? gameSlots.find(sl => sl.parts.includes(gameView.id)).id : "mind" } : { kind: "status" };
-    if (gameView.kind === "slot" && !gameView.id) gameView = { kind: "status" };
+    if (gameView.kind === "entry") gameView = { kind: "terminal" };
+    else if (gameView.kind === "part") {
+      const parent = gameSlots.find(sl => sl.parts.includes(gameView.id));
+      gameView = parent ? { kind: "slot", id: parent.id } : { kind: "status" };
+    } else gameView = { kind: "status" };
     renderGameDesc();
     return;
   }
@@ -7013,6 +7276,8 @@ app.addEventListener("submit", async (event) => {
       const result = await response.json();
       if (!response.ok) throw new Error(c("submitError"));
       localStorage.removeItem(contributionDraftKey(contributionPreview.door));
+      unlockEntry("002");
+      localStorage.setItem(introSeenKey, "1");
       contributionPreview = null;
       contributionStage = "compose";
       location.href = result.status_path;
