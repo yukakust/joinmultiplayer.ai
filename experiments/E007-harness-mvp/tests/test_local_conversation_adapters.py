@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-SCRIPT = Path(__file__).resolve().parents[2] / ".." / "site" / "experiments" / "E007" / "local-conversation-adapters-v0.2.py"
+SCRIPT = Path(__file__).resolve().parents[2] / ".." / "site" / "experiments" / "E007" / "local-conversation-adapters-v0.3.py"
 SPEC = importlib.util.spec_from_file_location("adapters", SCRIPT.resolve())
 adapters = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(adapters)
@@ -37,6 +37,16 @@ class AdapterTests(unittest.TestCase):
             path.write_text(json.dumps(data))
             result = adapters.extract_chatgpt_file(path)
             self.assertEqual([m["text"] for m in result[0]["messages"]], ["Human question", "Visible answer"])
+
+    def test_chatgpt_shape_probe_never_emits_values(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "Library" / "Application Support" / "com.openai.chat" / "conversations-v3-test"
+            root.mkdir(parents=True)
+            secret_text = "PRIVATE-CONVERSATION-TEXT"
+            (root / "one.data").write_text(json.dumps({"conversation":{"messages":[{"role":"user","text":secret_text}]}}))
+            result = adapters.chatgpt_container_shapes(Path(directory))
+            self.assertEqual(result["files_scanned"], 1)
+            self.assertNotIn(secret_text, json.dumps(result))
 
 
 if __name__ == "__main__":
