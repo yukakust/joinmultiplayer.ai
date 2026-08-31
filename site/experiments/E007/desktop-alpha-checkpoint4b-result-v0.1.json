@@ -1,0 +1,35 @@
+{
+  "schema_version": "e007-desktop-alpha-checkpoint4b-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "4B",
+  "status": "development_passed_downloader_only",
+  "hypothesis": "A desktop alpha can install one pinned local model without a terminal and reject an incomplete or corrupted file.",
+  "model": {
+    "id": "Qwen/Qwen3-8B-GGUF",
+    "file": "Qwen3-8B-Q4_K_M.gguf",
+    "revision": "7c41481f57cb95916b40956ab2f0b139b296d974",
+    "bytes": 5027783488,
+    "sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
+  },
+  "tests": {
+    "python_core_passed": 22,
+    "downloader_passed": 3,
+    "downloader_failed": 0,
+    "cases": ["complete download", "resume partial download", "reject wrong checksum"]
+  },
+  "package": {
+    "platform": "linux-x64",
+    "format": "AppImage",
+    "version": "0.1.0-alpha.2",
+    "bytes_rounded_mb": 129,
+    "sha256": "8bea9e95f0c83d678dbe0fa52fd69d21a83cff3d27f063e7547c2261ac11a783",
+    "npm_known_vulnerabilities": 0
+  },
+  "not_claimed": [
+    "the full 5.03 GB model was downloaded in this checkpoint",
+    "llama.cpp is installed",
+    "the downloaded model can answer a question",
+    "the swarm network is connected"
+  ],
+  "next_checkpoint": "Bundle the native llama.cpp runtime and prove one local inference."
+}

@@ -24,6 +24,13 @@ development AppImage passed its packaged health check and found 58 conversations
 and 2,948 visible messages on yukabox. The question field is deliberately
 disabled: Qwen reading, approval and network exchange are not connected yet.
 
+Checkpoint 4B added the first-run model step. The app checks memory and disk,
+downloads a pinned 5.03 GB Qwen3-8B Q4_K_M file, resumes an interrupted partial
+download and verifies exact size plus SHA-256 before installation. Three local
+fixture tests cover success, resume and corruption rejection. The real 5.03 GB
+download has not been run in this development checkpoint; llama.cpp and the
+question path remain unconnected.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

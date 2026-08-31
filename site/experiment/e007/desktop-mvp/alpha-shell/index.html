@@ -18,8 +18,9 @@
     <div class="stats"><article><span>РАЗГОВОРОВ</span><strong>58</strong></article><article><span>ВИДИМЫХ СООБЩЕНИЙ</span><strong>2 948</strong></article><article><span>СТАТУС</span><strong>READY</strong></article></div>
     <p class="note">Поле вопроса пока выключено. Это честная граница: приложение уже умеет безопасно увидеть библиотеку, но Qwen‑чтение, подтверждение отправки и связь между pocket i ещё не подключены.</p>
   </section>
-  <section class="grid"><article><span>ТЕСТЫ CORE</span><strong>22 / 22</strong></article><article><span>LINUX PACKAGE</span><strong>121 MB</strong></article><article><span>PRIVATE SIDECAR</span><strong>PASS</strong></article><article><span>MAC BUILD</span><strong>NEXT</strong></article></section>
-  <p class="note">Linux AppImage собран и его внутренний core проверен после упаковки. Это неподписанная development‑сборка; публичной загрузки пока нет. Mac-builder уже подготовлен, но macOS‑результат появится здесь только после физического запуска владельцем.</p>
+  <section class="grid"><article><span>ТЕСТЫ CORE</span><strong>22 / 22</strong></article><article><span>LINUX PACKAGE</span><strong>129 MB</strong></article><article><span>DOWNLOADER</span><strong>3 / 3</strong></article><article><span>MAC BUILD</span><strong>NEXT</strong></article></section>
+  <section class="window"><p>CHECKPOINT 4B · FIRST-RUN SETUP</p><h2>Set up your pocket i.</h2><div class="stats"><article><span>1 · LOCAL MODEL</span><strong>5.03 GB</strong></article><article><span>2 · LLAMA.CPP</span><strong>NEXT</strong></article><article><span>3 · CODEX LIBRARY</span><strong>WAIT</strong></article></div><p class="note">Загрузчик продолжает оборванную загрузку и принимает модель только после проверки точного размера и SHA‑256. Пока проверены маленькие локальные fixtures; настоящая загрузка 5,03 ГБ ещё не запускалась.</p></section>
+  <p class="note">Новый Linux AppImage собран после обновления Electron; `npm audit` показывает 0 известных уязвимостей. Вопрос по‑прежнему выключен: следующий checkpoint должен встроить llama.cpp и доказать один локальный inference.</p>
 </main>
 </body>
 </html>

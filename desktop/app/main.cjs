@@ -1,6 +1,11 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const { spawn } = require("node:child_process");
 const path = require("node:path");
+const manifest = require("./model-manifest.json");
+const { SetupManager } = require("./setup.cjs");
+
+let mainWindow = null;
+let setupManager = null;
 
 function bridgeCommand(action) {
   if (app.isPackaged) {
@@ -74,12 +79,27 @@ function createWindow() {
   window.removeMenu();
   window.loadFile(path.join(__dirname, "renderer", "index.html"));
   window.once("ready-to-show", () => window.show());
+  mainWindow = window;
 }
 
 ipcMain.handle("pocket-i:health", () => runBridge("health"));
 ipcMain.handle("pocket-i:scan", () => runBridge("scan"));
+ipcMain.handle("pocket-i:setup-status", () => setupManager.status());
+ipcMain.handle("pocket-i:install-model", async () => {
+  await setupManager.installModel();
+  return setupManager.status();
+});
 
 app.whenReady().then(() => {
+  setupManager = new SetupManager({
+    userDataPath: app.getPath("userData"),
+    manifest,
+    onProgress: (progress) => {
+      if (mainWindow && !mainWindow.isDestroyed()) {
+        mainWindow.webContents.send("pocket-i:setup-progress", progress);
+      }
+    },
+  });
   createWindow();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -89,4 +109,3 @@ app.whenReady().then(() => {
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
-
