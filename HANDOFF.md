@@ -448,11 +448,14 @@ input bypasses the model. Free-form multi-pile synthesis on 0.6B remains
 unaccepted. Decision:
 `/experiments/E007/answer-synthesis-accepted-architecture-v0.1.json`.
 
-MVP exit work remains: package the app/presets; test quantized 1.7B and the 4B
-reranker on the actual phone; build owner-approved local-memory import and safe
-capability cards; integrate all accepted modules; connect MacBook+yukabox+phone
-in one authenticated room; then run and publish one locked end-to-end test with
-a simple inspection UI.
+On 2026-08-31 the owner removed the phone from the MVP. The accepted desktop
+plan is `experiments/E007-harness-mvp/DESKTOP_MVP_PLAN.md`; its public checkpoint
+is `/experiment/e007/desktop-mvp/`. MVP exit work is now: integrate the accepted
+modules into one core; finish strict Codex, Claude Code and local ChatGPT
+adapters; add owner-approved evidence exchange; build a simple inspection UI;
+package the same core for macOS, Windows and Linux; then run one fresh locked
+English end-to-end test on at least two physical computers. Phone support and
+model training remain explicitly later and are not authorised by this plan.
 
 Checkpoint 3C.6A is locked before its first run at
 `/experiments/E007/source-anchor-protocol-v0.1.json`. It isolates ordinary

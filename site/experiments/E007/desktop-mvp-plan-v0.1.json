@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "checkpoint": "desktop-mvp-0",
+  "status": "accepted_plan_not_built",
+  "accepted_at": "2026-08-31",
+  "scope": {
+    "platforms": ["macOS", "Windows", "Linux"],
+    "excluded_from_mvp": ["phone"],
+    "training_authorised": false,
+    "language_for_locked_test": "English"
+  },
+  "checkpoints": [
+    "one local core",
+    "local library adapters",
+    "evidence retrieval and verification",
+    "safe network exchange",
+    "answer assembly with alternatives",
+    "simple desktop UI",
+    "three installers and one locked physical test"
+  ],
+  "definition_of_done": [
+    "terminal-free install and model download",
+    "visible-message-only local library",
+    "owner preview before any evidence leaves a device",
+    "answer with inspectable provenance and separate alternatives",
+    "same flow packaged for macOS, Windows and Linux"
+  ],
+  "claim_boundary": "This checkpoint fixes product scope and order of work. It does not prove that the integrated pipeline or any installer works."
+}
+
