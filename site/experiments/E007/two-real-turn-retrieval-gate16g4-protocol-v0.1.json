@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16G.4",
+  "status": "locked_before_run",
+  "kind": "two real question-to-answer retrieval smoke",
+  "hypothesis": "Can the accepted local candidate search recover the real assistant answer following a real user question in one Claude Code sample and one Codex sample?",
+  "sample": {
+    "sources": ["newest main Claude Code conversation", "newest main Codex conversation"],
+    "visible_messages_per_source": 20,
+    "pair": "last user message with a following assistant message",
+    "query_handling": "remove the exact user message from the searchable candidates",
+    "gold": "the first following visible assistant message"
+  },
+  "retrieval": {
+    "lexical_candidates": 5,
+    "multilingual_dense_candidates": 5,
+    "maximum_union": 10,
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 via fastembed 0.8.0"
+  },
+  "success_gate": {
+    "gold_answer_in_candidate_union": "2/2",
+    "source_files_fully_read": 2,
+    "visible_messages_indexed": "at most 40",
+    "public_message_text": 0
+  },
+  "claim_boundary": "This is a two-example plumbing smoke using an exact historical user question. It does not validate paraphrased questions, empty answers, semantic sufficiency or production-scale retrieval."
+}
