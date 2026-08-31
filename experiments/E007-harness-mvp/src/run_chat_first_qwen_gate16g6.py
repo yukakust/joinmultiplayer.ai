@@ -152,7 +152,7 @@ def main() -> None:
     import numpy as np
     import torch
     from fastembed import TextEmbedding
-    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from transformers import AutoModelForCausalLM, AutoTokenizer, StoppingCriteria
 
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--protocol", type=Path, default=PROTOCOL)
@@ -162,9 +162,12 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--threads", type=int, default=12)
     parser.add_argument("--route-only", action="store_true")
+    parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
-    if args.output.exists():
+    if args.output.exists() and not args.resume:
         raise RuntimeError(f"Refusing to overwrite preserved result: {args.output}")
+    if args.resume and not args.output.exists():
+        raise RuntimeError("Cannot resume because the private result does not exist")
     protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
     questions = json.loads(QUESTIONS.read_text(encoding="utf-8"))["queries"]
     source_bytes = args.payload.read_bytes()
@@ -220,13 +223,33 @@ def main() -> None:
         return
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL, revision=REVISION, local_files_only=True)
+
+    class StopAfterToolCall(StoppingCriteria):
+        def __init__(self, prefix_tokens: int):
+            self.prefix_tokens = prefix_tokens
+
+        def __call__(self, input_ids, scores, **kwargs):
+            generated = tokenizer.decode(input_ids[0, self.prefix_tokens:], skip_special_tokens=True)
+            return "</tool_call>" in generated
+
     torch.set_num_threads(args.threads)
     model = AutoModelForCausalLM.from_pretrained(MODEL, revision=REVISION, local_files_only=True, dtype=torch.bfloat16).eval()
-    result = {"schema_version":"0.1-private","experiment":"E007","gate":"16G.6","status":"running","index_built_this_run":index_built,"routes":routes,"rows":[]}
-    private_write(args.output, result)
+    if args.resume:
+        result = json.loads(args.output.read_text(encoding="utf-8"))
+        expected_routes = [(route["id"], route["routed_chats"]) for route in routes]
+        saved_routes = [(route["id"], route["routed_chats"]) for route in result.get("routes", [])]
+        if saved_routes != expected_routes:
+            raise RuntimeError("Cannot resume: routed conversations changed")
+        result["status"] = "running"
+    else:
+        result = {"schema_version":"0.1-private","experiment":"E007","gate":"16G.6","status":"running","index_built_this_run":index_built,"routes":routes,"rows":[]}
+        private_write(args.output, result)
+    completed = {(row["question_id"], row["route_rank"]) for row in result["rows"]}
     query_vector_by_id = {item["id"]: vector for item, vector in zip(questions, query_vectors)}
     for route in routes:
         for route_rank, card_id in enumerate(route["routed_chats"], 1):
+            if (route["id"], route_rank) in completed:
+                continue
             messages = chats[card_id]["messages"]
             whole = render_messages(messages)
             whole_tokens = len(tokenizer.encode(whole, add_special_tokens=False))
@@ -255,7 +278,11 @@ def main() -> None:
             encoded = tokenizer(prompt, return_tensors="pt")
             started = time.monotonic()
             with torch.inference_mode():
-                generated = model.generate(**encoded, max_new_tokens=256, do_sample=False, pad_token_id=tokenizer.eos_token_id)
+                generated = model.generate(
+                    **encoded, max_new_tokens=256, do_sample=False,
+                    pad_token_id=tokenizer.eos_token_id,
+                    stopping_criteria=[StopAfterToolCall(int(encoded.input_ids.shape[1]))],
+                )
             raw = tokenizer.decode(generated[0, encoded.input_ids.shape[1]:], skip_special_tokens=True).strip()
             parsed = parse_tool(raw, {message["id"] for message in supplied})
             row = {
