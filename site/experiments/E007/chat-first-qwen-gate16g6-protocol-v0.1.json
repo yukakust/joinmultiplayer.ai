@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.1",
+  "experiment": "E007",
+  "gate": "16G.6",
+  "status": "locked_before_run",
+  "kind": "chat-first retrieval and Qwen reading",
+  "hypothesis": "Can the agreed harness route ten new questions to the right local conversations, give Qwen3-8B either the whole short chat or selected areas of a long chat, and return a grounded answer with exact message evidence?",
+  "source": {
+    "private_snapshot_sha256": "4c916989dbcf4a67596f159057713dddc3c589f5cd85dac111a8d8f3a801d9ee",
+    "conversations": 58,
+    "visible_messages": 2727,
+    "short_conversations_at_most_10000_qwen_tokens": 55,
+    "long_conversations_over_10000_qwen_tokens": 3
+  },
+  "pipeline": [
+    "index complete visible messages while preserving conversation membership",
+    "route each new question with the union of lexical and multilingual-neural chat rankings",
+    "keep the first three routed conversations",
+    "give Qwen the whole conversation when it is at most 10000 Qwen tokens",
+    "for a longer conversation select lexical-plus-neural message areas and keep complete messages within a 10000-token reader budget",
+    "ask Qwen once per routed conversation for FOUND(claim, evidence message IDs) or EMPTY",
+    "verify mechanically that every evidence ID exists in the supplied context",
+    "review the resulting claims against the private source before publishing aggregates"
+  ],
+  "routing": {
+    "lexical_chat_candidates": 5,
+    "dense_chat_candidates": 5,
+    "fusion": "reciprocal-rank union",
+    "reader_chats": 3
+  },
+  "long_chat_branch": {
+    "lexical_message_candidates": 5,
+    "dense_message_candidates": 5,
+    "area": "candidate message plus its immediate previous and next complete messages",
+    "reader_budget_tokens": 10000,
+    "arbitrary_text_cutting": false
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "dtype": "bfloat16",
+    "device": "yukabox CPU",
+    "thinking": false,
+    "sampling": false,
+    "max_new_tokens": 256
+  },
+  "questions": "/experiments/E007/whole-chat-index-protocol-v0.1.json",
+  "success_gate": {
+    "expected_chat_routed_top_3": "10/10",
+    "expected_chat_returns_grounded_FOUND": "10/10",
+    "all_evidence_coordinates_valid": "10/10",
+    "human_claim_faithfulness": "10/10"
+  },
+  "privacy": "Conversation text, paths, hashes, raw model output and unreviewed claims remain private. Public output may contain only the already-public questions, aggregate states and manually reviewed safe paraphrases.",
+  "claim_boundary": "The ten questions are new relative to the immutable source conversations but were used in earlier isolated routing/reader gates. This gate tests their first locked end-to-end composition, not unseen-domain generalization."
+}
