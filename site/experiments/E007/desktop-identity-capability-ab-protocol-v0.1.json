@@ -1,0 +1,35 @@
+{
+  "schema_version": "e007-desktop-identity-capability-ab-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "6C",
+  "status": "locked_before_run",
+  "hypothesis": "Adding the short pocket i identity kernel does not make Qwen3-8B worse at turning a complete evidence shelf into a correct supported answer.",
+  "source": {
+    "url": "/experiments/E007/used-shelf-writer-result-v0.1.json",
+    "sha256": "6c08ae497a2845d1ab881fe71ad15537074288c72d7e0d3a1d259dbd4b0e1002",
+    "original_result": "30/30 complete supported answers"
+  },
+  "locked_cases": ["E7-Q01", "E7-Q02", "E7-Q03", "E7-Q04", "E7-Q05", "E7-Q06", "E7-Q07", "E7-Q08", "E7-Q09", "E7-Q10"],
+  "conditions": {
+    "A": "original Gate 15F technical-writer system prompt",
+    "B": "short pocket i identity kernel followed by the unchanged Gate 15F technical-writer system prompt"
+  },
+  "controls": {
+    "same_physical_macbook": true,
+    "same_qwen3_8b_gguf": true,
+    "same_llama_cpp_runtime": true,
+    "same_user_prompt_in_each_pair": true,
+    "greedy_decoding": true,
+    "independent_process_per_answer": true,
+    "condition_order_alternates": true
+  },
+  "locked_success": {
+    "B_parseable_json": "10/10",
+    "B_correct_diagnosis": "10/10",
+    "B_correct_safe_action": "10/10",
+    "B_unsupported_facts": 0,
+    "B_identity_or_lore_leaks": 0,
+    "B_not_worse_than_A_on_any_metric": true
+  },
+  "claim_boundary": "Ten reused synthetic English writer cases can expose an obvious regression. They cannot prove broad capability preservation, retrieval quality, networking, or statistical equivalence."
+}

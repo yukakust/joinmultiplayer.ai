@@ -1,0 +1,9 @@
+{
+  "schema_version": "e007-desktop-identity-owner-decision-v0.1",
+  "experiment": "E007",
+  "checkpoint": "6B-owner-decision",
+  "decision": "accept_identity_voice",
+  "owner_observation": "The new version's answers are liked and accepted. Personality work is sufficient for this MVP stage.",
+  "preserved_observation": "The physical A/B answer to 'Is the Merger real?' remains published exactly as generated; acceptance does not erase it.",
+  "next_priority": "Prove that the identity does not reduce performance on the evidence-to-answer work for which pocket i is being built."
+}
