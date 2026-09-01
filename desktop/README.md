@@ -74,3 +74,7 @@ Checkpoint 4C applies the exact `forge-chassis-texture-v1` asset from the
 Pocket i Figma file (node `19:2`) to that setup flow. The left display owns the
 current action; the right display shows setup state. No model or privacy logic
 changed in this visual checkpoint.
+
+Checkpoint 4D removes setup copy that duplicated the small status display. The
+main display now contains one instruction, one progress line and one action.
+The question field stays absent until it can actually work.

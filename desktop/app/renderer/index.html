@@ -14,32 +14,23 @@
     <section class="main-screen">
       <header>
         <div class="brand"><span></span><i></i></div>
-        <div><small>POCKET i · FIRST LIGHT</small><h1>Wake your<br>pocket i.</h1></div>
+        <h1>Wake your i.</h1>
       </header>
 
-      <div class="model-card">
-        <div><small>01 · LOCAL MIND</small><h2>Qwen3 8B</h2><p>5.03 GB · stays on this computer</p></div>
-        <strong id="model-status">CHECKING</strong>
-      </div>
       <div class="progress" aria-hidden="true"><span id="bar"></span></div>
-      <p id="progress-label" class="detail">Checking memory and free space…</p>
-      <button id="install" hidden>IGNITE POCKET i</button>
-
-      <div class="ask-preview">
-        <label for="prompt">ASK YOUR POCKET i</label>
-        <textarea id="prompt" disabled placeholder="Available after first light."></textarea>
-      </div>
+      <p id="progress-label" class="detail">Checking…</p>
+      <button id="install" hidden>WAKE i</button>
       <p id="error" class="error" hidden></p>
     </section>
 
     <aside class="status-screen">
-      <small>AWAKENING</small>
+      <small>POCKET i</small>
       <ol>
-        <li class="current"><span>01</span><div><strong>MODEL</strong><p id="model-side-status">checking</p></div></li>
+        <li class="current"><span>01</span><div><strong>QWEN3 8B</strong><p id="model-status">checking</p></div></li>
         <li><span>02</span><div><strong>RUNTIME</strong><p>next</p></div></li>
         <li><span>03</span><div><strong>MEMORY</strong><p id="library-status">waiting</p></div></li>
       </ol>
-      <div class="library"><small>LOCAL LIBRARY</small><p id="library-detail">Waiting for the model</p></div>
+      <p id="library-detail" hidden></p>
       <p class="privacy">Nothing leaves this device.</p>
     </aside>
   </main>

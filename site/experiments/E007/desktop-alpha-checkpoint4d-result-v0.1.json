@@ -1,0 +1,29 @@
+{
+  "schema_version": "e007-desktop-alpha-checkpoint4d-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "4D",
+  "status": "development_passed_visual_only",
+  "change": "Removed duplicate setup copy and the unavailable question field from the main display.",
+  "main_display": [
+    "i",
+    "Wake your i.",
+    "progress",
+    "WAKE i"
+  ],
+  "side_display": "Qwen, runtime and memory status only",
+  "tests": {
+    "python_core_passed": 22,
+    "downloader_passed": 3,
+    "failed": 0
+  },
+  "development_package": {
+    "platform": "linux-x64 AppImage",
+    "version": "0.1.0-alpha.4",
+    "bytes": 137599330,
+    "sha256": "978f4a4f3421e7c9ac0819ba7e58f4ac48323f6424e8893d8559b4544df0aa32"
+  },
+  "not_claimed": [
+    "physical DMG inspection",
+    "local inference"
+  ]
+}

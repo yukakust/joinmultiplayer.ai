@@ -37,6 +37,10 @@ display now owns the current setup action and the smaller display shows the
 three states. This is a visual development checkpoint only; it does not advance
 the runtime or inference claims.
 
+Checkpoint 4D simplified the main display after owner review: symbol, one
+instruction, progress and one button. Technical state remains on the smaller
+display; unavailable future controls are not shown.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.
