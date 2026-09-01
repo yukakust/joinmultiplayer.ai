@@ -1,0 +1,38 @@
+{
+  "schema_version": "e007-desktop-local-library-checkpoint6d-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "6D",
+  "status": "development_pass_with_linux_bridge_smoke_mac_package_pending",
+  "hypothesis": "The desktop app can discover Codex and Claude Code conversations while exposing only per-source counts to its renderer.",
+  "change": {
+    "enabled_sources": ["codex", "claude_code"],
+    "visible_status": "Codex N · Claude N",
+    "renderer_receives": ["source name", "source state", "conversation count", "aggregate status"],
+    "renderer_does_not_receive": [
+      "conversation text",
+      "conversation title",
+      "filesystem path",
+      "conversation identifier",
+      "message coordinate"
+    ]
+  },
+  "fixture_test": {
+    "sources_found": "2/2",
+    "conversations_counted": "2/2",
+    "private_fixture_text_in_bridge_output": false,
+    "private_path_in_bridge_output": false,
+    "private_identifier_in_bridge_output": false
+  },
+  "yukabox_bridge_smoke": {
+    "status": "passed",
+    "codex_conversations": 61,
+    "claude_code_conversations": 0,
+    "private_content_returned": false
+  },
+  "suite": {
+    "desktop_app": "12/12 passed",
+    "desktop_core": "22/22 passed"
+  },
+  "decision": "Keep the counts-only Local Library boundary and verify it next in a fresh packaged macOS build.",
+  "claim_boundary": "This is a fixture-backed development checkpoint plus an unpackaged Linux bridge smoke. It does not yet prove that a packaged Mac build can scan the owner's real library, retrieve evidence, or answer from it."
+}

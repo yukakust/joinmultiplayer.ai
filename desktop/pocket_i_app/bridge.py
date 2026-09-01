@@ -13,25 +13,33 @@ import sys
 from pocket_i_core.library import scan_local_library
 
 
+ENABLED_SOURCES = ("codex", "claude_code")
+
+
 def handle(action: str) -> dict[str, object]:
     if action == "health":
         return {
             "status": "ready",
-            "version": "desktop-alpha-checkpoint-4a",
-            "source": "codex",
+            "version": "desktop-alpha-checkpoint-6d",
+            "enabled_sources": list(ENABLED_SOURCES),
             "privacy": "no conversation text, paths or identifiers",
         }
     if action == "scan":
-        library = scan_local_library(sources=("codex",))
-        summary = library.public_summary()
-        summary.update(
-            {
-                "status": "ready",
-                "version": "desktop-alpha-checkpoint-4a",
-                "enabled_sources": ["codex"],
-            }
-        )
-        return summary
+        library = scan_local_library(sources=ENABLED_SOURCES)
+        return {
+            "schema_version": "desktop-library-counts-v0.1",
+            "status": "ready",
+            "version": "desktop-alpha-checkpoint-6d",
+            "total_conversations": len(library.conversations),
+            "adapters": [
+                {
+                    "source": adapter.source,
+                    "state": adapter.status,
+                    "conversations": adapter.conversations,
+                }
+                for adapter in library.adapters
+            ],
+        }
     raise ValueError("unsupported bridge action")
 
 
@@ -58,4 +66,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

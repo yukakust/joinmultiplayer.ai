@@ -43,8 +43,8 @@ are embedded again. A model-fingerprint change deliberately rebuilds the cache.
 
 `app/` contains the Checkpoint 4A Electron shell and `pocket_i_app/bridge.py`
 contains its bundled private sidecar boundary. The current window can inspect
-the Codex-only Local Library and receives counts only. Asking the swarm remains
-disabled until the evidence reader is connected.
+the Codex and Claude Code Local Library and receives conversation counts only.
+Asking the swarm remains disabled until the evidence reader is connected.
 
 Build the current native platform after installing the locked npm dependencies
 and PyInstaller in the selected Python environment:
@@ -113,3 +113,11 @@ on ten frozen Gate 15F evidence-to-answer cases. Both conditions preserve all
 ten diagnoses, actions, and exact evidence-ID sets; the identity condition adds
 no lore or unsupported fact. The run also exposed and fixed a long-prompt output
 adapter fallback when pinned llama-cli abbreviates its echoed prompt.
+
+Checkpoint 6D connects both accepted local sources to the desktop status panel.
+The panel shows only `Codex N · Claude N`. Conversation text, paths, names,
+identifiers and message coordinates remain inside the Python core and never
+cross into the Electron renderer. Fixture tests cover both sources and the
+counts-only boundary; a fresh packaged Mac scan remains the next physical gate.
+The same bridge was also run directly on yukabox: it reported 61 Codex
+conversations and no Claude Code library, while returning no private content.

@@ -78,6 +78,13 @@ writer on ten frozen physical Qwen3-8B evidence-to-answer pairs. A separate
 runner-envelope bug exposed local paths in the private result only; it was not
 published and the desktop output adapter gained a long-prompt regression test.
 
+Checkpoint 6D exposes the first Local Library state in the app: conversation
+counts for Codex and Claude Code. The renderer receives no conversation text,
+path, title, identifier or coordinate. This is an interface and privacy-boundary
+test, not yet a physical scan or evidence-retrieval result.
+The unpackaged bridge smoke on yukabox found 61 Codex conversations and zero
+Claude Code conversations. A packaged Mac scan remains unverified.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

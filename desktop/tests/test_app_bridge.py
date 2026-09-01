@@ -15,13 +15,16 @@ class DesktopBridgeTests(unittest.TestCase):
     def test_health_is_counts_only_contract(self):
         result = handle("health")
         self.assertEqual("ready", result["status"])
-        self.assertEqual("codex", result["source"])
+        self.assertEqual(["codex", "claude_code"], result["enabled_sources"])
 
     def test_scan_exposes_counts_but_not_private_text(self):
         with tempfile.TemporaryDirectory() as directory:
             codex_home = Path(directory)
             sessions = codex_home / "sessions"
             sessions.mkdir()
+            home = codex_home / "home"
+            claude = home / ".claude" / "projects" / "private-project"
+            claude.mkdir(parents=True)
             private = "DO-NOT-SHOW-THIS-TEXT"
             rows = [
                 {"type": "session_meta", "payload": {"id": "private-session"}},
@@ -30,7 +33,18 @@ class DesktopBridgeTests(unittest.TestCase):
             (sessions / "one.jsonl").write_text(
                 "\n".join(json.dumps(item) for item in rows), encoding="utf-8"
             )
-            environment = dict(os.environ, CODEX_HOME=str(codex_home))
+            claude_rows = [
+                {
+                    "type": "user",
+                    "sessionId": "private-claude-session",
+                    "uuid": "private-message",
+                    "message": {"role": "user", "content": private},
+                }
+            ]
+            (claude / "one.jsonl").write_text(
+                "\n".join(json.dumps(item) for item in claude_rows), encoding="utf-8"
+            )
+            environment = dict(os.environ, CODEX_HOME=str(codex_home), HOME=str(home))
             process = subprocess.run(
                 [sys.executable, "-m", "pocket_i_app.bridge", "--action", "scan"],
                 check=False,
@@ -40,11 +54,21 @@ class DesktopBridgeTests(unittest.TestCase):
             )
             self.assertEqual(0, process.returncode)
             result = json.loads(process.stdout)
-            self.assertEqual(1, result["total_conversations"])
-            self.assertEqual(1, result["total_messages"])
+            self.assertEqual(2, result["total_conversations"])
+            self.assertEqual(
+                {"codex": 1, "claude_code": 1},
+                {item["source"]: item["conversations"] for item in result["adapters"]},
+            )
+            self.assertEqual(
+                {"schema_version", "status", "version", "total_conversations", "adapters"},
+                set(result),
+            )
+            self.assertTrue(all(set(item) == {"source", "state", "conversations"} for item in result["adapters"]))
             self.assertNotIn(private, process.stdout)
             self.assertNotIn(str(codex_home), process.stdout)
             self.assertNotIn("private-session", process.stdout)
+            self.assertNotIn("private-claude-session", process.stdout)
+            self.assertNotIn("private-project", process.stdout)
 
     def test_unknown_action_fails_closed(self):
         with self.assertRaises(ValueError):
@@ -53,4 +77,3 @@ class DesktopBridgeTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

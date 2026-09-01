@@ -21,7 +21,10 @@ async function scanLibrary() {
   libraryStatus.textContent = "CHECKING";
   const library = await window.pocketI.scan();
   libraryStatus.textContent = library.total_conversations ? "READY" : "EMPTY";
-  libraryDetail.textContent = `${library.total_conversations} conversations · ${library.total_messages} visible messages`;
+  const counts = Object.fromEntries(
+    library.adapters.map((adapter) => [adapter.source, adapter.conversations]),
+  );
+  libraryDetail.textContent = `Codex ${counts.codex || 0} · Claude ${counts.claude_code || 0}`;
 }
 
 async function renderStatus() {
