@@ -56,6 +56,11 @@ answered on the owner's MacBook without a remote endpoint. It also exposed an
 output-adapter failure: the chat displayed llama-cli diagnostics. The next
 package removes the pinned runtime envelope and keeps only the generated answer.
 
+Checkpoint 5D physically reran that boundary with alpha.7. The downloaded model
+survived the application update, inference still worked, and the output adapter
+showed only the user's question and Qwen's answer. This closes presentation of
+one local answer, not memory, multi-turn context, or swarm behavior.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

@@ -91,3 +91,8 @@ now names Qwen3 8B before showing transferred and total size.
 Checkpoint 5C records the first physical Qwen3-8B answer on macOS. Inference
 worked, but llama-cli's banner, prompt echo and exit text reached the chat. The
 pinned-output adapter now extracts only the answer and disables runtime logs.
+
+Checkpoint 5D physically verifies alpha.7 on the owner's MacBook. The existing
+model was reused, Qwen3-8B answered locally, and the chat displayed only the
+question and model answer. Local-memory retrieval and swarm transport remain
+outside this checkpoint.

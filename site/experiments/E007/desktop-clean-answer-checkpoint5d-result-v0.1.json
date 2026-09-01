@@ -1,0 +1,23 @@
+{
+  "schema_version": "e007-desktop-clean-answer-checkpoint5d-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "5D",
+  "status": "physical_pass",
+  "observed_at": "2026-09-01",
+  "platform": "owner MacBook, macOS arm64",
+  "package": "0.1.0-alpha.7",
+  "question": "Who are you?",
+  "visible_model_answer": "I am Qwen, a large language model developed by Alibaba Cloud. I can assist with a wide range of tasks, including answering questions, creating text, and providing information. How can I help you today?",
+  "checks": {
+    "existing_model_reused_after_app_update": true,
+    "local_qwen3_8b_inference_completed": true,
+    "prompt_visible": true,
+    "answer_visible": true,
+    "runtime_banner_visible": false,
+    "local_model_path_visible": false,
+    "prompt_echo_from_runtime_visible": false,
+    "exit_marker_visible": false
+  },
+  "preserved_failure": "/experiments/E007/desktop-first-local-answer-checkpoint5c-result-v0.1.json",
+  "claim_boundary": "This physically verifies one clean local Qwen3-8B answer after an application update. It does not test local-memory retrieval, model-visible multi-turn history, evidence handling, networking, or swarm inference."
+}
