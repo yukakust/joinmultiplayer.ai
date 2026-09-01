@@ -85,6 +85,11 @@ test, not yet a physical scan or evidence-retrieval result.
 The unpackaged bridge smoke on yukabox found 61 Codex conversations and zero
 Claude Code conversations. A packaged Mac scan remains unverified.
 
+Checkpoint 6E changes status discovery to a metadata-only session inventory so
+the UI does not parse gigabytes of message bodies merely to show counts. The
+pinned alpha.8 Mac build at revision `c36e807` is awaiting the owner's physical
+run. Evidence retrieval remains deliberately outside this gate.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

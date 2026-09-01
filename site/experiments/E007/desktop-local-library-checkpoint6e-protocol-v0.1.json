@@ -1,0 +1,24 @@
+{
+  "schema_version": "e007-desktop-local-library-checkpoint6e-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "6E",
+  "status": "preregistered_awaiting_owner_mac_run",
+  "source_revision": "c36e807",
+  "artifact": "Pocket-i-0.1.0-alpha.8-arm64-c36e807.dmg",
+  "hypothesis": "A fresh packaged macOS build can open the existing local model and show Codex and Claude Code conversation counts without reading message bodies or exposing private metadata to the renderer.",
+  "procedure": [
+    "Build the pinned source revision on the owner MacBook.",
+    "Run all core and desktop tests before packaging.",
+    "Install the unsigned development DMG over the previous alpha.",
+    "Open Pocket i and inspect the MEMORY row.",
+    "Record only the two visible counts and whether the app remained responsive."
+  ],
+  "locked_success": [
+    "The application opens.",
+    "The existing model remains available or can be reused without a second model download.",
+    "MEMORY leaves CHECKING and becomes READY or EMPTY.",
+    "The line Codex N · Claude N appears.",
+    "No conversation text, title, path or identifier appears in the UI."
+  ],
+  "known_boundary": "This verifies packaging and count-only discovery. It does not retrieve evidence or answer from the Local Library."
+}

@@ -121,3 +121,10 @@ cross into the Electron renderer. Fixture tests cover both sources and the
 counts-only boundary; a fresh packaged Mac scan remains the next physical gate.
 The same bridge was also run directly on yukabox: it reported 61 Codex
 conversations and no Claude Code library, while returning no private content.
+
+Before Checkpoint 6E packaging, the count path was made metadata-only. It no
+longer constructs conversations or reads message bodies merely to paint two
+numbers. On yukabox the new inventory returned 68 Codex session records in
+about a tenth of a second. The different number is expected: the earlier full
+reader counted only non-empty visible conversations; the status panel counts
+top-level session records. The pinned Mac build source is revision `c36e807`.
