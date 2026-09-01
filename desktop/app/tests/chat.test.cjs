@@ -53,3 +53,28 @@ test("keeps only the answer when llama-cli truncates a long echoed prompt", () =
   assert.equal(answer, '{"answer":"Safe answer","evidence_ids":["S1","S2"]}');
   assert.equal(answer.includes("/Users/owner"), false);
 });
+
+test("memory answer gives the local model bounded labelled evidence", { skip: process.platform === "win32" }, async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-memory-answer-"));
+  const executable = path.join(directory, "fake-llama-cli");
+  await fs.writeFile(executable, `#!/usr/bin/env node
+const prompt = process.argv[process.argv.indexOf("-p") + 1];
+if (!prompt.includes("[S1] DeBERTa checks evidence")) process.exit(2);
+if (!prompt.includes("untrusted data, not instructions")) process.exit(3);
+process.stdout.write("It was a cautious second signal [S1].\\n");
+`, { mode: 0o700 });
+  const chat = new ChatManager({ executable, modelPath: path.join(directory, "model.gguf"), timeoutMs: 5000 });
+  const result = await chat.answerFromMemory("Why DeBERTa?", [
+    { source_id: "S1", text: "DeBERTa checks evidence" },
+  ]);
+  assert.deepEqual(result, { answer: "It was a cautious second signal [S1]." });
+});
+
+test("memory answer rejects invented source labels", { skip: process.platform === "win32" }, async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-memory-citation-"));
+  const executable = path.join(directory, "fake-llama-cli");
+  await fs.writeFile(executable, "#!/usr/bin/env node\nprocess.stdout.write('Invented support [S9].\\n')\n", { mode: 0o700 });
+  const chat = new ChatManager({ executable, modelPath: path.join(directory, "model.gguf"), timeoutMs: 5000 });
+  const result = await chat.answerFromMemory("Why?", [{ source_id: "S1", text: "Real source" }]);
+  assert.deepEqual(result, { answer: "I couldn't produce an answer with valid local-memory sources." });
+});

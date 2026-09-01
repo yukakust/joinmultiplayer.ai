@@ -105,6 +105,10 @@ ipcMain.handle("pocket-i:connect-memory", () => memoryService.call("connect", {}
 ipcMain.handle("pocket-i:route-memory", (_event, question) =>
   memoryService.call("route", { question }, 600000),
 );
+ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
+  const context = await memoryService.call("context", { question }, 600000);
+  return chatManager.answerFromMemory(question, context.items);
+});
 ipcMain.handle("pocket-i:setup-status", () => setupManager.status());
 ipcMain.handle("pocket-i:install-model", async () => {
   await setupManager.installModel();

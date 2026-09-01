@@ -96,6 +96,19 @@ def _production_embedder(data_dir: Path) -> EmbedBatch:
     return embed
 
 
+def _question_centered_excerpt(text: str, question: str, limit: int = 1800) -> str:
+    text = " ".join(text.split())
+    if len(text) <= limit:
+        return text
+    terms = sorted({term.strip(".,?!:;()[]{}") for term in question.split() if len(term) >= 4}, key=len, reverse=True)
+    folded = text.casefold()
+    position = next((folded.find(term.casefold()) for term in terms if folded.find(term.casefold()) >= 0), 0)
+    start = max(0, position - limit // 3)
+    end = min(len(text), start + limit)
+    start = max(0, end - limit)
+    return ("…" if start else "") + text[start:end] + ("…" if end < len(text) else "")
+
+
 class MemoryRuntime:
     """Hold plaintext conversations and the live index in RAM after consent."""
 
@@ -149,6 +162,8 @@ class MemoryRuntime:
             return self.connect()
         if action == "route":
             return self.route(question)
+        if action == "context":
+            return self.context(question)
         raise ValueError("unsupported bridge action")
 
     def connect(self) -> dict[str, object]:
@@ -235,6 +250,38 @@ class MemoryRuntime:
             "privacy": "matched previews are returned only to the local owner window",
         }
 
+    def context(self, question: str | None) -> dict[str, object]:
+        if self.data_dir is None:
+            raise ValueError("data_dir is required for memory context")
+        if not _read_state(self.data_dir)["connected"]:
+            raise ValueError("local memory is not connected")
+        question = (question or "").strip()
+        if not question or len(question) > 4000:
+            raise ValueError("question must contain between 1 and 4000 characters")
+        if self.index is None or self.library is None:
+            self.connect()
+        route = self.index.route(question, top_k=5)
+        hits = self.index.context_hits(question, route.conversation_ids, per_conversation=2, limit=10)
+        by_id = {item.conversation_id: item for item in self.library.conversations}
+        items = []
+        for number, hit in enumerate(hits, 1):
+            conversation = by_id[hit.conversation_id]
+            message = conversation.messages[hit.message_position]
+            items.append(
+                {
+                    "source_id": f"S{number}",
+                    "source": conversation.source,
+                    "role": message.role,
+                    "text": _question_centered_excerpt(message.text, question),
+                }
+            )
+        return {
+            "schema_version": "desktop-memory-context-v0.1",
+            "status": "ready",
+            "items": items,
+            "privacy": "raw excerpts may be consumed only by the local writer process",
+        }
+
     def _progress(self, payload: dict[str, object]) -> None:
         if self.on_progress is not None:
             self.on_progress(payload)
@@ -274,7 +321,7 @@ def _serve(runtime: MemoryRuntime) -> int:
             action = request.get("action")
             payload = request.get("payload") or {}
             if not isinstance(response_id, int) or action not in {
-                "health", "scan", "memory-status", "connect", "route"
+                "health", "scan", "memory-status", "connect", "route", "context"
             } or not isinstance(payload, dict):
                 raise ValueError("invalid request")
             runtime.on_progress = lambda progress: print(
@@ -294,7 +341,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Pocket i desktop private bridge")
     parser.add_argument(
         "--action",
-        choices=("health", "scan", "memory-status", "connect", "route", "serve"),
+        choices=("health", "scan", "memory-status", "connect", "route", "context", "serve"),
         required=True,
     )
     parser.add_argument("--data-dir", type=Path)

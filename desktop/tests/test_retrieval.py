@@ -55,6 +55,27 @@ class HybridRetrievalTests(unittest.TestCase):
         self.assertEqual("long", result.conversation_ids[0])
         self.assertEqual(("long", 1), (hits[0].conversation_id, hits[0].message_position))
 
+    def test_context_keeps_exact_and_semantic_messages_from_the_selected_chat(self):
+        conversations = (
+            chat(
+                "target",
+                "DeBERTa checks whether evidence supports a claim.",
+                "A cautious semantic verifier helps reject attractive noise.",
+                "Why judge evidence in an unrelated courtroom?",
+            ),
+        )
+        def semantic_embed(texts):
+            return [
+                [0.0, 1.0] if "cautious" in text.casefold() or text.startswith("Why") else [1.0, 0.0]
+                for text in texts
+            ]
+
+        index = HybridChatIndex(conversations, semantic_embed)
+
+        hits = index.context_hits("Why did DeBERTa judge evidence?", ("target",), per_conversation=2)
+
+        self.assertEqual({0, 1}, {item.message_position for item in hits})
+
     def test_public_summary_contains_only_rank_not_private_identifiers(self):
         private_id = "PRIVATE-CONVERSATION-ID"
         index = HybridChatIndex([chat(private_id, "Desktop package")], KeywordEmbedder(("desktop",)))

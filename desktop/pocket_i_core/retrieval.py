@@ -142,6 +142,63 @@ class HybridChatIndex:
             hits.append(RouteHit(conversation_id, self._message_positions[best]))
         return RouteResult(tuple(fused), tuple(lexical), tuple(neural)), tuple(hits)
 
+    def context_hits(
+        self,
+        question: str,
+        conversation_ids: Sequence[str],
+        *,
+        per_conversation: int = 2,
+        limit: int = 10,
+    ) -> tuple[RouteHit, ...]:
+        """Keep both exact-word and semantic messages from each selected chat."""
+        if per_conversation < 1 or limit < 1:
+            raise ValueError("context limits must be positive")
+        if set(conversation_ids) - set(self._conversation_ids):
+            raise ValueError("context requested an unknown conversation")
+        lexical_scores = self._bm25(question)
+        query_vectors = tuple(tuple(float(value) for value in vector) for vector in self._embed((question,)))
+        if len(query_vectors) != 1:
+            raise ValueError("embedder must return exactly one query vector")
+        neural_scores = [_cosine(query_vectors[0], vector) for vector in self._vectors]
+        result: list[RouteHit] = []
+        seen: set[tuple[str, int]] = set()
+        for conversation_id in conversation_ids:
+            candidates = [
+                index for index, item in enumerate(self._message_conversations) if item == conversation_id
+            ]
+            lexical = sorted(candidates, key=lambda index: (-lexical_scores[index], index))
+            neural = sorted(candidates, key=lambda index: (-neural_scores[index], index))
+            selected: list[int] = []
+            anchor = self._rare_anchor(question, candidates)
+            ordered_candidates = [anchor] if anchor is not None else []
+            for offset in range(per_conversation):
+                if offset < len(neural):
+                    ordered_candidates.append(neural[offset])
+                if offset < len(lexical):
+                    ordered_candidates.append(lexical[offset])
+            for index in ordered_candidates:
+                if index not in selected:
+                    selected.append(index)
+                if len(selected) == per_conversation:
+                    break
+            for index in selected:
+                key = (conversation_id, self._message_positions[index])
+                if key in seen:
+                    continue
+                seen.add(key)
+                result.append(RouteHit(*key))
+                if len(result) == limit:
+                    return tuple(result)
+        return tuple(result)
+
+    def _rare_anchor(self, question: str, candidates: Sequence[int]) -> int | None:
+        present_terms = [term for term in set(words(question)) if self._document_frequency.get(term, 0)]
+        if not present_terms:
+            return None
+        term = min(present_terms, key=lambda item: (self._document_frequency[item], -len(item), item))
+        matches = [index for index in candidates if term in self._frequencies[index]]
+        return min(matches, key=lambda index: (-self._frequencies[index][term], index)) if matches else None
+
     def core_router(self, question: str, conversations: Sequence[Conversation], top_k: int) -> tuple[str, ...]:
         """Use this index directly as the `HarnessModules.route` callback."""
         supplied = tuple(item.conversation_id for item in conversations)

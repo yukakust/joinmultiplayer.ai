@@ -216,9 +216,9 @@ chatForm.addEventListener("submit", async (event) => {
   try {
     if (memoryReady) {
       pending.textContent = "Searching memory…";
-      const result = await window.pocketI.routeMemory(question);
-      pending.remove();
-      addRouteResults(result);
+      const result = await window.pocketI.answerMemory(question);
+      pending.textContent = result.answer;
+      pending.classList.remove("pending");
       return;
     }
     const result = await window.pocketI.ask(question);

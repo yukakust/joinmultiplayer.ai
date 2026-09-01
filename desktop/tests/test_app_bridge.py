@@ -139,6 +139,10 @@ class DesktopBridgeTests(unittest.TestCase):
             self.assertIn("Copper thermostat", routed["items"][0]["preview"])
             self.assertNotIn("private-session", json.dumps(routed))
 
+            context = runtime.dispatch("context", question="copper thermostat")
+            self.assertEqual("S1", context["items"][0]["source_id"])
+            self.assertIn("Copper thermostat", context["items"][0]["text"])
+
 
 if __name__ == "__main__":
     unittest.main()
