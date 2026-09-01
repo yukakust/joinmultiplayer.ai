@@ -84,3 +84,6 @@ during packaging. After the model and runtime are present, the main display
 turns into a minimal local chat and sends one question to llama-cli through a
 child-process pipe. Fixture inference and the packaged Linux runtime pass; a
 real Qwen3-8B answer and physical macOS DMG still require owner inspection.
+
+Checkpoint 5B labels the large download in plain language. The progress line
+now names Qwen3 8B before showing transferred and total size.

@@ -47,6 +47,10 @@ then embeds that runtime in the package. One-shot questions use a local process
 pipe; no public or localhost inference server is opened. The current result is
 plumbing-only until Qwen3-8B produces a real answer in a physical installation.
 
+Checkpoint 5B records the first physical macOS setup observation: an anonymous
+4.7 GB progress counter is not trustworthy enough. The next package names the
+downloaded model directly on the same single status line.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

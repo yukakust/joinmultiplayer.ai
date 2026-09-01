@@ -55,7 +55,7 @@ async function renderStatus() {
 window.pocketI.onSetupProgress(({ received, total }) => {
   const percent = Math.min(100, received / total * 100);
   bar.style.width = `${percent}%`;
-  progressLabel.textContent = `${size(received)} of ${size(total)}`;
+  progressLabel.textContent = `Downloading Qwen3 8B · ${size(received)} / ${size(total)}`;
 });
 
 install.addEventListener("click", async () => {

@@ -1,0 +1,11 @@
+{
+  "schema_version": "e007-desktop-download-label-checkpoint5b-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "5B",
+  "status": "accepted_owner_observation",
+  "finding": "A multi-gigabyte progress counter without an object name feels unsafe.",
+  "change": "Downloading Qwen3 8B · transferred / total",
+  "scope": "copy-only; download URL, checksum and installation logic are unchanged",
+  "physical_alpha5_download": "continues without interruption",
+  "next_package": "0.1.0-alpha.6"
+}
