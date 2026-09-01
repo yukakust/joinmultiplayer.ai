@@ -72,6 +72,12 @@ ordinary reasoning control and handled brain disclosure and empty owner memory,
 but it called the fictional Merger real. The failure remains public. A future
 identity controller must own invariant facts outside generative output.
 
+The owner accepted the 6B voice. Checkpoint 6C then passed the relevant work
+regression: the short identity kernel was not worse than the original technical
+writer on ten frozen physical Qwen3-8B evidence-to-answer pairs. A separate
+runner-envelope bug exposed local paths in the private result only; it was not
+published and the desktop output adapter gained a long-prompt regression test.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

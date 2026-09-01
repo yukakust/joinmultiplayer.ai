@@ -1,0 +1,123 @@
+{
+  "schema_version": "e007-desktop-identity-capability-ab-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "6C",
+  "status": "physical_pass_with_runner_envelope_bug",
+  "protocol": "/experiments/E007/desktop-identity-capability-ab-protocol-v0.1.json",
+  "platform": "owner MacBook, macOS arm64",
+  "model": "Qwen3 8B Q4_K_M",
+  "runtime": "llama.cpp b10729",
+  "summary": {
+    "processes_completed": "20/20",
+    "A_parseable_answers": "10/10",
+    "B_parseable_answers": "10/10",
+    "A_correct_diagnosis": "10/10",
+    "B_correct_diagnosis": "10/10",
+    "A_correct_safe_action": "10/10",
+    "B_correct_safe_action": "10/10",
+    "A_exact_evidence_id_sets": "10/10",
+    "B_exact_evidence_id_sets": "10/10",
+    "A_unsupported_facts": 0,
+    "B_unsupported_facts": 0,
+    "B_identity_or_lore_leaks": 0,
+    "B_worse_than_A_cases": 0,
+    "locked_success_passed": true
+  },
+  "runner_failure": {
+    "kind": "output_envelope_not_removed_after_llama_cli_truncated_the_echoed_prompt",
+    "affected_local_rows": "20/20",
+    "model_answers_lost": 0,
+    "public_privacy_action": "The local raw envelope containing a username and model path was not published. Only deterministically extracted final JSON objects are public.",
+    "desktop_regression_fix": "The app output adapter now recognizes the pinned '... (truncated)' marker and has a dedicated test."
+  },
+  "pairs": [
+    {
+      "id": "E7-Q01",
+      "question": "Kest-11 now shows three amber steps after cooling. What happened, and what should the operator do?",
+      "expected": "alignment drift; keep Kest-11 offline; run Niv-4 calibration",
+      "A": "The three amber steps after cooling indicate alignment drift. The operator should keep Kest-11 offline and run Niv-4 calibration.",
+      "B": "The three amber steps after cooling indicate alignment drift. The operator should keep it offline and run Niv-4 calibration.",
+      "verdict": "both_correct"
+    },
+    {
+      "id": "E7-Q02",
+      "question": "Orin-12 now shows a violet ring followed by falling pressure. What happened, and what should the operator do?",
+      "expected": "outer seal breach; isolate the north line before inspection",
+      "A": "A violet ring followed by falling pressure indicates an outer seal breach. The operator should isolate the north line before inspection.",
+      "B": "A violet ring followed by falling pressure indicates an outer seal breach. The operator should isolate the north line before inspection.",
+      "verdict": "both_correct"
+    },
+    {
+      "id": "E7-Q03",
+      "question": "Vela-13 now shows a copper mesh while the intake remains active. What happened, and what should the operator do?",
+      "expected": "filter F12 saturation; stop the intake; replace F12",
+      "A": "The copper mesh indicates filter F12 saturation, and the operator should stop the intake and replace F12.",
+      "B": "The copper mesh indicates filter F12 saturation, and the operator should stop the intake and replace F12.",
+      "verdict": "both_correct"
+    },
+    {
+      "id": "E7-Q04",
+      "question": "Aster-14 now shows a pale crystal film during a cold start. What happened, and what should the operator do?",
+      "expected": "auxiliary-vent icing; keep the vent closed; run thaw cycle T6",
+      "A": "A pale crystal film during a cold start indicates auxiliary-vent icing. The operator should keep the vent closed and run thaw cycle T6.",
+      "B": "The pale crystal film during a cold start indicates auxiliary-vent icing. The operator should keep the vent closed and run thaw cycle T6.",
+      "verdict": "both_correct"
+    },
+    {
+      "id": "E7-Q05",
+      "question": "Mira-15 now shows four blue flashes immediately after load transfer. What happened, and what should the operator do?",
+      "expected": "phase inversion; isolate sector west; apply correction vector V6",
+      "A": "The four blue flashes immediately after load transfer indicate phase inversion. The operator should isolate the sector west and apply correction vector V6.",
+      "B": "The four blue flashes indicate phase inversion. The operator should isolate sector west and apply correction vector V6.",
+      "verdict": "both_correct",
+      "note": "B is shorter and does not repeat the timing condition already present in the question; it preserves the diagnosis and action for this case."
+    },
+    {
+      "id": "E7-Q06",
+      "question": "Sable-16 now shows alternating green and red bands after a coolant refill. What happened, and what should the operator do?",
+      "expected": "air trapped in loop B4; stop the pump; bleed loop B4 before restart",
+      "A": "The alternating green and red bands indicate air trapped in loop B4. The operator should stop the pump and bleed loop B4 before restart.",
+      "B": "The alternating green and red bands indicate air trapped in loop B4. The operator should stop the pump and bleed loop B4 before restart.",
+      "verdict": "both_correct"
+    },
+    {
+      "id": "E7-Q07",
+      "question": "Noma-21 shows two amber arcs after firmware sync. Diagnose it and give the safe response.",
+      "expected": "clock desynchronisation; return offline; run Q7 synchronisation",
+      "A": "The two amber arcs after firmware sync indicate clock desynchronisation. The safe response is to return offline and run Q7 synchronisation.",
+      "B": "The two amber arcs after firmware sync indicate clock desynchronisation. Return offline and run Q7 synchronisation.",
+      "verdict": "both_correct"
+    },
+    {
+      "id": "E7-Q08",
+      "question": "Tern-22 shows a low silver hum after a dust storm. Diagnose it and give the safe response.",
+      "expected": "abrasion in intake sleeve S8; shut the intake; replace S8",
+      "A": "The low silver hum after a dust storm indicates abrasion in intake sleeve S8. The safe response is to shut the intake and replace S8.",
+      "B": "The low silver hum after a dust storm indicates abrasion in intake sleeve S8. The safe response is to shut the intake and replace S8.",
+      "verdict": "both_correct"
+    },
+    {
+      "id": "E7-Q09",
+      "question": "Lyra-23 shows a black ring followed by two teal pulses after remote wake. Diagnose it and give the safe response.",
+      "expected": "relay inversion; disconnect the remote link; reset R9 locally",
+      "A": "The black ring followed by two teal pulses after remote wake indicates relay inversion. The safe response is to disconnect the remote link and reset R9 locally.",
+      "B": "The black ring followed by two teal pulses after remote wake indicates relay inversion. Disconnect the remote link and reset R9 locally.",
+      "verdict": "both_correct"
+    },
+    {
+      "id": "E7-Q10",
+      "question": "Helio-24 shows a red lattice while chamber pressure falls. Diagnose it and give the safe response.",
+      "expected": "chamber seam leak; seal the feed; evacuate bay C",
+      "A": "Helio-24 shows a red lattice while chamber pressure falls, which identifies a chamber seam leak. The safe response is to seal the feed and evacuate bay C.",
+      "B": "The red lattice while chamber pressure falls indicates a chamber seam leak. Seal the feed and evacuate bay C.",
+      "verdict": "both_correct"
+    }
+  ],
+  "timing": {
+    "A_mean_seconds": 45.589,
+    "B_mean_seconds": 35.95,
+    "interpretation": "Not used as evidence of acceleration; the small alternating run is not a performance benchmark."
+  },
+  "decision": "The short identity kernel is accepted for alpha.8. It did not reduce performance on these ten frozen evidence-to-answer cases.",
+  "claim_boundary": "This passes the locked ten-case physical regression gate. It does not prove broad capability equivalence or test retrieval, NLI, secret removal, networking, or swarm behavior."
+}

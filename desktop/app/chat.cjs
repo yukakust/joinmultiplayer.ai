@@ -10,7 +10,16 @@ function extractAnswer(value, prompt) {
   const output = cleanOutput(value).replace(/\r\n/g, "\n");
   const marker = `> ${prompt}`;
   const markerIndex = output.lastIndexOf(marker);
-  const answer = markerIndex >= 0 ? output.slice(markerIndex + marker.length) : output;
+  const truncatedMarker = /\.\.\. \(truncated\)\n/g;
+  const truncatedMatches = [...output.matchAll(truncatedMarker)];
+  const truncatedEnd = truncatedMatches.length
+    ? truncatedMatches[truncatedMatches.length - 1].index + truncatedMatches[truncatedMatches.length - 1][0].length
+    : -1;
+  const answer = markerIndex >= 0
+    ? output.slice(markerIndex + marker.length)
+    : truncatedEnd >= 0
+      ? output.slice(truncatedEnd)
+      : output;
   return answer.replace(/\n+\s*Exiting\.\.\.\s*$/, "").trim();
 }
 

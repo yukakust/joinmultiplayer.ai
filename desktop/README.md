@@ -107,3 +107,9 @@ identity on five paired MacBook questions. Three identity answers passed, one
 was partial, and the reality answer failed by calling the fictional Merger real.
 The prompt-only design must not ship as alpha.8; invariant disclosures need an
 application-level controller rather than model improvisation.
+
+Checkpoint 6C accepts the owner's identity decision and tests the short kernel
+on ten frozen Gate 15F evidence-to-answer cases. Both conditions preserve all
+ten diagnoses, actions, and exact evidence-ID sets; the identity condition adds
+no lore or unsupported fact. The run also exposed and fixed a long-prompt output
+adapter fallback when pinned llama-cli abbreviates its echoed prompt.

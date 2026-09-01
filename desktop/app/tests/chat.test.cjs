@@ -37,3 +37,19 @@ test("keeps only the model answer from pinned llama-cli single-turn output", () 
   assert.equal(answer, "I am Qwen. How can I help?");
   assert.equal(answer.includes("/private/model.gguf"), false);
 });
+
+test("keeps only the answer when llama-cli truncates a long echoed prompt", () => {
+  const raw = [
+    "Loading model...",
+    "model : /Users/owner/private-model.gguf",
+    "available commands:",
+    "",
+    "> A very long harness prompt that cannot be displayed ... (truncated)",
+    '{"answer":"Safe answer","evidence_ids":["S1","S2"]}',
+    "",
+    "Exiting...",
+  ].join("\n");
+  const answer = extractAnswer(raw, "A very long harness prompt that cannot be displayed in full");
+  assert.equal(answer, '{"answer":"Safe answer","evidence_ids":["S1","S2"]}');
+  assert.equal(answer.includes("/Users/owner"), false);
+});
