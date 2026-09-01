@@ -67,6 +67,11 @@ origin stays below 220 words with the kernel, and origin plus the honest reality
 valve stays below 250. Neutral harness prompts never receive lore. The code boundary is tested
 before any physical alpha.8 personality claim.
 
+Checkpoint 6B failed the physical prompt-only A/B. Qwen preserved the single
+ordinary reasoning control and handled brain disclosure and empty owner memory,
+but it called the fictional Merger real. The failure remains public. A future
+identity controller must own invariant facts outside generative output.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

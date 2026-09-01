@@ -101,3 +101,9 @@ Checkpoint 6A adds the English layered identity module. A short kernel is
 always present in companion chat; origin and reality capsules are selected only
 for matching questions. Harness modules keep neutral task prompts. Physical
 Qwen A/B inspection remains pending.
+
+Checkpoint 6B physically compared the old neutral prompt with the layered
+identity on five paired MacBook questions. Three identity answers passed, one
+was partial, and the reality answer failed by calling the fictional Merger real.
+The prompt-only design must not ship as alpha.8; invariant disclosures need an
+application-level controller rather than model improvisation.

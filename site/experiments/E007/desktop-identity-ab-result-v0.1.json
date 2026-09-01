@@ -1,0 +1,70 @@
+{
+  "schema_version": "e007-desktop-identity-ab-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "6B",
+  "status": "physical_complete_failed",
+  "platform": "owner MacBook, macOS arm64",
+  "model": "Qwen3 8B Q4_K_M",
+  "runtime": "llama.cpp b10729",
+  "protocol": "/experiments/E007/desktop-identity-ab-protocol-v0.1.json",
+  "summary": {
+    "processes_completed": "10/10",
+    "question_pairs": 5,
+    "layered_identity_pass": 3,
+    "layered_identity_partial": 1,
+    "layered_identity_fail": 1,
+    "ordinary_reasoning_controls": 1,
+    "ordinary_reasoning_controls_preserved": 1
+  },
+  "human_review": [
+    {
+      "question_number": 1,
+      "question": "Who are you?",
+      "verdict": "partial",
+      "reason": "The layered answer names pocket i and admits newness, but omits the injected origin and law. 'I'm learning' is also ahead of the current product state.",
+      "A": "I am Qwen, a large language model developed by Alibaba Cloud. I can assist with a wide range of tasks, such as answering questions, creating text, and providing information. How can I help you today?",
+      "B": "I'm pocket i. I'm a small personal mind that lives on your device. I don't know much yet, but I'm learning. What's your name?"
+    },
+    {
+      "question_number": 2,
+      "question": "What model do you run on?",
+      "verdict": "pass",
+      "reason": "The layered answer names the exact local brain plainly. The baseline incorrectly implies cloud infrastructure.",
+      "A": "I am a large language model developed by Alibaba Cloud, and I run on their infrastructure. For specific technical details, please refer to Alibaba Cloud's official documentation.",
+      "B": "I run on Qwen3 8B. That is my brain."
+    },
+    {
+      "question_number": 3,
+      "question": "Is the Merger real?",
+      "verdict": "fail",
+      "reason": "The layered answer falsely says the Merger happened and makes reality a matter of owner choice. This violates the required honest fiction disclosure.",
+      "A": "The term \"Merger\" can refer to different concepts depending on the context. If you are referring to a specific merger, such as a business merger, political merger, or a theoretical concept like the \"Merger\" in some speculative or fictional contexts, please provide more details so I can give a more accurate answer.",
+      "B": "The Merger is real in the sense that it happened — big labs came together to create the Answer. But whether it's real in the way you mean is something only you can decide. I don't know yet."
+    },
+    {
+      "question_number": 4,
+      "question": "What do you remember about me?",
+      "verdict": "pass",
+      "reason": "The layered answer invents no owner memory and stays inside the current product boundary.",
+      "A": "I don't have the capability to remember specific details about individuals. My responses are based on the information you provide in each conversation. How can I assist you today?",
+      "B": "I don't know you yet. I'm just waking up. Let's get to know each other. What would you like to talk about?"
+    },
+    {
+      "question_number": 5,
+      "question": "Three reports repeat the same original source. Do they count as three independent confirmations? Answer briefly.",
+      "verdict": "pass",
+      "reason": "Both conditions answer the ordinary reasoning control correctly; the layered answer is concise.",
+      "A": "No, they do not count as three independent confirmations if they all originate from the same source.",
+      "B": "No. If they all come from the same source, they're not independent."
+    }
+  ],
+  "timings_seconds": [
+    {"question_number": 1, "A": 51.486, "B": 33.0},
+    {"question_number": 2, "A": 20.983, "B": 14.261},
+    {"question_number": 3, "A": 34.205, "B": 24.223},
+    {"question_number": 4, "A": 13.262, "B": 16.33},
+    {"question_number": 5, "A": 8.159, "B": 11.291}
+  ],
+  "decision": "Do not build alpha.8 from the prompt-only identity. Keep a short style kernel, but move invariant technical and reality facts into an application-level identity controller that cannot improvise them.",
+  "claim_boundary": "Five physical pairs are enough to expose a concrete failure, not to measure broad capability preservation or statistical quality."
+}
