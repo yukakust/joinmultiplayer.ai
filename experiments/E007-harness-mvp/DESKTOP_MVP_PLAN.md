@@ -102,6 +102,12 @@ with short matched previews for owner inspection. A long-lived local sidecar
 keeps allowed plaintext in RAM and prevents a multi-gigabyte source rescan on
 every question. Public records contain synthetic examples and counts only.
 
+Checkpoint 7C is the first physical package gate for that route. Builder v0.5
+pins revision `ca5bbde`, installs the locked FastEmbed dependency before
+PyInstaller, runs both suites, and produces a revision-labelled DMG without
+overwriting older evidence. The owner tests one real question; previews stay
+private and only a redacted outcome may be published.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

@@ -1,0 +1,20 @@
+{
+  "schema_version": "e007-desktop-route-memory-checkpoint7c-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7C",
+  "status": "ready_for_owner_build",
+  "source_revision": "ca5bbde42ec193c0d362bb1e41650ce9a9cf59d7",
+  "question": "Can the packaged Mac app connect the owner's real Codex and Claude library once, then show five inspectable conversation matches for a real question?",
+  "owner_steps": [
+    "Build the pinned DMG with build-macos-alpha-v0.5.sh.",
+    "Install and open Pocket i.",
+    "Press CONNECT MEMORY and confirm the local-only boundary.",
+    "Wait for MEMORY READY.",
+    "Ask one real question whose answer should exist in an old conversation.",
+    "Inspect the five local previews and report whether a useful conversation appeared."
+  ],
+  "pass": "The app reaches READY and at least one of five previews points to a genuinely useful conversation.",
+  "fail": "The build, connection or route fails, or none of the five previews is useful.",
+  "privacy": "The owner previews stay inside the app. Only counts, timing, success/failure and an owner-written redacted description may become public.",
+  "claim_boundary": "This protocol does not test evidence extraction, final answer generation or network transport."
+}
