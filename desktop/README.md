@@ -142,3 +142,10 @@ conversation text only in RAM, and reuses the same index for later questions.
 The window shows five matching conversations and one short matched preview from
 each. It does not ask Qwen to answer yet. Tests prove that two requests reuse one
 process and that a second route reuses the same in-memory library and index.
+
+The first physical Checkpoint 7C run failed honestly: after 65 minutes the
+worker was still active, but the UI hit its fixed one-hour timeout and no final
+state existed. Checkpoint 7D commits every 128 new vectors, reports saved-message
+counts, removes the initial-build timeout, and lets the owner return to chat
+while work continues. A forced-interruption test proves the next run reuses the
+already committed batches.

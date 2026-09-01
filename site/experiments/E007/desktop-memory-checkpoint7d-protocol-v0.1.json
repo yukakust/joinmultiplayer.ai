@@ -1,0 +1,22 @@
+{
+  "schema_version": "e007-desktop-memory-checkpoint7d-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7D",
+  "status": "ready_for_owner_build",
+  "source_revision": "36b6e3fda707dea9b4317151a0e5d82c208ede29",
+  "hypothesis": "A large local library can be indexed transparently and resumed instead of becoming one invisible all-or-nothing computation.",
+  "changes": [
+    "Commit every 128 newly embedded messages.",
+    "Show reading and indexed-message progress with elapsed time.",
+    "Use no fixed timeout for the owner-approved initial build.",
+    "Allow BACK TO CHAT while indexing continues in the local process.",
+    "Reuse committed vectors after interruption."
+  ],
+  "development_result": {
+    "desktop_core": "28/28 passed",
+    "desktop_app": "15/15 passed",
+    "forced_interruption_resume": "passed"
+  },
+  "physical_pass": "Counts visibly advance, BACK TO CHAT works, and an interrupted run resumes with saved vectors.",
+  "claim_boundary": "The physical Mac result is pending. This gate still does not test evidence extraction or final answer generation."
+}

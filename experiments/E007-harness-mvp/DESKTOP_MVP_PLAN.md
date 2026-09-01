@@ -108,6 +108,11 @@ PyInstaller, runs both suites, and produces a revision-labelled DMG without
 overwriting older evidence. The owner tests one real question; previews stay
 private and only a redacted outcome may be published.
 
+Checkpoint 7C failed physically after the active worker crossed the fixed
+one-hour UI timeout. Checkpoint 7D replaces the all-or-nothing embedding pass
+with committed 128-message batches, visible counts, no initial-build timeout,
+and a background path back to chat. Restart reuse is a required pass condition.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

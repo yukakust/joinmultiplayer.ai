@@ -1,0 +1,17 @@
+{
+  "schema_version": "e007-desktop-memory-checkpoint7c-failure-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7C",
+  "status": "physical_fail",
+  "observed": {
+    "platform": "owner MacBook",
+    "elapsed_when_stopped_minutes": 65,
+    "worker_cpu_percent_near_stop": 130.3,
+    "search_model_cache_mb": 246,
+    "completed_state_written": false,
+    "ui_failure": "Local memory timed out after 60 minutes"
+  },
+  "interpretation": "The worker was still computing rather than hung, but the UI stopped waiting and exposed no count or resumable checkpoint. The owner stopped the run.",
+  "privacy": "No conversation text, local path, process ID or identifier is published.",
+  "decision": "Reject Checkpoint 7C. Save vectors in small committed batches, show real counts, remove the fixed connection timeout and permit returning to chat while indexing."
+}

@@ -81,6 +81,17 @@ find candidate chats
 
 The current acceptance layer is conservative and incomplete. Its failures are recorded above so later modules can replace individual steps without rebuilding the whole harness.
 
+## 8. A large first local index was invisible and all-or-nothing
+
+The physical Mac Checkpoint 7C worker was still using CPU after 65 minutes, but
+the app timed out after one hour and had not written a completed state. The
+owner could see neither a message count nor remaining work and could not return
+to chat. The run was stopped and rejected.
+
+Checkpoint 7D saves every 128 new vectors, reports real saved-message counts,
+has no fixed initial-build timeout, and keeps a `BACK TO CHAT` path. This is
+covered by development tests; the physical rerun is still pending.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`
