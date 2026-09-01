@@ -26,9 +26,9 @@ mkdir -p "$APP_DIR/sidecar-current" "$APP_DIR/build-sidecar"
   "$DESKTOP_DIR/pocket_i_app/bridge.py"
 
 cd "$APP_DIR"
+node prepare-runtime.cjs
 case "$(uname -s)" in
   Linux) npm run dist:linux ;;
   Darwin) npm run dist:mac ;;
   *) echo "This checkpoint builds only Linux and macOS." >&2; exit 1 ;;
 esac
-

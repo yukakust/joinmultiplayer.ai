@@ -41,6 +41,12 @@ Checkpoint 4D simplified the main display after owner review: symbol, one
 instruction, progress and one button. Technical state remains on the smaller
 display; unavailable future controls are not shown.
 
+Checkpoint 5A adds the previously missing post-setup chat. The build downloads
+and verifies a pinned official llama.cpp b10729 archive for its native target,
+then embeds that runtime in the package. One-shot questions use a local process
+pipe; no public or localhost inference server is opened. The current result is
+plumbing-only until Qwen3-8B produces a real answer in a physical installation.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

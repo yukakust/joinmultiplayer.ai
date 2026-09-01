@@ -3,9 +3,17 @@ const { spawn } = require("node:child_process");
 const path = require("node:path");
 const manifest = require("./model-manifest.json");
 const { SetupManager } = require("./setup.cjs");
+const { ChatManager } = require("./chat.cjs");
 
 let mainWindow = null;
 let setupManager = null;
+let chatManager = null;
+
+function runtimePath() {
+  const executable = process.platform === "win32" ? "llama-cli.exe" : "llama-cli";
+  const root = app.isPackaged ? path.join(process.resourcesPath, "runtime") : path.join(__dirname, "runtime-current");
+  return path.join(root, executable);
+}
 
 function bridgeCommand(action) {
   if (app.isPackaged) {
@@ -89,17 +97,24 @@ ipcMain.handle("pocket-i:install-model", async () => {
   await setupManager.installModel();
   return setupManager.status();
 });
+ipcMain.handle("pocket-i:ask", async (_event, question) => {
+  const status = await setupManager.status();
+  if (!status.readyToAsk) throw new Error("Finish setup before asking a question.");
+  return chatManager.ask(question);
+});
 
 app.whenReady().then(() => {
   setupManager = new SetupManager({
     userDataPath: app.getPath("userData"),
     manifest,
+    runtimePath: runtimePath(),
     onProgress: (progress) => {
       if (mainWindow && !mainWindow.isDestroyed()) {
         mainWindow.webContents.send("pocket-i:setup-progress", progress);
       }
     },
   });
+  chatManager = new ChatManager({ executable: runtimePath(), modelPath: setupManager.modelPath() });
   createWindow();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

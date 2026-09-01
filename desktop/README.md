@@ -78,3 +78,9 @@ changed in this visual checkpoint.
 Checkpoint 4D removes setup copy that duplicated the small status display. The
 main display now contains one instruction, one progress line and one action.
 The question field stays absent until it can actually work.
+
+Checkpoint 5A pins and verifies the official llama.cpp b10729 native runtime
+during packaging. After the model and runtime are present, the main display
+turns into a minimal local chat and sends one question to llama-cli through a
+child-process pipe. Fixture inference and the packaged Linux runtime pass; a
+real Qwen3-8B answer and physical macOS DMG still require owner inspection.

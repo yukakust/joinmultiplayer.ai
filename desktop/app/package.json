@@ -1,11 +1,12 @@
 {
   "name": "pocket-i-desktop",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.5",
   "private": true,
   "description": "Pocket i desktop alpha",
   "main": "main.cjs",
   "scripts": {
     "start": "electron .",
+    "prepare:runtime": "node prepare-runtime.cjs",
     "test": "node --test tests/*.test.cjs",
     "dist:linux": "electron-builder --linux AppImage",
     "dist:mac": "electron-builder --mac dmg"
@@ -20,8 +21,10 @@
     "asar": true,
     "files": [
       "main.cjs",
+      "chat.cjs",
       "setup.cjs",
       "model-manifest.json",
+      "runtime-manifest.json",
       "preload.cjs",
       "renderer/**/*"
     ],
@@ -29,6 +32,10 @@
       {
         "from": "sidecar-current",
         "to": "sidecar"
+      },
+      {
+        "from": "runtime-current",
+        "to": "runtime"
       }
     ],
     "directories": {

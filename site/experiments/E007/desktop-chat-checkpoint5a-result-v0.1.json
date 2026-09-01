@@ -1,0 +1,30 @@
+{
+  "schema_version": "e007-desktop-chat-checkpoint5a-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "5A",
+  "status": "development_passed_plumbing_only",
+  "hypothesis": "After setup, the large display can become a minimal local chat without adding setup copy back to the screen.",
+  "runtime": {
+    "source": "ggml-org/llama.cpp",
+    "revision": "b10729",
+    "linux_x64_sha256": "59424562241e453b198de17dc264b499d21f6a4e74ed2b1cf4d8f01309ecc94b",
+    "macos_arm64_sha256": "59bbec9a7c9fd6f0c78fc108a45df18bbd415a36c2dd10b390d8502e8653addf"
+  },
+  "tests": {
+    "python_core": "22/22",
+    "desktop_node": "6/6",
+    "linux_runtime_executes": true
+  },
+  "development_package": {
+    "platform": "linux-x64 AppImage",
+    "version": "0.1.0-alpha.5",
+    "bytes": 154495309,
+    "sha256": "1e167e284b908c2a2d9522f9d4421a7a0651bebc76a7d0571466633c6ccce148"
+  },
+  "not_claimed": [
+    "Qwen3 8B produced a real answer",
+    "the physical macOS DMG passed",
+    "chat history persists between launches"
+  ],
+  "next": "Build the macOS alpha, install the 5.03 GB model through WAKE i, and inspect one real local answer."
+}

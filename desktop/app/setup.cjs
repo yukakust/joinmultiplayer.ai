@@ -94,9 +94,10 @@ async function downloadVerified({ item, destination, onProgress = () => {} }) {
 }
 
 class SetupManager {
-  constructor({ userDataPath, manifest, onProgress = () => {} }) {
+  constructor({ userDataPath, manifest, runtimePath, onProgress = () => {} }) {
     this.userDataPath = userDataPath;
     this.manifest = manifest;
+    this.runtimePath = runtimePath;
     this.onProgress = onProgress;
     this.active = null;
   }
@@ -117,8 +118,15 @@ class SetupManager {
     const disk = await fsp.statfs(this.userDataPath);
     const freeBytes = disk.bavail * disk.bsize;
     const memoryBytes = os.totalmem();
+    let runtimeInstalled = false;
+    try {
+      const runtimeStat = await fsp.stat(this.runtimePath);
+      runtimeInstalled = runtimeStat.isFile();
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+    }
     return {
-      version: "desktop-alpha-checkpoint-4b",
+      version: "desktop-alpha-checkpoint-5a",
       model: {
         id: model.id,
         label: model.label,
@@ -132,8 +140,8 @@ class SetupManager {
         memoryOkay: memoryBytes >= MINIMUM_MEMORY_BYTES,
         diskOkay: freeBytes >= MINIMUM_FREE_BYTES || installed,
       },
-      runtime: { installed: false, label: "llama.cpp", nextCheckpoint: true },
-      readyToAsk: false,
+      runtime: { installed: runtimeInstalled, label: "llama.cpp" },
+      readyToAsk: installed && runtimeInstalled,
     };
   }
 
@@ -157,4 +165,3 @@ class SetupManager {
 }
 
 module.exports = { SetupManager, downloadVerified, sha256 };
-

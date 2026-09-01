@@ -6,7 +6,7 @@ const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
 
-const { downloadVerified } = require("../setup.cjs");
+const { SetupManager, downloadVerified } = require("../setup.cjs");
 
 async function fixtureServer(content) {
   const requests = [];
@@ -94,3 +94,19 @@ test("rejects and removes a model with a wrong checksum", async () => {
   }
 });
 
+test("becomes ready to ask only when model and runtime both exist", async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-ready-"));
+  const runtime = path.join(directory, "runtime", "llama-cli");
+  const setup = new SetupManager({
+    userDataPath: directory,
+    runtimePath: runtime,
+    manifest: { models: { reader: { file: "model.gguf", bytes: 4 } } },
+  });
+  assert.equal((await setup.status()).readyToAsk, false);
+  await fs.mkdir(path.dirname(setup.modelPath()), { recursive: true });
+  await fs.writeFile(setup.modelPath(), "1234");
+  assert.equal((await setup.status()).readyToAsk, false);
+  await fs.mkdir(path.dirname(runtime), { recursive: true });
+  await fs.writeFile(runtime, "runtime");
+  assert.equal((await setup.status()).readyToAsk, true);
+});

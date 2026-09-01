@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "pocket-i-runtime-manifest-v0.1",
+  "revision": "b10729",
+  "targets": {
+    "linux-x64": {
+      "archive": "llama-b10729-bin-ubuntu-x64.tar.gz",
+      "bytes": 16703197,
+      "sha256": "59424562241e453b198de17dc264b499d21f6a4e74ed2b1cf4d8f01309ecc94b",
+      "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10729/llama-b10729-bin-ubuntu-x64.tar.gz",
+      "executable": "llama-cli"
+    },
+    "darwin-arm64": {
+      "archive": "llama-b10729-bin-macos-arm64.tar.gz",
+      "bytes": 11065616,
+      "sha256": "59bbec9a7c9fd6f0c78fc108a45df18bbd415a36c2dd10b390d8502e8653addf",
+      "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10729/llama-b10729-bin-macos-arm64.tar.gz",
+      "executable": "llama-cli"
+    }
+  }
+}
