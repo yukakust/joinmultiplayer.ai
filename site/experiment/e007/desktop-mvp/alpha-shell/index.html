@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>E007 · Pocket i desktop · Checkpoint 5A</title>
+  <title>E007 · Pocket i desktop · Checkpoint 5C</title>
   <link rel="stylesheet" href="/style.css?v=e007-desktop-alpha-4c">
   <style>
     .page{max-width:none;width:100%;padding:clamp(20px,4vw,68px)}.hero{max-width:1450px}.hero h1{max-width:1300px}.lead{font-size:clamp(19px,2vw,32px);line-height:1.35;max-width:1180px}
@@ -13,7 +13,7 @@
 </head>
 <body>
 <main class="page">
-  <section class="hero"><p>E007 · CHECKPOINT 5A · CHAT PLUMBING</p><h1>После пробуждения появляется чат.</h1><p class="lead">Большой экран становится разговором. Малый экран показывает, готовы ли модель, runtime и память.</p></section>
+  <section class="hero"><p>E007 · CHECKPOINT 5C · FIRST LOCAL ANSWER</p><h1>Первый настоящий ответ получен.</h1><p class="lead">Qwen3 8B запустилась внутри физического MacBook и ответила без удалённого сервера.</p></section>
 
   <section class="preview-wrap" aria-label="Превью чата Pocket i desktop alpha 0.1.0 alpha 5">
     <p class="preview-label"><span>ПОСЛЕ WAKE · ALPHA.5</span><span>FIGMA NODE 19:2</span></p>
@@ -24,9 +24,9 @@
     </div>
   </section>
 
-  <section class="facts"><article><span>CORE TESTS</span><strong>22 / 22</strong></article><article><span>DESKTOP TESTS</span><strong>6 / 6</strong></article><article><span>LLAMA.CPP</span><strong>B10729</strong></article><article><span>REAL 8B ANSWER</span><strong>NOT YET</strong></article></section>
-  <p class="note">Чат и официальный llama.cpp теперь соединены кодом. Но реальный ответ Qwen3 8B ещё не проверен на физической установке модели — поэтому это plumbing checkpoint, не доказательство inference.</p>
-  <section class="history"><p>Физический запуск alpha.5 на macOS показал: счётчик 4,7 ГБ без названия выглядит небезопасно. В alpha.6 та же строка прямо говорит: <strong>Downloading Qwen3 8B</strong>.</p></section>
+  <section class="facts"><article><span>CORE TESTS</span><strong>22 / 22</strong></article><article><span>DESKTOP TESTS</span><strong>7 / 7</strong></article><article><span>LOCAL MODEL</span><strong>QWEN3 8B</strong></article><article><span>REAL ANSWER</span><strong>PASS</strong></article></section>
+  <p class="note"><strong>Найденная ошибка:</strong> alpha.5 показала вокруг ответа служебные логи llama.cpp. В alpha.7 чат оставляет только слова модели — без баннера, пути к файлу и <code>Exiting…</code>.</p>
+  <section class="history"><p>Это доказывает локальный запуск и один настоящий ответ. Память из разговоров, многоходовый контекст и swarm пока не подключены.</p><p><a href="/experiments/E007/desktop-first-local-answer-checkpoint5c-result-v0.1.json">Открыть результат Checkpoint 5C →</a></p></section>
 </main>
 </body>
 </html>

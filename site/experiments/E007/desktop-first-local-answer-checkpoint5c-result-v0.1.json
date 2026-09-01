@@ -1,0 +1,35 @@
+{
+  "schema_version": "e007-desktop-first-local-answer-checkpoint5c-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "5C",
+  "status": "physical_pass_with_output_adapter_failure",
+  "platform": "owner MacBook, macOS arm64",
+  "question": "Who are you?",
+  "model_answer": "I am Qwen, a large language model developed by Alibaba Cloud. I can assist with a wide range of tasks, including answering questions, creating text, and providing information. How can I help you today?",
+  "passed": [
+    "physical DMG opened",
+    "bundled llama.cpp ran locally",
+    "downloaded Qwen3-8B weights loaded",
+    "Qwen3-8B generated a relevant answer"
+  ],
+  "failed": "The chat displayed the llama-cli banner, prompt echo and exit line around the answer.",
+  "fix": "Disable runtime logs and extract only text after the echoed prompt and before the pinned exit marker.",
+  "next_package": "0.1.0-alpha.7",
+  "next_linux_build": {
+    "artifact": "Pocket i-0.1.0-alpha.7.AppImage",
+    "bytes": 154495323,
+    "sha256": "9cd5732097f9c9c090c792fe31a8fbc8c7784cfbf98c2b1bf45ba299a2cbb7e7",
+    "bundled_llama_cpp": "b10729",
+    "log_disable_supported": true
+  },
+  "verification": {
+    "desktop_tests": "7/7",
+    "core_tests": "22/22",
+    "captured_output_regression": "passed"
+  },
+  "not_claimed": [
+    "local-memory retrieval",
+    "multi-turn model context",
+    "network or swarm inference"
+  ]
+}

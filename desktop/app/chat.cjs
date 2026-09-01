@@ -5,6 +5,14 @@ function cleanOutput(value) {
   return value.replace(/\u001b\[[0-9;]*m/g, "").trim();
 }
 
+function extractAnswer(value, prompt) {
+  const output = cleanOutput(value).replace(/\r\n/g, "\n");
+  const marker = `> ${prompt}`;
+  const markerIndex = output.lastIndexOf(marker);
+  const answer = markerIndex >= 0 ? output.slice(markerIndex + marker.length) : output;
+  return answer.replace(/\n+\s*Exiting\.\.\.\s*$/, "").trim();
+}
+
 class ChatManager {
   constructor({ executable, modelPath, timeoutMs = 600000 }) {
     this.executable = executable;
@@ -31,6 +39,7 @@ class ChatManager {
       "--no-display-prompt",
       "--no-show-timings",
       "--no-warmup",
+      "--log-disable",
       "--color", "off"
     ];
     const runtimeDirectory = path.dirname(this.executable);
@@ -64,7 +73,7 @@ class ChatManager {
           reject(new Error(cleanOutput(stderr) || "The local model failed."));
           return;
         }
-        const answer = cleanOutput(stdout);
+        const answer = extractAnswer(stdout, prompt);
         if (!answer) {
           reject(new Error("The local model returned no answer."));
           return;
@@ -75,4 +84,4 @@ class ChatManager {
   }
 }
 
-module.exports = { ChatManager, cleanOutput };
+module.exports = { ChatManager, cleanOutput, extractAnswer };

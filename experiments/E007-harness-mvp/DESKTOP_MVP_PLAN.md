@@ -51,6 +51,11 @@ Checkpoint 5B records the first physical macOS setup observation: an anonymous
 4.7 GB progress counter is not trustworthy enough. The next package names the
 downloaded model directly on the same single status line.
 
+Checkpoint 5C passed the first physical local-inference boundary: Qwen3-8B
+answered on the owner's MacBook without a remote endpoint. It also exposed an
+output-adapter failure: the chat displayed llama-cli diagnostics. The next
+package removes the pinned runtime envelope and keeps only the generated answer.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

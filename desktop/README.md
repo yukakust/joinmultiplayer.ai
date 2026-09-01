@@ -87,3 +87,7 @@ real Qwen3-8B answer and physical macOS DMG still require owner inspection.
 
 Checkpoint 5B labels the large download in plain language. The progress line
 now names Qwen3 8B before showing transferred and total size.
+
+Checkpoint 5C records the first physical Qwen3-8B answer on macOS. Inference
+worked, but llama-cli's banner, prompt echo and exit text reached the chat. The
+pinned-output adapter now extracts only the answer and disables runtime logs.
