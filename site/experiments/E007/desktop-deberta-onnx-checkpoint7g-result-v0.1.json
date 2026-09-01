@@ -1,0 +1,44 @@
+{
+  "schema_version": "e007-desktop-deberta-onnx-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7G",
+  "status": "development_passed_physical_pending",
+  "source_model": {
+    "repository": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+    "language": "English",
+    "classes": ["entailment", "neutral", "contradiction"]
+  },
+  "rejected_attempt": {
+    "format": "dynamic INT8 ONNX",
+    "bytes": 243954409,
+    "reference_decisions_matched": "9/30",
+    "decision": "rejected because quantization destroyed model behaviour"
+  },
+  "accepted_artifact": {
+    "format": "native FP16 ONNX",
+    "model_bytes": 369758915,
+    "tokenizer_bytes": 8648864,
+    "model_sha256": "65397fecd22b14f9d20ebbdbddcfaae48dcf26c02bd7eabdcf1ca891cc21e069",
+    "tokenizer_sha256": "4b4f60231058db4b5794e7b124bb7945bc8ade6719282de4d2e0372ee527b929",
+    "reference_decisions_matched": "30/30",
+    "cpu_batch_seconds_for_30_short_pairs_on_yukabox": 11.316
+  },
+  "desktop_integration": [
+    "the build downloads both pinned files and verifies byte count plus SHA-256",
+    "the files are packaged as local Electron resources",
+    "the Python sidecar loads ONNX Runtime and the tokenizer lazily on the first evidence batch",
+    "the model receives only exact quote plus atomic claim, never the owner's question",
+    "a missing model remains an explicit unavailable signal"
+  ],
+  "tests": {
+    "desktop_node": "21/21",
+    "python_core": "31/31",
+    "frozen_reference_equivalence": "30/30",
+    "standalone_sidecar_real_nli": "passed",
+    "stripped_linux_sidecar_bytes": 57627656
+  },
+  "privacy": "Only existing public synthetic English pairs were used. No local conversations or owner questions entered validation.",
+  "decision": "Accept FP16 ONNX for the next Mac build. Reject INT8. Keep DeBERTa as a cautious signal, never the sole judge.",
+  "claim_boundary": "This proves equivalence on thirty frozen short reference pairs on yukabox CPU. It does not yet prove the packaged Mac binary loads or that DeBERTa judges real retrieved evidence correctly."
+}

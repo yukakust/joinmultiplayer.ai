@@ -1,0 +1,19 @@
+{
+  "id": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+  "revision": "6f5cf0a2b59cabb106aca4c287eed12e357e90eb",
+  "format": "ONNX FP16",
+  "files": [
+    {
+      "file": "model.onnx",
+      "bytes": 369758915,
+      "sha256": "65397fecd22b14f9d20ebbdbddcfaae48dcf26c02bd7eabdcf1ca891cc21e069",
+      "url": "https://joinmultiplayer.ai/experiments/E007/models/deberta-v3-base-mnli-fever-anli-fp16/model.onnx"
+    },
+    {
+      "file": "tokenizer.json",
+      "bytes": 8648864,
+      "sha256": "4b4f60231058db4b5794e7b124bb7945bc8ade6719282de4d2e0372ee527b929",
+      "url": "https://joinmultiplayer.ai/experiments/E007/models/deberta-v3-base-mnli-fever-anli-fp16/tokenizer.json"
+    }
+  ]
+}

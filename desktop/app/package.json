@@ -7,6 +7,7 @@
   "scripts": {
     "start": "electron .",
     "prepare:runtime": "node prepare-runtime.cjs",
+    "prepare:nli": "node prepare-nli.cjs",
     "test": "node --test tests/*.test.cjs",
     "dist:linux": "electron-builder --linux AppImage",
     "dist:mac": "electron-builder --mac dmg"
@@ -27,6 +28,7 @@
       "memory-service.cjs",
       "setup.cjs",
       "model-manifest.json",
+      "nli-manifest.json",
       "runtime-manifest.json",
       "preload.cjs",
       "renderer/**/*"
@@ -39,6 +41,10 @@
       {
         "from": "runtime-current",
         "to": "runtime"
+      },
+      {
+        "from": "nli-current",
+        "to": "nli"
       }
     ],
     "directories": {

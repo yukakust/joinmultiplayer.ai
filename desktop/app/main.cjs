@@ -18,7 +18,11 @@ function runtimePath() {
 }
 
 function bridgeCommand(action) {
-  const dataArgs = ["--data-dir", path.join(app.getPath("userData"), "memory")];
+  const nliRoot = app.isPackaged ? path.join(process.resourcesPath, "nli") : path.join(__dirname, "nli-current");
+  const dataArgs = [
+    "--data-dir", path.join(app.getPath("userData"), "memory"),
+    "--nli-dir", nliRoot,
+  ];
   if (app.isPackaged) {
     const executable = process.platform === "win32" ? "pocket-i-core.exe" : "pocket-i-core";
     return {

@@ -166,3 +166,9 @@ writer, and the final answer may cite only surviving evidence IDs. The NLI
 stage is a replaceable local interface and reports `unavailable` when its
 frozen model is absent; it never invents a decision. Packaging and validating
 the accepted DeBERTa checkpoint is the next physical-build gate.
+
+Checkpoint 7G rejects a broken INT8 export (`9/30` frozen decisions matched)
+and accepts the native FP16 ONNX export (`30/30` matched). The build downloads
+the 369,758,915-byte model and 8,648,864-byte tokenizer from the public lab,
+verifies both SHA-256 hashes, and packages them as local resources. The sidecar
+loads them lazily through ONNX Runtime. A physical Mac DMG run remains required.

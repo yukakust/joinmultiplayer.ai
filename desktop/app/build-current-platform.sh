@@ -15,6 +15,9 @@ if ! "$PYTHON_BIN" -c 'import fastembed; assert fastembed.__version__ == "0.8.0"
   exit 1
 fi
 
+cd "$APP_DIR"
+node prepare-nli.cjs
+
 rm -rf "$APP_DIR/sidecar-current" "$APP_DIR/build-sidecar"
 mkdir -p "$APP_DIR/sidecar-current" "$APP_DIR/build-sidecar"
 
@@ -23,6 +26,10 @@ mkdir -p "$APP_DIR/sidecar-current" "$APP_DIR/build-sidecar"
   --clean \
   --onefile \
   --collect-all fastembed \
+  --exclude-module torch \
+  --exclude-module transformers \
+  --exclude-module optimum \
+  --exclude-module onnx \
   --name pocket-i-core \
   --paths "$DESKTOP_DIR" \
   --distpath "$APP_DIR/sidecar-current" \

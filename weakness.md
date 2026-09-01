@@ -110,6 +110,11 @@ full PyTorch runtime would make the desktop package much larger. The next gate
 must export the exact accepted checkpoint to ONNX, compare its decisions with
 the frozen reference cases, and only then add it to the app.
 
+Checkpoint 7G completed that export. Dynamic INT8 was unusable (`9/30` matching
+decisions), so the app keeps the much larger native FP16 ONNX file (`30/30`).
+This preserves the tested decisions but adds about 378 MB before packaging
+overhead and still needs a physical Mac load test.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`

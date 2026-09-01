@@ -25,6 +25,7 @@ class DesktopBridgeTests(unittest.TestCase):
             [{"candidate_id": "E1", "label": "entailment", "confidence": 0.91}],
             result["items"],
         )
+        self.assertEqual("MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli", result["model"])
 
     def test_missing_nli_model_is_explicit_not_a_fake_decision(self):
         result = MemoryRuntime().judge_candidates([

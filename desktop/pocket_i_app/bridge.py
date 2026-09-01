@@ -15,6 +15,7 @@ from typing import Callable, Mapping, Sequence
 
 from pocket_i_core.index_cache import build_cached_index
 from pocket_i_core.library import count_local_conversations, scan_local_library
+from pocket_i_core.nli import LocalNli
 
 
 ENABLED_SOURCES = ("codex", "claude_code")
@@ -123,6 +124,7 @@ class MemoryRuntime:
         embed: EmbedBatch | None = None,
         on_progress: Callable[[dict[str, object]], None] | None = None,
         nli: NliBatch | None = None,
+        nli_dir: Path | None = None,
     ) -> None:
         self.data_dir = data_dir
         self.home = home
@@ -131,6 +133,7 @@ class MemoryRuntime:
         self.embed = embed
         self.on_progress = on_progress
         self.nli = nli
+        self.nli_dir = nli_dir
         self.library = None
         self.index = None
 
@@ -185,14 +188,20 @@ class MemoryRuntime:
                 raise ValueError("invalid candidate")
             clean.append((candidate_id, quote, claim))
         if self.nli is None:
-            return {
-                "schema_version": "desktop-nli-signals-v0.1",
-                "model": "not-installed",
-                "items": [
-                    {"candidate_id": candidate_id, "label": "unavailable", "confidence": 0.0}
-                    for candidate_id, _quote, _claim in clean
-                ],
-            }
+            if self.nli_dir is not None:
+                try:
+                    self.nli = LocalNli(self.nli_dir)
+                except (FileNotFoundError, ImportError):
+                    self.nli = None
+            if self.nli is None:
+                return {
+                    "schema_version": "desktop-nli-signals-v0.1",
+                    "model": "not-installed",
+                    "items": [
+                        {"candidate_id": candidate_id, "label": "unavailable", "confidence": 0.0}
+                        for candidate_id, _quote, _claim in clean
+                    ],
+                }
         decisions = tuple(self.nli([(quote, claim) for _candidate_id, quote, claim in clean]))
         if len(decisions) != len(clean):
             raise ValueError("nli returned the wrong number of decisions")
@@ -201,7 +210,11 @@ class MemoryRuntime:
             if label not in {"entailment", "neutral", "contradiction"}:
                 raise ValueError("invalid nli label")
             items.append({"candidate_id": candidate_id, "label": label, "confidence": round(float(confidence), 6)})
-        return {"schema_version": "desktop-nli-signals-v0.1", "model": "injected", "items": items}
+        return {
+            "schema_version": "desktop-nli-signals-v0.1",
+            "model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+            "items": items,
+        }
 
     def connect(self) -> dict[str, object]:
         if self.data_dir is None:
@@ -386,9 +399,10 @@ def main(argv: list[str] | None = None) -> int:
         required=True,
     )
     parser.add_argument("--data-dir", type=Path)
+    parser.add_argument("--nli-dir", type=Path)
     args = parser.parse_args(argv)
     if args.action == "serve":
-        return _serve(MemoryRuntime(data_dir=args.data_dir))
+        return _serve(MemoryRuntime(data_dir=args.data_dir, nli_dir=args.nli_dir))
     try:
         request = None
         if args.action == "route":
