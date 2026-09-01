@@ -113,6 +113,12 @@ one-hour UI timeout. Checkpoint 7D replaces the all-or-nothing embedding pass
 with committed 128-message batches, visible counts, no initial-build timeout,
 and a background path back to chat. Restart reuse is a required pass condition.
 
+Checkpoint 7E removes raw retrieval cards from the owner path. The internal
+route selects chats, preserves a rare named anchor plus semantic context, and
+asks local Qwen3-8B for one cited answer. Invalid source labels fail closed.
+Exact quote extraction and DeBERTa remain the next internal acceptance layer;
+the development result must not be described as the complete harness.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

@@ -1,0 +1,29 @@
+{
+  "schema_version": "e007-desktop-cited-memory-answer-checkpoint7e-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7E",
+  "status": "development_pass_physical_mac_run_pending",
+  "source_revision": "6e19275849b55e7cbdddf9f977a0de5dbbc7613c",
+  "problem": "The physical 7D screen exposed five raw conversation matches. It neither showed the best internal message reliably nor produced the answer the owner asked for.",
+  "new_owner_flow": [
+    "The owner asks one question.",
+    "The hybrid index selects five conversations internally.",
+    "For each selected conversation the harness keeps a rare-word anchor and a semantic match.",
+    "At most ten bounded excerpts go to the local Qwen3-8B writer.",
+    "The owner sees one short answer with local source labels, not raw retrieval cards."
+  ],
+  "guardrails": [
+    "Memory excerpts are marked as untrusted data rather than instructions.",
+    "The local writer is limited to an 8192-token context.",
+    "Invented source labels are rejected by code.",
+    "No excerpt is sent to a remote service."
+  ],
+  "development_result": {
+    "desktop_core": "29/29 passed",
+    "desktop_app": "17/17 passed",
+    "rare_named_anchor_regression": "passed",
+    "invalid_source_label_regression": "passed"
+  },
+  "decision": "Replace raw top-five cards with one cited local answer, then physically rerun the same DeBERTa question on the owner Mac.",
+  "claim_boundary": "This is a first complete retrieval-to-answer product path, not the full accepted evidence harness. Exact-quote extraction, secret screening for network transport, DeBERTa semantic signals, shelves and owner-approved outgoing capsules are not wired into this desktop path yet."
+}

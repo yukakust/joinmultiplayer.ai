@@ -92,6 +92,14 @@ Checkpoint 7D saves every 128 new vectors, reports real saved-message counts,
 has no fixed initial-build timeout, and keeps a `BACK TO CHAT` path. This is
 covered by development tests; the physical rerun is still pending.
 
+## 9. The first cited desktop answer is not yet fully evidence-checked
+
+Checkpoint 7E produces one local answer instead of exposing raw search cards.
+Code verifies that every displayed source label exists, but that does not prove
+that every sentence follows from its excerpt. Exact quote extraction, DeBERTa,
+shelves and owner approval before network transport are not wired into this
+desktop path yet. The UI must not call the current answer verified.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`

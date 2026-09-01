@@ -149,3 +149,11 @@ state existed. Checkpoint 7D commits every 128 new vectors, reports saved-messag
 counts, removes the initial-build timeout, and lets the owner return to chat
 while work continues. A forced-interruption test proves the next run reuses the
 already committed batches.
+
+Checkpoint 7E replaces the raw top-five debug screen with the first complete
+local retrieval-to-answer path. Inside the app, the index still selects five
+conversations, but it now keeps both a rare named anchor and a semantic message
+from each. Bounded excerpts go to local Qwen3-8B, and the owner sees one short
+answer with validated local source labels. This is not yet the full evidence
+harness: exact-quote extraction, DeBERTa and outgoing-capsule approval remain
+separate gates.
