@@ -13,6 +13,19 @@
     "Open Pocket i and inspect the MEMORY row.",
     "Record only the two visible counts and whether the app remained responsive."
   ],
+  "builder_attempts": [
+    {
+      "version": "v0.3",
+      "status": "failed_before_clone",
+      "reason": "The builder asked the remote for an abbreviated commit hash, which GitHub does not expose as a remote ref.",
+      "model_or_app_changed": false
+    },
+    {
+      "version": "v0.4",
+      "status": "ready",
+      "change": "Clone branch history, then detach and verify the full 40-character commit hash; clean the exact temporary build directory on success or failure."
+    }
+  ],
   "locked_success": [
     "The application opens.",
     "The existing model remains available or can be reused without a second model download.",
