@@ -10,7 +10,7 @@ import argparse
 import json
 import sys
 
-from pocket_i_core.library import scan_local_library
+from pocket_i_core.library import count_local_conversations
 
 
 ENABLED_SOURCES = ("codex", "claude_code")
@@ -25,12 +25,12 @@ def handle(action: str) -> dict[str, object]:
             "privacy": "no conversation text, paths or identifiers",
         }
     if action == "scan":
-        library = scan_local_library(sources=ENABLED_SOURCES)
+        library = count_local_conversations(sources=ENABLED_SOURCES)
         return {
             "schema_version": "desktop-library-counts-v0.1",
             "status": "ready",
             "version": "desktop-alpha-checkpoint-6d",
-            "total_conversations": len(library.conversations),
+            "total_conversations": library.total_conversations,
             "adapters": [
                 {
                     "source": adapter.source,

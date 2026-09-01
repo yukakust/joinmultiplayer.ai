@@ -6,10 +6,43 @@ import unittest
 import zlib
 from pathlib import Path
 
-from pocket_i_core import scan_local_library
+from pocket_i_core import count_local_conversations, scan_local_library
 
 
 class LocalLibraryTests(unittest.TestCase):
+    def test_count_only_inventory_reads_metadata_for_codex_and_claude(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            codex = home / ".codex" / "sessions"
+            codex.mkdir(parents=True)
+            (codex / "main.jsonl").write_text(
+                "\n".join(
+                    [
+                        json.dumps({"type": "session_meta", "payload": {"id": "main"}}),
+                        "THIS MESSAGE BODY IS DELIBERATELY NOT JSON",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            (codex / "child.jsonl").write_text(
+                json.dumps({"type": "session_meta", "payload": {"id": "child", "parent_thread_id": "main"}}),
+                encoding="utf-8",
+            )
+            claude = home / ".claude" / "projects" / "project"
+            claude.mkdir(parents=True)
+            (claude / "one.jsonl").write_text(
+                json.dumps({"type": "user", "sessionId": "claude-one", "message": {"content": "PRIVATE"}}),
+                encoding="utf-8",
+            )
+
+            counts = count_local_conversations(home=home)
+
+            self.assertEqual(2, counts.total_conversations)
+            self.assertEqual(
+                {"codex": 1, "claude_code": 1},
+                {item.source: item.conversations for item in counts.adapters},
+            )
+
     def test_codex_keeps_only_visible_main_session_messages(self):
         with tempfile.TemporaryDirectory() as directory:
             home = Path(directory)
@@ -98,4 +131,3 @@ class LocalLibraryTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

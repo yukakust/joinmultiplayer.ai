@@ -10,7 +10,14 @@ from .pipeline import (
     PocketICore,
     ShelfPlan,
 )
-from .library import AdapterStatus, LocalLibrary, scan_local_library
+from .library import (
+    AdapterStatus,
+    ConversationCount,
+    LocalLibrary,
+    LocalLibraryCounts,
+    count_local_conversations,
+    scan_local_library,
+)
 from .retrieval import HybridChatIndex, RouteResult
 from .index_cache import CacheStats, build_cached_index
 
@@ -24,11 +31,13 @@ __all__ = [
     "PocketICore",
     "ShelfPlan",
     "AdapterStatus",
+    "ConversationCount",
     "LocalLibrary",
+    "LocalLibraryCounts",
+    "count_local_conversations",
     "scan_local_library",
     "HybridChatIndex",
     "RouteResult",
     "CacheStats",
     "build_cached_index",
 ]
-

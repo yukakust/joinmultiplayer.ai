@@ -45,6 +45,22 @@ class LocalLibrary:
         }
 
 
+@dataclass(frozen=True)
+class ConversationCount:
+    source: str
+    status: str
+    conversations: int
+
+
+@dataclass(frozen=True)
+class LocalLibraryCounts:
+    adapters: tuple[ConversationCount, ...]
+
+    @property
+    def total_conversations(self) -> int:
+        return sum(item.conversations for item in self.adapters)
+
+
 def _hash(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
@@ -170,6 +186,86 @@ def read_claude_code(root: Path) -> tuple[tuple[Conversation, ...], int]:
         if messages:
             result.append(_conversation("claude_code", raw_session_id, messages))
     return tuple(result), files_read
+
+
+def _count_codex_conversations(root: Path, metadata_line_limit: int = 64) -> int:
+    sessions: set[str] = set()
+    child_sessions: set[str] = set()
+    for path in sorted(root.rglob("*.jsonl")) if root.is_dir() else ():
+        try:
+            handle = path.open(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        with handle:
+            for line_number, line in enumerate(handle, 1):
+                if line_number > metadata_line_limit:
+                    break
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                payload = row.get("payload")
+                if row.get("type") != "session_meta" or not isinstance(payload, dict):
+                    continue
+                raw_session_id = str(payload.get("id") or payload.get("session_id") or "")
+                if raw_session_id:
+                    sessions.add(raw_session_id)
+                    if payload.get("parent_thread_id"):
+                        child_sessions.add(raw_session_id)
+                break
+    return len(sessions - child_sessions)
+
+
+def _count_claude_conversations(root: Path, metadata_line_limit: int = 64) -> int:
+    sessions: set[str] = set()
+    for path in sorted(root.glob("*/*.jsonl")) if root.is_dir() else ():
+        try:
+            handle = path.open(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        with handle:
+            for line_number, line in enumerate(handle, 1):
+                if line_number > metadata_line_limit:
+                    break
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                raw_session_id = str(row.get("sessionId") or "")
+                if raw_session_id:
+                    sessions.add(raw_session_id)
+                    break
+    return len(sessions)
+
+
+def count_local_conversations(
+    *,
+    home: Path | None = None,
+    codex_home: Path | None = None,
+    sources: Sequence[str] = ("codex", "claude_code"),
+    environ: Mapping[str, str] | None = None,
+) -> LocalLibraryCounts:
+    """Count conversations from metadata without reading their message bodies."""
+    explicit_home = home is not None
+    home = (home or Path.home()).expanduser()
+    environ = environ or os.environ
+    unknown = set(sources) - {"codex", "claude_code"}
+    if unknown:
+        raise ValueError(f"unsupported count-only sources: {sorted(unknown)}")
+    counts = []
+    if "codex" in sources:
+        if codex_home is not None:
+            resolved_codex_home = codex_home
+        elif not explicit_home and environ.get("CODEX_HOME"):
+            resolved_codex_home = Path(environ["CODEX_HOME"])
+        else:
+            resolved_codex_home = home / ".codex"
+        count = _count_codex_conversations(resolved_codex_home / "sessions")
+        counts.append(ConversationCount("codex", "ready" if count else "not_found_or_empty", count))
+    if "claude_code" in sources:
+        count = _count_claude_conversations(home / ".claude" / "projects")
+        counts.append(ConversationCount("claude_code", "ready" if count else "not_found_or_empty", count))
+    return LocalLibraryCounts(tuple(counts))
 
 
 def _chatgpt_objects(value: object) -> Iterable[dict]:
