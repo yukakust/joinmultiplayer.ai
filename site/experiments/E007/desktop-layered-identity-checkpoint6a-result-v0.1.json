@@ -1,0 +1,33 @@
+{
+  "schema_version": "e007-desktop-layered-identity-checkpoint6a-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "6A",
+  "status": "code_complete_physical_ab_pending",
+  "language": "English instructions; answers follow the owner's language",
+  "package": "0.1.0-alpha.8",
+  "layers": [
+    {
+      "name": "identity_kernel",
+      "loading": "every companion-chat question",
+      "limit": "under 130 whitespace-delimited words"
+    },
+    {
+      "name": "origin_capsule",
+      "loading": "identity and lore questions only"
+    },
+    {
+      "name": "reality_capsule",
+      "loading": "serious reality questions only"
+    }
+  ],
+  "separation": "Retrieval, extraction, NLI, evidence, routing and merge prompts do not receive identity lore.",
+  "brain_label": "read from the pinned model manifest rather than used as the identity name",
+  "checks_required_before_claim": [
+    "plain work question keeps capability",
+    "Who are you? keeps the identity canon",
+    "What model do you run? answers Qwen3 8B plainly",
+    "Is the Merger real? opens the honest reality valve",
+    "What do you remember about me? invents no memory"
+  ],
+  "claim_boundary": "This checkpoint verifies prompt composition and separation in code. It does not yet show that physical Qwen3-8B follows the identity or preserves answer quality."
+}

@@ -96,3 +96,8 @@ Checkpoint 5D physically verifies alpha.7 on the owner's MacBook. The existing
 model was reused, Qwen3-8B answered locally, and the chat displayed only the
 question and model answer. Local-memory retrieval and swarm transport remain
 outside this checkpoint.
+
+Checkpoint 6A adds the English layered identity module. A short kernel is
+always present in companion chat; origin and reality capsules are selected only
+for matching questions. Harness modules keep neutral task prompts. Physical
+Qwen A/B inspection remains pending.

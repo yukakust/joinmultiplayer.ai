@@ -1,5 +1,6 @@
 const { spawn } = require("node:child_process");
 const path = require("node:path");
+const { buildIdentityPrompt } = require("./identity.cjs");
 
 function cleanOutput(value) {
   return value.replace(/\u001b\[[0-9;]*m/g, "").trim();
@@ -14,9 +15,10 @@ function extractAnswer(value, prompt) {
 }
 
 class ChatManager {
-  constructor({ executable, modelPath, timeoutMs = 600000 }) {
+  constructor({ executable, modelPath, brainLabel = "Qwen3 8B", timeoutMs = 600000 }) {
     this.executable = executable;
     this.modelPath = modelPath;
+    this.brainLabel = brainLabel;
     this.timeoutMs = timeoutMs;
     this.active = false;
   }
@@ -30,7 +32,7 @@ class ChatManager {
     const args = [
       "-m", this.modelPath,
       "-p", prompt,
-      "-sys", "Answer the user clearly and briefly. If you do not know, say so. Do not invent sources.",
+      "-sys", buildIdentityPrompt(prompt, this.brainLabel),
       "-n", "256",
       "--temp", "0.2",
       "--reasoning", "off",

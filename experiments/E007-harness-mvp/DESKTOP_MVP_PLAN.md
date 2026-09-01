@@ -61,6 +61,12 @@ survived the application update, inference still worked, and the output adapter
 showed only the user's question and Qwen's answer. This closes presentation of
 one local answer, not memory, multi-turn context, or swarm behavior.
 
+Checkpoint 6A implements personality as a separate English companion-chat
+module. The always-loaded kernel stays below 130 whitespace-delimited words;
+origin stays below 220 words with the kernel, and origin plus the honest reality
+valve stays below 250. Neutral harness prompts never receive lore. The code boundary is tested
+before any physical alpha.8 personality claim.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

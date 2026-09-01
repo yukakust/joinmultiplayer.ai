@@ -114,7 +114,11 @@ app.whenReady().then(() => {
       }
     },
   });
-  chatManager = new ChatManager({ executable: runtimePath(), modelPath: setupManager.modelPath() });
+  chatManager = new ChatManager({
+    executable: runtimePath(),
+    modelPath: setupManager.modelPath(),
+    brainLabel: manifest.models.reader.label,
+  });
   createWindow();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

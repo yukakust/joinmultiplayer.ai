@@ -1,6 +1,6 @@
 {
   "name": "pocket-i-desktop",
-  "version": "0.1.0-alpha.7",
+  "version": "0.1.0-alpha.8",
   "private": true,
   "description": "Pocket i desktop alpha",
   "main": "main.cjs",
@@ -22,6 +22,7 @@
     "files": [
       "main.cjs",
       "chat.cjs",
+      "identity.cjs",
       "setup.cjs",
       "model-manifest.json",
       "runtime-manifest.json",
