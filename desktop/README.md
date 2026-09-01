@@ -128,3 +128,10 @@ numbers. On yukabox the new inventory returned 68 Codex session records in
 about a tenth of a second. The different number is expected: the earlier full
 reader counted only non-empty visible conversations; the status panel counts
 top-level session records. The pinned Mac build source is revision `c36e807`.
+
+Checkpoint 7A supersedes the count-only package run with the first explicit
+memory connection. The app shows `CONNECT MEMORY`, discloses the accepted Codex
+and Claude boundary plus the 250 MB local search model, and does nothing until
+the owner confirms. The bridge then reads visible messages, builds the real
+cached MiniLM/BM25 index, and persists only hashes, vectors and count-only state.
+The chat still uses base Qwen at this checkpoint; retrieval is connected next.

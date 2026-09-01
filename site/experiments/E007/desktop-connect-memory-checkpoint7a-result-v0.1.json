@@ -1,0 +1,39 @@
+{
+  "schema_version": "e007-desktop-connect-memory-checkpoint7a-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7A",
+  "status": "development_pass_physical_memory_build_pending",
+  "hypothesis": "One explicit owner action can discover Codex and Claude Code, build the accepted local hybrid index, and persist no conversation plaintext.",
+  "owner_flow": [
+    "MEMORY starts as NOT CONNECTED.",
+    "The owner presses CONNECT MEMORY.",
+    "The app discloses visible Codex and Claude messages plus a 250 MB local search tool.",
+    "The owner confirms.",
+    "The UI advances through FINDING, BUILDING and READY or EMPTY."
+  ],
+  "index": {
+    "lexical": "BM25 per visible message",
+    "neural": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "runtime": "fastembed 0.8.0",
+    "persistent_data": ["hashed message key", "hashed content", "hashed conversation key", "embedding vector", "count-only connection state"],
+    "not_persisted": ["message text", "conversation title", "filesystem path", "message coordinate"]
+  },
+  "fixture_result": {
+    "private_conversations": 1,
+    "private_messages_indexed": 1,
+    "memory_status_before": "disconnected",
+    "memory_status_after": "connected",
+    "private_text_found_in_index": false,
+    "private_text_found_in_state": false,
+    "private_identifier_returned_to_renderer": false,
+    "index_mode": "0600",
+    "state_mode": "0600"
+  },
+  "suite": {
+    "desktop_core": "24/24 passed",
+    "desktop_app": "12/12 passed"
+  },
+  "preserved_failure": "The earlier count-only Mac packaging gate was superseded before a useful physical result; the first v0.3 builder failure remains recorded in Checkpoint 6E.",
+  "decision": "Keep explicit consent and the real cached hybrid index. Connect question routing to this memory before producing another DMG.",
+  "claim_boundary": "The index path passed with a deterministic fixture embedder. The real FastEmbed model download, a full owner library build, question routing, evidence extraction and answer generation are not tested here."
+}

@@ -11,7 +11,43 @@ from pathlib import Path
 from pocket_i_app.bridge import handle
 
 
+def tiny_embedder(texts):
+    return [[float(len(text)), float(sum(ord(char) for char in text) % 101)] for text in texts]
+
+
 class DesktopBridgeTests(unittest.TestCase):
+    def test_connect_builds_private_index_and_persists_counts_only_state(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory) / "home"
+            data_dir = Path(directory) / "private-memory"
+            codex = home / ".codex" / "sessions"
+            codex.mkdir(parents=True)
+            private = "PRIVATE MEMORY TEXT"
+            (codex / "one.jsonl").write_text(
+                "\n".join(
+                    [
+                        json.dumps({"type": "session_meta", "payload": {"id": "private-session"}}),
+                        json.dumps({"type": "event_msg", "payload": {"type": "user_message", "message": private}}),
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            before = handle("memory-status", data_dir=data_dir)
+            connected = handle("connect", data_dir=data_dir, home=home, embed=tiny_embedder)
+            after = handle("memory-status", data_dir=data_dir)
+
+            self.assertFalse(before["connected"])
+            self.assertTrue(connected["connected"])
+            self.assertEqual(1, connected["indexed_messages"])
+            self.assertTrue(after["connected"])
+            self.assertEqual(1, after["total_conversations"])
+            self.assertEqual(0o600, (data_dir / "index.sqlite3").stat().st_mode & 0o777)
+            self.assertEqual(0o600, (data_dir / "memory-state.json").stat().st_mode & 0o777)
+            self.assertNotIn(private.encode(), (data_dir / "index.sqlite3").read_bytes())
+            self.assertNotIn(private, (data_dir / "memory-state.json").read_text(encoding="utf-8"))
+            self.assertNotIn("private-session", json.dumps(connected))
+
     def test_health_is_counts_only_contract(self):
         result = handle("health")
         self.assertEqual("ready", result["status"])

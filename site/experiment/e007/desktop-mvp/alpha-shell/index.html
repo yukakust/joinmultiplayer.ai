@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>E007 · Pocket i desktop · Checkpoint 6D</title>
+  <title>E007 · Pocket i desktop · Checkpoint 7A</title>
   <link rel="stylesheet" href="/style.css?v=e007-desktop-alpha-4c">
   <style>
     .page{max-width:none;width:100%;padding:clamp(20px,4vw,68px)}.hero{max-width:1450px}.hero h1{max-width:1300px}.lead{font-size:clamp(19px,2vw,32px);line-height:1.35;max-width:1180px}
@@ -13,18 +13,18 @@
 </head>
 <body>
 <main class="page">
-  <section class="hero"><p>E007 · CHECKPOINT 6D · LOCAL LIBRARY</p><h1>Память найдена. Тексты остаются внутри.</h1><p class="lead">Приложение видит разговоры Codex и Claude Code, но экран получает только количество разговоров.</p></section>
+  <section class="hero"><p>E007 · CHECKPOINT 7A · CONNECT MEMORY</p><h1>Память подключается одной кнопкой.</h1><p class="lead">Только после согласия приложение читает видимые сообщения Codex и Claude, строит локальный индекс и оставляет тексты на устройстве.</p></section>
 
   <section class="preview-wrap" aria-label="Превью чата Pocket i desktop alpha 0.1.0 alpha 5">
     <p class="preview-label"><span>ПОСЛЕ WAKE · ALPHA.8</span><span>FIGMA NODE 19:2</span></p>
     <div class="forge">
       <img class="chassis" src="/experiments/E007/forge-chassis-texture-v1.png" alt="Металлический корпус Pocket i с двумя экранами">
       <section class="main-screen chat"><div class="chat-mark"><div class="brand"><span></span><i></i></div><small>POCKET i</small></div><div class="messages"><p class="message">I’m awake.</p><p class="message from-user">What do you remember?</p></div><div class="composer"><div>Ask something…</div><button>→</button></div></section>
-      <aside class="status-screen"><small>POCKET i</small><ol><li><span>01</span><div><strong>QWEN3 8B</strong><p>ready</p></div></li><li><span>02</span><div><strong>RUNTIME</strong><p>ready</p></div></li><li><span>03</span><div><strong>MEMORY</strong><p>ready</p></div></li></ol><div class="library"><p>Codex N · Claude N</p></div><p class="privacy">Nothing leaves this device.</p></aside>
+      <aside class="status-screen"><small>POCKET i</small><ol><li><span>01</span><div><strong>QWEN3 8B</strong><p>ready</p></div></li><li><span>02</span><div><strong>RUNTIME</strong><p>ready</p></div></li><li><span>03</span><div><strong>MEMORY</strong><p>not connected</p></div></li></ol><div class="library"><p>Codex 0 · Claude 0</p><button>CONNECT MEMORY</button></div><p class="privacy">Your messages stay on this device.</p></aside>
     </div>
   </section>
 
-  <section class="facts"><article><span>CORE TESTS</span><strong>23 / 23</strong></article><article><span>DESKTOP TESTS</span><strong>12 / 12</strong></article><article><span>LOCAL MODEL</span><strong>QWEN3 8B</strong></article><article><span>REAL ANSWER</span><strong>PASS</strong></article></section>
+  <section class="facts"><article><span>CORE TESTS</span><strong>24 / 24</strong></article><article><span>DESKTOP TESTS</span><strong>12 / 12</strong></article><article><span>LOCAL MODEL</span><strong>QWEN3 8B</strong></article><article><span>MEMORY INDEX</span><strong>DEV PASS</strong></article></section>
   <p class="note"><strong>Исправление проверено на MacBook:</strong> alpha.7 показывает только вопрос и ответ Qwen. Баннер, путь к модели и <code>Exiting…</code> исчезли.</p>
   <section class="history"><p>Это доказывает локальный запуск и один чисто показанный ответ. Память из разговоров, многоходовый контекст и swarm пока не подключены.</p><p><a href="/experiments/E007/desktop-clean-answer-checkpoint5d-result-v0.1.json">Открыть Checkpoint 5D →</a> · <a href="/experiments/E007/desktop-first-local-answer-checkpoint5c-result-v0.1.json">Предыдущая ошибка 5C →</a></p></section>
   <section class="history"><p><strong>Следующий чертёж:</strong> короткое английское ядро личности идёт в companion chat. История происхождения и честный выход из игры появляются только по подходящему вопросу. Harness остаётся нейтральным.</p><p><a href="/experiments/E007/desktop-layered-identity-checkpoint6a-result-v0.1.json">Открыть Checkpoint 6A →</a></p></section>
@@ -32,7 +32,8 @@
   <section class="history"><p><strong>Решение владельца:</strong> голос pocket i принят. Следующий gate проверяет не характер, а рабочую способность: 10 прежних задач evidence → answer, старая Qwen против Qwen с identity-kernel.</p><p><a href="/experiments/E007/desktop-identity-capability-ab-protocol-v0.1.json">План Gate 6C →</a> · <a href="/experiments/E007/desktop-identity-owner-decision-v0.1.json">Решение владельца →</a></p></section>
   <section class="history"><p><strong>Gate 6C прошёл:</strong> обе версии дали `10/10` полных диагнозов, `10/10` безопасных действий и точные пары источников. У новой личности — ноль lore-утечек и ноль ухудшившихся случаев.</p><p><a href="/experiments/E007/desktop-identity-capability-ab-result-v0.1.json">Все 10 пар →</a> · <a href="/experiments/E007/desktop-identity-capability-ab-protocol-v0.1.json">План до запуска →</a></p></section>
   <section class="history"><p><strong>Checkpoint 6D готов в коде:</strong> приложение теперь показывает `Codex N · Claude N`. На экран выходят только числа; тексты, названия разговоров, пути и координаты остаются внутри локального core.</p><p><a href="/experiments/E007/desktop-local-library-checkpoint6d-result-v0.1.json">Открыть результат →</a></p></section>
-  <section class="history"><p><strong>Checkpoint 6E ждёт MacBook:</strong> быстрый счётчик читает только записи сессий, а не гигабайты сообщений. Первая команда сборки упала до clone из-за короткого git hash; исправленный v0.4 закрепляет полный commit и перед упаковкой запускает `23 + 12` тестов.</p><p><a href="/experiments/E007/desktop-local-library-checkpoint6e-protocol-v0.1.json">План и сохранённая ошибка →</a> · <a href="/experiments/E007/build-macos-alpha-v0.4.sh">Исправленный скрипт →</a></p></section>
+  <section class="history"><p><strong>Checkpoint 6E отложен:</strong> быстрый счётчик был готов, но владелец решил не собирать ещё один DMG без рабочего ответа из памяти. Ошибка первой команды сборки сохранена.</p><p><a href="/experiments/E007/desktop-local-library-checkpoint6e-protocol-v0.1.json">План и сохранённая ошибка →</a></p></section>
+  <section class="history"><p><strong>Checkpoint 7A готов в разработке:</strong> `CONNECT MEMORY` сначала просит согласие, затем строит настоящий MiniLM/BM25-индекс. В тесте приватный текст не оказался ни в SQLite, ни в сохранённом состоянии. Новый DMG отложен до подключения вопроса к памяти.</p><p><a href="/experiments/E007/desktop-connect-memory-checkpoint7a-result-v0.1.json">Открыть результат →</a></p></section>
 </main>
 </body>
 </html>

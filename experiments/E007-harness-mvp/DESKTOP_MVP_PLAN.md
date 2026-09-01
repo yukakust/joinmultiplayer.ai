@@ -90,6 +90,12 @@ the UI does not parse gigabytes of message bodies merely to show counts. The
 pinned alpha.8 Mac build at revision `c36e807` is awaiting the owner's physical
 run. Evidence retrieval remains deliberately outside this gate.
 
+The owner chose not to package another count-only build. Checkpoint 7A therefore
+adds the explicit `CONNECT MEMORY` action first. Consent precedes any message
+read; Codex and Claude visible messages build the accepted cached MiniLM/BM25
+index. Only hashes, vectors and counts persist. Fixture coverage passes, while
+the real FastEmbed download and Mac library build remain a future physical run.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

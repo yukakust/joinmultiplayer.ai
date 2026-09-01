@@ -16,25 +16,26 @@ function runtimePath() {
 }
 
 function bridgeCommand(action) {
+  const dataArgs = ["--data-dir", path.join(app.getPath("userData"), "memory")];
   if (app.isPackaged) {
     const executable = process.platform === "win32" ? "pocket-i-core.exe" : "pocket-i-core";
     return {
       command: path.join(process.resourcesPath, "sidecar", executable),
-      args: ["--action", action],
+      args: ["--action", action, ...dataArgs],
       options: {},
     };
   }
   const desktopRoot = path.resolve(__dirname, "..");
   return {
     command: process.env.POCKET_I_PYTHON || "python3",
-    args: ["-m", "pocket_i_app.bridge", "--action", action],
+    args: ["-m", "pocket_i_app.bridge", "--action", action, ...dataArgs],
     options: {
       env: { ...process.env, PYTHONPATH: desktopRoot },
     },
   };
 }
 
-function runBridge(action) {
+function runBridge(action, timeoutMs = 120000) {
   return new Promise((resolve, reject) => {
     const request = bridgeCommand(action);
     const child = spawn(request.command, request.args, {
@@ -47,7 +48,7 @@ function runBridge(action) {
     const timer = setTimeout(() => {
       child.kill();
       reject(new Error("Local library scan timed out."));
-    }, 120000);
+    }, timeoutMs);
     child.stdout.on("data", (chunk) => { stdout += chunk.toString(); });
     child.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
     child.on("error", (error) => {
@@ -92,6 +93,8 @@ function createWindow() {
 
 ipcMain.handle("pocket-i:health", () => runBridge("health"));
 ipcMain.handle("pocket-i:scan", () => runBridge("scan"));
+ipcMain.handle("pocket-i:memory-status", () => runBridge("memory-status"));
+ipcMain.handle("pocket-i:connect-memory", () => runBridge("connect", 3600000));
 ipcMain.handle("pocket-i:setup-status", () => setupManager.status());
 ipcMain.handle("pocket-i:install-model", async () => {
   await setupManager.installModel();

@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'">
   <title>Pocket i</title>
   <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="memory.css">
 </head>
 <body>
   <main class="forge" aria-label="Pocket i setup console">
@@ -32,6 +33,14 @@
           <button id="send" type="submit" aria-label="Send">→</button>
         </form>
       </section>
+
+      <section id="memory-consent" class="memory-consent" hidden>
+        <small>LOCAL MEMORY</small>
+        <h2>Connect memory?</h2>
+        <p>Visible Codex and Claude messages. A 250 MB search tool stays on this computer.</p>
+        <div><button id="memory-confirm">CONNECT</button><button id="memory-cancel" class="quiet">NOT NOW</button></div>
+        <p id="memory-progress" class="memory-progress" hidden></p>
+      </section>
     </section>
 
     <aside class="status-screen">
@@ -42,7 +51,8 @@
         <li><span>03</span><div><strong>MEMORY</strong><p id="library-status">waiting</p></div></li>
       </ol>
       <p id="library-detail" class="library-detail">Codex 0 · Claude 0</p>
-      <p class="privacy">Nothing leaves this device.</p>
+      <button id="memory-connect" class="memory-connect" hidden>CONNECT MEMORY</button>
+      <p class="privacy">Your messages stay on this device.</p>
     </aside>
   </main>
   <script src="app.js"></script>

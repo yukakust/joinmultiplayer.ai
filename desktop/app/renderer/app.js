@@ -12,19 +12,34 @@ const chatForm = document.querySelector("#chat-form");
 const chatInput = document.querySelector("#chat-input");
 const messages = document.querySelector("#messages");
 const send = document.querySelector("#send");
+const memoryConnect = document.querySelector("#memory-connect");
+const memoryConsent = document.querySelector("#memory-consent");
+const memoryConfirm = document.querySelector("#memory-confirm");
+const memoryCancel = document.querySelector("#memory-cancel");
+const memoryProgress = document.querySelector("#memory-progress");
 
 function size(value) {
   return `${(value / 1024 ** 3).toFixed(1)} GB`;
 }
 
-async function scanLibrary() {
-  libraryStatus.textContent = "CHECKING";
-  const library = await window.pocketI.scan();
-  libraryStatus.textContent = library.total_conversations ? "READY" : "EMPTY";
+function showCounts(library) {
   const counts = Object.fromEntries(
     library.adapters.map((adapter) => [adapter.source, adapter.conversations]),
   );
   libraryDetail.textContent = `Codex ${counts.codex || 0} · Claude ${counts.claude_code || 0}`;
+}
+
+async function renderMemoryStatus() {
+  const memory = await window.pocketI.memoryStatus();
+  if (memory.connected) {
+    libraryStatus.textContent = memory.total_conversations ? "READY" : "EMPTY";
+    showCounts(memory);
+    memoryConnect.hidden = Boolean(memory.total_conversations);
+    return;
+  }
+  libraryStatus.textContent = "NOT CONNECTED";
+  libraryDetail.textContent = "Codex 0 · Claude 0";
+  memoryConnect.hidden = false;
 }
 
 async function renderStatus() {
@@ -34,7 +49,7 @@ async function renderStatus() {
     modelStatus.textContent = "READY";
     setupView.hidden = true;
     chatView.hidden = false;
-    await scanLibrary();
+    await renderMemoryStatus();
     chatInput.focus();
     return;
   }
@@ -45,7 +60,8 @@ async function renderStatus() {
     progressLabel.textContent = status.runtime.installed ? "" : "Runtime missing.";
     bar.style.width = "100%";
     install.hidden = true;
-    await scanLibrary();
+    libraryStatus.textContent = "WAITING";
+    memoryConnect.hidden = true;
     return;
   }
   modelStatus.textContent = "NOT INSTALLED";
@@ -59,6 +75,46 @@ window.pocketI.onSetupProgress(({ received, total }) => {
   const percent = Math.min(100, received / total * 100);
   bar.style.width = `${percent}%`;
   progressLabel.textContent = `Downloading Qwen3 8B · ${size(received)} / ${size(total)}`;
+});
+
+memoryConnect.addEventListener("click", () => {
+  chatView.hidden = true;
+  memoryConsent.hidden = false;
+  memoryProgress.hidden = true;
+});
+
+memoryCancel.addEventListener("click", () => {
+  memoryConsent.hidden = true;
+  chatView.hidden = false;
+  chatInput.focus();
+});
+
+memoryConfirm.addEventListener("click", async () => {
+  memoryConfirm.disabled = true;
+  memoryCancel.disabled = true;
+  memoryProgress.hidden = false;
+  errorBox.hidden = true;
+  try {
+    libraryStatus.textContent = "FINDING";
+    memoryProgress.textContent = "Finding Codex and Claude conversations…";
+    const found = await window.pocketI.scan();
+    showCounts(found);
+    libraryStatus.textContent = "BUILDING";
+    memoryProgress.textContent = "Building local memory…";
+    const connected = await window.pocketI.connectMemory();
+    showCounts(connected);
+    libraryStatus.textContent = connected.total_conversations ? "READY" : "EMPTY";
+    memoryConnect.hidden = Boolean(connected.total_conversations);
+    memoryConsent.hidden = true;
+    chatView.hidden = false;
+    chatInput.focus();
+  } catch (error) {
+    libraryStatus.textContent = "FAILED";
+    memoryProgress.textContent = error.message || "Memory could not be connected.";
+  } finally {
+    memoryConfirm.disabled = false;
+    memoryCancel.disabled = false;
+  }
 });
 
 install.addEventListener("click", async () => {
