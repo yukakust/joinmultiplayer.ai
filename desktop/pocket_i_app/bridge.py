@@ -96,60 +96,90 @@ def _production_embedder(data_dir: Path) -> EmbedBatch:
     return embed
 
 
-def handle(
-    action: str,
-    *,
-    data_dir: Path | None = None,
-    home: Path | None = None,
-    codex_home: Path | None = None,
-    environ: Mapping[str, str] | None = None,
-    embed: EmbedBatch | None = None,
-) -> dict[str, object]:
-    if action == "health":
-        return {
-            "status": "ready",
-            "version": "desktop-alpha-checkpoint-6d",
-            "enabled_sources": list(ENABLED_SOURCES),
-            "privacy": "no conversation text, paths or identifiers",
-        }
-    if action == "scan":
-        library = count_local_conversations(
-            home=home, codex_home=codex_home, sources=ENABLED_SOURCES, environ=environ
-        )
-        return {
-            "schema_version": "desktop-library-counts-v0.1",
-            "status": "ready",
-            "version": "desktop-alpha-checkpoint-6d",
-            **_counts_payload(library),
-        }
-    if action == "memory-status":
-        return {"schema_version": "desktop-memory-status-v0.1", "status": "ready", **_read_state(data_dir)}
-    if action == "connect":
-        if data_dir is None:
+class MemoryRuntime:
+    """Hold plaintext conversations and the live index in RAM after consent."""
+
+    def __init__(
+        self,
+        *,
+        data_dir: Path | None = None,
+        home: Path | None = None,
+        codex_home: Path | None = None,
+        environ: Mapping[str, str] | None = None,
+        embed: EmbedBatch | None = None,
+    ) -> None:
+        self.data_dir = data_dir
+        self.home = home
+        self.codex_home = codex_home
+        self.environ = environ
+        self.embed = embed
+        self.library = None
+        self.index = None
+
+    def dispatch(self, action: str, *, question: str | None = None) -> dict[str, object]:
+        if action == "health":
+            return {
+                "status": "ready",
+                "version": "desktop-alpha-checkpoint-7b",
+                "enabled_sources": list(ENABLED_SOURCES),
+                "privacy": "conversation text remains in the local memory process",
+            }
+        if action == "scan":
+            library = count_local_conversations(
+                home=self.home,
+                codex_home=self.codex_home,
+                sources=ENABLED_SOURCES,
+                environ=self.environ,
+            )
+            return {
+                "schema_version": "desktop-library-counts-v0.1",
+                "status": "ready",
+                "version": "desktop-alpha-checkpoint-7b",
+                **_counts_payload(library),
+            }
+        if action == "memory-status":
+            return {
+                "schema_version": "desktop-memory-status-v0.1",
+                "status": "ready",
+                **_read_state(self.data_dir),
+            }
+        if action == "connect":
+            return self.connect()
+        if action == "route":
+            return self.route(question)
+        raise ValueError("unsupported bridge action")
+
+    def connect(self) -> dict[str, object]:
+        if self.data_dir is None:
             raise ValueError("data_dir is required for memory connection")
-        library = scan_local_library(
-            home=home, codex_home=codex_home, sources=ENABLED_SOURCES, environ=environ
+        self.library = scan_local_library(
+            home=self.home,
+            codex_home=self.codex_home,
+            sources=ENABLED_SOURCES,
+            environ=self.environ,
         )
-        selected_embed = embed
-        if selected_embed is None:
-            selected_embed = _production_embedder(data_dir) if library.conversations else lambda _texts: ()
-        index, stats = build_cached_index(
-            library.conversations,
-            selected_embed,
-            cache_path=data_dir / "index.sqlite3",
+        if self.embed is None:
+            self.embed = _production_embedder(self.data_dir) if self.library.conversations else lambda _texts: ()
+        self.index, stats = build_cached_index(
+            self.library.conversations,
+            self.embed,
+            cache_path=self.data_dir / "index.sqlite3",
             model_fingerprint=EMBED_FINGERPRINT,
         )
         counts = count_local_conversations(
-            home=home, codex_home=codex_home, sources=ENABLED_SOURCES, environ=environ
+            home=self.home,
+            codex_home=self.codex_home,
+            sources=ENABLED_SOURCES,
+            environ=self.environ,
         )
         state = {
             "schema_version": "desktop-memory-state-v0.1",
             "total_conversations": counts.total_conversations,
             "adapters": _counts_payload(counts)["adapters"],
-            "indexed_messages": index.messages,
+            "indexed_messages": self.index.messages,
             "model_fingerprint": EMBED_FINGERPRINT,
         }
-        _write_state(data_dir, state)
+        _write_state(self.data_dir, state)
         return {
             "schema_version": "desktop-memory-connect-v0.1",
             "status": "ready",
@@ -159,16 +189,114 @@ def handle(
             "reused_messages": stats.reused,
             "embedded_messages": stats.embedded,
         }
-    raise ValueError("unsupported bridge action")
+
+    def route(self, question: str | None) -> dict[str, object]:
+        if self.data_dir is None:
+            raise ValueError("data_dir is required for memory routing")
+        if not _read_state(self.data_dir)["connected"]:
+            raise ValueError("local memory is not connected")
+        question = (question or "").strip()
+        if not question or len(question) > 4000:
+            raise ValueError("question must contain between 1 and 4000 characters")
+        if self.index is None or self.library is None:
+            self.connect()
+        _route, hits = self.index.route_with_hits(question, top_k=5)
+        by_id = {item.conversation_id: item for item in self.library.conversations}
+        items = []
+        for rank, hit in enumerate(hits, 1):
+            conversation = by_id[hit.conversation_id]
+            message = conversation.messages[hit.message_position]
+            preview = " ".join(message.text.split())
+            if len(preview) > 320:
+                preview = preview[:317].rstrip() + "…"
+            items.append(
+                {
+                    "rank": rank,
+                    "source": conversation.source,
+                    "role": message.role,
+                    "messages": len(conversation.messages),
+                    "preview": preview,
+                }
+            )
+        return {
+            "schema_version": "desktop-memory-route-v0.1",
+            "status": "ready",
+            "returned": len(items),
+            "items": items,
+            "privacy": "matched previews are returned only to the local owner window",
+        }
+
+
+def handle(
+    action: str,
+    *,
+    data_dir: Path | None = None,
+    home: Path | None = None,
+    codex_home: Path | None = None,
+    environ: Mapping[str, str] | None = None,
+    embed: EmbedBatch | None = None,
+    question: str | None = None,
+) -> dict[str, object]:
+    runtime = MemoryRuntime(
+        data_dir=data_dir,
+        home=home,
+        codex_home=codex_home,
+        environ=environ,
+        embed=embed,
+    )
+    return runtime.dispatch(action, question=question)
+
+
+def _serve(runtime: MemoryRuntime) -> int:
+    """Serve small JSON-line requests while keeping the private library warm."""
+    for raw_request in sys.stdin:
+        response_id = None
+        try:
+            if len(raw_request) > 16384:
+                raise ValueError("request is too large")
+            request = json.loads(raw_request)
+            if not isinstance(request, dict):
+                raise ValueError("request must be an object")
+            response_id = request.get("id")
+            action = request.get("action")
+            payload = request.get("payload") or {}
+            if not isinstance(response_id, int) or action not in {
+                "health", "scan", "memory-status", "connect", "route"
+            } or not isinstance(payload, dict):
+                raise ValueError("invalid request")
+            result = runtime.dispatch(action, question=payload.get("question"))
+            response = {"id": response_id, "ok": True, "result": result}
+        except Exception:  # never expose local paths or private parser details
+            response = {"id": response_id, "ok": False, "error": "Local memory failed."}
+        print(json.dumps(response, ensure_ascii=False), flush=True)
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Pocket i desktop private bridge")
-    parser.add_argument("--action", choices=("health", "scan", "memory-status", "connect"), required=True)
+    parser.add_argument(
+        "--action",
+        choices=("health", "scan", "memory-status", "connect", "route", "serve"),
+        required=True,
+    )
     parser.add_argument("--data-dir", type=Path)
     args = parser.parse_args(argv)
+    if args.action == "serve":
+        return _serve(MemoryRuntime(data_dir=args.data_dir))
     try:
-        result = handle(args.action, data_dir=args.data_dir)
+        request = None
+        if args.action == "route":
+            raw_request = sys.stdin.read(16385)
+            if len(raw_request) > 16384:
+                raise ValueError("request is too large")
+            request = json.loads(raw_request or "{}")
+            if not isinstance(request, dict):
+                raise ValueError("request must be an object")
+        result = handle(
+            args.action,
+            data_dir=args.data_dir,
+            question=request.get("question") if request is not None else None,
+        )
     except Exception as error:  # fail closed at the renderer boundary
         print(
             json.dumps(

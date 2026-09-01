@@ -4,10 +4,12 @@ const path = require("node:path");
 const manifest = require("./model-manifest.json");
 const { SetupManager } = require("./setup.cjs");
 const { ChatManager } = require("./chat.cjs");
+const { MemoryService } = require("./memory-service.cjs");
 
 let mainWindow = null;
 let setupManager = null;
 let chatManager = null;
+let memoryService = null;
 
 function runtimePath() {
   const executable = process.platform === "win32" ? "llama-cli.exe" : "llama-cli";
@@ -35,13 +37,17 @@ function bridgeCommand(action) {
   };
 }
 
-function runBridge(action, timeoutMs = 120000) {
+function memoryServiceCommand() {
+  return bridgeCommand("serve");
+}
+
+function runBridge(action, timeoutMs = 120000, payload = null) {
   return new Promise((resolve, reject) => {
     const request = bridgeCommand(action);
     const child = spawn(request.command, request.args, {
       ...request.options,
       windowsHide: true,
-      stdio: ["ignore", "pipe", "pipe"],
+      stdio: ["pipe", "pipe", "pipe"],
     });
     let stdout = "";
     let stderr = "";
@@ -67,6 +73,7 @@ function runBridge(action, timeoutMs = 120000) {
         reject(new Error("Local core returned an invalid response."));
       }
     });
+    child.stdin.end(payload === null ? "" : JSON.stringify(payload));
   });
 }
 
@@ -92,9 +99,12 @@ function createWindow() {
 }
 
 ipcMain.handle("pocket-i:health", () => runBridge("health"));
-ipcMain.handle("pocket-i:scan", () => runBridge("scan"));
-ipcMain.handle("pocket-i:memory-status", () => runBridge("memory-status"));
-ipcMain.handle("pocket-i:connect-memory", () => runBridge("connect", 3600000));
+ipcMain.handle("pocket-i:scan", () => memoryService.call("scan"));
+ipcMain.handle("pocket-i:memory-status", () => memoryService.call("memory-status"));
+ipcMain.handle("pocket-i:connect-memory", () => memoryService.call("connect", {}, 3600000));
+ipcMain.handle("pocket-i:route-memory", (_event, question) =>
+  memoryService.call("route", { question }, 600000),
+);
 ipcMain.handle("pocket-i:setup-status", () => setupManager.status());
 ipcMain.handle("pocket-i:install-model", async () => {
   await setupManager.installModel();
@@ -122,10 +132,15 @@ app.whenReady().then(() => {
     modelPath: setupManager.modelPath(),
     brainLabel: manifest.models.reader.label,
   });
+  memoryService = new MemoryService({ request: memoryServiceCommand() });
   createWindow();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
+});
+
+app.on("before-quit", () => {
+  if (memoryService) memoryService.stop();
 });
 
 app.on("window-all-closed", () => {

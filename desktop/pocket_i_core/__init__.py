@@ -18,7 +18,7 @@ from .library import (
     count_local_conversations,
     scan_local_library,
 )
-from .retrieval import HybridChatIndex, RouteResult
+from .retrieval import HybridChatIndex, RouteHit, RouteResult
 from .index_cache import CacheStats, build_cached_index
 
 __all__ = [
@@ -37,6 +37,7 @@ __all__ = [
     "count_local_conversations",
     "scan_local_library",
     "HybridChatIndex",
+    "RouteHit",
     "RouteResult",
     "CacheStats",
     "build_cached_index",

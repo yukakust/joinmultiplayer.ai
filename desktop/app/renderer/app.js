@@ -17,6 +17,7 @@ const memoryConsent = document.querySelector("#memory-consent");
 const memoryConfirm = document.querySelector("#memory-confirm");
 const memoryCancel = document.querySelector("#memory-cancel");
 const memoryProgress = document.querySelector("#memory-progress");
+let memoryReady = false;
 
 function size(value) {
   return `${(value / 1024 ** 3).toFixed(1)} GB`;
@@ -35,11 +36,13 @@ async function renderMemoryStatus() {
     libraryStatus.textContent = memory.total_conversations ? "READY" : "EMPTY";
     showCounts(memory);
     memoryConnect.hidden = Boolean(memory.total_conversations);
+    memoryReady = Boolean(memory.total_conversations);
     return;
   }
   libraryStatus.textContent = "NOT CONNECTED";
   libraryDetail.textContent = "Codex 0 · Claude 0";
   memoryConnect.hidden = false;
+  memoryReady = false;
 }
 
 async function renderStatus() {
@@ -105,6 +108,7 @@ memoryConfirm.addEventListener("click", async () => {
     showCounts(connected);
     libraryStatus.textContent = connected.total_conversations ? "READY" : "EMPTY";
     memoryConnect.hidden = Boolean(connected.total_conversations);
+    memoryReady = Boolean(connected.total_conversations);
     memoryConsent.hidden = true;
     chatView.hidden = false;
     chatInput.focus();
@@ -141,6 +145,25 @@ function addMessage(text, className) {
   return item;
 }
 
+function addRouteResults(result) {
+  const list = document.createElement("section");
+  list.className = "route-results";
+  const heading = document.createElement("strong");
+  heading.textContent = `Found ${result.returned} conversations`;
+  list.append(heading);
+  for (const item of result.items) {
+    const card = document.createElement("article");
+    const label = document.createElement("small");
+    label.textContent = `${item.rank} · ${item.source === "claude_code" ? "CLAUDE" : "CODEX"} · ${item.messages} MESSAGES`;
+    const preview = document.createElement("p");
+    preview.textContent = item.preview;
+    card.append(label, preview);
+    list.append(card);
+  }
+  messages.append(list);
+  messages.scrollTop = messages.scrollHeight;
+}
+
 chatForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const question = chatInput.value.trim();
@@ -151,6 +174,13 @@ chatForm.addEventListener("submit", async (event) => {
   send.disabled = true;
   const pending = addMessage("Thinking…", "from-i pending");
   try {
+    if (memoryReady) {
+      pending.textContent = "Searching memory…";
+      const result = await window.pocketI.routeMemory(question);
+      pending.remove();
+      addRouteResults(result);
+      return;
+    }
     const result = await window.pocketI.ask(question);
     pending.textContent = result.answer;
     pending.classList.remove("pending");

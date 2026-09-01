@@ -43,6 +43,18 @@ class HybridRetrievalTests(unittest.TestCase):
 
         self.assertEqual(("long",), result.conversation_ids)
 
+    def test_route_hit_points_to_the_matching_message_inside_the_chat(self):
+        conversations = [
+            chat("long", "unrelated opening", "The source anchor uses an exact quote.", "unrelated ending"),
+            chat("other", "A different subject."),
+        ]
+        index = HybridChatIndex(conversations, KeywordEmbedder(("anchor", "different")))
+
+        result, hits = index.route_with_hits("How does the source anchor work?", top_k=2)
+
+        self.assertEqual("long", result.conversation_ids[0])
+        self.assertEqual(("long", 1), (hits[0].conversation_id, hits[0].message_position))
+
     def test_public_summary_contains_only_rank_not_private_identifiers(self):
         private_id = "PRIVATE-CONVERSATION-ID"
         index = HybridChatIndex([chat(private_id, "Desktop package")], KeywordEmbedder(("desktop",)))

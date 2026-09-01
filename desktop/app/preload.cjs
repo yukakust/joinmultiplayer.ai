@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld("pocketI", {
   scan: () => ipcRenderer.invoke("pocket-i:scan"),
   memoryStatus: () => ipcRenderer.invoke("pocket-i:memory-status"),
   connectMemory: () => ipcRenderer.invoke("pocket-i:connect-memory"),
+  routeMemory: (question) => ipcRenderer.invoke("pocket-i:route-memory", question),
   setupStatus: () => ipcRenderer.invoke("pocket-i:setup-status"),
   installModel: () => ipcRenderer.invoke("pocket-i:install-model"),
   ask: (question) => ipcRenderer.invoke("pocket-i:ask", question),

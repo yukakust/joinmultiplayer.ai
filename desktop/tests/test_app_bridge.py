@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from pocket_i_app.bridge import handle
+from pocket_i_app.bridge import MemoryRuntime, handle
 
 
 def tiny_embedder(texts):
@@ -109,6 +109,35 @@ class DesktopBridgeTests(unittest.TestCase):
     def test_unknown_action_fails_closed(self):
         with self.assertRaises(ValueError):
             handle("read-everything")
+
+    def test_runtime_keeps_library_warm_and_returns_local_preview(self):
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory) / "home"
+            data_dir = Path(directory) / "private-memory"
+            codex = home / ".codex" / "sessions"
+            codex.mkdir(parents=True)
+            private = "Copper thermostat needs a cold reset after drift."
+            (codex / "one.jsonl").write_text(
+                "\n".join(
+                    [
+                        json.dumps({"type": "session_meta", "payload": {"id": "private-session"}}),
+                        json.dumps({"type": "event_msg", "payload": {"type": "user_message", "message": private}}),
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            runtime = MemoryRuntime(data_dir=data_dir, home=home, embed=tiny_embedder)
+            runtime.dispatch("connect")
+            original_library = runtime.library
+            original_index = runtime.index
+
+            routed = runtime.dispatch("route", question="copper thermostat")
+
+            self.assertIs(runtime.library, original_library)
+            self.assertIs(runtime.index, original_index)
+            self.assertEqual(1, routed["returned"])
+            self.assertIn("Copper thermostat", routed["items"][0]["preview"])
+            self.assertNotIn("private-session", json.dumps(routed))
 
 
 if __name__ == "__main__":

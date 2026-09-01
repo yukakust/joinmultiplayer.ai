@@ -135,3 +135,10 @@ and Claude boundary plus the 250 MB local search model, and does nothing until
 the owner confirms. The bridge then reads visible messages, builds the real
 cached MiniLM/BM25 index, and persists only hashes, vectors and count-only state.
 The chat still uses base Qwen at this checkpoint; retrieval is connected next.
+
+Checkpoint 7B connects the owner's question to that index. After consent, one
+local memory process stays alive: it reads the allowed library once, keeps the
+conversation text only in RAM, and reuses the same index for later questions.
+The window shows five matching conversations and one short matched preview from
+each. It does not ask Qwen to answer yet. Tests prove that two requests reuse one
+process and that a second route reuses the same in-memory library and index.

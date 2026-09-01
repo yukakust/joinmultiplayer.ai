@@ -5,3 +5,8 @@
 .memory-consent>div{display:flex;gap:.8cqw;margin-top:1.8cqw}
 .memory-consent .quiet{border-color:#5b4b3c;background:#0b0907;color:#978c78}
 .memory-consent .memory-progress{color:#dc6d23}
+.route-results{margin:.7cqw 0 1.2cqw;border-left:.2cqw solid #dc6d23;padding:.8cqw 1cqw;background:#080706a6}
+.route-results>strong{display:block;margin-bottom:.7cqw;color:#ede7d7;font-size:.95cqw}
+.route-results article{padding:.65cqw 0;border-top:1px solid #3d2a1e}
+.route-results article small{font-size:.7cqw;color:#dc6d23}
+.route-results article p{margin:.35cqw 0 0;color:#b8af9c;font-size:.82cqw;line-height:1.4}

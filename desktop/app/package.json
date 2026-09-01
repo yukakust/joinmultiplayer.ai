@@ -23,6 +23,7 @@
       "main.cjs",
       "chat.cjs",
       "identity.cjs",
+      "memory-service.cjs",
       "setup.cjs",
       "model-manifest.json",
       "runtime-manifest.json",

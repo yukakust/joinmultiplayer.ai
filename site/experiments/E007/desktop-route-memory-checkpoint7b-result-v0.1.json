@@ -1,0 +1,33 @@
+{
+  "schema_version": "e007-desktop-route-memory-checkpoint7b-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7B",
+  "status": "development_pass_physical_mac_run_pending",
+  "hypothesis": "After explicit consent, a question can route through the accepted local hybrid index and show five inspectable conversation matches without rereading the full library for every question.",
+  "owner_flow": [
+    "The owner connects memory once.",
+    "The owner asks one question.",
+    "The local index selects up to five conversations.",
+    "The owner sees one short matched preview from each conversation.",
+    "No Qwen answer is generated at this checkpoint."
+  ],
+  "runtime": {
+    "process": "one long-lived local memory sidecar",
+    "persistent_private_data": ["message hashes", "conversation hashes", "embedding vectors", "counts"],
+    "ram_only_private_data": ["allowed conversation text", "matched owner previews"],
+    "public_private_data": []
+  },
+  "synthetic_fixture": {
+    "question": "What happened to the copper thermostat?",
+    "matched_preview": "Copper thermostat needs a cold reset after drift.",
+    "expected_first_conversation_found": true,
+    "same_live_library_reused_for_second_route": true,
+    "private_identifier_returned": false
+  },
+  "suite": {
+    "desktop_core": "26/26 passed",
+    "desktop_app": "14/14 passed"
+  },
+  "decision": "Keep the live local index and owner-visible previews. Run the real Mac library next before adding evidence extraction or answer generation.",
+  "claim_boundary": "This is a development test with a deterministic fixture embedder. Real FastEmbed packaging, a full Mac library route, evidence extraction, Qwen synthesis and swarm transport are not proven here."
+}

@@ -96,6 +96,12 @@ read; Codex and Claude visible messages build the accepted cached MiniLM/BM25
 index. Only hashes, vectors and counts persist. Fixture coverage passes, while
 the real FastEmbed download and Mac library build remain a future physical run.
 
+Checkpoint 7B connects questions to the accepted index without pretending that
+retrieval is already an answer. The app shows the five selected conversations
+with short matched previews for owner inspection. A long-lived local sidecar
+keeps allowed plaintext in RAM and prevents a multi-gigabyte source rescan on
+every question. Public records contain synthetic examples and counts only.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

@@ -44,6 +44,12 @@ class RouteResult:
         }
 
 
+@dataclass(frozen=True)
+class RouteHit:
+    conversation_id: str
+    message_position: int
+
+
 class HybridChatIndex:
     """Rank whole chats by their best lexical and neural message matches."""
 
@@ -61,6 +67,11 @@ class HybridChatIndex:
             conversation.conversation_id
             for conversation in conversations
             for _message in conversation.messages
+        )
+        self._message_positions = tuple(
+            position
+            for conversation in conversations
+            for position, _message in enumerate(conversation.messages)
         )
         self._texts = tuple(message.text for conversation in conversations for message in conversation.messages)
         self._tokenized = tuple(words(text) for text in self._texts)
@@ -90,13 +101,17 @@ class HybridChatIndex:
         return len(self._texts)
 
     def route(self, question: str, top_k: int = 5) -> RouteResult:
+        result, _hits = self.route_with_hits(question, top_k=top_k)
+        return result
+
+    def route_with_hits(self, question: str, top_k: int = 5) -> tuple[RouteResult, tuple[RouteHit, ...]]:
         question = question.strip()
         if not question:
             raise ValueError("question must not be empty")
         if top_k < 1:
             raise ValueError("top_k must be positive")
         if not self._conversation_ids:
-            return RouteResult((), (), ())
+            return RouteResult((), (), ()), ()
 
         lexical_message_scores = self._bm25(question)
         lexical = self._rank_chats(lexical_message_scores)
@@ -110,7 +125,22 @@ class HybridChatIndex:
         neural = self._rank_chats(neural_message_scores)
 
         fused = self._reciprocal_rank_fusion(lexical, neural)[: min(top_k, len(self._conversation_ids))]
-        return RouteResult(tuple(fused), tuple(lexical), tuple(neural))
+        lexical_message_ranks = self._message_ranks(lexical_message_scores)
+        neural_message_ranks = self._message_ranks(neural_message_scores)
+        message_scores = [
+            1 / (60 + lexical_message_ranks[index]) + 1 / (60 + neural_message_ranks[index])
+            for index in range(len(self._texts))
+        ]
+        hits = []
+        for conversation_id in fused:
+            candidates = [
+                index for index, item in enumerate(self._message_conversations) if item == conversation_id
+            ]
+            if not candidates:
+                continue
+            best = min(candidates, key=lambda index: (-message_scores[index], index))
+            hits.append(RouteHit(conversation_id, self._message_positions[best]))
+        return RouteResult(tuple(fused), tuple(lexical), tuple(neural)), tuple(hits)
 
     def core_router(self, question: str, conversations: Sequence[Conversation], top_k: int) -> tuple[str, ...]:
         """Use this index directly as the `HarnessModules.route` callback."""
@@ -141,6 +171,11 @@ class HybridChatIndex:
         for conversation_id, score in zip(self._message_conversations, message_scores):
             best[conversation_id] = max(best[conversation_id], float(score))
         return sorted(best, key=lambda item: (-best[item], item))
+
+    @staticmethod
+    def _message_ranks(message_scores: Sequence[float]) -> dict[int, int]:
+        ordered = sorted(range(len(message_scores)), key=lambda index: (-float(message_scores[index]), index))
+        return {index: rank for rank, index in enumerate(ordered, 1)}
 
     @staticmethod
     def _reciprocal_rank_fusion(first: Sequence[str], second: Sequence[str], offset: int = 60) -> list[str]:
