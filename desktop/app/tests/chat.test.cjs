@@ -78,3 +78,45 @@ test("memory answer rejects invented source labels", { skip: process.platform ==
   const result = await chat.answerFromMemory("Why?", [{ source_id: "S1", text: "Real source" }]);
   assert.deepEqual(result, { answer: "I couldn't produce an answer with valid local-memory sources." });
 });
+
+test("strict memory answer extracts an exact quote before writing", { skip: process.platform === "win32" }, async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-strict-answer-"));
+  const executable = path.join(directory, "fake-llama-cli");
+  await fs.writeFile(executable, `#!/usr/bin/env node
+const prompt = process.argv[process.argv.indexOf("-p") + 1];
+if (prompt.includes("Return JSON only")) {
+  process.stdout.write(JSON.stringify({candidates:[{source_id:"S1",claim:"DeBERTa is a second signal.",quote:"a cautious second signal"}]}));
+} else {
+  if (!prompt.includes("EXACT SOURCE QUOTE: a cautious second signal")) process.exit(4);
+  process.stdout.write("DeBERTa is a cautious second signal [E1].\\n");
+}
+`, { mode: 0o700 });
+  const chat = new ChatManager({ executable, modelPath: path.join(directory, "model.gguf"), timeoutMs: 5000 });
+  let judged = null;
+  const result = await chat.answerFromVerifiedMemory(
+    "Why DeBERTa?",
+    [{ source_id: "S1", text: "It is a cautious second signal, not the only judge." }],
+    async (items) => {
+      judged = items;
+      return [{ candidate_id: "E1", label: "entailment" }];
+    },
+  );
+  assert.equal(judged[0].quote, "a cautious second signal");
+  assert.deepEqual(result, { answer: "DeBERTa is a cautious second signal [E1]." });
+});
+
+test("strict memory answer stops before writing when quote was invented", { skip: process.platform === "win32" }, async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-strict-empty-"));
+  const executable = path.join(directory, "fake-llama-cli");
+  await fs.writeFile(executable, `#!/usr/bin/env node
+process.stdout.write(JSON.stringify({candidates:[{source_id:"S1",claim:"Invented",quote:"not in source"}]}));
+`, { mode: 0o700 });
+  const chat = new ChatManager({ executable, modelPath: path.join(directory, "model.gguf"), timeoutMs: 5000 });
+  let judgeCalled = false;
+  const result = await chat.answerFromVerifiedMemory("Why?", [{ source_id: "S1", text: "Real source" }], async () => {
+    judgeCalled = true;
+    return [];
+  });
+  assert.equal(judgeCalled, false);
+  assert.deepEqual(result, { answer: "I couldn't find supported information in your connected memory." });
+});

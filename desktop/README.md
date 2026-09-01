@@ -157,3 +157,12 @@ from each. Bounded excerpts go to local Qwen3-8B, and the owner sees one short
 answer with validated local source labels. This is not yet the full evidence
 harness: exact-quote extraction, DeBERTa and outgoing-capsule approval remain
 separate gates.
+
+Checkpoint 7F puts an exact-evidence turnstile inside that same one-answer
+path. Qwen first returns atomic claims plus copied source quotes. Ordinary code
+rejects unknown labels, empty fields and any quote that is not an exact
+substring of the selected local excerpt. Only surviving evidence reaches the
+writer, and the final answer may cite only surviving evidence IDs. The NLI
+stage is a replaceable local interface and reports `unavailable` when its
+frozen model is absent; it never invents a decision. Packaging and validating
+the accepted DeBERTa checkpoint is the next physical-build gate.

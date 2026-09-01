@@ -16,6 +16,23 @@ def tiny_embedder(texts):
 
 
 class DesktopBridgeTests(unittest.TestCase):
+    def test_nli_signal_is_bounded_and_keeps_candidate_identity(self):
+        runtime = MemoryRuntime(nli=lambda pairs: [("entailment", 0.91) for _pair in pairs])
+        result = runtime.judge_candidates([
+            {"candidate_id": "E1", "quote": "Exact source text", "claim": "A claim"}
+        ])
+        self.assertEqual(
+            [{"candidate_id": "E1", "label": "entailment", "confidence": 0.91}],
+            result["items"],
+        )
+
+    def test_missing_nli_model_is_explicit_not_a_fake_decision(self):
+        result = MemoryRuntime().judge_candidates([
+            {"candidate_id": "E1", "quote": "Exact source text", "claim": "A claim"}
+        ])
+        self.assertEqual("not-installed", result["model"])
+        self.assertEqual("unavailable", result["items"][0]["label"])
+
     def test_connect_builds_private_index_and_persists_counts_only_state(self):
         with tempfile.TemporaryDirectory() as directory:
             home = Path(directory) / "home"

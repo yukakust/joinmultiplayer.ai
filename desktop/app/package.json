@@ -22,6 +22,7 @@
     "files": [
       "main.cjs",
       "chat.cjs",
+      "evidence.cjs",
       "identity.cjs",
       "memory-service.cjs",
       "setup.cjs",

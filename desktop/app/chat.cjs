@@ -1,6 +1,13 @@
 const { spawn } = require("node:child_process");
 const path = require("node:path");
 const { buildIdentityPrompt } = require("./identity.cjs");
+const {
+  NO_INFORMATION,
+  extractionPrompt,
+  validateCandidates,
+  writerPrompt,
+  validateAnswer,
+} = require("./evidence.cjs");
 
 function cleanOutput(value) {
   return value.replace(/\u001b\[[0-9;]*m/g, "").trim();
@@ -74,13 +81,42 @@ class ChatManager {
     });
   }
 
-  runPrompt(prompt, identityQuestion, outputTokens) {
+  async answerFromVerifiedMemory(question, sources, judge = async () => []) {
+    const cleanQuestion = typeof question === "string" ? question.trim() : "";
+    if (!cleanQuestion || cleanQuestion.length > 4000) throw new Error("Write one question under 4,000 characters.");
+    if (!Array.isArray(sources) || !sources.length || sources.length > 10) return { answer: NO_INFORMATION };
+
+    const extracted = await this.runPrompt(
+      extractionPrompt(cleanQuestion, sources),
+      cleanQuestion,
+      1024,
+      "You extract exact evidence. Return only valid JSON.",
+    );
+    const checked = validateCandidates(extracted.answer, sources);
+    if (!checked.accepted.length) return { answer: NO_INFORMATION };
+
+    const signals = await judge(checked.accepted);
+    const byId = new Map((Array.isArray(signals) ? signals : []).map((item) => [item.candidate_id, item.label]));
+    const evidence = checked.accepted.map((item) => ({ ...item, nli_signal: byId.get(item.candidate_id) || "unavailable" }));
+    const written = await this.runPrompt(
+      writerPrompt(cleanQuestion, evidence),
+      cleanQuestion,
+      512,
+      "You write a grounded answer from verified evidence only.",
+    );
+    if (!validateAnswer(written.answer, evidence)) {
+      return { answer: "I couldn't produce an answer with valid local-memory sources." };
+    }
+    return { answer: written.answer };
+  }
+
+  runPrompt(prompt, identityQuestion, outputTokens, systemPrompt = null) {
     if (this.active) return Promise.reject(new Error("Pocket i is already thinking."));
     this.active = true;
     const args = [
       "-m", this.modelPath,
       "-p", prompt,
-      "-sys", buildIdentityPrompt(identityQuestion, this.brainLabel),
+      "-sys", systemPrompt || buildIdentityPrompt(identityQuestion, this.brainLabel),
       "-n", String(outputTokens),
       "--temp", "0.2",
       "-c", "8192",

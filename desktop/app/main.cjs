@@ -107,7 +107,10 @@ ipcMain.handle("pocket-i:route-memory", (_event, question) =>
 );
 ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
   const context = await memoryService.call("context", { question }, 600000);
-  return chatManager.answerFromMemory(question, context.items);
+  return chatManager.answerFromVerifiedMemory(question, context.items, async (candidates) => {
+    const result = await memoryService.call("nli", { candidates }, 600000);
+    return result.items;
+  });
 });
 ipcMain.handle("pocket-i:setup-status", () => setupManager.status());
 ipcMain.handle("pocket-i:install-model", async () => {

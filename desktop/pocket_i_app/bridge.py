@@ -21,6 +21,7 @@ ENABLED_SOURCES = ("codex", "claude_code")
 EMBED_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 EMBED_FINGERPRINT = "fastembed-0.8.0:paraphrase-multilingual-MiniLM-L12-v2"
 EmbedBatch = Callable[[Sequence[str]], Sequence[Sequence[float]]]
+NliBatch = Callable[[Sequence[tuple[str, str]]], Sequence[tuple[str, float]]]
 
 
 def _counts_payload(library: object) -> dict[str, object]:
@@ -121,6 +122,7 @@ class MemoryRuntime:
         environ: Mapping[str, str] | None = None,
         embed: EmbedBatch | None = None,
         on_progress: Callable[[dict[str, object]], None] | None = None,
+        nli: NliBatch | None = None,
     ) -> None:
         self.data_dir = data_dir
         self.home = home
@@ -128,6 +130,7 @@ class MemoryRuntime:
         self.environ = environ
         self.embed = embed
         self.on_progress = on_progress
+        self.nli = nli
         self.library = None
         self.index = None
 
@@ -164,7 +167,41 @@ class MemoryRuntime:
             return self.route(question)
         if action == "context":
             return self.context(question)
+        if action == "nli":
+            raise ValueError("nli candidates are required")
         raise ValueError("unsupported bridge action")
+
+    def judge_candidates(self, candidates: object) -> dict[str, object]:
+        if not isinstance(candidates, list) or len(candidates) > 10:
+            raise ValueError("candidates must be a short list")
+        clean: list[tuple[str, str, str]] = []
+        for item in candidates:
+            if not isinstance(item, dict):
+                raise ValueError("candidate must be an object")
+            candidate_id = str(item.get("candidate_id", ""))
+            quote = str(item.get("quote", ""))
+            claim = str(item.get("claim", ""))
+            if not candidate_id or not quote or not claim or len(quote) > 1200 or len(claim) > 600:
+                raise ValueError("invalid candidate")
+            clean.append((candidate_id, quote, claim))
+        if self.nli is None:
+            return {
+                "schema_version": "desktop-nli-signals-v0.1",
+                "model": "not-installed",
+                "items": [
+                    {"candidate_id": candidate_id, "label": "unavailable", "confidence": 0.0}
+                    for candidate_id, _quote, _claim in clean
+                ],
+            }
+        decisions = tuple(self.nli([(quote, claim) for _candidate_id, quote, claim in clean]))
+        if len(decisions) != len(clean):
+            raise ValueError("nli returned the wrong number of decisions")
+        items = []
+        for (candidate_id, _quote, _claim), (label, confidence) in zip(clean, decisions):
+            if label not in {"entailment", "neutral", "contradiction"}:
+                raise ValueError("invalid nli label")
+            items.append({"candidate_id": candidate_id, "label": label, "confidence": round(float(confidence), 6)})
+        return {"schema_version": "desktop-nli-signals-v0.1", "model": "injected", "items": items}
 
     def connect(self) -> dict[str, object]:
         if self.data_dir is None:
@@ -321,14 +358,18 @@ def _serve(runtime: MemoryRuntime) -> int:
             action = request.get("action")
             payload = request.get("payload") or {}
             if not isinstance(response_id, int) or action not in {
-                "health", "scan", "memory-status", "connect", "route", "context"
+                "health", "scan", "memory-status", "connect", "route", "context", "nli"
             } or not isinstance(payload, dict):
                 raise ValueError("invalid request")
             runtime.on_progress = lambda progress: print(
                 json.dumps({"id": response_id, "event": "progress", "payload": progress}),
                 flush=True,
             )
-            result = runtime.dispatch(action, question=payload.get("question"))
+            result = (
+                runtime.judge_candidates(payload.get("candidates"))
+                if action == "nli"
+                else runtime.dispatch(action, question=payload.get("question"))
+            )
             response = {"id": response_id, "ok": True, "result": result}
         except Exception:  # never expose local paths or private parser details
             response = {"id": response_id, "ok": False, "error": "Local memory failed."}

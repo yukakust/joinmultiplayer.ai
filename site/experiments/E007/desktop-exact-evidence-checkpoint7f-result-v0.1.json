@@ -1,0 +1,23 @@
+{
+  "schema_version": "e007-desktop-exact-evidence-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7F",
+  "status": "development_passed_physical_pending",
+  "hypothesis": "Can the desktop app reject invented evidence before Qwen writes the one answer shown to the owner?",
+  "implemented": [
+    "Qwen extracts at most ten atomic claims with labelled exact quotes",
+    "ordinary code accepts only continuous exact substrings of known local excerpts",
+    "only accepted evidence reaches the final writer",
+    "the final answer may cite only accepted evidence IDs",
+    "internal extraction and writing prompts do not receive personality lore",
+    "the NLI stage has an explicit replaceable interface and returns unavailable instead of inventing a result"
+  ],
+  "tests": {
+    "desktop_node": "21/21",
+    "python_core": "31/31"
+  },
+  "privacy": "No private question, excerpt, quote, path, conversation ID or answer was published.",
+  "decision": "Accept the exact-evidence backbone. Do not call DeBERTa active until the exact frozen checkpoint is exported, validated and packaged.",
+  "next_checkpoint": "Export the accepted DeBERTa checkpoint to local ONNX, compare it with frozen reference decisions, then include it in the desktop build.",
+  "claim_boundary": "This is a tested code checkpoint, not a physical Mac result. Exact substring checks prove provenance, not that the quote completely answers the question. DeBERTa weights are not yet packaged."
+}

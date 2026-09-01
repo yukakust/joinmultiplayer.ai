@@ -100,6 +100,16 @@ that every sentence follows from its excerpt. Exact quote extraction, DeBERTa,
 shelves and owner approval before network transport are not wired into this
 desktop path yet. The UI must not call the current answer verified.
 
+## 10. Exact quotes are wired, but DeBERTa is not packaged yet
+
+Checkpoint 7F rejects invented or altered quotes before the writer and rejects
+final citations to unknown evidence. The accepted DeBERTa model is deliberately
+not faked: without its frozen local files, the NLI interface returns
+`unavailable`. The original safetensors alone are about 369 MB, and bundling a
+full PyTorch runtime would make the desktop package much larger. The next gate
+must export the exact accepted checkpoint to ONNX, compare its decisions with
+the frozen reference cases, and only then add it to the app.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`
