@@ -31,6 +31,12 @@ fixture tests cover success, resume and corruption rejection. The real 5.03 GB
 download has not been run in this development checkpoint; llama.cpp and the
 question path remain unconnected.
 
+Checkpoint 4C replaced the temporary setup styling with the exact
+`forge-chassis-texture-v1` PNG exported from the Pocket i Figma file. The main
+display now owns the current setup action and the smaller display shows the
+three states. This is a visual development checkpoint only; it does not advance
+the runtime or inference claims.
+
 ## What we are building
 
 One desktop application with the same harness on macOS, Windows and Linux.

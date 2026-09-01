@@ -1,5 +1,6 @@
 const install = document.querySelector("#install");
 const modelStatus = document.querySelector("#model-status");
+const modelSideStatus = document.querySelector("#model-side-status");
 const bar = document.querySelector("#bar");
 const progressLabel = document.querySelector("#progress-label");
 const libraryStatus = document.querySelector("#library-status");
@@ -21,6 +22,7 @@ async function renderStatus() {
   const status = await window.pocketI.setupStatus();
   if (status.model.installed) {
     modelStatus.textContent = "READY";
+    modelSideStatus.textContent = "ready";
     progressLabel.textContent = "The model passed its size and checksum checks.";
     bar.style.width = "100%";
     install.hidden = true;
@@ -28,6 +30,7 @@ async function renderStatus() {
     return;
   }
   modelStatus.textContent = "NOT INSTALLED";
+  modelSideStatus.textContent = "waiting";
   install.hidden = false;
   const notes = [`Memory ${size(status.hardware.memoryBytes)}`, `Free ${size(status.hardware.freeBytes)}`];
   if (!status.hardware.memoryOkay) notes.push("12 GB memory required");
@@ -45,12 +48,14 @@ window.pocketI.onSetupProgress(({ received, total }) => {
 install.addEventListener("click", async () => {
   install.disabled = true;
   modelStatus.textContent = "DOWNLOADING";
+  modelSideStatus.textContent = "downloading";
   errorBox.hidden = true;
   try {
     await window.pocketI.installModel();
     await renderStatus();
   } catch (error) {
     modelStatus.textContent = "FAILED";
+    modelSideStatus.textContent = "failed";
     errorBox.textContent = error.message || "The model could not be installed.";
     errorBox.hidden = false;
     install.disabled = false;
@@ -59,7 +64,7 @@ install.addEventListener("click", async () => {
 
 renderStatus().catch((error) => {
   modelStatus.textContent = "FAILED";
+  modelSideStatus.textContent = "failed";
   errorBox.textContent = error.message || "Setup could not start.";
   errorBox.hidden = false;
 });
-

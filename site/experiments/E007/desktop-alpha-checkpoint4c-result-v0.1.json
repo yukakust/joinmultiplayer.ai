@@ -1,0 +1,37 @@
+{
+  "schema_version": "e007-desktop-alpha-checkpoint4c-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "4C",
+  "status": "development_passed_visual_only",
+  "source": {
+    "figma_file": "pocket i · App Prototype v0.1",
+    "page": "Foundations",
+    "node_id": "19:2",
+    "node_name": "forge-chassis-texture-v1",
+    "asset": "PNG 1586x992",
+    "asset_sha256": "707e81f4dea7dd4267eaf3d5bc9220e4d512dbb3d6a146a3f1919c7eba4eeaa7"
+  },
+  "mapping": {
+    "main_display": "current setup action, progress and future question",
+    "side_display": "model, runtime and local-memory status",
+    "lower_ember_windows": "chassis atmosphere; dynamic states remain later"
+  },
+  "tests": {
+    "python_core_passed": 22,
+    "downloader_passed": 3,
+    "failed": 0
+  },
+  "development_package": {
+    "platform": "linux-x64 AppImage",
+    "version": "0.1.0-alpha.3",
+    "bytes": 137603533,
+    "sha256": "9c50cd98b94f8d69b144cded1c4c1a06fe65460d8122516de667ad73b151aefa",
+    "figma_asset_present_in_asar": true
+  },
+  "not_claimed": [
+    "the visual checkpoint was inspected in a physical DMG",
+    "llama.cpp is installed",
+    "the model can answer a question"
+  ],
+  "next_checkpoint": "Inspect the browser preview, then bundle llama.cpp and prove one local inference."
+}

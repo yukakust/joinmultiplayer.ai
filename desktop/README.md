@@ -69,3 +69,8 @@ Q4_K_M downloader. Downloads resume from a partial file and are promoted into
 the private model directory only after exact size and SHA-256 verification.
 The runtime and question path remain visibly disabled until the next
 checkpoint.
+
+Checkpoint 4C applies the exact `forge-chassis-texture-v1` asset from the
+Pocket i Figma file (node `19:2`) to that setup flow. The left display owns the
+current action; the right display shows setup state. No model or privacy logic
+changed in this visual checkpoint.
