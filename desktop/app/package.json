@@ -1,6 +1,6 @@
 {
   "name": "pocket-i-desktop",
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0-alpha.9",
   "private": true,
   "description": "Pocket i desktop alpha",
   "main": "main.cjs",
@@ -52,11 +52,15 @@
     },
     "linux": {
       "category": "Utility",
-      "target": ["AppImage"]
+      "target": [
+        "AppImage"
+      ]
     },
     "mac": {
       "category": "public.app-category.utilities",
-      "target": ["dmg"]
+      "target": [
+        "dmg"
+      ]
     }
   }
 }
