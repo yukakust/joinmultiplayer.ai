@@ -74,7 +74,48 @@ class IndexCacheTests(unittest.TestCase):
             connection.close()
             self.assertNotIn("text", columns)
 
+    def test_commits_each_batch_and_resumes_after_interruption(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "index.sqlite3"
+            data = tuple(
+                Conversation(f"c{index}", "fixture", (Message(f"c{index}:1", "user", f"fact {index}"),))
+                for index in range(5)
+            )
+            calls = 0
+
+            def interrupted(texts):
+                nonlocal calls
+                calls += 1
+                if calls == 2:
+                    raise RuntimeError("fixture interruption")
+                return CountingEmbedder()(texts)
+
+            with self.assertRaises(RuntimeError):
+                build_cached_index(
+                    data, interrupted, cache_path=path, model_fingerprint="model-v1", batch_size=2
+                )
+            resumed = CountingEmbedder()
+            _, stats = build_cached_index(
+                data, resumed, cache_path=path, model_fingerprint="model-v1", batch_size=2
+            )
+
+            self.assertEqual(2, stats.reused)
+            self.assertEqual(3, stats.embedded)
+            self.assertEqual([("fact 2", "fact 3"), ("fact 4",)], resumed.document_batches)
+
+    def test_reports_saved_message_progress(self):
+        with tempfile.TemporaryDirectory() as directory:
+            progress = []
+            build_cached_index(
+                library(),
+                CountingEmbedder(),
+                cache_path=Path(directory) / "index.sqlite3",
+                model_fingerprint="model-v1",
+                batch_size=1,
+                on_progress=lambda completed, total: progress.append((completed, total)),
+            )
+            self.assertEqual([(0, 2), (1, 2), (2, 2)], progress)
+
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -18,6 +18,33 @@ const memoryConfirm = document.querySelector("#memory-confirm");
 const memoryCancel = document.querySelector("#memory-cancel");
 const memoryProgress = document.querySelector("#memory-progress");
 let memoryReady = false;
+let memoryBuilding = false;
+let memoryStartedAt = null;
+let latestMemoryProgress = null;
+let memoryClock = null;
+
+function elapsedMemory() {
+  if (!memoryStartedAt) return "0:00";
+  const seconds = Math.max(0, Math.floor((Date.now() - memoryStartedAt) / 1000));
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+function paintMemoryProgress() {
+  if (!latestMemoryProgress) return;
+  const elapsed = elapsedMemory();
+  if (latestMemoryProgress.phase === "reading") {
+    memoryProgress.textContent = `Reading conversations · ${elapsed}`;
+  } else if (latestMemoryProgress.phase === "indexing") {
+    memoryProgress.textContent = `Indexing ${latestMemoryProgress.completed.toLocaleString()} / ${latestMemoryProgress.total.toLocaleString()} messages · ${elapsed}`;
+  } else if (latestMemoryProgress.phase === "ready") {
+    memoryProgress.textContent = `Memory ready · ${elapsed}`;
+  }
+}
+
+window.pocketI.onMemoryProgress((progress) => {
+  latestMemoryProgress = progress;
+  paintMemoryProgress();
+});
 
 function size(value) {
   return `${(value / 1024 ** 3).toFixed(1)} GB`;
@@ -84,6 +111,11 @@ memoryConnect.addEventListener("click", () => {
   chatView.hidden = true;
   memoryConsent.hidden = false;
   memoryProgress.hidden = true;
+  if (memoryBuilding) {
+    memoryProgress.hidden = false;
+    memoryCancel.textContent = "BACK TO CHAT";
+    paintMemoryProgress();
+  }
 });
 
 memoryCancel.addEventListener("click", () => {
@@ -94,8 +126,12 @@ memoryCancel.addEventListener("click", () => {
 
 memoryConfirm.addEventListener("click", async () => {
   memoryConfirm.disabled = true;
-  memoryCancel.disabled = true;
+  memoryCancel.textContent = "BACK TO CHAT";
   memoryProgress.hidden = false;
+  memoryBuilding = true;
+  memoryStartedAt = Date.now();
+  latestMemoryProgress = { phase: "reading" };
+  memoryClock = setInterval(paintMemoryProgress, 1000);
   errorBox.hidden = true;
   try {
     libraryStatus.textContent = "FINDING";
@@ -109,15 +145,19 @@ memoryConfirm.addEventListener("click", async () => {
     libraryStatus.textContent = connected.total_conversations ? "READY" : "EMPTY";
     memoryConnect.hidden = Boolean(connected.total_conversations);
     memoryReady = Boolean(connected.total_conversations);
+    memoryBuilding = false;
     memoryConsent.hidden = true;
     chatView.hidden = false;
     chatInput.focus();
   } catch (error) {
+    memoryBuilding = false;
     libraryStatus.textContent = "FAILED";
     memoryProgress.textContent = error.message || "Memory could not be connected.";
   } finally {
+    clearInterval(memoryClock);
+    memoryClock = null;
     memoryConfirm.disabled = false;
-    memoryCancel.disabled = false;
+    memoryCancel.textContent = "NOT NOW";
   }
 });
 

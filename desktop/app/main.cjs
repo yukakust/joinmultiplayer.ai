@@ -101,7 +101,7 @@ function createWindow() {
 ipcMain.handle("pocket-i:health", () => runBridge("health"));
 ipcMain.handle("pocket-i:scan", () => memoryService.call("scan"));
 ipcMain.handle("pocket-i:memory-status", () => memoryService.call("memory-status"));
-ipcMain.handle("pocket-i:connect-memory", () => memoryService.call("connect", {}, 3600000));
+ipcMain.handle("pocket-i:connect-memory", () => memoryService.call("connect", {}, null));
 ipcMain.handle("pocket-i:route-memory", (_event, question) =>
   memoryService.call("route", { question }, 600000),
 );
@@ -132,7 +132,14 @@ app.whenReady().then(() => {
     modelPath: setupManager.modelPath(),
     brainLabel: manifest.models.reader.label,
   });
-  memoryService = new MemoryService({ request: memoryServiceCommand() });
+  memoryService = new MemoryService({
+    request: memoryServiceCommand(),
+    onProgress: (progress) => {
+      if (mainWindow && !mainWindow.isDestroyed()) {
+        mainWindow.webContents.send("pocket-i:memory-progress", progress);
+      }
+    },
+  });
   createWindow();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

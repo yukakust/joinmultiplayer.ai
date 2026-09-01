@@ -107,12 +107,14 @@ class MemoryRuntime:
         codex_home: Path | None = None,
         environ: Mapping[str, str] | None = None,
         embed: EmbedBatch | None = None,
+        on_progress: Callable[[dict[str, object]], None] | None = None,
     ) -> None:
         self.data_dir = data_dir
         self.home = home
         self.codex_home = codex_home
         self.environ = environ
         self.embed = embed
+        self.on_progress = on_progress
         self.library = None
         self.index = None
 
@@ -152,6 +154,7 @@ class MemoryRuntime:
     def connect(self) -> dict[str, object]:
         if self.data_dir is None:
             raise ValueError("data_dir is required for memory connection")
+        self._progress({"phase": "reading"})
         self.library = scan_local_library(
             home=self.home,
             codex_home=self.codex_home,
@@ -160,11 +163,16 @@ class MemoryRuntime:
         )
         if self.embed is None:
             self.embed = _production_embedder(self.data_dir) if self.library.conversations else lambda _texts: ()
+        total_messages = sum(len(item.messages) for item in self.library.conversations)
+        self._progress({"phase": "indexing", "completed": 0, "total": total_messages})
         self.index, stats = build_cached_index(
             self.library.conversations,
             self.embed,
             cache_path=self.data_dir / "index.sqlite3",
             model_fingerprint=EMBED_FINGERPRINT,
+            on_progress=lambda completed, total: self._progress(
+                {"phase": "indexing", "completed": completed, "total": total}
+            ),
         )
         counts = count_local_conversations(
             home=self.home,
@@ -180,6 +188,7 @@ class MemoryRuntime:
             "model_fingerprint": EMBED_FINGERPRINT,
         }
         _write_state(self.data_dir, state)
+        self._progress({"phase": "ready", "completed": stats.messages, "total": stats.messages})
         return {
             "schema_version": "desktop-memory-connect-v0.1",
             "status": "ready",
@@ -226,6 +235,10 @@ class MemoryRuntime:
             "privacy": "matched previews are returned only to the local owner window",
         }
 
+    def _progress(self, payload: dict[str, object]) -> None:
+        if self.on_progress is not None:
+            self.on_progress(payload)
+
 
 def handle(
     action: str,
@@ -264,11 +277,16 @@ def _serve(runtime: MemoryRuntime) -> int:
                 "health", "scan", "memory-status", "connect", "route"
             } or not isinstance(payload, dict):
                 raise ValueError("invalid request")
+            runtime.on_progress = lambda progress: print(
+                json.dumps({"id": response_id, "event": "progress", "payload": progress}),
+                flush=True,
+            )
             result = runtime.dispatch(action, question=payload.get("question"))
             response = {"id": response_id, "ok": True, "result": result}
         except Exception:  # never expose local paths or private parser details
             response = {"id": response_id, "ok": False, "error": "Local memory failed."}
         print(json.dumps(response, ensure_ascii=False), flush=True)
+        runtime.on_progress = None
     return 0
 
 

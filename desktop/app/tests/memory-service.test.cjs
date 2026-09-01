@@ -55,3 +55,24 @@ test("rejects a failed private response without leaking details", async () => {
   await assert.rejects(service.call("route"), /Local memory failed/);
   service.stop();
 });
+
+test("forwards progress without completing the pending request", async () => {
+  const child = fakeProcess();
+  const progress = [];
+  child.stdin.write = (line, callback) => {
+    const request = JSON.parse(line);
+    setImmediate(() => {
+      child.stdout.emit("data", `${JSON.stringify({ id: request.id, event: "progress", payload: { completed: 2, total: 5 } })}\n`);
+      child.stdout.emit("data", `${JSON.stringify({ id: request.id, ok: true, result: { connected: true } })}\n`);
+    });
+    callback();
+  };
+  const service = new MemoryService({
+    request: { command: "fixture", args: [], options: {} },
+    spawnProcess: () => child,
+    onProgress: (item) => progress.push(item),
+  });
+  assert.deepEqual(await service.call("connect", {}, null), { connected: true });
+  assert.deepEqual(progress, [{ completed: 2, total: 5 }]);
+  service.stop();
+});

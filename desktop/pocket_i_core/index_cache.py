@@ -8,13 +8,14 @@ import sqlite3
 import struct
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Sequence
+from typing import Callable, Sequence
 
 from .pipeline import Conversation
 from .retrieval import EmbedBatch, HybridChatIndex
 
 
 SCHEMA_VERSION = "desktop-index-cache-v0.1"
+ProgressCallback = Callable[[int, int], None]
 
 
 @dataclass(frozen=True)
@@ -99,10 +100,14 @@ def build_cached_index(
     *,
     cache_path: Path,
     model_fingerprint: str,
+    batch_size: int = 128,
+    on_progress: ProgressCallback | None = None,
 ) -> tuple[HybridChatIndex, CacheStats]:
     """Reuse unchanged message vectors and embed only new or changed messages."""
     if not model_fingerprint.strip():
         raise ValueError("model_fingerprint must not be empty")
+    if batch_size < 1:
+        raise ValueError("batch_size must be positive")
     rows = _message_rows(conversations)
     connection = _open_private(cache_path)
     rebuilt = False
@@ -135,17 +140,29 @@ def build_cached_index(
                 continue
             vectors[index] = _unpack(item[2], item[1])
 
-        missing_texts = [rows[index][3] for index in missing_indices]
-        embedded_vectors = tuple(tuple(float(value) for value in vector) for vector in embed(missing_texts)) if missing_texts else ()
-        if len(embedded_vectors) != len(missing_indices):
-            raise ValueError("embedder returned the wrong number of new vectors")
-        for index, vector in zip(missing_indices, embedded_vectors):
-            cache_key, conversation_key, content_hash, _text = rows[index]
-            vectors[index] = vector
-            connection.execute(
-                "insert or replace into vectors(cache_key, conversation_key, content_hash, dimension, vector) values (?, ?, ?, ?, ?)",
-                (cache_key, conversation_key, content_hash, len(vector), _pack(vector)),
+        completed = len(rows) - len(missing_indices)
+        if on_progress is not None:
+            on_progress(completed, len(rows))
+        for start in range(0, len(missing_indices), batch_size):
+            batch_indices = missing_indices[start : start + batch_size]
+            batch_texts = [rows[index][3] for index in batch_indices]
+            embedded_vectors = tuple(
+                tuple(float(value) for value in vector) for vector in embed(batch_texts)
             )
+            if len(embedded_vectors) != len(batch_indices):
+                raise ValueError("embedder returned the wrong number of new vectors")
+            for index, vector in zip(batch_indices, embedded_vectors):
+                cache_key, conversation_key, content_hash, _text = rows[index]
+                vectors[index] = vector
+                connection.execute(
+                    "insert or replace into vectors(cache_key, conversation_key, content_hash, dimension, vector) values (?, ?, ?, ?, ?)",
+                    (cache_key, conversation_key, content_hash, len(vector), _pack(vector)),
+                )
+            # Each completed batch survives an app restart.
+            connection.commit()
+            completed += len(batch_indices)
+            if on_progress is not None:
+                on_progress(completed, len(rows))
         connection.commit()
     finally:
         connection.close()
@@ -161,4 +178,3 @@ def build_cached_index(
         rebuilt_for_model_change=rebuilt,
     )
     return HybridChatIndex(conversations, embed, document_vectors=complete_vectors), stats
-

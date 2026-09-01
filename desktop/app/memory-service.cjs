@@ -1,13 +1,14 @@
 const { spawn } = require("node:child_process");
 
 class MemoryService {
-  constructor({ request, spawnProcess = spawn }) {
+  constructor({ request, spawnProcess = spawn, onProgress = () => {} }) {
     this.request = request;
     this.spawnProcess = spawnProcess;
     this.child = null;
     this.buffer = "";
     this.nextId = 1;
     this.pending = new Map();
+    this.onProgress = onProgress;
   }
 
   start() {
@@ -33,6 +34,10 @@ class MemoryService {
       if (!line) continue;
       let response;
       try { response = JSON.parse(line); } catch { continue; }
+      if (response.event === "progress") {
+        this.onProgress(response.payload || {});
+        continue;
+      }
       const waiting = this.pending.get(response.id);
       if (!waiting) continue;
       this.pending.delete(response.id);
@@ -46,10 +51,10 @@ class MemoryService {
     this.start();
     const id = this.nextId++;
     return new Promise((resolve, reject) => {
-      const timer = setTimeout(() => {
-        this.pending.delete(id);
-        reject(new Error("Local memory timed out."));
-      }, timeoutMs);
+      const timer = timeoutMs === null ? null : setTimeout(() => {
+          this.pending.delete(id);
+          reject(new Error("Local memory timed out."));
+        }, timeoutMs);
       this.pending.set(id, { resolve, reject, timer });
       this.child.stdin.write(`${JSON.stringify({ id, action, payload })}\n`, (error) => {
         if (!error) return;
