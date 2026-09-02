@@ -1,0 +1,48 @@
+{
+  "schema_version": "e007-phrase-fallback-30-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7R",
+  "status": "locked_before_owner_run",
+  "hypothesis": "One additive conversation found from corpus-derived phrases improves recall without causing unsupported final answers.",
+  "conditions": "Keep the accepted five technical-anchor conversations in their original order, then add only the first novel phrase-derived conversation. Run the existing Qwen extraction, exact-ID validation, DeBERTa grounding, piles and Qwen writer.",
+  "groups": {
+    "direct": [
+      ["Why did we add DeBERTa to the Pocket i harness, and why could it not be the only judge?", "DeBERTa was a fast cautious reject signal; it missed context and could not be the sole judge."],
+      ["What should happen to Unicode tags, zero-width characters, homoglyphs, base64 and hex before judging?", "Normalize or expose those encodings before judging."],
+      ["Where should an assembled external payload be judged, and why is relay-only checking insufficient?", "At the recipient edge, because content can become dangerous after assembly or rendering."],
+      ["What did CourtGuard improve, and what did it make worse?", "It reduced false positives but missed more injections."],
+      ["What new-recipient fan-out cap was implemented at the relay?", "25 distinct new recipients per five-minute window."],
+      ["Why should passive room messages not always fail closed and ask permission?", "Repeated prompts train people to approve mechanically; fail closed only for privileged actions."],
+      ["Why was the /x share feature unreachable although its code was deployed?", "The Caddy allowlist did not include /x."],
+      ["Why was Llama-3.3 used although smaller Qwen or Gemma models were considered?", "It was already available through a free service."],
+      ["What did the four-question technical-anchor search recover?", "It recovered evidence for three of four frozen questions."],
+      ["What did automatic rare phrases change in the four-question search test?", "They recovered the missing passive-message evidence, reaching four of four, but added ranking noise."]
+    ],
+    "paraphrased": [
+      ["Why did the harness keep a language model beside its small DeBERTa guard?", "DeBERTa was useful as a fast signal but insufficient as the only semantic judge."],
+      ["How must hidden Unicode and encoded text be prepared before the safety model sees it?", "Normalize or expose hidden and encoded forms first."],
+      ["Why does safety inspection happen after a received message is fully assembled?", "Relay inspection alone cannot see attacks activated by later assembly or rendering."],
+      ["What was the trade-off of using a court of model judges?", "Fewer false alarms, but more missed attacks."],
+      ["How many previously unseen recipients may one sender contact during one relay window?", "25 during five minutes."],
+      ["Why is asking permission for every harmless room post itself unsafe?", "Users become tired and approve prompts reflexively."],
+      ["Which proxy configuration, rather than application code, blocked the sharing page?", "The Caddy path allowlist omitted /x."],
+      ["What made the larger Llama judge economical in that earlier setup?", "A connected free-tier service made it cost-free."],
+      ["Before phrase fallback, how many frozen searches exposed their needed evidence?", "Three of four."],
+      ["What benefit and cost did phrase-based retrieval show?", "It found the fourth source but sometimes ranked irrelevant chats higher."]
+    ],
+    "no_answer": [
+      ["What result did Pocket i experiment E099 produce?", null],
+      ["What did we decide about the Helios-42 routing model?", null],
+      ["Why was the /nebula export route removed from Caddy?", null],
+      ["What checksum was assigned to the Borealis-77 router?", null],
+      ["Why did the Orchid-9 classifier replace DeBERTa?", null],
+      ["What 913-recipient relay cap did we approve?", null],
+      ["Which Falcon-11 adapter solved the passive-message problem?", null],
+      ["Why was the /marble sharing endpoint returning HTTP 418?", null],
+      ["What did the 64-question E088 production trial prove?", null],
+      ["When did we deploy the Atlas-53 phone model to Vitaly's device?", null]
+    ]
+  },
+  "acceptance": "No new unsupported answer on the ten no-answer traps; owner-confirmed supported answers must not decrease; report fallback usefulness and noise separately.",
+  "privacy": "Questions and expected meanings are public. Local excerpts, answers, identifiers and traces remain in a private report on the owner's Mac."
+}
