@@ -17,6 +17,7 @@ const memoryConsent = document.querySelector("#memory-consent");
 const memoryConfirm = document.querySelector("#memory-confirm");
 const memoryCancel = document.querySelector("#memory-cancel");
 const memoryProgress = document.querySelector("#memory-progress");
+const openTestLog = document.querySelector("#open-test-log");
 let memoryReady = false;
 let memoryBuilding = false;
 let memoryStartedAt = null;
@@ -44,6 +45,15 @@ function paintMemoryProgress() {
 window.pocketI.onMemoryProgress((progress) => {
   latestMemoryProgress = progress;
   paintMemoryProgress();
+});
+
+openTestLog.addEventListener("click", async () => {
+  try {
+    await window.pocketI.openTestLog();
+  } catch (error) {
+    errorBox.textContent = error.message || "The private test log could not be opened.";
+    errorBox.hidden = false;
+  }
 });
 
 function size(value) {
@@ -219,6 +229,7 @@ chatForm.addEventListener("submit", async (event) => {
       const result = await window.pocketI.answerMemory(question);
       pending.textContent = result.answer;
       pending.classList.remove("pending");
+      openTestLog.hidden = !result.test_log_ready;
       return;
     }
     const result = await window.pocketI.ask(question);

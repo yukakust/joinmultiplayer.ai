@@ -7,6 +7,7 @@ contextBridge.exposeInMainWorld("pocketI", {
   connectMemory: () => ipcRenderer.invoke("pocket-i:connect-memory"),
   routeMemory: (question) => ipcRenderer.invoke("pocket-i:route-memory", question),
   answerMemory: (question) => ipcRenderer.invoke("pocket-i:answer-memory", question),
+  openTestLog: () => ipcRenderer.invoke("pocket-i:open-test-log"),
   onMemoryProgress: (callback) => {
     const listener = (_event, progress) => callback(progress);
     ipcRenderer.on("pocket-i:memory-progress", listener);

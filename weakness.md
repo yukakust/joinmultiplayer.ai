@@ -124,6 +124,11 @@ find the right conversation while the reader receives the wrong 1,800-character
 window. The next build prefers mixed-case names, digits, acronyms and IDs and
 also returns a private count-only diagnostic code for the failed stage.
 
+During owner-only alpha testing, alpha.11 additionally writes a complete local
+`last-answer-test-log.json`: selected excerpts, raw Qwen extraction, exact-quote
+decisions, DeBERTa signals, writer evidence and final output. It is mode `0600`,
+contains private text, is never uploaded, and must be removed from release builds.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`

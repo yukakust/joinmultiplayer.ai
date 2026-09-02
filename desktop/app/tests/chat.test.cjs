@@ -93,6 +93,7 @@ if (prompt.includes("Return JSON only")) {
 `, { mode: 0o700 });
   const chat = new ChatManager({ executable, modelPath: path.join(directory, "model.gguf"), timeoutMs: 5000 });
   let judged = null;
+  const stages = [];
   const result = await chat.answerFromVerifiedMemory(
     "Why DeBERTa?",
     [{ source_id: "S1", text: "It is a cautious second signal, not the only judge." }],
@@ -100,8 +101,19 @@ if (prompt.includes("Return JSON only")) {
       judged = items;
       return [{ candidate_id: "E1", label: "entailment" }];
     },
+    (stage, details) => stages.push({ stage, details }),
   );
   assert.equal(judged[0].quote, "a cautious second signal");
+  assert.deepEqual(stages.map((item) => item.stage), [
+    "sources_received",
+    "qwen_extraction",
+    "exact_quote_check",
+    "deberta_signals",
+    "writer_evidence",
+    "qwen_writer",
+    "completed",
+  ]);
+  assert.equal(stages[0].details.sources[0].text, "It is a cautious second signal, not the only judge.");
   assert.deepEqual(result, { answer: "DeBERTa is a cautious second signal [E1].", diagnostic: "answered" });
 });
 

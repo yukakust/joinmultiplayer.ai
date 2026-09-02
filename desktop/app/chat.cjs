@@ -81,10 +81,12 @@ class ChatManager {
     });
   }
 
-  async answerFromVerifiedMemory(question, sources, judge = async () => []) {
+  async answerFromVerifiedMemory(question, sources, judge = async () => [], observe = () => {}) {
     const cleanQuestion = typeof question === "string" ? question.trim() : "";
     if (!cleanQuestion || cleanQuestion.length > 4000) throw new Error("Write one question under 4,000 characters.");
+    observe("sources_received", { question: cleanQuestion, sources });
     if (!Array.isArray(sources) || !sources.length || sources.length > 10) {
+      observe("stopped", { reason: "no_source_excerpts" });
       return { answer: NO_INFORMATION, diagnostic: "no_source_excerpts" };
     }
 
@@ -94,29 +96,38 @@ class ChatManager {
       1024,
       "You extract exact evidence. Return only valid JSON.",
     );
+    observe("qwen_extraction", { raw_answer: extracted.answer });
     const checked = validateCandidates(extracted.answer, sources);
+    observe("exact_quote_check", checked);
     if (!checked.accepted.length) {
+      const diagnostic = checked.extracted ? "no_exact_quotes" : "no_candidates_extracted";
+      observe("stopped", { reason: diagnostic });
       return {
         answer: NO_INFORMATION,
-        diagnostic: checked.extracted ? "no_exact_quotes" : "no_candidates_extracted",
+        diagnostic,
       };
     }
 
     const signals = await judge(checked.accepted);
+    observe("deberta_signals", { items: signals });
     const byId = new Map((Array.isArray(signals) ? signals : []).map((item) => [item.candidate_id, item.label]));
     const evidence = checked.accepted.map((item) => ({ ...item, nli_signal: byId.get(item.candidate_id) || "unavailable" }));
+    observe("writer_evidence", { items: evidence });
     const written = await this.runPrompt(
       writerPrompt(cleanQuestion, evidence),
       cleanQuestion,
       512,
       "You write a grounded answer from verified evidence only.",
     );
+    observe("qwen_writer", { raw_answer: written.answer });
     if (!validateAnswer(written.answer, evidence)) {
+      observe("stopped", { reason: "invalid_final_citations" });
       return {
         answer: "I couldn't produce an answer with valid local-memory sources.",
         diagnostic: "invalid_final_citations",
       };
     }
+    observe("completed", { reason: "answered" });
     return { answer: written.answer, diagnostic: "answered" };
   }
 

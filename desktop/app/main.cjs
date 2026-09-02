@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, shell } = require("electron");
 const { spawn } = require("node:child_process");
 const fs = require("node:fs/promises");
 const path = require("node:path");
@@ -99,6 +99,25 @@ async function recordAnswerDiagnostic(result) {
   }
 }
 
+function testAuditPath() {
+  return path.join(app.getPath("userData"), "memory", "last-answer-test-log.json");
+}
+
+async function recordPrivateTestAudit(audit) {
+  const target = testAuditPath();
+  const directory = path.dirname(target);
+  const temporary = `${target}.tmp`;
+  try {
+    await fs.mkdir(directory, { recursive: true, mode: 0o700 });
+    await fs.writeFile(temporary, `${JSON.stringify(audit, null, 2)}\n`, { mode: 0o600 });
+    await fs.rename(temporary, target);
+    await fs.chmod(target, 0o600);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function createWindow() {
   const window = new BrowserWindow({
     width: 1240,
@@ -128,13 +147,52 @@ ipcMain.handle("pocket-i:route-memory", (_event, question) =>
   memoryService.call("route", { question }, 600000),
 );
 ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
-  const context = await memoryService.call("context", { question }, 600000);
-  const result = await chatManager.answerFromVerifiedMemory(question, context.items, async (candidates) => {
-    const result = await memoryService.call("nli", { candidates }, 600000);
-    return result.items;
-  });
-  await recordAnswerDiagnostic(result);
-  return result;
+  const audit = {
+    schema_version: "pocket-i-private-answer-test-log-v0.1",
+    warning: "PRIVATE: contains the owner's question, local memory excerpts and model output. Never upload this file.",
+    stage_guide: {
+      sources_received: "The exact local excerpts given to Qwen.",
+      qwen_extraction: "The raw evidence candidates returned by Qwen.",
+      exact_quote_check: "Ordinary code checks that every quote exists word-for-word in its excerpt.",
+      deberta_signals: "DeBERTa's cautious entailment, neutral or contradiction signal.",
+      writer_evidence: "The complete evidence bundle given to the final Qwen writer.",
+      qwen_writer: "The raw final text returned by Qwen.",
+      stopped: "The exact stage and reason where the harness stopped.",
+      completed: "The strict answer path completed.",
+    },
+    stages: [],
+  };
+  try {
+    const context = await memoryService.call("context", { question }, 600000);
+    const result = await chatManager.answerFromVerifiedMemory(
+      question,
+      context.items,
+      async (candidates) => {
+        const judged = await memoryService.call("nli", { candidates }, 600000);
+        return judged.items;
+      },
+      (stage, details) => audit.stages.push({ stage, details }),
+    );
+    audit.final = { answer: result.answer, diagnostic: result.diagnostic };
+    await recordAnswerDiagnostic(result);
+    const testLogReady = await recordPrivateTestAudit(audit);
+    return { ...result, test_log_ready: testLogReady };
+  } catch (error) {
+    audit.final = { error: error instanceof Error ? error.message : "Unknown local error" };
+    await recordPrivateTestAudit(audit);
+    throw error;
+  }
+});
+ipcMain.handle("pocket-i:open-test-log", async () => {
+  const target = testAuditPath();
+  try {
+    await fs.access(target);
+  } catch {
+    throw new Error("Run one memory question first.");
+  }
+  const error = await shell.openPath(target);
+  if (error) throw new Error("The private test log could not be opened.");
+  return { opened: true };
 });
 ipcMain.handle("pocket-i:setup-status", () => setupManager.status());
 ipcMain.handle("pocket-i:install-model", async () => {

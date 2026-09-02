@@ -1,0 +1,23 @@
+{
+  "schema_version": "e007-desktop-private-trace-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7I",
+  "status": "implemented_awaiting_physical_run",
+  "purpose": "Replace inference about a failed answer with a complete owner-visible local trace.",
+  "records_locally": [
+    "the exact excerpts selected from connected memory",
+    "raw Qwen evidence extraction",
+    "exact quote acceptance and rejection",
+    "DeBERTa signals",
+    "the evidence passed to the final writer",
+    "raw final writer output and the stopping stage"
+  ],
+  "owner_ui": "After a memory answer, OPEN TEST LOG opens the private JSON report.",
+  "privacy": "The report stays on the owner's computer with mode 0600. It contains private memory text and must never be uploaded. No private trace is present in this public record.",
+  "release_boundary": "This full trace is for owner-only alpha diagnosis and must be removed or reduced to count-only diagnostics before external release.",
+  "verification": {
+    "python_tests": "32/32",
+    "desktop_tests": "21/21",
+    "physical_mac": "pending"
+  }
+}
