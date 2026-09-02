@@ -1,0 +1,6 @@
+[Unit]
+Description=Nightly snapshot of the joinmultiplayer-new SQLite database
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /srv/joinmultiplayer-new/checkout/new/tools/backup_db.py --db /var/lib/joinmultiplayer-new/contributions.sqlite3 --out /var/backups/joinmultiplayer-new --keep 14
