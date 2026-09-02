@@ -142,6 +142,16 @@ single conclusion to preserve up to four exact blocks across sources. This is
 necessary for composition, but also makes DeBERTa's multi-block judgment a new
 physical checkpoint rather than a proven capability.
 
+## 12. A DeBERTa warning is currently displayed but ignored
+
+The alpha.13 ten-question physical regression scored 3 correct, 2 partial and
+5 wrong (`8/20`). Both deliberately absent answers were invented. In the fully
+traced final case, retrieval found an adjacent DoRA/Cerebras passage, Qwen
+answered an absent named-model question from it, and DeBERTa returned `neutral`
+with `0.996094` confidence. The harness still handed the claim to the writer.
+Therefore the current NLI field is metadata, not an acceptance turnstile, and
+the build is not safe for an external tester.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`

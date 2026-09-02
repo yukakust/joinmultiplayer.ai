@@ -1,0 +1,40 @@
+{
+  "schema_version": "e007-desktop-ten-question-regression-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7L",
+  "status": "physical_failed",
+  "platform": "owner MacBook arm64",
+  "package": "Pocket i 0.1.0-alpha.13",
+  "frozen_cases": 10,
+  "human_scores": {
+    "correct": 3,
+    "partial": 2,
+    "wrong": 5,
+    "points": 8,
+    "maximum_points": 20
+  },
+  "failure_classes": {
+    "meaning_compressed_incorrectly": 2,
+    "useful_answer_missed": 1,
+    "irrelevant_or_invented_answer": 4
+  },
+  "absent_answer_control": {
+    "cases": 2,
+    "correct_no_information": 0,
+    "invented_answers": 2
+  },
+  "decisive_trace": {
+    "case": "one deliberately absent named routing model",
+    "retrieval": "returned a thematically adjacent DoRA/Cerebras passage that did not contain the named model",
+    "qwen": "turned the adjacent passage into an answer to the absent question",
+    "deberta": "neutral with confidence 0.996094",
+    "harness_error": "passed the neutral candidate to the final writer anyway",
+    "writer": "returned the unrelated claim as a cited answer"
+  },
+  "gate": {
+    "required": "No invented answers; both absent controls return no information; at least seven of eight answerable questions correct.",
+    "passed": false
+  },
+  "privacy": "The public result contains only aggregate human scores and structural failure descriptions. Private source excerpts, local paths, conversation IDs and the full test trace are excluded.",
+  "conclusion": "The packaged pipeline can complete, but its semantic acceptance policy is unsafe. An external tester build is blocked until a neutral DeBERTa signal cannot silently become an accepted answer and absent named entities are handled fail-closed."
+}

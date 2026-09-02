@@ -1744,3 +1744,12 @@ cited answer. Human review found the answer useful but noted that it compressed
 the standalone-classifier limitation and the separate multi-agent CourtGuard
 result. This is one development pass only; a frozen ten-question regression is
 required before an external tester build.
+
+Checkpoint 7L then ran ten frozen English questions on unchanged alpha.13. Human
+review scored 3 correct, 2 partial and 5 wrong (`8/20`). Both deliberately
+absent named controls produced invented cited answers. The final private trace
+showed the decisive bug: an adjacent DoRA/Cerebras passage was turned into an
+answer about a nonexistent routing model even though DeBERTa returned `neutral`
+at `0.996094`. The harness passed that warning to the writer without gating it.
+The external tester build is blocked. Public record:
+`/experiments/E007/desktop-ten-question-regression-checkpoint7l-result-v0.1.json`.
