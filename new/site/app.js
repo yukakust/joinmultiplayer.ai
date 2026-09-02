@@ -5634,14 +5634,14 @@ const pieceStorageKey = "multiplayer-piece-v1";
 const litByStorageKey = "multiplayer-lit-by-v1";
 
 const gamePieces = [
-  { id: "match", name: { en: "Match", ru: "Спичка" }, flavor: { en: "the first fire; lights others", ru: "первый огонь; зажигает других", craft: { en: "protocol authors — the first fire", ru: "авторы протоколов — первый огонь" } } },
-  { id: "matchbox", name: { en: "Matchbox", ru: "Коробок" }, flavor: { en: "keeps matches together; a builder's home", ru: "держит спички вместе; дом строителя", craft: { en: "harness & orchestration", ru: "харнесс и оркестрация" } } },
-  { id: "lighter", name: { en: "Lighter", ru: "Зажигалка" }, flavor: { en: "one click — instant flame", ru: "один щелчок — мгновенный огонь", craft: { en: "models inside: embeddings, judges, small-model tuning", ru: "модели внутри: эмбеддинги, судьи, дообучение малых" } } },
-  { id: "flint", name: { en: "Flint & steel", ru: "Кремень" }, flavor: { en: "strikes the spark of a check", ru: "высекает искру проверки", craft: { en: "validation, audits, failure taxonomy", ru: "валидация, аудиты, таксономия провалов" } } },
-  { id: "candle", name: { en: "Candle", ru: "Свеча" }, flavor: { en: "a long, steady flame; a keeper", ru: "долгий ровный огонь; хранитель", craft: { en: "security & privacy boundary, sandboxes", ru: "граница безопасности и приватности, сандбоксы" } } },
-  { id: "lantern", name: { en: "Lantern", ru: "Фонарь" }, flavor: { en: "carries light between points", ru: "несёт свет между точками", craft: { en: "hardware, inference runtime, scale", ru: "железо, рантайм инференса, масштаб" } } },
-  { id: "lens", name: { en: "Lens", ru: "Лупа" }, flavor: { en: "focuses sunlight until it burns", ru: "фокусирует солнце, пока не вспыхнет", craft: { en: "reverse engineering, adapters, data formats", ru: "реверс-инжиниринг, адаптеры, форматы данных" } } },
-  { id: "sparkler", name: { en: "Sparkler", ru: "Бенгальский огонь" }, flavor: { en: "burns festively, scattering sparks", ru: "горит празднично, разбрасывая искры", craft: { en: "benchmarks, replication, public write-ups", ru: "бенчмарки, репликация, публичные разборы" } } }
+  { id: "match", name: { en: "Match", ru: "Спичка" }, flavor: { en: "the first fire; lights others", ru: "первый огонь; зажигает других" }, craft: { en: "protocol authors — the first fire", ru: "авторы протоколов — первый огонь" } },
+  { id: "matchbox", name: { en: "Matchbox", ru: "Коробок" }, flavor: { en: "keeps matches together; a builder's home", ru: "держит спички вместе; дом строителя" }, craft: { en: "harness & orchestration", ru: "харнесс и оркестрация" } },
+  { id: "lighter", name: { en: "Lighter", ru: "Зажигалка" }, flavor: { en: "one click — instant flame", ru: "один щелчок — мгновенный огонь" }, craft: { en: "models inside: embeddings, judges, small-model tuning", ru: "модели внутри: эмбеддинги, судьи, дообучение малых" } },
+  { id: "flint", name: { en: "Flint & steel", ru: "Кремень" }, flavor: { en: "strikes the spark of a check", ru: "высекает искру проверки" }, craft: { en: "validation, audits, failure taxonomy", ru: "валидация, аудиты, таксономия провалов" } },
+  { id: "candle", name: { en: "Candle", ru: "Свеча" }, flavor: { en: "a long, steady flame; a keeper", ru: "долгий ровный огонь; хранитель" }, craft: { en: "security & privacy boundary, sandboxes", ru: "граница безопасности и приватности, сандбоксы" } },
+  { id: "lantern", name: { en: "Lantern", ru: "Фонарь" }, flavor: { en: "carries light between points", ru: "несёт свет между точками" }, craft: { en: "hardware, inference runtime, scale", ru: "железо, рантайм инференса, масштаб" } },
+  { id: "lens", name: { en: "Lens", ru: "Лупа" }, flavor: { en: "focuses sunlight until it burns", ru: "фокусирует солнце, пока не вспыхнет" }, craft: { en: "reverse engineering, adapters, data formats", ru: "реверс-инжиниринг, адаптеры, форматы данных" } },
+  { id: "sparkler", name: { en: "Sparkler", ru: "Бенгальский огонь" }, flavor: { en: "burns festively, scattering sparks", ru: "горит празднично, разбрасывая искры" }, craft: { en: "benchmarks, replication, public write-ups", ru: "бенчмарки, репликация, публичные разборы" } }
 ];
 
 function pieceData(id) { return gamePieces.find(piece => piece.id === id) || gamePieces[0]; }
