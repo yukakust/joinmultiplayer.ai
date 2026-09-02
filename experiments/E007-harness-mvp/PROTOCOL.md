@@ -1722,3 +1722,17 @@ atomic claim plus one to four block IDs from one source. Ordinary code resolves
 those IDs to unchanged source text. Unknown IDs, mixed-source selections and
 oversized sets fail before NLI. This is implemented and unit-tested, but remains
 physically unverified until alpha.12 repeats the same owner question.
+
+## Desktop Checkpoint 7K — one conclusion may need several sources
+
+The physical alpha.12 trace reached the new ID check. Qwen selected `S1.4`,
+`S7.5` and `S7.6`: one block explains why DeBERTa was added and two explain why
+it cannot be the only judge. The harness rejected the set only because 7J had
+required every claim to use one source. That restriction was not a truth or
+privacy check and was wrong for a two-part question.
+
+The candidate now preserves every selected block ID, source ID and exact source
+text separately while allowing up to four blocks across sources. Unknown IDs
+and oversized selections still fail before NLI. The joined text is only the
+premise for DeBERTa; the writer receives the separately labelled exact blocks.
+Unit tests pass; physical alpha.13 verification is pending.

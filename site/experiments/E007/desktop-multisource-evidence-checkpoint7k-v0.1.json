@@ -1,0 +1,26 @@
+{
+  "schema_version": "e007-desktop-multisource-evidence-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7K",
+  "status": "implemented_awaiting_physical_run",
+  "physical_alpha12_observation": {
+    "qwen_selected": ["S1.4", "S7.5", "S7.6"],
+    "selection_quality": "All three blocks were relevant: one covered why DeBERTa was added and two covered why it could not be the only judge.",
+    "rejection": "The harness rejected the complete set solely because it crossed from S1 to S7.",
+    "deberta_ran": false,
+    "writer_ran": false
+  },
+  "change": [
+    "Allow one claim to preserve up to four exact evidence blocks across sources.",
+    "Keep every block ID, source ID and exact text separately.",
+    "Reject unknown IDs and oversized selections before DeBERTa.",
+    "Give the final writer separately labelled exact blocks rather than an unattributed merged quote."
+  ],
+  "verification": {
+    "python_tests": "32/32",
+    "desktop_tests": "22/22",
+    "physical_mac": "pending"
+  },
+  "privacy": "No private excerpt or full trace is included in this public record.",
+  "claim_boundary": "Qwen's physical selection was correct. Multi-source passage through DeBERTa and the writer remains unverified until alpha.13."
+}

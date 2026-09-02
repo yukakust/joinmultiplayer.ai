@@ -135,6 +135,13 @@ copying it. Alpha.12 therefore numbers immutable evidence blocks and lets Qwen
 select IDs only. Unit tests prove exact reconstruction and rejection of unknown
 IDs; usefulness and physical behavior still require the repeated Mac question.
 
+The repeated alpha.12 question exposed the next artificial restriction: Qwen
+correctly selected three blocks covering both halves of the question, but the
+harness rejected them because they came from `S1` and `S7`. Alpha.13 permits a
+single conclusion to preserve up to four exact blocks across sources. This is
+necessary for composition, but also makes DeBERTa's multi-block judgment a new
+physical checkpoint rather than a proven capability.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`

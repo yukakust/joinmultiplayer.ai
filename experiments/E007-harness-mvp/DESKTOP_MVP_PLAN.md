@@ -174,7 +174,8 @@ Route the question to five whole conversations. Read conversations up to
 10,000 model tokens whole; search inside longer conversations without cutting
 messages. The harness numbers immutable evidence blocks. Qwen proposes useful
 claims and selects only block IDs; ordinary code copies the exact source text
-behind those IDs. Qwen never has to retype a quote. DeBERTa remains a cautious
+behind those IDs. One claim may keep several blocks and sources when the whole
+set is needed. Qwen never has to retype a quote. DeBERTa remains a cautious
 signal, not the sole judge.
 
 ### 4. Safe network exchange

@@ -87,7 +87,7 @@ const prompt = process.argv[process.argv.indexOf("-p") + 1];
 if (prompt.includes("Return JSON only")) {
   process.stdout.write(JSON.stringify({candidates:[{claim:"DeBERTa is a second signal.",evidence_ids:["S1.1"]}]}));
 } else {
-  if (!prompt.includes("EXACT SOURCE QUOTE: It is a cautious second signal, not the only judge.")) process.exit(4);
+  if (!prompt.includes("EXACT SOURCE BLOCKS:\\n[S1.1] It is a cautious second signal, not the only judge.")) process.exit(4);
   process.stdout.write("DeBERTa is a cautious second signal [E1].\\n");
 }
 `, { mode: 0o700 });
