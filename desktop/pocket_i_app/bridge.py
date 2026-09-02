@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from typing import Callable, Mapping, Sequence
@@ -102,7 +103,25 @@ def _question_centered_excerpt(text: str, question: str, limit: int = 1800) -> s
     text = " ".join(text.split())
     if len(text) <= limit:
         return text
-    terms = sorted({term.strip(".,?!:;()[]{}") for term in question.split() if len(term) >= 4}, key=len, reverse=True)
+    terms = {
+        term
+        for term in re.findall(r"[A-Za-z0-9][A-Za-z0-9_-]*", question)
+        if len(term) >= 4
+    }
+    # Prefer identifier-like words (DeBERTa, Qwen3, MiniLM, CV-42). A generic
+    # longer word such as "information" must not pull a long source window
+    # away from the named thing the owner actually asked about.
+    terms = sorted(
+        terms,
+        key=lambda term: (
+            any(char.isupper() for char in term[1:])
+            or any(char.isdigit() for char in term)
+            or "-" in term
+            or "_" in term,
+            len(term),
+        ),
+        reverse=True,
+    )
     folded = text.casefold()
     position = next((folded.find(term.casefold()) for term in terms if folded.find(term.casefold()) >= 0), 0)
     start = max(0, position - limit // 3)

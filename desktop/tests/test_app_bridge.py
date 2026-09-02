@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from pocket_i_app.bridge import MemoryRuntime, handle
+from pocket_i_app.bridge import MemoryRuntime, _question_centered_excerpt, handle
 
 
 def tiny_embedder(texts):
@@ -16,6 +16,15 @@ def tiny_embedder(texts):
 
 
 class DesktopBridgeTests(unittest.TestCase):
+    def test_named_question_term_centers_a_long_excerpt_before_generic_words(self):
+        text = "information " + ("ordinary filler " * 180) + "DeBERTa is a cautious signal, not the only judge."
+        excerpt = _question_centered_excerpt(
+            text,
+            "Why did we add DeBERTa, and why could it not be the only judge?",
+            limit=240,
+        )
+        self.assertIn("DeBERTa is a cautious signal", excerpt)
+        self.assertNotIn("information", excerpt)
     def test_nli_signal_is_bounded_and_keeps_candidate_identity(self):
         runtime = MemoryRuntime(nli=lambda pairs: [("entailment", 0.91) for _pair in pairs])
         result = runtime.judge_candidates([

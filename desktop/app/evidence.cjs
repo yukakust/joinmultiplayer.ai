@@ -28,7 +28,7 @@ function validateCandidates(value, sources) {
     if (reason) rejected.push({ ...candidate, reason });
     else accepted.push(candidate);
   }
-  return { accepted, rejected };
+  return { extracted: input.length, accepted, rejected };
 }
 
 function extractionPrompt(question, sources) {

@@ -1,0 +1,20 @@
+{
+  "schema_version": "e007-desktop-full-path-failure-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7H",
+  "status": "physical_failed",
+  "platform": "owner MacBook arm64",
+  "package": "Pocket i 0.1.0-alpha.9",
+  "question": "Why did we add DeBERTa to the Pocket i harness, and why could it not be the only judge?",
+  "displayed_answer": "I couldn't find supported information in your connected memory.",
+  "passed": [
+    "the packaged app launched",
+    "Qwen3-8B, runtime and memory all reported ready",
+    "the strict path failed closed instead of inventing an answer"
+  ],
+  "failed": "No exact supported evidence reached the final writer.",
+  "leading_cause": "The long-message excerpt function preferred the generic word information because it was longer than the identifier DeBERTa, so a correctly routed conversation could still be cropped around the wrong place.",
+  "fix": "Prefer identifier-like attention terms such as mixed-case names, model names with digits, acronyms and hyphenated IDs before generic long words. Persist only a private stage code after each answer so the next failure can be located without storing question text or memory excerpts.",
+  "privacy": "The question and fixed no-information response are published; no local excerpt, conversation, path, identifier or model-generated private text is included.",
+  "claim_boundary": "The leading cause is inferred from code inspection. Alpha.9 did not expose a count-only internal diagnostic, so the next build adds one and must physically rerun the same question."
+}

@@ -84,7 +84,9 @@ class ChatManager {
   async answerFromVerifiedMemory(question, sources, judge = async () => []) {
     const cleanQuestion = typeof question === "string" ? question.trim() : "";
     if (!cleanQuestion || cleanQuestion.length > 4000) throw new Error("Write one question under 4,000 characters.");
-    if (!Array.isArray(sources) || !sources.length || sources.length > 10) return { answer: NO_INFORMATION };
+    if (!Array.isArray(sources) || !sources.length || sources.length > 10) {
+      return { answer: NO_INFORMATION, diagnostic: "no_source_excerpts" };
+    }
 
     const extracted = await this.runPrompt(
       extractionPrompt(cleanQuestion, sources),
@@ -93,7 +95,12 @@ class ChatManager {
       "You extract exact evidence. Return only valid JSON.",
     );
     const checked = validateCandidates(extracted.answer, sources);
-    if (!checked.accepted.length) return { answer: NO_INFORMATION };
+    if (!checked.accepted.length) {
+      return {
+        answer: NO_INFORMATION,
+        diagnostic: checked.extracted ? "no_exact_quotes" : "no_candidates_extracted",
+      };
+    }
 
     const signals = await judge(checked.accepted);
     const byId = new Map((Array.isArray(signals) ? signals : []).map((item) => [item.candidate_id, item.label]));
@@ -105,9 +112,12 @@ class ChatManager {
       "You write a grounded answer from verified evidence only.",
     );
     if (!validateAnswer(written.answer, evidence)) {
-      return { answer: "I couldn't produce an answer with valid local-memory sources." };
+      return {
+        answer: "I couldn't produce an answer with valid local-memory sources.",
+        diagnostic: "invalid_final_citations",
+      };
     }
-    return { answer: written.answer };
+    return { answer: written.answer, diagnostic: "answered" };
   }
 
   runPrompt(prompt, identityQuestion, outputTokens, systemPrompt = null) {

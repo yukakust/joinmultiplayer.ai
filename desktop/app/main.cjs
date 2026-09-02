@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const { spawn } = require("node:child_process");
+const fs = require("node:fs/promises");
 const path = require("node:path");
 const manifest = require("./model-manifest.json");
 const { SetupManager } = require("./setup.cjs");
@@ -81,6 +82,23 @@ function runBridge(action, timeoutMs = 120000, payload = null) {
   });
 }
 
+async function recordAnswerDiagnostic(result) {
+  const directory = path.join(app.getPath("userData"), "memory");
+  const target = path.join(directory, "last-answer-diagnostic.json");
+  const temporary = `${target}.tmp`;
+  const payload = {
+    schema_version: "pocket-i-answer-diagnostic-v0.1",
+    stage: typeof result?.diagnostic === "string" ? result.diagnostic : "unknown",
+  };
+  try {
+    await fs.mkdir(directory, { recursive: true, mode: 0o700 });
+    await fs.writeFile(temporary, `${JSON.stringify(payload, null, 2)}\n`, { mode: 0o600 });
+    await fs.rename(temporary, target);
+  } catch {
+    // Diagnostics must never block or weaken the owner's answer path.
+  }
+}
+
 function createWindow() {
   const window = new BrowserWindow({
     width: 1240,
@@ -111,10 +129,12 @@ ipcMain.handle("pocket-i:route-memory", (_event, question) =>
 );
 ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
   const context = await memoryService.call("context", { question }, 600000);
-  return chatManager.answerFromVerifiedMemory(question, context.items, async (candidates) => {
+  const result = await chatManager.answerFromVerifiedMemory(question, context.items, async (candidates) => {
     const result = await memoryService.call("nli", { candidates }, 600000);
     return result.items;
   });
+  await recordAnswerDiagnostic(result);
+  return result;
 });
 ipcMain.handle("pocket-i:setup-status", () => setupManager.status());
 ipcMain.handle("pocket-i:install-model", async () => {

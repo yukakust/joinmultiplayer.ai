@@ -102,7 +102,7 @@ if (prompt.includes("Return JSON only")) {
     },
   );
   assert.equal(judged[0].quote, "a cautious second signal");
-  assert.deepEqual(result, { answer: "DeBERTa is a cautious second signal [E1]." });
+  assert.deepEqual(result, { answer: "DeBERTa is a cautious second signal [E1].", diagnostic: "answered" });
 });
 
 test("strict memory answer stops before writing when quote was invented", { skip: process.platform === "win32" }, async () => {
@@ -118,5 +118,8 @@ process.stdout.write(JSON.stringify({candidates:[{source_id:"S1",claim:"Invented
     return [];
   });
   assert.equal(judgeCalled, false);
-  assert.deepEqual(result, { answer: "I couldn't find supported information in your connected memory." });
+  assert.deepEqual(result, {
+    answer: "I couldn't find supported information in your connected memory.",
+    diagnostic: "no_exact_quotes",
+  });
 });

@@ -115,6 +115,15 @@ decisions), so the app keeps the much larger native FP16 ONNX file (`30/30`).
 This preserves the tested decisions but adds about 378 MB before packaging
 overhead and still needs a physical Mac load test.
 
+## 11. A correct chat can still be cropped around the wrong word
+
+The first physical alpha.9 question returned no supported information. The
+excerpt function sorted question words mainly by length, so generic
+`information` could win over the identifier `DeBERTa`. The router may therefore
+find the right conversation while the reader receives the wrong 1,800-character
+window. The next build prefers mixed-case names, digits, acronyms and IDs and
+also returns a private count-only diagnostic code for the failed stage.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`
