@@ -5634,14 +5634,14 @@ const pieceStorageKey = "multiplayer-piece-v1";
 const litByStorageKey = "multiplayer-lit-by-v1";
 
 const gamePieces = [
-  { id: "match", name: { en: "Match", ru: "Спичка" }, flavor: { en: "the first fire; lights others", ru: "первый огонь; зажигает других" } },
-  { id: "matchbox", name: { en: "Matchbox", ru: "Коробок" }, flavor: { en: "keeps matches together; a builder's home", ru: "держит спички вместе; дом строителя" } },
-  { id: "lighter", name: { en: "Lighter", ru: "Зажигалка" }, flavor: { en: "one click — instant flame", ru: "один щелчок — мгновенный огонь" } },
-  { id: "flint", name: { en: "Flint & steel", ru: "Кремень" }, flavor: { en: "strikes the spark of a check", ru: "высекает искру проверки" } },
-  { id: "candle", name: { en: "Candle", ru: "Свеча" }, flavor: { en: "a long, steady flame; a keeper", ru: "долгий ровный огонь; хранитель" } },
-  { id: "lantern", name: { en: "Lantern", ru: "Фонарь" }, flavor: { en: "carries light between points", ru: "несёт свет между точками" } },
-  { id: "lens", name: { en: "Lens", ru: "Лупа" }, flavor: { en: "focuses sunlight until it burns", ru: "фокусирует солнце, пока не вспыхнет" } },
-  { id: "sparkler", name: { en: "Sparkler", ru: "Бенгальский огонь" }, flavor: { en: "burns festively, scattering sparks", ru: "горит празднично, разбрасывая искры" } }
+  { id: "match", name: { en: "Match", ru: "Спичка" }, flavor: { en: "the first fire; lights others", ru: "первый огонь; зажигает других", craft: { en: "protocol authors — the first fire", ru: "авторы протоколов — первый огонь" } } },
+  { id: "matchbox", name: { en: "Matchbox", ru: "Коробок" }, flavor: { en: "keeps matches together; a builder's home", ru: "держит спички вместе; дом строителя", craft: { en: "harness & orchestration", ru: "харнесс и оркестрация" } } },
+  { id: "lighter", name: { en: "Lighter", ru: "Зажигалка" }, flavor: { en: "one click — instant flame", ru: "один щелчок — мгновенный огонь", craft: { en: "models inside: embeddings, judges, small-model tuning", ru: "модели внутри: эмбеддинги, судьи, дообучение малых" } } },
+  { id: "flint", name: { en: "Flint & steel", ru: "Кремень" }, flavor: { en: "strikes the spark of a check", ru: "высекает искру проверки", craft: { en: "validation, audits, failure taxonomy", ru: "валидация, аудиты, таксономия провалов" } } },
+  { id: "candle", name: { en: "Candle", ru: "Свеча" }, flavor: { en: "a long, steady flame; a keeper", ru: "долгий ровный огонь; хранитель", craft: { en: "security & privacy boundary, sandboxes", ru: "граница безопасности и приватности, сандбоксы" } } },
+  { id: "lantern", name: { en: "Lantern", ru: "Фонарь" }, flavor: { en: "carries light between points", ru: "несёт свет между точками", craft: { en: "hardware, inference runtime, scale", ru: "железо, рантайм инференса, масштаб" } } },
+  { id: "lens", name: { en: "Lens", ru: "Лупа" }, flavor: { en: "focuses sunlight until it burns", ru: "фокусирует солнце, пока не вспыхнет", craft: { en: "reverse engineering, adapters, data formats", ru: "реверс-инжиниринг, адаптеры, форматы данных" } } },
+  { id: "sparkler", name: { en: "Sparkler", ru: "Бенгальский огонь" }, flavor: { en: "burns festively, scattering sparks", ru: "горит празднично, разбрасывая искры", craft: { en: "benchmarks, replication, public write-ups", ru: "бенчмарки, репликация, публичные разборы" } } }
 ];
 
 function pieceData(id) { return gamePieces.find(piece => piece.id === id) || gamePieces[0]; }
@@ -5658,8 +5658,11 @@ function takenPieceIds() {
 }
 
 function availablePieces() {
-  const taken = takenPieceIds();
-  return gamePieces.filter(piece => FORGE_PIECES[piece.id] && !taken.has(piece.id));
+  return gamePieces.filter(piece => FORGE_PIECES[piece.id]);
+}
+
+function craftCount(pieceId) {
+  return (Array.isArray(matchesCache) ? matchesCache : []).filter(m => m.piece === pieceId).length;
 }
 
 function chosenPiece() {
@@ -5707,7 +5710,7 @@ const playCopy = {
     title: "Shall we play?",
     intro: "This is a game of one move. A move is a checkable observation that another intelligence can verify after you. Choose a piece, make a move — and your piece ignites on the board, next to M0001.",
     pieceTitle: "CHOOSE YOUR PIECE",
-    pieceHint: "Every piece carries fire: it can be lit, and it can light the next one. The choice is character, not rank.",
+    pieceHint: "Every piece is a craft, not a rank: choose the one you practise. Its carriers work the same hole in the machine — you will not be alone.",
     pieceChosen: "YOUR PIECE",
     changePiece: "change",
     movesTitle: "MAKE A MOVE",
@@ -5743,7 +5746,7 @@ const playCopy = {
     title: "Сыграем?",
     intro: "Это игра в один ход. Ход — проверяемое наблюдение, которое другой интеллект сможет проверить после вас. Выберите фигурку, сделайте ход — и фигурка зажжётся на доске, рядом с M0001.",
     pieceTitle: "ВЫБЕРИТЕ ФИГУРКУ",
-    pieceHint: "Каждая фигурка — носитель огня: её можно зажечь, и она может зажечь следующего. Выбор — это характер, а не ранг.",
+    pieceHint: "Каждая фигурка — ремесло, а не ранг: выбери то, которым владеешь. Её носители работают над одной щелью в машине — ты не один.",
     pieceChosen: "ВАША ФИГУРКА",
     changePiece: "сменить",
     movesTitle: "СДЕЛАЙТЕ ХОД",
@@ -5795,7 +5798,7 @@ function playShell() {
             <button class="piece-option${piece.id === selected ? " is-selected" : ""}" data-action="choose-piece" data-piece="${piece.id}">
               ${pieceCarrier(piece.id, piece.id === selected)}
               <strong>${jt(piece.name)}</strong>
-              <span>${jt(piece.flavor)}</span>
+              <span>${jt(piece.craft)}</span>
             </button>`).join("")}
         </div>
       </section>
@@ -6423,11 +6426,20 @@ function gameShell() {
 function renderGameTable() {
   const target = document.querySelector("[data-game-table]");
   if (!target || matchesCache === null) return;
-  target.innerHTML = matchesCache.slice(0, 6).map(m => `
+  const groups = new Map();
+  matchesCache.forEach(m => {
+    if (!groups.has(m.piece)) groups.set(m.piece, []);
+    groups.get(m.piece).push(m);
+  });
+  target.innerHTML = [...groups.entries()].slice(0, 8).map(([pieceId, list]) => {
+    const piece = gamePieces.find(p => p.id === pieceId);
+    const names = list.map(m => m.name !== "anonymous" ? m.name : m.public_id).slice(0, 3).join(", ");
+    return `
     <div class="game-inv-row is-static">
-      ${pieceSVG(m.piece, true, "piece-inv")}
-      <span>${escapeHTML(m.public_id)}<i>${escapeHTML(m.name !== "anonymous" ? m.name : "")}</i></span>
-    </div>`).join("");
+      ${pieceSVG(pieceId, true, "piece-inv")}
+      <span>${escapeHTML(piece ? jt(piece.name) : pieceId)}${list.length > 1 ? ` ×${list.length}` : ""}<i>${escapeHTML(names)}${list.length > 3 ? "…" : ""}</i></span>
+    </div>`;
+  }).join("");
 }
 
 function renderGameDesc() {
@@ -6603,9 +6615,9 @@ const terminalCopy = {
     cont: "CONTINUE",
     skipHint: "click — full text",
     reservedTitle: "THE PIECE WAS WAITING FOR YOU",
-    reservedHint: "reserved before you arrived; no one else can carry it",
+    reservedHint: "the sign of your craft — its carriers work the same hole; you will not be alone",
     whoTitle: "WHO ENTERS?",
-    whoHint: "every piece carries fire — and belongs to one carrier, forever; the taken ones already stand at the table",
+    whoHint: "every piece is a craft: choose the one you actually practise — its carriers share one hole in the machine",
     slotEyebrow: "YOUR SLOT · RESERVED WITH THE PIECE",
     slotHow: "The move: rerun, break, or open it — then reply to the letter that found you, or leave a trace here. Records change only by independent rerun.",
     slotClassic: "or the classic entry:",
@@ -6628,9 +6640,9 @@ const terminalCopy = {
     cont: "ПРОДОЛЖИТЬ",
     skipHint: "клик — весь текст",
     reservedTitle: "ФИГУРКА ЖДАЛА ТЕБЯ",
-    reservedHint: "зарезервирована до твоего прихода; никто другой её не возьмёт",
+    reservedHint: "знак твоего ремесла — его носители работают над одной щелью; ты не один",
     whoTitle: "КТО ВХОДИТ?",
-    whoHint: "каждая фигурка — носитель огня, и достаётся одному — навсегда; занятые уже стоят на столе",
+    whoHint: "каждая фигурка — ремесло: выбери то, которым владеешь; её носители делят одну щель в машине",
     slotEyebrow: "ТВОЯ ЩЕЛЬ · ЗАРЕЗЕРВИРОВАНА ВМЕСТЕ С ФИГУРКОЙ",
     slotHow: "Ход: перепрогони, сломай или раскрой — и ответь на письмо, которое тебя нашло, или оставь след здесь. Рекорды меняются только независимым перепрогоном.",
     slotClassic: "или классический вход:",
@@ -6723,14 +6735,14 @@ function introOverlay(phase) {
       <button class="button crt-button is-waiting" data-intro="piece" disabled>${tc("cont")}</button>`,
     piece: (() => {
       const inv = gamePieces.find(piece => piece.id === localStorage.getItem(invitedPieceKey));
-      if (!inv || takenPieceIds().has(inv.id)) return null;
+      if (!inv) return null;
       return `
       <div class="crt-head"><span>[${tc("reservedTitle")}]</span></div>
       <p class="crt-note">${tc("reservedHint")}</p>
       <div class="crt-reserved">
         ${FORGE_PIECES[inv.id] ? pieceCarrier(inv.id, true) : pieceSVG(inv.id, true, "piece-reserved")}
         <strong>${jt(inv.name)}</strong>
-        <span>${jt(inv.flavor)}</span>
+        <span>${jt(inv.craft)}</span>
       </div>
       <button class="button crt-button" data-intro="mission">${tc("cont")}</button>`;
     })() || `
@@ -6741,6 +6753,7 @@ function introOverlay(phase) {
           <button class="piece-option${piece.id === chosenPiece() ? " is-selected" : ""}" data-action="choose-piece" data-piece="${piece.id}">
             ${pieceCarrier(piece.id, piece.id === chosenPiece())}
             <strong>${jt(piece.name)}</strong>
+            <span>${jt(piece.craft)}</span>
           </button>`).join("")}
       </div>
       <button class="button crt-button" data-intro="mission">${tc("cont")}</button>`,
@@ -6864,7 +6877,7 @@ function render() {
       if (!gallery) return;
       const selected = chosenPiece();
       const invitedId = localStorage.getItem(invitedPieceKey);
-      const invited = invitedId && !availablePieces().some(piece => piece.id === invitedId)
+      const invited = invitedId && !FORGE_PIECES[invitedId]
         ? gamePieces.find(piece => piece.id === invitedId) : null;
       gallery.innerHTML = (invited ? `
         <button class="piece-option is-selected is-reserved" data-action="choose-piece" data-piece="${invited.id}">
@@ -6875,7 +6888,7 @@ function render() {
         <button class="piece-option${piece.id === selected ? " is-selected" : ""}" data-action="choose-piece" data-piece="${piece.id}">
           ${pieceCarrier(piece.id, piece.id === selected)}
           <strong>${jt(piece.name)}</strong>
-          <span>${jt(piece.flavor)}</span>
+          <span>${jt(piece.craft)}</span>
         </button>`).join("");
     });
   } else if (path === "journey") {

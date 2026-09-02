@@ -1027,25 +1027,21 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                     and db.execute("SELECT 1 FROM matches WHERE public_id = ?", (lit_by,)).fetchone()
                 ):
                     lit_by = ""
-                existing_match = db.execute("SELECT public_id, trace_id FROM matches WHERE piece = ?", (piece,)).fetchone()
-                if existing_match is not None:
-                    match_info = {"public_id": existing_match[0], "piece": piece, "lit": False, "lit_by": lit_by or "self-found", "shared": True}
-                else:
-                    match_cursor = db.execute(
-                        "INSERT INTO matches (piece, pseudonym, lit_by, map_consent, trace_id, created_at) "
-                        "VALUES (?, ?, ?, ?, ?, ?)",
-                        (
-                            piece,
-                            author if author != "anonymous" else "",
-                            lit_by,
-                            match_consent,
-                            public_id,
-                            now,
-                        ),
-                    )
-                    match_id = f"M{match_cursor.lastrowid:04d}"
-                    db.execute("UPDATE matches SET public_id = ? WHERE row_id = ?", (match_id, match_cursor.lastrowid))
-                    match_info = {"public_id": match_id, "piece": piece, "lit": False, "lit_by": lit_by or "self-found"}
+                match_cursor = db.execute(
+                    "INSERT INTO matches (piece, pseudonym, lit_by, map_consent, trace_id, created_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    (
+                        piece,
+                        author if author != "anonymous" else "",
+                        lit_by,
+                        match_consent,
+                        public_id,
+                        now,
+                    ),
+                )
+                match_id = f"M{match_cursor.lastrowid:04d}"
+                db.execute("UPDATE matches SET public_id = ? WHERE row_id = ?", (match_id, match_cursor.lastrowid))
+                match_info = {"public_id": match_id, "piece": piece, "lit": False, "lit_by": lit_by or "self-found"}
         response = {"id": public_id, "token": token, "status": "pending", "status_path": f"/contribution/#{token}"}
         if match_info:
             response["match"] = match_info
