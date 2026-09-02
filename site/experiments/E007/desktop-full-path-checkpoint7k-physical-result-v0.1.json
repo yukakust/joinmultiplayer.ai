@@ -1,0 +1,22 @@
+{
+  "schema_version": "e007-desktop-full-path-physical-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7K.2",
+  "status": "physical_development_pass",
+  "platform": "owner MacBook arm64",
+  "package": "Pocket i 0.1.0-alpha.13",
+  "question": "Why did we add DeBERTa to the Pocket i harness, and why could it not be the only judge?",
+  "answer": "DeBERTa was added to the Pocket i harness as a fast reject classifier in an ensemble setup with an LLM-judge call [E1], but it could not be the only judge because multi-agent judging reduces false positives but is a worse injection detector overall [E1].",
+  "observed_path": [
+    "local memory returned relevant excerpts",
+    "Qwen selected three evidence block IDs across two sources",
+    "ordinary code resolved every ID to exact source text",
+    "DeBERTa ran and returned neutral with confidence 0.666504",
+    "the final Qwen writer cited only accepted evidence E1",
+    "the harness completed with diagnostic answered"
+  ],
+  "human_review": "The answer addressed both parts and remained grounded, but compressed the limitation of a standalone classifier and the separate CourtGuard multi-agent result into one explanation.",
+  "privacy": "No private source excerpt, local path, conversation identifier or full test trace is published.",
+  "claim_boundary": "This is one owner-reviewed physical development pass. It proves that the packaged stages can complete together, not that retrieval or answer quality is reliable across questions.",
+  "next": "Run a preregistered ten-question physical regression on the unchanged alpha.13 build before preparing an external tester build."
+}

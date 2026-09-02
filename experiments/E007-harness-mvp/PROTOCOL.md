@@ -1736,3 +1736,11 @@ text separately while allowing up to four blocks across sources. Unknown IDs
 and oversized selections still fail before NLI. The joined text is only the
 premise for DeBERTa; the writer receives the separately labelled exact blocks.
 Unit tests pass; physical alpha.13 verification is pending.
+
+Alpha.13 then completed the same physical Mac question end to end. Qwen chose
+three relevant block IDs across two sources, ordinary code reconstructed the
+exact text, DeBERTa ran (`neutral`, `0.666504`), and the writer returned one
+cited answer. Human review found the answer useful but noted that it compressed
+the standalone-classifier limitation and the separate multi-agent CourtGuard
+result. This is one development pass only; a frozen ten-question regression is
+required before an external tester build.
