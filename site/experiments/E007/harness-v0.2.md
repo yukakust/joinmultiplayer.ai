@@ -213,6 +213,15 @@ such as `/x`, `DeBERTa-v3`, and `499`. Qwen and DeBERTa do not participate. The
 owner inspects both columns locally; no conversation excerpt is uploaded.
 Protocol: `/experiments/E007/anchor-search-ab-protocol-v0.1.json`.
 
+The follow-up private-library development test adds corpus-derived rare
+two- and three-word phrases without a domain vocabulary. It recovered the
+needed evidence for all four frozen questions, versus three of four for the
+technical-anchor route alone. Because the phrase route also demoted two
+already-correct results, it is accepted only as an additive fallback: preserve
+the technical-anchor order and add the first novel phrase-derived conversation.
+Public, privacy-safe result:
+`/experiments/E007/phrase-search-ab-result-v0.1.json`.
+
 ## Locked Gate 14A: write only what the swarm supplied
 
 Ten English synthetic cases are frozen before Qwen's first run. Eight provide

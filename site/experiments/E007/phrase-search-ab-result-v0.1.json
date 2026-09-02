@@ -1,0 +1,49 @@
+{
+  "schema_version": "e007-phrase-search-ab-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7Q",
+  "status": "owner_reviewed_development_result",
+  "run_utc": "2026-09-02T20:57:00Z",
+  "protocol": "/experiments/E007/phrase-search-ab-protocol-v0.1.json",
+  "library": {
+    "indexed_visible_messages": 80284,
+    "privacy": "Private conversation text, identifiers and generated reports remained on the owner's Mac and are not present in this result."
+  },
+  "metric": "needed evidence visible within five routed conversations",
+  "conditions": {
+    "technical_anchor_search": {
+      "passed": 3,
+      "total": 4
+    },
+    "technical_anchors_plus_automatic_phrases": {
+      "passed": 4,
+      "total": 4
+    }
+  },
+  "per_question": [
+    {
+      "question": "DeBERTa role",
+      "technical_anchor_rank": 1,
+      "automatic_phrase_rank": 2
+    },
+    {
+      "question": "relay fan-out limit",
+      "technical_anchor_rank": 1,
+      "automatic_phrase_rank": 1
+    },
+    {
+      "question": "passive room messages",
+      "technical_anchor_rank": null,
+      "automatic_phrase_rank": 2
+    },
+    {
+      "question": "missing /x route",
+      "technical_anchor_rank": 1,
+      "automatic_phrase_rank": 2
+    }
+  ],
+  "finding": "Automatically derived rare two- and three-word phrases recovered the previously missed passive-message evidence while retaining evidence for the other three questions inside the five-chat budget.",
+  "precision_warning": "The phrase channel demoted two already-correct results and placed an irrelevant chat first for one question. It should be an additive fallback candidate, not replace or reorder the accepted technical-anchor route.",
+  "accepted_architecture": "Keep the accepted technical-anchor route unchanged and add the first novel phrase-derived conversation as one fallback candidate.",
+  "claim_boundary": "This is a four-question private-library development result reviewed by the owner. It measures retrieval recall at five, not answer accuracy or population-level reliability."
+}
