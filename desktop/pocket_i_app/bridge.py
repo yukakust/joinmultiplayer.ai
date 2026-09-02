@@ -203,7 +203,7 @@ class MemoryRuntime:
             candidate_id = str(item.get("candidate_id", ""))
             quote = str(item.get("quote", ""))
             claim = str(item.get("claim", ""))
-            if not candidate_id or not quote or not claim or len(quote) > 1200 or len(claim) > 600:
+            if not candidate_id or not quote or not claim or len(quote) > 1600 or len(claim) > 600:
                 raise ValueError("invalid candidate")
             clean.append((candidate_id, quote, claim))
         if self.nli is None:

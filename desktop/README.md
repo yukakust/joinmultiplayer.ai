@@ -172,3 +172,14 @@ and accepts the native FP16 ONNX export (`30/30` matched). The build downloads
 the 369,758,915-byte model and 8,648,864-byte tokenizer from the public lab,
 verifies both SHA-256 hashes, and packages them as local resources. The sidecar
 loads them lazily through ONNX Runtime. A physical Mac DMG run remains required.
+
+Checkpoint 7M replaces alpha.13's incomplete `Qwen → DeBERTa metadata →
+writer` shortcut with the accepted evidence-pile harness. Exact evidence IDs
+are still resolved by ordinary code. DeBERTa now blocks a claim unless its
+source entails it, groups mutually entailing claims in both directions, checks
+Qwen's readable pile rewrite against every original in both directions, and
+then compares the validated claims again before the writer sees them. A failed
+rewrite falls back to the exact original claim; a separate supported version
+stays separate. Fixture tests cover the real alpha.13 failure shape: a named
+answer invented from adjacent memory receives `neutral` and cannot reach the
+writer. This is an implementation checkpoint, not yet a physical Mac result.

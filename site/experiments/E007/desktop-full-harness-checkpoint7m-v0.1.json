@@ -1,0 +1,28 @@
+{
+  "schema_version": "e007-desktop-full-harness-checkpoint-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7M",
+  "status": "implementation_ready_physical_test_pending",
+  "package": "Pocket i 0.1.0-alpha.14",
+  "problem_fixed": "alpha.13 treated DeBERTa as metadata and allowed neutral claims to reach the final writer",
+  "implemented_path": [
+    "Qwen selects exact evidence IDs and proposes atomic claims",
+    "ordinary code resolves IDs to immutable source blocks",
+    "DeBERTa requires source-to-claim entailment before a claim continues",
+    "bidirectional DeBERTa creates cautious primary piles",
+    "Qwen writes one readable canonical claim per pile",
+    "bidirectional DeBERTa validates each canonical against every original",
+    "invalid canonicals are discarded while exact originals survive",
+    "validated units are compared bidirectionally into final piles",
+    "the writer receives only the grounded final piles"
+  ],
+  "deterministic_checks": {
+    "desktop_python": "32/32 passed",
+    "desktop_electron": "25/25 passed",
+    "adjacent_memory_neutral_reaches_writer": false,
+    "conflicting_supported_version_preserved_separately": true,
+    "invalid_canonical_deletes_original": false
+  },
+  "privacy": "This public checkpoint contains architecture and aggregate fixture results only. It contains no owner questions, conversation text, paths, identifiers or model outputs from private memory.",
+  "claim_boundary": "The full accepted answer-pile harness is wired and fixture-tested. It has not yet passed the physical ten-question alpha.14 regression, so an external tester build remains blocked."
+}

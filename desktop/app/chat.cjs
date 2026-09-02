@@ -4,6 +4,13 @@ const { buildIdentityPrompt } = require("./identity.cjs");
 const {
   NO_INFORMATION,
   extractionPrompt,
+  directionalNliJobs,
+  mutualEntailmentPiles,
+  canonicalPrompt,
+  validateCanonicals,
+  canonicalValidationJobs,
+  canonicalUnits,
+  writerEvidenceFromPiles,
   validateCandidates,
   writerPrompt,
   validateAnswer,
@@ -108,10 +115,50 @@ class ChatManager {
       };
     }
 
-    const signals = await judge(checked.accepted);
-    observe("deberta_signals", { items: signals });
-    const byId = new Map((Array.isArray(signals) ? signals : []).map((item) => [item.candidate_id, item.label]));
-    const evidence = checked.accepted.map((item) => ({ ...item, nli_signal: byId.get(item.candidate_id) || "unavailable" }));
+    const groundingSignals = await judge(checked.accepted);
+    observe("grounding_signals", { items: groundingSignals });
+    const groundingById = new Map((Array.isArray(groundingSignals) ? groundingSignals : [])
+      .map((item) => [item.candidate_id, item.label]));
+    const grounded = checked.accepted.filter((item) => groundingById.get(item.candidate_id) === "entailment");
+    observe("grounded_evidence", {
+      accepted_ids: grounded.map((item) => item.candidate_id),
+      rejected_ids: checked.accepted.filter((item) => groundingById.get(item.candidate_id) !== "entailment")
+        .map((item) => item.candidate_id),
+    });
+    if (!grounded.length) {
+      observe("stopped", { reason: "no_grounded_evidence" });
+      return { answer: NO_INFORMATION, diagnostic: "no_grounded_evidence" };
+    }
+
+    const primaryJobs = directionalNliJobs(grounded, "P");
+    const primarySignals = primaryJobs.length ? await judge(primaryJobs) : [];
+    const primaryPiles = mutualEntailmentPiles(grounded, primaryJobs, primarySignals);
+    observe("primary_piles", {
+      signals: primarySignals,
+      piles: primaryPiles.map((pile, index) => ({ pile_id: `P${index + 1}`, candidate_ids: pile.map((item) => item.candidate_id) })),
+    });
+
+    const canonicalized = await this.runPrompt(
+      canonicalPrompt(primaryPiles),
+      cleanQuestion,
+      1024,
+      "You carefully canonicalize grounded claims. Return only valid JSON.",
+    );
+    const canonicals = validateCanonicals(canonicalized.answer, primaryPiles);
+    observe("qwen_canonicals", { raw_answer: canonicalized.answer, canonicals });
+    const validationJobs = canonicalValidationJobs(canonicals);
+    const validationSignals = validationJobs.length ? await judge(validationJobs) : [];
+    const units = canonicalUnits(canonicals, validationJobs, validationSignals);
+    observe("canonical_validation", { signals: validationSignals, units });
+
+    const finalJobs = directionalNliJobs(units, "F");
+    const finalSignals = finalJobs.length ? await judge(finalJobs) : [];
+    const finalPiles = mutualEntailmentPiles(units, finalJobs, finalSignals);
+    const evidence = writerEvidenceFromPiles(finalPiles);
+    observe("final_piles", {
+      signals: finalSignals,
+      piles: finalPiles.map((pile, index) => ({ pile_id: `E${index + 1}`, unit_ids: pile.map((item) => item.unit_id) })),
+    });
     observe("writer_evidence", { items: evidence });
     const written = await this.runPrompt(
       writerPrompt(cleanQuestion, evidence),

@@ -154,7 +154,12 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
       sources_received: "The exact local excerpts given to Qwen.",
       qwen_extraction: "The raw claims and evidence IDs returned by Qwen.",
       evidence_id_check: "Ordinary code resolves Qwen's selected IDs back to exact source text.",
-      deberta_signals: "DeBERTa's cautious entailment, neutral or contradiction signal.",
+      grounding_signals: "DeBERTa blocks claims that are not entailed by their exact source blocks.",
+      grounded_evidence: "Only source-grounded claims continue.",
+      primary_piles: "Bidirectional DeBERTa groups mutually entailing claims without deleting alternatives.",
+      qwen_canonicals: "Qwen rewrites each pile into one readable claim.",
+      canonical_validation: "Bidirectional DeBERTa checks every rewrite against every original claim.",
+      final_piles: "Validated claims are compared again; supported alternatives stay separate.",
       writer_evidence: "The complete evidence bundle given to the final Qwen writer.",
       qwen_writer: "The raw final text returned by Qwen.",
       stopped: "The exact stage and reason where the harness stopped.",
@@ -168,8 +173,12 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
       question,
       context.items,
       async (candidates) => {
-        const judged = await memoryService.call("nli", { candidates }, 600000);
-        return judged.items;
+        const items = [];
+        for (let index = 0; index < candidates.length; index += 10) {
+          const judged = await memoryService.call("nli", { candidates: candidates.slice(index, index + 10) }, 600000);
+          items.push(...judged.items);
+        }
+        return items;
       },
       (stage, details) => audit.stages.push({ stage, details }),
     );

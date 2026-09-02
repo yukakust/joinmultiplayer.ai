@@ -94,7 +94,7 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual("no_information", result.status)
         self.assertEqual(["secret scanner blocked the capsule", "owner did not approve the capsule"], [item.rejection_reason for item in result.checked])
 
-    def test_nli_is_recorded_but_is_not_the_sole_gate(self):
+    def test_neutral_source_claim_is_recorded_and_blocked_before_shelves(self):
         chat = conversation("c1", "The exact source statement.")
         item = candidate("e1", "c1", "The exact source statement.")
         modules = self.modules(candidates=[item])
@@ -110,8 +110,10 @@ class PipelineTests(unittest.TestCase):
 
         result = PocketICore(modules).run("Does this help?", [chat])
 
-        self.assertEqual("answered", result.status)
+        self.assertEqual("no_information", result.status)
         self.assertEqual("neutral", result.checked[0].nli_signal)
+        self.assertFalse(result.checked[0].accepted)
+        self.assertEqual("source does not entail the proposed claim", result.checked[0].rejection_reason)
 
     def test_shelves_must_account_for_every_accepted_candidate(self):
         chat = conversation("c1", "One fact.")
@@ -142,4 +144,3 @@ class PipelineTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

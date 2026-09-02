@@ -84,37 +84,68 @@ test("strict memory answer extracts an exact quote before writing", { skip: proc
   const executable = path.join(directory, "fake-llama-cli");
   await fs.writeFile(executable, `#!/usr/bin/env node
 const prompt = process.argv[process.argv.indexOf("-p") + 1];
-if (prompt.includes("Return JSON only")) {
+if (prompt.includes("Find evidence that helps answer")) {
   process.stdout.write(JSON.stringify({candidates:[{claim:"DeBERTa is a second signal.",evidence_ids:["S1.1"]}]}));
+} else if (prompt.includes("Rewrite each pile")) {
+  process.stdout.write(JSON.stringify({piles:[{pile_id:"P1",claim:"DeBERTa is a second signal."}]}));
 } else {
   if (!prompt.includes("EXACT SOURCE BLOCKS:\\n[S1.1] It is a cautious second signal, not the only judge.")) process.exit(4);
   process.stdout.write("DeBERTa is a cautious second signal [E1].\\n");
 }
 `, { mode: 0o700 });
   const chat = new ChatManager({ executable, modelPath: path.join(directory, "model.gguf"), timeoutMs: 5000 });
-  let judged = null;
+  const judged = [];
   const stages = [];
   const result = await chat.answerFromVerifiedMemory(
     "Why DeBERTa?",
     [{ source_id: "S1", text: "It is a cautious second signal, not the only judge." }],
     async (items) => {
-      judged = items;
-      return [{ candidate_id: "E1", label: "entailment" }];
+      judged.push(items);
+      return items.map((item) => ({ candidate_id: item.candidate_id, label: "entailment" }));
     },
     (stage, details) => stages.push({ stage, details }),
   );
-  assert.equal(judged[0].quote, "It is a cautious second signal, not the only judge.");
+  assert.equal(judged[0][0].quote, "It is a cautious second signal, not the only judge.");
   assert.deepEqual(stages.map((item) => item.stage), [
     "sources_received",
     "qwen_extraction",
     "evidence_id_check",
-    "deberta_signals",
+    "grounding_signals",
+    "grounded_evidence",
+    "primary_piles",
+    "qwen_canonicals",
+    "canonical_validation",
+    "final_piles",
     "writer_evidence",
     "qwen_writer",
     "completed",
   ]);
   assert.equal(stages[0].details.sources[0].text, "It is a cautious second signal, not the only judge.");
   assert.deepEqual(result, { answer: "DeBERTa is a cautious second signal [E1].", diagnostic: "answered" });
+});
+
+test("strict memory answer blocks a neutral adjacent-memory claim before the writer", { skip: process.platform === "win32" }, async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-strict-neutral-"));
+  const executable = path.join(directory, "fake-llama-cli");
+  await fs.writeFile(executable, `#!/usr/bin/env node
+const prompt = process.argv[process.argv.indexOf("-p") + 1];
+if (!prompt.includes("Find evidence that helps answer")) process.exit(8);
+process.stdout.write(JSON.stringify({candidates:[{claim:"Helios-42 uses Cerebras.",evidence_ids:["S1.1"]}]}));
+`, { mode: 0o700 });
+  const chat = new ChatManager({ executable, modelPath: path.join(directory, "model.gguf"), timeoutMs: 5000 });
+  const stages = [];
+  const result = await chat.answerFromVerifiedMemory(
+    "What did we decide about Helios-42?",
+    [{ source_id: "S1", text: "Cerebras was used for an unrelated DoRA training run." }],
+    async (items) => items.map((item) => ({ candidate_id: item.candidate_id, label: "neutral", confidence: 0.996 })),
+    (stage, details) => stages.push({ stage, details }),
+  );
+  assert.deepEqual(result, {
+    answer: "I couldn't find supported information in your connected memory.",
+    diagnostic: "no_grounded_evidence",
+  });
+  assert.equal(stages.some((item) => item.stage === "qwen_writer"), false);
+  assert.equal(stages.at(-1).details.reason, "no_grounded_evidence");
 });
 
 test("strict memory answer stops before writing when evidence ID was invented", { skip: process.platform === "win32" }, async () => {

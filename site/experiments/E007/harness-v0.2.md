@@ -126,6 +126,34 @@ recovered merge also depended on a near tie: entailment 0.505623 versus neutral
 scale and across domains remains unproven. Decision record:
 `/experiments/E007/answer-piles-accepted-architecture-v0.1.json`.
 
+### Desktop integration checkpoint 7M
+
+The alpha.13 ten-question physical regression exposed an integration error,
+not a new model result: DeBERTa's `neutral` label was logged but every exact-ID
+candidate still reached the writer. The absent named-model controls therefore
+became cited invented answers.
+
+Pocket i 0.1.0-alpha.14 now wires the accepted Gate 13D sandwich into the local
+answer path:
+
+```text
+exact evidence IDs
+→ source entails claim (DeBERTa)
+→ cautious mutual-entailment piles
+→ readable Qwen canonical claim
+→ every original ↔ canonical (DeBERTa)
+→ final mutual-entailment piles
+→ grounded writer
+```
+
+`neutral`, `contradiction`, and `unavailable` claims stop before the writer. A
+bad Qwen canonicalization is discarded without deleting its exact originals.
+This code checkpoint passes deterministic tests for a supported answer, an
+adjacent-memory hallucination, a conflicting supported version, and a broken
+canonical rewrite. It remains unverified on the owner's physical memory until
+the unchanged alpha.14 DMG repeats the ten-question regression. Public record:
+`/experiments/E007/desktop-full-harness-checkpoint7m-v0.1.json`.
+
 ## Locked Gate 14A: write only what the swarm supplied
 
 Ten English synthetic cases are frozen before Qwen's first run. Eight provide

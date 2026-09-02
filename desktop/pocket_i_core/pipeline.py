@@ -221,9 +221,12 @@ class PocketICore:
         signal = self.modules.nli(question, candidate)
         if signal not in {"entailment", "neutral", "contradiction", "unavailable"}:
             raise ValueError(f"unknown NLI signal: {signal}")
-        # E007 showed that DeBERTa has weak recall. Preserve its signal, but do
-        # not let it silently delete exact, owner-approved evidence.
-        return CheckedEvidence(candidate, True, (), True, signal, True, None)
+        # An exact quote proves provenance, not meaning. Only an entailed claim
+        # may reach the answer shelves. Other versions remain auditable in the
+        # checked ledger instead of being silently handed to the writer.
+        accepted = signal == "entailment"
+        reason = None if accepted else "source does not entail the proposed claim"
+        return CheckedEvidence(candidate, True, (), True, signal, accepted, reason)
 
     @staticmethod
     def _validate_shelves(
@@ -239,4 +242,3 @@ class PocketICore:
             tuple(accepted_by_id[item] for item in shelves.used),
             tuple(accepted_by_id[item] for item in shelves.alternatives),
         )
-
