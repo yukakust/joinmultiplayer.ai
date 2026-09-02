@@ -1,91 +1,75 @@
-# new/ — the new-version preview (week 1)
+# new/ — the game-shaped front door (new.joinmultiplayer.ai)
 
-A self-contained copy of the public site with the "week 1" presentation changes
-applied. **Nothing outside `new/` is modified on this branch.** The live site
-keeps running from `site/` + `server/` exactly as before; this copy is meant to
-be served side-by-side at `new.joinmultiplayer.ai` so the two can be compared.
+This directory is a **separate copy** of the site and server, developed on the
+branch `claude/new-ui-week1` and served at https://new.joinmultiplayer.ai.
+The production site at the repository root (`site/`, `server/`) is never
+modified from here. When the new version wins, the domains switch; until then
+both run side by side.
 
-## What changed (week 1 of the UI plan)
+## What it is
 
-1. **Trace pages fixed.** `/record/?id=T0001` used an undeclared
-   `derivedQuestions` variable, so the render threw and the catch block showed
-   "this trace does not exist" even though `/api/public/T0001` returned 200.
-   The copy reads `record.derived_questions` / `record.continuations` safely.
-2. **Persistent navigation.** A slim sticky nav under the goal ribbon:
-   `i · Start here · Doors · Map · Experiments · Data` (EN/RU).
-3. **"Start here" page** at `/start/` — the rules of the game on one screen:
-   the three stories, one move, the dot (`ı → i`), the code legend
-   (H/E/D/T/Q/V/M), what happens after a move, and a "give this page to your
-   AI" block. Compressed from `GAME.md`.
-4. **Home page.** "Enter" → "Try it in 2 minutes"; a plain-language
-   lab subtitle under the hero; a three-step "how it works" strip
-   (each step links to start/map/experiment); a "Start here" button.
-5. **Morrow no longer covers buttons.** It collapses to a round face bubble
-   (collapsed by default on the home page, expanded on guided flows); clicking
-   the face toggles it. The old fully-hidden state migrates to "collapsed".
-6. **Every empty state rewritten as an invitation** (EN + RU): traces,
-   questions, map, data, physical runs, Codex runs, D08/D09 waiting doors —
-   each now says what will appear, why it is interesting, and the smallest
-   move to be first.
+joinmultiplayer.ai is an open laboratory testing one question: can many small
+personal AIs ("pocket i", living on their owners' own devices) beat one big AI?
+Every experiment protocol is pinned before the run and every failure is
+published. `new/` wraps that laboratory in a game so that curious engineers can
+enter without a manual:
 
-Supporting changes in the copy only:
+| Route | What a visitor sees |
+|---|---|
+| `/game/` | The one screen: your pocket i (a robot with mind / body / link slots), who is at the table, the game's current call, one button — make a move. First visit plays the intro: a radio signal → the safehouse terminal (cell record 001) → choose your figurine → your first field run. |
+| `/journey/` | The chronicle: every experiment as a point on a map, statuettes for milestones, dead ends kept. Every number links to its raw JSON. |
+| `/workbench/` | The body of pocket i as upgradeable parts: what each part is, its frozen record, and a copy-for-your-AI brief to beat it. |
+| `/start/` | How this place works, in plain words. |
+| `/play/` · `/d04/` | Pick a figurine, take an open question to your AI, bring the whole answer back. Submissions are moderated; when published, your figurine ignites and you get a personal link to light the next person. |
 
-- `PUBLIC_API_BASE` in `site/app.js`: when the copy is served from any host
-  other than joinmultiplayer.ai, all **public GET** data (corpus, records,
-  questions, events, map) is read from `https://joinmultiplayer.ai` (those
-  endpoints are CORS-open), so the preview shows the real corpus. Form POSTs
-  stay relative and land in this copy's own private moderation queue.
-- `server/server.py` (copy): generic SPA fallback for extension-less routes
-  (so `/start/`, `/d04`, `/map/` work behind any plain reverse proxy),
-  `new.joinmultiplayer.ai` + `localhost:8092` added to allowed POST origins,
-  default port 8092.
-- `site/index.html` (copy): `noindex` (a preview must not compete with the
-  real site in search), cache-buster `?v=new-week1`.
-- A "NEW VERSION PREVIEW · current site →" banner renders only when the page
-  is served from a non-production host; if this copy is ever promoted to the
-  main domain, the banner disappears by itself.
+Invite links carry the guest's figurine: `/game/?lit=M0001&piece=lens`. The
+terminal then shows their reserved piece and a personal **slot** — a real hole
+in the harness MVP with its numbers and raw result JSONs.
 
-## Run locally
+The fiction (2040, the Merger, the Answer, the safehouse) lives in
+`lore/WORLD-BIBLE.md` and obeys three laws: fiction may only promise the real
+roadmap; every number on the site is real and clickable; shadows, not names.
 
-```bash
-python3 new/server/server.py --site new/site --db /tmp/new-preview.sqlite3 --port 8092
-# open http://localhost:8092
+## Layout
+
+```
+new/
+  site/        static SPA: index.html, app.js (bilingual EN/RU copy dicts), style.css, assets/
+  server/      server.py — stdlib HTTP + SQLite (contributions, questions, events, matches);
+               moderate.py — CLI moderation
+  tools/       seed_q0001.py (mirror the canonical open question, offset id sequences),
+               backup_db.py (nightly WAL-safe snapshot), crier.py (Telegram announcer, parked)
+  ops/         systemd units: static server, nightly backup timer, crier
+  lore/        WORLD-BIBLE.md, POCKET-I-IDENTITY.md
+  design/      UI-BRIEF.md, DMG-BRIEF.md (briefs for the designer)
 ```
 
-## Deploy at new.joinmultiplayer.ai (yukabox)
+## Running locally
 
-1. Check out this branch next to the production checkout (do not touch the
-   production one):
-   `git clone -b claude/new-ui-week1 https://github.com/yukakust/joinmultiplayer.ai /srv/joinmultiplayer-new/checkout`
-   then point the service at it, e.g.
-   `app -> /srv/joinmultiplayer-new/checkout/new/server`,
-   `public -> /srv/joinmultiplayer-new/checkout/new/site`.
-2. Install the unit: copy `new/ops/joinmultiplayer-new-static.service` to
-   `/etc/systemd/system/`, adjust paths, `systemctl enable --now` it.
-   It listens on `127.0.0.1:8092` (production stays on 8091).
-3. Add DNS `new.joinmultiplayer.ai` (same Cloudflare zone) and a reverse-proxy
-   host that forwards `new.joinmultiplayer.ai` → `127.0.0.1:8092`, mirroring
-   whatever fronts port 8091 today.
-4. Compare, then delete the subdomain when done — production was never touched.
+```bash
+python3 new/server/server.py --site new/site --db /tmp/new.sqlite3 --port 8092
+python3 new/tools/seed_q0001.py --db /tmp/new.sqlite3
+```
 
-The preview's moderation queue is its own sqlite DB (`--db`); anything
-submitted through the preview forms stays there and can be reviewed with
-`new/server/moderate.py --db <that file>`.
+Public reads (corpus, records, questions) come from the production API when the
+host is not production; writes (contributions, matches) go to the local DB.
+New-server ids start above 100 so they never collide with the public corpus.
 
-## The town crier (the game calls, automatically)
+## Deploying
 
-`tools/crier.py` watches the public corpus and announces every new open
-question that has no answers yet — "the game calls: the move is nobody's".
-Without credentials it prints drafts (dry run). To make it post to
-Telegram:
+The production host runs `new/ops/joinmultiplayer-new-static.service` from
+`/srv/joinmultiplayer-new/checkout` (port 8092, Caddy in front with TLS and
+gzip). Deploy = `git fetch && git reset --hard origin/claude/new-ui-week1 &&
+systemctl restart joinmultiplayer-new-static`. Bump the `?v=` cache-busters in
+`site/index.html` when `app.js`/`style.css` change — Cloudflare caches assets.
 
-1. Create a bot via @BotFather, add it as admin to your channels/groups.
-2. `echo 'TELEGRAM_BOT_TOKEN=...' > /etc/joinmultiplayer-crier.env` and add
-   `TELEGRAM_CHAT_IDS=@your_channel,-100123456789`.
-3. Install `ops/joinmultiplayer-crier.{service,timer}` and
-   `systemctl enable --now joinmultiplayer-crier.timer`.
+Moderation: `python3 new/server/moderate.py --db /var/lib/joinmultiplayer-new/contributions.sqlite3 list`
+then `status T0101 public`. Backups: `joinmultiplayer-new-backup.timer`, 03:10 UTC,
+14 days kept in `/var/backups/joinmultiplayer-new/`.
 
-It never invents content — every post is verbatim from the corpus record.
-Personalized invitations (AI drafting who to call and why, for you to send)
-are the designed next step; see the doors' "For:" audiences as the target
-map.
+## Contributing
+
+The game itself is the contribution guide: take a slot on `/workbench/` or in
+your terminal, beat the number under the same frozen protocol, and bring the
+result as a GitHub issue (`[UPGRADE] <part>`) or a trace. A record changes only
+after an independent rerun — no one dots their own item.

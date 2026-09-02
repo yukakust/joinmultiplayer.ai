@@ -153,7 +153,7 @@ const ui = {
     fullAnswer: "Complete, unedited answer", addAnswer: "Add this answer", betweenAnswers: "What happened between the answers?", chooseAfter: "Choose only after bringing them all",
     agree: "They agree", disagree: "They disagree", partlyDisagree: "They partly disagree", cannotTell: "I cannot tell", sealTrace: "Seal this trace", rawUnchanged: "Raw answers stay unchanged. Corrections may be added, never hidden.",
     identity: "IDENTITY", traceExists: "Your trace exists.", whoLeft: "Who left it?", name: "Public name or pseudonym", anonymousPlaceholder: "Leave blank to appear as anonymous",
-    symbol: "Image or symbol", location: "Approximate location", locationPlaceholder: "optional · never exact", email: "Email for status updates", emailPlaceholder: "optional · prototype only", noEmail: "No email is sent in this prototype.", mapConsent: "Show this identity on the future public ignition map", enterAs: "Enter as ı",
+    symbol: "Image or symbol", location: "Approximate location", locationPlaceholder: "optional · never exact", email: "Email for status updates", emailPlaceholder: "optional · prototype only", noEmail: "No email is sent in this prototype.", mapConsent: "Show this piece on the public ignition map — it is live now", enterAs: "Enter as ı",
     anonymous: "anonymous", origin: "origin", awaiting: "AWAITING ANOTHER i", noDot: "It does not have a dot yet.", aiAnswers: "AI answers", privateLink: "PRIVATE STATUS LINK", copyLink: "copy link", invite: "Invite an i to check it", askNetwork: "Ask the network", verifierView: "switch to verifier view →", verifierNote: "The verifier switch exists only so you can walk through both sides of the prototype.",
     independentCheck: "ANOTHER i · INDEPENDENT CHECK", checkTrace: "Can you check<br>this trace?", question: "QUESTION", rawAnswers: "RAW ANSWERS", hiddenInterpretation: "The creator's expected answer and interpretation are hidden.", whatChecked: "What did you check?", groundTruth: "Ground truth", howChecked: "How did you check it?", evidence: "Evidence or direct sources", outcome: "Outcome", supports: "Supports", challenges: "Challenges", inconclusive: "Inconclusive", limitations: "Limitations", independent: "I did not create this trace or see its sealed interpretation", publishCheck: "Publish this check",
     dottedBy: "DOTTED BY M0003", checkedTrace: "Another i<br>checked your trace.", emailPreview: "EMAIL PREVIEW", dotNotification: "Another i put a dot on your trace.", checkedSentence: "{trace} was independently checked. Outcome: {outcome}.", newDoor: "YOU OPENED A NEW DOOR", modelsDisagreed: "The models disagreed. Can people recognize the correct answer?", labChanged: "THE LAB CHANGED", agreementSurvived: "Agreement survived one check.", oneCase: "One case is not the answer. The trace is now ready to be repeated.", startAnother: "Start another trace",
@@ -174,7 +174,7 @@ const ui = {
     tryIt: "Попробовать", enterDoor: "Открыть дверь", anotherI: "другой i", prototype: "ПРОТОТИП UX", prototypeNote: "сохранено только в этом браузере · ничего не публикуется · письма не отправляются", reset: "сбросить",
     principle: "Дверь подсказывает, как искать ответ.<br>Сам вопрос выбираете вы.", bringQuestion: "Задать свой вопрос", return: "Назад к i", questionStep: "D04 · ВОПРОС", trace: "СЛЕД", verifier: "проверяющий", whatKnow: "Что вы<br>хотите узнать?", exactQuestion: "Ваш точный вопрос", questionPlaceholder: "Напишите его ровно так, как зададите каждому ИИ.", whyMatter: "Почему это важно для вас?", field: "Область или тема", fieldPlaceholder: "например: архитектура, налоговое право, пчеловодство", knowAnswer: "Вы знаете ответ?", choose: "Выберите", know: "Знаю", partlyKnow: "Знаю частично", dontKnow: "Не знаю", checkPath: "Как это можно проверить?", source: "По источнику", reproduce: "Воспроизвести", expertReview: "Экспертная проверка", unknown: "Пока не знаю", expected: "У меня есть ожидаемый ответ", sealExpected: "Запечатайте его до ответов ИИ", expectedPlaceholder: "Он останется скрытым в режиме проверяющего.", freeze: "Зафиксировать вопрос",
     answer: "ОТВЕТ", frozenQuestion: "ЗАФИКСИРОВАННЫЙ ВОПРОС", copyQuestion: "копировать вопрос", answerAria: "Принесено ответов: {count} из 3", progressEmpty: "Принесите каждый ответ. Не выбирайте лучший.", progressPart: "принесено: {count} · ещё {remaining} до сравнения D04", progressReady: "{count} ответа · сравнение готово", bringFirst: "Принести первый ответ", bringAnother: "Принести ещё один ответ", model: "ИИ / модель", modelPlaceholder: "например: Claude Opus 4.1", version: "Версия", versionPlaceholder: "точная, датированная или неизвестна", date: "Дата", tools: "Доступные инструменты", none: "Нет", browsing: "Поиск", files: "Файлы", code: "Код", memory: "Память", fullAnswer: "Полный ответ без изменений", addAnswer: "Добавить этот ответ", betweenAnswers: "Что произошло между ответами?", chooseAfter: "Выберите, только когда принесёте все", agree: "Они согласны", disagree: "Они не согласны", partlyDisagree: "Они частично не согласны", cannotTell: "Я не могу понять", sealTrace: "Запечатать след", rawUnchanged: "Сырые ответы останутся неизменными. Исправления можно добавить, но нельзя скрыть.",
-    identity: "ЛИЧНОСТЬ", traceExists: "Ваш след существует.", whoLeft: "Кто его оставил?", name: "Публичное имя или псевдоним", anonymousPlaceholder: "Оставьте пустым, чтобы быть анонимным", symbol: "Изображение или символ", location: "Примерное место", locationPlaceholder: "необязательно · никогда не точно", email: "Почта для обновлений статуса", emailPlaceholder: "необязательно · только прототип", noEmail: "В этом прототипе письма не отправляются.", mapConsent: "Показывать эту личность на будущей публичной карте зажжений", enterAs: "Войти как ı",
+    identity: "ЛИЧНОСТЬ", traceExists: "Ваш след существует.", whoLeft: "Кто его оставил?", name: "Публичное имя или псевдоним", anonymousPlaceholder: "Оставьте пустым, чтобы быть анонимным", symbol: "Изображение или символ", location: "Примерное место", locationPlaceholder: "необязательно · никогда не точно", email: "Почта для обновлений статуса", emailPlaceholder: "необязательно · только прототип", noEmail: "В этом прототипе письма не отправляются.", mapConsent: "Показывать эту фигурку на публичной карте зажжений — она уже работает", enterAs: "Войти как ı",
     anonymous: "аноним", origin: "источник", awaiting: "ОЖИДАЕТ ДРУГОГО i", noDot: "Точки над ним ещё нет.", aiAnswers: "ответов ИИ", privateLink: "ЛИЧНАЯ ССЫЛКА СТАТУСА", copyLink: "копировать ссылку", invite: "Позвать i проверить", askNetwork: "Спросить сеть", verifierView: "перейти в режим проверки →", verifierNote: "Переключатель проверяющего существует только для того, чтобы пройти обе стороны прототипа.",
     independentCheck: "ДРУГОЙ i · НЕЗАВИСИМАЯ ПРОВЕРКА", checkTrace: "Можете проверить<br>этот след?", question: "ВОПРОС", rawAnswers: "СЫРЫЕ ОТВЕТЫ", hiddenInterpretation: "Ожидаемый ответ и интерпретация автора скрыты.", whatChecked: "Что вы проверили?", groundTruth: "Факт / ground truth", howChecked: "Как вы это проверили?", evidence: "Доказательства или прямые источники", outcome: "Результат", supports: "Подтверждает", challenges: "Ставит под сомнение", inconclusive: "Неопределённо", limitations: "Ограничения", independent: "Я не создавал этот след и не видел его запечатанную интерпретацию", publishCheck: "Опубликовать проверку",
     dottedBy: "ТОЧКУ ПОСТАВИЛ M0003", checkedTrace: "Другой i<br>проверил ваш след.", emailPreview: "ПРЕВЬЮ ПИСЬМА", dotNotification: "Другой i поставил точку над вашим следом.", checkedSentence: "{trace} независимо проверен. Результат: {outcome}.", newDoor: "ВЫ ОТКРЫЛИ НОВУЮ ДВЕРЬ", modelsDisagreed: "Модели не согласились. Могут ли люди распознать верный ответ?", labChanged: "ЛАБОРАТОРИЯ ИЗМЕНИЛАСЬ", agreementSurvived: "Согласие пережило одну проверку.", oneCase: "Один случай — ещё не ответ. Теперь этот след можно повторить.", startAnother: "Начать другой след",
@@ -187,7 +187,7 @@ const labCopy = {
   en: {
     goalLabel: "H0001 · THE GOAL",
     goal: "Can many personal pocket i—each preserving its own knowledge and individuality—temporarily unite into a single distributed neural network and grow stronger as the swarm scales?",
-    currentExperiment: "CURRENT EXPERIMENT · E004",
+    currentExperiment: "CURRENT EXPERIMENT · E007",
     experimentTitle: "Synthetic pocket i swarm",
     experimentStatus: "DEVELOPMENT ARTIFACT — HUMAN REVIEW REQUIRED",
     experimentIntro: "Start with two inspectable synthetic pocket i, then scale the same mechanism to 4, 8, 16, and 32. Each must learn different private knowledge by changing its own weights.",
@@ -261,7 +261,7 @@ const labCopy = {
   ru: {
     goalLabel: "H0001 · ЦЕЛЬ",
     goal: "Может ли множество личных pocket i, сохраняя собственные знания и индивидуальность, временно объединяться в одну распределённую нейросеть — и становиться сильнее по мере роста swarm?",
-    currentExperiment: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
+    currentExperiment: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E007",
     experimentTitle: "Синтетический swarm pocket i",
     experimentStatus: "ЕСТЬ DEVELOPMENT-АРТЕФАКТ — НУЖНА ПРОВЕРКА ЧЕЛОВЕКА",
     experimentIntro: "Начинаем с двух наглядных синтетических pocket i, затем масштабируем тот же механизм до 4, 8, 16 и 32. Каждый должен выучить своё приватное знание, действительно изменив собственные веса.",
@@ -928,7 +928,7 @@ function howItWorks() {
 
 function goalRibbon() {
   return `
-    <a class="goal-ribbon" href="/experiment/?id=E004">
+    <a class="goal-ribbon" href="/experiment/?id=E007">
       <span>${l("goalLabel")}</span>
       <strong>${l("goal")}</strong>
       <b>${l("currentExperiment")} →</b>
@@ -1038,6 +1038,13 @@ let prototype = loadPrototype();
 
 function savePrototype() {
   localStorage.setItem(storageKey, JSON.stringify(prototype));
+}
+
+async function fetchPublicObject(id, options = {}) {
+  const own = await fetch(`/api/public/${encodeURIComponent(id)}`, options).catch(() => null);
+  if (own && own.ok) return own;
+  if (!PUBLIC_API_BASE) return own || new Response("{}", { status: 404 });
+  return fetch(`${PUBLIC_API_BASE}/api/public/${encodeURIComponent(id)}`, options);
 }
 
 function escapeHTML(value = "") {
@@ -1377,7 +1384,7 @@ async function prefillParentQuestion() {
   const field = form?.elements?.question;
   if (!field) return;
   try {
-    const response = await fetch(`${PUBLIC_API_BASE}/api/public/${encodeURIComponent(parentId)}`);
+    const response = await fetchPublicObject(parentId);
     if (!response.ok) return;
     const record = await response.json();
     field.value = questionRecordValue(record, "question");
@@ -1699,7 +1706,7 @@ async function loadPublicQuestion() {
   if (!target) return;
   const id = new URLSearchParams(location.search).get("id") || "";
   try {
-    const response = await fetch(`${PUBLIC_API_BASE}/api/public/${encodeURIComponent(id)}`);
+    const response = await fetchPublicObject(id);
     if (!response.ok) throw new Error("not found");
     const record = await response.json();
     const derivedQuestions = record.derived_questions || [];
@@ -1771,7 +1778,7 @@ async function loadPublicRecord() {
   if (!target) return;
   const id = new URLSearchParams(location.search).get("id") || "";
   try {
-    const response = await fetch(`${PUBLIC_API_BASE}/api/public/${encodeURIComponent(id)}`);
+    const response = await fetchPublicObject(id);
     if (!response.ok) throw new Error("not found");
     const record = await response.json();
     const continuations = record.continuations || [];
@@ -2409,7 +2416,7 @@ function door(id, data) {
 
 const e004Copy = {
   en: {
-    step: "CURRENT EXPERIMENT · E004",
+    step: "CURRENT EXPERIMENT · E007",
     intro: "Four ways for independent pocket i to join one temporary neural network, tested separately from how each pocket learns locally.",
     status: "CHECKPOINT 2 APPROVED · DEVELOPMENT ARENA RUNNING",
     question: "THE QUESTION",
@@ -2482,7 +2489,7 @@ const e004Copy = {
     noWinner: "NO SCIENTIFIC WINNER"
   },
   ru: {
-    step: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E004",
+    step: "ТЕКУЩИЙ ЭКСПЕРИМЕНТ · E007",
     intro: "Четыре способа объединить независимые pocket i во временную нейросеть. Отдельно проверяем, как каждый pocket i учится локально.",
     status: "КОНТРОЛЬНАЯ ТОЧКА 2 ПРИНЯТА · DEVELOPMENT-АРЕНА ИДЁТ",
     question: "ВОПРОС",
@@ -4461,7 +4468,7 @@ async function loadE005() {
       <section class="e005-pocket-section"><div class="flow-step">${e5("pockets")}</div><p class="control-warning">${e5("pocketWarning")}</p><div class="e005-pockets">${world.pockets.map(pocket => `<article><i>i</i><strong>${escapeHTML(pocket.id)} · ${escapeHTML(pocket.name)}</strong><span>${escapeHTML(e4Localized(pocket.skill))}</span><small>fixture · ${percent(pocket.calibration)}</small></article>`).join("")}</div></section>
       <section class="e005-task-section"><div class="flow-step">${e5("tasks")}</div><div class="e005-tasks">${world.tasks.map(taskMarkup).join("")}</div></section>
       <section class="e004-decision"><span>${e5("review")}</span><p>${e5("reviewCopy")}</p></section>
-      <div class="actions"><a class="button secondary" href="/experiment/?id=E004">${e5("back")}</a><a class="quiet-link" href="/experiments/E005/world-public-v0.1.json">${e5("jsonWorld")} ↗</a><a class="quiet-link" href="/experiments/E005/harness-public-v0.1.json">${e5("jsonHarness")} ↗</a><a class="quiet-link" href="/experiments/E005/base-preflight-public-v0.1.json">BASE OUTPUTS JSON ↗</a></div>`;
+      <div class="actions"><a class="button secondary" href="/experiment/?id=E007">${e5("back")}</a><a class="quiet-link" href="/experiments/E005/world-public-v0.1.json">${e5("jsonWorld")} ↗</a><a class="quiet-link" href="/experiments/E005/harness-public-v0.1.json">${e5("jsonHarness")} ↗</a><a class="quiet-link" href="/experiments/E005/base-preflight-public-v0.1.json">BASE OUTPUTS JSON ↗</a></div>`;
   } catch (error) {
     target.querySelector(".experiment-loading").innerHTML = `<p class="form-error">${escapeHTML(error.message)}</p>`;
   }
@@ -4530,7 +4537,7 @@ async function loadE004Answers() {
       </article>`;
     };
     target.querySelector(".experiment-loading").outerHTML = `
-      <a class="button secondary" href="/experiment/?id=E004">${e4("backToExperiment")}</a>
+      <a class="button secondary" href="/experiment/?id=E007">${e4("backToExperiment")}</a>
       <p class="control-warning">${escapeHTML(e4Localized(microscope.claim_boundary))}</p>
       <div class="e004-answer-records">${(microscope.tasks || []).map(taskMarkup).join("")}</div>
       <div class="actions"><a class="quiet-link" href="/experiments/E004/microscope-public-v0.1.json">${e4("openEvidence")} ↗</a></div>`;
@@ -4955,7 +4962,7 @@ async function loadPublicRun() {
   const id = new URLSearchParams(location.search).get("id") || "";
   if (!target || !/^R\d{4,}$/i.test(id)) return;
   try {
-    const response = await fetch(`${PUBLIC_API_BASE}/api/public/${encodeURIComponent(id)}`, { cache: "no-store" });
+    const response = await fetchPublicObject(id, { cache: "no-store" });
     if (!response.ok) throw new Error("run unavailable");
     const run = await response.json();
     const loading = target.querySelector(".run-loading");
@@ -5200,7 +5207,7 @@ function startShell() {
       <div class="start-stories">
         <article><span>${s("story1t")}</span><p>${s("story1")}</p></article>
         <article><span>${s("story2t")}</span><p>${s("story2")}</p></article>
-        <article><span>${s("story3t")}</span><p>${s("story3")} <a href="/experiment/?id=E004">${s("story3link")} →</a></p></article>
+        <article><span>${s("story3t")}</span><p>${s("story3")} <a href="/experiment/?id=E007">${s("story3link")} →</a></p></article>
       </div>
 
       <section class="start-block">
@@ -5405,7 +5412,7 @@ const journeyNodes = [
   { id: "gentry", code: { en: "GAME · 01", ru: "ИГРА · 01" }, x: 58, row: 14.7, status: "active", statue: "box", date: { en: "29.08.2026", ru: "29.08.2026" },
     name: { en: "the entry", ru: "вход" },
     title: { en: "The game entry opens", ru: "Вход в игру открыт" },
-    body: { en: "The laboratory became a game you can enter: eight fire-carrier pieces, the ignition ritual (a contour that catches flame when your move is accepted), a personal 'light the next one' link, the pulsing 'game calls' line — and the box at the entrance: do you hear it? At the table sits the first match, M0001. The first providence session has been held: three scouts, thirteen candidates, five verified notes for the Matchbox hunt.", ru: "Лаборатория стала игрой, в которую можно войти: восемь фигурок-носителей огня, ритуал зажигания (контур вспыхивает, когда ход принят), личная ссылка «зажги следующего», пульс «Игра зовёт» — и коробка на входе: слышишь? За столом первая спичка — M0001. Проведён первый сеанс провидения: три следопыта, тринадцать кандидатов, пять проверенных записок для охоты на Коробка." },
+    body: { en: "The laboratory became a game you can enter: fire-carrier pieces, the ignition ritual (a contour that catches flame when your move is accepted), a personal 'light the next one' link, the pulsing 'game calls' line — and the box at the entrance: do you hear it? At the table sits the first match, M0001. The first providence session has been held: three scouts, thirteen candidates, five verified notes for the Matchbox hunt.", ru: "Лаборатория стала игрой, в которую можно войти: восемь фигурок-носителей огня, ритуал зажигания (контур вспыхивает, когда ход принят), личная ссылка «зажги следующего», пульс «Игра зовёт» — и коробка на входе: слышишь? За столом первая спичка — M0001. Проведён первый сеанс провидения: три следопыта, тринадцать кандидатов, пять проверенных записок для охоты на Коробка." },
     statueName: { en: "The opened box", ru: "Открытая коробка" },
     links: [{ href: "/play/", t: { en: "Enter the game", ru: "Войти в игру" } }, { href: "/workbench/", t: { en: "The workbench", ru: "Верстак" } }, { href: "/map/", t: { en: "Matches at the table", ru: "Спички за столом" } }] },
 
@@ -6525,9 +6532,9 @@ const PIECE_SLOTS = {
       en: "One real ChatGPT conversations-v3 cache file bounced eight bounded decoders — JSON-at-offset, plist, gzip, zlib, raw deflate, bz2, LZMA, Apple LZFSE/LZ4. The 85 sibling files stay unopened on principle. Open that one file with a bounded standard decoder: counts and schema leave the device, text never does.",
       ru: "Один реальный файл кэша ChatGPT (conversations-v3) отбил восемь ограниченных декодеров — JSON со смещением, plist, gzip, zlib, deflate, bz2, LZMA, Apple LZFSE/LZ4. Остальные 85 файлов принципиально не открыты. Раскрой этот один файл ограниченным стандартным декодером: наружу — счётчики и схема, текст — никогда." },
     links: [
-      { label: "Gate 16G.3 · result JSON", href: EXP + "/chatgpt-single-container-gate16g3-result-v0.1.json" },
-      { label: language === "ru" ? "PROTOCOL.md · весь путь" : "PROTOCOL.md · the whole road", href: GH },
-      { label: language === "ru" ? "3/18 vs 17/18 · летопись" : "3/18 vs 17/18 · the chronicle", href: "/journey/" }
+      { label: { en: "Gate 16G.3 · result JSON", ru: "Gate 16G.3 · result JSON" }, href: EXP + "/chatgpt-single-container-gate16g3-result-v0.1.json" },
+      { label: { en: "PROTOCOL.md · the whole road", ru: "PROTOCOL.md · весь путь" }, href: GH },
+      { label: { en: "3/18 vs 17/18 · the chronicle", ru: "3/18 vs 17/18 · летопись" }, href: "/journey/" }
     ] },
   matchbox: {
     title: { en: "THE 16G.7 TURNSTILE", ru: "ТУРНИКЕТ 16G.7" },
@@ -6535,9 +6542,9 @@ const PIECE_SLOTS = {
       en: "Our reader returned FOUND for 17 of 40 distractor conversations; the evidence turnstile now catches what it lets through — but our own weakness ledger says the cases were locked, the audit was not blind. What the track needs next is exactly your sport: a fresh blind English replication by someone with no stake in the result. Pre-register your confounds against us — that is the house style.",
       ru: "Наш reader вернул FOUND на 17 из 40 дистракторов; турникет улик теперь ловит его на выходе — но наш собственный реестр слабостей честно говорит: кейсы были заперты, а аудит не был слепым. Треку нужно ровно то, чем ты занимаешься: свежая слепая репликация человеком без ставки в результате. Зарегистрируй конфаундеры против нас — это и есть стиль дома." },
     links: [
-      { label: "Gate 16G.6 · result JSON", href: EXP + "/chat-first-qwen-gate16g6-result-v0.3.json" },
-      { label: "PROTOCOL.md · Gate 16G.7", href: GH },
-      { label: language === "ru" ? "3/18 vs 17/18 · летопись" : "3/18 vs 17/18 · the chronicle", href: "/journey/" }
+      { label: { en: "Gate 16G.6 · result JSON", ru: "Gate 16G.6 · result JSON" }, href: EXP + "/chat-first-qwen-gate16g6-result-v0.3.json" },
+      { label: { en: "PROTOCOL.md · Gate 16G.7", ru: "PROTOCOL.md · Gate 16G.7" }, href: GH },
+      { label: { en: "3/18 vs 17/18 · the chronicle", ru: "3/18 vs 17/18 · летопись" }, href: "/journey/" }
     ] },
   flint: {
     title: { en: "WHICH THIRD IS THIS ONE?", ru: "КОТОРАЯ ИЗ ТРЕТЕЙ?" },
@@ -6545,17 +6552,17 @@ const PIECE_SLOTS = {
       en: "Two clean specimens. One: full modular harness 3/18, plain central context 17/18, same frozen model. Two, fresher: the automatic pipeline reported 7/10 claims accepted — the human audit left 5/10 standing. Mechanical success overstates real success, and we wrote that down ourselves. Specification, coordination, or verification — your taxonomy, our corpses. The diagnosis is the move.",
       ru: "Два чистых образца. Первый: модульный харнесс 3/18 против 17/18 простого контекста, та же замороженная модель. Второй, свежее: автоматика отчиталась 7/10 принятых утверждений — ручной аудит оставил 5/10. Механический успех преувеличивает настоящий, и мы сами это записали. Спецификация, координация или верификация — твоя таксономия, наши трупы. Диагноз и есть ход." },
     links: [
-      { label: "PROTOCOL.md · CP2 и все гейты", href: GH },
-      { label: language === "ru" ? "Летопись провалов" : "The chronicle of failures", href: "/journey/" }
+      { label: { en: "PROTOCOL.md · CP2 and every gate", ru: "PROTOCOL.md · CP2 и все гейты" }, href: GH },
+      { label: { en: "The chronicle of failures", ru: "Летопись провалов" }, href: "/journey/" }
     ] },
   candle: {
     title: { en: "THE OUTBOUND BOUNDARY", ru: "ГРАНИЦА НАРУЖУ" },
     body: {
-      en: "The credential gate passed: 24/24 synthetic secrets blocked, 24/24 hard negatives allowed, zero leaks, deterministic. What is not built yet: the owner-permission gate and arbitrary private facts with no known format. Your redoubtful sandbox is the same religion — a boundary you can prove.",
-      ru: "Кредо-гейт пройден: 24/24 синтетических секрета заблокированы, 24/24 hard negatives пропущены, ноль утечек, детерминизм. Чего ещё нет: гейт разрешений владельца и произвольные приватные факты без известного формата. Твой redoubtful — та же религия: граница, которую можно доказать." },
+      en: "The credential gate passed: 24/24 synthetic secrets blocked, 24/24 hard negatives allowed, zero leaks, deterministic. What is not built yet: the owner-permission gate and arbitrary private facts with no known format. Your sandbox for over-eager local agents is the same religion — a boundary you can prove.",
+      ru: "Кредо-гейт пройден: 24/24 синтетических секрета заблокированы, 24/24 hard negatives пропущены, ноль утечек, детерминизм. Чего ещё нет: гейт разрешений владельца и произвольные приватные факты без известного формата. Твой сандбокс для слишком рьяных локальных агентов — та же религия: граница, которую можно доказать." },
     links: [
-      { label: "Gate 16F.1 · result JSON", href: EXP + "/outbound-secret-gate16f1-result-v0.1.json" },
-      { label: "PROTOCOL.md · Gate 16F.1", href: GH }
+      { label: { en: "Gate 16F.1 · result JSON", ru: "Gate 16F.1 · result JSON" }, href: EXP + "/outbound-secret-gate16f1-result-v0.1.json" },
+      { label: { en: "PROTOCOL.md · Gate 16F.1", ru: "PROTOCOL.md · Gate 16F.1" }, href: GH }
     ] },
   lantern: {
     title: { en: "THE ENGINE ECONOMY", ru: "ЭКОНОМИКА ДВИЖКА" },
@@ -6563,8 +6570,8 @@ const PIECE_SLOTS = {
       en: "One short evidence decision costs 15–89 seconds of Qwen3-8B on our CPU path — recorded in our own weakness ledger as an open wound. BF16 vs Q4/Q5 measured on an integrated Radeon and CPU, raw runtimes published; the strict KV-cache prefill gate failed honestly. Where do local wheels actually spin? You own the exact hardware class this question deserves.",
       ru: "Одно короткое решение по уликам стоит 15–89 секунд Qwen3-8B на нашем CPU-пути — записано в нашем реестре слабостей как открытая рана. BF16 против Q4/Q5 измерены на Radeon и CPU, сырые тайминги опубликованы; строгий prefill-гейт KV-кэша честно провален. Где именно буксуют локальные колёса? У тебя ровно тот класс железа, которого этот вопрос заслуживает." },
     links: [
-      { label: language === "ru" ? "gate-3c5 · сырые замеры (repo)" : "gate-3c5 · raw runtimes (repo)", href: "https://github.com/yukakust/joinmultiplayer.ai/tree/agent/game-loop-v0.1/experiments/E007-harness-mvp/artifacts/gate-3c5" },
-      { label: "PROTOCOL.md · Gate 16B", href: GH }
+      { label: { en: "gate-3c5 · raw runtimes (repo)", ru: "gate-3c5 · сырые замеры (repo)" }, href: "https://github.com/yukakust/joinmultiplayer.ai/tree/agent/game-loop-v0.1/experiments/E007-harness-mvp/artifacts/gate-3c5" },
+      { label: { en: "PROTOCOL.md · Gate 16B", ru: "PROTOCOL.md · Gate 16B" }, href: GH }
     ] },
   lighter: {
     title: { en: "5/5 WITHOUT TOUCHING THE WEIGHTS", ru: "5/5 НЕ ТРОГАЯ ВЕСА" },
@@ -6572,8 +6579,8 @@ const PIECE_SLOTS = {
       en: "One fact per model call turned 2 of 5 failed questions into complete answers; three still resist the composer. And our only semantic judge (DeBERTa) accepts 0/10 garbage but keeps just 7/10 of the good evidence — weak recall on multi-premise, numbers and negation, recorded in our weakness ledger. Same frozen weights — only the software around them may change. Your 11%→18% observation, inverted and waiting.",
       ru: "«Один факт — один вызов» превратил 2 из 5 провальных вопросов в полные ответы; три не поддаются. А единственный семантический судья (DeBERTa) не пропускает мусор (0/10), но удерживает лишь 7/10 хороших улик — слабый recall на составных посылках, числах и отрицаниях, записано в реестре слабостей. Веса заморожены — меняться может только софт вокруг. Твоё 11%→18%, вывернутое наизнанку." },
     links: [
-      { label: "PROTOCOL.md · Gates 16D.6–16D.7", href: GH },
-      { label: language === "ru" ? "3/18 vs 17/18 · летопись" : "3/18 vs 17/18 · the chronicle", href: "/journey/" }
+      { label: { en: "PROTOCOL.md · Gates 16D.6–16D.7", ru: "PROTOCOL.md · Gates 16D.6–16D.7" }, href: GH },
+      { label: { en: "3/18 vs 17/18 · the chronicle", ru: "3/18 vs 17/18 · летопись" }, href: "/journey/" }
     ] },
   sparkler: {
     title: { en: "THE CAPSULE VS THE CASCADE", ru: "КАПСУЛА ПРОТИВ КАСКАДА" },
@@ -6581,8 +6588,8 @@ const PIECE_SLOTS = {
       en: "No search lane both exceeded macro-F1 0.80 and found all five required sources. The next locked step: numbered source spans vs free-form quotes, A/B on the same sixteen pairs. Your 87%-across-14-modes lens, pointed at one honest specimen.",
       ru: "Ни одна поисковая лента не дала одновременно macro-F1 выше 0.80 и все пять обязательных источников. Следующий запертый шаг: номерные спаны против свободных цитат, A/B на тех же шестнадцати парах. Твоя оптика «87% по 14 модам» — на одном честном образце." },
     links: [
-      { label: "PROTOCOL.md · Gates 3B–3C.3", href: GH },
-      { label: language === "ru" ? "3/18 vs 17/18 · летопись" : "3/18 vs 17/18 · the chronicle", href: "/journey/" }
+      { label: { en: "PROTOCOL.md · Gates 3B–3C.3", ru: "PROTOCOL.md · Gates 3B–3C.3" }, href: GH },
+      { label: { en: "3/18 vs 17/18 · the chronicle", ru: "3/18 vs 17/18 · летопись" }, href: "/journey/" }
     ] }
 };
 
@@ -6714,8 +6721,9 @@ function introOverlay(phase) {
       <pre class="crt-text" data-typewriter></pre>
       <p class="crt-skip">${tc("skipHint")}</p>
       <button class="button crt-button is-waiting" data-intro="piece" disabled>${tc("cont")}</button>`,
-    piece: localStorage.getItem(invitedPieceKey) ? (() => {
+    piece: (() => {
       const inv = gamePieces.find(piece => piece.id === localStorage.getItem(invitedPieceKey));
+      if (!inv || takenPieceIds().has(inv.id)) return null;
       return `
       <div class="crt-head"><span>[${tc("reservedTitle")}]</span></div>
       <p class="crt-note">${tc("reservedHint")}</p>
@@ -6725,7 +6733,7 @@ function introOverlay(phase) {
         <span>${jt(inv.flavor)}</span>
       </div>
       <button class="button crt-button" data-intro="mission">${tc("cont")}</button>`;
-    })() : `
+    })() || `
       <div class="crt-head"><span>[${tc("whoTitle")}]</span></div>
       <p class="crt-note">${tc("whoHint")}</p>
       <div class="piece-gallery crt-pieces">
@@ -6744,7 +6752,7 @@ function introOverlay(phase) {
       <p class="crt-slot-title">${jt(slot.title)}</p>
       <p class="crt-text-static">${jt(slot.body)}</p>
       <div class="crt-slot-links">
-        ${slot.links.map(link => `<a href="${link.href}" target="_blank" rel="noopener">${link.label} ↗</a>`).join("")}
+        ${slot.links.map(link => `<a href="${link.href}" target="_blank" rel="noopener">${jt(link.label)} ↗</a>`).join("")}
       </div>
       <p class="crt-note">${tc("slotHow")}</p>
       <div class="crt-mission-actions">

@@ -481,7 +481,7 @@ def validate_question_submission(value: object) -> tuple[dict[str, str], str, st
 
 def init_db(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with sqlite3.connect(path) as db:
+    with sqlite3.connect(path, timeout=10) as db:
         db.execute("PRAGMA journal_mode=WAL")
         db.execute(
             """
@@ -811,6 +811,14 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         super().end_headers()
 
     def do_GET(self) -> None:  # noqa: N802
+        try:
+            self.handle_get()
+        except (sqlite3.Error, OSError, ValueError) as error:
+            self.log_error("GET %s failed: %r", self.path, error)
+            if not self.wfile.closed:
+                self.send_json(HTTPStatus.INTERNAL_SERVER_ERROR, {"error": "temporary server error; try again"})
+
+    def handle_get(self) -> None:
         path = urlparse(self.path).path
         if path == "/api/health":
             self.send_json(HTTPStatus.OK, {"ok": True})
@@ -914,8 +922,8 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                 self.send_json(HTTPStatus.NOT_FOUND, {"error": "not found"})
         except ValueError as error:
             self.send_json(HTTPStatus.BAD_REQUEST, {"error": str(error)})
-        except sqlite3.Error:
-            self.log_error("database error")
+        except sqlite3.Error as error:
+            self.log_error("database error: %r", error)
             self.send_json(HTTPStatus.INTERNAL_SERVER_ERROR, {"error": "temporary storage error"})
 
     def origin_allowed(self) -> bool:
@@ -923,8 +931,11 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         return not origin or origin in ALLOWED_ORIGINS
 
     def client_key(self) -> str:
+        peer = self.client_address[0]
+        if peer not in {"127.0.0.1", "::1"}:
+            return peer
         forwarded = self.headers.get("X-Forwarded-For", "")
-        return forwarded.split(",", 1)[0].strip() or self.client_address[0]
+        return forwarded.split(",", 1)[0].strip() or peer
 
     def read_json(self) -> object:
         try:
@@ -958,7 +969,7 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         if parent_public_id:
             if not PUBLIC_ID_RE.fullmatch(parent_public_id):
                 raise ValueError("parent record is not public")
-            with sqlite3.connect(self.db_path) as db:
+            with sqlite3.connect(self.db_path, timeout=10) as db:
                 if parent_public_id.startswith("T"):
                     parent = db.execute(
                         "SELECT 1 FROM contributions WHERE public_id = ? AND status = 'public'",
@@ -991,7 +1002,7 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
             raise ValueError("relation requires a parent record")
         token = secrets.token_urlsafe(32)
         now = utc_now()
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             cursor = db.execute(
                 "INSERT INTO contributions "
                 "(token_hash, door, payload, author, parent_public_id, relation, created_at, updated_at) "
@@ -1016,21 +1027,25 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                     and db.execute("SELECT 1 FROM matches WHERE public_id = ?", (lit_by,)).fetchone()
                 ):
                     lit_by = ""
-                match_cursor = db.execute(
-                    "INSERT INTO matches (piece, pseudonym, lit_by, map_consent, trace_id, created_at) "
-                    "VALUES (?, ?, ?, ?, ?, ?)",
-                    (
-                        piece,
-                        author if author != "anonymous" else "",
-                        lit_by,
-                        match_consent,
-                        public_id,
-                        now,
-                    ),
-                )
-                match_id = f"M{match_cursor.lastrowid:04d}"
-                db.execute("UPDATE matches SET public_id = ? WHERE row_id = ?", (match_id, match_cursor.lastrowid))
-                match_info = {"public_id": match_id, "piece": piece, "lit": False, "lit_by": lit_by or "self-found"}
+                existing_match = db.execute("SELECT public_id, trace_id FROM matches WHERE piece = ?", (piece,)).fetchone()
+                if existing_match is not None:
+                    match_info = {"public_id": existing_match[0], "piece": piece, "lit": False, "lit_by": lit_by or "self-found", "shared": True}
+                else:
+                    match_cursor = db.execute(
+                        "INSERT INTO matches (piece, pseudonym, lit_by, map_consent, trace_id, created_at) "
+                        "VALUES (?, ?, ?, ?, ?, ?)",
+                        (
+                            piece,
+                            author if author != "anonymous" else "",
+                            lit_by,
+                            match_consent,
+                            public_id,
+                            now,
+                        ),
+                    )
+                    match_id = f"M{match_cursor.lastrowid:04d}"
+                    db.execute("UPDATE matches SET public_id = ? WHERE row_id = ?", (match_id, match_cursor.lastrowid))
+                    match_info = {"public_id": match_id, "piece": piece, "lit": False, "lit_by": lit_by or "self-found"}
         response = {"id": public_id, "token": token, "status": "pending", "status_path": f"/contribution/#{token}"}
         if match_info:
             response["match"] = match_info
@@ -1043,7 +1058,7 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         payload, author, source_trace_id = validate_question_submission(body)
         token = secrets.token_urlsafe(32)
         now = utc_now()
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             source = db.execute(
                 "SELECT 1 FROM contributions WHERE public_id = ? AND status = 'public'",
                 (source_trace_id,),
@@ -1083,7 +1098,7 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
     def private_question(self, token: str) -> sqlite3.Row | None:
         if not isinstance(token, str) or len(token) > 200:
             return None
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             return db.execute(
                 "SELECT public_id, payload, author, source_trace_id, source_event_id, relation, "
@@ -1108,7 +1123,7 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
     def private_record(self, token: str) -> sqlite3.Row | None:
         if not isinstance(token, str) or len(token) > 200:
             return None
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             return db.execute(
                 "SELECT public_id, door, payload, author, parent_public_id, relation, status, review_note, created_at, updated_at "
@@ -1127,7 +1142,7 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         response["payload"] = json.loads(response["payload"])
         if response["status"] == "public":
             response["public_path"] = f"/record/?id={response['public_id']}"
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             match = db.execute(
                 "SELECT public_id, piece, lit_by, map_consent FROM matches WHERE trace_id = ?",
@@ -1144,7 +1159,7 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         self.send_json(HTTPStatus.OK, response)
 
     def get_public_matches(self) -> None:
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             rows = db.execute(
                 "SELECT m.public_id, m.piece, m.pseudonym, m.lit_by, m.trace_id, m.created_at "
@@ -1171,7 +1186,7 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         token = body.get("token", "")
         response = validate_response(body.get("response"))
         hashed = token_hash(token) if isinstance(token, str) else ""
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             record = db.execute(
                 "SELECT row_id, door, payload, status FROM contributions WHERE token_hash = ?", (hashed,)
@@ -1193,7 +1208,7 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
         self.send_json(HTTPStatus.OK, {"ok": True, "answers": len(payload["responses"])})
 
     def experiment_task_prompt(self, run_id: str) -> str:
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             row = db.execute(
                 "SELECT experiment_id FROM experiment_runs WHERE public_id = ?", (run_id,)
             ).fetchone()
@@ -1229,7 +1244,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         experiment_id, author, public_live = validate_experiment_run(body)
         token = secrets.token_urlsafe(32)
         now = utc_now()
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             cursor = db.execute(
                 "INSERT INTO experiment_runs "
                 "(token_hash, experiment_id, agent, author, public_live, protocol_version, created_at, updated_at) "
@@ -1263,7 +1278,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
     def private_experiment_run(self, token: str) -> sqlite3.Row | None:
         if not isinstance(token, str) or len(token) > 200:
             return None
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             return db.execute(
                 "SELECT public_id, experiment_id, agent, author, status, public_live, "
@@ -1289,7 +1304,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
     def append_experiment_run_event(self, body: object) -> None:
         token, sequence, event_type, payload = validate_run_event(body)
         now = utc_now()
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             record = db.execute(
                 "SELECT public_id, status FROM experiment_runs WHERE token_hash = ?",
@@ -1336,7 +1351,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         self.send_json(HTTPStatus.CREATED, {"ok": True, "sequence": sequence})
 
     def public_run_events(self, run_id: str) -> list[dict]:
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             rows = db.execute(
                 "SELECT sequence, event_type, payload, created_at "
@@ -1351,7 +1366,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         return events
 
     def public_experiment_run(self, run_id: str, *, include_events: bool = True) -> dict | None:
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             row = db.execute(
                 "SELECT public_id, experiment_id, agent, author, status, protocol_version, "
@@ -1373,7 +1388,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
             + ("AND experiment_id = ? " if experiment_id else "")
             + "ORDER BY row_id DESC"
         )
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             params = (experiment_id,) if experiment_id else ()
             ids = [row[0] for row in db.execute(query, params).fetchall()]
         return [self.public_experiment_run(run_id, include_events=False) for run_id in ids]
@@ -1395,7 +1410,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         owner_token = secrets.token_urlsafe(32)
         join_token = secrets.token_urlsafe(24)
         now = utc_now()
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             cursor = db.execute(
                 "INSERT INTO physical_rooms "
                 "(owner_token_hash, join_token_hash, author, created_at, updated_at) "
@@ -1425,7 +1440,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         label = clean_text(body.get("label", "device"), "device label", limit=40)
         now = utc_now()
         node_token = secrets.token_urlsafe(32)
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             db.execute("BEGIN IMMEDIATE")
             room = db.execute(
@@ -1478,7 +1493,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         if not isinstance(token, str) or len(token) > 200:
             return None
         digest = token_hash(token)
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             room = db.execute(
                 "SELECT * FROM physical_rooms WHERE owner_token_hash = ?", (digest,)
@@ -1503,7 +1518,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
             self.send_json(HTTPStatus.NOT_FOUND, {"error": "room access not found"})
             return
         kind, room, node = access
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             nodes = db.execute(
                 "SELECT node_public_id, role, label, status, metrics, created_at, updated_at "
@@ -1564,7 +1579,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
             "runtime": clean_text(metrics_value.get("runtime", "browser"), "runtime", limit=80),
         }
         now = utc_now()
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.execute(
                 "UPDATE physical_nodes SET status = 'ready', metrics = ?, updated_at = ? "
                 "WHERE row_id = ?",
@@ -1587,7 +1602,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         count = body.get("task_count", 64)
         if not isinstance(count, int) or isinstance(count, bool) or not 16 <= count <= 256:
             raise ValueError("choose between 16 and 256 tasks")
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             statuses = db.execute(
                 "SELECT status FROM physical_nodes WHERE room_public_id = ? ORDER BY role",
@@ -1660,7 +1675,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
             raise ValueError("room is not running")
         batch = validate_logits(body.get("capsules"), room["task_count"])
         now = utc_now()
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.execute("BEGIN IMMEDIATE")
             db.execute(
                 "UPDATE physical_nodes SET status = 'complete', contribution = ?, updated_at = ? "
@@ -1686,7 +1701,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         room = access[1]
         if room["status"] != "complete":
             raise ValueError("the physical run is not complete")
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.execute(
                 "UPDATE physical_rooms SET public = 1, updated_at = ? WHERE public_id = ?",
                 (utc_now(), room["public_id"]),
@@ -1694,7 +1709,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         self.send_json(HTTPStatus.OK, {"ok": True, "public_path": f"/network/?id={room['public_id']}"})
 
     def public_physical_rooms(self) -> list[dict]:
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             rows = db.execute(
                 "SELECT public_id, author, status, task_count, result, created_at, updated_at "
@@ -1744,7 +1759,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         if not PUBLIC_ID_RE.fullmatch(public_id) or not public_id.startswith("T"):
             self.send_json(HTTPStatus.NOT_FOUND, {"error": "record not found"})
             return
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             record = db.execute(
                 "SELECT public_id, door, payload, author, parent_public_id, relation, created_at, updated_at "
@@ -1757,7 +1772,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         response = dict(record)
         response["payload"] = json.loads(response["payload"])
         response["status"] = "public"
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             children = db.execute(
                 "SELECT public_id, payload, author FROM contributions "
@@ -1792,7 +1807,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         self.send_json(HTTPStatus.OK, response, public=True)
 
     def question_traces(self, public_id: str) -> list[dict]:
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             rows = db.execute(
                 "SELECT public_id, door, author, relation, created_at FROM contributions "
@@ -1814,7 +1829,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         if not re.fullmatch(r"Q[0-9]{4,}", public_id):
             self.send_json(HTTPStatus.NOT_FOUND, {"error": "question not found"})
             return
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             row = db.execute(
                 "SELECT public_id, payload, author, source_trace_id, source_event_id, relation, "
@@ -1828,7 +1843,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         self.send_json(HTTPStatus.OK, self.public_question_from_row(row), public=True)
 
     def public_questions(self) -> list[dict]:
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             rows = db.execute(
                 "SELECT public_id, payload, author, source_trace_id, source_event_id, relation, "
@@ -1851,7 +1866,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         ]
 
     def public_records(self) -> list[dict]:
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             rows = db.execute(
                 "SELECT public_id, door, payload, author, parent_public_id, relation, created_at, updated_at "
@@ -1866,7 +1881,7 @@ First, explain the proposed protocol and its falsification criteria in a concise
         return records
 
     def public_events(self) -> list[dict]:
-        with sqlite3.connect(self.db_path) as db:
+        with sqlite3.connect(self.db_path, timeout=10) as db:
             db.row_factory = sqlite3.Row
             rows = db.execute(
                 "SELECT event_id, event_type, object_type, object_id, actor, links, payload, created_at "

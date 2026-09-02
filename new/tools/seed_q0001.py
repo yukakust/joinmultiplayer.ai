@@ -48,7 +48,9 @@ def main() -> None:
 
     with sqlite3.connect(args.db) as db:
         if db.execute("SELECT 1 FROM questions WHERE public_id = 'Q0001'").fetchone():
-            print("Q0001 already seeded — nothing to do")
+            print("Q0001 already seeded")
+            for table in ("contributions", "questions"):
+                db.execute("UPDATE sqlite_sequence SET seq = MAX(seq, 100) WHERE name = ?", (table,))
             return
         db.execute(
             "INSERT INTO questions "
@@ -67,7 +69,15 @@ def main() -> None:
                 now,
             ),
         )
-    print("Q0001 seeded as public")
+    with sqlite3.connect(args.db) as db:
+        # keep new-server ids disjoint from the old public corpus (T0001–T00xx, Q0001)
+        for table in ("contributions", "questions"):
+            db.execute(
+                "INSERT INTO sqlite_sequence(name, seq) SELECT ?, 100 WHERE NOT EXISTS (SELECT 1 FROM sqlite_sequence WHERE name = ?)",
+                (table, table),
+            )
+            db.execute("UPDATE sqlite_sequence SET seq = MAX(seq, 100) WHERE name = ?", (table,))
+    print("Q0001 seeded as public; id sequences start above 100")
 
 
 if __name__ == "__main__":
