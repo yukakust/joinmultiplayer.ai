@@ -129,6 +129,12 @@ During owner-only alpha testing, alpha.11 additionally writes a complete local
 decisions, DeBERTa signals, writer evidence and final output. It is mode `0600`,
 contains private text, is never uploaded, and must be removed from release builds.
 
+The trace proved the first alpha.11 failure was not caused by cropping: the
+right passage reached Qwen and Qwen understood it, but altered the quote while
+copying it. Alpha.12 therefore numbers immutable evidence blocks and lets Qwen
+select IDs only. Unit tests prove exact reconstruction and rejection of unknown
+IDs; usefulness and physical behavior still require the repeated Mac question.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`

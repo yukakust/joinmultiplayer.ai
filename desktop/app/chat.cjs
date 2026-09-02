@@ -98,9 +98,9 @@ class ChatManager {
     );
     observe("qwen_extraction", { raw_answer: extracted.answer });
     const checked = validateCandidates(extracted.answer, sources);
-    observe("exact_quote_check", checked);
+    observe("evidence_id_check", checked);
     if (!checked.accepted.length) {
-      const diagnostic = checked.extracted ? "no_exact_quotes" : "no_candidates_extracted";
+      const diagnostic = checked.extracted ? "no_valid_evidence_ids" : "no_candidates_extracted";
       observe("stopped", { reason: diagnostic });
       return {
         answer: NO_INFORMATION,

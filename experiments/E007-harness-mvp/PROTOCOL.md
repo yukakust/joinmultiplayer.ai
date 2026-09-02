@@ -1709,3 +1709,16 @@ plumbing; embeddings remain sensitive local data. Crash/concurrency and
 macOS/Windows remain open. Result:
 `/experiments/E007/desktop-index-cache-checkpoint3b-result-v0.1.json`; UI:
 `/experiment/e007/desktop-mvp/index-cache/`.
+
+## Desktop Checkpoint 7J — select evidence, never retype it
+
+The private alpha.11 trace proved that the router found the correct DeBERTa
+passage and Qwen understood it, but Qwen omitted intervening words and changed
+formatting while trying to copy a literal quote. Exact validation correctly
+stopped the answer before DeBERTa.
+
+The desktop contract now numbers deterministic source blocks. Qwen returns one
+atomic claim plus one to four block IDs from one source. Ordinary code resolves
+those IDs to unchanged source text. Unknown IDs, mixed-source selections and
+oversized sets fail before NLI. This is implemented and unit-tested, but remains
+physically unverified until alpha.12 repeats the same owner question.

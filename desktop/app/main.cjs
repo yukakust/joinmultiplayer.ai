@@ -152,8 +152,8 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
     warning: "PRIVATE: contains the owner's question, local memory excerpts and model output. Never upload this file.",
     stage_guide: {
       sources_received: "The exact local excerpts given to Qwen.",
-      qwen_extraction: "The raw evidence candidates returned by Qwen.",
-      exact_quote_check: "Ordinary code checks that every quote exists word-for-word in its excerpt.",
+      qwen_extraction: "The raw claims and evidence IDs returned by Qwen.",
+      evidence_id_check: "Ordinary code resolves Qwen's selected IDs back to exact source text.",
       deberta_signals: "DeBERTa's cautious entailment, neutral or contradiction signal.",
       writer_evidence: "The complete evidence bundle given to the final Qwen writer.",
       qwen_writer: "The raw final text returned by Qwen.",

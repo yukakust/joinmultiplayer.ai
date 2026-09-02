@@ -1,0 +1,28 @@
+{
+  "schema_version": "e007-desktop-evidence-ids-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7J",
+  "status": "implemented_awaiting_physical_run",
+  "observed_failure": {
+    "routing": "The correct passage reached Qwen.",
+    "understanding": "Qwen produced a materially correct claim.",
+    "failure": "Qwen omitted intervening words and changed formatting while copying the supposed exact quote.",
+    "stopping_stage": "no_exact_quotes",
+    "deberta_ran": false,
+    "writer_ran": false
+  },
+  "new_contract": [
+    "The harness deterministically numbers exact source blocks.",
+    "Qwen returns one atomic claim plus one to four evidence IDs.",
+    "Ordinary code resolves IDs to unchanged source text.",
+    "Unknown IDs, mixed-source IDs and oversized selections are rejected before DeBERTa.",
+    "Qwen never retypes source evidence."
+  ],
+  "verification": {
+    "python_tests": "32/32",
+    "desktop_tests": "21/21",
+    "physical_mac": "pending"
+  },
+  "privacy": "The private alpha.11 trace is not published. This record contains only structural findings.",
+  "claim_boundary": "The software contract is implemented and unit-tested. It is not accepted as a physical fix until the same question succeeds or the new private trace identifies another stopping stage."
+}

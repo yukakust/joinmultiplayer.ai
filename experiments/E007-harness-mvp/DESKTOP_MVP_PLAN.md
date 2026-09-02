@@ -172,8 +172,9 @@ thinking, terminal output and arbitrary files stay outside the library.
 
 Route the question to five whole conversations. Read conversations up to
 10,000 model tokens whole; search inside longer conversations without cutting
-messages. Qwen proposes useful claims and exact message coordinates. Ordinary
-code verifies that every quoted span really exists. DeBERTa remains a cautious
+messages. The harness numbers immutable evidence blocks. Qwen proposes useful
+claims and selects only block IDs; ordinary code copies the exact source text
+behind those IDs. Qwen never has to retype a quote. DeBERTa remains a cautious
 signal, not the sole judge.
 
 ### 4. Safe network exchange

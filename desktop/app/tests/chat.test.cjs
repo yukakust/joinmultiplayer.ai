@@ -85,9 +85,9 @@ test("strict memory answer extracts an exact quote before writing", { skip: proc
   await fs.writeFile(executable, `#!/usr/bin/env node
 const prompt = process.argv[process.argv.indexOf("-p") + 1];
 if (prompt.includes("Return JSON only")) {
-  process.stdout.write(JSON.stringify({candidates:[{source_id:"S1",claim:"DeBERTa is a second signal.",quote:"a cautious second signal"}]}));
+  process.stdout.write(JSON.stringify({candidates:[{claim:"DeBERTa is a second signal.",evidence_ids:["S1.1"]}]}));
 } else {
-  if (!prompt.includes("EXACT SOURCE QUOTE: a cautious second signal")) process.exit(4);
+  if (!prompt.includes("EXACT SOURCE QUOTE: It is a cautious second signal, not the only judge.")) process.exit(4);
   process.stdout.write("DeBERTa is a cautious second signal [E1].\\n");
 }
 `, { mode: 0o700 });
@@ -103,11 +103,11 @@ if (prompt.includes("Return JSON only")) {
     },
     (stage, details) => stages.push({ stage, details }),
   );
-  assert.equal(judged[0].quote, "a cautious second signal");
+  assert.equal(judged[0].quote, "It is a cautious second signal, not the only judge.");
   assert.deepEqual(stages.map((item) => item.stage), [
     "sources_received",
     "qwen_extraction",
-    "exact_quote_check",
+    "evidence_id_check",
     "deberta_signals",
     "writer_evidence",
     "qwen_writer",
@@ -117,11 +117,11 @@ if (prompt.includes("Return JSON only")) {
   assert.deepEqual(result, { answer: "DeBERTa is a cautious second signal [E1].", diagnostic: "answered" });
 });
 
-test("strict memory answer stops before writing when quote was invented", { skip: process.platform === "win32" }, async () => {
+test("strict memory answer stops before writing when evidence ID was invented", { skip: process.platform === "win32" }, async () => {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-strict-empty-"));
   const executable = path.join(directory, "fake-llama-cli");
   await fs.writeFile(executable, `#!/usr/bin/env node
-process.stdout.write(JSON.stringify({candidates:[{source_id:"S1",claim:"Invented",quote:"not in source"}]}));
+process.stdout.write(JSON.stringify({candidates:[{claim:"Invented",evidence_ids:["S1.9"]}]}));
 `, { mode: 0o700 });
   const chat = new ChatManager({ executable, modelPath: path.join(directory, "model.gguf"), timeoutMs: 5000 });
   let judgeCalled = false;
@@ -132,6 +132,6 @@ process.stdout.write(JSON.stringify({candidates:[{source_id:"S1",claim:"Invented
   assert.equal(judgeCalled, false);
   assert.deepEqual(result, {
     answer: "I couldn't find supported information in your connected memory.",
-    diagnostic: "no_exact_quotes",
+    diagnostic: "no_valid_evidence_ids",
   });
 });
