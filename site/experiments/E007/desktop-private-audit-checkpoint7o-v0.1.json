@@ -1,0 +1,21 @@
+{
+  "schema_version": "e007-desktop-private-audit-checkpoint-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7O",
+  "candidate_build": "0.1.0-alpha.16",
+  "status": "implementation_complete_physical_regression_pending",
+  "problem": "Earlier questions overwrote the previous private diagnostic file, so false-negative causes could not be recovered.",
+  "change": [
+    "Every completed or failed memory question creates a new private JSON file.",
+    "The latest-log convenience copy is still updated.",
+    "One app button opens the directory containing all private logs."
+  ],
+  "storage": {
+    "directory_mode": "0700",
+    "file_mode": "0600",
+    "filename_data": "UTC timestamp, question SHA-256 prefix, random suffix",
+    "automatic_upload": false
+  },
+  "result_boundary": "This checkpoint proves local file-history mechanics in automated tests. It does not explain the four false negatives; those questions must be repeated in the physical build.",
+  "privacy": "No owner question, answer, excerpt, path, identifier, or private log is present in this public record."
+}

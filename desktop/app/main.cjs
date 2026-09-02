@@ -6,6 +6,7 @@ const manifest = require("./model-manifest.json");
 const { SetupManager } = require("./setup.cjs");
 const { ChatManager } = require("./chat.cjs");
 const { MemoryService } = require("./memory-service.cjs");
+const { privateAuditPaths, recordPrivateAudit } = require("./audit-store.cjs");
 
 let mainWindow = null;
 let setupManager = null;
@@ -99,19 +100,9 @@ async function recordAnswerDiagnostic(result) {
   }
 }
 
-function testAuditPath() {
-  return path.join(app.getPath("userData"), "memory", "last-answer-test-log.json");
-}
-
 async function recordPrivateTestAudit(audit) {
-  const target = testAuditPath();
-  const directory = path.dirname(target);
-  const temporary = `${target}.tmp`;
   try {
-    await fs.mkdir(directory, { recursive: true, mode: 0o700 });
-    await fs.writeFile(temporary, `${JSON.stringify(audit, null, 2)}\n`, { mode: 0o600 });
-    await fs.rename(temporary, target);
-    await fs.chmod(target, 0o600);
+    await recordPrivateAudit(app.getPath("userData"), audit);
     return true;
   } catch {
     return false;
@@ -193,14 +184,14 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
   }
 });
 ipcMain.handle("pocket-i:open-test-log", async () => {
-  const target = testAuditPath();
+  const target = privateAuditPaths(app.getPath("userData")).directory;
   try {
     await fs.access(target);
   } catch {
     throw new Error("Run one memory question first.");
   }
   const error = await shell.openPath(target);
-  if (error) throw new Error("The private test log could not be opened.");
+  if (error) throw new Error("The private test log folder could not be opened.");
   return { opened: true };
 });
 ipcMain.handle("pocket-i:setup-status", () => setupManager.status());

@@ -183,6 +183,17 @@ physical failure into a pass; the owner must repeat the visible questions in a
 new build. The exact code-to-harness map is published in
 `/experiments/E007/desktop-harness-crosswalk-checkpoint7n-v0.1.json`.
 
+### Desktop diagnostic checkpoint 7O
+
+Alpha.15 improved the owner's physical regression from two to four supported
+answers out of eight and correctly blocked both absent-answer controls. The
+remaining four false negatives could not be located because each question
+overwrote the previous private test log. Alpha.16 preserves every completed or
+failed question as a separate owner-only JSON file and keeps the existing
+last-log file only as a convenience copy. The app opens the containing folder;
+it never uploads these logs. The failed answers must now be repeated before any
+grounding rule changes.
+
 ## Locked Gate 14A: write only what the swarm supplied
 
 Ten English synthetic cases are frozen before Qwen's first run. Eight provide

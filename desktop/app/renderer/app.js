@@ -51,7 +51,7 @@ openTestLog.addEventListener("click", async () => {
   try {
     await window.pocketI.openTestLog();
   } catch (error) {
-    errorBox.textContent = error.message || "The private test log could not be opened.";
+    errorBox.textContent = error.message || "The private test log folder could not be opened.";
     errorBox.hidden = false;
   }
 });

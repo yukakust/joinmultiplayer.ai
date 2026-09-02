@@ -192,3 +192,13 @@ source, and asks DeBERTa about one atomic claim. The user's question remains
 outside the NLI call. Ordinary code verifies every quote before the bounded
 window is constructed; oversized or inconsistent evidence fails closed. This
 matches Step 11 of `schema.md` and still needs a physical Mac regression.
+
+Checkpoint 7O makes physical diagnosis durable. Alpha.15 still overwrote one
+private test log with the next question, so the cause of earlier false
+negatives could not be recovered. Alpha.16 writes every completed or failed
+memory answer to a new `0600` JSON file inside the owner's private
+`answer-test-logs` directory and continues to update
+`last-answer-test-log.json` as a convenience copy. `OPEN TEST LOGS` opens the
+directory. Filenames contain a timestamp, a question hash, and a random suffix;
+the question and evidence remain inside the private file and are never
+published automatically.

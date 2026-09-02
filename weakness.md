@@ -166,6 +166,12 @@ claim. Gate 16D.11 is encouraging development evidence, not a substitute for a
 new physical regression. Until that run passes, false-negative grounding
 remains an open weakness.
 
+Alpha.15 also retained only the last private audit, so a ten-question run erased
+the first nine diagnostic traces. Alpha.16 keeps an append-only local file per
+question while retaining the last-log convenience copy. Existing overwritten
+logs cannot be reconstructed; the four false-negative questions must be run
+again.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`
