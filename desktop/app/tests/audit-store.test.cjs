@@ -5,6 +5,11 @@ const path = require("node:path");
 const test = require("node:test");
 const { privateAuditPaths, recordPrivateAudit } = require("../audit-store.cjs");
 
+test("ships the audit store inside the packaged application", () => {
+  const packageDefinition = require("../package.json");
+  assert.ok(packageDefinition.build.files.includes("audit-store.cjs"));
+});
+
 test("keeps every private answer audit and also updates the latest copy", async () => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-audits-"));
   const first = { stages: [{ stage: "sources_received", details: { question: "First?" } }], final: { answer: "one" } };

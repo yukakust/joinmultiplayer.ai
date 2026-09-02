@@ -202,3 +202,8 @@ memory answer to a new `0600` JSON file inside the owner's private
 directory. Filenames contain a timestamp, a question hash, and a random suffix;
 the question and evidence remain inside the private file and are never
 published automatically.
+
+The first alpha.16 DMG did not start because its explicit Electron file list
+omitted `audit-store.cjs`. This packaging failure is preserved rather than
+hidden. Alpha.17 adds the module to the packaged `app.asar` and adds a regression
+test for the explicit file list.

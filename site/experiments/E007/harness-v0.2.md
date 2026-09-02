@@ -194,6 +194,10 @@ last-log file only as a convenience copy. The app opens the containing folder;
 it never uploads these logs. The failed answers must now be repeated before any
 grounding rule changes.
 
+The first alpha.16 DMG failed at startup: Electron's explicit package allowlist
+did not include the new audit module. Alpha.17 corrects the allowlist and adds a
+packaging regression test. No model result came from the broken build.
+
 ## Locked Gate 14A: write only what the swarm supplied
 
 Ten English synthetic cases are frozen before Qwen's first run. Eight provide

@@ -2,7 +2,7 @@
   "schema_version": "e007-desktop-private-audit-checkpoint-v0.1",
   "experiment": "E007",
   "checkpoint": "7O",
-  "candidate_build": "0.1.0-alpha.16",
+  "candidate_build": "0.1.0-alpha.17",
   "status": "implementation_complete_physical_regression_pending",
   "problem": "Earlier questions overwrote the previous private diagnostic file, so false-negative causes could not be recovered.",
   "change": [
@@ -17,5 +17,10 @@
     "automatic_upload": false
   },
   "result_boundary": "This checkpoint proves local file-history mechanics in automated tests. It does not explain the four false negatives; those questions must be repeated in the physical build.",
+  "failed_build_preserved": {
+    "build": "0.1.0-alpha.16",
+    "failure": "The Electron package allowlist omitted audit-store.cjs, so the app failed at startup.",
+    "model_result": "none"
+  },
   "privacy": "No owner question, answer, excerpt, path, identifier, or private log is present in this public record."
 }
