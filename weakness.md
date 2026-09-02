@@ -172,6 +172,13 @@ question while retaining the last-log convenience copy. Existing overwritten
 logs cannot be reconstructed; the four false-negative questions must be run
 again.
 
+The first preserved alpha.17 trace shows a separate retrieval failure. The
+question about `/x` reached Qwen with ten unrelated excerpts and stopped at
+`no_candidates_extracted`; DeBERTa was never called. The current word tokenizer
+reduces `/x` to `x`, whole chats are ranked by their single best message, and
+only two messages per selected chat are exposed. Checkpoint 7P therefore tests
+an exact-anchor-aware route in a private A/B before changing the application.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`

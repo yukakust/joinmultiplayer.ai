@@ -198,6 +198,21 @@ The first alpha.16 DMG failed at startup: Electron's explicit package allowlist
 did not include the new audit module. Alpha.17 corrects the allowlist and adds a
 packaging regression test. No model result came from the broken build.
 
+### Retrieval diagnostic checkpoint 7P
+
+The first durable alpha.17 log located one false negative before Qwen's claim
+extraction: the `/x` question received ten unrelated excerpts. The current
+desktop tokenizer had reduced `/x` to `x`, and the current reader always exposed
+two messages per selected chat rather than the accepted short-chat/long-chat
+procedure. No grounding change is justified by this trace.
+
+Before another DMG, a private local A/B freezes the four false-negative
+questions and compares the unchanged BM25+MiniLM route with one exact-anchor
+candidate. The candidate preserves routes, model/version names and numbers
+such as `/x`, `DeBERTa-v3`, and `499`. Qwen and DeBERTa do not participate. The
+owner inspects both columns locally; no conversation excerpt is uploaded.
+Protocol: `/experiments/E007/anchor-search-ab-protocol-v0.1.json`.
+
 ## Locked Gate 14A: write only what the swarm supplied
 
 Ten English synthetic cases are frozen before Qwen's first run. Eight provide

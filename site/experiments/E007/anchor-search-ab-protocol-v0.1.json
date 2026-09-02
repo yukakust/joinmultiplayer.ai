@@ -1,0 +1,20 @@
+{
+  "schema_version": "e007-anchor-search-ab-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7P",
+  "status": "locked_before_owner_run",
+  "hypothesis": "Adding exact technical anchors before Qwen increases the chance that the local search supplies the right conversation and message for technical questions.",
+  "conditions": {
+    "A": "Current desktop BM25 plus multilingual MiniLM routing; five chats and two messages per chat.",
+    "B": "The same frozen library, BM25, MiniLM and five-chat limit, plus exact route/model/version/number anchors; up to five candidate messages are displayed per chat."
+  },
+  "questions": [
+    "Why did we add DeBERTa to the Pocket i harness, and why could it not be the only judge?",
+    "What relay rate limit was proposed to slow the spread of malicious messages between new recipients?",
+    "Why should passive room messages not always fail closed and ask the user for permission?",
+    "Why was the /x share feature not reachable even though its application code was already deployed?"
+  ],
+  "evaluation": "The owner inspects the private side-by-side HTML and marks whether the needed conversation and evidence are visible in A and B. No answer model or automatic semantic judge participates.",
+  "claim_boundary": "This tests retrieval only. It does not test Qwen extraction, DeBERTa grounding, pile construction or final writing.",
+  "privacy": "The protocol contains no private text. The generated HTML and JSON remain on the owner's computer and are never uploaded automatically."
+}
