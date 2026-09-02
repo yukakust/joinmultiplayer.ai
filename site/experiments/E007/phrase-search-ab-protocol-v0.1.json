@@ -1,0 +1,20 @@
+{
+  "schema_version": "e007-phrase-search-ab-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7Q",
+  "status": "locked_before_owner_run",
+  "hypothesis": "Corpus-derived rare two- and three-word phrases can recover the remaining missed conversation without damaging the three questions already recovered by technical-anchor search.",
+  "conditions": {
+    "B": "Accepted BM25 plus MiniLM plus exact technical-anchor search; five chats and up to five messages per chat.",
+    "C": "The identical frozen search plus rare contiguous two- and three-word phrases generated from the question and weighted only by their frequency in the local library. No domain phrase list exists."
+  },
+  "questions": [
+    "Why did we add DeBERTa to the Pocket i harness, and why could it not be the only judge?",
+    "What relay rate limit was proposed to slow the spread of malicious messages between new recipients?",
+    "Why should passive room messages not always fail closed and ask the user for permission?",
+    "Why was the /x share feature not reachable even though its application code was already deployed?"
+  ],
+  "decision": "Accept C only if it exposes the needed evidence for the passive-message question and preserves the needed evidence for all other three questions. Otherwise keep the already accepted 3/4 technical-anchor result.",
+  "claim_boundary": "This tests retrieval only. It does not test Qwen, DeBERTa or final answer writing.",
+  "privacy": "The protocol contains no private text. Generated HTML and JSON stay on the owner's computer and are never uploaded automatically."
+}
