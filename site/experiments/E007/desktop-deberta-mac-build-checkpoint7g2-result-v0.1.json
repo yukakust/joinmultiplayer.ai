@@ -1,0 +1,25 @@
+{
+  "schema_version": "e007-desktop-deberta-mac-build-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7G.2",
+  "status": "physical_build_passed_runtime_pending",
+  "platform": "macOS 14.5 arm64",
+  "python": "3.13.2",
+  "source_revision": "37639514d0561abd7f86f769b0ef9c891c329792",
+  "package": {
+    "version": "0.1.0-alpha.9",
+    "filename": "Pocket-i-0.1.0-alpha.9-arm64-3763951.dmg",
+    "sha256": "336a340d94403f7d34e9403f7126ff08c311153754e87095173bda51cc90dfc5"
+  },
+  "checks": {
+    "python_core": "31/31",
+    "desktop_node": "21/21",
+    "deberta_files_downloaded_and_hash_verified": true,
+    "arm64_sidecar_built": true,
+    "electron_dmg_built": true,
+    "temporary_build_removed": true
+  },
+  "next": "Install alpha.9, keep the existing local memory index, ask one real English memory question, and inspect only the final answer.",
+  "privacy": "The build log contains no local conversation text, question, answer, path published by the project, or private model input.",
+  "claim_boundary": "The physical DMG build passed. The packaged Mac application has not yet been installed or asked a real question, so this does not prove that the packaged DeBERTa runtime or full retrieval-to-answer path works on the owner Mac."
+}
