@@ -468,6 +468,34 @@ an honest limitation, not proof across domains or scale. Decision record:
 | 14 | With Qwen3-1.7B, produce a readable answer containing only claims supplied by accepted piles. Preserve separate versions. Empty input bypasses the model and returns a fixed response. | Accepted by the owner after the paired Gate 14A.2 result: 1.7B passed 10/10 versus 8/10 for 0.6B, with 0 invented facts. Synthetic English development evidence only; full-pipeline and phone tests remain open. |
 | 15 | Record `contacted → found → accepted → used → answer improved` so routing learns realized value rather than popularity. | Metric contract accepted, learning loop not built. |
 
+## Desktop implementation map — checkpoint 7N
+
+The approved harness is larger than one local desktop answer. The current app
+implements only the local path and must not pretend that future network safety
+steps already exist.
+
+```text
+exact question
+→ route to five whole local conversations
+→ read bounded areas from those conversations
+→ Qwen proposes atomic claims and exact evidence IDs
+→ ordinary code restores immutable quotes and verifies provenance
+→ exact quote + bounded same-source context + atomic claim
+→ DeBERTa: supported / contradicted / not proven
+→ mutually supporting piles
+→ Qwen makes one readable claim per pile
+→ every rewrite is checked against every original in both directions
+→ final piles
+→ Qwen writes only from the surviving piles
+→ otherwise: "I couldn't find supported information in your connected memory."
+```
+
+Not active in this local-only build: contacting remote pocket i, outgoing
+secret removal and owner approval, relay receipts, offline states, lineage
+independence, and swarm value learning. Nothing is sent to another device yet,
+so those modules belong to the network checkpoint rather than being simulated
+inside the local answer path.
+
 ## Locked Gate 14A: closed-world answer synthesis
 
 Gate 14A freezes ten English synthetic cases before the first model run. Eight

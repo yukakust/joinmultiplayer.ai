@@ -1,0 +1,15 @@
+flowchart LR
+    Q[Exact question] --> R[Find five likely conversations]
+    R --> READ[Read likely places]
+    READ --> CLAIM[Qwen: one small claim plus evidence IDs]
+    CLAIM --> CODE[Code restores the exact quote]
+    CODE --> NLI[DeBERTa checks quote plus nearby source text]
+    NLI -->|supported| PILES[Put matching claims on the same shelf]
+    NLI -->|not proven| STOP[Do not use it]
+    PILES --> CLEAN[Qwen makes each shelf readable]
+    CLEAN --> CHECK[Check the rewrite both ways]
+    CHECK --> FINAL[Write only from checked shelves]
+    FINAL --> USER[Answer the owner]
+
+    REMOTE[Future remote pocket i] -. owner approval and secret removal .-> CLAIM
+    USER -. later: value feedback .-> REMOTE

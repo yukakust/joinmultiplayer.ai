@@ -196,7 +196,7 @@ class MemoryRuntime:
     def judge_candidates(self, candidates: object) -> dict[str, object]:
         if not isinstance(candidates, list) or len(candidates) > 10:
             raise ValueError("candidates must be a short list")
-        clean: list[tuple[str, str, str]] = []
+        clean: list[tuple[str, str, str, tuple[tuple[str, tuple[str, ...]], ...]]] = []
         for item in candidates:
             if not isinstance(item, dict):
                 raise ValueError("candidate must be an object")
@@ -205,7 +205,28 @@ class MemoryRuntime:
             claim = str(item.get("claim", ""))
             if not candidate_id or not quote or not claim or len(quote) > 1600 or len(claim) > 600:
                 raise ValueError("invalid candidate")
-            clean.append((candidate_id, quote, claim))
+            contexts_value = item.get("source_contexts", [])
+            contexts: list[tuple[str, tuple[str, ...]]] = []
+            if contexts_value:
+                if not isinstance(contexts_value, list) or len(contexts_value) > 4:
+                    raise ValueError("invalid source contexts")
+                for context in contexts_value:
+                    if not isinstance(context, dict):
+                        raise ValueError("invalid source context")
+                    text = str(context.get("text", ""))
+                    quotes_value = context.get("exact_quotes", [])
+                    if (
+                        not text
+                        or len(text) > 1800
+                        or not isinstance(quotes_value, list)
+                        or not 1 <= len(quotes_value) <= 4
+                    ):
+                        raise ValueError("invalid source context")
+                    quotes = tuple(str(value) for value in quotes_value)
+                    if any(not value or value not in text for value in quotes):
+                        raise ValueError("invalid exact quote in source context")
+                    contexts.append((text, quotes))
+            clean.append((candidate_id, quote, claim, tuple(contexts)))
         if self.nli is None:
             if self.nli_dir is not None:
                 try:
@@ -218,17 +239,32 @@ class MemoryRuntime:
                     "model": "not-installed",
                     "items": [
                         {"candidate_id": candidate_id, "label": "unavailable", "confidence": 0.0}
-                        for candidate_id, _quote, _claim in clean
+                        for candidate_id, _quote, _claim, _contexts in clean
                     ],
                 }
-        decisions = tuple(self.nli([(quote, claim) for _candidate_id, quote, claim in clean]))
+        pairs = []
+        premise_kinds = []
+        for _candidate_id, quote, claim, contexts in clean:
+            if contexts and hasattr(self.nli, "centered_source_premise"):
+                premise = self.nli.centered_source_premise(contexts, claim)
+                premise_kinds.append("exact_quote_plus_bounded_source_context")
+            else:
+                premise = quote
+                premise_kinds.append("exact_quote_or_claim_pair")
+            pairs.append((premise, claim))
+        decisions = tuple(self.nli(pairs))
         if len(decisions) != len(clean):
             raise ValueError("nli returned the wrong number of decisions")
         items = []
-        for (candidate_id, _quote, _claim), (label, confidence) in zip(clean, decisions):
+        for (candidate_id, _quote, _claim, _contexts), premise_kind, (label, confidence) in zip(clean, premise_kinds, decisions):
             if label not in {"entailment", "neutral", "contradiction"}:
                 raise ValueError("invalid nli label")
-            items.append({"candidate_id": candidate_id, "label": label, "confidence": round(float(confidence), 6)})
+            items.append({
+                "candidate_id": candidate_id,
+                "label": label,
+                "confidence": round(float(confidence), 6),
+                "premise_kind": premise_kind,
+            })
         return {
             "schema_version": "desktop-nli-signals-v0.1",
             "model": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",

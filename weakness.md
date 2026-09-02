@@ -142,7 +142,7 @@ single conclusion to preserve up to four exact blocks across sources. This is
 necessary for composition, but also makes DeBERTa's multi-block judgment a new
 physical checkpoint rather than a proven capability.
 
-## 12. A DeBERTa warning is currently displayed but ignored
+## 12. DeBERTa went from ignored to an over-strict quote-only gate
 
 The alpha.13 ten-question physical regression scored 3 correct, 2 partial and
 5 wrong (`8/20`). Both deliberately absent answers were invented. In the fully
@@ -151,6 +151,20 @@ answered an absent named-model question from it, and DeBERTa returned `neutral`
 with `0.996094` confidence. The harness still handed the claim to the writer.
 Therefore the current NLI field is metadata, not an acceptance turnstile, and
 the build is not safe for an external tester.
+
+Alpha.14 fixed the ignored-warning bug: `neutral`, `contradiction`, and
+`unavailable` stopped before the writer. The owner's physical regression then
+exposed the other half of the known problem. The desktop supplied only short
+selected blocks, so supported claims were rejected by the same quote-only
+failure mode measured in Gate 16D.9. This is why several real answers became
+`I couldn't find supported information` while the absent E099 answer was
+correctly blocked.
+
+Alpha.15 candidate restores the accepted input contract: immutable exact quote
+plus bounded neighbouring text from the same source, checked against one atomic
+claim. Gate 16D.11 is encouraging development evidence, not a substitute for a
+new physical regression. Until that run passes, false-negative grounding
+remains an open weakness.
 
 ## Evidence
 

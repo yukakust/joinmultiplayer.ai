@@ -154,6 +154,35 @@ canonical rewrite. It remains unverified on the owner's physical memory until
 the unchanged alpha.14 DMG repeats the ten-question regression. Public record:
 `/experiments/E007/desktop-full-harness-checkpoint7m-v0.1.json`.
 
+### Desktop correction checkpoint 7N
+
+The owner's alpha.14 run exposed a second integration mismatch. The strict gate
+worked — unsupported inventions stopped — but the desktop gave DeBERTa only the
+selected short evidence blocks. That was the older quote-only interface, whose
+low recall had already been measured in Gate 16D.9. Several supported answers
+therefore stopped too.
+
+Alpha.15 implements the already accepted Step 11 interface rather than changing
+the architecture:
+
+```text
+immutable exact quote
++ bounded neighbouring text from the same selected source
++ one atomic extracted claim
+→ DeBERTa
+```
+
+The person's question is not added to the NLI premise. Ordinary code first
+proves that every quote is still an exact substring of the source excerpt, then
+builds a source-only window centred on that quote. If the exact evidence and
+claim cannot fit, the candidate fails closed. Claim-to-claim pile comparisons
+remain separate and use the accepted Gate 13D sandwich.
+
+This is an implementation checkpoint. It does not turn the earlier alpha.14
+physical failure into a pass; the owner must repeat the visible questions in a
+new build. The exact code-to-harness map is published in
+`/experiments/E007/desktop-harness-crosswalk-checkpoint7n-v0.1.json`.
+
 ## Locked Gate 14A: write only what the swarm supplied
 
 Ten English synthetic cases are frozen before Qwen's first run. Eight provide

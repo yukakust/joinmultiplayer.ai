@@ -1,6 +1,6 @@
 {
   "name": "pocket-i-desktop",
-  "version": "0.1.0-alpha.14",
+  "version": "0.1.0-alpha.15",
   "private": true,
   "description": "Pocket i desktop alpha",
   "main": "main.cjs",

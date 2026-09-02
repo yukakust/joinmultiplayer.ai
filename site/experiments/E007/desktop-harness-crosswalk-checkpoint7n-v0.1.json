@@ -1,0 +1,33 @@
+{
+  "schema_version": "e007-desktop-harness-crosswalk-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7N",
+  "candidate_build": "0.1.0-alpha.15",
+  "status": "implementation_complete_physical_regression_pending",
+  "plain_summary": "The desktop now follows the approved local harness. Network-only steps are listed honestly as inactive.",
+  "local_path": [
+    {"step": 1, "name": "keep exact question", "status": "implemented"},
+    {"step": 2, "name": "route to five whole local conversations", "status": "implemented"},
+    {"step": 3, "name": "read bounded areas inside selected conversations", "status": "implemented"},
+    {"step": 4, "name": "extract one atomic claim with exact evidence IDs", "status": "implemented_with_model_guard"},
+    {"step": 5, "name": "restore immutable quotes and verify provenance", "status": "implemented"},
+    {"step": 6, "name": "check exact quote plus bounded same-source context against the claim", "status": "implemented_physical_test_pending"},
+    {"step": 7, "name": "build cautious mutually supporting piles", "status": "implemented"},
+    {"step": 8, "name": "make one readable claim per pile", "status": "implemented"},
+    {"step": 9, "name": "validate every rewrite against every original in both directions", "status": "implemented"},
+    {"step": 10, "name": "build final piles without deleting alternatives", "status": "implemented"},
+    {"step": 11, "name": "write only from surviving piles or return the fixed empty answer", "status": "implemented"}
+  ],
+  "network_path": [
+    {"name": "contact remote pocket i", "status": "inactive_local_build"},
+    {"name": "remove secrets and request owner approval before sending", "status": "inactive_local_build"},
+    {"name": "relay receipts and offline accounting", "status": "inactive_local_build"},
+    {"name": "lineage and independent-source accounting", "status": "inactive_local_build"},
+    {"name": "learn contacted-to-improved value", "status": "inactive_local_build"}
+  ],
+  "known_failure_preserved": {
+    "build": "0.1.0-alpha.14",
+    "result": "unsupported inventions stopped, but supported answers were also lost because the NLI premise was too narrow"
+  },
+  "privacy": "No owner questions, messages, paths, identifiers, or local evidence are present in this public record."
+}

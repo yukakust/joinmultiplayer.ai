@@ -154,7 +154,7 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
       sources_received: "The exact local excerpts given to Qwen.",
       qwen_extraction: "The raw claims and evidence IDs returned by Qwen.",
       evidence_id_check: "Ordinary code resolves Qwen's selected IDs back to exact source text.",
-      grounding_signals: "DeBERTa blocks claims that are not entailed by their exact source blocks.",
+      grounding_signals: "DeBERTa checks one atomic claim against its exact quote plus bounded neighbouring text from the same source. The user's question stays outside this check.",
       grounded_evidence: "Only source-grounded claims continue.",
       primary_piles: "Bidirectional DeBERTa groups mutually entailing claims without deleting alternatives.",
       qwen_canonicals: "Qwen rewrites each pile into one readable claim.",

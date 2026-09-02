@@ -26,6 +26,11 @@ test("ordinary code resolves selected evidence IDs to exact source text", () => 
   ] }, sources);
   assert.equal(result.accepted.length, 1);
   assert.equal(result.accepted[0].quote, "DeBERTa is a cautious second signal, not the only judge.");
+  assert.deepEqual(result.accepted[0].source_contexts, [{
+    source_id: "S1",
+    text: "First fact. DeBERTa is a cautious second signal, not the only judge.",
+    exact_quotes: ["DeBERTa is a cautious second signal, not the only judge."],
+  }]);
   assert.deepEqual(result.rejected.map((item) => item.reason), ["unknown evidence id", "invalid evidence ids"]);
 });
 

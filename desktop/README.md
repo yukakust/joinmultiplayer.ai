@@ -183,3 +183,12 @@ rewrite falls back to the exact original claim; a separate supported version
 stays separate. Fixture tests cover the real alpha.13 failure shape: a named
 answer invented from adjacent memory receives `neutral` and cannot reach the
 writer. This is an implementation checkpoint, not yet a physical Mac result.
+
+Checkpoint 7N corrects the NLI input used by that integration. Alpha.14 passed
+only the selected short evidence blocks to DeBERTa, recreating the known
+quote-only false-negative problem from Gate 16D.9. Alpha.15 keeps the exact
+quote immutable, attaches bounded neighbouring text from the same selected
+source, and asks DeBERTa about one atomic claim. The user's question remains
+outside the NLI call. Ordinary code verifies every quote before the bounded
+window is constructed; oversized or inconsistent evidence fails closed. This
+matches Step 11 of `schema.md` and still needs a physical Mac regression.

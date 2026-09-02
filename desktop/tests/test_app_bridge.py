@@ -31,10 +31,46 @@ class DesktopBridgeTests(unittest.TestCase):
             {"candidate_id": "E1", "quote": "Exact source text", "claim": "A claim"}
         ])
         self.assertEqual(
-            [{"candidate_id": "E1", "label": "entailment", "confidence": 0.91}],
+            [{
+                "candidate_id": "E1",
+                "label": "entailment",
+                "confidence": 0.91,
+                "premise_kind": "exact_quote_or_claim_pair",
+            }],
             result["items"],
         )
         self.assertEqual("MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli", result["model"])
+
+    def test_grounding_uses_exact_quote_with_bounded_source_context(self):
+        class RecordingNli:
+            def __init__(self):
+                self.pairs = None
+
+            def centered_source_premise(self, contexts, claim):
+                self.asserted = (contexts, claim)
+                return "Neighbour before. Exact source text. Neighbour after."
+
+            def __call__(self, pairs):
+                self.pairs = pairs
+                return [("entailment", 0.93)]
+
+        nli = RecordingNli()
+        runtime = MemoryRuntime(nli=nli)
+        result = runtime.judge_candidates([{
+            "candidate_id": "E1",
+            "quote": "Exact source text.",
+            "claim": "The source states the exact fact.",
+            "source_contexts": [{
+                "source_id": "S1",
+                "text": "Neighbour before. Exact source text. Neighbour after.",
+                "exact_quotes": ["Exact source text."],
+            }],
+        }])
+        self.assertEqual(
+            [("Neighbour before. Exact source text. Neighbour after.", "The source states the exact fact.")],
+            nli.pairs,
+        )
+        self.assertEqual("exact_quote_plus_bounded_source_context", result["items"][0]["premise_kind"])
 
     def test_missing_nli_model_is_explicit_not_a_fake_decision(self):
         result = MemoryRuntime().judge_candidates([
