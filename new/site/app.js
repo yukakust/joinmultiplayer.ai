@@ -5402,7 +5402,7 @@ const journeyNodes = [
     statueName: { en: "The sealed capsule", ru: "Запечатанная капсула" },
     links: [{ href: "/experiment/e007", t: { en: "E007 page", ru: "Страница E007" } }] },
 
-  { id: "gentry", code: "ИГРА · 01", x: 58, row: 14.7, status: "active", statue: "box", date: { en: "29.08.2026", ru: "29.08.2026" },
+  { id: "gentry", code: { en: "GAME · 01", ru: "ИГРА · 01" }, x: 58, row: 14.7, status: "active", statue: "box", date: { en: "29.08.2026", ru: "29.08.2026" },
     name: { en: "the entry", ru: "вход" },
     title: { en: "The game entry opens", ru: "Вход в игру открыт" },
     body: { en: "The laboratory became a game you can enter: eight fire-carrier pieces, the ignition ritual (a contour that catches flame when your move is accepted), a personal 'light the next one' link, the pulsing 'game calls' line — and the box at the entrance: do you hear it? At the table sits the first match, M0001. The first providence session has been held: three scouts, thirteen candidates, five verified notes for the Matchbox hunt.", ru: "Лаборатория стала игрой, в которую можно войти: восемь фигурок-носителей огня, ритуал зажигания (контур вспыхивает, когда ход принят), личная ссылка «зажги следующего», пульс «Игра зовёт» — и коробка на входе: слышишь? За столом первая спичка — M0001. Проведён первый сеанс провидения: три следопыта, тринадцать кандидатов, пять проверенных записок для охоты на Коробка." },
@@ -5565,7 +5565,7 @@ function renderJourneyTrail(skipAnim = false) {
     </svg>
     ${pos.map(n => `
       <button class="jnode jnode-${n.status}${journeySelected === n.id ? " is-selected" : ""}${n.id === "gentry" ? " jnode-here" : ""}" data-journey="${n.id}"
-              style="left:${n.x}%;top:${n.y}px" aria-label="${escapeHTML(n.code)} — ${escapeHTML(jt(n.title))}">
+              style="left:${n.x}%;top:${n.y}px" aria-label="${escapeHTML(jt(n.code) || n.code)} — ${escapeHTML(jt(n.title))}">
         <span class="jnode-dot${["passed","caveat","failed","active","hidden"].includes(n.status) ? " jnode-plaque" : ""}" aria-hidden="true">${
           ["passed","caveat","failed","active","hidden"].includes(n.status)
             ? `<img src="/assets/forge/sockets/${n.id === "origin" ? "start" : { passed: "passed", caveat: "qualified", failed: "broken", active: "current", hidden: "hidden" }[n.status]}.png" alt="" loading="lazy">`
@@ -5577,7 +5577,7 @@ function renderJourneyTrail(skipAnim = false) {
             <svg viewBox="0 0 22 30"><line x1="4" y1="29" x2="4" y2="2"/><path class="flag-pennant" d="M4 3 H19 L14.5 7.5 L19 12 H4 Z"/></svg>
             <i>${j("youAreHere")}</i>
           </span>` : ""}
-        <span class="jnode-label ${n.x > 55 ? "label-left" : "label-right"}"><b>${escapeHTML(n.code)}</b><span>${escapeHTML(jt(n.name))}</span></span>
+        <span class="jnode-label ${n.x > 55 ? "label-left" : "label-right"}"><b>${escapeHTML(jt(n.code) || n.code)}</b><span>${escapeHTML(jt(n.name))}</span></span>
       </button>`).join("")}`;
   renderJourneyParty();
   const done = target.querySelector(".jpath-done");
@@ -5600,7 +5600,7 @@ function renderJourneyInspector() {
   if (!n) { target.innerHTML = `<p class="journey-hint">${j("inspectorHint")}</p>`; return; }
   target.innerHTML = `
     <button class="journey-close" data-action="journey-close" aria-label="×">×</button>
-    <div class="flow-step">${escapeHTML(n.code)}${n.date ? ` · ${escapeHTML(jt(n.date))}` : ""}</div>
+    <div class="flow-step">${escapeHTML(jt(n.code) || n.code)}${n.date ? ` · ${escapeHTML(jt(n.date))}` : ""}</div>
     <h2>${escapeHTML(jt(n.title))}</h2>
     <p>${escapeHTML(jt(n.body))}</p>
     ${n.boundary ? `<div class="journey-boundary"><span>${j("boundaryLabel")}</span><p>${escapeHTML(jt(n.boundary))}</p></div>` : ""}
@@ -6252,7 +6252,7 @@ function wbBrief(part) {
     `Challenge: ${part.challenge.en}`,
     `Lanes: (a) sharper — beat the number under the same frozen protocol; (b) cheaper — same number for less tokens/time/memory.`,
     `Rules: change only this part; publish code + a result JSON in the artifact's format; a record changes only after an independent rerun — no one dots their own item.`,
-    `Bring the result: https://github.com/yukakust/joinmultiplayer.ai/issues/new?title=${encodeURIComponent("[UPGRADE] " + part.id)}`,
+    `Bring the result: https://github.com/yukakust/joinmultiplayer.ai/issues/new?template=experiment.yml&title=${encodeURIComponent("[UPGRADE] " + part.id)}`,
     `The workbench: https://new.joinmultiplayer.ai/workbench/`
   ].join("\n");
 }
@@ -6293,7 +6293,7 @@ function renderWbInspector() {
       <p class="wb-lanes"><b>${w("lanesLabel")}:</b> ${w("laneSharper")} · ${w("laneCheaper")}</p>
       <div class="actions">
         <button class="button" data-copy="wb-brief" data-part="${part.id}">${w("copyBrief")}</button>
-        <a class="button secondary" href="https://github.com/yukakust/joinmultiplayer.ai/issues/new?title=${encodeURIComponent("[UPGRADE] " + part.id)}">${w("submitVia")}</a>
+        <a class="button secondary" href="https://github.com/yukakust/joinmultiplayer.ai/issues/new?template=experiment.yml&title=${encodeURIComponent("[UPGRADE] " + part.id)}">${w("submitVia")}</a>
       </div>
       <p class="journey-hint">${w("submitNote")}</p>
     </div>
