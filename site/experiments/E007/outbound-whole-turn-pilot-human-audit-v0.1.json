@@ -1,0 +1,22 @@
+{
+  "schema_version": "e007-outbound-whole-turn-pilot-human-audit-v0.1",
+  "result": "/experiments/E007/outbound-whole-turn-pilot-result-v0.1.json",
+  "status": "completed_with_test_defects",
+  "summary": {
+    "correct_end_to_end": 5,
+    "test_contract_or_gold_defects": 2,
+    "real_pipeline_failures": 1,
+    "total": 8
+  },
+  "rows": [
+    {"id": "P1", "verdict": "correct", "reason": "Found the rename, restart cause, and required change with exact quotes."},
+    {"id": "P2", "verdict": "test_contract_defect", "reason": "Qwen found both correct facts and exact text, but returned turn ID LL1 instead of message ID LL1-A because both IDs were shown."},
+    {"id": "P3", "verdict": "correct", "reason": "Found both thermal rebound and the safe vent action in two messages from one turn."},
+    {"id": "P4", "verdict": "correct", "reason": "Selected current source head H2 and kept port 4310 as history."},
+    {"id": "P5", "verdict": "test_contract_defect", "reason": "Qwen found the synthetic credential, but returned turn ID PR1 instead of message ID PR1-A, so exact validation stopped before the secret scanner."},
+    {"id": "N1", "verdict": "correct_but_gold_wrong", "reason": "The source explicitly says the final overlap percentage was not recorded. That is useful knowledge under the accepted owner rule, not EMPTY."},
+    {"id": "N2", "verdict": "real_failure", "reason": "The source discusses watering time and soil moisture, not water temperature. Reranker and reader still passed it."},
+    {"id": "N3", "verdict": "correct", "reason": "The source mentions only an unsigned macOS DMG, so the Windows certificate question correctly returned EMPTY."}
+  ],
+  "decision": "Do not accept or reject the architecture from this run. Preserve it, fix the ambiguous source-ID presentation and the wrong N1 gold label, then rerun the same architecture."
+}

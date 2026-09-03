@@ -105,17 +105,18 @@ def qwen_read(server: str, question: str, conversations: list[dict]) -> tuple[st
         "Use one claim per fact and at most four claims. Never guess. Never copy a credential merely because the question asks for it.\n\n"
         f"QUESTION\n{question}\n\nLOCAL CONVERSATIONS\n{sources}"
     )
-    payload = post(server.rstrip("/") + "/api/chat", {
-        "model": "qwen3:8b",
+    payload = post(server.rstrip("/") + "/v1/chat/completions", {
+        "model": "qwen3-8b",
         "messages": [
             {"role": "system", "content": "Extract grounded local knowledge for a peer. Return JSON only."},
             {"role": "user", "content": prompt},
         ],
         "stream": False,
-        "think": False,
-        "options": {"temperature": 0, "num_predict": 768, "num_ctx": 8192},
+        "temperature": 0,
+        "max_tokens": 768,
+        "chat_template_kwargs": {"enable_thinking": False},
     })
-    raw = str(payload.get("message", {}).get("content", "")).strip()
+    raw = str(payload.get("choices", [{}])[0].get("message", {}).get("content", "")).strip()
     try:
         return raw, parse_json(raw)
     except (ValueError, json.JSONDecodeError):
@@ -172,27 +173,41 @@ def run(args: argparse.Namespace) -> dict:
     conversations = [as_core_conversation(item) for item in world["conversations"]]
     by_id = {item["id"]: item for item in world["conversations"]}
     index = HybridChatIndex(conversations, embed)
-    nli = LocalNli(args.nli)
+    routing_rows = []
+    if args.rerank_cache.is_file():
+        routing_rows = json.loads(args.rerank_cache.read_text(encoding="utf-8"))["rows"]
+        if len(routing_rows) != len(world["cases"]):
+            raise ValueError("rerank cache has the wrong number of cases")
+    else:
+        for number, case in enumerate(world["cases"], 1):
+            print(f"[rerank {number}/{len(world['cases'])}] {case['id']}", flush=True)
+            route = index.route(case["question"], top_k=5)
+            routed = [by_id[item] for item in route.conversation_ids]
+            relevance = []
+            for conversation in routed:
+                full_text = render_conversation(conversation)
+                score, decision = rerank(args.reranker, case["question"], full_text)
+                relevance.append({
+                    "conversation_id": conversation["id"],
+                    "characters_seen": len(full_text),
+                    "score": round(score, 8),
+                    "decision": decision,
+                })
+            routing_rows.append({"route_top_5": list(route.conversation_ids), "relevance": relevance})
+        args.rerank_cache.parent.mkdir(parents=True, exist_ok=True)
+        args.rerank_cache.write_text(json.dumps({"rows": routing_rows}, indent=2) + "\n", encoding="utf-8")
+    if args.rerank_only:
+        print(json.dumps({"status": "rerank_complete", "cache": str(args.rerank_cache), "cases": len(routing_rows)}, indent=2))
+        return {}
 
+    nli = LocalNli(args.nli)
     rows = []
     started = time.monotonic()
-    for number, case in enumerate(world["cases"], 1):
-        print(f"[{number}/{len(world['cases'])}] {case['id']}", flush=True)
-        route = index.route(case["question"], top_k=5)
-        routed = [by_id[item] for item in route.conversation_ids]
-        relevance = []
-        selected = []
-        for conversation in routed:
-            full_text = render_conversation(conversation)
-            score, decision = rerank(args.reranker, case["question"], full_text)
-            relevance.append({
-                "conversation_id": conversation["id"],
-                "characters_seen": len(full_text),
-                "score": round(score, 8),
-                "decision": decision,
-            })
-            if decision != "DROP":
-                selected.append(conversation)
+    for number, (case, routed_result) in enumerate(zip(world["cases"], routing_rows), 1):
+        print(f"[reader {number}/{len(world['cases'])}] {case['id']}", flush=True)
+        route_ids = routed_result["route_top_5"]
+        relevance = routed_result["relevance"]
+        selected = [by_id[item["conversation_id"]] for item in relevance if item["decision"] != "DROP"]
 
         raw, receipt = qwen_read(args.qwen, case["question"], selected) if selected else ('{"status":"EMPTY","claims":[]}', {"status": "EMPTY", "claims": []})
         exact, rejected = validate_receipt(receipt, selected)
@@ -223,8 +238,8 @@ def run(args: argparse.Namespace) -> dict:
             "question": case["question"],
             "expected_conversation": case["expected_conversation"],
             "expected_meaning": case["required_meaning"],
-            "route_top_5": list(route.conversation_ids),
-            "expected_routed": case["expected_conversation"] in route.conversation_ids,
+            "route_top_5": route_ids,
+            "expected_routed": case["expected_conversation"] in route_ids,
             "relevance": relevance,
             "expected_relevance": next((item for item in relevance if item["conversation_id"] == case["expected_conversation"]), None),
             "selected_conversations": [item["id"] for item in selected],
@@ -269,9 +284,11 @@ def run(args: argparse.Namespace) -> dict:
 def parser() -> argparse.ArgumentParser:
     value = argparse.ArgumentParser()
     value.add_argument("--reranker", default="http://127.0.0.1:18084")
-    value.add_argument("--qwen", default="http://127.0.0.1:11434")
+    value.add_argument("--qwen", default="http://127.0.0.1:18085")
     value.add_argument("--nli", type=Path, default=ROOT / "desktop/app/nli-current")
     value.add_argument("--embedding-cache", type=Path, default=Path("/home/yuka/.cache/joinmultiplayer/e007-fastembed"))
+    value.add_argument("--rerank-cache", type=Path, default=Path("/tmp/e007-outbound-whole-turn-rerank.json"))
+    value.add_argument("--rerank-only", action="store_true")
     return value
 
 
