@@ -107,6 +107,7 @@ async function renderStatus() {
     return;
   }
   modelStatus.textContent = status.model.installed ? "READY" : "NOT INSTALLED";
+  bar.style.width = "0%";
   install.hidden = false;
   const ready = status.hardware.memoryOkay && status.hardware.diskOkay;
   const missing = status.model.installed ? status.relevance : status.model;
@@ -176,8 +177,9 @@ memoryConfirm.addEventListener("click", async () => {
 
 install.addEventListener("click", async () => {
   install.disabled = true;
-  modelStatus.textContent = "DOWNLOADING";
-  rerankerStatus.textContent = "DOWNLOADING";
+  const before = await window.pocketI.setupStatus();
+  modelStatus.textContent = before.model.installed ? "READY" : "DOWNLOADING";
+  rerankerStatus.textContent = before.relevance?.installed ? "READY" : "DOWNLOADING";
   errorBox.hidden = true;
   try {
     await window.pocketI.installModel();
