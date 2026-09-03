@@ -1,0 +1,22 @@
+{
+  "schema_version": "e007-outbound-whole-turn-pilot-human-audit-v0.2",
+  "result": "/experiments/E007/outbound-whole-turn-pilot-result-v0.2.json",
+  "status": "completed_failed",
+  "summary": {
+    "fully_correct": 6,
+    "partial": 1,
+    "wrong": 1,
+    "total": 8
+  },
+  "rows": [
+    {"id": "P1", "verdict": "correct", "reason": "Found the variable rename, restart cause, and required change."},
+    {"id": "P2", "verdict": "partial", "reason": "Correctly explained why Llama-3.3 was split, but omitted the requested remedy: keep the whole message."},
+    {"id": "P3", "verdict": "correct", "reason": "Found both thermal rebound and the safe vent action in two messages from one turn."},
+    {"id": "P4", "verdict": "correct", "reason": "Returned current port 4410 and preserved port 4310 as history."},
+    {"id": "P5", "verdict": "correct", "reason": "Found the synthetic credential and blocked the outbound capsule without sending its value."},
+    {"id": "N1", "verdict": "correct", "reason": "Correctly reported that the exact overlap percentage was not recorded."},
+    {"id": "N2", "verdict": "wrong", "reason": "Returned watering time and soil moisture even though the question asked for water temperature."},
+    {"id": "N3", "verdict": "correct", "reason": "Correctly returned EMPTY because the source contains no Windows signing certificate."}
+  ],
+  "decision": "Do not promote this sender pipeline to the accepted architecture yet. Retrieval, whole-turn transport, exact quotes, DeBERTa support, and secret blocking worked. The missing module is a final question-to-grounded-claim completeness and relevance check before sending."
+}
