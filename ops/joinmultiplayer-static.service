@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /srv/joinmultiplayer/app/server.py --site /srv/joinmultiplayer/public --db /var/lib/joinmultiplayer/contributions.sqlite3 --host 127.0.0.1 --port 8091
+ExecStart=/usr/bin/python3 /srv/joinmultiplayer/app/server.py --site /srv/joinmultiplayer/public --db /var/lib/joinmultiplayer/contributions.sqlite3 --host 127.0.0.1 --port 8091 --model-assets /srv/gpu-static
 Restart=on-failure
 RestartSec=2
 DynamicUser=true

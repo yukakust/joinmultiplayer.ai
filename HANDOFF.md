@@ -651,6 +651,9 @@ release symlink:
 
 `joinmultiplayer-static.service` serves that directory and the contribution API
 on host-only port 8091.
+Pinned large model assets live separately under `/srv/gpu-static`; the service
+receives that read-only root through `--model-assets` and exposes only explicit
+allowlisted files with resumable byte ranges.
 The `joinmultiplayer.ai` Caddy virtual host reverse-proxies to
 `127.0.0.1:8091`. The unit source is tracked in
 `ops/joinmultiplayer-static.service`.
