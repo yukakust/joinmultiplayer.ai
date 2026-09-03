@@ -3,6 +3,8 @@
   "experiment": "E007",
   "checkpoint": "7P",
   "candidate_build": "0.1.0-alpha.18",
+  "source_revision": "9759935127f5c3301a30a470e1dd722c52bee354",
+  "mac_builder": "/experiments/E007/build-macos-alpha-v0.16.sh",
   "status": "implemented_awaiting_physical_mac_run",
   "owner_decision": "/experiments/E007/outbound-whole-turn-pilot-owner-decision-v0.1.json",
   "plain_language": "The desktop app now runs the accepted whole-message pipeline instead of the old clipped debug path.",
