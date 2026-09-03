@@ -114,16 +114,16 @@ def reranker_decision(score: float) -> str:
     return "NOT_SURE"
 
 
-def qwen(ollama: str, system: str, prompt: str, *, tokens: int) -> str:
-    result = post_json(ollama.rstrip("/") + "/api/generate", {
+def qwen(server: str, system: str, prompt: str, *, tokens: int) -> str:
+    result = post_json(server.rstrip("/") + "/v1/chat/completions", {
         "model": "qwen3:8b",
-        "system": system,
-        "prompt": prompt,
+        "messages": [{"role": "system", "content": system}, {"role": "user", "content": prompt}],
         "stream": False,
-        "think": False,
-        "options": {"temperature": 0, "num_predict": tokens, "num_ctx": 8192},
+        "temperature": 0,
+        "max_tokens": tokens,
+        "chat_template_kwargs": {"enable_thinking": False},
     })
-    return str(result.get("response", "")).strip()
+    return str(result["choices"][0]["message"]["content"]).strip()
 
 
 def evidence_units(sources: list[dict]) -> list[dict]:
@@ -236,7 +236,7 @@ def run(args: argparse.Namespace) -> dict:
             record.update({"raw_extraction": "", "valid_candidates": [], "rejected_candidates": [], "grounded_claims": [], "final_answer": NO_INFORMATION, "terminal": "no_relevant_raw_excerpt"})
             continue
         units = evidence_units(forwarded)
-        raw = qwen(args.ollama, "You extract exact evidence after relevance screening. Return only JSON.", extraction_prompt(record["question"], units), tokens=1024)
+        raw = qwen(args.qwen, "You extract exact evidence after relevance screening. Return only JSON.", extraction_prompt(record["question"], units), tokens=1024)
         accepted, rejected = validate_candidates(raw, forwarded)
         record["raw_extraction"] = raw
         record["valid_candidates"] = accepted
@@ -256,7 +256,7 @@ def run(args: argparse.Namespace) -> dict:
         if not grounded:
             record.update({"final_answer": NO_INFORMATION, "terminal": "no_grounded_claim"})
             continue
-        answer = qwen(args.ollama, "You write only from accepted evidence shelves.", writer_prompt(record["question"], grounded), tokens=512)
+        answer = qwen(args.qwen, "You write only from accepted evidence shelves.", writer_prompt(record["question"], grounded), tokens=512)
         if not valid_final(answer, grounded):
             record.update({"final_answer": NO_INFORMATION, "raw_writer_answer": answer, "terminal": "invalid_final_citations"})
             continue
@@ -285,7 +285,7 @@ def parser() -> argparse.ArgumentParser:
     value.add_argument("--output", type=Path, required=True)
     value.add_argument("--architecture", type=Path, default=Path("site/experiments/E007/miro-executable-harness-v0.1.json"))
     value.add_argument("--reranker", default="http://127.0.0.1:18084")
-    value.add_argument("--ollama", default="http://127.0.0.1:11434")
+    value.add_argument("--qwen", default="http://127.0.0.1:18085")
     value.add_argument("--nli", type=Path, default=Path("desktop/app/nli-current"))
     return value
 
