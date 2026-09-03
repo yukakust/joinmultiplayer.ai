@@ -1,0 +1,47 @@
+{
+  "schema_version": "e007-outbound-whole-turn-pilot-protocol-v0.1",
+  "status": "frozen_before_inference",
+  "experiment": "E007",
+  "checkpoint": "7T.1",
+  "hypothesis": "A pocket i can route a peer question to the right conversation, inspect whole conversational turns without character or sentence clipping, and return only a grounded, secret-safe capsule or an honest empty/blocked receipt.",
+  "models": {
+    "router": "BM25 + paraphrase-multilingual-MiniLM-L12-v2, reciprocal-rank fusion",
+    "relevance": "Qwen3-Reranker-4B Q4_K_M",
+    "reader": "Qwen3-8B Q4_K_M",
+    "support": "DeBERTa-v3-base-mnli-fever-anli"
+  },
+  "frozen_order": [
+    "unchanged peer question",
+    "hybrid top-5 conversation routing",
+    "whole short conversation or whole conversational turns",
+    "Qwen3-Reranker-4B relevance: TAKE / NOT_SURE / DROP",
+    "Qwen3-8B receipt: FOUND / EMPTY",
+    "ordinary-code exact quote and coordinate check",
+    "DeBERTa quote-to-claim support check",
+    "outbound secret scan",
+    "FOUND / EMPTY / BLOCKED terminal receipt"
+  ],
+  "forbidden_shortcuts": [
+    "1800-character clipping",
+    "sentence splitting on punctuation",
+    "480-character subchunks",
+    "sending an unsupported claim",
+    "publishing a private conversation"
+  ],
+  "cases": {
+    "total": 8,
+    "supported": 4,
+    "secret_blocked": 1,
+    "absent": 3
+  },
+  "success": {
+    "expected_conversation_in_top_5": 5,
+    "supported_relevance_not_dropped": 5,
+    "valid_terminal_receipts": 8,
+    "supported_found_and_grounded": 4,
+    "synthetic_secret_blocked": 1,
+    "absent_returned_empty": 3,
+    "non_exact_quotes_accepted": 0
+  },
+  "claim_boundary": "Eight synthetic English development cases. This tests the newly agreed sender-side order and whole-turn interface, not real private memory, long-context limits, source truth, networking, or generalization."
+}

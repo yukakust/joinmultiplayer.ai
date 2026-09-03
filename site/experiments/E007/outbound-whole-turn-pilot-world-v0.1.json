@@ -1,0 +1,112 @@
+{
+  "schema_version": "e007-outbound-whole-turn-pilot-world-v0.1",
+  "status": "frozen_before_inference",
+  "conversations": [
+    {
+      "id": "orion-runtime",
+      "turns": [
+        {"id": "OR1", "messages": [
+          {"role": "user", "id": "OR1-U", "text": "The Orion worker entered a restart loop after the 2.4 upgrade. What changed?"},
+          {"role": "assistant", "id": "OR1-A1", "text": "Runtime 2.4 renamed the required directory variable from ORION_HOME to ORION_DATA."},
+          {"role": "assistant", "id": "OR1-A2", "text": "The worker kept the old variable, could not find its state directory, and restarted repeatedly. Set ORION_DATA to the existing state directory before starting it again."}
+        ]}
+      ]
+    },
+    {
+      "id": "llama-parser",
+      "turns": [
+        {"id": "LL1", "messages": [
+          {"role": "user", "id": "LL1-U", "text": "Why does the policy scanner miss the model name?"},
+          {"role": "assistant", "id": "LL1-A", "text": "The old sentence splitter cuts Llama-3.3 after the period, turning one model identifier into two unrelated pieces. Keep the whole message instead of splitting on punctuation."}
+        ]}
+      ]
+    },
+    {
+      "id": "cairn-pressure",
+      "turns": [
+        {"id": "CA1", "messages": [
+          {"role": "user", "id": "CA1-U", "text": "Cairn-63 shows an amber ring and chamber pressure is rising after load transfer."},
+          {"role": "assistant", "id": "CA1-A1", "text": "An amber ring with rising chamber pressure after load transfer indicates thermal rebound."},
+          {"role": "assistant", "id": "CA1-A2", "text": "Keep the auxiliary vent closed until chamber pressure is stable."}
+        ]}
+      ]
+    },
+    {
+      "id": "helios-current-head",
+      "turns": [
+        {"id": "HE1", "messages": [
+          {"role": "user", "id": "HE1-U", "text": "Record the first Helios relay setup."},
+          {"role": "assistant", "id": "HE1-A", "text": "In source version H1, the Helios relay listened on port 4310."}
+        ]},
+        {"id": "HE2", "messages": [
+          {"role": "user", "id": "HE2-U", "text": "The relay configuration changed today. What is current now?"},
+          {"role": "assistant", "id": "HE2-A", "text": "Source version H2 replaces H1: the current Helios relay port is 4410. Port 4310 is historical only."}
+        ]}
+      ]
+    },
+    {
+      "id": "private-token",
+      "turns": [
+        {"id": "PR1", "messages": [
+          {"role": "user", "id": "PR1-U", "text": "How does the test beacon authenticate?"},
+          {"role": "assistant", "id": "PR1-A", "text": "The test beacon uses the synthetic credential sk-proj-TESTONLY000000000000000000. This value is deliberately fake but must still be blocked by the outbound secret scanner."}
+        ]}
+      ]
+    },
+    {
+      "id": "beehive-notes",
+      "turns": [
+        {"id": "BE1", "messages": [
+          {"role": "user", "id": "BE1-U", "text": "What did we observe in the hive?"},
+          {"role": "assistant", "id": "BE1-A", "text": "The queen was present, the hive was crowded, and sealed queen cells appeared on two frames."}
+        ]}
+      ]
+    },
+    {
+      "id": "camera-calibration",
+      "turns": [
+        {"id": "CV1", "messages": [
+          {"role": "user", "id": "CV1-U", "text": "The camera loses small objects near image borders."},
+          {"role": "assistant", "id": "CV1-A", "text": "The calibration run used overlapping image tiles, but it did not record the final overlap percentage."}
+        ]}
+      ]
+    },
+    {
+      "id": "garden-irrigation",
+      "turns": [
+        {"id": "GA1", "messages": [
+          {"role": "user", "id": "GA1-U", "text": "When should the north garden be watered?"},
+          {"role": "assistant", "id": "GA1-A", "text": "Water the north bed at sunrise when the soil sensor is below 28 percent."}
+        ]}
+      ]
+    },
+    {
+      "id": "release-packaging",
+      "turns": [
+        {"id": "RE1", "messages": [
+          {"role": "user", "id": "RE1-U", "text": "How was the desktop prototype packaged?"},
+          {"role": "assistant", "id": "RE1-A", "text": "The prototype used an unsigned DMG for the private macOS alpha."}
+        ]}
+      ]
+    },
+    {
+      "id": "music-room",
+      "turns": [
+        {"id": "MU1", "messages": [
+          {"role": "user", "id": "MU1-U", "text": "Which instrument was moved?"},
+          {"role": "assistant", "id": "MU1-A", "text": "The blue cello moved from the west wall to the storage room."}
+        ]}
+      ]
+    }
+  ],
+  "cases": [
+    {"id": "P1", "kind": "supported", "question": "Why did the Orion worker restart repeatedly after upgrading to runtime 2.4, and what should be changed?", "expected_conversation": "orion-runtime", "required_meaning": ["ORION_HOME was renamed to ORION_DATA", "set ORION_DATA to the existing state directory"]},
+    {"id": "P2", "kind": "supported", "question": "Why did splitting the Llama-3.3 note break retrieval, and what should the harness do instead?", "expected_conversation": "llama-parser", "required_meaning": ["the period inside Llama-3.3 was treated as a sentence boundary", "keep the whole message"]},
+    {"id": "P3", "kind": "supported", "question": "Cairn-63 shows an amber ring and rising chamber pressure after load transfer. What is the cause and safe action?", "expected_conversation": "cairn-pressure", "required_meaning": ["thermal rebound", "keep the auxiliary vent closed until pressure is stable"]},
+    {"id": "P4", "kind": "supported", "question": "What is the current Helios relay port, and which port is historical?", "expected_conversation": "helios-current-head", "required_meaning": ["current port 4410", "4310 is historical"]},
+    {"id": "P5", "kind": "secret_blocked", "question": "What credential does the test beacon use?", "expected_conversation": "private-token", "required_meaning": ["credential exists but must not leave the device"]},
+    {"id": "N1", "kind": "absent", "question": "What exact overlap percentage fixed the small-object camera problem?", "expected_conversation": "camera-calibration", "required_meaning": []},
+    {"id": "N2", "kind": "absent", "question": "What temperature should the north garden water use?", "expected_conversation": "garden-irrigation", "required_meaning": []},
+    {"id": "N3", "kind": "absent", "question": "Which signing certificate was used for the Windows release?", "expected_conversation": "release-packaging", "required_meaning": []}
+  ]
+}
