@@ -15,6 +15,12 @@ class RawFirstReplayTests(unittest.TestCase):
         self.assertEqual(RAW.reranker_decision(0.5), "NOT_SURE")
         self.assertEqual(RAW.reranker_decision(0.0), "DROP")
 
+    def test_frozen_case_labels_cover_five_useful_and_three_wrong_context(self):
+        labels = list(RAW.EXPECTED_RAW_CASES.values())
+        self.assertEqual(set(RAW.EXPECTED_RAW_CASES), {2, 3, 8, 9, 11, 14, 15, 20})
+        self.assertEqual(labels.count("useful"), 5)
+        self.assertEqual(labels.count("wrong_context"), 3)
+
     def test_invented_evidence_id_is_rejected(self):
         sources = [{"source_id": "S1", "text": "DeBERTa is a second signal."}]
         accepted, rejected = RAW.validate_candidates(

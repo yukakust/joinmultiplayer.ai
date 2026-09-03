@@ -23,6 +23,7 @@ TAKE_AT = 0.92222771
 DROP_AT = 0.00292693
 NO_INFORMATION = "I couldn't find supported information in your connected memory."
 RERANKER_INSTRUCTION = "Given a question, decide whether the passage contains information that directly helps answer that question."
+EXPECTED_RAW_CASES = {2: "useful", 3: "useful", 8: "useful", 9: "wrong_context", 11: "useful", 14: "wrong_context", 15: "useful", 20: "wrong_context"}
 PREFIX = (
     '<|im_start|>system\nJudge whether the Document meets the requirements based on the Query and the Instruct provided. '
     'Note that the answer can only be "yes" or "no".<|im_end|>\n<|im_start|>user\n'
@@ -67,6 +68,7 @@ def private_articles(path: Path) -> list[dict]:
         })
         records.append({
             "original_row": number,
+            "expected_raw_case": EXPECTED_RAW_CASES[number],
             "question": question,
             "expected": html.unescape(re.sub(r"<[^>]+>", "", expected.group(1))).strip() if expected else "",
             "sources": sources_event["details"]["sources"],
@@ -209,12 +211,21 @@ def run(args: argparse.Namespace) -> dict:
     totals = {"raw_excerpts": 0, "take": 0, "not_sure": 0, "drop": 0, "claims": 0, "grounded": 0, "answered": 0}
     for row_number, record in enumerate(records, 1):
         print(f"[{row_number}/8] reranking raw excerpts", flush=True)
-        for source in record["sources"]:
+        # The frozen unit is the raw source bundle behind the one claim that
+        # previously survived DeBERTa.  Reranking every retrieved source would
+        # change the experiment from an eight-case ordering replay into a new
+        # retrieval benchmark.
+        frozen_sources = [
+            source for source in record["sources"]
+            if source["source_id"] in record["old_grounded_source_ids"]
+        ]
+        record["sources"] = frozen_sources
+        for source in frozen_sources:
             score = reranker_score(args.reranker, record["question"], source["text"])
             source["reranker"] = {"score": round(score, 8), "decision": reranker_decision(score)}
             totals["raw_excerpts"] += 1
             totals[source["reranker"]["decision"].lower()] += 1
-        forwarded = [item for item in record["sources"] if item["reranker"]["decision"] != "DROP"]
+        forwarded = [item for item in frozen_sources if item["reranker"]["decision"] != "DROP"]
         old_decisions = {
             item["source_id"]: item["reranker"]["decision"]
             for item in record["sources"] if item["source_id"] in record["old_grounded_source_ids"]
