@@ -1,0 +1,39 @@
+{
+  "schema_version": "e007-raw-first-reranker-replay-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.2",
+  "status": "complete_failed",
+  "protocol": "/experiments/E007/raw-first-reranker-replay-protocol-v0.1.json",
+  "architecture": "/experiments/E007/miro-executable-harness-v0.1.json",
+  "kind": "outcome_conditioned_private_development_replay",
+  "result": {
+    "cases": 8,
+    "raw_source_excerpts": 9,
+    "useful_cases_forwarded": "5/5",
+    "useful_cases_dropped": "0/5",
+    "wrong_context_cases_stopped_before_qwen": "1/3",
+    "wrong_context_cases_forwarded_as_not_sure": "2/3",
+    "reranker_decisions": {"take": 3, "not_sure": 5, "drop": 1},
+    "mechanically_valid_extracted_claims": 10,
+    "deberta_entailed_claims": 9,
+    "invented_evidence_ids_accepted": 0,
+    "deberta_non_entailments_reaching_writer": 0,
+    "terminal_results": "8/8",
+    "final_answers_produced": 3,
+    "final_answers_correct_by_manual_review": "2/8",
+    "wrong_context_final_answers": 1
+  },
+  "gate_results": {
+    "zero_useful_raw_cases_lost_passed": true,
+    "zero_wrong_context_cases_reaching_qwen_passed": false,
+    "zero_invented_evidence_ids_accepted_passed": true,
+    "zero_deberta_non_entailments_reaching_writer_passed": true,
+    "all_cases_terminal_passed": true,
+    "human_final_answer_review_passed": false,
+    "all_passed": false
+  },
+  "finding": "The corrected order is executable and preserves recall, but forwarding every NOT_SURE excerpt is too permissive. Qwen3-8B also failed to extract an answer from three useful raw cases. DeBERTa correctly blocked one unsupported rewrite but cannot reject a wrong claim that is genuinely entailed by an irrelevant source.",
+  "decision": "Do not ship this path in the desktop app. Keep raw-excerpt reranking before Qwen, but design a separate treatment for NOT_SURE and simplify the post-reranker extraction step before rerunning.",
+  "privacy": "The public result contains aggregate counts only. Questions, excerpts, model outputs, expected answers and per-case decisions remain in the owner-private artifact.",
+  "claim_boundary": "This replay uses eight already opened, outcome-selected cases and frozen retrieval output. It does not test unseen generalization, retrieval recall, a packaged desktop build or a physical swarm."
+}

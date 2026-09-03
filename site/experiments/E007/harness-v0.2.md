@@ -324,6 +324,18 @@ private replay protocol is frozen before inference at
 `/experiments/E007/raw-first-reranker-replay-protocol-v0.1.json`. It reuses the
 same eight already opened cases and therefore cannot establish unseen
 generalization or retrieval recall.
+
+The private replay completed on 2026-09-03 and failed its full gate. The
+reranker forwarded all five useful cases and dropped none, but stopped only one
+of three wrong-context cases. The other two continued as `NOT_SURE`. Qwen3-8B
+then produced two correct final answers out of eight and one wrong answer from
+an irrelevant but internally supported excerpt. Exact-ID validation accepted
+no invented IDs, and no DeBERTa non-entailment reached the writer.
+
+Decision: keep the raw reranker before Qwen, but do not put this candidate into
+the desktop app. `NOT_SURE` needs its own path, and the extraction task after
+reranking still needs simplification. Public aggregate:
+`/experiments/E007/raw-first-reranker-replay-result-v0.1.json`.
 3. Allowlisted local-library adapters plus a privacy-safe capability card.
 4. One integrated run across all accepted modules rather than separate scripts.
 5. An authenticated MacBook + yukabox + phone room with complete receipts.
