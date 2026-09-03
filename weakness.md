@@ -179,6 +179,17 @@ reduces `/x` to `x`, whole chats are ranked by their single best message, and
 only two messages per selected chat are exposed. Checkpoint 7P therefore tests
 an exact-anchor-aware route in a private A/B before changing the application.
 
+## 13. Grounded does not mean relevant to the question
+
+Checkpoint 7R tested one additive conversation chosen from automatically rare
+two- and three-word query phrases. In 30 physical questions it was selected by
+Qwen three times, recovered no final answer, and caused one irrelevant answer
+to pass. DeBERTa correctly rejected one other irrelevant claim, but also
+rejected one claim backed by the exact passage needed for the question. The
+current NLI step asks whether source context entails a claim; it does not prove
+that the claim answers the owner's question. Phrase fallback is therefore not
+accepted, despite improving retrieval-only recall from 3/4 to 4/4.
+
 ## Evidence
 
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`

@@ -222,6 +222,15 @@ the technical-anchor order and add the first novel phrase-derived conversation.
 Public, privacy-safe result:
 `/experiments/E007/phrase-search-ab-result-v0.1.json`.
 
+The subsequent 30-question full-pipeline run rejected that tentative fallback
+decision. The extra phrase-derived conversation was selected three times: one
+useful claim was rejected by DeBERTa, one irrelevant claim was rejected, and
+one irrelevant but source-grounded claim reached the final answer. All ten
+absent-answer traps were safely refused, but the fallback recovered zero final
+answers. Therefore phrase fallback is **not accepted for the desktop app**;
+the technical-anchor result remains 3/4. Result:
+`/experiments/E007/phrase-fallback-30-result-v0.1.json`.
+
 ## Locked Gate 14A: write only what the swarm supplied
 
 Ten English synthetic cases are frozen before Qwen's first run. Eight provide

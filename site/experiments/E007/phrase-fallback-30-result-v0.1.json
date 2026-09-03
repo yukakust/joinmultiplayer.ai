@@ -1,0 +1,31 @@
+{
+  "schema_version": "e007-phrase-fallback-30-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7R",
+  "status": "owner_run_human_audited_development_result",
+  "run_utc": "2026-09-02T21:16:57Z",
+  "protocol": "/experiments/E007/phrase-fallback-30-protocol-v0.1.json",
+  "sample": {"direct": 10, "paraphrased": 10, "no_answer_traps": 10},
+  "human_audit": {
+    "fully_correct": 13,
+    "partial": 2,
+    "incorrect_missing_or_runtime_failure": 15,
+    "no_answer_traps_correctly_refused": 10,
+    "no_answer_traps_total": 10
+  },
+  "fallback_attribution": {
+    "selected_by_qwen": 3,
+    "recovered_final_answers": 0,
+    "correct_evidence_rejected_by_deberta": 1,
+    "irrelevant_evidence_rejected_by_deberta": 1,
+    "irrelevant_evidence_passed_to_final_answer": 1
+  },
+  "other_failures": {
+    "local_nli_runtime_errors": 2,
+    "irrelevant_base_route_claims_reaching_final_answer": 2
+  },
+  "finding": "The additive phrase fallback preserved perfect refusal on the ten frozen absent-answer traps, but it recovered no final answer and introduced one irrelevant supported answer. DeBERTa reduced noise but did not verify whether a grounded claim answered the owner's question.",
+  "decision": "Do not integrate the phrase fallback into the desktop application. Keep the previously accepted technical-anchor search at 3/4 and treat question-to-claim relevance as an unresolved harness module.",
+  "privacy": "Only aggregate counts and the architectural decision are public. Questions, excerpts, identifiers, model traces and complete answers remain on the owner's Mac.",
+  "claim_boundary": "One private 30-question development run on one owner's evolving local library; not a locked population estimate."
+}
