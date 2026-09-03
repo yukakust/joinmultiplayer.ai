@@ -3,7 +3,7 @@
   "experiment": "E007",
   "checkpoint": "7P",
   "candidate_build": "0.1.0-alpha.18",
-  "source_revision": "9759935127f5c3301a30a470e1dd722c52bee354",
+  "source_revision": "cd50e9852ff77438ed66045b1ee3d9a57fa81c56",
   "mac_builder": "/experiments/E007/build-macos-alpha-v0.16.sh",
   "status": "implemented_awaiting_physical_mac_run",
   "owner_decision": "/experiments/E007/outbound-whole-turn-pilot-owner-decision-v0.1.json",

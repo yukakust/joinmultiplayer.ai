@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-EXPECTED_REVISION="9759935127f5c3301a30a470e1dd722c52bee354"
-SHORT_REVISION="9759935"
+EXPECTED_REVISION="cd50e9852ff77438ed66045b1ee3d9a57fa81c56"
+SHORT_REVISION="cd50e98"
 
 if [ "$(uname -s)" != "Darwin" ]; then
   echo "This builder must run on macOS." >&2
