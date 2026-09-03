@@ -27,7 +27,8 @@ from outbound_secret_gate import detect_secret_categories  # noqa: E402
 
 PROTOCOL = ROOT / "site/experiments/E007/outbound-whole-turn-pilot-protocol-v0.1.json"
 WORLD = ROOT / "site/experiments/E007/outbound-whole-turn-pilot-world-v0.1.json"
-RESULT = ROOT / "site/experiments/E007/outbound-whole-turn-pilot-result-v0.1.json"
+CORRECTION = ROOT / "site/experiments/E007/outbound-whole-turn-pilot-correction-v0.2.json"
+RESULT = ROOT / "site/experiments/E007/outbound-whole-turn-pilot-result-v0.2.json"
 TAKE_AT = 0.92222771
 DROP_AT = 0.00292693
 RERANKER_INSTRUCTION = "Given a peer question, decide whether this local conversation contains information that directly helps answer it."
@@ -60,7 +61,9 @@ def parse_json(text: str) -> dict:
 
 
 def render_turn(turn: dict) -> str:
-    lines = [f"TURN {turn['id']}"]
+    # A turn is the context unit, not a citable source ID. Showing both the
+    # turn ID and message ID made Qwen cite the former in the first run.
+    lines = []
     for message in turn["messages"]:
         lines.append(f"[{message['id']}] {message['role'].upper()}: {message['text']}")
     return "\n".join(lines)
@@ -159,8 +162,14 @@ def validate_receipt(receipt: dict | None, selected: list[dict]) -> tuple[list[d
 def run(args: argparse.Namespace) -> dict:
     protocol = json.loads(PROTOCOL.read_text(encoding="utf-8"))
     world = json.loads(WORLD.read_text(encoding="utf-8"))
+    correction = json.loads(CORRECTION.read_text(encoding="utf-8"))
     if protocol["status"] != "frozen_before_inference" or world["status"] != "frozen_before_inference":
         raise RuntimeError("inputs must be frozen before inference")
+    if correction["status"] != "frozen_before_inference":
+        raise RuntimeError("correction must be frozen before inference")
+    for case in world["cases"]:
+        if case["id"] == correction["corrected_case"]["id"]:
+            case.update(correction["corrected_case"])
 
     from fastembed import TextEmbedding
 
@@ -264,17 +273,18 @@ def run(args: argparse.Namespace) -> dict:
         "absent_returned_empty": sum(row["terminal"] == "EMPTY" for row in rows if row["kind"] == "absent"),
         "non_exact_quotes_accepted": sum(bool(row["rejected_claims"]) and bool(row["sent_capsule"]) for row in rows),
     }
-    passed = all(expected[key] == value for key, value in protocol["success"].items())
+    passed = all(expected[key] == value for key, value in correction["success"].items())
     result = {
-        "schema_version": "e007-outbound-whole-turn-pilot-result-v0.1",
+        "schema_version": "e007-outbound-whole-turn-pilot-result-v0.2",
         "status": "completed_passed" if passed else "completed_failed",
         "protocol_sha256": sha256(PROTOCOL),
         "world_sha256": sha256(WORLD),
+        "correction_sha256": sha256(CORRECTION),
         "runtime_seconds": round(time.monotonic() - started, 3),
         "summary": expected,
         "passed_frozen_gate": passed,
         "rows": rows,
-        "claim_boundary": protocol["claim_boundary"],
+        "claim_boundary": correction["claim_boundary"],
     }
     RESULT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"passed": passed, "summary": expected, "result": str(RESULT)}, indent=2))

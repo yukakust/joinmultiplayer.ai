@@ -1,0 +1,26 @@
+{
+  "schema_version": "e007-outbound-whole-turn-pilot-correction-v0.2",
+  "status": "frozen_before_inference",
+  "base_protocol": "/experiments/E007/outbound-whole-turn-pilot-protocol-v0.1.json",
+  "base_world": "/experiments/E007/outbound-whole-turn-pilot-world-v0.1.json",
+  "changes": [
+    "Do not display a turn ID that can be confused with the required message ID.",
+    "Correct N1 from absent to supported because the source explicitly states that the requested value was not recorded.",
+    "Do not change models, routing, thresholds, prompts, source text, questions, or pipeline order."
+  ],
+  "corrected_case": {
+    "id": "N1",
+    "kind": "supported",
+    "required_meaning": ["the final overlap percentage was not recorded"]
+  },
+  "success": {
+    "expected_conversation_in_top_5": 6,
+    "supported_relevance_not_dropped": 6,
+    "valid_terminal_receipts": 8,
+    "supported_found_and_grounded": 5,
+    "synthetic_secret_blocked": 1,
+    "absent_returned_empty": 2,
+    "non_exact_quotes_accepted": 0
+  },
+  "claim_boundary": "Corrected rerun of the same eight opened synthetic English cases. It can detect implementation plumbing failures but cannot establish unseen generalization."
+}
