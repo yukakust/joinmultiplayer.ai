@@ -1,0 +1,40 @@
+{
+  "schema_version": "e007-minimal-evidence-selection-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.3",
+  "status": "complete_failed",
+  "protocol": "/experiments/E007/minimal-evidence-selection-protocol-v0.1.json",
+  "kind": "outcome_conditioned_private_development_replay",
+  "result": {
+    "cases": 8,
+    "useful_cases": 5,
+    "wrong_context_cases": 3,
+    "exact_sentences_scored": 118,
+    "sentence_decisions": {
+      "take": 2,
+      "not_sure": 47,
+      "drop": 69
+    },
+    "useful_cases_with_allowed_sentences": "2/5",
+    "wrong_context_cases_with_allowed_sentences": "0/3",
+    "claims_reaching_deberta": 2,
+    "deberta_entailed_claims": 2,
+    "invented_or_non_allowed_ids_accepted": 0,
+    "question_irrelevant_claims_reaching_shelves": 0,
+    "terminal_results": "8/8",
+    "final_answers_produced": 2,
+    "final_answers_correct_by_manual_review": "2/8"
+  },
+  "gate_results": {
+    "all_useful_cases_preserved_passed": false,
+    "zero_wrong_context_cases_allowed_passed": true,
+    "zero_non_allowed_ids_accepted_passed": true,
+    "zero_irrelevant_claims_reaching_shelves_passed": true,
+    "all_cases_terminal_passed": true,
+    "all_passed": false
+  },
+  "finding": "Sentence-level TAKE-only evidence produced perfect precision in this eight-case replay but inadequate recall. It allowed exact evidence for only two of five useful cases. The two produced answers were correct and contained no neighboring claims, while all three wrong-context cases were stopped before Qwen.",
+  "decision": "Do not adopt the strict sentence-level TAKE-only policy. Preserve the useful separation between full context and citable evidence, but design and test a second-stage treatment for NOT_SURE sentences before changing the application or accepted harness.",
+  "privacy": "Only aggregate counts and the decision are public. Questions, excerpts, sentence scores, model outputs and per-case answers remain owner-private.",
+  "claim_boundary": "Outcome-conditioned development replay on the same eight opened cases. It does not test retrieval recall, unseen generalization, a packaged application or physical devices."
+}

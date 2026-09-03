@@ -336,6 +336,22 @@ Decision: keep the raw reranker before Qwen, but do not put this candidate into
 the desktop app. `NOT_SURE` needs its own path, and the extraction task after
 reranking still needs simplification. Public aggregate:
 `/experiments/E007/raw-first-reranker-replay-result-v0.1.json`.
+
+### Checkpoint 7S.3 — minimal exact evidence
+
+The next private development replay kept the same eight opened cases but split
+the frozen source bundles into 118 exact sentences. Qwen3-Reranker-4B was asked
+to select citable evidence before Qwen3-8B could extract a claim. Qwen could
+read the complete source for context, but ordinary code allowed it to cite at
+most two sentence IDs marked `TAKE`.
+
+This strict policy failed on recall. It admitted no sentence from any of the
+three wrong-context cases, and both answers it produced were correct. However,
+it admitted evidence for only two of five useful cases; 47 sentences remained
+`NOT_SURE` and were unavailable to Qwen. The separation between readable
+context and citable evidence remains promising, but `TAKE`-only sentence
+selection is rejected. Public aggregate:
+`/experiments/E007/minimal-evidence-selection-result-v0.1.json`.
 3. Allowlisted local-library adapters plus a privacy-safe capability card.
 4. One integrated run across all accepted modules rather than separate scripts.
 5. An authenticated MacBook + yukabox + phone room with complete receipts.
