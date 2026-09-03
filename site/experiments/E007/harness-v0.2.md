@@ -380,3 +380,20 @@ child-agent conversations. Deduplication removed 939 repeated message records
 with zero ID/content conflicts. Main conversations contain a median 1,927
 Qwen3 tokens; two exceed 100k. The exact private text and chat titles remain
 unpublished. No topic grouping, secret scan, or search ran.
+## Checkpoint 7T.2 — whole turns accepted for the playable MVP
+
+The corrected run removed the rejected sentence and character slicing. It
+routed the unchanged question to five conversations, passed a whole short
+conversation or complete conversational turns through Qwen3-Reranker-4B, let
+Qwen3-8B return an atomic claim with an exact message quote, verified that
+quote with ordinary code, checked source support with DeBERTa, scanned the
+outbound capsule for secrets, and returned `FOUND`, `EMPTY`, or `BLOCKED`.
+
+Human review scored the eight synthetic English development cases as 6 fully
+correct, 1 partial, and 1 wrong. The partial answer explained why `Llama-3.3`
+was split but omitted the requested remedy. The wrong answer returned a true
+watering fact even though the question asked for a missing temperature. The
+owner accepts this path for the first playable build with both weaknesses
+visible as future Pocket i upgrades. This remains development evidence, not a
+locked or generalization result. Decision:
+`/experiments/E007/outbound-whole-turn-pilot-owner-decision-v0.1.json`.

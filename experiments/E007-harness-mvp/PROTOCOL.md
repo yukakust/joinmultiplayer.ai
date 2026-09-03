@@ -1753,3 +1753,20 @@ answer about a nonexistent routing model even though DeBERTa returned `neutral`
 at `0.996094`. The harness passed that warning to the writer without gating it.
 The external tester build is blocked. Public record:
 `/experiments/E007/desktop-ten-question-regression-checkpoint7l-result-v0.1.json`.
+## Desktop Checkpoint 7T.2 — accepted sender path
+
+Owner decision on 2026-09-03 accepts the corrected whole-turn sender path for
+the first playable build. The exact order is: unchanged question; hybrid top-5
+whole-conversation route; whole short conversation or complete turns;
+Qwen3-Reranker-4B `TAKE / NOT_SURE / DROP`; Qwen3-8B `FOUND / EMPTY` with an
+atomic claim, message ID, and exact quote; ordinary-code coordinate and quote
+check; DeBERTa source-to-claim check; outbound secret scan; terminal
+`FOUND / EMPTY / BLOCKED` receipt.
+
+The eight-case synthetic English development run received a human score of
+6 correct, 1 partial, and 1 wrong. The accepted known weaknesses are incomplete
+coverage of a multi-part question and a true but question-irrelevant claim.
+They remain explicit game upgrade targets rather than hidden failures. This
+acceptance does not prove generalization, real private-memory quality, physical
+networking, or swarm scale. Decision record:
+`site/experiments/E007/outbound-whole-turn-pilot-owner-decision-v0.1.json`.

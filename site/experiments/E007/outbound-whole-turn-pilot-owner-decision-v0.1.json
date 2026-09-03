@@ -1,0 +1,40 @@
+{
+  "schema_version": "e007-outbound-whole-turn-pilot-owner-decision-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7T.2",
+  "decided_at": "2026-09-03",
+  "status": "accepted_for_mvp_with_known_weaknesses",
+  "evidence": {
+    "result": "/experiments/E007/outbound-whole-turn-pilot-result-v0.2.json",
+    "human_audit": "/experiments/E007/outbound-whole-turn-pilot-human-audit-v0.2.json",
+    "fully_correct": 6,
+    "partial": 1,
+    "wrong": 1,
+    "total": 8
+  },
+  "accepted_pipeline": [
+    "unchanged peer question",
+    "hybrid top-5 whole-conversation routing",
+    "whole short conversation or complete conversational turns",
+    "Qwen3-Reranker-4B relevance: TAKE / NOT_SURE / DROP",
+    "Qwen3-8B returns FOUND or EMPTY with atomic claims and exact message evidence",
+    "ordinary code verifies message coordinates and exact quotes",
+    "DeBERTa verifies source-to-claim support",
+    "outbound secret scan",
+    "FOUND / EMPTY / BLOCKED receipt"
+  ],
+  "known_weaknesses": [
+    {
+      "id": "incomplete_multi_part_answer",
+      "observed_case": "P2",
+      "meaning": "The reader can answer one part of a multi-part question and omit another part."
+    },
+    {
+      "id": "true_but_question_irrelevant_claim",
+      "observed_case": "N2",
+      "meaning": "A true source-grounded fact from the right topic can still fail to answer the requested field."
+    }
+  ],
+  "product_decision": "Ship these two weaknesses visibly in the first playable Pocket i. They become upgrade targets for owners and the community; they must not be described as solved.",
+  "claim_boundary": "Owner acceptance of one eight-case synthetic English development pipeline for an MVP build. This is not proof of unseen generalization, private-memory quality, networking, or swarm scale."
+}

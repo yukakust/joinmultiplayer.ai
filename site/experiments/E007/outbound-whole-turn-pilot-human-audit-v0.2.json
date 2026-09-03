@@ -18,5 +18,6 @@
     {"id": "N2", "verdict": "wrong", "reason": "Returned watering time and soil moisture even though the question asked for water temperature."},
     {"id": "N3", "verdict": "correct", "reason": "Correctly returned EMPTY because the source contains no Windows signing certificate."}
   ],
-  "decision": "Do not promote this sender pipeline to the accepted architecture yet. Retrieval, whole-turn transport, exact quotes, DeBERTa support, and secret blocking worked. The missing module is a final question-to-grounded-claim completeness and relevance check before sending."
+  "decision_at_review_time": "Do not promote this sender pipeline to the accepted architecture yet. Retrieval, whole-turn transport, exact quotes, DeBERTa support, and secret blocking worked. The missing module is a final question-to-grounded-claim completeness and relevance check before sending.",
+  "later_owner_decision": "/experiments/E007/outbound-whole-turn-pilot-owner-decision-v0.1.json"
 }

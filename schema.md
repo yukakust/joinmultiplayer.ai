@@ -683,3 +683,28 @@ once merely to say that the requested value was absent, and two correct answers
 named more evidence messages than necessary. Until a follow-up passes, FOUND
 does not enter the network without checking that it contains a positive answer
 and the smallest supporting evidence set.
+## Accepted sender path for the playable MVP — 2026-09-03
+
+Gate 7T.2 is accepted by the owner for the first playable desktop build. The
+reader receives a whole short conversation or complete conversational turns.
+The rejected 1,800-character crop, punctuation sentence splitter, and
+480-character chunks are not part of this path.
+
+```text
+unchanged peer question
+→ BM25 + MiniLM top-5 conversation route
+→ whole short conversation or complete turns from a long conversation
+→ Qwen3-Reranker-4B: TAKE / NOT_SURE / DROP
+→ Qwen3-8B: FOUND / EMPTY, atomic claim, message ID, exact quote
+→ ordinary code checks the message and quote
+→ DeBERTa checks source → claim
+→ outbound secret scan
+→ FOUND / EMPTY / BLOCKED
+```
+
+Human review of the corrected eight-case synthetic English development run:
+6 fully correct, 1 partial, 1 wrong. The owner accepts two visible MVP
+weaknesses as future upgrade targets for the game: a multi-part question may
+lose one part, and a true fact from the right topic may fail to answer the
+requested field. Neither weakness is solved or hidden. Decision record:
+`/experiments/E007/outbound-whole-turn-pilot-owner-decision-v0.1.json`.
