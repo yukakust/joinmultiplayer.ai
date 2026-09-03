@@ -114,6 +114,7 @@ if (prompt.includes("Find evidence that helps answer")) {
     "evidence_id_check",
     "grounding_signals",
     "grounded_evidence",
+    "outbound_secret_scan",
     "question_relevance",
     "primary_piles",
     "qwen_canonicals",

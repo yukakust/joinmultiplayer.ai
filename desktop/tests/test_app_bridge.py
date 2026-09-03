@@ -8,7 +8,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from pocket_i_app.bridge import MemoryRuntime, _question_centered_excerpt, handle
+from pocket_i_app.bridge import MemoryRuntime, _complete_turn_positions, _render_messages, handle
+from pocket_i_core.library import Message
 
 
 def tiny_embedder(texts):
@@ -16,15 +17,18 @@ def tiny_embedder(texts):
 
 
 class DesktopBridgeTests(unittest.TestCase):
-    def test_named_question_term_centers_a_long_excerpt_before_generic_words(self):
-        text = "information " + ("ordinary filler " * 180) + "DeBERTa is a cautious signal, not the only judge."
-        excerpt = _question_centered_excerpt(
-            text,
-            "Why did we add DeBERTa, and why could it not be the only judge?",
-            limit=240,
+    def test_long_conversation_selection_keeps_complete_turns_without_slicing(self):
+        messages = (
+            Message("M1", "user", "A question with Llama-3.3 in it."),
+            Message("M2", "assistant", "A complete answer. It keeps punctuation and model names."),
+            Message("M3", "user", "Another question."),
+            Message("M4", "assistant", "Another answer."),
         )
-        self.assertIn("DeBERTa is a cautious signal", excerpt)
-        self.assertNotIn("information", excerpt)
+        positions = _complete_turn_positions(messages, (1,))
+        self.assertEqual((0, 1), positions)
+        rendered = _render_messages(tuple(messages[position] for position in positions))
+        self.assertIn("Llama-3.3", rendered)
+        self.assertIn("complete answer. It keeps", rendered)
     def test_nli_signal_is_bounded_and_keeps_candidate_identity(self):
         runtime = MemoryRuntime(nli=lambda pairs: [("entailment", 0.91) for _pair in pairs])
         result = runtime.judge_candidates([

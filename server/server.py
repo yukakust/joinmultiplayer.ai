@@ -919,6 +919,7 @@ class RateLimiter:
 
 class ApplicationHandler(SimpleHTTPRequestHandler):
     db_path: Path
+    model_assets_path: Path | None = None
     limiter = RateLimiter()
 
     def end_headers(self) -> None:
@@ -929,6 +930,9 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
 
     def do_GET(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
+        if path == "/model-assets/e007/qwen3-reranker-4b-q4_k_m.gguf":
+            self.serve_model_asset(send_body=True)
+            return
         if path == "/api/health":
             self.send_json(HTTPStatus.OK, {"ok": True})
             return
@@ -989,6 +993,57 @@ class ApplicationHandler(SimpleHTTPRequestHandler):
                 self.path = original_path
             return
         super().do_GET()
+
+    def do_HEAD(self) -> None:  # noqa: N802
+        path = urlparse(self.path).path
+        if path == "/model-assets/e007/qwen3-reranker-4b-q4_k_m.gguf":
+            self.serve_model_asset(send_body=False)
+            return
+        super().do_HEAD()
+
+    def serve_model_asset(self, *, send_body: bool) -> None:
+        if self.model_assets_path is None:
+            self.send_error(HTTPStatus.NOT_FOUND)
+            return
+        target = self.model_assets_path / "e007" / "qwen3-reranker-4b-q4_k_m.gguf"
+        try:
+            total = target.stat().st_size
+        except OSError:
+            self.send_error(HTTPStatus.NOT_FOUND)
+            return
+        start = 0
+        end = total - 1
+        requested = self.headers.get("Range", "")
+        if requested:
+            match = re.fullmatch(r"bytes=(\d+)-(\d*)", requested.strip())
+            if not match:
+                self.send_error(HTTPStatus.REQUESTED_RANGE_NOT_SATISFIABLE)
+                return
+            start = int(match.group(1))
+            end = int(match.group(2)) if match.group(2) else end
+            if start >= total or end < start or end >= total:
+                self.send_error(HTTPStatus.REQUESTED_RANGE_NOT_SATISFIABLE)
+                return
+        length = end - start + 1
+        self.send_response(HTTPStatus.PARTIAL_CONTENT if requested else HTTPStatus.OK)
+        self.send_header("Content-Type", "application/octet-stream")
+        self.send_header("Content-Length", str(length))
+        self.send_header("Accept-Ranges", "bytes")
+        if requested:
+            self.send_header("Content-Range", f"bytes {start}-{end}/{total}")
+        self.send_header("Cache-Control", "public, max-age=31536000, immutable")
+        self.end_headers()
+        if not send_body:
+            return
+        with target.open("rb") as source:
+            source.seek(start)
+            remaining = length
+            while remaining:
+                block = source.read(min(1024 * 1024, remaining))
+                if not block:
+                    break
+                self.wfile.write(block)
+                remaining -= len(block)
 
     def do_POST(self) -> None:  # noqa: N802
         if not self.origin_allowed():
@@ -2727,10 +2782,12 @@ def main() -> None:
     parser.add_argument("--db", type=Path, required=True)
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8091)
+    parser.add_argument("--model-assets", type=Path)
     args = parser.parse_args()
 
     init_db(args.db)
     ApplicationHandler.db_path = args.db
+    ApplicationHandler.model_assets_path = args.model_assets
     handler = lambda *handler_args, **kwargs: ApplicationHandler(  # noqa: E731
         *handler_args, directory=str(args.site), **kwargs
     )

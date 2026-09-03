@@ -1,0 +1,41 @@
+{
+  "schema_version": "e007-desktop-whole-turn-checkpoint7p-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7P",
+  "candidate_build": "0.1.0-alpha.18",
+  "status": "implemented_awaiting_physical_mac_run",
+  "owner_decision": "/experiments/E007/outbound-whole-turn-pilot-owner-decision-v0.1.json",
+  "plain_language": "The desktop app now runs the accepted whole-message pipeline instead of the old clipped debug path.",
+  "implemented_order": [
+    "unchanged question",
+    "hybrid top-5 whole-conversation routing",
+    "whole short conversation or complete turns from a long conversation",
+    "Qwen3-Reranker-4B: TAKE / NOT_SURE / DROP",
+    "Qwen3-8B: FOUND / EMPTY plus atomic claim, existing message ID and exact quote",
+    "ordinary-code message-ID and exact-quote check",
+    "DeBERTa source-to-claim support check",
+    "outbound secret-pattern scan",
+    "grounded answer writer or an honest no-information receipt"
+  ],
+  "removed_from_live_path": [
+    "1800-character clipping",
+    "sentence splitting on punctuation",
+    "Qwen reading before the 4B relevance gate"
+  ],
+  "models": {
+    "reader": "Qwen3-8B Q4_K_M",
+    "relevance": "Qwen3-Reranker-4B Q4_K_M",
+    "support": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli FP16 ONNX"
+  },
+  "known_weaknesses": [
+    "One development answer lost a second requested part.",
+    "One development answer returned an adjacent but wrong finding."
+  ],
+  "verification": {
+    "node_tests": 34,
+    "desktop_python_tests": 37,
+    "server_tests": 38,
+    "physical_mac_result": "pending"
+  },
+  "privacy": "Conversation text and model decisions stay on the owner's computer. Public checkpoint data contains no private prompts or messages."
+}

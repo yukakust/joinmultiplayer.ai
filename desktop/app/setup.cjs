@@ -7,7 +7,6 @@ const os = require("node:os");
 const path = require("node:path");
 
 const MINIMUM_MEMORY_BYTES = 12 * 1024 ** 3;
-const MINIMUM_FREE_BYTES = 8 * 1024 ** 3;
 
 function requestClient(url) {
   return new URL(url).protocol === "http:" ? http : https;
@@ -106,15 +105,27 @@ class SetupManager {
     return path.join(this.userDataPath, "models", this.manifest.models.reader.file);
   }
 
-  async status() {
-    const model = this.manifest.models.reader;
-    let installed = false;
+  relevanceModelPath() {
+    const model = this.manifest.models.relevance;
+    return model ? path.join(this.userDataPath, "models", model.file) : null;
+  }
+
+  async installed(item, target) {
+    if (!item || !target) return true;
     try {
-      const stat = await fsp.stat(this.modelPath());
-      installed = stat.size === model.bytes;
+      const stat = await fsp.stat(target);
+      return stat.size === item.bytes;
     } catch (error) {
       if (error.code !== "ENOENT") throw error;
+      return false;
     }
+  }
+
+  async status() {
+    const model = this.manifest.models.reader;
+    const installed = await this.installed(model, this.modelPath());
+    const relevance = this.manifest.models.relevance;
+    const relevanceInstalled = await this.installed(relevance, this.relevanceModelPath());
     const disk = await fsp.statfs(this.userDataPath);
     const freeBytes = disk.bavail * disk.bsize;
     const memoryBytes = os.totalmem();
@@ -125,6 +136,8 @@ class SetupManager {
     } catch (error) {
       if (error.code !== "ENOENT") throw error;
     }
+    const missingModelBytes = (installed ? 0 : model.bytes) + (relevanceInstalled ? 0 : (relevance?.bytes || 0));
+    const diskOkay = freeBytes >= missingModelBytes + 2 * 1024 ** 3;
     return {
       version: "desktop-alpha-checkpoint-5a",
       model: {
@@ -134,14 +147,22 @@ class SetupManager {
         installed,
         downloading: Boolean(this.active),
       },
+      relevance: relevance ? {
+        id: relevance.id,
+        label: relevance.label,
+        bytes: relevance.bytes,
+        installed: relevanceInstalled,
+        downloading: Boolean(this.active),
+      } : null,
       hardware: {
         memoryBytes,
         freeBytes,
         memoryOkay: memoryBytes >= MINIMUM_MEMORY_BYTES,
-        diskOkay: freeBytes >= MINIMUM_FREE_BYTES || installed,
+        diskOkay,
+        requiredDownloadBytes: missingModelBytes,
       },
       runtime: { installed: runtimeInstalled, label: "llama.cpp" },
-      readyToAsk: installed && runtimeInstalled,
+      readyToAsk: installed && relevanceInstalled && runtimeInstalled,
     };
   }
 
@@ -150,12 +171,22 @@ class SetupManager {
     const current = await this.status();
     if (!current.hardware.memoryOkay) throw new Error("This preset needs at least 12 GB of memory.");
     if (!current.hardware.diskOkay) throw new Error("At least 8 GB of free disk space is required.");
-    if (current.model.installed) return this.modelPath();
-    this.active = downloadVerified({
-      item: this.manifest.models.reader,
-      destination: this.modelPath(),
-      onProgress: this.onProgress,
-    });
+    const pending = [];
+    if (!current.model.installed) pending.push([this.manifest.models.reader, this.modelPath()]);
+    if (current.relevance && !current.relevance.installed) {
+      pending.push([this.manifest.models.relevance, this.relevanceModelPath()]);
+    }
+    if (!pending.length) return this.modelPath();
+    this.active = (async () => {
+      for (const [item, destination] of pending) {
+        await downloadVerified({
+          item,
+          destination,
+          onProgress: (progress) => this.onProgress({ ...progress, id: item.id, label: item.label }),
+        });
+      }
+      return this.modelPath();
+    })();
     try {
       return await this.active;
     } finally {

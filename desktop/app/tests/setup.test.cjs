@@ -110,3 +110,23 @@ test("becomes ready to ask only when model and runtime both exist", async () => 
   await fs.writeFile(runtime, "runtime");
   assert.equal((await setup.status()).readyToAsk, true);
 });
+
+test("a configured relevance model is required before the accepted pipeline is ready", async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-relevance-ready-"));
+  const runtime = path.join(directory, "runtime", "llama-cli");
+  const setup = new SetupManager({
+    userDataPath: directory,
+    runtimePath: runtime,
+    manifest: { models: {
+      reader: { file: "reader.gguf", bytes: 4 },
+      relevance: { file: "reranker.gguf", bytes: 3 },
+    } },
+  });
+  await fs.mkdir(path.dirname(setup.modelPath()), { recursive: true });
+  await fs.writeFile(setup.modelPath(), "1234");
+  await fs.mkdir(path.dirname(runtime), { recursive: true });
+  await fs.writeFile(runtime, "runtime");
+  assert.equal((await setup.status()).readyToAsk, false);
+  await fs.writeFile(setup.relevanceModelPath(), "123");
+  assert.equal((await setup.status()).readyToAsk, true);
+});

@@ -6,6 +6,7 @@ const libraryStatus = document.querySelector("#library-status");
 const libraryDetail = document.querySelector("#library-detail");
 const errorBox = document.querySelector("#error");
 const runtimeStatus = document.querySelector("#runtime-status");
+const rerankerStatus = document.querySelector("#reranker-status");
 const setupView = document.querySelector("#setup-view");
 const chatView = document.querySelector("#chat-view");
 const chatForm = document.querySelector("#chat-form");
@@ -85,6 +86,7 @@ async function renderMemoryStatus() {
 async function renderStatus() {
   const status = await window.pocketI.setupStatus();
   runtimeStatus.textContent = status.runtime.installed ? "READY" : "MISSING";
+  rerankerStatus.textContent = status.relevance?.installed ? "READY" : "NOT INSTALLED";
   if (status.readyToAsk) {
     modelStatus.textContent = "READY";
     setupView.hidden = true;
@@ -95,7 +97,7 @@ async function renderStatus() {
   }
   setupView.hidden = false;
   chatView.hidden = true;
-  if (status.model.installed) {
+  if (status.model.installed && status.relevance?.installed) {
     modelStatus.textContent = "READY";
     progressLabel.textContent = status.runtime.installed ? "" : "Runtime missing.";
     bar.style.width = "100%";
@@ -104,17 +106,18 @@ async function renderStatus() {
     memoryConnect.hidden = true;
     return;
   }
-  modelStatus.textContent = "NOT INSTALLED";
+  modelStatus.textContent = status.model.installed ? "READY" : "NOT INSTALLED";
   install.hidden = false;
   const ready = status.hardware.memoryOkay && status.hardware.diskOkay;
-  progressLabel.textContent = ready ? "5.03 GB" : "This computer needs more memory or space.";
+  const missing = status.model.installed ? status.relevance : status.model;
+  progressLabel.textContent = ready ? `${missing.label} · ${size(missing.bytes)}` : "This computer needs more memory or space.";
   install.disabled = !status.hardware.memoryOkay || !status.hardware.diskOkay;
 }
 
-window.pocketI.onSetupProgress(({ received, total }) => {
+window.pocketI.onSetupProgress(({ received, total, label }) => {
   const percent = Math.min(100, received / total * 100);
   bar.style.width = `${percent}%`;
-  progressLabel.textContent = `Downloading Qwen3 8B · ${size(received)} / ${size(total)}`;
+  progressLabel.textContent = `Downloading ${label || "local model"} · ${size(received)} / ${size(total)}`;
 });
 
 memoryConnect.addEventListener("click", () => {
@@ -174,6 +177,7 @@ memoryConfirm.addEventListener("click", async () => {
 install.addEventListener("click", async () => {
   install.disabled = true;
   modelStatus.textContent = "DOWNLOADING";
+  rerankerStatus.textContent = "DOWNLOADING";
   errorBox.hidden = true;
   try {
     await window.pocketI.installModel();

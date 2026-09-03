@@ -28,7 +28,11 @@ async function main() {
   await downloadVerified({ item: target, destination: archive });
   await run("tar", ["-xzf", archive, "-C", output, "--strip-components=1"]);
   const executable = path.join(output, target.executable);
+  const serverExecutable = path.join(output, target.serverExecutable || (process.platform === "win32" ? "llama-server.exe" : "llama-server"));
   await fs.chmod(executable, 0o700);
+  const serverStat = await fs.stat(serverExecutable);
+  if (!serverStat.isFile()) throw new Error("The pinned runtime does not contain llama-server.");
+  await fs.chmod(serverExecutable, 0o700);
   process.stdout.write(`RUNTIME_READY ${manifest.revision} ${key}\n`);
 }
 

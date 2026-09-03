@@ -13,7 +13,31 @@ const {
   writerEvidenceFromPiles,
   questionRelevancePrompt,
   validateQuestionRelevance,
+  wholeTurnExtractionPrompt,
+  validateWholeTurnCandidates,
 } = require("../evidence.cjs");
+
+test("whole-turn evidence keeps punctuation and accepts only an exact quote from an existing message", () => {
+  const sources = [{
+    source_id: "S1",
+    text: "[M1] ASSISTANT: Llama-3.3 was already on a free tier.",
+    messages: [{ message_id: "M1", role: "assistant", text: "Llama-3.3 was already on a free tier." }],
+  }];
+  const prompt = wholeTurnExtractionPrompt("Why use Llama-3.3?", sources);
+  assert.match(prompt, /Llama-3\.3/);
+  const result = validateWholeTurnCandidates({ status: "FOUND", claims: [{
+    claim: "It was already free.",
+    message_id: "M1",
+    exact_quote: "Llama-3.3 was already on a free tier.",
+  }] }, sources);
+  assert.equal(result.accepted.length, 1);
+  assert.equal(result.accepted[0].quote, "Llama-3.3 was already on a free tier.");
+  const broken = validateWholeTurnCandidates({ status: "FOUND", claims: [{
+    claim: "It was already free.", message_id: "M1", exact_quote: "Llama 3.3 was free.",
+  }] }, sources);
+  assert.equal(broken.accepted.length, 0);
+  assert.equal(broken.rejected[0].reason, "quote is not exact");
+});
 
 test("question relevance keeps direct and compositional answer parts but drops adjacent truth", () => {
   const candidates = [

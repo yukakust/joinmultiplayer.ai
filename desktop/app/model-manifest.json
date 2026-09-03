@@ -10,7 +10,16 @@
       "bytes": 5027783488,
       "sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785",
       "url": "https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/7c41481f57cb95916b40956ab2f0b139b296d974/Qwen3-8B-Q4_K_M.gguf"
+    },
+    "relevance": {
+      "id": "qwen3-reranker-4b-q4-k-m",
+      "label": "Qwen3 Reranker 4B",
+      "repository": "Qwen/Qwen3-Reranker-4B",
+      "revision": "22e683669bc0f0bd69640a1354a6d0aebcfeede5",
+      "file": "qwen3-reranker-4b-q4_k_m.gguf",
+      "bytes": 2496717472,
+      "sha256": "09341112a9147bf0dc96f6ec98b006f544b76bc18ab68c9f7f6a94e9890b613e",
+      "url": "https://joinmultiplayer.ai/model-assets/e007/qwen3-reranker-4b-q4_k_m.gguf"
     }
   }
 }
-

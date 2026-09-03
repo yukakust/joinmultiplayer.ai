@@ -100,19 +100,16 @@ def _production_embedder(data_dir: Path) -> EmbedBatch:
 
 
 def _question_centered_excerpt(text: str, question: str, limit: int = 1800) -> str:
+    """Legacy experiment helper; the accepted desktop path does not use it."""
     text = " ".join(text.split())
     if len(text) <= limit:
         return text
-    terms = {
-        term
-        for term in re.findall(r"[A-Za-z0-9][A-Za-z0-9_-]*", question)
-        if len(term) >= 4
-    }
-    # Prefer identifier-like words (DeBERTa, Qwen3, MiniLM, CV-42). A generic
-    # longer word such as "information" must not pull a long source window
-    # away from the named thing the owner actually asked about.
     terms = sorted(
-        terms,
+        {
+            term
+            for term in re.findall(r"[A-Za-z0-9][A-Za-z0-9_-]*", question)
+            if len(term) >= 4
+        },
         key=lambda term: (
             any(char.isupper() for char in term[1:])
             or any(char.isdigit() for char in term)
@@ -128,6 +125,28 @@ def _question_centered_excerpt(text: str, question: str, limit: int = 1800) -> s
     end = min(len(text), start + limit)
     start = max(0, end - limit)
     return ("…" if start else "") + text[start:end] + ("…" if end < len(text) else "")
+
+
+def _complete_turn_positions(messages: Sequence[object], anchors: Sequence[int]) -> tuple[int, ...]:
+    """Return whole user/assistant turns without slicing either message."""
+    selected: set[int] = set()
+    for position in anchors:
+        if not 0 <= position < len(messages):
+            continue
+        selected.add(position)
+        role = getattr(messages[position], "role", "")
+        if role == "user" and position + 1 < len(messages) and getattr(messages[position + 1], "role", "") == "assistant":
+            selected.add(position + 1)
+        elif role == "assistant" and position > 0 and getattr(messages[position - 1], "role", "") == "user":
+            selected.add(position - 1)
+    return tuple(sorted(selected))
+
+
+def _render_messages(messages: Sequence[object]) -> str:
+    return "\n\n".join(
+        f"[{getattr(message, 'coordinate')}] {getattr(message, 'role').upper()}: {getattr(message, 'text')}"
+        for message in messages
+    )
 
 
 class MemoryRuntime:
@@ -203,7 +222,7 @@ class MemoryRuntime:
             candidate_id = str(item.get("candidate_id", ""))
             quote = str(item.get("quote", ""))
             claim = str(item.get("claim", ""))
-            if not candidate_id or not quote or not claim or len(quote) > 1600 or len(claim) > 600:
+            if not candidate_id or not quote or not claim or len(quote) > 4000 or len(claim) > 600:
                 raise ValueError("invalid candidate")
             contexts_value = item.get("source_contexts", [])
             contexts: list[tuple[str, tuple[str, ...]]] = []
@@ -217,7 +236,7 @@ class MemoryRuntime:
                     quotes_value = context.get("exact_quotes", [])
                     if (
                         not text
-                        or len(text) > 1800
+                        or len(text) > 120_000
                         or not isinstance(quotes_value, list)
                         or not 1 <= len(quotes_value) <= 4
                     ):
@@ -366,25 +385,47 @@ class MemoryRuntime:
         if self.index is None or self.library is None:
             self.connect()
         route = self.index.route(question, top_k=5)
-        hits = self.index.context_hits(question, route.conversation_ids, per_conversation=2, limit=10)
         by_id = {item.conversation_id: item for item in self.library.conversations}
         items = []
-        for number, hit in enumerate(hits, 1):
-            conversation = by_id[hit.conversation_id]
-            message = conversation.messages[hit.message_position]
+        for number, conversation_id in enumerate(route.conversation_ids, 1):
+            conversation = by_id[conversation_id]
+            full_text = _render_messages(conversation.messages)
+            if len(full_text) <= 40_000:
+                selected_messages = conversation.messages
+                unit = "whole_short_conversation"
+            else:
+                hits = self.index.context_hits(question, (conversation_id,), per_conversation=2, limit=2)
+                positions = _complete_turn_positions(
+                    conversation.messages,
+                    tuple(hit.message_position for hit in hits),
+                )
+                selected_messages = tuple(conversation.messages[position] for position in positions)
+                if len(_render_messages(selected_messages)) > 100_000 and hits:
+                    positions = _complete_turn_positions(conversation.messages, (hits[0].message_position,))
+                    selected_messages = tuple(conversation.messages[position] for position in positions)
+                unit = "complete_turns_from_long_conversation"
+            rendered = _render_messages(selected_messages)
             items.append(
                 {
                     "source_id": f"S{number}",
                     "source": conversation.source,
-                    "role": message.role,
-                    "text": _question_centered_excerpt(message.text, question),
+                    "unit": unit,
+                    "text": rendered,
+                    "messages": [
+                        {
+                            "message_id": message.coordinate,
+                            "role": message.role,
+                            "text": message.text,
+                        }
+                        for message in selected_messages
+                    ],
                 }
             )
         return {
-            "schema_version": "desktop-memory-context-v0.1",
+            "schema_version": "desktop-memory-whole-turn-context-v0.2",
             "status": "ready",
             "items": items,
-            "privacy": "raw excerpts may be consumed only by the local writer process",
+            "privacy": "whole conversations and turns may be consumed only by local models",
         }
 
     def _progress(self, payload: dict[str, object]) -> None:

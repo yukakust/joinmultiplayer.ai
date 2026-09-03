@@ -207,3 +207,14 @@ The first alpha.16 DMG did not start because its explicit Electron file list
 omitted `audit-store.cjs`. This packaging failure is preserved rather than
 hidden. Alpha.17 adds the module to the packaged `app.asar` and adds a regression
 test for the explicit file list.
+
+Checkpoint 7P builds the owner-accepted whole-turn path into alpha.18. The
+unchanged question first routes to five conversations. A short conversation is
+kept whole; a long one contributes complete user/assistant turns, never a
+character slice or punctuation-made sentence. The pinned Qwen3-Reranker-4B
+classifies each unit as TAKE, NOT_SURE, or DROP before Qwen3-8B reads it. Qwen
+must name an existing message and copy an exact quote; ordinary code checks
+both, DeBERTa checks source support, and an outbound secret scan blocks common
+credential shapes. Large inputs are batched only between conversations, never
+inside a message. The accepted 6/8 development result and its two visible
+weaknesses remain part of the public record; this build does not relabel them.

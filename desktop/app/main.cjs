@@ -6,15 +6,23 @@ const manifest = require("./model-manifest.json");
 const { SetupManager } = require("./setup.cjs");
 const { ChatManager } = require("./chat.cjs");
 const { MemoryService } = require("./memory-service.cjs");
+const { RerankerManager } = require("./reranker.cjs");
 const { privateAuditPaths, recordPrivateAudit } = require("./audit-store.cjs");
 
 let mainWindow = null;
 let setupManager = null;
 let chatManager = null;
 let memoryService = null;
+let rerankerManager = null;
 
 function runtimePath() {
   const executable = process.platform === "win32" ? "llama-cli.exe" : "llama-cli";
+  const root = app.isPackaged ? path.join(process.resourcesPath, "runtime") : path.join(__dirname, "runtime-current");
+  return path.join(root, executable);
+}
+
+function rerankerRuntimePath() {
+  const executable = process.platform === "win32" ? "llama-server.exe" : "llama-server";
   const root = app.isPackaged ? path.join(process.resourcesPath, "runtime") : path.join(__dirname, "runtime-current");
   return path.join(root, executable);
 }
@@ -143,6 +151,7 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
     warning: "PRIVATE: contains the owner's question, local memory excerpts and model output. Never upload this file.",
     stage_guide: {
       sources_received: "The exact local excerpts given to Qwen.",
+      whole_turn_relevance: "Qwen3-Reranker-4B sees the unchanged question and each whole conversation or complete turn before Qwen reads it. DROP is removed; TAKE and NOT_SURE continue.",
       qwen_extraction: "The raw claims and evidence IDs returned by Qwen.",
       evidence_id_check: "Ordinary code resolves Qwen's selected IDs back to exact source text.",
       grounding_signals: "DeBERTa checks one atomic claim against its exact quote plus bounded neighbouring text from the same source. The user's question stays outside this check.",
@@ -161,9 +170,17 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
   };
   try {
     const context = await memoryService.call("context", { question }, 600000);
+    const relevance = await rerankerManager.filter(question, context.items);
+    audit.stages.push({ stage: "whole_turn_relevance", details: {
+      items: relevance.rows.map((item) => ({
+        source_id: item.source_id,
+        score: Number(item.score.toFixed(8)),
+        decision: item.decision,
+      })),
+    } });
     const result = await chatManager.answerFromVerifiedMemory(
       question,
-      context.items,
+      relevance.selected,
       async (candidates) => {
         const items = [];
         for (let index = 0; index < candidates.length; index += 10) {
@@ -222,6 +239,10 @@ app.whenReady().then(() => {
     modelPath: setupManager.modelPath(),
     brainLabel: manifest.models.reader.label,
   });
+  rerankerManager = new RerankerManager({
+    executable: rerankerRuntimePath(),
+    modelPath: setupManager.relevanceModelPath(),
+  });
   memoryService = new MemoryService({
     request: memoryServiceCommand(),
     onProgress: (progress) => {
@@ -238,6 +259,7 @@ app.whenReady().then(() => {
 
 app.on("before-quit", () => {
   if (memoryService) memoryService.stop();
+  if (rerankerManager) rerankerManager.stop();
 });
 
 app.on("window-all-closed", () => {

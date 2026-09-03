@@ -4,6 +4,7 @@ const { buildIdentityPrompt } = require("./identity.cjs");
 const {
   NO_INFORMATION,
   extractionPrompt,
+  wholeTurnExtractionPrompt,
   questionRelevancePrompt,
   validateQuestionRelevance,
   directionalNliJobs,
@@ -14,9 +15,11 @@ const {
   canonicalUnits,
   writerEvidenceFromPiles,
   validateCandidates,
+  validateWholeTurnCandidates,
   writerPrompt,
   validateAnswer,
 } = require("./evidence.cjs");
+const { secretCategories } = require("./secret-scan.cjs");
 
 function cleanOutput(value) {
   return value.replace(/\u001b\[[0-9;]*m/g, "").trim();
@@ -37,6 +40,24 @@ function extractAnswer(value, prompt) {
       ? output.slice(truncatedEnd)
       : output;
   return answer.replace(/\n+\s*Exiting\.\.\.\s*$/, "").trim();
+}
+
+function wholeTurnBatches(sources, maxCharacters = 90_000) {
+  const batches = [];
+  let current = [];
+  let size = 0;
+  for (const source of sources) {
+    const sourceSize = String(source?.text || "").length;
+    if (current.length && size + sourceSize > maxCharacters) {
+      batches.push(current);
+      current = [];
+      size = 0;
+    }
+    current.push(source);
+    size += sourceSize;
+  }
+  if (current.length) batches.push(current);
+  return batches;
 }
 
 class ChatManager {
@@ -99,14 +120,39 @@ class ChatManager {
       return { answer: NO_INFORMATION, diagnostic: "no_source_excerpts" };
     }
 
-    const extracted = await this.runPrompt(
-      extractionPrompt(cleanQuestion, sources),
-      cleanQuestion,
-      1024,
-      "You extract exact evidence. Return only valid JSON.",
-    );
-    observe("qwen_extraction", { raw_answer: extracted.answer });
-    const checked = validateCandidates(extracted.answer, sources);
+    const wholeTurns = sources.every((source) => Array.isArray(source?.messages));
+    let checked;
+    if (wholeTurns) {
+      const runs = [];
+      const accepted = [];
+      const rejected = [];
+      let extractedCount = 0;
+      for (const batch of wholeTurnBatches(sources)) {
+        const result = await this.runPrompt(
+          wholeTurnExtractionPrompt(cleanQuestion, batch),
+          cleanQuestion,
+          1024,
+          "You extract exact evidence. Return only valid JSON.",
+        );
+        const validated = validateWholeTurnCandidates(result.answer, batch);
+        runs.push({ source_ids: batch.map((item) => item.source_id), raw_answer: result.answer });
+        extractedCount += validated.extracted;
+        accepted.push(...validated.accepted);
+        rejected.push(...validated.rejected);
+      }
+      accepted.forEach((item, index) => { item.candidate_id = `E${index + 1}`; });
+      checked = { extracted: extractedCount, accepted: accepted.slice(0, 10), rejected, status: "BATCHED" };
+      observe("qwen_extraction", { runs });
+    } else {
+      const extracted = await this.runPrompt(
+        extractionPrompt(cleanQuestion, sources),
+        cleanQuestion,
+        1024,
+        "You extract exact evidence. Return only valid JSON.",
+      );
+      observe("qwen_extraction", { raw_answer: extracted.answer });
+      checked = validateCandidates(extracted.answer, sources);
+    }
     observe("evidence_id_check", checked);
     if (!checked.accepted.length) {
       const diagnostic = checked.extracted ? "no_valid_evidence_ids" : "no_candidates_extracted";
@@ -130,6 +176,16 @@ class ChatManager {
     if (!grounded.length) {
       observe("stopped", { reason: "no_grounded_evidence" });
       return { answer: NO_INFORMATION, diagnostic: "no_grounded_evidence" };
+    }
+
+    const blockedCategories = secretCategories(JSON.stringify(grounded));
+    observe("outbound_secret_scan", { blocked: blockedCategories.length > 0, categories: blockedCategories });
+    if (blockedCategories.length) {
+      observe("stopped", { reason: "secret_blocked" });
+      return {
+        answer: "I found relevant information, but it was blocked because it may contain a secret.",
+        diagnostic: "secret_blocked",
+      };
     }
 
     const relevance = await this.runPrompt(
@@ -206,7 +262,7 @@ class ChatManager {
       "-sys", systemPrompt || buildIdentityPrompt(identityQuestion, this.brainLabel),
       "-n", String(outputTokens),
       "--temp", "0.2",
-      "-c", "8192",
+      "-c", "32768",
       "--reasoning", "off",
       "--single-turn",
       "--simple-io",
@@ -258,4 +314,4 @@ class ChatManager {
   }
 }
 
-module.exports = { ChatManager, cleanOutput, extractAnswer };
+module.exports = { ChatManager, cleanOutput, extractAnswer, wholeTurnBatches };

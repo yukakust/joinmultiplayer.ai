@@ -1,6 +1,6 @@
 {
   "name": "pocket-i-desktop",
-  "version": "0.1.0-alpha.17",
+  "version": "0.1.0-alpha.18",
   "private": true,
   "description": "Pocket i desktop alpha",
   "main": "main.cjs",
@@ -27,6 +27,8 @@
       "evidence.cjs",
       "identity.cjs",
       "memory-service.cjs",
+      "reranker.cjs",
+      "secret-scan.cjs",
       "setup.cjs",
       "model-manifest.json",
       "nli-manifest.json",
