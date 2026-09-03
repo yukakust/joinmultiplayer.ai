@@ -295,6 +295,35 @@ evidence, not an end-to-end or phone result. Decision:
 
 1. One installable app with pinned presets and uninstall/update.
 2. Real-phone runtime measurements for quantized 1.7B and the 4B reranker.
+
+### Checkpoint 7S.2 — executable Miro order
+
+The previous desktop candidate accidentally let Qwen write a claim before the
+accepted raw-passage reranker. The late 7S.1 question-to-claim check could not
+repair this: all eight already grounded claims looked answer-shaped to Qwen.
+That ordering is rejected and remains part of the experiment history.
+
+The executable order is now frozen in
+`/experiments/E007/miro-executable-harness-v0.1.json`:
+
+```text
+unchanged question
+→ frozen raw retrieval candidates
+→ security boundary
+→ Qwen3-Reranker-4B on question ↔ raw excerpt
+→ Qwen3-8B extracts atomic claims and selects existing evidence IDs
+→ ordinary code resolves exact evidence
+→ DeBERTa checks source ↔ claim
+→ evidence shelves
+→ Qwen3-8B writes only from accepted shelves
+→ ordinary code checks final citations
+```
+
+Qwen must not see a raw excerpt that the reranker marked `DROP`. The focused
+private replay protocol is frozen before inference at
+`/experiments/E007/raw-first-reranker-replay-protocol-v0.1.json`. It reuses the
+same eight already opened cases and therefore cannot establish unseen
+generalization or retrieval recall.
 3. Allowlisted local-library adapters plus a privacy-safe capability card.
 4. One integrated run across all accepted modules rather than separate scripts.
 5. An authenticated MacBook + yukabox + phone room with complete receipts.

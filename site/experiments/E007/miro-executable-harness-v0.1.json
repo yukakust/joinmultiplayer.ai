@@ -1,0 +1,28 @@
+{
+  "schema_version": "e007-miro-executable-harness-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.2",
+  "status": "locked_before_private_replay",
+  "purpose": "One executable source of truth for the accepted Miro harness order.",
+  "ordered_path": [
+    {"step": 1, "miro": "Intent", "implementation": "Keep the owner's question unchanged."},
+    {"step": 2, "miro": "Discovery + router", "implementation": "Use the already frozen retrieval candidates for this replay."},
+    {"step": 3, "miro": "Security policy", "implementation": "Use only the already owner-visible local excerpts; do not publish their text."},
+    {"step": 4, "miro": "Local RAG", "implementation": "Treat each retrieved excerpt as a raw candidate, not as an answer."},
+    {"step": 5, "miro": "Reranker", "implementation": "Qwen3-Reranker-4B Q4_K_M compares the unchanged question with each raw excerpt. TAKE and NOT_SURE continue; DROP stops."},
+    {"step": 6, "miro": "Evidence extractor", "implementation": "Only after step 5, Qwen3-8B writes atomic claims and selects existing evidence IDs."},
+    {"step": 7, "miro": "Evidence capsule", "implementation": "Ordinary code resolves selected IDs to exact source text and rejects invented IDs."},
+    {"step": 8, "miro": "Semantic validation", "implementation": "DeBERTa checks whether the exact source context entails each claim. Neutral and contradiction stop."},
+    {"step": 9, "miro": "Evidence board + merge shelves", "implementation": "Ordinary code keeps only grounded claims and preserves separate versions."},
+    {"step": 10, "miro": "Synthesizer", "implementation": "Qwen3-8B writes a short answer from accepted claims only."},
+    {"step": 11, "miro": "Final verifier", "implementation": "Ordinary code requires every factual answer to cite an accepted evidence ID; otherwise it fails closed."},
+    {"step": 12, "miro": "Human answer", "implementation": "Return the answer or the fixed no-supported-information response."}
+  ],
+  "forbidden_orders": [
+    "Qwen claim extraction before raw-excerpt reranking",
+    "question-to-Qwen-written-claim relevance as a substitute for raw-excerpt reranking",
+    "DeBERTa as the only relevance or truth judge",
+    "writer access to rejected raw excerpts"
+  ],
+  "claim_boundary": "This contract makes the accepted middle and final path executable. The private replay freezes the earlier discovery output instead of rerunning the local index. It is not yet a new desktop build or a physical swarm test."
+}

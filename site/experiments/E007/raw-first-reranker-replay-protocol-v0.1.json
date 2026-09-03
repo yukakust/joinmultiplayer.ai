@@ -1,0 +1,26 @@
+{
+  "schema_version": "e007-raw-first-reranker-replay-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.2",
+  "status": "locked_before_private_replay",
+  "hypothesis": "Putting the accepted Qwen3-Reranker-4B before Qwen3-8B will remove wrong-context excerpts before they can be rewritten into answer-shaped claims, while preserving the excerpts that contain the five useful answers in the frozen eight-case replay.",
+  "architecture": "/experiments/E007/miro-executable-harness-v0.1.json",
+  "frozen_private_input": "The same eight cases that produced grounded claims in the owner's 30-question checkpoint 7R run.",
+  "models": {
+    "raw_relevance": {"id": "Qwen/Qwen3-Reranker-4B", "revision": "22e683669bc0f0bd69640a1354a6d0aebcfeede5", "quantization": "Q4_K_M", "sha256": "09341112a9147bf0dc96f6ec98b006f544b76bc18ab68c9f7f6a94e9890b613e"},
+    "extractor_and_writer": {"id": "Qwen3-8B", "quantization": "Q4_K_M", "decoding": "temperature 0, thinking disabled"},
+    "source_support": {"id": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli", "decision": "entailment only"}
+  },
+  "reranker_thresholds": {"take_at_or_above": 0.92222771, "drop_at_or_below": 0.00292693, "between": "NOT_SURE and continue"},
+  "frozen_human_labels": {"useful_raw_cases": 5, "wrong_context_raw_cases": 3},
+  "success_gate": {
+    "useful_raw_cases_lost": 0,
+    "wrong_context_raw_cases_reaching_qwen": 0,
+    "invented_evidence_ids_accepted": 0,
+    "deberta_non_entailments_reaching_writer": 0,
+    "all_eight_receive_a_terminal_answer_or_honest_empty": true,
+    "human_review": "authoritative for final answer meaning"
+  },
+  "privacy": "Raw questions, excerpts, model outputs and final answers remain private. Only counts, architectural order, failures and the decision may be published.",
+  "claim_boundary": "Outcome-conditioned development replay on eight already opened cases. It tests the corrected order, not unseen generalization, retrieval recall, a packaged app or physical devices."
+}
