@@ -147,6 +147,7 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
       evidence_id_check: "Ordinary code resolves Qwen's selected IDs back to exact source text.",
       grounding_signals: "DeBERTa checks one atomic claim against its exact quote plus bounded neighbouring text from the same source. The user's question stays outside this check.",
       grounded_evidence: "Only source-grounded claims continue.",
+      question_relevance: "Qwen checks whether each grounded claim answers the owner's question, contributes one needed part, or is unrelated. Truth and source support are not judged here.",
       primary_piles: "Bidirectional DeBERTa groups mutually entailing claims without deleting alternatives.",
       qwen_canonicals: "Qwen rewrites each pile into one readable claim.",
       canonical_validation: "Bidirectional DeBERTa checks every rewrite against every original claim.",

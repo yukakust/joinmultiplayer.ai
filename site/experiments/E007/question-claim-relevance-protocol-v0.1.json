@@ -1,0 +1,44 @@
+{
+  "schema_version": "e007-question-claim-relevance-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.1",
+  "status": "locked_before_owner_run",
+  "hypothesis": "A separate three-state question-to-claim gate can reject source-grounded but irrelevant claims without losing claims that answer the question directly or contribute one necessary part.",
+  "frozen_input": "The private 30-question checkpoint 7R result already produced on the owner's Mac.",
+  "model": {
+    "reader": "the already installed Qwen3-8B Q4_K_M GGUF",
+    "weights_changed": false
+  },
+  "input_to_model": [
+    "the owner's exact question",
+    "candidate IDs",
+    "source-grounded atomic claims"
+  ],
+  "hidden_from_model": [
+    "source quotes",
+    "conversation text",
+    "search scores",
+    "DeBERTa labels",
+    "expected answers",
+    "human labels"
+  ],
+  "relations": {
+    "answers": "The claim directly answers all or one explicit part of the question.",
+    "contributes": "The claim supplies a necessary reason, limitation, condition, consequence, or other answer part that becomes useful with another claim.",
+    "unrelated": "The claim may be true or share words with the question, but does not help answer it. Merely repeating the question is unrelated."
+  },
+  "code_policy": {
+    "keep": ["answers", "contributes"],
+    "drop": ["unrelated"],
+    "invalid_or_missing_decision": "fail_closed"
+  },
+  "acceptance": {
+    "relevant_claims_dropped_max": 0,
+    "irrelevant_claims_kept_max": 0,
+    "structured_decisions_required": "all",
+    "human_review": "authoritative"
+  },
+  "next_if_passed": "Insert the gate after source grounding and rerun the complete frozen 30-question pipeline.",
+  "privacy": "Questions, claims, raw model output, source excerpts and human labels remain on the owner's Mac. Only aggregate counts and the architectural decision may be published.",
+  "claim_boundary": "This replay isolates question-to-claim relevance. It does not rerun retrieval, extraction, source anchoring, DeBERTa grounding, pile construction or final writing."
+}

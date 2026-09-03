@@ -4,6 +4,8 @@ const { buildIdentityPrompt } = require("./identity.cjs");
 const {
   NO_INFORMATION,
   extractionPrompt,
+  questionRelevancePrompt,
+  validateQuestionRelevance,
   directionalNliJobs,
   mutualEntailmentPiles,
   canonicalPrompt,
@@ -130,9 +132,26 @@ class ChatManager {
       return { answer: NO_INFORMATION, diagnostic: "no_grounded_evidence" };
     }
 
-    const primaryJobs = directionalNliJobs(grounded, "P");
+    const relevance = await this.runPrompt(
+      questionRelevancePrompt(cleanQuestion, grounded),
+      cleanQuestion,
+      512,
+      "You classify whether grounded claims answer a question. Return only valid JSON.",
+    );
+    const relevant = validateQuestionRelevance(relevance.answer, grounded);
+    observe("question_relevance", { raw_answer: relevance.answer, ...relevant });
+    if (!relevant.valid) {
+      observe("stopped", { reason: "invalid_question_relevance" });
+      return { answer: NO_INFORMATION, diagnostic: "invalid_question_relevance" };
+    }
+    if (!relevant.accepted.length) {
+      observe("stopped", { reason: "no_question_relevant_evidence" });
+      return { answer: NO_INFORMATION, diagnostic: "no_question_relevant_evidence" };
+    }
+
+    const primaryJobs = directionalNliJobs(relevant.accepted, "P");
     const primarySignals = primaryJobs.length ? await judge(primaryJobs) : [];
-    const primaryPiles = mutualEntailmentPiles(grounded, primaryJobs, primarySignals);
+    const primaryPiles = mutualEntailmentPiles(relevant.accepted, primaryJobs, primarySignals);
     observe("primary_piles", {
       signals: primarySignals,
       piles: primaryPiles.map((pile, index) => ({ pile_id: `P${index + 1}`, candidate_ids: pile.map((item) => item.candidate_id) })),

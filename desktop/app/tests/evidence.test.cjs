@@ -11,7 +11,43 @@ const {
   canonicalValidationJobs,
   canonicalUnits,
   writerEvidenceFromPiles,
+  questionRelevancePrompt,
+  validateQuestionRelevance,
 } = require("../evidence.cjs");
+
+test("question relevance keeps direct and compositional answer parts but drops adjacent truth", () => {
+  const candidates = [
+    { candidate_id: "E1", claim: "DeBERTa was added as a fast cautious reject signal." },
+    { candidate_id: "E2", claim: "It misses context, so it cannot be the only judge." },
+    { candidate_id: "E3", claim: "The /x route was absent from a Caddy allowlist." },
+  ];
+  const prompt = questionRelevancePrompt("Why was DeBERTa added, and why not use it alone?", candidates);
+  assert.match(prompt, /contributes/);
+  assert.doesNotMatch(prompt, /EXACT SOURCE/);
+  const result = validateQuestionRelevance({ decisions: [
+    { candidate_id: "E1", relation: "answers" },
+    { candidate_id: "E2", relation: "contributes" },
+    { candidate_id: "E3", relation: "unrelated" },
+  ] }, candidates);
+  assert.equal(result.valid, true);
+  assert.deepEqual(result.accepted.map((item) => item.candidate_id), ["E1", "E2"]);
+  assert.deepEqual(result.rejected.map((item) => item.candidate_id), ["E3"]);
+});
+
+test("question relevance fails closed on missing, duplicate, or invented decisions", () => {
+  const candidates = [{ candidate_id: "E1", claim: "One" }, { candidate_id: "E2", claim: "Two" }];
+  assert.equal(validateQuestionRelevance({ decisions: [
+    { candidate_id: "E1", relation: "answers" },
+  ] }, candidates).valid, false);
+  assert.equal(validateQuestionRelevance({ decisions: [
+    { candidate_id: "E1", relation: "answers" },
+    { candidate_id: "E1", relation: "unrelated" },
+  ] }, candidates).valid, false);
+  assert.equal(validateQuestionRelevance({ decisions: [
+    { candidate_id: "E1", relation: "answers" },
+    { candidate_id: "E9", relation: "unrelated" },
+  ] }, candidates).valid, false);
+});
 
 test("ordinary code resolves selected evidence IDs to exact source text", () => {
   const sources = [{ source_id: "S1", text: "First fact. DeBERTa is a cautious second signal, not the only judge." }];

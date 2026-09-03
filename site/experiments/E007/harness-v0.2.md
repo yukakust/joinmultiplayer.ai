@@ -231,6 +231,20 @@ answers. Therefore phrase fallback is **not accepted for the desktop app**;
 the technical-anchor result remains 3/4. Result:
 `/experiments/E007/phrase-fallback-30-result-v0.1.json`.
 
+### Checkpoint 7S.1 — question-to-claim relevance
+
+Checkpoint 7R exposed a missing bridge. DeBERTa can establish that an exact
+source passage supports one atomic claim, but that does not establish that the
+claim helps answer the owner's question. The new gate receives only the exact
+question and already-grounded claims. It must label every claim `ANSWERS`,
+`CONTRIBUTES`, or `UNRELATED`; code keeps the first two and drops the third.
+Missing, duplicate, invented, or malformed decisions fail closed.
+
+The first replay is deliberately isolated: it reuses the private grounded
+claims from the frozen 30-question checkpoint and does not rerun retrieval or
+writing. Human review is authoritative. Protocol:
+`/experiments/E007/question-claim-relevance-protocol-v0.1.json`.
+
 ## Locked Gate 14A: write only what the swarm supplied
 
 Ten English synthetic cases are frozen before Qwen's first run. Eight provide
