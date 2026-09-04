@@ -1,0 +1,22 @@
+{
+  "schema_version": "e007-public-checkpoint-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.5",
+  "kind": "physical-development-diagnostic",
+  "date": "2026-09-04",
+  "device": "owner MacBook",
+  "app_version": "0.1.0-alpha.21",
+  "privacy": "Synthetic benchmark text and aggregate byte counts only. No owner question, conversation text, paths, identifiers, or model excerpts are included.",
+  "question": "Was the packaged local DeBERTa model itself responsible for the ten-minute grounding timeout?",
+  "measurements": {
+    "cold_one_seconds": 9.446,
+    "warm_one_seconds": 0.166,
+    "warm_eight_seconds": 2.37,
+    "warm_eight_labels_returned": 8,
+    "application_nli_request_bytes": 134732,
+    "local_service_request_limit_bytes": 16384
+  },
+  "result": "The packaged DeBERTa model is healthy and fast after loading. The failed application request exceeded the local JSON-line transport limit by more than eight times.",
+  "decision": "Do not increase model timeouts. Repair the local transport contract or pass bounded evidence context before repeating the full physical test.",
+  "claim_boundary": "This diagnoses one observed alpha.21 timeout. It does not yet prove that the repaired full pipeline will answer correctly."
+}
