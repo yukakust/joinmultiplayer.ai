@@ -1,0 +1,21 @@
+{
+  "schema_version": "e007-miro-current-harness-v0.1",
+  "experiment": "E007",
+  "checkpoint": "CURRENT HARNESS alpha.26",
+  "recorded_at": "2026-09-04",
+  "board_url": "https://miro.com/app/board/uXjVHwXKh2w=/",
+  "frame_title": "E007 · CURRENT HARNESS · alpha.26 · 2026-09-04",
+  "history_policy": "Existing diagrams and failed checkpoints were preserved.",
+  "change_from_alpha24": [
+    "Yuka's server is the default selected execution path, so no local model download is needed.",
+    "Default selection is not consent: no health check or inference request is sent before the owner accepts the warning.",
+    "The owner can decline or later disconnect the server.",
+    "The private audit now stores the exact pre-reranker inputs before the network call and records the returned decisions."
+  ],
+  "privacy_warning": "The owner's question and selected Codex or Claude excerpts leave the computer for Yuka's private yukabox through Tailscale. Do not use this alpha mode for secrets.",
+  "test_status": {
+    "python": "39/39 passed",
+    "desktop": "46/46 passed",
+    "physical_dmg": "not yet built"
+  }
+}

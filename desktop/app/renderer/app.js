@@ -25,6 +25,7 @@ const remoteCancel = document.querySelector("#remote-cancel");
 const remoteBrainToggle = document.querySelector("#remote-brain-toggle");
 const privacyNote = document.querySelector("#privacy-note");
 let remoteConsented = false;
+let remoteConsentDismissed = false;
 let memoryReady = false;
 let memoryBuilding = false;
 let memoryStartedAt = null;
@@ -116,11 +117,15 @@ async function renderStatus() {
       modelStatus.textContent = "OFF";
       rerankerStatus.textContent = "OFF";
       runtimeStatus.textContent = "OFF";
-      progressLabel.textContent = "Yuka’s server is off.";
+      progressLabel.textContent = "Yuka’s server is selected. No local model download is needed.";
       bar.style.width = "0%";
       install.textContent = "USE YUKA’S SERVER";
       install.hidden = false;
       install.disabled = false;
+      if (!remoteConsentDismissed) {
+        setupView.hidden = true;
+        remoteConsent.hidden = false;
+      }
       return;
     }
     modelStatus.textContent = status.model.installed ? "CONNECTED" : "OFFLINE";
@@ -255,6 +260,7 @@ remoteBrainToggle.addEventListener("click", async () => {
 });
 
 remoteCancel.addEventListener("click", async () => {
+  remoteConsentDismissed = true;
   remoteConsent.hidden = true;
   await renderStatus();
 });
@@ -263,6 +269,7 @@ remoteConfirm.addEventListener("click", async () => {
   remoteConfirm.disabled = true;
   errorBox.hidden = true;
   try {
+    remoteConsentDismissed = false;
     await window.pocketI.setRemoteBrain(true);
     remoteConsent.hidden = true;
     await renderStatus();

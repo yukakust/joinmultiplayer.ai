@@ -230,10 +230,12 @@ relevant sentence TAKE and unrelated garden text DROP. This is an owner-only
 development connection, not a public service. A packaged Mac run remains the
 physical checkpoint.
 
-Checkpoint 7U makes that remote path an explicit owner choice. Alpha.25 starts
-with Yuka's server off, does not health-check or call either remote model before
+Checkpoint 7U makes that remote path an explicit owner choice. Alpha.26 selects
+Yuka's server as the default path, so a new owner does not download local model
+weights. It still does not health-check or call either remote model before
 consent, and blocks both ordinary and memory-backed questions at the main
-process boundary while remote access is off. The consent screen says that the
+process boundary while consent is absent. The consent screen opens on first
+launch and says that the
 question and selected Codex or Claude excerpts leave the computer for Yuka's
 private yukabox through Tailscale and warns not to use this mode for secrets.
 Consent is stored locally, is bound to the exact reader and reranker endpoints,

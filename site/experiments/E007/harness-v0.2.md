@@ -391,9 +391,9 @@ outbound capsule for secrets, and returned `FOUND`, `EMPTY`, or `BLOCKED`.
 
 ## Checkpoint 7U — remote brain requires explicit consent
 
-The shared yukabox reader and reranker are now an optional execution mode, not
-an automatic transport choice. A fresh installation keeps the remote brain off.
-Before the first remote request, the owner sees that their question and selected
+The shared yukabox reader and reranker are now the default execution path, so a
+fresh installation does not download model weights. Default selection is not
+silent consent: before the first remote request, the owner sees that their question and selected
 Codex or Claude excerpts will leave the computer and be processed on Yuka's
 private yukabox through Tailscale. The warning says not to use this alpha mode
 for secrets. Only an explicit **I UNDERSTAND · CONNECT** action stores consent.
