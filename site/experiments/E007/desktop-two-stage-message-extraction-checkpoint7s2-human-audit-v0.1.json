@@ -1,0 +1,42 @@
+{
+  "schema_version": "e007-two-stage-message-extraction-30-human-audit-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.2",
+  "status": "development_promising_not_ready_to_integrate",
+  "reviewed_cases": 30,
+  "corrected_summary": {
+    "required_messages_selected": 40,
+    "required_messages_total": 40,
+    "required_evidence_extracted": 37,
+    "answerable_cases_complete": 17,
+    "answerable_cases_total": 20,
+    "no_answer_cases_correctly_empty": 9,
+    "no_answer_cases_total": 10,
+    "strict_cases_passed": 26,
+    "strict_cases_total": 30,
+    "placeholder_claims": 0,
+    "truly_irrelevant_sources_accepted": 1
+  },
+  "four_failures": [
+    {
+      "id": "E7-Q01",
+      "failure": "Both correct messages were selected. The separate reader accepted the cause but incorrectly returned EMPTY for the safety rule."
+    },
+    {
+      "id": "E7-Q02",
+      "failure": "Both correct messages were selected. The separate reader accepted the cause but incorrectly returned EMPTY for the safety rule."
+    },
+    {
+      "id": "E7-Q05",
+      "failure": "Both correct messages were selected. The separate reader accepted the cause but incorrectly returned EMPTY for the safety rule."
+    },
+    {
+      "id": "E7-Q29",
+      "failure": "No answer was supplied, but the selector matched a green-dot note about a different device and the reader accepted it."
+    }
+  ],
+  "metric_correction": "The automatic run called five non-required sources false positives. Human review found that four were relevant copied opinions in explicit dispute questions and should remain as alternative evidence. Only E7-Q29 was truly irrelevant.",
+  "finding": "Simple message handles solved identifier loss, and line handles made every returned quote mechanically exact. The remaining errors are now narrow and visible: three false EMPTY decisions after correct selection, plus one same-words/different-device false positive.",
+  "decision": "Do not integrate into the desktop yet. First test a simpler extraction contract that never asks whether an already-selected message answers the whole multi-part question; it should only extract what that one message says, then let the later relevance stage decide.",
+  "privacy": "The run used only the public synthetic E007 world. No owner memory appears in this audit."
+}
