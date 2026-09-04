@@ -1,0 +1,25 @@
+{
+  "schema_version": "e007-desktop-two-stage-integration-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.3",
+  "status": "implemented_and_development_checked_awaiting_physical_mac",
+  "package": "Pocket i 0.1.0-alpha.21",
+  "change": [
+    "Real message identifiers are replaced with short M handles before Qwen sees them.",
+    "Message selection and fact extraction are separate Qwen calls.",
+    "The second call may return one useful partial fact without answering the whole question.",
+    "Qwen selects exact line handles; ordinary code restores the original source text.",
+    "Literal schema placeholders and invented handles are blocked.",
+    "The later question-to-claim stage remains fail-closed before the final writer."
+  ],
+  "development_checks": {
+    "desktop_node_tests": "43/43",
+    "two_stage_python_tests": "4/4",
+    "previously_lost_safety_messages_recovered": "3/3",
+    "previous_false_positive_reached_writer": false,
+    "false_positive_stop_reason": "The relevance model omitted one required decision; strict validation rejected the incomplete receipt and stopped before writing."
+  },
+  "evidence_boundary": "The three repaired cases and one negative replay use the public synthetic E007 world. The actual packaged Mac path has not yet run.",
+  "next": "Build alpha.21 on the owner Mac, install it, repeat the fixed English question list, and inspect the durable per-question logs before inviting another owner.",
+  "privacy": "No owner memory, question, quote, source identifier, path, address, or credential is published."
+}

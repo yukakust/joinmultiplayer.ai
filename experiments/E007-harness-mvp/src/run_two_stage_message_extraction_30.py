@@ -162,9 +162,13 @@ def main() -> None:
     parser.add_argument("--reader-url", default="http://127.0.0.1:18180")
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--only", nargs="*")
     args = parser.parse_args()
     world = json.loads(args.world.read_text(encoding="utf-8"))
     cases = build_cases(world)
+    if args.only:
+        allowed = set(args.only)
+        cases = [case for case in cases if case["id"] in allowed]
     rows = []
     if args.resume and args.output.exists():
         previous = json.loads(args.output.read_text(encoding="utf-8"))
@@ -183,13 +187,13 @@ def main() -> None:
             "checkpoint": "7S.2",
             "status": "running" if len(rows) < len(cases) else "completed",
             "world_sha256": sha256(args.world),
-            "frozen_design": {"answerable": 20, "no_answer_in_packet": 10},
+            "frozen_design": {"answerable": 20, "no_answer_in_packet": 10, "executed_subset": args.only or "all"},
             "summary": summary(rows),
             "rows": rows,
         }
         atomic_write(args.output, payload)
         print(json.dumps({
-            "case": f"{number}/30",
+            "case": f"{number}/{len(cases)}",
             "id": case["id"],
             "kind": case["kind"],
             "passed": evaluation["passed"],

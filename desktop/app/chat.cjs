@@ -5,7 +5,11 @@ const { remoteChatCompletion } = require("./remote-inference.cjs");
 const {
   NO_INFORMATION,
   extractionPrompt,
-  wholeTurnExtractionPrompt,
+  handledMessages,
+  messageSelectionPrompt,
+  validateMessageSelection,
+  selectedMessageExtractionPrompt,
+  validateSelectedMessageClaims,
   questionRelevancePrompt,
   validateQuestionRelevance,
   directionalNliJobs,
@@ -43,7 +47,7 @@ function extractAnswer(value, prompt) {
   return answer.replace(/\n+\s*Exiting\.\.\.\s*$/, "").trim();
 }
 
-function wholeTurnBatches(sources, maxCharacters = 90_000) {
+function wholeTurnBatches(sources, maxCharacters = 48_000) {
   const batches = [];
   let current = [];
   let size = 0;
@@ -125,26 +129,52 @@ class ChatManager {
     const wholeTurns = sources.every((source) => Array.isArray(source?.messages));
     let checked;
     if (wholeTurns) {
-      const runs = [];
+      const selectionRuns = [];
+      const extractionRuns = [];
       const accepted = [];
       const rejected = [];
       let extractedCount = 0;
       for (const batch of wholeTurnBatches(sources)) {
-        const result = await this.runPrompt(
-          wholeTurnExtractionPrompt(cleanQuestion, batch),
+        const messages = handledMessages(batch);
+        const selection = await this.runPrompt(
+          messageSelectionPrompt(cleanQuestion, messages),
           cleanQuestion,
-          1024,
-          "You extract exact evidence. Return only valid JSON.",
+          256,
+          "You select potentially useful messages. Return only valid JSON.",
         );
-        const validated = validateWholeTurnCandidates(result.answer, batch);
-        runs.push({ source_ids: batch.map((item) => item.source_id), raw_answer: result.answer });
-        extractedCount += validated.extracted;
-        accepted.push(...validated.accepted);
-        rejected.push(...validated.rejected);
+        const selected = validateMessageSelection(selection.answer, messages);
+        selectionRuns.push({
+          source_ids: batch.map((item) => item.source_id),
+          handles: messages.map((item) => ({ handle: item.handle, message_id: item.message_id, source_id: item.source_id })),
+          raw_answer: selection.answer,
+          selected_handles: selected.selected.map((item) => item.handle),
+          rejected: selected.rejected,
+        });
+        rejected.push(...selected.rejected);
+        for (const message of selected.selected) {
+          const extraction = await this.runPrompt(
+            selectedMessageExtractionPrompt(cleanQuestion, message),
+            cleanQuestion,
+            768,
+            "You extract grounded partial facts from one selected message. Return only valid JSON.",
+          );
+          const validated = validateSelectedMessageClaims(extraction.answer, message);
+          extractionRuns.push({
+            handle: message.handle,
+            message_id: message.message_id,
+            source_id: message.source_id,
+            raw_answer: extraction.answer,
+            status: validated.status,
+          });
+          extractedCount += validated.extracted;
+          accepted.push(...validated.accepted);
+          rejected.push(...validated.rejected);
+        }
       }
       accepted.forEach((item, index) => { item.candidate_id = `E${index + 1}`; });
       checked = { extracted: extractedCount, accepted: accepted.slice(0, 10), rejected, status: "BATCHED" };
-      await observe("qwen_extraction", { runs });
+      await observe("qwen_message_selection", { runs: selectionRuns });
+      await observe("qwen_extraction", { runs: extractionRuns });
     } else {
       const extracted = await this.runPrompt(
         extractionPrompt(cleanQuestion, sources),

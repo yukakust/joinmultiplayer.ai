@@ -143,6 +143,46 @@ if (prompt.includes("Find evidence that helps answer")) {
   assert.deepEqual(result, { answer: "DeBERTa is a cautious second signal [E1].", diagnostic: "answered" });
 });
 
+test("whole-turn memory uses separate message selection and partial extraction", { skip: process.platform === "win32" }, async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-two-stage-answer-"));
+  const executable = path.join(directory, "fake-llama-cli");
+  await fs.writeFile(executable, `#!/usr/bin/env node
+const prompt = process.argv[process.argv.indexOf("-p") + 1];
+if (prompt.includes("Choose messages that contain information")) {
+  process.stdout.write(JSON.stringify({message_ids:["M1","M2"]}));
+} else if (prompt.includes("MESSAGE M1")) {
+  process.stdout.write(JSON.stringify({status:"FOUND",claims:[{claim:"The cause is alignment drift.",message_id:"M1",evidence_ids:["M1-L1"]}]}));
+} else if (prompt.includes("MESSAGE M2")) {
+  process.stdout.write(JSON.stringify({status:"FOUND",claims:[{claim:"Keep it offline.",message_id:"M2",evidence_ids:["M2-L1"]}]}));
+} else if (prompt.includes("Judge whether each claim helps answer")) {
+  process.stdout.write(JSON.stringify({decisions:[{candidate_id:"E1",relation:"answers"},{candidate_id:"E2",relation:"answers"}]}));
+} else if (prompt.includes("Rewrite each pile")) {
+  process.stdout.write(JSON.stringify({piles:[{pile_id:"P1",claim:"The cause is alignment drift."},{pile_id:"P2",claim:"Keep it offline."}]}));
+} else {
+  process.stdout.write("Alignment drift is the cause; keep it offline [E1].");
+}
+`, { mode: 0o700 });
+  const chat = new ChatManager({ executable, modelPath: path.join(directory, "model.gguf"), timeoutMs: 5000 });
+  const stages = [];
+  const result = await chat.answerFromVerifiedMemory(
+    "What happened and what should I do?",
+    [{
+      source_id: "S1",
+      text: "[real-1] Cause: alignment drift.\n[real-2] Action: keep it offline.",
+      messages: [
+        { message_id: "real-1", role: "assistant", text: "Cause: alignment drift." },
+        { message_id: "real-2", role: "assistant", text: "Action: keep it offline." },
+      ],
+    }],
+    async (items) => items.map((item) => ({ candidate_id: item.candidate_id, label: "entailment" })),
+    (stage, details) => stages.push({ stage, details }),
+  );
+  assert.equal(result.diagnostic, "answered");
+  assert.equal(stages.some((item) => item.stage === "qwen_message_selection"), true);
+  assert.equal(stages.find((item) => item.stage === "evidence_id_check").details.accepted.length, 2);
+  assert.equal(stages.find((item) => item.stage === "evidence_id_check").details.accepted[1].quote, "Action: keep it offline.");
+});
+
 test("strict memory answer blocks a neutral adjacent-memory claim before the writer", { skip: process.platform === "win32" }, async () => {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-strict-neutral-"));
   const executable = path.join(directory, "fake-llama-cli");

@@ -15,7 +15,55 @@ const {
   validateQuestionRelevance,
   wholeTurnExtractionPrompt,
   validateWholeTurnCandidates,
+  handledMessages,
+  messageSelectionPrompt,
+  validateMessageSelection,
+  selectedMessageExtractionPrompt,
+  validateSelectedMessageClaims,
 } = require("../evidence.cjs");
+
+test("two-stage whole-message interface hides real IDs and restores exact lines", () => {
+  const sources = [{
+    source_id: "S1",
+    messages: [{
+      message_id: "codex:private-long-id:10313",
+      role: "assistant",
+      text: "Cause: alignment drift.\nAction: keep it offline.",
+    }],
+  }];
+  const messages = handledMessages(sources);
+  assert.equal(messages[0].handle, "M1");
+  const selectionPrompt = messageSelectionPrompt("What happened and what next?", messages);
+  assert.match(selectionPrompt, /\[M1\]/);
+  assert.doesNotMatch(selectionPrompt, /private-long-id/);
+  const selected = validateMessageSelection({ message_ids: ["M1"] }, messages);
+  assert.equal(selected.selected.length, 1);
+  const prompt = selectedMessageExtractionPrompt("What happened and what next?", messages[0]);
+  assert.match(prompt, /M1-L1/);
+  assert.match(prompt, /M1-L2/);
+  const checked = validateSelectedMessageClaims({ status: "FOUND", claims: [{
+    claim: "Keep it offline.",
+    message_id: "M1",
+    evidence_ids: ["M1-L2"],
+  }] }, messages[0]);
+  assert.equal(checked.accepted.length, 1);
+  assert.equal(checked.accepted[0].quote, "Action: keep it offline.");
+  assert.equal(checked.accepted[0].evidence_blocks[0].message_id, "codex:private-long-id:10313");
+});
+
+test("two-stage whole-message interface blocks prompt placeholders and invented handles", () => {
+  const message = handledMessages([{ source_id: "S1", messages: [{
+    message_id: "real-id", role: "assistant", text: "Exact evidence.",
+  }] }])[0];
+  const placeholder = validateSelectedMessageClaims({ status: "FOUND", claims: [{
+    claim: "one atomic statement", message_id: "M1", evidence_ids: ["M1-L1"],
+  }] }, message);
+  assert.equal(placeholder.accepted.length, 0);
+  assert.equal(placeholder.rejected[0].reason, "placeholder claim");
+  const invented = validateMessageSelection({ message_ids: ["M9"] }, [message]);
+  assert.equal(invented.selected.length, 0);
+  assert.equal(invented.rejected[0].reason, "unknown message handle");
+});
 
 test("whole-turn evidence keeps punctuation and accepts only an exact quote from an existing message", () => {
   const sources = [{
