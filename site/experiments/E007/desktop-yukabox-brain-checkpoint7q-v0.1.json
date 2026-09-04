@@ -21,7 +21,19 @@
     "reader_real_answer": "My brain is running on the owner's yukabox.",
     "reranker_relevant_decision": "TAKE",
     "reranker_noise_decision": "DROP",
-    "node_tests": 39
+    "node_tests": 39,
+    "long_reranker_request": {
+      "status": "passed_after_fix",
+      "synthetic_characters": 70047,
+      "seconds": 88.896,
+      "decision": "NOT_SURE"
+    }
+  },
+  "physical_mac_attempt": {
+    "first_result": "failed_with_http_500",
+    "measured_cause": "The remote reranker received 7,083 tokens but its physical batch was configured for only 512.",
+    "change": "The reranker physical batch was raised to 8,192 tokens and a similarly long direct request completed.",
+    "full_retry": "pending"
   },
   "privacy": "The services listen only on the yukabox Tailscale address, not its public internet interfaces. Selected evidence leaves the Mac and reaches the owner's yukabox. The complete local library and index remain on the Mac.",
   "limitations": [
