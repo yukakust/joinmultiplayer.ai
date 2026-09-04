@@ -116,9 +116,9 @@ class ChatManager {
   async answerFromVerifiedMemory(question, sources, judge = async () => [], observe = () => {}) {
     const cleanQuestion = typeof question === "string" ? question.trim() : "";
     if (!cleanQuestion || cleanQuestion.length > 4000) throw new Error("Write one question under 4,000 characters.");
-    observe("sources_received", { question: cleanQuestion, sources });
+    await observe("sources_received", { question: cleanQuestion, sources });
     if (!Array.isArray(sources) || !sources.length || sources.length > 10) {
-      observe("stopped", { reason: "no_source_excerpts" });
+      await observe("stopped", { reason: "no_source_excerpts" });
       return { answer: NO_INFORMATION, diagnostic: "no_source_excerpts" };
     }
 
@@ -144,7 +144,7 @@ class ChatManager {
       }
       accepted.forEach((item, index) => { item.candidate_id = `E${index + 1}`; });
       checked = { extracted: extractedCount, accepted: accepted.slice(0, 10), rejected, status: "BATCHED" };
-      observe("qwen_extraction", { runs });
+      await observe("qwen_extraction", { runs });
     } else {
       const extracted = await this.runPrompt(
         extractionPrompt(cleanQuestion, sources),
@@ -152,13 +152,13 @@ class ChatManager {
         1024,
         "You extract exact evidence. Return only valid JSON.",
       );
-      observe("qwen_extraction", { raw_answer: extracted.answer });
+      await observe("qwen_extraction", { raw_answer: extracted.answer });
       checked = validateCandidates(extracted.answer, sources);
     }
-    observe("evidence_id_check", checked);
+    await observe("evidence_id_check", checked);
     if (!checked.accepted.length) {
       const diagnostic = checked.extracted ? "no_valid_evidence_ids" : "no_candidates_extracted";
-      observe("stopped", { reason: diagnostic });
+      await observe("stopped", { reason: diagnostic });
       return {
         answer: NO_INFORMATION,
         diagnostic,
@@ -166,24 +166,24 @@ class ChatManager {
     }
 
     const groundingSignals = await judge(checked.accepted);
-    observe("grounding_signals", { items: groundingSignals });
+    await observe("grounding_signals", { items: groundingSignals });
     const groundingById = new Map((Array.isArray(groundingSignals) ? groundingSignals : [])
       .map((item) => [item.candidate_id, item.label]));
     const grounded = checked.accepted.filter((item) => groundingById.get(item.candidate_id) === "entailment");
-    observe("grounded_evidence", {
+    await observe("grounded_evidence", {
       accepted_ids: grounded.map((item) => item.candidate_id),
       rejected_ids: checked.accepted.filter((item) => groundingById.get(item.candidate_id) !== "entailment")
         .map((item) => item.candidate_id),
     });
     if (!grounded.length) {
-      observe("stopped", { reason: "no_grounded_evidence" });
+      await observe("stopped", { reason: "no_grounded_evidence" });
       return { answer: NO_INFORMATION, diagnostic: "no_grounded_evidence" };
     }
 
     const blockedCategories = secretCategories(JSON.stringify(grounded));
-    observe("outbound_secret_scan", { blocked: blockedCategories.length > 0, categories: blockedCategories });
+    await observe("outbound_secret_scan", { blocked: blockedCategories.length > 0, categories: blockedCategories });
     if (blockedCategories.length) {
-      observe("stopped", { reason: "secret_blocked" });
+      await observe("stopped", { reason: "secret_blocked" });
       return {
         answer: "I found relevant information, but it was blocked because it may contain a secret.",
         diagnostic: "secret_blocked",
@@ -197,20 +197,20 @@ class ChatManager {
       "You classify whether grounded claims answer a question. Return only valid JSON.",
     );
     const relevant = validateQuestionRelevance(relevance.answer, grounded);
-    observe("question_relevance", { raw_answer: relevance.answer, ...relevant });
+    await observe("question_relevance", { raw_answer: relevance.answer, ...relevant });
     if (!relevant.valid) {
-      observe("stopped", { reason: "invalid_question_relevance" });
+      await observe("stopped", { reason: "invalid_question_relevance" });
       return { answer: NO_INFORMATION, diagnostic: "invalid_question_relevance" };
     }
     if (!relevant.accepted.length) {
-      observe("stopped", { reason: "no_question_relevant_evidence" });
+      await observe("stopped", { reason: "no_question_relevant_evidence" });
       return { answer: NO_INFORMATION, diagnostic: "no_question_relevant_evidence" };
     }
 
     const primaryJobs = directionalNliJobs(relevant.accepted, "P");
     const primarySignals = primaryJobs.length ? await judge(primaryJobs) : [];
     const primaryPiles = mutualEntailmentPiles(relevant.accepted, primaryJobs, primarySignals);
-    observe("primary_piles", {
+    await observe("primary_piles", {
       signals: primarySignals,
       piles: primaryPiles.map((pile, index) => ({ pile_id: `P${index + 1}`, candidate_ids: pile.map((item) => item.candidate_id) })),
     });
@@ -222,36 +222,36 @@ class ChatManager {
       "You carefully canonicalize grounded claims. Return only valid JSON.",
     );
     const canonicals = validateCanonicals(canonicalized.answer, primaryPiles);
-    observe("qwen_canonicals", { raw_answer: canonicalized.answer, canonicals });
+    await observe("qwen_canonicals", { raw_answer: canonicalized.answer, canonicals });
     const validationJobs = canonicalValidationJobs(canonicals);
     const validationSignals = validationJobs.length ? await judge(validationJobs) : [];
     const units = canonicalUnits(canonicals, validationJobs, validationSignals);
-    observe("canonical_validation", { signals: validationSignals, units });
+    await observe("canonical_validation", { signals: validationSignals, units });
 
     const finalJobs = directionalNliJobs(units, "F");
     const finalSignals = finalJobs.length ? await judge(finalJobs) : [];
     const finalPiles = mutualEntailmentPiles(units, finalJobs, finalSignals);
     const evidence = writerEvidenceFromPiles(finalPiles);
-    observe("final_piles", {
+    await observe("final_piles", {
       signals: finalSignals,
       piles: finalPiles.map((pile, index) => ({ pile_id: `E${index + 1}`, unit_ids: pile.map((item) => item.unit_id) })),
     });
-    observe("writer_evidence", { items: evidence });
+    await observe("writer_evidence", { items: evidence });
     const written = await this.runPrompt(
       writerPrompt(cleanQuestion, evidence),
       cleanQuestion,
       512,
       "You write a grounded answer from verified evidence only.",
     );
-    observe("qwen_writer", { raw_answer: written.answer });
+    await observe("qwen_writer", { raw_answer: written.answer });
     if (!validateAnswer(written.answer, evidence)) {
-      observe("stopped", { reason: "invalid_final_citations" });
+      await observe("stopped", { reason: "invalid_final_citations" });
       return {
         answer: "I couldn't produce an answer with valid local-memory sources.",
         diagnostic: "invalid_final_citations",
       };
     }
-    observe("completed", { reason: "answered" });
+    await observe("completed", { reason: "answered" });
     return { answer: written.answer, diagnostic: "answered" };
   }
 

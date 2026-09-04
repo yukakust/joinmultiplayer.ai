@@ -229,3 +229,12 @@ passed health checks; Qwen answered one live request, and the reranker marked a
 relevant sentence TAKE and unrelated garden text DROP. This is an owner-only
 development connection, not a public service. A packaged Mac run remains the
 physical checkpoint.
+
+Checkpoint 7R makes the physical test journal survive an interruption in the
+middle of the harness. The app now creates one private audit file before search
+starts and atomically updates that same file after every completed pipeline
+stage. The question, state (`started`, `completed`, or `failed`), timestamps,
+selected local excerpts, model outputs, checks, and exact stopping reason remain
+on the owner's Mac. `OPEN TEST LOGS` is always visible during the test build.
+This changes observation only: it does not change retrieval, prompts, model
+decisions, thresholds, or answer generation.

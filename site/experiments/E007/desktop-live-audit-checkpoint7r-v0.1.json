@@ -1,0 +1,27 @@
+{
+  "schema_version": "e007-desktop-live-audit-checkpoint-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7R",
+  "candidate_build": "0.1.0-alpha.20",
+  "status": "implementation_complete_physical_regression_pending",
+  "problem": "A completed request already produced a private history file, but an interruption during the harness could lose the unfinished stages and an early failure could be named unknown.",
+  "change": [
+    "Create one private audit file before retrieval begins.",
+    "Atomically update the same file after every completed harness stage.",
+    "Record started, completed, or failed state with timestamps.",
+    "Keep the OPEN TEST LOGS control visible in the test build."
+  ],
+  "unchanged": [
+    "retrieval and routing",
+    "Qwen prompts and outputs",
+    "reranker and DeBERTa decisions",
+    "thresholds and final answer policy"
+  ],
+  "automated_result": {
+    "desktop_node_tests_passed": 40,
+    "desktop_node_tests_failed": 0,
+    "durable_same_file_checkpoint_test": "passed"
+  },
+  "result_boundary": "This checkpoint verifies private audit persistence in automated tests. A new packaged Mac run is still required before using the logs to diagnose both failed questions.",
+  "privacy": "The public record contains no owner question, local-memory excerpt, model output, private path, or private audit file. Full audits remain local and are opened only by the owner."
+}

@@ -247,7 +247,6 @@ chatForm.addEventListener("submit", async (event) => {
       const result = await window.pocketI.answerMemory(question);
       pending.textContent = result.answer;
       pending.classList.remove("pending");
-      openTestLog.hidden = !result.test_log_ready;
       return;
     }
     const result = await window.pocketI.ask(question);

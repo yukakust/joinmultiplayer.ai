@@ -7,7 +7,7 @@ const { SetupManager } = require("./setup.cjs");
 const { ChatManager } = require("./chat.cjs");
 const { MemoryService } = require("./memory-service.cjs");
 const { RerankerManager } = require("./reranker.cjs");
-const { privateAuditPaths, recordPrivateAudit } = require("./audit-store.cjs");
+const { beginPrivateAudit, privateAuditPaths } = require("./audit-store.cjs");
 
 let mainWindow = null;
 let setupManager = null;
@@ -108,15 +108,6 @@ async function recordAnswerDiagnostic(result) {
   }
 }
 
-async function recordPrivateTestAudit(audit) {
-  try {
-    await recordPrivateAudit(app.getPath("userData"), audit);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 function createWindow() {
   const window = new BrowserWindow({
     width: 1240,
@@ -146,6 +137,7 @@ ipcMain.handle("pocket-i:route-memory", (_event, question) =>
   memoryService.call("route", { question }, 600000),
 );
 ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
+  const cleanQuestion = typeof question === "string" ? question.trim() : "";
   const audit = {
     schema_version: "pocket-i-private-answer-test-log-v0.1",
     warning: "PRIVATE: contains the owner's question, local memory excerpts and model output. Never upload this file.",
@@ -166,18 +158,33 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
       stopped: "The exact stage and reason where the harness stopped.",
       completed: "The strict answer path completed.",
     },
+    request: {
+      question: cleanQuestion,
+      state: "started",
+      started_at: new Date().toISOString(),
+    },
     stages: [],
+  };
+  let recorder;
+  try {
+    recorder = await beginPrivateAudit(app.getPath("userData"), audit);
+  } catch {
+    throw new Error("Pocket i could not start the private test log, so the test was not run.");
+  }
+  const recordStage = async (stage, details) => {
+    audit.stages.push({ stage, details });
+    await recorder.checkpoint(audit);
   };
   try {
     const context = await memoryService.call("context", { question }, 600000);
     const relevance = await rerankerManager.filter(question, context.items);
-    audit.stages.push({ stage: "whole_turn_relevance", details: {
+    await recordStage("whole_turn_relevance", {
       items: relevance.rows.map((item) => ({
         source_id: item.source_id,
         score: Number(item.score.toFixed(8)),
         decision: item.decision,
       })),
-    } });
+    });
     const result = await chatManager.answerFromVerifiedMemory(
       question,
       relevance.selected,
@@ -189,15 +196,23 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
         }
         return items;
       },
-      (stage, details) => audit.stages.push({ stage, details }),
+      recordStage,
     );
     audit.final = { answer: result.answer, diagnostic: result.diagnostic };
+    audit.request.state = "completed";
+    audit.request.finished_at = new Date().toISOString();
     await recordAnswerDiagnostic(result);
-    const testLogReady = await recordPrivateTestAudit(audit);
-    return { ...result, test_log_ready: testLogReady };
+    await recorder.checkpoint(audit);
+    return { ...result, test_log_ready: true };
   } catch (error) {
     audit.final = { error: error instanceof Error ? error.message : "Unknown local error" };
-    await recordPrivateTestAudit(audit);
+    audit.request.state = "failed";
+    audit.request.finished_at = new Date().toISOString();
+    try {
+      await recorder.checkpoint(audit);
+    } catch {
+      // Preserve the original pipeline error if the final audit checkpoint also fails.
+    }
     throw error;
   }
 });

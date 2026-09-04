@@ -3,7 +3,7 @@ const fs = require("node:fs/promises");
 const os = require("node:os");
 const path = require("node:path");
 const test = require("node:test");
-const { privateAuditPaths, recordPrivateAudit } = require("../audit-store.cjs");
+const { beginPrivateAudit, privateAuditPaths, recordPrivateAudit } = require("../audit-store.cjs");
 
 test("ships the audit store inside the packaged application", () => {
   const packageDefinition = require("../package.json");
@@ -25,4 +25,29 @@ test("keeps every private answer audit and also updates the latest copy", async 
   assert.equal(JSON.parse(await fs.readFile(targets.latest, "utf8")).final.answer, "two");
   assert.equal((await fs.stat(targets.directory)).mode & 0o777, 0o700);
   assert.equal((await fs.stat(targets.latest)).mode & 0o777, 0o600);
+});
+
+test("creates one durable audit before the pipeline starts and updates the same file", async () => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-live-audit-"));
+  const audit = {
+    request: { question: "Why DeBERTa?", state: "started" },
+    stages: [],
+  };
+  const recorder = await beginPrivateAudit(root, audit, new Date("2026-09-04T10:00:00Z"));
+  const filesAtStart = await fs.readdir(recorder.directory);
+  assert.equal(filesAtStart.length, 1);
+  assert.match(filesAtStart[0], /T100000000Z-[0-9a-f]{12}-[0-9a-f]{8}\.json$/);
+  assert.equal(JSON.parse(await fs.readFile(recorder.history, "utf8")).request.state, "started");
+
+  audit.stages.push({ stage: "sources_received", details: { question: "Why DeBERTa?", sources: [] } });
+  audit.request.state = "failed";
+  audit.final = { error: "model stopped" };
+  await recorder.checkpoint(audit);
+
+  const filesAtEnd = await fs.readdir(recorder.directory);
+  assert.deepEqual(filesAtEnd, filesAtStart);
+  const saved = JSON.parse(await fs.readFile(recorder.history, "utf8"));
+  assert.equal(saved.request.state, "failed");
+  assert.equal(saved.stages[0].stage, "sources_received");
+  assert.equal(saved.final.error, "model stopped");
 });
