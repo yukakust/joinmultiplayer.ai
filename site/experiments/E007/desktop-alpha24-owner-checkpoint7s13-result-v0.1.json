@@ -1,0 +1,27 @@
+{
+  "schema_version": "e007-public-checkpoint-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.13",
+  "kind": "physical-owner-development-result",
+  "date": "2026-09-04",
+  "package": "Pocket i 0.1.0-alpha.24",
+  "privacy": "Aggregate outcomes and pipeline stages only. No owner memory, questions, excerpts, paths, identifiers or raw model output are included.",
+  "semantic_queries_after_memory_was_freed": 5,
+  "results": {
+    "correct_supported_answers": 3,
+    "correct_no_answer_control": 1,
+    "false_negative": 1,
+    "incorrect_supported_answers": 0,
+    "total_correct": 4,
+    "total": 5
+  },
+  "infrastructure_observation": "One earlier query failed while the yukabox reranker was killed by system memory pressure. After the competing model was stopped, both Pocket i services remained healthy for the recorded semantic run.",
+  "false_negative_stage": "All five candidate source units were dropped by the remote reranker before Qwen extraction. The current private audit does not preserve the pre-reranker texts, so this run cannot distinguish a bad local excerpt from a reranker false rejection.",
+  "accepted_findings": [
+    "The repaired local NLI envelope completed in the packaged application.",
+    "Explicit partial relevance decisions preserve supported evidence without a retry.",
+    "The no-answer control reached the relevance stage and was rejected instead of being fabricated.",
+    "The current retrieval-to-reranker boundary still has a real false-negative path."
+  ],
+  "claim_boundary": "This is a five-query owner-device development check, not a locked accuracy estimate or another-owner replication."
+}
