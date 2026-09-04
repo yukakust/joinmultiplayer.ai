@@ -3,6 +3,8 @@
   "experiment": "E007",
   "checkpoint": "7Q",
   "candidate_build": "0.1.0-alpha.19",
+  "source_revision": "c1fb60b2c12d4dbcc1aa6a73f8b9a4b61ae32fc8",
+  "mac_builder": "/experiments/E007/build-macos-alpha-v0.17.sh",
   "status": "implemented_awaiting_physical_mac_run",
   "plain_language": "The Pocket i window and private memory stay on the Mac, while Qwen3-8B and Qwen3-Reranker-4B run on the owner's yukabox.",
   "path": [
