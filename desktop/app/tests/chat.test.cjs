@@ -143,6 +143,57 @@ if (prompt.includes("Find evidence that helps answer")) {
   assert.deepEqual(result, { answer: "DeBERTa is a cautious second signal [E1].", diagnostic: "answered" });
 });
 
+test("question relevance retries only omitted claims and preserves a correct decision", { skip: process.platform === "win32" }, async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-relevance-retry-"));
+  const executable = path.join(directory, "fake-llama-cli");
+  await fs.writeFile(executable, `#!/usr/bin/env node
+const prompt = process.argv[process.argv.indexOf("-p") + 1];
+if (prompt.includes("Find evidence that helps answer")) {
+  process.stdout.write(JSON.stringify({candidates:[
+    {claim:"Normalize hidden text before judging.",evidence_ids:["S1.1"]},
+    {claim:"Deliver A2A content as typed data.",evidence_ids:["S1.2"]},
+    {claim:"JSON-encode A2A content.",evidence_ids:["S1.3"]},
+    {claim:"Judge at the recipient edge.",evidence_ids:["S1.4"]}
+  ]}));
+} else if (prompt.includes("Judge whether each claim helps answer") && prompt.includes("[E1]") && prompt.includes("[E4]")) {
+  process.stdout.write(JSON.stringify({decisions:[{candidate_id:"E1",relation:"answers"}]}));
+} else if (prompt.includes("Judge whether each claim helps answer")) {
+  if (prompt.includes("[E1]")) process.exit(5);
+  process.stdout.write(JSON.stringify({decisions:[
+    {candidate_id:"E2",relation:"unrelated"},
+    {candidate_id:"E3",relation:"unrelated"},
+    {candidate_id:"E4",relation:"unrelated"}
+  ]}));
+} else if (prompt.includes("Rewrite each pile")) {
+  process.stdout.write(JSON.stringify({piles:[{pile_id:"P1",claim:"Normalize hidden text before judging."}]}));
+} else {
+  process.stdout.write("Normalize hidden text before judging [E1].");
+}
+`, { mode: 0o700 });
+  const chat = new ChatManager({ executable, modelPath: path.join(directory, "model.gguf"), timeoutMs: 5000 });
+  const stages = [];
+  const result = await chat.answerFromVerifiedMemory(
+    "What should happen to hidden text before judging?",
+    [{
+      source_id: "S1",
+      text: [
+        "Normalize hidden text before judging.",
+        "Deliver A2A content as typed data.",
+        "JSON-encode A2A content.",
+        "Judge at the recipient edge.",
+      ].join(" "),
+    }],
+    async (items) => items.map((item) => ({ candidate_id: item.candidate_id, label: "entailment" })),
+    (stage, details) => stages.push({ stage, details }),
+  );
+  assert.deepEqual(result, { answer: "Normalize hidden text before judging [E1].", diagnostic: "answered" });
+  const relevance = stages.find((item) => item.stage === "question_relevance").details;
+  assert.deepEqual(relevance.accepted.map((item) => item.candidate_id), ["E1"]);
+  assert.deepEqual(relevance.rejected.map((item) => item.candidate_id), ["E2", "E3", "E4"]);
+  assert.equal(relevance.defaulted_ids.length, 0);
+  assert.match(relevance.retry_raw_answer, /E4/);
+});
+
 test("whole-turn memory uses separate message selection and partial extraction", { skip: process.platform === "win32" }, async () => {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-two-stage-answer-"));
   const executable = path.join(directory, "fake-llama-cli");

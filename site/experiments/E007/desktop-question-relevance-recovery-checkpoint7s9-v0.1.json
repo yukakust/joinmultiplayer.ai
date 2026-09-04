@@ -1,0 +1,18 @@
+{
+  "schema_version": "e007-public-checkpoint-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.9",
+  "kind": "implementation-checkpoint",
+  "date": "2026-09-04",
+  "package": "Pocket i 0.1.0-alpha.23",
+  "privacy": "No owner question, memory, model excerpts, paths or identifiers are included.",
+  "failure_observed": "The question-relevance model returned one correct decision but omitted three other candidates. The strict batch validator discarded the correct decision with the incomplete receipt.",
+  "change": [
+    "Keep every structurally valid explicit decision from the first response.",
+    "Retry once with only the omitted candidates.",
+    "Treat candidates omitted again as unrelated, so they remain blocked.",
+    "Never turn an omitted candidate into accepted evidence."
+  ],
+  "test": "A four-candidate replay keeps the one correct answer, retries only the other three, rejects them as unrelated and completes the supported answer.",
+  "claim_boundary": "The deterministic replay passes. The same physical owner-memory question must still be repeated in the packaged application."
+}

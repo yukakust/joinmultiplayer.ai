@@ -13,6 +13,7 @@ const {
   writerEvidenceFromPiles,
   questionRelevancePrompt,
   validateQuestionRelevance,
+  completeQuestionRelevance,
   wholeTurnExtractionPrompt,
   validateWholeTurnCandidates,
   handledMessages,
@@ -106,11 +107,24 @@ test("question relevance keeps direct and compositional answer parts but drops a
   assert.deepEqual(result.rejected.map((item) => item.candidate_id), ["E3"]);
 });
 
-test("question relevance fails closed on missing, duplicate, or invented decisions", () => {
+test("question relevance keeps valid partial decisions for one bounded retry", () => {
   const candidates = [{ candidate_id: "E1", claim: "One" }, { candidate_id: "E2", claim: "Two" }];
-  assert.equal(validateQuestionRelevance({ decisions: [
+  const partial = validateQuestionRelevance({ decisions: [
     { candidate_id: "E1", relation: "answers" },
-  ] }, candidates).valid, false);
+  ] }, candidates);
+  assert.equal(partial.valid, false);
+  assert.deepEqual(partial.accepted.map((item) => item.candidate_id), ["E1"]);
+  assert.deepEqual(partial.missing_ids, ["E2"]);
+  const completed = completeQuestionRelevance(partial, validateQuestionRelevance({ decisions: [
+    { candidate_id: "E2", relation: "unrelated" },
+  ] }, [candidates[1]]), candidates);
+  assert.equal(completed.valid, true);
+  assert.deepEqual(completed.accepted.map((item) => item.candidate_id), ["E1"]);
+  assert.deepEqual(completed.rejected.map((item) => item.candidate_id), ["E2"]);
+});
+
+test("question relevance still rejects duplicate or invented decisions", () => {
+  const candidates = [{ candidate_id: "E1", claim: "One" }, { candidate_id: "E2", claim: "Two" }];
   assert.equal(validateQuestionRelevance({ decisions: [
     { candidate_id: "E1", relation: "answers" },
     { candidate_id: "E1", relation: "unrelated" },
