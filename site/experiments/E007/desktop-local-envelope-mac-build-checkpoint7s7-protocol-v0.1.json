@@ -1,0 +1,18 @@
+{
+  "schema_version": "e007-public-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.7",
+  "kind": "physical-development-build",
+  "package": "Pocket i 0.1.0-alpha.22",
+  "source_revision": "55a99bc5c6fc906fb8b4dd3e2c3477a56a2c104d",
+  "steps": [
+    "Build the pinned source on the owner Mac and run both test suites.",
+    "Install alpha.22 after quitting the previous Pocket i process.",
+    "Repeat the DeBERTa question that produced the alpha.21 transport timeout.",
+    "Require the private log to pass grounding_signals instead of timing out.",
+    "Inspect the final answer and every subsequent stage before running the remaining fixed questions."
+  ],
+  "privacy": "The build protocol is public. Owner questions, retrieved conversations and per-question logs remain private.",
+  "success": "The same physical query completes the local grounding call and produces either a supported answer or a later explicit fail-closed decision.",
+  "failure": "Any local transport timeout, missing grounding stage, unlogged stop, unsupported answer or private-data publication fails the checkpoint."
+}
