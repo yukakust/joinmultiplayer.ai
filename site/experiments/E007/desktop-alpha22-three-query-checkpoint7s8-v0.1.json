@@ -1,0 +1,26 @@
+{
+  "schema_version": "e007-public-checkpoint-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.8",
+  "kind": "physical-development-result",
+  "date": "2026-09-04",
+  "package": "Pocket i 0.1.0-alpha.22",
+  "privacy": "Aggregate stages and failure classes only. No owner memory, retrieved text, local paths, identifiers, prompts or raw model output are included.",
+  "queries": 3,
+  "results": {
+    "completed_supported_answer": 1,
+    "fail_closed_after_incomplete_question_relevance_receipt": 1,
+    "remote_reranker_unreachable_before_first_remote_stage": 1,
+    "local_nli_transport_timeouts": 0
+  },
+  "observations": [
+    "The alpha.21 local-envelope timeout did not recur; the first query completed every harness stage.",
+    "On the second query, retrieval, exact evidence reconstruction and local DeBERTa grounding all completed. The question-relevance model returned only one decision for four candidates, so the strict batch validator discarded the entire receipt.",
+    "The third query reached no recorded remote stage and failed at the three-minute yukabox request boundary. Both yukabox health endpoints were reachable again during the later diagnostic check."
+  ],
+  "next": [
+    "Treat every omitted relevance decision as a rejected candidate while retaining complete explicit decisions.",
+    "Add stage-level remote request logging and a bounded retry for transient yukabox availability."
+  ],
+  "claim_boundary": "One of three physical queries completed. The local envelope fix is supported by this run, but alpha.22 is not yet ready for another owner."
+}
