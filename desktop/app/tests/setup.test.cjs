@@ -149,6 +149,25 @@ test("remote mode is off until the owner explicitly consents", async () => {
   await assert.rejects(setup.installModel(), /Choose whether/);
 });
 
+test("remote is the default brain but choosing local persists without downloading", async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-brain-mode-"));
+  const setup = new SetupManager({
+    userDataPath: directory,
+    runtimePath: path.join(directory, "llama-cli"),
+    manifest: {
+      remoteBrain: { enabled: true, readerUrl: "http://127.0.0.1:1", relevanceUrl: "http://127.0.0.1:2", transport: "tailscale" },
+      models: {
+        reader: { id: "reader", label: "Reader", file: "reader.gguf", bytes: 4 },
+        relevance: { id: "reranker", label: "Reranker", file: "reranker.gguf", bytes: 4 },
+      },
+    },
+  });
+  assert.equal(await setup.brainMode(), "remote");
+  await setup.setBrainMode("local");
+  assert.equal(await setup.brainMode(), "local");
+  assert.equal((await setup.status()).mode, "local");
+});
+
 test("remote mode needs consent and both healthy yukabox services", async () => {
   const servers = [];
   async function healthServer() {

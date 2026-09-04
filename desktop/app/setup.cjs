@@ -102,6 +102,29 @@ class SetupManager {
     this.active = null;
     this.remote = manifest.remoteBrain?.enabled ? manifest.remoteBrain : null;
     this.remoteConsentPath = path.join(userDataPath, "remote-brain-consent.json");
+    this.brainModePath = path.join(userDataPath, "brain-mode.json");
+  }
+
+  async brainMode() {
+    if (!this.remote) return "local";
+    try {
+      const saved = JSON.parse(await fsp.readFile(this.brainModePath, "utf8"));
+      return saved?.mode === "local" ? "local" : "remote";
+    } catch (error) {
+      if (error.code !== "ENOENT" && !(error instanceof SyntaxError)) throw error;
+      return "remote";
+    }
+  }
+
+  async setBrainMode(mode) {
+    if (!this.remote && mode === "remote") throw new Error("No remote brain is configured.");
+    if (!["local", "remote"].includes(mode)) throw new Error("Unknown brain mode.");
+    await fsp.mkdir(this.userDataPath, { recursive: true, mode: 0o700 });
+    const temporary = `${this.brainModePath}.tmp`;
+    const payload = { schema_version: "pocket-i-brain-mode-v0.1", mode };
+    await fsp.writeFile(temporary, `${JSON.stringify(payload, null, 2)}\n`, { mode: 0o600 });
+    await fsp.rename(temporary, this.brainModePath);
+    return mode;
   }
 
   async remoteConsent() {
@@ -161,7 +184,8 @@ class SetupManager {
   }
 
   async status() {
-    if (this.remote) {
+    const mode = await this.brainMode();
+    if (this.remote && mode === "remote") {
       const consented = await this.remoteConsent();
       if (!consented) {
         return {
@@ -210,6 +234,7 @@ class SetupManager {
     const diskOkay = freeBytes >= missingModelBytes + 2 * 1024 ** 3;
     return {
       version: "desktop-alpha-checkpoint-5a",
+      mode: "local",
       model: {
         id: model.id,
         label: model.label,

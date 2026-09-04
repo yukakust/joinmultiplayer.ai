@@ -24,6 +24,9 @@ const remoteConfirm = document.querySelector("#remote-confirm");
 const remoteCancel = document.querySelector("#remote-cancel");
 const remoteBrainToggle = document.querySelector("#remote-brain-toggle");
 const privacyNote = document.querySelector("#privacy-note");
+const chooseYukabox = document.querySelector("#choose-yukabox");
+const chooseLocal = document.querySelector("#choose-local");
+const selectionSummary = document.querySelector("#selection-summary");
 let remoteConsented = false;
 let remoteConsentDismissed = false;
 let memoryReady = false;
@@ -31,6 +34,26 @@ let memoryBuilding = false;
 let memoryStartedAt = null;
 let latestMemoryProgress = null;
 let memoryClock = null;
+let selectedBrain = "remote";
+
+function renderBrainChoice() {
+  const remote = selectedBrain === "remote";
+  chooseYukabox.classList.toggle("selected", remote);
+  chooseLocal.classList.toggle("selected", !remote);
+  chooseYukabox.setAttribute("aria-pressed", String(remote));
+  chooseLocal.setAttribute("aria-pressed", String(!remote));
+  selectionSummary.textContent = `SELECTED: ${remote ? "YUKABOX" : "THIS MAC"} · WAITING FOR WAKE`;
+}
+
+chooseYukabox.addEventListener("click", () => {
+  selectedBrain = "remote";
+  renderBrainChoice();
+});
+
+chooseLocal.addEventListener("click", () => {
+  selectedBrain = "local";
+  renderBrainChoice();
+});
 
 function elapsedMemory() {
   if (!memoryStartedAt) return "0:00";
@@ -93,6 +116,8 @@ async function renderMemoryStatus() {
 async function renderStatus() {
   const status = await window.pocketI.setupStatus();
   const remote = status.mode === "remote";
+  selectedBrain = remote ? "remote" : "local";
+  renderBrainChoice();
   remoteConsented = Boolean(status.remoteConsented);
   remoteBrainToggle.hidden = !remote;
   remoteBrainToggle.textContent = remoteConsented ? "STOP USING YUKA’S SERVER" : "USE YUKA’S SERVER";
@@ -117,15 +142,11 @@ async function renderStatus() {
       modelStatus.textContent = "OFF";
       rerankerStatus.textContent = "OFF";
       runtimeStatus.textContent = "OFF";
-      progressLabel.textContent = "Yuka’s server is selected. No local model download is needed.";
+      progressLabel.textContent = "Yukabox is selected. No local model download is needed.";
       bar.style.width = "0%";
-      install.textContent = "USE YUKA’S SERVER";
+      install.innerHTML = "WAKE POCKET i <span>→</span>";
       install.hidden = false;
       install.disabled = false;
-      if (!remoteConsentDismissed) {
-        setupView.hidden = true;
-        remoteConsent.hidden = false;
-      }
       return;
     }
     modelStatus.textContent = status.model.installed ? "CONNECTED" : "OFFLINE";
@@ -133,7 +154,7 @@ async function renderStatus() {
     runtimeStatus.textContent = status.runtime.installed ? "TAILSCALE" : "OFFLINE";
     progressLabel.textContent = status.readyToAsk ? "Yukabox brain connected." : "Connect to Tailscale and wake yukabox.";
     bar.style.width = status.readyToAsk ? "100%" : "0%";
-    install.textContent = "CONNECT YUKABOX";
+    install.innerHTML = "WAKE POCKET i <span>→</span>";
     install.hidden = false;
     install.disabled = false;
     return;
@@ -219,17 +240,20 @@ memoryConfirm.addEventListener("click", async () => {
 install.addEventListener("click", async () => {
   install.disabled = true;
   const before = await window.pocketI.setupStatus();
-  if (before.mode === "remote" && before.consentRequired) {
+  if (selectedBrain === "remote" && (before.mode !== "remote" || before.consentRequired)) {
     setupView.hidden = true;
     chatView.hidden = true;
     remoteConsent.hidden = false;
     install.disabled = false;
     return;
   }
-  modelStatus.textContent = before.mode === "remote" ? "CONNECTING" : (before.model.installed ? "READY" : "DOWNLOADING");
-  rerankerStatus.textContent = before.mode === "remote" ? "CONNECTING" : (before.relevance?.installed ? "READY" : "DOWNLOADING");
   errorBox.hidden = true;
   try {
+    const active = selectedBrain === "local" && before.mode !== "local"
+      ? await window.pocketI.setRemoteBrain(false)
+      : before;
+    modelStatus.textContent = active.mode === "remote" ? "CONNECTING" : (active.model.installed ? "READY" : "DOWNLOADING");
+    rerankerStatus.textContent = active.mode === "remote" ? "CONNECTING" : (active.relevance?.installed ? "READY" : "DOWNLOADING");
     await window.pocketI.installModel();
     await renderStatus();
   } catch (error) {

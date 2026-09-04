@@ -7,6 +7,7 @@
   <title>Pocket i</title>
   <link rel="stylesheet" href="app.css">
   <link rel="stylesheet" href="memory.css">
+  <link rel="stylesheet" href="first-light.css">
 </head>
 <body>
   <main class="forge" aria-label="Pocket i setup console">
@@ -14,13 +15,22 @@
 
     <section class="main-screen">
       <div id="setup-view">
-        <header>
-          <div class="brand"><span></span><i></i></div>
-          <h1>Wake your i.</h1>
-        </header>
+        <div class="setup-mark"><div class="brand"><span></span><i></i></div><small>POCKET i · FIRST LIGHT</small></div>
+        <h1>WHERE SHOULD I WAKE?</h1>
+        <p class="setup-intro">Choose one. Nothing starts until you press WAKE.</p>
+        <div class="brain-choices" role="group" aria-label="Choose where Pocket i runs">
+          <button id="choose-yukabox" class="brain-choice selected" type="button" aria-pressed="true">
+            <strong>YUKABOX</strong><span>READY · NO DOWNLOAD</span><small>Uses your private server.</small>
+          </button>
+          <button id="choose-local" class="brain-choice" type="button" aria-pressed="false">
+            <strong>THIS MAC</strong><span>4.7 GB DOWNLOAD</span><small>Runs here. Nothing leaves this Mac.</small>
+          </button>
+        </div>
+        <small class="start-label">02 · START</small>
         <div class="progress" aria-hidden="true"><span id="bar"></span></div>
         <p id="progress-label" class="detail">Checking…</p>
-        <button id="install" hidden>WAKE i</button>
+        <button id="install" class="wake" hidden>WAKE POCKET i <span>→</span></button>
+        <p id="selection-summary" class="selection-summary">SELECTED: YUKABOX · WAITING FOR WAKE</p>
         <p id="error" class="error" hidden></p>
       </div>
 
@@ -60,9 +70,11 @@
         <li><span>04</span><div><strong>MEMORY</strong><p id="library-status">waiting</p></div></li>
       </ol>
       <p id="library-detail" class="library-detail">Codex 0 · Claude 0</p>
-      <button id="memory-connect" class="memory-connect" hidden>CONNECT MEMORY</button>
-      <button id="open-test-log" class="memory-connect test-log">OPEN TEST LOGS</button>
-      <button id="remote-brain-toggle" class="memory-connect remote-brain">USE YUKA’S SERVER</button>
+      <div class="status-actions">
+        <button id="memory-connect" class="memory-connect" hidden>CONNECT MEMORY</button>
+        <button id="open-test-log" class="memory-connect test-log">OPEN TEST LOGS</button>
+        <button id="remote-brain-toggle" class="memory-connect remote-brain">USE YUKA’S SERVER</button>
+      </div>
       <p id="privacy-note" class="privacy">Remote brain is off. Nothing is sent to yukabox.</p>
     </aside>
   </main>

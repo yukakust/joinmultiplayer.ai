@@ -1,0 +1,103 @@
+/* The chassis carries the drama; first-run controls stay quiet and legible. */
+#setup-view h1 {
+  font-family: inherit;
+  font-size: 3cqw;
+  line-height: 1.05;
+  letter-spacing: .02em;
+  margin: .8cqw 0 0;
+}
+
+.setup-mark {
+  display: flex;
+  align-items: center;
+  gap: 1.2cqw;
+}
+
+.setup-mark .brand {
+  transform: scale(.55);
+  transform-origin: left center;
+  margin-right: -1.2cqw;
+}
+
+.setup-intro {
+  margin: .6cqw 0 1.5cqw;
+  color: var(--muted);
+  font-size: .8cqw;
+}
+
+.brain-choices {
+  display: grid;
+  gap: .45cqw;
+}
+
+.brain-choice {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .25cqw 1cqw;
+  width: 100%;
+  min-height: 4.5cqw;
+  padding: .75cqw 1cqw;
+  text-align: left;
+  border-color: #3d2a1e;
+  background: #11100ecc;
+  box-shadow: none;
+}
+
+.brain-choice strong { font-size: .95cqw; }
+.brain-choice span {
+  justify-self: end;
+  color: var(--muted);
+  font-size: .68cqw;
+}
+.brain-choice small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: .65cqw;
+  letter-spacing: 0;
+}
+.brain-choice.selected { border-color: var(--amber); }
+.brain-choice.selected strong,
+.brain-choice.selected span { color: var(--amber); }
+
+.start-label {
+  display: block;
+  margin-top: .65cqw;
+  font-size: .65cqw;
+}
+
+#setup-view .progress {
+  height: .32cqw;
+  margin-top: .6cqw;
+}
+
+#setup-view .detail {
+  font-size: .72cqw;
+  min-height: 1cqw;
+  margin: .4cqw 0;
+}
+
+.wake {
+  width: 20cqw;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: none;
+}
+
+.selection-summary {
+  margin: .45cqw 0 0;
+  color: #796e5d;
+  font-size: .62cqw;
+}
+
+.status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4cqw;
+  margin-top: .55cqw;
+}
+
+.status-actions .memory-connect { margin: 0; }
+.status-screen .privacy {
+  bottom: .8cqw;
+  font-size: .7cqw;
+}

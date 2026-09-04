@@ -17,6 +17,7 @@ let rerankerManager = null;
 
 async function configureRemoteBrain(enabled) {
   if (!setupManager || !manifest.remoteBrain?.enabled) return false;
+  await setupManager.setBrainMode(enabled ? "remote" : "local");
   await setupManager.setRemoteConsent(Boolean(enabled));
   const remote = enabled ? manifest.remoteBrain : null;
   chatManager.remoteUrl = remote?.readerUrl || null;
