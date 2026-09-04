@@ -389,6 +389,24 @@ Qwen3-8B return an atomic claim with an exact message quote, verified that
 quote with ordinary code, checked source support with DeBERTa, scanned the
 outbound capsule for secrets, and returned `FOUND`, `EMPTY`, or `BLOCKED`.
 
+## Checkpoint 7U — remote brain requires explicit consent
+
+The shared yukabox reader and reranker are now an optional execution mode, not
+an automatic transport choice. A fresh installation keeps the remote brain off.
+Before the first remote request, the owner sees that their question and selected
+Codex or Claude excerpts will leave the computer and be processed on Yuka's
+private yukabox through Tailscale. The warning says not to use this alpha mode
+for secrets. Only an explicit **I UNDERSTAND · CONNECT** action stores consent.
+
+The main process rejects both ordinary and memory-backed inference while the
+switch is off, so hiding or bypassing the renderer cannot silently send text.
+Consent is local, revocable, and bound to the configured reader and reranker
+URLs; an endpoint change invalidates it. This checkpoint does not claim user
+authentication, tenant isolation, or readiness beyond a trusted Tailscale test.
+The private audit writes the exact pre-reranker inputs before the network call
+and then records successful completion of all reranker decisions. These fields
+remain owner-private; the public record contains only aggregate outcomes.
+
 Human review scored the eight synthetic English development cases as 6 fully
 correct, 1 partial, and 1 wrong. The partial answer explained why `Llama-3.3`
 was split but omitted the requested remedy. The wrong answer returned a true

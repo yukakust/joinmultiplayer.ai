@@ -15,6 +15,22 @@ let chatManager = null;
 let memoryService = null;
 let rerankerManager = null;
 
+async function configureRemoteBrain(enabled) {
+  if (!setupManager || !manifest.remoteBrain?.enabled) return false;
+  await setupManager.setRemoteConsent(Boolean(enabled));
+  const remote = enabled ? manifest.remoteBrain : null;
+  chatManager.remoteUrl = remote?.readerUrl || null;
+  rerankerManager.remoteUrl = remote?.relevanceUrl || null;
+  if (!enabled) rerankerManager.stop();
+  return Boolean(enabled);
+}
+
+async function requireRemoteConsent() {
+  if (manifest.remoteBrain?.enabled && !(await setupManager.remoteConsent())) {
+    throw new Error("Yuka's server is off. Turn it on before sending selected memory excerpts.");
+  }
+}
+
 function runtimePath() {
   const executable = process.platform === "win32" ? "llama-cli.exe" : "llama-cli";
   const root = app.isPackaged ? path.join(process.resourcesPath, "runtime") : path.join(__dirname, "runtime-current");
@@ -137,12 +153,15 @@ ipcMain.handle("pocket-i:route-memory", (_event, question) =>
   memoryService.call("route", { question }, 600000),
 );
 ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
+  await requireRemoteConsent();
   const cleanQuestion = typeof question === "string" ? question.trim() : "";
   const audit = {
     schema_version: "pocket-i-private-answer-test-log-v0.1",
     warning: "PRIVATE: contains the owner's question, local memory excerpts and model output. Never upload this file.",
     stage_guide: {
       sources_received: "The exact local excerpts given to Qwen.",
+      pre_reranker_sources: "The exact local whole conversations or complete turns about to be sent to the remote reranker. This stage is private and makes remote failures inspectable.",
+      remote_reranker_finished: "The remote reranker returned a decision for every sent item.",
       whole_turn_relevance: "Qwen3-Reranker-4B sees the unchanged question and each whole conversation or complete turn before Qwen reads it. DROP is removed; TAKE and NOT_SURE continue.",
       qwen_extraction: "The raw claims and evidence IDs returned by Qwen.",
       evidence_id_check: "Ordinary code resolves Qwen's selected IDs back to exact source text.",
@@ -177,7 +196,12 @@ ipcMain.handle("pocket-i:answer-memory", async (_event, question) => {
   };
   try {
     const context = await memoryService.call("context", { question }, 600000);
+    await recordStage("pre_reranker_sources", {
+      transport: manifest.remoteBrain?.transport || "local",
+      items: context.items,
+    });
     const relevance = await rerankerManager.filter(question, context.items);
+    await recordStage("remote_reranker_finished", { item_count: relevance.rows.length });
     await recordStage("whole_turn_relevance", {
       items: relevance.rows.map((item) => ({
         source_id: item.source_id,
@@ -228,17 +252,22 @@ ipcMain.handle("pocket-i:open-test-log", async () => {
   return { opened: true };
 });
 ipcMain.handle("pocket-i:setup-status", () => setupManager.status());
+ipcMain.handle("pocket-i:set-remote-brain", async (_event, enabled) => {
+  await configureRemoteBrain(enabled);
+  return setupManager.status();
+});
 ipcMain.handle("pocket-i:install-model", async () => {
   await setupManager.installModel();
   return setupManager.status();
 });
 ipcMain.handle("pocket-i:ask", async (_event, question) => {
+  await requireRemoteConsent();
   const status = await setupManager.status();
   if (!status.readyToAsk) throw new Error("Finish setup before asking a question.");
   return chatManager.ask(question);
 });
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   setupManager = new SetupManager({
     userDataPath: app.getPath("userData"),
     manifest,
@@ -249,16 +278,17 @@ app.whenReady().then(() => {
       }
     },
   });
+  const remoteConsented = await setupManager.remoteConsent();
   chatManager = new ChatManager({
     executable: runtimePath(),
     modelPath: setupManager.modelPath(),
-    remoteUrl: manifest.remoteBrain?.enabled ? manifest.remoteBrain.readerUrl : null,
+    remoteUrl: remoteConsented ? manifest.remoteBrain.readerUrl : null,
     brainLabel: manifest.models.reader.label,
   });
   rerankerManager = new RerankerManager({
     executable: rerankerRuntimePath(),
     modelPath: setupManager.relevanceModelPath(),
-    remoteUrl: manifest.remoteBrain?.enabled ? manifest.remoteBrain.relevanceUrl : null,
+    remoteUrl: remoteConsented ? manifest.remoteBrain.relevanceUrl : null,
   });
   memoryService = new MemoryService({
     request: memoryServiceCommand(),

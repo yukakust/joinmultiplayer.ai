@@ -101,6 +101,43 @@ class SetupManager {
     this.onProgress = onProgress;
     this.active = null;
     this.remote = manifest.remoteBrain?.enabled ? manifest.remoteBrain : null;
+    this.remoteConsentPath = path.join(userDataPath, "remote-brain-consent.json");
+  }
+
+  async remoteConsent() {
+    if (!this.remote) return false;
+    try {
+      const saved = JSON.parse(await fsp.readFile(this.remoteConsentPath, "utf8"));
+      return saved?.approved === true
+        && saved.readerUrl === this.remote.readerUrl
+        && saved.relevanceUrl === this.remote.relevanceUrl;
+    } catch (error) {
+      if (error.code !== "ENOENT" && !(error instanceof SyntaxError)) throw error;
+      return false;
+    }
+  }
+
+  async setRemoteConsent(approved) {
+    await fsp.mkdir(this.userDataPath, { recursive: true, mode: 0o700 });
+    if (!approved) {
+      try { await fsp.unlink(this.remoteConsentPath); } catch (error) {
+        if (error.code !== "ENOENT") throw error;
+      }
+      return false;
+    }
+    if (!this.remote) throw new Error("No remote brain is configured.");
+    const temporary = `${this.remoteConsentPath}.tmp`;
+    const payload = {
+      schema_version: "pocket-i-remote-consent-v0.1",
+      approved: true,
+      accepted_at: new Date().toISOString(),
+      transport: this.remote.transport,
+      readerUrl: this.remote.readerUrl,
+      relevanceUrl: this.remote.relevanceUrl,
+    };
+    await fsp.writeFile(temporary, `${JSON.stringify(payload, null, 2)}\n`, { mode: 0o600 });
+    await fsp.rename(temporary, this.remoteConsentPath);
+    return true;
   }
 
   modelPath() {
@@ -125,13 +162,29 @@ class SetupManager {
 
   async status() {
     if (this.remote) {
+      const consented = await this.remoteConsent();
+      if (!consented) {
+        return {
+          version: "desktop-alpha-yukabox-brain-v0.2",
+          mode: "remote",
+          remoteConsented: false,
+          consentRequired: true,
+          model: { id: this.manifest.models.reader.id, label: this.manifest.models.reader.label, bytes: 0, installed: false, downloading: false },
+          relevance: { id: this.manifest.models.relevance.id, label: this.manifest.models.relevance.label, bytes: 0, installed: false, downloading: false },
+          hardware: { memoryBytes: os.totalmem(), freeBytes: 0, memoryOkay: true, diskOkay: true, requiredDownloadBytes: 0 },
+          runtime: { installed: false, label: "Yukabox via Tailscale" },
+          readyToAsk: false,
+        };
+      }
       const [readerReady, relevanceReady] = await Promise.all([
         remoteHealth(this.remote.readerUrl),
         remoteHealth(this.remote.relevanceUrl),
       ]);
       return {
-        version: "desktop-alpha-yukabox-brain-v0.1",
+        version: "desktop-alpha-yukabox-brain-v0.2",
         mode: "remote",
+        remoteConsented: true,
+        consentRequired: false,
         model: { id: this.manifest.models.reader.id, label: this.manifest.models.reader.label, bytes: 0, installed: readerReady, downloading: false },
         relevance: { id: this.manifest.models.relevance.id, label: this.manifest.models.relevance.label, bytes: 0, installed: relevanceReady, downloading: false },
         hardware: { memoryBytes: os.totalmem(), freeBytes: 0, memoryOkay: true, diskOkay: true, requiredDownloadBytes: 0 },
@@ -185,6 +238,7 @@ class SetupManager {
 
   async installModel() {
     if (this.remote) {
+      if (!(await this.remoteConsent())) throw new Error("Choose whether to use Yuka's server first.");
       const current = await this.status();
       if (!current.readyToAsk) throw new Error("Yukabox brain is offline or still starting.");
       return this.remote.readerUrl;

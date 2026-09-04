@@ -230,6 +230,19 @@ relevant sentence TAKE and unrelated garden text DROP. This is an owner-only
 development connection, not a public service. A packaged Mac run remains the
 physical checkpoint.
 
+Checkpoint 7U makes that remote path an explicit owner choice. Alpha.25 starts
+with Yuka's server off, does not health-check or call either remote model before
+consent, and blocks both ordinary and memory-backed questions at the main
+process boundary while remote access is off. The consent screen says that the
+question and selected Codex or Claude excerpts leave the computer for Yuka's
+private yukabox through Tailscale and warns not to use this mode for secrets.
+Consent is stored locally, is bound to the exact reader and reranker endpoints,
+and can be revoked from the status panel. Changing either endpoint asks again.
+The private per-question audit now checkpoints the exact pre-reranker inputs
+before the network call and records when every reranker decision returns, so an
+offline server or false DROP is no longer hidden behind an empty stage list.
+This is still a trusted-tailnet alpha, not public multi-tenant authentication.
+
 Checkpoint 7R makes the physical test journal survive an interruption in the
 middle of the harness. The app now creates one private audit file before search
 starts and atomically updates that same file after every completed pipeline

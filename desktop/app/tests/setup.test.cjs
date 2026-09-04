@@ -131,7 +131,25 @@ test("a configured relevance model is required before the accepted pipeline is r
   assert.equal((await setup.status()).readyToAsk, true);
 });
 
-test("remote mode needs no local model files when both yukabox services are healthy", async () => {
+test("remote mode is off until the owner explicitly consents", async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-remote-off-"));
+  const setup = new SetupManager({
+    userDataPath: directory,
+    runtimePath: path.join(directory, "missing-runtime"),
+    manifest: {
+      remoteBrain: { enabled: true, transport: "tailscale", readerUrl: "http://reader.invalid", relevanceUrl: "http://reranker.invalid" },
+      models: { reader: { id: "reader", label: "Reader" }, relevance: { id: "reranker", label: "Reranker" } },
+    },
+  });
+  const status = await setup.status();
+  assert.equal(status.mode, "remote");
+  assert.equal(status.remoteConsented, false);
+  assert.equal(status.consentRequired, true);
+  assert.equal(status.readyToAsk, false);
+  await assert.rejects(setup.installModel(), /Choose whether/);
+});
+
+test("remote mode needs consent and both healthy yukabox services", async () => {
   const servers = [];
   async function healthServer() {
     const server = http.createServer((_request, response) => {
@@ -154,10 +172,14 @@ test("remote mode needs no local model files when both yukabox services are heal
         models: { reader: { id: "reader", label: "Reader" }, relevance: { id: "reranker", label: "Reranker" } },
       },
     });
+    await setup.setRemoteConsent(true);
     const status = await setup.status();
     assert.equal(status.mode, "remote");
+    assert.equal(status.remoteConsented, true);
     assert.equal(status.readyToAsk, true);
     assert.equal(status.hardware.requiredDownloadBytes, 0);
+    await setup.setRemoteConsent(false);
+    assert.equal((await setup.status()).consentRequired, true);
   } finally {
     await Promise.all(servers.map((server) => new Promise((resolve) => server.close(resolve))));
   }

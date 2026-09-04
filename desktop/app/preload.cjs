@@ -14,6 +14,7 @@ contextBridge.exposeInMainWorld("pocketI", {
     return () => ipcRenderer.removeListener("pocket-i:memory-progress", listener);
   },
   setupStatus: () => ipcRenderer.invoke("pocket-i:setup-status"),
+  setRemoteBrain: (enabled) => ipcRenderer.invoke("pocket-i:set-remote-brain", Boolean(enabled)),
   installModel: () => ipcRenderer.invoke("pocket-i:install-model"),
   ask: (question) => ipcRenderer.invoke("pocket-i:ask", question),
   onSetupProgress: (callback) => {

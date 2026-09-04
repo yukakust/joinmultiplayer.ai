@@ -6,6 +6,9 @@
 .memory-consent>div{display:flex;gap:.8cqw;margin-top:1.8cqw}
 .memory-consent .quiet{border-color:#5b4b3c;background:#0b0907;color:#978c78}
 .memory-consent .memory-progress{color:#dc6d23}
+.memory-consent .warning{color:#ff9368;border-left:.25cqw solid #d65e30;padding-left:.8cqw}
+.remote-brain{display:block;color:#dc6d23;border-color:#dc6d23;background:#160b07}
+.remote-brain.on{color:#ffb27f;border-color:#8f4d2b}
 .route-results{margin:.7cqw 0 1.2cqw;border-left:.2cqw solid #dc6d23;padding:.8cqw 1cqw;background:#080706a6}
 .route-results>strong{display:block;margin-bottom:.7cqw;color:#ede7d7;font-size:.95cqw}
 .route-results article{padding:.65cqw 0;border-top:1px solid #3d2a1e}

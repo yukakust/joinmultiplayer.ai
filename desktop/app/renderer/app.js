@@ -19,6 +19,12 @@ const memoryConfirm = document.querySelector("#memory-confirm");
 const memoryCancel = document.querySelector("#memory-cancel");
 const memoryProgress = document.querySelector("#memory-progress");
 const openTestLog = document.querySelector("#open-test-log");
+const remoteConsent = document.querySelector("#remote-consent");
+const remoteConfirm = document.querySelector("#remote-confirm");
+const remoteCancel = document.querySelector("#remote-cancel");
+const remoteBrainToggle = document.querySelector("#remote-brain-toggle");
+const privacyNote = document.querySelector("#privacy-note");
+let remoteConsented = false;
 let memoryReady = false;
 let memoryBuilding = false;
 let memoryStartedAt = null;
@@ -86,6 +92,13 @@ async function renderMemoryStatus() {
 async function renderStatus() {
   const status = await window.pocketI.setupStatus();
   const remote = status.mode === "remote";
+  remoteConsented = Boolean(status.remoteConsented);
+  remoteBrainToggle.hidden = !remote;
+  remoteBrainToggle.textContent = remoteConsented ? "STOP USING YUKA’S SERVER" : "USE YUKA’S SERVER";
+  remoteBrainToggle.classList.toggle("on", remoteConsented);
+  privacyNote.textContent = remoteConsented
+    ? "Selected excerpts may go to Yuka’s yukabox through Tailscale."
+    : "Remote brain is off. Nothing is sent to yukabox.";
   runtimeStatus.textContent = status.runtime.installed ? "READY" : "MISSING";
   rerankerStatus.textContent = status.relevance?.installed ? "READY" : "NOT INSTALLED";
   if (status.readyToAsk) {
@@ -99,6 +112,17 @@ async function renderStatus() {
   setupView.hidden = false;
   chatView.hidden = true;
   if (remote) {
+    if (status.consentRequired) {
+      modelStatus.textContent = "OFF";
+      rerankerStatus.textContent = "OFF";
+      runtimeStatus.textContent = "OFF";
+      progressLabel.textContent = "Yuka’s server is off.";
+      bar.style.width = "0%";
+      install.textContent = "USE YUKA’S SERVER";
+      install.hidden = false;
+      install.disabled = false;
+      return;
+    }
     modelStatus.textContent = status.model.installed ? "CONNECTED" : "OFFLINE";
     rerankerStatus.textContent = status.relevance?.installed ? "CONNECTED" : "OFFLINE";
     runtimeStatus.textContent = status.runtime.installed ? "TAILSCALE" : "OFFLINE";
@@ -190,6 +214,13 @@ memoryConfirm.addEventListener("click", async () => {
 install.addEventListener("click", async () => {
   install.disabled = true;
   const before = await window.pocketI.setupStatus();
+  if (before.mode === "remote" && before.consentRequired) {
+    setupView.hidden = true;
+    chatView.hidden = true;
+    remoteConsent.hidden = false;
+    install.disabled = false;
+    return;
+  }
   modelStatus.textContent = before.mode === "remote" ? "CONNECTING" : (before.model.installed ? "READY" : "DOWNLOADING");
   rerankerStatus.textContent = before.mode === "remote" ? "CONNECTING" : (before.relevance?.installed ? "READY" : "DOWNLOADING");
   errorBox.hidden = true;
@@ -201,6 +232,47 @@ install.addEventListener("click", async () => {
     errorBox.textContent = error.message || "The model could not be installed.";
     errorBox.hidden = false;
     install.disabled = false;
+  }
+});
+
+remoteBrainToggle.addEventListener("click", async () => {
+  errorBox.hidden = true;
+  if (!remoteConsented) {
+    setupView.hidden = true;
+    chatView.hidden = true;
+    memoryConsent.hidden = true;
+    remoteConsent.hidden = false;
+    return;
+  }
+  try {
+    await window.pocketI.setRemoteBrain(false);
+    remoteConsent.hidden = true;
+    await renderStatus();
+  } catch (error) {
+    errorBox.textContent = error.message || "Remote brain could not be turned off.";
+    errorBox.hidden = false;
+  }
+});
+
+remoteCancel.addEventListener("click", async () => {
+  remoteConsent.hidden = true;
+  await renderStatus();
+});
+
+remoteConfirm.addEventListener("click", async () => {
+  remoteConfirm.disabled = true;
+  errorBox.hidden = true;
+  try {
+    await window.pocketI.setRemoteBrain(true);
+    remoteConsent.hidden = true;
+    await renderStatus();
+  } catch (error) {
+    errorBox.textContent = error.message || "Yuka’s server could not be reached.";
+    errorBox.hidden = false;
+    remoteConsent.hidden = true;
+    setupView.hidden = false;
+  } finally {
+    remoteConfirm.disabled = false;
   }
 });
 

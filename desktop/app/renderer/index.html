@@ -41,6 +41,14 @@
         <div><button id="memory-confirm">CONNECT</button><button id="memory-cancel" class="quiet">NOT NOW</button></div>
         <p id="memory-progress" class="memory-progress" hidden></p>
       </section>
+
+      <section id="remote-consent" class="memory-consent" hidden>
+        <small>REMOTE BRAIN</small>
+        <h2>Use Yuka’s server?</h2>
+        <p>Your question and selected Codex or Claude excerpts will leave this computer and be processed on Yuka’s private yukabox through Tailscale.</p>
+        <p class="warning">Do not use this mode for secrets.</p>
+        <div><button id="remote-confirm">I UNDERSTAND · CONNECT</button><button id="remote-cancel" class="quiet">NOT NOW</button></div>
+      </section>
     </section>
 
     <aside class="status-screen">
@@ -54,7 +62,8 @@
       <p id="library-detail" class="library-detail">Codex 0 · Claude 0</p>
       <button id="memory-connect" class="memory-connect" hidden>CONNECT MEMORY</button>
       <button id="open-test-log" class="memory-connect test-log">OPEN TEST LOGS</button>
-      <p class="privacy">Your memory stays here. Selected evidence goes only to your yukabox through Tailscale.</p>
+      <button id="remote-brain-toggle" class="memory-connect remote-brain">USE YUKA’S SERVER</button>
+      <p id="privacy-note" class="privacy">Remote brain is off. Nothing is sent to yukabox.</p>
     </aside>
   </main>
   <script src="app.js"></script>
