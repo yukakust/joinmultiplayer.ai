@@ -24,6 +24,7 @@ EMBED_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 EMBED_FINGERPRINT = "fastembed-0.8.0:paraphrase-multilingual-MiniLM-L12-v2"
 EmbedBatch = Callable[[Sequence[str]], Sequence[Sequence[float]]]
 NliBatch = Callable[[Sequence[tuple[str, str]]], Sequence[tuple[str, float]]]
+SERVICE_REQUEST_LIMIT_BYTES = 4 * 1024 * 1024
 
 
 def _counts_payload(library: object) -> dict[str, object]:
@@ -458,7 +459,7 @@ def _serve(runtime: MemoryRuntime) -> int:
     for raw_request in sys.stdin:
         response_id = None
         try:
-            if len(raw_request) > 16384:
+            if len(raw_request.encode("utf-8")) > SERVICE_REQUEST_LIMIT_BYTES:
                 raise ValueError("request is too large")
             request = json.loads(raw_request)
             if not isinstance(request, dict):

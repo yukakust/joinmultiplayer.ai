@@ -1,0 +1,18 @@
+{
+  "schema_version": "e007-public-checkpoint-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.6",
+  "kind": "implementation-checkpoint",
+  "date": "2026-09-04",
+  "package": "Pocket i 0.1.0-alpha.22",
+  "privacy": "No owner questions, conversation text, paths, identifiers, or model excerpts are included.",
+  "change": "The private local JSON-line service now accepts bounded envelopes up to 4 MiB instead of rejecting every request above 16 KiB.",
+  "guardrails": [
+    "At most ten NLI candidates are accepted per call.",
+    "Candidate claims, exact quotes, source count and source sizes retain their existing bounds.",
+    "The local DeBERTa input remains bounded to 512 tokens per comparison.",
+    "Requests above 4 MiB still fail closed."
+  ],
+  "test_target": "Replay the same owner question that produced a 134732-byte alpha.21 envelope and require the grounding stage to complete.",
+  "claim_boundary": "This checkpoint repairs the diagnosed transport mismatch. A physical alpha.22 replay is still required."
+}

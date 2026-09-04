@@ -1,14 +1,23 @@
 from __future__ import annotations
 
 import json
+import io
 import os
 import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
-from pocket_i_app.bridge import MemoryRuntime, _complete_turn_positions, _render_messages, handle
+from pocket_i_app.bridge import (
+    MemoryRuntime,
+    SERVICE_REQUEST_LIMIT_BYTES,
+    _complete_turn_positions,
+    _render_messages,
+    _serve,
+    handle,
+)
 from pocket_i_core.library import Message
 
 
@@ -17,6 +26,43 @@ def tiny_embedder(texts):
 
 
 class DesktopBridgeTests(unittest.TestCase):
+    def test_warm_service_accepts_large_bounded_nli_envelope(self):
+        class FakeRuntime:
+            on_progress = None
+
+            def judge_candidates(self, candidates):
+                return {"received": len(candidates), "text_chars": len(candidates[0]["quote"])}
+
+        request = {
+            "id": 7,
+            "action": "nli",
+            "payload": {
+                "candidates": [{"candidate_id": "E1", "quote": "x" * 135_000, "claim": "claim"}]
+            },
+        }
+        stdout = io.StringIO()
+        with patch("sys.stdin", io.StringIO(json.dumps(request) + "\n")), patch("sys.stdout", stdout):
+            self.assertEqual(0, _serve(FakeRuntime()))
+        response = json.loads(stdout.getvalue())
+        self.assertTrue(response["ok"])
+        self.assertEqual(135_000, response["result"]["text_chars"])
+
+    def test_warm_service_still_rejects_unbounded_envelope(self):
+        class FakeRuntime:
+            on_progress = None
+
+            def judge_candidates(self, candidates):
+                raise AssertionError("oversized request reached the runtime")
+
+        padding = "x" * (SERVICE_REQUEST_LIMIT_BYTES + 1)
+        request = {"id": 8, "action": "nli", "payload": {"candidates": [], "padding": padding}}
+        stdout = io.StringIO()
+        with patch("sys.stdin", io.StringIO(json.dumps(request) + "\n")), patch("sys.stdout", stdout):
+            self.assertEqual(0, _serve(FakeRuntime()))
+        response = json.loads(stdout.getvalue())
+        self.assertFalse(response["ok"])
+        self.assertEqual("Local memory failed.", response["error"])
+
     def test_long_conversation_selection_keeps_complete_turns_without_slicing(self):
         messages = (
             Message("M1", "user", "A question with Llama-3.3 in it."),
