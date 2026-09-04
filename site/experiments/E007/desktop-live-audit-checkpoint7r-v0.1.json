@@ -3,6 +3,8 @@
   "experiment": "E007",
   "checkpoint": "7R",
   "candidate_build": "0.1.0-alpha.20",
+  "source_revision": "00d80c31d66a5ee5aeba45b29be50eb536ad8261",
+  "mac_builder": "/experiments/E007/build-macos-alpha-v0.18.sh",
   "status": "implementation_complete_physical_regression_pending",
   "problem": "A completed request already produced a private history file, but an interruption during the harness could lose the unfinished stages and an early failure could be named unknown.",
   "change": [
