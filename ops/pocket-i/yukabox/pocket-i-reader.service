@@ -6,7 +6,7 @@ Wants=network-online.target
 [Service]
 Type=simple
 Environment=LD_LIBRARY_PATH=/home/yuka/tools/llama.cpp/build/bin
-ExecStart=/home/yuka/tools/llama.cpp/build/bin/llama-server -m /home/yuka/pocket-i-models/Qwen3-8B-Q4_K_M.gguf --host 100.84.137.70 --port 18180 -c 32768 -b 512 -ub 512 -np 1 -t 20 --log-verbosity 1 --log-timestamps
+ExecStart=/home/yuka/tools/llama.cpp/build/bin/llama-server -m /home/yuka/pocket-i-models/Qwen3-8B-Q4_K_M.gguf --host 100.84.137.70 --port 18180 -c 16384 -b 512 -ub 512 -np 1 -t 20 --log-verbosity 1 --log-timestamps
 Restart=on-failure
 RestartSec=5
 

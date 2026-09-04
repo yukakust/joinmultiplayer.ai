@@ -1,0 +1,34 @@
+{
+  "schema_version": "e007-desktop-yukabox-memory-recovery-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7Q.2",
+  "status": "development_service_recovered",
+  "observed_failure": {
+    "desktop_message": "Yukabox brain is offline or still starting.",
+    "reader_http_status": 503,
+    "measured_cause": "The Linux OOM killer repeatedly terminated the reader and reranker while the host had about 55 of 59 GiB in use and all 8 GiB of swap occupied.",
+    "reader_restart_count_observed": 45
+  },
+  "change": {
+    "reader_context_tokens": {
+      "before": 32768,
+      "after": 16384
+    },
+    "reranker_context_tokens": {
+      "before": 32768,
+      "after": 16384
+    },
+    "model_weights_changed": false,
+    "unrelated_workloads_stopped": false
+  },
+  "verification": {
+    "reader_health_http": 200,
+    "reranker_health_http": 200,
+    "reader_live_output": "READER_OK",
+    "reranker_live_request_completed": true,
+    "reader_restarts_after_recovery": 0,
+    "reranker_restarts_after_recovery": 0
+  },
+  "limitation": "This restores the development connection under current memory pressure but lowers the maximum model context to 16,384 tokens. It does not yet prove the complete physical harness request or inputs near the new limit.",
+  "privacy": "No owner question, local-memory text, model evidence, private path, address, or credential is included."
+}

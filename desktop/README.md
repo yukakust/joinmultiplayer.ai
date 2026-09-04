@@ -238,3 +238,12 @@ selected local excerpts, model outputs, checks, and exact stopping reason remain
 on the owner's Mac. `OPEN TEST LOGS` is always visible during the test build.
 This changes observation only: it does not change retrieval, prompts, model
 decisions, thresholds, or answer generation.
+
+Checkpoint 7Q.2 preserves the first packaged remote-brain availability failure.
+The Mac-to-yukabox link was healthy, but both model services were repeatedly
+killed by the Linux OOM killer while unrelated host workloads occupied most of
+the 64 GB machine and swap was full. Without stopping those workloads, the two
+Pocket i services were restarted with 16,384-token contexts instead of 32,768.
+Both health checks and one real reader/reranker request then passed with zero
+new service restarts. The model weights are unchanged. Inputs near or above the
+smaller context remain an explicit limitation to test rather than hide.
