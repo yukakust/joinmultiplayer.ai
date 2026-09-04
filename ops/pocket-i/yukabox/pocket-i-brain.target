@@ -1,0 +1,6 @@
+[Unit]
+Description=Pocket i remote brain services
+Wants=pocket-i-reader.service pocket-i-reranker.service
+
+[Install]
+WantedBy=default.target

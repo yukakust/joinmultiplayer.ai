@@ -1,6 +1,7 @@
 const { spawn } = require("node:child_process");
 const path = require("node:path");
 const { buildIdentityPrompt } = require("./identity.cjs");
+const { remoteChatCompletion } = require("./remote-inference.cjs");
 const {
   NO_INFORMATION,
   extractionPrompt,
@@ -61,9 +62,10 @@ function wholeTurnBatches(sources, maxCharacters = 90_000) {
 }
 
 class ChatManager {
-  constructor({ executable, modelPath, brainLabel = "Qwen3 8B", timeoutMs = 600000 }) {
+  constructor({ executable, modelPath, remoteUrl = null, brainLabel = "Qwen3 8B", timeoutMs = 600000 }) {
     this.executable = executable;
     this.modelPath = modelPath;
+    this.remoteUrl = remoteUrl;
     this.brainLabel = brainLabel;
     this.timeoutMs = timeoutMs;
     this.active = false;
@@ -256,6 +258,14 @@ class ChatManager {
   runPrompt(prompt, identityQuestion, outputTokens, systemPrompt = null) {
     if (this.active) return Promise.reject(new Error("Pocket i is already thinking."));
     this.active = true;
+    if (this.remoteUrl) {
+      return remoteChatCompletion(this.remoteUrl, {
+        prompt,
+        systemPrompt: systemPrompt || buildIdentityPrompt(identityQuestion, this.brainLabel),
+        outputTokens,
+        timeoutMs: this.timeoutMs,
+      }).finally(() => { this.active = false; });
+    }
     const args = [
       "-m", this.modelPath,
       "-p", prompt,

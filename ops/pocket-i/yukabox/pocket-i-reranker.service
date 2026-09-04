@@ -1,0 +1,14 @@
+[Unit]
+Description=Pocket i Qwen3 Reranker 4B on the private Tailscale address
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=LD_LIBRARY_PATH=/home/yuka/tools/llama.cpp/build/bin
+ExecStart=/home/yuka/tools/llama.cpp/build/bin/llama-server -m /home/yuka/models/e007/mobile-reranker/qwen3-reranker-4b-q4_k_m.gguf --host 100.84.137.70 --port 18181 --reranking -c 32768 -b 512 -ub 512 -np 1 -t 20 --log-disable
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

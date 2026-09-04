@@ -20,6 +20,21 @@ test("rejects empty and oversized questions before inference", async () => {
   await assert.rejects(chat.ask("x".repeat(4001)), /4,000/);
 });
 
+test("uses the remote brain without a local executable or model", async () => {
+  const http = require("node:http");
+  const server = http.createServer((_request, response) => {
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify({ choices: [{ message: { content: "I live on yukabox." } }] }));
+  });
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  try {
+    const chat = new ChatManager({ remoteUrl: `http://127.0.0.1:${server.address().port}`, timeoutMs: 5000 });
+    assert.deepEqual(await chat.ask("Where are you?"), { answer: "I live on yukabox." });
+  } finally {
+    await new Promise((resolve) => server.close(resolve));
+  }
+});
+
 test("keeps only the model answer from pinned llama-cli single-turn output", () => {
   const raw = [
     "Loading model...",

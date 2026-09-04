@@ -1,0 +1,30 @@
+{
+  "schema_version": "e007-desktop-yukabox-brain-checkpoint7q-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7Q",
+  "candidate_build": "0.1.0-alpha.19",
+  "status": "implemented_awaiting_physical_mac_run",
+  "plain_language": "The Pocket i window and private memory stay on the Mac, while Qwen3-8B and Qwen3-Reranker-4B run on the owner's yukabox.",
+  "path": [
+    "Mac reads the owner's allowed Codex and Claude messages",
+    "Mac performs the local conversation index and chooses candidate conversations or complete turns",
+    "the unchanged question and selected evidence travel through the owner's private Tailscale network",
+    "Qwen3-Reranker-4B and Qwen3-8B run on yukabox",
+    "model results return to the Mac",
+    "local DeBERTa, exact checks, secret scan, piles and answer audit continue in the desktop harness"
+  ],
+  "verified": {
+    "reader_health": true,
+    "reranker_health": true,
+    "reader_real_answer": "My brain is running on the owner's yukabox.",
+    "reranker_relevant_decision": "TAKE",
+    "reranker_noise_decision": "DROP",
+    "node_tests": 39
+  },
+  "privacy": "The services listen only on the yukabox Tailscale address, not its public internet interfaces. Selected evidence leaves the Mac and reaches the owner's yukabox. The complete local library and index remain on the Mac.",
+  "limitations": [
+    "This is an owner-only alpha endpoint on a private tailnet, not a public multi-user inference service.",
+    "A physical Mac run of the complete memory-to-answer path is still required.",
+    "When yukabox is offline, the Mac app cannot answer until a local fallback is added."
+  ]
+}

@@ -130,3 +130,35 @@ test("a configured relevance model is required before the accepted pipeline is r
   await fs.writeFile(setup.relevanceModelPath(), "123");
   assert.equal((await setup.status()).readyToAsk, true);
 });
+
+test("remote mode needs no local model files when both yukabox services are healthy", async () => {
+  const servers = [];
+  async function healthServer() {
+    const server = http.createServer((_request, response) => {
+      response.writeHead(200, { "Content-Type": "application/json" });
+      response.end('{"status":"ok"}');
+    });
+    await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+    servers.push(server);
+    return `http://127.0.0.1:${server.address().port}`;
+  }
+  const readerUrl = await healthServer();
+  const relevanceUrl = await healthServer();
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "pocket-i-remote-ready-"));
+  try {
+    const setup = new SetupManager({
+      userDataPath: directory,
+      runtimePath: path.join(directory, "missing-runtime"),
+      manifest: {
+        remoteBrain: { enabled: true, readerUrl, relevanceUrl },
+        models: { reader: { id: "reader", label: "Reader" }, relevance: { id: "reranker", label: "Reranker" } },
+      },
+    });
+    const status = await setup.status();
+    assert.equal(status.mode, "remote");
+    assert.equal(status.readyToAsk, true);
+    assert.equal(status.hardware.requiredDownloadBytes, 0);
+  } finally {
+    await Promise.all(servers.map((server) => new Promise((resolve) => server.close(resolve))));
+  }
+});

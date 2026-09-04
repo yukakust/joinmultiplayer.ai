@@ -2,6 +2,7 @@ const http = require("node:http");
 const net = require("node:net");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
+const { requestJson: requestRemoteJson } = require("./remote-inference.cjs");
 
 const TAKE_AT = 0.92222771;
 const DROP_AT = 0.00292693;
@@ -51,9 +52,10 @@ function requestJson({ port, method = "GET", route, payload = null, timeoutMs = 
 }
 
 class RerankerManager {
-  constructor({ executable, modelPath, timeoutMs = 180000 }) {
+  constructor({ executable, modelPath, remoteUrl = null, timeoutMs = 180000 }) {
     this.executable = executable;
     this.modelPath = modelPath;
+    this.remoteUrl = remoteUrl;
     this.timeoutMs = timeoutMs;
     this.child = null;
     this.port = null;
@@ -104,14 +106,20 @@ class RerankerManager {
   }
 
   async score(question, document) {
-    await this.start();
+    if (!this.remoteUrl) await this.start();
     const content = `${PREFIX}<Instruct>: ${INSTRUCTION}\n<Query>: ${question}\n<Document>: ${document}${SUFFIX}`;
-    const payload = await requestJson({
-      port: this.port,
-      method: "POST",
-      route: "/embedding",
-      payload: { content, embd_normalize: -1 },
-    });
+    const payload = this.remoteUrl
+      ? await requestRemoteJson(this.remoteUrl, "/embedding", {
+        method: "POST",
+        timeoutMs: this.timeoutMs,
+        payload: { content, embd_normalize: -1 },
+      })
+      : await requestJson({
+        port: this.port,
+        method: "POST",
+        route: "/embedding",
+        payload: { content, embd_normalize: -1 },
+      });
     let values = payload?.[0]?.embedding;
     if (Array.isArray(values?.[0])) values = values[0];
     if (!Array.isArray(values) || values.length < 2) throw new Error("The local relevance score was invalid.");

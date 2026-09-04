@@ -5,6 +5,7 @@ const http = require("node:http");
 const https = require("node:https");
 const os = require("node:os");
 const path = require("node:path");
+const { remoteHealth } = require("./remote-inference.cjs");
 
 const MINIMUM_MEMORY_BYTES = 12 * 1024 ** 3;
 
@@ -99,6 +100,7 @@ class SetupManager {
     this.runtimePath = runtimePath;
     this.onProgress = onProgress;
     this.active = null;
+    this.remote = manifest.remoteBrain?.enabled ? manifest.remoteBrain : null;
   }
 
   modelPath() {
@@ -122,6 +124,21 @@ class SetupManager {
   }
 
   async status() {
+    if (this.remote) {
+      const [readerReady, relevanceReady] = await Promise.all([
+        remoteHealth(this.remote.readerUrl),
+        remoteHealth(this.remote.relevanceUrl),
+      ]);
+      return {
+        version: "desktop-alpha-yukabox-brain-v0.1",
+        mode: "remote",
+        model: { id: this.manifest.models.reader.id, label: this.manifest.models.reader.label, bytes: 0, installed: readerReady, downloading: false },
+        relevance: { id: this.manifest.models.relevance.id, label: this.manifest.models.relevance.label, bytes: 0, installed: relevanceReady, downloading: false },
+        hardware: { memoryBytes: os.totalmem(), freeBytes: 0, memoryOkay: true, diskOkay: true, requiredDownloadBytes: 0 },
+        runtime: { installed: readerReady && relevanceReady, label: "Yukabox via Tailscale" },
+        readyToAsk: readerReady && relevanceReady,
+      };
+    }
     const model = this.manifest.models.reader;
     const installed = await this.installed(model, this.modelPath());
     const relevance = this.manifest.models.relevance;
@@ -167,6 +184,11 @@ class SetupManager {
   }
 
   async installModel() {
+    if (this.remote) {
+      const current = await this.status();
+      if (!current.readyToAsk) throw new Error("Yukabox brain is offline or still starting.");
+      return this.remote.readerUrl;
+    }
     if (this.active) return this.active;
     const current = await this.status();
     if (!current.hardware.memoryOkay) throw new Error("This preset needs at least 12 GB of memory.");

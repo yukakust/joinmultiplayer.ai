@@ -1770,3 +1770,21 @@ They remain explicit game upgrade targets rather than hidden failures. This
 acceptance does not prove generalization, real private-memory quality, physical
 networking, or swarm scale. Decision record:
 `site/experiments/E007/outbound-whole-turn-pilot-owner-decision-v0.1.json`.
+
+## Desktop Checkpoint 7Q — Mac window, yukabox brain
+
+The owner accepted moving both large GGUF models from the storage-constrained
+Mac to yukabox. The desktop library does not move. Conversation parsing,
+hybrid routing, the private embedding index, exact evidence checks, DeBERTa,
+secret scanning and audit files stay on the Mac. Only the unchanged question
+and the complete conversations or turns already selected by the local router
+cross the owner's encrypted Tailscale network. Qwen3-Reranker-4B and Qwen3-8B
+run as two persistent llama.cpp services bound only to yukabox's Tailscale IP.
+
+The two services passed live health checks. The reader returned the expected
+one-sentence answer through the remote client. On one relevant and one noise
+example, the reranker returned TAKE and DROP respectively. Thirty-nine desktop
+Node tests pass, including remote health, remote chat, remote setup and local
+fallback tests. This does not yet prove the packaged Mac can complete a real
+private-memory answer. That physical run is the next checkpoint. The public
+record contains no private question or conversation text.

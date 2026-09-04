@@ -218,3 +218,14 @@ both, DeBERTa checks source support, and an outbound secret scan blocks common
 credential shapes. Large inputs are batched only between conversations, never
 inside a message. The accepted 6/8 development result and its two visible
 weaknesses remain part of the public record; this build does not relabel them.
+
+Checkpoint 7Q moves the two large inference models off the storage-constrained
+Mac without moving its library. Alpha.19 keeps conversation discovery, the
+private index, exact checks, DeBERTa and audit files on the Mac. It sends only
+the unchanged question plus already selected whole conversations or complete
+turns to the owner's yukabox through Tailscale. Qwen3-Reranker-4B and Qwen3-8B
+run there and return model results to the desktop harness. Both real endpoints
+passed health checks; Qwen answered one live request, and the reranker marked a
+relevant sentence TAKE and unrelated garden text DROP. This is an owner-only
+development connection, not a public service. A packaged Mac run remains the
+physical checkpoint.

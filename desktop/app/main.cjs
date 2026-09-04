@@ -237,11 +237,13 @@ app.whenReady().then(() => {
   chatManager = new ChatManager({
     executable: runtimePath(),
     modelPath: setupManager.modelPath(),
+    remoteUrl: manifest.remoteBrain?.enabled ? manifest.remoteBrain.readerUrl : null,
     brainLabel: manifest.models.reader.label,
   });
   rerankerManager = new RerankerManager({
     executable: rerankerRuntimePath(),
     modelPath: setupManager.relevanceModelPath(),
+    remoteUrl: manifest.remoteBrain?.enabled ? manifest.remoteBrain.relevanceUrl : null,
   });
   memoryService = new MemoryService({
     request: memoryServiceCommand(),

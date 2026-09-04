@@ -85,6 +85,7 @@ async function renderMemoryStatus() {
 
 async function renderStatus() {
   const status = await window.pocketI.setupStatus();
+  const remote = status.mode === "remote";
   runtimeStatus.textContent = status.runtime.installed ? "READY" : "MISSING";
   rerankerStatus.textContent = status.relevance?.installed ? "READY" : "NOT INSTALLED";
   if (status.readyToAsk) {
@@ -97,6 +98,17 @@ async function renderStatus() {
   }
   setupView.hidden = false;
   chatView.hidden = true;
+  if (remote) {
+    modelStatus.textContent = status.model.installed ? "CONNECTED" : "OFFLINE";
+    rerankerStatus.textContent = status.relevance?.installed ? "CONNECTED" : "OFFLINE";
+    runtimeStatus.textContent = status.runtime.installed ? "TAILSCALE" : "OFFLINE";
+    progressLabel.textContent = status.readyToAsk ? "Yukabox brain connected." : "Connect to Tailscale and wake yukabox.";
+    bar.style.width = status.readyToAsk ? "100%" : "0%";
+    install.textContent = "CONNECT YUKABOX";
+    install.hidden = false;
+    install.disabled = false;
+    return;
+  }
   if (status.model.installed && status.relevance?.installed) {
     modelStatus.textContent = "READY";
     progressLabel.textContent = status.runtime.installed ? "" : "Runtime missing.";
@@ -178,8 +190,8 @@ memoryConfirm.addEventListener("click", async () => {
 install.addEventListener("click", async () => {
   install.disabled = true;
   const before = await window.pocketI.setupStatus();
-  modelStatus.textContent = before.model.installed ? "READY" : "DOWNLOADING";
-  rerankerStatus.textContent = before.relevance?.installed ? "READY" : "DOWNLOADING";
+  modelStatus.textContent = before.mode === "remote" ? "CONNECTING" : (before.model.installed ? "READY" : "DOWNLOADING");
+  rerankerStatus.textContent = before.mode === "remote" ? "CONNECTING" : (before.relevance?.installed ? "READY" : "DOWNLOADING");
   errorBox.hidden = true;
   try {
     await window.pocketI.installModel();

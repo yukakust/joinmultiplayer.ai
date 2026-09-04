@@ -1,5 +1,11 @@
 {
   "schemaVersion": "pocket-i-model-manifest-v0.1",
+  "remoteBrain": {
+    "enabled": true,
+    "transport": "tailscale",
+    "readerUrl": "http://yukabox.tail1e1ad1.ts.net:18180",
+    "relevanceUrl": "http://yukabox.tail1e1ad1.ts.net:18181"
+  },
   "models": {
     "reader": {
       "id": "qwen3-8b-q4-k-m",
