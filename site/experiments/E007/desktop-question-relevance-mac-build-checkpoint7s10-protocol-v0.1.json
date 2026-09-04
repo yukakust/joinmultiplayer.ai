@@ -1,0 +1,16 @@
+{
+  "schema_version": "e007-public-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.10",
+  "kind": "physical-development-build",
+  "package": "Pocket i 0.1.0-alpha.23",
+  "source_revision": "a14731fac6bf20aca6c8c444e7e9d033bab8fb8f",
+  "steps": [
+    "Build and install the pinned alpha.23 package on the owner Mac.",
+    "Repeat the question whose correct relevance decision was previously discarded with an incomplete batch.",
+    "Require the first correct decision to survive and only omitted candidates to be retried.",
+    "Inspect the durable private log before continuing the fixed question list."
+  ],
+  "privacy": "The protocol is public; owner memory and per-question logs stay private.",
+  "claim_boundary": "The packaged physical replay has not run yet."
+}
