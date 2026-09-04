@@ -1,0 +1,38 @@
+{
+  "schema_version": "e007-desktop-two-stage-message-extraction-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S",
+  "status": "development_two_case_mechanism_pass_with_precision_limit",
+  "hypothesis": "Separating message selection from claim extraction, using simple local handles, and letting ordinary code reconstruct exact source text will recover evidence that the overloaded one-call prompt lost.",
+  "frozen_input": {
+    "cases": 2,
+    "origin": "Two owner-approved failed desktop audit logs",
+    "old_pipeline_accepted_cases": 0,
+    "private_text_published": false
+  },
+  "conditions": [
+    {
+      "name": "one_overloaded_call_from_saved_logs",
+      "correct_message_recovered": 1,
+      "cases_with_accepted_grounded_claim": 0,
+      "placeholder_claims_observed": 2
+    },
+    {
+      "name": "two_stage_then_code_reconstructs_lines",
+      "correct_message_recovered": 2,
+      "cases_with_needed_answer_recovered": 2,
+      "cases_with_accepted_grounded_claim": 2,
+      "accepted_exact_evidence_claims": 12,
+      "placeholder_claims_observed": 0,
+      "clearly_unnecessary_extra_claims_in_manual_review": 4
+    }
+  ],
+  "timing_seconds": {
+    "two_stage_with_initial_selection_total": 606.234,
+    "coordinate_extraction_reusing_saved_selection_total": 314.811
+  },
+  "finding": "The two-stage interface fixed message identity and placeholder failures. Asking Qwen to retype exact quotes still failed, while selecting source-line coordinates let code reconstruct exact evidence for every returned claim.",
+  "limit": "This is a two-case development replay, not a locked accuracy result. Qwen still returned extra true-but-unneeded claims, so the question-to-claim relevance stage remains necessary before writing an answer.",
+  "next": "Test the same contract on a larger frozen mix of answerable and unanswerable questions before integrating it into the desktop application.",
+  "privacy": "No owner question, message, quote, source identifier, local path, network address, or credential is published. Detailed outputs remain only in owner-private 0600 files."
+}
