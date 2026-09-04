@@ -1,0 +1,41 @@
+{
+  "schema_version": "e007-two-stage-message-extraction-30-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.2",
+  "status": "frozen_before_inference",
+  "hypothesis": "The two-stage message interface can recover grounded evidence when it exists and return no claim when the supplied packet contains only similar noise.",
+  "frozen_source": {
+    "world": "world-v0.1.json",
+    "questions": "E7-Q01 through E7-Q30",
+    "language": "English",
+    "synthetic": true
+  },
+  "cases": {
+    "answerable": {
+      "count": 20,
+      "input": "Each original question packet, containing two required sources plus its frozen distractors.",
+      "pass": "Both required source messages produce mechanically exact evidence."
+    },
+    "no_answer_in_packet": {
+      "count": 10,
+      "input": "The question remains unchanged, but both required sources are removed before inference and only similar distractors remain.",
+      "pass": "No accepted claim is produced."
+    }
+  },
+  "pipeline": [
+    "Replace real source identifiers with M1, M2 and so on.",
+    "Qwen3-8B selects zero to three message handles.",
+    "Qwen3-8B reads each selected message separately and writes short claims plus source-line handles.",
+    "Ordinary code validates every handle, blocks placeholder text, and reconstructs exact source lines.",
+    "The frozen source map scores required evidence and false-positive sources."
+  ],
+  "primary_metrics": [
+    "answerable cases with both required sources",
+    "required-source recall",
+    "no-answer cases with zero accepted claims",
+    "false-positive sources",
+    "placeholder claims"
+  ],
+  "claim_boundary": "This gate tests only selection and grounded extraction inside a supplied candidate packet. It does not test library-wide retrieval, DeBERTa, final writing, privacy filtering or a physical swarm.",
+  "privacy": "All test text is from the public synthetic E007 world; no owner memory is used."
+}
