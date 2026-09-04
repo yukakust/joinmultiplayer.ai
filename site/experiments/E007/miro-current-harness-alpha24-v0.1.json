@@ -1,0 +1,39 @@
+{
+  "schema_version": "e007-miro-current-harness-v0.1",
+  "experiment": "E007",
+  "checkpoint": "CURRENT HARNESS alpha.24",
+  "recorded_at": "2026-09-04",
+  "board_url": "https://miro.com/app/board/uXjVHwXKh2w=/",
+  "frame_title": "E007 · CURRENT HARNESS · alpha.24 · 2026-09-04",
+  "history_policy": "Existing diagrams and failed checkpoints were preserved.",
+  "lanes": [
+    "owner computer",
+    "yukabox through Tailscale",
+    "owner computer after remote inference"
+  ],
+  "steps": [
+    "owner asks one question",
+    "hybrid local index routes to five conversations",
+    "short conversations remain whole and long conversations contribute complete turns",
+    "owner permission boundary before remote transfer",
+    "Qwen3-Reranker-4B marks whole candidates TAKE, NOT_SURE or DROP",
+    "Qwen3-8B selects useful complete messages",
+    "Qwen3-8B extracts small claims and line handles one message at a time",
+    "ordinary local code restores exact source lines and rejects invented handles",
+    "local DeBERTa checks whether each claim follows from its exact evidence",
+    "local secret scan blocks evidence containing detected credentials",
+    "Qwen checks whether grounded claims answer or contribute to the question",
+    "bidirectional DeBERTa keeps agreeing and conflicting versions in separate piles",
+    "Qwen writes one readable canonical claim per pile",
+    "DeBERTa validates each canonical against its originals",
+    "only the verified used shelf reaches the final writer",
+    "Qwen3-8B writes a human answer with evidence labels"
+  ],
+  "visible_boundaries": {
+    "no_evidence": "Return a fixed honest not-found response.",
+    "private_audit": "Every stage is stored locally and private source text is not published.",
+    "remote_truth": "Selected conversations or turns leave the owner computer for yukabox in remote mode.",
+    "known_observability_gap": "The audit does not yet preserve the pre-reranker input, so a bad local excerpt cannot always be distinguished from a false DROP."
+  },
+  "next_product_step": "Make remote inference opt-in, off by default, visibly warn about selected excerpts leaving the device, health-check the server and allow disconnecting."
+}
