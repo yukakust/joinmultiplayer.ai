@@ -1,0 +1,27 @@
+{
+  "schema_version": "e007-desktop-yukabox-oom-recovery-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7Q.3",
+  "status": "development_connection_restored_not_production_stable",
+  "finding": "The desktop error reported a lost remote connection, but DNS and Tailscale were healthy. Linux killed model processes under whole-host memory pressure during inference.",
+  "measured_before": {
+    "ram_used_gib": 57,
+    "ram_total_gib": 59,
+    "swap_used_gib": 8,
+    "swap_total_gib": 8
+  },
+  "temporary_recovery": {
+    "additional_swap_gib": 16,
+    "unrelated_processes_stopped": false,
+    "reader_health_http": 200,
+    "reranker_health_http": 200
+  },
+  "stress_check": {
+    "long_reranker_request": "completed",
+    "long_reader_request": "completed_after_restarts",
+    "reader_restarts_observed": 3,
+    "meaning": "Extra swap allowed eventual completion, but the fixed pair of always-loaded models is not yet stable under competing host workloads."
+  },
+  "next_physical_action": "Repeat the real question while both endpoints are healthy and preserve the per-stage private audit. A resource-aware server design is still required before inviting another owner.",
+  "privacy": "No owner question, local-memory excerpt, model evidence, private path, address, or credential is included."
+}
