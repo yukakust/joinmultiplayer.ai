@@ -1,0 +1,12 @@
+{
+  "schema_version": "e007-public-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.12",
+  "kind": "physical-development-build",
+  "package": "Pocket i 0.1.0-alpha.24",
+  "source_revision": "6ef608168ebc31ac782327c67bd3b1108d1b9820",
+  "test": "Repeat the question whose relevance response explicitly accepted one candidate and omitted three.",
+  "success": "The explicit useful candidate continues; explicitly unrelated and omitted candidates do not; no second relevance call is made.",
+  "privacy": "The protocol is public; owner memory and per-question logs stay private.",
+  "claim_boundary": "The packaged physical replay has not run yet."
+}
