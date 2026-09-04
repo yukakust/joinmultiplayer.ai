@@ -10,11 +10,11 @@ share useful, consented knowledge without becoming one central model.
 ## Current checkpoint
 
 - Branch: `agent/game-loop-v0.1`
-- App: `desktop/app`, version `0.1.0-alpha.26`
+- App: `desktop/app`, version `0.1.0-alpha.27`
 - Core/index: `desktop/pocket_i_core`
 - Public experiment record: `site/experiments/E007`
 - Current Miro frame: `E007 · CURRENT HARNESS · alpha.26 · 2026-09-04`
-- macOS builder: `site/experiments/E007/build-macos-alpha-v0.24.sh`
+- macOS builder: `site/experiments/E007/build-macos-alpha-v0.25.sh`
 
 The Mac keeps conversation discovery, the index, exact evidence restoration,
 DeBERTa, secret scanning, and private audit logs. Qwen3-Reranker-4B and
@@ -53,7 +53,7 @@ Expected at this checkpoint: `39/39` Python tests and `46/46` desktop tests.
 
 ## Next checkpoint
 
-Build alpha.26 on the owner's Mac and physically verify: first-run warning,
+Build alpha.27 on the owner's Mac and physically verify: brain selection does not start work, `WAKE` starts only the selected mode, `OPEN TEST LOGS` opens the private audit directory, first-run warning,
 consent, yukabox health, one memory-backed answer, private audit creation, and
 disconnect. Only then give the DMG to Vitalik. Vitalik must have Tailscale
 access. This alpha does not yet provide public authentication, tenant isolation,
