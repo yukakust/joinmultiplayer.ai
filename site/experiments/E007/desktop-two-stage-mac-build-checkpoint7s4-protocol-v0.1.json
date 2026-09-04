@@ -1,0 +1,18 @@
+{
+  "schema_version": "e007-two-stage-mac-build-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.4",
+  "status": "builder_ready_awaiting_owner_mac",
+  "package": "Pocket i 0.1.0-alpha.21",
+  "source_revision": "59569a45a3dbf626b18e582b6ebad9519f8635ef",
+  "builder": "build-macos-alpha-v0.19.sh",
+  "physical_test": [
+    "Build and install alpha.21 on the owner Mac.",
+    "Ask the same English memory questions used in the previous packaged regression.",
+    "Keep every durable per-question private audit log.",
+    "Confirm that message selection and per-message extraction are visible as separate stages.",
+    "Score the human answer before enabling any shared-server option for another owner."
+  ],
+  "release_boundary": "Do not send this build to another owner until the owner Mac receives a grounded answer and an unanswerable control stops safely.",
+  "privacy": "The builder contains no owner memory or credentials. Selected evidence still travels to the owner-controlled yukabox in this development configuration."
+}
