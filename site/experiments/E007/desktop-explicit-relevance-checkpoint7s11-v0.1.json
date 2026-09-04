@@ -1,0 +1,18 @@
+{
+  "schema_version": "e007-public-checkpoint-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.11",
+  "kind": "implementation-checkpoint",
+  "date": "2026-09-04",
+  "package": "Pocket i 0.1.0-alpha.24",
+  "privacy": "No owner question, memory, paths, identifiers or raw model output are included.",
+  "decision": "Supersede the retry proposed at checkpoint 7S.9. Use only structurally valid decisions that the model explicitly returned.",
+  "rules": [
+    "Explicit answers or contributes decisions continue.",
+    "Explicit unrelated decisions are rejected.",
+    "Omitted candidates are rejected without another model call.",
+    "Invalid JSON, invented identifiers and duplicate identifiers still fail closed."
+  ],
+  "reason": "A correct partial answer is useful information. Missing output must not erase it and must not silently become accepted evidence.",
+  "claim_boundary": "The deterministic application test passes; a packaged physical replay is still required."
+}

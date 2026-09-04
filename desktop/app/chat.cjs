@@ -12,7 +12,6 @@ const {
   validateSelectedMessageClaims,
   questionRelevancePrompt,
   validateQuestionRelevance,
-  completeQuestionRelevance,
   directionalNliJobs,
   mutualEntailmentPiles,
   canonicalPrompt,
@@ -227,28 +226,8 @@ class ChatManager {
       512,
       "You classify whether grounded claims answer a question. Return only valid JSON.",
     );
-    const primaryRelevance = validateQuestionRelevance(relevance.answer, grounded);
-    let relevant = primaryRelevance;
-    let retryAnswer = null;
-    let retryResult = null;
-    if (!primaryRelevance.valid && primaryRelevance.reason === "missing decision") {
-      const missing = grounded.filter((item) => primaryRelevance.missing_ids.includes(item.candidate_id));
-      const retry = await this.runPrompt(
-        questionRelevancePrompt(cleanQuestion, missing),
-        cleanQuestion,
-        384,
-        "Classify every listed grounded claim. Return only valid JSON.",
-      );
-      retryAnswer = retry.answer;
-      retryResult = validateQuestionRelevance(retry.answer, missing);
-      relevant = completeQuestionRelevance(primaryRelevance, retryResult, grounded);
-    }
-    await observe("question_relevance", {
-      raw_answer: relevance.answer,
-      retry_raw_answer: retryAnswer,
-      retry_result: retryResult,
-      ...relevant,
-    });
+    const relevant = validateQuestionRelevance(relevance.answer, grounded);
+    await observe("question_relevance", { raw_answer: relevance.answer, ...relevant });
     if (!relevant.valid) {
       await observe("stopped", { reason: "invalid_question_relevance" });
       return { answer: NO_INFORMATION, diagnostic: "invalid_question_relevance" };

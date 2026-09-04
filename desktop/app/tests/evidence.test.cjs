@@ -13,7 +13,6 @@ const {
   writerEvidenceFromPiles,
   questionRelevancePrompt,
   validateQuestionRelevance,
-  completeQuestionRelevance,
   wholeTurnExtractionPrompt,
   validateWholeTurnCandidates,
   handledMessages,
@@ -107,20 +106,20 @@ test("question relevance keeps direct and compositional answer parts but drops a
   assert.deepEqual(result.rejected.map((item) => item.candidate_id), ["E3"]);
 });
 
-test("question relevance keeps valid partial decisions for one bounded retry", () => {
+test("question relevance uses explicit decisions and safely drops omitted candidates", () => {
   const candidates = [{ candidate_id: "E1", claim: "One" }, { candidate_id: "E2", claim: "Two" }];
-  const partial = validateQuestionRelevance({ decisions: [
+  const result = validateQuestionRelevance({ decisions: [
     { candidate_id: "E1", relation: "answers" },
   ] }, candidates);
-  assert.equal(partial.valid, false);
-  assert.deepEqual(partial.accepted.map((item) => item.candidate_id), ["E1"]);
-  assert.deepEqual(partial.missing_ids, ["E2"]);
-  const completed = completeQuestionRelevance(partial, validateQuestionRelevance({ decisions: [
+  assert.equal(result.valid, true);
+  assert.deepEqual(result.accepted.map((item) => item.candidate_id), ["E1"]);
+  assert.deepEqual(result.rejected.map((item) => item.candidate_id), ["E2"]);
+  assert.deepEqual(result.omitted_ids, ["E2"]);
+  const onlyUnrelated = validateQuestionRelevance({ decisions: [
     { candidate_id: "E2", relation: "unrelated" },
-  ] }, [candidates[1]]), candidates);
-  assert.equal(completed.valid, true);
-  assert.deepEqual(completed.accepted.map((item) => item.candidate_id), ["E1"]);
-  assert.deepEqual(completed.rejected.map((item) => item.candidate_id), ["E2"]);
+  ] }, candidates);
+  assert.deepEqual(onlyUnrelated.accepted, []);
+  assert.deepEqual(onlyUnrelated.rejected.map((item) => item.candidate_id), ["E1", "E2"]);
 });
 
 test("question relevance still rejects duplicate or invented decisions", () => {

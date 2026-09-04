@@ -378,45 +378,14 @@ function validateQuestionRelevance(value, candidates) {
     seen.add(candidateId);
     decisions.push({ candidate_id: candidateId, relation });
   }
-  if (rows.length !== expectedIds.length || expectedIds.some((id) => !seen.has(id))) {
-    const relationById = new Map(decisions.map((item) => [item.candidate_id, item.relation]));
-    return {
-      valid: false,
-      accepted: candidates.filter((item) => {
-        const relation = relationById.get(item.candidate_id);
-        return relation === "answers" || relation === "contributes";
-      }),
-      rejected: candidates.filter((item) => relationById.get(item.candidate_id) === "unrelated"),
-      decisions,
-      missing_ids: expectedIds.filter((id) => !seen.has(id)),
-      reason: "missing decision",
-    };
-  }
   const relationById = new Map(decisions.map((item) => [item.candidate_id, item.relation]));
-  const accepted = candidates.filter((item) => relationById.get(item.candidate_id) !== "unrelated");
-  const rejected = candidates.filter((item) => relationById.get(item.candidate_id) === "unrelated");
-  return { valid: true, accepted, rejected, decisions, missing_ids: [], reason: null };
-}
-
-function completeQuestionRelevance(primary, retry, candidates) {
-  const expectedIds = new Set(candidates.map((item) => item.candidate_id));
-  const decisions = [];
-  const seen = new Set();
-  for (const result of [primary, retry]) {
-    for (const decision of result?.decisions || []) {
-      if (!expectedIds.has(decision.candidate_id) || seen.has(decision.candidate_id)) continue;
-      seen.add(decision.candidate_id);
-      decisions.push(decision);
-    }
-  }
-  const defaulted_ids = candidates
-    .map((item) => item.candidate_id)
-    .filter((candidateId) => !seen.has(candidateId));
-  decisions.push(...defaulted_ids.map((candidate_id) => ({ candidate_id, relation: "unrelated" })));
-  return {
-    ...validateQuestionRelevance({ decisions }, candidates),
-    defaulted_ids,
-  };
+  const accepted = candidates.filter((item) => {
+    const relation = relationById.get(item.candidate_id);
+    return relation === "answers" || relation === "contributes";
+  });
+  const omitted_ids = expectedIds.filter((id) => !seen.has(id));
+  const rejected = candidates.filter((item) => !accepted.includes(item));
+  return { valid: true, accepted, rejected, decisions, omitted_ids, reason: null };
 }
 
 function writerPrompt(question, evidence) {
@@ -627,7 +596,6 @@ module.exports = {
   validateSelectedMessageClaims,
   questionRelevancePrompt,
   validateQuestionRelevance,
-  completeQuestionRelevance,
   directionalNliJobs,
   mutualEntailmentPiles,
   canonicalPrompt,
