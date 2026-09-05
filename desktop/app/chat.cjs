@@ -66,10 +66,11 @@ function wholeTurnBatches(sources, maxCharacters = 48_000) {
 }
 
 class ChatManager {
-  constructor({ executable, modelPath, remoteUrl = null, brainLabel = "Qwen3 8B", timeoutMs = 600000 }) {
+  constructor({ executable, modelPath, remoteUrl = null, remoteAccessToken = null, brainLabel = "Qwen3 8B", timeoutMs = 600000 }) {
     this.executable = executable;
     this.modelPath = modelPath;
     this.remoteUrl = remoteUrl;
+    this.remoteAccessToken = remoteAccessToken;
     this.brainLabel = brainLabel;
     this.timeoutMs = timeoutMs;
     this.active = false;
@@ -294,6 +295,7 @@ class ChatManager {
         systemPrompt: systemPrompt || buildIdentityPrompt(identityQuestion, this.brainLabel),
         outputTokens,
         timeoutMs: this.timeoutMs,
+        accessToken: this.remoteAccessToken,
       }).finally(() => { this.active = false; });
     }
     const args = [

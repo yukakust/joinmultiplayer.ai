@@ -9,6 +9,19 @@ const { MemoryService } = require("./memory-service.cjs");
 const { RerankerManager } = require("./reranker.cjs");
 const { beginPrivateAudit, privateAuditPaths } = require("./audit-store.cjs");
 
+function loadRemoteAccessToken() {
+  const fromEnvironment = String(process.env.POCKET_I_REMOTE_ACCESS_TOKEN || "").trim();
+  if (fromEnvironment) return fromEnvironment;
+  try {
+    const access = require("./remote-access.json");
+    return typeof access?.token === "string" ? access.token.trim() : "";
+  } catch {
+    return "";
+  }
+}
+
+const remoteAccessToken = loadRemoteAccessToken();
+
 let mainWindow = null;
 let setupManager = null;
 let chatManager = null;
@@ -21,7 +34,9 @@ async function configureRemoteBrain(enabled) {
   await setupManager.setRemoteConsent(Boolean(enabled));
   const remote = enabled ? manifest.remoteBrain : null;
   chatManager.remoteUrl = remote?.readerUrl || null;
+  chatManager.remoteAccessToken = remote ? remoteAccessToken : null;
   rerankerManager.remoteUrl = remote?.relevanceUrl || null;
+  rerankerManager.remoteAccessToken = remote ? remoteAccessToken : null;
   if (!enabled) rerankerManager.stop();
   return Boolean(enabled);
 }
@@ -273,6 +288,7 @@ app.whenReady().then(async () => {
     userDataPath: app.getPath("userData"),
     manifest,
     runtimePath: runtimePath(),
+    remoteAccessToken,
     onProgress: (progress) => {
       if (mainWindow && !mainWindow.isDestroyed()) {
         mainWindow.webContents.send("pocket-i:setup-progress", progress);
@@ -284,12 +300,14 @@ app.whenReady().then(async () => {
     executable: runtimePath(),
     modelPath: setupManager.modelPath(),
     remoteUrl: remoteConsented ? manifest.remoteBrain.readerUrl : null,
+    remoteAccessToken: remoteConsented ? remoteAccessToken : null,
     brainLabel: manifest.models.reader.label,
   });
   rerankerManager = new RerankerManager({
     executable: rerankerRuntimePath(),
     modelPath: setupManager.relevanceModelPath(),
     remoteUrl: remoteConsented ? manifest.remoteBrain.relevanceUrl : null,
+    remoteAccessToken: remoteConsented ? remoteAccessToken : null,
   });
   memoryService = new MemoryService({
     request: memoryServiceCommand(),

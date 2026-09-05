@@ -94,13 +94,14 @@ async function downloadVerified({ item, destination, onProgress = () => {} }) {
 }
 
 class SetupManager {
-  constructor({ userDataPath, manifest, runtimePath, onProgress = () => {} }) {
+  constructor({ userDataPath, manifest, runtimePath, remoteAccessToken = null, onProgress = () => {} }) {
     this.userDataPath = userDataPath;
     this.manifest = manifest;
     this.runtimePath = runtimePath;
     this.onProgress = onProgress;
     this.active = null;
     this.remote = manifest.remoteBrain?.enabled ? manifest.remoteBrain : null;
+    this.remoteAccessToken = remoteAccessToken;
     this.remoteConsentPath = path.join(userDataPath, "remote-brain-consent.json");
     this.brainModePath = path.join(userDataPath, "brain-mode.json");
   }
@@ -201,8 +202,8 @@ class SetupManager {
         };
       }
       const [readerReady, relevanceReady] = await Promise.all([
-        remoteHealth(this.remote.readerUrl),
-        remoteHealth(this.remote.relevanceUrl),
+        remoteHealth(this.remote.readerUrl, 3000, this.remoteAccessToken),
+        remoteHealth(this.remote.relevanceUrl, 3000, this.remoteAccessToken),
       ]);
       return {
         version: "desktop-alpha-yukabox-brain-v0.2",

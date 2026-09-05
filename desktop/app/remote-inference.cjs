@@ -1,15 +1,19 @@
 const http = require("node:http");
 const https = require("node:https");
 
-function requestJson(baseUrl, route, { method = "GET", payload = null, timeoutMs = 600000 } = {}) {
-  const target = new URL(route, baseUrl);
+function requestJson(baseUrl, route, { method = "GET", payload = null, timeoutMs = 600000, accessToken = null } = {}) {
+  const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
+  const normalizedRoute = String(route || "").replace(/^\/+/, "");
+  const target = new URL(normalizedRoute, normalizedBase);
   const client = target.protocol === "https:" ? https : http;
   const body = payload === null ? null : Buffer.from(JSON.stringify(payload));
+  const headers = body ? { "Content-Type": "application/json", "Content-Length": body.length } : {};
+  if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
   return new Promise((resolve, reject) => {
     const request = client.request(target, {
       method,
       timeout: timeoutMs,
-      headers: body ? { "Content-Type": "application/json", "Content-Length": body.length } : {},
+      headers,
     }, (response) => {
       let value = "";
       response.setEncoding("utf8");
@@ -29,10 +33,11 @@ function requestJson(baseUrl, route, { method = "GET", payload = null, timeoutMs
   });
 }
 
-async function remoteChatCompletion(baseUrl, { prompt, systemPrompt, outputTokens, timeoutMs }) {
+async function remoteChatCompletion(baseUrl, { prompt, systemPrompt, outputTokens, timeoutMs, accessToken = null }) {
   const response = await requestJson(baseUrl, "/v1/chat/completions", {
     method: "POST",
     timeoutMs,
+    accessToken,
     payload: {
       messages: [
         { role: "system", content: systemPrompt },
@@ -49,9 +54,9 @@ async function remoteChatCompletion(baseUrl, { prompt, systemPrompt, outputToken
   return { answer };
 }
 
-async function remoteHealth(baseUrl, timeoutMs = 3000) {
+async function remoteHealth(baseUrl, timeoutMs = 3000, accessToken = null) {
   try {
-    await requestJson(baseUrl, "/health", { timeoutMs });
+    await requestJson(baseUrl, "/health", { timeoutMs, accessToken });
     return true;
   } catch {
     return false;

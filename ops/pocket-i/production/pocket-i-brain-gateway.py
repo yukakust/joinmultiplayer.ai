@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+"""Authenticated reverse proxy for the closed Pocket i alpha."""
+
+from __future__ import annotations
+
+import hmac
+import http.client
+import json
+import os
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+
+LISTEN_HOST = os.environ.get("POCKET_I_GATEWAY_HOST", "127.0.0.1")
+LISTEN_PORT = int(os.environ.get("POCKET_I_GATEWAY_PORT", "18190"))
+TOKEN_FILE = os.environ.get(
+    "POCKET_I_GATEWAY_TOKEN_FILE",
+    "/run/credentials/pocket-i-brain-gateway.service/access-token",
+)
+BACKENDS = {
+    "reader": ("100.84.137.70", 18180),
+    "relevance": ("100.84.137.70", 18181),
+}
+ALLOWED = {
+    ("GET", "health"),
+    ("POST", "v1/chat/completions"),
+    ("POST", "embedding"),
+}
+MAX_BODY_BYTES = 256 * 1024 * 1024
+
+
+def read_token() -> str:
+    with open(TOKEN_FILE, "r", encoding="utf-8") as handle:
+        token = handle.read().strip()
+    if len(token) < 32:
+        raise RuntimeError("Pocket i gateway token is missing or too short")
+    return token
+
+
+ACCESS_TOKEN = read_token()
+
+
+class Gateway(BaseHTTPRequestHandler):
+    server_version = "Pocket-i-Brain-Gateway"
+    sys_version = ""
+
+    def log_message(self, format_string: str, *args: object) -> None:
+        # Never create a second store of private prompts or bearer tokens.
+        return
+
+    def _json_error(self, status: int, message: str) -> None:
+        body = json.dumps({"error": message}).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _authorized(self) -> bool:
+        supplied = self.headers.get("Authorization", "")
+        return hmac.compare_digest(supplied, f"Bearer {ACCESS_TOKEN}")
+
+    def _proxy(self) -> None:
+        if not self._authorized():
+            self._json_error(401, "unauthorized")
+            return
+
+        route = self.path.split("?", 1)[0].strip("/")
+        parts = route.split("/", 1)
+        if len(parts) != 2 or parts[0] not in BACKENDS:
+            self._json_error(404, "not found")
+            return
+        backend_name, backend_route = parts
+        if (self.command, backend_route) not in ALLOWED:
+            self._json_error(404, "not found")
+            return
+        if backend_name == "reader" and backend_route == "embedding":
+            self._json_error(404, "not found")
+            return
+        if backend_name == "relevance" and backend_route == "v1/chat/completions":
+            self._json_error(404, "not found")
+            return
+
+        try:
+            length = int(self.headers.get("Content-Length", "0"))
+        except ValueError:
+            self._json_error(400, "invalid content length")
+            return
+        if length < 0 or length > MAX_BODY_BYTES:
+            self._json_error(413, "request too large")
+            return
+        body = self.rfile.read(length) if length else None
+        host, port = BACKENDS[backend_name]
+        headers = {"Accept": "application/json"}
+        if body is not None:
+            headers.update({"Content-Type": "application/json", "Content-Length": str(len(body))})
+        connection = http.client.HTTPConnection(host, port, timeout=900)
+        try:
+            connection.request(self.command, f"/{backend_route}", body=body, headers=headers)
+            response = connection.getresponse()
+            payload = response.read()
+            self.send_response(response.status)
+            self.send_header("Content-Type", response.getheader("Content-Type") or "application/json")
+            self.send_header("Content-Length", str(len(payload)))
+            self.send_header("Cache-Control", "no-store")
+            self.end_headers()
+            self.wfile.write(payload)
+        except (OSError, http.client.HTTPException):
+            self._json_error(502, "brain unavailable")
+        finally:
+            connection.close()
+
+    do_GET = _proxy
+    do_POST = _proxy
+
+
+if __name__ == "__main__":
+    ThreadingHTTPServer((LISTEN_HOST, LISTEN_PORT), Gateway).serve_forever()

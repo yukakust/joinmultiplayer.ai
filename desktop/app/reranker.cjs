@@ -52,10 +52,11 @@ function requestJson({ port, method = "GET", route, payload = null, timeoutMs = 
 }
 
 class RerankerManager {
-  constructor({ executable, modelPath, remoteUrl = null, timeoutMs = 180000 }) {
+  constructor({ executable, modelPath, remoteUrl = null, remoteAccessToken = null, timeoutMs = 180000 }) {
     this.executable = executable;
     this.modelPath = modelPath;
     this.remoteUrl = remoteUrl;
+    this.remoteAccessToken = remoteAccessToken;
     this.timeoutMs = timeoutMs;
     this.child = null;
     this.port = null;
@@ -112,6 +113,7 @@ class RerankerManager {
       ? await requestRemoteJson(this.remoteUrl, "/embedding", {
         method: "POST",
         timeoutMs: this.timeoutMs,
+        accessToken: this.remoteAccessToken,
         payload: { content, embd_normalize: -1 },
       })
       : await requestJson({
