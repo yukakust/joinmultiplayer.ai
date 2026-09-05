@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-EXPECTED_REVISION="72fca59860e6b3251c601f8eba5cfd03d0a66824"
-SHORT_REVISION="72fca59"
+EXPECTED_REVISION="e3c980a8dfc2f1fa636dac6636647d672a1b1060"
+SHORT_REVISION="e3c980a"
 TOKEN_HOST="${POCKET_I_TOKEN_HOST:-yuka@yukabox.tail1e1ad1.ts.net}"
 TOKEN_REMOTE_PATH="${POCKET_I_TOKEN_REMOTE_PATH:-.config/pocket-i/alpha-access/vitaly-alpha.token}"
 
@@ -24,7 +24,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-echo "Preparing Vitaly's closed alpha build with reranker cutoff 0.05..."
+echo "Preparing Vitaly's audited closed alpha build with reranker cutoff 0.05..."
 umask 077
 ssh -o BatchMode=yes -o ConnectTimeout=10 "$TOKEN_HOST" "cat '$TOKEN_REMOTE_PATH'" > "$TOKEN_FILE"
 chmod 600 "$TOKEN_FILE"
@@ -104,10 +104,11 @@ if (manifest.remoteBrain.readerUrl !== "https://brain.joinmultiplayer.ai/reader"
 if (manifest.remoteBrain.relevanceUrl !== "https://brain.joinmultiplayer.ai/relevance") process.exit(4);
 if (!access.token || access.token.length < 32) process.exit(5);
 if (!reranker.includes("const DROP_AT = 0.05;")) process.exit(6);
+if (manifest.remoteBrain.auditMode !== "full") process.exit(7);
 NODE
 
 APP_VERSION="$(node -p "require('$REPO_DIR/desktop/app/package.json').version")"
-if [ "$APP_VERSION" != "0.1.0-alpha.29" ]; then
+if [ "$APP_VERSION" != "0.1.0-alpha.30" ]; then
   echo "Wrong package version: $APP_VERSION" >&2
   exit 1
 fi
