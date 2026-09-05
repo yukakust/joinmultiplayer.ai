@@ -9,6 +9,8 @@ User=pocket-i-brain
 Group=pocket-i-brain
 LoadCredential=access-token:/etc/pocket-i-brain/access-token
 Environment=POCKET_I_GATEWAY_TOKEN_FILE=%d/access-token
+Environment=POCKET_I_GATEWAY_AUDIT_DIR=%S/pocket-i-brain-gateway/audit
+StateDirectory=pocket-i-brain-gateway
 ExecStart=/usr/bin/python3 /srv/joinmultiplayer/brain-gateway/pocket-i-brain-gateway.py
 Restart=on-failure
 RestartSec=3

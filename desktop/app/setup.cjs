@@ -134,7 +134,8 @@ class SetupManager {
       const saved = JSON.parse(await fsp.readFile(this.remoteConsentPath, "utf8"));
       return saved?.approved === true
         && saved.readerUrl === this.remote.readerUrl
-        && saved.relevanceUrl === this.remote.relevanceUrl;
+        && saved.relevanceUrl === this.remote.relevanceUrl
+        && saved.auditMode === (this.remote.auditMode || "off");
     } catch (error) {
       if (error.code !== "ENOENT" && !(error instanceof SyntaxError)) throw error;
       return false;
@@ -152,12 +153,13 @@ class SetupManager {
     if (!this.remote) throw new Error("No remote brain is configured.");
     const temporary = `${this.remoteConsentPath}.tmp`;
     const payload = {
-      schema_version: "pocket-i-remote-consent-v0.1",
+      schema_version: "pocket-i-remote-consent-v0.2",
       approved: true,
       accepted_at: new Date().toISOString(),
       transport: this.remote.transport,
       readerUrl: this.remote.readerUrl,
       relevanceUrl: this.remote.relevanceUrl,
+      auditMode: this.remote.auditMode || "off",
     };
     await fsp.writeFile(temporary, `${JSON.stringify(payload, null, 2)}\n`, { mode: 0o600 });
     await fsp.rename(temporary, this.remoteConsentPath);

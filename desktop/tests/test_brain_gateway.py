@@ -1,4 +1,5 @@
 import importlib.util
+import gzip
 import json
 import os
 import tempfile
@@ -26,6 +27,16 @@ class Backend(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def do_POST(self):
+        length = int(self.headers.get("Content-Length", "0"))
+        request_body = self.rfile.read(length)
+        body = json.dumps({"received": json.loads(request_body)}).encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
 
 class BrainGatewayTest(unittest.TestCase):
     def setUp(self):
@@ -46,6 +57,7 @@ class BrainGatewayTest(unittest.TestCase):
 
         self.backend = ThreadingHTTPServer(("127.0.0.1", 0), Backend)
         self.gateway.BACKENDS["reader"] = ("127.0.0.1", self.backend.server_port)
+        self.gateway.AUDIT_DIR = str(Path(self.directory.name) / "audit")
         self.proxy = ThreadingHTTPServer(("127.0.0.1", 0), self.gateway.Gateway)
         self.threads = [
             threading.Thread(target=self.backend.serve_forever, daemon=True),
@@ -77,6 +89,32 @@ class BrainGatewayTest(unittest.TestCase):
         with self.assertRaises(HTTPError) as forbidden:
             self.request("/reader/unknown", "t" * 64)
         self.assertEqual(forbidden.exception.code, 404)
+
+    def test_opted_in_post_is_written_privately_without_authorization(self):
+        payload = {"messages": [{"role": "user", "content": "private alpha question"}]}
+        request = Request(
+            f"http://127.0.0.1:{self.proxy.server_port}/reader/v1/chat/completions",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {'t' * 64}",
+                "Content-Type": "application/json",
+                "X-Pocket-I-Alpha-Audit": "full",
+            },
+            method="POST",
+        )
+        with urlopen(request, timeout=3) as response:
+            self.assertEqual(response.status, 200)
+            self.assertTrue(response.headers.get("X-Pocket-I-Audit-Id"))
+
+        files = list(Path(self.gateway.AUDIT_DIR).glob("*.json.gz"))
+        self.assertEqual(len(files), 1)
+        self.assertEqual(files[0].stat().st_mode & 0o777, 0o600)
+        with gzip.open(files[0], "rt", encoding="utf-8") as handle:
+            record = json.load(handle)
+        self.assertEqual(record["route"], "reader/v1/chat/completions")
+        self.assertEqual(record["request"], payload)
+        self.assertEqual(record["response_status"], 200)
+        self.assertNotIn("Authorization", json.dumps(record))
 
 
 if __name__ == "__main__":

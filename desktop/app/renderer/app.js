@@ -123,7 +123,7 @@ async function renderStatus() {
   remoteBrainToggle.textContent = remoteConsented ? "STOP USING YUKA’S SERVER" : "USE YUKA’S SERVER";
   remoteBrainToggle.classList.toggle("on", remoteConsented);
   privacyNote.textContent = remoteConsented
-    ? "Selected excerpts may go to Yuka’s yukabox through encrypted HTTPS."
+    ? "Closed alpha: remote questions, selected excerpts and model results are stored on Yuka’s server."
     : "Remote brain is off. Nothing is sent to yukabox.";
   runtimeStatus.textContent = status.runtime.installed ? "READY" : "MISSING";
   rerankerStatus.textContent = status.relevance?.installed ? "READY" : "NOT INSTALLED";

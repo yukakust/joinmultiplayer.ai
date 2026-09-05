@@ -8,9 +8,11 @@ async function fixtureServer() {
   let received = null;
   const routes = [];
   const authorizations = [];
+  const auditModes = [];
   const server = http.createServer((request, response) => {
     routes.push(request.url);
     authorizations.push(request.headers.authorization || null);
+    auditModes.push(request.headers["x-pocket-i-alpha-audit"] || null);
     if (request.url.endsWith("/health")) {
       response.writeHead(200, { "Content-Type": "application/json" });
       response.end('{"status":"ok"}');
@@ -30,6 +32,7 @@ async function fixtureServer() {
     received: () => received,
     routes,
     authorizations,
+    auditModes,
     close: () => new Promise((resolve) => server.close(resolve)),
   };
 }
@@ -67,6 +70,7 @@ test("keeps the HTTPS gateway lane and sends its private bearer token", async ()
     });
     assert.deepEqual(server.routes, ["/reader/health", "/reader/v1/chat/completions"]);
     assert.deepEqual(server.authorizations, ["Bearer closed-alpha-token", "Bearer closed-alpha-token"]);
+    assert.deepEqual(server.auditModes, [null, "full"]);
   } finally {
     await server.close();
   }

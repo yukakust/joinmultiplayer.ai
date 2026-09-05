@@ -3,6 +3,7 @@
   "remoteBrain": {
     "enabled": true,
     "transport": "tailscale",
+    "auditMode": "full",
     "readerUrl": "http://yukabox.tail1e1ad1.ts.net:18180",
     "relevanceUrl": "http://yukabox.tail1e1ad1.ts.net:18181"
   },

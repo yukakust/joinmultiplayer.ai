@@ -9,6 +9,7 @@ function requestJson(baseUrl, route, { method = "GET", payload = null, timeoutMs
   const body = payload === null ? null : Buffer.from(JSON.stringify(payload));
   const headers = body ? { "Content-Type": "application/json", "Content-Length": body.length } : {};
   if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
+  if (accessToken && method === "POST") headers["X-Pocket-I-Alpha-Audit"] = "full";
   return new Promise((resolve, reject) => {
     const request = client.request(target, {
       method,
