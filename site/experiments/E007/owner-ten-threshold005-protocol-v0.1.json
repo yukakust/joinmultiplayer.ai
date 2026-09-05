@@ -1,0 +1,32 @@
+{
+  "schema_version": "e007-owner-ten-threshold005-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.15",
+  "status": "ready_for_owner_run",
+  "purpose": "Run the complete accepted harness from the terminal with the new 0.05 reranker cutoff before packaging another DMG.",
+  "questions": {
+    "total": 10,
+    "expected_answerable": 8,
+    "expected_no_answer": 2
+  },
+  "pipeline": [
+    "existing local Codex and Claude index",
+    "whole conversation or complete-turn retrieval",
+    "Qwen3-Reranker-4B with cutoff 0.05",
+    "Qwen3-8B message selection and atomic extraction",
+    "exact evidence ID reconstruction",
+    "local DeBERTa grounding",
+    "question relevance",
+    "piles, canonical validation and final writer"
+  ],
+  "execution": {
+    "interface": "standalone terminal runner; Electron UI is not used",
+    "source_revision": "261482e7d8b097ad8eeb186d476f5cc5e83b5df6",
+    "reader": "owner Yukabox over Tailscale",
+    "reranker": "owner Yukabox over Tailscale",
+    "memory_and_nli": "owner Mac",
+    "logs": "ten private per-question JSON files plus one private summary"
+  },
+  "privacy": "Raw questions, retrieved memory and model output remain in the private Downloads result directory and must not be published.",
+  "claim_boundary": "This is an owner-device development run over known questions, not unseen validation or another-owner replication."
+}
