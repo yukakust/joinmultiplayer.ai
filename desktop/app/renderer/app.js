@@ -123,7 +123,7 @@ async function renderStatus() {
   remoteBrainToggle.textContent = remoteConsented ? "STOP USING YUKA’S SERVER" : "USE YUKA’S SERVER";
   remoteBrainToggle.classList.toggle("on", remoteConsented);
   privacyNote.textContent = remoteConsented
-    ? "Selected excerpts may go to Yuka’s yukabox through Tailscale."
+    ? "Selected excerpts may go to Yuka’s yukabox through encrypted HTTPS."
     : "Remote brain is off. Nothing is sent to yukabox.";
   runtimeStatus.textContent = status.runtime.installed ? "READY" : "MISSING";
   rerankerStatus.textContent = status.relevance?.installed ? "READY" : "NOT INSTALLED";
@@ -152,7 +152,7 @@ async function renderStatus() {
     modelStatus.textContent = status.model.installed ? "CONNECTED" : "OFFLINE";
     rerankerStatus.textContent = status.relevance?.installed ? "CONNECTED" : "OFFLINE";
     runtimeStatus.textContent = status.runtime.installed ? "TAILSCALE" : "OFFLINE";
-    progressLabel.textContent = status.readyToAsk ? "Yukabox brain connected." : "Connect to Tailscale and wake yukabox.";
+    progressLabel.textContent = status.readyToAsk ? "Yukabox brain connected." : "Yukabox is offline or unreachable.";
     bar.style.width = status.readyToAsk ? "100%" : "0%";
     install.innerHTML = "WAKE POCKET i <span>→</span>";
     install.hidden = false;

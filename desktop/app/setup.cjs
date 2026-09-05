@@ -197,7 +197,7 @@ class SetupManager {
           model: { id: this.manifest.models.reader.id, label: this.manifest.models.reader.label, bytes: 0, installed: false, downloading: false },
           relevance: { id: this.manifest.models.relevance.id, label: this.manifest.models.relevance.label, bytes: 0, installed: false, downloading: false },
           hardware: { memoryBytes: os.totalmem(), freeBytes: 0, memoryOkay: true, diskOkay: true, requiredDownloadBytes: 0 },
-          runtime: { installed: false, label: "Yukabox via Tailscale" },
+          runtime: { installed: false, label: this.remote.label || "Yukabox" },
           readyToAsk: false,
         };
       }
@@ -213,7 +213,7 @@ class SetupManager {
         model: { id: this.manifest.models.reader.id, label: this.manifest.models.reader.label, bytes: 0, installed: readerReady, downloading: false },
         relevance: { id: this.manifest.models.relevance.id, label: this.manifest.models.relevance.label, bytes: 0, installed: relevanceReady, downloading: false },
         hardware: { memoryBytes: os.totalmem(), freeBytes: 0, memoryOkay: true, diskOkay: true, requiredDownloadBytes: 0 },
-        runtime: { installed: readerReady && relevanceReady, label: "Yukabox via Tailscale" },
+        runtime: { installed: readerReady && relevanceReady, label: this.remote.label || "Yukabox" },
         readyToAsk: readerReady && relevanceReady,
       };
     }
