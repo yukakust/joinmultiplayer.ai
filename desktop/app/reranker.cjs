@@ -5,10 +5,16 @@ const { spawn } = require("node:child_process");
 const { requestJson: requestRemoteJson } = require("./remote-inference.cjs");
 
 const TAKE_AT = 0.92222771;
-const DROP_AT = 0.00292693;
+// Gate 7S.14: the frozen 30-question development sweep retained 58/58 useful
+// fragments at this conservative cutoff while rejecting Helios-like weak hits.
+const DROP_AT = 0.05;
 const INSTRUCTION = "Given a peer question, decide whether this local conversation contains information that directly helps answer it.";
 const PREFIX = '<|im_start|>system\nJudge whether the Document meets the requirements based on the Query and the Instruct provided. Note that the answer can only be "yes" or "no".<|im_end|>\n<|im_start|>user\n';
 const SUFFIX = "<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n";
+
+function decisionForScore(score) {
+  return score >= TAKE_AT ? "TAKE" : score < DROP_AT ? "DROP" : "NOT_SURE";
+}
 
 function freePort() {
   return new Promise((resolve, reject) => {
@@ -131,7 +137,7 @@ class RerankerManager {
     if (!Number.isFinite(score)) throw new Error("The local relevance score was invalid.");
     return {
       score,
-      decision: score >= TAKE_AT ? "TAKE" : score <= DROP_AT ? "DROP" : "NOT_SURE",
+      decision: decisionForScore(score),
     };
   }
 
@@ -152,4 +158,4 @@ class RerankerManager {
   }
 }
 
-module.exports = { DROP_AT, INSTRUCTION, RerankerManager, TAKE_AT, requestJson };
+module.exports = { DROP_AT, INSTRUCTION, RerankerManager, TAKE_AT, decisionForScore, requestJson };

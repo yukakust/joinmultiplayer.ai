@@ -1,7 +1,15 @@
 const assert = require("node:assert/strict");
 const test = require("node:test");
 
-const { RerankerManager } = require("../reranker.cjs");
+const { DROP_AT, RerankerManager, decisionForScore } = require("../reranker.cjs");
+
+test("reranker drops weak scores below the frozen 0.05 cutoff", () => {
+  assert.equal(DROP_AT, 0.05);
+  assert.equal(decisionForScore(0.00710329), "DROP");
+  assert.equal(decisionForScore(0.04999999), "DROP");
+  assert.equal(decisionForScore(0.05), "NOT_SURE");
+  assert.equal(decisionForScore(0.81229362), "NOT_SURE");
+});
 
 test("reranker removes DROP but preserves TAKE and NOT_SURE", async () => {
   const manager = new RerankerManager({ executable: "unused", modelPath: "unused" });
