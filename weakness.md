@@ -195,3 +195,27 @@ accepted, despite improving retrieval-only recall from 3/4 to 4/4.
 - Gate 16G.6 reader: `/experiment/e007/gate-16g/chat-first-reader/`
 - Invalid mixed-language diagnostic: `/experiment/e007/gate-16g/quote-check/`
 - English-only Gate 16G.8: `/experiment/e007/gate-16g/english-atomic-evidence/`
+
+## 14. Top-five conversation retrieval can omit the answer
+
+In the owner ten-question cutoff run, Q05 and Q06 reached the reranker with five
+unrelated conversations. The expected evidence was absent, so lowering the
+reranker cutoff could not recover either answer. This is an upstream retrieval
+false negative, not a grounding or writer failure.
+
+Open work with Vitaly: test `question → correct conversation` on answered and
+answerless questions, then improve recall without turning superficially similar
+technical text into evidence.
+
+## 15. One oversized candidate can abort all candidates
+
+Q07 and Q08 stopped before relevance decisions because individual reranker
+inputs contained 32,792 and 10,084 tokens while the live server used an 8,192
+token physical batch. The HTTP 500 from one candidate aborted the complete
+question. Q08 already contained a short source with the correct free-tier
+explanation, but that useful source was lost with the failed batch.
+
+Open work with Vitaly: isolate failure per candidate. Continue processing
+normal candidates and send the oversized item to the explicit long-message
+path. Do not silently crop whole messages and do not treat infrastructure
+failure as semantic `DROP`.

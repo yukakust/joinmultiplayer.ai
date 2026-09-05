@@ -34,6 +34,29 @@ as tested parts. This is not yet a downloadable end-to-end product.
 15. The harness records `contacted → found → accepted → used → improved` so it
     learns value, not popularity.
 
+## Open weaknesses to fix with Vitaly
+
+The owner ten-question run with the accepted `0.05` reranker cutoff exposed two
+problems outside the cutoff itself. They are deliberately recorded, not fixed
+in this checkpoint:
+
+1. **Conversation retrieval can miss the answer.** For Q05 and Q06, the local
+   top-five route returned only unrelated conversations. The correct evidence
+   therefore never reached the reranker or reader. The next diagnostic must
+   improve and measure the transition `question → correct conversation`, while
+   keeping answerless questions in the set so extra recall does not become
+   extra hallucination.
+2. **One oversized candidate can abort the whole question.** Q07 included a
+   candidate of 32,792 tokens and Q08 one of 10,084 tokens. The live reranker
+   was configured with an 8,192-token physical batch, returned HTTP 500, and
+   the harness discarded every candidate—including a short, correct Q08
+   source. One candidate failure must be isolated: normal candidates continue,
+   while the oversized candidate enters the explicit long-message path.
+
+Observed result: four correct answers, two correct abstentions, two retrieval
+false negatives, two oversized-candidate infrastructure failures, and zero new
+unsupported answers. This run does not establish 10/10 end-to-end quality.
+
 ## What Gate 3C.6P–Q taught us
 
 The same NLI model scored `20/20` when it saw one exact source sentence and one
