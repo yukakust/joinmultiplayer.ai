@@ -1,0 +1,874 @@
+{
+  "schema_version": "e007-reranker-threshold-sweep-result-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.14",
+  "status": "completed_development",
+  "model": "Qwen3-Reranker-4B Q4_K_M",
+  "pairs": 102,
+  "seconds": 90.549,
+  "sweep": [
+    {
+      "threshold": 0.003,
+      "useful_kept": 58,
+      "useful_total": 58,
+      "useful_recall": 1.0,
+      "irrelevant_dropped": 6,
+      "irrelevant_total": 44,
+      "irrelevant_rejection": 0.136364,
+      "false_passes": 38,
+      "useful_losses": 0,
+      "answerable_complete": 20,
+      "answerable_total": 20,
+      "no_answer_clean": 0,
+      "no_answer_total": 10,
+      "strict_questions_correct": 20,
+      "strict_questions_total": 30
+    },
+    {
+      "threshold": 0.005,
+      "useful_kept": 58,
+      "useful_total": 58,
+      "useful_recall": 1.0,
+      "irrelevant_dropped": 11,
+      "irrelevant_total": 44,
+      "irrelevant_rejection": 0.25,
+      "false_passes": 33,
+      "useful_losses": 0,
+      "answerable_complete": 20,
+      "answerable_total": 20,
+      "no_answer_clean": 0,
+      "no_answer_total": 10,
+      "strict_questions_correct": 20,
+      "strict_questions_total": 30
+    },
+    {
+      "threshold": 0.01,
+      "useful_kept": 58,
+      "useful_total": 58,
+      "useful_recall": 1.0,
+      "irrelevant_dropped": 14,
+      "irrelevant_total": 44,
+      "irrelevant_rejection": 0.318182,
+      "false_passes": 30,
+      "useful_losses": 0,
+      "answerable_complete": 20,
+      "answerable_total": 20,
+      "no_answer_clean": 0,
+      "no_answer_total": 10,
+      "strict_questions_correct": 20,
+      "strict_questions_total": 30
+    },
+    {
+      "threshold": 0.03,
+      "useful_kept": 58,
+      "useful_total": 58,
+      "useful_recall": 1.0,
+      "irrelevant_dropped": 20,
+      "irrelevant_total": 44,
+      "irrelevant_rejection": 0.454545,
+      "false_passes": 24,
+      "useful_losses": 0,
+      "answerable_complete": 20,
+      "answerable_total": 20,
+      "no_answer_clean": 1,
+      "no_answer_total": 10,
+      "strict_questions_correct": 21,
+      "strict_questions_total": 30
+    },
+    {
+      "threshold": 0.05,
+      "useful_kept": 58,
+      "useful_total": 58,
+      "useful_recall": 1.0,
+      "irrelevant_dropped": 22,
+      "irrelevant_total": 44,
+      "irrelevant_rejection": 0.5,
+      "false_passes": 22,
+      "useful_losses": 0,
+      "answerable_complete": 20,
+      "answerable_total": 20,
+      "no_answer_clean": 2,
+      "no_answer_total": 10,
+      "strict_questions_correct": 22,
+      "strict_questions_total": 30
+    },
+    {
+      "threshold": 0.1,
+      "useful_kept": 57,
+      "useful_total": 58,
+      "useful_recall": 0.982759,
+      "irrelevant_dropped": 26,
+      "irrelevant_total": 44,
+      "irrelevant_rejection": 0.590909,
+      "false_passes": 18,
+      "useful_losses": 1,
+      "answerable_complete": 19,
+      "answerable_total": 20,
+      "no_answer_clean": 5,
+      "no_answer_total": 10,
+      "strict_questions_correct": 24,
+      "strict_questions_total": 30
+    },
+    {
+      "threshold": 0.2,
+      "useful_kept": 56,
+      "useful_total": 58,
+      "useful_recall": 0.965517,
+      "irrelevant_dropped": 28,
+      "irrelevant_total": 44,
+      "irrelevant_rejection": 0.636364,
+      "false_passes": 16,
+      "useful_losses": 2,
+      "answerable_complete": 18,
+      "answerable_total": 20,
+      "no_answer_clean": 6,
+      "no_answer_total": 10,
+      "strict_questions_correct": 24,
+      "strict_questions_total": 30
+    },
+    {
+      "threshold": 0.5,
+      "useful_kept": 52,
+      "useful_total": 58,
+      "useful_recall": 0.896552,
+      "irrelevant_dropped": 33,
+      "irrelevant_total": 44,
+      "irrelevant_rejection": 0.75,
+      "false_passes": 11,
+      "useful_losses": 6,
+      "answerable_complete": 14,
+      "answerable_total": 20,
+      "no_answer_clean": 9,
+      "no_answer_total": 10,
+      "strict_questions_correct": 23,
+      "strict_questions_total": 30
+    },
+    {
+      "threshold": 0.8,
+      "useful_kept": 49,
+      "useful_total": 58,
+      "useful_recall": 0.844828,
+      "irrelevant_dropped": 38,
+      "irrelevant_total": 44,
+      "irrelevant_rejection": 0.863636,
+      "false_passes": 6,
+      "useful_losses": 9,
+      "answerable_complete": 11,
+      "answerable_total": 20,
+      "no_answer_clean": 10,
+      "no_answer_total": 10,
+      "strict_questions_correct": 21,
+      "strict_questions_total": 30
+    },
+    {
+      "threshold": 0.92222771,
+      "useful_kept": 48,
+      "useful_total": 58,
+      "useful_recall": 0.827586,
+      "irrelevant_dropped": 38,
+      "irrelevant_total": 44,
+      "irrelevant_rejection": 0.863636,
+      "false_passes": 6,
+      "useful_losses": 10,
+      "answerable_complete": 10,
+      "answerable_total": 20,
+      "no_answer_clean": 10,
+      "no_answer_total": 10,
+      "strict_questions_correct": 20,
+      "strict_questions_total": 30
+    }
+  ],
+  "rows": [
+    {
+      "id": "E7-Q01",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-J01-DIAG",
+          "useful": true,
+          "score": 0.99699822
+        },
+        {
+          "source_id": "E7-J01-SAFE",
+          "useful": true,
+          "score": 0.94846941
+        },
+        {
+          "source_id": "E7-J01-NOISE",
+          "useful": false,
+          "score": 0.57197489
+        }
+      ]
+    },
+    {
+      "id": "E7-Q02",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-J02-DIAG",
+          "useful": true,
+          "score": 0.99919661
+        },
+        {
+          "source_id": "E7-J02-SAFE",
+          "useful": true,
+          "score": 0.95428588
+        },
+        {
+          "source_id": "E7-J02-NOISE",
+          "useful": false,
+          "score": 0.51800521
+        }
+      ]
+    },
+    {
+      "id": "E7-Q03",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-J03-DIAG",
+          "useful": true,
+          "score": 0.99769336
+        },
+        {
+          "source_id": "E7-J03-SAFE",
+          "useful": true,
+          "score": 0.9892183
+        },
+        {
+          "source_id": "E7-J03-NOISE",
+          "useful": false,
+          "score": 0.4604263
+        }
+      ]
+    },
+    {
+      "id": "E7-Q04",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-J04-DIAG",
+          "useful": true,
+          "score": 0.99914821
+        },
+        {
+          "source_id": "E7-J04-SAFE",
+          "useful": true,
+          "score": 0.99445681
+        },
+        {
+          "source_id": "E7-J04-NOISE",
+          "useful": false,
+          "score": 0.64514482
+        }
+      ]
+    },
+    {
+      "id": "E7-Q05",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-J05-DIAG",
+          "useful": true,
+          "score": 0.99761639
+        },
+        {
+          "source_id": "E7-J05-SAFE",
+          "useful": true,
+          "score": 0.45207098
+        },
+        {
+          "source_id": "E7-J05-NOISE",
+          "useful": false,
+          "score": 0.64913173
+        }
+      ]
+    },
+    {
+      "id": "E7-Q06",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-J06-DIAG",
+          "useful": true,
+          "score": 0.99983464
+        },
+        {
+          "source_id": "E7-J06-SAFE",
+          "useful": true,
+          "score": 0.7898894
+        },
+        {
+          "source_id": "E7-J06-NOISE",
+          "useful": false,
+          "score": 0.41831166
+        }
+      ]
+    },
+    {
+      "id": "E7-Q07",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-X01-DIAG",
+          "useful": true,
+          "score": 0.9956231
+        },
+        {
+          "source_id": "E7-X01-SAFE",
+          "useful": true,
+          "score": 0.9820974
+        },
+        {
+          "source_id": "E7-X01-LOOKALIKE",
+          "useful": false,
+          "score": 0.96737659
+        }
+      ]
+    },
+    {
+      "id": "E7-Q08",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-X02-DIAG",
+          "useful": true,
+          "score": 0.99918088
+        },
+        {
+          "source_id": "E7-X02-SAFE",
+          "useful": true,
+          "score": 0.62037907
+        },
+        {
+          "source_id": "E7-X02-LOOKALIKE",
+          "useful": false,
+          "score": 0.92623638
+        }
+      ]
+    },
+    {
+      "id": "E7-Q09",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-X03-DIAG",
+          "useful": true,
+          "score": 0.99823739
+        },
+        {
+          "source_id": "E7-X03-SAFE",
+          "useful": true,
+          "score": 0.98465055
+        },
+        {
+          "source_id": "E7-X03-LOOKALIKE",
+          "useful": false,
+          "score": 0.98403061
+        }
+      ]
+    },
+    {
+      "id": "E7-Q10",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-X04-DIAG",
+          "useful": true,
+          "score": 0.99906019
+        },
+        {
+          "source_id": "E7-X04-SAFE",
+          "useful": true,
+          "score": 0.95359833
+        },
+        {
+          "source_id": "E7-X04-LOOKALIKE",
+          "useful": false,
+          "score": 0.96059625
+        }
+      ]
+    },
+    {
+      "id": "E7-Q11",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-X05-DIAG",
+          "useful": true,
+          "score": 0.99740355
+        },
+        {
+          "source_id": "E7-X05-SAFE",
+          "useful": true,
+          "score": 0.97701353
+        },
+        {
+          "source_id": "E7-X05-LOOKALIKE",
+          "useful": false,
+          "score": 0.95465188
+        }
+      ]
+    },
+    {
+      "id": "E7-Q12",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-X06-DIAG",
+          "useful": true,
+          "score": 0.99709037
+        },
+        {
+          "source_id": "E7-X06-SAFE",
+          "useful": true,
+          "score": 0.29088958
+        },
+        {
+          "source_id": "E7-X06-LOOKALIKE",
+          "useful": false,
+          "score": 0.95894792
+        }
+      ]
+    },
+    {
+      "id": "E7-Q13",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-M01-INDEPENDENT",
+          "useful": true,
+          "score": 0.99906134
+        },
+        {
+          "source_id": "E7-M01-SAFE",
+          "useful": true,
+          "score": 0.08897671
+        },
+        {
+          "source_id": "E7-M01-COPY-1",
+          "useful": true,
+          "score": 0.98469836
+        },
+        {
+          "source_id": "E7-M01-COPY-2",
+          "useful": true,
+          "score": 0.99153225
+        },
+        {
+          "source_id": "E7-M01-COPY-3",
+          "useful": true,
+          "score": 0.99654098
+        }
+      ]
+    },
+    {
+      "id": "E7-Q14",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-M02-INDEPENDENT",
+          "useful": true,
+          "score": 0.99917326
+        },
+        {
+          "source_id": "E7-M02-SAFE",
+          "useful": true,
+          "score": 0.78541034
+        },
+        {
+          "source_id": "E7-M02-COPY-1",
+          "useful": true,
+          "score": 0.98876062
+        },
+        {
+          "source_id": "E7-M02-COPY-2",
+          "useful": true,
+          "score": 0.99446345
+        },
+        {
+          "source_id": "E7-M02-COPY-3",
+          "useful": true,
+          "score": 0.99517958
+        }
+      ]
+    },
+    {
+      "id": "E7-Q15",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-M03-INDEPENDENT",
+          "useful": true,
+          "score": 0.99937576
+        },
+        {
+          "source_id": "E7-M03-SAFE",
+          "useful": true,
+          "score": 0.41317189
+        },
+        {
+          "source_id": "E7-M03-COPY-1",
+          "useful": true,
+          "score": 0.9942519
+        },
+        {
+          "source_id": "E7-M03-COPY-2",
+          "useful": true,
+          "score": 0.99469453
+        },
+        {
+          "source_id": "E7-M03-COPY-3",
+          "useful": true,
+          "score": 0.99644156
+        }
+      ]
+    },
+    {
+      "id": "E7-Q16",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-M04-INDEPENDENT",
+          "useful": true,
+          "score": 0.99912104
+        },
+        {
+          "source_id": "E7-M04-SAFE",
+          "useful": true,
+          "score": 0.35680683
+        },
+        {
+          "source_id": "E7-M04-COPY-1",
+          "useful": true,
+          "score": 0.99077375
+        },
+        {
+          "source_id": "E7-M04-COPY-2",
+          "useful": true,
+          "score": 0.99314949
+        },
+        {
+          "source_id": "E7-M04-COPY-3",
+          "useful": true,
+          "score": 0.9961769
+        }
+      ]
+    },
+    {
+      "id": "E7-Q17",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-M05-INDEPENDENT",
+          "useful": true,
+          "score": 0.9994962
+        },
+        {
+          "source_id": "E7-M05-SAFE",
+          "useful": true,
+          "score": 0.84926604
+        },
+        {
+          "source_id": "E7-M05-COPY-1",
+          "useful": true,
+          "score": 0.9914235
+        },
+        {
+          "source_id": "E7-M05-COPY-2",
+          "useful": true,
+          "score": 0.99579507
+        },
+        {
+          "source_id": "E7-M05-COPY-3",
+          "useful": true,
+          "score": 0.99756043
+        }
+      ]
+    },
+    {
+      "id": "E7-Q18",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-M06-INDEPENDENT",
+          "useful": true,
+          "score": 0.99946184
+        },
+        {
+          "source_id": "E7-M06-SAFE",
+          "useful": true,
+          "score": 0.17975768
+        },
+        {
+          "source_id": "E7-M06-COPY-1",
+          "useful": true,
+          "score": 0.98308285
+        },
+        {
+          "source_id": "E7-M06-COPY-2",
+          "useful": true,
+          "score": 0.99214557
+        },
+        {
+          "source_id": "E7-M06-COPY-3",
+          "useful": true,
+          "score": 0.99455441
+        }
+      ]
+    },
+    {
+      "id": "E7-Q19",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-S01-MIXED",
+          "useful": true,
+          "score": 0.99727058
+        },
+        {
+          "source_id": "E7-S01-SAFE",
+          "useful": true,
+          "score": 0.99507873
+        },
+        {
+          "source_id": "E7-S01-NOISE",
+          "useful": false,
+          "score": 0.09149175
+        }
+      ]
+    },
+    {
+      "id": "E7-Q20",
+      "kind": "answerable",
+      "items": [
+        {
+          "source_id": "E7-S02-MIXED",
+          "useful": true,
+          "score": 0.99521666
+        },
+        {
+          "source_id": "E7-S02-SAFE",
+          "useful": true,
+          "score": 0.99629204
+        },
+        {
+          "source_id": "E7-S02-NOISE",
+          "useful": false,
+          "score": 0.11366978
+        }
+      ]
+    },
+    {
+      "id": "E7-Q21",
+      "kind": "no_answer_in_packet",
+      "items": [
+        {
+          "source_id": "E7-S03-NOISE",
+          "useful": false,
+          "score": 0.4250388
+        },
+        {
+          "source_id": "E7-F-P029-01",
+          "useful": false,
+          "score": 0.00178937
+        },
+        {
+          "source_id": "E7-F-P029-02",
+          "useful": false,
+          "score": 0.00104815
+        }
+      ]
+    },
+    {
+      "id": "E7-Q22",
+      "kind": "no_answer_in_packet",
+      "items": [
+        {
+          "source_id": "E7-S04-NOISE",
+          "useful": false,
+          "score": 0.0937074
+        },
+        {
+          "source_id": "E7-F-P030-03",
+          "useful": false,
+          "score": 0.0320567
+        },
+        {
+          "source_id": "E7-F-P030-04",
+          "useful": false,
+          "score": 0.00457554
+        }
+      ]
+    },
+    {
+      "id": "E7-Q23",
+      "kind": "no_answer_in_packet",
+      "items": [
+        {
+          "source_id": "E7-S05-NOISE",
+          "useful": false,
+          "score": 0.18027487
+        },
+        {
+          "source_id": "E7-F-P031-05",
+          "useful": false,
+          "score": 0.01280698
+        },
+        {
+          "source_id": "E7-F-P032-01",
+          "useful": false,
+          "score": 0.00101832
+        }
+      ]
+    },
+    {
+      "id": "E7-Q24",
+      "kind": "no_answer_in_packet",
+      "items": [
+        {
+          "source_id": "E7-S06-NOISE",
+          "useful": false,
+          "score": 0.07569188
+        },
+        {
+          "source_id": "E7-F-P033-02",
+          "useful": false,
+          "score": 0.00116166
+        },
+        {
+          "source_id": "E7-F-P033-03",
+          "useful": false,
+          "score": 0.00291594
+        }
+      ]
+    },
+    {
+      "id": "E7-Q25",
+      "kind": "no_answer_in_packet",
+      "items": [
+        {
+          "source_id": "E7-U01-NOISE",
+          "useful": false,
+          "score": 0.44587776
+        },
+        {
+          "source_id": "E7-F-P034-04",
+          "useful": false,
+          "score": 0.00578256
+        },
+        {
+          "source_id": "E7-F-P034-05",
+          "useful": false,
+          "score": 0.00977579
+        }
+      ]
+    },
+    {
+      "id": "E7-Q26",
+      "kind": "no_answer_in_packet",
+      "items": [
+        {
+          "source_id": "E7-U02-NOISE",
+          "useful": false,
+          "score": 0.04458502
+        },
+        {
+          "source_id": "E7-F-P036-01",
+          "useful": false,
+          "score": 0.00495294
+        },
+        {
+          "source_id": "E7-F-P036-02",
+          "useful": false,
+          "score": 0.01905108
+        }
+      ]
+    },
+    {
+      "id": "E7-Q27",
+      "kind": "no_answer_in_packet",
+      "items": [
+        {
+          "source_id": "E7-U03-NOISE",
+          "useful": false,
+          "score": 0.00076161
+        },
+        {
+          "source_id": "E7-F-P037-03",
+          "useful": false,
+          "score": 0.00411275
+        },
+        {
+          "source_id": "E7-F-P037-04",
+          "useful": false,
+          "score": 0.01352455
+        }
+      ]
+    },
+    {
+      "id": "E7-Q28",
+      "kind": "no_answer_in_packet",
+      "items": [
+        {
+          "source_id": "E7-U04-NOISE",
+          "useful": false,
+          "score": 0.21057507
+        },
+        {
+          "source_id": "E7-F-P038-05",
+          "useful": false,
+          "score": 0.00453874
+        },
+        {
+          "source_id": "E7-F-P039-01",
+          "useful": false,
+          "score": 0.0105343
+        }
+      ]
+    },
+    {
+      "id": "E7-Q29",
+      "kind": "no_answer_in_packet",
+      "items": [
+        {
+          "source_id": "E7-U05-NOISE",
+          "useful": false,
+          "score": 0.00617378
+        },
+        {
+          "source_id": "E7-F-P040-02",
+          "useful": false,
+          "score": 0.57960351
+        },
+        {
+          "source_id": "E7-F-P040-03",
+          "useful": false,
+          "score": 0.01748457
+        }
+      ]
+    },
+    {
+      "id": "E7-Q30",
+      "kind": "no_answer_in_packet",
+      "items": [
+        {
+          "source_id": "E7-U06-NOISE",
+          "useful": false,
+          "score": 0.01300438
+        },
+        {
+          "source_id": "E7-F-P041-04",
+          "useful": false,
+          "score": 0.00409732
+        },
+        {
+          "source_id": "E7-F-P041-05",
+          "useful": false,
+          "score": 0.08462046
+        }
+      ]
+    }
+  ],
+  "claim_boundary": "Candidate cutoff selection on a public synthetic set; unseen whole-conversation validation remains required."
+}

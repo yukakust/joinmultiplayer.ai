@@ -1,0 +1,30 @@
+{
+  "schema_version": "e007-reranker-threshold-sweep-protocol-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.14",
+  "status": "locked_before_run",
+  "hypothesis": "A single lower cutoff can stop very weak NOT_SURE matches such as the Helios-42 false answer without discarding most useful evidence.",
+  "model": "Qwen3-Reranker-4B Q4_K_M",
+  "instruction": "Given a peer question, decide whether this local conversation contains information that directly helps answer it.",
+  "frozen_data": {
+    "source": "desktop-two-stage-message-extraction-checkpoint7s2-result-v0.1.json",
+    "questions": 30,
+    "answerable": 20,
+    "no_answer": 10,
+    "question_fragment_pairs": 102
+  },
+  "labels": {
+    "ordinary_answerable": "DIAG, SAFE, MIXED and INDEPENDENT records for the exact case are useful; NOISE and LOOKALIKE records are not useful.",
+    "dispute_questions": "INDEPENDENT, SAFE and all three COPY records belong to the requested dispute and are useful.",
+    "no_answer_questions": "Every supplied record is non-useful."
+  },
+  "thresholds": [0.003, 0.005, 0.01, 0.03, 0.05, 0.1, 0.2, 0.5, 0.8, 0.92222771],
+  "reported_metrics": [
+    "useful_fragment_recall",
+    "irrelevant_fragment_rejection",
+    "answerable_questions_with_all_useful_fragments",
+    "no_answer_questions_with_no_fragment_passed",
+    "strict_questions_correct"
+  ],
+  "claim_boundary": "This development sweep chooses a candidate cutoff on public synthetic questions. It does not validate that cutoff on unseen owner memory or whole-conversation inputs."
+}

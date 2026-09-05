@@ -1,0 +1,44 @@
+{
+  "schema_version": "e007-reranker-threshold-sweep-human-audit-v0.1",
+  "experiment": "E007",
+  "checkpoint": "7S.14",
+  "status": "development_candidate_selected",
+  "questions": 30,
+  "question_fragment_pairs": 102,
+  "candidate_cutoff": 0.05,
+  "why": [
+    "It would reject the observed Helios-42 false route scored at 0.00710329.",
+    "It retained all 58 of 58 useful fragments in the frozen 30-question sweep.",
+    "It rejected 22 of 44 irrelevant fragments, versus 6 of 44 under the current approximately 0.003 cutoff.",
+    "Raising the cutoff to 0.10 rejected four more irrelevant fragments but lost the first useful fragment, a conditional safety rule scored at 0.08897671."
+  ],
+  "comparison": [
+    {
+      "cutoff": 0.003,
+      "useful_kept": "58/58",
+      "irrelevant_dropped": "6/44",
+      "strict_questions_correct": "20/30"
+    },
+    {
+      "cutoff": 0.05,
+      "useful_kept": "58/58",
+      "irrelevant_dropped": "22/44",
+      "strict_questions_correct": "22/30"
+    },
+    {
+      "cutoff": 0.10,
+      "useful_kept": "57/58",
+      "irrelevant_dropped": "26/44",
+      "strict_questions_correct": "24/30"
+    },
+    {
+      "cutoff": 0.50,
+      "useful_kept": "52/58",
+      "irrelevant_dropped": "33/44",
+      "strict_questions_correct": "23/30"
+    }
+  ],
+  "interpretation": "Use 0.05 as the conservative candidate lower cutoff. Later stages still have to reject the 22 irrelevant fragments that remain above it.",
+  "next_validation": "Run the frozen 0.05 cutoff once on unseen questions over whole conversations, including answerable and no-answer cases. Do not tune it on that validation set.",
+  "claim_boundary": "The selected value is fitted to public synthetic short fragments. It is not yet a locked production threshold for private whole-conversation retrieval."
+}
