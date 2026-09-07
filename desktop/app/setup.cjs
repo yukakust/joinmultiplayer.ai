@@ -142,6 +142,12 @@ class SetupManager {
     }
   }
 
+  async requireRemoteConsentForSelectedBrain() {
+    if (this.remote && await this.brainMode() === "remote" && !(await this.remoteConsent())) {
+      throw new Error("Yuka's server is off. Turn it on before sending selected memory excerpts.");
+    }
+  }
+
   async setRemoteConsent(approved) {
     await fsp.mkdir(this.userDataPath, { recursive: true, mode: 0o700 });
     if (!approved) {

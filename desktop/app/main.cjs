@@ -42,9 +42,7 @@ async function configureRemoteBrain(enabled) {
 }
 
 async function requireRemoteConsent() {
-  if (manifest.remoteBrain?.enabled && !(await setupManager.remoteConsent())) {
-    throw new Error("Yuka's server is off. Turn it on before sending selected memory excerpts.");
-  }
+  await setupManager.requireRemoteConsentForSelectedBrain();
 }
 
 function runtimePath() {

@@ -147,6 +147,7 @@ test("remote mode is off until the owner explicitly consents", async () => {
   assert.equal(status.consentRequired, true);
   assert.equal(status.readyToAsk, false);
   await assert.rejects(setup.installModel(), /Choose whether/);
+  await assert.rejects(setup.requireRemoteConsentForSelectedBrain(), /server is off/);
 });
 
 test("remote is the default brain but choosing local persists without downloading", async () => {
@@ -172,6 +173,7 @@ test("remote is the default brain but choosing local persists without downloadin
   await fs.writeFile(setup.relevanceModelPath(), "1234");
   await fs.writeFile(path.join(directory, "llama-cli"), "runtime");
   assert.equal(await setup.installModel(), setup.modelPath());
+  await assert.doesNotReject(setup.requireRemoteConsentForSelectedBrain());
 });
 
 test("remote mode needs consent and both healthy yukabox services", async () => {
