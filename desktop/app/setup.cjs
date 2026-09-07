@@ -265,7 +265,8 @@ class SetupManager {
   }
 
   async installModel() {
-    if (this.remote) {
+    const mode = await this.brainMode();
+    if (this.remote && mode === "remote") {
       if (!(await this.remoteConsent())) throw new Error("Choose whether to use Yuka's server first.");
       const current = await this.status();
       if (!current.readyToAsk) throw new Error("Yukabox brain is offline or still starting.");

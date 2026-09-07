@@ -48,11 +48,13 @@ function renderBrainChoice() {
 chooseYukabox.addEventListener("click", () => {
   selectedBrain = "remote";
   renderBrainChoice();
+  progressLabel.textContent = "Yukabox selected. No local model download is needed.";
 });
 
 chooseLocal.addEventListener("click", () => {
   selectedBrain = "local";
   renderBrainChoice();
+  progressLabel.textContent = "This Mac selected. About 7 GB will be downloaded after WAKE.";
 });
 
 function elapsedMemory() {

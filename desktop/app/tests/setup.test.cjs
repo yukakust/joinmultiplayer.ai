@@ -166,6 +166,12 @@ test("remote is the default brain but choosing local persists without downloadin
   await setup.setBrainMode("local");
   assert.equal(await setup.brainMode(), "local");
   assert.equal((await setup.status()).mode, "local");
+
+  await fs.mkdir(path.dirname(setup.modelPath()), { recursive: true });
+  await fs.writeFile(setup.modelPath(), "1234");
+  await fs.writeFile(setup.relevanceModelPath(), "1234");
+  await fs.writeFile(path.join(directory, "llama-cli"), "runtime");
+  assert.equal(await setup.installModel(), setup.modelPath());
 });
 
 test("remote mode needs consent and both healthy yukabox services", async () => {
