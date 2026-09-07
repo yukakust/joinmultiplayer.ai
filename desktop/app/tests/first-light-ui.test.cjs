@@ -14,4 +14,5 @@ test("first light separates selection from wake and keeps private logs visible",
   assert.match(js, /chooseYukabox\.addEventListener/);
   assert.match(js, /chooseLocal\.addEventListener/);
   assert.match(js, /install\.addEventListener/);
+  assert.match(js, /remoteBrainToggle\.hidden = !status\.remoteAvailable/);
 });

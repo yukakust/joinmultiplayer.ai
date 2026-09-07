@@ -199,6 +199,7 @@ class SetupManager {
       if (!consented) {
         return {
           version: "desktop-alpha-yukabox-brain-v0.2",
+          remoteAvailable: true,
           mode: "remote",
           remoteConsented: false,
           consentRequired: true,
@@ -215,6 +216,7 @@ class SetupManager {
       ]);
       return {
         version: "desktop-alpha-yukabox-brain-v0.2",
+        remoteAvailable: true,
         mode: "remote",
         remoteConsented: true,
         consentRequired: false,
@@ -243,6 +245,7 @@ class SetupManager {
     const diskOkay = freeBytes >= missingModelBytes + 2 * 1024 ** 3;
     return {
       version: "desktop-alpha-checkpoint-5a",
+      remoteAvailable: Boolean(this.remote),
       mode: "local",
       model: {
         id: model.id,

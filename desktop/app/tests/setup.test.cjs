@@ -167,6 +167,7 @@ test("remote is the default brain but choosing local persists without downloadin
   await setup.setBrainMode("local");
   assert.equal(await setup.brainMode(), "local");
   assert.equal((await setup.status()).mode, "local");
+  assert.equal((await setup.status()).remoteAvailable, true);
 
   await fs.mkdir(path.dirname(setup.modelPath()), { recursive: true });
   await fs.writeFile(setup.modelPath(), "1234");

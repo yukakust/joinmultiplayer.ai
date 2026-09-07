@@ -121,8 +121,8 @@ async function renderStatus() {
   selectedBrain = remote ? "remote" : "local";
   renderBrainChoice();
   remoteConsented = Boolean(status.remoteConsented);
-  remoteBrainToggle.hidden = !remote;
-  remoteBrainToggle.textContent = remoteConsented ? "STOP USING YUKA’S SERVER" : "USE YUKA’S SERVER";
+  remoteBrainToggle.hidden = !status.remoteAvailable;
+  remoteBrainToggle.textContent = remote && remoteConsented ? "STOP USING YUKA’S SERVER" : "USE YUKA’S SERVER";
   remoteBrainToggle.classList.toggle("on", remoteConsented);
   privacyNote.textContent = remoteConsented
     ? "Closed alpha: remote questions, selected excerpts and model results are stored on Yuka’s server."
