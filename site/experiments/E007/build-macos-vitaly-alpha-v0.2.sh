@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-EXPECTED_REVISION="e3c980a8dfc2f1fa636dac6636647d672a1b1060"
-SHORT_REVISION="e3c980a"
+EXPECTED_REVISION="32711a1a052898809fff870989bf626a928561ba"
+SHORT_REVISION="32711a1"
 TOKEN_HOST="${POCKET_I_TOKEN_HOST:-yuka@yukabox.tail1e1ad1.ts.net}"
 TOKEN_REMOTE_PATH="${POCKET_I_TOKEN_REMOTE_PATH:-.config/pocket-i/alpha-access/vitaly-alpha.token}"
 
@@ -108,7 +108,7 @@ if (manifest.remoteBrain.auditMode !== "full") process.exit(7);
 NODE
 
 APP_VERSION="$(node -p "require('$REPO_DIR/desktop/app/package.json').version")"
-if [ "$APP_VERSION" != "0.1.0-alpha.30" ]; then
+if [ "$APP_VERSION" != "0.1.0-alpha.31" ]; then
   echo "Wrong package version: $APP_VERSION" >&2
   exit 1
 fi
