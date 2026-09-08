@@ -9,6 +9,7 @@ import gzip
 import json
 import os
 import tempfile
+import threading
 import time
 import uuid
 from datetime import datetime, timezone
@@ -33,6 +34,11 @@ ALLOWED = {
 MAX_BODY_BYTES = 256 * 1024 * 1024
 AUDIT_DIR = os.environ.get("POCKET_I_GATEWAY_AUDIT_DIR", "")
 AUDIT_HEADER = "X-Pocket-I-Alpha-Audit"
+ASYNC_HEADER = "X-Pocket-I-Async"
+JOB_TTL_SECONDS = 30 * 60
+MAX_JOBS = 64
+JOBS: dict[str, dict[str, object]] = {}
+JOBS_LOCK = threading.Lock()
 
 
 def _decoded_payload(payload: bytes | None) -> object:
@@ -92,6 +98,86 @@ def read_token() -> str:
 ACCESS_TOKEN = read_token()
 
 
+def _prune_jobs(now: float | None = None) -> None:
+    current = time.monotonic() if now is None else now
+    expired = [
+        job_id for job_id, job in JOBS.items()
+        if current - float(job["created_monotonic"]) > JOB_TTL_SECONDS
+    ]
+    for job_id in expired:
+        JOBS.pop(job_id, None)
+
+
+def _run_async_job(*, job_id: str, backend_name: str, backend_route: str,
+                   method: str, body: bytes | None, audit_enabled: bool) -> None:
+    started = time.monotonic()
+    host, port = BACKENDS[backend_name]
+    headers = {"Accept": "application/json"}
+    if body is not None:
+        headers.update({"Content-Type": "application/json", "Content-Length": str(len(body))})
+    with JOBS_LOCK:
+        job = JOBS.get(job_id)
+        if job is None:
+            return
+        job["state"] = "running"
+    connection = http.client.HTTPConnection(host, port, timeout=900)
+    try:
+        connection.request(method, f"/{backend_route}", body=body, headers=headers)
+        response = connection.getresponse()
+        payload = response.read()
+        elapsed_ms = round((time.monotonic() - started) * 1000)
+        audit_id = None
+        if audit_enabled and method == "POST":
+            try:
+                audit_id = write_private_audit(
+                    route=f"{backend_name}/{backend_route}",
+                    request_body=body,
+                    response_status=response.status,
+                    response_body=payload,
+                    elapsed_ms=elapsed_ms,
+                )
+            except OSError:
+                audit_id = None
+        with JOBS_LOCK:
+            job = JOBS.get(job_id)
+            if job is not None:
+                job.update({
+                    "state": "ready" if 200 <= response.status < 300 else "failed",
+                    "response_status": response.status,
+                    "response_body": payload,
+                    "content_type": response.getheader("Content-Type") or "application/json",
+                    "elapsed_ms": elapsed_ms,
+                    "audit_id": audit_id,
+                    "error": None if 200 <= response.status < 300 else "brain rejected the request",
+                })
+    except (OSError, http.client.HTTPException) as error:
+        elapsed_ms = round((time.monotonic() - started) * 1000)
+        if audit_enabled and method == "POST":
+            try:
+                write_private_audit(
+                    route=f"{backend_name}/{backend_route}",
+                    request_body=body,
+                    response_status=502,
+                    response_body=None,
+                    elapsed_ms=elapsed_ms,
+                    error=type(error).__name__,
+                )
+            except OSError:
+                pass
+        with JOBS_LOCK:
+            job = JOBS.get(job_id)
+            if job is not None:
+                job.update({
+                    "state": "failed",
+                    "response_status": 502,
+                    "response_body": None,
+                    "elapsed_ms": elapsed_ms,
+                    "error": "brain unavailable",
+                })
+    finally:
+        connection.close()
+
+
 class Gateway(BaseHTTPRequestHandler):
     server_version = "Pocket-i-Brain-Gateway"
     sys_version = ""
@@ -101,13 +187,47 @@ class Gateway(BaseHTTPRequestHandler):
         return
 
     def _json_error(self, status: int, message: str) -> None:
-        body = json.dumps({"error": message}).encode("utf-8")
+        self._json(status, {"error": message})
+
+    def _json(self, status: int, value: object) -> None:
+        body = json.dumps(value).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
         self.end_headers()
         self.wfile.write(body)
+
+    def _poll_job(self, job_id: str) -> None:
+        with JOBS_LOCK:
+            _prune_jobs()
+            job = JOBS.get(job_id)
+            snapshot = dict(job) if job is not None else None
+        if snapshot is None:
+            self._json_error(404, "job not found")
+            return
+        state = str(snapshot["state"])
+        if state in {"queued", "running"}:
+            self._json(202, {"job_id": job_id, "state": state, "poll_after_ms": 1000})
+            return
+        if state == "failed":
+            self._json(200, {
+                "job_id": job_id,
+                "state": "failed",
+                "response_status": snapshot.get("response_status", 502),
+                "elapsed_ms": snapshot.get("elapsed_ms"),
+                "error": snapshot.get("error") or "brain unavailable",
+            })
+            return
+        response_body = snapshot.get("response_body")
+        self._json(200, {
+            "job_id": job_id,
+            "state": "ready",
+            "response_status": snapshot.get("response_status", 200),
+            "elapsed_ms": snapshot.get("elapsed_ms"),
+            "audit_id": snapshot.get("audit_id"),
+            "result": _decoded_payload(response_body if isinstance(response_body, bytes) else None),
+        })
 
     def _authorized(self) -> bool:
         supplied = self.headers.get("Authorization", "")
@@ -119,6 +239,13 @@ class Gateway(BaseHTTPRequestHandler):
             return
 
         route = self.path.split("?", 1)[0].strip("/")
+        if self.command == "GET" and route.startswith("jobs/"):
+            job_id = route.removeprefix("jobs/")
+            if not job_id or "/" in job_id:
+                self._json_error(404, "job not found")
+                return
+            self._poll_job(job_id)
+            return
         parts = route.split("/", 1)
         if len(parts) != 2 or parts[0] not in BACKENDS:
             self._json_error(404, "not found")
@@ -144,6 +271,33 @@ class Gateway(BaseHTTPRequestHandler):
             return
         body = self.rfile.read(length) if length else None
         audit_enabled = self.headers.get(AUDIT_HEADER, "").strip().lower() == "full"
+        async_enabled = self.command == "POST" and self.headers.get(ASYNC_HEADER, "").strip().lower() == "v1"
+        if async_enabled:
+            with JOBS_LOCK:
+                _prune_jobs()
+                if len(JOBS) >= MAX_JOBS:
+                    self._json_error(503, "too many active jobs")
+                    return
+                job_id = f"{uuid.uuid4().hex}{uuid.uuid4().hex}"
+                JOBS[job_id] = {
+                    "state": "queued",
+                    "created_monotonic": time.monotonic(),
+                    "response_body": None,
+                }
+            threading.Thread(
+                target=_run_async_job,
+                kwargs={
+                    "job_id": job_id,
+                    "backend_name": backend_name,
+                    "backend_route": backend_route,
+                    "method": self.command,
+                    "body": body,
+                    "audit_enabled": audit_enabled,
+                },
+                daemon=True,
+            ).start()
+            self._json(202, {"job_id": job_id, "state": "queued", "poll_after_ms": 1000})
+            return
         started = time.monotonic()
         host, port = BACKENDS[backend_name]
         headers = {"Accept": "application/json"}

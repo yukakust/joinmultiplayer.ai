@@ -346,6 +346,12 @@ chatForm.addEventListener("submit", async (event) => {
   chatInput.disabled = true;
   send.disabled = true;
   const pending = addMessage("Thinking…", "from-i pending");
+  const thinkingStarted = Date.now();
+  const thinkingClock = setInterval(() => {
+    const seconds = Math.floor((Date.now() - thinkingStarted) / 1000);
+    const elapsed = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+    pending.textContent = `${remoteConsented ? "Yukabox" : "Pocket i"} is thinking · ${elapsed}`;
+  }, 1000);
   try {
     if (memoryReady) {
       pending.textContent = "Searching memory…";
@@ -362,6 +368,7 @@ chatForm.addEventListener("submit", async (event) => {
     pending.classList.remove("pending");
     pending.classList.add("failed");
   } finally {
+    clearInterval(thinkingClock);
     chatInput.disabled = false;
     send.disabled = false;
     chatInput.focus();

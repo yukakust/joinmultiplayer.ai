@@ -79,3 +79,36 @@ test("keeps the HTTPS gateway lane and sends its private bearer token", async ()
 test("reports an unreachable remote brain without leaking network details", async () => {
   assert.equal(await remoteHealth("http://127.0.0.1:1", 100), false);
 });
+
+test("polls an accepted remote job until its model result is ready", async () => {
+  let polls = 0;
+  const server = http.createServer((request, response) => {
+    response.setHeader("Content-Type", "application/json");
+    if (request.method === "POST") {
+      assert.equal(request.headers["x-pocket-i-async"], "v1");
+      response.writeHead(202);
+      response.end(JSON.stringify({ job_id: "job-123", state: "queued", poll_after_ms: 1 }));
+      return;
+    }
+    assert.equal(request.url, "/jobs/job-123");
+    polls += 1;
+    response.writeHead(polls < 2 ? 202 : 200);
+    response.end(JSON.stringify(polls < 2
+      ? { job_id: "job-123", state: "running", poll_after_ms: 1 }
+      : { job_id: "job-123", state: "ready", response_status: 200, result: { choices: [{ message: { content: "Finished later" } }] } }));
+  });
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  try {
+    const result = await remoteChatCompletion(`http://127.0.0.1:${server.address().port}/reader`, {
+      prompt: "Long question",
+      systemPrompt: "Identity",
+      outputTokens: 32,
+      timeoutMs: 5000,
+      accessToken: "closed-alpha-token",
+    });
+    assert.deepEqual(result, { answer: "Finished later" });
+    assert.equal(polls, 2);
+  } finally {
+    await new Promise((resolve) => server.close(resolve));
+  }
+});

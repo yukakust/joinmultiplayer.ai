@@ -4,6 +4,7 @@ import json
 import os
 import tempfile
 import threading
+import time
 import unittest
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -16,6 +17,8 @@ GATEWAY_PATH = ROOT / "ops" / "pocket-i" / "production" / "pocket-i-brain-gatewa
 
 
 class Backend(BaseHTTPRequestHandler):
+    delay_seconds = 0
+
     def log_message(self, *_args):
         pass
 
@@ -30,6 +33,7 @@ class Backend(BaseHTTPRequestHandler):
     def do_POST(self):
         length = int(self.headers.get("Content-Length", "0"))
         request_body = self.rfile.read(length)
+        time.sleep(self.delay_seconds)
         body = json.dumps({"received": json.loads(request_body)}).encode("utf-8")
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
@@ -40,6 +44,7 @@ class Backend(BaseHTTPRequestHandler):
 
 class BrainGatewayTest(unittest.TestCase):
     def setUp(self):
+        Backend.delay_seconds = 0
         self.directory = tempfile.TemporaryDirectory()
         token_path = Path(self.directory.name) / "token"
         token_path.write_text("t" * 64, encoding="utf-8")
@@ -58,6 +63,7 @@ class BrainGatewayTest(unittest.TestCase):
         self.backend = ThreadingHTTPServer(("127.0.0.1", 0), Backend)
         self.gateway.BACKENDS["reader"] = ("127.0.0.1", self.backend.server_port)
         self.gateway.AUDIT_DIR = str(Path(self.directory.name) / "audit")
+        self.gateway.JOBS.clear()
         self.proxy = ThreadingHTTPServer(("127.0.0.1", 0), self.gateway.Gateway)
         self.threads = [
             threading.Thread(target=self.backend.serve_forever, daemon=True),
@@ -115,6 +121,39 @@ class BrainGatewayTest(unittest.TestCase):
         self.assertEqual(record["request"], payload)
         self.assertEqual(record["response_status"], 200)
         self.assertNotIn("Authorization", json.dumps(record))
+
+    def test_async_post_returns_immediately_and_can_be_polled(self):
+        self.backend.RequestHandlerClass.delay_seconds = 0.5
+        payload = {"messages": [{"role": "user", "content": "slow private question"}]}
+        request = Request(
+            f"http://127.0.0.1:{self.proxy.server_port}/reader/v1/chat/completions",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {'t' * 64}",
+                "Content-Type": "application/json",
+                "X-Pocket-I-Alpha-Audit": "full",
+                "X-Pocket-I-Async": "v1",
+            },
+            method="POST",
+        )
+        started = time.monotonic()
+        with urlopen(request, timeout=3) as response:
+            self.assertEqual(response.status, 202)
+            accepted = json.load(response)
+        self.assertLess(time.monotonic() - started, 0.25)
+        self.assertEqual(accepted["state"], "queued")
+
+        result = None
+        for _ in range(20):
+            with self.request(f"/jobs/{accepted['job_id']}", "t" * 64) as response:
+                result = json.load(response)
+            if result["state"] == "ready":
+                break
+            time.sleep(0.03)
+        self.assertEqual(result["state"], "ready")
+        self.assertEqual(result["response_status"], 200)
+        self.assertEqual(result["result"]["received"], payload)
+        self.assertTrue(result["audit_id"])
 
 
 if __name__ == "__main__":

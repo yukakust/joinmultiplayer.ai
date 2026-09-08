@@ -1,15 +1,12 @@
 const http = require("node:http");
 const https = require("node:https");
 
-function requestJson(baseUrl, route, { method = "GET", payload = null, timeoutMs = 600000, accessToken = null } = {}) {
-  const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
-  const normalizedRoute = String(route || "").replace(/^\/+/, "");
-  const target = new URL(normalizedRoute, normalizedBase);
+function requestOnce(target, { method = "GET", body = null, timeoutMs, accessToken = null, asyncJob = false }) {
   const client = target.protocol === "https:" ? https : http;
-  const body = payload === null ? null : Buffer.from(JSON.stringify(payload));
   const headers = body ? { "Content-Type": "application/json", "Content-Length": body.length } : {};
   if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
   if (accessToken && method === "POST") headers["X-Pocket-I-Alpha-Audit"] = "full";
+  if (accessToken && method === "POST" && asyncJob) headers["X-Pocket-I-Async"] = "v1";
   return new Promise((resolve, reject) => {
     const request = client.request(target, {
       method,
@@ -24,7 +21,7 @@ function requestJson(baseUrl, route, { method = "GET", payload = null, timeoutMs
           reject(new Error(`Yukabox returned HTTP ${response.statusCode}.`));
           return;
         }
-        try { resolve(JSON.parse(value)); } catch { reject(new Error("Yukabox returned invalid data.")); }
+        try { resolve({ status: response.statusCode, value: JSON.parse(value) }); } catch { reject(new Error("Yukabox returned invalid data.")); }
       });
     });
     request.on("timeout", () => request.destroy(new Error("Yukabox took too long to answer.")));
@@ -32,6 +29,47 @@ function requestJson(baseUrl, route, { method = "GET", payload = null, timeoutMs
     if (body) request.write(body);
     request.end();
   });
+}
+
+function wait(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+async function requestJson(baseUrl, route, { method = "GET", payload = null, timeoutMs = 600000, accessToken = null } = {}) {
+  const normalizedBase = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
+  const normalizedRoute = String(route || "").replace(/^\/+/, "");
+  const target = new URL(normalizedRoute, normalizedBase);
+  const body = payload === null ? null : Buffer.from(JSON.stringify(payload));
+  const started = Date.now();
+  const first = await requestOnce(target, {
+    method,
+    body,
+    timeoutMs,
+    accessToken,
+    asyncJob: method === "POST",
+  });
+  if (first.status !== 202 || !first.value?.job_id) return first.value;
+
+  const jobId = String(first.value.job_id);
+  const pollTarget = new URL(`/jobs/${encodeURIComponent(jobId)}`, target.origin);
+  let state = first.value;
+  while (["queued", "running"].includes(state?.state)) {
+    const elapsed = Date.now() - started;
+    if (elapsed >= timeoutMs) throw new Error("Yukabox took too long to answer.");
+    await wait(Math.min(Number(state.poll_after_ms) || 1000, Math.max(1, timeoutMs - elapsed)));
+    const remaining = Math.max(1, timeoutMs - (Date.now() - started));
+    const polled = await requestOnce(pollTarget, {
+      method: "GET",
+      timeoutMs: Math.min(15000, remaining),
+      accessToken,
+    });
+    state = polled.value;
+  }
+  if (state?.state === "failed") {
+    throw new Error(`Yukabox returned HTTP ${Number(state.response_status) || 502}.`);
+  }
+  if (state?.state !== "ready" || !state.result) throw new Error("Yukabox returned invalid job data.");
+  return state.result;
 }
 
 async function remoteChatCompletion(baseUrl, { prompt, systemPrompt, outputTokens, timeoutMs, accessToken = null }) {
