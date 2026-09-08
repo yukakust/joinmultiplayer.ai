@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-EXPECTED_REVISION="4b50c40c3568a599ac39ddd715ab37125aee3663"
-SHORT_REVISION="4b50c40"
+EXPECTED_REVISION="12bf8e7124f9b85dca028efe93d08f5c886fc0bc"
+SHORT_REVISION="12bf8e7"
 TOKEN_HOST="${POCKET_I_TOKEN_HOST:-yuka@yukabox.tail1e1ad1.ts.net}"
 TOKEN_REMOTE_PATH="${POCKET_I_TOKEN_REMOTE_PATH:-.config/pocket-i/alpha-access/vitaly-alpha.token}"
 
@@ -99,16 +99,18 @@ const root = process.env.REPO_DIR + "/desktop/app";
 const manifest = require(root + "/model-manifest.json");
 const access = require(root + "/remote-access.json");
 const reranker = fs.readFileSync(root + "/reranker.cjs", "utf8");
+const remoteInference = fs.readFileSync(root + "/remote-inference.cjs", "utf8");
 if (manifest.remoteBrain.transport !== "https") process.exit(2);
 if (manifest.remoteBrain.readerUrl !== "https://brain.joinmultiplayer.ai/reader") process.exit(3);
 if (manifest.remoteBrain.relevanceUrl !== "https://brain.joinmultiplayer.ai/relevance") process.exit(4);
 if (!access.token || access.token.length < 32) process.exit(5);
 if (!reranker.includes("const DROP_AT = 0.05;")) process.exit(6);
 if (manifest.remoteBrain.auditMode !== "full") process.exit(7);
+if (!remoteInference.includes('headers["X-Pocket-I-Async"] = "v1"')) process.exit(8);
 NODE
 
 APP_VERSION="$(node -p "require('$REPO_DIR/desktop/app/package.json').version")"
-if [ "$APP_VERSION" != "0.1.0-alpha.33" ]; then
+if [ "$APP_VERSION" != "0.1.0-alpha.34" ]; then
   echo "Wrong package version: $APP_VERSION" >&2
   exit 1
 fi
