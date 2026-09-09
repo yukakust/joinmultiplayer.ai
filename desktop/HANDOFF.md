@@ -1,5 +1,9 @@
 # Pocket i desktop — developer handoff
 
+For the overall vision and contribution tracks, read [START_HERE.md](../START_HERE.md).
+
+Reviewed against `main` at `cb7a35b` on 9 September 2026.
+
 ## What we are building
 
 Pocket i is a desktop app that searches the owner's local Codex and Claude Code
@@ -9,11 +13,11 @@ share useful, consented knowledge without becoming one central model.
 
 ## Current checkpoint
 
-- Branch: `agent/game-loop-v0.1`
+- Development baseline reviewed here: `main` (older branch instructions are historical)
 - App: `desktop/app`, version `0.1.0-alpha.35`
 - Core/index: `desktop/pocket_i_core`
 - Public experiment record: `site/experiments/E007`
-- Current Miro frame: `E007 · CURRENT HARNESS · alpha.26 · 2026-09-04`
+- Historical Miro frame (not verified against alpha.35): `E007 · CURRENT HARNESS · alpha.26 · 2026-09-04`
 - macOS builder: `site/experiments/E007/build-macos-alpha-v0.25.sh`
 
 The Mac keeps conversation discovery, the index, exact evidence restoration,
@@ -52,15 +56,21 @@ PYTHONPATH=desktop python3 -m unittest discover -s desktop/tests -p 'test_*.py'
 npm --prefix desktop/app test
 ```
 
-Expected at this checkpoint: `39/39` Python tests and `46/46` desktop tests.
+These are the test entry points. Historical test counts are not a current pass guarantee; run the suites on your chosen revision.
 
-## Next checkpoint
+## Known limits and next verification
 
-Build alpha.27 on the owner's Mac and physically verify: brain selection does not start work, `WAKE` starts only the selected mode, `OPEN TEST LOGS` opens the private audit directory, first-run warning,
-consent, yukabox health, one memory-backed answer, private audit creation, and
-disconnect. Only then give the DMG to Vitalik. Vitalik must have Tailscale
-access. This alpha does not yet provide public authentication, tenant isolation,
-or a production SLA for the shared server.
+The secret scanner currently checks retained claims after early remote calls;
+it does not prevent all secrets in the original question or context from leaving
+the device. Final citation validation does not prove every final assertion.
+
+Verify the current package on a Mac: consent and revocation, authenticated
+inference access, memory setup, one supported answer, one honest refusal,
+oversized conversations, private audit creation, and disconnect/recovery.
+The alpha.35 input-budget fix needs packaged regression coverage, not merely a
+version bump. The HTTPS gateway supersedes the older Tailscale-only client setup;
+obtain current access instructions privately from Yuka. Authentication alone is
+not evidence of tenant isolation or a production SLA.
 
 Preserve old diagrams, failed runs, and public artifacts: they are part of the
 experiment history rather than cleanup targets.

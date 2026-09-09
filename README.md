@@ -1,5 +1,7 @@
 # i
 
+**New collaborator? Start with [Pocket i onboarding](START_HERE.md).**
+
 > Can many small intelligences become smarter than one big AI?
 
 We don't know.

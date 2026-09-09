@@ -1,3 +1,11 @@
+# Current contributor entry point
+
+Start with [Pocket i — start here](START_HERE.md) for the current product, game vision, contribution tracks, and setup boundaries. See [desktop/HANDOFF.md](desktop/HANDOFF.md) for the desktop checkpoint.
+
+The material below is the historical laboratory handoff. Its branch, deployment, and capability statements describe earlier checkpoints and must not override the current onboarding.
+
+---
+
 # Developer handoff — joinmultiplayer.ai
 
 ## What this is
