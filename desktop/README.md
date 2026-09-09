@@ -262,3 +262,15 @@ Pocket i services were restarted with 16,384-token contexts instead of 32,768.
 Both health checks and one real reader/reranker request then passed with zero
 new service restarts. The model weights are unchanged. Inputs near or above the
 smaller context remain an explicit limitation to test rather than hide.
+
+Checkpoint 7V fixes the first real oversized-chat failure from Vitaly's Mac.
+The old path treated any conversation below 40,000 characters as short, but a
+38,313-character mixed Russian/technical conversation became 15,104 reranker
+tokens and exceeded the 8,192 physical batch. Alpha.35 uses a conservative
+20,000-byte model-input budget instead of assuming a fixed characters-per-token
+ratio. Oversized conversations still route by whole messages. If one selected
+turn is itself too large, the local side keeps the most question-relevant whole
+paragraphs and gives each derived paragraph an auditable source coordinate; it
+never slices a paragraph. JavaScript batches use the same UTF-8 byte budget.
+Yukabox keeps a 16,384 physical reranker batch as a final guard, not as a reason
+to send giant conversations.

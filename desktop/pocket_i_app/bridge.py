@@ -17,6 +17,8 @@ from typing import Callable, Mapping, Sequence
 from pocket_i_core.index_cache import build_cached_index
 from pocket_i_core.library import count_local_conversations, scan_local_library
 from pocket_i_core.nli import LocalNli
+from pocket_i_core.pipeline import Message
+from pocket_i_core.retrieval import words
 
 
 ENABLED_SOURCES = ("codex", "claude_code")
@@ -25,6 +27,7 @@ EMBED_FINGERPRINT = "fastembed-0.8.0:paraphrase-multilingual-MiniLM-L12-v2"
 EmbedBatch = Callable[[Sequence[str]], Sequence[Sequence[float]]]
 NliBatch = Callable[[Sequence[tuple[str, str]]], Sequence[tuple[str, float]]]
 SERVICE_REQUEST_LIMIT_BYTES = 4 * 1024 * 1024
+MODEL_CONTEXT_BYTES = 20_000
 
 
 def _counts_payload(library: object) -> dict[str, object]:
@@ -148,6 +151,44 @@ def _render_messages(messages: Sequence[object]) -> str:
         f"[{getattr(message, 'coordinate')}] {getattr(message, 'role').upper()}: {getattr(message, 'text')}"
         for message in messages
     )
+
+
+def _model_input_bytes(messages: Sequence[object]) -> int:
+    """Use encoded bytes as a conservative, language-neutral context guard."""
+    return len(_render_messages(messages).encode("utf-8"))
+
+
+def _bounded_whole_paragraphs(
+    messages: Sequence[object], question: str, limit: int = MODEL_CONTEXT_BYTES
+) -> tuple[Message, ...]:
+    """Keep useful paragraphs whole when a selected turn cannot fit the model."""
+    query_terms = {term for term in words(question) if len(term) >= 3}
+    paragraphs: list[tuple[float, int, int, Message]] = []
+    for message_position, message in enumerate(messages):
+        text = str(getattr(message, "text", ""))
+        role = str(getattr(message, "role", "assistant"))
+        coordinate = str(getattr(message, "coordinate", "message"))
+        for paragraph_position, paragraph in enumerate(re.split(r"\n[ \t]*\n+", text)):
+            paragraph = paragraph.strip()
+            if not paragraph:
+                continue
+            paragraph_terms = words(paragraph)
+            score = sum(
+                paragraph_terms.count(term) * (1.0 + min(len(term), 20) / 20)
+                for term in query_terms
+            )
+            derived = Message(f"{coordinate}:p{paragraph_position + 1}", role, paragraph)
+            if _model_input_bytes((derived,)) <= limit:
+                paragraphs.append((score, message_position, paragraph_position, derived))
+
+    selected: list[tuple[int, int, Message]] = []
+    for _score, message_position, paragraph_position, paragraph in sorted(
+        paragraphs, key=lambda item: (-item[0], item[1], item[2])
+    ):
+        proposed = tuple(item[2] for item in selected) + (paragraph,)
+        if _model_input_bytes(proposed) <= limit:
+            selected.append((message_position, paragraph_position, paragraph))
+    return tuple(item[2] for item in sorted(selected, key=lambda item: (item[0], item[1])))
 
 
 class MemoryRuntime:
@@ -391,7 +432,7 @@ class MemoryRuntime:
         for number, conversation_id in enumerate(route.conversation_ids, 1):
             conversation = by_id[conversation_id]
             full_text = _render_messages(conversation.messages)
-            if len(full_text) <= 40_000:
+            if len(full_text.encode("utf-8")) <= MODEL_CONTEXT_BYTES:
                 selected_messages = conversation.messages
                 unit = "whole_short_conversation"
             else:
@@ -401,10 +442,12 @@ class MemoryRuntime:
                     tuple(hit.message_position for hit in hits),
                 )
                 selected_messages = tuple(conversation.messages[position] for position in positions)
-                if len(_render_messages(selected_messages)) > 100_000 and hits:
-                    positions = _complete_turn_positions(conversation.messages, (hits[0].message_position,))
-                    selected_messages = tuple(conversation.messages[position] for position in positions)
                 unit = "complete_turns_from_long_conversation"
+                if _model_input_bytes(selected_messages) > MODEL_CONTEXT_BYTES:
+                    selected_messages = _bounded_whole_paragraphs(selected_messages, question)
+                    unit = "whole_paragraphs_from_oversized_turn"
+            if not selected_messages:
+                continue
             rendered = _render_messages(selected_messages)
             items.append(
                 {

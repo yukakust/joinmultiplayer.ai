@@ -47,13 +47,13 @@ function extractAnswer(value, prompt) {
   return answer.replace(/\n+\s*Exiting\.\.\.\s*$/, "").trim();
 }
 
-function wholeTurnBatches(sources, maxCharacters = 48_000) {
+function wholeTurnBatches(sources, maxBytes = 20_000) {
   const batches = [];
   let current = [];
   let size = 0;
   for (const source of sources) {
-    const sourceSize = String(source?.text || "").length;
-    if (current.length && size + sourceSize > maxCharacters) {
+    const sourceSize = Buffer.byteLength(String(source?.text || ""), "utf8");
+    if (current.length && size + sourceSize > maxBytes) {
       batches.push(current);
       current = [];
       size = 0;

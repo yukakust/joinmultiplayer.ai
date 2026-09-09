@@ -12,8 +12,11 @@ from unittest.mock import patch
 
 from pocket_i_app.bridge import (
     MemoryRuntime,
+    MODEL_CONTEXT_BYTES,
     SERVICE_REQUEST_LIMIT_BYTES,
+    _bounded_whole_paragraphs,
     _complete_turn_positions,
+    _model_input_bytes,
     _render_messages,
     _serve,
     handle,
@@ -75,6 +78,24 @@ class DesktopBridgeTests(unittest.TestCase):
         rendered = _render_messages(tuple(messages[position] for position in positions))
         self.assertIn("Llama-3.3", rendered)
         self.assertIn("complete answer. It keeps", rendered)
+
+    def test_oversized_turn_keeps_relevant_paragraph_whole(self):
+        irrelevant = "Unrelated archive material. " * 700
+        relevant = "The Wings project keeps its recovery key in the owner-controlled vault."
+        messages = (
+            Message("M1", "user", "What do we know about Wings?"),
+            Message("M2", "assistant", f"{irrelevant}\n\n{relevant}\n\n{irrelevant}"),
+        )
+        selected = _bounded_whole_paragraphs(messages, "What do we know about Wings?")
+        rendered = _render_messages(selected)
+        self.assertIn(relevant, rendered)
+        self.assertNotIn("…", rendered)
+        self.assertLessEqual(_model_input_bytes(selected), MODEL_CONTEXT_BYTES)
+        self.assertTrue(any(message.coordinate.endswith(":p2") for message in selected))
+
+    def test_oversized_single_paragraph_is_not_silently_cut(self):
+        messages = (Message("M1", "assistant", "Wings " * (MODEL_CONTEXT_BYTES + 1)),)
+        self.assertEqual((), _bounded_whole_paragraphs(messages, "Wings"))
     def test_nli_signal_is_bounded_and_keeps_candidate_identity(self):
         runtime = MemoryRuntime(nli=lambda pairs: [("entailment", 0.91) for _pair in pairs])
         result = runtime.judge_candidates([

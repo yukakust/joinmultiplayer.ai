@@ -10,7 +10,7 @@ share useful, consented knowledge without becoming one central model.
 ## Current checkpoint
 
 - Branch: `agent/game-loop-v0.1`
-- App: `desktop/app`, version `0.1.0-alpha.27`
+- App: `desktop/app`, version `0.1.0-alpha.35`
 - Core/index: `desktop/pocket_i_core`
 - Public experiment record: `site/experiments/E007`
 - Current Miro frame: `E007 · CURRENT HARNESS · alpha.26 · 2026-09-04`
@@ -18,12 +18,15 @@ share useful, consented knowledge without becoming one central model.
 
 The Mac keeps conversation discovery, the index, exact evidence restoration,
 DeBERTa, secret scanning, and private audit logs. Qwen3-Reranker-4B and
-Qwen3-8B currently run on Yuka's private yukabox through Tailscale.
+Qwen3-8B currently run on Yuka's private yukabox behind the authenticated
+`brain.joinmultiplayer.ai` HTTPS gateway.
 
 ## Current answer path
 
 1. Local hybrid search chooses five likely conversations.
-2. Short chats stay whole; long chats contribute complete turns/messages.
+2. Chats within a conservative 20,000-byte input budget stay whole; longer
+   chats contribute complete turns, and an oversized turn contributes selected
+   whole paragraphs with derived source coordinates.
 3. The remote reranker marks each candidate `TAKE`, `NOT_SURE`, or `DROP`.
 4. Qwen3-8B selects useful messages and extracts small claims with line handles.
 5. Local code restores exact source lines and rejects invented handles.
